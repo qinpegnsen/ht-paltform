@@ -1,0 +1,10 @@
+<input class="form-control rzh-sel-city" (focus)="showSelectArea()" [required]="required" [(ngModel)]="adr" type="text" name="adr" placeholder="请选择地址"/>
+<div class="slectArea rzh-sel-city" *ngIf="show">
+  <div class="area-list rzh-sel-city">
+    <button type="button" *ngFor="let area of areas" area-code="area.areaCode" (click)="getArea(area.fullName,area.areaCode,area.isNew)" class="area-item btn btn-default rzh-sel-city"><em class="elderCity-class-for-sel mr icon-arrow-right rzh-sel-city"></em>{{area.areaName}}</button>
+  </div>
+  <div class="select-area-footer rzh-sel-city">
+    <button type="button" (click)="freshCitys()" class="btn btn-info btn-xs m5 rzh-sel-city"><em id="elderCity-refresh-em" class="icon-refresh rzh-sel-city"></em></button>
+    <button type="button" (click)="cityConfirm()" class="btn btn-success btn-xs m5 pull-right rzh-sel-city"><em class="fa fa-check-square-o rzh-sel-city"></em> 确认</button>
+  </div>
+</div>

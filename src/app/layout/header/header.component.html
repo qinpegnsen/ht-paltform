@@ -1,0 +1,141 @@
+<!-- 公共头部 begin-->
+<nav class="navbar topnavbar" role="navigation">
+  <!-- logo begin-->
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#/">
+      <div class="brand-logo">
+        <img class="img-responsive" src="assets/img/logo.png" alt="App Logo"/>
+      </div>
+      <div class="brand-logo-collapsed">
+        <img class="img-responsive" src="assets/img/logo-single.png" alt="App Logo"/>
+      </div>
+    </a>
+  </div>
+  <!-- logo end-->
+
+  <!-- 功能导航 begin-->
+  <div class="nav-wrapper">
+    <ul class="nav navbar-nav">
+
+      <!--隐藏显示侧边栏 begin-->
+      <li>
+        <!-- pc端隐藏显示侧边栏-->
+        <a class="hidden-xs" trigger-resize="" (click)="toggleCollapsedSideabar()" *ngIf="!isCollapsedText()"
+           title="侧边栏">
+          <i class="fa fa-navicon"></i>
+        </a>
+        <!-- 手机端隐藏显示侧边栏 -->
+        <a class="visible-xs sidebar-toggle" (click)="settings.layout.asideToggled =! settings.layout.asideToggled">
+          <i class="fa fa-navicon"></i>
+        </a>
+      </li>
+      <!--隐藏显示侧边栏 end-->
+
+      <!-- 显示、隐藏用户头像 begin-->
+      <li>
+        <a (click)="toggleUserBlock($event)" title="用户信息">
+          <i class="icon-user"></i>
+        </a>
+      </li>
+      <!-- 显示、隐藏用户头像 end-->
+
+
+      <!-- 锁屏 begin-->
+      <!--<li>-->
+      <!--<a title="Lock screen" [routerLink]="'/lock'">-->
+      <!--<i class="icon-lock"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!-- 锁屏 end-->
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <!--<li>-->
+      <!--<a (click)="openNavSearch($event)">-->
+      <!--<i class="icon-magnifier"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!-- Fullscreen (only desktops)-->
+      <li class="visible-lg">
+        <a #fsbutton (click)="toggleFullScreen($event)" title="全屏">
+          <i class="fa fa-expand"></i>
+        </a>
+      </li>
+      <!-- 弹出菜单 begin-->
+      <li class="dropdown dropdown-list" dropdown>
+        <a dropdownToggle title="新消息">
+          <i class="icon-bell"></i>
+          <div class="label label-danger">11</div>
+        </a>
+        <ul *dropdownMenu class="dropdown-menu animated flipInX">
+          <li>
+            <div class="list-group">
+              <a class="list-group-item">
+                <div class="media-box">
+                  <div class="pull-left">
+                    <i class="fa fa-twitter fa-2x text-info"></i>
+                  </div>
+                  <div class="media-box-body clearfix">
+                    <p class="m0">New followers</p>
+                    <p class="m0 text-muted">
+                      <small>1 new follower</small>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a class="list-group-item">
+                <div class="media-box">
+                  <div class="pull-left">
+                    <i class="fa fa-envelope fa-2x text-warning"></i>
+                  </div>
+                  <div class="media-box-body clearfix">
+                    <p class="m0">New e-mails</p>
+                    <p class="m0 text-muted">
+                      <small>You have 10 new emails</small>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a class="list-group-item">
+                <div class="media-box">
+                  <div class="pull-left">
+                    <i class="fa fa-tasks fa-2x text-success"></i>
+                  </div>
+                  <div class="media-box-body clearfix">
+                    <p class="m0">Pending Tasks</p>
+                    <p class="m0 text-muted">
+                      <small>11 pending task</small>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a class="list-group-item">
+                <small translate="topbar.notification.MORE">More notifications</small>
+                <span class="label label-danger pull-right">14</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <!--弹出菜单 end-->
+      <!-- 多功能侧边栏 begin-->
+      <!--<li>-->
+      <!--<a (click)="toggleOffsidebar()">-->
+      <!--<i class="icon-notebook"></i>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!-- 多功能侧边栏 end-->
+      <!--退出登录 start-->
+      <li>
+        <a (click)="logout($event)" title="退出登录">
+          <i class="icon-power"></i>
+        </a>
+      </li>
+      <!--退出登录 end-->
+    </ul>
+  </div>
+  <!-- 功能导航 end-->
+
+  <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch>
+
+</nav>
+<!-- 公共头部 end-->

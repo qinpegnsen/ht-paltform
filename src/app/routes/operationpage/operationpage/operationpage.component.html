@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <a class="btn btn-info" routerLink="rightpage">出来吧，神龙</a>
+    <hr/>
+    枚举信息（例）：{{menu_info_json}}
+    <hr/>
+    <select>
+      <option value="">请选择...</option>
+      <option *ngFor="let item of menu_info" [value]="item.key">{{item.val}}</option>
+    </select>
+    <hr/>
+    {{menu_info_val}}
+  </div>
+  <!--路由嵌套 begin-->
+  <router-outlet></router-outlet>
+  <!--路由嵌套 end-->
+</div>

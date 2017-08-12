@@ -1,0 +1,24 @@
+{
+    "header": {
+        "search": {
+            "PLACEHOLDER": "请输入搜索内容，并点击回车进行搜索"
+        }
+    },
+    "offsidebar": {
+        "setting": {
+            "SETTINGS": "设置"
+        }
+    },
+    "sidebar": {
+        "WELCOME": "欢迎您",
+        "heading": {
+            "HEADER": "Menu Heading"
+        },
+        "nav": {
+            "SINGLEVIEW": "Single View"
+        }
+    },
+    "dashboard": {
+        "WELCOME": "欢迎您"
+    }
+}

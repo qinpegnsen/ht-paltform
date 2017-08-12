@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3>单按钮demo</h3>
+    <hr/>
+    <div class="m">
+      <app-buttons [config]="buttonConfig" (callback)="toAdd($event)" ></app-buttons>
+      <app-buttons [config]="textButtonConfig" (callback)="textButtonConfig.callback($event)" ></app-buttons>
+      <hr/>
+    </div>
+    <h3>多按钮demo</h3>
+    <hr/>
+    <div class="m">
+      <app-buttons [config]="option" (callback)="option.callback($event)" *ngFor="let option of buttonListConfig"></app-buttons>
+      <hr/>
+    </div>
+  </div>
+</div>

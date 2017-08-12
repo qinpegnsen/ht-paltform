@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th style="width: 5%">
+          序号
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="name">客户名</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="email">性别</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter>年龄</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="city">手机号</rzhDefaultSorter>
+        </th>
+        <th style="width: 15%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let elder of dataTable.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{elder.username}}</td>
+        <td>{{elder.sexText}}</td>
+        <td>{{elder.age}}</td>
+        <td>{{elder.phone}}</td>
+        <td>
+          <app-buttons [config]="option" (callback)="option.callback($event)" *ngFor="let option of buttonConfig"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+/* ========================================================================
+     扩展样式 - 右侧公共操作页面样式
+ ========================================================================== */
+
+@charset "UTF-8";
+
+$rightpage-bg:           #fff;
+$rightpage-border-color: grayscale(darken($rightpage-bg, 20%));
+$rightpage-color:        $text-color;
+$rightpage-wd:           $aside-wd + 15px;      // match the width with the main aside component
+
+.rightpage {
+  position: fixed;
+  top: 0;
+  min-height: 100%;
+  height:auto;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  margin-top: 0;
+  border-left: 5px solid #F0F0F0;
+  background-color: $rightpage-bg;
+  color: $rightpage-color;
+  z-index: $z-index-main-section + 5;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  @include transition(all .3s ease);
+  @media only screen and (min-width: $mq-tablet) {  //pc模式下
+    top: 0;
+    padding-top: 55px;
+    margin-top: 0;
+    width: 50%;
+  }
+}
+
+// 开启右侧页面信息
+.operationpage-open  {
+  -webkit-overflow-scrolling: touch;
+  .rightpage {
+    overflow-y: auto;
+  }
+  @media only screen and (min-width: $mq-tablet) {
+    overflow-y: auto;
+  }
+}
+
+.no-csstransforms3d {
+  .rightpage {
+    right: -500px;
+  }
+  .operationpage-open {
+    .rightpage {
+      right: 0;
+    }
+  }
+}
+
+.csstransforms3d { //滑动效果
+  .rightpage {
+    @include translate3d( (500px), 0, 0);
+  }
+  .operationpage-open {
+    .rightpage {
+      @include translate3d(0, 0, 0);
+    }
+  }
+}
+
+

@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <!-- 公共头部 -->
+    <app-header class="topnavbar-wrapper"></app-header>
+    <!-- 导航栏 -->
+    <app-sidebar class="aside"></app-sidebar>
+    <!-- 多功能栏 -->
+    <!--<app-offsidebar class="offsidebar"></app-offsidebar>-->
+    <!-- 业务核心 -->
+    <section>
+        <!-- 逻辑页面 -->
+        <div class="content-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <!-- 底部 -->
+    <footer app-footer></footer>
+</div>

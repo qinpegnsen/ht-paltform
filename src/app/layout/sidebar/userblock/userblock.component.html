@@ -1,0 +1,16 @@
+<!--左侧栏目-登录用户的信息 begin-->
+<div class="item user-block" *ngIf="userBlockIsVisible()">
+    <!-- 用户头像-->
+    <div class="user-block-picture">
+        <div class="user-block-status">
+            <img class="img-thumbnail img-circle" [src]="user.picture" alt="Avatar" />
+            <div class="circle circle-success circle-lg"></div>
+        </div>
+    </div>
+    <!-- 用户信息-->
+    <div class="user-block-info">
+        <span class="user-block-name">{{ 'sidebar.WELCOME' | translate }}  {{user.name}}</span>
+        <span class="user-block-role">{{user.job}}</span>
+    </div>
+</div>
+<!--左侧栏目-登录用户的信息 end-->

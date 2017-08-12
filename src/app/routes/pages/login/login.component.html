@@ -1,0 +1,19 @@
+<div class="page-body">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <div class="page-container" ng-controller="LoginFormController">
+    <h1 class="text-info">用户登陆</h1>
+    <form class="form" role="form" ng-submit="login()" name="loginForm" novalidate="">
+      <div id="authMsg" class="authMsg"></div>
+      <input type="text" class="input" name="username" [(ngModel)]="userName" autocomplete="off" required  placeholder="请输入员工账号">
+      <input type="password" class="input" name="password" [(ngModel)]="password" autocomplete="off" required placeholder="请输入密码">
+      <!--<div toggle-fullscreen="toggle-fullscreen">-->
+      <button type="submit" class="button button-login" (click)="login()">点击登录</button>
+      <!--</div>-->
+      <div class="error"><span>+</span></div>
+    </form>
+    <div class="connect">
+      <p><span ng-bind="app.description"></span></p>
+      <p>Copyright &copy; <span ng-bind="app.name"></span></p>
+    </div>
+  </div>
+</div>

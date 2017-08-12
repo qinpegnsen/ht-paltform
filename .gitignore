@@ -1,0 +1,8 @@
+#忽略node_modules
+/node_modules
+#忽略vscode配置
+/.vscode
+#忽略build文件
+/dist
+#忽略idea项目配置文件夹
+/.idea
