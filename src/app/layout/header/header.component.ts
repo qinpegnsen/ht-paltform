@@ -8,6 +8,7 @@ import {MenuService} from '../../core/menu/menu.service';
 import {Router} from "@angular/router";
 import {AjaxService} from '../../core/services/ajax.service';
 import {CookieService} from "angular2-cookie/core";
+import {LayoutComponent} from "../layout.component";
 
 @Component({
   selector: 'app-header',
@@ -20,9 +21,10 @@ export class HeaderComponent implements OnInit {
   isNavSearchVisible: boolean;
   @ViewChild('fsbutton') fsbutton;
 
-  constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService, private ajax: AjaxService, private router: Router,private cookieService:CookieService) {
+  constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
+              private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent) {
     // 只显示指定的
-    if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu().slice(0, 4);
+    if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
   }
 
   ngOnInit() {
@@ -92,5 +94,13 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  /**
+   * 为子菜单赋值
+   */
+  getSubmenus(text){
+    let menus = this.menu.getSubMenu(text);
+    this.layout.submenus(menus)
   }
 }

@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
         end = new Date().getTime();
         if (result.success) {
           let user =  result.data;
-          console.log("█ result.data.menuVOList ►►►",  result.data.menuVOList);
+          // console.log("█ result.data.menuVOList ►►►",  result.data.menuVOList);
           // me.myMenu.addMenu(result.data.menuVOList);
 
           me._cookieService.putObject('loginInfo', user); //用户信息存入cookie

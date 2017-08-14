@@ -1,21 +1,27 @@
-import {Component, OnInit, Injector} from '@angular/core';
+import {Component, OnInit, Injector, Input, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 declare var $: any;
 
 import {MenuService} from '../../core/menu/menu.service';
 import {SettingsService} from '../../core/settings/settings.service';
+import {isNullOrUndefined} from "util";
+import {OnChanges} from "_@angular_core@4.0.2@@angular/core/src/metadata";
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit,OnChanges{
+
+
   menuItems: Array<any>;
   router: Router;
 
+  @Input() menus:any;
+
   constructor(public menu: MenuService, public settings: SettingsService, public injector: Injector) {
-    this.menuItems = menu.getMenu(); //设置导航栏目
+    // this.menuItems = menu.getMenu(); //设置导航栏目
   }
 
   ngOnInit() {
@@ -26,9 +32,16 @@ export class SidebarComponent implements OnInit {
       // 去页面顶部
       window.scrollTo(0, 0);
     });
-
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['menus'] && !isNullOrUndefined(this.menus)){
+        this.menuItems = this.menus;
+      console.log("█ this.menuItems ►►►",  this.menuItems);
+    }
 
+    // throw new Error('Method not implemented.');
+    console.log("█ changes ►►►",  changes);
+  }
   // 点击导航菜单时，处理
   toggleSubmenuClick(event) {
     if (!this.isSidebarCollapsed() && !this.isSidebarCollapsedText() && !this.isEnabledHover()) {

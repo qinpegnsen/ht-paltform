@@ -38,6 +38,12 @@
         </a>
       </li>
       <!-- 显示、隐藏用户头像 end-->
+      <li *ngFor="let menu of menuItems">
+        <a class="hidden-xs text-center pt-sm pb-sm" [title]="menu.text" (click)="getSubmenus(menu.text)">
+          <div class="icon-box"><i [class]="menu.icon"></i></div>
+          <span>{{menu.text}}</span>
+        </a>
+      </li>
 
 
       <!-- 锁屏 begin-->

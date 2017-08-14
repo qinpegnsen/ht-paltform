@@ -54,4 +54,18 @@ export class MenuService {
     return menu; //cookie中取出
   }
 
+  /**
+   * 获取子菜单
+   * @param menuText
+   */
+  getSubMenu(menuText){
+    let subMenus = [];
+      menu.forEach((menuItem) => {
+        if (menuItem.text == menuText && !isNullOrUndefined(menuItem['submenu'])){
+          subMenus = menuItem['submenu']
+        }
+    })
+    return subMenus;
+  }
+
 }
