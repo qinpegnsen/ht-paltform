@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {AjaxService} from '../../core/services/ajax.service';
 import {CookieService} from "angular2-cookie/core";
 import {LayoutComponent} from "../layout.component";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,9 @@ export class HeaderComponent implements OnInit {
   constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
               private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent) {
     // 只显示指定的
-    if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
+    let allMenus = [];
+    if(typeof menu.getMenu() !== 'undefined') allMenus = menu.getMenu();
+    this.menuItems = this.getSubmenuFirstLink(allMenus);// 获取子菜单的第一个的链接作为一级菜单的链接，可使一级菜单切换时页面默认为子菜单的第一项
   }
 
   ngOnInit() {
@@ -102,5 +105,19 @@ export class HeaderComponent implements OnInit {
   getSubmenus(text){
     let menus = this.menu.getSubMenu(text);
     this.layout.submenus(menus)
+  }
+
+  /**
+   *  获取子菜单的第一个的链接作为一级菜单的链接，可使一级菜单切换时页面默认为子菜单的第一项
+   * @param allMenus
+   * @returns {any}
+   */
+  private getSubmenuFirstLink(allMenus){
+    allMenus.forEach((menu) => {
+      if(!isNullOrUndefined(menu['submenu'])){
+        menu['link'] = menu['submenu'][0].link;
+      }
+    })
+    return allMenus;
   }
 }

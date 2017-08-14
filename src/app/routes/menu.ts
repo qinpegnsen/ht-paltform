@@ -3,8 +3,9 @@
  * @type {{text: string; link: string; icon: string; submenu: [{text: string; link: string},{text: string; link: string}]}}
  */
 const system = {
-  text: '系统',
+  text: '图表2',
   icon: 'fa fa-gears text-center',
+  // link: '/main/echarts',
   alert: 'child',
   submenu: [
     {
@@ -28,7 +29,7 @@ const SystemMain = {
 };
 const datatables = {
   text: '列表',
-  link: '/main/datatables',
+  // link: '/main/datatables',
   icon: 'icon-chart',
   submenu: [
     {
@@ -62,12 +63,12 @@ const echarts = {
   icon: 'fa fa-bar-chart',
   submenu: [
     {
-      text: '消息通知',
-      link: '/main/msg'
-    },
-    {
       text: '图表',
       link: '/main/echarts'
+    },
+    {
+      text: '消息通知',
+      link: '/main/msg'
     },
     {
       text: '按钮',
@@ -77,7 +78,7 @@ const echarts = {
 };
 const operationpage = {
   text: '页面',
-  link: '/main/operationpage',
+  // link: '/main/operationpage',
   icon: 'icon-doc',
   submenu: [
     {
@@ -101,16 +102,16 @@ const navtree = {
 };
 const buttons = {
   text: '按钮',
-  link: '/main/buttons',
+  // link: '/main/buttons',
   icon: 'fa fa-toggle-off',
   submenu: [
     {
-      text: '弹窗',
-      link: '/main/msg'
-    },
-    {
       text: '按钮',
       link: '/main/buttons'
+    },
+    {
+      text: '弹窗',
+      link: '/main/msg'
     },
     {
       text: '图表',
@@ -126,6 +127,5 @@ export let menu = [
   buttons,
   echarts,
   msg,
-  operationpage,
   system
 ];
