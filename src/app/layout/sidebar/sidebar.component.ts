@@ -36,11 +36,7 @@ export class SidebarComponent implements OnInit,OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['menus'] && !isNullOrUndefined(this.menus)){
         this.menuItems = this.menus;
-      // console.log("█ this.menuItems ►►►",  this.menuItems);
     }
-
-    // throw new Error('Method not implemented.');
-    console.log("█ changes ►►►",  changes);
   }
   // 点击导航菜单时，处理
   toggleSubmenuClick(event) {

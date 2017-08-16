@@ -58,12 +58,14 @@ export class MenuService {
    * 获取子菜单
    * @param menuText
    */
-  getSubMenu(menuText){
+  getSubMenu(link){
+    //这个link可能是一级菜单，二级菜单、三级菜单……，只需要取第一级路由即可
+    let path = '/' + link.split('/')[1];
     let subMenus = [];
-      menu.forEach((menuItem) => {
-        if (menuItem.text == menuText && !isNullOrUndefined(menuItem['submenu'])){
-          subMenus = menuItem['submenu']
-        }
+    menu.forEach((menuItem) => {
+      if (menuItem.link == path && !isNullOrUndefined(menuItem['submenu'])){
+        subMenus = menuItem['submenu']
+      }
     })
     return subMenus;
   }

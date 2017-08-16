@@ -1,5 +1,5 @@
 /**
- * 菜单管理
+ * 菜单管理（一级路由的link不可删掉，将根据一级路由取子菜单）
  * @type {{text: string; link: string; icon: string; submenu: [{text: string; link: string},{text: string; link: string}]}}
  */
 const website = {
@@ -27,12 +27,12 @@ const website = {
 const operation = {
   text: '运营管理',
   icon: 'fa fa-sitemap',
-  link: '/DBO',
+  link: '/operation',
   submenu: [
     {
       text: '快递公司',
       icon: 'fa fa-truck',
-      link: '/DBO/delivery'
+      link: '/operation/delivery'
     },
     {
       text: '文章管理',
@@ -41,23 +41,23 @@ const operation = {
       submenu: [
         {
           text: '文章分类',
-          link: 'DBO/article/sort'
+          link: '/operation/article/sort'
         },
         {
           text: '文章管理',
-          link: 'DBO/article/manage'
+          link: '/operation/article/manage'
         }
       ]
     },
     {
       text: '保障服务',
       icon: 'icon-diamond',
-      link: '/DBO/ensure'
+      link: '/operation/ensure'
     },
     {
       text: '售后保障',
       icon: 'fa fa-shield',
-      link: '/DBO/after-ensure'
+      link: '/operation/after-ensure'
     }
   ]
 };
@@ -69,7 +69,7 @@ const goods = {
     {
       text: '商品发布',
       icon: 'fa fa-cube',
-      link: '/goods/publish'
+      link: '/goods/msg'
     },
     {
       text: '商品管理',
@@ -101,17 +101,17 @@ const goods = {
 const shop = {
   text: '店铺管理',
   icon: 'fa fa-institution',
-  link: '/shops',
+  link: '/shop',
   submenu: [
     {
       text: '店铺管理',
       icon: 'fa fa-institution',
-      link: '/shops/manage'
+      link: '/shop/manage'
     },
     {
       text: '店铺账号管理',
       icon: 'fa fa-institution',
-      link: '/shops/account'
+      link: '/shop/account'
     }
   ]
 };

@@ -1,6 +1,14 @@
+@import '../../../app/shared/styles/app/variables';
+@import '../../../app/shared/styles/themes/theme-a';
 .navbar-nav li:hover{
-  background-color: #1daad6;
+  background-color: $brand-info-dark;
 }
+
+.current{
+  box-shadow: 0 -3px 0 rgba(255,255,255,.5) inset;
+  color: $nav-top-item-mobile-active !important;
+}
+
 .navbar-nav li a{
   height: 55px;
 }

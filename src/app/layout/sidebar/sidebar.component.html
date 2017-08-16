@@ -15,7 +15,7 @@
         <a *ngIf="!item.heading && !item.submenu && item.elink" [attr.target]="item.target" [attr.href]="item.elink"
            title="{{item.text}}">
           <span class="pull-right" *ngIf="item.alert"
-                [ngClass]="item.label || 'icon-arrow-down'"></span>
+                [ngClass]="item.label || 'fa fa-sort-desc'"></span>
           <em class="{{item.icon}}" *ngIf="item.icon"></em>
           <span>{{(item.translate | translate) || item.text}}</span>
         </a>
@@ -24,7 +24,7 @@
            title="{{item.text}}"
            (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
           <span class="pull-right" *ngIf="item.alert"
-                [ngClass]="item.label || 'icon-arrow-down'"></span>
+                [ngClass]="item.label || 'fa fa-sort-desc'"></span>
           <em class="{{item.icon}}" *ngIf="item.icon"></em>
           <span>{{(item.translate | translate) || item.text}}</span>
         </a>
@@ -32,7 +32,7 @@
         <a *ngIf="!item.heading && item.submenu" title="{{item.text}}"
            (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
           <span class="pull-right" *ngIf="item.alert"
-                [ngClass]="item.label || 'icon-arrow-down'"></span>
+                [ngClass]="item.label || 'fa fa-sort-desc'"></span>
           <em class="{{item.icon}}" *ngIf="item.icon"></em>
           <span>{{(item.translate | translate) || item.text}}</span>
         </a>
@@ -43,21 +43,21 @@
             <!-- sublevel: external links -->
             <a *ngIf="!subitem.heading && !subitem.submenu && subitem.elink" [attr.target]="subitem.target"
                [attr.href]="subitem.elink" title="{{subitem.text}}">
-              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'icon-arrow-down'">{{subitem.alert}}</span>
+              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'fa fa-sort-desc'">{{subitem.alert}}</span>
               <em class="{{subitem.icon}}" *ngIf="subitem.icon"></em>
               <span>{{(subitem.translate | translate) || subitem.text}}</span>
             </a>
             <!-- sublevel: single menu item  -->
             <a *ngIf="!subitem.submenu && !subitem.elink" [routerLink]="subitem.link" [attr.route]="subitem.link"
                title="{{subitem.text}}">
-              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'icon-arrow-down'">{{subitem.alert}}</span>
+              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'fa fa-sort-desc'">{{subitem.alert}}</span>
               <em class="{{subitem.icon}}" *ngIf="subitem.icon"></em>
               <span>{{(subitem.translate | translate) || subitem.text}}</span>
             </a>
             <!-- sublevel: has submenu -->
             <a *ngIf="subitem.submenu" title="{{subitem.text}}"
                (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
-              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'icon-arrow-down'">{{subitem.alert}}</span>
+              <span class="pull-right" *ngIf="subitem.alert" [ngClass]="subitem.label || 'fa fa-sort-desc'">{{subitem.alert}}</span>
               <em class="{{subitem.icon}}" *ngIf="subitem.icon"></em>
               <span>{{(subitem.translate | translate) || subitem.text}}</span>
             </a>
@@ -67,14 +67,14 @@
                 <!-- sublevel 2: single menu item  -->
                 <a *ngIf="!subitem2.submenu" [routerLink]="subitem2.link" [attr.route]="subitem2.link"
                    title="{{subitem2.text}}">
-                  <span class="pull-right" *ngIf="subitem2.alert" [ngClass]="subitem2.label || 'icon-arrow-down'">{{subitem2.alert}}</span>
+                  <span class="pull-right" *ngIf="subitem2.alert" [ngClass]="subitem2.label || 'fa fa-sort-desc'">{{subitem2.alert}}</span>
                   <em class="{{subitem2.icon}}" *ngIf="subitem2.icon"></em>
                   <span>{{(subitem2.translate | translate) || subitem2.text}}</span>
                 </a>
                 <!-- sublevel2: has submenu -->
                 <a *ngIf="subitem2.submenu" title="{{subitem2.text}}"
                    (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
-                  <span class="pull-right" *ngIf="subitem2.alert" [ngClass]="subitem2.label || 'icon-arrow-down'">{{subitem2.alert}}</span>
+                  <span class="pull-right" *ngIf="subitem2.alert" [ngClass]="subitem2.label || 'fa fa-sort-desc'">{{subitem2.alert}}</span>
                   <em class="{{subitem2.icon}}" *ngIf="subitem2.icon"></em>
                   <span>{{(subitem2.translate | translate) || subitem2.text}}</span>
                 </a>
@@ -85,7 +85,7 @@
                     <a *ngIf="!subitem3.submenu" [routerLink]="subitem3.link" [attr.route]="subitem3.link"
                        title="{{subitem3.text}}">
                       <span class="pull-right" *ngIf="subitem3.alert"
-                            [ngClass]="subitem3.label || 'icon-arrow-down'">{{subitem3.alert}}</span>
+                            [ngClass]="subitem3.label || 'fa fa-sort-desc'">{{subitem3.alert}}</span>
                       <em class="{{subitem3.icon}}" *ngIf="subitem3.icon"></em>
                       <span>{{(subitem3.translate | translate) || subitem3.text}}</span>
                     </a>
@@ -93,7 +93,7 @@
                     <a *ngIf="subitem3.submenu" title="{{subitem3.text}}"
                        (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
                       <span class="pull-right" *ngIf="subitem3.alert"
-                            [ngClass]="subitem3.label || 'icon-arrow-down'">{{subitem3.alert}}</span>
+                            [ngClass]="subitem3.label || 'fa fa-sort-desc'">{{subitem3.alert}}</span>
                       <em class="{{subitem3.icon}}" *ngIf="subitem3.icon"></em>
                       <span>{{(subitem3.translate | translate) || subitem3.text}}</span>
                     </a>
@@ -104,7 +104,7 @@
                         <a *ngIf="!subitem4.submenu" [routerLink]="subitem4.link" [attr.route]="subitem4.link"
                            title="{{subitem4.text}}">
                           <span class="pull-right" *ngIf="subitem4.alert"
-                                [ngClass]="subitem4.label || 'icon-arrow-down'">{{subitem4.alert}}</span>
+                                [ngClass]="subitem4.label || 'fa fa-sort-desc'">{{subitem4.alert}}</span>
                           <em class="{{subitem4.icon}}" *ngIf="subitem4.icon"></em>
                           <span>{{(subitem4.translate | translate) || subitem4.text}}</span>
                         </a>

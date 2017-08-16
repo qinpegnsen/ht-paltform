@@ -1,22 +1,32 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-const screenfull = require('screenfull');
-const browser = require('jquery.browser');
-declare var $: any;
-import {UserblockService} from '../sidebar/userblock/userblock.service';
-import {SettingsService} from '../../core/settings/settings.service';
-import {MenuService} from '../../core/menu/menu.service';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
+import {UserblockService} from "../sidebar/userblock/userblock.service";
+import {SettingsService} from "../../core/settings/settings.service";
+import {MenuService} from "../../core/menu/menu.service";
 import {Router} from "@angular/router";
-import {AjaxService} from '../../core/services/ajax.service';
+import {AjaxService} from "../../core/services/ajax.service";
 import {CookieService} from "angular2-cookie/core";
 import {LayoutComponent} from "../layout.component";
 import {isNullOrUndefined} from "util";
+const screenfull = require('screenfull');
+const browser = require('jquery.browser');
+declare var $: any;
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
+
+  @Input() private curPath;
+  ngOnChanges(changes: SimpleChanges): void {
+    let me = this;
+    if(changes['curPath'] && !isNullOrUndefined(me.curPath)){
+      // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
+      me.onRouterChange(me.curPath);
+    }
+  }
+
   navCollapsed = true;
   menuItems = [];
   isNavSearchVisible: boolean;
@@ -28,6 +38,7 @@ export class HeaderComponent implements OnInit {
     let allMenus = [];
     if(typeof menu.getMenu() !== 'undefined') allMenus = menu.getMenu();
     this.menuItems = this.getSubmenuFirstLink(allMenus);// 获取子菜单的第一个的链接作为一级菜单的链接，可使一级菜单切换时页面默认为子菜单的第一项
+
   }
 
   ngOnInit() {
@@ -35,6 +46,31 @@ export class HeaderComponent implements OnInit {
     if (browser.msie) { // 不支持ie
       this.fsbutton.nativeElement.style.display = 'none';
     }
+
+
+    let me = this;
+    // 初始化时检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
+    $(function(){
+      let rulHref = window.location.href, host = window.location.host;
+      let path = rulHref.substring(rulHref.indexOf(host)).substring(host.length);
+      me.onRouterChange(path);
+      me.getSubmenus(path);
+    })
+  }
+
+  /**
+   * 检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
+   * @param path
+   */
+  private onRouterChange(path){
+    let myNavs = $('.my-nav');
+    for(let i = 0; i < myNavs.length; i++){
+      let myNav = myNavs.eq(i).attr('route');
+      if(myNav.indexOf(path) === 0){
+        myNavs.eq(i).addClass('current').parent().siblings().children('.my-nav').removeClass('current');
+        return;
+      }
+    };
   }
 
   //显示、隐藏当前登录的用户信息
@@ -101,10 +137,11 @@ export class HeaderComponent implements OnInit {
 
   /**
    * 为子菜单赋值，通过父组件（layout）的方法来给同级的组件（sidebar）传值，所以这里把子菜单传给了父组件（layout）的方法
+   *
    * @param text
    */
-  getSubmenus(text){
-    let menus = this.menu.getSubMenu(text);
+  getSubmenus(link){
+    let menus = this.menu.getSubMenu(link);
     this.layout.submenus(menus)
   }
 
@@ -115,8 +152,10 @@ export class HeaderComponent implements OnInit {
    */
   private getSubmenuFirstLink(allMenus){
     allMenus.forEach((menu) => {
-      if(!isNullOrUndefined(menu['submenu'])){
-        menu['link'] = menu['submenu'][0].link;
+      if(!isNullOrUndefined(menu['submenu'][0].link)){// 第一个子菜单只有二级菜单
+        menu['route'] = menu['submenu'][0].link;
+      }else{// 第一个子菜单有三级菜单
+        menu['route'] = menu['submenu'][0]['submenu'][0].link;
       }
     })
     return allMenus;

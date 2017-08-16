@@ -18,8 +18,7 @@ export class RightpageComponent implements OnInit {
   }
   // 取消
   cancel(){
-    this.settings.closeRightPage(); //关闭右侧滑动页面
-    this.router.navigate(['/main/operationpage']);
+    this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
 }
