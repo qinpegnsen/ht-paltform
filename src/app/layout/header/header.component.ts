@@ -100,7 +100,8 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * 为子菜单赋值
+   * 为子菜单赋值，通过父组件（layout）的方法来给同级的组件（sidebar）传值，所以这里把子菜单传给了父组件（layout）的方法
+   * @param text
    */
   getSubmenus(text){
     let menus = this.menu.getSubMenu(text);

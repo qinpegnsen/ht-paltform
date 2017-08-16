@@ -31,15 +31,8 @@
       </li>
       <!--隐藏显示侧边栏 end-->
 
-      <!-- 显示、隐藏用户头像 begin-->
-      <li>
-        <a (click)="toggleUserBlock($event)" title="用户信息">
-          <i class="icon-user"></i>
-        </a>
-      </li>
-      <!-- 显示、隐藏用户头像 end-->
       <li *ngFor="let menu of menuItems">
-        <a class="hidden-xs text-center pt-sm pb-sm" [title]="menu.text" [routerLink]="menu.link" (click)="getSubmenus(menu.text)">
+        <a class="text-center pt-sm pb-sm" [title]="menu.text" [routerLink]="menu.link" routerLinkActive="active" (click)="getSubmenus(menu.text)">
           <div class="icon-box"><i [class]="menu.icon"></i></div>
           <span>{{menu.text}}</span>
         </a>
@@ -60,12 +53,13 @@
       <!--<i class="icon-magnifier"></i>-->
       <!--</a>-->
       <!--</li>-->
-      <!-- Fullscreen (only desktops)-->
-      <li class="visible-lg">
-        <a #fsbutton (click)="toggleFullScreen($event)" title="全屏">
-          <i class="fa fa-expand"></i>
+      <!-- 显示、隐藏用户头像 begin-->
+      <li>
+        <a (click)="toggleUserBlock($event)" title="用户信息">
+          <i class="icon-user"></i>
         </a>
       </li>
+      <!-- 显示、隐藏用户头像 end-->
       <!-- 弹出菜单 begin-->
       <li class="dropdown dropdown-list" dropdown>
         <a dropdownToggle title="新消息">
@@ -130,6 +124,12 @@
       <!--</a>-->
       <!--</li>-->
       <!-- 多功能侧边栏 end-->
+      <!-- Fullscreen (only desktops)-->
+      <li class="visible-lg">
+        <a #fsbutton (click)="toggleFullScreen($event)" title="全屏">
+          <i class="fa fa-expand"></i>
+        </a>
+      </li>
       <!--退出登录 start-->
       <li>
         <a (click)="logout($event)" title="退出登录">
