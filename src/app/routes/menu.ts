@@ -4,84 +4,135 @@
  */
 const website = {
   text: '站点设置',
-  icon: 'fa fa-gears text-center',
+  icon: 'icon-settings',
+  link: '/website',
   submenu: [
     {
-      text: '快递公司',
-      icon: 'fa fa-bar-chart',
-      link: '/main/echarts'
+      text: '地区设置',
+      icon: 'fa fa-area-chart',
+      link: '/website/areas'
     },
     {
-      text: '文章管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      text: '数据字典',
+      icon: 'fa fa-book',
+      link: '/website/dataDictionary'
     },
     {
       text: '计量单位',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'fa fa-calculator',
+      link: '/website/measure'
     }
   ]
 };
 const operation = {
   text: '运营管理',
-  link: '/main/navtree',
-  icon: 'fa fa-code-fork'
+  icon: 'fa fa-sitemap',
+  link: '/DBO',
+  submenu: [
+    {
+      text: '快递公司',
+      icon: 'fa fa-truck',
+      link: '/DBO/delivery'
+    },
+    {
+      text: '文章管理',
+      icon: 'icon-book-open',
+      alert: '▼',
+      submenu: [
+        {
+          text: '文章分类',
+          link: 'DBO/article/sort'
+        },
+        {
+          text: '文章管理',
+          link: 'DBO/article/manage'
+        }
+      ]
+    },
+    {
+      text: '保障服务',
+      icon: 'icon-diamond',
+      link: '/DBO/ensure'
+    },
+    {
+      text: '售后保障',
+      icon: 'fa fa-shield',
+      link: '/DBO/after-ensure'
+    }
+  ]
 };
 const goods = {
   text: '商品管理',
-  icon: 'icon-chart',
+  icon: 'fa fa-cubes',
+  link: '/goods',
   submenu: [
     {
+      text: '商品发布',
+      icon: 'fa fa-cube',
+      link: '/goods/publish'
+    },
+    {
       text: '商品管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/datatables/datatable'
+      icon: 'fa fa-cubes',
+      link: '/goods/manage'
     },
     {
       text: '分类管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/datatables/ng2-datatable'
+      icon: 'fa fa-cubes',
+      alert: '▼',
+      submenu: [
+        {
+          text: '分类管理',
+          link: '/goods/sorts/manage'
+        },
+        {
+          text: '属性模板',
+          link: '/goods/sorts/properties'
+        }
+      ]
     },
     {
       text: '品牌管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/datatables/ng2-datatable'
+      icon: 'fa fa-cubes',
+      link: '/goods/brands'
     }
   ]
 };
 const shop = {
   text: '店铺管理',
-  icon: 'icon-volume-2',
+  icon: 'fa fa-institution',
+  link: '/shops',
   submenu: [
     {
       text: '店铺管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'fa fa-institution',
+      link: '/shops/manage'
     },
     {
       text: '店铺账号管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/buttons'
+      icon: 'fa fa-institution',
+      link: '/shops/account'
     }
   ]
 };
 const member = {
   text: '会员管理',
-  icon: 'fa fa-bar-chart',
+  icon: 'fa fa-users',
+  link: '/member',
   submenu: [
     {
       text: '会员管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/echarts'
+      icon: 'fa fa-user',
+      link: '/member/users'
     },
     {
       text: '积分管理',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-ticket',
       alert: '▼',
       submenu: [
         {
           text: '积分增减',
-          link: '/main/echarts'
+          link: '/member/integration/change'
         }
       ]
     }
@@ -89,25 +140,26 @@ const member = {
 };
 const orders = {
   text: '订单管理',
-  icon: 'icon-doc',
+  icon: 'fa fa-file-text',
+  link: '/orders',
   submenu: [
     {
       text: '商品订单',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'fa fa-file-text-o',
+      link: '/orders/order'
     },
     {
       text: '评价管理',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-smile-o',
       alert: '▼',
       submenu: [
         {
           text: '店铺评价',
-          link: '/main/msg'
+          link: '/orders/evaluate/shop'
         },
         {
           text: '买家评价',
-          link: '/main/buttons'
+          link: '/orders/evaluate/buyer'
         }
       ]
     }
@@ -115,101 +167,135 @@ const orders = {
 };
 const sale = {
   text: '售前售后',
-  link: '/main/navtree',
-  icon: 'fa fa-code-fork',
+  icon: 'icon-earphones-alt',
+  link: '/sale',
   submenu: [
     {
       text: '退款',
-      icon: 'fa fa-bar-chart',
-      link: '/main/buttons'
+      icon: 'fa fa-money',
+      alert: '▼',
+      submenu: [
+        {
+          text: '退款管理',
+          link: '/sale/refund/manage'
+        },
+        {
+          text: '退款审核',
+          link: '/sale/refund/verify'
+        }
+      ]
     },
     {
       text: '退货',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-retweet',
+      alert: '▼',
+      submenu: [
+        {
+          text: '退货管理',
+          link: '/sale/return/manage'
+        },
+        {
+          text: '退货审核',
+          link: '/sale/return/verify'
+        }
+      ]
+    },
+    {
+      text: '退货退款原因',
+      icon: 'icon-question',
       link: '/main/msg'
     }
   ]
 };
 const statistics = {
   text: '统计管理',
-  icon: 'fa fa-toggle-off',
+  icon: 'fa fa-bar-chart',
+  link: '/stat',
   submenu: [
     {
       text: '统计设置',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-cogs',
       alert: '▼',
       submenu: [
         {
+          text: '订单金额区间',
+          link: '/stat/set/order-money'
+        },
+        {
+          text: '商品价格区间',
+          link: '/stat/set/goods-price'
+        },
+        {
           text: '统计缓存重置',
-          link: '/main/msg'
+          link: '/stat/set/cache-reset'
         }
       ]
     },
     {
       text: '会员统计',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-users',
       alert: '▼',
       submenu: [
         {
           text: '新增会员',
-          link: '/main/msg'
+          link: '/stat/users/new'
         },
         {
           text: '会员分析',
-          link: '/main/buttons'
+          link: '/stat/users/analyze'
         },
         {
           text: '区域分析',
-          link: '/main/msg'
+          link: '/stat/users/area'
         },
         {
           text: '购买分析',
-          link: '/main/buttons'
+          link: '/stat/users/buy'
         }
       ]
     },
     {
       text: '销量分析',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-line-chart',
       alert: '▼',
       submenu: [
         {
           text: '结算统计',
-          link: '/main/msg'
+          link: '/stat/sales/settle'
         },
         {
           text: '订单统计',
-          link: '/main/buttons'
+          link: '/stat/sales/order'
         }
       ]
     },
     {
       text: '商品分析',
-      icon: 'fa fa-bar-chart',
+      icon: 'fa fa-cube',
       alert: '▼',
       submenu: [
         {
           text: '热卖商品',
-          link: '/main/msg'
+          link: '/stat/goods/hot-sale'
         },
         {
           text: '商品销售明细',
-          link: '/main/buttons'
+          link: '/stat/goods/sale-detail'
         }
       ]
     },
     {
       text: '售后分析',
-      icon: 'fa fa-bar-chart',
+      icon: 'icon-chart',
       alert: '▼',
       submenu: [
         {
           text: '退款统计',
-          link: '/main/msg'
+          link: '/stat/after/refund'
         },
         {
           text: '退货统计',
-          link: '/main/buttons'
+          link: '/stat/after/return'
         }
       ]
     }
@@ -217,40 +303,40 @@ const statistics = {
 };
 const agent = {
   text: '代理商管理',
-  link: '/main/navtree',
-  icon: 'fa fa-code-fork',
+  icon: 'fa fa-users',
+  link: '/agent',
   submenu: [
     {
       text: '代理商管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'fa fa-users',
+      link: '/agent/agent'
     },
     {
       text: '代理区域管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'icon-location-pin',
+      link: '/agent/region'
     },
     {
       text: '进货管理',
-      icon: 'fa fa-bar-chart',
-      link: '/main/buttons'
+      icon: 'fa fa-cubes',
+      link: '/agent/stock'
     }
   ]
 };
 const app = {
   text: 'APP管理',
-  link: '/main/navtree',
-  icon: 'fa fa-code-fork',
+  icon: 'icon-screen-smartphone',
+  link: '/app',
   submenu: [
     {
       text: '应用设置',
-      icon: 'fa fa-bar-chart',
-      link: '/main/msg'
+      icon: 'fa fa-wrench',
+      link: '/app/use-set'
     },
     {
       text: '消息推送',
-      icon: 'fa fa-bar-chart',
-      link: '/main/buttons'
+      icon: 'icon-speech',
+      link: '/app/msg-push'
     }
   ]
 };
