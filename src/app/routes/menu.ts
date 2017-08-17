@@ -32,20 +32,21 @@ const operation = {
     {
       text: '快递公司',
       icon: 'fa fa-truck',
-      link: '/operation/delivery'
+      link: '/operation/express'
     },
     {
       text: '文章管理',
       icon: 'icon-book-open',
+      link: '/operation/article',
       alert: '▼',
       submenu: [
         {
-          text: '文章分类',
-          link: '/operation/article/sort'
-        },
-        {
           text: '文章管理',
           link: '/operation/article/manage'
+        },
+        {
+          text: '文章分类',
+          link: '/operation/article/sort'
         }
       ]
     },

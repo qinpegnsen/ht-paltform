@@ -6,15 +6,20 @@ import {SharedModule} from '../shared/shared.module';
 
 import {routes} from './routes';
 import {PagesModule} from './pages/pages.module';
+
+
+
 @NgModule({
   imports: [
     SharedModule,
     RouterModule.forRoot(routes),
-    PagesModule,
+    PagesModule
+
   ],
   declarations: [],
   exports: [
     RouterModule
+
   ]
 })
 

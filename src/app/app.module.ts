@@ -13,6 +13,7 @@ import {SharedModule} from './shared/shared.module';
 import {RoutesModule} from './routes/routes.module';
 import {CookieService} from '_angular2-cookie@1.2.6@angular2-cookie';
 import { OpaqueToken } from '@angular/core';
+import {TableDateService} from "./routes/operation/article/article-manage/table-date.service";
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: Http) {
@@ -37,7 +38,7 @@ export function createTranslateLoader(http: Http) {
     })
   ],
   providers: [
-    CookieService
+    CookieService,TableDateService
   ],
   bootstrap: [AppComponent]
 })

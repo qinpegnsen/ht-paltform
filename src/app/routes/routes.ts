@@ -1,3 +1,6 @@
+/**
+ * Created by qinpengsen on 2017/8/17.
+ */
 import {LayoutComponent} from '../layout/layout.component';
 import {LoginComponent} from './pages/login/login.component';
 import {PagesComponent} from './pages/pages/pages.component';
@@ -10,8 +13,8 @@ export const routes = [
     children: [
       {path: '', redirectTo: '/home', pathMatch: 'full'},
       {path: 'home', loadChildren: './home/home.module#HomeModule'},
-      {path: 'website', component: ButtonDemoComponent},
-      {path: 'DBO', loadChildren: './msg/msg.module#MsgModule'},
+      {path: 'website', loadChildren: './website/website.module#WebsiteModule'},
+      {path: 'operation', loadChildren: './operation/operation.module#OperationModule'},
       {path: 'goods', loadChildren: './echarts/echarts.module#EchartsModule'},
       {path: 'shops', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
       {path: 'member', loadChildren: './navtree/navtree.module#NavtreeModule'},

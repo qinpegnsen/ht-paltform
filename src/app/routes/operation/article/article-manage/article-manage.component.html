@@ -1,0 +1,60 @@
+<div class="content-heading mb-lg">
+  数据字典列表
+  <app-buttons class="pull-right" [config]="articleAddbutton"></app-buttons>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleListdata"
+           (pageChange)="queryArticleList($event)">
+      <thead>
+      <tr>
+        <th style="width: 5%">
+          序号
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="email">类型</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter>状态</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="city">时间</rzhDefaultSorter>
+        </th>
+        <th style="width: 15%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let article of articleList.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{article.articleTitleShort}}</td>
+        <td>{{article.articleType}}</td>
+        <td>{{article.state}}</td>
+        <td>{{article.createTime}}</td>
+        <td>
+          <app-buttons [config]="option" (callback)="option.callback($event)"
+                       *ngFor="let option of articleButtonLists"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
