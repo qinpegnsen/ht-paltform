@@ -63,11 +63,11 @@ export class HeaderComponent implements OnInit, OnChanges {
    * @param path
    */
   private onRouterChange(path){
-    let myNavs = $('.my-nav');
-    for(let i = 0; i < myNavs.length; i++){
-      let myNav = myNavs.eq(i).attr('route');
-      if(myNav.indexOf(path) === 0){
-        myNavs.eq(i).addClass('current').parent().siblings().children('.my-nav').removeClass('current');
+    let firstNavs = $('.my-nav');
+    for(let i = 0; i < firstNavs.length; i++){
+      let firstNav = firstNavs.eq(i).attr('route');
+      if(path.indexOf(firstNav) === 0){
+        firstNavs.eq(i).addClass('current').parent().siblings().children('.my-nav').removeClass('current');
         return;
       }
     };
