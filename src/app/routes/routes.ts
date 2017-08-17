@@ -10,7 +10,7 @@ export const routes = [
     children: [
       {path: '', redirectTo: '/home', pathMatch: 'full'},
       {path: 'home', loadChildren: './home/home.module#HomeModule'},
-      {path: 'website', component: ButtonDemoComponent},
+      {path: 'website', loadChildren: './website/website.module#WebsiteModule'},
       {path: 'DBO', loadChildren: './msg/msg.module#MsgModule'},
       {path: 'goods', loadChildren: './echarts/echarts.module#EchartsModule'},
       {path: 'shops', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
