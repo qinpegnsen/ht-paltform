@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "install": "napa",
+
     "start": "ng serve --port 4000 --proxy-config proxy.conf.js",
     "build": "ng build",
     "test": "ng test",
