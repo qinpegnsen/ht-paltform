@@ -1,6 +1,3 @@
-/**
- * Created by qinpengsen on 2017/8/17.
- */
 import {LayoutComponent} from '../layout/layout.component';
 import {LoginComponent} from './pages/login/login.component';
 import {PagesComponent} from './pages/pages/pages.component';

@@ -1,0 +1,77 @@
+<div class="content-heading mb-lg">
+  数据字典列表
+  <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope" ng-if="search">
+    <div class="form-group mb0">
+      <label class="label-width
+       pull-left text-right lh35 mb0">查找：</label>
+      <div class="col-xs-5">
+        <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryDatas($event)" placeholder="机构名称">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="queryDatas($event)"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="name">关键词</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="remark">信息</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="name">停启用</rzhDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <rzhDefaultSorter by="remark">管理操作</rzhDefaultSorter>
+        </th>
+        <!--<th style="width: 15%"></th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let elder of dataTable.data">
+        <td>{{elder.name}}</td>
+        <td>{{elder.remark}}</td>
+        <td>
+          <!--菜单权限列表的是否启用-->
+          <label class="switch">
+            <input type="checkbox" [checked]="menu.isUse=='Y'" (change)="upMenudateState(menu)" title="是否启动"/>
+            <span></span>
+          </label>
+        </td>
+        <td>
+        <app-buttons [config]="option" (callback)="option.callback($event)" *ngFor="let option of buttonListConfig"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
