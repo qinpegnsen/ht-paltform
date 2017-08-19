@@ -32,7 +32,11 @@ $rightpage-wd:           $aside-wd + 15px;      // match the width with the main
     width: 50%;
   }
 }
-
+.rightpage label i{
+  font-weight: normal;
+  color: #f44336;
+  letter-spacing: 2px;
+}
 // 开启右侧页面信息
 .operationpage-open  {
   -webkit-overflow-scrolling: touch;

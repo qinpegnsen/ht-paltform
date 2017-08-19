@@ -1,0 +1,74 @@
+<div class="content-heading mb-lg">
+  品牌管理
+  <app-buttons class="pull-right" [config]="addButton" routerLink="addBrand"></app-buttons>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="brands" (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          序号
+        </th>
+        <th class="col-md-1 unselectable text-center hidden-sm">
+          <rzhDefaultSorter by="brandInitial">首字母</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="brandName">品牌名称</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">品牌图片</th>
+        <th class="col-md-2 unselectable text-center">是否推荐</th>
+        <th class="col-md-1 unselectable text-center">展示类型</th>
+        <th class="col-md-1 unselectable text-center hidden-sm">
+          <rzhDefaultSorter by="brandSort">排序</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">状态</th>
+        <th class="col-md-2 unselectable text-center">管理操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let brand of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td class="hidden-sm">{{brand.brandInitial}}</td>
+        <td>{{brand.brandName}}</td>
+        <td><img src="{{brand.brandPic}}" alt=""></td>
+        <td>{{brand.brandRecommend == 'Y'? '推荐':'否'}}</td>
+        <td>{{brand.showType == 'IMG'? '图片': '文本'}}</td>
+        <td class="hidden-sm">{{brand.brandSort}}</td>
+        <td>{{brand.state}}
+          <label class="switch switch-md" title="显示/隐藏">
+            <input [checked]="brand.state=='SHOW'" type="checkbox"
+                   (change)="changeBrandState(brand.state=='SHOW',brand.id, brands.curPage)">
+            <span></span>
+          </label>
+        </td>
+        <td>
+          <span *ngIf="brand.state=='SHOW'">
+            <app-buttons [config]="option" (callback)="option.callback($event,brand.id)"
+                         *ngFor="let option of buttons"></app-buttons>
+          </span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{brands.genStartRow()}} 至 {{brands.genEndRow()}} 条，共 {{brands.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

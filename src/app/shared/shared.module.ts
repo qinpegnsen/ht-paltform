@@ -37,6 +37,7 @@ import { StatePipe } from './pipe/state.pipe';
 import { AreaNamePipe } from './pipe/area-name.pipe';
 import { SelectModule } from 'ng2-select';
 import {RzhtoolsService} from "../core/services/rzhtools.service";
+import {SubmitService} from "../core/forms/submit.service";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -68,7 +69,8 @@ import {RzhtoolsService} from "../core/services/rzhtools.service";
   ],
   providers: [
     ColorsService,
-    RzhtoolsService
+    RzhtoolsService,
+    SubmitService
   ],
   declarations: [
     FlotDirective,
