@@ -12,7 +12,7 @@ export const routes = [
       {path: 'home', loadChildren: './home/home.module#HomeModule'},
       {path: 'website', loadChildren: './website/website.module#WebsiteModule'},
       {path: 'DBO', loadChildren: './msg/msg.module#MsgModule'},
-      {path: 'goods', loadChildren: './echarts/echarts.module#EchartsModule'},
+      {path: 'goods', loadChildren: './goods/goods.module#GoodsModule'},
       {path: 'shops', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
       {path: 'member', loadChildren: './navtree/navtree.module#NavtreeModule'},
       {path: 'sale', loadChildren: './echarts/echarts.module#EchartsModule'},

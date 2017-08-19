@@ -32,20 +32,21 @@ const operation = {
     {
       text: '快递公司',
       icon: 'fa fa-truck',
-      link: '/operation/delivery'
+      link: '/operation/express'
     },
     {
       text: '文章管理',
       icon: 'icon-book-open',
+      link: '/operation/article',
       alert: '▼',
       submenu: [
         {
-          text: '文章分类',
-          link: '/operation/article/sort'
-        },
-        {
           text: '文章管理',
           link: '/operation/article/manage'
+        },
+        {
+          text: '文章分类',
+          link: '/operation/article/sort'
         }
       ]
     },
@@ -69,7 +70,7 @@ const goods = {
     {
       text: '商品发布',
       icon: 'fa fa-cube',
-      link: '/goods/msg'
+      link: '/goods/publish'
     },
     {
       text: '商品管理',
@@ -80,14 +81,15 @@ const goods = {
       text: '分类管理',
       icon: 'fa fa-cubes',
       alert: '▼',
+      link: '/goods/kind',
       submenu: [
         {
           text: '分类管理',
-          link: '/goods/sorts/manage'
+          link: '/goods/kind/manage'
         },
         {
           text: '属性模板',
-          link: '/goods/sorts/properties'
+          link: '/goods/kind/properties'
         }
       ]
     },
@@ -129,6 +131,7 @@ const member = {
       text: '积分管理',
       icon: 'fa fa-ticket',
       alert: '▼',
+      link: '/member/integration',
       submenu: [
         {
           text: '积分增减',
@@ -152,6 +155,7 @@ const orders = {
       text: '评价管理',
       icon: 'fa fa-smile-o',
       alert: '▼',
+      link: '/orders/evaluate',
       submenu: [
         {
           text: '店铺评价',
@@ -174,6 +178,7 @@ const sale = {
       text: '退款',
       icon: 'fa fa-money',
       alert: '▼',
+      link: '/sale/refund',
       submenu: [
         {
           text: '退款管理',
@@ -189,6 +194,7 @@ const sale = {
       text: '退货',
       icon: 'fa fa-retweet',
       alert: '▼',
+      link: '/sale/return',
       submenu: [
         {
           text: '退货管理',
@@ -216,6 +222,7 @@ const statistics = {
       text: '统计设置',
       icon: 'fa fa-cogs',
       alert: '▼',
+      link: '/stat/set',
       submenu: [
         {
           text: '订单金额区间',
@@ -235,6 +242,7 @@ const statistics = {
       text: '会员统计',
       icon: 'fa fa-users',
       alert: '▼',
+      link: '/stat/users',
       submenu: [
         {
           text: '新增会员',
@@ -258,6 +266,7 @@ const statistics = {
       text: '销量分析',
       icon: 'fa fa-line-chart',
       alert: '▼',
+      link: '/stat/sales',
       submenu: [
         {
           text: '结算统计',
@@ -273,6 +282,7 @@ const statistics = {
       text: '商品分析',
       icon: 'fa fa-cube',
       alert: '▼',
+      link: '/stat/goods',
       submenu: [
         {
           text: '热卖商品',
@@ -288,6 +298,7 @@ const statistics = {
       text: '售后分析',
       icon: 'icon-chart',
       alert: '▼',
+      link: '/stat/after',
       submenu: [
         {
           text: '退款统计',

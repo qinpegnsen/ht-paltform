@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from "@angular/core";
+import {Component, HostBinding, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import {Location} from "@angular/common";
 import {SettingsService} from "./core/settings/settings.service";
 import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
@@ -7,9 +7,9 @@ import {Router} from "@angular/router";
 declare var $: any;
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
     //动态样式
@@ -33,14 +33,16 @@ export class AppComponent implements OnInit {
         // this.checkLogin();
     }
 
-    // 检测登录状态并引流
-    private checkLogin(){
-        let url = this.location.path();
-        let loginCookie = this.cookieService.get("RBAC_LGTICKET");
-        if(url !== "/pages/login"){
-          if(!loginCookie) this.router.navigate(['/pages/login'],{ replaceUrl: true }); //路由跳转
-        }else{
-          if(loginCookie) this.router.navigate(['/home'],{ replaceUrl: true }); //路由跳转
-        }
+
+
+  // 检测登录状态并引流
+  private checkLogin() {
+    let url = this.location.path();
+    let loginCookie = this.cookieService.get("RBAC_LGTICKET");
+    if (url !== "/pages/login") {
+      if (!loginCookie) this.router.navigate(['/pages/login'], {replaceUrl: true}); //路由跳转
+    } else {
+      if (loginCookie) this.router.navigate(['/home'], {replaceUrl: true}); //路由跳转
     }
+  }
 }
