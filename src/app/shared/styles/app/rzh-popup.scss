@@ -1,0 +1,82 @@
+/* ========================================================================
+     扩展样式 - 右侧公共操作页面样式
+ ========================================================================== */
+
+@charset "UTF-8";
+
+$popup-bg:           #fff;
+$popup-border-color: grayscale(darken($popup-bg, 20%));
+$popup-color:        $text-color;
+$popup-wd:           $aside-wd + 15px;      // match the width with the main aside component
+
+
+.mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-index-main-section + 100;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  margin-top: 0;
+  border: 2px solid #F0F0F0;
+  box-shadow: 0px 0px 5px 1px #fff;
+  background-color: $popup-bg;
+  color: $popup-color;
+  z-index: $z-index-main-section + 5;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  @include transition(all .3s ease);
+}
+.pop{
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.popup-hd{
+  font-size: large;
+  padding: 10px 20px;
+  position: relative;
+}
+.popup-colse{
+  width: 20px;
+  height: 20px;
+  line-height:20px;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: xx-large;
+}
+.popup-colse:hover{
+  color: #cc1635;
+  cursor: pointer;
+}
+.popup-colse:active{
+   color: #b30624;
+ }
+
+.popup-bd{
+  min-height: 200px;
+  padding: 20px;
+}
+.popup-ft{
+  padding: 10px 20px;
+}
+
+
+.csstransforms3d { //滑动效果
+  .popup {
+    @include translate3d( -50%, -50%, 0);
+  }
+}
+
+

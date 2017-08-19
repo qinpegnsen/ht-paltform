@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ToasterConfig, ToasterService} from 'angular2-toaster';
+import {Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit} from "@angular/core";
+import {ToasterConfig, ToasterService} from "angular2-toaster";
+import {AppComponent} from "../../../app.component";
+import {PopupComponent} from "app/routes/operationpage/popup/popup.component";
+import {Router} from "@angular/router";
 const swal = require('sweetalert');
 
 @Component({
@@ -12,12 +15,36 @@ export class MsgComponent implements OnInit {
     positionClass: 'toast-bottom-right', //提示位置
     showCloseButton: true //显示关闭按钮
   });
+  componentRef: ComponentRef<PopupComponent>;
 
-  constructor(public toasterService: ToasterService) {
+  constructor(public toasterService: ToasterService,private router: Router,  private app: AppComponent, private resolver: ComponentFactoryResolver) {
+  }
+
+  /**
+   * 当路由变化时会销毁组件
+   */
+  ngOnDestroy() {
+    this.componentRef.destroy()
   }
 
   ngOnInit() {
+
   }
+
+  /**
+   * 显示窗口组件
+   */
+  showPopup(){
+    let _this = this;
+    _this.app.container.clear();// 先清空容器，每次我们需要创建组件时，我们需要删除之前的视图，否则组件容器中会出现多个视图 (如果允许多个组件的话，就不需要执行清除操作 )。
+    const factory: ComponentFactory<PopupComponent> = _this.resolver.resolveComponentFactory(PopupComponent);// PopupComponent是自己创建的弹窗组件
+    _this.componentRef = _this.app.container.createComponent(factory);// 调用容器的 createComponent() 方法，该方法内部将调用 ComponentFactory 实例的 create() 方法创建对应的组件，并将组件添加到我们的容器。
+    this.componentRef.instance.val = {a:1};// 定义向子组件输入的值
+    this.componentRef.instance.output.subscribe(event => console.log(event));// 订阅动态组件的输出值
+  }
+
+
+
 
   /************************************************弹框提醒 begin *************************************************************************/
   //成功提示框
@@ -127,47 +154,57 @@ export class MsgComponent implements OnInit {
   msgSuccess() {
     this.toasterService.pop("success", "成功提示", "成功消息，类型：succes");
   }
+
   //失败消息
   msgError() {
     this.toasterService.pop("error", "失败提示", "失败消息，类型：error");
   }
+
   //警示消息
   msgWarning() {
     this.toasterService.pop("warning", "警示提示", "警示消息，类型：warning");
   }
+
   //信息消息
   msgInfo() {
     this.toasterService.pop("info", "信息提示", "信息消息，类型：info");
   }
+
   //执行中消息
   msgWait() {
     this.toasterService.pop("wait", "执行中提示", "执行中消息，类型：wait");
   }
+
   //上中 消息
   msgTopCenter() {
     this.toasterconfig['positionClass'] = "toast-top-center";
     this.toasterService.pop("success", "成功提示", "成功消息，类型：success");
   }
+
   //上左 消息
   msgTopLeft() {
     this.toasterconfig['positionClass'] = "toast-top-left";
     this.toasterService.pop("success", "成功提示", "成功消息，类型：success");
   }
+
   //上右 消息
   msgTopRight() {
     this.toasterconfig['positionClass'] = "toast-top-right";
     this.toasterService.pop("success", "成功提示", "成功消息，类型：success");
   }
+
   //下中 消息
   msgBottomCenter() {
     this.toasterconfig['positionClass'] = "toast-bottom-center";
     this.toasterService.pop("success", "成功提示", "成功消息，类型：success");
   }
+
   //上左 消息
   msgBottomLeft() {
     this.toasterconfig['positionClass'] = "toast-bottom-left";
     this.toasterService.pop("success", "成功提示", "成功消息，类型：success");
   }
+
   //上右 消息
   msgBottomRight() {
     this.toasterconfig['positionClass'] = "toast-bottom-right";

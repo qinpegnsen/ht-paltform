@@ -35,10 +35,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
               private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent) {
     // 只显示指定的
-    let allMenus = [];
-    if(typeof menu.getMenu() !== 'undefined') allMenus = menu.getMenu();
-    this.menuItems = this.getSubmenuFirstLink(allMenus);// 获取子菜单的第一个的链接作为一级菜单的链接，可使一级菜单切换时页面默认为子菜单的第一项
-
+    if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
   }
 
   ngOnInit() {
