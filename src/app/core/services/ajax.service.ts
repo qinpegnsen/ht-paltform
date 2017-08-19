@@ -85,6 +85,7 @@ export class AjaxService {
       return;
     }
     config.data._method = "delete";
+    // config.method = "delete";
     this.post(config);   //执行ajax
   };
 

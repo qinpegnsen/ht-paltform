@@ -1,22 +1,51 @@
 import { Injectable } from '@angular/core';
-import {AjaxService} from "../../../../core/services/ajax.service";
+import {AjaxService} from "../../../core/services/ajax.service";
 import {isNull} from "util";
-import {Page} from "../../../../core/page/page";
 const swal = require('sweetalert');
 
+
 @Injectable()
-export class TableDateService {
+export class AddArticleSortService {
 
   constructor(private ajax: AjaxService) { }
 
   /**
-   * 查询文章管理列表
-   * @param data
+   * 新增文章分类
    * @param url
-   * @returns {Page}
+   * @param data
    */
-  public queryData(data,url) {
-    let result:Page=new Page();
+  public addClass(url,data) {
+    let result;
+    this.ajax.post({
+      url: url,
+      data: data,
+      async:false,
+      success: (data) => {
+        if (!isNull(data)) {
+          if(data.success==true){
+            result=data.info;
+            swal(result,'','success')
+          }else{
+            console.log('article/queryAllArticle 返回的success为假');
+          }
+        }else{
+          console.log('article/queryAllArticle 返回的数据为空');
+        }
+      },
+      error: (data) => {
+        swal('分类用户已存在','','error')
+      }
+    });
+  }
+
+  /**
+   * t通过id查询分类
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  public queryClassById(url,data) {
+    var result;
     this.ajax.get({
       url: url,
       data: data,
@@ -24,7 +53,8 @@ export class TableDateService {
       success: (data) => {
         if (!isNull(data)) {
           if(data.success==true){
-            result=new Page(data.data);
+            result=data.data;
+            let info=data.info;
           }else{
             console.log('article/queryAllArticle 返回的success为假');
           }
@@ -33,26 +63,30 @@ export class TableDateService {
         }
       },
       error: () => {
-        console.log('article/queryAllArticle 连接数据库失败');
+        swal('失败','','error')
       }
     });
-    return result;
+    return result
   }
 
   /**
-   * 查询文章
+   * 修改类别
+   * @param url
+   * @param data
+   * @returns {any}
    */
-  public selsectArticle(url,data) {
-    let result;
-    this.ajax.get({
+  public updateClass(url,data) {
+    var result;
+    this.ajax.put({
       url: url,
       data: data,
       async:false,
       success: (data) => {
         if (!isNull(data)) {
           if(data.success==true){
-            result=data.info;
-            swal(result,'','success')
+            result=data.data;
+            let info=data.info;
+            swal(info,'','success')
           }else{
             console.log('article/queryAllArticle 返回的success为假');
           }
@@ -61,35 +95,11 @@ export class TableDateService {
         }
       },
       error: (data) => {
-        swal('分类用户已存在','','error')
+        swal('修改用户失败','','error')
       }
     });
+    return result
   }
 
-  /**
-   * 删除文章
-   */
-  public delArticle(url,data) {
-    let result;
-    this.ajax.get({
-      url: url,
-      data: data,
-      async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success==true){
-            result=data.info;
-            swal(result,'','success')
-          }else{
-            console.log('article/queryAllArticle 返回的success为假');
-          }
-        }else{
-          console.log('article/queryAllArticle 返回的数据为空');
-        }
-      },
-      error: (data) => {
-        swal('分类用户已存在','','error')
-      }
-    });
-  }
+
 }

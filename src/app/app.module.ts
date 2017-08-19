@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; // this is needed!
 import {NgModule} from '@angular/core';
 import {HttpModule, Http} from '@angular/http';
-import {TranslateService, TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {AppComponent} from './app.component';
@@ -12,8 +12,8 @@ import {LayoutModule} from './layout/layout.module';
 import {SharedModule} from './shared/shared.module';
 import {RoutesModule} from './routes/routes.module';
 import {CookieService} from '_angular2-cookie@1.2.6@angular2-cookie';
-import { OpaqueToken } from '@angular/core';
-import {TableDateService} from "./routes/operation/article/article-manage/table-date.service";
+
+
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: Http) {
@@ -38,7 +38,7 @@ export function createTranslateLoader(http: Http) {
     })
   ],
   providers: [
-    CookieService,TableDateService
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

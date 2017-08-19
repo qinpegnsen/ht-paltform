@@ -21,4 +21,5 @@ export class RightpageComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
+
 }
