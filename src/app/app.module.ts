@@ -1,16 +1,10 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; // this is needed!
-import {NgModule} from '@angular/core';
-import {HttpModule, Http} from '@angular/http';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"; // this is needed!
 import {NgModule} from "@angular/core";
 import {Http, HttpModule} from "@angular/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 
-import {AppComponent} from './app.component';
+import {AppComponent} from "./app.component";
 
 import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
