@@ -29,7 +29,7 @@
           <span>{{(item.translate | translate) || item.text}}</span>
         </a>
         <!-- has submenu -->
-        <a *ngIf="!item.heading && item.submenu" title="{{item.text}}" [routerLink]="item.link"
+        <a *ngIf="!item.heading && item.submenu" title="{{item.text}}"
            (click)="toggleSubmenuClick($event)" (mouseenter)="toggleSubmenuHover($event)">
           <span class="pull-right" *ngIf="item.alert"
                 [ngClass]="item.label || 'fa fa-sort-desc'"></span>
