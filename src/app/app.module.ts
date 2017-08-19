@@ -4,14 +4,13 @@ import {Http, HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
-import {AppComponent} from "./app.component";
+import {AppComponent} from './app.component';
 
 import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
 import {SharedModule} from "./shared/shared.module";
 import {RoutesModule} from "./routes/routes.module";
 import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
-import {TableDateService} from "./routes/operation/article/article-manage/table-date.service";
 import {PopupComponent} from "./routes/operationpage/popup/popup.component";
 
 // https://github.com/ocombe/ng2-translate/issues/218
@@ -37,7 +36,7 @@ export function createTranslateLoader(http: Http) {
     })
   ],
   providers: [
-    CookieService, TableDateService
+    CookieService
   ],
   bootstrap: [AppComponent],
   entryComponents: [PopupComponent],
