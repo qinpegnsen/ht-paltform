@@ -1,0 +1,113 @@
+<div class="rightpage">
+  <form class="form-validate form-horizontal" #addKind="ngForm" style="height: 100%">
+    <!-- START panel-->
+    <div class="panel-default">
+      <!--可编辑表单 start-->
+      <div class="panel-body mb-xl">
+        <fieldset class="b0">
+          <legend>添加品牌</legend>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><i>*</i>品牌名称</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="brandName" required [(ngModel)]="brandInfo.brandName"
+                     #brandName="ngModel" placeholder="请输入品牌名称"/>
+            </div>
+          </div>
+          <div [hidden]="brandName.valid || brandName.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请输入品牌名称
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><i>*</i>品牌首字母</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" required name="brandInitial" [(ngModel)]="brandInfo.brandInitial"
+                    #brandInitial="ngModel" placeholder="品牌首字母"/>
+            </div>
+          </div>
+          <div [hidden]="brandInitial.valid || brandInitial.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请输入品牌名称
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">图片</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="brandPic" [(ngModel)]="brandInfo.brandPic"
+                     placeholder="图片地址"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">排序</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="brandSort" [(ngModel)]="brandInfo.brandSort"
+                     placeholder="排序"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">店铺编码</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="storeCode" [(ngModel)]="brandInfo.storeCode"
+                     placeholder="店铺编码"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">是否推荐</label>
+            <div class="col-sm-7">
+              <select class="form-control" name="brandRecommend" [(ngModel)]="brandInfo.brandRecommend" >
+                <option value="Y">是</option>
+                <option value="N">否</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">品牌展示类型</label>
+            <div class="col-sm-7">
+              <select class="form-control" name="showType" [(ngModel)]="brandInfo.showType" >
+                <option value="IMG">图片</option>
+                <option value="TXT">文本</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">状态</label>
+            <div class="col-sm-7">
+              <select class="form-control" name="state" [(ngModel)]="brandInfo.state" >
+                <option value="SHOW">显示</option>
+                <option value="HIDE">隐藏</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!--可编辑表单 end-->
+
+      <!--btns-->
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+
+        <!--添加分类 -->
+        <button class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
+                [disabled]="!addKind.form.valid">提交
+        </button>
+      </div>
+    </div>
+
+    <!-- END panel-->
+  </form>
+</div>
