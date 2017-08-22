@@ -1,0 +1,96 @@
+<div class="content-heading mb-lg">
+  地区设置
+  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="form-group mb0">
+      <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
+      <div class="col-xs-5">
+        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               placeholder="请输入地区名称作为关键字进行搜索">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-body">
+  <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
+    <thead>
+    <tr>
+      <th class="w5 text-center">
+        序号
+      </th>
+      <th class="w10 text-center">
+        <rzhDefaultSorter by="areaCode">地区编码</rzhDefaultSorter>
+      </th>
+      <th class="w15 text-center">
+        <rzhDefaultSorter by="areaName">地区名称</rzhDefaultSorter>
+      </th>
+      <th class="w20 text-center">
+        <rzhDefaultSorter by="fullName">全名称</rzhDefaultSorter>
+      </th>
+      <th class="w15 text-center">
+        <rzhDefaultSorter by="createTime">开通时间</rzhDefaultSorter>
+      </th>
+      <th class="w15 text-center">
+        <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>
+      </th>
+      <th class="w10 text-center">
+        <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
+      </th>
+      <th class="w10 text-center">
+        <rzhDefaultSorter by="b">操作</rzhDefaultSorter>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let file of dataTable.data;let y = index" class="text-center">
+      <td style="padding-left: 20px">{{y+1}}</td>
+      <td>{{file.areaCode}}</td>
+      <td>{{file.areaName}}</td>
+      <td>{{file.fullName}}</td>
+      <td>{{file.createTime}}</td>
+      <td>{{file.remark}}</td>
+      <td>{{file.state}}</td>
+      <td>
+        <!--文件控制的是否启用-->
+
+        <label class="switch">
+          <input type="checkbox" [checked]="file.state=='NORMAL'" (change)="upFiledateState(file)" title="是否启动"/>
+          <span></span>
+        </label>
+
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="7">
+        <div class="col-sm-5">
+          <div class="text-muted"><strong>第 {{controlData.genStartRow()}} 至 {{controlData.genEndRow()}} 条，共 {{controlData.totalRow}} 条</strong></div>
+        </div>
+        <div class="col-sm-7">
+          <div style="float: right">
+            <rzhBootstrapPaginator></rzhBootstrapPaginator>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

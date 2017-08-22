@@ -2,7 +2,7 @@ const PROXY_CONFIG = [
   {
     context: [
       "/article",
-      "/limit",
+      "/goodskind",
       "/limitFile",
       "/limitMenu",
       "/limitOpt",
@@ -17,7 +17,7 @@ const PROXY_CONFIG = [
       "/sys",
       "/res"
     ],
-    target: "http://192.168.10.110:8089",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -33,6 +33,14 @@ const PROXY_CONFIG = [
       "/upload"
     ],
     target: "http://192.168.10.110:8083",   //拦截 context配置路径，经过此地址
+    secure: false
+  }
+  ,
+  {
+    context: [
+      "/agent_area"
+    ],
+    target: "http://192.168.10.182:8081",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];

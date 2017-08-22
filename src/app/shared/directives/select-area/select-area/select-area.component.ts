@@ -44,12 +44,17 @@ export class SelectAreaComponent implements OnInit {
   getArea(fullName, myAreaCode, isOld) {
     let me = this;
     me.show = true;
-    me.areas = me.tools.getAreaByCode(myAreaCode, isOld).children;
+    //me.areas = me.getAreaByCode(myAreaCode).children;
+    me.areas = null;
     me.adr = fullName;
     me.areaCode = myAreaCode;
     if (isNullOrUndefined(me.areas) || me.areas.length == 0) {
       me.cityConfirm();
     }
+  }
+
+  getAreaByCode(myAreaCode){
+
   }
 
   /**

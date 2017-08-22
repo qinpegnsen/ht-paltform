@@ -320,7 +320,7 @@ const agent = {
     {
       text: '代理商管理',
       icon: 'fa fa-users',
-      link: '/agent/agent'
+      link: '/agent/agentperson'
     },
     {
       text: '代理区域管理',
