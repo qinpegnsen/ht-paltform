@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {TableDateService} from "./table-date.service";
+import {AddArticleComponent} from "./add-article/add-article.component";
 
 @Component({
   selector: 'app-article-manage',
@@ -17,7 +18,7 @@ export class ArticleManageComponent implements OnInit {
 
   }
 
-  /**
+  /**linkType
    * 初始化
    * 1.给articleManButtonLists和articleManAddbutton赋值
    * 2.调用文章管理的接口
@@ -31,6 +32,7 @@ export class ArticleManageComponent implements OnInit {
       };
 
     this.queryArticManleList()
+
   }
 
 
@@ -50,7 +52,6 @@ export class ArticleManageComponent implements OnInit {
     let url= "/article/queryAllArticle";
     let result=this.TableDateService.queryData(data,url);
     this.articleManListdata= result;
-    console.log(this.articleManListdata)
   }
 
 

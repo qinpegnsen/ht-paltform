@@ -14,20 +14,21 @@ import {ArticleSortDelService} from "./article/article-sort/article-sort-del.ser
 import {ArticleManageComponent} from "./article/article-manage/article-manage.component";
 import {TableDateService} from "./article/article-manage/table-date.service";
 import { AddArticleManComponent } from './add-article-man/add-article-man.component';
-import {AddArticleManService} from "./add-article-man/add-article-man.service";
+import {AddArticleManService} from "./article/article-manage/add-article/add-article-man.service";
 import { ContentNavComponent } from './article/article-manage/content-nav/content-nav.component';
 import { ContentComponent } from './article/article-manage/content/content.component';
+import { AddArticleComponent } from './article/article-manage/add-article/add-article.component';
 
 
 const addSort: Routes = [
   {path: 'addSort', component: AddArticleSortComponent}
 ];
-const addMan: Routes = [
-  {path: 'addMan', component: AddArticleManComponent}
+const addArticle: Routes = [
+  {path: 'addArticle', component: AddArticleComponent}
 ];
 const articleChildRoutes: Routes = [
   {path: '', redirectTo:'manage'},
-  {path: 'manage', component: ArticleManageComponent,children:addMan},
+  {path: 'manage', component: ArticleManageComponent,children:addArticle},
   {path: 'sort', component: ArticleSortComponent,children:addSort}
 ]
 const routes: Routes = [
@@ -44,7 +45,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent,  AddArticleManComponent, ContentNavComponent, ContentComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent,  AddArticleManComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
   providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService]
 })
 export class OperationModule { }

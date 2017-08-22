@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-content',
@@ -7,14 +8,19 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
+  /**
+   * 输入属性，文章列表的数据，然后在页面呈现出来
+   */
   @Input()
   articleManListdata;
+
 
   private updatebutton:Object;//更新文章按钮
   private deletebutton:Object;//删除文章按钮
   private detailsbutton:Object;//查看详情按钮
 
-  constructor() { }
+  constructor(private routeInfo: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.updatebutton={
@@ -29,6 +35,8 @@ export class ContentComponent implements OnInit {
       title:"详情",
       type: "details"
     };
+
+
   }
 
 }

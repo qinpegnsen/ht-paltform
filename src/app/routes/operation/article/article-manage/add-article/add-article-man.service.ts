@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {isNull} from "util";
-import {AjaxService} from "../../../core/services/ajax.service";
+import {AjaxService} from "../../../../../core/services/ajax.service";
 const swal = require('sweetalert');
 @Injectable()
 export class AddArticleManService {

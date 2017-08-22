@@ -1,15 +1,16 @@
 
   <div class="content-heading mb-lg">
     文章管理
-    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addMan"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
+    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
   </div>
   <div>
     <app-content-nav></app-content-nav>
+    <!--路由嵌套 begin-->
+    <router-outlet></router-outlet>
+    <!--路由嵌套 end-->
     <app-content [articleManListdata]="articleManListdata"></app-content>
   </div>
-  <!--路由嵌套 begin-->
-  <router-outlet></router-outlet>
-  <!--路由嵌套 end-->
+
 
 
 

@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import {AddArticleManService} from "./add-article-man.service";
 import {ActivatedRoute} from "@angular/router";
-import {SettingsService} from "../../../core/settings/settings.service";
-import {AddArticleManService} from "../article/article-manage/add-article/add-article-man.service";
-
+import {SettingsService} from "../../../../../core/settings/settings.service";
+declare var $: any;
 @Component({
-  selector: 'app-add-article-man',
-  templateUrl: './add-article-man.component.html',
-  styleUrls: ['./add-article-man.component.scss']
+  selector: 'app-add-article',
+  templateUrl: './add-article.component.html',
+  styleUrls: ['./add-article.component.scss']
 })
-export class AddArticleManComponent implements OnInit {
+export class AddArticleComponent implements OnInit {
 
   public linkType:string;
 
+  public contents: string;
+
   public articleClassList;//文章分类列表的数据
 
-  constructor(private routeInfo: ActivatedRoute,public settings: SettingsService,public AddArticleManService: AddArticleManService) {
-    this.settings.showRightPage("0%");
+  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public AddArticleManService: AddArticleManService) {
+    this.settings.showRightPage("30%");
   }
 
   ngOnInit() {
@@ -27,7 +29,18 @@ export class AddArticleManComponent implements OnInit {
     let url='/articleclass/queryArticleClass';
     let data={}
     this.articleClassList=this.AddArticleManService.articleClass(url,data)
-    console.log(this.articleClassList)
+
+
+    $('#summernote').summernote({
+      height: 280,
+      dialogsInBody: true,
+      callbacks: {
+        onChange: (contents, $editable) => {
+          this.contents = contents;
+          // console.log(contents);
+        }
+      }
+    });
   }
 
   // 取消
@@ -35,7 +48,11 @@ export class AddArticleManComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
   // 提交
-  submit(obj){
+  submit(obj,RichText){
+
+    console.log(obj)
+    console.log(RichText)
+    obj.addArticleEnum='DRAFT'
     console.log(obj)
     if(this.linkType=='addArticle'){
       let url='/article/addArticle';
@@ -52,12 +69,11 @@ export class AddArticleManComponent implements OnInit {
         goodIds:obj.goodIds,
         articleCommend:obj.articleCommend,
         articleCommentFlag:obj.articleCommentFlag,
-        articleCoverType:'AUTO',
+        articleCoverType:obj.articleCoverType,
         url:obj.url,
-        articleState:'DRAFT'
+        addArticleEnum:'DRAFT'
       }
       this.AddArticleManService.addArticle(url,data);
     }
-
   }
 }
