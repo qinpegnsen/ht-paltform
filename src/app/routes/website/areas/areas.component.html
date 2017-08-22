@@ -1,3 +1,91 @@
-<p>
-  areas works!
-</p>
+<div class="content-heading mb-lg">
+  地区设置
+  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="form-group mb0">
+      <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
+      <div class="col-xs-5">
+        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               placeholder="请输入地区名称作为关键字进行搜索">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="col-md-10 font15 mt mb pl text-primary">
+    <i class="icon-layers mr"></i>
+    <span class="cursor-p" (click)="queryChildSortList()">地区管理</span>
+    <span *ngFor="let menuTit of childMenuTitList">
+      <i class="fa fa-arrow-right mr ml"></i>
+      <font class="cursor-p" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
+    </span>
+    <span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
+      <i class="fa fa-level-up mr5"></i>
+      返回上一级
+    </span>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="areas">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          序号
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="area_code">地区编码</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="areaName">地区名称</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="level">所在层级</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let organ of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td>{{organ.areaCode}}</td>
+        <td>{{organ.areaName}}</td>
+        <td>{{organ.level}}</td>
+        <td>
+          <app-buttons [config]="option" routerLink="rightpage" [queryParams]="{id:3}"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2}"></app-buttons>
+          <app-buttons [config]="deletebutton"></app-buttons>
+          <span class="btn btn-default btn-xs" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">
+          <!--<div class="col-sm-5">-->
+          <!--<div class="text-muted"><strong>第 {{areas.genStartRow()}} 至 {{areas.genEndRow()}} 条，共 {{areas.totalRow}}-->
+          <!--条</strong></div>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>-->
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

@@ -23,8 +23,13 @@
 </div>
 <div class="panel panel-default">
   <div class="col-md-10 font15 mt mb pl text-primary">
+<<<<<<< Updated upstream
     <i class="icon-layers mr"></i>
     <span class="cursor-p" (click)="queryChildSortList()">文章分类</span>
+=======
+  <i class="icon-layers mr"></i>
+  <span class="cursor-p" (click)="queryChildSortList()">菜单权限</span>
+>>>>>>> Stashed changes
     <span *ngFor="let menuTit of childMenuTitList">
       <i class="fa fa-arrow-right mr ml"></i>
       <font class="cursor-p" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
@@ -33,7 +38,7 @@
       <i class="fa fa-level-up mr5"></i>
       返回上一级
     </span>
-  </div>
+</div>
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleSortListdata"
            (pageChange)="queryArticSortleList($event)">

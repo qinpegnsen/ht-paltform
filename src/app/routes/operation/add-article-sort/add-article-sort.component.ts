@@ -18,7 +18,7 @@ export class AddArticleSortComponent implements OnInit {
   public acParentId:number;
   public id:number;
   public stateList:Array<string>;
-  constructor(public settings: SettingsService,public AddArticleSortService: AddArticleSortService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,) {
+  constructor(public settings: SettingsService,public AddArticleSortService: AddArticleSortService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 

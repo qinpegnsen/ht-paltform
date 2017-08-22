@@ -1,0 +1,29 @@
+.panel.panel-default{
+  border-top-width:1px;
+}
+.unselectable{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.sort-num{
+  width: 3%;
+  min-width: 50px;
+}
+
+.lh35{
+  line-height: 35px;
+}
+.label-width{
+  width: 10%;
+  min-width:60px;
+  max-width:120px;
+}
+.form-control{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
