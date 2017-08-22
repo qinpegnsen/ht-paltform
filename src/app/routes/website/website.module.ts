@@ -13,6 +13,7 @@ const appChildRoutes: Routes = [
   {path: 'rightpage', component: RightpageComponent}
 ]
 const routes: Routes = [
+  {path:'',redirectTo:'areas'},
   {path: 'adddata', component: AdddataComponent},
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
   {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},

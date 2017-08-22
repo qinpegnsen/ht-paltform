@@ -18,7 +18,7 @@ export class ButtonService {
     elink?: string,    // used only for external links
     target?: string,   // anchor target="_blank|_self|_parent|_top|framename"
     icon?: string,
-    isUse?: boolean //是否显示使用
+    enable?: boolean //是否显示使用
   }>) {
     items.forEach((item) => {
       this.buttonItems.push(item);

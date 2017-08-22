@@ -22,10 +22,8 @@ export class AreasService {
   constructor(private ajax: AjaxService) { }
 
   public controlDatas(url,data) {
-    var result;
-    let me = this
-
-    this.ajax.get({
+    let me = this,result;
+    me.ajax.get({
       url:url,
       data: data,
       async:false,

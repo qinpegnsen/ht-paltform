@@ -16,7 +16,7 @@ interface menuVO{
   level?:number;
   ord?:number;
   remarks?:string;
-  isUse:string;
+  enable:string;
 }
 
 class MenuItem {

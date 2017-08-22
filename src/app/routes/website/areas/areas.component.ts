@@ -5,6 +5,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import {ActivatedRoute,Router} from '@angular/router';
 import {isNullOrUndefined} from "util";
 import {AreasService} from "./areas.service";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-areas',
@@ -78,7 +79,11 @@ export class AreasComponent implements OnInit {
     //this.AreasService.controlDatas()//页面元素信息加载
     //let result=this.AreasService.controlDatas();
     console.log("█ result ►►►",result  );
-    this.table.voList = result.data;
+    if(isNullOrUndefined(result)){
+
+    }else{
+      this.table.voList = result.data;
+    }
 
     this.areas = new Page(this.table);
   }
