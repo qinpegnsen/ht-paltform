@@ -24,7 +24,7 @@
 <div class="panel panel-default">
   <div class="col-md-10 font15 mt mb pl text-primary">
     <i class="icon-layers mr"></i>
-    <span class="cursor-p" (click)="queryChildSortList()">菜单权限</span>
+    <span class="cursor-p" (click)="queryChildSortList()">文章分类</span>
     <span *ngFor="let menuTit of childMenuTitList">
       <i class="fa fa-arrow-right mr ml"></i>
       <font class="cursor-p" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>

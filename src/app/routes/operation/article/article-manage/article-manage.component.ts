@@ -10,9 +10,7 @@ import {TableDateService} from "./table-date.service";
 export class ArticleManageComponent implements OnInit {
 
   private articleManAddbutton:Object;//新增文章按钮
-  private updatebutton:Object;//更新文章按钮
-  private deletebutton:Object;//删除文章按钮
-  private detailsbutton:Object;//查看详情按钮
+
   private articleManListdata;//用来存储服务取回来的数据
 
   constructor(private TableDateService:TableDateService) {
@@ -31,18 +29,7 @@ export class ArticleManageComponent implements OnInit {
         title:"新增文章",
         type: "add"
       };
-    this.updatebutton={
-        title:"编辑",
-        type: "update"
-      };
-    this.deletebutton={
-        title:"删除",
-        type: "delete"
-      };
-    this.detailsbutton={
-      title:"详情",
-      type: "details"
-    };
+
     this.queryArticManleList()
   }
 
@@ -57,16 +44,18 @@ export class ArticleManageComponent implements OnInit {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:6
+      pageSize:6,
+      articleState:'AUDIT'
     }
     let url= "/article/queryAllArticle";
     let result=this.TableDateService.queryData(data,url);
     this.articleManListdata= result;
+    console.log(this.articleManListdata)
   }
 
 
   /**
-   * 查询文章
+   * 查询当前文章的信息
    */
   selecteArticle(id){
     let data={
@@ -78,14 +67,14 @@ export class ArticleManageComponent implements OnInit {
   }
 
   /**
-   * 查询文章
+   * 删除文章
    */
   delArticle(id){
+    console.log(id)
     let data={
-      articleId:id,
-      queryState:''
+      articleId:id
     }
-    let url= "/article/queryArticle";
-    this. TableDateService.selsectArticle(url,data)
+    let url= "/article/deleteArticleByState";
+    this. TableDateService.delArticle(url,data)
   }
 }

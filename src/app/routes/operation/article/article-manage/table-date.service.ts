@@ -40,7 +40,7 @@ export class TableDateService {
   }
 
   /**
-   * 查询文章
+   * 查询具体的文章信息
    */
   public selsectArticle(url,data) {
     let result;
@@ -71,13 +71,14 @@ export class TableDateService {
    */
   public delArticle(url,data) {
     let result;
-    this.ajax.get({
+    this.ajax.put({
       url: url,
       data: data,
       async:false,
       success: (data) => {
         if (!isNull(data)) {
           if(data.success==true){
+            console.log(data)
             result=data.info;
             swal(result,'','success')
           }else{

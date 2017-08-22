@@ -15,6 +15,8 @@ import {ArticleManageComponent} from "./article/article-manage/article-manage.co
 import {TableDateService} from "./article/article-manage/table-date.service";
 import { AddArticleManComponent } from './add-article-man/add-article-man.component';
 import {AddArticleManService} from "./add-article-man/add-article-man.service";
+import { ContentNavComponent } from './article/article-manage/content-nav/content-nav.component';
+import { ContentComponent } from './article/article-manage/content/content.component';
 
 
 const addSort: Routes = [
@@ -42,7 +44,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent,  AddArticleManComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent,  AddArticleManComponent, ContentNavComponent, ContentComponent],
   providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService]
 })
 export class OperationModule { }

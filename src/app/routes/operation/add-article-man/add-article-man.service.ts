@@ -29,11 +29,38 @@ export class AddArticleManService {
         }
       },
       error: (data) => {
-        swal('分类用户已存在','','error')
+        console.log(data)
+        swal('获取数据失败','','error')
       }
     });
   }
 
-
+  /**
+   * 文章分类列表
+   */
+  public articleClass(url,data) {
+    let result;
+    this.ajax.get({
+      url: url,
+      data: data,
+      async:false,
+      success: (data) => {
+        if (!isNull(data)) {
+          if(data.success==true){
+            result=data.data;
+            console.log(data)
+          }else{
+            console.log('article/queryAllArticle 返回的success为假');
+          }
+        }else{
+          console.log('article/queryAllArticle 返回的数据为空');
+        }
+      },
+      error: (data) => {
+        swal('分类用户已存在','','error')
+      }
+    });
+    return result;
+  }
 
 }

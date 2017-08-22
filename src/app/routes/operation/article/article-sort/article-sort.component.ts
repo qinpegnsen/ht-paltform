@@ -116,9 +116,9 @@ export class ArticleSortComponent implements OnInit {
   /**
    * 返回上一级菜单列表
    */
-  goBackMenu() {
+  goBackMenu(articleList) {
     let num = this.childMenuTitList.length;
-    if (num - 2 < 0) this.queryChildSortList();
+    if (num - 2 < 0) this.queryChildSortList(articleList);
     else this.queryChildSortList(this.childMenuTitList[num - 2].code, this.childMenuTitList[num - 2].name, true);
   }
 

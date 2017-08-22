@@ -1,64 +1,15 @@
-<div class="content-heading mb-lg">
-  文章管理
-  <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addMan"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
-           (pageChange)="queryArticManleList($event)">
-      <thead>
-      <tr>
-        <th style="width: 5%">
-          序号
-        </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
-        </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter by="email">类型</rzhDefaultSorter>
-        </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter>状态</rzhDefaultSorter>
-        </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter by="city">时间</rzhDefaultSorter>
-        </th>
-        <th style="width: 15%">操作</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let article of articleList.data;let i = index">
-        <td>{{i+1}}</td>
-        <td>{{article.articleTitleShort}}</td>
-        <td>{{article.articleType}}</td>
-        <td>{{article.state}}</td>
-        <td>{{article.createTime}}</td>
-        <td>
-          <app-buttons [config]="updatebutton" routerLink="addMan" [queryParams]="{linkType:'updateMan',id:article.id}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="delArticle(article.id)"></app-buttons>
-          <app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>
-        </td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="12">
-          <div class="col-sm-5">
-            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至 {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
-              条</strong></div>
-          </div>
-          <div class="col-sm-7">
-            <div class="pull-right">
-              <rzhBootstrapPaginator></rzhBootstrapPaginator>
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+
+  <div class="content-heading mb-lg">
+    文章管理
+    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addMan"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
   </div>
-</div>
-<!--路由嵌套 begin-->
-<router-outlet></router-outlet>
-<!--路由嵌套 end-->
+  <div>
+    <app-content-nav></app-content-nav>
+    <app-content [articleManListdata]="articleManListdata"></app-content>
+  </div>
+  <!--路由嵌套 begin-->
+  <router-outlet></router-outlet>
+  <!--路由嵌套 end-->
+
+
 
