@@ -8,7 +8,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {AddKindComponent} from "./add-kind/add-kind.component";
 import {SharedModule} from "../../shared/shared.module";
 import { AddBrandComponent } from './add-brand/add-brand.component';
-import { EditBrandComponent } from './edit-brand/edit-brand.component';
 
 // 父路由，用于页面嵌套显示
 const routes: Routes = [

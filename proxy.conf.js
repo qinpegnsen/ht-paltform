@@ -3,21 +3,9 @@ const PROXY_CONFIG = [
     context: [
       "/article",
       "/goodskind",
-      "/limitFile",
-      "/limitMenu",
-      "/limitOpt",
-      "/limitPage",
-      "/login",
-      "/orgManager",
-      "/organ",
-      "/role",
-      "/roleGroup",
-      "/staff",
-      "/role",
-      "/sys",
-      "/res"
+      "/goodsBrand"
     ],
-    target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.101:8089",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
