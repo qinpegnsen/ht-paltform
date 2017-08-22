@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 
 @Component({
     selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-    constructor() { }
+    constructor(private tools:RzhtoolsService) { }
 
     ngOnInit() {
     }
 
+    ceshi222(){
+      this.tools.rzhAlt("success","hello world!")
+    }
 }

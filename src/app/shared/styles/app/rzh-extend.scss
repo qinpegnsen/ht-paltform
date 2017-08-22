@@ -4,16 +4,19 @@
 
 @charset "UTF-8";
 //重写弹框布局距离
-.toast-top-center,.toast-top-right{
+.toast-top-center{
   top:60px;
 }
-.toast-top-left {
-  top: 60px;
-  left: 230px;
-}
-.toast-bottom-left {
-  left: 230px;
-}
+//.toast-top-center,.toast-top-right{
+//  top:60px;
+//}
+//.toast-top-left {
+//  top: 60px;
+//  left: 230px;
+//}
+//.toast-bottom-left {
+//  left: 230px;
+//}
 // 必填项已填
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px solid #42A948; /* green */

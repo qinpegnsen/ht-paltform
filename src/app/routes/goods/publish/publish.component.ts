@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-publish',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublishComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  ccc() {
+    AppComponent.rzhAlt("error", "ok.....", "sdfsdfsdf");
   }
 
 }

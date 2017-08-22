@@ -2,16 +2,15 @@ import {Injectable} from "@angular/core";
 import {isNull, isNullOrUndefined} from "util";
 import {areaJSON} from "./area";
 import {AjaxService} from "./ajax.service";
-import {any} from "codelyzer/util/function";
+import {ToasterConfig, ToasterService} from "angular2-toaster";
 
 @Injectable()
 export class RzhtoolsService {
-
   private areaJson: any;
   private enumData = {};
 
   // Angular2框架负责注入对象
-  constructor(private ajax: AjaxService) {
+  constructor(private ajax: AjaxService, private toaster: ToasterService) {
     this.areaJson = areaJSON;
   }
 
@@ -321,9 +320,9 @@ export class RzhtoolsService {
   public getEnumDataValByKey = function (code, key) {
     let enumData = this.getEnumData(code);
     if (enumData != null && enumData !== '' && enumData !== undefined) {
-      if (enumData[key] != null && enumData[key] !== '' && enumData[key] !== undefined){
+      if (enumData[key] != null && enumData[key] !== '' && enumData[key] !== undefined) {
         return enumData[key];
-      }else {
+      } else {
         return '';
       }
     } else {
@@ -331,6 +330,27 @@ export class RzhtoolsService {
     }
   };
 
+  /**
+   * 消息提醒弹框
+   * @param type 类型：error、success、info...
+   * @param title 提示头信息
+   * @param info 内容信息
+   * @param operation 参数信息
+   */
+  rzhAlt = function (type: string, title: string, info?: string, operation?: Array<AltOperation>) {
+    let me = this;
+    if (!isNullOrUndefined(operation) && operation.length > 0) {
+      for(let oper of operation) me.toaster[oper.key] = oper.val;
+    }
+    me.toaster.pop(type, title, info);
+  }
+
+}
+
+@Injectable()
+export class AltOperation { //消息提醒配置
+  key: string;    // 名称
+  val: string;    // 信息
 }
 
 @Injectable()

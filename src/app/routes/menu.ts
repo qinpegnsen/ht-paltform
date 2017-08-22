@@ -65,38 +65,38 @@ const operation = {
 const goods = {
   text: '商品管理',
   icon: 'fa fa-cubes',
-  link: '/goods',
+  link: '/pgoods',
   submenu: [
     {
       text: '商品发布',
       icon: 'fa fa-cube',
-      link: '/goods/publish'
+      link: '/pgoods/publish'
     },
     {
       text: '商品管理',
       icon: 'fa fa-cubes',
-      link: '/goods/manage'
+      link: '/pgoods/manage'
     },
     {
       text: '分类管理',
       icon: 'fa fa-cubes',
       alert: '▼',
-      link: '/goods/kind',
+      link: '/pgoods/kind',
       submenu: [
         {
           text: '分类管理',
-          link: '/goods/kind/manage'
+          link: '/pgoods/kind-manage'
         },
         {
           text: '属性模板',
-          link: '/goods/kind/properties'
+          link: '/pgoods/properties'
         }
       ]
     },
     {
       text: '品牌管理',
       icon: 'fa fa-cubes',
-      link: '/goods/brands'
+      link: '/pgoods/brands'
     }
   ]
 };

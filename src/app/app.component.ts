@@ -3,6 +3,9 @@ import {Location} from "@angular/common";
 import {SettingsService} from "./core/settings/settings.service";
 import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
 import {Router} from "@angular/router";
+import {ToasterConfig, ToasterService} from "angular2-toaster";
+import {isNullOrUndefined} from "util";
+import {RzhtoolsService} from "./core/services/rzhtools.service";
 
 declare var $: any;
 
@@ -12,6 +15,15 @@ declare var $: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public toaster: ToasterConfig = new ToasterConfig({
+    showCloseButton: true,
+    tapToDismiss: false,
+    timeout: {'success': 3000, 'error': 0},
+    positionClass: 'toast-top-center',
+    animationClass: 'slide-from-top'
+  });
+  static toasterConfig:ToasterConfig; //消息提示配置
+  static toasterService:ToasterService; //消息提示服务
   //动态样式
   @HostBinding('class.layout-fixed') get isFixed() {
     return this.settings.layout.isFixed;
@@ -59,7 +71,8 @@ export class AppComponent implements OnInit {
   @ViewChild("altComponent", {read: ViewContainerRef}) container: ViewContainerRef;
 
 
-  constructor(public settings: SettingsService, private cookieService: CookieService, private location: Location, private router: Router) {
+  constructor(public settings: SettingsService, private cookieService: CookieService, private location: Location, private router: Router,private toasterService:ToasterService) {
+    AppComponent.toasterService = toasterService;
   }
 
   ngOnInit() {
@@ -68,7 +81,17 @@ export class AppComponent implements OnInit {
     // this.checkLogin();
   }
 
-
+  /**
+   * 消息提醒弹框
+   * @param type 类型：error、success、info...
+   * @param title 提示头信息
+   * @param info 内容信息
+   * @param operation 参数信息
+   */
+  static rzhAlt (type: string, title: string, info?: string, operation?: any,appcom?:AppComponent) {
+    if (!isNullOrUndefined(operation)) appcom.toaster = new ToasterConfig(operation);
+    AppComponent.toasterService.pop(type, title, info);
+  }
 
   // 检测登录状态并引流
   private checkLogin() {

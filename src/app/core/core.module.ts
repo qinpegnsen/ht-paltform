@@ -9,6 +9,9 @@ import {AjaxService} from './services/ajax.service';
 import {MaskService} from './services/mask.service';
 import {throwIfAlreadyLoaded} from "./module-import-guard";
 import {PopupComponent} from "../routes/operationpage/popup/popup.component";
+import {RzhtoolsService} from "./services/rzhtools.service";
+import {ToasterService} from "angular2-toaster";
+import {EditBrandComponent} from "../routes/goods/edit-brand/edit-brand.component";
 
 @NgModule({
   imports: [],
@@ -20,9 +23,11 @@ import {PopupComponent} from "../routes/operationpage/popup/popup.component";
     PatternService,
     TableService,
     MaskService,
+    RzhtoolsService,
+    ToasterService,
     AjaxService
   ],
-  declarations: [PopupComponent],
+  declarations: [PopupComponent,EditBrandComponent],
   exports: []
 })
 export class CoreModule {

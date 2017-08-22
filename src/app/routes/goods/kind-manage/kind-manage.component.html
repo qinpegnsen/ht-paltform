@@ -1,0 +1,117 @@
+<div class="content-heading mb-lg">
+  分类管理
+  <app-buttons class="pull-right" [config]="addButton" routerLink="addKind"></app-buttons>
+</div>
+<!--<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="form-group mb0">
+      <div class="col-sm-5">
+        <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryDatas($event)" placeholder="分类名称">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="queryDatas($event)"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="col-md-10 font15 mt mb pl text-primary">
+  <!--<i class="icon-layers mr"></i>-->
+  <span class="cursor-p" (click)="queryChildKindList()">商品分类</span>
+  <span *ngFor="let kindTit of childKindList">
+      <i class="fa fa-arrow-right mr ml"></i>
+      <font class="cursor-p" (click)="queryChildKindList(kindTit.id,kindTit.name,true)">{{kindTit.name}}</font>
+    </span>
+  <span *ngIf="childKindList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
+        <i class="fa fa-level-up mr5"></i>
+        上一级
+      </span>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="kinds"
+           (pageChange)="queryDatas(kinds.curPage,childKindId,$event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          序号
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="kindName">分类名称</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="kindIcon">分类图标</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="kindParentId">上级分类</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="keywords">关键字</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="description">描述</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="orgSign">状态</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">管理操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td>{{kind.kindName}}</td>
+        <td>{{kind.kindIcon}}</td>
+        <td>{{kind.parentKindName}}</td>
+        <td>{{kind.keywords}}</td>
+        <td>{{kind.description}}</td>
+        <td>{{kind.state}}
+          <label class="switch switch-md" title="显示/隐藏">
+            <input [checked]="kind.state=='SHOW'" type="checkbox"
+                   (change)="changeKindState(kind.state=='SHOW',kind.id,kind.kindParentId, kinds.curPage)">
+            <span></span>
+          </label>
+        </td>
+        <td>
+            <span>
+              <app-buttons [config]="option" (callback)="option.callback($event,kind.id)"
+                           *ngFor="let option of buttons"></app-buttons>
+            </span>
+          <span *ngIf="kind.level != 1">
+              <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
+                 [queryParams]="{pid: kind.kindParentId, pname: kind.parentKindName}" title="添加下级分类"></a>
+            </span>
+          <span class="btn btn-default btn-xs" *ngIf="kind.level != 3"
+                (click)="queryChildKindList(kind.id, kind.kindName,false)">
+              <i class="fa fa-level-down"></i> 下级
+            </span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{kinds.genStartRow()}} 至 {{kinds.genEndRow()}} 条，共 {{kinds.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

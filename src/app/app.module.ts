@@ -12,6 +12,7 @@ import {SharedModule} from "./shared/shared.module";
 import {RoutesModule} from "./routes/routes.module";
 import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
 import {PopupComponent} from "./routes/operationpage/popup/popup.component";
+import {EditBrandComponent} from "./routes/goods/edit-brand/edit-brand.component";
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: Http) {
@@ -39,7 +40,10 @@ export function createTranslateLoader(http: Http) {
     CookieService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [PopupComponent],
+  entryComponents: [
+    PopupComponent,
+    EditBrandComponent
+  ],
 })
 export class AppModule {
 }

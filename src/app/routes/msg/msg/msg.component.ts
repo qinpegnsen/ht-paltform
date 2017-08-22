@@ -23,9 +23,9 @@ export class MsgComponent implements OnInit {
   /**
    * 当路由变化时会销毁组件
    */
-  ngOnDestroy() {
+/*  ngOnDestroy() {
     this.componentRef.destroy()
-  }
+  }*/
 
   ngOnInit() {
 
