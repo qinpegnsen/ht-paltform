@@ -13,11 +13,11 @@ import {ArticleSortService} from "./article/article-sort/article-sort.service";
 import {ArticleSortDelService} from "./article/article-sort/article-sort-del.service";
 import {ArticleManageComponent} from "./article/article-manage/article-manage.component";
 import {TableDateService} from "./article/article-manage/table-date.service";
-import { AddArticleManComponent } from './add-article-man/add-article-man.component';
 import {AddArticleManService} from "./article/article-manage/add-article/add-article-man.service";
 import { ContentNavComponent } from './article/article-manage/content-nav/content-nav.component';
 import { ContentComponent } from './article/article-manage/content/content.component';
 import { AddArticleComponent } from './article/article-manage/add-article/add-article.component';
+import {ContentService} from "./article/article-manage/content/content.service";
 
 
 const addSort: Routes = [
@@ -45,7 +45,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent,  AddArticleManComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
-  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService]
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
+  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService]
 })
 export class OperationModule { }

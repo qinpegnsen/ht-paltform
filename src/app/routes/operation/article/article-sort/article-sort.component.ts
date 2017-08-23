@@ -3,6 +3,7 @@ import {ArticleSortService} from "app/routes/operation/article/article-sort/arti
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {ArticleSortDelService} from "./article-sort-del.service";
 import {isNullOrUndefined} from "util";
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-article-sort',
@@ -48,8 +49,6 @@ export class ArticleSortComponent implements OnInit {
     };
     this.queryArticSortleList()
   }
-
-
   /**
    * 获取文章分类的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
@@ -69,15 +68,43 @@ export class ArticleSortComponent implements OnInit {
   }
 
   /**
-   * 删除分类
+   * 删除分类 首先进行确认是否删除
    */
   deleteSort(delSortId){
-    let url='/articleclass/deleteArticleClassById';
-    let data={
-      id:delSortId
-    }
-    this.ArticleSortDelService.delSort(url,data)
-    this.queryArticSortleList()
+    let that=this;
+    swal({
+        title: "您确定要删除吗？",
+        text: "您确定要删除这条数据？",
+        type: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        confirmButtonText: "是的，我要删除",
+        confirmButtonColor: "#ec6c62"
+      },function(isConfirm){
+        if (isConfirm) {
+          let url='/articleclass/deleteArticleClassById';
+          let data={
+            id:delSortId
+          }
+         let  flag = that.ArticleSortDelService.confirmDel(url,data)
+          if(flag){
+            that.queryArticSortleList()
+          }
+        } else {
+          swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+      });
+  }
+
+  /**
+   * 删除之前先确认是否确认进行删除
+   * @param url
+   * @param data
+   */
+  public delSort(url,data) {
+    let me = this,flag = false;
+
+    return flag;
   }
 
 

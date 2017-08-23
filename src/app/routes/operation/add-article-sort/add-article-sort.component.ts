@@ -78,7 +78,7 @@ export class AddArticleSortComponent implements OnInit {
       }
       this.AddArticleSortService.updateClass(url,data);
     }
-    this.router.navigate(['/operation/article/sort']);
+    this.router.navigate(['/main/operation/article/sort']);
     this.ArticleSortComponent.queryArticSortleList()
 
   }

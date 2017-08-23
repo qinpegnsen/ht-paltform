@@ -18,10 +18,11 @@ export class AddArticleManService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
+          result=data.info;
           if(data.success==true){
-            result=data.info;
             swal(result,'','success')
           }else{
+            swal(result,'','success')
             console.log('article/queryAllArticle 返回的success为假');
           }
         }else{
@@ -48,7 +49,6 @@ export class AddArticleManService {
         if (!isNull(data)) {
           if(data.success==true){
             result=data.data;
-            console.log(data)
           }else{
             console.log('article/queryAllArticle 返回的success为假');
           }

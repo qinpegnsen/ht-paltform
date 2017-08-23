@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {TableDateService} from "./table-date.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-article-manage',
@@ -13,7 +14,9 @@ export class ArticleManageComponent implements OnInit {
 
   private articleManListdata;//用来存储服务取回来的数据
 
-  constructor(private TableDateService:TableDateService) {
+  public flag:boolean;//定义boolean值用来控制内容组件是否显示
+
+  constructor(private TableDateService:TableDateService,private router:Router) {
 
   }
 
@@ -26,35 +29,19 @@ export class ArticleManageComponent implements OnInit {
   ngOnInit() {
 
 
-
     this.articleManAddbutton={
         text:"新增文章",
         title:"新增文章",
         type: "add"
       };
 
-    this.queryArticManleList()
+
 
   }
 
 
 
-  /**
-   * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
-   * @param event 点击页码时候的事件对象
-   */
-  public queryArticManleList(event?:PageEvent) {
-    let activePage = 1;
-    if(typeof event !== "undefined") activePage =event.activePage;
-    let data={
-      curPage:activePage,
-      pageSize:6,
-      articleState:'AUDIT'
-    }
-    let url= "/article/queryAllArticle";
-    let result=this.TableDateService.queryData(data,url);
-    this.articleManListdata= result;
-  }
+
 
 
   /**
