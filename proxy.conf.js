@@ -3,7 +3,34 @@ const PROXY_CONFIG = [
     context: [
       "/article",
       "/goodskind",
-      "/goodsBrand"
+      "/goodsBrand",
+      "/agent_area",
+      "/agent",
+      "/articleclass",
+      "/article_comment",
+      "/article",
+      "/article_syd",
+      "/custaddr",
+      "/cust",
+      "/favorites",
+      "/invoice",
+      "/datadic",
+      "/goodsAudit",
+      "/goodsBrand",
+      "/goodschangerec",
+      "/goods",
+      "/goodsEnum",
+      "/goodskind",
+      "/goodsStorage",
+      "/goodsSyd",
+      "/goods_unit",
+      "/adminLogin",
+      "/agentLogin",
+      "/custLogin",
+      "/seller",
+      "/store",
+      "/storeexpresstpl"
+
     ],
     target: "http://192.168.10.101:8089",   //拦截 context配置路径，经过此地址
     secure: false
