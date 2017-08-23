@@ -61,7 +61,7 @@ export class MenuService {
   getSubMenu(link){
     //这个link可能是一级菜单，二级菜单、三级菜单……，只需要取第一级路由即可（取到/main/**）
     let path = '/main/' + link.split('/')[2];
-    console.log("█ path ►►►",  path);
+    // console.log("█ path ►►►",  path);
     let subMenus = [];
     menu.forEach((menuItem) => {
       if (menuItem.link == path && !isNullOrUndefined(menuItem['submenu'])){

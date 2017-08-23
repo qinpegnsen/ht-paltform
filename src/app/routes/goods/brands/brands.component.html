@@ -3,6 +3,15 @@
   <app-buttons class="pull-right" [config]="addButton" routerLink="addBrand"></app-buttons>
   <!--<button (click)="showPopup()">122222</button>-->
 </div>
+<!--<div class="panel mb p bg-gray-lighter">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>商品品牌建立后可与商品分类进行绑定，新增一个品牌则需要重新与商品分类建立所属关系。</li>
+    <li>品牌绑定商品分类后，商家发布商品时，可根据发布的商品所在分类找到对应的所属品牌并选择。</li>
+    <li>品牌标签用于对品牌的类型进行区分，应先行建立品牌标签后再选择品牌要绑定的标签，一个品牌可绑定多个品牌标签。例如：品牌“Nike耐克”可与标签“服装”“运动装备”等多个标签建立关系。 </li>
+    <li>被推荐品牌，将在前台品牌推荐模块出显示。</li>
+  </ul>
+</div>-->
 <div class="panel mb">
   <div class="panel-body p ng-scope">
     <div class="form-group col-sm-3 mb0">
@@ -36,7 +45,7 @@
 
   </div>
 </div>
-<div class="panel panel-default">
+<div class="panel panel-danger">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="brands" (pageChange)="queryDatas(1,$event)">
       <thead>
@@ -71,7 +80,7 @@
         <td class="hidden-sm">{{brand.brandInitial}}</td>
         <td>{{brand.brandName}}</td>
         <td><img src="{{brand.brandPic}}" alt=""></td>
-        <td>{{brand.brandRecommend == 'Y'? '推荐':'否'}}
+        <td>
           <label class="switch switch-md" title="是/否">
             <input [checked]="brand.brandRecommend=='Y'" type="checkbox"
                    (change)="changeBrandRecommend(brand.brandRecommend=='Y',brand.id, brands.curPage)">

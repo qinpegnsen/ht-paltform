@@ -50,7 +50,7 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="kindParentId">上级分类</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="keywords">关键字</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -70,7 +70,7 @@
         <td>{{kind.parentKindName}}</td>
         <td>{{kind.keywords}}</td>
         <td>{{kind.description}}</td>
-        <td>{{kind.state}}
+        <td>
           <label class="switch switch-md" title="显示/隐藏">
             <input [checked]="kind.state=='SHOW'" type="checkbox"
                    (change)="changeKindState(kind.state=='SHOW',kind.id,kind.kindParentId, kinds.curPage)">
@@ -82,9 +82,9 @@
               <app-buttons [config]="option" (callback)="option.callback($event,kind.id)"
                            *ngFor="let option of buttons"></app-buttons>
             </span>
-          <span *ngIf="kind.level != 1">
+          <span *ngIf="kind.level != 3">
               <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
-                 [queryParams]="{pid: kind.kindParentId, pname: kind.parentKindName}" title="添加下级分类"></a>
+                 [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1}" title="添加下级分类"></a>
             </span>
           <span class="btn btn-default btn-xs" *ngIf="kind.level != 3"
                 (click)="queryChildKindList(kind.id, kind.kindName,false)">

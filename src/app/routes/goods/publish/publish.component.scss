@@ -1,0 +1,13 @@
+.guide{
+  list-style: none;
+}
+.guide li{
+  border-left: 1px solid #f5f5f5;
+}
+.guide li:first-child{
+  border: none;
+}
+
+.cur{
+  background-color: #CCCCCC;
+}
