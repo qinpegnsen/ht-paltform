@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {TableDateService} from "./table-date.service";
-import {AddArticleComponent} from "./add-article/add-article.component";
 
 @Component({
   selector: 'app-article-manage',
@@ -25,6 +24,9 @@ export class ArticleManageComponent implements OnInit {
    * 3.button的回调方法
    */
   ngOnInit() {
+
+
+
     this.articleManAddbutton={
         text:"新增文章",
         title:"新增文章",
