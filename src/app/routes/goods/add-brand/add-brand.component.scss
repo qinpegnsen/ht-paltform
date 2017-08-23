@@ -1,0 +1,20 @@
+
+.t-item {
+  width: 100%;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+  border-bottom: 1px dashed #e1e1e1;
+}
+.item-hd{
+  padding: 15px 15px 15px 0;
+  font-weight: bold;
+  text-align: right;
+  //min-width: 130px;
+}
+.item-bd{
+  margin: 0;
+  padding: 15px 0 15px 15px;
+  word-wrap: break-word;
+  border-left: 1px dashed #e1e1e1;
+}

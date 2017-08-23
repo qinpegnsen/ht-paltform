@@ -49,8 +49,8 @@ export class KindManageComponent implements OnInit {
         size: "xs",
         callback: function (result, kindId) {
           result.then((id) => {
-            let url = '/goodskind/deleteGoodsKindById';
-            let data = {id: kindId};
+            let url = '/goodskind/updateStateById';
+            let data = {id: kindId, state: 'DEL'};
             me.submitService.delRequest(url,data);
           })
         }

@@ -21,15 +21,6 @@
             请输入分类名称
           </div>
         </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-4 control-label">分类图标</label>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" name="kindIcon" [(ngModel)]="kindInfo.kindIcon"
-                     placeholder="分类图标"/>
-            </div>
-          </div>
-        </fieldset>
         <fieldset *ngIf="path != 'upKind'">
           <div class="form-group">
             <label class="col-sm-4 control-label">上级分类</label>
@@ -42,41 +33,19 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">排序</label>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" name="sort" required [(ngModel)]="kindInfo.sort"
-                     placeholder="排序"/>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-4 control-label">分享佣金比例</label>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" name="commisRate" [(ngModel)]="kindInfo.commisRate"
-                     placeholder="分享佣金比例"/>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-4 control-label"><i>*</i>关键词</label>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" required name="keywords" [(ngModel)]="kindInfo.keywords"
-                     #keywords="ngModel" placeholder="关键词"/>
-            </div>
-          </div>
-          <div [hidden]="keywords.valid || keywords.pristine"
-               class="col-sm-8 pull-right text-danger">
-            请填写关键词
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
             <label class="col-sm-4 control-label"><i>*</i>分类级别</label>
             <div class="col-sm-7">
-              <input class="form-control" type="text" name="level" required [(ngModel)]="kindInfo.level"
-                     placeholder="分类级别" [readonly]="path == 'upKind'"/>
+              <input class="form-control" type="text" name="level" [(ngModel)]="kindInfo.level"
+                     placeholder="分类级别" readonly/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">分类图标</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="kindIcon" [(ngModel)]="kindInfo.kindIcon"
+                     placeholder="分类图标"/>
             </div>
           </div>
         </fieldset>
@@ -95,6 +64,38 @@
                 <option value="HIDE">隐藏</option>
               </select>-->
             </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">排序</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="sort" [tooltip]="tip.sort" [(ngModel)]="kindInfo.sort"
+                     placeholder="排序"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">分享佣金比例</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="commisRate" [tooltip]="tip.commisRate" [(ngModel)]="kindInfo.commisRate"
+                     placeholder="分享佣金比例"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><i>*</i>关键词</label>
+            <div class="col-sm-7">
+              <!--<tag-input theme='minimal' name="tagName1" [ngModel]="['Typescript', 'Angular 2']" [maxItems]="5"></tag-input>-->
+              <input class="form-control" type="text" required name="keywords" [tooltip]="tip.keywords" [(ngModel)]="kindInfo.keywords"
+                     #keywords="ngModel" placeholder="关键词"/>
+            </div>
+          </div>
+          <div [hidden]="keywords.valid || keywords.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请填写关键词
           </div>
         </fieldset>
         <fieldset>

@@ -4,6 +4,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {KindManageComponent} from "../kind-manage/kind-manage.component";
 import {ActivatedRoute} from "@angular/router";
 import {GoodsService} from "../goods.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-add-kind',
@@ -17,7 +18,9 @@ export class AddKindComponent implements OnInit {
   private pageTitle;// 右弹窗页面标题
   private editKind: boolean = false;
   private tip = {
-    commisRateTip: '123456'
+    commisRate: '请输入小数形式，0 <= 佣金比例 < 1',
+    sort: '0-99，默认0',
+    keywords: '多个关键词请用逗号隔开'
   }
 
   constructor(public settings: SettingsService,private route:ActivatedRoute,
@@ -29,6 +32,8 @@ export class AddKindComponent implements OnInit {
   ngOnInit() {
     let me = this;
     this.kindInfo['state'] = 'SHOW';
+    this.kindInfo['level'] = '1';
+    this.kindInfo['sort'] = '0';
 
     //获取当前路由
     me.route.url.subscribe(urls => {
@@ -41,8 +46,9 @@ export class AddKindComponent implements OnInit {
           me.pageTitle = "新增分类";
           me.editKind = true;
           let param = this.route.snapshot.queryParams;
-          this.kindInfo['kindParentId'] = param.pid;
-          this.kindInfo['parentKindName'] = param.pname;
+          if(!isNullOrUndefined(param.pid)) this.kindInfo['kindParentId'] = param.pid ;
+          if(!isNullOrUndefined(param.pname)) this.kindInfo['parentKindName'] = param.pname ;
+          if(!isNullOrUndefined(param.level)) this.kindInfo['level'] = param.level ;
           break;
 
         //修改分类
@@ -72,7 +78,6 @@ export class AddKindComponent implements OnInit {
   private addKindForm() {
     let me = this;
     let submitUrl, submitData;
-
     submitData = me.kindInfo;
     switch (me.path) {
       //新增分类

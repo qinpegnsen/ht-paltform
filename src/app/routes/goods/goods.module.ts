@@ -21,7 +21,8 @@ const routes: Routes = [
   {path: 'properties', component: PropertiesComponent},
   {path: 'brands', component: BrandsComponent,children: [
     {path: 'addBrand', component: AddBrandComponent},
-    {path: 'upBrand/:brandId', component: AddBrandComponent}
+    {path: 'upBrand/:brandId', component: AddBrandComponent},
+    {path: 'brandDetail/:brandId', component: AddBrandComponent}
   ]}
 ];
 

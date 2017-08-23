@@ -1,9 +1,9 @@
 <div class="rightpage">
-  <form class="form-validate form-horizontal" #addKind="ngForm" style="height: 100%">
+  <form class="form-validate form-horizontal" #addBrand="ngForm" style="height: 100%">
     <!-- START panel-->
-    <div class="panel-default">
+    <div class="panel-default mb-xl">
       <!--可编辑表单 start-->
-      <div class="panel-body mb-xl">
+      <div class="panel-body" *ngIf="editBrand">
         <fieldset class="b0">
           <legend>添加品牌</legend>
         </fieldset>
@@ -19,6 +19,21 @@
           <div [hidden]="brandName.valid || brandName.pristine"
                class="col-sm-8 pull-right text-danger">
             请输入品牌名称
+          </div>
+        </fieldset>
+        <fieldset *ngIf="path=='addBrand'">
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><i>*</i>绑定分类</label>
+            <div class="col-sm-7">
+              <select class="form-control" name="kindId" required [(ngModel)]="brandInfo.kindId" #kindId="ngModel">
+                <option value="">请选择分类</option>
+                <option *ngFor="let kind of kindsList" [value]="kind.id">{{kind.kindName}}</option>
+              </select>
+            </div>
+          </div>
+          <div [hidden]="kindId.valid || kindId.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请选择分类
           </div>
         </fieldset>
         <fieldset>
@@ -65,10 +80,12 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">是否推荐</label>
             <div class="col-sm-7">
-              <select class="form-control" name="brandRecommend" [(ngModel)]="brandInfo.brandRecommend" >
-                <option value="Y">是</option>
-                <option value="N">否</option>
-              </select>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="brandRecommend" value="Y" checked="checked" [(ngModel)]="brandInfo.brandRecommend" />
+                <span class="fa fa-circle"></span>是</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="brandRecommend" value="N" [(ngModel)]="brandInfo.brandRecommend"/>
+                <span class="fa fa-circle"></span>否</label>
             </div>
           </div>
         </fieldset>
@@ -76,10 +93,12 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">品牌展示类型</label>
             <div class="col-sm-7">
-              <select class="form-control" name="showType" [(ngModel)]="brandInfo.showType" >
-                <option value="IMG">图片</option>
-                <option value="TXT">文本</option>
-              </select>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="showType" value="IMG" checked="checked" [(ngModel)]="brandInfo.showType" />
+                <span class="fa fa-circle"></span>图片</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="showType" value="TXT" [(ngModel)]="brandInfo.showType"/>
+                <span class="fa fa-circle"></span>文本</label>
             </div>
           </div>
         </fieldset>
@@ -87,23 +106,89 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">状态</label>
             <div class="col-sm-7">
-              <select class="form-control" name="state" [(ngModel)]="brandInfo.state" >
-                <option value="SHOW">显示</option>
-                <option value="HIDE">隐藏</option>
-              </select>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="state" value="SHOW" checked="checked" [(ngModel)]="brandInfo.state" />
+                <span class="fa fa-circle"></span>显示</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="state" value="HIDE" [(ngModel)]="brandInfo.state"/>
+                <span class="fa fa-circle"></span>隐藏</label>
             </div>
           </div>
         </fieldset>
       </div>
       <!--可编辑表单 end-->
 
+
+      <!--展示详情 start-->
+      <div class="panel-body pb-xl" *ngIf="brandDetail">
+        <fieldset class="b0">
+          <legend>{{pageTitle}}</legend>
+        </fieldset>
+        <table class="t-items p w100">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">品牌名称：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">所属分类：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandKind}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">品牌首字母：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandInitial}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">图片：</td>
+            <td class="item-bd col-sm-7 mb0"><img [src]="brandInfo.brandPic" width="120" alt=""></td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">排序：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandSort}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">店铺编码：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.storeCode }}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">审核状态：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandApply == 'APPLY'? '审核中': brandInfo.brandApply == 'PASS'? '审核通过': '未通过'}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">是否推荐：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandRecommend == 'Y'? '推荐':'否'}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">品牌展示类型：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.showType == 'IMG'? '图片': '文本'}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">显示状态：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.state == 'SHOW'? '显示': '隐藏'}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">创建时间：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.createTimeBegin | date: 'yyyy-mm-dd hh:mm:ss'}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">修改时间：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.updateTimeBegin | date: 'yyyy-mm-dd hh:mm:ss'}}</td>
+          </tr>
+        </table>
+      </div>
+      <!--展示详情 end-->
+
       <!--btns-->
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
 
         <!--添加分类 -->
-        <button class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
-                [disabled]="!addKind.form.valid">提交
+        <button class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()" *ngIf="editBrand"
+                [disabled]="!addBrand.form.valid">提交
+        </button>
+
+        <!--从详情转修改-->
+        <button class="ml btn btn-info pull-left" type="button" (click)="toUpdateBrand()" *ngIf="brandDetail"
+                [disabled]="!addBrand.form.valid">修改品牌信息
         </button>
       </div>
     </div>

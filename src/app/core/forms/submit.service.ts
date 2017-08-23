@@ -28,7 +28,13 @@ export class SubmitService {
         // console.log("█ res ►►►", res);
         if (res.success) {
           if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          AppComponent.rzhAlt('success',res.info, res.info)
+          swal({
+            title: '成功',
+            text: res.info,
+            type: 'success',
+            timer: 2000, //关闭时间，单位：毫秒
+            showConfirmButton: false  //不显示按钮
+          });
         } else {
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
@@ -58,10 +64,17 @@ export class SubmitService {
       data: requestDate,
       async: false,
       success: (res) => {
-        console.log("█ res ►►►", res);
+        // console.log("█ res ►►►", res);
         if (res.success) {
           if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          AppComponent.rzhAlt('success',res.info, res.info)
+          // swal('成功', res.info, 'success')
+          swal({
+            title: '成功',
+            text: res.info,
+            type: 'success',
+            timer: 2000, //关闭时间，单位：毫秒
+            showConfirmButton: false  //不显示按钮
+          });
         } else {
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
@@ -94,7 +107,13 @@ export class SubmitService {
         console.log("█ res ►►►", res);
         if (res.success) {
           if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          AppComponent.rzhAlt('success',res.info, res.info)
+          swal({
+            title: '成功',
+            text: res.info,
+            type: 'success',
+            timer: 2000, //关闭时间，单位：毫秒
+            showConfirmButton: false  //不显示按钮
+          });
         } else {
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
@@ -127,7 +146,7 @@ export class SubmitService {
    * @param requestData
    * @returns {any}
    */
-  getData(requestUrl, requestData) {
+  getData(requestUrl:string, requestData:any) {
     let result;
     this.ajax.get({
       url: requestUrl,
@@ -136,7 +155,7 @@ export class SubmitService {
       success: (res) => {
         if (res.success && !isNullOrUndefined(res)) {
           result = res.data;
-          console.log("█ result ►►►",  result);
+          // console.log("█ result ►►►",  result);
         }
       },
       error: (res) => {
