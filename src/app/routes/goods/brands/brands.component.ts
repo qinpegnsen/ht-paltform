@@ -34,7 +34,7 @@ export class BrandsComponent implements OnInit {
         size: "xs",
         callback: function (result, brandId, curPage) {
           result.then((id) => {
-            me.router.navigate(['/pgoods/brands/upBrand', brandId], {queryParams: {page: curPage}});
+            me.router.navigate(['/main/goods/brands/upBrand', brandId], {queryParams: {page: curPage}});
           })
         }
       },

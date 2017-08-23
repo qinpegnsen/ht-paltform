@@ -5,19 +5,19 @@ import {ButtonDemoComponent} from "./buttons/buttonDemo/button-demo.component";
 // 设置路由指向
 export const routes = [
   {
-    path: '',
+    path: 'main',
     component: LayoutComponent,
     children: [
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: '', redirectTo: '/main/home', pathMatch: 'full'},
       {path: 'home', loadChildren: './home/home.module#HomeModule'},
       {path: 'website', loadChildren: './website/website.module#WebsiteModule'},
       {path: 'operation', loadChildren: './operation/operation.module#OperationModule'},
-      {path: 'pgoods', loadChildren: './goods/goods.module#GoodsModule'},
+      {path: 'goods', loadChildren: './goods/goods.module#GoodsModule'},
       {path: 'shops', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
       {path: 'member', loadChildren: './navtree/navtree.module#NavtreeModule'},
       {path: 'sale', loadChildren: './echarts/echarts.module#EchartsModule'},
       {path: 'stat', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
-      {path: 'agentP', loadChildren: './agent/agent.module#AgentModule'},
+      {path: 'agent', loadChildren: './agent/agent.module#AgentModule'},
       {path: 'app', loadChildren: './msg/msg.module#MsgModule'},
       {path: 'orders', component: ButtonDemoComponent},
     ]
@@ -26,10 +26,10 @@ export const routes = [
     path: 'pages',
     component: PagesComponent,
     children: [
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: '', redirectTo: '/main/home', pathMatch: 'full'},
       {path: 'login', component: LoginComponent}
     ]
   },
   // 路由指向找不到时，指向这里
-  {path: '**', redirectTo: '/home'}
+  {path: '**', redirectTo: '/main/home'}
 ];

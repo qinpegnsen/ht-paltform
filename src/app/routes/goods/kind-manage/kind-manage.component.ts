@@ -39,7 +39,7 @@ export class KindManageComponent implements OnInit {
         size: "xs",
         callback: function (result, kindId) {
           result.then((id) => {
-            me.router.navigate(['/pgoods/kind-manage/upKind',kindId]);
+            me.router.navigate(['/main/goods/kind-manage/upKind',kindId]);
           })
         }
       },
