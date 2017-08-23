@@ -27,7 +27,6 @@ const addArticle: Routes = [
   {path: 'addArticle', component: AddArticleComponent}
 ];
 const articleChildRoutes: Routes = [
-  {path: '', redirectTo:'manage'},
   {path: 'manage', component: ArticleManageComponent,children:addArticle},
   {path: 'sort', component: ArticleSortComponent,children:addSort}
 ]
