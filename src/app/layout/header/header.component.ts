@@ -142,19 +142,4 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.layout.submenus(menus)
   }
 
-  /**
-   *  获取子菜单的第一个的链接作为一级菜单的链接，可使一级菜单切换时页面默认为子菜单的第一项
-   * @param allMenus
-   * @returns {any}
-   */
-  private getSubmenuFirstLink(allMenus){
-    allMenus.forEach((menu) => {
-      if(!isNullOrUndefined(menu['submenu'][0].link)){// 第一个子菜单只有二级菜单
-        menu['route'] = menu['submenu'][0].link;
-      }else{// 第一个子菜单有三级菜单
-        menu['route'] = menu['submenu'][0]['submenu'][0].link;
-      }
-    })
-    return allMenus;
-  }
 }
