@@ -24,7 +24,7 @@ export class AddKindComponent implements OnInit {
   }
 
   constructor(public settings: SettingsService,private route:ActivatedRoute,
-              private parentComp: KindManageComponent,private goodsService: GoodsService,
+              private parentComp: KindManageComponent,
               private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -69,7 +69,7 @@ export class AddKindComponent implements OnInit {
   private getKindInfo(){
     let url = '/goodskind/loadGoodsKindById';
     let data = { id: this.submit.getParams('kindId')};
-    return this.goodsService.getData(url,data);
+    return this.submit.getData(url,data);
   }
 
 

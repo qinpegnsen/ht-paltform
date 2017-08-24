@@ -18,8 +18,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild(routes),
-    CommonModule
+    RouterModule.forChild(routes)
   ],
   declarations: [OperationpageComponent, RightpageComponent]
 })

@@ -14,15 +14,19 @@ export class BrandsComponent implements OnInit {
   public brands: Page = new Page();
   private addButton;
   private buttons;
-  private brandName:string = '';// 品牌名称
-  private brandInitial:string = '';// 首字母
-  private brandRecommend:string = '';// 是否推荐
+  private brandName: string = '';// 品牌名称
+  private brandInitial: string = '';// 首字母
+  private brandRecommend: string = '';// 是否推荐
+  private kindList;// 分类列表
+  private selectKindName: string = '根据分类查询';
+  private brandKind;// 品牌分类
   constructor(private router: Router, private submitService: SubmitService) {
   }
 
   ngOnInit() {
     let me = this;
-    this.queryDatas(1);
+    this.queryDatas(1);// 获取品牌数据
+    this.getKindList();// 获取分类列表
     this.addButton = {
       type: 'add',
       text: '新增品牌',
@@ -53,39 +57,53 @@ export class BrandsComponent implements OnInit {
               confirmButtonText: '删除',
               cancelButtonText: '取消',
               closeOnConfirm: false,
-              closeOnCancel: false
+              closeOnCancel: true
             }, () => {
-                let url = '/goodsBrand/deleteBrand';
-                let data = {id: brandId};
-                me.submitService.delRequest(url, data);
-                me.queryDatas(curPage);
-                // swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
+              let url = '/goodsBrand/deleteBrand';
+              let data = {id: brandId};
+              me.submitService.delRequest(url, data);
+              me.queryDatas(curPage);
+              // swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
             });
-
           })
         }
       },
       {
-        title:"详情",
+        title: "详情",
         type: "details",
         size: "xs",
-        callback:function(result, brandId, curPage) {
-          result.then((id)=> {
-            me.router.navigate(['/main/goods/brands/brandDetail',brandId], {queryParams: {page: curPage}});
+        callback: function (result, brandId, curPage) {
+          result.then((id) => {
+            me.router.navigate(['/main/goods/brands/brandDetail', brandId], {queryParams: {page: curPage}});
           })
         }
       }
     ];
   }
 
+  /**
+   * 获取分类列表
+   */
+  getKindList(){
+    let url = '/goodskind/queryGoodsByParentId';
+    let data = {kindParentId:''}
+    this.kindList = this.submitService.getData(url,data)
+    console.log("█ this.kindList ►►►",  this.kindList);
+  }
+
+  selected(id,name){
+    this.brandKind = id;
+    this.selectKindName = name;
+    this.queryDatas(1)
+  }
+
 
   /**
-   * 修改
+   * 修改状态
    * @param show
    * @param kindId
    */
   changeBrandState(show, brandId, curPage) {
-    console.log("█ brandId ►►►", brandId);
     let state, requestData, requestUrl;
     state = show ? 'HIDE' : 'SHOW';
     requestUrl = '/goodsBrand/updateState';
@@ -93,13 +111,17 @@ export class BrandsComponent implements OnInit {
       id: brandId,
       state: state
     };
-    console.log("█ requestData ►►►", requestData);
     this.submitService.putRequest(requestUrl, requestData);
     this.queryDatas(curPage);
   }
 
+  /**
+   * 修改是否推荐
+   * @param show
+   * @param brandId
+   * @param curPage
+   */
   changeBrandRecommend(show, brandId, curPage) {
-    console.log("█ brandId ►►►", brandId);
     let brandRecommend, requestData, requestUrl;
     brandRecommend = show ? 'N' : 'Y';
     requestUrl = '/goodsBrand/updateRecommend';
@@ -107,7 +129,6 @@ export class BrandsComponent implements OnInit {
       id: brandId,
       brandRecommend: brandRecommend
     };
-    console.log("█ requestData ►►►", requestData);
     this.submitService.putRequest(requestUrl, requestData);
     this.queryDatas(curPage);
   }
@@ -118,7 +139,7 @@ export class BrandsComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -131,6 +152,7 @@ export class BrandsComponent implements OnInit {
       curPage: activePage,
       pageSize: 10,
       sortColumns: '',
+      kindId: _this.brandKind,
       brandName: _this.brandName,
       brandInitial: _this.brandInitial,
       brandRecommend: _this.brandRecommend

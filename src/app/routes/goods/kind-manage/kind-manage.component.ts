@@ -19,15 +19,14 @@ export class KindManageComponent implements OnInit {
   private addButton;// 添加按钮的配置
   private buttons;// 按钮组的配置
   private childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
-  private childKindList:Array<any> = []; //菜单级别面包屑
+  private childKindList: Array<any> = []; //菜单级别面包屑
 
-  constructor(private goodsService: GoodsService,private router:Router,
-              private submitService:SubmitService,public tool:RzhtoolsService) {
+  constructor(private router: Router, private submitService: SubmitService, public tool: RzhtoolsService) {
   }
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1,0);
+    me.queryDatas(1, 0);
     me.addButton = {
       type: 'add',
       text: '新增分类',
@@ -39,7 +38,7 @@ export class KindManageComponent implements OnInit {
         size: "xs",
         callback: function (result, kindId) {
           result.then((id) => {
-            me.router.navigate(['/main/goods/kind-manage/upKind',kindId]);
+            me.router.navigate(['/main/goods/kind-manage/upKind', kindId]);
           })
         }
       },
@@ -51,7 +50,7 @@ export class KindManageComponent implements OnInit {
           result.then((id) => {
             let url = '/goodskind/updateStateById';
             let data = {id: kindId, state: 'DEL'};
-            me.submitService.delRequest(url,data);
+            me.submitService.delRequest(url, data);
           })
         }
       }
@@ -63,27 +62,28 @@ export class KindManageComponent implements OnInit {
    * @param show
    * @param kindId
    */
-  changeKindState(show, kindId,kindPid, curPage) {
+  changeKindState(show, kindId, kindPid, curPage) {
     // console.log("█ curPage ►►►",  curPage);
     let state, requestData, requestUrl;
     if (show) {
       state = 'HIDE'
     } else {
       state = 'SHOW'
-    };
+    }
+    ;
     requestUrl = '/goodskind/updateStateById';
     requestData = {
       id: kindId,
       state: state
     }
-    this.submitService.delRequest(requestUrl,requestData);
-    this.queryDatas(curPage,kindPid);
+    this.submitService.delRequest(requestUrl, requestData);
+    this.queryDatas(curPage, kindPid);
   }
 
   /**
    * 查询子集分类列表
    */
-  queryChildKindList(kindId?, kindName?, isTit?:boolean) {
+  queryChildKindList(kindId?, kindName?, isTit?: boolean) {
     let me = this, num = 0;
     if (isNullOrUndefined(kindId)) {
       this.childKindId = null, this.childKindList = []; //清空子集查询
@@ -98,7 +98,7 @@ export class KindManageComponent implements OnInit {
         me.childKindList.splice(num + 1); //剔除下标后面的路径
       }
     }
-    this.queryDatas(1,me.childKindId)
+    this.queryDatas(1, me.childKindId)
     // me.data = new Page(me.limitService.queryMenuList(1, 4, me.sysCode, me.childKindId));
   }
 
@@ -112,9 +112,9 @@ export class KindManageComponent implements OnInit {
   }
 
 
-  ceshi33(){
+  ceshi33() {
     let me = this;
-    me.tool.rzhAlt("success","hello world!");
+    me.tool.rzhAlt("success", "hello world!");
     // this.toasterService.pop("info", "信息提示", "信息消息，类型：info");
   }
 
@@ -123,25 +123,23 @@ export class KindManageComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryDatas(curPage,kindId,event?: PageEvent) {
+  queryDatas(curPage, kindId, event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    };
+    }
+    ;
     let requestUrl = '/goodskind/queryGoodsKindPageByParentId';
     let requestData = {
       curPage: activePage,
       pageSize: 20,
       kindParentId: kindId
     };
-    // console.log("█ requestData ►►►",  requestData);
-    let res = me.goodsService.getData(requestUrl, requestData);
-    // console.log("█ result ►►►",  res.voList[0].kindIcon);
+    let res = me.submitService.getData(requestUrl, requestData);
     me.kinds = new Page(res);
   }
-
 
 
 }

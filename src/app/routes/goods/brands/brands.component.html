@@ -14,7 +14,7 @@
 </div>-->
 <div class="panel mb">
   <div class="panel-body p ng-scope">
-    <div class="form-group col-sm-3 mb0">
+    <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
         <input type="text" [(ngModel)]="brandName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                (change)="queryDatas(1)" placeholder="品牌名称">
@@ -24,7 +24,7 @@
         <em class="icon-magnifier fa-fw"></em>
       </button>
     </div>
-    <div class="form-group col-sm-3 mb0">
+    <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
         <input type="text" [(ngModel)]="brandInitial" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                (change)="queryDatas(1)" placeholder="首字母">
@@ -33,6 +33,22 @@
               class="btn btn-primary bar-h3-btn mr ng-scope">
         <em class="icon-magnifier fa-fw"></em>
       </button>
+    </div>
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <div class="btn-group w100" dropdown>
+          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b class="caret pull-right"></b>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu" >
+            <li (click)="selected('', '请选择分类')">
+              <a href="#">请选择分类</a>
+            </li>
+            <li *ngFor="let kind of kindList" (click)="selected(kind.id, kind.kindName)">
+              <a href="#">{{kind.kindName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <!--<div class="form-group mt-sm mb0">
       <label class="radio-inline c-radio">
