@@ -27,7 +27,7 @@ export class SubmitService {
       success: (res) => {
         // console.log("█ res ►►►", res);
         if (res.success) {
-          if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
+          if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           swal({
             title: '成功',
             text: res.info,
@@ -57,7 +57,7 @@ export class SubmitService {
    * @param submitData
    * @param back:true(返回上一级)
    */
-  delRequest(requestUrl, requestDate,back?: boolean) {
+  delRequest(requestUrl, requestDate, back?: boolean) {
     // console.log("█ requestDate ►►►",  requestDate);
     this.ajax.del({
       url: requestUrl,
@@ -66,7 +66,7 @@ export class SubmitService {
       success: (res) => {
         // console.log("█ res ►►►", res);
         if (res.success) {
-          if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
+          if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           // swal('成功', res.info, 'success')
           swal({
             title: '成功',
@@ -97,7 +97,7 @@ export class SubmitService {
    * @param submitData
    * @param back:true(返回上一级)
    */
-  putRequest(requestUrl, requestDate,back?: boolean) {
+  putRequest(requestUrl, requestDate, back?: boolean) {
     // console.log("█ requestDate ►►►",  requestDate);
     this.ajax.put({
       url: requestUrl,
@@ -106,7 +106,7 @@ export class SubmitService {
       success: (res) => {
         console.log("█ res ►►►", res);
         if (res.success) {
-          if(back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
+          if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           swal({
             title: '成功',
             text: res.info,
@@ -146,17 +146,14 @@ export class SubmitService {
    * @param requestData
    * @returns {any}
    */
-  getData(requestUrl:string, requestData:any) {
-    let result;
+  getData(requestUrl: string, requestData: any) {
+    let result: any;
     this.ajax.get({
       url: requestUrl,
       data: requestData,
       async: false,
       success: (res) => {
-        if (res.success && !isNullOrUndefined(res)) {
-          result = res.data;
-          // console.log("█ result ►►►",  result);
-        }
+        if (!isNullOrUndefined(res) && res.success) result = res.data;
       },
       error: (res) => {
         console.log('result', res);
