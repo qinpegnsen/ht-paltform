@@ -22,7 +22,7 @@ export class AddArticleSortService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.info;
             swal(result,'','success')
           }else{
@@ -52,7 +52,7 @@ export class AddArticleSortService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.data;
             let info=data.info;
           }else{
@@ -83,7 +83,7 @@ export class AddArticleSortService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.data;
             let info=data.info;
             swal(info,'','success')

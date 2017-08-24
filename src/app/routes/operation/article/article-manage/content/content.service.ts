@@ -26,8 +26,10 @@ export class ContentService {
           swal(info,'','error')
         }
       },
-      error: () => {
-        console.log('article/queryAllArticle 连接数据库失败');
+      error: (data) => {
+        let info=data.info;
+        swal(info,'','success')
+        console.log(1)
       }
     });
     return flag;
@@ -47,7 +49,7 @@ export class ContentService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=new Page(data.data);
           }else{
             console.log('article/queryAllArticle 返回的success为假');

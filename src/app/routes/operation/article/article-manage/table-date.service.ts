@@ -21,7 +21,7 @@ export class TableDateService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.info;
             swal(result,'','success')
           }else{
@@ -48,7 +48,7 @@ export class TableDateService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             console.log(data)
             result=data.info;
             swal(result,'','success')

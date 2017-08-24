@@ -19,7 +19,7 @@ export class AddArticleManService {
       success: (data) => {
         if (!isNull(data)) {
           result=data.info;
-          if(data.success==true){
+          if(data.success){
             swal(result,'','success')
           }else{
             swal(result,'','success')
@@ -47,7 +47,7 @@ export class AddArticleManService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.data;
           }else{
             console.log('article/queryAllArticle 返回的success为假');
@@ -62,5 +62,38 @@ export class AddArticleManService {
     });
     return result;
   }
+
+  /**
+   * 根据文章的id查询文章的信息
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  public queryArticle(url,data) {
+    let result;
+    this.ajax.get({
+      url: url,
+      data: data,
+      async:false,
+      success: (data) => {
+        if (!isNull(data)) {
+          if(data.success){
+            result=data.data;
+          }else{
+            console.log('article/queryAllArticle 返回的success为假');
+          }
+        }else{
+          console.log('article/queryAllArticle 返回的数据为空');
+        }
+      },
+      error: (data) => {
+        swal('分类用户已存在','','error')
+      }
+    });
+    return result;
+  }
+
+
+
 
 }

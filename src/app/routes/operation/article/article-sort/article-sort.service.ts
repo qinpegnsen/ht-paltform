@@ -22,7 +22,7 @@ export class ArticleSortService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=new Page(data.data);
           }else{
             console.log('article/queryAllArticle 返回的success为假');

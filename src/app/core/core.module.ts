@@ -11,6 +11,7 @@ import {throwIfAlreadyLoaded} from "./module-import-guard";
 import {PopupComponent} from "../routes/operationpage/popup/popup.component";
 import {RzhtoolsService} from "./services/rzhtools.service";
 import {ToasterService} from "angular2-toaster";
+import {GetUidService} from "./services/get-uid.service";
 
 @NgModule({
   imports: [],
@@ -24,7 +25,8 @@ import {ToasterService} from "angular2-toaster";
     MaskService,
     RzhtoolsService,
     ToasterService,
-    AjaxService
+    AjaxService,
+    GetUidService
   ],
   declarations: [PopupComponent],
   exports: []

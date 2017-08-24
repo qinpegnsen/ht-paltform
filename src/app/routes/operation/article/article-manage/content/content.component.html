@@ -30,7 +30,7 @@
         <td>{{article.state}}</td>
         <td>{{article.createTime}}</td>
         <td>
-          <app-buttons [config]="updatebutton" routerLink="addMan" [queryParams]="{linkType:'updateMan',id:article.id}"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="delArticle(article.id)"></app-buttons>
           <app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>
         </td>

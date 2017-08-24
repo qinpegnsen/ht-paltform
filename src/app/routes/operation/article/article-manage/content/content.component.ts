@@ -30,11 +30,8 @@ export class ContentComponent implements OnInit  {
     this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
-          if(event.url=='/main/operation/article/manage/addArticle?linkType=addArticle'){
-            console.log(event.url)
+          if(event.url.indexOf('linkType')>0){
             this.flag=false;
-            console.log(this.flag)
           }else if(event.url=='/main/operation/article/manage'){
             this.flag=true;
           }
@@ -65,7 +62,7 @@ export class ContentComponent implements OnInit  {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:6,
+      pageSize:8,
       articleState:'DRAFT'
     }
     let url= "/article/queryAllArticle";
@@ -90,7 +87,7 @@ export class ContentComponent implements OnInit  {
       if (isConfirm) {
         let url='/article/deleteArticleByState';
         let data={
-          id:delId
+          articleId:delId
         }
         let  flag = that.ContentService.confirmDel(url,data)
         if(flag){
