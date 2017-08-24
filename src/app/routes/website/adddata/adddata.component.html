@@ -1,18 +1,26 @@
-<!--添加机构-->
+<!--添加类型key-->
 <div class="rightpage">
-  <form class="form-validate form-horizontal" style="height: 100%">
+  <form class="form-validate form-horizontal" style="height: 100%" >
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
         <fieldset class="b0">
           <legend>数据字典信息</legend>
         </fieldset>
-
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">名称</label>
+            <label class="col-sm-3 control-label">类型码（code）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="name" [(ngModel)]="adddata.name"
+              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.code"
+                     placeholder="请填写名称"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称（name）</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.name"
                      placeholder="请填写名称"/>
             </div>
           </div>
@@ -39,20 +47,66 @@
 </div>
 
 <!--修改数据字典key-->
-<div class="rightpage">
-  <form class="form-validate form-horizontal" style="height: 100%">
+<div class="rightpage"  *ngIf="linkType=='updateSort'">
+  <form class="form-validate form-horizontal" style="height: 100%" #addClass="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
         <fieldset class="b0">
-          <legend>修改数据字典信息</legend>
+          <legend>修改数据字典 <i><b>{{keys}}</b></i>值</legend>
         </fieldset>
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">名称</label>
+            <label class="col-sm-3 control-label">类型名（name）</label>
+            <!--<label class="col-sm-3 control-label">值名称 （val）</label>-->
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="name" [(ngModel)]="adddata.name"
+              <input class="form-control" type="text" name="info" *ngIf="updataData.info" [(ngModel)]="updataData.info"
+                     placeholder="请填写名称"/>
+              <input class="form-control" type="text" *ngIf="updataData.name" name="name" [(ngModel)]="updataData.name"
+                     placeholder="请填写名称"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">备注</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" type="text" name="remark" [(ngModel)]="updataData.remark"
+                     placeholder="请填写备注"/>
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addClass.value)" [disabled]="addClass.invalid">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+
+<!--添加子菜单-->
+<div class="rightpage" *ngIf="linkType=='addChildSort'">
+  <form class="form-validate form-horizontal" style="height: 100%" #addChildClass="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>
+            新增类型 <i><b>【{{keyName}}】</b></i> 的val
+
+          </legend>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">值名称（val）</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.name"
                      placeholder="请填写名称"/>
             </div>
           </div>
@@ -71,10 +125,9 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submit()">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addChildClass.value)" [disabled]="addChildClass.invalid">提交信息</button>
       </div>
     </div>
     <!-- END panel-->
   </form>
 </div>
-
