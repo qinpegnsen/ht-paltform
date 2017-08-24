@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {isNull} from "util";
 import {AjaxService} from "../../../core/services/ajax.service";
-const swal = require('sweetalert');
+import {AppComponent} from "../../../app.component";
 @Injectable()
 export class AdddataService {
 
@@ -46,21 +46,20 @@ export class AdddataService {
             result=data.data;
             let info=data.info;
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('aa 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('aa 返回的数据为空');
         }
       },
       error: () => {
-        swal('失败','','error')
+        AppComponent.rzhAlt("error","操作失败");
       }
     });
     return result
   }
 
   public addClass(url,data) {
-    let result;
     this.ajax.post({
       url: url,
       data: data,
@@ -68,17 +67,16 @@ export class AdddataService {
       success: (data) => {
         if (!isNull(data)) {
           if(data.success==true){
-            result=data.info;
-            swal(result,'','success')
+            AppComponent.rzhAlt("success",data.info);
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('addDatadict 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('addDatadict 返回的数据为空');
         }
       },
       error: (data) => {
-        swal('分类用户已存在','','error')
+        AppComponent.rzhAlt("error",'分类用户已存在');
       }
     });
   }
@@ -94,16 +92,16 @@ export class AdddataService {
           if(data.success==true){
             result=data.data;
             let info=data.info;
-            swal(info,'','success')
+            AppComponent.rzhAlt("success",info);
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('/datadict/updateDatadict 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('/datadict/updateDatadict 返回的数据为空');
         }
       },
       error: (data) => {
-        swal('修改用户失败','','error')
+        AppComponent.rzhAlt("error","修改用户失败");
       }
     });
     return result

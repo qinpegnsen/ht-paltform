@@ -4,6 +4,7 @@ import {Page} from "../../../core/page/page";
 import {isNullOrUndefined} from "util";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {DataDictionaryComponentService} from "./data-dictionary-component.service";
+import {AppComponent} from "../../../app.component";
 const swal = require('sweetalert');
 
 @Component({
@@ -18,7 +19,8 @@ export class DataDictionaryComponent implements OnInit {
   private addchildbutton: object//添加子按钮
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
-  private childMenuCode; //菜单编码，查询子集用
+  public childMenuCode; //菜单编码，查询子集用
+  public childMenuName; //菜单名称，查询子集用
   private code: string = '';//默认查询key的子
   private searchkey: string = '';
   private childMenuTitList: Array<any> = []; //菜单级别面包屑
@@ -34,8 +36,8 @@ export class DataDictionaryComponent implements OnInit {
     //按钮配置
     me.addButton = {
       type: "add",
-      text: "添加",
-      title: '添加'
+      text: "添加key",
+      title: '添加key'
     };
     me.updatebutton = {
       title: "编辑",
@@ -77,12 +79,32 @@ export class DataDictionaryComponent implements OnInit {
    *删除
    */
   delete(delCodeId) {
-    let url = "/datadict/deleteDatadictType";
-    let data = {
-      code: delCodeId
-    }
-    this.dataDictionaryService.delCode(url, data)
-    this.queryDatas()
+    let _this = this, url: string = "/datadict/deleteDatadictType", data: any,length:number = _this.childMenuTitList.length;
+    swal({
+        title: '确认删除此信息？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+        function () {  //点击‘确认’时执行
+          swal.close(); //关闭弹框
+          if (length < 1) {
+            data = {
+              code: delCodeId
+            }
+          } else {
+            url = "/datadict/deleteDatadict";
+            data = {
+              code: delCodeId
+            }
+          }
+        _this.dataDictionaryService.delCode(url, data); //删除数据
+        if(length<1) _this.queryDatas(); //更新（第一层）
+        else _this.queryChildSortList(_this.childMenuCode,_this.childMenuName,true); //更新（第二层）
+      }
+    );
   }
 
   /*
@@ -99,11 +121,11 @@ export class DataDictionaryComponent implements OnInit {
         'enable': data.enable
       },
       success: (res) => {
-        if (res.success) swal(res.info, '', 'success');
-        else swal('操作失败', '', 'error');
+        if (res.success) AppComponent.rzhAlt("success",res.info);
+        else AppComponent.rzhAlt("error","操作失败");
       },
       error: (data) => {
-        swal('修改功能操作状态失败', 'error');
+        AppComponent.rzhAlt("error","修改功能操作状态失败");
       }
     });
   }
@@ -112,14 +134,15 @@ export class DataDictionaryComponent implements OnInit {
    * 根据分类的父id查询子分类
    * @param parentId
    */
-  queryChildSortList(childCode?, menuName?, isTit?: boolean) {
+  queryChildSortList(childCode ?, menuName ?, isTit ?: boolean) {
     let me = this, num = 0;
     if (isNullOrUndefined(childCode)) {
-      me.childMenuCode = null, me.childMenuTitList = []; //清空子集查询
+      me.childMenuCode = null, me.childMenuName = null, me.childMenuTitList = []; //清空子集查询
       me.queryDatas();
       return;
     } else {
       me.childMenuCode = childCode;
+      me.childMenuName = menuName;
       let item = {name: menuName, code: childCode};
       if (!isTit) {
         me.childMenuTitList.push(item); //非点击面包屑路径时，添加面包屑

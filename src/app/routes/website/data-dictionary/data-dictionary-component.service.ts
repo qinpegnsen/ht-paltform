@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {AjaxService} from "../../../core/services/ajax.service";
 import {isNull} from "util";
 import {Page} from "../../../core/page/page";
+import {AppComponent} from "../../../app.component";
 
-const swal = require('sweetalert');
 @Injectable()
 export class DataDictionaryComponentService {
 
@@ -36,16 +36,20 @@ export class DataDictionaryComponentService {
 
   //删除key
    delCode(url,data) {
+
+    console.log("data======",data);
+
     this.ajax.del({
       url:url,
       data: data,
       async:false,
       success: (data) => {
+        console.log("data====----==",data);
         let info=data.info;
         if(data.success){
-          swal(info,'','success')
+          AppComponent.rzhAlt("success",info);
         }else{
-          swal(info,'','error')
+          AppComponent.rzhAlt("error",info);
         }
       },
       error: () => {
