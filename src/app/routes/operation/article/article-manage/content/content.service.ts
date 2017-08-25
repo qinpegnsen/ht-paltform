@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../../../core/services/ajax.service";
 import {Page} from "../../../../../core/page/page";
 import {isNull} from "util";
+import {AppComponent} from "../../../../../app.component";
 const swal = require('sweetalert');
 @Injectable()
 export class ContentService {
@@ -20,10 +21,10 @@ export class ContentService {
       success: (data) => {
         let info=data.info;
         if(data.success){
-          swal(info,'','success')
+          AppComponent.rzhAlt("success",info);
           flag=true;
         }else{
-          swal(info,'','error')
+          AppComponent.rzhAlt("error",info);
         }
       },
       error: (data) => {

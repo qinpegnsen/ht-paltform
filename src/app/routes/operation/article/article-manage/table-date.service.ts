@@ -1,67 +1,7 @@
 import { Injectable } from '@angular/core';
-import {AjaxService} from "../../../../core/services/ajax.service";
-import {isNull} from "util";
-import {Page} from "../../../../core/page/page";
-const swal = require('sweetalert');
-
 @Injectable()
 export class TableDateService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor() { }
 
-
-  /**
-   * 查询具体的文章信息
-   */
-  public selsectArticle(url,data) {
-    let result;
-    this.ajax.get({
-      url: url,
-      data: data,
-      async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            result=data.info;
-            swal(result,'','success')
-          }else{
-            console.log('article/queryAllArticle 返回的success为假');
-          }
-        }else{
-          console.log('article/queryAllArticle 返回的数据为空');
-        }
-      },
-      error: (data) => {
-        swal('分类用户已存在','','error')
-      }
-    });
-  }
-
-  /**
-   * 删除文章
-   */
-  public delArticle(url,data) {
-    let result;
-    this.ajax.put({
-      url: url,
-      data: data,
-      async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            console.log(data)
-            result=data.info;
-            swal(result,'','success')
-          }else{
-            console.log('article/queryAllArticle 返回的success为假');
-          }
-        }else{
-          console.log('article/queryAllArticle 返回的数据为空');
-        }
-      },
-      error: (data) => {
-        swal('分类用户已存在','','error')
-      }
-    });
-  }
 }

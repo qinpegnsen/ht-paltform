@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {ContentService} from "./content.service";
 import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTable";
@@ -9,11 +9,18 @@ const swal = require('sweetalert');
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit  {
+export class ContentComponent implements OnInit,OnChanges  {
+
+  @Output()
+  public totalRow=new EventEmitter();//把当点击文章的总条数发射出去，在导航处呈现
+
+  @Input()  //导航栏传过来的文章的状态，从未获取不同的文章列表
+  public state;
 
   public articleManListdata;//存储文章列表的数据
 
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+
 
   private updatebutton:Object;//更新文章按钮
   private deletebutton:Object;//删除文章按钮
@@ -53,20 +60,32 @@ export class ContentComponent implements OnInit  {
     this.queryArticManleList()//调用文章的列表
   }
 
+  ngOnChanges(){
+    this.queryArticManleList()
+  }
+
   /**
    * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
+   * addArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
    */
-  public queryArticManleList(event?:PageEvent) {
+  public queryArticManleList(event?:PageEvent,addArticlestate?) {
     let activePage = 1;
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
       pageSize:8,
-      articleState:'DRAFT'
+      articleState:''
     }
+    if(addArticlestate){
+      data.articleState=addArticlestate;
+    }else{
+      data.articleState=this.state?this.state:'DRAFT';
+    }
+
     let url= "/article/queryAllArticle";
     let result=this.ContentService.queryData(data,url);
+    this.totalRow.emit(result.totalRow)
     this.articleManListdata= result;
   }
 
@@ -81,10 +100,12 @@ export class ContentComponent implements OnInit  {
       type: "warning",
       showCancelButton: true,
       closeOnConfirm: false,
-      confirmButtonText: "是的，我要删除",
+      confirmButtonText: "确认",
+      cancelButtonText: '取消',
       confirmButtonColor: "#ec6c62"
     },function(isConfirm){
       if (isConfirm) {
+        swal.close(); //关闭弹框
         let url='/article/deleteArticleByState';
         let data={
           articleId:delId

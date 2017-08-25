@@ -94,6 +94,35 @@ export class AddArticleManService {
   }
 
 
+  /**
+   * 修改文章
+   */
+  public updateArticle(url,data) {
+    let result;
+    this.ajax.post({
+      url: url,
+      data: data,
+      async:false,
+      success: (data) => {
+        if (!isNull(data)) {
+          result=data.info;
+          if(data.success){
+            swal(result,'','success')
+          }else{
+            swal(result,'','success')
+            console.log('article/queryAllArticle 返回的success为假');
+          }
+        }else{
+          console.log('article/queryAllArticle 返回的数据为空');
+        }
+      },
+      error: (data) => {
+        console.log(data)
+        swal('获取数据失败','','error')
+      }
+    });
+  }
+
 
 
 }

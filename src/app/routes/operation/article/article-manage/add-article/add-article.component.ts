@@ -54,7 +54,6 @@ export class AddArticleComponent implements OnInit {
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
 
     this.articleCoverType = 'AUTO'//文章封面类型默认的样式
-    // this.articleClassId = this.queryArticleData.articleClassId //修改是默认的分类
 
     this.articleCoverTypes=[
       {key:'AUTO',text:'自动'},
@@ -72,7 +71,7 @@ export class AddArticleComponent implements OnInit {
     this.articleClassList = this.AddArticleManService.articleClass(url, data)
 
     /**
-     * 调用富文本编辑器
+     * 调用富文本编辑器，初始化编辑器
      */
 
     setTimeout(() => {
@@ -86,21 +85,36 @@ export class AddArticleComponent implements OnInit {
           }
         }
       });
+
     }, 0);
 
     /**
-     * 根据id查询文章列表的数据
+     * 根据id查询文章的数据
      * @type {string}
      */
-    // let queryArticleurl = '/article/queryArticle';
-    // let queryArticledata = {
-    //   articleId:this.articleId,
-    //   queryState:'FONT'
-    // }
-    // this.queryArticleData= this.AddArticleManService.articleClass(queryArticleurl,queryArticledata);
-    // console.log(this.queryArticleData)
+    if(this.linkType=='updataArticle'){
+      let queryArticleurl = '/article/queryArticle';
+      let queryArticledata = {
+        articleId:this.articleId,
+        queryState:'BLACK'
+      }
+      this.queryArticleData= this.AddArticleManService.queryArticle(queryArticleurl,queryArticledata);
+      setTimeout(() => {
+        $('#summernote').summernote({
+          height: 280,
+          dialogsInBody: true,
+          callbacks: {
+            onChange: (contents, $editable) => {
+              this.contents = contents;
+              // console.log(contents);
+            }
+          }
+        });
+        $('#summernote').summernote('code',this.queryArticleData.articleBody.articleContent );//给编辑器赋值
+      }, 0);
+    }
 
-
+    console.log(this.queryArticleData)
   }
 
   /**
@@ -141,18 +155,29 @@ export class AddArticleComponent implements OnInit {
   }
 
   // 提交
-  submit(obj) {
+  submit(obj,state) {
     console.log(obj)
     if (this.linkType == 'addArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       console.log(sHTML)
       let url = '/article/addArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
-      obj.addArticleEnum = 'DRAFT' //默认文章的类型是草稿
+      obj.addArticleEnum = state //默认文章的类型是草稿
       let data = obj;
       this.AddArticleManService.addArticle(url, data);
       this.router.navigate(['/main/operation/article/manage']);
-      this.ContentComponent.queryArticManleList()
+      this.ContentComponent.queryArticManleList(state)
+    }else if (this.linkType == 'updataArticle') {
+      var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+      console.log(sHTML)
+      let url = '/article/updateArticle';
+      obj.articleContent = sHTML;  //赋值编辑器的值
+      obj.addArticleEnum = state //默认文章的类型是草稿
+      obj.articleId=this.articleId
+      let data = obj;
+      this.AddArticleManService.updateArticle(url, data);
+      this.router.navigate(['/main/operation/article/manage']);
+      this.ContentComponent.queryArticManleList(state)
     }
   }
 }

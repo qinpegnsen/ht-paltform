@@ -64,6 +64,7 @@ export class ArticleSortComponent implements OnInit {
     }
     let url= "/articleclass/queryArticleClassPage";
     let result=this.ArticleSortService.queryData(url,data);
+    console.log(result)
     this.articleSortListdata= result;
   }
 
@@ -77,11 +78,13 @@ export class ArticleSortComponent implements OnInit {
         text: "您确定要删除这条数据？",
         type: "warning",
         showCancelButton: true,
+        cancelButtonText: '取消',
         closeOnConfirm: false,
-        confirmButtonText: "是的，我要删除",
+        confirmButtonText: "确认",
         confirmButtonColor: "#ec6c62"
       },function(isConfirm){
         if (isConfirm) {
+          swal.close(); //关闭弹框
           let url='/articleclass/deleteArticleClassById';
           let data={
             id:delSortId

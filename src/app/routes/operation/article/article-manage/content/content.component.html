@@ -7,17 +7,20 @@
         <th style="width: 5%">
           序号
         </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
+        <th style="width: 15%">
+          <rzhDefaultSorter by="name">短标题</rzhDefaultSorter>
+        </th>
+        <th style="width: 15%">
+          <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
+        </th>
+        <th style="width: 15%">
+          <rzhDefaultSorter>是否推荐</rzhDefaultSorter>
         </th>
         <th style="width: 20%">
-          <rzhDefaultSorter by="email">类型</rzhDefaultSorter>
+          <rzhDefaultSorter>封面</rzhDefaultSorter>
         </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter>状态</rzhDefaultSorter>
-        </th>
-        <th style="width: 20%">
-          <rzhDefaultSorter by="city">时间</rzhDefaultSorter>
+        <th style="width: 15%">
+          <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
         </th>
         <th style="width: 15%">操作</th>
       </tr>
@@ -26,9 +29,11 @@
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
         <td>{{article.articleTitleShort}}</td>
-        <td>{{article.articleType}}</td>
-        <td>{{article.state}}</td>
-        <td>{{article.createTime}}</td>
+        <td>{{article.articleClassId}}</td>
+        <td>{{article.articleCommend}}</td>
+        <td>{{article.coverType}}</td>
+        <td *ngIf="article.articleGoods">否</td>
+        <td *ngIf="article.articleGoods">是</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="delArticle(article.id)"></app-buttons>

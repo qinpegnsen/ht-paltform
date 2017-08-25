@@ -3,13 +3,12 @@
     <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
   </div>
   <div>
-    <app-content-nav></app-content-nav>
-    <!--路由嵌套 begin-->
-    <router-outlet></router-outlet>
-    <!--路由嵌套 end-->
-    <app-content></app-content>
+    <app-content-nav (sendState)="getState($event)" ></app-content-nav>
+    <app-content [state]="state" (totalRow)="getTotalRow($event)" ></app-content>
   </div>
-
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
 
 
 
