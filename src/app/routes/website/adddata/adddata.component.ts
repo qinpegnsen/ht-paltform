@@ -5,6 +5,7 @@ import {AdddataService} from "./adddata.service";
 import {DataDictionaryComponent} from "../data-dictionary/data-dictionary.component";
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {MeasureComponent} from "../measure/measure.component";
 
 @Component({
   selector: 'app-adddata',
@@ -14,9 +15,12 @@ import {SubmitService} from "../../../core/forms/submit.service";
 })
 export class AdddataComponent implements OnInit {
   private adddata = {name: '', remark: ''};
+  private adddatas = {sort: '', unitName: ''};
   public updataData: any;
+  public updataDataa: any;
   public addchildData:any;
   public linkType: string;
+  public id: number;
   public acParentId: number;
   public info: string;
   public code: number;
@@ -25,7 +29,8 @@ export class AdddataComponent implements OnInit {
   private keyName: string;
   private keys: string;
   constructor(public settings: SettingsService, private router: Router, private adddataService: AdddataService,
-              private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent, private sub: SubmitService) {
+              private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent,
+              private sub: SubmitService,private submitt: SubmitService,private measureComponent: MeasureComponent,) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -38,9 +43,15 @@ export class AdddataComponent implements OnInit {
     _this.keyName = _this.routeInfo.snapshot.queryParams['key'];
     _this.keys = _this.routeInfo.snapshot.queryParams['keys'];
     _this.typeCode = _this.routeInfo.snapshot.queryParams['typeCode'];
-    if (_this.linkType == "updateSort") {//若为修改操作,获取信息
+    _this.id = _this.routeInfo.snapshot.queryParams['id'];
+    if (_this.linkType == "updateSort") {//数据字典--若为修改操作,获取信息
       if (isNullOrUndefined(_this.typeCode)) _this.updataData = _this.sub.getData("/datadict/loadDatadictType", {code: _this.code}); //获取数据字典key
       else _this.updataData = _this.sub.getData("/datadict/loadDatadictByCode", {code: _this.code}); //获取数据字典val
+    };
+    if (_this.linkType == "updateCount") {//计量单位--若为修改操作,获取信息
+      _this.updataDataa = _this.sub.getData("/goods_unit/loadById", {id: _this.id}); //获取数据字典key
+      console.log(_this.updataDataa)
+
     }
   }
 
@@ -49,9 +60,9 @@ export class AdddataComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
-  //提交
+  //数据字典--提交
   submit(obj) {
-    if (this.linkType == 'addChildSort') {
+      if (this.linkType == 'addChildSort') {
       let url = '/datadict/addDatadict';
       let data = {
         typeCode: this.code,
@@ -86,6 +97,29 @@ export class AdddataComponent implements OnInit {
     }
     if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(); //第一层，更新第一层数据
     else this.dataDictionaryComponent.queryChildSortList(this.dataDictionaryComponent.childMenuCode, this.dataDictionaryComponent.childMenuName, true);//第2层，更新第2层数据
+    this.settings.closeRightPageAndRouteBack();
+  }
+
+//计量单位--提交
+  submita(res){
+    if (this.linkType == 'addCount') {
+      let url = '/goods_unit/addGoodsUnit';
+      let data = {
+        sort: res.sort,
+        unitName: res.unitName
+      }
+      this.submitt.postRequest(url, data);
+    }
+    else if (this.linkType == 'updateCount') {
+      let url = '/goods_unit/updateGoodsUnit';
+      let data = {
+        id:this.id,
+        sort: res.sort,
+        unitName: res.unitName
+      }
+      this.submitt.putRequest(url, data);
+    }
+    this.measureComponent.qeuryAllService();
     this.settings.closeRightPageAndRouteBack();
   }
 }

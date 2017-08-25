@@ -1,4 +1,4 @@
-<!--添加类型key-->
+<!--数据字典--添加类型key-->
 <div class="rightpage">
   <form class="form-validate form-horizontal" style="height: 100%" >
     <!-- START panel-->
@@ -11,7 +11,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">类型码（code）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.code"
+              <input class="form-control" type="text" name="info" [(ngModel)]="adddatas.code"
                      placeholder="请填写名称"/>
             </div>
           </div>
@@ -20,7 +20,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">名称（name）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.name"
+              <input class="form-control" type="text" name="info" [(ngModel)]="adddatas.name"
                      placeholder="请填写名称"/>
             </div>
           </div>
@@ -46,7 +46,7 @@
   </form>
 </div>
 
-<!--修改数据字典key-->
+<!--数据字典--修改数据字典key-->
 <div class="rightpage"  *ngIf="linkType=='updateSort'">
   <form class="form-validate form-horizontal" style="height: 100%" #addClass="ngForm">
     <!-- START panel-->
@@ -89,7 +89,7 @@
   </form>
 </div>
 
-<!--添加子菜单-->
+<!--数据字典--添加子菜单-->
 <div class="rightpage" *ngIf="linkType=='addChildSort'">
   <form class="form-validate form-horizontal" style="height: 100%" #addChildClass="ngForm">
     <!-- START panel-->
@@ -126,6 +126,88 @@
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
         <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addChildClass.value)" [disabled]="addChildClass.invalid">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+
+<!--计量单位--修改-->
+<div class="rightpage" *ngIf="linkType=='updateCount'">
+  <form class="form-validate form-horizontal" style="height: 100%"   #res="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>修改计量单位信息</legend>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">单位名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text"  name="unitName" [(ngModel)]="updataDataa.unitName"
+                     placeholder="请填写单位名称"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">排序</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="number"  name="sort" [(ngModel)]="updataDataa.sort"
+                     placeholder="请填写排序"/>
+            </div>
+          </div>
+        </fieldset>
+
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+
+<!--计量单位--添加-->
+<div class="rightpage"  *ngIf="linkType=='addCount'">
+  <form class="form-validate form-horizontal" style="height: 100%" #res="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>添加计量单位</legend>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">单位名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text"  name="unitName" [(ngModel)]="adddata.unitName"
+                     placeholder="请填写菜单名称"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">排序</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="number" name="sort" [(ngModel)]="adddata.sort"
+                     placeholder="请填写排序" />
+            </div>
+          </div>
+        </fieldset>
+
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)">提交信息</button>
       </div>
     </div>
     <!-- END panel-->

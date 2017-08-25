@@ -16,13 +16,14 @@ export class AdddataService {
       success: (res) => {
         console.log(res)
         if (res.success && !isNull(res.data)) {
+          AppComponent.rzhAlt("success",res.info);
           result = res.data;
         }else{
-          console.log(123)
+          AppComponent.rzhAlt("error",res.info);
         }
       },
       error: (res) => {
-        console.log('res', res);
+        AppComponent.rzhAlt("error",res.info);
       }
     });
     return result;
@@ -66,13 +67,13 @@ export class AdddataService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             AppComponent.rzhAlt("success",data.info);
           }else{
-            console.log('addDatadict 返回的success为假');
+            AppComponent.rzhAlt("error",data.info);
           }
         }else{
-          console.log('addDatadict 返回的数据为空');
+          AppComponent.rzhAlt("error",data.info);
         }
       },
       error: (data) => {
@@ -89,15 +90,15 @@ export class AdddataService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          if(data.success==true){
+          if(data.success){
             result=data.data;
             let info=data.info;
             AppComponent.rzhAlt("success",info);
           }else{
-            console.log('/datadict/updateDatadict 返回的success为假');
+            AppComponent.rzhAlt("error",data.info);
           }
         }else{
-          console.log('/datadict/updateDatadict 返回的数据为空');
+           AppComponent.rzhAlt("error",data.info);
         }
       },
       error: (data) => {
