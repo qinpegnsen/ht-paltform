@@ -66,7 +66,7 @@
       <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td>{{kind.kindName}}</td>
-        <td>{{kind.kindIcon}}</td>
+        <td><img [src]="kind.kindIcon" alt=""></td>
         <td>{{kind.parentKindName}}</td>
         <td>{{kind.keywords}}</td>
         <td>{{kind.description}}</td>
@@ -82,12 +82,12 @@
               <app-buttons [config]="option" (callback)="option.callback($event,kind.id)"
                            *ngFor="let option of buttons"></app-buttons>
             </span>
-          <span *ngIf="kind.level != 3">
-              <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
-                 [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1}" title="添加下级分类"></a>
-            </span>
-          <span class="btn btn-default btn-xs" *ngIf="kind.level != 3"
-                (click)="queryChildKindList(kind.id, kind.kindName,false)">
+            <span *ngIf="kind.level != 3">
+                <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
+                   [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1}" title="添加下级分类"></a>
+              </span>
+            <span class="btn btn-default btn-xs" *ngIf="kind.level != 3"
+                  (click)="queryChildKindList(kind.id, kind.kindName,false)">
               <i class="fa fa-level-down"></i> 下级
             </span>
         </td>

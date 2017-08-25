@@ -161,5 +161,25 @@ export class SubmitService {
     });
     return result;
   }
-
+  /**
+   * 上传图片或文件
+   * @param url
+   * @param data
+   */
+  public uploadFile(url,data) {
+    this.ajax.post({
+      url: url,
+      data: data,
+      async: false,
+      success: (res) => {
+        console.log("█ res ►►►",  res);
+        if (!res.success) {
+          AppComponent.rzhAlt("error", res.info,'');
+        }
+      },
+      error: () => {
+        AppComponent.rzhAlt("error", '图片上传连接失败','');
+      }
+    });
+  }
 }

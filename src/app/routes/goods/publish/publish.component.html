@@ -1,36 +1,14 @@
 <div class="panel mb">
   <ul class="guide m0 p0 clearfix step-nav">
-    <li class="col-md-6 p-lg" [class.cur]="true">
+    <li class="col-md-6 p-lg" [class.cur]="step===1">
       <i>1</i><span class="font18">选择商品分类</span><br><span>确定您的商品所属分类，选择最后一级分类目录进入下一步。</span>
     </li>
-    <li class="col-md-6 p-lg">
+    <li class="col-md-6 p-lg" [class.cur]="step===2">
       <i>2</i><span class="font18">填写商品详情</span><br><span>填写商品名称、选择商品属性、上传商品图片以及相关信息。</span>
     </li>
   </ul>
 </div>
-<div class="panel mb step-one clearfix">
-  <div class="clearfix">
-    <div class="col-sm-4 m0 p">
-      <ul>
-        <li *ngFor="let item of firstList" (click)="getNextLevel(item.id,item.level,this)">
-          {{item.kindName}}
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-4 m0 p">
-      <ul>
-        <li *ngFor="let item of secondList" (click)="getNextLevel(item.id,item.level,this)">{{item.kindName}}</li>
-      </ul>
-    </div>
-    <div class="col-sm-4 m0 p">
-      <ul>
-        <li *ngFor="let item of thirdList" (click)="getNextLevel(item.id,item.level,this)">{{item.kindName}}</li>
-      </ul>
-    </div>
-  </div>
-  <div class="choosed mb0">
-    <span class="unchoosed" *ngIf="choosedKindStr==''">请选择分类</span>
-    <span *ngIf="choosedKindStr!=''">您当前选择的分类是：{{choosedKindStr}}</span>
-  </div>
-  <button type="button" class="btn btn-green btn-lg m-lg pull-right" [disabled]="!choosedKind">下一步</button>
-</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

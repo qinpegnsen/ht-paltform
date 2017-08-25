@@ -1,0 +1,28 @@
+<div class="panel mb step-one clearfix">
+  <div class="clearfix">
+    <div class="col-sm-4 m0 p">
+      <ul>
+        <li *ngFor="let item of firstList" (click)="getNextLevel(item.id,item.level,this)">
+          {{item.kindName}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-4 m0 p">
+      <ul>
+        <li *ngFor="let item of secondList" (click)="getNextLevel(item.id,item.level,this)">{{item.kindName}}</li>
+      </ul>
+    </div>
+    <div class="col-sm-4 m0 p">
+      <ul>
+        <li *ngFor="let item of thirdList" (click)="getNextLevel(item.id,item.level,this)">{{item.kindName}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="choosed mb0">
+    <span class="unchoosed" *ngIf="!choosedKindStr">请选择分类</span>
+    <span *ngIf="choosedKindStr">您当前选择的分类是：{{choosedKindStr}}</span>
+  </div>
+  <button type="button" class="btn btn-green btn-lg m-lg pull-right" routerLink="../step_two"
+          [disabled]="!choosedKind">下一步
+  </button>
+</div>
