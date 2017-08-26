@@ -113,12 +113,12 @@
         </fieldset>
         <fieldset *ngIf="flag">
           <div class="form-group">
-            <label class="col-sm-2 control-label">封面路径
-            </label>
-            <div class="col-sm-10">
-              <label for="image-input" class="file-upload">
-                <button class="btn btn-info"><em class="fa fa-upload mr" (click)="upload()" ></em>图片上传</button>
-                <input id="image-input" type="file">
+            <label class="col-sm-2 control-label">封面图片</label>
+            <div class="col-sm-3">
+              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+              <label for="image-input" class="btn btn-default file-upload">
+                <i class="icon-cloud-upload mr"></i>{{fileName}}
+                <input type="file" name="coverImg" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
               </label>
             </div>
           </div>

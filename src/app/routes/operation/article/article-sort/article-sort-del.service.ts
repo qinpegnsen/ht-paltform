@@ -29,7 +29,7 @@ export class ArticleSortDelService {
         }
       },
       error: () => {
-        console.log('article/queryAllArticle 连接数据库失败');
+        console.log('分类删除 连接数据库失败');
       }
     });
     return flag;

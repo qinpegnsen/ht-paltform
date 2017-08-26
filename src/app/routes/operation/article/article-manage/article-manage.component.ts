@@ -1,5 +1,6 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {TableDateService} from "./table-date.service";
+import {ContentComponent} from "./content/content.component";
 
 @Component({
   selector: 'app-article-manage',
@@ -12,11 +13,11 @@ export class ArticleManageComponent implements OnInit,OnChanges{
 
   private state//文章的状态
 
-  private totalRow//文章的总条数，用来在导航处呈现
+  private searchKey;//默认查询的文章的名称
 
   public flag:boolean;//定义boolean值用来控制内容组件是否显示
 
-  constructor(private TableDateService:TableDateService) {
+  constructor() {
 
   }
 
@@ -40,12 +41,16 @@ export class ArticleManageComponent implements OnInit,OnChanges{
      */
 
   }
+
+  /**
+   * 根据输入的文章名字查询文章,其实不用这个点击事件，输入属性变化自动刷新
+   */
+  queryArticList(){
+
+  }
   getState(state){
     this.state=state;
   }
 
-  getTotalRow(totalRow){
-    this.totalRow=totalRow;
-  }
 
 }

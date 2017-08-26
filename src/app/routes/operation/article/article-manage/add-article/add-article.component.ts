@@ -6,6 +6,7 @@ import {ArticleManageComponent} from "../article-manage.component";
 import {ContentComponent} from "app/routes/operation/article/article-manage/content/content.component";
 import {GetUidService} from "../../../../../core/services/get-uid.service";
 import {FileUploader} from "ng2-file-upload";
+import {AppComponent} from "../../../../../app.component";
 declare var $: any;
 
 const uploadUrl = "/article/uploadCoverImage";  //图片上传路径(调取上传的接口)
@@ -24,9 +25,15 @@ export class AddArticleComponent implements OnInit {
    */
   public uploader:FileUploader = new FileUploader({
     url: uploadUrl,
-    itemAlias:"coverImg",
+    itemAlias:"limitFile",
     queueLimit: 1
   });
+
+  private fileName:string = '选择图片';
+
+  private myImg: any;
+
+  private uuid: any;
 
   public linkType: string;
 
@@ -113,8 +120,6 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote('code',this.queryArticleData.articleBody.articleContent );//给编辑器赋值
       }, 0);
     }
-
-    console.log(this.queryArticleData)
   }
 
   /**
@@ -127,26 +132,28 @@ export class AddArticleComponent implements OnInit {
     }else {
       this.flag=false;
     }
-    let uid=this.GetUidService.getUid();
-    console.log(uid)
-
-
-    /**
-     * 构建form时，传入自定义参数
-     * @param item
-     */
-    this.uploader.onBuildItemForm = function(fileItem, form){
-      form.append('uuid', this.uid);
-    };
-
-    this.uploader.onSuccessItem = function (item, response, status, headers) {
-      let res = JSON.parse(response);
-      console.log(res)
-    };
+    this.uuid=this.GetUidService.getUid();
   }
 
-  upload(){
-    console.log(1)
+  /**
+   * 监听图片选择
+   * @param $event
+   */
+  fileChangeListener($event) {
+    // console.log($event)
+    let that = this;
+    let image: any = new Image();
+    let file: File = $event.target.files[0];
+    that.fileName = file.name;
+    let myReader: FileReader = new FileReader();
+    myReader.onloadend = function (loadEvent: any) {
+      // console.log(loadEvent)
+      image.src = loadEvent.target.result;
+      that.myImg = image.src;
+    };
+    myReader.readAsDataURL(file);
+
+
   }
 
   // 取消
@@ -156,17 +163,62 @@ export class AddArticleComponent implements OnInit {
 
   // 提交
   submit(obj,state) {
-    console.log(obj)
-    if (this.linkType == 'addArticle') {
-      var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-      console.log(sHTML)
-      let url = '/article/addArticle';
-      obj.articleContent = sHTML;  //赋值编辑器的值
-      obj.addArticleEnum = state //默认文章的类型是草稿
-      let data = obj;
-      this.AddArticleManService.addArticle(url, data);
-      this.router.navigate(['/main/operation/article/manage']);
-      this.ContentComponent.queryArticManleList(state)
+    let me=this;
+    if (me.linkType == 'addArticle') {
+      /**
+       * 构建form时，传入自定义参数
+       * @param item
+       */
+      me.uploader.onBuildItemForm = function(fileItem, form){
+        console.log("█ fileItem ►►►",  fileItem);
+        form.append('uuid', me.uuid);
+        console.log("█ form ►►►",  form);
+      };
+
+      /**
+       * 执行上传
+       */
+      me.uploader.uploadAll();
+
+      /**
+       * 上传成功处理
+       * @param item 上传列表
+       * @param response 返回信息
+       * @param status 状态
+       * @param headers 头信息
+       */
+      me.uploader.onSuccessItem = function (item, response, status, headers) {
+        let res = JSON.parse(response);
+        console.log("█ res ►►►",  res);
+        if(res.success){
+          var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+          // console.log(sHTML)
+          let url = '/article/addArticle';
+          obj.articleContent = sHTML;  //赋值编辑器的值
+          obj.addArticleEnum = state //默认文章的类型是草稿
+          obj.uuid=me.uuid;
+          let data = obj;
+          console.log(data)
+          me.AddArticleManService.addArticle(url, data);
+          me.router.navigate(['/main/operation/article/manage']);
+          me.ContentComponent.queryArticManleList(state)
+        }else{
+          AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+        }
+
+      };
+
+      /**
+       * 上传失败处理
+       * @param item 上传列表
+       * @param response 返回信息
+       * @param status 状态
+       * @param headers 头信息
+       */
+      me.uploader.onErrorItem = function (item, response, status, headers) {
+        AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+      };
+
     }else if (this.linkType == 'updataArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       console.log(sHTML)

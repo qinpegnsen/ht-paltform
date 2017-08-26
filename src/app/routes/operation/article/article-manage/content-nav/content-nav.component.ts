@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {NavService} from "./nav.service";
 
 @Component({
   selector: 'app-content-nav',
@@ -10,20 +11,17 @@ export class ContentNavComponent implements OnInit,OnChanges {
   @Output()
   public sendState=new EventEmitter();//把当点击文章的状态发射出去，用来查询文章的列表
 
-  // @Input()
-  // public totalRow;//当前的文章的总共条数
-
-  public draftTotol:number=0;//当前的草稿的总共条数
-  public auditTotol:number=0;//当前的未审核的总共条数
-  public reviseTotol:number=0;//当前的在审核的总共条数
-  public normalTotol:number=0;//当前的正常的总共条数
-  public delTotol:number=0;//当前的删除的总共条数
-
   public flag='DRAFT'; //默认草稿是选中的状态
 
-  constructor() { }
+  public stateList; //状态总数列表
+
+  constructor(public NavService:NavService) { }
 
   ngOnInit() {
+    let data={}
+    let url= "/article/getCountByState";
+    this.stateList=this.NavService.queryTotalRow(url,data);
+    console.log(this.stateList.data)
 
   }
   ngOnChanges(){

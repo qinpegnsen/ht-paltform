@@ -18,6 +18,8 @@ import { ContentNavComponent } from './article/article-manage/content-nav/conten
 import { ContentComponent } from './article/article-manage/content/content.component';
 import { AddArticleComponent } from './article/article-manage/add-article/add-article.component';
 import {ContentService} from "./article/article-manage/content/content.service";
+import {FileUploadModule} from "ng2-file-upload";
+import {NavService} from "./article/article-manage/content-nav/nav.service";
 
 
 const addSort: Routes = [
@@ -42,9 +44,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
-  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent]
+  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService]
 })
 export class OperationModule { }

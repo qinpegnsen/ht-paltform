@@ -1,4 +1,4 @@
-<div class="col-md-10 panel panel-default pull-right" *ngIf="flag">
+<div class="col-md-10 panel panel-default" *ngIf="flag">
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
            (pageChange)="queryArticManleList($event)">
@@ -8,12 +8,15 @@
           序号
         </th>
         <th style="width: 15%">
-          <rzhDefaultSorter by="name">短标题</rzhDefaultSorter>
+          <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th style="width: 10%">
           <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th style="width: 10%">
+          <rzhDefaultSorter>是否置顶</rzhDefaultSorter>
+        </th>
+        <th style="width: 10%">
           <rzhDefaultSorter>是否推荐</rzhDefaultSorter>
         </th>
         <th style="width: 20%">
@@ -29,15 +32,28 @@
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
         <td>{{article.articleTitleShort}}</td>
-        <td>{{article.articleClassId}}</td>
-        <td>{{article.articleCommend}}</td>
-        <td>{{article.coverType}}</td>
-        <td *ngIf="article.articleGoods">否</td>
+        <td>{{article.articleClass.acName}}</td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article)"/>
+            <span></span>
+          </label>
+        </td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="article.articleCommend=='Y'" (change)="isRecom(article)"/>
+            <span></span>
+          </label>
+        </td>
+        <td><img src="{{article.articleCover.url}}" alt=""></td>
+        <td *ngIf="!article.articleGoods">否</td>
         <td *ngIf="article.articleGoods">是</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="delArticle(article.id)"></app-buttons>
-          <app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>
+          <!--<app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>-->
+          <!--<app-buttons [config]="auditbutton" *ngIf="articleState=='AUDIT'" (click)="auditArticle(article.id)"></app-buttons>-->
+          <!--<app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>-->
         </td>
       </tr>
       </tbody>

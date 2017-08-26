@@ -23,10 +23,10 @@ export class AddArticleManService {
             swal(result,'','success')
           }else{
             swal(result,'','success')
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('新增文章 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('新增文章 返回的数据为空');
         }
       },
       error: (data) => {
@@ -50,10 +50,10 @@ export class AddArticleManService {
           if(data.success){
             result=data.data;
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('文章分类列表 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('文章分类列表 返回的数据为空');
         }
       },
       error: (data) => {
@@ -110,10 +110,10 @@ export class AddArticleManService {
             swal(result,'','success')
           }else{
             swal(result,'','success')
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('updateArticle 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('updateArticle 返回的数据为空');
         }
       },
       error: (data) => {
