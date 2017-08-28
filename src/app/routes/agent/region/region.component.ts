@@ -14,7 +14,7 @@ const swal = require('sweetalert');
 export class RegionComponent implements OnInit {
   private addButton;//新增数据按钮配置
   private controlData:Page = new Page();
-  private areaCode;//声明保存上级的菜单编码
+  private areaCode;//声明保存上级的地区编码
   private queryId:number;//获取添加，修改的ID
   private limitForm = {
     areaCode: ''
@@ -27,15 +27,25 @@ export class RegionComponent implements OnInit {
   ngOnInit() {
     let _this = this;
     _this.queryId = _this.routeInfo.snapshot.queryParams['id'];
+
+    /**
+     * 新增区域代理按钮
+     * @type {{type: string, text: string, title: string}}
+       */
     this.addButton = {
       type:"add",
       text:"新增区域代理",
       title:'新增区域代理',
     };
+
     this.controlDatas();
   }
 
 
+    /**
+     * 获取地区列表
+     * @param event
+     */
   public controlDatas(event?:PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
@@ -86,6 +96,10 @@ export class RegionComponent implements OnInit {
   }
 
 
+  /**
+   * 添加代理区域
+   * @param value
+     */
   addLimitList (value) {
     let _this = this;
     if (_this.queryId == 1) {
@@ -99,14 +113,14 @@ export class RegionComponent implements OnInit {
         success: (res) => {
           if (res.success) {
             _this.router.navigate(['/main/limit'], {replaceUrl: true}); //路由跳转
-            swal('添加页面元素提交成功！', '','success');
+            swal('已添加代理区域！', '','success');
           } else {
             let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
             swal(res.info, errorMsg, 'error');
           }
         },
         error: (data) => {
-          swal('添加页面元素提交失败！', '','error');
+          swal('添加代理区域失败！', '','error');
         }
       })
     }

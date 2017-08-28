@@ -21,6 +21,12 @@ export class AreasService {
 
   constructor(private ajax: AjaxService) { }
 
+  /**
+   * 获取地区列表
+   * @param url
+   * @param data
+   * @returns {any}
+     */
   public controlDatas(url,data) {
     let me = this,result;
     me.ajax.get({

@@ -1,5 +1,6 @@
 <div class="content-heading mb-lg">
   地区设置
+  <!--添加地区按钮配置-->
   <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
 </div>
 <div class="panel mb">
@@ -60,8 +61,10 @@
         <td>{{organ.areaName}}</td>
         <td>{{organ.level}}</td>
         <td>
-          <app-buttons [config]="option" routerLink="rightpage" [queryParams]="{id:3}"></app-buttons>
-          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2}"></app-buttons>
+          <!--添加区域信息按钮-->
+          <app-buttons [config]="option" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
+          <!--修改区域信息按钮-->
+          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2,areaCode:organ.areaCode}"></app-buttons>
           <app-buttons [config]="deletebutton"></app-buttons>
           <span class="btn btn-default btn-xs" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
         </td>
