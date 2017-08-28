@@ -140,9 +140,9 @@
         </fieldset>
         <fieldset *ngIf="path=='upBrandImg'">
           <div class="form-group">
-            <label class="col-sm-4 control-label">图片</label>
-            <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+            <label class="col-sm-2"></label>
+            <div class="col-sm-8">
+              <img class="p-lg w100" *ngIf="myImg" [src]="myImg" alt="">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{fileName}}
                 <input type="file" name="brandPic" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
@@ -223,6 +223,11 @@
         <!--从详情转修改-->
         <button class="ml btn btn-info pull-left" type="button" (click)="toUpdateBrand()" *ngIf="brandDetail"
                 [disabled]="!addBrand.form.valid">修改品牌信息
+        </button>
+
+        <!--修改品牌图片-->
+        <button class="ml btn btn-info pull-left" type="button" (click)="addBrandForm()" *ngIf="upBrandImg"
+                [disabled]="!myImg">修改图片
         </button>
       </div>
     </div>

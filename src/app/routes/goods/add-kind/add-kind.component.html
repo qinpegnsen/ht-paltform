@@ -1,5 +1,5 @@
 <div class="rightpage">
-  <form class="form-validate form-horizontal" #editKind="ngForm" style="height: 100%">
+  <form class="form-validate form-horizontal" #EditKind="ngForm" style="height: 100%">
     <!-- START panel-->
     <div class="panel-default">
       <!--可编辑表单 start-->
@@ -131,12 +131,13 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">图片</label>
-            <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+            <label class="col-sm-2"></label>
+            <div class="col-sm-8">
+              <img class="p-lg w100" *ngIf="myImg" [src]="myImg" alt="">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{fileName}}
-                <input type="file" name="brandPic" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
+                <input type="file" name="brandPic" required ng2FileSelect [uploader]="uploader"
+                       (change)="fileChangeListener($event)"/>
               </label>
             </div>
           </div>
@@ -149,8 +150,13 @@
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
 
         <!--添加分类 -->
+        <button *ngIf="editKind" class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
+                [disabled]="!EditKind.form.valid">提交
+        </button>
+
+        <!--修改分类图标 -->
         <button class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
-                [disabled]="!editKind.form.valid">提交
+                [disabled]="!myImg">上传
         </button>
       </div>
     </div>
