@@ -6,46 +6,43 @@ import {NavService} from "./nav.service";
   templateUrl: './content-nav.component.html',
   styleUrls: ['./content-nav.component.scss']
 })
-export class ContentNavComponent implements OnInit,OnChanges {
+export class ContentNavComponent implements OnInit,OnChanges{
 
   @Output()
   public sendState=new EventEmitter();//把当点击文章的状态发射出去，用来查询文章的列表
 
-  public flag='DRAFT'; //默认草稿是选中的状态
+  @Input()
+  public totalRow//获取各种状态的总条数,然后刷新页面
 
-  public stateList; //状态总数列表
+  public flag='DRAFT'; //默认草稿是选中的状态,给点击的当前的状态添加样式
+
+  public defaultState='DRAFT'; //组件之间传送的时候默认的是草稿的状态
+
+  public stateList; //各种状态总数列表
 
   constructor(public NavService:NavService) { }
 
+  /**
+   * 初始化的时候获取所有状态的总条数
+   * 发射默认的文章状态
+   */
   ngOnInit() {
     let data={}
     let url= "/article/getCountByState";
     this.stateList=this.NavService.queryTotalRow(url,data);
-    console.log(this.stateList.data)
-
+    this.sendState.emit(this.defaultState)
   }
+
   ngOnChanges(){
-    // console.log(this.totalRow)
+    this.stateList=this.totalRow
   }
-
   /**
    * 点击的时候获取文章的状态
-   * @param state
+   * @param state  默认是草稿
    */
   articleState(state){
-    this.flag=state;
+    this.flag=state;//给点击的当前的状态添加样式
     this.sendState.emit(state)
-    // if(state=='AUDIT'){
-    //   this.draftTotol=this.totalRow;
-    // }else if(state=='AUDIT'){
-    //   this.auditTotol=this.totalRow;
-    // }else if(state=='REVISE'){
-    //   this.reviseTotol=this.totalRow;
-    // }else if(state=='NORMAL'){
-    //   this.normalTotol=this.totalRow;
-    // }else if(state=='DEL'){
-    //   this.delTotol=this.totalRow;
-    // }
   }
 
 }

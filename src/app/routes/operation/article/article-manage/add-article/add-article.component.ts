@@ -7,6 +7,8 @@ import {ContentComponent} from "app/routes/operation/article/article-manage/cont
 import {GetUidService} from "../../../../../core/services/get-uid.service";
 import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../../../app.component";
+import {ContentNavComponent} from "../content-nav/content-nav.component";
+import {ContentService} from "../content/content.service";
 declare var $: any;
 
 const uploadUrl = "/article/uploadCoverImage";  //图片上传路径(调取上传的接口)
@@ -33,11 +35,15 @@ export class AddArticleComponent implements OnInit {
 
   private myImg: any;
 
+  private auditResult: string;
+
   private uuid: any;
 
   public linkType: string;
 
   public contents: string;
+
+  public reason: string;
 
   public flag: boolean=false;
 
@@ -49,9 +55,11 @@ export class AddArticleComponent implements OnInit {
 
   public articleCoverType;//初始化的时候设置默认选中的值
   public articleCoverTypes;//初始化的时候设置默认选中的值
-  public articleClassId;//初始化的时候设置默认选中的值
+  public submitObj;//用来保存提交的时候的数据，在addArticleExtra里面使用
+  public submitState;//用来保存提交的时候的状态，在addArticleExtra里面使用
+  public autionOptions;//审核状态的列表
 
-  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public AddArticleManService: AddArticleManService, public ArticleManageComponent: ArticleManageComponent, public router: Router, public ContentComponent: ContentComponent,public GetUidService: GetUidService) {
+  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public AddArticleManService: AddArticleManService, public ArticleManageComponent: ArticleManageComponent, public ContentNavComponent: ContentNavComponent, public router: Router, public ContentComponent: ContentComponent,public GetUidService: GetUidService,public ContentService:ContentService) {
     this.settings.showRightPage( "30%" );
   }
 
@@ -92,7 +100,6 @@ export class AddArticleComponent implements OnInit {
           }
         }
       });
-
     }, 0);
 
     /**
@@ -106,6 +113,7 @@ export class AddArticleComponent implements OnInit {
         queryState:'BLACK'
       }
       this.queryArticleData= this.AddArticleManService.queryArticle(queryArticleurl,queryArticledata);
+      console.log(this.queryArticleData)
       setTimeout(() => {
         $('#summernote').summernote({
           height: 280,
@@ -120,6 +128,12 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote('code',this.queryArticleData.articleBody.articleContent );//给编辑器赋值
       }, 0);
     }
+
+    this.autionOptions=[
+      {id:1,name:'SUCCESS'},
+      {id:2,name:'FAILURE'}
+    ]
+
   }
 
   /**
@@ -163,8 +177,11 @@ export class AddArticleComponent implements OnInit {
 
   // 提交
   submit(obj,state) {
+    this.submitObj=obj;
+    this.submitState=state;
     let me=this;
     if (me.linkType == 'addArticle') {
+      this.addArticleExtra()//没有图片上传的时候也可以调用
       /**
        * 构建form时，传入自定义参数
        * @param item
@@ -191,17 +208,7 @@ export class AddArticleComponent implements OnInit {
         let res = JSON.parse(response);
         console.log("█ res ►►►",  res);
         if(res.success){
-          var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-          // console.log(sHTML)
-          let url = '/article/addArticle';
-          obj.articleContent = sHTML;  //赋值编辑器的值
-          obj.addArticleEnum = state //默认文章的类型是草稿
-          obj.uuid=me.uuid;
-          let data = obj;
-          console.log(data)
-          me.AddArticleManService.addArticle(url, data);
-          me.router.navigate(['/main/operation/article/manage']);
-          me.ContentComponent.queryArticManleList(state)
+          me.addArticleExtra()
         }else{
           AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
         }
@@ -229,7 +236,40 @@ export class AddArticleComponent implements OnInit {
       let data = obj;
       this.AddArticleManService.updateArticle(url, data);
       this.router.navigate(['/main/operation/article/manage']);
-      this.ContentComponent.queryArticManleList(state)
+      // this.ContentComponent.queryArticManleList(state)
+    }else if (this.linkType == 'auditArticle') {
+    console.log(obj)
+      let data={
+        articleId:this.articleId,
+        auditState:obj.auditState,
+        reason:obj.reason
+      }
+      let url= "/article/AuditArticle";
+      let result=this.ContentService.auditArticle(url,data)
+      if(result){
+        this.router.navigate(['/main/operation/article/manage']);
+        // this.ContentComponent.queryArticManleList(state)
+      }
+
     }
+
+  }
+
+  /**
+   * 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
+   */
+  addArticleExtra(){
+    var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+    // console.log(sHTML)
+    let url = '/article/addArticle';
+    this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
+    this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
+    this.submitObj.uuid=this.uuid;
+    let data = this.submitObj;
+    console.log(this.submitState)
+    this.AddArticleManService.addArticle(url, data);
+    this.router.navigate(['/main/operation/article/manage']);
+    // this.ContentComponent.queryArticManleList('N',this.submitState)   //新增的时候刷新内容区域
+    // this.ContentNavComponent.articleState(this.submitState)  //新增的时候刷新导航区域
   }
 }

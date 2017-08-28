@@ -48,6 +48,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
-  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService]
+  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService,ContentNavComponent]
 })
 export class OperationModule { }

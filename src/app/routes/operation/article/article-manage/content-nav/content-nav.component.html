@@ -6,11 +6,11 @@
     </div>
     <div col-md-6 class="setClass" [class.active]="flag=='AUDIT'" (click)="articleState('AUDIT')">
       <i class="glyphicon glyphicon-trash"></i>
-      <span>待修改({{stateList.data.AUDIT}})</span>
+      <span>审核中({{stateList.data.AUDIT}})</span>
     </div>
     <div col-md-6 class="setClass" [class.active]="flag=='REVISE'" (click)="articleState('REVISE')">
       <i class="glyphicon glyphicon-trash"></i>
-      <span>审核中({{stateList.data.REVISE}})</span>
+      <span>待修改({{stateList.data.REVISE}})</span>
     </div>
     <div col-md-6 class="setClass" [class.active]="flag=='NORMAL'" (click)="articleState('NORMAL')">
       <i class="glyphicon glyphicon-ok"></i>

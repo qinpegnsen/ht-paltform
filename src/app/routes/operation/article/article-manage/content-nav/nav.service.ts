@@ -15,7 +15,6 @@ export class NavService {
    */
   public queryTotalRow(url,data) {
     let result;
-    console.log("█ url ►►►",  url);
     this.ajax.get({
       url: url,
       data: data,

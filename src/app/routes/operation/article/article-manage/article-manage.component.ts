@@ -1,19 +1,18 @@
-import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {TableDateService} from "./table-date.service";
-import {ContentComponent} from "./content/content.component";
-
+import {Component,OnInit} from '@angular/core';
 @Component({
   selector: 'app-article-manage',
   templateUrl: './article-manage.component.html',
   styleUrls: ['./article-manage.component.scss']
 })
-export class ArticleManageComponent implements OnInit,OnChanges{
+export class ArticleManageComponent implements OnInit{
 
   private articleManAddbutton:Object;//新增文章按钮
 
   private state//文章的状态
 
-  private searchKey;//默认查询的文章的名称
+  private totalRow//文章各种状态的总条数
+
+  private searchKey:string='';//默认查询的文章的名称,并且输入到内容组件，输入属性变化，子组件的钩子变化
 
   public flag:boolean;//定义boolean值用来控制内容组件是否显示
 
@@ -35,21 +34,12 @@ export class ArticleManageComponent implements OnInit,OnChanges{
       };
   }
 
-  ngOnChanges(){
-    /**
-     * 获取子组件传递过来的文章的状态，作为中间人在传给content组件
-     */
-
-  }
-
-  /**
-   * 根据输入的文章名字查询文章,其实不用这个点击事件，输入属性变化自动刷新
-   */
-  queryArticList(){
-
-  }
   getState(state){
     this.state=state;
+  }
+
+  getEmitTotalRow(obj){
+    this.totalRow=obj;
   }
 
 

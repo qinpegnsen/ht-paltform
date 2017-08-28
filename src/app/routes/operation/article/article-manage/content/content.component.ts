@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {NavigationEnd, Router} from "@angular/router";
 import {ContentService} from "./content.service";
 import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTable";
+import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -11,15 +12,20 @@ const swal = require('sweetalert');
 })
 export class ContentComponent implements OnInit,OnChanges  {
 
-  @Input()  //导航栏传过来的文章的状态，从未获取不同的文章列表
+  @Input()  //导航栏传过来的文章的状态，从而获取不同的文章列表
   public state;
 
-  @Input()  //导航栏传过来的文章的状态，从未获取不同的文章列表
+  @Input()  //导航栏传过来的查询字符串，从而获取到查询的文章
   public searchKey;
 
-  public articleState;
+  @Output()  //发射获取到得总条数
+  public emitTotalRow=new EventEmitter();
+
+  public articleState;//用来储存文章的状态
 
   public articleManListdata;//存储文章列表的数据
+
+  public TotalRow;//存储文章列表的数据
 
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
 
@@ -29,22 +35,30 @@ export class ContentComponent implements OnInit,OnChanges  {
   private publishbutton:Object;//草稿文章发布按钮
   private auditbutton:Object;//待审核文章审核按钮
 
-  constructor(private router:Router,public ContentService:ContentService) {
+  constructor(private router:Router,public ContentService:ContentService,public NavService:NavService) {
     this.articleState='DRAFT'
   }
 
   ngOnInit() {
     /**
-     * 路由事件用来监听地址栏的变化，当新增文章出现的时候吗，内容组件隐藏
+     * 路由事件用来监听地址栏的变化
+     * 1.当新增文章出现的时候，内容组件隐藏
+     * 2.路由变化的时候，刷新页面
      */
 
     this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          console.log(event.url)
           if(event.url.indexOf('linkType')>0){
             this.flag=false;
           }else if(event.url=='/main/operation/article/manage'){
             this.flag=true;
+            this.queryArticManleList('N') //刷新内容页面
+            let data={}
+            let url= "/article/getCountByState";
+            this.TotalRow=this.NavService.queryTotalRow(url,data) //刷新导航页面
+            this.emitTotalRow.emit(this.TotalRow)
           }
         }
       });
@@ -61,24 +75,23 @@ export class ContentComponent implements OnInit,OnChanges  {
       type: "details"
     };
     this.publishbutton={
-      title:"发布",
-      type: "submit"
+      title:"发布文章",
+      type: "upload"
     };
-    this.publishbutton={
-      title:"审核通过",
+    this.auditbutton={
+      title:"审核",
       type: "agree"
     };
 
-    this.queryArticManleList()//调用文章的列表
-    console.log(this.state)
+    this.queryArticManleList('N')//调用文章的列表
   }
 
+  /**
+   * 输入属性变化的时候再次查询，获取当前状态下的系统列表
+   */
   ngOnChanges(){
-    this.queryArticManleList()
     this.articleState=this.state;
-    console.log(this.articleState)
-    console.log(this.searchKey)
-    // console.log(this.articleState)
+    this.queryArticManleList('N')
   }
 
   /**
@@ -86,24 +99,25 @@ export class ContentComponent implements OnInit,OnChanges  {
    * @param event 点击页码时候的事件对象
    * addArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
    */
-  public queryArticManleList(event?:PageEvent,addArticlestate?) {
+  public queryArticManleList(booelean,event?:PageEvent,addArticlestate?) {
     let activePage = 1;
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
       pageSize:8,
-      articleState:'',
-      articleTitle:this.searchKey
+      articleState:this.articleState,
+      articleTitle:this.searchKey,
+      isTopState:booelean
     }
-    console.log(data)
+
     if(addArticlestate){
       data.articleState=addArticlestate;
     }else{
       data.articleState=this.articleState?this.articleState:'DRAFT';
     }
-
-    let url= "/article/queryAllArticle";
+    let url= "/article/queryAllArticleBySort";
     let result=this.ContentService.queryData(url,data);
+    console.log(result)
     this.articleManListdata= result;
   }
 
@@ -130,7 +144,7 @@ export class ContentComponent implements OnInit,OnChanges  {
         }
         let  flag = that.ContentService.confirmDel(url,data)
         if(flag){
-          that.queryArticManleList()
+          that.queryArticManleList('N')
         }
       } else {
         swal("Cancelled", "Your imaginary file is safe :)", "error");
@@ -145,11 +159,10 @@ export class ContentComponent implements OnInit,OnChanges  {
     let data={
       articleId:id
     }
-    let url= "/article/pubArticle";
+    let url= "/article/publishArticle";
     let result=this.ContentService.publishArticle(url,data)
     if(result){
-      let result=this.queryArticManleList()//调用文章的列表
-      this.articleManListdata= result;//获取到数据，刷新页面
+      this.queryArticManleList('N')//调用文章的列表，刷新页面
     }
   }
 
@@ -158,19 +171,14 @@ export class ContentComponent implements OnInit,OnChanges  {
    */
   auditArticle(id){
     let data={
-      articleId:id
+      articleId:id,
+      auditState:'SUCCESS',
+      reason:''
     }
     let url= "/article/AuditArticle";
-    let result=this.ContentService.isTop(url,data)
+    let result=this.ContentService.auditArticle(url,data)
     if(result){
-      let data={
-        articleId:id,
-        auditState:'SUCCESS',
-        reason:id
-      }
-      let url= "/article/queryAllArticleBySort";
-      let result=this.ContentService.queryTopList(url,data);
-      this.articleManListdata= result;//获取到数据，刷新页面
+      this.queryArticManleList('N')//调用文章的列表，刷新页面
     }
   }
 
@@ -192,7 +200,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let url= "/article/updateArticleIsCommend";
     let result=this.ContentService.isRecom(url,data)
     if(result){
-      this.queryArticManleList()
+      this.queryArticManleList('N')
     }
   }
 
@@ -215,16 +223,8 @@ export class ContentComponent implements OnInit,OnChanges  {
     }
     let url= "/article/pubArticle";
     let result=that.ContentService.isTop(url,data)
-    console.log(that.articleState)
     if(result){
-      let data={
-        articleState:that.articleState
-      }
-      console.log(data)
-      let url= "/article/queryAllArticleBySort";
-      let result=that.ContentService.queryTopList(url,data);
-      console.log(result)
-      that.articleManListdata= result;//获取到数据，刷新页面
+      this.queryArticManleList('Y')//调用文章的列表
     }
   }
 

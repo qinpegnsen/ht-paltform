@@ -81,6 +81,7 @@ public queryData(url,data) {
       success: (data) => {
         if (!isNull(data)) {
           if(data.success){
+            console.log(data)
             let info=data.info;
             AppComponent.rzhAlt("success",info);
             result=true;
@@ -131,7 +132,7 @@ public queryData(url,data) {
   }
 
   /**
-   * 发布文章
+   * 审核文章
    * @param data
    * @param url
    * @returns {Page}
@@ -163,7 +164,7 @@ public queryData(url,data) {
   }
 
   /**
-   * 审核文章
+   * 发布文章
    * @param data
    * @param url
    * @returns {Page}
@@ -175,16 +176,13 @@ public queryData(url,data) {
       data: data,
       async:false,
       success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            let info=data.info;
-            AppComponent.rzhAlt("success",info);
-            result=true;
-          }else{
-            console.log('是否置顶 返回的success为假');
-          }
+        if(data.success){
+          console.log(data)
+          let info=data.info;
+          AppComponent.rzhAlt("success",info);
+          result=true;
         }else{
-          console.log('是否置顶 返回的数据为空');
+          console.log('是否置顶 返回的success为假');
         }
       },
       error: () => {
