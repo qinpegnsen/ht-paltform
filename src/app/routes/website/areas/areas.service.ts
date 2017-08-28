@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../core/services/ajax.service";
 import {Page} from "../../../core/page/page";
+import {AppComponent} from "../../../app.component";
 
 @Injectable()
 export class AreasService {
@@ -45,5 +46,29 @@ export class AreasService {
       }
     });
     return result;
+  }
+
+  /**
+   * 删除区域信息
+   * @param url
+   * @param data
+     */
+  delCode(url,data) {
+    this.ajax.del({
+      url:url,
+      data: data,
+      async:false,
+      success: (data) => {
+        let info=data.info;
+        if(data.success){
+          AppComponent.rzhAlt("success",info);
+        }else{
+          AppComponent.rzhAlt("error",info);
+        }
+      },
+      error: () => {
+        console.log('连接数据库失败');
+      }
+    });
   }
 }

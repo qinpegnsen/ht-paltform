@@ -68,8 +68,7 @@ export class RightpageComponent implements OnInit {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
             swal('添加区域提交成功！', '','success');
           } else {
-            let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-            swal(res.info, errorMsg, 'error');
+            swal('添加区域提交失败====！', 'error');
           }
         },
         error: (data) => {
