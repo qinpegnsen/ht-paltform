@@ -6,6 +6,7 @@ import {ActivatedRoute,Router} from '@angular/router';
 import {isNullOrUndefined} from "util";
 import {AreasService} from "./areas.service";
 import {AppComponent} from "../../../app.component";
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-areas',
@@ -24,6 +25,7 @@ export class AreasComponent implements OnInit {
   private childMenuCode; //菜单编码，查询子集用
   private childMenuTitList:Array<any> = []; //菜单级别面包屑
   private area_code;
+  private areaCode;
 
   private table = {
     curPage:1,
@@ -130,7 +132,7 @@ export class AreasComponent implements OnInit {
   }
 
   /**
-   * 返回上一级菜单列表
+   * 返回上一级地区列表
    */
   goBackMenu() {
     let num = this.childMenuTitList.length;
@@ -139,43 +141,29 @@ export class AreasComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
- /* public controlDatas() {
-    console.log(1)
-    let me = this
-
-    this.ajax.get({
-      url: "/res/area/queryAreasByCode",
-      data: {
-        area_code:'',
-        level:1
+  /*
+   *删除区域信息
+   */
+  delete(delCodeId) {
+    let _this = this, url: string = "/res/area/deleteAreaByCode", data: any,length:number = _this.childMenuTitList.length;
+    swal({
+        title: '确认删除此信息？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
       },
-      success: (data) => {
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+          data = {
+            areaCode:delCodeId
+          }
         console.log(data)
-
-        me.table.voList = data.data;
-        console.log("█ list ►►►", data.data);
-
-        me.areas = new Page(me.table);
-        console.log("█ me.areas ►►►", me.areas);
-
-      },
-      error: (data) => {
-        console.log("获取地区错误");
+        _this.AreasService.delCode(url, data); //删除数据
       }
-    });
-  }*/
+    );
+  }
 
 
 }
