@@ -45,7 +45,6 @@ export class AddKindComponent implements OnInit {
     let me = this;
     this.kindInfo['state'] = 'SHOW';
     this.kindInfo['level'] = '1';
-    this.kindInfo['sort'] = '0';
 
     //获取当前路由
     me.route.url.subscribe(urls => {
@@ -126,6 +125,7 @@ export class AddKindComponent implements OnInit {
     let me = this;
     let submitUrl, submitData;
     submitData = me.kindInfo;
+    if(me.uuid) submitData.kindIcon = me.uuid;
     switch (me.path) {
       //新增分类
       case "addKind":
@@ -155,15 +155,45 @@ export class AddKindComponent implements OnInit {
          * 执行上传
          */
         me.uploader.uploadAll();
-        me.submit.postRequest(submitUrl, submitData, true);// 所有post提交用的都是SubmitService里的postRequest方法,true表示需要返回上级页面
         break;
       //修改分类
       case "upKind":
         submitUrl = '/goodskind/updateGoodsKind';
         me.submit.putRequest(submitUrl, submitData, true);// 所有put提交用的都是SubmitService里的putRequest方法,true表示需要返回上级页面
         break;
+      case "upKindImg":
+        submitUrl = '/goodskind/updateGoodsKindIcon';
+        submitData = {
+          kindId: this.submit.getParams('kindId'),
+          uuid: me.uuid
+        };
+        me.uploader.onBuildItemForm = function (fileItem, form) {
+          form.append('uuid', me.uuid);
+        };
+        me.uploader.onSuccessItem = function (item, response, status, headers) {
+          let res = JSON.parse(response);
+          if (res.success) {
+            console.log("█ submitData ►►►",  submitData);
+            me.submit.putRequest(submitUrl, submitData, true);
+          } else {
+            AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+          }
+        }
+        /**
+         * 上传失败处理
+         * @param item 失败的文件列表
+         * @param response 返回信息
+         * @param status 状态码
+         * @param headers 上传失败后服务器的返回的返回头
+         */
+        me.uploader.onErrorItem = function (item, response, status, headers) {
+          AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+        };
+        /**
+         * 执行上传
+         */
+        me.uploader.uploadAll();
     }
-    console.log("█ submitData ►►►", submitData);
     me.parentComp.queryDatas(1, 0);// 刷新父页面数据
   }
 

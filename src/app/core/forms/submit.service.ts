@@ -46,7 +46,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        console.log("post ormData error");
+        console.log("post error");
       }
     })
   }
@@ -58,7 +58,6 @@ export class SubmitService {
    * @param back:true(返回上一级)
    */
   delRequest(requestUrl, requestDate, back?: boolean) {
-    // console.log("█ requestDate ►►►",  requestDate);
     this.ajax.del({
       url: requestUrl,
       data: requestDate,
@@ -67,7 +66,6 @@ export class SubmitService {
         // console.log("█ res ►►►", res);
         if (res.success) {
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          // swal('成功', res.info, 'success')
           swal({
             title: '成功',
             text: res.info,
@@ -86,7 +84,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        console.log('result', res);
+        console.log('del error', res);
       }
     });
   }
@@ -98,7 +96,6 @@ export class SubmitService {
    * @param back:true(返回上一级)
    */
   putRequest(requestUrl, requestDate, back?: boolean) {
-    // console.log("█ requestDate ►►►",  requestDate);
     this.ajax.put({
       url: requestUrl,
       data: requestDate,
@@ -125,7 +122,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        console.log('result', res);
+        console.log('put error', res);
       }
     });
   }
@@ -156,30 +153,9 @@ export class SubmitService {
         if (!isNullOrUndefined(res) && res.success) result = res.data;
       },
       error: (res) => {
-        console.log('result', res);
+        console.log('get data error', res);
       }
     });
     return result;
-  }
-  /**
-   * 上传图片或文件
-   * @param url
-   * @param data
-   */
-  public uploadFile(url,data) {
-    this.ajax.post({
-      url: url,
-      data: data,
-      async: false,
-      success: (res) => {
-        console.log("█ res ►►►",  res);
-        if (!res.success) {
-          AppComponent.rzhAlt("error", res.info,'');
-        }
-      },
-      error: () => {
-        AppComponent.rzhAlt("error", '图片上传连接失败','');
-      }
-    });
   }
 }
