@@ -1,15 +1,35 @@
+<script src="article-manage.component.ts"></script>
 <div class="content-heading mb-lg">
-    文章管理
-    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"  [queryParams]="{linkType:'addArticle'}"></app-buttons>
+  文章管理
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope" ng-if="search">
+    <div class="form-group mb0">
+      <div class="col-xs-5">
+        <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryArticList()" placeholder="请输入要查询的文章名称">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="queryArticList()"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"
+                 [queryParams]="{linkType:'addArticle'}"></app-buttons>
   </div>
-  <div>
-    <app-content-nav></app-content-nav>
-    <!--路由嵌套 begin-->
-    <router-outlet></router-outlet>
-    <!--路由嵌套 end-->
-    <app-content></app-content>
-  </div>
+</div>
 
+<div class="">
+  <app-content-nav (sendState)="getState($event)"></app-content-nav>
+  <app-content [state]="state" #child [searchKey]="searchKey"></app-content>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
 
 
 

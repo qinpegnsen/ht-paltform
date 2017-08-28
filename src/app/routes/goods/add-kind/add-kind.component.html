@@ -3,9 +3,9 @@
     <!-- START panel-->
     <div class="panel-default">
       <!--可编辑表单 start-->
-      <div class="panel-body mb-xl">
+      <div class="panel-body mb-xl" *ngIf="!upKindImg">
         <fieldset class="b0">
-          <legend>添加分类</legend>
+          <legend>{{pageTitle}}</legend>
         </fieldset>
 
         <fieldset *ngIf="kindInfo.level != '1'">
@@ -54,12 +54,28 @@
             请填写关键词
           </div>
         </fieldset>
-        <fieldset>
+        <!--如果是添加分类-->
+        <fieldset *ngIf="path=='addKind'">
           <div class="form-group">
             <label class="col-sm-4 control-label">分类图标</label>
             <div class="col-sm-7">
-              <input class="form-control" type="text" name="kindIcon" [(ngModel)]="kindInfo.kindIcon"
-                     placeholder="分类图标"/>
+              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+              <label class="btn btn-default file-upload">
+                <i class="icon-cloud-upload mr"></i>{{fileName}}
+                <input type="file" name="brandPic" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!--如果是修改分类，根据是否有图片选择是否上传-->
+        <fieldset *ngIf="path!='addKind'">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">分类图标</label>
+            <div class="col-sm-7">
+              <img *ngIf="kindInfo.kindIcon" class="col-sm-5 p-sm" [src]="kindInfo.kindIcon" alt="">
+              <label class="btn btn-default file-upload" (click)="toUpKindImg(kindInfo.id)">
+                <i class="icon-cloud-upload mr"></i>{{kindInfo.kindIcon? '修改图片':'上传图片'}}</label>
             </div>
           </div>
         </fieldset>
@@ -76,7 +92,8 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">分享佣金比例</label>
             <div class="col-sm-7">
-              <input class="form-control" type="text" name="commisRate" [tooltip]="tip.commisRate" [(ngModel)]="kindInfo.commisRate"
+              <input class="form-control num" type="number" name="commisRate" [tooltip]="tip.commisRate"
+                     [(ngModel)]="kindInfo.commisRate"
                      placeholder="分享佣金比例"/>
             </div>
           </div>
@@ -85,7 +102,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">排序</label>
             <div class="col-sm-7">
-              <input class="form-control" type="text" name="sort" [tooltip]="tip.sort" [(ngModel)]="kindInfo.sort"
+              <input class="form-control num" type="number" name="sort" [tooltip]="tip.sort" [(ngModel)]="kindInfo.sort"
                      placeholder="排序"/>
             </div>
           </div>
@@ -105,6 +122,27 @@
         </fieldset>
       </div>
       <!--可编辑表单 end-->
+
+
+      <!--修改图片 start-->
+      <div class="panel-body pb-xl" *ngIf="upKindImg">
+        <fieldset class="b0">
+          <legend>{{pageTitle}}</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">图片</label>
+            <div class="col-sm-7">
+              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+              <label class="btn btn-default file-upload">
+                <i class="icon-cloud-upload mr"></i>{{fileName}}
+                <input type="file" name="brandPic" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!--修改图片 end-->
 
       <!--btns-->
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">

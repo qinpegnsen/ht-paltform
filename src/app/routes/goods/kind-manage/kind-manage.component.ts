@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {GoodsService} from "../goods.service";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {Router} from "@angular/router";
@@ -11,7 +10,7 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
   selector: 'app-kind-manage',
   templateUrl: './kind-manage.component.html',
   styleUrls: ['./kind-manage.component.scss'],
-  providers: [GoodsService]
+  providers: []
 })
 export class KindManageComponent implements OnInit {
   private searchKey: string;// 搜索关键词
@@ -134,7 +133,7 @@ export class KindManageComponent implements OnInit {
     let requestUrl = '/goodskind/queryGoodsKindPageByParentId';
     let requestData = {
       curPage: activePage,
-      pageSize: 20,
+      pageSize: 10,
       kindParentId: kindId
     };
     let res = me.submitService.getData(requestUrl, requestData);

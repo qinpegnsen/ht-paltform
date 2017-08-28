@@ -6,7 +6,11 @@
 .setClass{
   height:40px;
   line-height: 40px;
+  text-align: center;
 }
 i{
   margin-right:10px;
+}
+.active{
+  background: deepskyblue;
 }

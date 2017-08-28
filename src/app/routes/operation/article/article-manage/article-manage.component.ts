@@ -1,22 +1,23 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {TableDateService} from "./table-date.service";
-import {NavigationEnd, Router} from "@angular/router";
+import {ContentComponent} from "./content/content.component";
 
 @Component({
   selector: 'app-article-manage',
   templateUrl: './article-manage.component.html',
   styleUrls: ['./article-manage.component.scss']
 })
-export class ArticleManageComponent implements OnInit {
+export class ArticleManageComponent implements OnInit,OnChanges{
 
   private articleManAddbutton:Object;//新增文章按钮
 
-  private articleManListdata;//用来存储服务取回来的数据
+  private state//文章的状态
+
+  private searchKey;//默认查询的文章的名称
 
   public flag:boolean;//定义boolean值用来控制内容组件是否显示
 
-  constructor(private TableDateService:TableDateService,private router:Router) {
+  constructor() {
 
   }
 
@@ -27,44 +28,29 @@ export class ArticleManageComponent implements OnInit {
    * 3.button的回调方法
    */
   ngOnInit() {
-
-
     this.articleManAddbutton={
         text:"新增文章",
         title:"新增文章",
         type: "add"
       };
-
-
-
   }
 
+  ngOnChanges(){
+    /**
+     * 获取子组件传递过来的文章的状态，作为中间人在传给content组件
+     */
 
-
-
-
-
-  /**
-   * 查询当前文章的信息
-   */
-  selecteArticle(id){
-    let data={
-      articleId:id,
-      queryState:''
-    }
-    let url= "/article/queryArticle";
-   this. TableDateService.selsectArticle(url,data)
   }
 
   /**
-   * 删除文章
+   * 根据输入的文章名字查询文章,其实不用这个点击事件，输入属性变化自动刷新
    */
-  delArticle(id){
-    console.log(id)
-    let data={
-      articleId:id
-    }
-    let url= "/article/deleteArticleByState";
-    this. TableDateService.delArticle(url,data)
+  queryArticList(){
+
   }
+  getState(state){
+    this.state=state;
+  }
+
+
 }

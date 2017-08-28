@@ -17,7 +17,7 @@ export class ArticleSortComponent implements OnInit {
   private deletebutton:Object;//删除按钮
   private updatebutton:Object;//修改按钮
   private articleSortListdata;//用来存储服务取回来的数据
-  private searchKey:string='';//默认查询的文章的名称
+  private searchKey:string='';//默认查询的分类的名称
   private childMenuCode; //菜单编码，查询子集用
   private childMenuTitList:Array<any> = []; //菜单级别面包屑
 
@@ -64,6 +64,7 @@ export class ArticleSortComponent implements OnInit {
     }
     let url= "/articleclass/queryArticleClassPage";
     let result=this.ArticleSortService.queryData(url,data);
+    console.log(result)
     this.articleSortListdata= result;
   }
 
@@ -77,11 +78,13 @@ export class ArticleSortComponent implements OnInit {
         text: "您确定要删除这条数据？",
         type: "warning",
         showCancelButton: true,
+        cancelButtonText: '取消',
         closeOnConfirm: false,
-        confirmButtonText: "是的，我要删除",
+        confirmButtonText: "确认",
         confirmButtonColor: "#ec6c62"
       },function(isConfirm){
         if (isConfirm) {
+          swal.close(); //关闭弹框
           let url='/articleclass/deleteArticleClassById';
           let data={
             id:delSortId

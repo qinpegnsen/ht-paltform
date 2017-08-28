@@ -26,10 +26,10 @@ export class AddArticleSortService {
             result=data.info;
             swal(result,'','success')
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('新增文章分类 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('新增文章分类 返回的数据为空');
         }
       },
       error: (data) => {
@@ -39,7 +39,7 @@ export class AddArticleSortService {
   }
 
   /**
-   * t通过id查询分类
+   * 通过id查询分类
    * @param url
    * @param data
    * @returns {any}
@@ -56,10 +56,10 @@ export class AddArticleSortService {
             result=data.data;
             let info=data.info;
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('通过id查询分类 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('通过id查询分类 返回的数据为空');
         }
       },
       error: () => {
@@ -88,10 +88,10 @@ export class AddArticleSortService {
             let info=data.info;
             swal(info,'','success')
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('修改类别 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('修改类别 返回的数据为空');
         }
       },
       error: (data) => {

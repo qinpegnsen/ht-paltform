@@ -88,7 +88,6 @@ export class BrandsComponent implements OnInit {
     let url = '/goodskind/queryGoodsByParentId';
     let data = {kindParentId:''}
     this.kindList = this.submitService.getData(url,data)
-    console.log("█ this.kindList ►►►",  this.kindList);
   }
 
   selected(id,name){
@@ -158,7 +157,7 @@ export class BrandsComponent implements OnInit {
       brandRecommend: _this.brandRecommend
     };
     _this.brands = new Page(_this.submitService.getData(requestUrl, requestData));
-    console.log("█ _this.brands ►►►", _this.brands);
+    // console.log("█ _this.brands ►►►", _this.brands);
   }
 
 
