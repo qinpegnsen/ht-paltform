@@ -69,6 +69,9 @@
   font-weight: bold;
   border-bottom: 1px solid #f0f0f0;
 }
+.specs h6{
+  line-height: 36px;
+}
 
 .specs ul {
   list-style: none;
@@ -83,7 +86,9 @@
   padding-right: 5px;
   margin-bottom: 5px;
 }
-
+.specs li .c-checkbox{
+  line-height: 22px;
+}
 .specs form {
   border-bottom: 1px dashed #f0f0f0;
 }
@@ -158,6 +163,12 @@
 .sku-table td .price {
   float: left;
   width: 50px;
+}
+.sku-table td .stock {
+  width: 60px;
+}
+.sku-table td .sku {
+  width: 80px;
 }
 
 .goodspics {

@@ -32,9 +32,7 @@
       <dd class="col-xs-10 col-md-8">
         <div class="w60">
           <select class="form-control" name="">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option *ngFor="let brand of brandsList" [value]="brand.id">{{brand.brandName}}</option>
           </select>
         </div>
         <p class="tip">选择您的商品品牌，有利于商品通过品牌索引方式被找到；如没有您想要的品牌，可从“品牌管理”功能中添加并提交后台审核后再选择。</p>
@@ -108,109 +106,30 @@
           <span class="col-sm-2 col-xs-3 text-right">规格</span>
           <span class="col-sm-10 col-xs-9">规格值 <em>（通过选择规格值建立商品与商品规格的关系）</em></span>
         </h5>
-        <form class="clearfix" #color>
+        <form class="clearfix enumType" *ngFor="let enumType of enumTypes;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
-            <span *ngIf="true">{{'颜色'}}</span>
-            <!--<label class="w80"><input class="form-control" name="ppp" type="text" value="颜色"></label>-->
+            <span class="_attrName">{{enumType.name}}</span>
+            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="enumType.id"
+                                           [value]="enumType.name" (change)="changeSpecAttr($event.target)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!-- <label class="w66">
-                 <input class="form-control" type="text" name="color" value="白色">
-               </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-          </ul>
-        </form>
-        <form class="clearfix" #color>
-          <h6 class="col-sm-2 col-xs-3 text-right">
-            <span *ngIf="true">{{'颜色'}}</span>
-            <!--<label class="w80"><input class="form-control" name="ppp" type="text" value="颜色"></label>-->
-          </h6>
-          <ul class="col-sm-10 col-xs-9 p">
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!-- <label class="w66">
-                 <input class="form-control" type="text" name="color" value="白色">
-               </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
-            </li>
-            <li class="col-xs-4 col-md-3">
-              <input type="checkbox">
-              <span>{{'白色'}}</span>
-              <!--<label class="w66">
-                <input class="form-control" type="text" name="color" value="白色">
-              </label>-->
+            <li class="col-xs-4 col-md-3 _attr" *ngFor="let val of enumType.goodsEnumValList">
+              <label class="checkbox-inline c-checkbox">
+                <input class="_val" type="checkbox" [name]="enumType.name" [id]="val.id" [value]="val.enumValue"
+                       (change)="checkSpecVal($event.target)"
+                />
+                <span class="fa fa-check"></span>
+              </label>
+              <span class="_value">{{val.enumValue}}</span>
+              <label class="w66 hide">
+                <input class="form-control" type="text" [name]="val.idx" [id]="val.id" [value]="val.enumValue"
+                       (change)="changeSpecVal($event.target)">
+              </label>
             </li>
           </ul>
         </form>
         <p class="tip">
-          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。<br>
-          规格可自定义添加，但最多不超过3组；每组规格值也可自定义添加，但最多不超过10个。
+          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
         </p>
       </dd>
     </dl>
@@ -220,22 +139,26 @@
         <table class="sku-table w100">
           <thead>
           <tr>
-            <th class="sol-xs-6"><i>*</i>价格 <em class="icon-note"></em></th>
-            <th class="col-xs-3"><i>*</i>库存 <em class="icon-note"></em></th>
-            <th class="col-xs-3">商家编号</th>
+            <!--<th class="col-xs-2">属性1</th>-->
+            <!--<th class="col-xs-2">属性2</th>-->
+            <th class="sol-xs-2"><i>*</i>价格 <em class="icon-note"></em></th>
+            <th class="col-xs-2"><i>*</i>库存 <em class="icon-note"></em></th>
+            <th class="col-xs-2">商家编号</th>
           </tr>
           </thead>
           <tbody>
           <tr>
+            <!--<td>{{123}}</td>-->
+            <!--<td>{{456}}</td>-->
             <td>
               <input class="text price num" name="" type="number">
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text num" name="" type="number">
+              <input class="text stock num" name="" type="number">
             </td>
             <td>
-              <input class="text num" name="" type="number">
+              <input class="text num sku" name="" type="number">
             </td>
           </tr>
           </tbody>
@@ -250,7 +173,12 @@
         <div class="goodspics" data-spec-id="1" data-spce-value-id="23">
           <div class="color-value">
             <h4>颜色：<span data-spec-value-name="23">{{'绿色'}}</span></h4>
-            <div class="btn btn-sm btn-info"> <em class="fa fa-picture-o"></em> 打开相册图片 </div>
+            <label class="btn btn-sm btn-info file-upload">
+              <em class="fa fa-picture-o"></em>
+              打开相册图片
+              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
+                     multiple (change)="fileChangeListener($event)"/>
+            </label>
           </div>
           <ul class="goods-pic-list">
             <li class="ui-state-disabled">
