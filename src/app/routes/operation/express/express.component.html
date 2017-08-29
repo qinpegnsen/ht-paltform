@@ -1,3 +1,71 @@
-<p>
-  express works!
-</p>
+<div class="content-heading mb-lg">
+  快递公司列表
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope" ng-if="search">
+    <div class="form-group mb0">
+      <div class="col-xs-5">
+        <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryExpressList()" placeholder="请输入要查询的快递公司名称">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="queryExpressList()"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+    <app-buttons class="pull-right" [config]="expressAddbutton" routerLink="addSort"  [queryParams]="{linkType:'addClass'}"></app-buttons>
+  </div>
+</div>
+<!--<div class="panel-body">-->
+  <!--<table class="table table-striped" #expressList="rzhDataTable" [rzhData]="expressListdata"-->
+         <!--(pageChange)="queryExpressList($event)">-->
+    <!--<thead>-->
+    <!--<tr>-->
+      <!--<th style="width: 5%">-->
+        <!--序号-->
+      <!--</th>-->
+      <!--<th style="width: 15%">-->
+        <!--<rzhDefaultSorter by="name">公司名称</rzhDefaultSorter>-->
+      <!--</th>-->
+      <!--<th style="width: 25%">-->
+        <!--<rzhDefaultSorter by="email">公司编号</rzhDefaultSorter>-->
+      <!--</th>-->
+      <!--<th style="width: 10%">-->
+        <!--<rzhDefaultSorter>公司网址</rzhDefaultSorter>-->
+      <!--</th>-->
+      <!--<th style="width: 10%">-->
+        <!--<rzhDefaultSorter>状态</rzhDefaultSorter>-->
+      <!--</th>-->
+      <!--<th style="width: 10%">-->
+        <!--<rzhDefaultSorter by="city">常用快递</rzhDefaultSorter>-->
+      <!--</th>-->
+      <!--<th style="width: 25%">操作</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let express of expressList.data;let i = index">-->
+
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--<tfoot>-->
+    <!--<tr>-->
+      <!--<td colspan="12">-->
+        <!--<div class="col-md-5">-->
+          <!--<div class="text-muted pull-left"><strong>第 {{articleSortListdata.genStartRow()}} 至-->
+            <!--{{articleSortListdata.genEndRow()}} 条，共 {{articleSortListdata.totalRow}}-->
+            <!--条</strong></div>-->
+        <!--</div>-->
+        <!--<div class="col-md-7">-->
+          <!--<div class="pull-right">-->
+            <!--<rzhBootstrapPaginator></rzhBootstrapPaginator>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</td>-->
+    <!--</tr>-->
+    <!--</tfoot>-->
+  <!--</table>-->
+<!--</div>-->

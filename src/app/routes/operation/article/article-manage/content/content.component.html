@@ -1,7 +1,7 @@
 <div class="col-md-10 panel panel-default" *ngIf="flag">
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
-           (pageChange)="queryArticManleList($event)">
+           (pageChange)="queryArticManleList('N',$event)">
       <thead>
       <tr>
         <th style="width: 5%">
@@ -13,10 +13,10 @@
         <th style="width: 10%">
           <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
         </th>
-        <th style="width: 10%">
+        <th style="width: 10%"  *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否置顶</rzhDefaultSorter>
         </th>
-        <th style="width: 10%">
+        <th style="width: 10%"  *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否推荐</rzhDefaultSorter>
         </th>
         <th style="width: 20%">
@@ -25,7 +25,7 @@
         <th style="width: 15%">
           <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">操作</th>
+        <th style="width: 15%"  [hidden]="articleState=='DEL'">操作</th>
       </tr>
       </thead>
       <tbody>
@@ -33,13 +33,13 @@
         <td>{{i+1}}</td>
         <td>{{article.articleTitleShort}}</td>
         <td>{{article.articleClass.acName}}</td>
-        <td>
+        <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
             <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article)"/>
             <span></span>
           </label>
         </td>
-        <td>
+        <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
             <input type="checkbox" [checked]="article.articleCommend=='Y'" (change)="isRecom(article)"/>
             <span></span>
@@ -48,11 +48,11 @@
         <td><img src="{{article.articleCover.url}}" alt=""></td>
         <td *ngIf="!article.articleGoods">否</td>
         <td *ngIf="article.articleGoods">是</td>
-        <td>
-          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="delArticle(article.id)"></app-buttons>
-          <!--<app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>-->
-          <!--<app-buttons [config]="auditbutton" *ngIf="articleState=='AUDIT'" (click)="auditArticle(article.id)"></app-buttons>-->
+        <td [hidden]="articleState=='DEL'">
+          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
+          <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'" (click)="delArticle(article.id)"></app-buttons>
+          <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>
+          <app-buttons [config]="auditbutton" routerLink="addArticle" [queryParams]="{linkType:'auditArticle',id:article.id}" *ngIf="articleState=='AUDIT'" ></app-buttons>
           <!--<app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>-->
         </td>
       </tr>

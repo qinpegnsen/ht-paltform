@@ -80,10 +80,10 @@ export class AddArticleManService {
           if(data.success){
             result=data.data;
           }else{
-            console.log('article/queryAllArticle 返回的success为假');
+            console.log('根据文章的id查询文章的信息 返回的success为假');
           }
         }else{
-          console.log('article/queryAllArticle 返回的数据为空');
+          console.log('根据文章的id查询文章的信息 返回的数据为空');
         }
       },
       error: (data) => {

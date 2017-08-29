@@ -32,7 +32,7 @@ const PROXY_CONFIG = [
       "/storeexpresstpl"
 
     ],
-    target: "http://192.168.10.101:8089",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.182:8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -53,9 +53,9 @@ const PROXY_CONFIG = [
   ,
   {
     context: [
-      "/agent_area"
+      "/res"
     ],
-    target: "http://192.168.10.182:8081",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];

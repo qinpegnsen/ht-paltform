@@ -158,7 +158,6 @@ export class AddBrandComponent implements OnInit {
     let me = this, brandId = this.submit.getParams('brandId');
     me.settings.closeRightPage(); //关闭右侧滑动页面
     me.router.navigate(['/main/goods/brands/upBrandImg', brandId], {replaceUrl: true});
-    // me.router.navigate(['/main/goods/brands/upBrandImg?page=' + me.parentCompPage, brandId], {replaceUrl: true});
   }
 
   //提交表单
@@ -170,17 +169,52 @@ export class AddBrandComponent implements OnInit {
       //新增品牌
       case "addBrand":
         submitUrl = '/goodsBrand/addBrand';
-        submitData.brandPic = me.uuid;
+        if (me.uuid) submitData.brandPic = me.uuid;
 
         me.uploader.onBuildItemForm = function(fileItem, form){
-          console.log("█ fileItem ►►►",  fileItem);
           form.append('uuid', me.uuid);
-          console.log("█ form ►►►",  form);
         };
         me.uploader.onSuccessItem = function (item, response, status, headers) {
           let res = JSON.parse(response);
           if (res.success) {
+            console.log("█ submitData ►►►",  submitData);
             me.submit.postRequest(submitUrl, submitData, true);
+          } else {
+            AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+          }
+        }
+        /**
+         * 上传失败处理
+         * @param item 失败的文件列表
+         * @param response 返回信息
+         * @param status 状态码
+         * @param headers 上传失败后服务器的返回的返回头
+         */
+        me.uploader.onErrorItem = function (item, response, status, headers) {
+          AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+        };
+        /**
+         * 执行上传
+         */
+        me.uploader.uploadAll();
+        break;
+
+      //修改品牌LOGO
+      case "upBrandImg":
+        submitUrl = '/goodsBrand/updateBrandImageByUUID';
+        submitData = {
+          id: this.submit.getParams('brandId'),
+          brandImageuuid: me.uuid
+        };
+
+        me.uploader.onBuildItemForm = function(fileItem, form){
+          form.append('uuid', me.uuid);
+        };
+        me.uploader.onSuccessItem = function (item, response, status, headers) {
+          let res = JSON.parse(response);
+          if (res.success) {
+            console.log("█ submitData ►►►",  submitData);
+            me.submit.putRequest(submitUrl, submitData, true);
           } else {
             AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
           }

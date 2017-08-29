@@ -1,3 +1,387 @@
-<p class="step-two">
-  edit-detail works!
-</p>
+<form class="step-two">
+  <!--商品基本信息-->
+  <fieldset class="m0 p0">
+    <legend class="m0">商品基本信息</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品分类：</dt>
+      <dd class="col-xs-10">
+        <span>{{goodsKind}}</span>
+        <button class="btn btn-info btn-sm ml" routerLink="../step_one">选择分类</button>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2"><i>*</i>商品名称：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w60">
+          <input type="text" class="form-control">
+        </div>
+        <p class="tip">商品标题名称长度至少3个字符，最长50个汉字</p>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品卖点：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w60">
+          <textarea class="form-control" name="" id="" cols="10" rows="3"></textarea>
+        </div>
+        <p class="tip">商品卖点可填写商品的简介或特点，最长不能超过140个汉字</p>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品品牌：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w60">
+          <select class="form-control" name="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <p class="tip">选择您的商品品牌，有利于商品通过品牌索引方式被找到；如没有您想要的品牌，可从“品牌管理”功能中添加并提交后台审核后再选择。</p>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品属性：</dt>
+      <dd class="col-xs-10">
+        <div class="w80 clearfix">
+          <label class="col-sm-4">
+            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
+            <div class="col-xs-9 pl-sm pr-sm">
+              <select class="form-control" name="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </label>
+          <label class="col-sm-4 col-xs-6">
+            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
+            <div class="col-xs-9 pl-sm pr-sm">
+              <select class="form-control" name="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </label>
+          <label class="col-sm-4 col-xs-6">
+            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
+            <div class="col-xs-9 pl-sm pr-sm">
+              <select class="form-control" name="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </label>
+        </div>
+        <p class="tip" [class.tip-active]="hover">正确选择商品属性直接影响搜索筛选的准确与否，请根据实际情况认真选择填写。</p>
+      </dd>
+    </dl>
+  </fieldset>
+
+  <!--商品交易信息-->
+  <fieldset class="m0 p0">
+    <legend class="m0">商品交易信息</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2"><i>*</i>计量单位：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w60">
+          <select name="" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <p class="tip">请正确该商品的单位描述，确保购买者明确商品对应单价/计量单位。</p>
+      </dd>
+    </dl>
+  </fieldset>
+
+  <!--商品规格及图片-->
+  <fieldset class="m0 p0">
+    <legend class="m0">商品规格及图片</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品规格：</dt>
+      <dd class="col-xs-10 col-lg-8 specs">
+        <h5 class="clearfix m0">
+          <span class="col-sm-2 col-xs-3 text-right">规格</span>
+          <span class="col-sm-10 col-xs-9">规格值 <em>（通过选择规格值建立商品与商品规格的关系）</em></span>
+        </h5>
+        <form class="clearfix" #color>
+          <h6 class="col-sm-2 col-xs-3 text-right">
+            <span *ngIf="true">{{'颜色'}}</span>
+            <!--<label class="w80"><input class="form-control" name="ppp" type="text" value="颜色"></label>-->
+          </h6>
+          <ul class="col-sm-10 col-xs-9 p">
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!-- <label class="w66">
+                 <input class="form-control" type="text" name="color" value="白色">
+               </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+          </ul>
+        </form>
+        <form class="clearfix" #color>
+          <h6 class="col-sm-2 col-xs-3 text-right">
+            <span *ngIf="true">{{'颜色'}}</span>
+            <!--<label class="w80"><input class="form-control" name="ppp" type="text" value="颜色"></label>-->
+          </h6>
+          <ul class="col-sm-10 col-xs-9 p">
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!-- <label class="w66">
+                 <input class="form-control" type="text" name="color" value="白色">
+               </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+            <li class="col-xs-4 col-md-3">
+              <input type="checkbox">
+              <span>{{'白色'}}</span>
+              <!--<label class="w66">
+                <input class="form-control" type="text" name="color" value="白色">
+              </label>-->
+            </li>
+          </ul>
+        </form>
+        <p class="tip">
+          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。<br>
+          规格可自定义添加，但最多不超过3组；每组规格值也可自定义添加，但最多不超过10个。
+        </p>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品价格及库存：</dt>
+      <dd class="col-xs-10 col-lg-8">
+        <table class="sku-table w100">
+          <thead>
+          <tr>
+            <th class="sol-xs-6"><i>*</i>价格 <em class="icon-note"></em></th>
+            <th class="col-xs-3"><i>*</i>库存 <em class="icon-note"></em></th>
+            <th class="col-xs-3">商家编号</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input class="text price num" name="" type="number">
+              <em class="add-on">元</em>
+            </td>
+            <td>
+              <input class="text num" name="" type="number">
+            </td>
+            <td>
+              <input class="text num" name="" type="number">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <p class="tip"> 点击 <em class="icon-note"></em> 可批量修改所在列的值。 <br>
+          当规格值较多时，可在操作区域通过滑动滚动条查看超出隐藏区域。</p>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品价格及库存：</dt>
+      <dd class="col-xs-10 col-lg-8 pic-list">
+        <div class="goodspics" data-spec-id="1" data-spce-value-id="23">
+          <div class="color-value">
+            <h4>颜色：<span data-spec-value-name="23">{{'绿色'}}</span></h4>
+            <div class="btn btn-sm btn-info"> <em class="fa fa-picture-o"></em> 打开相册图片 </div>
+          </div>
+          <ul class="goods-pic-list">
+            <li class="ui-state-disabled">
+              <div class="upload-thumb">
+                <img src="https://b2b2c.bizpower.com/seller/static/img//default_goods_image_240.gif">
+              </div>
+            </li>
+          </ul>
+        </div>
+      </dd>
+    </dl>
+  </fieldset>
+
+  <!--商品详情描述-->
+  <fieldset class="m0 p0">
+    <legend class="m0">商品详情描述</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2"><i>*</i>计量单位：</dt>
+      <dd class="col-xs-10 col-lg-8">
+        <div class="w100">
+          <div id="summernote" class="summernote">
+            <span>Rich text presentation here..</span>
+          </div>
+        </div>
+      </dd>
+    </dl>
+  </fieldset>
+
+  <!--商品物流信息-->
+  <fieldset class="m0 p0 logistics">
+    <legend class="m0">商品物流信息</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2">运费：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w90">
+          <div class="mb">
+            <span class="radio c-radio c-radio-nofont radio-box">
+              <label>
+              <input type="radio" name="freight" value="Y" checked="checked"/>
+              <span class="fa fa-circle"></span>使用固定运费</label>
+            </span>
+            <span class="clearfix">
+              <input class="text price num" name="" type="number" value="0">
+              <em class="add-on">元</em>
+            </span>
+          </div>
+          <div>
+            <span class="radio c-radio c-radio-nofont radio-box">
+              <label>
+              <input type="radio" name="freight" value="N" />
+              <span class="fa fa-circle"></span>使用物流规则</label>
+            </span>
+            <span>
+              <select class="rules-list" name="">
+                <option value="">-请选择-</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
+            </span>
+            <span class="btn btn-green btn-sm"><em class="fa fa-truck"></em> 添加物流规则</span>
+          </div>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">物流参数：</dt>
+      <dd class="col-xs-10">
+        <div class="w60">
+          <div class="clearfix mb">
+            <span class="pull-left mr">重量：</span>
+             <span class="pull-left">
+              <input class="text weight num" name="" type="number" value="1.00">
+              <em class="add-on">kg</em>
+            </span>
+          </div>
+          <div class="clearfix">
+            <span class="pull-left mr">体积：</span>
+             <span class="pull-left">
+              <input class="text weight num" name="" type="number" value="1.00">
+              <em class="add-on">m³</em>
+            </span>
+          </div>
+        </div>
+        <p class="tip">如选择物流规则具有体积或重量运费时，需设定商品物流参数，默认为“1”单位，小数点后保留2位。</p>
+      </dd>
+    </dl>
+  </fieldset>
+
+  <!--商品其他信息-->
+  <fieldset class="m0 p0 others-info">
+    <legend class="m0">其他信息</legend>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品发布：</dt>
+      <dd class="col-xs-10">
+        <div class="w60">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="publish" value="Y" checked="checked" />
+            <span class="fa fa-circle"></span>立即发布</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="publish" value="N" />
+            <span class="fa fa-circle"></span>放入仓库</label>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">商品推荐：</dt>
+      <dd class="col-xs-10">
+        <div class="w60">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="recommend" value="Y" checked="checked" />
+            <span class="fa fa-circle"></span>推荐</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="recommend" value="N" />
+            <span class="fa fa-circle"></span>不推荐</label>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2">是否参加促销活动：</dt>
+      <dd class="col-xs-10">
+        <div class="w60">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="promotion" value="Y" checked="checked" />
+            <span class="fa fa-circle"></span>是</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="promotion" value="N" />
+            <span class="fa fa-circle"></span>否</label>
+        </div>
+        <p class="tip">请选择您的商品是否参加促销活动，如选择“否”，当您参加活动时将不能选择该商品。</p>
+      </dd>
+    </dl>
+  </fieldset>
+
+</form>

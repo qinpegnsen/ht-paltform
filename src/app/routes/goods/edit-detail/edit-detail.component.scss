@@ -1,3 +1,263 @@
-.step-two{
+.step-two {
+  min-width: 450px;
+}
 
+.step-two legend {
+  font-size: 18px;
+  background-color: #f5f5f5;
+  line-height: 30px;
+  padding: 5px 0 5px 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.step-two dl {
+  margin: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.step-two dt {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: normal;
+  padding: 15px 10px;
+  text-align: right;
+}
+
+.step-two i {
+  color: #cc1635;
+  font-size: 14px;
+  margin-right: 3px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.step-two dd {
+  font-size: 12px;
+  line-height: 30px;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal;
+  padding: 15px 4% 15px 1%;
+  border-left: 1px solid #f0f0f0;
+}
+
+.step-two .tip {
+  font-size: 12px;
+  line-height: 16px;
+  color: #bbb;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.step-two .tip.tip-active {
+  color: #bbb;
+}
+
+.step-two .pro-name {
+  text-align: right;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 36px;
+}
+
+.specs h5 {
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.specs ul {
+  list-style: none;
+  border-left: 1px solid #f0f0f0;
+  margin-bottom: 0;
+}
+
+.specs li {
+  line-height: 36px;
+  height: 36px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+
+.specs form {
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.specs h6 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.specs form label {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.specs input {
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+.sku-table input[type="text"], .sku-table input[type="password"], .sku-table input.text, .sku-table input.password {
+  font: 12px/1.5 Tahoma, Arial, "\5b8b\4f53", sans-serif;
+  color: #777;
+  background-color: #FFF;
+  vertical-align: top;
+  min-height: 20px;
+  padding: 5px;
+  border: solid 1px #E6E9EE;
+  outline: 0 none;
+}
+
+.specs em {
+  font-weight: normal;
+  font-style: normal;
+  color: #bbb;
+}
+
+.sku-table {
+  border: solid 1px #BCE8F1;
+  box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
+}
+
+.add-on {
+  float: left;
+  font-style: normal;
+  line-height: 28px;
+  background-color: #F6F7Fb;
+  vertical-align: top;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border: solid #E6E9EE;
+  border-width: 1px 1px 1px 0;
+}
+
+.sku-table th {
+  font-weight: 600;
+  line-height: 24px;
+  color: #3A87AD;
+  background: #D9EDF7;
+  white-space: nowrap;
+  height: 24px;
+  padding: 5px 10px;
+}
+
+.sku-table td {
+  white-space: nowrap;
+  height: 30px;
+  padding: 5px 10px;
+  border-top: solid 1px #BCE8F1;
+}
+
+.sku-table td .price {
+  float: left;
+  width: 50px;
+}
+
+.goodspics {
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  border: solid 1px #BCE8F1;
+  box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
+  padding: 9px;
+}
+
+.goodspics .color-value {
+  float: left;
+  width: 120px;
+}
+
+.goodspics .color-value h4 {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.goodspics .goods-pic-list {
+  display: block;
+  font-size: 0;
+  float: left;
+  padding: 0;
+  margin: 0;
+  background-color: #FAFAFA;
+  overflow: hidden;
+}
+
+.goodspics .goods-pic-list li {
+  font-size: 12px;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+  position: relative;
+  z-index: 1;
+  zoom: 1;
+}
+
+.goodspics .goods-pic-list li .upload-thumb {
+  line-height: 100px;
+  background-color: #FFF;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  width: 100px;
+  height: 100px;
+  border: solid 1px #F5F5F5;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  overflow: hidden;
+}
+
+.goodspics .goods-pic-list li .upload-thumb img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.logistics .radio-box {
+  float: left;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.logistics .btn {
+  font-size: 12px;
+}
+
+.logistics label,.others-info .c-radio {
+  line-height: 22px;
+}
+
+.logistics .price {
+  float: left;
+  width: 50px;
+}
+.logistics .weight {
+  float: left;
+  width: 66px;
+}
+.logistics .text, .logistics .rules-list {
+  font: 12px/1.5 Tahoma, Arial, "\5b8b\4f53", sans-serif;
+  color: #777;
+  background-color: #FFF;
+  vertical-align: top;
+  min-height: 20px;
+  padding: 5px;
+  border: solid 1px #E6E9EE;
+  outline: 0 none;
+}
+
+.logistics .rules-list {
+  height: 30px;
+  width: 160px;
 }

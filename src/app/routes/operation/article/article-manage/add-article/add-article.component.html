@@ -66,40 +66,6 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"><i>*</i>是否推荐</label>
-            <div class="col-sm-9 control-label">
-              <div class="radio c-radio pull-left">
-                <label>
-                  <input type="radio"  value="Y"  ngModel name="articleCommend"   #articleCommendY class="col-sm-2"/>
-                  <span class="fa fa-circle"></span>是
-                </label>
-                <label>
-                  <input type="radio"  value="N"  ngModel name="articleCommend"  #articleCommendN class="col-sm-2" />
-                  <span class="fa fa-circle"></span>否
-                </label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>
-            <div class="col-sm-9 control-label">
-              <div class="radio c-radio pull-left">
-                <label>
-                  <input type="radio"  value="Y"  ngModel name="articleCommentFlag"  #articleCommendY class="col-sm-2"/>
-                  <span class="fa fa-circle"></span>是
-                </label>
-                <label>
-                  <input type="radio"  value="N"  ngModel name="articleCommentFlag" #articleCommendN class="col-sm-2" />
-                  <span class="fa fa-circle"></span>否
-                </label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>封面类型</label>
             <div class="col-sm-9">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
@@ -337,11 +303,51 @@
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'DRAFT')"
-                    [disabled]="addArticle.invalid">存草稿
-            </button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'AUDIT')"
+                        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'AUDIT')"
                     [disabled]="addArticle.invalid">发表文章
+            </button>
+          </div>
+        </fieldset>
+      </div>
+
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--审核文章-->
+<div class="col-lg-10" *ngIf="linkType=='auditArticle'">
+  <form class="form-validate form-horizontal" style="height: 100%" #aduit="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>审核结果</label>
+            <div class="col-sm-4">
+              <select class="form-control" type="text" name="auditState" [(ngModel)]="auditResult" required>
+                <option [value]="item.name" *ngFor="let item of autionOptions" >{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="auditResult=='FAILURE'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>原因</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="reason" #reasonTem="ngModel" [(ngModel)]="reason" required
+                     placeholder='请输入未审核通过的原因'/>
+              <div [hidden]="reasonTem.valid||reasonTem.untouched"
+                   class="alert alert-danger">
+                文章标题是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="pull-right form-group special">
+            <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(aduit.value,'AUDIT')"
+                    [disabled]="aduit.invalid">确认审核
             </button>
           </div>
         </fieldset>
