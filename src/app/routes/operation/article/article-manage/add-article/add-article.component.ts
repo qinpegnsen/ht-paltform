@@ -81,7 +81,7 @@ export class AddArticleComponent implements OnInit {
      * 初始化的时候调取文章分类的接口
      * @type {string}
      */
-    let url = '/articleclass/queryArticleClass';
+    let url = '/articleClass/queryArticleClass';
     let data = {}
     this.articleClassList = this.AddArticleManService.articleClass(url, data)
 
@@ -129,6 +129,10 @@ export class AddArticleComponent implements OnInit {
       }, 0);
     }
 
+    /**
+     * 审核时候的两种状态
+     * @type {[{id: number; name: string},{id: number; name: string}]}
+     */
     this.autionOptions=[
       {id:1,name:'SUCCESS'},
       {id:2,name:'FAILURE'}
@@ -236,9 +240,7 @@ export class AddArticleComponent implements OnInit {
       let data = obj;
       this.AddArticleManService.updateArticle(url, data);
       this.router.navigate(['/main/operation/article/manage']);
-      // this.ContentComponent.queryArticManleList(state)
     }else if (this.linkType == 'auditArticle') {
-    console.log(obj)
       let data={
         articleId:this.articleId,
         auditState:obj.auditState,
@@ -248,7 +250,6 @@ export class AddArticleComponent implements OnInit {
       let result=this.ContentService.auditArticle(url,data)
       if(result){
         this.router.navigate(['/main/operation/article/manage']);
-        // this.ContentComponent.queryArticManleList(state)
       }
 
     }

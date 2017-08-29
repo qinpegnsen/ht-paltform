@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {LayoutComponent} from "../../layout/layout.component";
 import {MaskService} from "./mask.service";
 import {Router} from "@angular/router";
 declare var $: any;

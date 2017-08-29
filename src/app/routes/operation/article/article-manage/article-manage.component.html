@@ -24,7 +24,7 @@
 </div>
 
 <div class="">
-  <app-content-nav (sendState)="getState($event)"></app-content-nav>
+  <app-content-nav (sendState)="getState($event)" [totalRow]="totalRow"></app-content-nav>
   <app-content [state]="state" #child [searchKey]="searchKey" (emitTotalRow)="getEmitTotalRow($event)" ></app-content>
 </div>
 <!--路由嵌套 begin-->

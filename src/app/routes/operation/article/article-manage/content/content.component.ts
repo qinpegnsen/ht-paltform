@@ -55,10 +55,7 @@ export class ContentComponent implements OnInit,OnChanges  {
           }else if(event.url=='/main/operation/article/manage'){
             this.flag=true;
             this.queryArticManleList('N') //刷新内容页面
-            let data={}
-            let url= "/article/getCountByState";
-            this.TotalRow=this.NavService.queryTotalRow(url,data) //刷新导航页面
-            this.emitTotalRow.emit(this.TotalRow)
+            this.getTotalRow()
           }
         }
       });
@@ -94,6 +91,15 @@ export class ContentComponent implements OnInit,OnChanges  {
     this.queryArticManleList('N')
   }
 
+  /**
+   * 得到各种状态的总条数，跟多地方用到
+   */
+  public getTotalRow(){
+    let data={}
+    let url= "/article/getCountByState";
+    this.TotalRow=this.NavService.queryTotalRow(url,data) //刷新导航页面
+    this.emitTotalRow.emit(this.TotalRow)
+  }
   /**
    * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
@@ -163,6 +169,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let result=this.ContentService.publishArticle(url,data)
     if(result){
       this.queryArticManleList('N')//调用文章的列表，刷新页面
+      this.getTotalRow()
     }
   }
 
@@ -179,6 +186,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let result=this.ContentService.auditArticle(url,data)
     if(result){
       this.queryArticManleList('N')//调用文章的列表，刷新页面
+      this.getTotalRow()
     }
   }
 

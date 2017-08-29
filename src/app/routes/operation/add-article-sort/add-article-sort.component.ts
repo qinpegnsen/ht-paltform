@@ -25,12 +25,13 @@ export class AddArticleSortComponent implements OnInit {
   ngOnInit() {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];
     this.acParentId = this.routeInfo.snapshot.queryParams['acParentId'];
-    this.id = this.routeInfo.snapshot.queryParams['id'];
-    let url='/articleclass/loadArticleClassById';
-    let data={
-     id:this.id
-    }
-    if(this.linkType=='updateSort'){
+
+    this.id = this.routeInfo.snapshot.queryParams['id'];//如果id存在的话，就说明是修改，这时候才执行以下的代码
+    if(this.id){
+      let url='/articleClass/loadArticleClassById';
+      let data={
+        id:this.id
+      }
       let updataData=this.AddArticleSortService.queryClassById(url,data);
       this.updataData=updataData;
     }
@@ -48,7 +49,7 @@ export class AddArticleSortComponent implements OnInit {
   // 提交
   submit(obj){
     if(this.linkType=='addClass'){
-      let url='/articleclass/addArticleClass';
+      let url='/articleClass/addArticleClass';
       let data={
         acName:this.acName,
         acParentId:0,
@@ -59,7 +60,7 @@ export class AddArticleSortComponent implements OnInit {
       this.AddArticleSortService.addClass(url,data);
 
     }else if(this.linkType=='addChildSort'){
-      let url='/articleclass/addArticleClass';
+      let url='/articleClass/addArticleClass';
       let data={
         acName:this.acName,
         acParentId:this.acParentId,
@@ -69,7 +70,7 @@ export class AddArticleSortComponent implements OnInit {
       }
       this.AddArticleSortService.addClass(url,data);
     }else if(this.linkType=='updateSort'){
-      let url='/articleclass/updateArticleClass';
+      let url='/articleClass/updateArticleClass';
       let data={
         id:this.id,
         acName:obj.acName,

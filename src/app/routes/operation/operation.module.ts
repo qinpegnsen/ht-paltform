@@ -20,6 +20,7 @@ import { AddArticleComponent } from './article/article-manage/add-article/add-ar
 import {ContentService} from "./article/article-manage/content/content.service";
 import {FileUploadModule} from "ng2-file-upload";
 import {NavService} from "./article/article-manage/content-nav/nav.service";
+import { RightPageComponent } from './express/right-page/right-page.component';
 
 
 const addSort: Routes = [
@@ -32,9 +33,12 @@ const articleChildRoutes: Routes = [
   {path: 'manage', component: ArticleManageComponent,children:addArticle},
   {path: 'sort', component: ArticleSortComponent,children:addSort}
 ]
+const expressChildRoute: Routes = [
+  {path: 'rightPage', component: RightPageComponent}
+]
 const routes: Routes = [
   {path: '',redirectTo:'express'},
-  {path: 'express', component: ExpressComponent},
+  {path: 'express', component: ExpressComponent,children:expressChildRoute},
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
   {path: 'ensure', component:EnsureComponent},
   {path: 'after-ensure', component: AfterEnsureComponent}
@@ -47,7 +51,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent],
   providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService,ContentNavComponent]
 })
 export class OperationModule { }

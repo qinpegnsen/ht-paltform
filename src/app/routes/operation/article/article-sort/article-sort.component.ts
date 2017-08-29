@@ -62,9 +62,8 @@ export class ArticleSortComponent implements OnInit {
       pageSize:4,
       acName:this.searchKey
     }
-    let url= "/articleclass/queryArticleClassPage";
+    let url= "/articleClass/queryArticleClassPage";
     let result=this.ArticleSortService.queryData(url,data);
-    console.log(result)
     this.articleSortListdata= result;
   }
 
@@ -85,7 +84,7 @@ export class ArticleSortComponent implements OnInit {
       },function(isConfirm){
         if (isConfirm) {
           swal.close(); //关闭弹框
-          let url='/articleclass/deleteArticleClassById';
+          let url='/articleClass/deleteArticleClassById';
           let data={
             id:delSortId
           }
@@ -137,7 +136,7 @@ export class ArticleSortComponent implements OnInit {
      pageSize:6,
      acParentId:childCode
    }
-   let url= "/articleclass/queryArticleClassPage";
+   let url= "/articleClass/queryArticleClassPage";
    let result = me.ArticleSortService.queryData(url,data);
    this.articleSortListdata= result;
 
