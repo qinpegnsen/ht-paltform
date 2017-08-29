@@ -70,7 +70,7 @@ export class ArticleSortComponent implements OnInit {
   /**
    * 删除分类 首先进行确认是否删除
    */
-  deleteSort(delSortId){
+  deleteSort(delSortId,acParentId){
     let that=this;
     swal({
         title: "您确定要删除吗？",
@@ -90,7 +90,7 @@ export class ArticleSortComponent implements OnInit {
           }
          let  flag = that.ArticleSortDelService.confirmDel(url,data)
           if(flag){
-            that.queryArticSortleList()
+            that.queryChildSortList(acParentId)
           }
         } else {
           swal("Cancelled", "Your imaginary file is safe :)", "error");
@@ -98,21 +98,12 @@ export class ArticleSortComponent implements OnInit {
       });
   }
 
+
   /**
-   * 删除之前先确认是否确认进行删除
-   * @param url
-   * @param data
-   */
-  public delSort(url,data) {
-    let me = this,flag = false;
-
-    return flag;
-  }
-
-
- /**
    * 根据分类的父id查询子分类
-   * @param parentId
+   * @param childCode 编码
+   * @param menuName  名字
+   * @param isTit 是否点击的面包屑导航
    */
   queryChildSortList(childCode?, menuName?, isTit?:boolean) {
     let me = this, num = 0;
@@ -121,10 +112,9 @@ export class ArticleSortComponent implements OnInit {
     } else {
       me.childMenuCode = childCode;
       let item = {name: menuName, code: childCode};
-      if (!isTit){
-        me.childMenuTitList.push(item); //非点击面包屑路径时，添加面包屑
-      }
-      else { //点击面包屑路径时，提出点击地址后的面包屑路径
+      if (!isTit){//非点击面包屑路径时或者是点击返回上一级的时候，添加面包屑
+        me.childMenuTitList.push(item);
+      }else { //点击面包屑路径时，提出点击地址后的面包屑路径
         for (var i = 0; i < me.childMenuTitList.length; i++) {  //获取点击面包屑的路径地址下标
           if (item.code == me.childMenuTitList[i].code) num = i;
         }
@@ -133,7 +123,7 @@ export class ArticleSortComponent implements OnInit {
     }
    let data={
      curPage:1,
-     pageSize:6,
+     pageSize:4,
      acParentId:childCode
    }
    let url= "/articleClass/queryArticleClassPage";
@@ -145,9 +135,9 @@ export class ArticleSortComponent implements OnInit {
   /**
    * 返回上一级菜单列表
    */
-  goBackMenu(articleList) {
+  goBackMenu() {
     let num = this.childMenuTitList.length;
-    if (num - 2 < 0) this.queryChildSortList(articleList);
+    if (num - 2 < 0) this.queryChildSortList();
     else this.queryChildSortList(this.childMenuTitList[num - 2].code, this.childMenuTitList[num - 2].name, true);
   }
 
