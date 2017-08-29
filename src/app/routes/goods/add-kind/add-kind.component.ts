@@ -31,7 +31,7 @@ export class AddKindComponent implements OnInit {
   private fileName: string = '选择图片';// 文件名
   private myImg;// 我的图片，展示图片
   public uploader: FileUploader = new FileUploader({
-    url: '/goodskind/uploadGoodsKindIcon',
+    url: '/goodsKind/uploadGoodsKindIcon',
     itemAlias: "goodsKindIcon"
   }); //初始化上传方法
 
@@ -114,7 +114,7 @@ export class AddKindComponent implements OnInit {
    * @returns {any}
    */
   private getKindInfo() {
-    let url = '/goodskind/loadGoodsKindById';
+    let url = '/goodsKind/loadGoodsKindById';
     let data = {id: this.submit.getParams('kindId')};
     return this.submit.getData(url, data);
   }
@@ -129,7 +129,7 @@ export class AddKindComponent implements OnInit {
     switch (me.path) {
       //新增分类
       case "addKind":
-        submitUrl = '/goodskind/addGoodsKind';
+        submitUrl = '/goodsKind/addGoodsKind';
         me.uploader.onBuildItemForm = function (fileItem, form) {
           form.append('uuid', me.uuid);
         };
@@ -158,11 +158,11 @@ export class AddKindComponent implements OnInit {
         break;
       //修改分类
       case "upKind":
-        submitUrl = '/goodskind/updateGoodsKind';
+        submitUrl = '/goodsKind/updateGoodsKind';
         me.submit.putRequest(submitUrl, submitData, true);// 所有put提交用的都是SubmitService里的putRequest方法,true表示需要返回上级页面
         break;
       case "upKindImg":
-        submitUrl = '/goodskind/updateGoodsKindIcon';
+        submitUrl = '/goodsKind/updateGoodsKindIcon';
         submitData = {
           kindId: this.submit.getParams('kindId'),
           uuid: me.uuid

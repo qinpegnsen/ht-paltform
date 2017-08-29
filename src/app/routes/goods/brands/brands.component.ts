@@ -85,7 +85,7 @@ export class BrandsComponent implements OnInit {
    * 获取分类列表
    */
   getKindList(){
-    let url = '/goodskind/queryGoodsByParentId';
+    let url = '/goodsKind/queryGoodsByParentId';
     let data = {kindParentId:''}
     this.kindList = this.submitService.getData(url,data)
   }

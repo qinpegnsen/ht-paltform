@@ -2,37 +2,36 @@ const PROXY_CONFIG = [
   {
     context: [
       "/article",
-      "/goodskind",
+      "/goodsKind",
       "/goodsBrand",
-      "/agent_area",
+      "/agentArea",
       "/agent",
-      "/articleclass",
-      "/article_comment",
+      "/articleClass",
+      "/articleComment",
       "/article",
-      "/article_syd",
-      "/custaddr",
+      "/articleSyd",
+      "/custAddr",
       "/cust",
-      "/favorites",
-      "/invoice",
-      "/datadic",
+      "/custFavorites",
+      "/custInvoice",
+      "/datadict",
       "/goodsAudit",
       "/goodsBrand",
-      "/goodschangerec",
-      "/goods",
+      "/goodsChangeRec",
+      "/goodsEdit",
       "/goodsEnum",
-      "/goodskind",
+      "/goodsQuery",
       "/goodsStorage",
       "/goodsSyd",
-      "/goods_unit",
+      "/goodsUnit",
       "/adminLogin",
       "/agentLogin",
       "/custLogin",
       "/seller",
       "/store",
-      "/storeexpresstpl"
-
+      "/storeExpressTpl"
     ],
-    target: "http://192.168.10.182:8081",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.167:8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {

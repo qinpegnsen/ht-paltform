@@ -22,7 +22,7 @@ export class ChooseKindComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.publishComponent.step = 1;
-    me.firstList = me.submit.getData('/goodskind/queryGoodsByParentId', '');
+    me.firstList = me.submit.getData('/goodsKind/queryGoodsByParentId', '');
     $(document).on('click','.step-one li',function(){
       $(this).addClass('current').siblings().removeClass('current');
       me.choosedKindStr = '';
@@ -37,12 +37,12 @@ export class ChooseKindComponent implements OnInit {
     let me = this;
     switch (level) {
       case 1:
-        me.secondList = me.submit.getData('/goodskind/queryGoodsByParentId', {kindParentId: id});
+        me.secondList = me.submit.getData('/goodsKind/queryGoodsByParentId', {kindParentId: id});
         me.thirdList = [];
         me.choosedKind = '';
         break;
       case 2 :
-        me.thirdList = me.submit.getData('/goodskind/queryGoodsByParentId', {kindParentId: id});
+        me.thirdList = me.submit.getData('/goodsKind/queryGoodsByParentId', {kindParentId: id});
         me.choosedKind = '';
         break;
       case 3:

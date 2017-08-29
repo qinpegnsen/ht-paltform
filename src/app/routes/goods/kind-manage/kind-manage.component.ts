@@ -47,7 +47,7 @@ export class KindManageComponent implements OnInit {
         size: "xs",
         callback: function (result, kindId) {
           result.then((id) => {
-            let url = '/goodskind/updateStateById';
+            let url = '/goodsKind/updateStateById';
             let data = {id: kindId, state: 'DEL'};
             me.submitService.delRequest(url, data);
           })
@@ -70,7 +70,7 @@ export class KindManageComponent implements OnInit {
       state = 'SHOW'
     }
     ;
-    requestUrl = '/goodskind/updateStateById';
+    requestUrl = '/goodsKind/updateStateById';
     requestData = {
       id: kindId,
       state: state
@@ -130,7 +130,7 @@ export class KindManageComponent implements OnInit {
       activePage = curPage;
     }
     ;
-    let requestUrl = '/goodskind/queryGoodsKindPageByParentId';
+    let requestUrl = '/goodsKind/queryGoodsKindPageByParentId';
     let requestData = {
       curPage: activePage,
       pageSize: 10,

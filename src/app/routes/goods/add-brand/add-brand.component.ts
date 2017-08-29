@@ -67,7 +67,7 @@ export class AddBrandComponent implements OnInit {
           let param = this.route.snapshot.queryParams;
           if (!isNullOrUndefined(param.pid)) this.brandInfo['kindparentCompId'] = param.pid;
           if (!isNullOrUndefined(param.pname)) this.brandInfo['parentCompKindName'] = param.pname;
-          this.kindsList = this.submit.getData('/goodskind/queryGoodsByParentId', ''); //分类列表
+          this.kindsList = this.submit.getData('/goodsKind/queryGoodsByParentId', ''); //分类列表
           break;
 
         //修改品牌
@@ -76,7 +76,7 @@ export class AddBrandComponent implements OnInit {
           me.pageTitle = "修改品牌";
           me.editBrand = true;
           me.brandInfo = this.getBrandInfo('BRAND');// 获取品牌信息
-          this.kindsList = this.submit.getData('/goodskind/queryGoodsByParentId', ''); // 分类列表
+          this.kindsList = this.submit.getData('/goodsKind/queryGoodsByParentId', ''); // 分类列表
           break;
 
         //查看品牌详情
