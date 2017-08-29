@@ -1,0 +1,78 @@
+<div class="content-heading mb-lg">
+  订单统计
+</div>
+
+<div class="panel panel-default">
+
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>统计数据色块展示了时间段内总下单金额和下单量</li>
+      <li>统计图展示了符合搜索条件订单的下单总金额和下单数量在时间段内的走势情况及与前一个时间段的走势对比</li>
+      <li>列表展示了时间段内订单详细数据，便于详细了解订单具体信息</li>
+    </ul>
+  </div>
+  <div class="xz">
+
+    <button class="btn">搜索</button>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+
+  </div>
+  <div class="panel panel-default">
+    <div class="new-vip">订单列表</div>
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+        <thead>
+
+        <tr>
+        <th class="th">
+          <rzhDefaultSorter by="name">订单号</rzhDefaultSorter>
+        </th>
+        <th class="th">
+            <rzhDefaultSorter by="name">买家</rzhDefaultSorter>
+        </th>
+        <th style="width: 28%;border: 1px solid #ccc;text-align: center">
+            <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
+        </th>
+        <th class="th">
+            <rzhDefaultSorter by="name">下单时间</rzhDefaultSorter>
+        </th>
+        <th class="th">
+            <rzhDefaultSorter by="name">订单金额（元）</rzhDefaultSorter>
+        </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="td">aaa</td>
+          <td class="td">sss</td>
+          <td class="td">ddd</td>
+          <td class="td">aaa</td>
+          <td class="td">aaa</td>
+        </tr>
+      </table>
+      <!--<tfoot>-->
+      <!--<tr>-->
+      <!--<td colspan="5">-->
+      <!--<div class="col-sm-5">-->
+      <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
+      <!--</div>-->
+      <!--<div class="col-sm-7">-->
+      <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
+      <!--</div>-->
+      <!--</td>-->
+      <!--</tr>-->
+      <!--</tfoot>-->
+    </div>
+  </div>
+</div>
+

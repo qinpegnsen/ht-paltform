@@ -1,0 +1,64 @@
+<div class="content-heading mb-lg">
+  新增会员
+</div>
+
+<div class="panel panel-default">
+
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>统计图展示了时间段内新增会员数的走势和与前一时间段的对比</li>
+      <li>统计表展示了时间段内新增会员数值和与前一时间段的同比数值，点击每条记录后的“查看”，了解新增会员的详细信息</li>
+    </ul>
+  </div>
+  <div class="xz">
+
+    <button class="btn">sousu </button>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+
+  </div>
+  <div class="panel panel-default">
+    <div class="new-vip">新增会员统计表</div>
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+        <thead>
+        <tr>
+          <th class="th">
+            <rzhDefaultSorter by="name">小时</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">昨天</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="email">今天</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter>同比</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="city">管理操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="td">aaa</td>
+          <td class="td">sss</td>
+          <td class="td">ddd</td>
+          <td class="td">fff</td>
+          <td class="td">ggg</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -16,7 +16,7 @@ export const routes = [
       {path: 'shops', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
       {path: 'member', loadChildren: './navtree/navtree.module#NavtreeModule'},
       {path: 'sale', loadChildren: './echarts/echarts.module#EchartsModule'},
-      {path: 'stat', loadChildren: './operationpage/operationpage.module#OperationpageModule'},
+      {path: 'stat', loadChildren: './statistics/statistics.module#StatisticsModule'},
       {path: 'agent', loadChildren: './agent/agent.module#AgentModule'},
       {path: 'app', loadChildren: './msg/msg.module#MsgModule'},
       {path: 'orders', component: ButtonDemoComponent},

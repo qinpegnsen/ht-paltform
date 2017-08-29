@@ -1,0 +1,37 @@
+.ts{
+  background: #C9E7F2;
+  width: 98%;
+  margin: auto;
+  margin-top: 15px;
+}
+.xz{
+  width: 98%;
+  margin: auto;
+  height: 50px;
+}
+.sel{
+  float: right;
+  height: 30px;
+  width: 230px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.btn{
+  float: right;
+  height: 30px;
+  width: 50px;
+  margin-top: 5px;
+}
+.th{
+  width: 33%;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+tr:first-child>th{
+  border-top:  1px solid #ccc!important;
+}
+.td{
+  width: 33%;
+  border: 1px solid #ccc;
+  text-align: center;
+}

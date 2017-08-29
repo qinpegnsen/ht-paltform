@@ -36,9 +36,6 @@ export class DataDictionaryComponentService {
 
   //删除key
    delCode(url,data) {
-
-    console.log("data======",data);
-
     this.ajax.del({
       url:url,
       data: data,

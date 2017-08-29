@@ -1,0 +1,80 @@
+<div class="content-heading mb-lg">
+  退款统计
+</div>
+
+<div class="panel panel-default">
+
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>统计图展现了时间段内退款金额的走势情况</li>
+      <li>列表展示了时间段内退款详细数据，便于详细了解退款记录的具体信息</li>
+    </ul>
+  </div>
+  <div class="xz">
+
+    <button class="btn">搜索</button>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+  </div>
+  <div class="panel panel-default">
+    <div class="new-vip">退款金额统计表</div>
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+        <thead>
+        <tr>
+          <th class="th">
+            <rzhDefaultSorter by="name">订单编号</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">退款编号</rzhDefaultSorter>
+          </th>
+          <th class="thh">
+            <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
+          </th>
+          <th class="thh">
+            <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">会员名称</rzhDefaultSorter>
+          </th>
+          <th class="th">
+          <rzhDefaultSorter by="name">申请时间</rzhDefaultSorter>
+          </th>
+          <th class="th">
+          <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">商家处理</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">平台处理</rzhDefaultSorter>
+          </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="td">ddd</td>
+          <td class="td">ddd</td>
+          <td class="thh">aaa</td>
+          <td class="thh">sss</td>
+          <td class="td">ddd</td>
+          <td class="td">ddd</td>
+          <td class="td">ddd</td>
+          <td class="td">ddd</td>
+          <td class="td">ddd</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+

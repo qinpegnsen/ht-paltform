@@ -217,19 +217,20 @@ const statistics = {
     {
       text: '统计设置',
       icon: 'fa fa-cogs',
+      link: '/main/stat/xtsz',
       alert: '▼',
       submenu: [
         {
           text: '订单金额区间',
-          link: '/main/stat/set-money'
+          link: '/main/stat/xtsz/set-money'
         },
         {
           text: '商品价格区间',
-          link: '/main/stat/set-price'
+          link: '/main/stat/xtsz/set-price'
         },
         {
           text: '统计缓存重置',
-          link: '/main/stat/cache-reset'
+          link: '/main/stat/xtsz/cache-reset'
         }
       ]
     },
@@ -241,19 +242,19 @@ const statistics = {
       submenu: [
         {
           text: '新增会员',
-          link: '/main/stat/users-new'
+          link: '/main/stat/users/users-new'
         },
         {
           text: '会员分析',
-          link: '/main/stat/analyze-users'
+          link: '/main/stat/users/analyze-users'
         },
         {
           text: '区域分析',
-          link: '/main/stat/analyze-area'
+          link: '/main/stat/users/analyze-area'
         },
         {
           text: '购买分析',
-          link: '/main/stat/analyze-buy'
+          link: '/main/stat/users/analyze-buy'
         }
       ]
     },
@@ -265,11 +266,11 @@ const statistics = {
       submenu: [
         {
           text: '结算统计',
-          link: '/main/stat/settle'
+          link: '/main/stat/sales/settle'
         },
         {
           text: '订单统计',
-          link: '/main/stat/orders'
+          link: '/main/stat/sales/orders'
         }
       ]
     },
@@ -281,11 +282,11 @@ const statistics = {
       submenu: [
         {
           text: '热卖商品',
-          link: '/main/stat/hot-sale'
+          link: '/main/stat/goods/hot-sale'
         },
         {
           text: '商品销售明细',
-          link: '/main/stat/sale-detail'
+          link: '/main/stat/goods/sale-detail'
         }
       ]
     },
@@ -297,11 +298,11 @@ const statistics = {
       submenu: [
         {
           text: '退款统计',
-          link: '/main/stat/refund'
+          link: '/main/stat/after/refund'
         },
         {
           text: '退货统计',
-          link: '/main/stat/return'
+          link: '/main/stat/after/return'
         }
       ]
     }

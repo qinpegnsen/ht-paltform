@@ -9,5 +9,4 @@ export class MeasureService {
   constructor(private ajax: AjaxService) { }
 
 
-
 }

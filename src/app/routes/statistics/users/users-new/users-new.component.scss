@@ -1,0 +1,46 @@
+.ts{
+  background: #C9E7F2;
+  width: 98%;
+  margin: auto;
+  margin-top: 15px;
+}
+.xz{
+  width: 98%;
+  margin: auto;
+  height: 50px;
+}
+.sel{
+  float: right;
+  height: 30px;
+  width: 230px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.btn{
+  float: right;
+  height: 30px;
+  width: 50px;
+  margin-top: 5px;
+}
+.new-vip{
+  width:100%;
+  background: #000;
+  height: 50px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 2.6;
+  padding-left: 1%;
+}
+.th{
+  width: 20%;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+tr:first-child>th{
+  border-top:  1px solid #ccc!important;
+}
+.td{
+  width: 20%;
+  border: 1px solid #ccc;
+  text-align: center;
+}

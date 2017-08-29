@@ -1,0 +1,56 @@
+<div class="content-heading mb-lg">
+  会员分析
+</div>
+
+<div class="panel panel-default">
+
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>统计图展示了时间段内订单数量|订单总金额排名前15位的会员订单统计数据对比</li>
+      <li>统计表展示了时间段内订单数量|订单总金额排名前15位的会员其名称及订单统计数据</li>
+    </ul>
+  </div>
+  <div class="xz">
+
+    <button class="btn">搜索</button>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+    <select name="" id="" class="sel">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
+    </select>
+
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+        <thead>
+        <tr>
+          <th class="th">
+            <rzhDefaultSorter by="name">序号</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="name">会员名</rzhDefaultSorter>
+          </th>
+          <th class="th">
+            <rzhDefaultSorter by="email">下单金额（元）</rzhDefaultSorter>
+          </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="td">aaa</td>
+          <td class="td">sss</td>
+          <td class="td">ddd</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
