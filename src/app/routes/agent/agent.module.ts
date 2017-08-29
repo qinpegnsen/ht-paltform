@@ -14,7 +14,7 @@ const appChildRoutes: Routes = [
 ];
 const routes: Routes = [
   {path: '', component: AgentpersonComponent},
-  {path: 'agentperson', component: AgentpersonComponent},
+  {path: 'agentperson', component: AgentpersonComponent,children: appChildRoutes},
   {path: 'region', component: RegionComponent,children: appChildRoutes},
   {path: 'stock', component:StockComponent},
 
