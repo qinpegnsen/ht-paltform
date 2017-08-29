@@ -49,7 +49,7 @@ export class AdddataComponent implements OnInit {
       else _this.updataData = _this.sub.getData("/datadict/loadDatadictByCode", {code: _this.code}); //获取数据字典val
     };
     if (_this.linkType == "updateCount") {//计量单位--若为修改操作,获取信息
-      _this.updataDataa = _this.sub.getData("/goods_unit/loadById", {id: _this.id}); //获取数据字典key
+      _this.updataDataa = _this.sub.getData("/goodsUnit/loadById", {id: _this.id}); //获取数据字典key
       console.log(_this.updataDataa)
 
     }
@@ -103,7 +103,7 @@ export class AdddataComponent implements OnInit {
 //计量单位--提交
   submita(res){
     if (this.linkType == 'addCount') {
-      let url = '/goods_unit/addGoodsUnit';
+      let url = '/goodsUnit/addGoodsUnit';
       let data = {
         sort: res.sort,
         unitName: res.unitName
@@ -111,7 +111,7 @@ export class AdddataComponent implements OnInit {
       this.submitt.postRequest(url, data);
     }
     else if (this.linkType == 'updateCount') {
-      let url = '/goods_unit/updateGoodsUnit';
+      let url = '/goodsUnit/updateGoodsUnit';
       let data = {
         id:this.id,
         sort: res.sort,

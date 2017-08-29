@@ -45,7 +45,7 @@ export class MeasureComponent implements OnInit {
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
-    let url = "/goods_unit/queryPage";
+    let url = "/goodsUnit/queryPage";
     let data={
       curPage: activePage,
       pageSize:10,
@@ -62,7 +62,7 @@ export class MeasureComponent implements OnInit {
   * */
   deleteCount(delid) {
     let me=this;
-    let url = "/goods_unit/deleteGoodsUnit";
+    let url = "/goodsUnit/deleteGoodsUnit";
     let data={
      id:delid
     }
@@ -78,7 +78,6 @@ export class MeasureComponent implements OnInit {
         swal.close(); //关闭弹框
         me.submit.delRequest(url, data); //删除数据
         me.qeuryAllService(); //更新
-
       }
     );
   }
