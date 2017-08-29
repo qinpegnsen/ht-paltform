@@ -3,7 +3,7 @@
 </div>
 
 <div class="panel panel-default">
-
+<!--操作提示-->
   <div class="panel mb p ts">
     <p class="font18">操作提示</p>
     <ul>
@@ -12,50 +12,48 @@
     </ul>
   </div>
   <div class="xz">
-
-    <button class="btn">sousu </button>
+<!--搜索按钮-->
+    <button class="btn">
+      <i class="icon icon-magnifier icona"></i>
+    </button>
+    <!--时间选择按钮-->
     <select name="" id="" class="sel">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-    <select name="" id="" class="sel">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
-    </select>
-
   </div>
+  <!--操作表-->
   <div class="panel panel-default">
     <div class="new-vip">新增会员统计表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">小时</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">昨天</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="email">今天</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter>同比</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="city">管理操作</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td class="td">aaa</td>
-          <td class="td">sss</td>
-          <td class="td">ddd</td>
-          <td class="td">fff</td>
-          <td class="td">ggg</td>
+          <td class="refund-th">aaa</td>
+          <td class="refund-th">sss</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">fff</td>
+          <td class="refund-th">ggg</td>
         </tr>
       </table>
     </div>

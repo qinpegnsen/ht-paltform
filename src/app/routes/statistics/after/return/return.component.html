@@ -12,7 +12,6 @@
     </ul>
   </div>
   <div class="xz">
-
     <button class="btn">搜索</button>
     <select name="" id="" class="sel">
       <option value="按照天统计">按照天统计</option>
@@ -20,16 +19,52 @@
       <option value="按照月统计">按照月统计</option>
     </select>
   </div>
+<!--图表切换-->
+  <div class="panel">
+    <tabset class="bg-white p0" [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-clock-o fa-fw"></em>Tasks Panel
+        </ng-template>
+        <div>
+          <!-- START list group-->
+          <div class="list-group mb0">
+            <div class="refund-table">
+              <h3 style="text-align: center">排行榜</h3>
+              <div echarts [options]="option" class="demo-chart"></div>
+            </div>
+          </div>
+          <!-- END list group-->
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-money fa-fw"></em>Transactions Panel
+        </ng-template>
+        <div>
+          <!-- START table responsive-->
+          <div class="table-responsive">
+            <div class="refund-table">
+              <h3 style="text-align: center">很帅气</h3>
+              <div echarts [options]="optiona" class="demo-chart"></div>
+            </div>
+          </div>
+          <!-- END table responsive-->
+        </div>
+      </tab>
+    </tabset>
+  </div>
+
   <div class="panel panel-default">
     <div class="new-vip">退款金额统计表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">订单编号</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">退款编号</rzhDefaultSorter>
           </th>
           <th class="thh">
@@ -38,19 +73,19 @@
           <th class="thh">
             <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">会员名称</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">申请时间</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">商家处理</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">平台处理</rzhDefaultSorter>
           </th>
 
@@ -58,15 +93,15 @@
         </thead>
         <tbody>
         <tr>
-          <td class="td">ddd</td>
-          <td class="td">ddd</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">ddd</td>
           <td class="thh">aaa</td>
           <td class="thh">sss</td>
-          <td class="td">ddd</td>
-          <td class="td">ddd</td>
-          <td class="td">ddd</td>
-          <td class="td">ddd</td>
-          <td class="td">ddd</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">ddd</td>
         </tr>
       </table>
     </div>

@@ -3,7 +3,7 @@
 </div>
 
 <div class="panel panel-default">
-
+<!--操作提示-->
   <div class="panel mb p ts">
     <p class="font18">操作提示</p>
     <ul>
@@ -13,20 +13,18 @@
     </ul>
   </div>
   <div class="xz">
-
-    <button class="btn">搜索</button>
+<!--搜索按钮-->
+    <button class="btn">
+      <i class="icon icon-magnifier icona"></i>
+    </button>
+    <!--选择时间条件-->
     <select name="" id="" class="sel">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-    <select name="" id="" class="sel">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
-    </select>
-
   </div>
+  <!--订单列表-->
   <div class="panel panel-default">
     <div class="new-vip">订单列表</div>
     <div class="panel-body">
@@ -34,30 +32,30 @@
         <thead>
 
         <tr>
-        <th class="th">
+        <th class="refund-th">
           <rzhDefaultSorter by="name">订单号</rzhDefaultSorter>
         </th>
-        <th class="th">
+        <th class="refund-th">
             <rzhDefaultSorter by="name">买家</rzhDefaultSorter>
         </th>
         <th style="width: 28%;border: 1px solid #ccc;text-align: center">
             <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
         </th>
-        <th class="th">
+        <th class="refund-th">
             <rzhDefaultSorter by="name">下单时间</rzhDefaultSorter>
         </th>
-        <th class="th">
+        <th class="refund-th">
             <rzhDefaultSorter by="name">订单金额（元）</rzhDefaultSorter>
         </th>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td class="td">aaa</td>
-          <td class="td">sss</td>
-          <td class="td">ddd</td>
-          <td class="td">aaa</td>
-          <td class="td">aaa</td>
+          <td class="refund-th">aaa</td>
+          <td class="refund-th">sss</td>
+          <td style="width: 28%;border: 1px solid #ccc;text-align: center">ddd</td>
+          <td class="refund-th">aaa</td>
+          <td class="refund-th">aaa</td>
         </tr>
       </table>
       <!--<tfoot>-->
