@@ -20,6 +20,7 @@ import { SaleDetailComponent } from './goods/sale-detail/sale-detail.component';
 import { AfterComponent } from './after/after.component';
 import { RefundComponent } from './after/refund/refund.component';
 import { ReturnComponent } from './after/return/return.component';
+import {AngularEchartsModule} from "ngx-echarts";
 
 
 // const addSort: Routes = [

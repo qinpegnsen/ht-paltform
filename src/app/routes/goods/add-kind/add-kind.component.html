@@ -62,7 +62,8 @@
               <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{fileName}}
-                <input type="file" name="brandPic" ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
+                <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
+                        (change)="fileChangeListener($event)"/>
               </label>
             </div>
           </div>

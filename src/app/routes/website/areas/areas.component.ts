@@ -69,12 +69,16 @@ export class AreasComponent implements OnInit {
       type: "add",
       size: 'xs'
     };
+    this.queryList()//获取地区的列表
+  }
 
 
-    /**
-     * 获取地区的列表
-     * @param event
-     */
+  /**
+   * 获取地区的列表
+   * @param event
+   */
+  public queryList() {
+
     let data={area_code:'',level:1}
     let url= "/res/area/queryAreasByCode";
     let result = this.AreasService.controlDatas(url,data);
@@ -161,6 +165,9 @@ export class AreasComponent implements OnInit {
           }
         console.log(data)
         _this.AreasService.delCode(url, data); //删除数据
+        let datas={areaCode:delCodeId}
+        let urls= "/res/area/queryAreasByCode";
+        _this.AreasService.controlDatas(urls,datas);//实现局部刷新
       }
     );
   }

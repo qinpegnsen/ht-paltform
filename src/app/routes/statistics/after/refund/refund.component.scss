@@ -11,16 +11,39 @@
 }
 .sel{
   float: right;
-  height: 30px;
+  height: 35px;
   width: 230px;
-  margin-right: 10px;
+  margin-right:10px;
+  border: 1px solid #dde6e9;
+  border-radius: 4px;
+}
+.refund-btn{
+  float: right;
+  border: 1px solid #d9e0e7;
+  background: #fff;
+  height: 30px;
+  width: 30px;
   margin-top: 5px;
 }
-.btn{
+.btna{
   float: right;
+  border: 1px solid #d9e0e7;
+  background: #d9e0e7;
   height: 30px;
-  width: 50px;
+  width: 30px;
   margin-top: 5px;
+  margin-right: 10px;
+}
+.refund-btn:hover{
+  float: right;
+  border: 1px solid #d9e0e7;
+  background: #d9e0e7;
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+}
+.icona{
+  margin-left: -6px;
 }
 .new-vip{
   width:100%;
@@ -36,7 +59,7 @@
   border: 1px solid #ccc;
   text-align: center;
 }
-.th{
+.refund-th{
   width:10%;
   border: 1px solid #ccc;
   text-align: center;
@@ -44,8 +67,37 @@
 tr:first-child>th{
   border-top:  1px solid #ccc!important;
 }
-.td{
-  width: 10%;
-  border: 1px solid #ccc;
+.demo-chart {
+  width:95%;
+  height: 300px;
+  margin: auto;
+}
+.calendara{
+  width: 230px;
+  height: 30px;
+  float: right;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding:3px 0 0 7px;
+  border-radius: 0;
+  background-color: #fff;
+}
+.caldiv{
+  width: 230px;
+  float: right;
+}
+.refund-table{
+  width: 100%;
+}
+.refund-table h3{
   text-align: center;
+}
+//日期选择样式
+.sel-date{
+  position: relative;
+}
+.sel-date .date-info{
+  position: absolute;z-index: 999; top: 35px; min-height:200px;
 }

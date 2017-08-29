@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SettingsService} from '../../../core/settings/settings.service';
 import {AjaxService} from "../../../core/services/ajax.service";
 import {ActivatedRoute,Router} from '@angular/router';
+import {AreasComponent} from "../areas/areas.component";
 const swal = require('sweetalert');
 
 @Component({
@@ -20,14 +21,12 @@ export class RightpageComponent implements OnInit {
   }
 
   // 构造 初始化
-  constructor(public settings: SettingsService,private router:Router,private ajax:AjaxService,private routeInfo:ActivatedRoute) {
+  constructor(public settings: SettingsService,private router:Router,private ajax:AjaxService,private routeInfo:ActivatedRoute,private AreasComponent:AreasComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
   ngOnInit() {
     this.queryId = this.routeInfo.snapshot.queryParams['id'];
     this.areaCode = this.routeInfo.snapshot.queryParams['areaCode'];
-
-
 
     /**
      * 请求详细数据，并显示()
@@ -46,15 +45,17 @@ export class RightpageComponent implements OnInit {
       });
     }
   }
-  // 取消
+
+  /**
+   * 关闭右侧滑动页面
+   */
   cancel(){
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
-
-
   }
 
   addLimitList(value){
     let _this = this;
+    //添加区域信息
     if(_this.queryId == 1){
       _this.ajax.post({
         url: '/res/area/addArea',
@@ -67,6 +68,7 @@ export class RightpageComponent implements OnInit {
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
             swal('添加区域提交成功！', '','success');
+            _this.AreasComponent.queryList()//实现刷新
           } else {
             swal('添加区域提交失败====！', 'error');
           }
@@ -89,6 +91,7 @@ export class RightpageComponent implements OnInit {
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true});   //路由跳转
             swal('修改区域信息成功！', '','success');
+            _this.AreasComponent.queryList()//实现刷新
           } else {
             let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
             swal(res.info, errorMsg, 'error');

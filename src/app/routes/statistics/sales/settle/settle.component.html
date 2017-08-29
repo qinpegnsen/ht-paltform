@@ -3,7 +3,7 @@
 </div>
 
 <div class="panel panel-default">
-
+<!--操作提示-->
   <div class="panel mb p ts">
     <p class="font18">操作提示</p>
     <ul>
@@ -12,33 +12,31 @@
     </ul>
   </div>
   <div class="xz">
-
-    <button class="btn">搜索</button>
+<!--搜索按钮-->
+    <button class="btn">
+      <i class="icon icon-magnifier icona"></i>
+    </button>
+    <!--选择时间条件-->
     <select name="" id="" class="sel">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-    <select name="" id="" class="sel">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
-    </select>
-
   </div>
-
+<!--图文结合-->
   <div class="row r3">
     <div class="col-md-4">
       <!-- START panel-->
-      <div class="panel panel-primary">
+      <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-xs-3">
-              <em class="fa fa-comments fa-5x"></em>
+
+            <div class="col-xs-9">
+              <div class="">订单金额（元）</div>
+              <p class="text-md m0">New Comments!</p>
             </div>
-            <div class="col-xs-9 text-right">
-              <div class="text-lg">26</div>
-              <p class="m0">New Comments!</p>
+            <div class="col-xs-3 text-right">
+            <em class="fa fa-shopping-cart fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -47,15 +45,15 @@
     </div>
     <div class="col-md-4">
       <!-- START panel-->
-      <div class="panel panel-green">
+      <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-xs-3">
-              <em class="fa fa-tasks fa-5x"></em>
+            <div class="col-xs-9 ">
+              <div class="">退款金额（元）</div>
+              <p class="text-md m0">New Tasks!</p>
             </div>
-            <div class="col-xs-9 text-right">
-              <div class="text-lg">12</div>
-              <p class="m0">New Tasks!</p>
+            <div class="col-xs-3 text-right">
+            <em class="fa fa-gavel fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -64,24 +62,79 @@
     </div>
     <div class="col-md-4">
       <!-- START panel-->
-      <div class="panel panel-warning">
+      <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-xs-3">
-              <em class="fa fa-shopping-cart fa-5x"></em>
+
+            <div class="col-xs-9 ">
+              <div class="">实收金额（元）</div>
+              <p class="text-md m0">New Orders!</p>
             </div>
-            <div class="col-xs-9 text-right">
-              <div class="text-lg">124</div>
-              <p class="m0">New Orders!</p>
+            <div class="col-xs-3 text-right">
+            <em class="fa fa-tags fa-3x tp-em"></em>
             </div>
           </div>
         </div>
       </div>
       <!-- END panel-->
     </div>
-
   </div>
+  <div class="row r3">
+    <div class="col-md-4">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
 
+            <div class="col-xs-9">
+              <div class="">实收佣金（元）</div>
+              <p class="text-md m0">New Comments!</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-pie-chart fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+        <!-- END panel-->
+      </div>
+    </div>
+    <div class="col-md-4">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9 ">
+              <div class="">店铺费用（元）</div>
+              <p class="text-md m0">New Tasks!</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-cube fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+    <div class="col-md-4">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+
+            <div class="col-xs-9 ">
+              <div class="">总收入（元）</div>
+              <p class="text-md m0">New Orders!</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-calculator fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+  </div>
+<!--统计表-->
   <div class="panel panel-default">
     <div class="new-vip">销售收入统计表</div>
     <div class="panel-body">
@@ -91,22 +144,22 @@
           <th style="width: 15%;border: 1px solid #ccc;text-align: center">
             <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="trefund-thh">
             <rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>
           </th>
-          <th class="th">
+          <th class="refund-th">
             <rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>
           </th>
 
@@ -114,13 +167,13 @@
         </thead>
         <tbody>
         <tr>
-          <td class="td">aaa</td>
-          <td class="td">sss</td>
-          <td class="td">ddd</td>
-          <td class="td">aaa</td>
-          <td class="td">aaa</td>
-          <td class="td">sss</td>
-          <td class="td">ddd</td>
+          <td style="width: 15%;border: 1px solid #ccc;text-align: center">aaa</td>
+          <td class="refund-th">sss</td>
+          <td class="refund-th">ddd</td>
+          <td class="refund-th">aaa</td>
+          <td class="refund-th">aaa</td>
+          <td class="refund-th">sss</td>
+          <td class="refund-th">ddd</td>
         </tr>
       </table>
       <!--<tfoot>-->

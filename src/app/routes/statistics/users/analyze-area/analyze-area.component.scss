@@ -18,9 +18,22 @@
 }
 .btn{
   float: right;
+  border: 1px solid #d9e0e7;
+  background: #fff;
   height: 30px;
-  width: 50px;
+  width: 30px;
   margin-top: 5px;
+}
+.btn:hover{
+  float: right;
+  border: 1px solid #d9e0e7;
+  background: #d9e0e7;
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+}
+.icona{
+  margin-left: -6px;
 }
 .new-vip{
   width:100%;
@@ -31,7 +44,7 @@
   line-height: 2.6;
   padding-left: 1%;
 }
-.th{
+.refund-th{
   width: 25%;
   border: 1px solid #ccc;
   text-align: center;
@@ -39,8 +52,4 @@
 tr:first-child>th{
   border-top:  1px solid #ccc!important;
 }
-.td{
-  width: 25%;
-  border: 1px solid #ccc;
-  text-align: center;
-}
+

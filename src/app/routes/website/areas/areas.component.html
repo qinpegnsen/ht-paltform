@@ -61,13 +61,11 @@
         <td>{{organ.areaName}}</td>
         <td>{{organ.level}}</td>
         <td>
-          <!--添加区域信息按钮-->
-          <app-buttons [config]="option" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
           <!--修改区域信息按钮-->
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2,areaCode:organ.areaCode}"></app-buttons>
           <!--删除区域信息按钮-->
           <app-buttons [config]="deletebutton" (click)="delete(organ.areaCode)"></app-buttons>
-          <span class="btn btn-default btn-xs" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
+          <span class="btn btn-default btn-xs"  *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
         </td>
       </tr>
       </tbody>

@@ -38,6 +38,7 @@ import { AreaNamePipe } from './pipe/area-name.pipe';
 import { SelectModule } from 'ng2-select';
 import {RzhtoolsService} from "../core/services/rzhtools.service";
 import {SubmitService} from "../core/forms/submit.service";
+import {AngularEchartsModule} from "ngx-echarts";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -65,7 +66,8 @@ import {SubmitService} from "../core/forms/submit.service";
     DataTableModule,
     RzhButtonsModule,
     SelectAreaModule,
-    SelectModule
+    SelectModule,
+    AngularEchartsModule
   ],
   providers: [
     ColorsService,
@@ -119,7 +121,8 @@ import {SubmitService} from "../core/forms/submit.service";
     SelectAreaModule,
     StatePipe,
     AreaNamePipe,
-    SelectModule
+    SelectModule,
+    AngularEchartsModule
   ]
 })
 

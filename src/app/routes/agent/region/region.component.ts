@@ -38,7 +38,7 @@ export class RegionComponent implements OnInit {
       title:'新增区域代理',
     };
 
-    this.controlDatas();
+    this.controlDatas();//调用获取地区列表方法
   }
 
 
@@ -51,7 +51,7 @@ export class RegionComponent implements OnInit {
     if (typeof event !== "undefined") activePage = event.activePage;
 
     this.ajax.get({
-      url: "/agent_area/listPage",
+      url: "/agentArea/listPage",
       data: {
         curPage: activePage,
       },

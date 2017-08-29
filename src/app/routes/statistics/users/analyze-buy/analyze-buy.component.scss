@@ -18,7 +18,20 @@
 }
 .btn{
   float: right;
+  border: 1px solid #d9e0e7;
+  background: #fff;
   height: 30px;
-  width: 50px;
+  width: 30px;
   margin-top: 5px;
+}
+.btn:hover{
+  float: right;
+  border: 1px solid #d9e0e7;
+  background: #d9e0e7;
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+}
+.icona{
+  margin-left: -6px;
 }
