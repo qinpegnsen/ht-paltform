@@ -26,7 +26,7 @@
     <span class="cursor-p" (click)="queryChildSortList()">文章分类</span>
     <span *ngFor="let menuTit of childMenuTitList">
       <i class="fa fa-arrow-right mr ml"></i>
-      <font class="cursor-p" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
+      <font class="cursor-p" (click)="queryChildSortList('',menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
     </span>
     <span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
       <i class="fa fa-level-up mr5"></i>
@@ -71,9 +71,9 @@
         <td>{{article.createTime}}</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="addSort" [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
-          <app-buttons [config]="childbutton" routerLink="addSort" [queryParams]="{linkType:'addChildSort',acParentId:article.id}"></app-buttons>
+          <app-buttons [config]="childbutton" routerLink="addSort" [queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="deleteSort(article.id,article.acParentId)"></app-buttons>
-          <span (click)="queryChildSortList(article.id,article.acName,false)" class="btn btn-default btn-xs">
+          <span (click)="queryChildSortList('',article.id,article.acName,false)" class="btn btn-default btn-xs"  *ngIf="article.haveChildren">
           <i class="fa fa-level-down"></i>
           下级菜单
           </span>

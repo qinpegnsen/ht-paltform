@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SettingsService} from "../../../core/settings/settings.service";
-import {AddArticleSortService} from "./add-article-sort.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleSortComponent} from "../article/article-sort/article-sort.component";
+import {SubmitService} from "../../../core/forms/submit.service";
 
 @Component({
   selector: 'app-add-article-sort',
@@ -19,7 +19,7 @@ export class AddArticleSortComponent implements OnInit {
   public id:number;
   public flag:boolean=false;
   public stateList:Array<string>;
-  constructor(public settings: SettingsService,public AddArticleSortService: AddArticleSortService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router) {
+  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,public service:SubmitService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -55,8 +55,7 @@ export class AddArticleSortComponent implements OnInit {
         id:this.acParentId
       }
     }
-
-    let updataData=this.AddArticleSortService.queryClassById(url,data);
+    let updataData=this.service.getData(url,data);
     this.updataData=updataData;
     console.log(updataData)
   }
@@ -75,20 +74,22 @@ export class AddArticleSortComponent implements OnInit {
         state:obj.state,
         summary:obj.summary
       }
-      this.AddArticleSortService.addClass(url,data);
+      this.service.postRequest(url,data);
+      this.ArticleSortComponent.queryArticSortleList()
 
     }else if(this.linkType=='addChildSort'){
       let url='/articleClass/addArticleClass';
       let data={
         acName:this.acName,
-        acParentId:this.acParentId,
+        acParentId:this.id,//每个类别的id作为他的子类的父id
         acSort:this.acSort,
         state:obj.state,
         summary:obj.summary
       }
-      this.AddArticleSortService.addClass(url,data);
+      this.service.postRequest(url,data);
+      this.ArticleSortComponent.queryChildSortList('',this.id,this.updataData.acName,this.flag)
     }else if(this.linkType=='updateSort'){
-      this.flag=true;
+      this.flag=true;//flag用来判断面包屑是加还是减，当新增分类的时候为假，这时候面包屑加，当修改的时候设置为true，这时候减
       let url='/articleClass/updateArticleClass';
       let data={
         id:this.id,
@@ -97,14 +98,12 @@ export class AddArticleSortComponent implements OnInit {
         summary:obj.summary,
         acParentId:this.acParentId
       }
-      this.AddArticleSortService.updateClass(url,data);
+      // this.AddArticleSortService.updateClass(url,data);
+      this.service.putRequest(url,data);
+      this.ArticleSortComponent.getChild(this.acParentId)
+
     }
     this.router.navigate(['/main/operation/article/sort']);
-
-    /**
-     * flag 用来判断面包屑是加还是减，当新增分类的时候为假，这时候面包屑加，当修改的时候设置为true，这时候减
-     */
-    this.ArticleSortComponent.queryChildSortList(this.acParentId,this.updataData.acName,this.flag)
 
   }
 }

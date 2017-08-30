@@ -6,7 +6,7 @@ import {AppComponent} from "../../../../../app.component";
 const swal = require('sweetalert');
 @Injectable()
 export class ContentService {
-
+  //不用公共的服务，因为返回的不一样,这里是boolean值
   constructor(private ajax: AjaxService) { }
 
   /**
@@ -35,36 +35,6 @@ export class ContentService {
     });
     return flag;
   }
-
-  /**
- * 查询文章管理列表
- * @param data
- * @param url
- * @returns {Page}
- */
-public queryData(url,data) {
-  let result:Page=new Page();
-  this.ajax.get({
-    url: url,
-    data: data,
-    async:false,
-    success: (data) => {
-      if (!isNull(data)) {
-        if(data.success){
-          result=new Page(data.data);
-        }else{
-          console.log('查询文章管理列表 返回的success为假');
-        }
-      }else{
-        console.log('查询文章管理列表 返回的数据为空');
-      }
-    },
-    error: () => {
-      console.log('查询文章管理列表 连接数据库失败');
-    }
-  });
-  return result;
-}
 
   /**
    * 是否置顶
@@ -164,7 +134,7 @@ public queryData(url,data) {
   }
 
   /**
-   * 发布文章
+   *
    * @param data
    * @param url
    * @returns {Page}
@@ -192,34 +162,6 @@ public queryData(url,data) {
     return result;
   }
 
-  /**
-   * 查询置顶后的文章管理列表
-   * @param data
-   * @param url
-   * @returns {Page}
-   */
-  public queryTopList(url,data) {
-    let result:Page=new Page();
-    this.ajax.get({
-      url: url,
-      data: data,
-      async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            result=new Page(data.data);
-          }else{
-            console.log('查询置顶后的文章管理列表 返回的success为假');
-          }
-        }else{
-          console.log('查询置顶后的文章管理列表 返回的数据为空');
-        }
-      },
-      error: () => {
-        console.log('查询文章管理列表 连接数据库失败');
-      }
-    });
-    return result;
-  }
+
 
 }

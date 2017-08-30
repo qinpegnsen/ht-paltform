@@ -8,7 +8,7 @@ export class NavService {
   constructor(private ajax: AjaxService) { }
 
   /**
-   * 查询文章状态总数
+   * 查询文章状态总数,这个不能用公共的服务的原因在于数据结构不一样，直接返回的是data
    * @param data
    * @param url
    * @returns {Page}

@@ -8,11 +8,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { ArticleSortComponent } from './article/article-sort/article-sort.component';
 import {SharedModule} from "../../shared/shared.module";
 import { AddArticleSortComponent } from './add-article-sort/add-article-sort.component';
-import {AddArticleSortService} from "./add-article-sort/add-article-sort.service";
-import {ArticleSortService} from "./article/article-sort/article-sort.service";
-import {ArticleSortDelService} from "./article/article-sort/article-sort-del.service";
 import {ArticleManageComponent} from "./article/article-manage/article-manage.component";
-import {TableDateService} from "./article/article-manage/table-date.service";
 import {AddArticleManService} from "./article/article-manage/add-article/add-article-man.service";
 import { ContentNavComponent } from './article/article-manage/content-nav/content-nav.component';
 import { ContentComponent } from './article/article-manage/content/content.component';
@@ -52,6 +48,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent],
-  providers:[AddArticleSortService,TableDateService,ArticleSortService,ArticleSortDelService,ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService,ContentNavComponent]
+  providers:[ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService,ContentNavComponent]
 })
 export class OperationModule { }

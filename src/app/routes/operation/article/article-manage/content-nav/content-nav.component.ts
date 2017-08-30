@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {NavService} from "./nav.service";
+import {SubmitService} from "../../../../../core/forms/submit.service";
 
 @Component({
   selector: 'app-content-nav',
@@ -20,7 +21,7 @@ export class ContentNavComponent implements OnInit,OnChanges{
 
   public stateList; //各种状态总数列表
 
-  constructor(public NavService:NavService) { }
+  constructor(public NavService:NavService,public service:SubmitService) { }
 
   /**
    * 初始化的时候获取所有状态的总条数

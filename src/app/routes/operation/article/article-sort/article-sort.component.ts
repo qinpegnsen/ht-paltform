@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleSortService} from "app/routes/operation/article/article-sort/article-sort.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
-import {ArticleSortDelService} from "./article-sort-del.service";
 import {isNullOrUndefined} from "util";
+import {SubmitService} from "../../../../core/forms/submit.service";
+import {Page} from "../../../../core/page/page";
 const swal = require('sweetalert');
 
 @Component({
   selector: 'app-article-sort',
   templateUrl: './article-sort.component.html',
-  styleUrls: ['./article-sort.component.scss'],
-  providers:[ArticleSortDelService]
+  styleUrls: ['./article-sort.component.scss']
 })
 export class ArticleSortComponent implements OnInit {
   private articleSortAddbutton:Object;//新增分类按钮
   private childbutton:Object;//新增子分类按钮
   private deletebutton:Object;//删除按钮
   private updatebutton:Object;//修改按钮
-  private articleSortListdata;//用来存储服务取回来的数据
+  private articleSortListdata//用来存储服务取回来的数据
   private searchKey:string='';//默认查询的分类的名称
   private childMenuCode; //菜单编码，查询子集用
   private childMenuTitList:Array<any> = []; //菜单级别面包屑
 
-  constructor(private ArticleSortService:ArticleSortService,private ArticleSortDelService:ArticleSortDelService) { }
+  constructor(public service:SubmitService) { }
 
   /**
    * 初始化
@@ -63,7 +62,7 @@ export class ArticleSortComponent implements OnInit {
       acName:this.searchKey
     }
     let url= "/articleClass/queryArticleClassPage";
-    let result=this.ArticleSortService.queryData(url,data);
+    let result=new Page(this.service.getData(url,data));
     this.articleSortListdata= result;
   }
 
@@ -88,48 +87,57 @@ export class ArticleSortComponent implements OnInit {
           let data={
             id:delSortId
           }
-         let  flag = that.ArticleSortDelService.confirmDel(url,data)
-          if(flag){
-            that.queryChildSortList(acParentId)
-          }
-        } else {
-          swal("Cancelled", "Your imaginary file is safe :)", "error");
+         that.service.delRequest(url,data)
+         that.getChild(acParentId)
+
         }
       });
   }
 
 
   /**
-   * 根据分类的父id查询子分类
+   * 根据分类的父id查询子分类 和面包屑导航
    * @param childCode 编码
    * @param menuName  名字
    * @param isTit 是否点击的面包屑导航
+   * @param parentId 主要用来删除的用的
    */
-  queryChildSortList(childCode?, menuName?, isTit?:boolean) {
+  queryChildSortList(parentId,childCode?, menuName?, isTit?:boolean) {
     let me = this, num = 0;
     if (isNullOrUndefined(childCode)) {
       this.childMenuCode = null, this.childMenuTitList = []; //清空子集查询
     } else {
       me.childMenuCode = childCode;
       let item = {name: menuName, code: childCode};
-      if (!isTit){//非点击面包屑路径时或者是点击返回上一级的时候，添加面包屑
+      if (!isTit){//非点击面包屑路径时或者是点击下一级的时候，添加面包屑
         me.childMenuTitList.push(item);
-      }else { //点击面包屑路径时，提出点击地址后的面包屑路径
+      }else { //点击面包屑路径时或者是返回上一级的时候，提出点击地址后的面包屑路径
+
+        console.log(childCode,menuName)
+
         for (var i = 0; i < me.childMenuTitList.length; i++) {  //获取点击面包屑的路径地址下标
           if (item.code == me.childMenuTitList[i].code) num = i;
         }
         me.childMenuTitList.splice(num + 1); //剔除下标后的路径
       }
     }
-   let data={
-     curPage:1,
-     pageSize:4,
-     acParentId:childCode
-   }
-   let url= "/articleClass/queryArticleClassPage";
-   let result = me.ArticleSortService.queryData(url,data);
-   this.articleSortListdata= result;
+    let transId=parentId?parentId:childCode //解决删除子类不能返回的和查询为空的问题
+    me.getChild(transId)
 
+  }
+
+  /**
+   * 根据分类的父id查询子分类,从上面分离出来的
+   */
+  getChild(transId){
+    let data={
+      curPage:1,
+      pageSize:4,
+      acParentId:transId
+    }
+    let url= "/articleClass/queryArticleClassPage";
+    let result = new Page(this.service.getData(url,data));
+    this.articleSortListdata= result;
   }
 
   /**
@@ -137,8 +145,8 @@ export class ArticleSortComponent implements OnInit {
    */
   goBackMenu() {
     let num = this.childMenuTitList.length;
-    if (num - 2 < 0) this.queryChildSortList();
-    else this.queryChildSortList(this.childMenuTitList[num - 2].code, this.childMenuTitList[num - 2].name, true);
+    if (num - 2 < 0) this.queryChildSortList('');
+    else this.queryChildSortList('',this.childMenuTitList[num - 2].code, this.childMenuTitList[num - 2].name, true);
   }
 
 }

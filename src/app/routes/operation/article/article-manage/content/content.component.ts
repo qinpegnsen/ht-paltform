@@ -3,6 +3,8 @@ import {NavigationEnd, Router} from "@angular/router";
 import {ContentService} from "./content.service";
 import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTable";
 import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
+import {SubmitService} from "../../../../../core/forms/submit.service";
+import {Page} from "../../../../../core/page/page";
 const swal = require('sweetalert');
 
 @Component({
@@ -35,7 +37,7 @@ export class ContentComponent implements OnInit,OnChanges  {
   private publishbutton:Object;//草稿文章发布按钮
   private auditbutton:Object;//待审核文章审核按钮
 
-  constructor(private router:Router,public ContentService:ContentService,public NavService:NavService) {
+  constructor(private router:Router,public ContentService:ContentService,public NavService:NavService,public service:SubmitService) {
     this.articleState='DRAFT'
   }
 
@@ -49,7 +51,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
+          // console.log(event.url)
           if(event.url.indexOf('linkType')>0){
             this.flag=false;
           }else if(event.url=='/main/operation/article/manage'){
@@ -122,8 +124,7 @@ export class ContentComponent implements OnInit,OnChanges  {
       data.articleState=this.articleState?this.articleState:'DRAFT';
     }
     let url= "/article/queryAllArticleBySort";
-    let result=this.ContentService.queryData(url,data);
-    console.log(result)
+    let result=new Page(this.service.getData(url,data));
     this.articleManListdata= result;
   }
 

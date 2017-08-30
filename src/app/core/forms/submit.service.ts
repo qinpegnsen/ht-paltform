@@ -13,13 +13,13 @@ export class SubmitService {
   }
 
   /**
-   * POST 请求，并且不需要返回数据
+   * POST 请求
    * @param submitUrl
    * @param submitData
    * @param back:true(返回上一级)
    */
   postRequest(submitUrl, submitData, back?: boolean) {
-    let me = this;
+    let me = this,result;
     me.ajax.post({
       url: submitUrl,
       data: submitData,
@@ -35,6 +35,7 @@ export class SubmitService {
             timer: 2000, //关闭时间，单位：毫秒
             showConfirmButton: false  //不显示按钮
           });
+          result=res.data;
         } else {
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
@@ -49,6 +50,7 @@ export class SubmitService {
         console.log("post error");
       }
     })
+    return result;
   }
 
   /**
@@ -84,12 +86,13 @@ export class SubmitService {
   }
 
   /**
-   * put 请求，并且不需要返回数据
+   * put 请求
    * @param submitUrl
    * @param submitData
    * @param back:true(返回上一级)
    */
   putRequest(requestUrl, requestDate, back?: boolean) {
+    let result;
     this.ajax.put({
       url: requestUrl,
       data: requestDate,
@@ -105,6 +108,7 @@ export class SubmitService {
             timer: 2000, //关闭时间，单位：毫秒
             showConfirmButton: false  //不显示按钮
           });
+          result=res.data;
         } else {
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
@@ -119,6 +123,7 @@ export class SubmitService {
         console.log('put error', res);
       }
     });
+    return result;
   }
 
   /**

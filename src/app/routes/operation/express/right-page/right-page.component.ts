@@ -3,7 +3,6 @@ import {SettingsService} from "../../../../core/settings/settings.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {ExpressComponent} from "../express.component";
-import {AddArticleSortService} from "app/routes/operation/add-article-sort/add-article-sort.service";
 
 @Component({
   selector: 'app-right-page',
@@ -23,7 +22,7 @@ export class RightPageComponent implements OnInit {
   public bingID:string="Y"; //是否启用的数组
 
 
-  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public service:SubmitService,public parent:ExpressComponent,public selectById: AddArticleSortService) {
+  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public service:SubmitService,public parent:ExpressComponent) {
     this.settings.showRightPage("30%");
   }
 
@@ -41,7 +40,7 @@ export class RightPageComponent implements OnInit {
       let data={
         id:this.id
       }
-      this.editData=this.selectById.queryClassById(url,data);
+      this.editData=this.service.getData(url,data);
     }
 
     /**

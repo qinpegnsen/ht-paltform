@@ -81,9 +81,12 @@ export class AddArticleComponent implements OnInit {
      * 初始化的时候调取文章分类的接口
      * @type {string}
      */
-    let url = '/articleClass/queryArticleClass';
-    let data = {}
-    this.articleClassList = this.AddArticleManService.articleClass(url, data)
+    let url = '/articleClass/queryArticleClassPage';
+    let data = {
+      curPage:1,
+      pageSize:10,
+    }
+    this.articleClassList = this.AddArticleManService.articleClass(url,data).voList
 
     /**
      * 调用富文本编辑器，初始化编辑器
@@ -266,6 +269,8 @@ export class AddArticleComponent implements OnInit {
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.uuid=this.uuid;
+    this.submitObj.articleCommend='Y';
+    this.submitObj.articleCommentFlag='Y'
     let data = this.submitObj;
     console.log(this.submitState)
     this.AddArticleManService.addArticle(url, data);
