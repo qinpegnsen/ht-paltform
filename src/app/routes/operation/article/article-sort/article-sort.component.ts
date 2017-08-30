@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleSortService} from "app/routes/operation/article/article-sort/article-sort.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
-import {ArticleSortDelService} from "./article-sort-del.service";
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "../../../../core/page/page";
