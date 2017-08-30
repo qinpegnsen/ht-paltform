@@ -2,14 +2,15 @@
   min-width: 450px;
 }
 
+.step-two fieldset {
+  border-bottom: 1px solid #eee;
+}
+
 .step-two legend {
   font-size: 18px;
   background-color: #f5f5f5;
   line-height: 30px;
   padding: 5px 0 5px 15px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 .step-two dl {
@@ -69,7 +70,8 @@
   font-weight: bold;
   border-bottom: 1px solid #f0f0f0;
 }
-.specs h6{
+
+.specs h6 {
   line-height: 36px;
 }
 
@@ -86,9 +88,11 @@
   padding-right: 5px;
   margin-bottom: 5px;
 }
-.specs li .c-checkbox{
+
+.specs li .c-checkbox {
   line-height: 22px;
 }
+
 .specs form {
   border-bottom: 1px dashed #f0f0f0;
 }
@@ -151,6 +155,7 @@
   white-space: nowrap;
   height: 24px;
   padding: 5px 10px;
+  position: relative;
 }
 
 .sku-table td {
@@ -160,15 +165,44 @@
   border-top: solid 1px #BCE8F1;
 }
 
-.sku-table td .price {
+.sku-table ._price {
   float: left;
   width: 50px;
 }
-.sku-table td .stock {
+
+.sku-table .stock {
   width: 60px;
 }
-.sku-table td .sku {
+
+.sku-table .sku {
   width: 80px;
+}
+
+.sku-table .dropdown-menu p {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.sku-table .dropdown-menu ._price {
+  width: 66px;
+  font-size: 12px;
+}
+
+.sku-table .close{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sku-table .dropdown-menu button {
+  font-size: 12px;
 }
 
 .goodspics {
@@ -177,6 +211,10 @@
   border: solid 1px #BCE8F1;
   box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
   padding: 9px;
+}
+.goodspics img{
+  width: 100%;
+  height: 100%;
 }
 
 .goodspics .color-value {
@@ -221,12 +259,10 @@
   display: table-cell;
   width: 100px;
   height: 100px;
-  border: solid 1px #F5F5F5;
   position: absolute;
   z-index: 1;
   top: 10px;
   left: 10px;
-  overflow: hidden;
 }
 
 .goodspics .goods-pic-list li .upload-thumb img {
@@ -245,7 +281,7 @@
   font-size: 12px;
 }
 
-.logistics label,.others-info .c-radio {
+.logistics label, .others-info .c-radio {
   line-height: 22px;
 }
 
@@ -253,10 +289,12 @@
   float: left;
   width: 50px;
 }
+
 .logistics .weight {
   float: left;
   width: 66px;
 }
+
 .logistics .text, .logistics .rules-list {
   font: 12px/1.5 Tahoma, Arial, "\5b8b\4f53", sans-serif;
   color: #777;

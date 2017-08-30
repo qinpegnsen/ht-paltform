@@ -1,4 +1,4 @@
-<form class="step-two">
+<form class="step-two panel panel-default" [formGroup]="valForm">
   <!--商品基本信息-->
   <fieldset class="m0 p0">
     <legend class="m0">商品基本信息</legend>
@@ -101,7 +101,7 @@
     <legend class="m0">商品规格及图片</legend>
     <dl class="clearfix">
       <dt class="col-xs-2">商品规格：</dt>
-      <dd class="col-xs-10 col-lg-8 specs">
+      <dd class="col-xs-10 specs">
         <h5 class="clearfix m0">
           <span class="col-sm-2 col-xs-3 text-right">规格</span>
           <span class="col-sm-10 col-xs-9">规格值 <em>（通过选择规格值建立商品与商品规格的关系）</em></span>
@@ -135,30 +135,124 @@
     </dl>
     <dl class="clearfix">
       <dt class="col-xs-2">商品价格及库存：</dt>
-      <dd class="col-xs-10 col-lg-8">
+      <dd class="col-xs-10">
         <table class="sku-table w100">
           <thead>
-          <tr>
-            <!--<th class="col-xs-2">属性1</th>-->
-            <!--<th class="col-xs-2">属性2</th>-->
-            <th class="sol-xs-2"><i>*</i>价格 <em class="icon-note"></em></th>
+          <!--当没有选择规格时-->
+          <tr class="text-center" *ngIf="skuAttr.length == 0">
+            <th [class.col-xs-2]="skuAttr"><i>*</i>市场价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置市场价</p>
+                  <input class="_price marketPrice" name="marketPrice" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
+            <th [class.col-xs-2]="skuAttr"><i>*</i>销售价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置销售价</p>
+                  <input class="_price price" name="price" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
+            <th [class.col-xs-2]="skuAttr"><i>*</i>会员价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置会员价</p>
+                  <input class="_price memberPrice" name="memberPrice" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
             <th class="col-xs-2"><i>*</i>库存 <em class="icon-note"></em></th>
-            <th class="col-xs-2">商家编号</th>
+          </tr>
+
+          <!--当选择了规格时-->
+          <tr class="text-center" *ngIf="skuAttr.length > 0">
+            <th class="col-xs-2" *ngFor="let attr of skuAttr"
+                [id]="attr.attrCode">{{attr.attrName}}</th>
+            <th [class.col-xs-2]="skuAttr"><i>*</i>市场价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置市场价</p>
+                  <input class="_price marketPrice" name="marketPrice" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
+            <th [class.col-xs-2]="skuAttr"><i>*</i>销售价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置销售价</p>
+                  <input class="_price price" name="price" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
+            <th [class.col-xs-2]="skuAttr"><i>*</i>会员价 <em class="icon-note cursor-p s-menu"></em>
+              <div class="dropdown-menu animated fadeInDown" role="menu">
+                <div class="close">×</div>
+                <div class="pl pr">
+                  <p>批量设置会员价</p>
+                  <input class="_price memberPrice" name="memberPrice" type="text" placeholder="0.00">
+                  <button class="btn btn-green btn-sm ml set">设置</button>
+                </div>
+              </div>
+            </th>
+            <th class="col-xs-2"><i>*</i>库存 <em class="icon-note"></em></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <!--<td>{{123}}</td>-->
-            <!--<td>{{456}}</td>-->
+
+          <!--当没有选择规格时-->
+          <tr *ngIf="skuVal.length == 0" class="text-center">
             <td>
-              <input class="text price num" name="" type="number">
+              <input class="text _price num" name="marketPrice" type="number">
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text stock num" name="" type="number">
+              <input class="text _price num" name="price" type="number" >
+              <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text num sku" name="" type="number">
+              <input class="text _price num" name="memberPrice" type="number">
+              <em class="add-on">元</em>
+            </td>
+            <td>
+              <input class="text stock num" name="stock" type="number" value="10" formControlName="minvalue" [formControl]="valForm.controls['minvalue']" >
+              <span class="text-danger"
+                    *ngIf="valForm.controls['minvalue'].hasError('min') && (valForm.controls['minvalue'].dirty || valForm.controls['minvalue'].touched)">库存最少为10 </span>
+            </td>
+          </tr>
+
+          <!--当选择了规格时-->
+          <tr *ngFor="let sku of skuVal">
+            <td *ngFor="let val of sku" [id]="val.valCode" [class]="val.idx">{{val.value}}</td>
+            <td>
+              <input class="text _price num" name="marketPrice" type="number" value="0.00">
+              <em class="add-on">元</em>
+            </td>
+            <td>
+              <input class="text _price num" name="price" type="number" value="0.00">
+              <em class="add-on">元</em>
+            </td>
+            <td>
+              <input class="text _price num" name="memberPrice" type="number" value="0.00">
+              <em class="add-on">元</em>
+            </td>
+            <td>
+              <input class="text stock num" name="stock" type="number" value="10" formControlName="minvalue"
+                     [formControl]="valForm.controls['minvalue']" >
+              <span class="text-danger"
+                    *ngIf="valForm.controls['minvalue'].hasError('min') && (valForm.controls['minvalue'].dirty || valForm.controls['minvalue'].touched)">库存最少为10 </span>
             </td>
           </tr>
           </tbody>
@@ -168,22 +262,46 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2">商品价格及库存：</dt>
-      <dd class="col-xs-10 col-lg-8 pic-list">
-        <div class="goodspics" data-spec-id="1" data-spce-value-id="23">
+      <dt class="col-xs-2"><i>*</i>商品图片：</dt>
+      <dd class="col-xs-10 pic-list">
+        <!--当没有选择第一规格时-->
+        <div class="goodspics" *ngIf="skuImg.vals.length == 0">
           <div class="color-value">
-            <h4>颜色：<span data-spec-value-name="23">{{'绿色'}}</span></h4>
+            <h4>默认：</h4>
             <label class="btn btn-sm btn-info file-upload">
               <em class="fa fa-picture-o"></em>
               打开相册图片
-              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
-                     multiple (change)="fileChangeListener($event)"/>
+              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader" multiple/>
             </label>
           </div>
-          <ul class="goods-pic-list">
+          <ul class="goods-pic-list ml">
             <li class="ui-state-disabled">
               <div class="upload-thumb">
                 <img src="https://b2b2c.bizpower.com/seller/static/img//default_goods_image_240.gif">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--当选择了第一规格时-->
+        <div class="goodspics" *ngFor="let val of skuImg.vals" [id]="val.valCode">
+          <div class="color-value">
+            <h4>{{skuImg.attrName}}：<span data-spec-value-name="23">{{val.valName}}</span></h4>
+            <label class="btn btn-sm btn-info file-upload">
+              <em class="fa fa-picture-o"></em>
+              打开相册图片
+              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="val.uploader" multiple/>
+            </label>
+          </div>
+          <ul class="goods-pic-list ml">
+            <li class="ui-state-disabled" *ngIf="val.uploader.queue.length == 0">
+              <div class="upload-thumb">
+                <img src="https://b2b2c.bizpower.com/seller/static/img//default_goods_image_240.gif">
+              </div>
+            </li>
+            <li class="ui-state-disabled" *ngFor="let item of val.uploader.queue">
+              <div class="upload-thumb">
+                <img *ngIf="item" [src]="item | imgUrl" [alt]="item?.file?.name">
               </div>
             </li>
           </ul>
@@ -197,7 +315,7 @@
     <legend class="m0">商品详情描述</legend>
     <dl class="clearfix">
       <dt class="col-xs-2"><i>*</i>计量单位：</dt>
-      <dd class="col-xs-10 col-lg-8">
+      <dd class="col-xs-10">
         <div class="w100">
           <div id="summernote" class="summernote">
             <span>Rich text presentation here..</span>

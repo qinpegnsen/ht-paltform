@@ -38,6 +38,7 @@ import { AreaNamePipe } from './pipe/area-name.pipe';
 import { SelectModule } from 'ng2-select';
 import {RzhtoolsService} from "../core/services/rzhtools.service";
 import {SubmitService} from "../core/forms/submit.service";
+import { ImgUrlPipe } from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
 
 // https://angular.io/styleguide#!#04-10
@@ -84,7 +85,8 @@ import {AngularEchartsModule} from "ngx-echarts";
     ScrollableDirective,
     JqcloudDirective,
     StatePipe,
-    AreaNamePipe
+    AreaNamePipe,
+    ImgUrlPipe
   ],
   exports: [
     CommonModule,
@@ -122,6 +124,7 @@ import {AngularEchartsModule} from "ngx-echarts";
     StatePipe,
     AreaNamePipe,
     SelectModule,
+    ImgUrlPipe,
     AngularEchartsModule
   ]
 })
