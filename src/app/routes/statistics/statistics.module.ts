@@ -21,12 +21,12 @@ import { AfterComponent } from './after/after.component';
 import { RefundComponent } from './after/refund/refund.component';
 import { ReturnComponent } from './after/return/return.component';
 import {AngularEchartsModule} from "ngx-echarts";
+import { ListDetailComponent } from './users/list-detail/list-detail.component';
 
 
-// const addSort: Routes = [
-//   {path: 'addSort', component: AddArticleSortComponent}
-// ];
-
+const listChildRoutes:Routes = [
+  {path: 'list-detail', component:ListDetailComponent},
+]
 const xtszChildRoutes: Routes = [
   {path: 'cache-reset', component:CacheResetComponent},
 
@@ -35,9 +35,9 @@ const usersChildRoutes:Routes = [
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},
-  {path: 'users-new', component:UsersNewComponent},
-
+  {path: 'users-new', component:UsersNewComponent,children:listChildRoutes},
 ]
+
 const salesChildRoutes:Routes = [
   {path: 'settle', component:SettleComponent},
   {path: 'orders', component:OrdersComponent},
@@ -82,6 +82,7 @@ const routes: Routes = [
     SaleDetailComponent,
     AfterComponent,
     RefundComponent,
-    ReturnComponent]
+    ReturnComponent,
+    ListDetailComponent]
 })
 export class StatisticsModule { }

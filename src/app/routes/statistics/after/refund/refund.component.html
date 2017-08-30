@@ -19,6 +19,7 @@
     </button>
     <!--日期选择 begin-->
     <div class="caldiv mr sel-date">
+      <!--按天-->
       <p class="input-group">
         <input class="form-control" value="{{dt | date:'yyyy-MM-dd'}}" type="text"/>
         <span class="input-group-btn">
@@ -27,16 +28,34 @@
             </button>
         </span>
       </p>
+      <!--按月-->
+      <!--<p class="input-group">-->
+        <!--<input class="form-control" value="{{dt | date:'yyyy-MM'}}" type="text"/>-->
+        <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-default" (click)="showDate()" type="button">-->
+                <!--<em class="fa fa-calendar"></em>-->
+            <!--</button>-->
+        <!--</span>-->
+      <!--</p>-->
+      <!--按周-->
+      <!--<p class="input-group">-->
+        <!--<input class="form-control" value="{{dt | date:'yyyy-MM-dd-ww'}}" type="text"/>-->
+        <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-default" (click)="showDate()" type="button">-->
+                <!--<em class="fa fa-calendar"></em>-->
+            <!--</button>-->
+        <!--</span>-->
+      <!--</p>-->
       <div class="date-info" *ngIf="dateShow">
         <datepicker [(ngModel)]="dt" (selectionDone)="selDate()" [minDate]="minDate" [showWeeks]="true"></datepicker>
       </div>
     </div>
     <!--日期选择 end-->
     <!--筛选条件选择-->
-    <select name="" id="" class="sel">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
+    <select name="" id="" class="sel" [(ngModel)]="kk">
+      <option value="day">按照天统计</option>
+      <option value="week">按照周统计</option>
+      <option value="month">按照月统计</option>
     </select>
   </div>
 <!--图表统计-->

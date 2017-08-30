@@ -1,3 +1,4 @@
+<div  *ngIf="this.flag">
 <div class="content-heading mb-lg">
   新增会员
 </div>
@@ -53,10 +54,13 @@
           <td class="refund-th">sss</td>
           <td class="refund-th">ddd</td>
           <td class="refund-th">fff</td>
-          <td class="refund-th">ggg</td>
+          <td class="refund-th">
+            <button routerLink="list-detail" [queryParams]="{linkType:''}" class=" btn-primary"><i class="icon icon-eye"></i>查看</button>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 
-</div>
+</div></div>
+<router-outlet></router-outlet>

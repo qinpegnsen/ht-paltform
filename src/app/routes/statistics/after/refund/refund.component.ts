@@ -11,6 +11,7 @@ export class RefundComponent implements OnInit {
   dateShow: boolean = false; //显示、隐藏日期框
   public minDate: Date = void 0;
   public events: Array<any>;
+  private kk:string;
 
   public formats: Array<string> = ['DD-MM-YYYY', 'YYYY/MM/DD', 'DD.MM.YYYY', 'shortDate'];
   public format: string = this.formats[0];
@@ -50,7 +51,7 @@ export class RefundComponent implements OnInit {
     series: [
       {
         name: '直接访问',
-        type: 'bar',
+        type: 'line',//数据呈折线展现
         barWidth: '60%',
         data: [10, 52, 200, 334, 390, 330, 220]
       }

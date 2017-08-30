@@ -1,0 +1,49 @@
+<div class="content-heading mb-lg">
+  会员详情列表
+</div>
+<div class="panel panel-default">
+  <div class="new-vip">会员详情列表</div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th class="">
+          <rzhDefaultSorter >会员ID</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter>会员名称</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >会员邮箱</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >会员手机</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >可用预期款（元）</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >允许购买</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >允许发言</rzhDefaultSorter>
+        </th>
+        <th class="">
+          <rzhDefaultSorter >会员状态</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="">ddd</td>
+        <td class="">ddd</td>
+        <td class="">aaa</td>
+        <td class="">sss</td>
+        <td class="">ddd</td>
+        <td class="">ddd</td>
+        <td class="">ddd</td>
+        <td class="">ddd</td>
+      </tr>
+    </table>
+  </div>
+</div>
