@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg">
   代理商管理
-  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:2}"></app-buttons>
+  <app-buttons class="pull-right" [config]="addButton" routerLink="appAgent" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
 <div class="panel mb">
   <div class="panel-body p ng-scope">
@@ -21,7 +21,7 @@
     </div>
   </div>
 </div>
-<div class="panel panel-default">
+<div class="panel panel-default" *ngIf="this.flag">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
       <thead>
@@ -32,13 +32,13 @@
         <th class="w10 text-center">
           <rzhDefaultSorter by="agentName">代理商名称</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="agentAcct">登录账号</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="leader">负责人</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="mobile">联系电话</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
@@ -46,6 +46,9 @@
         </th>
         <th class="w15 text-center">
           <rzhDefaultSorter by="areaCode">区域编码</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
           <rzhDefaultSorter by="b">操作</rzhDefaultSorter>
@@ -62,14 +65,20 @@
         <td>{{file.idcard}}</td>
         <td>{{file.areaCode}}</td>
         <td>
+        <label class="switch">
+          <input type="checkbox" [checked]="file.state=='NORMAL'" (change)="upFiledateState(file)" title="是否启动"/>
+          <span></span>
+        </label>
+        </td>
+        <td>
           <!--修改代理商信息按钮-->
-          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:3}"></app-buttons>
+          <app-buttons [config]="updatebutton"></app-buttons>
           <!--删除代理商信息按钮-->
-          <app-buttons [config]="deletebutton"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="delete(file.id)"></app-buttons>
           <!--修改代理商密码按钮-->
-          <app-buttons [config]="updatebuttono" routerLink="rightpage" [queryParams]="{id:4}"></app-buttons>
+          <app-buttons [config]="updatebuttono" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></app-buttons>
           <!--上传图片按钮-->
-          <app-buttons [config]="updatebuttonio" routerLink="rightpage" [queryParams]="{id:5}"></app-buttons>
+          <app-buttons [config]="updatebuttonio" routerLink="rightpage" [queryParams]="{id:3}"></app-buttons>
         </td>
       </tr>
       </tbody>

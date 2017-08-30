@@ -63,8 +63,8 @@ export class ArticleSortComponent implements OnInit {
       acName:this.searchKey
     }
     let url= "/articleClass/queryArticleClassPage";
-    let result=this.ArticleSortService.queryData(url,data);
-    this.articleSortListdata= result;
+    let queryData=this.ArticleSortService.queryData(url,data);
+    this.articleSortListdata= queryData;
   }
 
   /**

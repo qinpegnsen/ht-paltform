@@ -90,7 +90,6 @@ export class AreasComponent implements OnInit {
     }else{
       this.table.voList = result.data;
     }
-
     this.areas = new Page(this.table);
   }
 
