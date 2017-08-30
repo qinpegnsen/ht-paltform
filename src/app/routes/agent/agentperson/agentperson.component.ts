@@ -4,11 +4,15 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import {isNull} from "util";
 import {Page} from "../../../core/page/page";
 import {ActivatedRoute,Router} from '@angular/router';
+import {AgentpersonService} from "./agentperson.service";
+const swal = require('sweetalert');
+import {NavigationEnd} from "@angular/router";
 
 @Component({
   selector: 'app-agentperson',
   templateUrl: './agentperson.component.html',
-  styleUrls: ['./agentperson.component.scss']
+  styleUrls: ['./agentperson.component.scss'],
+  providers:[AgentpersonService]
 })
 export class AgentpersonComponent implements OnInit {
   private addButton;//新增代理商按钮配置
@@ -18,9 +22,11 @@ export class AgentpersonComponent implements OnInit {
   private updatebuttonio;//上传图片按钮
   private queryId:number;//获取添加，修改的ID
   private controlData:Page = new Page();
+  private id;//获取删除时需要的id
+  public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
 
 
-  constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router) {
+  constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router,private AgentpersonService:AgentpersonService) {
 
   }
 
@@ -57,7 +63,28 @@ export class AgentpersonComponent implements OnInit {
       title:'上传图片',
       size: 'xs'
     }
-    this.controlDatas();//调用获取代理商列表方法
+
+
+    /**
+     * 路由事件用来监听地址栏的变化
+     * 1.当添加代理商出现的时候，代理商列表组件隐藏
+     * 2.路由变化的时候，刷新页面
+     */
+    _this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          console.log(event.url)
+          if(event.url.indexOf('linkType')>0){
+            _this.flag=false;
+          }else if(event.url=='/main/agent/agentperson'){
+            _this.flag=true;
+            _this.getAgentList() //刷新内容页面
+          }
+        }
+      });
+
+    this.getAgentList()
+
   }
 
 
@@ -65,25 +92,71 @@ export class AgentpersonComponent implements OnInit {
    * 获取代理商列表
    * @param event
    */
-  public controlDatas(event?:PageEvent) {
-    let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+  public getAgentList(event?:PageEvent){
+    let activePage = 1;
+    if(typeof event !== "undefined") {activePage =event.activePage};
+    let data={
+      curPage:activePage,
+    }
+    let url= "/agent/pageQuery";
+    this.controlData=this.AgentpersonService.controlDatas(url,data);
+  }
 
-    this.ajax.get({
-      url: "/agent/pageQuery",
-      data: {
-        curPage: activePage,
+
+  /**
+   * 删除代理商信息
+   * @param event
+   */
+  delete(delCodeId) {
+    let _this = this, url: string = "/agent/deleteAgent", data: any;
+    swal({
+        title: '确认删除此信息？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
       },
-      success: (data) => {
-        console.log("█ data ►►►", data );
-        if (!isNull(data)) {
-          me.controlData = new Page(data.data);
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        data = {
+          id:delCodeId
+        }
+        console.log(data)
+        _this.AgentpersonService.delCode(url, data); //删除数据
+        let datas={id:delCodeId}
+        let urls= "/agent/pageQuery";
+        _this.AgentpersonService.controlDatas(urls,datas);//实现局部刷新
+      }
+    );
+  }
+
+
+  /**
+   * 查看代理商是否被关闭
+   */
+  upFiledateState(data) {
+    if (data.state == "NORMAL") {
+      data.state = "FREEZE"
+    } else if (data.state == "FREEZE") {
+      data.state = "NORMAL"
+    }
+    this.ajax.put({
+      url: '/agent/updateAgentState',
+      data: {
+        'agentCode': data.agentCode,
+        'state': data.state
+      },
+      success: () => {
+        if (data.state == "NORMAL") {
+          swal('开启成功', '', 'success');
+        } else if (data.state == "FREEZE") {
+          swal('关闭成功', '', 'success');
         }
       },
       error: (data) => {
-        console.log("地区获取失败");
+        swal('开启/关闭，失败', 'error');
       }
     });
   }
-
 }

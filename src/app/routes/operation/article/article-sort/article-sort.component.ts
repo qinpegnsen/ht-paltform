@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ArticleSortService} from "app/routes/operation/article/article-sort/article-sort.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+import {ArticleSortDelService} from "./article-sort-del.service";
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "../../../../core/page/page";
@@ -15,7 +17,7 @@ export class ArticleSortComponent implements OnInit {
   private childbutton:Object;//新增子分类按钮
   private deletebutton:Object;//删除按钮
   private updatebutton:Object;//修改按钮
-  private articleSortListdata//用来存储服务取回来的数据
+  private articleSortListdata;//用来存储服务取回来的数据
   private searchKey:string='';//默认查询的分类的名称
   private childMenuCode; //菜单编码，查询子集用
   private childMenuTitList:Array<any> = []; //菜单级别面包屑
