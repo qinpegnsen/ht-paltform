@@ -237,7 +237,6 @@ export class EditDetailComponent implements OnInit {
    * @param skuData
    */
   private genClearArray(skuData) {
-    console.log("█ skuData ►►►", skuData);
     let me = this;
     me.skuAttr = [];
     me.skuVal = [];
@@ -262,7 +261,6 @@ export class EditDetailComponent implements OnInit {
   private togetherAllUploaders(){
     let me = this, allUploaders = [];
     // 当选择了规格时,不上传默认的图片
-    console.log("█ me.skuImg.vals ►►►",  me.skuImg.vals);
     if(me.skuImg.vals.length > 0){
       allUploaders = [];
       me.skuImg.vals.forEach((item) => {
@@ -270,12 +268,10 @@ export class EditDetailComponent implements OnInit {
       });
     }else{
       allUploaders = [];
-      console.log("█ me.defaultUploader.queue.length ►►►",  me.defaultUploader.queue.length);
       if(me.defaultUploader.queue.length > 0){
         allUploaders.push(me.defaultUploader);// 加入默认的uploader
       }
     };
-    console.log("█ allUploaders ►►►",  allUploaders);
     return allUploaders;
   }
 
