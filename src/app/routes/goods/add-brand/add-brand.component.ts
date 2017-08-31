@@ -169,7 +169,7 @@ export class AddBrandComponent implements OnInit {
       //新增品牌
       case "addBrand":
         submitUrl = '/goodsBrand/addBrand';
-        if (me.uuid) submitData.brandPic = me.uuid;
+        if (me.uuid) submitData.brandImageuuid = me.uuid;
 
         me.uploader.onBuildItemForm = function(fileItem, form){
           form.append('uuid', me.uuid);

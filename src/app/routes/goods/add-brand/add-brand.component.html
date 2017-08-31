@@ -1,5 +1,5 @@
 <div class="rightpage">
-  <form class="form-validate form-horizontal" #addBrand="ngForm"style="height: 100%">
+  <form class="form-validate form-horizontal" #addBrand="ngForm" style="height: 100%">
     <!-- START panel-->
     <div class="panel-default mb-xl">
       <!--可编辑表单 start-->
@@ -174,7 +174,9 @@
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">图片：</td>
-            <td class="item-bd col-sm-7 mb0"><img [src]="brandInfo.brandPic" width="120" alt=""></td>
+            <td class="item-bd col-sm-7 mb0"><img [src]="brandInfo.brandPic"
+                                                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                                                  width="120" alt=""></td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">排序：</td>
