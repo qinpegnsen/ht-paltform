@@ -17,7 +17,8 @@
           </span>
       </div>
     </div>
-    <app-buttons class="pull-right" [config]="articleSortAddbutton" routerLink="addSort"  [queryParams]="{linkType:'addClass'}"></app-buttons>
+    <app-buttons class="pull-right" [config]="articleSortAddbutton" routerLink="addSort"
+                 [queryParams]="{linkType:'addClass'}"></app-buttons>
   </div>
 </div>
 <div class="panel panel-default">
@@ -32,7 +33,7 @@
       <i class="fa fa-level-up mr5"></i>
       返回上一级
     </span>
-</div>
+  </div>
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleSortListdata"
            (pageChange)="queryArticSortleList($event)">
@@ -70,10 +71,13 @@
         <td>{{article.acSort}}</td>
         <td>{{article.createTime}}</td>
         <td>
-          <app-buttons [config]="updatebutton" routerLink="addSort" [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
-          <app-buttons [config]="childbutton" routerLink="addSort" [queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="addSort"
+                       [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
+          <app-buttons [config]="childbutton" routerLink="addSort"
+                       [queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="deleteSort(article.id,article.acParentId)"></app-buttons>
-          <span (click)="queryChildSortList('',article.id,article.acName,false)" class="btn btn-default btn-xs"  *ngIf="article.haveChildren">
+          <span (click)="queryChildSortList('',article.id,article.acName,false)" class="btn btn-default btn-xs"
+                *ngIf="article.haveChildren">
           <i class="fa fa-level-down"></i>
           下级菜单
           </span>

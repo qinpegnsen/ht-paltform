@@ -9,7 +9,6 @@ import { ArticleSortComponent } from './article/article-sort/article-sort.compon
 import {SharedModule} from "../../shared/shared.module";
 import { AddArticleSortComponent } from './add-article-sort/add-article-sort.component';
 import {ArticleManageComponent} from "./article/article-manage/article-manage.component";
-import {AddArticleManService} from "./article/article-manage/add-article/add-article-man.service";
 import { ContentNavComponent } from './article/article-manage/content-nav/content-nav.component';
 import { ContentComponent } from './article/article-manage/content/content.component';
 import { AddArticleComponent } from './article/article-manage/add-article/add-article.component';
@@ -48,6 +47,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent],
-  providers:[ArticleSortComponent,AddArticleManService,ContentService,ContentComponent,NavService,ContentNavComponent]
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent]
 })
 export class OperationModule { }
