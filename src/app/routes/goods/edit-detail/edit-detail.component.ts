@@ -26,6 +26,10 @@ export class EditDetailComponent implements OnInit {
   private skuImg: any;// 图片属性
 
   valForm: FormGroup;// 表单值验证
+  private defaultUploader: FileUploader = new FileUploader({
+    url: '/goodsBrand/uploadBrandImage',
+    itemAlias: "limitFile"
+  })
 
   constructor(private publishComponent: PublishComponent,
               private route: ActivatedRoute,
@@ -64,9 +68,8 @@ export class EditDetailComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           callbacks: {
-            onChange: (contents, $editable) => {
+            onChange: (contents) => {
               this.contents = contents;
-              // console.log(contents);
             }
           }
         });

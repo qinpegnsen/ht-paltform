@@ -271,13 +271,19 @@
             <label class="btn btn-sm btn-info file-upload">
               <em class="fa fa-picture-o"></em>
               打开相册图片
-              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader" multiple/>
+              <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="defaultUploader" multiple/>
             </label>
           </div>
           <ul class="goods-pic-list ml">
-            <li class="ui-state-disabled">
+            <li class="ui-state-disabled" *ngIf="defaultUploader.queue.length == 0">
               <div class="upload-thumb">
                 <img src="https://b2b2c.bizpower.com/seller/static/img//default_goods_image_240.gif">
+              </div>
+            </li>
+            <li class="ui-state-disabled img-box" *ngFor="let item of defaultUploader.queue">
+              <div class="close" (click)="item.remove()">×</div>
+              <div class="upload-thumb">
+                <img *ngIf="item" [src]="item._file | imgUrl" [alt]="item?.file?.name">
               </div>
             </li>
           </ul>
@@ -299,9 +305,10 @@
                 <img src="https://b2b2c.bizpower.com/seller/static/img//default_goods_image_240.gif">
               </div>
             </li>
-            <li class="ui-state-disabled" *ngFor="let item of val.uploader.queue">
+            <li class="ui-state-disabled img-box" *ngFor="let item of val.uploader.queue">
+              <div class="close" (click)="item.remove()">×</div>
               <div class="upload-thumb">
-                <img *ngIf="item" [src]="item | imgUrl" [alt]="item?.file?.name">
+                <img *ngIf="item" [src]="item._file | imgUrl" [alt]="item?.file?.name">
               </div>
             </li>
           </ul>

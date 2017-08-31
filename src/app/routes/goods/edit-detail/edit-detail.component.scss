@@ -190,7 +190,7 @@
   font-size: 12px;
 }
 
-.sku-table .close{
+.sku-table .close,.goodspics .close{
   width: 20px;
   height: 20px;
   position: absolute;
@@ -199,6 +199,7 @@
   font-size: 20px;
   text-align: center;
   line-height: 20px;
+  z-index: 9;
 }
 
 .sku-table .dropdown-menu button {
@@ -212,11 +213,16 @@
   box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
   padding: 9px;
 }
+.goodspics .img-box{
+  position: relative;
+}
 .goodspics img{
   width: 100%;
   height: 100%;
 }
-
+.goodspics .close{
+  font-size:24px;
+}
 .goodspics .color-value {
   float: left;
   width: 120px;

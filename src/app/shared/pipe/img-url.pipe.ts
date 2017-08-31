@@ -9,11 +9,10 @@ export class ImgUrlPipe implements PipeTransform {
 
   }
 
-  transform(value: any, args?: any): any {
-    console.log("█ value._file ►►►",  value._file);
+  transform(value: File, args?: any): any {
     let src, url = window.URL;
     if(url){
-      src = url.createObjectURL(value._file);
+      src = url.createObjectURL(value);
     }
     return this.sanitizer.bypassSecurityTrustUrl(src);
   }
