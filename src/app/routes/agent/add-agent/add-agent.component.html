@@ -17,14 +17,14 @@
             </div>
           </div>
         </fieldset>
-        <fieldset>
+        <!--<fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label">代理商级别</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" name="agentLevel" ngModel [(ngModel)]="staff.agentLevel"/>
             </div>
           </div>
-        </fieldset>
+        </fieldset>-->
         <fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 代理商登录账户</label>
@@ -51,14 +51,14 @@
             </div>
           </div>
         </fieldset>
-        <fieldset>
+        <!--<fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label">上级代理商编码</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" name="agentPcode" ngModel [(ngModel)]="staff.agentPcode"/>
             </div>
           </div>
-        </fieldset>
+        </fieldset>-->
         <fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 负责人</label>
@@ -96,32 +96,7 @@
                 身份证号是必填项，请填写身份证号
               </div>
             </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 身份证正面暗码</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="idcardImage1uuid" [(ngModel)]="staff.idcardImage1uuid"
-                     #idcardImage1uuid="ngModel" type="text"/>
-              <div [hidden]="idcardImage1uuid.valid || idcardImage1uuid.pristine"
-                   class="alert alert-danger">
-                身份证正面暗码是必填项，请填写身份证正面暗码
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 身份证反面暗码</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="idcardImage2uuid" [(ngModel)]="staff.idcardImage2uuid"
-                     #idcardImage2uuid="ngModel" type="text"/>
-              <div [hidden]="idcardImage2uuid.valid || idcardImage2uuid.pristine"
-                   class="alert alert-danger">
-                身份证反面暗码是必填项，请填写身份证反面暗码
-              </div>
-            </div>
+            <button class="btn btn-info" type="button" routerLink="rightpage" [queryParams]="{id:3}">上传身份证</button>
           </div>
         </fieldset>
         <fieldset>
@@ -164,7 +139,7 @@
             <div class="col-sm-8">
               <input class="form-control" type="text" name="coordinateLng" ngModel [(ngModel)]="staff.coordinateLng"/>
             </div>
-            <button class="btn btn-info" type="button">标注经纬度</button>
+            <button class="btn btn-info" type="button" (click)="isShowMap(staff)">标注经纬度</button>
           </div>
         </fieldset>
         <fieldset>
@@ -173,7 +148,14 @@
             <div class="col-sm-8">
               <input class="form-control" type="text" name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
             </div>
-            <button class="btn btn-info" type="button">标注经纬度</button>
+            <button class="btn btn-info" type="button" (click)="isShowMap(staff)">标注经纬度</button>
+          </div>
+          <div class="form-group" [hidden]="!staff.isShowMap">
+            <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
+              <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+              <div id="container">
+              </div>
+            </div>
           </div>
         </fieldset>
         <fieldset>
@@ -185,24 +167,52 @@
             </div>
           </div>
         </fieldset>
+        <!--身份证正面暗码<input class="form-control" required [(ngModel)]="idcardImage1uuid" name="idcardImage1uuid">-->
+        <!--<fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 身份证正面暗码</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="idcardImage1uuid" [(ngModel)]="staff.idcardImage1uuid"
+                     #idcardImage1uuid="ngModel" type="text"/>
+              <div [hidden]="idcardImage1uuid.valid || idcardImage1uuid.pristine"
+                   class="alert alert-danger">
+                身份证正面暗码是必填项，请填写身份证正面暗码
+              </div>
+            </div>
+          </div>
+        </fieldset>-->
+        <!--身份证反面暗码 <input class="form-control" required [(ngModel)]="idcardImage2uuid" name="idcardImage2uuid">-->
+        <!--<fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 身份证反面暗码</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="idcardImage2uuid" [(ngModel)]="staff.idcardImage2uuid"
+                     #idcardImage2uuid="ngModel" type="text"/>
+              <div [hidden]="idcardImage2uuid.valid || idcardImage2uuid.pristine"
+                   class="alert alert-danger">
+                身份证反面暗码是必填项，请填写身份证反面暗码
+              </div>
+            </div>
+          </div>
+        </fieldset>-->
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)" >提交信息</button>
+            <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
           </div>
         </fieldset>
       </div>
-     <!-- <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)" >提交信息</button>
-      </div>-->
+      <!-- <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+         <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)" >提交信息</button>
+       </div>-->
     </div>
     <!-- END panel-->
   </form>
 </div>
 <!--修改代理商-->
 <div class="col-lg-10" *ngIf="linkType=='updataArticle'">
-  <form class="form-validate form-horizontal" style="height: 100%"  #addLimitForm="ngForm">
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-default">
@@ -320,7 +330,7 @@
           <fieldset>
             <div class="pull-right form-group special">
               <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-              <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)" >提交信息</button>
+              <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
             </div>
           </fieldset>
         </div>
@@ -330,5 +340,9 @@
     <!-- END panel-->
   </form>
 </div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
 
 

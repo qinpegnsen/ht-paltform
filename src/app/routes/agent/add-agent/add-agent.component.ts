@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterContentInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SettingsService} from '../../../core/settings/settings.service';
 import {AjaxService} from "../../../core/services/ajax.service";
 const swal = require('sweetalert');
+declare var $:any;
+declare var AMap:any;
 
 
 @Component({
@@ -11,58 +13,125 @@ const swal = require('sweetalert');
   styleUrls: ['./add-agent.component.scss']
 })
 export class AddAgentComponent implements OnInit {
-  public linkType: string;
-  private staff = {}
+  public linkType:string;
+  private uid;//声明保存获取到的暗码
+  private staff:any = {};
 
-  constructor( public settings: SettingsService,private ajax:AjaxService,private router:Router,private routeInfo:ActivatedRoute) {
+  constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
+
   ngOnInit() {
+    let me = this;
+    //页面完成后加载地图
+    setTimeout(() => {
+      //实例化地图
+      let map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom: 13,//地图显示的缩放级别
+        keyboardEnable: false
+      });
+
+      // 搜索定位
+      AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
+        //实例化Autocomplete
+        var autoOptions = {
+          city: "", //城市，默认全国
+          input: "keyword"//搜索框id
+        };
+        let autocomplete = new AMap.Autocomplete(autoOptions); //实例化搜索组件
+        //包装搜索条件
+        let placeSearch = new AMap.PlaceSearch({
+          city: '北京', //默认北京
+          map: map
+        })
+        //设置收拾条件（选择时，重置搜索地址信息）
+        AMap.event.addListener(autocomplete, "select", function (e) {
+          placeSearch.search(e.poi.name)
+        });
+      })
+
+      //设置监听，获取地图经纬度
+      var clickEventListener = map.on('click', function (e) {
+        me.staff.coordinateLng = e.lnglat.getLng();//经度
+        me.staff.coordinateLat = e.lnglat.getLat();//纬度
+      });
+
+    }, 1);
+
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+
+    /**
+     * 文件控制上传 获取暗码
+     */
+    this.ajax.get({
+      url: '/upload/basic/uid',
+      success: (res) => {
+        if (res.success) {
+          this.uid = res.data;//把获取的暗码赋值给uid
+          //console.log('获取的暗码成功！', _this.uid);
+          //_this.outputvalue.emit(true);//提交成功后向父组件传值
+        } else {
+          let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
+          swal(res.info, errorMsg, 'error');
+        }
+      },
+      error: (data) => {
+        //swal('获得暗码失败','','error');
+      }
+    });
+  }
+
+  /**
+   * 显示/隐藏地图
+   * @param data
+   */
+  isShowMap(data:any) {
+    data.isShowMap = !data.isShowMap;
   }
 
   /**
    * 关闭右侧滑动页面
    */
-  cancel(){
+  cancel() {
     //this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
     this.router.navigate(['/main/agent/agentperson']);
   }
 
-  addLimitList(value){
+  addLimitList(value) {
     let _this = this;
     //添加代理商信息
-    if(_this.linkType = 'addArticle'){
+    if (_this.linkType = 'addArticle') {
       _this.ajax.post({
         url: '/agent/addAgent',
         data: {
-          'agentName':value.agentName,
-          'agentLevel':value.agentLevel,
-          'agentAcct':value.agentAcct,
-          'agentPwd':value.agentPwd,
-          'leader':value.leader,
-          'mobile':value.mobile,
-          'idcard':value.idcard,
-          'idcardImage1uuid':value.idcardImage1uuid,
-          'idcardImage2uuid':value.idcardImage2uuid,
-          'areaCode':value.areaCode,
-          'address':value.address,
-          'coordinateLng':value.coordinateLng,
-          'coordinateLat':value.coordinateLat,
-          'description':value.description
+          'agentName': value.agentName,
+          'agentLevel': value.agentLevel,
+          'agentAcct': value.agentAcct,
+          'agentPwd': value.agentPwd,
+          'leader': value.leader,
+          'mobile': value.mobile,
+          'idcard': value.idcard,
+          'idcardImage1uuid': value.idcardImage1uuid,
+          'idcardImage2uuid': value.idcardImage2uuid,
+          'areaCode': value.areaCode,
+          'address': value.address,
+          'coordinateLng': value.coordinateLng,
+          'coordinateLat': value.coordinateLat,
+          'description': value.description
         },
         success: (res) => {
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
-            swal('添加代理商提交成功！', '','success');
-           // _this.AreasComponent.queryList()//实现刷新
+            swal('添加代理商提交成功！', '', 'success');
+            // _this.AreasComponent.queryList()//实现刷新
           } else {
             swal('添加代理商提交失败====！', 'error');
           }
         },
         error: (data) => {
-          swal('添加代理商提交失败！', '','error');
+          swal('添加代理商提交失败！', '', 'error');
         }
       })
     }
@@ -71,26 +140,26 @@ export class AddAgentComponent implements OnInit {
       _this.ajax.put({
         url: '/agent/updateAgentBasic',
         data: {
-          'agentName':value.agentName,
-          'agentLevel':value.agentLevel,
-          'agentAcct':value.agentAcct,
-          'agentPwd':value.agentPwd,
-          'leader':value.leader,
-          'mobile':value.mobile,
-          'idcard':value.idcard,
-          'idcardImage1uuid':value.idcardImage1uuid,
-          'idcardImage2uuid':value.idcardImage2uuid,
-          'areaCode':value.areaCode,
-          'address':value.address,
-          'coordinateLng':value.coordinateLng,
-          'coordinateLat':value.coordinateLat,
-          'description':value.description
+          'agentName': value.agentName,
+          'agentLevel': value.agentLevel,
+          'agentAcct': value.agentAcct,
+          'agentPwd': value.agentPwd,
+          'leader': value.leader,
+          'mobile': value.mobile,
+          'idcard': value.idcard,
+          'idcardImage1uuid': value.idcardImage1uuid,
+          'idcardImage2uuid': value.idcardImage2uuid,
+          'areaCode': value.areaCode,
+          'address': value.address,
+          'coordinateLng': value.coordinateLng,
+          'coordinateLat': value.coordinateLat,
+          'description': value.description
         },
         success: (res) => {
           console.log(res)
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true});   //路由跳转
-            swal('修改区域信息成功！', '','success');
+            swal('修改区域信息成功！', '', 'success');
             //_this.AreasComponent.queryList()//实现刷新
           } else {
             let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
@@ -98,7 +167,7 @@ export class AddAgentComponent implements OnInit {
           }
         },
         error: (data) => {
-          swal('修改区域信息失败！', '','error');
+          swal('修改区域信息失败！', '', 'error');
         }
       });
     }

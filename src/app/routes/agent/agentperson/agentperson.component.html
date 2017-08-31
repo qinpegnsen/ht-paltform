@@ -77,8 +77,6 @@
           <app-buttons [config]="deletebutton" (click)="delete(file.id)"></app-buttons>
           <!--修改代理商密码按钮-->
           <app-buttons [config]="updatebuttono" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></app-buttons>
-          <!--上传图片按钮-->
-          <app-buttons [config]="updatebuttonio" routerLink="rightpage" [queryParams]="{id:3}"></app-buttons>
         </td>
       </tr>
       </tbody>

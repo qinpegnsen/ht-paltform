@@ -47,7 +47,7 @@ export class RightpageComponent implements OnInit {
             swal('修改密码提交成功！', '','success');
             //_this.AreasComponent.queryList()//实现刷新
           } else {
-            swal('添加区域提交失败====！', 'error');
+            swal('修改密码提交失败====！', 'error');
           }
         },
         error: (data) => {
