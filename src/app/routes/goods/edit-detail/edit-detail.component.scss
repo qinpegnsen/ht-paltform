@@ -1,5 +1,5 @@
 .step-two {
-  min-width: 450px;
+  min-width: 800px;
 }
 
 .step-two fieldset {
@@ -135,12 +135,13 @@
 }
 
 .add-on {
-  float: left;
+  font-size: 12px;
   font-style: normal;
   line-height: 28px;
   background-color: #F6F7Fb;
   vertical-align: top;
   text-align: center;
+  display: inline-block;
   width: 30px;
   height: 30px;
   border: solid #E6E9EE;
@@ -156,17 +157,26 @@
   height: 24px;
   padding: 5px 10px;
   position: relative;
+  text-align: center;
 }
-
+.sku-table .dropdown-menu{
+  min-width: 120px;
+  left: 20%;
+}
 .sku-table td {
   white-space: nowrap;
   height: 30px;
   padding: 5px 10px;
   border-top: solid 1px #BCE8F1;
+  text-align: center;
+  font-size: 0; // 解决行内块之间间隙的问题
+}
+.sku-table td p{
+  font-size: 12px;
+  margin-bottom: 0;
 }
 
 .sku-table ._price {
-  float: left;
   width: 50px;
 }
 
@@ -190,7 +200,7 @@
   font-size: 12px;
 }
 
-.sku-table .close,.goodspics .close{
+.sku-table .close, .goodspics .close {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -213,15 +223,30 @@
   box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
   padding: 9px;
 }
-.goodspics .img-box{
+
+.goodspics .img-box {
   position: relative;
 }
-.goodspics img{
+
+.goodspics img {
   width: 100%;
   height: 100%;
 }
-.goodspics .close{
-  font-size:24px;
+
+.goodspics .close {
+  font-size: 24px;
+}
+.up-success{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right:0;
+  bottom: 0;
+  background-color: rgba(255,255,255,.5);
+  color: #37bc9b;
+  font-size: 30px;
+  z-index: 10;
+  text-align: center;
 }
 .goodspics .color-value {
   float: left;
@@ -316,3 +341,6 @@
   height: 30px;
   width: 160px;
 }
+
+// 重置input框的placeholder文本颜色
+input::-webkit-input-placeholder{color: #b3b3b3;}

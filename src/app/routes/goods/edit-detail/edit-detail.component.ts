@@ -7,6 +7,7 @@ import {GoodsService} from "../goods.service";
 import {FileUploader} from "ng2-file-upload";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CustomValidators} from "ng2-validation";
+import {GetUidService} from "../../../core/services/get-uid.service";
 declare var $: any;
 
 @Component({
@@ -24,10 +25,11 @@ export class EditDetailComponent implements OnInit {
   private skuAttr = [];//属性列表
   private skuVal = [];//属性值列表
   private skuImg: any;// 图片属性
+  private uuidsList = [];
 
   valForm: FormGroup;// 表单值验证
   private defaultUploader: FileUploader = new FileUploader({
-    url: '/goodsBrand/uploadBrandImage',
+    url: '/goodsEdit/uploadGoodsImage',
     itemAlias: "limitFile"
   })
 
@@ -36,6 +38,7 @@ export class EditDetailComponent implements OnInit {
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
+              private getUid:GetUidService,
               fb: FormBuilder) {
     this.valForm = fb.group({
       'minvalue': [null, CustomValidators.min(6)],
@@ -86,10 +89,11 @@ export class EditDetailComponent implements OnInit {
         $('.sku-table').on('click', '.set', function () {
           let inputObjName = $(this).prev('input').attr('name'),
             inputVal = $(this).prev('input').val();
-          $('.sku-table input[name="' + inputObjName + '"]').val(inputVal);// 表格中name属性与它相等的输入框的值等于它的值
-          $(this).parents('.dropdown-menu').slideUp(200);
+          if(!isNullOrUndefined(inputVal) && inputVal !== ''){
+            $('.sku-table input[name="' + inputObjName + '"]').val(inputVal);// 表格中name属性与它相等的输入框的值等于它的值
+            $(this).parents('.dropdown-menu').slideUp(200);
+          }
         });
-
       })
     }
     this.publishComponent.changeStep();
@@ -179,10 +183,10 @@ export class EditDetailComponent implements OnInit {
     for (let i = 0; i < checkedAttr.length; i++) {
       let val = checkedAttr.eq(i).parents('._attr').find('._value').next().find('input');
       let obj = {
-        valCode: val.id,
+        valCode: val.attr('id'),
         valName: val.val(),
         uploader: new FileUploader({
-          url: '/goodsBrand/uploadBrandImage',
+          url: '/goodsEdit/uploadGoodsImage',
           itemAlias: "limitFile"
         })
       };
@@ -252,5 +256,51 @@ export class EditDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * 上传图片,第一步，集成所有需要上传的uploader到一个集合里
+   */
+  private togetherAllUploaders(){
+    let me = this, allUploaders = [];
+    // 当选择了规格时,不上传默认的图片
+    console.log("█ me.skuImg.vals ►►►",  me.skuImg.vals);
+    if(me.skuImg.vals.length > 0){
+      allUploaders = [];
+      me.skuImg.vals.forEach((item) => {
+        allUploaders.push(item.uploader);
+      });
+    }else{
+      allUploaders = [];
+      console.log("█ me.defaultUploader.queue.length ►►►",  me.defaultUploader.queue.length);
+      if(me.defaultUploader.queue.length > 0){
+        allUploaders.push(me.defaultUploader);// 加入默认的uploader
+      }
+    };
+    console.log("█ allUploaders ►►►",  allUploaders);
+    return allUploaders;
+  }
+
+
+  private uploadImgs(){
+    let me = this;
+    let allUploaders = me.togetherAllUploaders();
+    me.uuidsList = [];//每次传图片先置空暗码列表
+    allUploaders.forEach((uploader) => {
+      let uuids = [];
+      uploader.onBuildItemForm = function (fileItem, form) {
+        let uuid = me.getUid.getUid()
+        form.append('uuid',uuid);
+        uuids.push(uuid);
+      };
+      uploader.queue.forEach((item,index) => {
+        item.onError = function(){
+          uuids.splice(index,1)
+        }
+      })
+      uploader.uploadAll();//全部上传
+      uploader.onCompleteAll = function(){
+        me.uuidsList.push(uuids);
+      }
+    })
+  }
 
 }
