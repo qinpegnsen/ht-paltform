@@ -1,8 +1,10 @@
 /* ========================================================================
      Component: typo
  ========================================================================== */
- 
-@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic);
+
+//@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic);
+//TODO 暂时先如此解决
+@import url(/src/app/shared/styles/googleapis-fonts/fonts.css);
 
 body {
   font-family: "Source Sans Pro", sans-serif;

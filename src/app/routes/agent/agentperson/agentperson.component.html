@@ -72,7 +72,7 @@
         </td>
         <td>
           <!--修改代理商信息按钮-->
-          <app-buttons [config]="updatebutton"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="appAgent" [queryParams]="{linkType:'updataArticle'}"></app-buttons>
           <!--删除代理商信息按钮-->
           <app-buttons [config]="deletebutton" (click)="delete(file.id)"></app-buttons>
           <!--修改代理商密码按钮-->
