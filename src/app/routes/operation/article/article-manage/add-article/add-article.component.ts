@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AddArticleManService} from "./add-article-man.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SettingsService} from "../../../../../core/settings/settings.service";
-import {ArticleManageComponent} from "../article-manage.component";
-import {ContentComponent} from "app/routes/operation/article/article-manage/content/content.component";
 import {GetUidService} from "../../../../../core/services/get-uid.service";
 import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../../../app.component";
-import {ContentNavComponent} from "../content-nav/content-nav.component";
 import {ContentService} from "../content/content.service";
+import {SubmitService} from "../../../../../core/forms/submit.service";
 declare var $: any;
 
 const uploadUrl = "/article/uploadCoverImage";  //图片上传路径(调取上传的接口)
@@ -59,7 +56,7 @@ export class AddArticleComponent implements OnInit {
   public submitState;//用来保存提交的时候的状态，在addArticleExtra里面使用
   public autionOptions;//审核状态的列表
 
-  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public AddArticleManService: AddArticleManService, public ArticleManageComponent: ArticleManageComponent, public ContentNavComponent: ContentNavComponent, public router: Router, public ContentComponent: ContentComponent,public GetUidService: GetUidService,public ContentService:ContentService) {
+  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public router: Router, public GetUidService: GetUidService,public ContentService:ContentService,public service:SubmitService) {
     this.settings.showRightPage( "30%" );
   }
 
@@ -86,7 +83,7 @@ export class AddArticleComponent implements OnInit {
       curPage:1,
       pageSize:10,
     }
-    this.articleClassList = this.AddArticleManService.articleClass(url,data).voList
+    this.articleClassList = this.service.getData(url,data).voList
 
     /**
      * 调用富文本编辑器，初始化编辑器
@@ -115,7 +112,7 @@ export class AddArticleComponent implements OnInit {
         articleId:this.articleId,
         queryState:'BLACK'
       }
-      this.queryArticleData= this.AddArticleManService.queryArticle(queryArticleurl,queryArticledata);
+      this.queryArticleData= this.service.getData(queryArticleurl,queryArticledata);
       console.log(this.queryArticleData)
       setTimeout(() => {
         $('#summernote').summernote({
@@ -241,7 +238,7 @@ export class AddArticleComponent implements OnInit {
       obj.addArticleEnum = state //默认文章的类型是草稿
       obj.articleId=this.articleId
       let data = obj;
-      this.AddArticleManService.updateArticle(url, data);
+      this.service.postRequest(url,data);
       this.router.navigate(['/main/operation/article/manage']);
     }else if (this.linkType == 'auditArticle') {
       let data={
@@ -269,13 +266,9 @@ export class AddArticleComponent implements OnInit {
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.uuid=this.uuid;
-    this.submitObj.articleCommend='Y';
-    this.submitObj.articleCommentFlag='Y'
     let data = this.submitObj;
     console.log(this.submitState)
-    this.AddArticleManService.addArticle(url, data);
+    this.service.postRequest(url,data);
     this.router.navigate(['/main/operation/article/manage']);
-    // this.ContentComponent.queryArticManleList('N',this.submitState)   //新增的时候刷新内容区域
-    // this.ContentNavComponent.articleState(this.submitState)  //新增的时候刷新导航区域
   }
 }

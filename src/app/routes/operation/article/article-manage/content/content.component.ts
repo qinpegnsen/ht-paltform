@@ -123,8 +123,10 @@ export class ContentComponent implements OnInit,OnChanges  {
     }else{
       data.articleState=this.articleState?this.articleState:'DRAFT';
     }
+
     let url= "/article/queryAllArticleBySort";
     let result=new Page(this.service.getData(url,data));
+    console.log(result)
     this.articleManListdata= result;
   }
 
