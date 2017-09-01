@@ -70,26 +70,14 @@
         <td>{{i+1}}</td>
         <td>{{member.custName}}</td>
         <td>{{member.custTruename}}</td>
-        <td *ngIf="member.custSex=='MALE'">
-          男
-        </td>
-        <td *ngIf="member.custSex=='FAMADAM'">
-          女
-        </td>
-        <td *ngIf="member.custSex=='UNKNOW'">
-          未知
+        <td>
+          {{member.custSex | rzhState:'1002' }}
         </td>
         <td>{{member.areaName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>
-        <td *ngIf="member.isMember=='N'">
-          否
-        </td>
-        <td *ngIf="member.isMember=='Y'">
-          是
-        </td>
-        <td *ngIf="member.state=='NORMAL'">
-          正常
+        <td>
+          {{member.isMember | rzhState:'1001' }}
         </td>
         <td *ngIf="member.state=='FREEZE'">
           冻结
@@ -99,6 +87,9 @@
         </td>
         <td *ngIf="member.state=='STOP'">
           禁言
+        </td>
+        <td *ngIf="member.state=='NORMAL'">
+          正常
         </td>
         <td>{{member.createTime}}</td>
         <td>

@@ -32,8 +32,6 @@ export class AddArticleComponent implements OnInit {
 
   private myImg: any;
 
-  private auditResult: string;
-
   private uuid: any;
 
   public linkType: string;
@@ -158,18 +156,18 @@ export class AddArticleComponent implements OnInit {
    * @param $event
    */
   fileChangeListener($event) {
-    // console.log($event)
     let that = this;
     let image: any = new Image();
     let file: File = $event.target.files[0];
     that.fileName = file.name;
     let myReader: FileReader = new FileReader();
+
+    myReader.readAsDataURL(file);
+
     myReader.onloadend = function (loadEvent: any) {
-      // console.log(loadEvent)
       image.src = loadEvent.target.result;
       that.myImg = image.src;
     };
-    myReader.readAsDataURL(file);
 
 
   }
@@ -192,6 +190,7 @@ export class AddArticleComponent implements OnInit {
        */
       me.uploader.onBuildItemForm = function(fileItem, form){
         console.log("█ fileItem ►►►",  fileItem);
+        console.log(form)
         form.append('uuid', me.uuid);
         console.log("█ form ►►►",  form);
       };

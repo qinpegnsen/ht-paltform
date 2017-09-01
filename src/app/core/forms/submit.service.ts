@@ -149,7 +149,17 @@ export class SubmitService {
       data: requestData,
       async: false,
       success: (res) => {
-        if (!isNullOrUndefined(res) && res.success) result = res.data;
+        if (!isNullOrUndefined(res) && res.success) {
+          result = res.data;
+        }else{
+          swal({
+            title: '失败',
+            text: res.info,
+            type: 'error',
+            timer: 2000, //关闭时间，单位：毫秒
+            showConfirmButton: false  //不显示按钮
+          });
+        }
       },
       error: (res) => {
         console.log('get data error', res);

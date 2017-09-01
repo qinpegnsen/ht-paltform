@@ -45,7 +45,7 @@
             <span></span>
           </label>
         </td>
-        <td><img src="{{article.articleCover.url}}" alt=""></td>
+        <td>{{article.articleCover.url}} <img src="{{article.articleCover.url }}" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
         <td *ngIf="!article.articleGoods">否</td>
         <td *ngIf="article.articleGoods">是</td>
         <td [hidden]="articleState=='DEL'">

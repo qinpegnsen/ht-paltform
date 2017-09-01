@@ -106,6 +106,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
    * addArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
+   * booelean  是否调取置顶的列表
    */
   public queryArticManleList(booelean,event?:PageEvent,addArticlestate?) {
     let activePage = 1;
