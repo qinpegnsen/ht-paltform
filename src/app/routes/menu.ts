@@ -348,7 +348,10 @@ const app = {
   ]
 };
 
-
+const editPw = {
+  text: '密码修改',
+  link: '/main/edit-pw',
+};
 /**
  * 菜单配置
  */

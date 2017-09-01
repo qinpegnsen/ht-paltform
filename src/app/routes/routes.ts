@@ -19,6 +19,7 @@ export const routes = [
       {path: 'stat', loadChildren: './statistics/statistics.module#StatisticsModule'},
       {path: 'agent', loadChildren: './agent/agent.module#AgentModule'},
       {path: 'app', loadChildren: './msg/msg.module#MsgModule'},
+      {path: 'edit-pw', loadChildren: './edit-pw/edit-pw.module#EditPwModule'},
       {path: 'orders', component: ButtonDemoComponent},
     ]
   },

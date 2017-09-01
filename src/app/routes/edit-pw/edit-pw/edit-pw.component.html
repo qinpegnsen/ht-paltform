@@ -1,0 +1,48 @@
+
+<div>
+  <form class="form-validate form-horizontal" style="height: 100%" #res="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>修改密码</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">新密码：</label>
+            <div class="col-sm-8">
+              <input class="form-control num" type="number"  name="pwd" ngModel id="pwd"
+                     placeholder="请填写新密码"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">确认密码：</label>
+            <div class="col-sm-8">
+              <input class="form-control num" type="number"  name="comfirmPwd" ngModel id="comfirmPwd"
+                     placeholder="请再次输入密码"/><span id="tishi"></span>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">旧密码：</label>
+            <div class="col-sm-8">
+              <input class="form-control num" type="number" name="oldpwd" ngModel (keyup)="validate()"
+                     placeholder="请填写旧密码" />
+            </div>
+          </div>
+        </fieldset>
+
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res)">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<router-outlet></router-outlet>

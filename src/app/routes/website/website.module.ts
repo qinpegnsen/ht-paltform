@@ -20,7 +20,6 @@ const routes: Routes = [
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
   {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},
   {path: 'measure', component: MeasureComponent,  children:appChildRoutes}
-
 ];
 
 @NgModule({

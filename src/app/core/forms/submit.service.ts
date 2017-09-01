@@ -25,7 +25,7 @@ export class SubmitService {
       data: submitData,
       async: false,
       success: (res) => {
-        // console.log("█ res ►►►", res);
+        console.log("█ res ►►►", res);
         if (res.success) {
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           swal({

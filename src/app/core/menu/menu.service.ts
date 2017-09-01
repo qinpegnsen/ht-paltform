@@ -35,15 +35,36 @@ export class MenuService {
 
   constructor(private cookieService:CookieService) {
   }
+  foreachPushMenu(items:Array<menuVO>) {
+    let menuItems:Array<MenuItem> = [],menuItem:MenuItem;
+    console.log("█ items ►►►",  items);
+    items.forEach((item) => {
+      menuItem = new MenuItem();
+      //设置菜单显示名称
+      menuItem.text = item.menuName;
+      //判断菜单是否有下级
+      if (item.menuUrl == "#") {
+        menuItem.alert = "child";
+        menuItem.submenu = this.foreachPushMenu(item.subMenuList);
+      }
+      else menuItem.link = item.menuUrl;
 
+      //判断菜单图标是否为空
+      if (!isNullOrUndefined(item.menuIcon)) menuItem.icon = item.menuIcon;
+
+      menuItems.push(menuItem);
+    });
+    return menuItems;
+  }
   /**
    * 设置权限菜单信息
    * @param items
    */
   addMenu(items:Array<menuVO>) {
-    items.forEach((item) => {
-
-    });
+    let menuItems:Array<MenuItem> = [],menuItem:MenuItem;
+    menuItems = this.foreachPushMenu(items);
+    let menuItemsString = JSON.stringify(menuItems);
+    sessionStorage.setItem('userMenu', menuItemsString); //保存menu信息至cookie
   }
 
   /**
@@ -51,6 +72,7 @@ export class MenuService {
    * @returns {Array<any>}
    */
   getMenu() {
+    let menus = JSON.parse(sessionStorage.getItem("userMenu"));
     return menu; //cookie中取出
   }
 

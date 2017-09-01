@@ -70,19 +70,19 @@ export class LoginComponent implements OnInit {
     me.ajax.post({
       url: '/login/login',
       data: {
-        'loginCode': me.userName,
+        'account': me.userName,
         'pwd': me.password
       },
       success: (result) => {
+        console.log(result);
         this.maskservice.hideMask();
         end = new Date().getTime();
         if (result.success) {
           let user =  result.data;
           // console.log("█ result.data.menuVOList ►►►",  result.data.menuVOList);
           // me.myMenu.addMenu(result.data.menuVOList);
-
-          me._cookieService.putObject('loginInfo', user); //用户信息存入cookie
-          me.setting.user.name = user.mgrName,me.setting.user.job = user.mgrName; //修改user变量
+          sessionStorage.setItem('loginInfo', user); //用户信息存入cookie
+          me.setting.user.name = user.staffName,me.setting.user.job = user.mgrName; //修改user变量
           me.router.navigate(['/main/home'], {replaceUrl: true}); //路由跳转
         }
         else {

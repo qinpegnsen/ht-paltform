@@ -1,6 +1,8 @@
 const PROXY_CONFIG = [
   {
     context: [
+      "/login",
+      "/admin",
       "/article",
       "/goodsKind",
       "/goodsBrand",
