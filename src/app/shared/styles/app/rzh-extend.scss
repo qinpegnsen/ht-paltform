@@ -25,6 +25,12 @@
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
 }
+.position-absolute{
+  position: absolute;
+}
+.position-relative{
+  position: relative
+}
 //禁止文本选中
 .unselectable{
   -webkit-touch-callout: none;
@@ -152,6 +158,9 @@
 .w98{width: 98%}
 .w99{width: 99%}
 .w100{width: 100%}
+.top53{top: 53%}
+.top28{top: 28%}
+.left99{left: 99%}
 
 input[type=number].num {
   -moz-appearance:textfield;

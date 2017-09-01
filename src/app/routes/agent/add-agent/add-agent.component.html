@@ -6,13 +6,22 @@
       <div class="panel-body">
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 代理商名称</label>
-            <div class="col-sm-8">
+            <label class="col-sm-2 control-label"> <i>*</i> 代理商名称</label>
+            <div class="col-sm-4">
               <input class="form-control" required name="agentName" [(ngModel)]="staff.agentName"
                      #agentName="ngModel" type="text"/>
               <div [hidden]="agentName.valid || agentName.pristine"
                    class="alert alert-danger">
                 代理商名称是必填项，请填写代理商名称
+              </div>
+            </div>
+            <label class="col-sm-2 control-label"> <i>*</i> 联系电话</label>
+            <div class="col-sm-4">
+              <input class="form-control" required name="mobile" [(ngModel)]="staff.mobile"
+                     #mobile="ngModel" type="text"/>
+              <div [hidden]="mobile.valid || mobile.pristine"
+                   class="alert alert-danger">
+                联系电话是必填项，请填写联系电话
               </div>
             </div>
           </div>
@@ -27,8 +36,8 @@
         </fieldset>-->
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 代理商登录账户</label>
-            <div class="col-sm-8">
+            <label class="col-sm-2 control-label"> <i>*</i> 代理商登录账户</label>
+            <div class="col-sm-4">
               <input class="form-control" required name="agentAcct" [(ngModel)]="staff.agentAcct"
                      #agentAcct="ngModel" type="text"/>
               <div [hidden]="agentAcct.valid || agentAcct.pristine"
@@ -36,12 +45,8 @@
                 代理商登录账户是必填项，请填写代理商登录账户
               </div>
             </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 代理商登录密码</label>
-            <div class="col-sm-8">
+            <label class="col-sm-2 control-label"> <i>*</i> 代理商登录密码</label>
+            <div class="col-sm-4">
               <input class="form-control" required name="agentPwd" [(ngModel)]="staff.agentPwd"
                      #agentPwd="ngModel" type="text"/>
               <div [hidden]="agentPwd.valid || agentPwd.pristine"
@@ -51,79 +56,10 @@
             </div>
           </div>
         </fieldset>
-        <!--<fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">上级代理商编码</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" name="agentPcode" ngModel [(ngModel)]="staff.agentPcode"/>
-            </div>
-          </div>
-        </fieldset>-->
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 负责人</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="leader" [(ngModel)]="staff.leader"
-                     #leader="ngModel" type="text"/>
-              <div [hidden]="leader.valid || leader.pristine"
-                   class="alert alert-danger">
-                负责人是必填项，请填写负责人
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 联系电话</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="mobile" [(ngModel)]="staff.mobile"
-                     #mobile="ngModel" type="text"/>
-              <div [hidden]="mobile.valid || mobile.pristine"
-                   class="alert alert-danger">
-                联系电话是必填项，请填写联系电话
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 身份证号</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
-                     #idcard="ngModel" type="text"/>
-              <div [hidden]="idcard.valid || idcard.pristine"
-                   class="alert alert-danger">
-                身份证号是必填项，请填写身份证号
-              </div>
-            </div>
-            <button class="btn btn-info" type="button" routerLink="rightpage" [queryParams]="{id:3}">上传身份证</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">座机</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone"/>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 区域编码</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="areaCode" [(ngModel)]="staff.areaCode"
-                     #areaCode="ngModel" type="text"/>
-              <div [hidden]="areaCode.valid || areaCode.pristine"
-                   class="alert alert-danger">
-                区域编码是必填项，请填写区域编码
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 详细地址</label>
-            <div class="col-sm-8">
+            <label class="col-sm-2 control-label"> <i>*</i> 详细地址</label>
+            <div class="col-sm-4">
               <input class="form-control" required name="address" [(ngModel)]="staff.address"
                      #address="ngModel" type="text"/>
               <div [hidden]="address.valid || address.pristine"
@@ -131,28 +67,75 @@
                 详细地址是必填项，请填写详细地址
               </div>
             </div>
+            <label class="col-sm-2 control-label"> <i>*</i> 身份证号</label>
+            <div class="col-sm-4">
+              <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
+                     #idcard="ngModel" type="text" style="position: relative"/>
+              <div [hidden]="idcard.valid || idcard.pristine"
+                   class="alert alert-danger">
+                身份证号是必填项，请填写身份证号
+              </div>
+            </div>
+            <!--<button class="btn btn-info" style="position: absolute;" type="button">上传身份证</button>-->
+            <!--上传组件 begin-->
+            <div class="form-group ">
+                <div class="position-absolute top28 left99">
+                  <div for="file1" class="file-upload pull-left mr5">
+                    <label type="button" class="btn btn-info btn-s file-upload">
+                      <input id="file1" class="w100" type="file" ng2FileSelect [uploader]="uploader" multiple/>
+                      上传身份证
+                    </label>
+                    <!--多选-->
+                    {{uploader.queue.length}}
+                    <img *ngFor="let item of uploader.queue" width="100px" [src]="item._file | imgUrl" alt="">
+                    <!--<input id="file1" type="file" ng2FileSelect [uploader]="uploader"/>-->
+                  </div>
+                </div>
+            </div>
+            <!--上传组件 end-->
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">坐标_经度</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" name="coordinateLng" ngModel [(ngModel)]="staff.coordinateLng"/>
+            <label class="col-sm-2 control-label"> <i>*</i> 区域编码</label>
+            <div class="col-sm-4">
+              <input class="form-control" required name="areaCode" [(ngModel)]="staff.areaCode"
+                     #areaCode="ngModel" type="text"/>
+              <div [hidden]="areaCode.valid || areaCode.pristine"
+                   class="alert alert-danger">
+                区域编码是必填项，请填写区域编码
+              </div>
             </div>
-            <button class="btn btn-info" type="button" (click)="isShowMap(staff)">标注经纬度</button>
+            <label class="col-sm-2 control-label">座机</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone"/>
+            </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">坐标_纬度</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+            <label class="col-sm-2 control-label"> <i>*</i> 负责人</label>
+            <div class="col-sm-4">
+              <input class="form-control" required name="leader" [(ngModel)]="staff.leader"
+                     #leader="ngModel" type="text"/>
+              <div [hidden]="leader.valid || leader.pristine"
+                   class="alert alert-danger">
+                负责人是必填项，请填写负责人
+              </div>
             </div>
-            <button class="btn btn-info" type="button" (click)="isShowMap(staff)">标注经纬度</button>
+            <label class="col-sm-2 control-label">坐标_纬度</label>
+            <div class="col-sm-2">
+              <input class="form-control col-sm-1" type="text" name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+            </div>
+            <div class="col-sm-2">
+              <input class="form-control col-sm-1 position-relative" type="text" name="coordinateLng" ngModel [(ngModel)]="staff.coordinateLng"/>
+            </div>
           </div>
+          <button class="btn btn-info position-absolute top53 left99" type="button" (click)="isShowMap(staff)">标注经纬度</button>
           <div class="form-group" [hidden]="!staff.isShowMap">
             <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
               <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+              <button class="btn btn-info btn-determine" type="button" (click)="isShowMap(staff)">确定</button>
               <div id="container">
               </div>
             </div>
@@ -160,9 +143,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">代理点描述</label>
-            <div class="col-sm-8">
-              <!--<input class="form-control" type="text" name="description" ngModel [(ngModel)]="staff.description"/>-->
+            <label class="col-sm-2 control-label">代理点描述</label>
+            <div class="col-sm-10">
               <textarea class="form-control" name="description" ngModel [(ngModel)]="staff.description"></textarea>
             </div>
           </div>
