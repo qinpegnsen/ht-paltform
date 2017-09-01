@@ -340,9 +340,35 @@ export class RzhtoolsService {
   rzhAlt = function (type: string, title: string, info?: string, operation?: Array<AltOperation>) {
     let me = this;
     if (!isNullOrUndefined(operation) && operation.length > 0) {
-      for(let oper of operation) me.toaster[oper.key] = oper.val;
+      for (let oper of operation) me.toaster[oper.key] = oper.val;
     }
     me.toaster.pop(type, title, info);
+  }
+
+  /**
+   * 上传商品图片
+   * @param file
+   */
+  uploadImg = function (file: any) {
+    let _this = this, ret: Array<any> = new Array(),data:any = new FormData();
+    data.append("limitFile", file);
+    _this.ajax.post({
+      url: "/goodsEdit/uploadGoodsBodyImage",
+      data: data,
+      async: false,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (response) => {
+        console.log("█ response ►►►", response);
+        if (!isNullOrUndefined(response) && response.success) ret = response.data;
+        if (isNullOrUndefined(ret)) ret = new Array();
+      },
+      error: (response) => {
+        console.log("█ response ►►►", response);
+      }
+    });
+    return ret;
   }
 
 }

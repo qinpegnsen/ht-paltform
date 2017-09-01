@@ -289,7 +289,7 @@
             <label class="btn btn-sm btn-info file-upload">
               <em class="fa fa-picture-o"></em>
               打开相册图片
-              <input class="w100" type="file" accept="image/*" name="brandPic" ng2FileSelect [uploader]="defaultUploader" multiple/>
+              <input class="w100" type="file" accept="image/*" name="" ng2FileSelect [uploader]="defaultUploader" multiple/>
             </label>
           </div>
           <ul class="goods-pic-list">
@@ -315,7 +315,7 @@
             <label class="btn btn-sm btn-info file-upload">
               <em class="fa fa-picture-o"></em>
               打开相册图片
-              <input class="w100" type="file" accept="image/*" name="brandPic" ng2FileSelect
+              <input class="w100" type="file" accept="image/*" name="" ng2FileSelect
                      [uploader]="val.uploader" multiple/>
             </label>
           </div>
@@ -356,12 +356,45 @@
       <dd class="col-xs-10">
         <div class="w100 app-box">
           <div class="app-wrap">
-            <div class="app-content"></div>
+            <div class="app-control">
+              <div class="app-content">
+                <div class="app-img-box" *ngFor="let item of mblItemList;let i=index;">
+                  <div class="_edit hide">
+                    <ul class="tools pull-right p-sm">
+                      <li class="btn p0 mr-sm btn-default" *ngIf="i != 0" (click)="moveImg(i,'up',item)">上移</li>
+                      <li class="btn p0 mr-sm btn-default" *ngIf="i != mblItemList.length-1"
+                          (click)="moveImg(i,'down',item)">下移
+                      </li>
+                      <li class="btn p0 mr-sm btn-default">替换</li>
+                      <li class="btn p0 mr-sm btn-default" (click)="removeItem(i)">移除</li>
+                    </ul>
+                  </div>
+                  <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
+                        onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <p class="text" *ngIf="item.type== 'text'">{{item.value}}</p>
+                </div>
+              </div>
+              <div class="mobile-edit-area mt hide">
+                <div class="mea-text">
+                  <p class="text-tip">还可以输入 <i class="counter">500</i>字 </p>
+                  <div class="pl pr"><textarea class="textarea valid form-control p-sm" rows="3"
+                                               (keyup)="counter($event.target)"></textarea></div>
+                  <div class="button">
+                    <a class="btn btn-sm btn-primary" (click)="insertText($event.target)" href="javascript:void(0);">确认</a>
+                    <a class="btn btn-sm btn-default ml" (click)="hideEdit($event.target)" href="javascript:void(0);">取消</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <ul class="app-add clearfix">
               <li class="col-xs-6">
-                <em class="fa fa-picture-o font24"></em><br>图片
+                <label class="file-upload mb0">
+                  <em class="fa fa-picture-o font24"></em><br>图片
+                  <input class="w100" type="file" accept="image/*" name="appPic" ng2FileSelect
+                         [uploader]="mobileUploader" multiple/>
+                </label>
               </li>
-              <li class="col-xs-6">
+              <li class="col-xs-6" (click)="showEdit()">
                 <em class="fa fa-font font24"></em><br>文字
               </li>
             </ul>

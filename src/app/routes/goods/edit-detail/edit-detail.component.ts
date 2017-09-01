@@ -8,6 +8,9 @@ import {FileUploader} from "ng2-file-upload";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CustomValidators} from "ng2-validation";
 import {GetUidService} from "../../../core/services/get-uid.service";
+import {AppComponent} from "../../../app.component";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {forEach} from "@angular/router/src/utils/collection";
 declare var $: any;
 
 @Component({
@@ -25,12 +28,19 @@ export class EditDetailComponent implements OnInit {
   private skuAttr = [];//属性列表
   private skuVal = [];//属性值列表
   private skuImg: any;// 图片属性
+  private mobileDescription: any;//移动端详情
   private uuidsList = [];
+  private mblItemList: Array<any> = new Array(); //手机端上传后的图片集合
 
   valForm: FormGroup;// 表单值验证
   private defaultUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsImage',
     itemAlias: "limitFile"
+  })
+  private mobileUploader: FileUploader = new FileUploader({
+    url: '/goodsEdit/uploadGoodsBodyImage',
+    itemAlias: "limitFile",
+    autoUpload: true
   })
 
   constructor(private publishComponent: PublishComponent,
@@ -38,7 +48,8 @@ export class EditDetailComponent implements OnInit {
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
-              private getUid:GetUidService,
+              private getUid: GetUidService,
+              private tools: RzhtoolsService,
               fb: FormBuilder) {
     this.valForm = fb.group({
       'minvalue': [null, CustomValidators.min(6)],
@@ -73,6 +84,9 @@ export class EditDetailComponent implements OnInit {
           callbacks: {
             onChange: (contents) => {
               this.contents = contents;
+            },
+            onImageUpload: function (files) {
+              for (let file of files) me.sendFile(file);
             }
           }
         });
@@ -89,11 +103,22 @@ export class EditDetailComponent implements OnInit {
         $('.sku-table').on('click', '.set', function () {
           let inputObjName = $(this).prev('input').attr('name'),
             inputVal = $(this).prev('input').val();
-          if(!isNullOrUndefined(inputVal) && inputVal !== ''){
+          if (!isNullOrUndefined(inputVal) && inputVal !== '') {
             $('.sku-table input[name="' + inputObjName + '"]').val(inputVal);// 表格中name属性与它相等的输入框的值等于它的值
             $(this).parents('.dropdown-menu').slideUp(200);
           }
         });
+        //当点击移动端编辑图片的时候
+        $('.app-control').on('click', '.app-img-box', function () {
+          let target = this;
+          let editState = !$(target).find('._edit').hasClass('hide');//编辑状态：true-编辑状态，false-普通状态
+          if (editState) {
+            $(target).find('._edit').addClass('hide');
+          } else {
+            $(target).find('._edit').removeClass('hide');
+            $(target).siblings().find('._edit').addClass('hide');
+          }
+        })
       })
     }
     this.publishComponent.changeStep();
@@ -104,6 +129,93 @@ export class EditDetailComponent implements OnInit {
       vals: []
     }
 
+
+    /**
+     * 手机端上传图片成功处理
+     * @param item 信息集合
+     * @param response 返回结果
+     * @param status 状态码
+     * @param headers 头信息
+     */
+    me.mobileUploader.onSuccessItem = function (item, response: any, status, headers) {
+      if (!isNullOrUndefined(response)) {
+        response = JSON.parse(response);
+        if (response.success) {
+          for (let file of response.data) {
+            let obj = {
+              type: 'img',
+              value: file
+            };
+            me.mblItemList.push(obj);
+          }
+        }
+      }
+    }
+
+  }
+
+  /**
+   * 编辑器上传图片并显示
+   * @param file
+   */
+  sendFile(file) {
+    let _this = this, imgs: Array<any> = _this.tools.uploadImg(file);
+    for (let img of imgs) $("#summernote").summernote('insertImage', img, '');
+  }
+
+  /**
+   * 输入框计数器
+   */
+  private counter(target) {
+    let hadLength = $(target).val().length;
+    let leaveLength = 500 - hadLength;
+    $(target).parents('.mea-text').find('.counter').html(leaveLength);
+    return hadLength;
+  }
+
+  //显示移动端编辑框
+  private showEdit() {
+    $('.app-img-box ._edit').addClass('hide');
+    $('.app-box .mobile-edit-area').removeClass('hide');
+    $('.app-control'). scrollTo();
+  }
+
+  //隐藏移动端编辑框
+  private hideEdit(target) {
+    $(target).parents('.mobile-edit-area').addClass('hide');
+  }
+
+  //插入文本
+  private insertText(target) {
+    let me = this;
+    let textArea = $(target).parents('.mobile-edit-area').find('.textarea');
+    if (me.counter(textArea) > 0) {
+      let obj = {
+        type: 'text',
+        value: textArea.val()
+      };
+      me.mblItemList.push(obj);
+      console.log("█ me.mblItemList ►►►", me.mblItemList);
+      me.hideEdit(target);// 隐藏文本编辑区域
+    }
+  }
+
+  //移动端详情编辑向上移动图片
+  private moveImg(index, type, item) {
+    let me = this, prevItem = me.mblItemList[index - 1], nextItem = me.mblItemList[index + 1];
+    if (type == 'up') {
+      me.mblItemList[index - 1] = item;
+      me.mblItemList[index] = prevItem;
+    } else if (type == 'down') {
+      me.mblItemList[index] = nextItem;
+      me.mblItemList[index + 1] = item;
+    }
+    $('.app-img-box').eq(index).find('._edit').addClass('hide');
+  }
+
+  private removeItem(index) {
+    let me = this;
+    me.mblItemList.splice(index - 1, 1);
   }
 
   /**
@@ -258,25 +370,29 @@ export class EditDetailComponent implements OnInit {
   /**
    * 上传图片,第一步，集成所有需要上传的uploader到一个集合里
    */
-  private togetherAllUploaders(){
+  private togetherAllUploaders() {
     let me = this, allUploaders = [];
     // 当选择了规格时,不上传默认的图片
-    if(me.skuImg.vals.length > 0){
+    if (me.skuImg.vals.length > 0) {
       allUploaders = [];
       me.skuImg.vals.forEach((item) => {
         allUploaders.push(item.uploader);
       });
-    }else{
+    } else {
       allUploaders = [];
-      if(me.defaultUploader.queue.length > 0){
+      if (me.defaultUploader.queue.length > 0) {
         allUploaders.push(me.defaultUploader);// 加入默认的uploader
       }
-    };
+    }
+    ;
+    if (me.mobileUploader.queue.length > 0) {
+      allUploaders.push(me.mobileUploader);// 加入移动端详情uploader
+    }
     return allUploaders;
   }
 
 
-  private uploadImgs(){
+  private uploadImgs() {
     let me = this;
     let allUploaders = me.togetherAllUploaders();
     me.uuidsList = [];//每次传图片先置空暗码列表
@@ -284,19 +400,26 @@ export class EditDetailComponent implements OnInit {
       let uuids = [];
       uploader.onBuildItemForm = function (fileItem, form) {
         let uuid = me.getUid.getUid()
-        form.append('uuid',uuid);
+        form.append('uuid', uuid);
         uuids.push(uuid);
       };
-      uploader.queue.forEach((item,index) => {
-        item.onError = function(){
-          uuids.splice(index,1)
+      uploader.queue.forEach((item, index) => {
+        item.onError = function () {
+          uuids.splice(index, 1)
+        };
+        item.onSuccess = function (response, status, headers) {
+          AppComponent.rzhAlt('success', '图片上传成功', '图片上传成功')
         }
       })
       uploader.uploadAll();//全部上传
-      uploader.onCompleteAll = function(){
+      uploader.onCompleteAll = function () {
         me.uuidsList.push(uuids);
       }
     })
+  }
+
+  private submitBtn() {
+    $('.edit').remove()
   }
 
 }
