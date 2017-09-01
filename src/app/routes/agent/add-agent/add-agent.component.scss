@@ -7,11 +7,14 @@
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
 }
-.col-sm-3 i{
+.col-sm-2 i{
   color: #a94644;
 }
 .isShowMap{
   border: 2px solid #cfdbe2;margin: 5px 0;position: relative;
+}
+.btn-determine{
+  position: absolute;bottom: 10px;right: 30px;z-index: 999;
 }
 .isShowlMap{
   position: absolute;top: 20px;right: 50px;z-index: 999;
