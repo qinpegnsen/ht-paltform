@@ -71,7 +71,7 @@ export class AdddataComponent implements OnInit {
       }
       this.adddataService.addClass(url, data);
     } else if (this.linkType == 'updateSort') {
-      if (!isNullOrUndefined(obj)) { //修改数据字典key
+      if (!isNullOrUndefined(obj.name)) { //修改数据字典key
         let url: string = '/datadict/updateDatadictType', data: any;
         if (!isNullOrUndefined(obj.name)) {
           data = { //参数

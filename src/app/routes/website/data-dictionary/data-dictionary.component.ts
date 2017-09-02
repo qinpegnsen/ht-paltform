@@ -48,7 +48,7 @@ export class DataDictionaryComponent implements OnInit {
       type: "delete"
     };
     me.addchildbutton = {
-      title: "添加子按钮",
+      title: "添加val",
       type: "add"
     };
     this.queryDatas()

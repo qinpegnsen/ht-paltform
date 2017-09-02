@@ -15,7 +15,7 @@ export class AdddataService {
       async: false,
       success: (res) => {
         console.log(res)
-        if (res.success && !isNull(res.data)) {
+        if (res.success) {
           AppComponent.rzhAlt("success",res.info);
           result = res.data;
         }else{
