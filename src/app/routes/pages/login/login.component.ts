@@ -8,6 +8,7 @@ import {MaskService} from "app/core/services/mask.service";
 import {menu} from "../../menu";
 import {MenuService} from "../../../core/menu/menu.service";
 import {CookieService} from "angular2-cookie/core";
+import {AppComponent} from "../../../app.component";
 
 declare var $: any;
 @Component({
@@ -77,16 +78,19 @@ export class LoginComponent implements OnInit {
         console.log(result);
         this.maskservice.hideMask();
         end = new Date().getTime();
+        let info = result.data;
         if (result.success) {
           let user =  result.data;
           // console.log("█ result.data.menuVOList ►►►",  result.data.menuVOList);
-          // me.myMenu.addMenu(result.data.menuVOList);
-          sessionStorage.setItem('loginInfo', user); //用户信息存入cookie
+          me.myMenu.addMenu(result.data.menuVOList);
+          sessionStorage.setItem('loginInfo', JSON.stringify(user)); //用户信息存入cookie
           me.setting.user.name = user.staffName,me.setting.user.job = user.mgrName; //修改user变量
           me.router.navigate(['/main/home'], {replaceUrl: true}); //路由跳转
+          AppComponent.rzhAlt("success",info);
         }
         else {
           console.log("█ result ►►►",  JSON.stringify(result));
+          AppComponent.rzhAlt("error",info);
         }
       },
       error: (result) => {

@@ -34,13 +34,13 @@ export class EditPwComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
   //提交修改
-//   submita(res){
-//       let url = '/admin/updatePwd';
-//       let data = {
-//         pwd:res.pwd,
-//         comfirmPwd:res.comfirmPwd,
-//         oldpwd:res.oldpwd,
-//       }
-//       this.submitt.postRequest(url, data);
-// }
+  submita(res){
+      let url = '/admin/updatePwd';
+      let data = {
+        pwd:res.form._value.pwd,
+        comfirmPwd:res.form._value.comfirmPwd,
+        oldpwd:res.form._value.oldpwd,
+      }
+      this.submitt.postRequest(url, data);
+}
 }
