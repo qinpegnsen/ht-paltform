@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {PublishComponent} from "../publish/publish.component";
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
@@ -29,6 +29,7 @@ export class EditDetailComponent implements OnInit {
   private skuVal = [];//属性值列表
   private skuImg: any;// 图片属性
   private mobileDescription: any;//移动端详情
+  private mblTextAreaEditInserBtnEvent;//移动端文本编辑确定按钮事件
   private uuidsList = [];
   private mblItemList: Array<any> = new Array(); //手机端上传后的图片集合
 
@@ -151,9 +152,23 @@ export class EditDetailComponent implements OnInit {
         }
       }
     }
-
   }
 
+  /**
+   * 替换图片
+   * @param e 选择图片事件
+   * @param i 需要替换掉的图片的索引值
+   */
+  mblReplaceImg(e,i){
+    let _this = this,file = e.target.files[0],imgs: Array<any> = _this.tools.uploadImg(file);
+    for (let img of imgs) {
+      let obj = {
+        type: 'img',
+        value: img
+      };
+      _this.mblItemList[i] = obj;
+    }
+  }
   /**
    * 编辑器上传图片并显示
    * @param file
@@ -174,32 +189,48 @@ export class EditDetailComponent implements OnInit {
   }
 
   //显示移动端编辑框
-  private showEdit() {
+  private showEdit(index?) {
     $('.app-img-box ._edit').addClass('hide');
     $('.app-box .mobile-edit-area').removeClass('hide');
-    $('.app-control'). scrollTo();
+    this.scrollBottom();//使移动端详情编辑滚动条一直保持在最底部
   }
 
-  //隐藏移动端编辑框
-  private hideEdit(target) {
-    $(target).parents('.mobile-edit-area').addClass('hide');
+  //隐藏移动端文本编辑框
+  private hideEdit() {
+    $('.mobile-edit-area').addClass('hide');
+  }
+  /**
+   * 使移动端详情编辑滚动条一直保持在最底部
+   */
+  private scrollBottom(){
+    $('.app-control')[0].scrollTop = $('.app-control')[0].scrollHeight;// 使滚动条一直保持在最底部
   }
 
-  //插入文本
-  private insertText(target) {
+  /**
+   * 插入文本
+   * @param target
+   */
+  private insertText(index?) {
     let me = this;
-    let textArea = $(target).parents('.mobile-edit-area').find('.textarea');
+    let textArea = $('.mobile-edit-area .textarea');
     if (me.counter(textArea) > 0) {
       let obj = {
         type: 'text',
         value: textArea.val()
       };
       me.mblItemList.push(obj);
-      console.log("█ me.mblItemList ►►►", me.mblItemList);
-      me.hideEdit(target);// 隐藏文本编辑区域
+      textArea.val('');// 清除文本区域内容
+      me.hideEdit();// 隐藏文本编辑区域
     }
   }
-
+  //手机端详情编辑编辑文本
+  mblReplaceText(target,index, quondamText){
+    let me = this;
+    console.log("█ quondamText ►►►",  quondamText);
+    $('.mobile-edit-area .textarea').html(quondamText);
+    $(target).parents('.app-img-box').find('.text').remove();
+    $(target).parents('.app-img-box').find('.mobile-edit-area').removeClass('hide')
+  }
   //移动端详情编辑向上移动图片
   private moveImg(index, type, item) {
     let me = this, prevItem = me.mblItemList[index - 1], nextItem = me.mblItemList[index + 1];
@@ -210,12 +241,12 @@ export class EditDetailComponent implements OnInit {
       me.mblItemList[index] = nextItem;
       me.mblItemList[index + 1] = item;
     }
-    $('.app-img-box').eq(index).find('._edit').addClass('hide');
+    $('._edit').addClass('hide');
   }
 
   private removeItem(index) {
     let me = this;
-    me.mblItemList.splice(index - 1, 1);
+    me.mblItemList.splice(index, 1);
   }
 
   /**

@@ -360,18 +360,36 @@
               <div class="app-content">
                 <div class="app-img-box" *ngFor="let item of mblItemList;let i=index;">
                   <div class="_edit hide">
-                    <ul class="tools pull-right p-sm">
+                    <ul class="tools pull-right">
                       <li class="btn p0 mr-sm btn-default" *ngIf="i != 0" (click)="moveImg(i,'up',item)">上移</li>
                       <li class="btn p0 mr-sm btn-default" *ngIf="i != mblItemList.length-1"
                           (click)="moveImg(i,'down',item)">下移
                       </li>
-                      <li class="btn p0 mr-sm btn-default">替换</li>
+                      <li class="btn p0 mr-sm btn-default" *ngIf="item.type== 'img'">
+                        <label class="file-upload mb0">替换
+                          <input class="w100" type="file" accept="image/*" name="appPic"
+                                 (change)="mblReplaceImg($event,i)"/>
+                        </label>
+                      </li>
+                      <li class="btn p0 mr-sm btn-default" *ngIf="item.type== 'text'"
+                          (click)="mblReplaceText($event.target,i,item.value)">编辑
+                      </li>
                       <li class="btn p0 mr-sm btn-default" (click)="removeItem(i)">移除</li>
                     </ul>
                   </div>
                   <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
                         onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                  <p class="text" *ngIf="item.type== 'text'">{{item.value}}</p>
+                  <p class="text mb0" style="line-height: 1.6" *ngIf="item.type== 'text'">{{item.value}}</p>
+                  <div class="mobile-edit-area mt hide" *ngIf="item.type== 'text'">
+                    <div class="mea-text">
+                      <div class="pl pr"><textarea class="textarea valid form-control p-sm" rows="3"
+                                                   (keyup)="counter($event.target)"></textarea></div>
+                      <div class="button">
+                        <a class="btn btn-sm btn-primary" (click)="insertText($event.target)" href="javascript:void(0);">确认</a>
+                        <a class="btn btn-sm btn-default ml" (click)="hideEdit($event.target)" href="javascript:void(0);">取消</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="mobile-edit-area mt hide">
