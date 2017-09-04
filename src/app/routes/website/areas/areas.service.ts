@@ -23,7 +23,7 @@ export class AreasService {
   constructor(private ajax: AjaxService) { }
 
   /**
-   * 获取地区列表
+   * 查询地区列表信息
    * @param url
    * @param data
    * @returns {any}

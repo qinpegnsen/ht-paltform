@@ -2,23 +2,56 @@
   代理商管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="appAgent" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
+<!--<div class="panel mb">-->
+  <!--<div class="panel-body p ng-scope">-->
+    <!--<div class="form-group mb0">-->
+      <!--<label class="label-width  pull-left text-right lh35 mb0">查找：</label>-->
+      <!--<div class="col-xs-5">-->
+        <!--<input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
+               <!--placeholder="请输入代理商名称作为关键字进行搜索">-->
+      <!--</div>-->
+      <!--<div class="col-sm-1 pull-left text-center">-->
+        <!--<span class="ng-scope">-->
+           <!--<button type="button" title="搜索" id="toSearch"-->
+                   <!--class="btn btn-primary bar-h3-btn mr ng-scope">-->
+             <!--<em class="icon-magnifier fa-fw"></em>搜索-->
+           <!--</button>-->
+          <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 <div class="panel mb">
   <div class="panel-body p ng-scope">
-    <div class="form-group mb0">
-      <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
-      <div class="col-xs-5">
-        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               placeholder="请输入地区名称作为关键字进行搜索">
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="agentName"
+               (change)="getAgentList()" placeholder="代理商名称">
       </div>
-      <div class="col-sm-1 pull-left text-center">
-        <span class="ng-scope">
-           <button type="button" title="搜索" id="toSearch"
-                   class="btn btn-primary bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
-           </button>
-          </span>
-      </div>
+      <button type="button" title="搜索"
+              class="btn btn-primary bar-h3-btn mr ng-scope">
+        <em class="icon-magnifier fa-fw"></em>
+      </button>
     </div>
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="areaCode"
+               (change)="getAgentList()" placeholder="代理商区域编码">
+      </div>
+      <button type="button" title="搜索"
+              class="btn btn-primary bar-h3-btn mr ng-scope">
+        <em class="icon-magnifier fa-fw"></em>
+      </button>
+    </div>
+    <!--<div class="form-group mt-sm mb0">
+      <label class="radio-inline c-radio">
+        <input type="radio" name="brandRecommend" value="Y" [(ngModel)]="brandRecommend" (change)="queryDatas(1,$event)" />
+        <span class="fa fa-circle"></span>推荐</label>
+      <label class="radio-inline c-radio">
+        <input type="radio" name="brandRecommend" value="N" [(ngModel)]="brandRecommend" (change)="queryDatas(1,$event)" />
+        <span class="fa fa-circle"></span>不推荐</label>
+    </div>-->
+
   </div>
 </div>
 <div class="panel panel-default" *ngIf="this.flag">
@@ -66,7 +99,7 @@
         <td>{{file.areaCode}}</td>
         <td>
         <label class="switch">
-          <input type="checkbox" [checked]="file.state=='NORMAL'" (change)="upFiledateState(file)" title="是否启动"/>
+          <input type="checkbox" [checked]="file.state=='NORMAL'" (change)="upFiledateState(file)"title="是否启动"/>
           <span></span>
         </label>
         </td>
@@ -74,7 +107,7 @@
           <!--修改代理商信息按钮-->
           <app-buttons [config]="updatebutton" routerLink="appAgent" [queryParams]="{linkType:'updataArticle',agentCode:file.agentCode}"></app-buttons>
           <!--删除代理商信息按钮-->
-          <app-buttons [config]="deletebutton" (click)="delete(file.id)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="delete(file.id)" *ngIf="file.state=='FREEZE'"></app-buttons>
           <!--修改代理商密码按钮-->
           <!--<app-buttons [config]="updatebuttono" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></app-buttons>-->
           <button class="btn btn-default fa fa-pencil btn-xs" title="修改密码" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></button>

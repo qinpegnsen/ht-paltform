@@ -74,7 +74,7 @@ export class AreasComponent implements OnInit {
 
 
   /**
-   * 获取地区的列表
+   * 查询地区的列表信息
    * @param event
    */
   public queryList() {

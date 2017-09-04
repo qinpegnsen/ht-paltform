@@ -16,6 +16,7 @@ export class RegionComponent implements OnInit {
   private controlData:Page = new Page();
   private areaCode;//声明保存上级的地区编码
   private queryId:number;//获取添加，修改的ID
+  private area_code: string = '';// 代理区域编码
   private limitForm = {
     areaCode: ''
   }
@@ -43,7 +44,7 @@ export class RegionComponent implements OnInit {
 
 
     /**
-     * 获取地区列表
+     * 查询代理区域信息列表
      * @param event
      */
   public controlDatas(event?:PageEvent) {
@@ -51,12 +52,12 @@ export class RegionComponent implements OnInit {
     if (typeof event !== "undefined") activePage = event.activePage;
 
     this.ajax.get({
-      url: "/agentArea/listPage",
+      url: "/agentArea/listAgentArea",
       data: {
         curPage: activePage,
+        area_code:this.areaCode
       },
       success: (data) => {
-        console.log("█ data ►►►", data );
         if (!isNull(data)) {
           me.controlData = new Page(data.data);
         }

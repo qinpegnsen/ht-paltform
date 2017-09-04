@@ -24,6 +24,8 @@ export class AgentpersonComponent implements OnInit {
   private controlData:Page = new Page();
   private id;//获取删除时需要的id
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+  private areaCode: string = '';// 代理商区域编码
+  private agentName: string = '';// 代理商名称
 
 
   constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router,private AgentpersonService:AgentpersonService) {
@@ -93,10 +95,12 @@ export class AgentpersonComponent implements OnInit {
    * @param event
    */
   public getAgentList(event?:PageEvent){
-    let activePage = 1;
+    let _this = this, activePage = 1;
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
       curPage:activePage,
+      agentName:_this.agentName,
+      areaCode:_this.areaCode
     }
     let url= "/agent/pageQuery";
     this.controlData=this.AgentpersonService.controlDatas(url,data);

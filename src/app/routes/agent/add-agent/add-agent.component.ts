@@ -16,6 +16,7 @@ const uploadUrl = "/agent/uploadIdcardImage";  //图片上传路径(调取上传
   styleUrls: ['./add-agent.component.scss']
 })
 export class AddAgentComponent implements OnInit {
+  public flag:boolean=false;//修改经纬度按钮的显示
   public uploader:FileUploader = new FileUploader({
     url: uploadUrl,
     itemAlias:"limitFile",
@@ -119,6 +120,16 @@ export class AddAgentComponent implements OnInit {
    */
   isShowMap(data:any) {
     data.isShowMap = !data.isShowMap;
+  }
+
+  /**
+   * 显示/隐藏 修改经纬度的按钮
+   * @param data
+   */
+  buttonShow(data:any) {
+    data.isShowMap = !data.isShowMap;
+    this.flag=true;
+    console.log(this.flag)
   }
 
   /**
