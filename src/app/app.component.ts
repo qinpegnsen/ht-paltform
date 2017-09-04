@@ -5,7 +5,6 @@ import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
 import {Router} from "@angular/router";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
 import {isNullOrUndefined} from "util";
-import {RzhtoolsService} from "./core/services/rzhtools.service";
 
 declare var $: any;
 

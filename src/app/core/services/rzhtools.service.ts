@@ -3,6 +3,7 @@ import {isNull, isNullOrUndefined} from "util";
 import {areaJSON} from "./area";
 import {AjaxService} from "./ajax.service";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
+import {AppComponent} from "../../app.component";
 
 @Injectable()
 export class RzhtoolsService {
@@ -365,6 +366,7 @@ export class RzhtoolsService {
         if (isNullOrUndefined(ret)) ret = new Array();
       },
       error: (response) => {
+        AppComponent.rzhAlt('warning','图片上传失败','')
         console.log("█ response ►►►", response);
       }
     });

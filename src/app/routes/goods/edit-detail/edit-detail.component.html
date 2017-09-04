@@ -1,4 +1,4 @@
-<form class="step-two panel panel-default" [formGroup]="valForm" #publishForm="ngForm">
+<form class="step-two panel panel-default" #publishForm="ngForm">
   <!--商品基本信息-->
   <fieldset class="m0 p0">
     <legend class="m0">商品基本信息</legend>
@@ -13,7 +13,7 @@
       <dt class="col-xs-2"><i>*</i>商品名称：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w60">
-          <input type="text" required name="" class="form-control">
+          <input type="text" required name="goodsName" [(ngModel)]="publishData.goodsName" class="form-control">
         </div>
         <p class="tip">商品标题名称长度至少3个字符，最长50个汉字</p>
       </dd>
@@ -22,7 +22,7 @@
       <dt class="col-xs-2">商品卖点：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w60">
-          <textarea class="form-control" name="" id="" cols="10" rows="3"></textarea>
+          <textarea class="form-control" name="goodsJingle" [(ngModel)]="publishData.goodsJingle" id="" cols="10" rows="3"></textarea>
         </div>
         <p class="tip">商品卖点可填写商品的简介或特点，最长不能超过140个汉字</p>
       </dd>
@@ -31,7 +31,7 @@
       <dt class="col-xs-2">商品品牌：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w60">
-          <select class="form-control" name="">
+          <select class="form-control" name="brandCode" [(ngModel)]="publishData.brandCode">
             <option *ngFor="let brand of brandsList" [value]="brand.id">{{brand.brandName}}</option>
           </select>
         </div>
@@ -42,33 +42,12 @@
       <dt class="col-xs-2">商品属性：</dt>
       <dd class="col-xs-10">
         <div class="w80 clearfix">
-          <label class="col-sm-4">
-            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
+          <label class="col-sm-4 base-attr" *ngFor="let attrType of baseAttrList;let i = index">
+            <span class="col-xs-3 pl-sm pr-sm pro-name">{{attrType.name}}</span>
             <div class="col-xs-9 pl-sm pr-sm">
-              <select class="form-control" name="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </label>
-          <label class="col-sm-4 col-xs-6">
-            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
-            <div class="col-xs-9 pl-sm pr-sm">
-              <select class="form-control" name="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </label>
-          <label class="col-sm-4 col-xs-6">
-            <span class="col-xs-3 pl-sm pr-sm pro-name">衣长</span>
-            <div class="col-xs-9 pl-sm pr-sm">
-              <select class="form-control" name="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+              <select class="form-control" name="baseAttr">
+                <option  *ngFor="let attr of attrType.goodsEnumValList" [value]="attr.id"
+                         [class]="attr.idx">{{attr.enumValue}}</option>
               </select>
             </div>
           </label>
@@ -85,10 +64,8 @@
       <dt class="col-xs-2"><i>*</i>计量单位：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w60">
-          <select name="" required class="form-control">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <select name="unit" required class="form-control" [(ngModel)]="publishData.unit">
+            <option [value]="unit.id" *ngFor="let unit of unitList">{{unit.unitName}}</option>
           </select>
         </div>
         <p class="tip">请正确该商品的单位描述，确保购买者明确商品对应单价/计量单位。</p>
@@ -138,52 +115,8 @@
       <dd class="col-xs-10">
         <table class="sku-table w100">
           <thead>
-          <!--当没有选择规格时-->
-          <tr class="text-center" *ngIf="skuAttr.length == 0">
-            <th [class.col-xs-2]="skuAttr"><i>*</i>市场价 <em class="icon-note cursor-p s-menu"></em>
-              <div class="dropdown-menu animated fadeInDown pl pr" role="menu">
-                <div class="close">×</div>
-                <p>批量设置市场价</p>
-                <div class="text-center">
-                  <input class="_price marketPrice" name="marketPrice" type="text" placeholder="0.00">
-                  <button class="btn btn-green btn-sm set">设置</button>
-                </div>
-              </div>
-            </th>
-            <th [class.col-xs-2]="skuAttr"><i>*</i>销售价 <em class="icon-note cursor-p s-menu"></em>
-              <div class="dropdown-menu animated fadeInDown pl pr" role="menu">
-                <div class="close">×</div>
-                <p>批量设置销售价</p>
-                <div class="text-center">
-                  <input class="_price price" name="price" type="text" placeholder="0.00">
-                  <button class="btn btn-green btn-sm set">设置</button>
-                </div>
-              </div>
-            </th>
-            <th [class.col-xs-2]="skuAttr"><i>*</i>会员价 <em class="icon-note cursor-p s-menu"></em>
-              <div class="dropdown-menu animated fadeInDown pl pr" role="menu">
-                <div class="close">×</div>
-                <p>批量设置会员价</p>
-                <div class="text-center">
-                  <input class="_price memberPrice" name="memberPrice" type="text" placeholder="0.00">
-                  <button class="btn btn-green btn-sm set">设置</button>
-                </div>
-              </div>
-            </th>
-            <th class="col-xs-2"><i>*</i>库存 <em class="icon-note cursor-p s-menu"></em>
-              <div class="dropdown-menu animated fadeInDown pl pr" role="menu">
-                <div class="close">×</div>
-                <p>批量设置库存</p>
-                <div class="text-center">
-                  <input class="_price memberPrice" name="stock" type="text" placeholder=">10">
-                  <button class="btn btn-green btn-sm set">设置</button>
-                </div>
-              </div>
-            </th>
-          </tr>
-
           <!--当选择了规格时-->
-          <tr class="text-center" *ngIf="skuAttr.length > 0">
+          <tr class="text-center">
             <th class="col-xs-2" *ngFor="let attr of skuAttr"
                 [id]="attr.attrCode">{{attr.attrName}}</th>
             <th [class.col-xs-2]="skuAttr"><i>*</i>市场价 <em class="icon-note cursor-p s-menu"></em>
@@ -191,7 +124,7 @@
                 <div class="close">×</div>
                 <p>批量设置市场价</p>
                 <div class="text-center">
-                  <input class="_price marketPrice" name="marketPrice" type="text" placeholder="0.00">
+                  <input class="_price marketPrice" name="marketPrice" type="text" placeholder="0.00" />
                   <button class="btn btn-green btn-sm set">设置</button>
                 </div>
               </div>
@@ -201,7 +134,7 @@
                 <div class="close">×</div>
                 <p>批量设置销售价</p>
                 <div class="text-center">
-                  <input class="_price price" name="price" type="text" placeholder="0.00">
+                  <input class="_price price" name="price" type="text" placeholder="0.00" />
                   <button class="btn btn-green btn-sm set">设置</button>
                 </div>
               </div>
@@ -211,7 +144,7 @@
                 <div class="close">×</div>
                 <p>批量设置会员价</p>
                 <div class="text-center">
-                  <input class="_price memberPrice" name="memberPrice" type="text" placeholder="0.00">
+                  <input class="_price memberPrice" name="memberPrice" type="text" placeholder="0.00" />
                   <button class="btn btn-green btn-sm set">设置</button>
                 </div>
               </div>
@@ -221,7 +154,7 @@
                 <div class="close">×</div>
                 <p>批量设置库存</p>
                 <div class="text-center">
-                  <input class="_price memberPrice" name="stock" type="text" placeholder=">10">
+                  <input class="_price memberPrice" name="storageNum" type="text" placeholder=">10" />
                   <button class="btn btn-green btn-sm set">设置</button>
                 </div>
               </div>
@@ -229,48 +162,27 @@
           </tr>
           </thead>
           <tbody>
-          <!--当没有选择规格时-->
-          <tr *ngIf="skuVal.length == 0" class="text-center">
-            <td>
-              <input class="text _price num" name="marketPrice" required type="number">
-              <em class="add-on">元</em>
-            </td>
-            <td>
-              <input class="text _price num" name="price" required type="number" >
-              <em class="add-on">元</em>
-            </td>
-            <td>
-              <input class="text _price num" name="memberPrice" required type="number">
-              <em class="add-on">元</em>
-            </td>
-            <td>
-              <input class="text stock num" name="stock" type="number" required value="10" formControlName="minvalue"
-                     [formControl]="valForm.controls['minvalue']" >
-              <span class="text-danger"
-                    *ngIf="valForm.controls['minvalue'].hasError('min') && (valForm.controls['minvalue'].dirty || valForm.controls['minvalue'].touched)">库存最少为10 </span>
-            </td>
-          </tr>
 
           <!--当选择了规格时-->
-          <tr *ngFor="let sku of skuVal">
-            <td *ngFor="let val of sku" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
+          <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
+            <td [hidden]="true"><input type="text" name="saGroupCode" [(ngModel)]="sku.saGroupCode"></td>
+            <td *ngFor="let val of sku.attrsList" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
             <td>
-              <input class="text _price num" name="marketPrice" type="number" required placeholder="0.00">
+              <input class="text _price num" name="marketPrice" type="number" required placeholder="0.00"
+                     [(ngModel)]="sku.marketPrice" />
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text _price num" name="price" type="number" required placeholder="0.00">
+              <input class="text _price num" name="price" type="number" required placeholder="0.00" [(ngModel)]="sku.price" />
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text _price num" name="memberPrice" type="number" required placeholder="0.00">
+              <input class="text _price num" name="memberPrice" type="number" required placeholder="0.00"  [(ngModel)]="sku.memberPrice" />
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text stock num" name="stock" type="number" value="10" required formControlName="minvalue"
-                     [formControl]="valForm.controls['minvalue']" >
-              <span class="text-danger"
-                    *ngIf="valForm.controls['minvalue'].hasError('min') && (valForm.controls['minvalue'].dirty || valForm.controls['minvalue'].touched)">库存最少为10 </span>
+              <input class="text stock num" name="storageNum" type="number" required placeholder=">10" [(ngModel)]="sku.storageNum" />
+              <span class="text-danger" >库存最少为10 </span>
             </td>
           </tr>
           </tbody>
@@ -291,6 +203,7 @@
               打开相册图片
               <input class="w100" type="file" accept="image/*" name="" ng2FileSelect [uploader]="defaultUploader" multiple/>
             </label>
+            <p class="tip">默认第一张图片为主图</p>
           </div>
           <ul class="goods-pic-list">
             <li class="ui-state-disabled" *ngIf="defaultUploader.queue.length == 0">
@@ -318,6 +231,7 @@
               <input class="w100" type="file" accept="image/*" name="" ng2FileSelect
                      [uploader]="val.uploader" multiple/>
             </label>
+            <p class="tip">默认第一张图片为主图</p>
           </div>
           <ul class="goods-pic-list ml">
             <li class="ui-state-disabled" *ngIf="val.uploader.queue.length == 0">
@@ -345,9 +259,7 @@
       <dt class="col-xs-2">商品描述：</dt>
       <dd class="col-xs-10">
         <div class="w100">
-          <div id="summernote" class="summernote">
-            <span>Rich text presentation here..</span>
-          </div>
+          <div id="summernote" class="summernote"> </div>
         </div>
       </dd>
     </dl>
@@ -372,7 +284,7 @@
                         </label>
                       </li>
                       <li class="btn p0 mr-sm btn-default" *ngIf="item.type== 'text'"
-                          (click)="mblReplaceText($event.target,i,item.value)">编辑
+                          (click)="mblReplaceText($event.target,item.value)">编辑
                       </li>
                       <li class="btn p0 mr-sm btn-default" (click)="removeItem(i)">移除</li>
                     </ul>
@@ -380,26 +292,28 @@
                   <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
                         onerror="javascript:this.src='../../../assets/img/dummy.png'">
                   <p class="text mb0" style="line-height: 1.6" *ngIf="item.type== 'text'">{{item.value}}</p>
-                  <div class="mobile-edit-area mt hide" *ngIf="item.type== 'text'">
+                  <div class="mobile-edit-area hide" *ngIf="item.type== 'text'">
                     <div class="mea-text">
+                      <p class="text-tip">还可以输入 <i class="counter">500</i>字 </p>
                       <div class="pl pr"><textarea class="textarea valid form-control p-sm" rows="3"
                                                    (keyup)="counter($event.target)"></textarea></div>
                       <div class="button">
-                        <a class="btn btn-sm btn-primary" (click)="insertText($event.target)" href="javascript:void(0);">确认</a>
+                        <a class="btn btn-sm btn-primary" (click)="insertMblText($event.target,i)"
+                           href="javascript:void(0);">确认</a>
                         <a class="btn btn-sm btn-default ml" (click)="hideEdit($event.target)" href="javascript:void(0);">取消</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="mobile-edit-area mt hide">
+              <div class="mobile-edit-area hide">
                 <div class="mea-text">
                   <p class="text-tip">还可以输入 <i class="counter">500</i>字 </p>
                   <div class="pl pr"><textarea class="textarea valid form-control p-sm" rows="3"
                                                (keyup)="counter($event.target)"></textarea></div>
                   <div class="button">
-                    <a class="btn btn-sm btn-primary" (click)="insertText($event.target)" href="javascript:void(0);">确认</a>
-                    <a class="btn btn-sm btn-default ml" (click)="hideEdit($event.target)" href="javascript:void(0);">取消</a>
+                    <a class="btn btn-sm btn-primary" (click)="insertMblText()" href="javascript:void(0);">确认</a>
+                    <a class="btn btn-sm btn-default ml" (click)="hideEdit()" href="javascript:void(0);">取消</a>
                   </div>
                 </div>
               </div>
@@ -412,7 +326,7 @@
                          [uploader]="mobileUploader" multiple/>
                 </label>
               </li>
-              <li class="col-xs-6" (click)="showEdit()">
+              <li class="col-xs-6" (click)="showEdit($event.target)">
                 <em class="fa fa-font font24"></em><br>文字
               </li>
             </ul>
@@ -447,32 +361,43 @@
     <dl class="clearfix">
       <dt class="col-xs-2">运费：</dt>
       <dd class="col-xs-10 col-md-8">
+        <div class="w60">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="isFreight" value="Y" [(ngModel)]="publishData.isFreight" />
+            <span class="fa fa-circle"></span>有</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="isFreight" value="N" [(ngModel)]="publishData.isFreight" />
+            <span class="fa fa-circle"></span>无</label>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix" *ngIf="publishData.isFreight == 'Y'">
+      <dt class="col-xs-2">设置运费：</dt>
+      <dd class="col-xs-10 col-md-8">
         <div class="w90">
-          <div class="mb">
-            <span class="radio c-radio c-radio-nofont radio-box">
-              <label>
-              <input type="radio" name="freight" value="Y" checked="checked"/>
-              <span class="fa fa-circle"></span>使用固定运费</label>
-            </span>
-            <span class="clearfix">
-              <input class="text price num" name="" type="number" value="0">
-              <em class="add-on">元</em>
-            </span>
+          <div class="mb clearfix">
+              <span class="radio c-radio c-radio-nofont radio-box">
+                <label>
+                <input type="radio" name="freightType" value="FIXED" [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
+                <span class="fa fa-circle"></span>使用固定运费</label>
+              </span>
+            <span class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='FIXED'">
+                <input class="text price num" name="fixedFreight" type="number" [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
+                <em class="add-on">元</em>
+              </span>
           </div>
-          <div>
+          <div class="clearfix">
             <span class="radio c-radio c-radio-nofont radio-box">
               <label>
-              <input type="radio" name="freight" value="N" />
+              <input type="radio" name="freightType" value="TPL" [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用物流规则</label>
             </span>
-            <span>
-              <select class="rules-list" name="">
+            <span *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
+              <select class="rules-list" name="freightType" [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
                 <option value="">-请选择-</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
               </select>
+              <span class="btn btn-green btn-sm"><em class="fa fa-truck"></em> 添加物流规则</span>
             </span>
-            <span class="btn btn-green btn-sm"><em class="fa fa-truck"></em> 添加物流规则</span>
           </div>
         </div>
       </dd>
@@ -484,14 +409,15 @@
           <div class="clearfix mb">
             <span class="pull-left mr">重量：</span>
              <span class="pull-left">
-              <input class="text weight num" name="" type="number" value="1.00">
+              <input class="text weight num" name="weight" type="number" placeholder="1.00"
+                     [(ngModel)]="publishData.goodsExpressInfo.weight">
               <em class="add-on">kg</em>
             </span>
           </div>
           <div class="clearfix">
             <span class="pull-left mr">体积：</span>
              <span class="pull-left">
-              <input class="text weight num" name="" type="number" value="1.00">
+              <input class="text weight num" name="volume" type="number" placeholder="1.00" [(ngModel)]="publishData.goodsExpressInfo.volume">
               <em class="add-on">m³</em>
             </span>
           </div>
@@ -531,14 +457,27 @@
       </dd>
     </dl>
     <dl class="clearfix">
+      <dt class="col-xs-2">是否有赠品：</dt>
+      <dd class="col-xs-10">
+        <div class="w60">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="haveGift" value="Y" [(ngModel)]="publishData.haveGift" />
+            <span class="fa fa-circle"></span>是</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="haveGift" value="N" [(ngModel)]="publishData.haveGift" />
+            <span class="fa fa-circle"></span>否</label>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix">
       <dt class="col-xs-2">是否参加促销活动：</dt>
       <dd class="col-xs-10">
         <div class="w60">
           <label class="radio-inline c-radio">
-            <input type="radio" name="promotion" value="Y" checked="checked" />
+            <input type="radio" name="isJoinLimitime" value="Y" [(ngModel)]="publishData.isJoinLimitime"/>
             <span class="fa fa-circle"></span>是</label>
           <label class="radio-inline c-radio">
-            <input type="radio" name="promotion" value="N" />
+            <input type="radio" name="isJoinLimitime" value="N" [(ngModel)]="publishData.isJoinLimitime" />
             <span class="fa fa-circle"></span>否</label>
         </div>
         <p class="tip">请选择您的商品是否参加促销活动，如选择“否”，当您参加活动时将不能选择该商品。</p>
@@ -547,7 +486,7 @@
   </fieldset>
 
   <fieldset class="pt-xl m0 text-center">
-    <button class="btn btn-green" type="button" [disabled]="!publishForm.form.valid">
+    <button class="btn btn-green" type="button" (click)="publishGoods()">
       <em class="fa fa-upload mr"></em>发布商品</button>
     <button class="btn btn-green" type="button" (click)="uploadImgs()">
       <em class="fa fa-upload mr"></em>上传图片</button>

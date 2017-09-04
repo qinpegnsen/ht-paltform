@@ -5,13 +5,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
 import {FileUploader} from "ng2-file-upload";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {CustomValidators} from "ng2-validation";
 import {GetUidService} from "../../../core/services/get-uid.service";
-import {AppComponent} from "../../../app.component";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {forEach} from "@angular/router/src/utils/collection";
 declare var $: any;
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-edit-detail',
@@ -20,20 +17,34 @@ declare var $: any;
   providers: [PublishComponent, GoodsService]
 })
 export class EditDetailComponent implements OnInit {
-  private goodsKind: string;//商品分类，从上个组件中传过来
-  private enumTypes: any;// 所有规格数据
-  private brandsList: any;// 品牌列表
-  private goodsBaseCode: string;//商品基本编码
-  private enum: any;// 所选规格，用于请求sku接口的数据
-  private skuAttr = [];//属性列表
-  private skuVal = [];//属性值列表
-  private skuImg: any;// 图片属性
-  private mobileDescription: any;//移动端详情
-  private mblTextAreaEditInserBtnEvent;//移动端文本编辑确定按钮事件
-  private uuidsList = [];
-  private mblItemList: Array<any> = new Array(); //手机端上传后的图片集合
+  private kindId: string;         //商品分类id
+  private goodsKind: string;     //商品分类，从上个组件中传过来
+  private enumTypes: any;         // 所有规格数据
+  private brandsList: any;        // 品牌列表
+  private unitList: any;           // 计量单位列表
+  private baseAttrList: any;      // 商品基本属性列表
+  private goodsBaseCode: string;  //商品基本编码
+  private enum: any;              // 所选规格，用于请求sku接口的数据
+  private skuAttr = [];           //属性列表
+  private skuImg: any;            // 图片属性
+  private uuidsList = [];         //上传图片暗码列表
+  private mblItemList = [];       //手机端上传后的图片集合
+  private publishData: any = {
+    goodsExpressInfo: {},
+    goodsImagesList: [],
+    goodsBaseAttrList: [],
+    goodsSkuList: [
+      {
+        attrsList: [],
+        marketPrice: '',
+        memberPrice: '',
+        price: '',
+        saGroupCode: '',
+        storageNum: ''
+      }
+    ]
+  };// 商品发布数据，所有数据
 
-  valForm: FormGroup;// 表单值验证
   private defaultUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsImage',
     itemAlias: "limitFile"
@@ -50,35 +61,35 @@ export class EditDetailComponent implements OnInit {
               private goods: GoodsService,
               private router: Router,
               private getUid: GetUidService,
-              private tools: RzhtoolsService,
-              fb: FormBuilder) {
-    this.valForm = fb.group({
-      'minvalue': [null, CustomValidators.min(6)],
-    })
+              private tools: RzhtoolsService) {
   }
 
 
   ngOnInit() {
     let me = this;
-
-    let kindId = me.route.snapshot.queryParams['kindId'];
-    if (isNullOrUndefined(kindId)) {
+    me.kindId = me.route.snapshot.queryParams['kindId'];
+    if (isNullOrUndefined(me.kindId)) {
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
       me.getPageData();// 获取当前页面需要的数据
       me.goodsKind = me.route.snapshot.queryParams['choosedKind'].replace('>>', '>').replace('>>', '>');
+
+      me.publishData['isFreight'] = 'N';
+      me.publishData['haveGift'] = 'Y';
+      me.publishData['isJoinLimitime'] = 'Y';
+      me.publishData.goodsExpressInfo['freightType'] = 'FIXED';
+
       /**
        * JQuery初始化后执行事件
        */
       $(function () {
+        //提示信息
         $('.tip').hover(function () {
           $(this).css('color', '#000');
         }, function () {
           $(this).css('color', '#bbb');
         });
-        /**
-         * 调用富文本编辑器，初始化编辑器
-         */
+        //调用富文本编辑器，初始化编辑器
         $('#summernote').summernote({
           height: 280,
           dialogsInBody: true,
@@ -96,29 +107,30 @@ export class EditDetailComponent implements OnInit {
         $('.sku-table').on('click', '.s-menu', function () {
           $(this).next().slideToggle(200)
         });
+
         //当点击批量修改小窗口的关闭时
         $('.sku-table').on('click', '.close', function () {
           $(this).parents('.dropdown-menu').slideUp(200);
         });
+
         //当点击设置按钮时
         $('.sku-table').on('click', '.set', function () {
           let inputObjName = $(this).prev('input').attr('name'),
             inputVal = $(this).prev('input').val();
+          console.log("█ inputObjName ►►►", inputObjName);
           if (!isNullOrUndefined(inputVal) && inputVal !== '') {
-            $('.sku-table input[name="' + inputObjName + '"]').val(inputVal);// 表格中name属性与它相等的输入框的值等于它的值
+            // $('.sku-table input[name="' + inputObjName + '"]').val(inputVal);// 表格中name属性与它相等的输入框的值等于它的值
+            me.publishData.goodsSkuList.forEach((sku) => {
+              sku[inputObjName] = inputVal
+            });
             $(this).parents('.dropdown-menu').slideUp(200);
           }
         });
+
         //当点击移动端编辑图片的时候
         $('.app-control').on('click', '.app-img-box', function () {
           let target = this;
-          let editState = !$(target).find('._edit').hasClass('hide');//编辑状态：true-编辑状态，false-普通状态
-          if (editState) {
-            $(target).find('._edit').addClass('hide');
-          } else {
-            $(target).find('._edit').removeClass('hide');
-            $(target).siblings().find('._edit').addClass('hide');
-          }
+          me.editMblImg(target);
         })
       })
     }
@@ -155,12 +167,45 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 获取发布页面所需数据
+   */
+  private getPageData() {
+    let me = this;
+    let pageData = me.submit.getData('/goodsQuery/pageDataAdd', {kindId: me.kindId});
+    console.log("█ pageData ►►►", pageData);
+    if (isNullOrUndefined(pageData)) {
+      swal('连网失败', "服务器连接失败", 'error');
+    } else {
+      me.enumTypes = pageData.enumTypeList;// 规格
+      me.brandsList = pageData.brandList;// 品牌列表
+      me.unitList = pageData.unitList;// 计量单位
+      me.goodsBaseCode = pageData.goodsBaseCode;// 商品基本编码
+      me.baseAttrList = pageData.baseAttrList;// 商品基本属性
+    }
+  }
+
+  /**
+   * 编辑移动端详情的图片或文本
+   * @param target
+   */
+  private editMblImg(target) {
+    if ($(target).find('.mobile-edit-area').length > 0 && !$(target).find('.mobile-edit-area').hasClass('hide')) return;// 当是修改文本的时候，点击当前板块不显示编辑工具
+    let editState = !$(target).find('._edit').hasClass('hide');//编辑状态：true-编辑状态，false-普通状态
+    if (editState) {
+      $(target).find('._edit').addClass('hide');
+    } else {
+      $(target).find('._edit').removeClass('hide');
+      $(target).siblings().find('._edit').addClass('hide');
+    }
+  }
+
+  /**
    * 替换图片
    * @param e 选择图片事件
    * @param i 需要替换掉的图片的索引值
    */
-  mblReplaceImg(e,i){
-    let _this = this,file = e.target.files[0],imgs: Array<any> = _this.tools.uploadImg(file);
+  mblReplaceImg(e, i) {
+    let _this = this, file = e.target.files[0], imgs: Array<any> = _this.tools.uploadImg(file);
     for (let img of imgs) {
       let obj = {
         type: 'img',
@@ -169,13 +214,21 @@ export class EditDetailComponent implements OnInit {
       _this.mblItemList[i] = obj;
     }
   }
+
   /**
    * 编辑器上传图片并显示
    * @param file
    */
   sendFile(file) {
     let _this = this, imgs: Array<any> = _this.tools.uploadImg(file);
-    for (let img of imgs) $("#summernote").summernote('insertImage', img, '');
+    for (let img of imgs) {
+      $("#summernote").summernote('insertImage', img, '');
+      let obj = {
+        type: 'img',
+        value: img
+      };
+      _this.mblItemList.push(obj);
+    }
   }
 
   /**
@@ -188,50 +241,77 @@ export class EditDetailComponent implements OnInit {
     return hadLength;
   }
 
-  //显示移动端编辑框
-  private showEdit(index?) {
+  /**
+   * 显示移动端编辑框
+   * @param target
+   */
+  private showEdit(target) {
     $('.app-img-box ._edit').addClass('hide');
     $('.app-box .mobile-edit-area').removeClass('hide');
+    this.counter(target);
     this.scrollBottom();//使移动端详情编辑滚动条一直保持在最底部
   }
 
-  //隐藏移动端文本编辑框
-  private hideEdit() {
+  /**
+   * 隐藏移动端文本编辑框
+   * @param target
+   */
+  private hideEdit(target?) {
+    if (!isUndefined(target)) {
+      $(target).parents('.app-img-box').find('._edit').addClass('hide');
+      $(target).parents('.app-img-box').find('.mobile-edit-area').addClass('hide');
+    }
     $('.mobile-edit-area').addClass('hide');
   }
+
   /**
    * 使移动端详情编辑滚动条一直保持在最底部
    */
-  private scrollBottom(){
+  private scrollBottom() {
     $('.app-control')[0].scrollTop = $('.app-control')[0].scrollHeight;// 使滚动条一直保持在最底部
   }
 
   /**
    * 插入文本
    * @param target
+   * @param index
    */
-  private insertText(index?) {
+  private insertMblText(target?, index?) {
     let me = this;
+    if (!isUndefined(target)) $(target).parents('.app-img-box').find('._edit').addClass('hide');
     let textArea = $('.mobile-edit-area .textarea');
     if (me.counter(textArea) > 0) {
       let obj = {
         type: 'text',
         value: textArea.val()
       };
-      me.mblItemList.push(obj);
+      if (!isUndefined(index)) me.mblItemList[index] = obj;
+      else me.mblItemList.push(obj);
       textArea.val('');// 清除文本区域内容
       me.hideEdit();// 隐藏文本编辑区域
     }
   }
-  //手机端详情编辑编辑文本
-  mblReplaceText(target,index, quondamText){
+
+  /**
+   * 手机端详情编辑编辑文本
+   * @param target
+   * @param quondamText
+   */
+  mblReplaceText(target, quondamText) {
     let me = this;
-    console.log("█ quondamText ►►►",  quondamText);
+    console.log("█ quondamText ►►►", quondamText);
     $('.mobile-edit-area .textarea').html(quondamText);
     $(target).parents('.app-img-box').find('.text').remove();
-    $(target).parents('.app-img-box').find('.mobile-edit-area').removeClass('hide')
+    $(target).parents('.app-img-box').find('.mobile-edit-area').removeClass('hide');
+    $(target).parents('.app-img-box').find('._edit').addClass('hide');
   }
-  //移动端详情编辑向上移动图片
+
+  /**
+   * 移动端详情编辑向上移动图片
+   * @param index
+   * @param type
+   * @param item
+   */
   private moveImg(index, type, item) {
     let me = this, prevItem = me.mblItemList[index - 1], nextItem = me.mblItemList[index + 1];
     if (type == 'up') {
@@ -244,21 +324,13 @@ export class EditDetailComponent implements OnInit {
     $('._edit').addClass('hide');
   }
 
+  /**
+   * 移动端详情移除图片
+   * @param index
+   */
   private removeItem(index) {
     let me = this;
     me.mblItemList.splice(index, 1);
-  }
-
-  /**
-   * 获取发布页面所需数据
-   */
-  private getPageData() {
-    let me = this;
-    let pageData = me.submit.getData('/goodsQuery/pageData', '');
-    console.log("█ pageData ►►►", pageData);
-    me.enumTypes = pageData.enumTypeList;// 规格
-    me.brandsList = pageData.brandList;// 品牌列表
-    me.goodsBaseCode = pageData.goodsBaseCode;// 商品基本编码
   }
 
   /**
@@ -321,13 +393,19 @@ export class EditDetailComponent implements OnInit {
   private genImgSku($obj) {
     let me = this;
     let checkedAttr = $obj.parents('.enumType').find('._val:checked');
-    if (checkedAttr.length > 0) me.skuImg.attrName = $obj.parents('.enumType').find('._attrName').next().find('input').val();
+    if (checkedAttr.length > 0) {
+      me.skuImg.attrName = $obj.parents('.enumType').find('._attrName').next().find('input').val();
+      me.skuImg.attrCode = $obj.parents('.enumType').find('._attrName').next().find('input').attr('id');
+    }
+    ;
     let attrVals = [];
     for (let i = 0; i < checkedAttr.length; i++) {
       let val = checkedAttr.eq(i).parents('._attr').find('._value').next().find('input');
       let obj = {
+        attrCode: me.skuImg.attrCode,
         valCode: val.attr('id'),
         valName: val.val(),
+        idx: val.attr('name'),
         uploader: new FileUploader({
           url: '/goodsEdit/uploadGoodsImage',
           itemAlias: "limitFile"
@@ -338,12 +416,11 @@ export class EditDetailComponent implements OnInit {
     me.skuImg.vals = attrVals;
 
     //生成多个uploader
-
     console.log("█ me.skuImg ►►►", me.skuImg);
   }
 
   /**
-   * 将所选规格生成一个的对象
+   * 将所选规格生成一个对象
    * @param spec
    */
   private genObject(spec) {
@@ -367,7 +444,7 @@ export class EditDetailComponent implements OnInit {
       type: spec.attr('id'),
       goodsBaseCode: me.goodsBaseCode
     };
-    console.log("█ me.enum ►►►", me.enum);
+    // console.log("█ me.enum ►►►", me.enum);
     let skuData = me.goods.getSkuData('/goodsEdit/genesku', me.enum);
     if (!isNullOrUndefined(skuData)) {
       me.genClearArray(skuData.data);//将数据生成易解析的新数组
@@ -382,19 +459,19 @@ export class EditDetailComponent implements OnInit {
   private genClearArray(skuData) {
     let me = this;
     me.skuAttr = [];
-    me.skuVal = [];
     if (skuData.length > 0) {
+      me.publishData.goodsSkuList = skuData;
       let tempSkuAttr = skuData[0].attrsList;
       tempSkuAttr.forEach((attr) => {
         let obj = {
           attrCode: attr.attrCode,
-          attrName: attr.attrName
+          attrName: attr.attrName,
+          idx: attr.idx
         }
         me.skuAttr.push(obj);
       });
-      skuData.forEach((sku) => {
-        me.skuVal.push(sku.attrsList);
-      })
+    } else {
+      me.publishData.goodsSkuList[0].attrsList = [];
     }
   }
 
@@ -427,7 +504,7 @@ export class EditDetailComponent implements OnInit {
     let me = this;
     let allUploaders = me.togetherAllUploaders();
     me.uuidsList = [];//每次传图片先置空暗码列表
-    allUploaders.forEach((uploader) => {
+    allUploaders.forEach((uploader, i) => {
       let uuids = [];
       uploader.onBuildItemForm = function (fileItem, form) {
         let uuid = me.getUid.getUid()
@@ -439,18 +516,80 @@ export class EditDetailComponent implements OnInit {
           uuids.splice(index, 1)
         };
         item.onSuccess = function (response, status, headers) {
-          AppComponent.rzhAlt('success', '图片上传成功', '图片上传成功')
+          // AppComponent.rzhAlt('success', '图片上传成功', '图片上传成功')
         }
       })
       uploader.uploadAll();//全部上传
       uploader.onCompleteAll = function () {
-        me.uuidsList.push(uuids);
+        me.uuidsList.push({
+          idx: i,
+          uuid: uuids
+        });
+        console.log("█ me.uuidsList ►►►", me.uuidsList);
       }
     })
   }
 
-  private submitBtn() {
-    $('.edit').remove()
+  genGoodsBaseAttrList() {
+    let me = this, baseAttr = $('.base-attr').find('select');
+    for (let i = 0; i < baseAttr.length; i++) {
+      let obj = {
+        name: baseAttr.eq(i).find("option:selected").text(),
+        value: baseAttr.eq(i).val(),
+        idx: baseAttr.eq(i).find("option:selected").attr('class')
+      }
+      console.log("█ obj ►►►", obj);
+      me.publishData.goodsBaseAttrList.push(obj)
+    }
+  }
+
+  /**
+   * 生成商品图片列表
+   */
+  private genGoodsImgList() {
+    let me = this, goodsImgList: Array<any> = new Array(), imgList: Array<string> = new Array(), item: any;
+    for (var i = 0; i < me.skuImg.vals.length; i++) {
+      item = me.skuImg.vals[i];
+      for (let img of me.uuidsList) {
+        if (img['idx'] == i) {
+          for (let k=0; k<img.uuid.length; k ++) {
+            const temp: any = {attrCode: '', valCode: '', valName: '', idx: '', goodsImage: ''};
+            Object.assign(temp, item);
+            temp.idx = k+1;
+            temp.goodsImage = img.uuid[k];
+            delete(temp.uploader);
+            goodsImgList.push(temp);
+          }
+        }
+      }
+    }
+    return goodsImgList;
+  }
+
+  /**
+   * 移动端详情
+   * @returns {string}
+   */
+  private genMblDetailHtml() {
+    let me = this, mblHtml = '';
+    me.mblItemList.forEach((item) => {
+      if (item.type = 'img') {
+        mblHtml += '<img width="100%" src="' + item.value + '">';
+      } else if (item.type = 'text') {
+        mblHtml += '<p class="text mb0" style="line-height: 1.6">' + item.value + '</p>';
+      }
+    });
+    return mblHtml;
+  }
+
+  private publishGoods() {
+    let me = this;
+    me.publishData['kindId'] = me.kindId;
+    me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码
+    me.publishData['goodsBody'] = $('.summernote').summernote('code');  // 商品详情 PC
+    me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
+    me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
+    console.log("█ me.publishData ►►►", me.publishData);
   }
 
 }
