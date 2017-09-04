@@ -28,6 +28,7 @@ export class RightpageComponent implements OnInit {
     this.queryId = this.routeInfo.snapshot.queryParams['id'];
     this.areaCode = this.routeInfo.snapshot.queryParams['areaCode'];
 
+
     /**
      * 请求详细数据，并显示()
      */
@@ -37,7 +38,7 @@ export class RightpageComponent implements OnInit {
         async: false, //同步请求
         data: {area_code: this.areaCode},
         success: (res) => {
-          this.staff = res.data;
+          this.staff = res.data[0];
         },
         error: (res) => {
           console.log("post limit error");

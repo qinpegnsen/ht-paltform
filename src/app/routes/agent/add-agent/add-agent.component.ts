@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SettingsService} from '../../../core/settings/settings.service';
 import {AjaxService} from "../../../core/services/ajax.service";
 import { FileUploader } from 'ng2-file-upload';
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 declare var $:any;
 declare var AMap:any;
@@ -22,8 +23,8 @@ export class AddAgentComponent implements OnInit {
   }); //初始化上传方法
   public linkType:string;
   private uid;//声明保存获取到的暗码
+  public agentCode:string;//获取代理商编码
   private staff:any = {};
-  private flag:boolean=true;
 
 
   constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute) {
@@ -70,6 +71,7 @@ export class AddAgentComponent implements OnInit {
     }, 1);
 
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
 
     /**
      * 上传文件 获取暗码
@@ -90,6 +92,25 @@ export class AddAgentComponent implements OnInit {
         //swal('获得暗码失败','','error');
       }
     });
+
+    /**
+     * 请求代理商详细数据，并显示()
+     */
+    if(!isNullOrUndefined(this.agentCode)) {
+      this.ajax.get({
+        url: '/agent/loadByAgentCode',
+        async: false, //同步请求
+        data: {agentCode: this.agentCode},
+        success: (res) => {
+          this.staff = res.data;
+          if(isNullOrUndefined(this.staff)) this.staff = {}
+        },
+        error: (res) => {
+          console.log("post limit error");
+        }
+      });
+    }
+
   }
 
   /**
