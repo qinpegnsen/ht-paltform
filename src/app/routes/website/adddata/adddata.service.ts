@@ -73,11 +73,12 @@ export class AdddataService {
             AppComponent.rzhAlt("error",data.info);
           }
         }else{
-          AppComponent.rzhAlt("error",data.info);
+          AppComponent.rzhAlt("error","用户已存在");
         }
       },
       error: (data) => {
-        AppComponent.rzhAlt("error",'分类用户已存在');
+        console.log('data---',data)
+        AppComponent.rzhAlt("error",data.info);
       }
     });
   }

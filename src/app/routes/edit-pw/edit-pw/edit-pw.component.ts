@@ -35,6 +35,7 @@ export class EditPwComponent implements OnInit {
   }
   //提交修改
   submita(res){
+    console.log("res--",res);
       let url = '/admin/updatePwd';
       let data = {
         pwd:res.form._value.pwd,

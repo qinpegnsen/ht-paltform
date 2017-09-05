@@ -11,18 +11,26 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">类型码（code）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.code"
-                     placeholder="请填写名称"/>
+              <input class="form-control" type="text" required name="code" [(ngModel)]="adddata.code" #name="ngModel"
+                     placeholder="请填写类型码"/>
             </div>
+          </div>
+          <div [hidden]="name.valid || name.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写类型码
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label">名称（name）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.name"
+              <input class="form-control" type="text" required name="name" [(ngModel)]="adddata.name" #name="ngModel"
                      placeholder="请填写名称"/>
             </div>
+          </div>
+          <div [hidden]="name.valid || name.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入名称
           </div>
         </fieldset>
 
@@ -30,12 +38,30 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">备注</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" type="text" name="remark" [(ngModel)]="adddata.remark"
+              <input class="form-control" type="text"  name="remark" [(ngModel)]="adddata.remark" #name="ngModel"
                      placeholder="请填写备注"/>
             </div>
           </div>
+          <div [hidden]="name.valid || name.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入名称
+          </div>
         </fieldset>
 
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">唯一值</label>
+            <div class="col-sm-8">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isUniqueVal" value="Y" [(ngModel)]="adddata.isUniqueVal" />
+                <span class="fa fa-circle"></span>是</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isUniqueVal" value="N" checked="checked" [(ngModel)]="adddata.isUniqueVal"/>
+                <span class="fa fa-circle"></span>否</label>
+              <span></span>
+            </div>
+          </div>
+        </fieldset>
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
@@ -61,11 +87,19 @@
             <label class="col-sm-3 control-label">类型名（name）</label>
             <!--<label class="col-sm-3 control-label">值名称 （val）</label>-->
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" *ngIf="updataData.info" [(ngModel)]="updataData.info"
+              <input class="form-control" type="text" required name="info" *ngIf="updataData.info" [(ngModel)]="updataData.info" #info="ngModel"
                      placeholder="请填写名称"/>
-              <input class="form-control" type="text" *ngIf="updataData.name" name="name" [(ngModel)]="updataData.name"
+              <input class="form-control" type="text" *ngIf="updataData.name" required name="name" [(ngModel)]="updataData.name" #name="ngModel"
                      placeholder="请填写名称"/>
             </div>
+          </div>
+          <div [hidden]="info.valid || info.pristine"  *ngIf="updataData.info"
+               class="col-sm-9 pull-right text-danger">
+            请填写名称
+          </div>
+          <div [hidden]="name.valid || name.pristine" *ngIf="updataData.name"
+               class="col-sm-9 pull-right text-danger">
+            请填写名称
           </div>
         </fieldset>
 
@@ -73,9 +107,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">备注</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" type="text" name="remark" [(ngModel)]="updataData.remark"
+              <input class="form-control" type="text" required name="remark" [(ngModel)]="updataData.remark" #remark="ngModel"
                      placeholder="请填写备注"/>
             </div>
+          </div>
+          <div [hidden]="remark.valid || remark.pristine"
+          class="col-sm-9 pull-right text-danger">
+          请填写名称
           </div>
         </fieldset>
 
@@ -98,7 +136,6 @@
         <fieldset class="b0">
           <legend>
             新增类型 <i><b>【{{keyName}}】</b></i> 的val
-
           </legend>
         </fieldset>
 
@@ -106,9 +143,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">值名称（val）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" name="info" [(ngModel)]="adddata.name"
+              <input class="form-control" type="text" required name="info" [(ngModel)]="adddata.info" #info="ngModel"
                      placeholder="请填写名称"/>
             </div>
+          </div>
+          <div [hidden]="info.valid || info.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写类型码
           </div>
         </fieldset>
 
@@ -187,9 +228,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">单位名称</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  name="unitName" [(ngModel)]="adddata.unitName"
+              <input class="form-control" type="text" required name="unitName" [(ngModel)]="adddata.unitName" #unitName="ngModel"
                      placeholder="请填写菜单名称"/>
             </div>
+          </div>
+          <div [hidden]="unitName.valid || unitName.pristine"
+          class="col-sm-9 pull-right text-danger">
+            请填写菜单名称
           </div>
         </fieldset>
 
