@@ -39,42 +39,55 @@
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
       <thead>
       <tr>
-        <th style="width: 15%">
+        <th class="w6 text-center">
           <rzhDefaultSorter by="order">序号</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th class="w15 text-center">
           <rzhDefaultSorter by="remark">类型码（code）</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th class="w20 text-center">
           <rzhDefaultSorter by="name"  *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
           <rzhDefaultSorter by="name"  *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th class="w20 text-center ">
           <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th class="w7 text-center">
           <rzhDefaultSorter by="stop">停启用</rzhDefaultSorter>
         </th>
-        <th style="width: 25%">
+        <th class="w7 text-center">
+          <rzhDefaultSorter by="stop">唯一值</rzhDefaultSorter>
+        </th>
+        <th class="w25 text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let elder of dataTable.data;let x=index">
+      <tr *ngFor="let elder of dataTable.data;let x=index"  class="text-center">
         <td>{{x+1}}</td>
         <td>{{elder.code}}</td>
         <td *ngIf="elder.name !='' && elder.name!=null && elder.name!=undefined">{{elder.name}}</td>
         <td *ngIf="elder.info !='' && elder.info!=null && elder.info!=undefined">{{elder.info}}</td>
         <td>{{elder.remark}}</td>
         <td>
-          <!--菜单权限列表的是否启用-->
+          <!--是否启用-->
           <label class="switch">
             <input type="checkbox" *ngIf="elder.enable == 'Y'" [checked]="true" (change)="startState(elder)" title="是否启动"/>
             <input type="checkbox" *ngIf="elder.enable == 'N'" [checked]="false" (change)="startState(elder)" title="是否启动"/>
             <span></span>
           </label>
         </td>
+        <td>
+          <!--是否有唯一值-->
+          <label class="switch" *ngIf="elder.isUniqueVal=='Y'">
+            是
+          </label>
+          <label class="switch" *ngIf="elder.isUniqueVal=='N'">
+            否
+          </label>
+        </td>
+        <!--<td>{{elder.remark}}</td>-->
         <td>
           <app-buttons [config]="updatebutton" routerLink="adddata" *ngIf="!elder.typeCode"
                        [queryParams]="{linkType:'updateSort',code:elder.code}"></app-buttons>

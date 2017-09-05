@@ -10,8 +10,9 @@ import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
 import {SharedModule} from "./shared/shared.module";
 import {RoutesModule} from "./routes/routes.module";
-import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
+// import {CookieService} from "_angular2-cookie@1.2.6@angular2-cookie";
 import {PopupComponent} from "./routes/operationpage/popup/popup.component";
+import {CookieService} from "angular2-cookie/core";
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: Http) {

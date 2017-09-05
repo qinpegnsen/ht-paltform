@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   navCollapsed = true;
   menuItems = [];
+
   isNavSearchVisible: boolean;
   @ViewChild('fsbutton') fsbutton;
 
@@ -125,6 +126,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.ajax.get({
       url: "/login/logout",
       success: (result) => {
+        console.log(1235)
         if (result.success) {
           this.router.navigate(['/pages/login'], {replaceUrl: true});
         }

@@ -8,22 +8,22 @@
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
       <thead>
       <tr>
-        <th style="width: 20%">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th style="width: 20%">
+        <th class="w25 text-center">
           <rzhDefaultSorter by="name">单位名称</rzhDefaultSorter>
         </th>
-        <th style="width: 20%">
+        <th class="w25 text-center">
           <rzhDefaultSorter by="sort">排序</rzhDefaultSorter>
         </th>
-        <th style="width: 20%">
+        <th class="w40 text-center">
           <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data;let i = index">
+      <tr *ngFor="let count of dataTable.data;let i = index"  class="text-center">
         <td>{{i+1}}</td>
         <td>{{count.unitName}}</td>
         <td>{{count.sort}}</td>
