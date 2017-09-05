@@ -11,29 +11,37 @@ import {AddBrandComponent} from "./add-brand/add-brand.component";
 import {ChooseKindComponent} from "./choose-kind/choose-kind.component";
 import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {FileUploadModule} from "ng2-file-upload";
+import {GoodsService} from "./goods.service";
+import {SubmitService} from "../../core/forms/submit.service";
 
 
 // 父路由，用于页面嵌套显示
 const routes: Routes = [
   {path: '', redirectTo: 'publish'},
-  {path: 'publish',component: PublishComponent, children: [
+  {
+    path: 'publish', component: PublishComponent, children: [
     {path: '', redirectTo: 'step_one'},
     {path: 'step_one', component: ChooseKindComponent},
     {path: 'step_two', component: EditDetailComponent}
-  ]},
+  ]
+  },
   {path: 'manage', component: ManageComponent},
-  {path: 'kind-manage', component: KindManageComponent,children: [
+  {
+    path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},
     {path: 'upKind/:kindId', component: AddKindComponent},
     {path: 'upKindImg/:kindId', component: AddKindComponent}
-  ]},
+  ]
+  },
   {path: 'properties', component: PropertiesComponent},
-  {path: 'brands', component: BrandsComponent,children: [
+  {
+    path: 'brands', component: BrandsComponent, children: [
     {path: 'addBrand', component: AddBrandComponent},
-    {path: 'upBrand/:brandId', component: AddBrandComponent},
-    {path: 'upBrandImg/:brandId', component: AddBrandComponent},
-    {path: 'brandDetail/:brandId', component: AddBrandComponent}
-  ]}
+    {path: 'upBrand', component: AddBrandComponent},
+    {path: 'upBrandImg', component: AddBrandComponent},
+    {path: 'brandDetail', component: AddBrandComponent}
+  ]
+  }
 ];
 
 @NgModule({
@@ -52,6 +60,13 @@ const routes: Routes = [
     AddBrandComponent,
     ChooseKindComponent,
     EditDetailComponent
+  ],
+  providers: [
+    GoodsService,
+    SubmitService,
+    PublishComponent,
+    BrandsComponent,
+    KindManageComponent
   ]
 })
 export class GoodsModule {

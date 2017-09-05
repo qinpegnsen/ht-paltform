@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {SubmitService} from "../../../core/forms/submit.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {GoodsService} from "../goods.service";
 declare var $: any;
 
 @Component({
@@ -9,19 +8,14 @@ declare var $: any;
   styleUrls: ['./publish.component.scss']
 })
 export class PublishComponent implements OnInit {
-  public step: number = 1;// 当前步骤
+  step: number = 1;// 当前步骤
 
-  constructor(private router: Router,private route: ActivatedRoute,private submit: SubmitService) {
+  constructor(private goods:GoodsService) {
   }
 
   ngOnInit() {
     let me = this;
-    console.log("█ this.step ►►►",  this.step);
-  }
-
-  changeStep(){
-    this.step = 2
-    console.log("█ this.step ►►►",  this.step);
+    console.log("█ this ►►►",  this);
   }
 
 
