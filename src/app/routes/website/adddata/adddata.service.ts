@@ -6,7 +6,7 @@ import {AppComponent} from "../../../app.component";
 export class AdddataService {
 
   constructor(private ajax: AjaxService) { }
-
+  //添加key
   getaddData(requestData) {
     let result;
     this.ajax.post({
@@ -59,7 +59,7 @@ export class AdddataService {
     });
     return result
   }
-
+  //数据字典添加服务
   public addClass(url,data) {
     this.ajax.post({
       url: url,
@@ -82,7 +82,7 @@ export class AdddataService {
       }
     });
   }
-
+  //数据字典修改服务
   public updateClass(url,data) {
     var result;
     this.ajax.put({

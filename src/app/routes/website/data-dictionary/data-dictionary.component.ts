@@ -54,15 +54,12 @@ export class DataDictionaryComponent implements OnInit {
     this.queryDatas()
   }
 
-//查询key列表
+   //查询key列表
   searchdata() {
     this.queryDatas()
   }
 
-  /**
-   * 查询数据字典信息列表
-   * @param event
-   */
+  //查询数据字典信息列表
   public queryDatas(event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
@@ -75,9 +72,7 @@ export class DataDictionaryComponent implements OnInit {
     me.data = new Page(res);
   }
 
-  /*
-   *删除
-   */
+  //删除
   delete(delCodeId) {
     let _this = this, url: string = "/datadict/deleteDatadictType", data: any,length:number = _this.childMenuTitList.length;
     swal({
@@ -107,9 +102,7 @@ export class DataDictionaryComponent implements OnInit {
     );
   }
 
-  /*
-   * 停启用
-   * */
+  //停启用
   startState(data) {
     if (data.enable == "Y") data.enable = "N"; else data.enable = "Y";
     let url = "/datadict/updateEnable", _this = this;
@@ -130,10 +123,7 @@ export class DataDictionaryComponent implements OnInit {
     });
   }
 
-  /**
-   * 根据分类的父id查询子分类
-   * @param parentId
-   */
+  //根据分类的父id查询子分类
   queryChildSortList(childCode ?, menuName ?, isTit ?: boolean) {
     let me = this, num = 0;
     if (isNullOrUndefined(childCode)) {
@@ -164,9 +154,7 @@ export class DataDictionaryComponent implements OnInit {
     me.data = result;
   }
 
-  /**
-   * 返回上一级菜单列表
-   */
+  // 返回上一级菜单列表
   goBackMenu() {
     this.queryChildSortList();
   }

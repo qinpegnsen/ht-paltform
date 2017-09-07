@@ -14,13 +14,14 @@ import {MeasureComponent} from "../measure/measure.component";
   providers: [AdddataService]
 })
 export class AdddataComponent implements OnInit {
-  private adddata = {name: '', remark: ''};
+  private adddata = {name: '', remark: '',code:'',isUniqueVal:''};
   private adddatas = {sort: '', unitName: ''};
   public updataData: any;
   public updataDataa: any;
   public addchildData:any;
   public linkType: string;
   public id: number;
+  public isUniqueVal='N';
   public acParentId: number;
   public info: string;
   public code: number;
@@ -62,7 +63,7 @@ export class AdddataComponent implements OnInit {
 
   //数据字典--提交
   submit(obj) {
-      if (this.linkType == 'addChildSort') {
+      if (this.linkType == 'addChildSort') {//添加数据字典val
       let url = '/datadict/addDatadict';
       let data = {
         typeCode: this.code,
@@ -92,8 +93,7 @@ export class AdddataComponent implements OnInit {
       }
 
     } else {
-      var data = this.adddata
-      this.adddataService.getaddData(data)
+      this.adddataService.getaddData(obj)//添加数据字典key
     }
     if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(); //第一层，更新第一层数据
     else this.dataDictionaryComponent.queryChildSortList(this.dataDictionaryComponent.childMenuCode, this.dataDictionaryComponent.childMenuName, true);//第2层，更新第2层数据
@@ -103,7 +103,7 @@ export class AdddataComponent implements OnInit {
 //计量单位--提交
   submita(res){
     if (this.linkType == 'addCount') {
-      let url = '/goodsUnit/addGoodsUnit';
+      let url = '/goodsUnit/addGoodsUnit';//计量单位添加
       let data = {
         sort: res.sort,
         unitName: res.unitName
@@ -111,7 +111,7 @@ export class AdddataComponent implements OnInit {
       this.submitt.postRequest(url, data);
     }
     else if (this.linkType == 'updateCount') {
-      let url = '/goodsUnit/updateGoodsUnit';
+      let url = '/goodsUnit/updateGoodsUnit';//计量单位修改
       let data = {
         id:this.id,
         sort: res.sort,
