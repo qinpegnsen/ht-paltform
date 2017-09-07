@@ -50,7 +50,7 @@ import {AngularEchartsModule} from "ngx-echarts";
     TranslateModule,
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
-    ButtonsModule.forRoot(),
+    AccordionModule.forRoot(),
     CarouselModule.forRoot(),
     CollapseModule.forRoot(),
     DatepickerModule.forRoot(),

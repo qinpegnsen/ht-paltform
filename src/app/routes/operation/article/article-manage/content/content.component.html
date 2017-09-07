@@ -4,28 +4,28 @@
            (pageChange)="queryArticManleList('N',$event)">
       <thead>
       <tr>
-        <th style="width: 5%">
+        <th class="w5">
           序号
         </th>
-        <th style="width: 15%">
+        <th class="w15">
           <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
         </th>
-        <th style="width: 10%">
+        <th class="w10">
           <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
         </th>
-        <th style="width: 10%"  *ngIf="articleState=='NORMAL'">
+        <th class="w10" *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否置顶</rzhDefaultSorter>
         </th>
-        <th style="width: 10%"  *ngIf="articleState=='NORMAL'">
+        <th class="w10" *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否推荐</rzhDefaultSorter>
         </th>
-        <th style="width: 20%">
+        <th class="w20">
           <rzhDefaultSorter>封面</rzhDefaultSorter>
         </th>
-        <th style="width: 15%">
+        <th class="w15">
           <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
         </th>
-        <th style="width: 15%"  [hidden]="articleState=='DEL'">操作</th>
+        <th class="w15" [hidden]="articleState=='DEL'">操作</th>
       </tr>
       </thead>
       <tbody>

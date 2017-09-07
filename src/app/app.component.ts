@@ -96,7 +96,10 @@ export class AppComponent implements OnInit {
 
   // 检测登录状态并引流
   private checkLogin() {
+
     let url = this.location.path();
+    console.log(url)
+    console.log(this)
     let loginCookie = this.cookieService.get("SZH_LINFO");
     if (url !== "/pages/login") {
       if (!loginCookie) this.router.navigate(['/pages/login'], {replaceUrl: true}); //路由跳转
