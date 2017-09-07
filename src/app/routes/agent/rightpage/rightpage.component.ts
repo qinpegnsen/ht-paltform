@@ -31,6 +31,10 @@ export class RightpageComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
+  /**
+   * 修改密码
+   * @param value
+   */
   addLimitList(value){
     let _this = this;
     if(_this.queryId == 2){

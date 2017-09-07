@@ -16,6 +16,8 @@ import {ContentService} from "./article/article-manage/content/content.service";
 import {FileUploadModule} from "ng2-file-upload";
 import {NavService} from "./article/article-manage/content-nav/nav.service";
 import { RightPageComponent } from './express/right-page/right-page.component';
+import {FreightTemplateComponent} from "./freight-template/freight-template.component";
+import { AddFormworkComponent } from './add-formwork/add-formwork.component';
 
 
 const addSort: Routes = [
@@ -31,12 +33,16 @@ const articleChildRoutes: Routes = [
 const expressChildRoute: Routes = [
   {path: 'rightPage', component: RightPageComponent}
 ]
+const appChildRoutes: Routes = [
+  {path: 'add-formoek', component: AddFormworkComponent}
+]
 const routes: Routes = [
   {path: '',redirectTo:'express'},
   {path: 'express', component: ExpressComponent,children:expressChildRoute},
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
   {path: 'ensure', component:EnsureComponent},
-  {path: 'after-ensure', component: AfterEnsureComponent}
+  {path: 'after-ensure', component: AfterEnsureComponent},
+  {path: 'freight-template', component: FreightTemplateComponent,children: appChildRoutes},
 ];
 
 @NgModule({
@@ -46,7 +52,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent]
 })
 export class OperationModule { }

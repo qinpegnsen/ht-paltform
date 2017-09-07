@@ -1,0 +1,14 @@
+<div class="content-heading mb-lg">
+  运费模板管理
+  <app-buttons class="pull-right" [config]="addButton" routerLink="add-formoek" [queryParams]="{linkType:'addArticle'}"></app-buttons>
+</div>
+<div class="panel h80 prompting">
+  <ul>
+    <li>操作提示：</li>
+    <li>1.如果商品选择使用了配送规则，则该商品只售卖配送规则中指定的地区，运费为指定地区的运费</li>
+    <li>2.正在被商品使用的配送规则不允许删除</li>
+  </ul>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

@@ -54,6 +54,10 @@ export class RightpageComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
+  /**
+   * 添加/修改
+   * @param value 必填信息
+   */
   addLimitList(value){
     let _this = this;
     //添加区域信息

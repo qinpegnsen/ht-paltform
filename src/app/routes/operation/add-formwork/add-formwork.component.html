@@ -1,0 +1,52 @@
+<div class="col-lg-10" *ngIf="linkType=='addArticle'">
+  <form class="form-validate form-horizontal" style="height: 100%">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">运费模板名称</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text"
+                     placeholder="请填写运费模板名称"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">是否包邮</label>
+            <div class="col-sm-4">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="A" checked/>
+                <span class="fa fa-circle"></span>自定义运费</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="A"/>
+                <span class="fa fa-circle"></span>卖家承担运费</label>
+              <span></span>
+            </div>
+            <label class="col-sm-2 control-label">计价方式</label>
+            <div class="col-sm-4">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="B" checked/>
+                <span class="fa fa-circle"></span>按件数</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="B"/>
+                <span class="fa fa-circle"></span> 按重量</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="B"/>
+                <span class="fa fa-circle"></span>按体积</label>
+              <span></span>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="pull-right form-group special">
+            <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+            <button class="ml btn btn-info pull-left" type="button" >提交信息</button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>

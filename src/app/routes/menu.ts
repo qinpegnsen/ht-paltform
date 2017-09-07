@@ -60,6 +60,11 @@ const operation = {
       text: '售后保障',
       icon: 'fa fa-shield',
       link: '/main/operation/after-ensure'
+    },
+    {
+      text: '运费模板管理',
+      icon: 'fa fa-book',
+      link: '/main/operation/freight-template'
     }
   ]
 };
