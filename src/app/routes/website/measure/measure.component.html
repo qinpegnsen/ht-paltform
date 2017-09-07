@@ -29,7 +29,6 @@
         <td>{{count.sort}}</td>
         <td>
           <app-buttons [config]="updatebuttons" routerLink="adddata" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
-          <!--<app-buttons [config]="addbuttons" routerLink="adddata" [queryParams]="{linkType:'addCount',acParentId:count.id}"></app-buttons>-->
           <app-buttons [config]="deletebuttons" (click)="deleteCount(count.id)"></app-buttons>
         </td>
       </tr>

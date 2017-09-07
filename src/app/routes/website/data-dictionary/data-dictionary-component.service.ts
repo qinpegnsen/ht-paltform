@@ -56,11 +56,10 @@ export class DataDictionaryComponentService {
   }
 
   /**
-*
-* @param data
-* @param url
-* @returns {Page}
-*/
+  * @param data
+  * @param url
+  * @returns {Page}
+  */
   public queryData(url,data) {
     var result;
     this.ajax.get({

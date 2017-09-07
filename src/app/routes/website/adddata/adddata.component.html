@@ -1,6 +1,6 @@
 <!--数据字典--添加类型key-->
 <div class="rightpage">
-  <form class="form-validate form-horizontal" style="height: 100%" >
+  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -9,9 +9,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">类型码（code）</label>
+            <label class="col-sm-3 control-label"><i>*</i>类型码（code）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" required name="code" [(ngModel)]="adddata.code" #name="ngModel"
+              <input class="form-control" type="text" required name="code" ngModel #name="ngModel"
                      placeholder="请填写类型码"/>
             </div>
           </div>
@@ -22,9 +22,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">名称（name）</label>
+            <label class="col-sm-3 control-label"><i>*</i>名称（name）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" required name="name" [(ngModel)]="adddata.name" #name="ngModel"
+              <input class="form-control" type="text" required name="name" ngModel #name="ngModel"
                      placeholder="请填写名称"/>
             </div>
           </div>
@@ -36,13 +36,13 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">备注</label>
+            <label class="col-sm-3 control-label"><i>*</i>备注</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  name="remark" [(ngModel)]="adddata.remark" #name="ngModel"
+              <input class="form-control" type="text" required name="remark" ngModel #remark="ngModel"
                      placeholder="请填写备注"/>
             </div>
           </div>
-          <div [hidden]="name.valid || name.pristine"
+          <div [hidden]="remark.valid || remark.pristine"
                class="col-sm-9 pull-right text-danger">
             请输入名称
           </div>
@@ -53,10 +53,10 @@
             <label class="col-sm-3 control-label">唯一值</label>
             <div class="col-sm-8">
               <label class="radio-inline c-radio">
-                <input type="radio" name="isUniqueVal" value="Y" [(ngModel)]="adddata.isUniqueVal" />
+                <input type="radio" name="isUniqueVal" value="Y" ngModel/>
                 <span class="fa fa-circle"></span>是</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="isUniqueVal" value="N" checked="checked" [(ngModel)]="adddata.isUniqueVal"/>
+                <input type="radio" name="isUniqueVal" value="N"  [(ngModel)]="isUniqueVal"/>
                 <span class="fa fa-circle"></span>否</label>
               <span></span>
             </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submit()">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addForm.value)" [disabled]="!addForm.form.valid" >提交信息</button>
       </div>
     </div>
     <!-- END panel-->
@@ -74,7 +74,7 @@
 
 <!--数据字典--修改数据字典key-->
 <div class="rightpage"  *ngIf="linkType=='updateSort'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addClass="ngForm">
+  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -84,8 +84,7 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">类型名（name）</label>
-            <!--<label class="col-sm-3 control-label">值名称 （val）</label>-->
+            <label class="col-sm-3 control-label"><i>*</i>类型名（name）</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="info" *ngIf="updataData.info" [(ngModel)]="updataData.info" #info="ngModel"
                      placeholder="请填写名称"/>
@@ -105,7 +104,7 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">备注</label>
+            <label class="col-sm-3 control-label"><i>*</i>备注</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="remark" [(ngModel)]="updataData.remark" #remark="ngModel"
                      placeholder="请填写备注"/>
@@ -120,7 +119,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addClass.value)" [disabled]="addClass.invalid">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addForm.value)" [disabled]="!addForm.form.valid">提交信息</button>
       </div>
     </div>
     <!-- END panel-->
@@ -141,7 +140,7 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">值名称（val）</label>
+            <label class="col-sm-3 control-label"><i>*</i>值名称（val）</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="info" [(ngModel)]="adddata.info" #info="ngModel"
                      placeholder="请填写名称"/>
@@ -166,7 +165,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addChildClass.value)" [disabled]="addChildClass.invalid">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addChildClass.value)" [disabled]="!addChildClass.form.valid">提交信息</button>
       </div>
     </div>
     <!-- END panel-->
@@ -185,21 +184,29 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">单位名称</label>
+            <label class="col-sm-3 control-label"><i>*</i>单位名称</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  name="unitName" [(ngModel)]="updataDataa.unitName"
+              <input class="form-control" type="text" required name="unitName" [(ngModel)]="updataDataa.unitName" #unitName="ngModel"
                      placeholder="请填写单位名称"/>
             </div>
+          </div>
+          <div [hidden]="unitName.valid || unitName.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写单位名称
           </div>
         </fieldset>
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">排序</label>
+            <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
-              <input class="form-control num" type="number"  name="sort" [(ngModel)]="updataDataa.sort"
+              <input class="form-control num" type="number" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel"
                      placeholder="请填写排序"/>
             </div>
+          </div>
+          <div [hidden]="sort.valid || sort.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写排序
           </div>
         </fieldset>
 
@@ -207,7 +214,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)" [disabled]="!res.form.valid">提交信息</button>
       </div>
     </div>
     <!-- END panel-->
@@ -226,7 +233,7 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">单位名称</label>
+            <label class="col-sm-3 control-label"><i>*</i>单位名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="unitName" [(ngModel)]="adddata.unitName" #unitName="ngModel"
                      placeholder="请填写菜单名称"/>
@@ -252,7 +259,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submita(res.value)" [disabled]="!res.form.valid">提交信息</button>
       </div>
     </div>
     <!-- END panel-->

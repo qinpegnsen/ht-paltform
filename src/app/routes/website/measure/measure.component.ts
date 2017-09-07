@@ -22,7 +22,7 @@ export class MeasureComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    // //按钮配置
+    //按钮配置
     me.addbuttons = {
       type: "add",
       title: '添加',
@@ -38,10 +38,7 @@ export class MeasureComponent implements OnInit {
     };
     this.qeuryAllService()
   }
-
-  /*
-  * 计量单位--查询分页
-  * */
+  //计量单位--查询分页
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
@@ -54,12 +51,10 @@ export class MeasureComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
      me.data = new Page(result);
-     console.log(me.data)
+     // console.log(me.data)
   }
 
-  /*
-  * 计量单位--删除
-  * */
+ //计量单位--删除
   deleteCount(delid) {
     let me=this;
     let url = "/goodsUnit/deleteGoodsUnit";
