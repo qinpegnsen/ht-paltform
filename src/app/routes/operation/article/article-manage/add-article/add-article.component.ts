@@ -189,10 +189,7 @@ export class AddArticleComponent implements OnInit {
        * @param item
        */
       me.uploader.onBuildItemForm = function(fileItem, form){
-        console.log("█ fileItem ►►►",  fileItem);
-        console.log(form)
         form.append('uuid', me.uuid);
-        console.log("█ form ►►►",  form);
       };
 
       /**
@@ -209,7 +206,6 @@ export class AddArticleComponent implements OnInit {
        */
       me.uploader.onSuccessItem = function (item, response, status, headers) {
         let res = JSON.parse(response);
-        console.log("█ res ►►►",  res);
         if(res.success){
           me.addArticleExtra()
         }else{
@@ -231,7 +227,6 @@ export class AddArticleComponent implements OnInit {
 
     }else if (this.linkType == 'updataArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-      console.log(sHTML)
       let url = '/article/updateArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
       obj.addArticleEnum = state //默认文章的类型是草稿
