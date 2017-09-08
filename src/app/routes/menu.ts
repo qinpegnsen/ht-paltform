@@ -358,6 +358,7 @@ const editPw = {
 };
 const textEditing = {
   text: '文章编辑',
+  icon:'icon icon-note',
   link: '/main/text-editing',
 };
 /**
