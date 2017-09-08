@@ -8,3 +8,4 @@
 /.idea
 #忽略全局配置
 /package.json
+/proxy.conf.js
