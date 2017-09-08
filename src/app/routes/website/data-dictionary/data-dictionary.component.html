@@ -5,8 +5,7 @@
 <div class="panel mb"  *ngIf="childMenuTitList.length < 1">
   <div class="panel-body p ng-scope" ng-if="search">
     <div class="form-group mb0">
-      <label class="label-width
-       pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
+      <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
       <div class="col-xs-5">
         <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                (change)="searchdata($event)" placeholder="关键字">
