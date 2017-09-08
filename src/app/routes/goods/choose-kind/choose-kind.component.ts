@@ -6,8 +6,7 @@ declare var $: any;
 @Component({
   selector: 'app-choose-kind',
   templateUrl: './choose-kind.component.html',
-  styleUrls: ['./choose-kind.component.scss'],
-  providers: [PublishComponent]
+  styleUrls: ['./choose-kind.component.scss']
 })
 export class ChooseKindComponent implements OnInit {
   private firstList;// 一级分类列表

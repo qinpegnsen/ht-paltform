@@ -13,6 +13,7 @@ import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {GoodsService} from "./goods.service";
 import {SubmitService} from "../../core/forms/submit.service";
+import { PublishedComponent } from './published/published.component';
 
 
 // 父路由，用于页面嵌套显示
@@ -22,15 +23,17 @@ const routes: Routes = [
     path: 'publish', component: PublishComponent, children: [
     {path: '', redirectTo: 'step_one'},
     {path: 'step_one', component: ChooseKindComponent},
-    {path: 'step_two', component: EditDetailComponent}
+    {path: 'step_two', component: EditDetailComponent},
+    {path: 'step_three', component: PublishedComponent},
+    {path: 'edit', component: EditDetailComponent}
   ]
   },
   {path: 'manage', component: ManageComponent},
   {
     path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},
-    {path: 'upKind/:kindId', component: AddKindComponent},
-    {path: 'upKindImg/:kindId', component: AddKindComponent}
+    {path: 'upKind', component: AddKindComponent},
+    {path: 'upKindImg', component: AddKindComponent}
   ]
   },
   {path: 'properties', component: PropertiesComponent},
@@ -59,7 +62,8 @@ const routes: Routes = [
     AddKindComponent,
     AddBrandComponent,
     ChooseKindComponent,
-    EditDetailComponent
+    EditDetailComponent,
+    PublishedComponent
   ],
   providers: [
     GoodsService,

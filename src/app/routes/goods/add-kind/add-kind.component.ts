@@ -7,14 +7,13 @@ import {isNullOrUndefined} from "util";
 import {AppComponent} from "../../../app.component";
 import {FileUploader} from "ng2-file-upload";
 import {GetUidService} from "../../../core/services/get-uid.service";
+import {MaskService} from "../../../core/services/mask.service";
 const swal = require('sweetalert');
 
 @Component({
   selector: 'app-add-kind',
   templateUrl: './add-kind.component.html',
-  styleUrls: ['./add-kind.component.scss'],
-  providers: [KindManageComponent, SubmitService
-  ]
+  styleUrls: ['./add-kind.component.scss']
 })
 export class AddKindComponent implements OnInit {
   private kindInfo = {};
@@ -36,7 +35,7 @@ export class AddKindComponent implements OnInit {
   }); //初始化上传方法
 
   constructor(public settings: SettingsService, private route: ActivatedRoute,private router: Router,
-              private parentComp: KindManageComponent, private getUid: GetUidService,
+              private parentComp: KindManageComponent, private getUid: GetUidService,private mask: MaskService,
               private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -57,10 +56,10 @@ export class AddKindComponent implements OnInit {
           me.pageTitle = "新增分类";
           me.editKind = true;
           this.uuid = this.getUid.getUid();
-          let param = this.route.snapshot.queryParams;
-          if (!isNullOrUndefined(param.pid)) this.kindInfo['kindParentId'] = param.pid;
-          if (!isNullOrUndefined(param.pname)) this.kindInfo['parentKindName'] = param.pname;
-          if (!isNullOrUndefined(param.level)) this.kindInfo['level'] = param.level;
+          let parmas = this.route.snapshot.queryParams;
+          if(!isNullOrUndefined(parmas.pid)) this.kindInfo['kindParentId'] = parmas.pid;
+          if(!isNullOrUndefined(parmas.pname)) this.kindInfo['parentKindName'] = parmas.pname;
+          if(!isNullOrUndefined(parmas.level)) this.kindInfo['level'] = parmas.level;
           break;
 
         //修改分类
@@ -88,7 +87,7 @@ export class AddKindComponent implements OnInit {
    */
   toUpKindImg(id){
     this.settings.closeRightPage(); //关闭右侧滑动页面
-    this.router.navigate(['/main/goods/kind-manage/upKindImg', id], { replaceUrl: true });
+    this.router.navigate(['/main/goods/kind-manage/upKindImg'], { replaceUrl: true ,preserveQueryParams: true });
   }
 
   /**
@@ -125,76 +124,81 @@ export class AddKindComponent implements OnInit {
     let me = this;
     let submitUrl, submitData;
     submitData = me.kindInfo;
-    if(me.uuid) submitData.kindIcon = me.uuid;
     switch (me.path) {
       //新增分类
       case "addKind":
         submitUrl = '/goodsKind/addGoodsKind';
-        me.uploader.onBuildItemForm = function (fileItem, form) {
-          form.append('uuid', me.uuid);
-        };
-        me.uploader.onSuccessItem = function (item, response, status, headers) {
-          let res = JSON.parse(response);
-          if (res.success) {
-            me.submit.postRequest(submitUrl, submitData, true);
-          } else {
-            AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-          }
-        }
-        /**
-         * 上传失败处理
-         * @param item 失败的文件列表
-         * @param response 返回信息
-         * @param status 状态码
-         * @param headers 上传失败后服务器的返回的返回头
-         */
-        me.uploader.onErrorItem = function (item, response, status, headers) {
-          AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-        };
-        /**
-         * 执行上传
-         */
-        me.uploader.uploadAll();
+        me.upLoadImg(submitData,submitUrl,'post');//上传图片&提交数据
         break;
       //修改分类
       case "upKind":
         submitUrl = '/goodsKind/updateGoodsKind';
-        me.submit.putRequest(submitUrl, submitData, true);// 所有put提交用的都是SubmitService里的putRequest方法,true表示需要返回上级页面
+        submitData.kindIcon = null;
+        me.upLoadImg(submitData,submitUrl,'put');//上传图片&提交数据
         break;
-      case "upKindImg":
-        submitUrl = '/goodsKind/updateGoodsKindIcon';
-        submitData = {
-          kindId: this.submit.getParams('kindId'),
-          uuid: me.uuid
-        };
-        me.uploader.onBuildItemForm = function (fileItem, form) {
-          form.append('uuid', me.uuid);
-        };
-        me.uploader.onSuccessItem = function (item, response, status, headers) {
-          let res = JSON.parse(response);
-          if (res.success) {
-            console.log("█ submitData ►►►",  submitData);
-            me.submit.putRequest(submitUrl, submitData, true);
-          } else {
-            AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-          }
-        }
-        /**
-         * 上传失败处理
-         * @param item 失败的文件列表
-         * @param response 返回信息
-         * @param status 状态码
-         * @param headers 上传失败后服务器的返回的返回头
-         */
-        me.uploader.onErrorItem = function (item, response, status, headers) {
-          AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-        };
-        /**
-         * 执行上传
-         */
-        me.uploader.uploadAll();
     }
-    me.parentComp.queryDatas(1, 0);// 刷新父页面数据
+  }
+
+  /**
+   * 上传图片及提交数据
+   * @param submitData
+   * @param submitUrl
+   * @param method : post/put
+   */
+  private upLoadImg(submitData,submitUrl,method){
+    let me = this;
+    me.mask.showMask();//上传图片比较慢，显示遮罩层
+    //上传之前
+    me.uploader.onBuildItemForm = function(fileItem, form){
+      me.uuid = me.getUid.getUid();
+      form.append('uuid', me.uuid);
+    };
+    //执行上传
+    me.uploader.uploadAll();
+    //上传成功
+    me.uploader.onSuccessItem = function (item, response, status, headers) {
+      let res = JSON.parse(response);
+      if (res.success) {
+        if (me.uuid) submitData.kindIcon = me.uuid;
+      } else {
+        AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+      }
+    }
+    // 上传失败
+    me.uploader.onErrorItem = function (item, response, status, headers) {
+      AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+    };
+    //上传完成，不管成功还是失败
+    me.uploader.onCompleteAll = function(){
+      me.submitFormDataAndRefresh(submitUrl,submitData,method)
+    }
+
+    //如果没有选择图片则直接提交
+    if(isNullOrUndefined(me.uuid)){
+      me.submitFormDataAndRefresh(submitUrl,submitData,method)
+    }else if(!isNullOrUndefined(me.uuid) && !me.uploader.isUploading){
+      if (me.uuid) submitData.kindIcon = me.uuid;
+      // 图片已经传过了，但是数据提交失败了，改过之后可以直接提交
+      me.submitFormDataAndRefresh(submitUrl,submitData,method)
+    }
+  }
+
+  /**
+   * 提交数据，刷新父当前页组件数据
+   * method: post
+   * @param submitUrl
+   * @param submitData
+   */
+  private submitFormDataAndRefresh(submitUrl, submitData,method){
+    let me = this;
+    if(method == 'post'){
+      me.submit.postRequest(submitUrl, submitData, true);
+    }else if(method == 'put'){
+      me.submit.putRequest(submitUrl, submitData, true);
+    }
+    let pPage = this.submit.getParams('page');
+    if(isNullOrUndefined(pPage)) pPage = 1;
+    me.parentComp.queryDatas(pPage, 0);// 刷新父页面数据
   }
 
   // 取消

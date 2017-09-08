@@ -9,8 +9,7 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 @Component({
   selector: 'app-kind-manage',
   templateUrl: './kind-manage.component.html',
-  styleUrls: ['./kind-manage.component.scss'],
-  providers: []
+  styleUrls: ['./kind-manage.component.scss']
 })
 export class KindManageComponent implements OnInit {
   private searchKey: string;// 搜索关键词
@@ -37,7 +36,7 @@ export class KindManageComponent implements OnInit {
         size: "xs",
         callback: function (result, kindId) {
           result.then((id) => {
-            me.router.navigate(['/main/goods/kind-manage/upKind', kindId]);
+            me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId}});
           })
         }
       },
