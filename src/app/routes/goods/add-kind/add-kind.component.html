@@ -45,7 +45,8 @@
             <label class="col-sm-4 control-label"><i>*</i>关键词</label>
             <div class="col-sm-7">
               <!--<tag-input theme='minimal' name="tagName1" [ngModel]="['Typescript', 'Angular 2']" [maxItems]="5"></tag-input>-->
-              <input class="form-control" type="text" required name="keywords" [tooltip]="tip.keywords" [(ngModel)]="kindInfo.keywords"
+              <input class="form-control" type="text" required name="keywords" [tooltip]="tip.keywords"
+                     [(ngModel)]="kindInfo.keywords"
                      #keywords="ngModel" placeholder="关键词"/>
             </div>
           </div>
@@ -55,28 +56,19 @@
           </div>
         </fieldset>
         <!--如果是添加分类-->
-        <fieldset *ngIf="path=='addKind'">
+        <fieldset>
           <div class="form-group">
             <label class="col-sm-4 control-label">分类图标</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="myImg && !kindInfo.kindIcon" [src]="myImg" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="myImg && kindInfo.kindIcon" [src]="myImg" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="!myImg && kindInfo.kindIcon" [src]="kindInfo.kindIcon"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
               <label class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{fileName}}
+                <i class="icon-cloud-upload mr"></i>{{kindInfo.kindIcon? '修改图片':'上传图片'}}
                 <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
-                        (change)="fileChangeListener($event)"/>
+                       (change)="fileChangeListener($event)"/>
               </label>
-            </div>
-          </div>
-        </fieldset>
-
-        <!--如果是修改分类，根据是否有图片选择是否上传-->
-        <fieldset *ngIf="path!='addKind'">
-          <div class="form-group">
-            <label class="col-sm-4 control-label">分类图标</label>
-            <div class="col-sm-7">
-              <img *ngIf="kindInfo.kindIcon" class="col-sm-5 p-sm" [src]="kindInfo.kindIcon" alt="">
-              <label class="btn btn-default file-upload" (click)="toUpKindImg(kindInfo.id)">
-                <i class="icon-cloud-upload mr"></i>{{kindInfo.kindIcon? '修改图片':'上传图片'}}</label>
             </div>
           </div>
         </fieldset>
@@ -113,7 +105,7 @@
             <label class="col-sm-4 control-label">状态</label>
             <div class="col-sm-7">
               <label class="radio-inline c-radio">
-                <input type="radio" name="state" value="SHOW" [(ngModel)]="kindInfo.state" />
+                <input type="radio" name="state" value="SHOW" [(ngModel)]="kindInfo.state"/>
                 <span class="fa fa-circle"></span>显示</label>
               <label class="radio-inline c-radio">
                 <input type="radio" name="state" value="HIDE" [(ngModel)]="kindInfo.state"/>

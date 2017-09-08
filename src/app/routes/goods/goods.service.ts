@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {isNullOrUndefined} from "util";
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
+import {MaskService} from "../../core/services/mask.service";
+import {Router} from "@angular/router";
 const swal = require('sweetalert');
 
 @Injectable()
 export class GoodsService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(private ajax: AjaxService,private mask: MaskService,private router: Router,) { }
   /**
    * get 获取数据
    * @param requestUrl
@@ -45,16 +47,11 @@ export class GoodsService {
       async: false,
       contentType: "application/json",
       success: (res) => {
-        console.log("█ res ►►►", res);
         if (res.success) {
-          swal({
-            title: '成功',
-            text: res.info,
-            type: 'success',
-            timer: 3000, //关闭时间，单位：毫秒
-            showConfirmButton: false  //不显示按钮
-          });
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          me.router.navigate(['/main/goods/publish/step_three'],{queryParams: {baseCode: res.data}})
         } else {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -65,7 +62,8 @@ export class GoodsService {
         }
       },
       error: (res) => {
-        console.log("post error");
+        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        AppComponent.rzhAlt("error", '网络错误');
       }
     })
   }

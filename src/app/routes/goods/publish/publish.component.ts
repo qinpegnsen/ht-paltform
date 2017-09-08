@@ -14,8 +14,6 @@ export class PublishComponent implements OnInit {
   }
 
   ngOnInit() {
-    let me = this;
-    console.log("█ this ►►►",  this);
   }
 
 

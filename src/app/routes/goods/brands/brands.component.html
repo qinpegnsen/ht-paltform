@@ -95,7 +95,8 @@
         <td>{{i+1}}</td>
         <td class="hidden-sm">{{brand.brandInitial}}</td>
         <td>{{brand.brandName}}</td>
-        <td><img [src]="brand.brandPic" onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></td>
+        <td><img height="50px" [src]="brand.brandPic" onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                 alt=""></td>
         <td>
           <label class="switch switch-md" title="是/否">
             <input [checked]="brand.brandRecommend=='Y'" type="checkbox"

@@ -4,12 +4,16 @@ import {SettingsService} from "../settings/settings.service";
 import {isNullOrUndefined} from "util";
 import {ActivatedRoute} from "@angular/router";
 import {AppComponent} from "../../app.component";
+import {MaskService} from "../services/mask.service";
 const swal = require('sweetalert');
 
 @Injectable()
 export class SubmitService {
 
-  constructor(private ajax: AjaxService, private settings: SettingsService, private route: ActivatedRoute) {
+  constructor(private ajax: AjaxService,
+              private mask: MaskService,
+              private settings: SettingsService,
+              private route: ActivatedRoute) {
   }
 
   /**
@@ -19,7 +23,7 @@ export class SubmitService {
    * @param back:true(返回上一级)
    */
   postRequest(submitUrl, submitData, back?: boolean) {
-    let me = this,result;
+    let me = this, result;
     me.ajax.post({
       url: submitUrl,
       data: submitData,
@@ -27,16 +31,19 @@ export class SubmitService {
       success: (res) => {
         console.log("█ res ►►►", res);
         if (res.success) {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          swal({
-            title: '成功',
-            text: res.info,
-            type: 'success',
-            timer: 2000, //关闭时间，单位：毫秒
-            showConfirmButton: false  //不显示按钮
-          });
-          result=res.data;
+          AppComponent.rzhAlt("success", res.info);
+          /* swal({
+           title: '成功',
+           text: res.info,
+           type: 'success',
+           timer: 3000, //关闭时间，单位：毫秒
+           showConfirmButton: false  //不显示按钮
+           });*/
+          result = res.data;
         } else {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -47,6 +54,8 @@ export class SubmitService {
         }
       },
       error: (res) => {
+        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        AppComponent.rzhAlt("error", '网络错误');
         console.log("post error");
       }
     })
@@ -80,6 +89,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
+        AppComponent.rzhAlt("error", '网络错误');
         console.log('del error', res);
       }
     });
@@ -92,7 +102,7 @@ export class SubmitService {
    * @param back:true(返回上一级)
    */
   putRequest(requestUrl, requestDate, back?: boolean) {
-    let result;
+    let result,me = this;
     this.ajax.put({
       url: requestUrl,
       data: requestDate,
@@ -100,16 +110,19 @@ export class SubmitService {
       success: (res) => {
         console.log("█ res ►►►", res);
         if (res.success) {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
-          swal({
-            title: '成功',
-            text: res.info,
-            type: 'success',
-            timer: 2000, //关闭时间，单位：毫秒
-            showConfirmButton: false  //不显示按钮
-          });
-          result=res.data;
+          AppComponent.rzhAlt("success", res.info);
+          /*swal({
+           title: '成功',
+           text: res.info,
+           type: 'success',
+           timer: 3000, //关闭时间，单位：毫秒
+           showConfirmButton: false  //不显示按钮
+           });*/
+          result = res.data;
         } else {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -120,6 +133,8 @@ export class SubmitService {
         }
       },
       error: (res) => {
+        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        AppComponent.rzhAlt("error", '网络错误');
         console.log('put error', res);
       }
     });
@@ -128,12 +143,22 @@ export class SubmitService {
 
   /**
    * 获取路由参数
+   * 适用于'?'开头的传参形式
    * @returns {any}
    */
-  getParams(param) {
-    let val;
-    this.route.params.subscribe(params => val = params[param]);
-    return val;
+  /*getParams(param) {
+   let val;
+   this.route.params.subscribe(params => val = params[param]);
+   return val;
+   }*/
+
+  /**
+   * 获取路由参数
+   * 适用于'?'开头的传参形式
+   * @returns {any}
+   */
+  public getParams(name) {
+    return this.route.snapshot.queryParams[name];
   }
 
   /**
@@ -151,17 +176,12 @@ export class SubmitService {
       success: (res) => {
         if (!isNullOrUndefined(res) && res.success) {
           result = res.data;
-        }else{
-          swal({
-            title: '失败',
-            text: res.info,
-            type: 'error',
-            timer: 2000, //关闭时间，单位：毫秒
-            showConfirmButton: false  //不显示按钮
-          });
+        } else {
+          swal('失败', res.info, 'error');
         }
       },
       error: (res) => {
+        AppComponent.rzhAlt("error", '网络错误');
         console.log('get data error', res);
       }
     });
