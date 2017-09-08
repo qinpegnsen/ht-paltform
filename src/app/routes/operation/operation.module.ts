@@ -18,6 +18,9 @@ import {NavService} from "./article/article-manage/content-nav/nav.service";
 import { RightPageComponent } from './express/right-page/right-page.component';
 import {FreightTemplateComponent} from "./freight-template/freight-template.component";
 import { AddFormworkComponent } from './add-formwork/add-formwork.component';
+import {HelpCenterComponent} from "./help-center/help-center.component";
+import {HelpAssortmentComponent} from "./help-center/help-assortment/help-assortment.component";
+import {HelpInterlocutionComponent} from "./help-center/help-interlocution/help-interlocution.component";
 
 
 const addSort: Routes = [
@@ -36,10 +39,16 @@ const expressChildRoute: Routes = [
 const appChildRoutes: Routes = [
   {path: 'add-formoek', component: AddFormworkComponent}
 ]
+const helpChildRoutes: Routes = [
+  {path: 'help-assortment', component: HelpAssortmentComponent},
+  {path: 'help-interlocution', component: HelpInterlocutionComponent}
+]
+
 const routes: Routes = [
   {path: '',redirectTo:'express'},
   {path: 'express', component: ExpressComponent,children:expressChildRoute},
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
+  {path: 'help-center', component: HelpCenterComponent,children:helpChildRoutes},
   {path: 'ensure', component:EnsureComponent},
   {path: 'after-ensure', component: AfterEnsureComponent},
   {path: 'freight-template', component: FreightTemplateComponent,children: appChildRoutes},
@@ -52,7 +61,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent],
-  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent]
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent],
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,]
 })
 export class OperationModule { }

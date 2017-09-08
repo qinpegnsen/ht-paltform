@@ -65,7 +65,23 @@ const operation = {
       text: '运费模板管理',
       icon: 'fa fa-book',
       link: '/main/operation/freight-template'
-    }
+    },
+    {
+      text: '帮助中心',
+      icon: 'icon-note',
+      link: '/main/operation/help-center',
+      alert: '▼',
+      submenu: [
+        {
+          text: '帮助分类',
+          link: '/main/operation/help-center/help-interlocution'
+        },
+        {
+          text: '帮助问答',
+          link: '/main/operation/help-center/help-assortment'
+        }
+      ]
+    },
   ]
 };
 const goods = {
