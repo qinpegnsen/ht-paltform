@@ -6,3 +6,4 @@
 /dist
 #忽略idea项目配置文件夹
 /.idea
+/package.json
