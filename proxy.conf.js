@@ -48,7 +48,7 @@ const PROXY_CONFIG = [
     context: [
       "/upload"
     ],
-    target: "http://192.168.10.110:8083",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.110:8088",   //拦截 context配置路径，经过此地址
     secure: false
   }
   ,
