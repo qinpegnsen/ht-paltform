@@ -31,9 +31,8 @@ export class TextEditingComponent implements OnInit {
       });
     }, 0);
   }
-  /**
-   * 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
-   */
+
+  // 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
   submit(){
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
     let url = '';//新增文章接口
