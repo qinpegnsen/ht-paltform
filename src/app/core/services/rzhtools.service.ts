@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {isNull, isNullOrUndefined} from "util";
-import {areaJSON} from "./area";
+import {areaIdCardJSON} from "./areaIdCard";
 import {AjaxService} from "./ajax.service";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
 import {AppComponent} from "../../app.component";
@@ -12,7 +12,7 @@ export class RzhtoolsService {
 
   // Angular2框架负责注入对象
   constructor(private ajax: AjaxService, private toaster: ToasterService) {
-    this.areaJson = areaJSON;
+    this.areaJson = areaIdCardJSON;
   }
 
   /**
@@ -109,14 +109,12 @@ export class RzhtoolsService {
    * @returns 行政区域对象
    */
   public getAreaByCode(areaCode: string, isSelectOld?: boolean) {
-    let areaJsonFile = 'json/area.json',
-      result = null,
+    let result = null,
       areaLevel = this.getAreaLevel(areaCode),       // 获得传入区域代码的级别
       areaLevelOne: BasicArea = null,
       areaLevelTwo: BasicArea = null,
-      arealevelThree: BasicArea = null,
+      arealevelThree: BasicArea = null;
       // getAreaURL = areaJsonFile + '?v=' + (new Date().getTime()); // 清除缓存
-      getAreaURL = areaJsonFile; // 清除缓存
     isSelectOld = isNull(isSelectOld) ? true : isSelectOld;
 
     // 取到省级区域对象
