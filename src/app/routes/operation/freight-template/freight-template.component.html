@@ -9,6 +9,38 @@
     <li>2.正在被商品使用的配送规则不允许删除</li>
   </ul>
 </div>
+<div>
+  <table  #dataTable="rzhDataTable" [rzhData]="areas" style="width:100%">
+    <tbody>
+    <ng-container  *ngFor="let organ of dataTable.data;let i = index">
+      <tr>
+        <td>
+        <div style="border:1px solid red; margin-top: 30px">
+          <div>
+            <span>{{organ.tplName}}</span>
+            <span>
+              <app-buttons [config]="updatebutton"></app-buttons>
+              <app-buttons [config]="deletebutton"></app-buttons>
+            </span>
+
+          </div>
+            <div *ngFor="let storeExpressTplValList of organ.storeExpressTplValList;let i = index">
+              {{storeExpressTplValList.area}}
+              {{storeExpressTplValList.createTime}}
+              {{storeExpressTplValList.firstNum}}
+              {{storeExpressTplValList.firstPrice}}
+              {{storeExpressTplValList.addAttach}}
+              {{storeExpressTplValList.addPrice}}
+            </div>
+        </div>
+        </td>
+
+      </tr>
+    </ng-container>
+
+    </tbody>
+  </table>
+</div>
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->

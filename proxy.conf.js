@@ -31,7 +31,8 @@ const PROXY_CONFIG = [
       "/custLogin",
       "/seller",
       "/store",
-      "/storeExpressTpl"
+      "/storeExpressTpl",
+      "/expressTpl"
     ],
     target: "http://192.168.10.109:8085",   //拦截 context配置路径，经过此地址
     secure: false

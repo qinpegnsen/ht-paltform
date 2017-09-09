@@ -1,16 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
+import {asQueryList} from "@angular/core/src/view";
+import {isNullOrUndefined} from "util";
+import {FreightTemplateService} from "./freight-template.service";
+import {Page} from "../../../core/page/page";
 
 @Component({
   selector: 'app-freight-template',
   templateUrl: './freight-template.component.html',
-  styleUrls: ['./freight-template.component.scss']
+  styleUrls: ['./freight-template.component.scss'],
+  providers:[FreightTemplateService]
 })
 export class FreightTemplateComponent implements OnInit {
   private addButton;//新增运费模板按钮配置
+  private updatebutton;//修改运费模板按钮配置
+  private deletebutton;//删除运费模板按钮配置
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+  private areas:Page= new Page();
+  private table = {
+    curPage:1,
+    lastPage:true,
+    needCountQuery:false,
+    optObject:null,
+    optObjectList:null,
+    pageSize:20,
+    params:{},
+    sortColumns:null,
+    totalPage:1,
+    totalRow:5,
+    voList:[]
+  }
 
-  constructor(private router:Router) {
+  constructor(private router:Router,private FreightTemplateService:FreightTemplateService) {
 
   }
 
@@ -25,11 +46,23 @@ export class FreightTemplateComponent implements OnInit {
       text:"新增运费模板",
       title:'新增运费模板',
     };
+    this.updatebutton = {
+      type:"update",
+      text:"修改",
+      title:'修改运费模板',
+      size:'xs',
+    };
+    this.deletebutton = {
+      type:"delete",
+      text:"删除",
+      title:'删除运费模板',
+      size:'xs',
+    };
 
 
     /**
      * 路由事件用来监听地址栏的变化
-     * 1.当添加代理商出现的时候，代理商列表组件隐藏
+     * 1.当添加运费模板出现的时候，运费模板列表组件隐藏
      * 2.路由变化的时候，刷新页面
      */
     _this.router.events
@@ -43,6 +76,26 @@ export class FreightTemplateComponent implements OnInit {
           }
         }
       });
+    _this.queryList()//获取费模板列表信息
+
+  }
+
+  /**
+   * 查询运费模板列表信息
+   * @param event
+   */
+  public queryList() {
+    let data={storeCode:'SZH_PLAT_SELF_STORE_CODE',level:1}
+    let url= "/expressTpl/queryByStoreCode";
+    let result = this.FreightTemplateService.controlDatas(url,data);
+    console.log("█ data ►►►", data );
+
+    if(isNullOrUndefined(result)){
+
+    }else{
+      this.table.voList = result.data;
+    }
+    this.areas = new Page(this.table);
   }
 
 }
