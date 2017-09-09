@@ -1,5 +1,6 @@
 <div class="content-heading mb-lg">
   运费模板管理
+  <!--添加运费模板按钮-->
   <app-buttons class="pull-right" [config]="addButton" routerLink="add-formoek" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
 <div class="panel h80 prompting">
@@ -9,30 +10,57 @@
     <li>2.正在被商品使用的配送规则不允许删除</li>
   </ul>
 </div>
-<div>
-  <table  #dataTable="rzhDataTable" [rzhData]="areas" style="width:100%">
+<div *ngIf="this.flag">
+  <table #dataTable="rzhDataTable" [rzhData]="areas" class="w100">
     <tbody>
-    <ng-container  *ngFor="let organ of dataTable.data;let i = index">
+    <ng-container *ngFor="let organ of dataTable.data;let i = index">
       <tr>
         <td>
-        <div style="border:1px solid red; margin-top: 30px">
-          <div>
-            <span>{{organ.tplName}}</span>
-            <span>
-              <app-buttons [config]="updatebutton"></app-buttons>
-              <app-buttons [config]="deletebutton"></app-buttons>
+          <div class="table-thead">
+            <div class="table-thead-header">
+              <span>{{organ.tplName}}</span>
+              <span>
+                <!--修改运费模板值按钮-->
+              <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle'}"></app-buttons>
+                <!--删除运费模板值按钮-->
+              <app-buttons [config]="deletebutton"  (click)="delete(organ.id)"></app-buttons>
             </span>
-
-          </div>
-            <div *ngFor="let storeExpressTplValList of organ.storeExpressTplValList;let i = index">
-              {{storeExpressTplValList.area}}
-              {{storeExpressTplValList.createTime}}
-              {{storeExpressTplValList.firstNum}}
-              {{storeExpressTplValList.firstPrice}}
-              {{storeExpressTplValList.addAttach}}
-              {{storeExpressTplValList.addPrice}}
             </div>
-        </div>
+            <table class="table table-striped w100">
+              <thead>
+              <tr>
+                <th class="col-md-6 unselectable">
+                  <rzhDefaultSorter by="agentName">运送到</rzhDefaultSorter>
+                </th>
+                <th class="col-md-2 unselectable text-center">
+                  <rzhDefaultSorter by="createTime">创建时间</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center">
+                  <rzhDefaultSorter by="firstNum">首件(件)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center">
+                  <rzhDefaultSorter by="firstPrice">运费(元)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center">
+                  <rzhDefaultSorter by="addAttach">续件(件)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center">
+                  <rzhDefaultSorter by="addPrice">运费(元)</rzhDefaultSorter>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let storeExpressTplValList of organ.storeExpressTplValList;let i = index">
+                <td class="pl18">{{storeExpressTplValList.area}}</td>
+                <td class="text-center">{{storeExpressTplValList.createTime}}</td>
+                <td class="text-center">{{storeExpressTplValList.firstNum}}</td>
+                <td class="text-center">{{storeExpressTplValList.firstPrice}}</td>
+                <td class="text-center">{{storeExpressTplValList.addAttach}}</td>
+                <td class="text-center">{{storeExpressTplValList.addPrice}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </td>
 
       </tr>

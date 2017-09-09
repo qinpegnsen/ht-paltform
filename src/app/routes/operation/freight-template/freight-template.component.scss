@@ -9,3 +9,21 @@
     color: #c09853;
   }
 }
+.table-thead{
+  border:1px solid #dddddd;
+  margin-top: 30px;
+  background: #fafafa;
+  .table-thead-header{
+    height: 40px;
+    border-bottom: 1px solid #dddddd;
+    line-height: 37px;
+    span:nth-child(1){
+      float: left;
+      margin-left: 20px;
+    }
+    span:nth-child(2){
+      float: right;
+      margin-right: 20px;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import {asQueryList} from "@angular/core/src/view";
 import {isNullOrUndefined} from "util";
 import {FreightTemplateService} from "./freight-template.service";
 import {Page} from "../../../core/page/page";
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-freight-template',
@@ -71,7 +72,7 @@ export class FreightTemplateComponent implements OnInit {
           console.log(event.url)
           if(event.url.indexOf('linkType')>0){
             _this.flag=false;
-          }else if(event.url=='/main/agent/agentperson'){
+          }else if(event.url=='/main/operation/freight-template'){
             _this.flag=true;
           }
         }
@@ -98,4 +99,32 @@ export class FreightTemplateComponent implements OnInit {
     this.areas = new Page(this.table);
   }
 
+
+  /**
+   * 删除运费模板信息信息
+   * @param event
+   */
+  delete(delCodeId) {
+    let _this = this, url: string = "/expressTpl/delteStoreExpressTpl", data: any;
+    swal({
+        title: '确认删除此信息？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        data = {
+          id:delCodeId
+        }
+        console.log(data)
+        _this.FreightTemplateService.delCode(url, data); //删除数据
+        let datas={id:delCodeId}
+        let urls= "/expressTpl/queryByStoreCode";
+        _this.FreightTemplateService.controlDatas(urls,datas);//实现局部刷新
+      }
+    );
+  }
 }

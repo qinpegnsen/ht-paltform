@@ -19,7 +19,6 @@ export class AddFormworkComponent implements OnInit {
    * 关闭右侧滑动页面
    */
   cancel() {
-    //this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
     this.router.navigate(['/main/operation/freight-template']);
   }
 }
