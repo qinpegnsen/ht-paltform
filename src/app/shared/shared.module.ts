@@ -40,6 +40,7 @@ import {RzhtoolsService} from "../core/services/rzhtools.service";
 import {SubmitService} from "../core/forms/submit.service";
 import { ImgUrlPipe } from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
+import { HoverDirective } from './directives/hover/hover.directive';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -86,7 +87,8 @@ import {AngularEchartsModule} from "ngx-echarts";
     JqcloudDirective,
     StatePipe,
     AreaNamePipe,
-    ImgUrlPipe
+    ImgUrlPipe,
+    HoverDirective
   ],
   exports: [
     CommonModule,
@@ -125,7 +127,8 @@ import {AngularEchartsModule} from "ngx-echarts";
     AreaNamePipe,
     SelectModule,
     ImgUrlPipe,
-    AngularEchartsModule
+    AngularEchartsModule,
+    HoverDirective
   ]
 })
 
