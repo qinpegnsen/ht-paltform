@@ -69,14 +69,6 @@ export class AddKindComponent implements OnInit {
           me.editKind = true;
           me.kindInfo = this.getKindInfo();// 获取分类信息
           break;
-
-        //修改分类
-        case "upKindImg":
-          //console.log("█ \"修改分类图片\" ►►►", "修改分类图片");
-          me.pageTitle = "修改分类图片";
-          me.upKindImg = true;
-          this.uuid = this.getUid.getUid();
-          break;
       }
     });
   }
@@ -159,7 +151,7 @@ export class AddKindComponent implements OnInit {
     me.uploader.onSuccessItem = function (item, response, status, headers) {
       let res = JSON.parse(response);
       if (res.success) {
-        if (me.uuid) submitData.kindIcon = me.uuid;
+        if (!isNullOrUndefined(me.uuid)) submitData.kindIcon = me.uuid;
       } else {
         AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
       }
@@ -174,12 +166,9 @@ export class AddKindComponent implements OnInit {
     }
 
     //如果没有选择图片则直接提交
-    if(isNullOrUndefined(me.uuid)){
-      me.submitFormDataAndRefresh(submitUrl,submitData,method)
-    }else if(!isNullOrUndefined(me.uuid) && !me.uploader.isUploading){
-      if (me.uuid) submitData.kindIcon = me.uuid;
-      // 图片已经传过了，但是数据提交失败了，改过之后可以直接提交
-      me.submitFormDataAndRefresh(submitUrl,submitData,method)
+    if(!me.uploader.isUploading){   // 图片已经传过了，但是数据提交失败了，改过之后可以直接提交
+      if (!isNullOrUndefined(me.uuid)) submitData.kindIcon = me.uuid;
+      me.submitFormDataAndRefresh(submitUrl,submitData,method);
     }
   }
 
