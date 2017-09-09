@@ -1,0 +1,150 @@
+<!--帮助中心-添加分类-->
+<div class="rightpage" *ngIf="linkType == 'aa'" >
+  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>帮助分类信息</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>序号</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="sort" ngModel #sort="ngModel"
+                     placeholder="请填写序号"/>
+            </div>
+          </div>
+          <div [hidden]="sort.valid || sort.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写序号
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="name" ngModel #name="ngModel"
+                     placeholder="请填写名称"/>
+            </div>
+          </div>
+          <div [hidden]="name.valid || name.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入名称
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">描述</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text"  name="description" ngModel
+                     placeholder="请填写描述"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>图标</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="icon" ngModel  #icon="ngModel"
+                     placeholder="请填写图标"/>
+            </div>
+          </div>
+          <div [hidden]="icon.valid || icon.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入图标
+          </div>
+        </fieldset>
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addForm.value)" [disabled]="!addForm.form.valid" >提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+
+<!--帮助中心--修改-->
+<div class="rightpage" *ngIf="linkType=='updateCount'">
+  <form class="form-validate form-horizontal" style="height: 100%"  #res="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>帮助分类信息</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>id</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="id" [(ngModel)]="updataDataa.id" #id="ngModel"
+                     placeholder="请填写序号"/>
+            </div>
+          </div>
+          <div [hidden]="id.valid || id.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写id
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>序号</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel"
+                     placeholder="请填写序号"/>
+            </div>
+          </div>
+          <div [hidden]="sort.valid || sort.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写序号
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="name" [(ngModel)]="updataDataa.kindName" #kindName="ngModel"
+                     placeholder="请填写名称"/>
+            </div>
+          </div>
+          <div [hidden]="kindName.valid || kindName.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入名称
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">描述</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text"  name="description" [(ngModel)]="updataDataa.description"
+                     placeholder="请填写描述"/>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>图标</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" required name="icon" [(ngModel)]="updataDataa.icon"  #icon="ngModel"
+                     placeholder="请填写图标"/>
+            </div>
+          </div>
+          <div [hidden]="icon.valid || icon.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入图标
+          </div>
+        </fieldset>
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid" >提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>

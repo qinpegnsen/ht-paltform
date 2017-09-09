@@ -70,6 +70,7 @@ export class DataDictionaryComponent implements OnInit {
     }
     let res = this.dataDictionaryService.getdataservice(requestData)
     me.data = new Page(res);
+    console.log(me.data)
   }
 
   //删除

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 declare var $: any;
 @Component({
   selector: 'app-help-assortment',
@@ -7,9 +8,12 @@ declare var $: any;
 })
 export class HelpAssortmentComponent implements OnInit {
   public contents: string;
-  constructor() { }
+  private linkType:string;
+  constructor(private routeInfo: ActivatedRoute,) { }
 
   ngOnInit() {
+
+    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
       $('#summernote').summernote({
@@ -24,5 +28,7 @@ export class HelpAssortmentComponent implements OnInit {
       });
     }, 0);
   }
-
+    back(){
+      window.history.back();
+    }
 }

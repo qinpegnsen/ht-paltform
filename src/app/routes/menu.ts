@@ -78,7 +78,7 @@ const operation = {
         },
         {
           text: '帮助问答',
-          link: '/main/operation/help-center/help-assortment'
+          link: '/main/operation/help-center/help-answer'
         }
       ]
     },

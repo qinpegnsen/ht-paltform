@@ -1,21 +1,32 @@
 
 <div class="content-heading mb-lg">
   帮助问答
+  <button (click)="back()" class="pull-right btn-info btn-sm">返回</button>
 </div>
 <div class="panel panel-default">
-  <div class="panel-body">
-
-    <div class="problem">
-      <label class="question">问题：</label>
-      <input type="text" class="w68 problem-box">
+  <div class="panel-body help-center-width">
+    <div class="select">
+      问题分类：
+      <select name="" id="">
+        <option value="">a</option>
+        <option value="">s</option>
+        <option value="">c</option>
+        <option value="">c</option>
+        <option value="">c</option>
+        <option value="">c</option>
+      </select>
+    </div>
+    <div class="questiona text-center">
+      <label class="question col-sm-1">问题：</label>
+      <input type="text" class="col-sm-8 problem-box">
     </div>
 
     <div class="reset-div text-edit">
-      <table class="w98 edit-table">
-        <tr class="w98">
-          <td class="w7 text-content">答案：</td>
-          <td class="w70">
-            <div class="col-sm-10">
+      <table class="w100 edit-table">
+        <tr class="w100">
+          <td class="col-sm-1 text-content text-center">答案：</td>
+          <td class="w100">
+            <div class="col-sm-9">
               <div id="summernote" class="summernote">
                 <span>Rich text presentation here..</span>
               </div>
@@ -26,15 +37,15 @@
 
     </div>
 
-    <div>
-      <label class="question">排序：</label>
-      <input type="text" class="w20 problem-box">
+    <div class="questiona">
+      <label class="question col-sm-1 text-center">排序：</label>
+      <input type="text" class="col-sm-2 problem-box">
     </div>
 
-    <div>
-      <button class="col-sm-1 btn-primary" style="margin:21px 0 0 260px">提交</button>
-    </div>
+    <!--<div>-->
+      <!--<button class="col-sm-1 btn-primary">提交</button>-->
+    <!--</div>-->
   </div>
 </div>
-<router-outlet></router-outlet>
+
 

@@ -1,67 +1,75 @@
 
-<div class="content-heading mb-lg">
-  帮助分类
-  <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
-      <thead>
-      <tr>
-        <th class="w5 text-center">
-          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
-        </th>
-        <th class="w13 text-center">
-          <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
-        </th>
-        <th class="w13 text-center">
-        <rzhDefaultSorter by="sort">图标</rzhDefaultSorter>
-      </th>
-        <th class="w21 text-center">
-          <rzhDefaultSorter by="sort">状态</rzhDefaultSorter>
-        </th>
-        <th class="w13 text-center">
-          <rzhDefaultSorter by="sort">时间</rzhDefaultSorter>
-        </th>
+<div *ngIf="flag">
+  <div class="content-heading mb-lg">
+    帮助分类
+    <app-buttons class="pull-right" [config]="addButton" routerLink="addrightpage" [queryParams]="{linkType:'aa'}"></app-buttons>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w5 text-center">
+            <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+          </th>
+          <th class="w13 text-center">
+            <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="sort">描述</rzhDefaultSorter>
+          </th>
+          <th class="w13 text-center">
+            <rzhDefaultSorter by="sort">图标</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="sort">状态</rzhDefaultSorter>
+          </th>
+          <th class="w13 text-center">
+            <rzhDefaultSorter by="sort">时间</rzhDefaultSorter>
+          </th>
 
-        <th class="w35 text-center">
-          <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let count of dataTable.data;let i = index"  class="text-center">
-        <td>{{i+1}}</td>
-        <td>{{count.unitName}}</td>
-        <td>{{count.sort}}</td>
-        <td>
-          <label class="switch">
-            <input type="checkbox"  [checked]="true" (change)="startState(elder)" title="是否启动"/>
-            <span></span>
-          </label>
-        </td>
-        <td>{{count.sort}}</td>
-        <td>
-          <app-buttons [config]="updatebuttons" routerLink="adddata" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="delete(elder.code)"></app-buttons>
-          <app-buttons [config]="deletebuttons" (click)="deleteCount(count.id)"></app-buttons>
-          <app-buttons [config]="deletebuttons" (click)="deleteCount(count.id)"></app-buttons>
-        </td>
-      </tr>
-      </tbody>
-      <!--<tfoot>-->
-      <!--<tr>-->
-        <!--<td colspan="5">-->
-          <!--<div class="col-sm-5">-->
-            <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7">-->
-            <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
-          <!--</div>-->
-        <!--</td>-->
-      <!--</tr>-->
-      <!--</tfoot>-->
-    </table>
+          <th class="w30 text-center">
+            <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let count of dataTable.data"  class="text-center">
+          <td>{{count.sort}}</td>
+          <td>{{count.kindName}}</td>
+          <td>{{count.description}}</td>
+          <td>{{count.icon}}</td>
+          <td>
+            <!--是否启用-->
+            <label class="switch">
+              <input type="checkbox" *ngIf="count.state == 'HIDE'" [checked]="false" (change)="startState(count)" title="是否隐藏"/>
+              <input type="checkbox" *ngIf="count.state == 'SHOW'" [checked]="true" (change)="startState(count)" title="是否隐藏"/>
+              <span></span>
+            </label>
+          </td>
+          <td>{{count.createTime}}</td>
+          <td>
+            <app-buttons [config]="addchildbutton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>
+            <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="addrightpage" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
+            <app-buttons [config]="seebutton" routerLink="problem-details"  [queryParams]="{linkType:'jiaoajio',id:count.id}" ></app-buttons>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>
