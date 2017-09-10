@@ -1,0 +1,56 @@
+
+<div class="content-heading mb-lg">
+  查看
+</div>
+<form class="form-validate form-horizontal" style="height: 100%"  #res="ngForm">
+  <div class="panel panel-default">
+    <div class="panel-body help-center-width">
+      <div class="select w95">
+        <span>问题分类：</span>
+        <select name="" id="">
+          <option value="">3</option>
+          <option value="">s</option>
+          <option value="">c</option>
+          <option value="">c</option>
+          <option value="">c</option>
+          <option value="">c</option>
+        </select>
+      </div>
+
+      <div class="questiona text-center">
+        <label class="question col-sm-1">问题：</label>
+        <input type="text" class="col-sm-8 problem-box">
+      </div>
+
+      <div class="reset-div text-edit">
+        <table class="w100 edit-table">
+          <tr class="w100">
+            <td class="col-sm-1 text-content text-center">答案：</td>
+            <td class="w100">
+              <div class="col-sm-9">
+                <div id="summernote" class="summernote">
+                  <span>Rich text presentation here..</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="questiona">
+        <label class="question col-sm-1 text-center">排序：</label>
+        <input type="text" class="col-sm-2 problem-box">
+      </div>
+
+      <div>
+        <div class="col-sm-3 " >
+
+          <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" >提交信息</button>
+          <button class="ml btn btn-default mr pull-right" (click)="back()" type="button">取消</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</form>

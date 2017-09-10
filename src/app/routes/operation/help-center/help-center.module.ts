@@ -9,6 +9,8 @@ import {routes} from "../../routes";
 import {SharedModule} from "../../../shared/shared.module";
 import { ProblemDetailsComponent } from './problem-details/problem-details.component';
 import { HelpAnswerComponent } from './help-answer/help-answer.component';
+import { HelpUpdateComponent } from './help-update/help-update.component';
+import { ViewProblemComponent } from './view-problem/view-problem.component';
 
 @NgModule({
   imports: [
@@ -16,6 +18,6 @@ import { HelpAnswerComponent } from './help-answer/help-answer.component';
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [HelpCenterComponent, HelpAssortmentComponent, HelpInterlocutionComponent,AddrightpageComponent, ProblemDetailsComponent, HelpAnswerComponent],
+  declarations: [HelpCenterComponent, HelpAssortmentComponent, HelpInterlocutionComponent,AddrightpageComponent, ProblemDetailsComponent, HelpAnswerComponent, HelpUpdateComponent, ViewProblemComponent],
 })
 export class HelpCenterModule { }

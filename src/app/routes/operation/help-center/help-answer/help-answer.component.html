@@ -1,8 +1,8 @@
 
-<div>
+  <div *ngIf="flag">
   <div class="content-heading mb-lg">
     帮助分类
-    <app-buttons class="pull-right" [config]="addButton" ></app-buttons>
+    <app-buttons class="pull-right" [config]="addButton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio'}" ></app-buttons>
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
@@ -31,7 +31,7 @@
           <td>{{count.sort}}</td>
           <td>{{count.answer}}</td>
           <td>
-            是否显示
+            <!--是否显示-->
             <label class="switch">
               <input type="checkbox" *ngIf="count.state == 'HIDE'" [checked]="false" (change)="startState(count)" title="是否隐藏"/>
               <input type="checkbox" *ngIf="count.state == 'SHOW'" [checked]="true" (change)="startState(count)" title="是否隐藏"/>
@@ -40,13 +40,24 @@
           </td>
           <td>{{count.createTime}}</td>
           <td>
-            <!--<app-buttons [config]="addchildbutton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>-->
             <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
-            <!--<app-buttons [config]="updatebutton" routerLink="addrightpage" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>-->
-            <!--<app-buttons [config]="seebutton" routerLink="problem-details"  [queryParams]="{linkType:'jiaoajio',id:count.id}" ></app-buttons>-->
+            <app-buttons [config]="updatebutton" routerLink="help-update" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>
+
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </div>
   </div>

@@ -1,24 +1,20 @@
 
 <div class="content-heading mb-lg">
-  帮助问答
-  <button (click)="back()" class="pull-right btn-info btn-sm">返回</button>
+  帮助问答(添加)
 </div>
+<form class="form-validate form-horizontal" style="height: 100%"  #res="ngForm">
 <div class="panel panel-default">
-  <div class="panel-body help-center-width">
+  <div class="panel-body help-center-width"  >
     <div class="select">
       问题分类：
-      <select name="" id="">
+      <select id="" >
         <option value="">a</option>
-        <option value="">s</option>
-        <option value="">c</option>
-        <option value="">c</option>
-        <option value="">c</option>
-        <option value="">c</option>
       </select>
     </div>
+
     <div class="questiona text-center">
       <label class="question col-sm-1">问题：</label>
-      <input type="text" class="col-sm-8 problem-box">
+      <input type="text" class="col-sm-8 problem-box" name="question">
     </div>
 
     <div class="reset-div text-edit">
@@ -28,24 +24,27 @@
           <td class="w100">
             <div class="col-sm-9">
               <div id="summernote" class="summernote">
-                <span>Rich text presentation here..</span>
+                <span name="answer">Rich text presentation here..</span>
               </div>
             </div>
           </td>
         </tr>
       </table>
-
     </div>
 
     <div class="questiona">
       <label class="question col-sm-1 text-center">排序：</label>
-      <input type="text" class="col-sm-2 problem-box">
+      <input type="text" class="col-sm-2 problem-box" name="sort">
     </div>
 
-    <!--<div>-->
-      <!--<button class="col-sm-1 btn-primary">提交</button>-->
-    <!--</div>-->
+    <div>
+      <div class="col-sm-3 " >
+
+        <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" >提交信息</button>
+        <button class="ml btn btn-default mr pull-right" (click)="back()" type="button">取消</button>
+      </div>
+    </div>
+
   </div>
 </div>
-
-
+</form>

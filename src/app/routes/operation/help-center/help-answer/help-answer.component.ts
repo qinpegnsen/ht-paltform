@@ -4,6 +4,8 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {AjaxService} from "../../../../core/services/ajax.service";
 import {AppComponent} from "../../../../app.component";
+import {NavigationEnd, Router} from "@angular/router";
+import {SettingsService} from "../../../../core/settings/settings.service";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-help-answer',
@@ -15,7 +17,10 @@ export class HelpAnswerComponent implements OnInit {
   private addButton;//添加按钮
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
-  constructor(private submit: SubmitService,private ajax: AjaxService,) { }
+
+
+  public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+  constructor(private submit: SubmitService,private ajax: AjaxService,private router:Router,public settings: SettingsService,) { }
 
   ngOnInit() {
     let me = this;
@@ -33,6 +38,23 @@ export class HelpAnswerComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
+    /**
+     * 路由事件用来监听地址栏的变化
+     * 1.当添加代理商出现的时候，代理商列表组件隐藏
+     * 2.路由变化的时候，刷新页面
+     */
+    me.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          console.log(event.url)
+          if(event.url.indexOf('jiaoajio')>0){
+            me.flag=false;
+          }else if(event.url=='/main/help-center/help-assortment'){
+            me.flag=true;
+            //_this.getAgentList() //刷新内容页面
+          }
+        }
+      });
     this.qeuryAllService();
   }
   //帮助分类--查询分页
@@ -92,4 +114,7 @@ export class HelpAnswerComponent implements OnInit {
       }
     );
   }
+
+
+
 }
