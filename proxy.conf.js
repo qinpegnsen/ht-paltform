@@ -10,7 +10,6 @@ const PROXY_CONFIG = [
       "/agent",
       "/articleClass",
       "/articleComment",
-      "/article",
       "/articleSyd",
       "/custAddr",
       "/cust",
