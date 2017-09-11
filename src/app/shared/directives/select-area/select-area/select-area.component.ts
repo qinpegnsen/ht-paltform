@@ -53,10 +53,6 @@ export class SelectAreaComponent implements OnInit {
     }
   }
 
-  getAreaByCode(myAreaCode){
-
-  }
-
   /**
    * 显示城市选择器并获取省级列表
    */
