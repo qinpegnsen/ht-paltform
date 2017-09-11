@@ -42,15 +42,31 @@ export class SelectAreaComponent implements OnInit {
    * @param isOld 是否为老版
    */
   getArea(fullName, myAreaCode, isOld) {
-    let me = this;
-    me.show = true;
-    //me.areas = me.getAreaByCode(myAreaCode).children;
-    me.areas = null;
+    let me = this, areaData;
+    areaData = me.tools.getAreaByCode(myAreaCode, isOld);
+    let allCitys = areaData.children;
     me.adr = fullName;
     me.areaCode = myAreaCode;
-    if (isNullOrUndefined(me.areas) || me.areas.length == 0) {
+    if (!isNullOrUndefined(allCitys) && allCitys.length != 0) {//如果有下级列表
+      me.areas = me.getNewCitys(allCitys);
+    }else{
       me.cityConfirm();
-    }
+    };
+  }
+
+  /**
+   * 获取城市列表所有中的新地区
+   * @param citys
+   * @returns {Array}
+   */
+  getNewCitys(citys){
+    let newCitys = [];
+    citys.forEach((city) =>{
+      if(city.isNew === 1){
+        newCitys.push(city)
+      }
+    });
+    return newCitys;
   }
 
   /**
@@ -75,6 +91,7 @@ export class SelectAreaComponent implements OnInit {
       adr: this.adr
     });
   }
+
 
   /**
    * 确定选择城市
