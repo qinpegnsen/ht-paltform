@@ -4,12 +4,13 @@ import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
 import {MaskService} from "../../core/services/mask.service";
 import {Router} from "@angular/router";
+import {SubmitService} from "../../core/forms/submit.service";
 const swal = require('sweetalert');
 
 @Injectable()
 export class GoodsService {
 
-  constructor(private ajax: AjaxService,private mask: MaskService,private router: Router,) { }
+  constructor(private ajax: AjaxService,private mask: MaskService,private router: Router,private submit: SubmitService) { }
   /**
    * get 获取数据
    * @param requestUrl
@@ -66,5 +67,21 @@ export class GoodsService {
         AppComponent.rzhAlt("error", '网络错误');
       }
     })
+  }
+
+  /**
+   * 获取分类列表
+   */
+  getKindList(){
+    let url = '/goodsKind/queryGoodsByParentId';
+    let data = {kindParentId:''};
+    return this.submit.getData(url,data)
+  }
+
+  /**
+   * 商品审核状态列表
+   */
+  getGoodsAudits(){
+
   }
 }

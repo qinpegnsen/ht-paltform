@@ -83,7 +83,7 @@ export class EditDetailComponent implements OnInit {
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
-        me.publishData['kindName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
+        me.publishData['kindSelectName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
         // 默认值
         me.publishData['isFreight'] = 'N';                  //是否有运费
         me.publishData['haveGift'] = 'Y';                   //是否有赠品
@@ -508,11 +508,13 @@ export class EditDetailComponent implements OnInit {
   sendFile(file) {
     let _this = this, img = _this.tools.uploadImg(file);
     $("#summernote").summernote('insertImage', img, '');
-    let obj = {
-      type: 'img',
-      value: img
-    };
-    _this.mblItemList.push(obj);
+    if(!isNullOrUndefined(img)){
+      let obj = {
+        type: 'img',
+        value: img
+      };
+      _this.mblItemList.push(obj);
+    }
   }
 
   /**

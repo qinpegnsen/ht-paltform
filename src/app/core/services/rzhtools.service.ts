@@ -359,9 +359,7 @@ export class RzhtoolsService {
       contentType: false,
       processData: false,
       success: (response) => {
-        console.log("█ response ►►►", response);
         if (!isNullOrUndefined(response) && response.success) ret = response.data;
-        if (isNullOrUndefined(ret)) ret = '';
       },
       error: (response) => {
         AppComponent.rzhAlt('warning','图片上传失败','')

@@ -1,3 +1,137 @@
-<p>
-  manage works!
-</p>
+<div class="content-heading mb-lg">
+  商品管理
+  <app-buttons class="pull-right" [config]="addButton" routerLink="../publish/step_one"></app-buttons>
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <input type="text" [(ngModel)]="query.brandName"
+               class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryDatas(1)" placeholder="品牌名称">
+      </div>
+      <button type="button" title="搜索"
+              class="btn btn-primary bar-h3-btn mr ng-scope">
+        <em class="icon-magnifier fa-fw"></em>
+      </button>
+    </div>
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <input type="text" [(ngModel)]="query.goodsName"
+               class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="queryDatas(1)" placeholder="商品名">
+      </div>
+      <button type="button" title="搜索"
+              class="btn btn-primary bar-h3-btn mr ng-scope">
+        <em class="icon-magnifier fa-fw"></em>
+      </button>
+    </div>
+    <div class="form-group col-md-4 mb0">
+      <div class="col-md-8 col-xs-6 pl0">
+        <div class="btn-group w100" dropdown>
+          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b
+            class="caret pull-right"></b>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu">
+            <li (click)="selectKind('', '所有分类')">
+              <a href="#">请选择分类</a>
+            </li>
+            <li *ngFor="let kind of kindList" (click)="selectKind(kind.id, kind.kindName)">
+              <a href="#">{{kind.kindName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+   <!-- <div class="form-group mt-sm mb0">
+      <select name="" [(ngModel)]="query.goodsAudit">
+        <option *ngFor="let key of getKeys(goodsAudits)" [value]="key">{{key}}={{goodsAudits[key]}}</option>
+      </select>
+    </div>-->
+
+  </div>
+</div>
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
+           (pageChange)="queryDatas(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 unselectable text-center">序号</th>
+        <th class="w30 unselectable hidden-sm">
+          <rzhDefaultSorter by="brandInitial">商品名</rzhDefaultSorter>
+        </th>
+        <th class="w20 unselectable">
+          <rzhDefaultSorter by="brandName">规格/规格值</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="price">价格</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="brandApply">发布时间</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">审核状态</th>
+        <th class="w20 unselectable text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td class="text-left position-relative">
+          <span class="img-box mr"><img [src]="goods.goodsImage"
+                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+          <div class="mb0 goods-info">
+            <p>
+              <a class="goods-name" href="javascript:;">
+                <span class="tag font12"
+                      [class.bg-info]="goods.state=='NORMAL'"
+                      [class.bg-danger]="goods.state=='STOP'"
+                      [class.bg-warning]="goods.state=='DOWN'">
+                  {{goods.state | rzhState:'1006'}}</span>
+                {{goods.goodsName}}</a>
+            </p>
+          </div>
+        </td>
+        <td class="text-left">{{i+1}}</td>
+        <td>{{goods.minPrice}}-{{goods.maxPrice}}</td>
+        <td>{{goods.createTime}}</td>
+        <td>{{goods.goodsAudit | rzhState:'1014'}}</td>
+        <td>
+          <button class="btn btn-warning btn-xs fa fa-level-down" *ngIf="goods.state=='NORMAL'" title="下架"
+                  (click)="changeState('DOWN',goods.goodsBaseCode)"> 下架</button>
+          <button class="btn btn-danger btn-xs fa fa-lock" *ngIf="goods.state=='NORMAL'" title="禁售"
+                  (click)="changeState('STOP',goods.goodsBaseCode)"> 禁售</button>
+          <button class="btn btn-green btn-xs fa fa-unlock-alt" *ngIf="goods.state=='STOP'" title="解禁"
+                  (click)="changeState('STOP',goods.goodsBaseCode)"> 解禁</button>
+          <button class="btn btn-info btn-xs fa fa-level-up" *ngIf="goods.state=='DOWN'" title="申请上架"
+                  (click)="changeState('NORMAL',goods.goodsBaseCode)"> 上架</button>
+          <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"> 审核
+          </button>
+          <app-buttons [config]="option" (callback)="option.callback($event,goods.goodsBaseCode, goodsList.curPage)"
+                       *ngFor="let option of buttons"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{goodsList.genStartRow()}} 至 {{goodsList.genEndRow()}} 条，共
+              {{goodsList.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

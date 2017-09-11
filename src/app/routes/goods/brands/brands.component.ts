@@ -4,6 +4,7 @@ import {isUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {GoodsService} from "../goods.service";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-brands',
@@ -20,18 +21,18 @@ export class BrandsComponent implements OnInit {
   private kindList;// 分类列表
   private selectKindName: string = '根据分类查询';
   private brandKind;// 品牌分类
-  constructor(private router: Router, private submitService: SubmitService) {
+  constructor(private router: Router, private submitService: SubmitService, private goods: GoodsService) {
   }
 
   ngOnInit() {
     let me = this;
-    this.queryDatas(1);// 获取品牌数据
-    this.getKindList();// 获取分类列表
-    this.addButton = {
+    me.queryDatas(1);// 获取品牌数据
+    me.kindList = me.goods.getKindList(); //获取分类列表
+    me.addButton = {
       type: 'add',
       text: '新增品牌',
     };
-    this.buttons = [
+    me.buttons = [
       {
         title: "修改",
         type: "update",
@@ -63,7 +64,6 @@ export class BrandsComponent implements OnInit {
               let data = {id: brandId};
               me.submitService.delRequest(url, data);
               me.queryDatas(curPage);
-              // swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
             });
           })
         }
@@ -82,14 +82,10 @@ export class BrandsComponent implements OnInit {
   }
 
   /**
-   * 获取分类列表
+   * 选择分类
+   * @param id
+   * @param name
    */
-  getKindList(){
-    let url = '/goodsKind/queryGoodsByParentId';
-    let data = {kindParentId:''}
-    this.kindList = this.submitService.getData(url,data)
-  }
-
   selected(id,name){
     this.brandKind = id;
     this.selectKindName = name;
