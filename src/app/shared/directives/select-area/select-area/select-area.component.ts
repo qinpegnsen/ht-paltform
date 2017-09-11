@@ -72,7 +72,12 @@ export class SelectAreaComponent implements OnInit {
    */
   freshCitys() {
     this.adr = '';
+    this.areaCode = '';
     this.areas = this.tools.getAreaByCode('');
+    this.myData.emit({
+      areaCode: this.areaCode,
+      adr: this.adr
+    });
   }
 
   /**
