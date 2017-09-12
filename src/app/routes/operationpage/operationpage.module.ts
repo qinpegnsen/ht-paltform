@@ -1,9 +1,8 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {OperationpageComponent} from './operationpage/operationpage.component';
-import {RouterModule, Routes} from '@angular/router';
-import {RightpageComponent} from './rightpage/rightpage.component';
-import {SharedModule} from '../../shared/shared.module';
+import {NgModule} from "@angular/core";
+import {OperationpageComponent} from "./operationpage/operationpage.component";
+import {RouterModule, Routes} from "@angular/router";
+import {RightpageComponent} from "./rightpage/rightpage.component";
+import {SharedModule} from "../../shared/shared.module";
 
 // 子路由，用于页面嵌套显示
 const appChildRoutes: Routes = [

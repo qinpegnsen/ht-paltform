@@ -25,7 +25,8 @@ const routes: Routes = [
     {path: 'step_one', component: ChooseKindComponent},
     {path: 'step_two', component: EditDetailComponent},
     {path: 'step_three', component: PublishedComponent},
-    {path: 'edit', component: EditDetailComponent}
+    {path: 'edit', component: EditDetailComponent},
+    {path: 'audit', component: EditDetailComponent}
   ]
   },
   {path: 'manage', component: ManageComponent},
@@ -63,7 +64,7 @@ const routes: Routes = [
     AddBrandComponent,
     ChooseKindComponent,
     EditDetailComponent,
-    PublishedComponent
+    PublishedComponent,
   ],
   providers: [
     GoodsService,

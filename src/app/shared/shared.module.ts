@@ -41,6 +41,7 @@ import {SubmitService} from "../core/forms/submit.service";
 import { ImgUrlPipe } from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
 import { HoverDirective } from './directives/hover/hover.directive';
+import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.component';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -88,7 +89,8 @@ import { HoverDirective } from './directives/hover/hover.directive';
     StatePipe,
     AreaNamePipe,
     ImgUrlPipe,
-    HoverDirective
+    HoverDirective,
+    GetKindComponent
   ],
   exports: [
     CommonModule,
@@ -128,7 +130,8 @@ import { HoverDirective } from './directives/hover/hover.directive';
     SelectModule,
     ImgUrlPipe,
     AngularEchartsModule,
-    HoverDirective
+    HoverDirective,
+    GetKindComponent
   ]
 })
 

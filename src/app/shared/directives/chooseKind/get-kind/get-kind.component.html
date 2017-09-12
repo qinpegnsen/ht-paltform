@@ -1,0 +1,18 @@
+<div dropdown class="get-kind">
+  <button class="form-control rzh-sel-kind text-left" (click)="showSelectKind()" type="button"
+          dropdownToggle>{{myKindName? myKindName :'全部分类'}}
+    <b class="caret pull-right"></b></button>
+  <div class="selectBox rzh-sel-kind" *ngIf="show">
+    <div class="_list rzh-sel-kind">
+      <button type="button" *ngFor="let kind of kindList"
+              (click)="getKindList(kind.id,kind.kindName,kind.level)" class="_item btn btn-default rzh-sel-kind"><em
+        class="elderCity-class-for-sel mr icon-arrow-right rzh-sel-kind"></em>{{kind.kindName}}</button>
+    </div>
+    <div class="_footer rzh-sel-kind">
+      <button type="button" (click)="refresh()" class="btn btn-info btn-xs m5 rzh-sel-kind"><em
+        id="elderCity-refresh-em" class="icon-refresh rzh-sel-kind"></em> 重置</button>
+      <button type="button" (click)="myConfirm()" class="btn btn-success btn-xs m5 pull-right rzh-sel-kind"><em
+        class="fa fa-check-square-o rzh-sel-kind"></em> 查询</button>
+    </div>
+  </div>
+</div>

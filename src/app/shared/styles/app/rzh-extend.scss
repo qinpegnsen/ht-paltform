@@ -1,6 +1,10 @@
 /* ========================================================================
      扩展样式
  ========================================================================== */
+$xsImg: 40px;         // 商品列表图片的宽，较小的图
+$smallImg: 50px;      // 商品列表图片的宽，较小的图
+$middleImg: 60px;     // 商品列表图片的宽，中等大小的图
+$largeImg: 80px;      // 商品列表图片的宽，较大的图
 
 @charset "UTF-8";
 //重写弹框布局距离
@@ -269,4 +273,51 @@ input[type=number].num::-webkit-inner-spin-button,
 input[type=number].num::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.goods-xs-img{
+  width: $xsImg;
+  height: $xsImg;
+}
+.goods-sm-img{
+  width: $smallImg;
+  height: $smallImg;
+}
+.goods-md-img{
+  width: $middleImg;
+  height: $middleImg;
+}
+.goods-lg-img{
+  width: $largeImg;
+  height: $largeImg;
+}
+.goods-xs-info{
+  position: absolute;
+  left: $xsImg+20;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+.goods-sm-info{
+  position: absolute;
+  left: $smallImg+20;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+.goods-md-info{
+  position: absolute;
+  left: $middleImg+20;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+.goods-lg-info{
+  position: absolute;
+  left: $largeImg+20;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+.item-bottom-border{
+  border-bottom: 1px solid #f5f5f5;
 }

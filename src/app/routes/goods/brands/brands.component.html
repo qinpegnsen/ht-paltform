@@ -104,8 +104,8 @@
             <span></span>
           </label>
         </td>
-        <td>{{brand.brandApply == 'APPLY'? '审核中': brand.brandApply == 'PASS'? '审核通过': '未通过'}}</td>
-        <td>{{brand.showType == 'IMG'? '图片': '文本'}}</td>
+        <td>{{brand.brandApply | rzhState: '1023'}}</td>
+        <td>{{brand.showType | rzhState: '1024'}}</td>
         <td class="hidden-sm">{{brand.brandSort}}</td>
         <td>
           <label class="switch switch-md" title="显示/隐藏">

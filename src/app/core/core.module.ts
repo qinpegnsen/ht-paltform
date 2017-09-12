@@ -8,10 +8,10 @@ import {TableService} from "./list/table.service";
 import {AjaxService} from "./services/ajax.service";
 import {MaskService} from "./services/mask.service";
 import {throwIfAlreadyLoaded} from "./module-import-guard";
-import {PopupComponent} from "../routes/operationpage/popup/popup.component";
 import {RzhtoolsService} from "./services/rzhtools.service";
 import {ToasterService} from "angular2-toaster";
 import {GetUidService} from "./services/get-uid.service";
+import {PopupComponent} from "../routes/operationpage/popup/popup.component";
 
 @NgModule({
   imports: [],

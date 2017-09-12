@@ -460,3 +460,39 @@
 
 // 重置input框的placeholder文本颜色
 input::-webkit-input-placeholder{color: #b3b3b3;}
+
+.c-checkbox input[type=checkbox]:disabled + span,
+.c-checkbox input[type=radio]:disabled + span,
+.c-radio input[type=checkbox]:disabled + span,
+.c-radio input[type=radio]:disabled + span {
+  border-color: #5d9cec !important;
+  background-color: #fff !important;
+  opacity: 0.8;
+}
+.c-checkbox input[type=checkbox]:checked:disabled + span,
+.c-checkbox input[type=radio]:checked:disabled + span{
+  border-color: #5d9cec !important;
+  background-color: #5d9cec !important;
+  opacity: 0.8;
+}
+.c-radio input[type=checkbox]:checked:disabled + span,
+.c-radio input[type=radio]:checked:disabled + span {
+  border-color: #5d9cec !important;
+  background-color: #fff !important;
+  opacity: 0.8;
+}
+.c-checkbox input[type=radio]:checked:disabled + span:before,
+.c-radio input[type=radio]:checked:disabled + span:before {
+  color: #5d9cec;
+  opacity: 0.8;
+ }
+.c-radio.c-radio-nofont input[type=radio]:disabled + span:before{
+  background-color: #5d9cec
+}
+.form-control[disabled], fieldset[disabled] .form-control {
+  cursor: not-allowed;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: #fff;
+  opacity: 1;
+}

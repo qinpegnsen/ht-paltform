@@ -1,8 +1,8 @@
 import {Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit} from "@angular/core";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
 import {AppComponent} from "../../../app.component";
-import {PopupComponent} from "app/routes/operationpage/popup/popup.component";
 import {Router} from "@angular/router";
+import {PopupComponent} from "../../operationpage/popup/popup.component";
 const swal = require('sweetalert');
 
 @Component({
@@ -39,8 +39,8 @@ export class MsgComponent implements OnInit {
     _this.app.container.clear();// 先清空容器，每次我们需要创建组件时，我们需要删除之前的视图，否则组件容器中会出现多个视图 (如果允许多个组件的话，就不需要执行清除操作 )。
     const factory: ComponentFactory<PopupComponent> = _this.resolver.resolveComponentFactory(PopupComponent);// PopupComponent是自己创建的弹窗组件
     _this.componentRef = _this.app.container.createComponent(factory);// 调用容器的 createComponent() 方法，该方法内部将调用 ComponentFactory 实例的 create() 方法创建对应的组件，并将组件添加到我们的容器。
-    this.componentRef.instance.val = {a:1};// 定义向子组件输入的值
-    this.componentRef.instance.output.subscribe(event => console.log(event));// 订阅动态组件的输出值
+    _this.componentRef.instance.val = {a:1};// 定义向子组件输入的值
+    _this.componentRef.instance.output.subscribe(event => console.log(event));// 订阅动态组件的输出值
   }
 
 

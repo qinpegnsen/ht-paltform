@@ -5,8 +5,7 @@ declare var $: any;
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.scss'],
-  providers: []
+  styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent implements OnInit {
   @Input() val: any;// 输入值

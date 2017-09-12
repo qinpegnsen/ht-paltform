@@ -182,21 +182,20 @@
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">审核状态：</td>
-            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandApply == 'APPLY'? '审核中': brandInfo.brandApply == 'PASS'?
-              '审核通过': '未通过'}}
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandApply | rzhState: '1023'}}
             </td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">是否推荐：</td>
-            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandRecommend == 'Y'? '推荐':'否'}}</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.brandRecommend | rzhState: '1001'}}</td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">品牌展示类型：</td>
-            <td class="item-bd col-sm-7 mb0">{{brandInfo.showType == 'IMG'? '图片': '文本'}}</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.showType | rzhState: '1024'}}</td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">显示状态：</td>
-            <td class="item-bd col-sm-7 mb0">{{brandInfo.state == 'SHOW'? '显示': '隐藏'}}</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.state | rzhState: '1025'}}</td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">创建时间：</td>

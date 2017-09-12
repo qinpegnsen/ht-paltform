@@ -1,16 +1,21 @@
 import {Injectable} from "@angular/core";
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
 import {MaskService} from "../../core/services/mask.service";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../core/forms/submit.service";
+import {SettingsService} from "../../core/settings/settings.service";
 const swal = require('sweetalert');
 
 @Injectable()
 export class GoodsService {
 
-  constructor(private ajax: AjaxService,private mask: MaskService,private router: Router,private submit: SubmitService) { }
+  constructor(private ajax: AjaxService,
+              private mask: MaskService,
+              private router: Router,
+              private settings: SettingsService,
+              private submit: SubmitService) { }
   /**
    * get 获取数据
    * @param requestUrl
@@ -72,16 +77,56 @@ export class GoodsService {
   /**
    * 获取分类列表
    */
-  getKindList(){
+  getKindList(parentId?:string){
+    if(isUndefined(parentId)) parentId = '';
     let url = '/goodsKind/queryGoodsByParentId';
-    let data = {kindParentId:''};
+    let data = {kindParentId: parentId};
     return this.submit.getData(url,data)
   }
 
   /**
-   * 商品审核状态列表
+   * put 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
    */
-  getGoodsAudits(){
-
+  putRequest(requestUrl, requestDate, back?: boolean) {
+    let result,me = this;
+    this.ajax.put({
+      url: requestUrl,
+      data: requestDate,
+      async: false,
+      success: (res) => {
+        console.log("█ res ►►►", res);
+        if (res.success) {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
+          swal({
+           title: '成功',
+           text: res.info,
+           type: 'success',
+           timer: 3000, //关闭时间，单位：毫秒
+           showConfirmButton: false  //不显示按钮
+           });
+          result = res.data;
+        } else {
+          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          let errorMsg;
+          if (isNullOrUndefined(res.data)) {
+            errorMsg = res.info
+          } else {
+            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
+          }
+          AppComponent.rzhAlt("error", res.info, errorMsg);
+        }
+      },
+      error: (res) => {
+        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        AppComponent.rzhAlt("error", '网络错误');
+        console.log('put error', res);
+      }
+    });
+    return result;
   }
+
 }

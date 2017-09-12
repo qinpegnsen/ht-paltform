@@ -29,9 +29,13 @@ export class EditDetailComponent implements OnInit {
   private skuImg: any;            // 图片属性
   private goodsImgList = {};       // 商品上传图片列表
   private oldImgs: any = {};        // 商品已经有的图片列表
-  private mblItemList = [];       //手机端上传后的图片集合
+  private mblItemList = [];         //手机端上传后的图片集合
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
+  private myReadOnly: boolean = false;  // 商品详情或审核商品时是只读状态
+  private goodsBody:any;          //商品详情
+  private audit:any;              // 商品审核
+  private goodsAudits:any;        // 商品审核状态列表
   private publishData: any = {
     goodsExpressInfo: {},
     goodsImagesList: [],
@@ -72,14 +76,15 @@ export class EditDetailComponent implements OnInit {
   ngOnInit() {
 
     let me = this;
-    me.publishComponent.step = 2;
     me.route.url.subscribe(paths => {
       me.path = paths[0].path;
     })
 
     me.kindId = me.route.snapshot.queryParams['kindId'];
+    if(me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
     me.getPageData();// 获取当前页面需要的数据
     if (me.path == 'step_two' && isNullOrUndefined(me.kindId)) {
+      me.publishComponent.step = 2;
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
@@ -93,6 +98,25 @@ export class EditDetailComponent implements OnInit {
         me.publishData.goodsExpressInfo.volume = 1.00;      //体积
         me.publishData.goodsExpressInfo['freightType'] = 'FIXED';   //运费类型默认固定运费
       }
+      if(me.path == 'edit') me.publishComponent.step = 2;
+      if(me.path == 'audit') {
+        me.publishComponent.step = 0;
+        me.myReadOnly = true;
+        me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
+        // 去掉待审核状态
+        for (var i = me.goodsAudits.length - 1; i >= 0; i--) {
+          var obj = me.goodsAudits[i];
+          if(obj.key == 'AUDIT'){
+            me.goodsAudits.splice(i,1)
+          }
+        }
+        // 初始化默认审核状态
+        me.audit = {
+          opinion: '',
+          result: 'PASS',
+          goodsBaseCode: me.goodsBaseCode
+        }
+      } // 商品详情或审核商品时是只读状态
 
       /**
        * JQuery初始化后执行事件
@@ -102,6 +126,7 @@ export class EditDetailComponent implements OnInit {
         $('#summernote').summernote({
           height: 280,
           dialogsInBody: true,
+          placeholder: 'write here...',
           callbacks: {
             onChange: (contents) => {
               this.contents = contents;
@@ -112,36 +137,38 @@ export class EditDetailComponent implements OnInit {
           }
         });
 
-        //当点击批量修改价格的按钮时
-        $('.sku-table').on('click', '.s-menu', function () {
-          $(this).find('input').val('');
-          $(this).next().slideToggle(200)
-        });
+        if(me.path != 'audit'){
+          //当点击批量修改价格的按钮时
+          $('.sku-table').on('click', '.s-menu', function () {
+            $(this).find('input').val('');
+            $(this).next().slideToggle(200)
+          });
 
-        //当点击批量修改小窗口的关闭时
-        $('.sku-table').on('click', '.close', function () {
-          $(this).parents('.dropdown-menu').slideUp(200);
-        });
+          //当点击批量修改小窗口的关闭时
+          $('.sku-table').on('click', '.close', function () {
+            $(this).parents('.dropdown-menu').slideUp(200);
+          });
 
-        //当点击移动端编辑图片的时候
-        $('.app-control').on('click', '.app-img-box', function () {
-          let target = this;
-          me.editMblImg(target);
-        })
+          //当点击移动端编辑图片的时候
+          $('.app-control').on('click', '.app-img-box', function () {
+            let target = this;
+            me.editMblImg(target);
+          })
 
-        $('body').click(function (e) {
-          if (!$(e.target).parents().hasClass('app-img-box')) {
-            $('.app-img-box ._edit').addClass('hide');
-          } //关闭选框
-        });
+          $('body').click(function (e) {
+            if (!$(e.target).parents().hasClass('app-img-box')) {
+              $('.app-img-box ._edit').addClass('hide');
+            } //关闭选框
+          });
 
-        //当点击批量设置按钮的时候
-        $('.sku-table').on('click', '.set', function () {
-          let target = this;
-          $(target).parents('dropdown-menu').slideUp(200);
-        })
+          //当点击批量设置按钮的时候
+          $('.sku-table').on('click', '.set', function () {
+            let target = this;
+            $(target).parents('dropdown-menu').slideUp(200);
+          })
+        }
 
-        if (me.path == 'edit') {
+        if (me.path == 'edit' || me.path == 'audit') {
           me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
           me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
           me.genMblItemList();        //将html字符串生成移动端图片文字组合
@@ -185,8 +212,7 @@ export class EditDetailComponent implements OnInit {
   private getPageData() {
     let me = this, pageData;
     console.log("█ me.path ►►►", me.path);
-    if (me.path == 'edit') {
-      me.goodsBaseCode = me.submit.getParams('baseCode');
+    if (me.path != 'step_two') {
       pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
     } else {
       pageData = me.submit.getData('/goodsQuery/pageDataAdd', {kindId: me.kindId});
@@ -210,11 +236,12 @@ export class EditDetailComponent implements OnInit {
     if (me.path == 'step_two') {
       me.goodsBaseCode = pageData.goodsBaseCode;  // 商品基本编码
     }
-    if (me.path == 'edit') {
+    if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;
       me.publishData = me.goodsEditData;                  // 商品发布数据
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
-      $('#summernote').summernote('code', me.goodsEditData.goodsBody.replace(/\\/, ''));   //PC端详情
+      me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
+      $('#summernote').summernote('code', me.goodsBody);   //PC端详情
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
     }
   }
@@ -771,7 +798,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 发布商品
    */
-  private publishGoods() {
+  publishGoods() {
     let me = this;
     this.mask.showMask();//显示遮罩层
     me.uploadImgs();// 先上传图片
@@ -790,6 +817,14 @@ export class EditDetailComponent implements OnInit {
     me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
     console.log("█ me.publishData ►►►", me.publishData);
     me.goods.publishGoods('/goodsEdit/save', me.publishData);
+  }
+
+  /**
+   * 审核商品
+   */
+  auditGoods(){
+    let me = this;
+    me.goods.putRequest('/goodsEdit/auditGoods',me.audit,true)
   }
 
 }
