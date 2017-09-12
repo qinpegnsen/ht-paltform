@@ -3,6 +3,7 @@ import {SettingsService} from "../../../core/settings/settings.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleSortComponent} from "../article/article-sort/article-sort.component";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {OperationService} from "../operation.service";
 
 @Component({
   selector: 'app-add-article-sort',
@@ -19,7 +20,7 @@ export class AddArticleSortComponent implements OnInit {
   public id:number;
   public flag:boolean=false;
   public stateList:Array<string>;
-  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,public service:SubmitService) {
+  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,public service:SubmitService,public operationService:OperationService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -57,7 +58,6 @@ export class AddArticleSortComponent implements OnInit {
     }
     let updataData=this.service.getData(url,data);
     this.updataData=updataData;
-    console.log(updataData)
   }
   // 取消
   cancel(){
@@ -74,8 +74,12 @@ export class AddArticleSortComponent implements OnInit {
         state:obj.state,
         summary:obj.summary
       }
-      this.service.postRequest(url,data);
-      this.ArticleSortComponent.queryArticSortleList()
+      let result=this.operationService.postRequest(url,data);
+      if(result){
+        this.ArticleSortComponent.queryArticSortleList()
+      }else{
+        return;
+      }
 
     }else if(this.linkType=='addChildSort'){
       let url='/articleClass/addArticleClass';

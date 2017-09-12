@@ -25,6 +25,7 @@ import {AddrightpageComponent} from "./help-center/addrightpage/addrightpage.com
 import {ProblemDetailsComponent} from "./help-center/problem-details/problem-details.component";
 import {HelpAnswerComponent} from "./help-center/help-answer/help-answer.component";
 import {HelpUpdateComponent} from "./help-center/help-update/help-update.component";
+import {OperationService} from "./operation.service";
 
 
 const addSort: Routes = [
@@ -78,6 +79,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent],
-  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,]
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService]
 })
 export class OperationModule { }
