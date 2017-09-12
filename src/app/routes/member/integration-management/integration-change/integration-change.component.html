@@ -12,20 +12,24 @@
           <div class="panel-body">
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label">会员号码：</label>
+                <label class="col-sm-3 control-label"><i>*</i>会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control" type="text"  name="tel" ngModel />
+                  <input class="form-control" type="text"  name="tel" ngModel required #tel="ngModel" [pattern]="patterns.phone"/>
                 </div>
+              </div>
+              <div [hidden]="tel.valid || tel.pristine"
+                   class="col-sm-9 pull-right text-danger">
+                请填写正确手机号
               </div>
             </fieldset>
 
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label">增减类型：</label>
+                <label class="col-sm-3 control-label"><i>*</i>增减类型：</label>
                 <div class="col-sm-8">
                   <label class="radio-inline c-radio">
-                    <input type="radio" name="logType" value="RECHARGE" checked="checked"
-                          ngModel/>
+                    <input type="radio" name="logType" value="RECHARGE" checked
+                          [(ngModel)]="logType"/>
                     <span class="fa fa-circle"></span>充值</label>
                   <label class="radio-inline c-radio">
                     <input type="radio" name="logType" value="DEDUCT" ngModel/>
@@ -36,10 +40,14 @@
 
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label">重消币：</label>
+                <label class="col-sm-3 control-label"><i>*</i>重消币：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="custCoin" ngModel/>
+                  <input class="form-control num" type="number"  name="custCoin" ngModel required #custCoin="ngModel"/>
                 </div>
+              </div>
+              <div [hidden]="custCoin.valid || custCoin.pristine"
+                   class="col-sm-9 pull-right text-danger">
+                请填写重消币
               </div>
             </fieldset>
 

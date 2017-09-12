@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AjaxService} from "../../../../core/services/ajax.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AppComponent} from "../../../../app.component";
 const swal = require('sweetalert');
 @Component({
@@ -16,12 +16,15 @@ export class ProblemDetailsComponent implements OnInit {
   private deletebutton: Object;//删除按钮
   private result:any;
   private kind:any;
-  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router) { }
+
+  private id:number;
+  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router, private routeInfo: ActivatedRoute,) { }
 
   ngOnInit() {
 
     let me=this;
-
+    me.id = this.routeInfo.snapshot.queryParams['id'];//获取地址栏的参数
+    console.log(me.id)
     //按钮配置
     me.addButton = {
       type: "add",
@@ -66,7 +69,7 @@ export class ProblemDetailsComponent implements OnInit {
     allproblem(){
       let url = "/helpQuestions/queryAll";
       let data={
-        kindId:'',
+        kindId:this.id,
     }
     this.result = this.submit.getData(url,data);
     console.log("█ result ►►►",  this.result);

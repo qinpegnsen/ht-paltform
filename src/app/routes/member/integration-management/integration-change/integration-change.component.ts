@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {PatternService} from "../../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-integration-change',
@@ -7,11 +8,10 @@ import {SubmitService} from "../../../../core/forms/submit.service";
   styleUrls: ['./integration-change.component.scss']
 })
 export class IntegrationChangeComponent implements OnInit {
-
-  constructor(private submitt: SubmitService,) { }
+  public logType='RECHARGE'
+  constructor(private submitt: SubmitService,private patterns: PatternService) { }
 
   ngOnInit() {
-
   }
 
   //提交

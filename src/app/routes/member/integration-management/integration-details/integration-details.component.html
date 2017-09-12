@@ -7,26 +7,35 @@
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
       <thead>
       <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="name">序号</rzhDefaultSorter>
+        </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="name">会员编码</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="sort">重消币</rzhDefaultSorter>
         </th>
+        <th class="w30 text-center">
+          <rzhDefaultSorter by="email">操作描述</rzhDefaultSorter>
+        </th>
         <th class="w25 text-center">
           <rzhDefaultSorter by="sort">创建时间</rzhDefaultSorter>
-        </th>
-        <th class="w35 text-center">
-          <rzhDefaultSorter by="email">操作描述</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data"  class="text-center">
+      <tr *ngFor="let count of dataTable.data;let x=index"  class="text-center">
+        <td>{{x+1}}</td>
         <td>{{count.custCode}}</td>
-        <td>{{count.coin}}</td>
-        <td>{{count.createTime}}</td>
+        <td *ngIf="count.coin<0" style="color:red">
+          {{count.coin}}
+        </td>
+        <td *ngIf="count.coin>0" style="color:green">
+          {{count.coin}}
+        </td>
         <td>{{count.description}}</td>
+        <td>{{count.createTime}}</td>
       </tr>
       </tbody>
       <tfoot>
