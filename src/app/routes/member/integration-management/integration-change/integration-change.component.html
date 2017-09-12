@@ -1,6 +1,6 @@
 
 <div class="content-heading mb-lg">
-  积分增减
+ 重消币增减
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
@@ -23,16 +23,20 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">增减类型：</label>
                 <div class="col-sm-8">
-                  <select class="form-control" name="logType" ngModel>
-                    <option value="RECHARGE">增加</option>
-                    <option value="DEDUCT">减少</option>
-                  </select>
+                  <label class="radio-inline c-radio">
+                    <input type="radio" name="logType" value="RECHARGE" checked="checked"
+                          ngModel/>
+                    <span class="fa fa-circle"></span>充值</label>
+                  <label class="radio-inline c-radio">
+                    <input type="radio" name="logType" value="DEDUCT" ngModel/>
+                    <span class="fa fa-circle"></span>扣除</label>
                 </div>
               </div>
             </fieldset>
+
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label">积分值：</label>
+                <label class="col-sm-3 control-label">重消币：</label>
                 <div class="col-sm-8">
                   <input class="form-control num" type="number"  name="custCoin" ngModel/>
                 </div>
@@ -41,7 +45,7 @@
 
           </div>
           <div class="panel-footer">
-            <button class="btn btn-info sub" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid">提交信息</button>
+            <button class="btn btn-info sub" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid">提交信息  </button>
           </div>
         </div>
         <!-- END panel-->

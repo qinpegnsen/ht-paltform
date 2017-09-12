@@ -149,16 +149,16 @@ const member = {
       link: '/main/member/users'
     },
     {
-      text: '积分管理',
+      text: '重消币管理',
       icon: 'fa fa-ticket',
       alert: '▼',
       submenu: [
         {
-          text: '积分明细',
+          text: '重消币明细',
           link: '/main/member/integration-management/integration-details'
         },
         {
-          text: '积分增减',
+          text: '重消币增减',
           link: '/main/member/integration-management/integration-change'
         }
       ]

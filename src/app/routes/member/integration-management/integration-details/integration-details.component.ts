@@ -19,7 +19,7 @@ export class IntegrationDetailsComponent implements OnInit {
   }
 
 
-  //积分明细--查询分页
+  //重消币明细--查询分页
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
