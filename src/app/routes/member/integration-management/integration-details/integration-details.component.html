@@ -1,0 +1,48 @@
+
+<div class="content-heading mb-lg">
+  积分明细
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+      <thead>
+      <tr>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="name">会员编码</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="sort">积分</rzhDefaultSorter>
+        </th>
+        <th class="w25 text-center">
+          <rzhDefaultSorter by="sort">创建时间</rzhDefaultSorter>
+        </th>
+        <th class="w35 text-center">
+          <rzhDefaultSorter by="email">操作描述</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of dataTable.data"  class="text-center">
+        <td>{{count.custCode}}</td>
+        <td>{{count.coin}}</td>
+        <td>{{count.createTime}}</td>
+        <td>{{count.description}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="7">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>
+

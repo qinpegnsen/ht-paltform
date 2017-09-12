@@ -1,0 +1,52 @@
+
+<div class="content-heading mb-lg">
+  积分增减
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!--计量单位--添加-->
+    <div class="" >
+      <form class="form-validate form-horizontal"  #res="ngForm">
+        <!-- START panel-->
+        <div class="panel-default">
+          <div class="panel-body">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">会员号码：</label>
+                <div class="col-sm-8">
+                  <input class="form-control" type="text"  name="tel" ngModel />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">增减类型：</label>
+                <div class="col-sm-8">
+                  <select class="form-control" name="logType" ngModel>
+                    <option value="RECHARGE">增加</option>
+                    <option value="DEDUCT">减少</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">积分值：</label>
+                <div class="col-sm-8">
+                  <input class="form-control num" type="number"  name="custCoin" ngModel/>
+                </div>
+              </div>
+            </fieldset>
+
+          </div>
+          <div class="panel-footer">
+            <button class="btn btn-info sub" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid">提交信息</button>
+          </div>
+        </div>
+        <!-- END panel-->
+      </form>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -154,8 +154,12 @@ const member = {
       alert: '▼',
       submenu: [
         {
+          text: '积分明细',
+          link: '/main/member/integration-management/integration-details'
+        },
+        {
           text: '积分增减',
-          link: '/main/member/integration-change'
+          link: '/main/member/integration-management/integration-change'
         }
       ]
     }
