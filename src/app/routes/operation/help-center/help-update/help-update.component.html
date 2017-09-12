@@ -5,31 +5,28 @@
 <form class="form-validate form-horizontal" style="height: 100%"  #res="ngForm">
   <div class="panel panel-default">
     <div class="panel-body help-center-width">
-      <div class="select w95">
-       <span>问题分类：</span>
-        <select name="" id="">
-          <option value="">3</option>
-          <option value="">s</option>
-          <option value="">c</option>
-          <option value="">c</option>
-          <option value="">c</option>
-          <option value="">c</option>
+
+      <div class="select">
+        <span style="margin-left: 20px">问题分类：</span>
+        <select id="" >
+          <option value="" *ngFor="let help of kinds">
+            {{help.kindName}}
+          </option>
         </select>
       </div>
-
       <div class="questiona text-center">
         <label class="question col-sm-1">问题：</label>
-        <input type="text" class="col-sm-8 problem-box">
+        <input type="text" class="col-sm-8 problem-box" name="question" [(ngModel)]="b.question">
       </div>
 
       <div class="reset-div text-edit">
         <table class="w100 edit-table">
           <tr class="w100">
             <td class="col-sm-1 text-content text-center">答案：</td>
-            <td class="w100">
-              <div class="col-sm-9">
+            <td class="w100 aaa">
+              <div class="col-sm-9 bbb">
                 <div id="summernote" class="summernote">
-                  <span>Rich text presentation here..</span>
+                    <span></span>
                 </div>
               </div>
             </td>
@@ -39,7 +36,7 @@
 
       <div class="questiona">
         <label class="question col-sm-1 text-center">排序：</label>
-        <input type="text" class="col-sm-2 problem-box">
+        <input type="text" class="col-sm-2 problem-box" name="sort" [(ngModel)]="b.sort">
       </div>
 
       <div>

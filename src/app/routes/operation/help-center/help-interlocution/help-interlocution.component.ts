@@ -54,12 +54,11 @@ export class HelpInterlocutionComponent implements OnInit {
     me.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
           if(event.url.indexOf('jiaoajio')>0){
             me.flag=false;
-          }else if(event.url=='/main/help-center/help-assortment'){
+          }else if(event.url=='/main/operation/help-center/help-interlocution'){
             me.flag=true;
-            //_this.getAgentList() //刷新内容页面
+            this.qeuryAllService() //刷新内容页面
           }
         }
       });

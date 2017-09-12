@@ -28,7 +28,6 @@ export class AddrightpageComponent implements OnInit {
     if (_this.linkType == "updateCount") {//分类帮助--若为修改操作,获取信息
       _this.updataDataa = _this.submitt.getData("/helpKind/loadById", {id: _this.id}); //获取数据字典key
       console.log(_this.updataDataa)
-
     }
   }
 

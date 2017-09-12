@@ -1,42 +1,55 @@
 <div *ngIf="flag">
   <div class="content-heading mb-lg">
     问题详情页
-    <button class="pull-right btn-info btn-sm col-sm-1" >取消</button>
+    <button class="pull-right btn-info btn-sm col-sm-1" (click)="back()">返回</button>
   </div>
   <div class="panel mb">
-    <div class="panel-body p ng-scope" ng-if="search">
-      <div class="form-group mb0">
-        <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
-        <div class="col-xs-5">
-          <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                 (change)="searchdata($event)" placeholder="关键字">
-        </div>
-        <div class="col-sm-1 pull-left text-center">
-        <span class="ng-scope">
-           <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
-                   class="btn btn-primary bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
-           </button>
-          </span>
-        </div>
-      </div>
-    </div>
 
-    <div>
-      <ul>
-        <li routerLink="view-problem" [queryParams]="{linkType:'aa'}">1.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>2.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>3.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>4.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>5.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>6.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>7.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>8.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>9.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-        <li>10.aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-      </ul>
+
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="answer">问题</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="creattime">创建时间</rzhDefaultSorter>
+          </th>
+          <th class="w40 text-center">
+            <rzhDefaultSorter >管理操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--routerLink="view-problem" [queryParams]="{linkType:'aa',id:a.id}"-->
+        <tr  *ngFor="let a of result;let x=index" style="list-style: none"  class="text-center" >
+          <td>{{a.sort}}</td>
+          <td [innerHtml]="a.question"></td>
+          <td>
+            <!--是否显示-->
+            <label class="switch">
+              <input type="checkbox" *ngIf="a.state == 'HIDE'" [checked]="false" (change)="startState(a)" title="是否隐藏"/>
+              <input type="checkbox" *ngIf="a.state == 'SHOW'" [checked]="true" (change)="startState(a)" title="是否隐藏"/>
+              <span></span>
+            </label>
+          </td>
+          <td>{{a.createTime}}</td>
+          <td>
+            <app-buttons [config]="deletebutton" (click)="delete(a.id)"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="/main/operation/help-center/help-answer/help-update" [queryParams]="{linkType:'jiaoajio',id:a.id}"></app-buttons>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
 </div>
-
+</div>
 <router-outlet></router-outlet>

@@ -6,15 +6,17 @@
 <div class="panel panel-default">
   <div class="panel-body help-center-width"  >
     <div class="select">
-      问题分类：
-      <select id="" >
-        <option value="">a</option>
+     <span style="margin-left: 20px">问题分类：</span>
+      <select class="" type="text" [(ngModel)]="kindId"  name="id" >
+        <option [value]="help.id" *ngFor="let help of kinds">
+          {{help.kindName}}
+        </option>
       </select>
     </div>
 
     <div class="questiona text-center">
       <label class="question col-sm-1">问题：</label>
-      <input type="text" class="col-sm-8 problem-box" name="question">
+      <input type="text" class="col-sm-8 problem-box" name="question" ngModel>
     </div>
 
     <div class="reset-div text-edit">
@@ -24,7 +26,6 @@
           <td class="w100">
             <div class="col-sm-9">
               <div id="summernote" class="summernote">
-                <span name="answer">Rich text presentation here..</span>
               </div>
             </div>
           </td>
@@ -34,7 +35,7 @@
 
     <div class="questiona">
       <label class="question col-sm-1 text-center">排序：</label>
-      <input type="text" class="col-sm-2 problem-box" name="sort">
+      <input type="text" class="col-sm-2 problem-box" name="sort" ngModel>
     </div>
 
     <div>

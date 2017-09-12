@@ -17,8 +17,9 @@ export class HelpAnswerComponent implements OnInit {
   private addButton;//添加按钮
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
-
-
+   private kinds:any;
+  private kindId: string;
+  private searchkey: string = '';
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
   constructor(private submit: SubmitService,private ajax: AjaxService,private router:Router,public settings: SettingsService,) { }
 
@@ -49,14 +50,26 @@ export class HelpAnswerComponent implements OnInit {
           console.log(event.url)
           if(event.url.indexOf('jiaoajio')>0){
             me.flag=false;
-          }else if(event.url=='/main/help-center/help-assortment'){
+          }else if(event.url=='/main/operation/help-center/help-answer'){
             me.flag=true;
-            //_this.getAgentList() //刷新内容页面
+            this.qeuryAllService() //刷新内容页面
           }
         }
       });
     this.qeuryAllService();
+   this.qeuryAll();
+    me.kindId = me.kinds[0].id;
   }
+  //查找
+  searchdata(){
+    this.qeuryAllService();
+  }
+  //查询分类
+  qeuryAll(){
+    this.kinds = this.submit.getData("/helpKind/queryAll",'');
+    console.log("█ this.kinds ►►►",  this.kinds);
+  }
+
   //帮助分类--查询分页
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
@@ -65,8 +78,12 @@ export class HelpAnswerComponent implements OnInit {
     let data={
       curPage: activePage,
       pageSize:10,
+      question:me.searchkey,
+      kindId:me.kindId,
+
     }
     let result = this.submit.getData(url,data);
+    console.log("█ result ►►►",  result);
     me.data = new Page(result);
   }
 
@@ -114,7 +131,5 @@ export class HelpAnswerComponent implements OnInit {
       }
     );
   }
-
-
 
 }

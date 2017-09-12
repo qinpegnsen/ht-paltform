@@ -1,10 +1,39 @@
 
   <div *ngIf="flag">
   <div class="content-heading mb-lg">
-    帮助分类
+    帮助问题
     <app-buttons class="pull-right" [config]="addButton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio'}" ></app-buttons>
   </div>
   <div class="panel panel-default">
+    <div class="panel-body p ng-scope" ng-if="search">
+
+      <div class="select" style="display: inline-block;float: left;margin-right: 50px;line-height: 36px;">
+        问题分类：
+        <select class="" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
+          <option [value]="help.id" *ngFor="let help of kinds">
+            {{help.kindName}}
+          </option>
+        </select>
+      </div>
+
+
+    <div class="form-group mb0" >
+    <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
+    <div class="col-xs-5">
+    <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+    (change)="searchdata($event)" placeholder="关键字">
+    </div>
+    <div class="col-sm-1 pull-left text-center">
+    <span class="ng-scope">
+    <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
+    class="btn btn-primary bar-h3-btn mr ng-scope">
+    <em class="icon-magnifier fa-fw"></em>搜索
+    </button>
+    </span>
+    </div>
+    </div>
+    </div>
+
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
         <thead>
@@ -29,7 +58,7 @@
         <tbody>
         <tr *ngFor="let count of dataTable.data"  class="text-center">
           <td>{{count.sort}}</td>
-          <td>{{count.answer}}</td>
+          <td [innerHtml]="count.question">s</td>
           <td>
             <!--是否显示-->
             <label class="switch">

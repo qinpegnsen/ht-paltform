@@ -49,7 +49,7 @@
           </td>
           <td>{{count.createTime}}</td>
           <td>
-            <app-buttons [config]="addchildbutton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>
+            <!--<app-buttons [config]="addchildbutton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>-->
             <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
             <app-buttons [config]="updatebutton" routerLink="addrightpage" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
             <app-buttons [config]="seebutton" routerLink="problem-details"  [queryParams]="{linkType:'jiaoajio',id:count.id}" ></app-buttons>

@@ -11,14 +11,15 @@
   margin: auto;
 }
 .text-content{
-  height: 360px;
   vertical-align: top;
   padding-top: 10px;
 }
 .summernote{
   padding: 0;
 }
-
+.note-editor.note-frame .note-editing-area{
+  min-height: 300px;
+}
 .help-center-width{
   min-width: 800px;
 }
@@ -33,7 +34,7 @@
   margin: auto;
 }
 .select select{
-  margin-left: 35px;
+  margin-left: 60px;
 }
 .questiona{
   margin-bottom: 50px;
