@@ -25,7 +25,6 @@ import {AddrightpageComponent} from "./help-center/addrightpage/addrightpage.com
 import {ProblemDetailsComponent} from "./help-center/problem-details/problem-details.component";
 import {HelpAnswerComponent} from "./help-center/help-answer/help-answer.component";
 import {HelpUpdateComponent} from "./help-center/help-update/help-update.component";
-import {ViewProblemComponent} from "./help-center/view-problem/view-problem.component";
 
 
 const addSort: Routes = [
@@ -45,12 +44,10 @@ const appChildRoutes: Routes = [
   {path: 'add-formoek', component: AddFormworkComponent}
 ]
 
-const detailRoutes: Routes = [
-  {path: 'view-problem', component:ViewProblemComponent},
-]
+
 const rightChildRoutes: Routes = [
   {path: 'help-assortment', component:HelpAssortmentComponent},
-  {path: 'problem-details', component:ProblemDetailsComponent,children:detailRoutes},
+  {path: 'problem-details', component:ProblemDetailsComponent},
   {path: 'addrightpage', component:AddrightpageComponent}
 ]
 const helpdRoutes: Routes = [
@@ -80,7 +77,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent,ViewProblemComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,]
 })
 export class OperationModule { }
