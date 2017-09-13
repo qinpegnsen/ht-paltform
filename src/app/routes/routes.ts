@@ -20,7 +20,6 @@ export const routes = [
       {path: 'agent', loadChildren: './agent/agent.module#AgentModule'},
       {path: 'app', loadChildren: './msg/msg.module#MsgModule'},
       {path: 'edit-pw', loadChildren: './edit-pw/edit-pw.module#EditPwModule'},
-      {path: 'text-editing', loadChildren: './text-editing/text-editing.module#TextEditingModule'},
       {path: 'orders', component: ButtonDemoComponent},
     ]
   },
