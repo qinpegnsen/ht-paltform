@@ -2,7 +2,7 @@
 <div class="content-heading mb-lg">
   帮助问答（修改）
 </div>
-<form class="form-validate form-horizontal" style="height: 100%"  #res="ngForm">
+<form class="form-validate" style="height: 100%"  #res="ngForm">
   <div class="panel panel-default">
     <div class="panel-body help-center-width">
 
@@ -18,7 +18,6 @@
         <label class="question col-sm-1">问题：</label>
         <input type="text" class="col-sm-8 problem-box" name="question" [(ngModel)]="b.question">
       </div>
-
       <div class="reset-div text-edit">
         <table class="w100 edit-table">
           <tr class="w100">
@@ -26,7 +25,7 @@
             <td class="w100 aaa">
               <div class="col-sm-9 bbb">
                 <div id="summernote" class="summernote">
-                    <span></span>
+                  <span></span>
                 </div>
               </div>
             </td>

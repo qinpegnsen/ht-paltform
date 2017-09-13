@@ -61,7 +61,10 @@ export class ProblemDetailsComponent implements OnInit {
   back(){
     this.router.navigate(['/main/operation/help-center/help-interlocution']);
   }
-  //查询分类
+
+  /**
+   * 查询分类
+   */
   qeuryAllService(){
     this.kind = this.submit.getData("/helpKind/queryAll",'');
     console.log("█ this.kinds ►►►",  this.kind);
@@ -75,7 +78,9 @@ export class ProblemDetailsComponent implements OnInit {
     console.log("█ result ►►►",  this.result);
   }
 
-  //隐藏显示
+  /**
+   * 隐藏显示
+   */
   startState(data) {
     if (data.state == "HIDE") data.state = "SHOW"; else data.state = "HIDE";
     let url = "/helpQuestions/updateHelpKindState", _this = this;
@@ -97,7 +102,9 @@ export class ProblemDetailsComponent implements OnInit {
     });
   }
 
-  //删除
+  /**
+   * 删除
+   */
   delete(delid) {
     let me=this;
     let url = "/helpQuestions/deleteHelpQuestions";

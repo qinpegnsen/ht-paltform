@@ -48,7 +48,7 @@ export class HelpAnswerComponent implements OnInit {
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           console.log(event.url)
-          if(event.url.indexOf('jiaoajio')>0){
+          if(event.url.indexOf('routers')>0){
             me.flag=false;
           }else if(event.url=='/main/operation/help-center/help-answer'){
             me.flag=true;
@@ -56,21 +56,29 @@ export class HelpAnswerComponent implements OnInit {
           }
         }
       });
-    this.qeuryAllService();
-   this.qeuryAll();
-    me.kindId = me.kinds[0].id;
+      this.qeuryAllService();
+      this.qeuryAll();
+    // me.kindId = me.kinds[0].id;   //帮助问题默认分类
   }
-  //查找
+
+  /**
+   * 查找
+   */
   searchdata(){
     this.qeuryAllService();
   }
-  //查询分类
+
+  /**
+   * 查询分类
+   */
   qeuryAll(){
     this.kinds = this.submit.getData("/helpKind/queryAll",'');
     console.log("█ this.kinds ►►►",  this.kinds);
   }
 
-  //帮助分类--查询分页
+  /**
+   * 帮助分类--查询分页
+   */
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
@@ -87,7 +95,9 @@ export class HelpAnswerComponent implements OnInit {
     me.data = new Page(result);
   }
 
-  //隐藏显示
+  /**
+   * 隐藏显示
+   */
   startState(data) {
     if (data.state == "HIDE") data.state = "SHOW"; else data.state = "HIDE";
     let url = "/helpQuestions/updateHelpKindState", _this = this;
@@ -109,7 +119,9 @@ export class HelpAnswerComponent implements OnInit {
     });
   }
 
-  //删除
+  /**
+   * 删除
+   */
   delete(delid) {
     let me=this;
     let url = "/helpQuestions/deleteHelpQuestions";

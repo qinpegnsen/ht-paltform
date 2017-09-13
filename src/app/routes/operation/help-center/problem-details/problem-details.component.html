@@ -28,7 +28,6 @@
         </tr>
         </thead>
         <tbody>
-        <!--routerLink="view-problem" [queryParams]="{linkType:'aa',id:a.id}"-->
         <tr  *ngFor="let a of result;let x=index" style="list-style: none"  class="text-center" >
           <td>{{a.sort}}</td>
           <td [innerHtml]="a.question"></td>
@@ -43,8 +42,7 @@
           <td>{{a.createTime}}</td>
           <td>
             <app-buttons [config]="deletebutton" (click)="delete(a.id)"></app-buttons>
-            <app-buttons [config]="updatebutton" routerLink="/main/operation/help-center/help-answer/help-update" [queryParams]="{linkType:'jiaoajio',id:a.id}"></app-buttons>
-
+            <app-buttons [config]="updatebutton" routerLink="/main/operation/help-center/help-answer/help-update" [queryParams]="{linkType:'routers',id:a.id}"></app-buttons>
           </td>
         </tr>
         </tbody>

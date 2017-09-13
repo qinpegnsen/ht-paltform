@@ -20,23 +20,30 @@ export class AddrightpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    //路由中获取对应参数
+    /**
+     * 路由中获取对应参数
+     */
     let _this = this;
     _this.id = _this.routeInfo.snapshot.queryParams['id'];
     _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
 
     if (_this.linkType == "updateCount") {//分类帮助--若为修改操作,获取信息
-      _this.updataDataa = _this.submitt.getData("/helpKind/loadById", {id: _this.id}); //获取数据字典key
+      _this.updataDataa = _this.submitt.getData("/helpKind/loadById", {id: _this.id});
       console.log(_this.updataDataa)
     }
   }
 
-  // 取消
+
+  /**
+   *  取消
+   */
   cancel() {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
- // 提交
+  /**
+   * 提交
+   */
   submit(res) {
     if (this.linkType == 'aa') {
       let url = '/helpKind/addHelpKind';//帮助分类添加
@@ -50,7 +57,7 @@ export class AddrightpageComponent implements OnInit {
       this.helpInterlocutionComponent.qeuryAllService();
       this.settings.closeRightPageAndRouteBack();
     } else if (this.linkType == 'updateCount') {
-      let url = '/helpKind/updateHelpKind';//计量单位修改
+      let url = '/helpKind/updateHelpKind';//帮助分类修改
       let data = {
         id:res.id,
         name:res.name,

@@ -2,7 +2,7 @@
   <div *ngIf="flag">
   <div class="content-heading mb-lg">
     帮助问题
-    <app-buttons class="pull-right" [config]="addButton" routerLink="help-assortment" [queryParams]="{linkType:'jiaoajio'}" ></app-buttons>
+    <app-buttons class="pull-right" [config]="addButton" routerLink="help-assortment" [queryParams]="{linkType:'routers'}" ></app-buttons>
   </div>
   <div class="panel panel-default">
     <div class="panel-body p ng-scope" ng-if="search">
@@ -70,7 +70,7 @@
           <td>{{count.createTime}}</td>
           <td>
             <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
-            <app-buttons [config]="updatebutton" routerLink="help-update" [queryParams]="{linkType:'jiaoajio',id:count.id}"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="help-update" [queryParams]="{linkType:'routers',id:count.id}"></app-buttons>
 
           </td>
         </tr>

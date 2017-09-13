@@ -54,7 +54,7 @@ export class HelpInterlocutionComponent implements OnInit {
     me.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          if(event.url.indexOf('jiaoajio')>0){
+          if(event.url.indexOf('routers')>0){
             me.flag=false;
           }else if(event.url=='/main/operation/help-center/help-interlocution'){
             me.flag=true;
@@ -64,7 +64,10 @@ export class HelpInterlocutionComponent implements OnInit {
       });
     this.qeuryAllService();
   }
-  //帮助分类--查询分页
+
+  /**
+   * 帮助分类--查询分页
+   */
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
@@ -77,7 +80,9 @@ export class HelpInterlocutionComponent implements OnInit {
     me.data = new Page(result);
   }
 
-  //隐藏显示
+  /**
+   * 隐藏显示
+   */
   startState(data) {
     if (data.state == "HIDE") data.state = "SHOW"; else data.state = "HIDE";
     let url = "/helpKind/updateHelpKindState", _this = this;
@@ -97,7 +102,9 @@ export class HelpInterlocutionComponent implements OnInit {
     });
   }
 
-  //删除
+  /**
+   * 删除
+   */
   delete(delid) {
     let me=this;
     let url = "/helpKind/deleteHelpKind";

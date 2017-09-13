@@ -6,6 +6,8 @@ import {Page} from "../../../../core/page/page";
 import {AjaxService} from "../../../../core/services/ajax.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {constructDependencies} from "@angular/core/src/di/reflective_provider";
+import {isNullOrUndefined} from "util";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 declare var $: any;
 @Component({
   selector: 'app-help-assortment',
@@ -18,7 +20,7 @@ export class HelpAssortmentComponent implements OnInit {
   private kinds:any;
   private kindId: string;
   private aa:any;
-  constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService) { }
+  constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService, private tools: RzhtoolsService,) { }
 
   ngOnInit() {
     let me=this;
@@ -31,27 +33,46 @@ export class HelpAssortmentComponent implements OnInit {
         callbacks: {
           onChange: (contents, $editable) => {
             this.contents = contents;
-            // console.log(contents);
+          },
+          onImageUpload: function (files) {
+            for (let file of files) me.sendFile(file);
           }
         }
       });
+      me.kindId = me.kinds[0].id;//默认选中第一个帮助分类
     }, 0);
     this.qeuryAllService();
-    me.kindId = me.kinds[0].id;
   }
 
-    //返回上一页
+  /**
+   * 编辑器上传图片并显示
+   * @param file
+   */
+  sendFile(file) {
+    let _this = this, img = _this.tools.uploadImg(file);
+    if(!isNullOrUndefined(img)){
+      $("#summernote").summernote('insertImage', img, '');
+    }
+  }
+
+  /**
+   * 返回上一页
+   */
     back(){
       this.router.navigate(['/main/operation/help-center/help-answer']);
       this.qeuryAllService();
     }
-  //查询分类
+
+  /**
+   * 查询分类
+   */
   qeuryAllService(){
     this.kinds = this.submitt.getData("/helpKind/queryAll",'');
-    console.log("█ this.kinds ►►►",  this.kinds);
   }
 
-   //添加问题
+  /**
+   * 添加问题
+   */
   submit(res) {
     let me = this;
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
@@ -65,7 +86,6 @@ export class HelpAssortmentComponent implements OnInit {
       this.submitt.postRequest(url, data);
       this.router.navigate(['/main/operation/help-center/help-answer']);
       this.qeuryAllService();
-      console.log("█ data ►►►",  data);
     }
 
 }
