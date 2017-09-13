@@ -79,19 +79,22 @@
           </label>
         </td>
         <td>
-            <span>
-              <app-buttons [config]="option" (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
-                           *ngFor="let option of buttons"></app-buttons>
-            </span>
+          <p *ngIf="kind.state!='DEL'">
+            <app-buttons [config]="option" (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
+                         *ngFor="let option of buttons"></app-buttons>
             <span *ngIf="kind.level != 3">
-                <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
-                   [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
-                   title="添加下级分类"></a>
-              </span>
+              <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
+                 [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
+                 title="添加下级分类"></a>
+            </span>
             <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
-                  (click)="queryChildKindList(kind.id, kind.kindName,false)">
+                    (click)="queryChildKindList(kind.id, kind.kindName,false)">
               <i class="fa fa-level-down"></i> 下级
             </span>
+          </p>
+          <p *ngIf="kind.state=='DEL'">
+            <button class="btn btn-outline btn-danger btn-xs">已删除</button>
+          </p>
         </td>
       </tr>
       </tbody>

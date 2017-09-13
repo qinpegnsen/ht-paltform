@@ -35,9 +35,7 @@ export class KindManageComponent implements OnInit {
         type: "update",
         size: "xs",
         callback: function (result, kindId,curPage, kindPid) {
-          result.then((id) => {
-            me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId,page:curPage,kindPid:kindPid}});
-          })
+          me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId,page:curPage,kindPid:kindPid}});
         }
       },
       {
@@ -45,12 +43,10 @@ export class KindManageComponent implements OnInit {
         type: "delete",
         size: "xs",
         callback: function (result, kindId,curPage, kindPid) {
-          result.then((id) => {
-            let url = '/goodsKind/updateStateById';
-            let data = {id: kindId, state: 'DEL'};
-            me.submitService.delRequest(url, data);
-            this.queryDatas(curPage, kindPid);
-          })
+          let url = '/goodsKind/updateStateById';
+          let data = {id: kindId, state: 'DEL'};
+          me.submitService.delRequest(url, data);
+          this.queryDatas(curPage, kindPid);
         }
       }
     ];
