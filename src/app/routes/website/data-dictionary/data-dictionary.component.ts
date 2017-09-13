@@ -70,7 +70,7 @@ export class DataDictionaryComponent implements OnInit {
     }
     let res = this.dataDictionaryService.getdataservice(requestData)
     me.data = new Page(res);
-    console.log(me.data)
+    // console.log(me.data)
   }
 
   //删除
@@ -125,8 +125,10 @@ export class DataDictionaryComponent implements OnInit {
   }
 
   //根据分类的父id查询子分类
-  queryChildSortList(childCode ?, menuName ?, isTit ?: boolean) {
+  queryChildSortList(childCode ?, menuName ?, isTit ?: boolean,event?: PageEvent) {
     let me = this, num = 0;
+    let activePage = 1;
+    if (typeof event !== "undefined") activePage = event.activePage;
     if (isNullOrUndefined(childCode)) {
       me.childMenuCode = null, me.childMenuName = null, me.childMenuTitList = []; //清空子集查询
       me.queryDatas();
@@ -146,13 +148,14 @@ export class DataDictionaryComponent implements OnInit {
       }
     }
     let data = {
-      curPage: 1,
-      pageSize: 6,
+      curPage: activePage,
+      pageSize: 10,
       code: childCode
     }
     let url = "/datadict/querryDatadictList";
     let result = me.dataDictionaryService.queryData(url, data);
-    me.data = result;
+    me.data = new Page(result);
+    // me.data = result;
   }
 
   // 返回上一级菜单列表

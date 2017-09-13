@@ -11,3 +11,7 @@ td,th{
 .p0:hover{
   background: #F2F2F2;
 }
+.btn-xs, .btn-group-xs > .btn {
+  padding: 3px 10px;
+  line-height: 1.8;
+}

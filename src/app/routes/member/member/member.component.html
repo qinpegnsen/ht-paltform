@@ -42,7 +42,7 @@
       <th class="w10">
         <rzhDefaultSorter by="email">真实姓名</rzhDefaultSorter>
       </th>
-      <th class="w10">
+      <th class="w5">
         <rzhDefaultSorter>性别</rzhDefaultSorter>
       </th>
       <th class="w10">
@@ -54,14 +54,14 @@
       <th class="w10">
         <rzhDefaultSorter>手机号</rzhDefaultSorter>
       </th>
-      <th class="w10">
+      <th class="w5">
         <rzhDefaultSorter>是否新会员</rzhDefaultSorter>
       </th>
       <th class="w10">
         <rzhDefaultSorter>状态</rzhDefaultSorter>
       </th>
       <th class="w10">创建时间</th>
-      <th class="w5">管理操作</th>
+      <th class="w15">管理操作</th>
     </tr>
     </thead>
     <tbody>
@@ -94,7 +94,16 @@
         <td>{{member.createTime}}</td>
         <td>
           <app-buttons [config]="detailsbutton" (click)="showDetail(member)"></app-buttons>
-        </td>
+
+          <button class="btn btn-green btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
+                  (click)="changeState('FREEZE',member.custCode)"></button>
+          <button class="btn btn-info btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
+                  (click)="changeState('BLACK',member.custCode)"></button>
+          <button class="btn btn-purple btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="正常"
+                  (click)="changeState('NORMAL',member.custCode)"></button>
+          <!--<button class="btn btn-danger btn-xs fa fa-trash" *ngIf="member.state=='NORMAL'" title="冻结"-->
+                  <!--(click)="changeState('FREEZE',member.custCode)"></button>-->
+        <!--</td>-->
       </tr>
       <tr *ngIf="member.isShow">
         <td class="p0" colspan="11">
