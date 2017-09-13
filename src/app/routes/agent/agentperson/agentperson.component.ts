@@ -106,7 +106,6 @@ export class AgentpersonComponent implements OnInit {
     this.controlData=this.AgentpersonService.controlDatas(url,data);
   }
 
-
   /**
    * 删除代理商信息
    * @param event
@@ -134,7 +133,6 @@ export class AgentpersonComponent implements OnInit {
       }
     );
   }
-
 
   /**
    * 查看代理商是否被关闭

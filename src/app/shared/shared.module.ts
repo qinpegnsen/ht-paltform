@@ -41,6 +41,7 @@ import {SubmitService} from "../core/forms/submit.service";
 import { ImgUrlPipe } from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
 import { HoverDirective } from './directives/hover/hover.directive';
+import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
 import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.component';
 
 // https://angular.io/styleguide#!#04-10
@@ -48,6 +49,8 @@ import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.comp
   imports: [
     CommonModule,
     FormsModule,
+    NzCheckboxModule,
+    NzModalModule,
     ReactiveFormsModule,
     TranslateModule,
     AccordionModule.forRoot(),

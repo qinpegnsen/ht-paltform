@@ -25,6 +25,7 @@ import {AddrightpageComponent} from "./help-center/addrightpage/addrightpage.com
 import {ProblemDetailsComponent} from "./help-center/problem-details/problem-details.component";
 import {HelpAnswerComponent} from "./help-center/help-answer/help-answer.component";
 import {HelpUpdateComponent} from "./help-center/help-update/help-update.component";
+import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
 import {OperationService} from "./operation.service";
 
 
@@ -75,7 +76,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    NzCheckboxModule,
     SharedModule,
+    NzModalModule,
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent],

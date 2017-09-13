@@ -97,15 +97,10 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i>*</i> 选择区域</label>
-            <div class="col-sm-4">
-              <input class="form-control" required name="areaCode" [(ngModel)]="staff.areaCode"
-                     #areaCode="ngModel" type="text"/>
-              <div [hidden]="areaCode.valid || areaCode.pristine"
-                   class="alert alert-danger">
-                区域编码是必填项，请填写区域编码
-              </div>
-            </div>
+                <label class="col-sm-2 control-label"><i>*</i>选择区域</label>
+                <div class="col-sm-4">
+                  <app-select-area [required]="true" (myData)="getAreaData($event)"></app-select-area>
+                </div>
             <label class="col-sm-2 control-label">座机</label>
             <div class="col-sm-4">
               <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone"/>

@@ -42,18 +42,18 @@ export class FreightTemplateComponent implements OnInit {
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
      */
-    this.addButton = {
+    _this.addButton = {
       type:"add",
       text:"新增运费模板",
       title:'新增运费模板',
     };
-    this.updatebutton = {
+    _this.updatebutton = {
       type:"update",
       text:"修改",
       title:'修改运费模板',
       size:'xs',
     };
-    this.deletebutton = {
+    _this.deletebutton = {
       type:"delete",
       text:"删除",
       title:'删除运费模板',

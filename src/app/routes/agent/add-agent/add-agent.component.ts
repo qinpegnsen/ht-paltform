@@ -17,6 +17,7 @@ const uploadUrl = "/agent/uploadIdcardImage";  //图片上传路径(调取上传
 })
 export class AddAgentComponent implements OnInit {
   public flag:boolean=false;//修改经纬度按钮的显示
+  private organ={}
   public uploader:FileUploader = new FileUploader({
     url: uploadUrl,
     itemAlias:"limitFile",
@@ -138,6 +139,12 @@ export class AddAgentComponent implements OnInit {
   cancel() {
     //this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
     this.router.navigate(['/main/agent/agentperson']);
+  }
+
+  //获取区域数据
+  private getAreaData(area){
+    let me = this;
+    me.organ['areaCode'] = area.areaCode;
   }
 
   addLimitList(value) {
