@@ -70,7 +70,7 @@
 </div>
 <div class="panel panel-danger">
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
            (pageChange)="queryDatas(1,$event)">
       <thead>
       <tr>

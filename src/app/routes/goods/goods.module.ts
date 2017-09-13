@@ -15,6 +15,7 @@ import {GoodsService} from "./goods.service";
 import {SubmitService} from "../../core/forms/submit.service";
 import { PublishedComponent } from './published/published.component';
 import {ManageService} from "./manage/manage.service";
+import { WholesaleMerchandiseManagementComponent } from './wholesale-merchandise-management/wholesale-merchandise-management.component';
 
 
 // 父路由，用于页面嵌套显示
@@ -31,6 +32,7 @@ const routes: Routes = [
   ]
   },
   {path: 'manage', component: ManageComponent},
+  {path: 'wholesale-merchandise-management', component: WholesaleMerchandiseManagementComponent},
   {
     path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},
@@ -66,6 +68,7 @@ const routes: Routes = [
     ChooseKindComponent,
     EditDetailComponent,
     PublishedComponent,
+    WholesaleMerchandiseManagementComponent,
   ],
   providers: [
     GoodsService,

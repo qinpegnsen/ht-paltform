@@ -118,6 +118,11 @@ const goods = {
       text: '品牌管理',
       icon: 'fa fa-cubes',
       link: '/main/goods/brands'
+    },
+    {
+      text: '批发商品管理',
+      icon: 'fa fa-cubes',
+      link: '/main/goods/wholesale-merchandise-management'
     }
   ]
 };

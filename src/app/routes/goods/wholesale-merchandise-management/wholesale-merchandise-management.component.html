@@ -1,0 +1,129 @@
+<div class="content-heading mb-lg">
+  批发商品管理
+</div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="col-md-8 col-xs-6 pl0">
+          <input type="text" [(ngModel)]="goodsName"
+                 class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 (change)="queryDatas(1)" placeholder="品牌名称">
+        </div>
+        <button type="button" title="搜索"
+                class="btn btn-primary bar-h3-btn mr ng-scope">
+          <em class="icon-magnifier fa-fw"></em>
+        </button>
+      </div>
+      <div class="form-group mb0">
+        <div class="col-md-8 col-xs-6 pl0">
+          <input type="text" [(ngModel)]="goodsName"
+                 class="form-control border-b-grey"
+                 (change)="queryDatas(1)" placeholder="商品名">
+        </div>
+        <button type="button" title="搜索"
+                class="btn btn-primary bar-h3-btn mr ng-scope">
+          <em class="icon-magnifier fa-fw"></em>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group clearfix">
+        <span class="pull-left query-name">分类：</span>
+        <!--<div class="col-md-8 col-xs-6 pl0">-->
+          <!--<app-get-kind (myData)="getKind($event)"></app-get-kind>-->
+        <!--</div>-->
+      </div>
+      <div class="form-group clearfix mb0">
+        <span class="pull-left query-name">自营：</span>
+        <div class="col-md-8 col-xs-6 pl0">
+          <!--<select class="form-control" name="isOwnPlat" [(ngModel)]="isOwnPlat" (change)="queryDatas(1)">-->
+            <!--<option value="">全部</option>-->
+            <!--<option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>-->
+          <!--</select>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+           (pageChange)="qeuryAllService($event)">
+      <thead>
+      <tr>
+        <th class="w5 unselectable text-center">序号</th>
+        <th class="w35 unselectable hidden-sm">
+          <rzhDefaultSorter by="goodsName">商品名</rzhDefaultSorter>
+        </th>
+        <th class="w15 unselectable">
+          <rzhDefaultSorter by="sku">规格/规格值</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="price">价格（元）</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="time">发布时间</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">是否允许批发</th>
+        <th class="w20 unselectable text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td class="text-left position-relative">
+          <span class="img-box mr a"><img [src]="goods.goodsImage"
+                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+          <div class="mb0 goods-info">
+            <p>
+                {{goods.goodsName}}
+            </p>
+          </div>
+        </td>
+        <td class="text-left">
+          <div class="attr-width">
+            <p class="mb0 font12 one-row omg" *ngFor="let attr of goods.goodsSavSetList">
+              <span class="inline">{{attr.attrName}}：</span>
+              <span class="inline">{{attr.value}}：</span>
+            </p>
+          </div>
+        </td>
+        <td>{{goods.goodsPrice.batchPrice}}</td>
+        <td>{{goods.createTime}}</td>
+        <td>
+          <!--<label class="switch">-->
+            <!--<input type="checkbox" *ngIf="attr.enable == 'Y'" [checked]="true" (change)="startState(attr)" title="是否允许批发"/>-->
+            <!--<input type="checkbox" *ngIf="attr.enable == 'N'" [checked]="false" (change)="startState(attr)" title="是否允许批发"/>-->
+            <!--<span></span>-->
+          <!--</label>-->
+        </td>
+        <td>
+<!--操作-->
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共
+              {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
