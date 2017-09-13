@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {isNullOrUndefined} from "util";
-import {GoodsService} from "../../../../routes/goods/goods.service";
+import {GoodsService} from "../../../routes/goods/goods.service";
 declare var $: any;
 
 @Component({

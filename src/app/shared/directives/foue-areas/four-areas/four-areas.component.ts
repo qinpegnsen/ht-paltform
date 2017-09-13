@@ -4,12 +4,11 @@ import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 declare var $: any;
 
 @Component({
-  selector: 'app-select-area',
-  templateUrl: './select-area.component.html',
-  styleUrls: ['./select-area.component.scss'],
-  providers: [RzhtoolsService]
+  selector: 'app-four-areas',
+  templateUrl: './four-areas.component.html',
+  styleUrls: ['./four-areas.component.scss']
 })
-export class SelectAreaComponent implements OnInit {
+export class FourAreasComponent implements OnInit {
   private show: boolean = false;
   private areas: any;
   private areaCode: string = '';
@@ -17,11 +16,10 @@ export class SelectAreaComponent implements OnInit {
   @Input() private selectedAreaName: string;
   @Output() myData = new EventEmitter();
 
-  constructor(private tools: RzhtoolsService) {
-  };
+  constructor(private tools: RzhtoolsService) {  };
 
   ngOnInit() {
-    if (this.selectedAreaName != '' || !isNullOrUndefined(this.selectedAreaName))this.adr = this.selectedAreaName;
+    if (this.selectedAreaName != '' || !isNullOrUndefined(this.selectedAreaName)) this.adr = this.selectedAreaName;
     /**
      * 点击区域选框外页面时，关闭选框
      * @type {SelectAreaComponent}
@@ -44,32 +42,15 @@ export class SelectAreaComponent implements OnInit {
    * @param myAreaCode 区域编码
    * @param isOld 是否为老版
    */
-  getArea(fullName, myAreaCode, isOld) {
-    let me = this, areaData;
-    areaData = me.tools.getAreaByCode(myAreaCode, isOld);
-    let allCitys = areaData.children;
+  getArea(fullName, myAreaCode, level) {
+    let me = this;
     me.adr = fullName;
     me.areaCode = myAreaCode;
-    if (!isNullOrUndefined(allCitys) && allCitys.length != 0) {//如果有下级列表
-      me.areas = me.getNewCitys(allCitys);
-    }else{
+    if (level == 4) {  // 如果是第四级了
       me.cityConfirm();
+    }else{
+      me.areas = me.tools.getAreaList(myAreaCode, level);
     };
-  }
-
-  /**
-   * 获取城市列表所有中的新地区
-   * @param citys
-   * @returns {Array}
-   */
-  getNewCitys(citys){
-    let newCitys = [];
-    citys.forEach((city) =>{
-      if(city.isNew === 1){
-        newCitys.push(city)
-      }
-    });
-    return newCitys;
   }
 
   /**
@@ -79,7 +60,7 @@ export class SelectAreaComponent implements OnInit {
     let me = this;
     if (me.show) return;
     me.show = true;
-    me.areas = me.tools.getAreaByCode('');
+    me.areas = me.tools.getAreaList();
   }
 
   /**
@@ -88,7 +69,7 @@ export class SelectAreaComponent implements OnInit {
   freshCitys() {
     this.adr = '';
     this.areaCode = '';
-    this.areas = this.tools.getAreaByCode('');
+    this.areas = this.tools.getAreaList();
     this.myData.emit({
       areaCode: this.areaCode,
       adr: this.adr
@@ -109,4 +90,5 @@ export class SelectAreaComponent implements OnInit {
       adr: this.adr
     });
   }
+
 }

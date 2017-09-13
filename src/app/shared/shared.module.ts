@@ -42,7 +42,9 @@ import { ImgUrlPipe } from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
 import { HoverDirective } from './directives/hover/hover.directive';
 import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
-import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.component';
+import { GetKindComponent } from './directives/get-kind/get-kind.component';
+import { FourAreasComponent } from './directives/foue-areas/four-areas/four-areas.component';
+import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -73,7 +75,8 @@ import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.comp
     RzhButtonsModule,
     SelectAreaModule,
     SelectModule,
-    AngularEchartsModule
+    AngularEchartsModule,
+    FoueAreasModule
   ],
   providers: [
     ColorsService,
@@ -134,7 +137,8 @@ import { GetKindComponent } from './directives/chooseKind/get-kind/get-kind.comp
     ImgUrlPipe,
     AngularEchartsModule,
     HoverDirective,
-    GetKindComponent
+    GetKindComponent,
+    FoueAreasModule
   ]
 })
 
