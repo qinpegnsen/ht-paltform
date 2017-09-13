@@ -7,18 +7,20 @@
   <div class="panel panel-default">
     <div class="panel-body p ng-scope" ng-if="search">
 
-      <div class="select" style="display: inline-block;float: left;margin-right: 50px;line-height: 36px;">
-        问题分类：
-        <select class="" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
+      <div class="" >
+        <label class="pull-left lh">问题分类：</label>
+        <span class="col-sm-1">
+           <select class="form-control" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
           <option [value]="help.id" *ngFor="let help of kinds">
             {{help.kindName}}
           </option>
         </select>
+        </span>
       </div>
 
 
     <div class="form-group mb0" >
-    <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
+    <label class="label-width pull-left text-right mb0 lh">查找：</label>
     <div class="col-xs-5">
     <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
     (change)="searchdata($event)" placeholder="关键字">
@@ -41,16 +43,16 @@
           <th class="w10 text-center">
             <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
           </th>
-          <th class="w20 text-center">
+          <th class="w35 text-center">
             <rzhDefaultSorter by="answer">问题</rzhDefaultSorter>
           </th>
-          <th class="w10 text-center">
+          <th class="w20 text-center">
             <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
           </th>
-          <th class="w20 text-center">
+          <th class="w25 text-center">
             <rzhDefaultSorter by="creattime">创建时间</rzhDefaultSorter>
           </th>
-          <th class="w40 text-center">
+          <th class="w20 text-center">
             <rzhDefaultSorter >管理操作</rzhDefaultSorter>
           </th>
         </tr>
@@ -58,7 +60,7 @@
         <tbody>
         <tr *ngFor="let count of dataTable.data;let i=index"  class="text-center">
           <td>{{i+1}}</td>
-          <td [innerHtml]="count.question">s</td>
+          <td [innerHtml]="count.question" class="pull-left"></td>
           <td>
             <!--是否显示-->
             <label class="switch">

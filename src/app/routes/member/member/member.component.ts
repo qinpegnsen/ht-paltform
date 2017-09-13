@@ -9,7 +9,6 @@ import {Page} from "../../../core/page/page";
   styleUrls: ['./member.component.scss']
 })
 export class MemberComponent implements OnInit {
-
   private custName:string='';//默认查询的会员的名称
 
   private custTruename:string='';//默认查询的会员的名称
@@ -61,5 +60,20 @@ export class MemberComponent implements OnInit {
    */
   showDetail(data:any){
     data.isShow = !data.isShow;
+  }
+
+  /**
+   * 改变用户状态
+   * @param state
+   * @param orgCode
+   */
+  changeState(state,custCode){
+    let url = '/cust/updateState';
+    let data = {
+      custCode:custCode,
+      state:state
+    }
+    this.service.putRequest(url,data);
+    this.queryMemberList();
   }
 }
