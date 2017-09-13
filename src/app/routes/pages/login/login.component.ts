@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
         'pwd': me.password
       },
       success: (result) => {
-        alert("aa")
         this.maskservice.hideMask();
         end = new Date().getTime();
         let info = result.data;
@@ -89,7 +88,7 @@ export class LoginComponent implements OnInit {
           AppComponent.rzhAlt("success",info);
         }
         else {
-          console.log("█ result ►►►",  JSON.stringify(result));
+          console.log("█ result ►►►",  result);
           AppComponent.rzhAlt("error",info);
         }
       },

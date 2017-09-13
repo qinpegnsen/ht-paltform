@@ -33,9 +33,9 @@ export class EditDetailComponent implements OnInit {
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
   private myReadOnly: boolean = false;  // 商品详情或审核商品时是只读状态
-  private goodsBody:any;          //商品详情
-  private audit:any;              // 商品审核
-  private goodsAudits:any;        // 商品审核状态列表
+  private goodsBody: any;          //商品详情
+  private audit: any;              // 商品审核
+  private goodsAudits: any;        // 商品审核状态列表
   private publishData: any = {
     goodsExpressInfo: {},
     goodsImagesList: [],
@@ -81,13 +81,13 @@ export class EditDetailComponent implements OnInit {
     })
 
     me.kindId = me.route.snapshot.queryParams['kindId'];
-    if(me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
+    if (me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
     me.getPageData();// 获取当前页面需要的数据
     if (me.path == 'step_two' && isNullOrUndefined(me.kindId)) {
-      me.publishComponent.step = 2;
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
+        me.publishComponent.step = 2;
         me.publishData['kindSelectName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
         // 默认值
         me.publishData['isFreight'] = 'N';                  //是否有运费
@@ -98,16 +98,16 @@ export class EditDetailComponent implements OnInit {
         me.publishData.goodsExpressInfo.volume = 1.00;      //体积
         me.publishData.goodsExpressInfo['freightType'] = 'FIXED';   //运费类型默认固定运费
       }
-      if(me.path == 'edit') me.publishComponent.step = 2;
-      if(me.path == 'audit') {
+      if (me.path == 'edit') me.publishComponent.step = 2;
+      if (me.path == 'audit') {
         me.publishComponent.step = 0;
         me.myReadOnly = true;
         me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
         // 去掉待审核状态
         for (var i = me.goodsAudits.length - 1; i >= 0; i--) {
           var obj = me.goodsAudits[i];
-          if(obj.key == 'AUDIT'){
-            me.goodsAudits.splice(i,1)
+          if (obj.key == 'AUDIT') {
+            me.goodsAudits.splice(i, 1)
           }
         }
         // 初始化默认审核状态
@@ -137,7 +137,7 @@ export class EditDetailComponent implements OnInit {
           }
         });
 
-        if(me.path != 'audit'){
+        if (me.path != 'audit') {
           //当点击批量修改价格的按钮时
           $('.sku-table').on('click', '.s-menu', function () {
             $(this).find('input').val('');
@@ -241,7 +241,9 @@ export class EditDetailComponent implements OnInit {
       me.publishData = me.goodsEditData;                  // 商品发布数据
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-      $('#summernote').summernote('code', me.goodsBody);   //PC端详情
+      setTimeout(function () {
+        $('#summernote').summernote('code', me.goodsBody);   //PC端详情
+      }, 1)
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
     }
   }
@@ -520,7 +522,7 @@ export class EditDetailComponent implements OnInit {
    * @param i 需要替换掉的图片的索引值
    */
   mblReplaceImg(e, i) {
-    let _this = this, file = e.target.files[0], img= _this.tools.uploadImg(file);
+    let _this = this, file = e.target.files[0], img = _this.tools.uploadImg(file);
     let obj = {
       type: 'img',
       value: img
@@ -534,8 +536,8 @@ export class EditDetailComponent implements OnInit {
    */
   sendFile(file) {
     let _this = this, img = _this.tools.uploadImg(file);
-    $("#summernote").summernote('insertImage', img, '');
-    if(!isNullOrUndefined(img)){
+    if (!isNullOrUndefined(img)) {
+      $("#summernote").summernote('insertImage', img, '');
       let obj = {
         type: 'img',
         value: img
@@ -688,11 +690,11 @@ export class EditDetailComponent implements OnInit {
    * 商品规格图片上传
    */
   private uploadImgs() {
-    let me = this,uploadedNum = 0;
+    let me = this, uploadedNum = 0;
     let allUploaders = me.togetherAllUploaders();
     allUploaders.forEach((uploader, i) => {
       uploader.uploadAll();//全部上传
-      if(!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
+      if (!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
       uploader.queue.forEach((item, index) => {
         item.onSuccess = function (response, status, headers) {
           if (!isNullOrUndefined(response)) {
@@ -708,7 +710,7 @@ export class EditDetailComponent implements OnInit {
           }
         }
       })
-      uploader.onCompleteAll = function(){
+      uploader.onCompleteAll = function () {
         uploadedNum += 1;     // 该组上传完之后uploadedNum+1；
         if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
           me.genPublishDataAndPublish()     //整理数据并且发布商品
@@ -726,12 +728,12 @@ export class EditDetailComponent implements OnInit {
    * @param allUploaders
    * @returns {boolean}
    */
-  private allUploaded(allUploaders){
+  private allUploaded(allUploaders) {
     let uploadedNum = 0;
     allUploaders.forEach((item) => {
-      if(!item.isUploading) uploadedNum += 1
+      if (!item.isUploading) uploadedNum += 1
     })
-    if(uploadedNum == allUploaders.length) return true;
+    if (uploadedNum == allUploaders.length) return true;
   }
 
   /**
@@ -760,7 +762,7 @@ export class EditDetailComponent implements OnInit {
       for (var i = 0; i < me.skuImg.vals.length; i++) {
         item = me.skuImg.vals[i];
         let itemImgSrcs = me.goodsImgList[item.valCode];
-        if(!isNullOrUndefined(itemImgSrcs)){
+        if (!isNullOrUndefined(itemImgSrcs)) {
           for (let k = 0; k < itemImgSrcs.length; k++) {
             const temp: any = {attrCode: '', valCode: '', valName: '', idx: '', goodsImage: ''};
             Object.assign(temp, item);
@@ -775,7 +777,7 @@ export class EditDetailComponent implements OnInit {
     } else if (me.defaultUploader.queue.length > 0) {
       AppComponent.rzhAlt('warning', '数据缺失', "请选择商品规格");
     }
-    console.log("█ goodsImgList ►►►",  goodsImgList);
+    console.log("█ goodsImgList ►►►", goodsImgList);
     return goodsImgList;
   }
 
@@ -822,9 +824,9 @@ export class EditDetailComponent implements OnInit {
   /**
    * 审核商品
    */
-  auditGoods(){
+  auditGoods() {
     let me = this;
-    me.goods.putRequest('/goodsEdit/auditGoods',me.audit,true)
+    me.goods.putRequest('/goodsEdit/auditGoods', me.audit, true)
   }
 
 }

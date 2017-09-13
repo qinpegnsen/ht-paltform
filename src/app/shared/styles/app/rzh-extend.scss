@@ -96,6 +96,14 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 // 扩展主要颜色，山楂红色
 .main-red{ color: #CC1635;}
 
+// 单行显示，溢出隐藏（……）适用于宽度固定的元素
+._omg{overflow: hidden; text-overflow: ellipsis; white-space:nowrap;}
+
+/* 支持webkit内核的浏览器，相对较适用于移动端的单行文本溢出隐藏* 宽度相对于父级*/
+.omg{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;/** 显示的行数 **/overflow: hidden;}
+/*多行文本溢出隐藏，设置-webkit-line-clamp: n */
+.omg2{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;/** 显示的行数 **/overflow: hidden;}
+
 .w1{width: 1%}
 .w2{width: 2%}
 .w3{width: 3%}

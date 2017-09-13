@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
@@ -6,7 +6,7 @@ import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-const swal = require('sweetalert');
+import {ManageService} from "./manage.service";
 declare var $: any;
 
 @Component({
@@ -28,6 +28,7 @@ export class ManageComponent implements OnInit {
   constructor(private router: Router,
               private tools: RzhtoolsService,
               private submit: SubmitService,
+              public manage: ManageService,
               private goodsService: GoodsService) {
   }
 
@@ -133,41 +134,10 @@ export class ManageComponent implements OnInit {
    * 显示窗口组件，加载sku列表
    */
   showSkuList(baseCode, name) {
-    let _this = this,_item = '';
-    let list = _this.submit.getData('/goodsQuery/load', {goodsBaseCode: baseCode});// 获取需要展示的数据
-    for(let item of list){
-      _item += `<tr class="item-bottom-border"><td class="position-relative p"><img class="goods-xs-img" src="`+item.goodsImage+` alt="">
-      <div class="mb0 goods-xs-info"><a class="goods-name" href="javascript:;">`+item.goodsName+`</a></div></td>
-      <td class="text-center">`+item.goodsPrice.price+`</td>
-      <td class="text-center">`+item.storageNum+`</td>
-      </tr>`
-    }
-    _this.skuTemplete = `<div class="mask fadeIn sku-box">
-  <div class="popup animated fadeIn">
-
-    <div class="pop popup-hd font14">
-      查看商品<span class="font16">“`+name+`”</span>的规格
-      <div class="popup-colse unselectable">×</div>
-    </div>
-    <div class="pop popup-bd p">
-      <table class="w100" style="max-height: 500px">
-        <thead class="bg-gray-lighter">
-          <tr>
-            <td class="col-xs-8 p">商品规格</td>
-            <td class="col-xs-2 p text-center">价格</td>
-            <td class="col-xs-2 p text-center">库存</td>
-          </tr>
-        </thead>
-        <tbody>`+_item+`</tbody>
-      </table>
-    </div>
-    <div class="pop popup-ft"></div>
-    </div>
-    </div>
-    `
+    let list = this.submit.getData('/goodsQuery/load', {goodsBaseCode: baseCode});// 获取需要展示的数据
+    this.skuTemplete = this.manage.skuTemplate(list,name);
     $('body').append(this.skuTemplete);
   }
-
 
   private domActions() {
     setTimeout(function(){

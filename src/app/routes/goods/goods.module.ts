@@ -14,6 +14,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {GoodsService} from "./goods.service";
 import {SubmitService} from "../../core/forms/submit.service";
 import { PublishedComponent } from './published/published.component';
+import {ManageService} from "./manage/manage.service";
 
 
 // 父路由，用于页面嵌套显示
@@ -71,7 +72,8 @@ const routes: Routes = [
     SubmitService,
     PublishComponent,
     BrandsComponent,
-    KindManageComponent
+    KindManageComponent,
+    ManageService
   ]
 })
 export class GoodsModule {

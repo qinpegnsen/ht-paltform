@@ -227,8 +227,8 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
       <dt class="col-xs-2"><i>*</i>商品图片：</dt>
       <dd class="col-xs-10 pic-list">
         <!--当没有选择第一规格时-->
-        <div class="goodspics" *ngIf="skuImg.vals.length == 0">
-          <div class="color-value mr" [class.hide]="myReadOnly">
+        <div class="goodspics" *ngIf="skuImg.vals.length == 0" [class.hide]="myReadOnly">
+          <div class="color-value mr">
             <h4>默认：</h4>
             <label class="btn btn-sm btn-info file-upload" (click)="noAttrTip()">
               <em class="fa fa-picture-o"></em>
@@ -256,9 +256,9 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
 
         <!--当选择了第一规格时-->
         <div class="goodspics" *ngFor="let val of skuImg.vals;let idx = index;" [id]="val.valCode">
-          <div class="color-value" [class.hide]="myReadOnly">
+          <div class="color-value">
             <h4>{{skuImg.attrName}}：<span data-spec-value-name="23">{{val.valName}}</span></h4>
-            <label class="btn btn-sm btn-info file-upload">
+            <label class="btn btn-sm btn-info file-upload" [class.hide]="myReadOnly">
               <em class="fa fa-picture-o"></em>
               打开相册图片
               <input class="w100" type="file" name="" ng2FileSelect
