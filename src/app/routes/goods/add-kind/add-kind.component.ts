@@ -8,6 +8,7 @@ import {AppComponent} from "../../../app.component";
 import {FileUploader} from "ng2-file-upload";
 import {GetUidService} from "../../../core/services/get-uid.service";
 import {MaskService} from "../../../core/services/mask.service";
+import {PatternService} from "../../../core/forms/pattern.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -34,8 +35,13 @@ export class AddKindComponent implements OnInit {
     itemAlias: "goodsKindIcon"
   }); //初始化上传方法
 
-  constructor(public settings: SettingsService, private route: ActivatedRoute,private router: Router,
-              private parentComp: KindManageComponent, private getUid: GetUidService,private mask: MaskService,
+  constructor(public settings: SettingsService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private parentComp: KindManageComponent,
+              private getUid: GetUidService,
+              public patterns: PatternService,
+              private mask: MaskService,
               private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }

@@ -23,7 +23,7 @@
             <label class="col-sm-4 control-label">分类级别</label>
             <div class="col-sm-7">
               <input class="form-control" type="text" name="level" [(ngModel)]="kindInfo.level"
-                     placeholder="分类级别" readonly/>
+                     placeholder="分类级别" [pattern]="patterns.num" readonly/>
             </div>
           </div>
         </fieldset>
@@ -86,18 +86,26 @@
             <label class="col-sm-4 control-label">分享佣金比例</label>
             <div class="col-sm-7">
               <input class="form-control num" type="number" name="commisRate" [tooltip]="tip.commisRate"
-                     [(ngModel)]="kindInfo.commisRate"
+                     [(ngModel)]="kindInfo.commisRate" #commisRate="ngModel" [pattern]="patterns.decimals"
                      placeholder="分享佣金比例"/>
             </div>
+          </div>
+          <div [hidden]="commisRate.valid || commisRate.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请填写0-1的小数
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
             <label class="col-sm-4 control-label">排序</label>
             <div class="col-sm-7">
-              <input class="form-control num" type="number" name="sort" [tooltip]="tip.sort" [(ngModel)]="kindInfo.sort"
-                     placeholder="排序"/>
+              <input class="form-control num" type="number" name="sort" [tooltip]="tip.sort" [pattern]="patterns.doubleDigit"
+                     [(ngModel)]="kindInfo.sort" #sort="ngModel" placeholder="排序"/>
             </div>
+          </div>
+          <div [hidden]="sort.valid || sort.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请填写0-99的整数
           </div>
         </fieldset>
         <fieldset *ngIf="path != 'upKind'">

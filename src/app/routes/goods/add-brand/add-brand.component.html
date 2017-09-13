@@ -70,9 +70,13 @@
             <label class="col-sm-4 control-label">排序</label>
             <div class="col-sm-7">
               <input class="form-control num" type="number" name="brandSort" [tooltip]="tip.brandSort"
-                     [(ngModel)]="brandInfo.brandSort"
+                     [(ngModel)]="brandInfo.brandSort" #brandSort="ngModel" [pattern]="patterns.doubleDigit"
                      placeholder="排序"/>
             </div>
+          </div>
+          <div [hidden]="brandSort.valid || brandSort.pristine"
+               class="col-sm-8 pull-right text-danger">
+            请填写0-99的整数
           </div>
         </fieldset>
         <fieldset>

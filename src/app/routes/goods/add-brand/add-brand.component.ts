@@ -8,6 +8,7 @@ import {GetUidService} from "../../../core/services/get-uid.service";
 import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../app.component";
 import {MaskService} from "../../../core/services/mask.service";
+import {PatternService} from "../../../core/forms/pattern.service";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-add-brand',
@@ -36,6 +37,7 @@ export class AddBrandComponent implements OnInit {
 
 
   constructor(public settings: SettingsService, private route: ActivatedRoute,
+              public patterns: PatternService,
               private router: Router, private getUid: GetUidService,private mask: MaskService,
               public parentComp: BrandsComponent, private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
