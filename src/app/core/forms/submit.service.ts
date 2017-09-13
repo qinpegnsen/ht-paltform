@@ -49,7 +49,7 @@ export class SubmitService {
           } else {
             errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
           }
-          AppComponent.rzhAlt("error", res.info, errorMsg);
+          AppComponent.rzhAlt("error", errorMsg);
         }
       },
       error: (res) => {
@@ -84,7 +84,7 @@ export class SubmitService {
           } else {
             errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
           }
-          AppComponent.rzhAlt("error", res.info, errorMsg);
+          AppComponent.rzhAlt("error", errorMsg);
         }
       },
       error: (res) => {
@@ -128,7 +128,7 @@ export class SubmitService {
           } else {
             errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
           }
-          AppComponent.rzhAlt("error", res.info, errorMsg);
+          AppComponent.rzhAlt("error", errorMsg);
         }
       },
       error: (res) => {

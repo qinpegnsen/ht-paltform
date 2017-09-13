@@ -34,9 +34,9 @@ export class KindManageComponent implements OnInit {
         title: "修改",
         type: "update",
         size: "xs",
-        callback: function (result, kindId) {
+        callback: function (result, kindId,curPage, kindPid) {
           result.then((id) => {
-            me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId}});
+            me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId,page:curPage,kindPid:kindPid}});
           })
         }
       },
@@ -44,11 +44,12 @@ export class KindManageComponent implements OnInit {
         title: "删除",
         type: "delete",
         size: "xs",
-        callback: function (result, kindId) {
+        callback: function (result, kindId,curPage, kindPid) {
           result.then((id) => {
             let url = '/goodsKind/updateStateById';
             let data = {id: kindId, state: 'DEL'};
             me.submitService.delRequest(url, data);
+            this.queryDatas(curPage, kindPid);
           })
         }
       }

@@ -47,7 +47,7 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="kindIcon">分类图标</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-center" *ngIf="childKindList.length>0">
           <rzhDefaultSorter by="kindParentId">上级分类</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -68,7 +68,7 @@
         <td>{{kind.kindName}}</td>
         <td><img height="50px" [src]="kind.kindIcon" onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt=""></td>
-        <td>{{kind.parentKindName}}</td>
+        <td  *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
         <td>{{kind.keywords}}</td>
         <td>{{kind.description}}</td>
         <td>
@@ -80,7 +80,7 @@
         </td>
         <td>
             <span>
-              <app-buttons [config]="option" (callback)="option.callback($event,kind.id)"
+              <app-buttons [config]="option" (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
                            *ngFor="let option of buttons"></app-buttons>
             </span>
             <span *ngIf="kind.level != 3">
@@ -88,7 +88,7 @@
                    [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
                    title="添加下级分类"></a>
               </span>
-            <span class="btn btn-default btn-xs" *ngIf="kind.level != 3"
+            <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
                   (click)="queryChildKindList(kind.id, kind.kindName,false)">
               <i class="fa fa-level-down"></i> 下级
             </span>

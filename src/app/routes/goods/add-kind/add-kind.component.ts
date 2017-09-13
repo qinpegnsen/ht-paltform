@@ -192,8 +192,10 @@ export class AddKindComponent implements OnInit {
       me.submit.putRequest(submitUrl, submitData, true);
     }
     let pPage = this.submit.getParams('page');
+    let kindPid = this.submit.getParams('kindPid');
     if(isNullOrUndefined(pPage)) pPage = 1;
-    me.parentComp.queryDatas(pPage, 0);// 刷新父页面数据
+    if(isNullOrUndefined(kindPid)) kindPid = 0;
+    me.parentComp.queryDatas(pPage, kindPid);// 刷新父页面数据
   }
 
   // 取消
