@@ -349,6 +349,7 @@ export class RzhtoolsService {
    * @param file
    */
   uploadImg = function (file: any) {
+    console.log("█ file ►►►",  file);
     let _this = this, ret: string,data:any = new FormData();
     data.append("limitFile", file);
     _this.ajax.post({
@@ -360,9 +361,10 @@ export class RzhtoolsService {
       processData: false,
       success: (response) => {
         if (!isNullOrUndefined(response) && response.success) ret = response.data;
+        if(!response.success) AppComponent.rzhAlt('error',response.info,file.name+'上传失败')
       },
       error: (response) => {
-        AppComponent.rzhAlt('warning','图片上传失败','')
+        AppComponent.rzhAlt('error',file.name+'上传失败','')
         console.log("█ response ►►►", response);
       }
     });
