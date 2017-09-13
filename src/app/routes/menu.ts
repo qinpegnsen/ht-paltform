@@ -376,16 +376,11 @@ const editPw = {
   text: '密码修改',
   link: '/main/edit-pw',
 };
-const textEditing = {
-  text: '文章编辑',
-  icon:'icon icon-note',
-  link: '/main/text-editing',
-};
+
 /**
  * 菜单配置
  */
 export let menu = [
-  textEditing,
   website,
   operation,
   goods,

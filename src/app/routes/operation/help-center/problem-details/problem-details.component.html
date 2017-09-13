@@ -28,8 +28,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr  *ngFor="let a of result;let x=index" style="list-style: none"  class="text-center" >
-          <td>{{a.sort}}</td>
+        <tr  *ngFor="let a of result;let i=index" style="list-style: none"  class="text-center" >
+          <td>{{i+1}}</td>
           <td [innerHtml]="a.question"></td>
           <td>
             <!--是否显示-->

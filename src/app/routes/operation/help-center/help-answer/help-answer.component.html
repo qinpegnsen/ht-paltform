@@ -56,8 +56,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let count of dataTable.data"  class="text-center">
-          <td>{{count.sort}}</td>
+        <tr *ngFor="let count of dataTable.data;let i=index"  class="text-center">
+          <td>{{i+1}}</td>
           <td [innerHtml]="count.question">s</td>
           <td>
             <!--是否显示-->
