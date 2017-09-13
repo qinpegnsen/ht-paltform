@@ -146,8 +146,10 @@
           <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"
                   routerLink="../publish/audit" [queryParams]="{baseCode: goods.goodsBaseCode}"> 审核
           </button>
-          <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
-                       *ngFor="let option of buttons"></app-buttons>
+          <span *ngIf="goods.goodsAudit!='REJECT'">
+            <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
+                         *ngFor="let option of buttons"></app-buttons>
+          </span>
         </td>
       </tr>
       </tbody>
