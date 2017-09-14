@@ -31,7 +31,7 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{article.articleTitleShort}}</td>
+        <td>{{article.articleTitle}}</td>
         <td>{{article.articleClass.acName}}</td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
