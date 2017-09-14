@@ -6,6 +6,7 @@ import {DataDictionaryComponent} from "../data-dictionary/data-dictionary.compon
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {MeasureComponent} from "../measure/measure.component";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 
 @Component({
   selector: 'app-adddata',
@@ -74,7 +75,12 @@ export class AdddataComponent implements OnInit {
         info: obj.info,
         remark: obj.remark
       }
-      this.adddataService.addClass(url, data);
+      let result= this.adddataService.addClass(url, data);
+      if(result){
+        this.dataDictionaryComponent.queryDatas()
+      }else{
+        return;
+      }
     } else if (this.linkType == 'updateSort') {//修改数据字典key
       let url: string = '/datadict/updateDatadictType', data: any;
       if (!isNullOrUndefined(obj.name)) {
@@ -94,7 +100,12 @@ export class AdddataComponent implements OnInit {
       }
       this.adddataService.updateClass(url, data);
     } else {
-      this.adddataService.getaddData(obj)//添加数据字典key
+      let result=this.adddataService.getaddData(obj);//添加数据字典key
+      if(result){
+        this.dataDictionaryComponent.queryDatas()
+      }else{
+        return;
+      }
     }
     if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(); //第一层，更新第一层数据
     else this.dataDictionaryComponent.queryChildSortList(this.dataDictionaryComponent.childMenuCode, this.dataDictionaryComponent.childMenuName, true);//第2层，更新第2层数据
