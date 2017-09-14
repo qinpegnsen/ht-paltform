@@ -21,7 +21,12 @@ export class OperationService {
       async: false,
       success: (res) => {
         result=res.success;
-        AppComponent.rzhAlt("error", res.info);
+        console.log("█ res.info ►►►",  res.info);
+        if(res.info=="添加成功"){
+          AppComponent.rzhAlt("success", res.info);
+        }else{
+          AppComponent.rzhAlt("error", res.info);
+        }
       },
       error: () => {
         result='';
