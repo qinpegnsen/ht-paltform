@@ -109,7 +109,8 @@ export class AdddataComponent implements OnInit {
         sort: res.sort,
         unitName: res.unitName
       }
-      this.submitt.postRequest(url, data);
+      this.submitt.postRequest(url, data, true);
+      this.measureComponent.qeuryAllService();
     }
     else if (this.linkType == 'updateCount') {
       let url = '/goodsUnit/updateGoodsUnit';//计量单位修改
@@ -118,9 +119,8 @@ export class AdddataComponent implements OnInit {
         sort: res.sort,
         unitName: res.unitName
       }
-      this.submitt.putRequest(url, data);
+      this.submitt.putRequest(url, data,true);
+      this.measureComponent.qeuryAllService();
     }
-    this.measureComponent.qeuryAllService();
-    this.settings.closeRightPageAndRouteBack();
   }
 }
