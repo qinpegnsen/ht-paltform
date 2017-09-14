@@ -63,8 +63,8 @@ export class AddKindComponent implements OnInit {
           me.editKind = true;
           this.uuid = this.getUid.getUid();
           let parmas = this.route.snapshot.queryParams;
-          if(!isNullOrUndefined(parmas.pid)) this.kindInfo['kindParentId'] = parmas.pid;
           if(!isNullOrUndefined(parmas.pname)) this.kindInfo['parentKindName'] = parmas.pname;
+          if(!isNullOrUndefined(parmas.pid)) this.kindInfo['kindParentId'] = parmas.pid;
           if(!isNullOrUndefined(parmas.level)) this.kindInfo['level'] = parmas.level;
           break;
 
@@ -118,7 +118,7 @@ export class AddKindComponent implements OnInit {
 
 
   //提交表单
-  private addKindForm() {
+  addKindForm() {
     let me = this;
     let submitUrl, submitData;
     submitData = me.kindInfo;
@@ -185,14 +185,15 @@ export class AddKindComponent implements OnInit {
    * @param submitData
    */
   private submitFormDataAndRefresh(submitUrl, submitData,method){
-    let me = this;
+    console.log("█ submitData ►►►",  submitData);
+    let me = this,pPage,kindPid;
     if(method == 'post'){
       me.submit.postRequest(submitUrl, submitData, true);
     }else if(method == 'put'){
       me.submit.putRequest(submitUrl, submitData, true);
     }
-    let pPage = this.submit.getParams('page');
-    let kindPid = this.submit.getParams('kindPid');
+    pPage = this.submit.getParams('page');
+    kindPid = this.submit.getParams('kindPid');
     if(isNullOrUndefined(pPage)) pPage = 1;
     if(isNullOrUndefined(kindPid)) kindPid = 0;
     me.parentComp.queryDatas(pPage, kindPid);// 刷新父页面数据

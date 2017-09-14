@@ -66,7 +66,6 @@ export class HeaderComponent implements OnInit, OnChanges {
       let firstNav = firstNavs.eq(i).attr('route');
       if(path.indexOf(firstNav) === 0){
         firstNavs.eq(i).addClass('current').parent().siblings().children('.my-nav').removeClass('current');
-        return;
       }
     };
   }

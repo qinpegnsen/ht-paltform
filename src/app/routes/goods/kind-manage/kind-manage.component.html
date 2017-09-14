@@ -84,7 +84,7 @@
                          *ngFor="let option of buttons"></app-buttons>
             <span *ngIf="kind.level != 3">
               <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
-                 [queryParams]="{pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
+                 [queryParams]="{kindPid: kind.kindParentId,pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
                  title="添加下级分类"></a>
             </span>
             <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
