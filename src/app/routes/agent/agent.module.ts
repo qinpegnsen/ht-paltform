@@ -33,7 +33,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  providers:[AgentpersonService],
+  providers:[AgentpersonService,RegionComponent],
   declarations: [AgentpersonComponent, RegionComponent, StockComponent, RightpageComponent, AddAgentComponent]
 })
 export class AgentModule { }

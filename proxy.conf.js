@@ -37,7 +37,7 @@ const PROXY_CONFIG = [
       "/helpQuestions"
     ],
     // target: "http://192.168.10.111:8811",   //拦截 context配置路径，经过此地址
-    target: "http://192.168.10.167:8081",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.109:8085",   //拦截 context配置路径，经过此地址
     // target: "http://192.168.10.112:8080",   //拦截 context配置路径，经过此地址
     secure: false
   },
@@ -54,18 +54,18 @@ const PROXY_CONFIG = [
       "/upload"
     ],
     // target: "http://192.168.10.111:8813",   //拦截 context配置路径，经过此地址
-    target: "http://192.168.10.167:8900",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
     // target: "http://192.168.10.112:8082",   //拦截 context配置路径，经过此地址
     secure: false
   }
   ,
-  // {
-  //   context: [
-  //     "/res"
-  //   ],
-  //   target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
-  //   secure: false
-  // }
+  {
+    context: [
+      "/res"
+    ],
+    target: "http://192.168.10.109:8082",   //拦截 context配置路径，经过此地址
+    secure: false
+  }
 ];
 
 module.exports = PROXY_CONFIG;

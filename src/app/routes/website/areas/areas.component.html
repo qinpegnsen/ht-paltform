@@ -1,9 +1,9 @@
 <div class="content-heading mb-lg">
   地区设置
   <!--添加地区按钮配置-->
-  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>
+  <!--<app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>-->
 </div>
-<div class="panel mb">
+<!--<div class="panel mb">
   <div class="panel-body p ng-scope">
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
@@ -24,7 +24,7 @@
       </button>
     </div>
   </div>
-</div>
+</div>-->
 <div class="panel panel-default">
   <div class="col-md-10 font15 mt mb pl text-primary">
     <i class="icon-layers mr"></i>
@@ -64,10 +64,10 @@
         <td>{{organ.areaName}}</td>
         <td>{{organ.level}}</td>
         <td>
-          <!--修改区域信息按钮-->
+       <!--   &lt;!&ndash;修改区域信息按钮&ndash;&gt;
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2,areaCode:organ.areaCode}"></app-buttons>
-          <!--删除区域信息按钮-->
-          <app-buttons [config]="deletebutton" (click)="delete(organ.areaCode)"></app-buttons>
+          &lt;!&ndash;删除区域信息按钮&ndash;&gt;
+          <app-buttons [config]="deletebutton" (click)="delete(organ.areaCode)"></app-buttons>-->
           <span class="btn btn-default btn-xs"  *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
         </td>
       </tr>

@@ -86,7 +86,6 @@ export class AgentpersonComponent implements OnInit {
       });
 
     this.getAgentList()
-
   }
 
 
@@ -127,9 +126,10 @@ export class AgentpersonComponent implements OnInit {
         }
         console.log(data)
         _this.AgentpersonService.delCode(url, data); //删除数据
-        let datas={id:delCodeId}
+        /*let datas={id:delCodeId}
         let urls= "/agent/pageQuery";
-        _this.AgentpersonService.controlDatas(urls,datas);//实现局部刷新
+        this.controlData = _this.AgentpersonService.controlDatas(urls,datas);//实现局部刷新*/
+        _this.getAgentList()//实现刷新
       }
     );
   }

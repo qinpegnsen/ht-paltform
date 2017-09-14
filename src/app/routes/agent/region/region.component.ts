@@ -78,7 +78,7 @@ export class RegionComponent implements OnInit {
       data.state = "NORMAL"
     }
     this.ajax.get({
-      url: '/agent_area/agentAreaStatus',
+      url: '/agentArea/agentAreaStatus',
       data: {
         'areaCode': data.areaCode,
         'stateEnum': data.state

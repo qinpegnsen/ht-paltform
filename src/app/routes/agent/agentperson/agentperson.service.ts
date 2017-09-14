@@ -27,7 +27,7 @@ export class AgentpersonService {
         }
       },
       error: (data) => {
-        console.log("地区获取失败");
+        console.log("代理商列表获取失败");
       }
     });
     return result;

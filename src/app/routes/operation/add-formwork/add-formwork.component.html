@@ -247,26 +247,25 @@
     <div class="header">
       <span>选择区域</span><span class="icon" (click)="area_model = !area_model">关闭</span>
     </div>
-
     <div class="model-body">
-      <table>
+      <table class="table table-striped">
         <tbody>
         <tr *ngFor="let v of data; let i = index">
           <td>
-            <div >
+            <div>
               <label nz-checkbox [(ngModel)]="allCheckeds[i]['allChecked']"
                      (ngModelChange)="updateAllChecked(i, null, v.provices)">
                 <span>{{v?.label}}</span>
               </label>
             </div>
           </td>
-          <td>
+          <td class="area-item">
             <div class="ncsc-province" *ngFor="let name of v.provices; let j = index">
               <ng-container >
                 <label nz-checkbox [(ngModel)]="v.provices[j]['checked']"
                        (ngModelChange)="updateAllchildChecked(i, j, name.areaCode)">
                   <span
-                    (click)="allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']">{{name.label}}</span>
+                    (click)="allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']">{{name.label}}<i style="padding-left: 5px" class="icon-arrow-down" ></i></span>
                 </label>
                 <nz-checkbox-group [(ngModel)]="checkOptionsOnes[name.areaCode][0]"
                                    class="ncsc-citys-sub"
@@ -282,8 +281,8 @@
       </table>
     </div>
     <div class="model-bottom">
-      <span class="btn btn-default" (click)="area_model = !area_model">放弃操作</span>
-      <button class="ml btn btn-info pull-left" type="button" (click)="getResult(); area_model = !area_model;" >提交信息</button>
+      <span class="btn btn-default ml lr" (click)="area_model = !area_model">放弃操作</span>
+      <button class="ml btn btn-info pull-left ml" type="button" (click)="getResult(); area_model = !area_model;" >提交信息</button>
     </div>
   </div>
 </div>

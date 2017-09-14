@@ -4,6 +4,7 @@ import {SettingsService} from '../../../core/settings/settings.service';
 import {AjaxService} from "../../../core/services/ajax.service";
 import { FileUploader } from 'ng2-file-upload';
 import {isNullOrUndefined} from "util";
+import {PatternService} from "../../../core/forms/pattern.service";
 const swal = require('sweetalert');
 declare var $:any;
 declare var AMap:any;
@@ -29,7 +30,7 @@ export class AddAgentComponent implements OnInit {
   private staff:any = {};
 
 
-  constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute) {
+  constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute,private patterns: PatternService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -150,30 +151,63 @@ export class AddAgentComponent implements OnInit {
   addLimitList(value) {
     let _this = this;
     //添加代理商信息
-    if (_this.linkType = 'addArticle') {
+    if (_this.linkType == 'addArticle') {
+      _this.ajax.post({
+        url: '/agent/addAgent',
+        data: {
+          'agentName': value.agentName,
+          'agentLevel': value.agentLevel,
+          'agentAcct': value.agentAcct,
+          'agentPwd': value.agentPwd,
+          'leader': value.leader,
+          'mobile': value.mobile,
+          'idcard': value.idcard,
+          /*'idcardImage1uuid': value.idcardImage1uuid,
+          'idcardImage2uuid': value.idcardImage2uuid,*/
+          'areaCode': value.areaCode,
+          'address': value.address,
+          'coordinateLng': value.coordinateLng,
+          'coordinateLat': value.coordinateLat,
+          'description': value.description
+        },
+        success: (res) => {
+          if (res.success) {
+            _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true}); //路由跳转
+            swal('添加代理商提交成功！', '', 'success');
+            // _this.AreasComponent.queryList()//实现刷新
+          } else {
+            swal('添加代理商提交失败====！', 'error');
+          }
+        },
+        error: (data) => {
+          swal('添加代理商提交失败！', '', 'error');
+        }
+      })
 
 
-      /**
+
+
+    /*  /!**
        * 构建form时，传入自定义参数
        * @param item
-       */
+       *!/
       _this.uploader.onBuildItemForm = function(fileItem, form){
         form.append('fileuuid', _this.uid);
       };
 
-      /**
+      /!**
        * 上传成功处理
        * @param item 成功的文件列表
        * @param response 返回信息
        * @param status 状态码
        * @param headers 上传成功后服务器的返回的返回头
-       */
+       *!/
       _this.uploader.onSuccessItem = function (item, response, status, headers) {
         let res = JSON.parse(response);
         if (res.success) {
-          /**
+          /!**
            * 上传文件成功，保存数据库
-           */
+           *!/
           _this.ajax.post({
             url: '/agent/addAgent',
             async: false,
@@ -211,20 +245,20 @@ export class AddAgentComponent implements OnInit {
           swal('上传失败', '文件上传失败！', 'error');
         }
       };
-      /**
+      /!**
        * 上传失败处理
        * @param item 失败的文件列表
        * @param response 返回信息
        * @param status 状态码
        * @param headers 上传失败后服务器的返回的返回头
-       */
+       *!/
       _this.uploader.onErrorItem = function (item, response, status, headers) {
         swal('上传失败', '文件上传失败！', 'error');
       };
-      /**
+      /!**
        * 执行上传
-       */
-      _this.uploader.uploadAll();
+       *!/
+      _this.uploader.uploadAll();*/
 
 
      /* _this.ajax.post({
@@ -260,10 +294,11 @@ export class AddAgentComponent implements OnInit {
       })*/
     }
     //修改代理商信息
-    else {
+    else if(_this.linkType == 'updataArticle'){
       _this.ajax.put({
         url: '/agent/updateAgentBasic',
         data: {
+          'agentCode':_this.agentCode,
           'agentName': value.agentName,
           'agentLevel': value.agentLevel,
           'agentAcct': value.agentAcct,
@@ -271,18 +306,18 @@ export class AddAgentComponent implements OnInit {
           'leader': value.leader,
           'mobile': value.mobile,
           'idcard': value.idcard,
-          'idcardImage1uuid': value.idcardImage1uuid,
-          'idcardImage2uuid': value.idcardImage2uuid,
+         /* 'idcardImage1uuid': value.idcardImage1uuid,
+          'idcardImage2uuid': value.idcardImage2uuid,*/
           'areaCode': value.areaCode,
           'address': value.address,
           'coordinateLng': value.coordinateLng,
           'coordinateLat': value.coordinateLat,
-          'description': value.description
+          'description': value.description,
         },
         success: (res) => {
           console.log(res)
           if (res.success) {
-            _this.router.navigate(['/main/website/areas'], {replaceUrl: true});   //路由跳转
+            _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true});   //路由跳转
             swal('修改区域信息成功！', '', 'success');
             //_this.AreasComponent.queryList()//实现刷新
           } else {

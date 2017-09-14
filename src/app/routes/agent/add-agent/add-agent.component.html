@@ -4,6 +4,7 @@
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
+        <input class="form-control" required [(ngModel)]="organ.areaCode" name="areaCode" type="hidden"/>
         <fieldset>
           <div class="form-group">
             <label class="col-sm-2 control-label"> <i>*</i> 代理商名称</label>
@@ -18,10 +19,10 @@
             <label class="col-sm-2 control-label"> <i>*</i> 联系电话</label>
             <div class="col-sm-4">
               <input class="form-control" required name="mobile" [(ngModel)]="staff.mobile"
-                     #mobile="ngModel" type="text"/>
+                     #mobile="ngModel" type="text" [pattern]="patterns.phone"/>
               <div [hidden]="mobile.valid || mobile.pristine"
                    class="alert alert-danger">
-                联系电话是必填项，请填写联系电话
+                联系电话是必填项，请填写正确联系电话
               </div>
             </div>
           </div>
@@ -48,7 +49,7 @@
             <label class="col-sm-2 control-label"> <i>*</i> 代理商登录密码</label>
             <div class="col-sm-4">
               <input class="form-control" required name="agentPwd" [(ngModel)]="staff.agentPwd"
-                     #agentPwd="ngModel" type="text"/>
+                     #agentPwd="ngModel" type="password" minlength="6" maxlength="16" placeholder="请输入6-16位密码"/>
               <div [hidden]="agentPwd.valid || agentPwd.pristine"
                    class="alert alert-danger">
                 代理商登录密码是必填项，请填写代理商登录密码
@@ -70,10 +71,10 @@
             <label class="col-sm-2 control-label"> <i>*</i> 身份证号</label>
             <div class="col-sm-4">
               <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
-                     #idcard="ngModel" type="text" style="position: relative"/>
+                     #idcard="ngModel" type="text" style="position: relative" [pattern]="patterns.idcard"/>
               <div [hidden]="idcard.valid || idcard.pristine"
                    class="alert alert-danger">
-                身份证号是必填项，请填写身份证号
+                身份证号是必填项，请填写正确身份证号
               </div>
             </div>
             <!--<button class="btn btn-info" style="position: absolute;" type="button">上传身份证</button>-->
@@ -86,7 +87,6 @@
                       上传身份证
                     </label>
                     <!--多选-->
-                    {{uploader.queue.length}}
                     <img *ngFor="let item of uploader.queue" width="100px" [src]="item._file | imgUrl" alt="">
                     <!--<input id="file1" type="file" ng2FileSelect [uploader]="uploader"/>-->
                   </div>
@@ -103,7 +103,7 @@
                 </div>
             <label class="col-sm-2 control-label">座机</label>
             <div class="col-sm-4">
-              <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone"/>
+              <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone" [pattern]="patterns.telephone"/>
             </div>
           </div>
         </fieldset>
@@ -249,9 +249,9 @@
           <!--</fieldset>-->
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label">选择区域</label>
+              <label class="col-sm-2 control-label">区域编码</label>
               <div class="col-sm-4">
-                <input class="form-control" type="text" name="areaCode" ngModel [(ngModel)]="staff.areaCode"/>
+                <input class="form-control" type="text" name="areaCode" ngModel [(ngModel)]="staff.areaCode" readonly/>
               </div>
               <label class="col-sm-2 control-label">详细地址</label>
               <div class="col-sm-4">

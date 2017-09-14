@@ -86,7 +86,7 @@ export class FreightTemplateComponent implements OnInit {
    * @param event
    */
   public queryList() {
-    let data={storeCode:'SZH_PLAT_SELF_STORE_CODE',level:1}
+    let data={storeCode:'SZH_PLAT_SELF_STORE',level:1}
     let url= "/expressTpl/queryByStoreCode";
     let result = this.FreightTemplateService.controlDatas(url,data);
     console.log("█ data ►►►", data );

@@ -26,13 +26,26 @@
   align-content: center;
   z-index: 4;
   .model-main{
-    min-height: 600px;
-    min-width: 1000px;
+    min-height: 450px;
+    min-width: 740px;
     background: #ffffff;
     border: 1px solid #CCCCCC;
+    .model-body{
+      margin-left: 20px;
+      td{
+        padding-top: 20px;
+        border-bottom: 1px dotted #CCCCCC;
+      }
+      .area-item{
+        padding-left: 50px;
+      }
+    }
+    .model-bottom{
+      margin-top: 40px;
+    }
   }
   .header{
-    height: 30px;
+    height: 40px;
     border-bottom: 1px solid #CCCCCC;
     display: flex;
     justify-content: space-between;
@@ -67,5 +80,4 @@
   width: 130px;
   height: 30px;
   position: relative;
-
 }
