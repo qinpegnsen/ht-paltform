@@ -151,11 +151,14 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">备注</label>
+            <label class="col-sm-3 control-label"><i>*</i>备注</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" type="text" name="remark" [(ngModel)]="adddata.remark"
-                     placeholder="请填写备注"/>
+              <input class="form-control" type="text" type="text" required name="remark" [(ngModel)]="adddata.remark" #remark="ngModel" placeholder="请填写备注"/>
             </div>
+          </div>
+          <div [hidden]="remark.valid || remark.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请填写名称
           </div>
         </fieldset>
 
@@ -233,12 +236,12 @@
             <label class="col-sm-3 control-label"><i>*</i>单位名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="unitName" [(ngModel)]="adddata.unitName" #unitName="ngModel"
-                     placeholder="请填写菜单名称"/>
+                     placeholder="请填写单位名称"/>
             </div>
           </div>
           <div [hidden]="unitName.valid || unitName.pristine"
-          class="col-sm-9 pull-right text-danger">
-            请填写菜单名称
+          class="col-sm-9 pull-right text-danger alert alert-danger">
+            请填写单位名称
           </div>
         </fieldset>
 
