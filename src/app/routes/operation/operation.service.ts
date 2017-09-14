@@ -21,7 +21,7 @@ export class OperationService {
       async: false,
       success: (res) => {
         result=res.success;
-        AppComponent.rzhAlt("success", res.info);
+        AppComponent.rzhAlt("error", res.info);
       },
       error: () => {
         result='';

@@ -6,6 +6,8 @@ import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../../../app.component";
 import {ContentService} from "../content/content.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
+import {isNullOrUndefined} from "util";
+import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 declare var $: any;
 
 const uploadUrl = "/article/uploadCoverImage";  //图片上传路径(调取上传的接口)
@@ -53,8 +55,7 @@ export class AddArticleComponent implements OnInit {
   public submitObj;//用来保存提交的时候的数据，在addArticleExtra里面使用
   public submitState;//用来保存提交的时候的状态，在addArticleExtra里面使用
   public autionOptions;//审核状态的列表
-
-  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public router: Router, public GetUidService: GetUidService,public ContentService:ContentService,public service:SubmitService) {
+  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public router: Router, public GetUidService: GetUidService,public ContentService:ContentService,public service:SubmitService,private tools: RzhtoolsService) {
     this.settings.showRightPage( "30%" );
   }
 
@@ -88,6 +89,7 @@ export class AddArticleComponent implements OnInit {
      */
 
     setTimeout(() => {
+      let me=this;
       $('#summernote').summernote({
         height: 280,
         dialogsInBody: true,
@@ -95,6 +97,9 @@ export class AddArticleComponent implements OnInit {
           onChange: (contents, $editable) => {
             this.contents = contents;
             // console.log(contents);
+          },
+          onImageUpload: function (files) {
+            for (let file of files) me.sendFile(file);
           }
         }
       });
@@ -111,7 +116,6 @@ export class AddArticleComponent implements OnInit {
         queryState:'BLACK'
       }
       this.queryArticleData= this.service.getData(queryArticleurl,queryArticledata);
-      console.log(this.queryArticleData)
       setTimeout(() => {
         $('#summernote').summernote({
           height: 280,
@@ -138,6 +142,7 @@ export class AddArticleComponent implements OnInit {
 
   }
 
+
   /**
    * 单选按钮的点击事件，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件不行
    * @param code
@@ -149,6 +154,16 @@ export class AddArticleComponent implements OnInit {
       this.flag=false;
     }
     this.uuid=this.GetUidService.getUid();
+  }
+  /**
+   * 编辑器上传图片并显示
+   * @param file
+   */
+  sendFile(file) {
+    let _this = this, img = _this.tools.uploadImg(file);
+    if(!isNullOrUndefined(img)){
+      $("#summernote").summernote('insertImage', img, '');
+    }
   }
 
   /**
