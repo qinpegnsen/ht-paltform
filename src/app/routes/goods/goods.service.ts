@@ -85,6 +85,14 @@ export class GoodsService {
   }
 
   /**
+   * 获取品牌列表
+   */
+  getBrandList(){
+    let url = '/goodsBrand/queryAll';
+    return this.submit.getData(url,'')
+  }
+
+  /**
    * put 请求
    * @param submitUrl
    * @param submitData
