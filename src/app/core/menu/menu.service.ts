@@ -64,7 +64,7 @@ export class MenuService {
     let menuItems:Array<MenuItem> = [],menuItem:MenuItem;
     menuItems = this.foreachPushMenu(items);
     let menuItemsString = JSON.stringify(menuItems);
-    sessionStorage.setItem('userMenu', menuItemsString); //保存menu信息至cookie
+    localStorage.setItem('userMenu', menuItemsString); //保存menu信息至cookie
   }
 
   /**
@@ -72,7 +72,7 @@ export class MenuService {
    * @returns {Array<any>}
    */
   getMenu() {
-    let menus = JSON.parse(sessionStorage.getItem("userMenu"));
+    let menus = JSON.parse(localStorage.getItem("userMenu"));
     return menu; //cookie中取出
   }
 

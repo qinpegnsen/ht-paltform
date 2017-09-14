@@ -5,6 +5,7 @@ import {AjaxService} from "./ajax.service";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
 import {AppComponent} from "../../app.component";
 import {SubmitService} from "../forms/submit.service";
+import {AREA_LEVEL_2_JSON} from "./area_level_2";
 
 @Injectable()
 export class RzhtoolsService {
@@ -274,6 +275,52 @@ export class RzhtoolsService {
     return level;
   }
 
+  /**
+   * 根据区域编码查询区域（2级）
+   * @param code  12位区域编码
+   * @returns {any}
+   */
+  public getLevel2AreaByCode(code){
+    let areaList = AREA_LEVEL_2_JSON;
+    let level = this.getLevelByCode(code);
+    if(level == 1){
+      for(let levelOneItem of areaList){
+        if(levelOneItem.areaCode == code){
+          return levelOneItem;
+        }
+      }
+    }else if(level == 2){
+      let parentCode = code.substring(0,2) + '0000000000';
+      for(let area of areaList){
+        if(area.areaCode === parentCode){
+          for(let levelTwoItem of area.children){
+            if(levelTwoItem.areaCode == code) return levelTwoItem;
+          }
+        }
+      }
+    }else{
+      return null
+    }
+
+  }
+
+  /**
+   * 12位的区域编码根据code查询级别
+   * @param areaCode
+   * @returns {number}
+   */
+  private getLevelByCode(areaCode){
+    let level = 0;
+    if (isNullOrUndefined(areaCode)) {
+      return level;
+    }
+    areaCode = areaCode.toString();
+    if (areaCode.length != 12) return level;
+    if (areaCode.substr(2, 4) == '0000') level = 1;
+    else if (areaCode.substr(4, 2) == '00') level = 2;
+    else level = 3;
+    return level;
+  }
 
   /**
    * 根据类型标示获取枚举信息

@@ -458,6 +458,22 @@
   font-weight:normal;
 }
 
+.tpl-box{
+  border: 1px solid #FBEED5;
+  background-color: #FCF8E3;
+}
+.one-row{
+  height: 30px;
+  line-height:20px;
+  overflow: hidden;
+}
+.tpl-box .tpl-list li{
+  border-bottom:1px dashed #ccc;
+}
+.tpl-box .tpl-list li:last-child{
+  border: none;
+}
+
 // 重置input框的placeholder文本颜色
 input::-webkit-input-placeholder{color: #b3b3b3;}
 

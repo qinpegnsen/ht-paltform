@@ -423,7 +423,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
     <dl class="clearfix" *ngIf="publishData.isFreight == 'Y'">
       <dt class="col-xs-2"><i>*</i>设置运费：</dt>
       <dd class="col-xs-10 col-md-8">
-        <div class="w90">
+        <div class="w100">
           <div class="mb clearfix" [class.hide]="myReadOnly && publishData.goodsExpressInfo.freightType=='TPL'">
               <span class="radio c-radio c-radio-nofont radio-box">
                 <label>
@@ -448,11 +448,28 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
             <span class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
               <select class="rules-list text form-control pull-left" name="freightType" [disabled]="myReadOnly"
                       [required]="publishData.goodsExpressInfo.freightType=='TPL'"
-                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
-                <option value="">-请选择-</option>
+                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId" #tplId="ngModel" (change)="getTplValById(publishData.goodsExpressInfo.expressTplId)">
+                <option value="" disabled>-请选择-</option>
+                <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
               </select>
-              <span class="btn btn-green btn-sm"><em class="fa fa-truck"></em> 添加物流规则</span>
+              <a class="btn btn-green btn-sm ml" target="_blank" [href]="targetUrl"><em
+                class="fa fa-truck"></em> 添加物流规则</a>
             </span>
+            <div class="tpl-box w100 p mt"
+                 *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId != ''">
+              <p class="m0">
+                <strong>指定物流配送区域及运费</strong>
+                <button class="btn btn-xs btn-default fa fa-eye pull-right" routerLink="/main/operation/freight-template">查看详情</button>
+              </p>
+              <ul class="list-unstyled tpl-list mb0">
+                <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
+                  <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
+                  <p class="col-xs-5 m0 one-row omg p-sm text-right" >
+                    {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
+                    .addPrice}}元</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </dd>

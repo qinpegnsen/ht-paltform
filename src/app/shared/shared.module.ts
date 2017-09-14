@@ -45,6 +45,7 @@ import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
 import { GetKindComponent } from './directives/get-kind/get-kind.component';
 import { FourAreasComponent } from './directives/foue-areas/four-areas/four-areas.component';
 import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
+import { Level2AreaNamePipe } from './pipe/level-2-area-name.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -96,7 +97,8 @@ import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
     AreaNamePipe,
     ImgUrlPipe,
     HoverDirective,
-    GetKindComponent
+    GetKindComponent,
+    Level2AreaNamePipe
   ],
   exports: [
     CommonModule,
@@ -138,7 +140,8 @@ import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
     AngularEchartsModule,
     HoverDirective,
     GetKindComponent,
-    FoueAreasModule
+    FoueAreasModule,
+    Level2AreaNamePipe
   ]
 })
 

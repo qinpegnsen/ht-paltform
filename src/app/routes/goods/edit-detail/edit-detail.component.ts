@@ -36,6 +36,11 @@ export class EditDetailComponent implements OnInit {
   private goodsBody: any;          //商品详情
   private audit: any;              // 商品审核
   private goodsAudits: any;        // 商品审核状态列表
+  public storeCode:string;          //店铺编码
+  public logistics:any;             // 物流规则列表
+  public tplVals:any;               // 运费模板内容
+  private unit:string = '件';       // 运费价格
+  targetUrl = location.protocol+'//'+location.host+'/main/operation/freight-template'; //新增模流模板地址
   private publishData: any = {
     goodsExpressInfo: {},
     goodsImagesList: [],
@@ -97,6 +102,7 @@ export class EditDetailComponent implements OnInit {
         me.publishData.goodsExpressInfo.weight = 1.00;      //重量
         me.publishData.goodsExpressInfo.volume = 1.00;      //体积
         me.publishData.goodsExpressInfo['freightType'] = 'FIXED';   //运费类型默认固定运费
+        me.publishData.goodsExpressInfo.expressTplId = '';  //运费模板
       }
       if (me.path == 'edit') me.publishComponent.step = 2;
       if (me.path == 'audit') {
@@ -245,6 +251,35 @@ export class EditDetailComponent implements OnInit {
         $('#summernote').summernote('code', me.goodsBody);   //PC端详情
       }, 1)
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
+    }
+    if(me.path != 'audit'){
+      me.getExpressTpl()
+    }
+  }
+
+  /**
+   * 获取运费模板
+   */
+  getExpressTpl(){
+    let me = this;
+    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取物流模板
+    if(!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
+  }
+
+  /**
+   * 根据运费模板ID获取模板内容
+   * @param tplId
+   */
+  getTplValById(tplId){
+    let me = this;
+    let result = me.goods.getTplVal(tplId);
+    if(!isNullOrUndefined(result)) me.tplVals = result;
+    if(me.tplVals.valuationType == 'VOLUME'){
+      me.unit = 'm³'
+    }else if(me.tplVals.valuationType == 'WEIGHT'){
+      me.unit = 'kg'
+    }else{
+      me.unit = '件'
     }
   }
 

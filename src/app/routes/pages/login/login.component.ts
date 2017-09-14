@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import '../../../../assets/login/js/supersized.3.2.7.min.js'
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
-import {SettingsService} from '../../../core/settings/settings.service';
-import {AjaxService} from '../../../core/services/ajax.service';
+import {Component, OnInit} from "@angular/core";
+import "../../../../assets/login/js/supersized.3.2.7.min.js";
+import {Location} from "@angular/common";
+import {Router} from "@angular/router";
+import {SettingsService} from "../../../core/settings/settings.service";
+import {AjaxService} from "../../../core/services/ajax.service";
 import {MaskService} from "app/core/services/mask.service";
-import {menu} from "../../menu";
 import {MenuService} from "../../../core/menu/menu.service";
 import {CookieService} from "angular2-cookie/core";
 import {AppComponent} from "../../../app.component";
@@ -77,19 +76,16 @@ export class LoginComponent implements OnInit {
       success: (result) => {
         this.maskservice.hideMask();
         end = new Date().getTime();
-        let info = result.data;
         if (result.success) {
           let user =  result.data;
-          // console.log("█ result.data.menuVOList ►►►",  result.data.menuVOList);
-          me.myMenu.addMenu(result.data.menuVOList);
-          sessionStorage.setItem('loginInfo', JSON.stringify(user)); //用户信息存入cookie
+          localStorage.setItem('loginInfo', JSON.stringify(user)); //用户信息存入localStorage
+          me.myMenu.addMenu(result.data.menuVOList);// 生成菜单
           me.setting.user.name = user.staffName,me.setting.user.job = user.mgrName; //修改user变量
           me.router.navigate(['/main/home'], {replaceUrl: true}); //路由跳转
-          AppComponent.rzhAlt("success",info);
         }
         else {
           console.log("█ result ►►►",  result);
-          AppComponent.rzhAlt("error",info);
+          AppComponent.rzhAlt("error",result.info);
         }
       },
       error: (result) => {
