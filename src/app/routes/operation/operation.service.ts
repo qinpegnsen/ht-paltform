@@ -21,7 +21,7 @@ export class OperationService {
       async: false,
       success: (res) => {
         result=res.success;
-        if(res.info=="添加成功"){
+        if(res.success){
           AppComponent.rzhAlt("success", res.info);
         }else{
           AppComponent.rzhAlt("error", res.info);
