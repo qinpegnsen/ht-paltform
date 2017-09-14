@@ -4,16 +4,22 @@
 <div class="panel mb">
   <div class="panel-body p ng-scope">
     <div class="col-md-4">
+    <div class="form-group clearfix">
+      <span class="pull-left query-name lh">选择分类：</span>
+      <div class="col-md-8 col-xs-6 pl0">
+        <app-get-kind (myData)="getKind($event)"></app-get-kind>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-4">
       <div class="form-group">
-        <div class="col-md-8 col-xs-6 pl0">
-          <input type="text" [(ngModel)]="brandName"
-                 class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                 (change)="search($event)" placeholder="品牌名称">
+        <div class="form-group clearfix">
+          <span class="pull-left query-name lh">选择品牌：</span>
+          <div class="col-md-8 col-xs-6 pl0">
+            <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled"  (data)="refreshValue($event)" placeholder="请选择品牌">
+            </ng-select>
+          </div>
         </div>
-        <button type="button" title="搜索"
-                class="btn btn-primary bar-h3-btn mr ng-scope">
-          <em class="icon-magnifier fa-fw"></em>
-        </button>
       </div>
     </div>
     <div class="col-md-4">
@@ -29,14 +35,7 @@
         </button>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-group clearfix">
-        <span class="pull-left query-name">分类：</span>
-        <div class="col-md-8 col-xs-6 pl0">
-          <app-get-kind (myData)="getKind($event)"></app-get-kind>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 <div class="panel panel-danger">
@@ -86,7 +85,7 @@
             </p>
           </div>
         </td>
-        <td><span class="font12">￥</span>:&nbsp;{{goods.goodsPrice.batchPrice}}</td>
+        <td><span class="font12">￥</span>&nbsp;{{goods.goodsPrice.batchPrice}}.00</td>
         <td>{{goods.createTime}}</td>
         <td>
           <label class="switch switch-md" title="是否允许批发">

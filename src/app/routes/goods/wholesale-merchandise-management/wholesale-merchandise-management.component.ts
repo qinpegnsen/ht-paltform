@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {SubmitService} from "../../../core/forms/submit.service";
@@ -6,6 +6,8 @@ import {Page} from "../../../core/page/page";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
 import {isNullOrUndefined} from "util";
+import {GoodsService} from "../goods.service";
+import {SelectComponent} from "ng2-select";
 @Component({
   selector: 'app-wholesale-merchandise-management',
   templateUrl: './wholesale-merchandise-management.component.html',
@@ -17,15 +19,28 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
   private goodsName: any = ''; //商品名
   private brandName: any = ''; //品牌名
   private kindId: any = ''; //品牌名
+  public brandList:any;   //品牌列表
   public _goods = [];
-  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router) { }
+  private selectedBlandStr:any;
+  public value: any = {};
+  constructor(private ajax: AjaxService,private submit: SubmitService,
+              private goods: GoodsService,private router:Router) { }
 
   ngOnInit() {
+    this.qeuryAllService();
+    this.getBrandList()
+  }
+
+  /**
+   * 品牌名搜索
+   */
+  refreshValue(value: any): void {
+    this.brandName = value.text;
     this.qeuryAllService();
   }
 
   /**
-   * 品牌名称，品牌名搜索
+   * 品牌名称
    */
   search(){
     this.qeuryAllService();
@@ -38,6 +53,24 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
   getKind(data) {
     this.kindId = data.kindId;
     this.qeuryAllService();
+  }
+
+  /**
+   * 选择品牌名
+   * @param data  选择分类组件输出数据
+   */
+  getBrandList() {
+    let list = this.goods.getBrandList(),newList = [];
+    if(!isNullOrUndefined(list)) {
+      for(let item of list){
+        let obj = {
+          id: item.id,
+          text: item.brandName,
+        }
+        newList.push(obj);
+      }
+    }
+    this.brandList = newList;
   }
   /**
    * 批发商品管理--查询分页
