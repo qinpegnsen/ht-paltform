@@ -32,7 +32,7 @@ const routes: Routes = [
   ]
   },
   {path: 'manage', component: ManageComponent},
-  {path: 'wholesale-merchandise-management', component: WholesaleMerchandiseManagementComponent},
+  {path: 'wholesale', component: WholesaleMerchandiseManagementComponent},
   {
     path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},
