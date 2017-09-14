@@ -300,18 +300,22 @@ input[type=number].num::-webkit-outer-spin-button {
   margin: 0;
 }
 .goods-xs-img{
+  display: inline-block;
   width: $xsImg;
   height: $xsImg;
 }
 .goods-sm-img{
+  display: inline-block;
   width: $smallImg;
   height: $smallImg;
 }
 .goods-md-img{
+  display: inline-block;
   width: $middleImg;
   height: $middleImg;
 }
 .goods-lg-img{
+  display: inline-block;
   width: $largeImg;
   height: $largeImg;
 }
