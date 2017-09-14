@@ -14,33 +14,36 @@ const swal = require('sweetalert');
 })
 export class ContentComponent implements OnInit,OnChanges  {
 
-  @Input()  //导航栏传过来的文章的状态，从而获取不同的文章列表
+  @Input()                                //导航栏传过来的文章的状态，从而获取不同的文章列表
   public state;
-
-  @Input()  //导航栏传过来的查询字符串，从而获取到查询的文章
+  @Input()                                //导航栏传过来的查询字符串，从而获取到查询的文章
   public searchKey;
-
-  @Output()  //发射获取到得总条数
+  @Output()                                //发射获取到得总条数
   public emitTotalRow=new EventEmitter();
+  public articleState;                     //用来储存文章的状态
+  public articleManListdata;               //存储文章列表的数据
+  public TotalRow;                         //存储文章列表的数据
+  public flag:boolean=true;               //定义boolean值用来控制内容组件是否显示
+  private updatebutton:Object;             //更新文章按钮
+  private deletebutton:Object;             //删除文章按钮
+  private detailsbutton:Object;            //查看详情按钮
+  private publishbutton:Object;            //草稿文章发布按钮
+  private auditbutton:Object;              //待审核文章审核按钮
 
-  public articleState;//用来储存文章的状态
-
-  public articleManListdata;//存储文章列表的数据
-
-  public TotalRow;//存储文章列表的数据
-
-  public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-
-  private updatebutton:Object;//更新文章按钮
-  private deletebutton:Object;//删除文章按钮
-  private detailsbutton:Object;//查看详情按钮
-  private publishbutton:Object;//草稿文章发布按钮
-  private auditbutton:Object;//待审核文章审核按钮
-
-  constructor(private router:Router,public ContentService:ContentService,public NavService:NavService,public service:SubmitService) {
+  constructor(
+    private router:Router,
+    public ContentService:ContentService,
+    public NavService:NavService,
+    public service:SubmitService
+  ) {
     this.articleState='DRAFT'
   }
 
+  /**
+   * 1.路由的监听
+   * 2.按钮的赋值
+   * 3.调用文章列表的方法
+   */
   ngOnInit() {
     /**
      * 路由事件用来监听地址栏的变化
@@ -61,6 +64,7 @@ export class ContentComponent implements OnInit,OnChanges  {
           }
         }
       });
+
     this.updatebutton={
       title:"编辑",
       type: "update"
@@ -102,11 +106,12 @@ export class ContentComponent implements OnInit,OnChanges  {
     this.TotalRow=this.NavService.queryTotalRow(url,data) //刷新导航页面
     this.emitTotalRow.emit(this.TotalRow)
   }
+
   /**
    * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
-   * addArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
-   * booelean  是否调取置顶的列表
+   * @paddArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
+   * @pbooelean  是否调取置顶的列表
    */
   public queryArticManleList(booelean,event?:PageEvent,addArticlestate?) {
     let activePage = 1;

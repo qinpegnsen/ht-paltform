@@ -31,34 +31,38 @@ export class AddArticleComponent implements OnInit {
   });
 
   private fileName:string = '选择图片';
-
   private myImg: any;
-
   private uuid: any;
-
   public linkType: string;
-
   public contents: string;
-
   public reason: string;
+  public flag: boolean=false;                      //开关，用来判断是否显示图片路径
+  public articleClassList;                          // 文章分类列表的数据
+  public articleId:number                          // 路由传递过来的文章的id
+  public queryArticleData:any                      //用来保存根据文章的id查询出来的文章的信息
+  public articleCoverType;                          //初始化的时候设置默认选中的值
+  public articleCoverTypes;                         //初始化的时候设置默认选中的值
+  public submitObj;                                 //用来保存提交的时候的数据，在addArticleExtra里面使用
+  public submitState;                               //用来保存提交的时候的状态，在addArticleExtra里面使用
+  public autionOptions;                             //审核状态的列表
 
-  public flag: boolean=false;
 
-  public articleClassList; // 文章分类列表的数据
-
-  public articleId:number // 路由传递过来的文章的id
-
-  public queryArticleData:any //用来保存根据文章的id查询出来的文章的信息
-
-  public articleCoverType;//初始化的时候设置默认选中的值
-  public articleCoverTypes;//初始化的时候设置默认选中的值
-  public submitObj;//用来保存提交的时候的数据，在addArticleExtra里面使用
-  public submitState;//用来保存提交的时候的状态，在addArticleExtra里面使用
-  public autionOptions;//审核状态的列表
-  constructor(public settings: SettingsService, private routeInfo: ActivatedRoute, public router: Router, public GetUidService: GetUidService,public ContentService:ContentService,public service:SubmitService,private tools: RzhtoolsService) {
+  constructor(
+    public settings: SettingsService,
+    private routeInfo: ActivatedRoute,
+    public router: Router,
+    public GetUidService: GetUidService,
+    public ContentService:ContentService,
+    public service:SubmitService,
+    private tools: RzhtoolsService
+  ) {
     this.settings.showRightPage( "30%" );
   }
 
+  /**
+   * 1.获取地址栏的参数，进行判断
+   * 2.对按钮进行赋值
+   */
   ngOnInit() {
 
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
@@ -155,6 +159,8 @@ export class AddArticleComponent implements OnInit {
     }
     this.uuid=this.GetUidService.getUid();
   }
+
+
   /**
    * 编辑器上传图片并显示
    * @param file

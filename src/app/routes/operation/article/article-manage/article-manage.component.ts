@@ -6,15 +6,11 @@ import {Component,OnInit} from '@angular/core';
 })
 export class ArticleManageComponent implements OnInit{
 
-  private articleManAddbutton:Object;//新增文章按钮
-
-  private state//文章的状态
-
-  private totalRow//文章各种状态的总条数
-
-  private searchKey:string='';//默认查询的文章的名称,并且输入到内容组件，输入属性变化，子组件的钩子变化
-
-  public flag:boolean;//定义boolean值用来控制内容组件是否显示
+  private articleManAddbutton:Object;         //新增文章按钮
+  private state                               //文章的状态
+  private totalRow                            //文章各种状态的总条数
+  private searchKey:string='';                //默认查询的文章的名称,并且输入到内容组件，输入属性变化，子组件的钩子变化
+  public flag:boolean;                        //定义boolean值用来控制内容组件是否显示
 
   constructor() {
 
@@ -34,10 +30,19 @@ export class ArticleManageComponent implements OnInit{
       };
   }
 
+
+  /**
+   * 获取当前点击的状态
+   * @param state
+   */
   getState(state){
     this.state=state;
   }
 
+  /**
+   * 获取总数，进行传递
+   * @param obj
+   */
   getEmitTotalRow(obj){
     this.totalRow=obj;
   }

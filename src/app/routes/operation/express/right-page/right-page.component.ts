@@ -11,21 +11,25 @@ import {ExpressComponent} from "../express.component";
 })
 export class RightPageComponent implements OnInit {
 
-  public type:string; //储存地址栏传递过来的类型，从而显示不同的页面
+  public type:string;           //储存地址栏传递过来的类型，从而显示不同的页面
+  public id:number;             //储存地址栏传递过来的id，从而获取当前id的内容，并修改
+  public isUseList:any;         //是否启用的数组
+  public editData:any;          //根据id查询出来的数据
+  public bingID:string="Y";     //是否启用的数组
 
-  public id:number; //储存地址栏传递过来的id，从而获取当前id的内容，并修改
-
-  public isUseList:any; //是否启用的数组
-
-  public editData:any; //根据id查询出来的数据
-
-  public bingID:string="Y"; //是否启用的数组
-
-
-  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public service:SubmitService,public parent:ExpressComponent) {
+  constructor(
+    public settings: SettingsService,
+    private routeInfo: ActivatedRoute,
+    public service:SubmitService,
+    public parent:ExpressComponent
+  ) {
     this.settings.showRightPage("30%");
   }
 
+  /**
+   * 1.获取参数的类型
+   * 2.对按钮进行赋值
+   */
   ngOnInit() {
     this.type = this.routeInfo.snapshot.queryParams['type'];
 

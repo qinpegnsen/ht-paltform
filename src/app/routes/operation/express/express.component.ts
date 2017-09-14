@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {SettingsService} from "../../../core/settings/settings.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -12,14 +11,18 @@ const swal = require('sweetalert');
 })
 export class ExpressComponent implements OnInit {
 
-  private expressListdata;//用来存储快递公司的信息
-  private searchKey:string='';//默认查询的分类的名称
+  private expressListdata;            //用来存储快递公司的信息
+  private searchKey:string='';        //默认查询的分类的名称
 
-  private expressAddbutton:Object;//新增快递公司按钮
-  private updatebutton:Object;//修改按钮
-  private deletebutton:Object;//删除按钮
+  private expressAddbutton:Object;     //新增快递公司按钮
+  private updatebutton:Object;         //修改按钮
+  private deletebutton:Object;         //删除按钮
   constructor(public service:SubmitService) {}
 
+  /**
+   * 1.获取快递列表的数据
+   * 2.对按钮进行配置
+   */
   ngOnInit() {
     this.updatebutton={
       title:"编辑",
@@ -34,9 +37,6 @@ export class ExpressComponent implements OnInit {
       text:"新增快递公司",
       type: "add"
     };
-    /**
-     * 初始化的时候获取快递列表的数据
-     */
    this.queryExpressList()
 
   }
