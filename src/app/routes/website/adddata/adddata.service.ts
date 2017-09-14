@@ -14,15 +14,15 @@ export class AdddataService {
       data: requestData,
       async: false,
       success: (res) => {
-        // console.log(res)
+        result=res.success;
         if (res.success) {
           AppComponent.rzhAlt("success",res.info);
-          result = res.data;
         }else{
           AppComponent.rzhAlt("error",res.info);
         }
       },
       error: (res) => {
+        result='';
         AppComponent.rzhAlt("error",res.info);
       }
     });

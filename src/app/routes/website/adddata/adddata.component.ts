@@ -76,13 +76,11 @@ export class AdddataComponent implements OnInit {
         remark: obj.remark
       }
       let result= this.adddataService.addClass(url, data);
-      console.log("█ result ►►►",  result);
       if(result){
         this.dataDictionaryComponent.queryDatas()
       }else{
         return;
       }
-
     } else if (this.linkType == 'updateSort') {//修改数据字典key
       let url: string = '/datadict/updateDatadictType', data: any;
       if (!isNullOrUndefined(obj.name)) {
@@ -102,7 +100,12 @@ export class AdddataComponent implements OnInit {
       }
       this.adddataService.updateClass(url, data);
     } else {
-      this.adddataService.getaddData(obj)//添加数据字典key
+      let result=this.adddataService.getaddData(obj);//添加数据字典key
+      if(result){
+        this.dataDictionaryComponent.queryDatas()
+      }else{
+        return;
+      }
     }
     if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(); //第一层，更新第一层数据
     else this.dataDictionaryComponent.queryChildSortList(this.dataDictionaryComponent.childMenuCode, this.dataDictionaryComponent.childMenuName, true);//第2层，更新第2层数据
