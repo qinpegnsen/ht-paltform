@@ -59,30 +59,29 @@ export class AdddataService {
     });
     return result
   }
-  //数据字典添加服务
+  //val添加服务
   public addClass(url,data) {
+    let me=this,result;
     this.ajax.post({
       url: url,
       data: data,
       async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            AppComponent.rzhAlt("success",data.info);
-          }else{
-            AppComponent.rzhAlt("error",data.info);
-          }
+      success: (res) => {
+        result=res.success;
+        if(res.success){
+          AppComponent.rzhAlt("success", res.info);
         }else{
-          AppComponent.rzhAlt("error","用户已存在");
+          AppComponent.rzhAlt("error", res.info);
         }
       },
-      error: (data) => {
-        console.log('data---',data)
-        AppComponent.rzhAlt("error",data.info);
+      error: (res) => {
+        result='';
+        AppComponent.rzhAlt("error", res.info);
       }
     });
+    return result;
   }
-  //数据字典修改服务
+  //val修改服务
   public updateClass(url,data) {
     var result;
     this.ajax.put({

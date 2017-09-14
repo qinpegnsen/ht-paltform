@@ -6,6 +6,7 @@ import {DataDictionaryComponent} from "../data-dictionary/data-dictionary.compon
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {MeasureComponent} from "../measure/measure.component";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 
 @Component({
   selector: 'app-adddata',
@@ -74,7 +75,14 @@ export class AdddataComponent implements OnInit {
         info: obj.info,
         remark: obj.remark
       }
-      this.adddataService.addClass(url, data);
+      let result= this.adddataService.addClass(url, data);
+      console.log("█ result ►►►",  result);
+      if(result){
+        this.dataDictionaryComponent.queryDatas()
+      }else{
+        return;
+      }
+
     } else if (this.linkType == 'updateSort') {//修改数据字典key
       let url: string = '/datadict/updateDatadictType', data: any;
       if (!isNullOrUndefined(obj.name)) {
