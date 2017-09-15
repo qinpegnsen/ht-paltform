@@ -46,6 +46,7 @@ import { GetKindComponent } from './directives/get-kind/get-kind.component';
 import { FourAreasComponent } from './directives/foue-areas/four-areas/four-areas.component';
 import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
 import { Level2AreaNamePipe } from './pipe/level-2-area-name.pipe';
+import { DecimalTwoPipe } from './pipe/decimal-two.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -98,7 +99,8 @@ import { Level2AreaNamePipe } from './pipe/level-2-area-name.pipe';
     ImgUrlPipe,
     HoverDirective,
     GetKindComponent,
-    Level2AreaNamePipe
+    Level2AreaNamePipe,
+    DecimalTwoPipe
   ],
   exports: [
     CommonModule,
@@ -141,7 +143,8 @@ import { Level2AreaNamePipe } from './pipe/level-2-area-name.pipe';
     HoverDirective,
     GetKindComponent,
     FoueAreasModule,
-    Level2AreaNamePipe
+    Level2AreaNamePipe,
+    DecimalTwoPipe
   ]
 })
 
