@@ -125,7 +125,6 @@ export class KindManageComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    ;
     let requestUrl = '/goodsKind/queryGoodsKindPageByParentId';
     let requestData = {
       curPage: activePage,

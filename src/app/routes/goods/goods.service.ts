@@ -93,6 +93,20 @@ export class GoodsService {
   }
 
   /**
+   * 根据分类查询品牌列表
+   * @param kindId
+   */
+  getBrandListByKind(kindId){
+    let requestUrl = '/goodsKind/queryGoodsKindPageByParentId';
+    let requestData = {
+      curPage: 1,
+      pageSize: 100,
+      kindParentId: kindId
+    };
+    return this.submit.getData(requestUrl, requestData).voList;
+  }
+
+  /**
    * put 请求
    * @param submitUrl
    * @param submitData
