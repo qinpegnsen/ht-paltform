@@ -20,8 +20,8 @@
             <div class="table-thead-header">
               <span>{{organ.tplName}}</span>
               <span>
-                <!--修改运费模板值按钮-->
-              <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle'}"></app-buttons>
+                <!--修改运费模板按钮-->
+            <!--  <app-buttons [config]="updatebutton" routerLink="add-formoek"></app-buttons>-->
                 <!--删除运费模板值按钮-->
               <app-buttons [config]="deletebutton"  (click)="delete(organ.id)"></app-buttons>
             </span>

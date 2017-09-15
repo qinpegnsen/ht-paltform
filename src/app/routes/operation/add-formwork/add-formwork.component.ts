@@ -5,6 +5,7 @@ import {AREA_LEVEL_3_JSON} from "../../../core/services/area_level_3";
 import {AREA_LEVEL_1_JSON} from "../../../core/services/area_level_1";
 import {CHINA_AREA} from "../../../core/services/china_area";
 import {isArray} from "rxjs/util/isArray";
+import {AjaxService} from "../../../core/services/ajax.service";
 const swal = require('sweetalert');
 
 
@@ -21,14 +22,16 @@ export class AddFormworkComponent implements OnInit {
   private flag = true;//声明flag用于计算方式的显示隐藏
   private moduleList = [];
   public area_model: boolean = false;
+  public reslut: Array<any> = [];
+  private cru: number = 0;
   china_area = CHINA_AREA;
   area_level1 = AREA_LEVEL_1_JSON;
   area_level2 = AREA_LEVEL_3_JSON;
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  public reslut: string = '';
-  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService) { }
+  // public reslut: string = '';
+  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService) { }
 
   ngOnInit() {
     // 初始化地区数据
@@ -72,7 +75,7 @@ export class AddFormworkComponent implements OnInit {
     this.allCheckeds[index]['allChecked'] =
       this.data[index]['provices'].every(item => item.checked === true);
 
-    // 全选全不选
+    // 添加运费模板时选择区域的  全选全不选
     if (this.data[index]['provices'][j]['checked']) {
       this.checkOptionsOnes[code][0].forEach(value => value.checked = true);
     } else {
@@ -110,6 +113,12 @@ export class AddFormworkComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * 已选择的区域
+   * @param provices
+   * @param index
+   */
   getProvices(provices: Array<string>, index: string) {
     const len = isArray(this.area_level1) ? this.area_level1.length : 0;
     for (let i = 0; i < len; i++) {
@@ -139,7 +148,7 @@ export class AddFormworkComponent implements OnInit {
     }
   }
   /**
-   *获取选择的结果
+   *获取选择区域后的结果
    */
   getResult(): string {
     const len = isArray(this.data) ? this.data.length : 0;
@@ -161,12 +170,58 @@ export class AddFormworkComponent implements OnInit {
     }
     this.moduleList[0].reslut = tempResult.join('_');
     console.log(tempResult.join('_'));
-    this.reslut = tempResult.join('_');
+    // this.moduleList[this.cru]['reslut'] = tempResult.join('_');
+    this.reslut[this.cru] = tempResult.join('_');
+    this.close();
     return tempResult.join('_');
   }
 
-  clear() {
 
+  /**
+   * 判断选择区域时选择了几个
+   * @param areaCode
+   * @returns {string}
+   */
+  getCount(areaCode: string) {
+    let count = 0;
+    this.checkOptionsOnes[areaCode][0].forEach(item => {
+      if (item.checked === true) {
+        count ++ ;
+      }
+    });
+    return count === 0 ? '' : '(' + count + ')';
+  }
+
+  /**
+   * 关闭时区域的子集框消失
+   */
+  clear() {
+    this.allCheckeds.forEach(item => {
+      item.content.forEach(item => {
+        item.childChecked = false;
+      });
+    });
+  }
+
+  close() {
+    // allCheckeds[i]['content'][j]['childChecked']
+    this.allCheckeds.forEach(item => {
+      item['content'].forEach(value => {
+        value['childChecked'] = false;
+      })
+    })
+  }
+
+  edit(index: number) {
+    this.data.forEach((item, indexs) => {
+      this.allCheckeds.forEach((item) => {
+        item.allChecked = false;
+      })
+      this.updateAllChecked(indexs, null, item.provices);
+    });
+
+    this.cru = index;
+    console.log(this.cru);
   }
 
   show(){
@@ -213,7 +268,34 @@ export class AddFormworkComponent implements OnInit {
         console.log(data)
         _this.AddFormworkService.delCode(url, data); //删除数据
         _this.moduleList.splice(i,1)
+        _this.reslut[i] = '';
       }
     );
+  }
+
+  /**
+   *添加运费模板
+   * @param value
+   */
+  addLimitList(value){
+    let _this = this;
+    //添加区域信息
+    if(_this.linkType == 'addArticle'){
+      _this.ajax.post({
+        url: '/expressTpl/addStoreExpressTpl',
+        data: {},
+        success: (res) => {
+          if (res.success) {
+            _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
+            swal('添加运费模板提交成功！', '','success');
+          } else {
+            swal('添加成功但保存信息有误====！', 'error');
+          }
+        },
+        error: (data) => {
+          swal('添加运费模板提交失败！', '','error');
+        }
+      })
+    }
   }
 }
