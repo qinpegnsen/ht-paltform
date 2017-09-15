@@ -50,6 +50,7 @@ export class FourAreasComponent implements OnInit {
       me.cityConfirm();
     }else{
       me.areas = me.tools.getAreaList(myAreaCode, level);
+      if(isNullOrUndefined(me.areas)) me.cityConfirm();// 如果查出来第四级没有数据，则隐藏选择框
     };
   }
 
