@@ -104,7 +104,9 @@ export class GoodsService {
       pageSize: 100,
       kindId: kindId
     };
-    return this.submit.getData(requestUrl, requestData).voList;
+    let result = this.submit.getData(requestUrl, requestData);
+    if(!isNullOrUndefined(result))  return result.voList;
+    else AppComponent.rzhAlt('warning','查询品牌列表失败')
   }
 
   /**
