@@ -21,7 +21,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
   private kindId: any = ''; //品牌名
   public brandList:any;   //品牌列表
   public _goods = [];
-  private selectedBlandStr:any;
   public value: any = {};
   constructor(private ajax: AjaxService,private submit: SubmitService,
               private goods: GoodsService,private router:Router) { }
@@ -30,7 +29,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
     this.qeuryAllService();
     this.getBrandList()
   }
-
 
   /**
    * 品牌名称
@@ -88,9 +86,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
       kindId:me.kindId,
       goodsName:me.goodsName,
       brandName:me.brandName,
-      state: '',
-      goodsAudit: '',
-      sortColumns:'',
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
@@ -113,7 +108,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
           isBatch:data.isBatch,
         },
         success: (res) => {
-          console.log("█ res ►►►",  res);
           if (res.success) AppComponent.rzhAlt("success",res.info);
           else AppComponent.rzhAlt("error",res.info);
           _this.qeuryAllService()
@@ -125,7 +119,7 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
       });
     }else if(isNullOrUndefined(data.goodsPrice.batchPrice)){
       AppComponent.rzhAlt("warning",'请先设置价格');
-      _this.qeuryAllService()
+      _this.qeuryAllService();
     }
   }
 
@@ -138,8 +132,7 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
         goodsCode:goodsCode,
         batchPrice:this._goods[i],
       }
-      console.log("█ data ►►►",  data.batchPrice);
       this.submit.putRequest(url, data);
-       this.qeuryAllService();
+      this.qeuryAllService();
   }
 }

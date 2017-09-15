@@ -3,20 +3,20 @@
 </div>
 <div class="panel mb">
   <div class="panel-body p ng-scope">
-    <div class="col-md-4">
-    <div class="form-group clearfix">
-      <span class="pull-left query-name lh">选择分类：</span>
-      <div class="col-md-8 col-xs-6 pl0">
-        <app-get-kind (myData)="getKind($event)"></app-get-kind>
+     <div class="col-md-4">
+      <div class="form-group clearfix">
+        <span class="pull-left query-name lh">选择分类：</span>
+        <div class="col-md-8 col-xs-6 pl0">
+          <app-get-kind (myData)="getKind($event)"></app-get-kind>
+        </div>
       </div>
     </div>
-  </div>
     <div class="col-md-4">
       <div class="form-group">
         <div class="form-group clearfix">
           <span class="pull-left query-name lh">选择品牌：</span>
           <div class="col-md-8 col-xs-6 pl0">
-            <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled"  (data)="refreshValue($event)" placeholder="请选择品牌">
+            <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled"  (data)="refreshValue($event)" placeholder="全部品牌">
             </ng-select>
           </div>
         </div>
@@ -35,7 +35,6 @@
         </button>
       </div>
     </div>
-
   </div>
 </div>
 <div class="panel panel-danger">
@@ -44,7 +43,9 @@
            (pageChange)="qeuryAllService($event)">
       <thead>
       <tr>
-        <th class="w5 unselectable text-center">序号</th>
+        <th class="w5 unselectable text-center">
+          <rzhDefaultSorter> 序号</rzhDefaultSorter>
+        </th>
         <th class="w35 unselectable hidden-sm">
           <rzhDefaultSorter by="goodsName">商品名</rzhDefaultSorter>
         </th>
@@ -96,9 +97,10 @@
             <span></span>
           </label>
         </td>
-        <td class="text-center">
-         <input class="form-control w40 pull-left" type="text" placeholder="0.00" [(ngModel)]="_goods[i]" name="batchPrice">
-          <button class="btn-info pull-left aa" (click)="submita(goods.goodsCode,i)" type="submit">确认</button>
+        <td>
+          <input class="form-control w40 text-center price-change-box" type="text" placeholder="0.00" [(ngModel)]="_goods[i]"        name="batchPrice">
+          <span class="btn btn-green  aa" (click)="submita(goods.goodsCode,i)" type="submit"><i class="fa fa-check                checkmark"></i></span>
+
         </td>
       </tr>
       </tbody>

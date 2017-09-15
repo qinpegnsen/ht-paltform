@@ -191,7 +191,7 @@ const orders = {
         },
         {
           text: '买家评价',
-          link: '/main/orders/eval-buyer'
+          link: '/main/orders/buyer'
         }
       ]
     }

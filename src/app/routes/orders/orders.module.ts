@@ -7,6 +7,7 @@ import { WaitForSendComponent } from './orders/wait-for-send/wait-for-send.compo
 import {FinishedComponent} from "./orders/finished/finished.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
+import { BuyerEvaluationComponent } from './buyer-evaluation/buyer-evaluation.component';
 import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
 
 
@@ -23,6 +24,8 @@ const routes: Routes = [
     {path: 'order-detail', component: OrderDetailComponent}
   ]
   },
+  {path: 'buyer', component: BuyerEvaluationComponent}
+
 ]
 
 @NgModule({
@@ -36,11 +39,14 @@ const routes: Routes = [
     AllOrdersComponent,
     WaitForEvalComponent,
     FinishedComponent,
+    BuyerEvaluationComponent,
+    FinishedComponent,
     WaitForSendComponent,
     OrderDetailComponent
   ],
   providers: [
-    OrdersComponent
+    OrdersComponent,
+    BuyerEvaluationComponent
   ]
 })
 export class OrdersModule { }

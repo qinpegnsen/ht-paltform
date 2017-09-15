@@ -1,0 +1,29 @@
+.ts{
+  background: #C9E7F2;
+  width: 98%;
+  margin: auto;
+  margin-top: 15px;
+}
+.search{
+  margin: auto;
+}
+
+.special{
+  padding-left: 10px;
+}
+.special:hover{
+  background: #DCF8FF;
+}
+.p0:hover{
+  background: #F2F2F2;
+}
+
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 200px;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}

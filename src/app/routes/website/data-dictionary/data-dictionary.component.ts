@@ -28,7 +28,6 @@ export class DataDictionaryComponent implements OnInit {
 
   constructor(private ajax: AjaxService, private dataDictionaryService: DataDictionaryComponentService) {
 
-
   }
 
   ngOnInit() {
@@ -70,7 +69,6 @@ export class DataDictionaryComponent implements OnInit {
     }
     let res = this.dataDictionaryService.getdataservice(requestData)
     me.data = new Page(res);
-    // console.log(me.data)
   }
 
   //删除

@@ -61,12 +61,16 @@ export class AdddataComponent implements OnInit {
     }
   }
 
-  // 取消
+  /**
+   *   取消
+   */
   cancel() {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
-  //数据字典--提交
+  /**
+   * 数据字典--提交
+   */
   submit(obj) {
     if (this.linkType == 'addChildSort') {//添加数据字典val
       let url = '/datadict/addDatadict';
@@ -113,7 +117,9 @@ export class AdddataComponent implements OnInit {
     this.settings.closeRightPageAndRouteBack();
   }
 
-//计量单位--提交
+  /**
+   * 计量单位--提交
+   */
   submita(res) {
     if (this.linkType == 'addCount') {
       let url = '/goodsUnit/addGoodsUnit';//计量单位添加
