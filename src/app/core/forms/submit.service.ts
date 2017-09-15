@@ -175,8 +175,6 @@ export class SubmitService {
       success: (res) => {
         if (!isNullOrUndefined(res) && res.success) {
           result = res.data;
-        } else {
-          swal('失败', res.info, 'error');
         }
       },
       error: (res) => {
