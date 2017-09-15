@@ -19,7 +19,7 @@ export class Level2AreaNamePipe implements PipeTransform {
     let codes = value.split(',');
     for(let value of codes){
       if(!isNullOrUndefined(value)){
-        let result = this.tools.getLevel2AreaByCode(value);
+        let result = this.tools.getAreaByTwelveBitCode(value);
         if(!isNullOrUndefined(result) && !isNullOrUndefined(result.fullName)){
           fullName.push(result.fullName);
         }

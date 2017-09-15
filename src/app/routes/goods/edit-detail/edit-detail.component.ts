@@ -32,7 +32,7 @@ export class EditDetailComponent implements OnInit {
   private mblItemList = [];         //手机端上传后的图片集合
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private myReadOnly: boolean = false;  // 商品详情或审核商品时是只读状态
+  private myReadOnly: boolean;  // 商品详情或审核商品时是只读状态
   private goodsBody: any;          //商品详情
   private audit: any;              // 商品审核
   private goodsAudits: any;        // 商品审核状态列表
@@ -104,10 +104,11 @@ export class EditDetailComponent implements OnInit {
         me.publishData.goodsExpressInfo['freightType'] = 'FIXED';   //运费类型默认固定运费
         me.publishData.goodsExpressInfo.expressTplId = '';  //运费模板
       }
+
       if (me.path == 'edit') me.publishComponent.step = 2;
       if (me.path == 'audit') {
         me.publishComponent.step = 0;
-        me.myReadOnly = true;
+        me.myReadOnly = true;// 商品详情或审核商品时是只读状态
         me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
         // 去掉待审核状态
         for (var i = me.goodsAudits.length - 1; i >= 0; i--) {
@@ -122,7 +123,9 @@ export class EditDetailComponent implements OnInit {
           result: 'PASS',
           goodsBaseCode: me.goodsBaseCode
         }
-      } // 商品详情或审核商品时是只读状态
+      } else{
+        me.myReadOnly = false;
+      }
 
       /**
        * JQuery初始化后执行事件
@@ -217,7 +220,7 @@ export class EditDetailComponent implements OnInit {
    */
   private getPageData() {
     let me = this, pageData;
-    console.log("█ me.path ►►►", me.path);
+    me.getExpressTpl(); //获取物流模板
     if (me.path != 'step_two') {
       pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
     } else {
@@ -251,9 +254,7 @@ export class EditDetailComponent implements OnInit {
         $('#summernote').summernote('code', me.goodsBody);   //PC端详情
       }, 1)
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-    }
-    if(me.path != 'audit'){
-      me.getExpressTpl()
+      if(me.publishData.goodsExpressInfo.expressTplId) me.getTplValById(); //根据物流模板ID获取模板值
     }
   }
 
@@ -270,8 +271,8 @@ export class EditDetailComponent implements OnInit {
    * 根据运费模板ID获取模板内容
    * @param tplId
    */
-  getTplValById(tplId){
-    let me = this;
+  getTplValById(){
+    let me = this,tplId = me.publishData.goodsExpressInfo.expressTplId;
     let result = me.goods.getTplVal(tplId);
     if(!isNullOrUndefined(result)) me.tplVals = result;
     if(me.tplVals.valuationType == 'VOLUME'){

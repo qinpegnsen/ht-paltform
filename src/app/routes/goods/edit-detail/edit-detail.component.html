@@ -140,7 +140,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
                 <div class="close">×</div>
                 <p>批量设置市场价</p>
                 <div class="text-center">
-                  <input class="form-control" name="marketPrice" type="text" placeholder="0.00"/>
+                  <input class="form-control num" name="marketPrice" type="number" placeholder="0.00"/>
                   <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
                 </div>
               </div>
@@ -151,7 +151,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
                 <div class="close">×</div>
                 <p>批量设置销售价</p>
                 <div class="text-center">
-                  <input class="form-control" name="price" type="text" placeholder="0.00"/>
+                  <input class="form-control num" name="price" type="number" placeholder="0.00"/>
                   <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
                 </div>
               </div>
@@ -162,7 +162,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
                 <div class="close">×</div>
                 <p>批量设置会员价</p>
                 <div class="text-center">
-                  <input class="form-control" name="memberPrice" type="text" placeholder="0.00"/>
+                  <input class="form-control num" name="memberPrice" type="number" placeholder="0.00"/>
                   <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
                 </div>
               </div>
@@ -173,7 +173,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
                 <div class="close">×</div>
                 <p>批量设置库存</p>
                 <div class="text-center">
-                  <input class="form-control" name="storageNum" type="text" placeholder=">10"/>
+                  <input class="form-control num" name="storageNum" type="number" placeholder=">10"/>
                   <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
                 </div>
               </div>
@@ -195,8 +195,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
               <input class="text _price num form-control" name="price" type="number" required [readonly]="myReadOnly"
                      [(ngModel)]="sku.price" #price="ngModel" [ngModelOptions]="{standalone: true}"/>
               <em class="add-on">元</em>
-              <span *ngIf="marketPrice.value != null"
-                [hidden]="price.value < marketPrice.value || price.value == marketPrice.value || price.value == null"
+              <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value || !marketPrice.value"
                     class="text-danger font12">销售价应小于市场价
               </span>
             </td>
@@ -204,15 +203,15 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
               <input class="text _price num form-control" name="memberPrice" type="number" required [readonly]="myReadOnly"
                      [(ngModel)]="sku.memberPrice" #memberPrice="ngModel" [ngModelOptions]="{standalone: true}"/>
               <em class="add-on">元</em>
-              <span *ngIf="price.value != null"
-                [hidden]="memberPrice.value < price.value || memberPrice.value == price.value || memberPrice.value == null"
+              <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value || !memberPrice.value || !price.value"
                     class="text-danger font12">会员价应小于销售价
               </span>
             </td>
             <td>
               <input class="text stock num form-control" name="storageNum" type="number" required [readonly]="myReadOnly"
                      [(ngModel)]="sku.storageNum" #storageNum="ngModel" [ngModelOptions]="{standalone: true}"/>
-              <span [hidden]="storageNum.value > 9 || storageNum.value == null" class="text-danger font12">库存最少为10
+              <span [hidden]="storageNum.value > 9 || !storageNum.value"
+                    class="text-danger font12">库存最少为10
               </span>
             </td>
           </tr>
@@ -424,39 +423,50 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
       <dt class="col-xs-2"><i>*</i>设置运费：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w100">
+          <!--固定运费-->
           <div class="mb clearfix" [class.hide]="myReadOnly && publishData.goodsExpressInfo.freightType=='TPL'">
-              <span class="radio c-radio c-radio-nofont radio-box">
-                <label>
-                <input type="radio" name="freightType" value="FIXED" placeholder="1.00" [disabled]="myReadOnly"
-                       [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
-                <span class="fa fa-circle"></span>使用固定运费</label>
-              </span>
-            <span class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='FIXED'">
-                <input class="text price num form-control pull-left" name="fixedFreight" type="number"
-                       [required]="publishData.goodsExpressInfo.freightType=='FIXED'" [readonly]="myReadOnly"
-                       [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
-                <em class="add-on">元</em>
-              </span>
-          </div>
-          <div class="clearfix" [class.hide]="myReadOnly && publishData.goodsExpressInfo.freightType=='FIXED'">
             <span class="radio c-radio c-radio-nofont radio-box">
               <label>
-              <input type="radio" name="freightType" value="TPL" [disabled]="myReadOnly"
+              <input type="radio" name="freightType" value="FIXED" placeholder="1.00" [disabled]="myReadOnly"
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
-              <span class="fa fa-circle"></span>使用物流规则</label>
+              <span class="fa fa-circle"></span>使用固定运费</label>
             </span>
-            <span class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
-              <select class="rules-list text form-control pull-left" name="freightType" [disabled]="myReadOnly"
-                      [required]="publishData.goodsExpressInfo.freightType=='TPL'"
-                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId" #tplId="ngModel" (change)="getTplValById(publishData.goodsExpressInfo.expressTplId)">
-                <option value="" disabled>-请选择-</option>
-                <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
+            <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
+              <input class="text price num form-control pull-left" name="fixedFreight" type="number"
+                     [required]="publishData.goodsExpressInfo.freightType=='FIXED'" [readonly]="myReadOnly"
+                     [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
+              <em class="add-on">元</em>
+            </span>
+          </div>
+          <!--运费模板-->
+          <div class="clearfix" [class.hide]="myReadOnly && publishData.goodsExpressInfo.freightType=='FIXED'">
+            <div *ngIf="!myReadOnly">
+              <span class="radio c-radio c-radio-nofont radio-box">
+                <label>
+                <input type="radio" name="freightType" value="TPL"
+                       [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
+                <span class="fa fa-circle"></span>使用物流规则</label>
+              </span>
+              <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='TPL'">
+                <select class="rules-list text form-control pull-left" name="freightType"
+                        [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
+                        [required]="publishData.goodsExpressInfo.freightType=='TPL'">
+                  <option value="" disabled>-请选择-</option>
+                  <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
+                </select>
+                <a class="btn btn-green btn-sm ml" [class.hide]="myReadOnly" target="_blank" [href]="targetUrl"><em
+                  class="fa fa-truck"></em> 添加物流规则</a>
+              </span>
+            </div>
+            <div *ngIf="myReadOnly" class="clearfix">
+              <label class="pull-left mr mt-sm">使用的物流规则</label>
+              <select class="rules-list text form-control pull-left" name="freightType" disabled
+                     [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
+                <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
               </select>
-              <a class="btn btn-green btn-sm ml" target="_blank" [href]="targetUrl"><em
-                class="fa fa-truck"></em> 添加物流规则</a>
-            </span>
+            </div>
             <div class="tpl-box w100 p mt"
-                 *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId != ''">
+                 [hidden]="publishData.goodsExpressInfo.freightType!='TPL' || publishData.goodsExpressInfo.expressTplId == ''">
               <p class="m0">
                 <strong>指定物流配送区域及运费</strong>
                 <button class="btn btn-xs btn-default fa fa-eye pull-right" routerLink="/main/operation/freight-template">查看详情</button>

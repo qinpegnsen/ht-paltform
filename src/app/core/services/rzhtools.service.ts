@@ -280,7 +280,7 @@ export class RzhtoolsService {
    * @param code  12位区域编码
    * @returns {any}
    */
-  public getLevel2AreaByCode(code){
+  public getAreaByTwelveBitCode(code){
     let areaList = AREA_LEVEL_2_JSON;
     let level = this.getLevelByCode(code);
     if(level == 1){
@@ -318,7 +318,8 @@ export class RzhtoolsService {
     if (areaCode.length != 12) return level;
     if (areaCode.substr(2, 4) == '0000') level = 1;
     else if (areaCode.substr(4, 2) == '00') level = 2;
-    else level = 3;
+    else if (areaCode.substr(6, 6) == '000000') level = 3;
+    else level = 4;
     return level;
   }
 
