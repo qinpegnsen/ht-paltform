@@ -1,6 +1,6 @@
 <!--添加运费模板begin-->
 <div class="col-lg-10" *ngIf="linkType=='addArticle'">
-  <form class="form-validate form-horizontal" style="height: 100%">
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -71,7 +71,7 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of moduleList;let i = index">
-                      <td>{{item.reslut}}</td>
+                      <td>{{reslut[i]}}</td>
                       <td class="text-center">
                         <input class="text _price num form-control" name="agentName" type="number" required/>
                       </td>
@@ -92,7 +92,7 @@
                       </td>
                       <td class="text-center">
                         <!--修改运费模板值按钮-->
-                        <app-buttons [config]="updatebutton" (click)="area_model = !area_model"></app-buttons>
+                        <app-buttons [config]="updatebutton" (click)="edit(i);area_model = !area_model"></app-buttons>
                         <!--删除运费模板值按钮-->
                         <app-buttons [config]="deletebutton" (click)="delete(organ,i)"></app-buttons>
                       </td>
@@ -110,7 +110,7 @@
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="button" >提交信息</button>
+            <button class="ml btn btn-info pull-left"  type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
           </div>
         </fieldset>
       </div>
@@ -216,7 +216,7 @@
                         </td>
                         <td class="text-center">
                           <!--修改运费模板值按钮-->
-                          <app-buttons [config]="updatebutton" (click)="area_model = !area_model"></app-buttons>
+                          <app-buttons [config]="updatebutton" (click)="edit(i);area_model = !area_model"></app-buttons>
                           <!--删除运费模板值按钮-->
                           <app-buttons [config]="deletebutton" (click)="delete(organ,i)"></app-buttons>
                         </td>
@@ -248,7 +248,7 @@
 <div class="model" *ngIf="area_model">
   <div class="model-main">
     <div class="header">
-      <span>选择区域</span><span class="icon" (click)="area_model = !area_model">关闭</span>
+      <span>选择区域</span><span class="icon" (click)="close();area_model = !area_model">关闭</span>
     </div>
     <div class="model-body">
       <table class="table table-striped">
@@ -264,18 +264,19 @@
           </td>
           <td class="area-item">
             <div class="ncsc-province" *ngFor="let name of v.provices; let j = index">
-              <ng-container >
+              <ng-container>
                 <label nz-checkbox [(ngModel)]="v.provices[j]['checked']"
                        (ngModelChange)="updateAllchildChecked(i, j, name.areaCode)">
-                  <span
-                    (click)="allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']">{{name.label}}<i style="padding-left: 5px" class="icon-arrow-down" ></i></span>
+                  <span>{{name.label}}{{getCount(name.areaCode)}}</span>
                 </label>
-                <nz-checkbox-group [(ngModel)]="checkOptionsOnes[name.areaCode][0]"
-                                   class="ncsc-citys-sub"
-                                   style=""
-                                   [ngStyle]="{display: allCheckeds[i]['content'][j]['childChecked'] ? 'block': 'none'}"
-                                   (ngModelChange)="updateSingleChecked(i, j, name.areaCode)">
-                </nz-checkbox-group>
+                <i class="icon-arrow-down mr" (click)="clear(); allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']"></i>
+                <div class="ncsc-citys-sub"  [ngStyle]="{display: allCheckeds[i]['content'][j]['childChecked'] ? 'block': 'none'}">
+                  <nz-checkbox-group [(ngModel)]="checkOptionsOnes[name.areaCode][0]"
+                                     style=""
+                                     (ngModelChange)="updateSingleChecked(i, j, name.areaCode)">
+                  </nz-checkbox-group>
+                  <button class="btn-info" style="position: absolute; right: 0; bottom: 0;" (click)="allCheckeds[i]['content'][j]['childChecked'] = false"> 关闭</button>
+                </div>
               </ng-container>
             </div>
           </td>
@@ -284,7 +285,7 @@
       </table>
     </div>
     <div class="model-bottom">
-      <span class="btn btn-default ml lr" (click)="area_model = !area_model">放弃操作</span>
+      <span class="btn btn-default ml lr" (click)="close(); area_model = !area_model">放弃操作</span>
       <button class="ml btn btn-info pull-left ml" type="button" (click)="getResult(); area_model = !area_model;" >提交信息</button>
     </div>
   </div>

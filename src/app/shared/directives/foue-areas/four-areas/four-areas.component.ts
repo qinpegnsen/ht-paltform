@@ -81,7 +81,7 @@ export class FourAreasComponent implements OnInit {
   /**
    * 确定选择城市
    */
-  cityConfirm() {
+    cityConfirm() {
     this.show = false;
     if (this.adr == '') {
       this.areaCode = ''

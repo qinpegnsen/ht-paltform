@@ -1,3 +1,15 @@
 //@import "/src/assets/login/css/reset.css";
-@import "/src/assets/login/css/supersized.css";
-@import "/src/assets/login/css/style.css";
+@import "../../../../assets/login/css/style.css";
+@import "../../../../assets/login/css/supersized.css";
+
+.text-info {
+  color: #ffffff;
+}
+.login-tip{
+  position: absolute;
+  margin-top: 50px;
+}
+
+.form .input{
+  color: #ddd;
+}
