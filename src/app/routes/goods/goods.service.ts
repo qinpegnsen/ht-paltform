@@ -98,11 +98,11 @@ export class GoodsService {
    */
   getBrandListByKind(kindId?){
     if(isUndefined(kindId)) kindId = '';
-    let requestUrl = '/goodsKind/queryGoodsKindPageByParentId';
+    let requestUrl = '/goodsBrand/queryBrandPagesByNA';
     let requestData = {
       curPage: 1,
       pageSize: 100,
-      kindParentId: kindId
+      kindId: kindId
     };
     return this.submit.getData(requestUrl, requestData).voList;
   }
