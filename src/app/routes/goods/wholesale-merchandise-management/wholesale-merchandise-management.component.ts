@@ -5,7 +5,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {GoodsService} from "../goods.service";
 import {SelectComponent} from "ng2-select";
 @Component({
@@ -31,13 +31,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
     this.getBrandList()
   }
 
-  /**
-   * 品牌名搜索
-   */
-  refreshValue(value: any): void {
-    this.brandName = value.text;
-    this.qeuryAllService();
-  }
 
   /**
    * 品牌名称
@@ -53,14 +46,24 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
   getKind(data) {
     this.kindId = data.kindId;
     this.qeuryAllService();
+    this.getBrandList(this.kindId)
+  }
+
+  /**
+   * 品牌名搜索
+   */
+  refreshValue(value: any): void {
+    this.brandName = value.text;
+    this.qeuryAllService();
   }
 
   /**
    * 选择品牌名
    * @param data  选择分类组件输出数据
    */
-  getBrandList() {
-    let list = this.goods.getBrandList(),newList = [];
+  getBrandList(kindId?) {
+    if(isUndefined(kindId)) kindId = '';
+    let list = this.goods.getBrandListByKind(kindId),newList = [];
     if(!isNullOrUndefined(list)) {
       for(let item of list){
         let obj = {
@@ -137,5 +140,6 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
       }
       console.log("█ data ►►►",  data.batchPrice);
       this.submit.putRequest(url, data);
+       this.qeuryAllService();
   }
 }

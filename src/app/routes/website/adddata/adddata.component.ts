@@ -75,7 +75,8 @@ export class AdddataComponent implements OnInit {
         info: obj.info,
         remark: obj.remark
       }
-      let result= this.adddataService.addClass(url, data);
+      let result=this.adddataService.addClass(url, data);
+      console.log("█ result ►►►",  result);
       if(result){
         this.dataDictionaryComponent.queryDatas()
       }else{

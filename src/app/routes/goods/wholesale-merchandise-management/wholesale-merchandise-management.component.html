@@ -85,7 +85,9 @@
             </p>
           </div>
         </td>
-        <td><span class="font12">￥</span>&nbsp;{{goods.goodsPrice.batchPrice}}.00</td>
+        <td><span class="font12">￥</span>&nbsp;
+          {{goods.goodsPrice.batchPrice | decimalTwo}}
+        </td>
         <td>{{goods.createTime}}</td>
         <td>
           <label class="switch switch-md" title="是否允许批发">

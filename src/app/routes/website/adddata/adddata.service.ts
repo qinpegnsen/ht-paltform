@@ -68,7 +68,7 @@ export class AdddataService {
    * val添加服务
    */
   public addClass(url,data) {
-    let me=this,result;
+    let result;
     this.ajax.post({
       url: url,
       data: data,
