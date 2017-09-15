@@ -7,7 +7,7 @@ import {isNullOrUndefined} from "util";
 export class DecimalTwoPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if(isNullOrUndefined(value)) value = 0;
+    if(isNullOrUndefined(value) || value == '') value = 0;
     let val = value.toString(),result;
     // 如果含小数点
     if(val.indexOf('.') != -1){
