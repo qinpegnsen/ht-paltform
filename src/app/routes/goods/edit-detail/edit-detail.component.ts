@@ -32,7 +32,7 @@ export class EditDetailComponent implements OnInit {
   private mblItemList = [];         //手机端上传后的图片集合
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private myReadOnly: boolean;  // 商品详情或审核商品时是只读状态
+  private myReadOnly: boolean;     // 商品详情或审核商品时是只读状态
   private goodsBody: any;          //商品详情
   private audit: any;              // 商品审核
   private goodsAudits: any;        // 商品审核状态列表

@@ -1,0 +1,61 @@
+.szh-order-details{
+  width: 350px;
+  display: inline-block;
+}
+.szh-order-details .order-head {
+  background-color: #f5f5f5;
+}
+.szh-order-details .content dl{
+  margin-bottom: 10px;
+  font-size: 0;
+}
+.szh-order-details .content dt,.szh-order-details .content dd{
+  display: inline-block;
+  font-size: 12px;
+}
+.szh-order-details .content dt{
+  width: 20%;
+  text-align: right;
+  font-weight: normal;
+  color: #888;
+}
+.szh-order-details .content dd{
+  width: 80%;
+  color: #666;
+  line-height: 20px;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal;
+  font-size: 13px;
+}
+.szh-order-details .content dl.line{
+  border-top: 1px dotted #ddd;
+  position: relative;
+}
+.szh-order-details .content .more{
+  background-color: #FBFBFB;
+  width: 320px;
+  padding: 10px;
+  border: solid 1px #CCC;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 30px;
+  box-shadow: 2px 2px 0 rgba(153,153,153,0.15);
+}
+.szh-order-details .content .more li{
+  color: #888;
+  line-height: 20px;
+}
+.szh-order-details .content .more li span{
+  color: #666;
+  margin-right: 20px;
+}
+.szh-order-condition{
+  position: absolute;
+  left: 350px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 25px;
+}

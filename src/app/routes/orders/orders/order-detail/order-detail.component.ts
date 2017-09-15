@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {OrdersComponent} from "../orders.component";
 
 @Component({
-  selector: 'app-wait-for-take',
-  templateUrl: './wait-for-take.component.html',
-  styleUrls: ['./wait-for-take.component.scss']
+  selector: 'app-order-detail',
+  templateUrl: './order-detail.component.html',
+  styleUrls: ['./order-detail.component.scss']
 })
-export class WaitForTakeComponent implements OnInit {
-
+export class OrderDetailComponent implements OnInit {
   constructor(private parentComp:OrdersComponent) { }
 
   ngOnInit() {
     let me = this;
-    me.parentComp.orderType = 3
+    me.parentComp.orderType = 100;
   }
 
 }

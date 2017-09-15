@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WaitForTakeComponent } from './wait-for-take.component';
+import { WaitForSendComponent } from './wait-for-send.component';
 
-describe('WaitForTakeComponent', () => {
-  let component: WaitForTakeComponent;
-  let fixture: ComponentFixture<WaitForTakeComponent>;
+describe('WaitForSendComponent', () => {
+  let component: WaitForSendComponent;
+  let fixture: ComponentFixture<WaitForSendComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WaitForTakeComponent ]
+      declarations: [ WaitForSendComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WaitForTakeComponent);
+    fixture = TestBed.createComponent(WaitForSendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,11 +2,12 @@ import {NgModule} from "@angular/core";
 import {OrdersComponent} from "./orders/orders.component";
 import {WaitForPayComponent} from "./orders/wait-for-pay/wait-for-pay.component";
 import {AllOrdersComponent} from "./orders/all-orders/all-orders.component";
-import {WaitForTakeComponent} from "./orders/wait-for-take/wait-for-take.component";
 import {WaitForEvalComponent} from "./orders/wait-for-eval/wait-for-eval.component";
+import { WaitForSendComponent } from './orders/wait-for-send/wait-for-send.component';
 import {FinishedComponent} from "./orders/finished/finished.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
+import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
 
 
 const routes: Routes = [
@@ -16,11 +17,12 @@ const routes: Routes = [
     {path: '', redirectTo: 'all-orders'},
     {path: 'all-orders', component: AllOrdersComponent},
     {path: 'wait-for-pay', component: WaitForPayComponent},
-    {path: 'wait-for-take', component: WaitForTakeComponent},
+    {path: 'wait-for-send', component: WaitForSendComponent},
     {path: 'wait-for-eval', component: WaitForEvalComponent},
     {path: 'finished', component: FinishedComponent},
+    {path: 'order-detail', component: OrderDetailComponent}
   ]
-  }
+  },
 ]
 
 @NgModule({
@@ -32,9 +34,10 @@ const routes: Routes = [
     OrdersComponent,
     WaitForPayComponent,
     AllOrdersComponent,
-    WaitForTakeComponent,
     WaitForEvalComponent,
-    FinishedComponent
+    FinishedComponent,
+    WaitForSendComponent,
+    OrderDetailComponent
   ],
   providers: [
     OrdersComponent

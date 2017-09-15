@@ -6,19 +6,18 @@ import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 
 @Component({
-  selector: 'app-all-orders',
-  templateUrl: './all-orders.component.html',
-  styleUrls: ['./all-orders.component.scss']
+  selector: 'app-wait-for-send',
+  templateUrl: './wait-for-send.component.html',
+  styleUrls: ['./wait-for-send.component.scss']
 })
-export class AllOrdersComponent implements OnInit {
-
+export class WaitForSendComponent implements OnInit {
   public goodsList: Page = new Page();
   constructor(private parentComp:OrdersComponent,
               private submit: SubmitService,) { }
 
   ngOnInit() {
     let me = this;
-    me.parentComp.orderType = 1;
+    me.parentComp.orderType = 3;
     me.queryDatas(1)
   }
 
@@ -42,4 +41,5 @@ export class AllOrdersComponent implements OnInit {
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
+
 }

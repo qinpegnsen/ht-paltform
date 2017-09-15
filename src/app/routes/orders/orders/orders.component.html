@@ -1,11 +1,15 @@
-<div class="panel mb">
+<div class="order panel mb">
   <div class="panel-body">
-    <ul class="order-guide list-unstyled clearfix">
+    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType!=100">
       <li class="pull-left" [class.cur-order]="orderType==1" routerLink="all-orders">所有订单</li>
       <li class="pull-left" [class.cur-order]="orderType==2" routerLink="wait-for-pay">待支付</li>
-      <li class="pull-left" [class.cur-order]="orderType==3" routerLink="wait-for-take">待收货</li>
+      <li class="pull-left" [class.cur-order]="orderType==3" routerLink="wait-for-send">待发货</li>
       <li class="pull-left" [class.cur-order]="orderType==4" routerLink="wait-for-eval">待评价</li>
       <li class="pull-left" [class.cur-order]="orderType==5" routerLink="finished">已完成</li>
+    </ul>
+    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
+      <li class="pull-left" routerLink="all-orders">订单列表</li>
+      <li class="pull-left cur-order">商品详情</li>
     </ul>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>

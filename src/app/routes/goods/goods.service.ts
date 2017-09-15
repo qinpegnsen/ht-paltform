@@ -163,7 +163,7 @@ export class GoodsService {
     let me = this, storeCode;
     let loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
     if(isNullOrUndefined(loginInfo)){
-      AppComponent.rzhAlt('warning','请登录后重试')
+      AppComponent.rzhAlt('warning','获取运费模板失败，请登录后重试');
       return null;
     }else if(!isNullOrUndefined(loginInfo.storeCode)){
       // storeCode = loginInfo.storeCode;
