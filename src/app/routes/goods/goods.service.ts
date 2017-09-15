@@ -96,7 +96,8 @@ export class GoodsService {
    * 根据分类查询品牌列表
    * @param kindId
    */
-  getBrandListByKind(kindId){
+  getBrandListByKind(kindId?){
+    if(isUndefined(kindId)) kindId = '';
     let requestUrl = '/goodsKind/queryGoodsKindPageByParentId';
     let requestData = {
       curPage: 1,
