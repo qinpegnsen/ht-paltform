@@ -176,11 +176,11 @@ export class AddAgentComponent implements OnInit {
             swal('添加代理商提交成功！', '', 'success');
             // _this.AreasComponent.queryList()//实现刷新
           } else {
-            swal('添加代理商提交失败====！', 'error');
+            swal(res.info,);
           }
         },
         error: (data) => {
-          swal('添加代理商提交失败！', '', 'error');
+          swal('添加代理商提交失败！', 'error');
         }
       })
 
