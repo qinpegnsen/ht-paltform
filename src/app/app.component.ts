@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   public toaster: ToasterConfig = new ToasterConfig({
     showCloseButton: true,
     tapToDismiss: false,
-    timeout: {'success': 3000, 'error': 5000},
+    timeout: {'success': 3000, 'warning': 3000, 'error': 5000},
     positionClass: 'toast-top-center',
     animationClass: 'slide-from-top'
   });

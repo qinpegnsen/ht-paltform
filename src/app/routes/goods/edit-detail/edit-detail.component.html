@@ -471,7 +471,7 @@ myReadOnly是商品审核是页面元素显示/隐藏用的
                 <strong>指定物流配送区域及运费</strong>
                 <button class="btn btn-xs btn-default fa fa-eye pull-right" routerLink="/main/operation/freight-template">查看详情</button>
               </p>
-              <ul class="list-unstyled tpl-list mb0">
+              <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId != ''">
                 <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
                   <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
                   <p class="col-xs-5 m0 one-row omg p-sm text-right" >

@@ -27,11 +27,14 @@ $popup-wd:           $aside-wd + 15px;      // match the width with the main asi
   left: 50%;
   margin-top: 0;
   border: 2px solid #F0F0F0;
-  box-shadow: 0px 0px 5px 1px #fff;
+  box-shadow: 0px 0px 0px 2px #f5f5f5;
   background-color: $popup-bg;
   color: $popup-color;
   overflow: auto;
   -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   -webkit-overflow-scrolling: touch;
 }
@@ -52,8 +55,8 @@ $popup-wd:           $aside-wd + 15px;      // match the width with the main asi
   line-height:20px;
   text-align: center;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 10px;
+  right: 10px;
   font-size: xx-large;
 }
 .popup-colse:hover{
