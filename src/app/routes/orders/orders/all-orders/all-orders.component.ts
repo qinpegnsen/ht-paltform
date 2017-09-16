@@ -14,6 +14,7 @@ import {CancelComponent} from "../cancel/cancel.component";
 export class AllOrdersComponent implements OnInit {
   public curCancelOrderId:string;
   public curDeliverOrderId:string;
+  public lookLogisticsOrderId:string;
   private beginTime:string;
   private endTime:string;
   public goodsList: Page = new Page();
@@ -70,6 +71,9 @@ export class AllOrdersComponent implements OnInit {
   deliverOrder(orderId){
     this.curDeliverOrderId = orderId;
   }
+  lookLogistics(orderId){
+    this.lookLogisticsOrderId = orderId;
+  }
   /**
    * 取消订单回调函数
    * @param data
@@ -84,5 +88,12 @@ export class AllOrdersComponent implements OnInit {
    */
   getDeliverOrderData(data){
     this.curDeliverOrderId = null;
+  }
+  /**
+   * 查询物流回调函数
+   * @param data
+   */
+  getLogisticsData(data){
+    this.lookLogisticsOrderId = null;
   }
 }

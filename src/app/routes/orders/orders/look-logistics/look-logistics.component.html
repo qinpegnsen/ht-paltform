@@ -1,0 +1,34 @@
+
+<div class="cancel-order fadeIn"  *ngIf="showLogisticsWindow">
+  <div class="mask" (click)="hideWindow()"></div>
+  <div class="popup animated fadeIn">
+    <div class="pop popup-hd">
+      <span class="f-bold">查看物流</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="pop cancel-con font12 w100">
+      <div>
+        <dl
+          class="bb m0 clearfix"><dt class="col-xs-3">订单编号：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+          ?orderId:201705468524444}}</dd></dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">物流公司：</dt>
+          <dd class="col-xs-9">汇通快递</dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">运单号：</dt>
+          <dd class="col-xs-9">254586323256</dd>
+        </dl>
+      </div>
+      <ul class="list-unstyled ba m-lg p gray-bg-lighter logistics-list">
+        <li>暂无物流信息</li>
+        <li>暂无物流信息</li>
+        <li>暂无物流信息</li>
+      </ul>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" (click)="hideWindow()">关闭</button>
+    </div>
+  </div>
+</div>
+
