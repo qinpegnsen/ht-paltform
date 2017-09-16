@@ -47,10 +47,10 @@
         <th class="w15 text-center">
           <rzhDefaultSorter>评分</rzhDefaultSorter>
         </th>
-        <th class="w30 text-center">
+        <th class="w35 text-center">
           <rzhDefaultSorter>评价内容</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center">
+        <th class="w15 text-center">
           <rzhDefaultSorter>晒单图片</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
@@ -66,10 +66,10 @@
         <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
         <td>{{count.goodsName}}</td>
         <td>{{count.createTime}}</td>
-        <td>{{count.brandCode}}</td>
+        <td><span [innerHtml]="5 | stars"></span></td>
         <td class="pull-left">{{count.goodsCode}}</td>
         <td>
-          <img [src]="count.goodsImage" alt="" style="cursor: pointer" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
           <img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
         </td>
         <td>

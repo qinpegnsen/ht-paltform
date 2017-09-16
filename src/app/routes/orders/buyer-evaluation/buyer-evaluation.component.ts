@@ -88,7 +88,7 @@ export class BuyerEvaluationComponent implements OnInit {
   showImg(event, i){
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
-    i.style.left = (event.clientX - 230 ) + 'px';
+    i.style.left = (event.clientX - 150) + 'px';
     // console.log("█ i.style.top = 100 ►►►",  i.style.top);
   }
 
@@ -99,3 +99,4 @@ export class BuyerEvaluationComponent implements OnInit {
     i.style.display = 'none';
   }
 }
+
