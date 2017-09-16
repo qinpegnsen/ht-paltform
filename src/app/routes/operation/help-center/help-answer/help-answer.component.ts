@@ -88,7 +88,6 @@ export class HelpAnswerComponent implements OnInit {
       pageSize:10,
       question:me.searchkey,
       kindId:me.kindId,
-
     }
     let result = this.submit.getData(url,data);
     console.log("█ result ►►►",  result);

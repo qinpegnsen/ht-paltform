@@ -6,32 +6,30 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-body p ng-scope" ng-if="search">
-
       <div class="" >
         <label class="pull-left lh">问题分类：</label>
-        <span class="col-sm-1">
-           <select class="form-control" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
-          <option [value]="help.id" *ngFor="let help of kinds">
-            {{help.kindName}}
-          </option>
-        </select>
-        </span>
+          <span class="col-sm-1">
+             <select class="form-control" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
+                 <option [value]="help.id" *ngFor="let help of kinds">
+                 {{help.kindName}}
+                 </option>
+             </select>
+          </span>
       </div>
 
-
     <div class="form-group mb0" >
-    <label class="label-width pull-left text-right mb0 lh">查找：</label>
-    <div class="col-xs-5">
-    <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-    (change)="searchdata($event)" placeholder="关键字">
+      <label class="label-width pull-left text-right mb0 lh">查找：</label>
+        <div class="col-xs-5">
+        <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+        (change)="searchdata($event)" placeholder="关键字">
     </div>
     <div class="col-sm-1 pull-left text-center">
-    <span class="ng-scope">
-    <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
-    class="btn btn-primary bar-h3-btn mr ng-scope">
-    <em class="icon-magnifier fa-fw"></em>搜索
-    </button>
-    </span>
+      <span class="ng-scope">
+        <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
+        class="btn btn-primary bar-h3-btn mr ng-scope">
+        <em class="icon-magnifier fa-fw"></em>搜索
+        </button>
+      </span>
     </div>
     </div>
     </div>

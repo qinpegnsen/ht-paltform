@@ -49,7 +49,6 @@ export class HelpUpdateComponent implements OnInit {
     me.b=me.submitt.getData("/helpQuestions/loadHelpQuestions", {id:me.kindid});
   }
 
-
   /**
    * 编辑器上传图片并显示
    * @param file

@@ -235,7 +235,7 @@ const sale = {
     {
       text: '退货退款原因',
       icon: 'icon-question',
-      link: '/main/msg'
+      link: '/main/sale/msg'
     }
   ]
 };
