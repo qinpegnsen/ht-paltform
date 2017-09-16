@@ -12,3 +12,21 @@
   color: #23b7e5;
   border-bottom-color: #23b7e5;
 }
+.place-time{
+  width: 300px;
+  display: inline-block;
+}
+.place-time ._title{
+  width: 72px;
+  line-height: 36px;
+  text-align: right;
+  float: left;
+}
+.place-time ._picker{
+  width: 220px;
+  float: right;
+}
+.search-term{
+  width: 380px;
+  display: inline-block;
+}

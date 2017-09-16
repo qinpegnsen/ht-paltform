@@ -1,0 +1,43 @@
+
+<div class="cancel-order fadeIn"  *ngIf="showCancelWindow">
+  <div class="mask" (click)="hideWindow()"></div>
+  <div class="popup animated fadeIn">
+    <div class="pop popup-hd">
+      <span class="f-bold">取消订单</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="pop cancel-con font12 w100">
+      <dl
+        class="bb m0 clearfix"><dt class="col-xs-3">订单编号：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+        ?orderId:201705468524444}}</dd></dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">订单编号：</dt>
+        <dd class="col-xs-9">
+          <ul class="list-unstyled cancel-reason mb0">
+            <li>
+              <label><input type="radio" name="a" value="option1" />
+                <span></span>无法备齐货物</label>
+            </li>
+            <li>
+              <label><input type="radio" name="a" value="option1" />
+                <span></span>不是有效的时间</label>
+            </li>
+            <li>
+              <label><input type="radio" name="a" value="option1" />
+                <span></span>买家主动要求</label>
+            </li>
+            <li>
+              <label><input type="radio" name="a" value="option1" />
+                <span></span>其他原因</label>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info">确认提交</button>
+    </div>
+  </div>
+</div>
+

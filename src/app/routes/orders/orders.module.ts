@@ -9,6 +9,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import { BuyerEvaluationComponent } from './buyer-evaluation/buyer-evaluation.component';
 import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
+import { CanceledComponent } from './orders/canceled/canceled.component';
+import { SendGoodsComponent } from './orders/deliver/deliver';
+import { CancelComponent } from './orders/cancel/cancel.component';
 
 
 const routes: Routes = [
@@ -21,6 +24,7 @@ const routes: Routes = [
     {path: 'wait-for-send', component: WaitForSendComponent},
     {path: 'wait-for-eval', component: WaitForEvalComponent},
     {path: 'finished', component: FinishedComponent},
+    {path: 'canceled', component: CanceledComponent},
     {path: 'order-detail', component: OrderDetailComponent}
   ]
   },
@@ -42,7 +46,10 @@ const routes: Routes = [
     BuyerEvaluationComponent,
     FinishedComponent,
     WaitForSendComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    CanceledComponent,
+    SendGoodsComponent,
+    CancelComponent
   ],
   providers: [
     OrdersComponent,

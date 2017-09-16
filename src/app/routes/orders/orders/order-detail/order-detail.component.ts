@@ -8,10 +8,19 @@ import {OrdersComponent} from "../orders.component";
 })
 export class OrderDetailComponent implements OnInit {
   constructor(private parentComp:OrdersComponent) { }
+  public orderStep = 0;
 
   ngOnInit() {
     let me = this;
     me.parentComp.orderType = 100;
   }
 
+  showTimeList(target){
+    target.style.display = 'block';
+  }
+  hideTimesList(target){
+    target.style.display = 'none';
+  }
 }
+
+

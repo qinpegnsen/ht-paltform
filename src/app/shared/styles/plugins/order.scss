@@ -34,6 +34,11 @@ $buyer-info-box-width: 200px;
   .b, .ba  {border: 1px solid $bd-color; } // all borders
 
 }
+
+.search-time{
+  display: inline-block;
+  width: 200px;
+}
 .gray-bg{ background-color: $gray-bg;}
 .gray-bg-lighter{ background-color: $gray-bg-lighter;}
 
@@ -61,8 +66,9 @@ $buyer-info-box-width: 200px;
   border: 1px solid #FEC500;
   background-color: #FFFCE9;
   border-radius: 4px;
-  position: fixed;
+  position: absolute;
   z-index: 2;
+  left: 40%;
   box-shadow: 1px 1px 1px 3px #FFFCE9;
 }
 .szh-buyer-info .info-con{
@@ -92,4 +98,7 @@ $buyer-info-box-width: 200px;
 }
 .f-light{
   font-weight: normal;
+}
+.bs-datepicker{
+  z-index: 200;
 }

@@ -1,12 +1,48 @@
 <div class="order panel mb">
   <div class="panel-body">
-    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType!=100">
-      <li class="pull-left" [class.cur-order]="orderType==1" routerLink="all-orders">所有订单</li>
-      <li class="pull-left" [class.cur-order]="orderType==2" routerLink="wait-for-pay">待支付</li>
-      <li class="pull-left" [class.cur-order]="orderType==3" routerLink="wait-for-send">待发货</li>
-      <li class="pull-left" [class.cur-order]="orderType==4" routerLink="wait-for-eval">待评价</li>
-      <li class="pull-left" [class.cur-order]="orderType==5" routerLink="finished">已完成</li>
-    </ul>
+    <div *ngIf="orderType!=100">
+      <ul class="order-guide list-unstyled clearfix bb">
+        <li class="pull-left" [class.cur-order]="orderType==1" routerLink="all-orders">所有订单</li>
+        <li class="pull-left" [class.cur-order]="orderType==2" routerLink="wait-for-pay">待支付</li>
+        <li class="pull-left" [class.cur-order]="orderType==3" routerLink="wait-for-send">待发货</li>
+        <li class="pull-left" [class.cur-order]="orderType==4" routerLink="wait-for-eval">待评价</li>
+        <li class="pull-left" [class.cur-order]="orderType==5" routerLink="finished">已完成</li>
+        <li class="pull-left" [class.cur-order]="orderType==6" routerLink="canceled">已取消</li>
+      </ul>
+
+      <div class="row clearfix p text-right">
+        <div class="place-time clearfix">
+          <span class="_title">下单时间：</span>
+          <div class="_picker">
+            <div class="input-group">
+              <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker">
+              <span class="btn input-group-addon icon-calendar" (click)="dpr.show()"></span>
+            </div>
+          </div>
+        </div>
+        <div class="search-term clearfix">
+          <div class="col-xs-4 pr0">
+            <select class="form-control pl-sm pr-sm" name="sss" id="0">
+              <option value="11">买家账号</option>
+              <option value="22">商品名称</option>
+              <option value="33">订单编号</option>
+            </select>
+          </div>
+          <div class="col-xs-8 pl-sm">
+            <div class="form-group mb0">
+              <div class="col-xs-9 pl0 pr-sm">
+                <input type="text" class="form-control border-b-grey">
+              </div>
+              <button type="button" title="搜索"
+                      class="btn btn-primary bar-h3-btn mr ng-scope">
+                <em class="icon-magnifier fa-fw"></em>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
       <li class="pull-left" routerLink="all-orders">订单列表</li>
       <li class="pull-left cur-order">商品详情</li>

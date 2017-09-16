@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {CancelComponent} from "../cancel/cancel.component";
 
 @Component({
   selector: 'app-all-orders',
@@ -11,8 +12,12 @@ import {SubmitService} from "../../../../core/forms/submit.service";
   styleUrls: ['./all-orders.component.scss']
 })
 export class AllOrdersComponent implements OnInit {
-
+  public curCancelOrderId:string;
+  public curDeliverOrderId:string;
+  private beginTime:string;
+  private endTime:string;
   public goodsList: Page = new Page();
+  @ViewChild('cancelBox') cancelBox: CancelComponent;
   constructor(private parentComp:OrdersComponent,
               private submit: SubmitService,) { }
 
@@ -41,5 +46,43 @@ export class AllOrdersComponent implements OnInit {
       sortColumns: '',
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+  }
+
+  /**
+   * 显示买家信息
+   * @param event
+   * @param i
+   */
+  showUserInfo(i){
+    i.style.display = 'block';
+  }
+
+  /**
+   * 隐藏买家信息
+   * @param i
+   */
+  hideBuyerInfo(i){
+    i.style.display = 'none';
+  }
+  cancelOrder(orderId){
+    this.curCancelOrderId = orderId;
+  }
+  deliverOrder(orderId){
+    this.curDeliverOrderId = orderId;
+  }
+  /**
+   * 取消订单回调函数
+   * @param data
+   */
+  getCancelOrderData(data){
+    this.curCancelOrderId = null;
+  }
+
+  /**
+   * 发货回调函数
+   * @param data
+   */
+  getDeliverOrderData(data){
+    this.curDeliverOrderId = null;
   }
 }
