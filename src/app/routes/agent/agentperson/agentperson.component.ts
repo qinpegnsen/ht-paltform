@@ -19,13 +19,16 @@ export class AgentpersonComponent implements OnInit {
   private updatebutton;//修改代理商信息按钮
   private deletebutton;//删除代理商信息按钮
   private updatebuttono;//修改密码按钮
+  private details;//查看代理商详情
   private updatebuttonio;//上传图片按钮
   private queryId:number;//获取添加，修改的ID
+  private organ={}
   private controlData:Page = new Page();
   private id;//获取删除时需要的id
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
   private areaCode: string = '';// 代理商区域编码
   private agentName: string = '';// 代理商名称
+  public agentCode:string;//获取代理商编码
 
 
   constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router,private AgentpersonService:AgentpersonService) {
@@ -35,6 +38,7 @@ export class AgentpersonComponent implements OnInit {
   ngOnInit() {
     let _this = this;
     _this.queryId = _this.routeInfo.snapshot.queryParams['id'];
+    _this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];
 
     /**
      * 按钮配置
@@ -49,22 +53,27 @@ export class AgentpersonComponent implements OnInit {
       type:"update",
       title:'修改代理商',
       size: 'xs'
-    }
+    };
     this.deletebutton = {
       type:"delete",
       title:'删除代理商',
       size: 'xs'
-    }
+    };
     this.updatebuttono = {
       type:"search",
       title:'修改密码',
       size: 'xs'
-    }
+    };
     this.updatebuttonio = {
       type:"upload",
       title:'上传图片',
       size: 'xs'
-    }
+    };
+    this.details = {
+      type:"details",
+      title:'查看代理商详情',
+      size: 'xs'
+    };
 
 
     /**
@@ -88,6 +97,13 @@ export class AgentpersonComponent implements OnInit {
     this.getAgentList()
   }
 
+  //获取区域数据
+  private getAreaData(area){
+    let me = this;
+    me.organ['areaCode'] = area.areaCode;
+    me.getAgentList();
+  }
+
 
   /**
    * 获取代理商列表
@@ -99,7 +115,7 @@ export class AgentpersonComponent implements OnInit {
     let data={
       curPage:activePage,
       agentName:_this.agentName,
-      areaCode:_this.areaCode
+      areaCode:_this.organ['areaCode']
     }
     let url= "/agent/pageQuery";
     this.controlData=this.AgentpersonService.controlDatas(url,data);
@@ -129,6 +145,32 @@ export class AgentpersonComponent implements OnInit {
         /*let datas={id:delCodeId}
         let urls= "/agent/pageQuery";
         this.controlData = _this.AgentpersonService.controlDatas(urls,datas);//实现局部刷新*/
+        _this.getAgentList()//实现刷新
+      }
+    );
+  }
+
+
+  /**
+   * 重置代理商密码
+   * @param event
+   */
+  resetPwd(pwd) {
+    let _this = this, url: string = "/agent/updateAgentPwdReset", data: any;
+    swal({
+        title: '确认要重置密码？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        data = {
+          'agentCode':pwd
+        }
+        _this.AgentpersonService.pwd(url, data); //删除数据
         _this.getAgentList()//实现刷新
       }
     );

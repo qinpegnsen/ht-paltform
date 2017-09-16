@@ -8,7 +8,7 @@ import {PatternService} from "../../../core/forms/pattern.service";
 const swal = require('sweetalert');
 declare var $:any;
 declare var AMap:any;
-const uploadUrl = "/agent/uploadIdcardImage";  //图片上传路径(调取上传的接口)
+const uploadUrl = "upload/basic/upload";  //图片上传路径(调取上传的接口)
 
 
 @Component({
@@ -28,6 +28,7 @@ export class AddAgentComponent implements OnInit {
   private uid;//声明保存获取到的暗码
   public agentCode:string;//获取代理商编码
   private staff:any = {};
+  private aa;
 
 
   constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute,private patterns: PatternService) {
@@ -105,6 +106,8 @@ export class AddAgentComponent implements OnInit {
         async: false, //同步请求
         data: {agentCode: this.agentCode},
         success: (res) => {
+          console.log("█ res ►►►",  res);
+
           this.staff = res.data;
           if(isNullOrUndefined(this.staff)) this.staff = {}
         },
@@ -120,10 +123,13 @@ export class AddAgentComponent implements OnInit {
    * 显示/隐藏地图
    * @param data
    */
-  isShowMap(data:any) {
+  isShowMap(data?:any) {
     data.isShowMap = !data.isShowMap;
+    this.aa=!this.aa;
   }
-
+  isShowMap1(){
+    this.aa=!this.aa;
+  }
   /**
    * 显示/隐藏 修改经纬度的按钮
    * @param data
@@ -160,7 +166,7 @@ export class AddAgentComponent implements OnInit {
           'agentAcct': value.agentAcct,
           'agentPwd': value.agentPwd,
           'leader': value.leader,
-          'mobile': value.mobile,
+          'moblie': value.moblie,
           'idcard': value.idcard,
           /*'idcardImage1uuid': value.idcardImage1uuid,
           'idcardImage2uuid': value.idcardImage2uuid,*/
@@ -168,7 +174,8 @@ export class AddAgentComponent implements OnInit {
           'address': value.address,
           'coordinateLng': value.coordinateLng,
           'coordinateLat': value.coordinateLat,
-          'description': value.description
+          'description': value.description,
+          'telephone':value.telephone
         },
         success: (res) => {
           if (res.success) {
@@ -183,9 +190,6 @@ export class AddAgentComponent implements OnInit {
           swal('添加代理商提交失败！', 'error');
         }
       })
-
-
-
 
     /*  /!**
        * 构建form时，传入自定义参数
@@ -217,7 +221,7 @@ export class AddAgentComponent implements OnInit {
               'agentAcct': value.agentAcct,
               'agentPwd': value.agentPwd,
               'leader': value.leader,
-              'mobile': value.mobile,
+              'moblie': value.moblie,
               'idcard': value.idcard,
               'idcardImage1uuid': value.idcardImage1uuid,
               'idcardImage2uuid': value.idcardImage2uuid,
@@ -259,39 +263,6 @@ export class AddAgentComponent implements OnInit {
        * 执行上传
        *!/
       _this.uploader.uploadAll();*/
-
-
-     /* _this.ajax.post({
-        url: '/agent/addAgent',
-        data: {
-          'agentName': value.agentName,
-          'agentLevel': value.agentLevel,
-          'agentAcct': value.agentAcct,
-          'agentPwd': value.agentPwd,
-          'leader': value.leader,
-          'mobile': value.mobile,
-          'idcard': value.idcard,
-          'idcardImage1uuid': value.idcardImage1uuid,
-          'idcardImage2uuid': value.idcardImage2uuid,
-          'areaCode': value.areaCode,
-          'address': value.address,
-          'coordinateLng': value.coordinateLng,
-          'coordinateLat': value.coordinateLat,
-          'description': value.description
-        },
-        success: (res) => {
-          if (res.success) {
-            _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
-            swal('添加代理商提交成功！', '', 'success');
-            // _this.AreasComponent.queryList()//实现刷新
-          } else {
-            swal('添加代理商提交失败====！', 'error');
-          }
-        },
-        error: (data) => {
-          swal('添加代理商提交失败！', '', 'error');
-        }
-      })*/
     }
     //修改代理商信息
     else if(_this.linkType == 'updataArticle'){
@@ -304,8 +275,9 @@ export class AddAgentComponent implements OnInit {
           'agentAcct': value.agentAcct,
           'agentPwd': value.agentPwd,
           'leader': value.leader,
-          'mobile': value.mobile,
+          'moblie': value.moblie,
           'idcard': value.idcard,
+          'telephone':value.telephone,
          /* 'idcardImage1uuid': value.idcardImage1uuid,
           'idcardImage2uuid': value.idcardImage2uuid,*/
           'areaCode': value.areaCode,
@@ -315,6 +287,8 @@ export class AddAgentComponent implements OnInit {
           'description': value.description,
         },
         success: (res) => {
+          console.log("█ value ►►►",  value);
+
           console.log(res)
           if (res.success) {
             _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true});   //路由跳转

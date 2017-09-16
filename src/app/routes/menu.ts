@@ -348,11 +348,11 @@ const agent = {
       icon: 'fa fa-users',
       link: '/main/agent/agentperson'
     },
-    {
+  /*  {
       text: '代理区域管理',
       icon: 'icon-location-pin',
       link: '/main/agent/region'
-    },
+    },*/
     {
       text: '进货管理',
       icon: 'fa fa-cubes',

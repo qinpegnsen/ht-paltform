@@ -3,6 +3,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import {SettingsService} from "../../../core/settings/settings.service";
 import {ActivatedRoute,Router} from '@angular/router';
 import {RegionComponent} from "../region/region.component";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 
 @Component({
@@ -19,7 +20,7 @@ export class RightpageComponent implements OnInit {
     agentPwd:'',
     agentNewPwd:''
   }
-
+  private staff:any = {};
   // 构造 初始化
   constructor(public settings: SettingsService,private router:Router,private ajax:AjaxService,private routeInfo:ActivatedRoute,private RegionComponent:RegionComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
@@ -27,10 +28,32 @@ export class RightpageComponent implements OnInit {
   ngOnInit() {
     this.queryId = this.routeInfo.snapshot.queryParams['id'];
     this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];
+
+    this.loadAgent();
   }
   // 取消
   cancel(){
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
+  }
+
+  /**
+   * 请求代理商详细数据，并显示()
+   */
+  loadAgent(){
+    if(!isNullOrUndefined(this.agentCode)) {
+      this.ajax.get({
+        url: '/agent/loadByAgentCode',
+        async: false, //同步请求
+        data: {agentCode: this.agentCode},
+        success: (res) => {
+          this.staff = res.data;
+          if(isNullOrUndefined(this.staff)) this.staff = {}
+        },
+        error: (res) => {
+          console.log("post limit error");
+        }
+      });
+    }
   }
 
   //获取区域数据
@@ -40,32 +63,12 @@ export class RightpageComponent implements OnInit {
   }
 
   /**
-   * 修改密码
-   * @param value
+   * 添加代理区域
+    * @param value
    */
   addLimitList(value){
     let _this = this;
     if(_this.queryId == 2){
-      _this.ajax.put({
-        url: '/agent/updateAgentPwd',
-        data: {
-          'agentCode': value.agentCode,
-          'agentPwd': value.agentPwd,
-          'agentNewPwd': value.agentNewPwd
-        },
-        success: (res) => {
-          if (res.success) {
-            _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
-            swal('修改密码提交成功！', '','success');
-            //_this.AreasComponent.queryList()//实现刷新
-          } else {
-            swal('修改密码提交失败====！', 'error');
-          }
-        },
-        error: (data) => {
-          swal('修改密码提交失败！', '','error');
-        }
-      })
     }else if(_this.queryId == 1){
       _this.ajax.post({
         url: '/agentArea/addAgentArea',

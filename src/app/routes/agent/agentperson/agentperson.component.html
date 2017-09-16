@@ -2,26 +2,7 @@
   代理商管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="appAgent" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
-<!--<div class="panel mb">-->
-  <!--<div class="panel-body p ng-scope">-->
-    <!--<div class="form-group mb0">-->
-      <!--<label class="label-width  pull-left text-right lh35 mb0">查找：</label>-->
-      <!--<div class="col-xs-5">-->
-        <!--<input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
-               <!--placeholder="请输入代理商名称作为关键字进行搜索">-->
-      <!--</div>-->
-      <!--<div class="col-sm-1 pull-left text-center">-->
-        <!--<span class="ng-scope">-->
-           <!--<button type="button" title="搜索" id="toSearch"-->
-                   <!--class="btn btn-primary bar-h3-btn mr ng-scope">-->
-             <!--<em class="icon-magnifier fa-fw"></em>搜索-->
-           <!--</button>-->
-          <!--</span>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-<div class="panel mb">
+<div class="panel mb" *ngIf="this.flag">
   <div class="panel-body p ng-scope">
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
@@ -35,8 +16,8 @@
     </div>
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
-        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="areaCode"
-               (change)="getAgentList()" placeholder="代理商区域编码">
+        <input type="text"  [(ngModel)]="organ.areaCode" (change)="getAgentList()" placeholder="代理商区域编码" type="hidden"/>
+        <app-four-areas (myData)="getAreaData($event)"></app-four-areas>
       </div>
       <button type="button" title="搜索"
               class="btn btn-primary bar-h3-btn mr ng-scope">
@@ -78,7 +59,7 @@
           <rzhDefaultSorter by="idcard">身份证号</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="areaCode">区域编码</rzhDefaultSorter>
+          <rzhDefaultSorter by="fullName">区域名称</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
@@ -96,7 +77,7 @@
         <td>{{file.leader}}</td>
         <td>{{file.moblie}}</td>
         <td>{{file.idcard}}</td>
-        <td>{{file.areaCode}}</td>
+        <td>{{file.fullName}}</td>
         <td>
         <label class="switch">
           <input type="checkbox" [checked]="file.state=='NORMAL'" (change)="upFiledateState(file)"title="是否启动"/>
@@ -108,26 +89,13 @@
           <app-buttons [config]="updatebutton" routerLink="appAgent" [queryParams]="{linkType:'updataArticle',agentCode:file.agentCode}"></app-buttons>
           <!--删除代理商信息按钮-->
           <app-buttons [config]="deletebutton" (click)="delete(file.id)" *ngIf="file.state=='FREEZE'"></app-buttons>
+          <!--查看代理商详情按钮-->
+          <app-buttons [config]="details" title="查看代理商详情" routerLink="rightpage" [queryParams]="{id:3,agentCode:file.agentCode}"></app-buttons>
           <!--修改代理商密码按钮-->
-          <!--<app-buttons [config]="updatebuttono" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></app-buttons>-->
-          <button class="btn btn-default fa fa-pencil btn-xs" title="修改密码" routerLink="rightpage" [queryParams]="{id:2,agentCode:file.agentCode}"></button>
+          <button class="btn btn-default fa fa-pencil btn-xs" title="重置密码" (click)="resetPwd(file.agentCode)"></button>
         </td>
       </tr>
       </tbody>
-      <!--<tfoot>
-      <tr>
-        <td colspan="7">
-          <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{controlData.genStartRow()}} 至 {{controlData.genEndRow()}} 条，共 {{controlData.totalRow}} 条</strong></div>
-          </div>
-          <div class="col-sm-7">
-            <div style="float: right">
-              <rzhBootstrapPaginator></rzhBootstrapPaginator>
-            </div>
-          </div>
-        </td>
-      </tr>
-      </tfoot>-->
     </table>
   </div>
 </div>

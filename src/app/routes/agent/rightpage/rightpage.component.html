@@ -44,50 +44,70 @@
 </div>
 <!--添加代理区域信息end-->
 
-<!--修改密码begin-->
-<div class="rightpage" *ngIf="this.queryId==2">
+
+<!--查看代理商详情begin-->
+<div class="rightpage" *ngIf="this.queryId==3">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
         <fieldset class="b0">
-          <legend>修改密码</legend>
+          <legend>代理商详情</legend>
         </fieldset>
-
-        <input class="form-control" required [(ngModel)]="agentCode" name="agentCode" type="hidden"/>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 代理商登录密码</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="agentPwd" [(ngModel)]="limitForm.agentPwd"
-                     #agentPwd="ngModel" type="text"/>
-              <div [hidden]="agentPwd.valid || agentPwd.pristine"
-                   class="alert alert-danger">
-                代理商登录密码是必填项，请填写代理商登录密码
-              </div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"> <i>*</i> 新密码</label>
-            <div class="col-sm-8">
-              <input class="form-control" required name="agentNewPwd" [(ngModel)]="limitForm.agentNewPwd"
-                     #agentNewPwd="ngModel" type="text"/>
-              <div [hidden]="agentNewPwd.valid || agentNewPwd.pristine"
-                   class="alert alert-danger">
-                新密码是必填项，请填写新密码
-              </div>
-            </div>
-          </div>
-        </fieldset>
+          <ul class="org-items">
+            <li class="org-item">
+              <span class="item-hd col-sm-4">代理商名称：</span>
+              <p class="item-bd col-sm-7">{{staff.agentName}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">登录账号：</span>
+              <p class="item-bd col-sm-7">{{staff.agentAcct}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">身份证号：</span>
+              <p class="item-bd col-sm-7">{{staff.idcard}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">负责人：</span>
+              <p class="item-bd col-sm-7">{{staff.leader}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">联系电话：</span>
+              <p class="item-bd col-sm-7">{{staff.moblie}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">座机：</span>
+              <p class="item-bd col-sm-7">{{staff.telephone}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">详细地址：</span>
+              <p class="item-bd col-sm-7">{{staff.address}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">上次修改时间：</span>
+              <p class="item-bd col-sm-7">{{staff.updateTime}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">坐标经度：</span>
+              <p class="item-bd col-sm-7">{{staff.coordinateLng}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">坐标纬度：</span>
+              <p class="item-bd col-sm-7">{{staff.coordinateLat}}</p>
+            </li>
+            <li class="org-item">
+              <span class="item-hd col-sm-4">代理点描述：</span>
+              <p class="item-bd col-sm-7">{{staff.description}}</p>
+            </li>
+          </ul>
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
+       <!-- <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>-->
       </div>
     </div>
     <!-- END panel-->
   </form>
 </div>
-<!--修改密码end-->
+<!--查看代理商详情end-->
+

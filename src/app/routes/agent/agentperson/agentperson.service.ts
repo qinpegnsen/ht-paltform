@@ -56,4 +56,29 @@ export class AgentpersonService {
       }
     });
   }
+
+
+  /**
+   * 重置代理商密码
+   * @param url
+   * @param data
+   */
+  pwd(url,data) {
+    this.ajax.put({
+      url:url,
+      data: data,
+      async:false,
+      success: (data) => {
+        let info=data.info;
+        if(data.success){
+          AppComponent.rzhAlt("success",info);
+        }else{
+          AppComponent.rzhAlt("error",info);
+        }
+      },
+      error: () => {
+        console.log('连接数据库失败');
+      }
+    });
+  }
 }
