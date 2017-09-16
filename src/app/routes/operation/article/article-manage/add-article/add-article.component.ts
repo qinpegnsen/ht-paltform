@@ -10,7 +10,7 @@ import {isNullOrUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 declare var $: any;
 
-const uploadUrl = "/article/uploadCoverImage";  //图片上传路径(调取上传的接口)
+const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
 @Component({
   selector: 'app-add-article',
   templateUrl: './add-article.component.html',
