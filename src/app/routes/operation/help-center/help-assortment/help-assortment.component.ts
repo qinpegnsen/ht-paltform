@@ -74,7 +74,7 @@ export class HelpAssortmentComponent implements OnInit {
    * 添加问题
    */
   submit(res) {
-    let me = this;
+      let me = this;
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let url = '/helpQuestions/addHelpQuestions';//帮助分类添加
       let data = {
@@ -83,9 +83,8 @@ export class HelpAssortmentComponent implements OnInit {
         answer:sHTML,
         sort: res.sort,
       }
-      this.submitt.postRequest(url, data);
-      this.router.navigate(['/main/operation/help-center/help-answer']);
+      this.submitt.postRequest(url,data,true);
       this.qeuryAllService();
+      this.router.navigate(['/main/operation/help-center/help-answer']);
     }
-
 }

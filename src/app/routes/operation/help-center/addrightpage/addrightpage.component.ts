@@ -33,7 +33,6 @@ export class AddrightpageComponent implements OnInit {
     }
   }
 
-
   /**
    *  取消
    */
@@ -53,9 +52,8 @@ export class AddrightpageComponent implements OnInit {
         sort: res.sort,
         description: res.description,
       }
-      this.submitt.postRequest(url, data);
+      this.submitt.postRequest(url,data,true);
       this.helpInterlocutionComponent.qeuryAllService();
-      this.settings.closeRightPageAndRouteBack();
     } else if (this.linkType == 'updateCount') {
       let url = '/helpKind/updateHelpKind';//帮助分类修改
       let data = {
@@ -65,9 +63,8 @@ export class AddrightpageComponent implements OnInit {
         icon: res.icon,
         description:res.description,
       }
-      this.submitt.putRequest(url, data);
+      this.submitt.putRequest(url,data,true);
       this.helpInterlocutionComponent.qeuryAllService();
-      this.settings.closeRightPageAndRouteBack();
     }
   }
 }

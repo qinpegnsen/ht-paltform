@@ -58,6 +58,10 @@ export class ProblemDetailsComponent implements OnInit {
       });
     this.allproblem();
   }
+
+  /**
+   * 返回上级页面
+   */
   back(){
     this.router.navigate(['/main/operation/help-center/help-interlocution']);
   }
@@ -69,10 +73,10 @@ export class ProblemDetailsComponent implements OnInit {
     this.kind = this.submit.getData("/helpKind/queryAll",'');
     console.log("█ this.kinds ►►►",  this.kind);
   }
-    allproblem(){
-      let url = "/helpQuestions/queryAll";
-      let data={
-        kindId:this.id,
+  allproblem(){
+    let url = "/helpQuestions/queryAll";
+    let data={
+      kindId:this.id,
     }
     this.result = this.submit.getData(url,data);
     console.log("█ result ►►►",  this.result);
