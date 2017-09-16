@@ -31,8 +31,8 @@ export class AddKindComponent implements OnInit {
   private fileName: string = '选择图片';// 文件名
   private myImg;// 我的图片，展示图片
   public uploader: FileUploader = new FileUploader({
-    url: '/goodsKind/uploadGoodsKindIcon',
-    itemAlias: "goodsKindIcon"
+    url: 'upload/basic/upload',
+    itemAlias: "limitFile"
   }); //初始化上传方法
 
   constructor(public settings: SettingsService,

@@ -28,7 +28,7 @@ export class AddBrandComponent implements OnInit {
     brandSort: '0-99，默认0 , 数字越小排序越靠前',
   }
   public uploader:FileUploader = new FileUploader({
-    url: '/goodsBrand/uploadBrandImage',
+    url: 'upload/basic/upload',
     itemAlias:"limitFile"
   }); //初始化上传方法
   private myImg: any;
