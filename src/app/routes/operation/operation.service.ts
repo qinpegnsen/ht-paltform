@@ -2,12 +2,23 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
-import {isNullOrUndefined} from "util";
-
+import {isNullOrUndefined, isUndefined} from "util";
+import {SubmitService} from "../../core/forms/submit.service";
 @Injectable()
 export class OperationService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(private ajax: AjaxService,private submit: SubmitService) { }
+
+  /**
+   * 获取分类列表
+   */
+  getKindList(parentId?:string){
+    if(isUndefined(parentId)) parentId = '';
+    let url = '/articleClass/queryArticleClassByAcName';
+    let data = {acParentId: parentId};
+    return this.submit.getData(url,data)
+  }
+
 
   /**
    * POST 请求

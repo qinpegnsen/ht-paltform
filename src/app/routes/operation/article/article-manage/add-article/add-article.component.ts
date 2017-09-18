@@ -91,13 +91,6 @@ export class AddArticleComponent implements OnInit {
       type: "delete"
     };
 
-    /**
-     * 初始化的时候调取文章分类的接口
-     * @type {string}
-     */
-    let url = '/articleClass/queryArticleClassByAcName';
-    let data = {}
-    this.articleClassList = this.service.getData(url, data)
 
     /**
      * 调用富文本编辑器，初始化编辑器
@@ -290,20 +283,19 @@ export class AddArticleComponent implements OnInit {
    */
   alertResult() {
     let  me = this;
-
-
     this.closeAlert();//关闭弹窗
 
+    $("._myAppend").append($(".panel-success").find('li'));//把已经选择的追加到里面
+    this.listTeamOne=[];//清空已经选择的数组
     if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
       $("._myAppend").css("height", '0px')
     }else{
       $("._myAppend").css("height", '300px')
     }
-    $("._myAppend").append($(".panel-success").find('li'));
 
     let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" ></i></label></div>`
 
-    $("._myAppend").find($('li')).children('div').append(str);
+    $("._myAppend").find($('li')).children('div').append(str);//在给每个里追加一个删除按钮
     $('._myAppend').on('click','._del',function(){
       me.excuDel(this)
     })

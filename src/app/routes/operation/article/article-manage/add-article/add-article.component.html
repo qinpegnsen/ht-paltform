@@ -8,9 +8,10 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>文章分类</label>
             <div class="col-sm-4">
-              <select class="form-control" type="text" name="articleClassId" ngModel required>
-                <option [value]="item.id" *ngFor="let item of articleClassList">{{item.acName}}</option>
-              </select>
+              <app-get-class (myData)="getKind($event)"></app-get-class>
+              <!--<select class="form-control" type="text" name="articleClassId" ngModel required>-->
+                <!--<option [value]="item.id" *ngFor="let item of articleClassList">{{item.acName}}</option>-->
+              <!--</select>-->
             </div>
           </div>
         </fieldset>
