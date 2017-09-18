@@ -54,10 +54,10 @@ export class GoodsService {
       contentType: "application/json",
       success: (res) => {
         if (res.success) {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           me.router.navigate(['/main/goods/publish/step_three'],{queryParams: {baseCode: res.data}})
         } else {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -68,7 +68,7 @@ export class GoodsService {
         }
       },
       error: (res) => {
-        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
       }
     })
@@ -124,7 +124,7 @@ export class GoodsService {
       success: (res) => {
         console.log("█ res ►►►", res);
         if (res.success) {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           swal({
            title: '成功',
@@ -135,7 +135,7 @@ export class GoodsService {
            });
           result = res.data;
         } else {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -146,7 +146,7 @@ export class GoodsService {
         }
       },
       error: (res) => {
-        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
         console.log('put error', res);
       }

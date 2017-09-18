@@ -41,7 +41,6 @@ export class AddKindComponent implements OnInit {
               private parentComp: KindManageComponent,
               private getUid: GetUidService,
               public patterns: PatternService,
-              private mask: MaskService,
               private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -145,7 +144,7 @@ export class AddKindComponent implements OnInit {
    */
   private upLoadImg(submitData,submitUrl,method){
     let me = this;
-    me.mask.showMask();//上传图片比较慢，显示遮罩层
+    MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
     me.uploader.onBuildItemForm = function(fileItem, form){
       me.uuid = me.getUid.getUid();

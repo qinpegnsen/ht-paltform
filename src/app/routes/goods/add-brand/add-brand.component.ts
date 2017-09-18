@@ -184,7 +184,7 @@ export class AddBrandComponent implements OnInit {
    */
   private upLoadImg(submitUrl,submitData,method){
     let me = this;
-    me.mask.showMask();//上传图片比较慢，显示遮罩层
+    MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
     me.uploader.onBuildItemForm = function(fileItem, form){
       me.uuid = me.getUid.getUid();

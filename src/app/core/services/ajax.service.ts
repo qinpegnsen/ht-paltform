@@ -5,7 +5,7 @@ declare var $: any;
 
 @Injectable()
 export class AjaxService {
-  constructor(private route: Router, private maskservice: MaskService) {
+  constructor(private route: Router) {
   }
 
   //get方式提交，一般用于查询
@@ -34,7 +34,7 @@ export class AjaxService {
     config.beforeSend = function (xhr) {
       //显示遮罩层
       if (config.mask === true) {
-        _this.maskservice.showMask();
+        MaskService.showMask();
       }
     };
 
@@ -42,10 +42,10 @@ export class AjaxService {
     var success = config.success;
     config.success = function (result, status, xhr) {
       //隐藏遮罩层
-      if (config.mask === true) _this.maskservice.hideMask();
+      if (config.mask === true) MaskService.hideMask();
       //过滤登录
       if (xhr.getResponseHeader("serverError") || xhr.getResponseHeader("serverError") === "sessionOut") {
-        _this.route.navigate(['/pages/login'],{ replaceUrl: true }); //路由跳转
+        _this.route.navigate(['/pages/login'], {replaceUrl: true}); //路由跳转
       } else {
         if (typeof success === "function") {
           success(result, status, xhr);
@@ -55,7 +55,7 @@ export class AjaxService {
     var error = config.error;
     config.error = function (result, status, xhr) {
       //隐藏遮罩层
-      if (config.mask === true) _this.maskservice.hideMask();
+      if (config.mask === true) MaskService.hideMask();
       //回调
       if (typeof error === 'function') {
         error(result, status, xhr);

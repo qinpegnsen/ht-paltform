@@ -30,7 +30,7 @@ export class SubmitService {
       async: false,
       success: (res) => {
         if (res.success) {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           AppComponent.rzhAlt("success", res.info);
           /* swal({
@@ -42,7 +42,7 @@ export class SubmitService {
            });*/
           result = res.data;
         } else {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -53,7 +53,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
         console.log("post error");
       }
@@ -109,7 +109,7 @@ export class SubmitService {
       success: (res) => {
         console.log("█ res ►►►", res);
         if (res.success) {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           AppComponent.rzhAlt("success", res.info);
           /*swal({
@@ -121,7 +121,7 @@ export class SubmitService {
            });*/
           result = res.data;
         } else {
-          me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+          MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           let errorMsg;
           if (isNullOrUndefined(res.data)) {
             errorMsg = res.info
@@ -132,7 +132,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        me.mask.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
+        MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
         console.log('put error', res);
       }

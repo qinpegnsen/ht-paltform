@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   public password: string;
   public authMsg: string;
 
-  constructor(private ajax: AjaxService, private maskservice: MaskService,
+  constructor(private ajax: AjaxService,
               private localtion: Location, private router: Router, private _cookieService: CookieService,
               private setting:SettingsService,private myMenu:MenuService) {
 
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
   public login() {
     let start = new Date().getTime(), end;
     let me = this;
-    this.maskservice.showMask();
+    MaskService.showMask();
     me.ajax.post({
       url: '/login/login',
       data: {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
         'pwd': me.password
       },
       success: (result) => {
-        this.maskservice.hideMask();
+        MaskService.hideMask();
         end = new Date().getTime();
         if (result.success) {
           let user =  result.data;
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (result) => {
-        this.maskservice.hideMask();
+        MaskService.hideMask();
       }
     });
   }

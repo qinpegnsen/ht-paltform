@@ -73,8 +73,7 @@ export class EditDetailComponent implements OnInit {
               private goods: GoodsService,
               private router: Router,
               private getUid: GetUidService,
-              private tools: RzhtoolsService,
-              private mask: MaskService) {
+              private tools: RzhtoolsService) {
   }
 
 
@@ -838,7 +837,7 @@ export class EditDetailComponent implements OnInit {
    */
   publishGoods() {
     let me = this;
-    this.mask.showMask();//显示遮罩层
+    MaskService.showMask();//显示遮罩层
     me.uploadImgs();// 先上传图片
   }
 

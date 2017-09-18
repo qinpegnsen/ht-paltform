@@ -27,6 +27,8 @@ import {HelpAnswerComponent} from "./help-center/help-answer/help-answer.compone
 import {HelpUpdateComponent} from "./help-center/help-update/help-update.component";
 import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
 import {OperationService} from "./operation.service";
+import {GoodsService} from "../goods/goods.service";
+import {MaskService} from "../../core/services/mask.service";
 
 
 const addSort: Routes = [
@@ -82,6 +84,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent],
-  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService]
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService]
 })
 export class OperationModule { }

@@ -6,8 +6,11 @@ import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../../../app.component";
 import {ContentService} from "../content/content.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
+import {OperationService} from "../../../operation.service";
+import {GoodsService} from "../../../../goods/goods.service";
+import {MaskService} from "../../../../../core/services/mask.service";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -24,56 +27,66 @@ export class AddArticleComponent implements OnInit {
    * itemAlias  文件别名
    * queueLimit 上传文件控制
    */
-  public uploader:FileUploader = new FileUploader({
+  public uploader: FileUploader = new FileUploader({
     url: uploadUrl,
-    itemAlias:"limitFile",
+    itemAlias: "limitFile",
     queueLimit: 1
   });
 
-  private fileName:string = '选择图片';
+  private fileName: string = '选择图片';
   private myImg: any;
   private uuid: any;
   public linkType: string;
   public contents: string;
   public reason: string;
-  public flag: boolean=false;                      //开关，用来判断是否显示图片路径
+  public flag: boolean = false;                      //开关，用来判断是否显示图片路径
   public articleClassList;                          // 文章分类列表的数据
-  public articleId:number                          // 路由传递过来的文章的id
-  public queryArticleData:any                      //用来保存根据文章的id查询出来的文章的信息
+  public articleId: number                          // 路由传递过来的文章的id
+  public queryArticleData: any                      //用来保存根据文章的id查询出来的文章的信息
   public articleCoverType;                          //初始化的时候设置默认选中的值
   public articleCoverTypes;                         //初始化的时候设置默认选中的值
   public submitObj;                                 //用来保存提交的时候的数据，在addArticleExtra里面使用
   public submitState;                               //用来保存提交的时候的状态，在addArticleExtra里面使用
   public autionOptions;                             //审核状态的列表
-
-
-  constructor(
-    public settings: SettingsService,
-    private routeInfo: ActivatedRoute,
-    public router: Router,
-    public GetUidService: GetUidService,
-    public ContentService:ContentService,
-    public service:SubmitService,
-    private tools: RzhtoolsService
-  ) {
-    this.settings.showRightPage( "30%" );
+  public goodShow: boolean = false;                 //关联商品的弹框
+  public linkGoods: any;                             //关联商品的数据
+  private kindId: any = '';                          //品牌名
+  public brandList:any;                              //品牌列表
+  linkGoodsList: Array<any>;                          //可以选择的商品
+  listTeamOne: Array<any> = [];                       //已经选择的商品
+  private brandName: any = '';                       //品牌名
+  private goodsName: any = '';                       //商品名
+  private linkGoodStr: any = '';                     //关联商品id的拼接
+  constructor(public settings: SettingsService,
+              private routeInfo: ActivatedRoute,
+              public router: Router,
+              public GetUidService: GetUidService,
+              public ContentService: ContentService,
+              public service: SubmitService,
+              private tools: RzhtoolsService,
+              private goods: GoodsService,
+              private operationService: OperationService) {
+    this.settings.showRightPage("30%");
   }
 
   /**
    * 1.获取地址栏的参数，进行判断
    * 2.对按钮进行赋值
+   * 3.调用关联的商品
    */
   ngOnInit() {
+
+
 
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
 
     this.articleCoverType = 'AUTO'//文章封面类型默认的样式
 
-    this.articleCoverTypes=[
-      {key:'AUTO',text:'自动'},
-      {key:'ONE',text:'一个封面'},
-      {key:'THREE',text:'三个封面'}
+    this.articleCoverTypes = [
+      {key: 'AUTO', text: '自动'},
+      {key: 'ONE', text: '一个封面'},
+      {key: 'THREE', text: '三个封面'}
 
     ]
 
@@ -83,17 +96,17 @@ export class AddArticleComponent implements OnInit {
      */
     let url = '/articleClass/queryArticleClassPage';
     let data = {
-      curPage:1,
-      pageSize:10,
+      curPage: 1,
+      pageSize: 10,
     }
-    this.articleClassList = this.service.getData(url,data).voList
+    this.articleClassList = this.service.getData(url, data).voList
 
     /**
      * 调用富文本编辑器，初始化编辑器
      */
 
     setTimeout(() => {
-      let me=this;
+      let me = this;
       $('#summernote').summernote({
         height: 280,
         dialogsInBody: true,
@@ -109,17 +122,25 @@ export class AddArticleComponent implements OnInit {
       });
     }, 0);
 
+
+    /**
+     * 解决拖拽时候默认出现的框
+     */
+    setTimeout(() => {
+      $(".note-dropzone").css("display", 'none')
+    }, 0)
+
     /**
      * 根据id查询文章的数据
      * @type {string}
      */
-    if(this.linkType=='updataArticle'){
+    if (this.linkType == 'updataArticle') {
       let queryArticleurl = '/article/queryArticle';
       let queryArticledata = {
-        articleId:this.articleId,
-        queryState:'BLACK'
+        articleId: this.articleId,
+        queryState: 'BLACK'
       }
-      this.queryArticleData= this.service.getData(queryArticleurl,queryArticledata);
+      this.queryArticleData = this.service.getData(queryArticleurl, queryArticledata);
       setTimeout(() => {
         $('#summernote').summernote({
           height: 280,
@@ -131,7 +152,7 @@ export class AddArticleComponent implements OnInit {
             }
           }
         });
-        $('#summernote').summernote('code',this.queryArticleData.articleBody.articleContent );//给编辑器赋值
+        $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);//给编辑器赋值
       }, 0);
     }
 
@@ -139,11 +160,73 @@ export class AddArticleComponent implements OnInit {
      * 审核时候的两种状态
      * @type {[{id: number; name: string},{id: number; name: string}]}
      */
-    this.autionOptions=[
-      {id:1,name:'SUCCESS'},
-      {id:2,name:'FAILURE'}
+    this.autionOptions = [
+      {id: 1, name: 'SUCCESS'},
+      {id: 2, name: 'FAILURE'}
     ]
 
+    this.getLinkGoods();
+
+  }
+
+
+  /**
+   * 选择分类
+   * @param data  选择分类组件输出数据
+   */
+  getKind(data) {
+    this.kindId = data.kindId;
+    this.getLinkGoods();
+    this.getBrandList(this.kindId)
+  }
+
+  /**
+   * 选择品牌名
+   * @param data  选择分类组件输出数据
+   */
+  getBrandList(kindId?) {
+    if(isUndefined(kindId)) kindId = '';
+    let list = this.goods.getBrandListByKind(kindId),newList = [];
+    if(!isNullOrUndefined(list)) {
+      for(let item of list){
+        let obj = {
+          id: item.id,
+          text: item.brandName,
+        }
+        newList.push(obj);
+      }
+    }
+    this.brandList = newList;
+  }
+
+  /**
+   * 品牌名搜索
+   */
+  refreshValue(value: any): void {
+    this.brandName = value.text;
+    this.getLinkGoods();
+  }
+
+  /**
+   * 商品名称搜索
+   */
+  search(){
+    this.getLinkGoods();
+  }
+
+  /**
+   * 获取关联的商品的数据
+   */
+  getLinkGoods() {
+    let url = "/goodsQuery/queryForArticle";
+    let data = {
+      kindId: this.kindId,
+      brandName: this.brandName,
+      goodsName: this.goodsName,
+      sortColumns: ''
+    }
+    this.linkGoods = this.operationService.linkGoods(url, data);
+    if (this.linkGoods) this.linkGoodsList = this.linkGoods.voList;
   }
 
 
@@ -151,13 +234,13 @@ export class AddArticleComponent implements OnInit {
    * 单选按钮的点击事件，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件不行
    * @param code
    */
-  changeState(code){
-    if(code=='ONE'||code=='THREE'){
-      this.flag=true;
-    }else {
-      this.flag=false;
+  changeState(code) {
+    if (code == 'ONE' || code == 'THREE') {
+      this.flag = true;
+    } else {
+      this.flag = false;
     }
-    this.uuid=this.GetUidService.getUid();
+    this.uuid = this.GetUidService.getUid();
   }
 
 
@@ -167,7 +250,7 @@ export class AddArticleComponent implements OnInit {
    */
   sendFile(file) {
     let _this = this, img = _this.tools.uploadImg(file);
-    if(!isNullOrUndefined(img)){
+    if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img, '');
     }
   }
@@ -193,23 +276,47 @@ export class AddArticleComponent implements OnInit {
 
   }
 
-  // 取消
+  /**
+   *为文章关联商品
+   */
+  linkGood() {
+    // MaskService.simpleShowMask(); //显示遮罩层
+    $("session").css('z-index',120)
+    this.goodShow = !this.goodShow;
+  }
+
+  /**
+   * 取消
+   */
   cancel() {
     this.router.navigate(['/main/operation/article/manage']);
   }
 
-  // 提交
-  submit(obj,state) {
-    this.submitObj=obj;
-    this.submitState=state;
-    let me=this;
+  /**
+   * 取消弹框
+   */
+  closeAlert() {
+    this.goodShow = !this.goodShow;
+    // MaskService.simpleHideMask(); //隐藏遮罩层
+    $("session").css('z-index',0)
+  }
+
+  /**
+   * 提交
+   * @param obj
+   * @param state
+   */
+  submit(obj, state) {
+    this.submitObj = obj;
+    this.submitState = state;
+    let me = this;
     if (me.linkType == 'addArticle') {
       this.addArticleExtra()//没有图片上传的时候也可以调用
       /**
        * 构建form时，传入自定义参数
        * @param item
        */
-      me.uploader.onBuildItemForm = function(fileItem, form){
+      me.uploader.onBuildItemForm = function (fileItem, form) {
         form.append('uuid', me.uuid);
       };
 
@@ -227,10 +334,10 @@ export class AddArticleComponent implements OnInit {
        */
       me.uploader.onSuccessItem = function (item, response, status, headers) {
         let res = JSON.parse(response);
-        if(res.success){
+        if (res.success) {
           me.addArticleExtra()
-        }else{
-          AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+        } else {
+          AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
         }
 
       };
@@ -243,27 +350,27 @@ export class AddArticleComponent implements OnInit {
        * @param headers 头信息
        */
       me.uploader.onErrorItem = function (item, response, status, headers) {
-        AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       };
 
-    }else if (this.linkType == 'updataArticle') {
+    } else if (this.linkType == 'updataArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let url = '/article/updateArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
       obj.addArticleEnum = state //默认文章的类型是草稿
-      obj.articleId=this.articleId
+      obj.articleId = this.articleId
       let data = obj;
-      this.service.postRequest(url,data);
+      this.service.postRequest(url, data);
       this.router.navigate(['/main/operation/article/manage']);
-    }else if (this.linkType == 'auditArticle') {
-      let data={
-        articleId:this.articleId,
-        auditState:obj.auditState,
-        reason:obj.reason
+    } else if (this.linkType == 'auditArticle') {
+      let data = {
+        articleId: this.articleId,
+        auditState: obj.auditState,
+        reason: obj.reason
       }
-      let url= "/article/AuditArticle";
-      let result=this.ContentService.auditArticle(url,data)
-      if(result){
+      let url = "/article/AuditArticle";
+      let result = this.ContentService.auditArticle(url, data)
+      if (result) {
         this.router.navigate(['/main/operation/article/manage']);
       }
 
@@ -274,16 +381,31 @@ export class AddArticleComponent implements OnInit {
   /**
    * 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
    */
-  addArticleExtra(){
+  addArticleExtra() {
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
     // console.log(sHTML)
     let url = '/article/addArticle';
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
-    this.submitObj.uuid=this.uuid;
+    this.submitObj.uuid = this.uuid;
     let data = this.submitObj;
     console.log(this.submitState)
-    this.service.postRequest(url,data);
+    this.service.postRequest(url, data);
     this.router.navigate(['/main/operation/article/manage']);
+  }
+
+  /**
+   * 获取弹框选择的商品的信息
+   */
+  alertResult(){
+    let idStr=''
+    setTimeout(()=>{
+      let obj=$(".panel-success").find('._desc').find('input');
+      for(let i=0;i<obj.length;i++){
+        idStr+=`${$(obj[i]).val()},`
+      }
+      this.linkGoodStr=idStr.slice(0,idStr.length-1)
+    },0)
+    this.closeAlert();//关闭弹窗
   }
 }
