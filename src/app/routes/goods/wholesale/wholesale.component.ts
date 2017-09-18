@@ -10,11 +10,11 @@ import {GoodsService} from "../goods.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 
 @Component({
-  selector: 'app-wholesale-merchandise-management',
-  templateUrl: './wholesale-merchandise-management.component.html',
-  styleUrls: ['./wholesale-merchandise-management.component.scss']
+  selector: 'app-wholesale',
+  templateUrl: './wholesale.component.html',
+  styleUrls: ['./wholesale.component.scss']
 })
-export class WholesaleMerchandiseManagementComponent implements OnInit {
+export class WholesaleComponent implements OnInit {
 
   private data: Page = new Page();
   private goodsName: any = ''; //商品名
