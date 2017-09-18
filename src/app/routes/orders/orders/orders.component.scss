@@ -20,7 +20,7 @@
   width: 72px;
   line-height: 36px;
   text-align: right;
-  float: left;
+  display: inline-block;
 }
 .place-time ._picker{
   width: 220px;
@@ -29,4 +29,5 @@
 .search-term{
   width: 380px;
   display: inline-block;
+  vertical-align: top;
 }
