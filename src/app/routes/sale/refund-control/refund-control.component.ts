@@ -27,9 +27,9 @@ export class RefundControlComponent implements OnInit {
       text:'查看'
     };
     me.handlebutton = {
-      title: "查看",
-      type: "details",
-      text:'查看'
+       title: "设置",
+       type: "set",
+       text:'设置'
     };
 
     me.router.events
@@ -45,6 +45,14 @@ export class RefundControlComponent implements OnInit {
       });
     this.qeuryAllService();
   }
+
+  /**
+   * 根据商品名称搜索
+   */
+  search(){
+    this.qeuryAllService();
+  }
+
   /**
    * 查询买家评价分页
    */

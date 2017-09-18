@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
+import {isNullOrUndefined} from "util";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 
 @Injectable()
 export class OperationService {
@@ -62,4 +64,38 @@ export class OperationService {
     })
     return result;
   }
+
+  /**
+   * POST 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
+   */
+  addproblem(submitUrl, submitData, back?: boolean) {
+    let me = this, result;
+    me.ajax.post({
+      url: submitUrl,
+      data: submitData,
+      async: false,
+      success: (res) => {
+        if (res.success) {
+          console.log("█ res ►►►",  res);
+          result = res.info;
+        } else {
+          let errorMsg;
+          if (isNullOrUndefined(res.data)) {
+            result = res.info;
+            AppComponent.rzhAlt("error",result );
+          } else {
+            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
+          }
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", '网络错误');
+      }
+    })
+    return result;
+  }
+
 }

@@ -21,7 +21,7 @@ export class HelpUpdateComponent implements OnInit {
   private abc:any;
   public kindid: number;
   constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private submitt: SubmitService, private tools: RzhtoolsService,private helpAnswerComponent:HelpAnswerComponent,private location: Location) { }
+              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location) { }
 
   ngOnInit() {
     let me = this;
@@ -47,6 +47,7 @@ export class HelpUpdateComponent implements OnInit {
 
     //帮助问题修改时，先获取数据
     me.b=me.submitt.getData("/helpQuestions/loadHelpQuestions", {id:me.kindid});
+    console.log("█ me.b ►►►",  me.b);
   }
 
   /**
@@ -72,6 +73,7 @@ export class HelpUpdateComponent implements OnInit {
    */
   qeuryAll(){
     this.kinds = this.submitt.getData("/helpKind/queryAll",'');
+    console.log("█ this.kinds ►►►",  this.kinds);
   }
 
   /**

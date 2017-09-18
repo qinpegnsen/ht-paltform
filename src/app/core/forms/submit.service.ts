@@ -55,7 +55,7 @@ export class SubmitService {
       error: (res) => {
         MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
-        console.log("post error");
+        // console.log("res");
       }
     })
     return result;

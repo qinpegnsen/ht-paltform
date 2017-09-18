@@ -8,8 +8,8 @@
 
       <div class="select">
         <span style="margin-left: 20px">问题分类：</span>
-        <select id="" >
-          <option value="" *ngFor="let help of kinds">
+        <select id="" name="kindId" [(ngModel)]="b.kindId">
+          <option [value]="help.id" *ngFor="let help of kinds">
             {{help.kindName}}
           </option>
         </select>
@@ -35,7 +35,7 @@
 
       <div class="questiona">
         <label class="question col-sm-1 text-center">排序：</label>
-        <input type="text" class="col-sm-2 problem-box" name="sort" [(ngModel)]="b.sort">
+        <input type="number" class="col-sm-2 problem-box num" name="sort" [(ngModel)]="b.sort">
       </div>
 
       <div>

@@ -41,12 +41,12 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i>重消币：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="custCoin" ngModel required #custCoin="ngModel"/>
+                  <input class="form-control num" type="number"  name="custCoin" ngModel required #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
                 </div>
               </div>
               <div [hidden]="custCoin.valid || custCoin.pristine"
                    class="col-sm-9 pull-right text-danger">
-                请填写重消币
+                请填写重消币(最多写两位小数)
               </div>
             </fieldset>
 

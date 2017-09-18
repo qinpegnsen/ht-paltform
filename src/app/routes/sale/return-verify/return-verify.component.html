@@ -1,3 +1,140 @@
-<p>
-  return-verify works!
-</p>
+<div *ngIf="this.flag">
+  <div class="content-heading mb-lg">
+    退款管理
+  </div>
+
+  <div class="panel panel-default">
+    <!--操作提示-->
+    <div class="panel mb p ts">
+      <p class="font18">操作提示</p>
+      <ul>
+        <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。 如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
+        <li>平台也可以不经过商家处理，直接处理退款申请，退款给买家。</li>
+      </ul>
+    </div>
+
+    <div class="panel mb w98 search">
+      <div class="panel-body p ng-scope" ng-if="search">
+        <div class="form-group mb0">
+          <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
+          <div class="col-xs-5">
+            <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                   (change)="search($event)" placeholder="关键字">
+          </div>
+          <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="search($event)"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w5 text-center">
+            <rzhDefaultSorter by="sort"></rzhDefaultSorter>
+          </th>
+          <th class="w20 pull-left">
+            <rzhDefaultSorter>退单单号</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>退款金额（元）</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>申请时间</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>申请人（买家）</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>商家处理</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>平台处理</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter>商家名称</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+          <rzhDefaultSorter>商家处理时间</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter>管理操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <ng-container *ngFor="let count of dataTable.data; let i = index">
+
+          <tr class="text-center">
+            <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
+            <td class="pull-left">{{count.goodsCode}}111111111111111111111111</td>
+            <td>{{count.createTime}}</td>
+            <td>{{count.createTime}}</td>
+            <td>{{count.goodsCode}}</td>
+            <td>{{count.goodsName}} </td>
+            <td>{{count.goodsName}} </td>
+            <td>{{count.goodsName}} </td>
+            <td>
+              <app-buttons [config]="handlebutton" (click)="deleteCount(count.id)"></app-buttons>
+              <app-buttons [config]="seebutton" routerLink="../refund-details"
+                           [queryParams]="{linkType:'qq'}"></app-buttons>
+            </td>
+          </tr>
+
+          <tr *ngIf="count.isShow">
+            <td class="p0" colspan="11">
+              <div class="bg-table special text-left">
+                <span class="m20">申请原因:</span> <span>{{count.createTime}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="m20">订单编号:</span> <span>{{count.createTime}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="m20">涉及商品:</span> <span> </span>
+              </div>
+
+              <div class="bg-table special text-left">
+                <span class="m20 shopimg">商品图片:</span>
+                <span></span>
+                <!--<img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
+                <!--<img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
+              </div>
+              <div class="bg-table special text-left">
+              <span class="m20">商品ID:</span> <span> </span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="m20">商品处理备注:</span> <span></span>
+              </div>
+              <div class="bg-table special text-left">
+              <span class="m20">买家ID:</span> <span> </span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="m20">商家ID:</span> <span></span>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="9">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

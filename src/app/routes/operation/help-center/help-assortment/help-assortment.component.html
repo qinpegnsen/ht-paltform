@@ -7,7 +7,7 @@
   <div class="panel-body help-center-width"  >
     <div class="select">
      <span style="margin-left: 20px">问题分类：</span>
-      <select class="" type="text" [(ngModel)]="kindId"  name="id" >
+      <select class="" type="text" [(ngModel)]="kindId"  name="id">
         <option [value]="help.id" *ngFor="let help of kinds">
           {{help.kindName}}
         </option>
@@ -16,7 +16,7 @@
 
     <div class="questiona text-center">
       <label class="question col-sm-1">问题：</label>
-      <input type="text" class="col-sm-8 problem-box" name="question" ngModel>
+      <input type="text" class="col-sm-8 problem-box" name="question" ngModel >
     </div>
 
     <div class="reset-div text-edit">
@@ -35,13 +35,13 @@
 
     <div class="questiona">
       <label class="question col-sm-1 text-center">排序：</label>
-      <input type="text" class="col-sm-2 problem-box" name="sort" ngModel>
+      <input type="number" class="col-sm-2 problem-box num" name="sort" ngModel>
     </div>
 
     <div>
       <div class="col-sm-3 " >
 
-        <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" >提交信息</button>
+        <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid" >提交信息</button>
         <button class="ml btn btn-default mr pull-right" (click)="back()" type="button">取消</button>
       </div>
     </div>

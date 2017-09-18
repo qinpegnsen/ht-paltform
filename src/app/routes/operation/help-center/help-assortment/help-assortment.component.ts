@@ -8,6 +8,7 @@ import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {constructDependencies} from "@angular/core/src/di/reflective_provider";
 import {isNullOrUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {OperationService} from "../../operation.service";
 declare var $: any;
 @Component({
   selector: 'app-help-assortment',
@@ -19,8 +20,7 @@ export class HelpAssortmentComponent implements OnInit {
   private linkType:string;
   private kinds:any;
   private kindId: string;
-  private aa:any;
-  constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService, private tools: RzhtoolsService,) { }
+  constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService, private tools: RzhtoolsService,private operationService: OperationService,) { }
 
   ngOnInit() {
     let me=this;
@@ -83,8 +83,13 @@ export class HelpAssortmentComponent implements OnInit {
         answer:sHTML,
         sort: res.sort,
       }
-      this.submitt.postRequest(url,data,true);
-      this.qeuryAllService();
-      this.router.navigate(['/main/operation/help-center/help-answer']);
+      let answer=this.operationService.addproblem(url,data,true);
+      // console.log("█ re ►►►",  answer);
+      if(answer=='帮助问题名称已存在' || answer=='排序不能为空' ||answer=='答案不能为空' || answer=='问题不能为空'){
+        return;
+      }else{
+        this.qeuryAllService();
+        this.router.navigate(['/main/operation/help-center/help-answer']);
+      }
     }
 }

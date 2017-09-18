@@ -40,29 +40,32 @@
 <div class="panel panel-danger">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
-           (pageChange)="qeuryAllService($event)">
+           (pageChange)="qeuryAllService(1,$event)">
       <thead>
       <tr>
         <th class="w5 unselectable text-center">
           <rzhDefaultSorter> 序号</rzhDefaultSorter>
         </th>
-        <th class="w35 unselectable hidden-sm">
+        <th class="w30 unselectable hidden-sm">
           <rzhDefaultSorter by="goodsName">商品名</rzhDefaultSorter>
         </th>
         <th class="w15 unselectable">
           <rzhDefaultSorter by="sku">规格/规格值</rzhDefaultSorter>
         </th>
         <th class="w10 unselectable text-center">
-          <rzhDefaultSorter by="price">价格（元）</rzhDefaultSorter>
+          <rzhDefaultSorter by="price">会员价格（元）</rzhDefaultSorter>
+        </th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="price">批发价格（元）</rzhDefaultSorter>
         </th>
         <th class="w10 unselectable text-center">
           <rzhDefaultSorter by="time">发布时间</rzhDefaultSorter>
         </th>
-        <th class="w10 unselectable text-center">
+        <th class="w5 unselectable text-center">
           <rzhDefaultSorter by="price">是否允许批发</rzhDefaultSorter>
         </th>
         <th class="w20 unselectable text-center">
-          <rzhDefaultSorter by="price">操作</rzhDefaultSorter>
+          <rzhDefaultSorter by="price">设置批发价</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
@@ -87,6 +90,9 @@
           </div>
         </td>
         <td><span class="font12">￥</span>&nbsp;
+          {{goods.goodsPrice.memberPrice | decimalTwo}}
+        </td>
+        <td><span class="font12">￥</span>&nbsp;
           {{goods.goodsPrice.batchPrice | decimalTwo}}
         </td>
         <td>{{goods.createTime}}</td>
@@ -98,9 +104,17 @@
           </label>
         </td>
         <td>
-          <input class="form-control w40 text-center price-change-box" type="text" placeholder="0.00" [(ngModel)]="_goods[i]"        name="batchPrice">
-          <span class="btn btn-green  aa" (click)="submita(goods.goodsCode,i)" type="submit"><i class="fa fa-check                checkmark"></i></span>
-
+          <div>
+            <input class="form-control w40 text-center price-change-box num" required type="number" placeholder="0.00" [(ngModel)]="_goods[i]"    name="batchPrice" #batchPrice="ngModel" [pattern]="patterns.twodecimal">
+            <span class="btn btn-green  aa" (click)="submita(goods.goodsCode,i,data.curPage)" type="submit"><i class="fa fa-check                checkmark"></i></span>
+          </div>
+          <!--<div [hidden]="batchPrice < goods.goodsPrice.batchPrice || batchPrice.value == goods.goodsPrice.batchPrice || !goods.goodsPrice.batchPrice"-->
+          <!--class="text-danger font12">批发价小于会员价-->
+          <!--</div>-->
+          <div [hidden]="batchPrice.valid || batchPrice.pristine"
+               class="col-sm-9 text-danger">
+            请填写批发价(最多写两位小数)
+          </div>
         </td>
       </tr>
       </tbody>

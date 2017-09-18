@@ -7,7 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
 import {isNullOrUndefined, isUndefined} from "util";
 import {GoodsService} from "../goods.service";
-import {SelectComponent} from "ng2-select";
+import {PatternService} from "../../../core/forms/pattern.service";
+
 @Component({
   selector: 'app-wholesale-merchandise-management',
   templateUrl: './wholesale-merchandise-management.component.html',
@@ -23,10 +24,10 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
   public _goods = [];
   public value: any = {};
   constructor(private ajax: AjaxService,private submit: SubmitService,
-              private goods: GoodsService,private router:Router) { }
+              private goods: GoodsService,private router:Router,private patterns: PatternService) { }
 
   ngOnInit() {
-    this.qeuryAllService();
+    this.qeuryAllService(1);
     this.getBrandList()
   }
 
@@ -34,7 +35,7 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
    * 品牌名称
    */
   search(){
-    this.qeuryAllService();
+    this.qeuryAllService(1);
   }
 
   /**
@@ -43,7 +44,7 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
    */
   getKind(data) {
     this.kindId = data.kindId;
-    this.qeuryAllService();
+    this.qeuryAllService(1);
     this.getBrandList(this.kindId)
   }
 
@@ -52,7 +53,7 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
    */
   refreshValue(value: any): void {
     this.brandName = value.text;
-    this.qeuryAllService();
+    this.qeuryAllService(1);
   }
 
   /**
@@ -73,12 +74,17 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
     }
     this.brandList = newList;
   }
+
   /**
    * 批发商品管理--查询分页
    */
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?: PageEvent,){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if (typeof event !== 'undefined') {
+      activePage = event.activePage;
+    } else if (!isUndefined(curPage)) {
+      activePage = curPage;
+    };
     let url = "/goodsQuery/querySku";
     let data={
       curPage: activePage,
@@ -89,13 +95,13 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
-    console.log(me.data)
+    console.log("█  ►►►",result);
   }
 
   /**
    * 是否允许批发
    */
-  startState(data) {
+  startState(data,curPage) {
     let _this = this, isBatch;
     if(data.isBatch == 'Y') data.isBatch = 'N';
     else data.isBatch = 'Y';
@@ -110,29 +116,36 @@ export class WholesaleMerchandiseManagementComponent implements OnInit {
         success: (res) => {
           if (res.success) AppComponent.rzhAlt("success",res.info);
           else AppComponent.rzhAlt("error",res.info);
-          _this.qeuryAllService()
+          _this.qeuryAllService(curPage)
         },
         error: (data) => {
           AppComponent.rzhAlt("error",data.info);
-          _this.qeuryAllService()
+          _this.qeuryAllService(curPage)
         }
       });
     }else if(isNullOrUndefined(data.goodsPrice.batchPrice)){
       AppComponent.rzhAlt("warning",'请先设置价格');
-      _this.qeuryAllService();
+      _this.qeuryAllService(curPage);
     }
   }
 
   /**
    * 批发价修改
    */
-  submita(goodsCode,i) {
-      let url = '/goodsEdit/updateBatchPrice';
-      let data = {
-        goodsCode:goodsCode,
-        batchPrice:this._goods[i],
-      }
-      this.submit.putRequest(url, data);
-      this.qeuryAllService();
+  submita(goodsCode,i,curPage) {
+    let _this=this;
+    // if(_this._goods[i]<_this.goodsPrice.memberPrice){
+    let url = '/goodsEdit/updateBatchPrice';
+    let data = {
+      goodsCode: goodsCode,
+      batchPrice: this._goods[i],
+    }
+    _this.submit.putRequest(url, data);
+    _this.qeuryAllService(curPage);
+  // }else{
+    // AppComponent.rzhAlt("error","修改价格失败");
+    // }
+      console.log("█ this._goods[i] ►►►",  this._goods[i]);
+
   }
 }

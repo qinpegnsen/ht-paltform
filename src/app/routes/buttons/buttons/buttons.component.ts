@@ -128,6 +128,8 @@ export class ButtonsComponent implements OnInit {
         return {btnClass: ButtonsComponent.buttonStyles.purpleLight, iconClass: "icon-cloud-upload"};
       case "stop":
         return {btnClass: ButtonsComponent.buttonStyles.dark, iconClass: "fa fa-cog"};
+        case "set":
+        return {btnClass: ButtonsComponent.buttonStyles.info, iconClass: "icon icon-settings"};
     }
   }
 

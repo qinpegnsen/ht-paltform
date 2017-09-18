@@ -15,7 +15,6 @@ export class RefundDetailsComponent implements OnInit {
   ngOnInit() {
     let me=this;
     me.queryParams = me.routeInfo.snapshot.queryParams['queryParams'];
-
     me.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
@@ -28,5 +27,4 @@ export class RefundDetailsComponent implements OnInit {
         }
       });
   }
-
 }
