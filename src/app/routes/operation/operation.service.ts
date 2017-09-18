@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
+import {isNullOrUndefined} from "util";
 
 @Injectable()
 export class OperationService {
@@ -64,31 +65,6 @@ export class OperationService {
   }
 
 
-  /**
-   * get 请求   获取关联的商品
-   * @param url
-   * @param data
-   * @returns {any}
-   */
-  linkGoods(url, data) {
-    let me = this, result;
-    me.ajax.get({
-      url: url,
-      data: data,
-      async: false,
-      success: (res) => {
-        if(res.success){
-          result=res.data;
-        }else{
-          AppComponent.rzhAlt("error", res.info);
-        }
-      },
-      error: () => {
-        AppComponent.rzhAlt("error", '关联商品连接服务错误');
-      }
-    })
-    return result;
-  }
 
   /**
    * POST 请求
