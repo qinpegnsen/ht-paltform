@@ -294,7 +294,11 @@ export class AddArticleComponent implements OnInit {
 
     this.closeAlert();//关闭弹窗
 
-    $("._myAppend").css("height", '300px')
+    if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
+      $("._myAppend").css("height", '0px')
+    }else{
+      $("._myAppend").css("height", '300px')
+    }
     $("._myAppend").append($(".panel-success").find('li'));
 
     let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" ></i></label></div>`
