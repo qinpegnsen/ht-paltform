@@ -4,10 +4,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-deliver-goods',
-  templateUrl: './deliver.html',
-  styleUrls: ['./deliver.scss']
+  templateUrl: './deliver.component.html',
+  styleUrls: ['./deliver.component.scss']
 })
-export class SendGoodsComponent implements OnInit {
+export class DeliverComponent implements OnInit {
   public showDeliverWindow:boolean = false;
   @Input('orderId') orderId: string;
   @Output() deliverGoods = new EventEmitter();

@@ -1,11 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {PublishComponent} from "../publish/publish.component";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isNull, isNullOrUndefined, isUndefined} from "util";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
 import {FileUploader} from "ng2-file-upload";
-import {GetUidService} from "../../../core/services/get-uid.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {AppComponent} from "../../../app.component";
 import {MaskService} from "../../../core/services/mask.service";
@@ -32,17 +31,20 @@ export class EditDetailComponent implements OnInit {
   private mblItemList = [];         //手机端上传后的图片集合
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private myReadOnly: boolean;     // 商品详情或审核商品时是只读状态
+  private myReadOnly: boolean = false;     // 商品详情或审核商品时是只读状态
   private goodsBody: any;          //商品详情
-  private audit: any;              // 商品审核
-  private goodsAudits: any;        // 商品审核状态列表
   public storeCode:string;          //店铺编码
   public logistics:any;             // 物流规则列表
   public tplVals:any;               // 运费模板内容
   private unit:string = '件';       // 运费价格
-  targetUrl = location.protocol+'//'+location.host+'/main/operation/freight-template'; //新增模流模板地址
+
   private publishData: any = {
-    goodsExpressInfo: {},
+    goodsExpressInfo: {
+      freightType: null,
+      fixedFreight: null,
+      expressTplId: null
+    },
+    isFreight: null,
     goodsImagesList: [],
     goodsBaseAttrList: [],
     goodsSkuList: [
@@ -72,7 +74,6 @@ export class EditDetailComponent implements OnInit {
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
-              private getUid: GetUidService,
               private tools: RzhtoolsService) {
   }
 
@@ -80,6 +81,7 @@ export class EditDetailComponent implements OnInit {
   ngOnInit() {
 
     let me = this;
+    me.publishComponent.step = 2
     me.route.url.subscribe(paths => {
       me.path = paths[0].path;
     })
@@ -91,39 +93,12 @@ export class EditDetailComponent implements OnInit {
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
-        me.publishComponent.step = 2;
         me.publishData['kindSelectName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
         // 默认值
         me.publishData['isFreight'] = 'N';                  //是否有运费
         me.publishData['haveGift'] = 'Y';                   //是否有赠品
         me.publishData['isJoinLimitime'] = 'Y';             //是有参加活动
         me.publishData['brandCode'] = '';                   //品牌
-        me.publishData.goodsExpressInfo.weight = 1.00;      //重量
-        me.publishData.goodsExpressInfo.volume = 1.00;      //体积
-        me.publishData.goodsExpressInfo['freightType'] = 'FIXED';   //运费类型默认固定运费
-        me.publishData.goodsExpressInfo.expressTplId = '';  //运费模板
-      }
-
-      if (me.path == 'edit') me.publishComponent.step = 2;
-      if (me.path == 'audit') {
-        me.publishComponent.step = 0;
-        me.myReadOnly = true;// 商品详情或审核商品时是只读状态
-        me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
-        // 去掉待审核状态
-        for (var i = me.goodsAudits.length - 1; i >= 0; i--) {
-          var obj = me.goodsAudits[i];
-          if (obj.key == 'AUDIT') {
-            me.goodsAudits.splice(i, 1)
-          }
-        }
-        // 初始化默认审核状态
-        me.audit = {
-          opinion: '',
-          result: 'PASS',
-          goodsBaseCode: me.goodsBaseCode
-        }
-      } else{
-        me.myReadOnly = false;
       }
 
       /**
@@ -145,43 +120,39 @@ export class EditDetailComponent implements OnInit {
           }
         });
 
-        if (me.path != 'audit') {
-          //当点击批量修改价格的按钮时
-          $('.sku-table').on('click', '.s-menu', function () {
-            $(this).find('input').val('');
-            $(this).next().slideToggle(200)
-          });
+        //当点击批量修改价格的按钮时
+        $('.sku-table').on('click', '.s-menu', function () {
+          $(this).next().slideToggle(200)
+        });
 
-          //当点击批量修改小窗口的关闭时
-          $('.sku-table').on('click', '.close', function () {
-            $(this).parents('.dropdown-menu').slideUp(200);
-          });
+        //当点击批量修改小窗口的关闭时
+        $('.sku-table').on('click', '.close', function () {
+          $(this).parents('.dropdown-menu').slideUp(200);
+        });
 
-          //当点击移动端编辑图片的时候
-          $('.app-control').on('click', '.app-img-box', function () {
-            let target = this;
-            me.editMblImg(target);
-          })
+        //当点击移动端编辑图片的时候
+        $('.app-control').on('click', '.app-img-box', function () {
+          let target = this;
+          me.editMblImg(target);
+        })
 
-          $('body').click(function (e) {
-            if (!$(e.target).parents().hasClass('app-img-box')) {
-              $('.app-img-box ._edit').addClass('hide');
-            } //关闭选框
-          });
+        $('body').click(function (e) {
+          if (!$(e.target).parents().hasClass('app-img-box')) {
+            $('.app-img-box ._edit').addClass('hide');
+          } //关闭选框
+        });
 
-          //当点击批量设置按钮的时候
-          $('.sku-table').on('click', '.set', function () {
-            let target = this;
-            $(target).parents('dropdown-menu').slideUp(200);
-          })
-        }
+        //当点击批量设置按钮的时候
+        $('.sku-table').on('click', '.set', function () {
+          let target = this;
+          $(target).parents('dropdown-menu').slideUp(200);
+        })
 
-        if (me.path == 'edit' || me.path == 'audit') {
+        if (me.path == 'edit') {
           me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
           me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
           me.genMblItemList();        //将html字符串生成移动端图片文字组合
         }
-
       })
     }
 
@@ -212,6 +183,16 @@ export class EditDetailComponent implements OnInit {
         }
       }
     }
+  }
+//添加物流模板
+  addLogisticsModule(){
+    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+    window.open(preUrl + '/main/operation/freight-template/add-formoek?linkType=addArticle')
+  }
+//查看物流模板
+  lookLogisticsModule(){
+    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+    window.open(preUrl + '/main/operation/freight-template')
   }
 
   /**
@@ -253,7 +234,7 @@ export class EditDetailComponent implements OnInit {
         $('#summernote').summernote('code', me.goodsBody);   //PC端详情
       }, 1)
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-      if(me.publishData.goodsExpressInfo.expressTplId) me.getTplValById(); //根据物流模板ID获取模板值
+      if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
     }
   }
 
@@ -284,6 +265,21 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 审核input框的value合不合要求
+   */
+  auditInputValueForNum(target,type?){
+    let val = target.value, reg;
+    console.log("█ val ►►►",  val);
+    if(type == 'int') reg = val.match(/\d+/);
+    else reg = val.match(/\d+(\.\d{1,2})?/);
+    if (!isNull(reg)){
+      target.value = reg[0];
+    }else {
+      target.value = val.substring(0,val.length-1)
+    }
+  }
+
+  /**
    * edit将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
    * 同时生成一个老图片对象，用于显示与修改老图片
    */
@@ -306,7 +302,6 @@ export class EditDetailComponent implements OnInit {
     let me = this;
     me.oldImgs[groupId].splice(index, 1);      //删除老图片组中的这个图片
     me.goodsImgList[groupId].splice(index, 1); //删除总图片组中的这个图片
-    // console.log("█ me.goodsImgList ►►►",  me.goodsImgList);
   }
 
   /**
@@ -837,8 +832,95 @@ export class EditDetailComponent implements OnInit {
    */
   publishGoods() {
     let me = this;
-    MaskService.showMask();//显示遮罩层
-    me.uploadImgs();// 先上传图片
+    if(me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeLogistics()){
+      MaskService.showMask();//显示遮罩层
+      me.uploadImgs();// 先上传图片
+    }
+  }
+
+  /**
+   * 判断商品图片是否上传
+   * @returns {boolean}
+   */
+  judgeGoodsImgs(){
+    let me = this, targets = me.skuImg.vals;
+    if(targets.length > 0){
+      for(let target of targets){
+        if(target.uploader.queue.length == 0){
+          AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+target.valName+'的商品的图片');
+          return false
+        }
+      }
+    }else{
+      AppComponent.rzhAlt('warning','请选择商品规格');
+      return false
+    }
+    return true
+  }
+
+  /**
+   * 判断物流规则是否正确
+   * @returns {boolean}
+   */
+  judgeLogistics(){
+    let me = this;
+    if(me.publishData.isFreight == 'Y'){
+      let obj = me.publishData.goodsExpressInfo;
+      if(!isNullOrUndefined(obj.freightType)){
+        //如果使用物流模板
+        if(obj.freightType == 'TPL'){
+          if(obj.expressTplId == '' || isNullOrUndefined(obj.expressTplId)){
+            AppComponent.rzhAlt('warning','请选择物流模板');
+            return false;
+          }
+        }else{
+          if(obj.fixedFreight == '' || isNullOrUndefined(obj.fixedFreight)){
+            AppComponent.rzhAlt('warning','请设置固定运费');
+            return false;
+          }
+        }
+      }else{
+        AppComponent.rzhAlt('warning','请设置运费');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * 判断价格或库存是否符合要求
+   * @returns {boolean}
+   */
+  judgeSkuPrices(){
+    let me = this;
+    if(me.skuImg.vals.length > 0){
+      let target = me.publishData.goodsSkuList;
+      for (let item of target){
+        if(Number(item.marketPrice) == 0){
+          AppComponent.rzhAlt('warning','请输入商品的市场价');
+          return false;
+        } else if(Number(item.price) == 0){
+          AppComponent.rzhAlt('warning','请输入商品价格');
+          return false;
+        } else if(Number(item.memberPrice) == 0){
+          AppComponent.rzhAlt('warning','请输入商品的会员价');
+          return false;
+        } else if(Number(item.price) > Number(item.marketPrice)){
+          AppComponent.rzhAlt('warning','商品价格应小于市场价');
+          return false;
+        } else if(Number(item.memberPrice) > Number(item.price)){
+          AppComponent.rzhAlt('warning','会员价应小于商品价格');
+          return false;
+        }else if(Number(item.storageNum)<10){
+          AppComponent.rzhAlt('warning','商品库存必须大于10');
+          return false;
+        }else{
+          return true
+        }
+      }
+    }else{
+      AppComponent.rzhAlt('warning','请选择商品规格');
+    }
   }
 
   /**
@@ -854,14 +936,6 @@ export class EditDetailComponent implements OnInit {
     me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
     console.log("█ me.publishData ►►►", me.publishData);
     me.goods.publishGoods('/goodsEdit/save', me.publishData);
-  }
-
-  /**
-   * 审核商品
-   */
-  auditGoods() {
-    let me = this;
-    me.goods.putRequest('/goodsEdit/auditGoods', me.audit, true)
   }
 
 }

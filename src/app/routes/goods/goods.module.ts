@@ -9,13 +9,15 @@ import {AddKindComponent} from "./add-kind/add-kind.component";
 import {SharedModule} from "../../shared/shared.module";
 import {AddBrandComponent} from "./add-brand/add-brand.component";
 import {ChooseKindComponent} from "./choose-kind/choose-kind.component";
-import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {GoodsService} from "./goods.service";
 import {SubmitService} from "../../core/forms/submit.service";
 import { PublishedComponent } from './published/published.component';
 import {ManageService} from "./manage/manage.service";
-import { WholesaleMerchandiseManagementComponent } from './wholesale-merchandise-management/wholesale-merchandise-management.component';
+import {EditDetailComponent} from "./edit-detail/edit-detail.component";
+import {AuditGoodsComponent} from "./audit-goods/audit-goods.component";
+import {WholesaleComponent} from "./wholesale/wholesale.component";
+
 
 
 // 父路由，用于页面嵌套显示
@@ -28,11 +30,11 @@ const routes: Routes = [
     {path: 'step_two', component: EditDetailComponent},
     {path: 'step_three', component: PublishedComponent},
     {path: 'edit', component: EditDetailComponent},
-    {path: 'audit', component: EditDetailComponent}
+    {path: 'audit', component: AuditGoodsComponent}
   ]
   },
   {path: 'manage', component: ManageComponent},
-  {path: 'wholesale', component: WholesaleMerchandiseManagementComponent},
+  {path: 'wholesale', component: WholesaleComponent},
   {
     path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},
@@ -67,8 +69,9 @@ const routes: Routes = [
     AddBrandComponent,
     ChooseKindComponent,
     EditDetailComponent,
+    AuditGoodsComponent,
     PublishedComponent,
-    WholesaleMerchandiseManagementComponent,
+    WholesaleComponent,
   ],
   providers: [
     GoodsService,

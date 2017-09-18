@@ -10,7 +10,7 @@ import {SharedModule} from "../../shared/shared.module";
 import { BuyerEvaluationComponent } from './buyer-evaluation/buyer-evaluation.component';
 import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
 import { CanceledComponent } from './orders/canceled/canceled.component';
-import { SendGoodsComponent } from './orders/deliver/deliver';
+import {DeliverComponent} from './orders/deliver/deliver.component';
 import { CancelComponent } from './orders/cancel/cancel.component';
 import { LookLogisticsComponent } from './orders/look-logistics/look-logistics.component';
 
@@ -49,9 +49,10 @@ const routes: Routes = [
     WaitForSendComponent,
     OrderDetailComponent,
     CanceledComponent,
-    SendGoodsComponent,
+    DeliverComponent,
     CancelComponent,
-    LookLogisticsComponent
+    LookLogisticsComponent,
+    DeliverComponent
   ],
   providers: [
     OrdersComponent,
