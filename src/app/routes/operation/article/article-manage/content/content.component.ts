@@ -98,7 +98,7 @@ export class ContentComponent implements OnInit,OnChanges  {
   }
 
   /**
-   * 得到各种状态的总条数，跟多地方用到
+   * 得到各种状态的总条数，很多地方用到
    */
   public getTotalRow(){
     let data={}
@@ -118,7 +118,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:8,
+      pageSize:6,
       articleState:this.articleState,
       articleTitle:this.searchKey,
       isTopState:booelean

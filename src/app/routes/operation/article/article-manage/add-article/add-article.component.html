@@ -70,7 +70,7 @@
             <div class="col-sm-9">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
-                  <input type="radio" value="{{item.key}}" (click)="changeState(item.key)"
+                  <input type="radio" value="{{item.key}}" (click)="coverType(item.key)"
                          [(ngModel)]="articleCoverType" name="articleCoverType" class="col-sm-2"/>
                   <span class="fa fa-circle"></span>{{item.text}}
                 </label>
@@ -81,13 +81,21 @@
         <fieldset *ngIf="flag">
           <div class="form-group">
             <label class="col-sm-2 control-label">封面图片</label>
-            <div class="col-sm-3">
-              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="myImg" alt="">
-              <label for="image-input" class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{fileName}}
-                <input type="file" name="coverImg" ng2FileSelect [uploader]="uploader"
-                       (change)="fileChangeListener($event)"/>
-              </label>
+            <div class="col-sm-10">
+              <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
+                <span class="close" (click)="item.remove()">×</span>
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                </span>
+              </span>
+              <div class="">
+                <label for="image-input" class="btn btn-default file-upload col-sm-3">
+                  <i class="icon-cloud-upload mr"></i>{{fileName}}
+                  <input type="file" name="coverImg" ngModel ng2FileSelect [uploader]="uploader"
+                         multiple maxlength="3"/>
+                </label>
+              </div>
             </div>
           </div>
         </fieldset>
@@ -118,18 +126,22 @@
           </div>
         </fieldset>
         <fieldset>
-          <div class="form-group">
+          <div class="form-group _myLinkGood">
             <label class="col-sm-2 control-label">关联商品列表</label>
             <div class="col-sm-10">
-              <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" [(ngModel)]="linkGoodStr"/>
+              <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
+            <div class="_myAppend col-sm-12">
+
+            </div>
           </div>
+
         </fieldset>
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'DRAFT')"
+            <button class="ml btn btn-success pull-left" type="submit" (click)="submit(addArticle.value,'DRAFT')"
                     [disabled]="addArticle.invalid">存草稿
             </button>
             <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'AUDIT')"
@@ -331,15 +343,187 @@
 <!--审核文章-->
 <div class="col-lg-10" *ngIf="linkType=='auditArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #aduit="ngForm">
+
+
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
+
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>文章分类</label>
+            <div class="col-sm-4">
+              <select class="form-control" type="text" name="articleClassId"
+                      [(ngModel)]="queryArticleData.articleClassId" required>
+                <option [value]="item.id" *ngFor="let item of articleClassList">{{item.acName}}</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleTitle" required
+                     placeholder='必填项'/>
+              <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
+                   class="alert alert-danger">
+                文章标题是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
+            <div class="col-sm-6">
+              <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleTitleShort"
+                     required placeholder='必填项'/>
+              <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
+                   class="alert alert-danger">
+                文章短标题是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>文章摘要
+            </label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
+"
+                     required placeholder='必填项'/>
+              <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
+                   class="alert alert-danger">
+                文章摘要是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>文章内容</label>
+            <div class="col-sm-10">
+              <div id="summernote" class="summernote">
+                <span> </span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>是否推荐</label>
+            <div class="col-sm-9 control-label">
+              <div class="radio c-radio pull-left">
+                <label>
+                  <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"
+                         #articleCommendY class="col-sm-2"/>
+                  <span class="fa fa-circle"></span>是
+                </label>
+                <label>
+                  <input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"
+                         #articleCommendN class="col-sm-2"/>
+                  <span class="fa fa-circle"></span>否
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>
+            <div class="col-sm-9 control-label">
+              <div class="radio c-radio pull-left">
+                <label>
+                  <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommentFlag"
+                         name="articleCommentFlag" #articleCommendY class="col-sm-2"/>
+                  <span class="fa fa-circle"></span>是
+                </label>
+                <label>
+                  <input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommentFlag"
+                         name="articleCommentFlag" #articleCommendN class="col-sm-2"/>
+                  <span class="fa fa-circle"></span>否
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><i>*</i>封面类型</label>
+            <div class="col-sm-9">
+              <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
+                <label>
+                  <input type="radio" value="{{item.key}}" (click)="changeState(item.key)"
+                         [(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>
+                  <span class="fa fa-circle"></span>{{item.text}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="flag">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">封面路径
+            </label>
+            <div class="col-sm-10">
+              <label for="image-input" class="file-upload">
+                <button class="btn btn-info"><em class="fa fa-upload mr" (click)="upload()"></em>图片上传</button>
+                <input id="image-input" type="file">
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">文章标签
+            </label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleTag"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">关键字</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleKeyword"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">相关文章
+            </label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleLink"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">关联商品列表</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="goodIds" #goodIdsTem="ngModel" ngModel/>
+            </div>
+          </div>
+        </fieldset>
+
+
+
         <fieldset>
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>审核结果</label>
             <div class="col-sm-4">
               <select class="form-control" type="text" name="auditState" [(ngModel)]="auditResult" required>
-                <option [value]="item.name" *ngFor="let item of autionOptions">{{item.name}}</option>
+                <option [value]="item.id" *ngFor="let item of autionOptions">{{item.name}}</option>
               </select>
             </div>
           </div>
@@ -369,6 +553,9 @@
 
     </div>
     <!-- END panel-->
+
+
+
   </form>
 </div>
 
@@ -430,16 +617,19 @@
               <ul class="list-group">
                 <li *ngFor="let item of linkGoodsList; let i = index" class="list-group-item" dnd-sortable
                     [sortableIndex]="i">
-                  <div>
-                    <span class="p0 _span">
+                  <div class="clearfix">
+                    <div class="p0 _span col-lg-1">
                       <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                    </span>
-                    <span class="_desc">
+                    </div>
+                    <div class="col-lg-6">
                       <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
-                      <span class="extra p10 ml"><span>￥：{{item.goodsPrice.memberPrice}}</span></span>
+                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
                       <input type="hidden" value="{{item.goodsCode}}">
-                    </span>
+                    </div>
+                    <div class="col-lg-2">
+                      <span class="extra p10 ml _desc"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -458,16 +648,19 @@
               <ul class="list-group">
                 <li *ngFor="let item of listTeamOne; let i = index" class="list-group-item" dnd-sortable
                     [sortableIndex]="i">
-                  <div>
-                    <span class="p0 _span">
-                      <img src="{{item.goodsImage}}" alt="" class='special'
+                  <div class="clearfix">
+                    <div class="p0 _span col-lg-1">
+                      <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                    </span>
-                    <span class="_desc">
-                      <span (click)="showDetail(shop)">{{item.goodsName}}</span><br>
-                      <span class="extra"><span>￥：{{item.goodsPrice.memberPrice}}</span></span>
+                    </div>
+                    <div class="col-lg-6 _copy">
+                      <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
+                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
                       <input type="hidden" value="{{item.goodsCode}}">
-                    </span>
+                    </div>
+                    <div class="col-lg-2">
+                      <span class="extra p10 ml _desc"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    </div>
                   </div>
                 </li>
               </ul>

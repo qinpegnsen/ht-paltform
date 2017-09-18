@@ -60,7 +60,7 @@
   width:60px;height:60px;display: inline-block;
 }
 ._desc{
-  height:60px;width:120px;display: inline-block;
+  width:45px;display: inline-block;
 }
 ._scroll{
   height:500px;
@@ -77,3 +77,14 @@
   padding-left:0px !important;
   padding-right:30px;
 }
+._img{
+  width:300px;height:200px;
+}
+._uploadImg{
+  display: inline-block;
+  margin-bottom: 15px;
+}
+._myAppend{
+  margin-top:15px;
+  overflow-y: scroll;
+ }

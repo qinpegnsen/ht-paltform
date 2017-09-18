@@ -33,13 +33,11 @@ export class AddArticleComponent implements OnInit {
     queueLimit: 1
   });
 
-  private fileName: string = '选择图片';
-  private myImg: any;
   private uuid: any;
   public linkType: string;
   public contents: string;
   public reason: string;
-  public flag: boolean = false;                      //开关，用来判断是否显示图片路径
+  public flag: boolean = false;                    //开关，用来判断是否显示图片路径
   public articleClassList;                          // 文章分类列表的数据
   public articleId: number                          // 路由传递过来的文章的id
   public queryArticleData: any                      //用来保存根据文章的id查询出来的文章的信息
@@ -51,12 +49,13 @@ export class AddArticleComponent implements OnInit {
   public goodShow: boolean = false;                 //关联商品的弹框
   public linkGoods: any;                             //关联商品的数据
   private kindId: any = '';                          //品牌名
-  public brandList:any;                              //品牌列表
+  public brandList: any;                              //品牌列表
   linkGoodsList: Array<any>;                          //可以选择的商品
   listTeamOne: Array<any> = [];                       //已经选择的商品
   private brandName: any = '';                       //品牌名
   private goodsName: any = '';                       //商品名
   private linkGoodStr: any = '';                     //关联商品id的拼接
+  private deletebutton: Object;                       //删除按钮
   constructor(public settings: SettingsService,
               private routeInfo: ActivatedRoute,
               public router: Router,
@@ -75,9 +74,6 @@ export class AddArticleComponent implements OnInit {
    * 3.调用关联的商品
    */
   ngOnInit() {
-
-
-
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
 
@@ -90,16 +86,18 @@ export class AddArticleComponent implements OnInit {
 
     ]
 
+    this.deletebutton = {//删除按钮
+      title: "删除",
+      type: "delete"
+    };
+
     /**
      * 初始化的时候调取文章分类的接口
      * @type {string}
      */
-    let url = '/articleClass/queryArticleClassPage';
-    let data = {
-      curPage: 1,
-      pageSize: 10,
-    }
-    this.articleClassList = this.service.getData(url, data).voList
+    let url = '/articleClass/queryArticleClassByAcName';
+    let data = {}
+    this.articleClassList = this.service.getData(url, data)
 
     /**
      * 调用富文本编辑器，初始化编辑器
@@ -134,7 +132,7 @@ export class AddArticleComponent implements OnInit {
      * 根据id查询文章的数据
      * @type {string}
      */
-    if (this.linkType == 'updataArticle') {
+    if (this.linkType == 'updataArticle' || this.linkType == 'auditArticle') {
       let queryArticleurl = '/article/queryArticle';
       let queryArticledata = {
         articleId: this.articleId,
@@ -161,12 +159,9 @@ export class AddArticleComponent implements OnInit {
      * @type {[{id: number; name: string},{id: number; name: string}]}
      */
     this.autionOptions = [
-      {id: 1, name: 'SUCCESS'},
-      {id: 2, name: 'FAILURE'}
+      {id: 'SUCCESS', name: '成功'},
+      {id: 'FAILURE', name: '失败'}
     ]
-
-    this.getLinkGoods();
-
   }
 
 
@@ -185,10 +180,10 @@ export class AddArticleComponent implements OnInit {
    * @param data  选择分类组件输出数据
    */
   getBrandList(kindId?) {
-    if(isUndefined(kindId)) kindId = '';
-    let list = this.goods.getBrandListByKind(kindId),newList = [];
-    if(!isNullOrUndefined(list)) {
-      for(let item of list){
+    if (isUndefined(kindId)) kindId = '';
+    let list = this.goods.getBrandListByKind(kindId), newList = [];
+    if (!isNullOrUndefined(list)) {
+      for (let item of list) {
         let obj = {
           id: item.id,
           text: item.brandName,
@@ -210,7 +205,7 @@ export class AddArticleComponent implements OnInit {
   /**
    * 商品名称搜索
    */
-  search(){
+  search() {
     this.getLinkGoods();
   }
 
@@ -227,16 +222,24 @@ export class AddArticleComponent implements OnInit {
     }
     this.linkGoods = this.operationService.linkGoods(url, data);
     if (this.linkGoods) this.linkGoodsList = this.linkGoods.voList;
+    console.log("█  this.linkGoodsList ►►►", this.linkGoodsList);
   }
 
 
   /**
-   * 单选按钮的点击事件，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件不行
+   * 点击选择封面类型，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件
    * @param code
    */
-  changeState(code) {
+  coverType(code) {
     if (code == 'ONE' || code == 'THREE') {
       this.flag = true;
+      if (code == 'THREE') {
+        this.uploader = new FileUploader({
+          url: uploadUrl,
+          itemAlias: "limitFile",
+          queueLimit: 3
+        });
+      }
     } else {
       this.flag = false;
     }
@@ -255,33 +258,14 @@ export class AddArticleComponent implements OnInit {
     }
   }
 
-  /**
-   * 监听图片选择
-   * @param $event
-   */
-  fileChangeListener($event) {
-    let that = this;
-    let image: any = new Image();
-    let file: File = $event.target.files[0];
-    that.fileName = file.name;
-    let myReader: FileReader = new FileReader();
-
-    myReader.readAsDataURL(file);
-
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.myImg = image.src;
-    };
-
-
-  }
 
   /**
    *为文章关联商品
    */
   linkGood() {
+    this.getLinkGoods()  //获取商品分类的数据
     // MaskService.simpleShowMask(); //显示遮罩层
-    $("session").css('z-index',120)
+    $("session").css('z-index', 120)
     this.goodShow = !this.goodShow;
   }
 
@@ -298,8 +282,41 @@ export class AddArticleComponent implements OnInit {
   closeAlert() {
     this.goodShow = !this.goodShow;
     // MaskService.simpleHideMask(); //隐藏遮罩层
-    $("session").css('z-index',0)
+    $("session").css('z-index', 0)
   }
+
+  /**
+   * 获取弹框选择的商品的信息
+   */
+  alertResult() {
+    let  me = this;
+
+
+    this.closeAlert();//关闭弹窗
+
+    $("._myAppend").css("height", '300px')
+    $("._myAppend").append($(".panel-success").find('li'));
+
+    let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" ></i></label></div>`
+
+    $("._myAppend").find($('li')).children('div').append(str);
+    $('._myAppend').on('click','._del',function(){
+      me.excuDel(this)
+    })
+
+  }
+
+  /**
+   * 点击关联商品的删除执行的方法
+   * @param obj
+   */
+  excuDel(obj){
+    $(obj).parents('.list-group-item').remove();
+    if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
+      $("._myAppend").css("height", '0px')
+    }
+  }
+
 
   /**
    * 提交
@@ -307,6 +324,7 @@ export class AddArticleComponent implements OnInit {
    * @param state
    */
   submit(obj, state) {
+    console.log("█ obj ►►►", obj);
     this.submitObj = obj;
     this.submitState = state;
     let me = this;
@@ -339,7 +357,6 @@ export class AddArticleComponent implements OnInit {
         } else {
           AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
         }
-
       };
 
       /**
@@ -383,29 +400,26 @@ export class AddArticleComponent implements OnInit {
    */
   addArticleExtra() {
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-    // console.log(sHTML)
+
+    let idStr = ''; //获取关联的商品
+    let obj = $("._myAppend").find('._copy').find('input');
+    console.log("█  $(\".panel-_myAppend\").find('._copy') ►►►",   $("._myAppend").find('._copy'));
+    for (let i = 0; i < obj.length; i++) {
+      idStr += `${$(obj[i]).val()},`
+    }
+    this.linkGoodStr = idStr.slice(0, idStr.length - 1);
+
     let url = '/article/addArticle';
+
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.uuid = this.uuid;
+    this.submitObj.goodIds = this.linkGoodStr;
     let data = this.submitObj;
-    console.log(this.submitState)
+
     this.service.postRequest(url, data);
     this.router.navigate(['/main/operation/article/manage']);
   }
 
-  /**
-   * 获取弹框选择的商品的信息
-   */
-  alertResult(){
-    let idStr=''
-    setTimeout(()=>{
-      let obj=$(".panel-success").find('._desc').find('input');
-      for(let i=0;i<obj.length;i++){
-        idStr+=`${$(obj[i]).val()},`
-      }
-      this.linkGoodStr=idStr.slice(0,idStr.length-1)
-    },0)
-    this.closeAlert();//关闭弹窗
-  }
+
 }

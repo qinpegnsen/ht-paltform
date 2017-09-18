@@ -174,7 +174,9 @@ export class SubmitService {
       async: false,
       success: (res) => {
         if (!isNullOrUndefined(res) && res.success) {
+          console.log("█ res ►►►",  res);
           result = res.data;
+          console.log("█ result ►►►",  result);
         }
       },
       error: (res) => {
