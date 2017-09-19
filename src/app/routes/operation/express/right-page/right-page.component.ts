@@ -3,6 +3,7 @@ import {SettingsService} from "../../../../core/settings/settings.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {ExpressComponent} from "../express.component";
+import {PatternService} from "../../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-right-page',
@@ -21,7 +22,8 @@ export class RightPageComponent implements OnInit {
     public settings: SettingsService,
     private routeInfo: ActivatedRoute,
     public service:SubmitService,
-    public parent:ExpressComponent
+    public parent:ExpressComponent,
+    private patterns: PatternService
   ) {
     this.settings.showRightPage("30%");
   }

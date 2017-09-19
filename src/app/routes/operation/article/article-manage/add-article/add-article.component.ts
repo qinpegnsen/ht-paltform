@@ -127,12 +127,13 @@ export class AddArticleComponent implements OnInit {
      * @type {string}
      */
     if (this.linkType == 'updataArticle' || this.linkType == 'auditArticle') {
-      let queryArticleurl = '/article/queryArticle';
-      let queryArticledata = {
+      let url = '/article/queryArticle';
+      let data = {
         articleId: this.articleId,
         queryState: 'BLACK'
       }
-      this.queryArticleData = this.service.getData(queryArticleurl, queryArticledata);
+      this.queryArticleData = this.service.getData(url, data);
+      console.log(this.queryArticleData)
       setTimeout(() => {
         $('#summernote').summernote({
           height: 280,
