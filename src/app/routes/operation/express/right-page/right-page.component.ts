@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {ExpressComponent} from "../express.component";
 import {PatternService} from "../../../../core/forms/pattern.service";
+import {OperationService} from "../../operation.service";
 
 @Component({
   selector: 'app-right-page',
@@ -23,7 +24,8 @@ export class RightPageComponent implements OnInit {
     private routeInfo: ActivatedRoute,
     public service:SubmitService,
     public parent:ExpressComponent,
-    private patterns: PatternService
+    private patterns: PatternService,
+    private operationService: OperationService
   ) {
     this.settings.showRightPage("30%");
   }
@@ -74,7 +76,10 @@ export class RightPageComponent implements OnInit {
         expressUrl:obj.expressUrl,
         isUse:obj.isUse
       }
-      this.service.postRequest(url,data);
+      let result=this.operationService.addNewArticle(url,data);
+      if(result=='物流公司编码已存在'||result=='物流公司名称已存在'){
+        return;
+      }
     }else if(this.type=="edit"){
       let url='/basicExpress/updateBasicExpress';
       let data={
