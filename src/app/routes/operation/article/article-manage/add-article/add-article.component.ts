@@ -403,7 +403,9 @@ export class AddArticleComponent implements OnInit {
    */
   addArticleExtra() {
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-
+    if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
+      sHTML='';
+    }
     let idStr = ''; //获取关联的商品
     let obj = $("._myAppend").find('._copy').find('input');
     for (let i = 0; i < obj.length; i++) {
@@ -420,8 +422,13 @@ export class AddArticleComponent implements OnInit {
     this.submitObj.articleClassId = this.articleClasssId;
     let data = this.submitObj;
 
-    this.service.postRequest(url, data);
-    this.router.navigate(['/main/operation/article/manage']);
+    let result=this.operationService.addNewArticle(url, data);
+
+    if(result=='文章内容不能为空'){
+      return;
+    }else{
+      this.router.navigate(['/main/operation/article/manage']);
+    }
   }
 
 
