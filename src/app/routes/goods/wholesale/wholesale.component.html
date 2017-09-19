@@ -99,7 +99,7 @@
         <td>
           <label class="switch switch-md" title="是否允许批发">
             <input [checked]="goods.isBatch == 'Y'" type="checkbox"
-                   (change)="startState(goods)">
+                   (change)="startState(goods,data.curPage)">
             <span></span>
           </label>
         </td>
