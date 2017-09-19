@@ -5,7 +5,6 @@ import {SettingsService} from "./core/settings/settings.service";
 import {Router} from "@angular/router";
 import {ToasterConfig, ToasterService} from "angular2-toaster";
 import {isNullOrUndefined} from "util";
-import {RzhtoolsService} from "./core/services/rzhtools.service";
 import {CookieService} from "angular2-cookie/core";
 
 declare var $: any;

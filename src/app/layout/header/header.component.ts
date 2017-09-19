@@ -49,8 +49,8 @@ export class HeaderComponent implements OnInit, OnChanges {
     let me = this;
     // 初始化时检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
     $(function(){
-      let rulHref = window.location.href, host = window.location.host;
-      let path = rulHref.substring(rulHref.indexOf(host)).substring(host.length);
+      let rulHref = window.location.href;
+      let path = rulHref.substring(rulHref.indexOf('/main'),rulHref.length);
       me.onRouterChange(path);
       me.getSubmenus(path);
     })
@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit, OnChanges {
       }
     };
   }
+
 
   //显示、隐藏当前登录的用户信息
   toggleUserBlock(event) {
