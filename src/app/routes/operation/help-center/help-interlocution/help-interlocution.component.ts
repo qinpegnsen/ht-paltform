@@ -3,7 +3,7 @@ import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import {AjaxService} from "../../../../core/services/ajax.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AppComponent} from "../../../../app.component";
 const swal = require('sweetalert');
 @Component({
@@ -17,13 +17,17 @@ export class HelpInterlocutionComponent implements OnInit {
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
   private seebutton: Object;//查看按钮
+  private queryId:any;
   private data: Page = new Page();
 
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router) { }
+  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router,private routeInfo:ActivatedRoute) { }
 
   ngOnInit() {
+
     let me = this;
+    me.queryId = me.routeInfo.snapshot.queryParams['id'];
+
     //按钮配置
     me.addButton = {
       type: "add",

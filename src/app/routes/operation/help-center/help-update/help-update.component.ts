@@ -6,6 +6,8 @@ import {HelpAnswerComponent} from "../help-answer/help-answer.component";
 import { Location }from '@angular/common';
 import {isNullOrUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {OperationService} from "../../operation.service";
+import {PatternService} from "../../../../core/forms/pattern.service";
 declare var $: any;
 
 @Component({
@@ -21,7 +23,7 @@ export class HelpUpdateComponent implements OnInit {
   private abc:any;
   public kindid: number;
   constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location) { }
+              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location,private operationService:OperationService,public patterns:PatternService) { }
 
   ngOnInit() {
     let me = this;
@@ -80,6 +82,7 @@ export class HelpUpdateComponent implements OnInit {
    * 修改完成后提交
    */
   submit(res){
+    let _this=this;
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
     let url = '/helpQuestions/updateHelpQuestions';//帮助问题修改
     let data = {
@@ -88,8 +91,14 @@ export class HelpUpdateComponent implements OnInit {
       sort: res.sort,
       answer: sHTML,
     }
-    this.abc=this.submitt.putRequest(url, data);
-    this.router.navigate(['/main/operation/help-center/help-answer']);
-    console.log( this.abc)
+    _this.abc=_this.operationService.updateproblem(url, data);
+    let answer=_this.abc;
+    if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" ||answer=="帮助问题答案不能为空"){
+      return;
+    }else{
+      this.qeuryAll();
+      this.router.navigate(['/main/operation/help-center/help-answer']);
+    }
+
   }
 }

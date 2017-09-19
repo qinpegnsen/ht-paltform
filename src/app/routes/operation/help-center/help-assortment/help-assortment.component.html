@@ -35,7 +35,11 @@
 
     <div class="questiona">
       <label class="question col-sm-1 text-center">排序：</label>
-      <input type="number" class="col-sm-2 problem-box num" name="sort" ngModel>
+      <input type="number" class="col-sm-2 problem-box num" name="sort" required ngModel #sort="ngModel" [pattern]="patterns.positive">
+      <div [hidden]="sort.valid || sort.pristine"
+           class="col-sm-9 pull-right text-danger">
+        请填写排序
+      </div>
     </div>
 
     <div>
