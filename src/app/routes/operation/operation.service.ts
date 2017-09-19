@@ -2,8 +2,10 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 import {SubmitService} from '../../core/forms/submit.service';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 
 @Injectable()
@@ -121,6 +123,42 @@ export class OperationService {
       async: false,
       success: (res) => {
         if (res.success) {
+          // console.log("█ res ►►►",  res);
+          result = res.info;
+        } else {
+          let errorMsg;
+          if (isNullOrUndefined(res.data)) {
+            result = res.info;
+            AppComponent.rzhAlt("error",result );
+          } else {
+            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
+          }
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", '网络错误');
+      }
+    })
+    return result;
+  }
+
+
+  /**
+   * put 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
+   */
+  updateproblem(requestUrl, requestDate, back?: boolean) {
+    let result,me = this;
+    this.ajax.put({
+      url: requestUrl,
+      data: requestDate,
+      async: false,
+      success: (res) => {
+        console.log("█ res ►►►", res);
+        if (res.success) {
+          AppComponent.rzhAlt("success", res.info);
           result = res.info;
         } else {
           swal(res.info,'','error');

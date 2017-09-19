@@ -17,8 +17,8 @@ export class PatternService {
   public decimals: string;  // 0-1小数
   public doubleDigit: string; // 两位为整数（0-99）
   public _URL: string; //网址
-  public twodecimal:string;
-
+  public twodecimal:string;//两位小数
+  public positive:string;
   constructor() {
     this.num = '^[0-9]*$'; //数字正则
     this.letter = '^[A-Za-z]*$'; //字母正则
@@ -33,6 +33,7 @@ export class PatternService {
     this.decimals = '^(0\.[0-9]*[1-9]$)|^0$';　　//0-1小数，包含0,不包含1
     this.doubleDigit = '^[0-9]{1,2}$'; // 两位为整数（0-99）
     this.twodecimal='^[0-9]+(.[0-9]{1,2})?$';//两位小数
+    this.positive = '^[0-9]+$'; // 整数
   }
 
 }

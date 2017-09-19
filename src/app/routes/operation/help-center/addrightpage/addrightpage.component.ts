@@ -3,6 +3,7 @@ import {SettingsService} from "../../../../core/settings/settings.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {HelpInterlocutionComponent} from "../help-interlocution/help-interlocution.component";
+import {PatternService} from "../../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-addrightpage',
@@ -15,7 +16,8 @@ export class AddrightpageComponent implements OnInit {
   public updataDataa: any;
 
   constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private sub: SubmitService, private submitt: SubmitService,private helpInterlocutionComponent:HelpInterlocutionComponent) {
+              private sub: SubmitService, private submitt: SubmitService,
+              private helpInterlocutionComponent:HelpInterlocutionComponent,public patterns:PatternService) {
                this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -25,6 +27,7 @@ export class AddrightpageComponent implements OnInit {
      */
     let _this = this;
     _this.id = _this.routeInfo.snapshot.queryParams['id'];
+    console.log("█ _this.id  ►►►",  _this.id );
     _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
 
     if (_this.linkType == "updateCount") {//分类帮助--若为修改操作,获取信息
@@ -48,7 +51,6 @@ export class AddrightpageComponent implements OnInit {
       let url = '/helpKind/addHelpKind';//帮助分类添加
       let data = {
         name: res.name,
-        icon: res.icon,
         sort: res.sort,
         description: res.description,
       }
@@ -58,13 +60,13 @@ export class AddrightpageComponent implements OnInit {
     } else if (this.linkType == 'updateCount') {
       let url = '/helpKind/updateHelpKind';//帮助分类修改
       let data = {
-        id:res.id,
-        name:res.name,
+        id:this.id,
+        kindName:res.kindName,
         sort: res.sort,
-        icon: res.icon,
         description:res.description,
       }
       this.submitt.putRequest(url,data,true);
+      console.log("█ data ►►►",  data);
       this.helpInterlocutionComponent.qeuryAllService();
     }
   }
