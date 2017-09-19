@@ -321,7 +321,6 @@ export class AddArticleComponent implements OnInit {
    */
   getData(menuCode){
     this.articleClasssId=menuCode;
-    console.log(menuCode)
   }
 
 
@@ -331,7 +330,6 @@ export class AddArticleComponent implements OnInit {
    * @param state
    */
   submit(obj, state) {
-    console.log("█ obj ►►►", obj);
     this.submitObj = obj;
     this.submitState = state;
     let me = this;
@@ -410,7 +408,6 @@ export class AddArticleComponent implements OnInit {
 
     let idStr = ''; //获取关联的商品
     let obj = $("._myAppend").find('._copy').find('input');
-    console.log("█  $(\".panel-_myAppend\").find('._copy') ►►►",   $("._myAppend").find('._copy'));
     for (let i = 0; i < obj.length; i++) {
       idStr += `${$(obj[i]).val()},`
     }
