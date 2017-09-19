@@ -395,9 +395,7 @@ export class AddArticleComponent implements OnInit {
       if (result) {
         this.router.navigate(['/main/operation/article/manage']);
       }
-
     }
-
   }
 
   /**

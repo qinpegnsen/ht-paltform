@@ -6,7 +6,7 @@
       <div class="panel-body">
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章分类</label>
+            <label class="col-sm-2 control-label"><i>*</i>文章分类</label>
             <div class="col-sm-4">
               <app-get-class (myData)="getData($event)"></app-get-class>
             </div>
@@ -14,8 +14,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel" ngModel required
                      placeholder='必填项'/>
               <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
@@ -27,8 +27,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章短标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel" ngModel
                      required placeholder='必填项'/>
               <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
@@ -40,9 +40,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章摘要
+            <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" ngModel
                      required placeholder='必填项'/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
@@ -54,8 +54,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章内容</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章内容</label>
+            <div class="col-sm-10">
               <div id="summernote" class="summernote">
                 <span>请输入文章的内容...</span>
               </div>
@@ -64,8 +64,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>封面类型</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>封面类型</label>
+            <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
                   <input type="radio" value="{{item.key}}" (click)="coverType(item.key)"
@@ -78,8 +78,8 @@
         </fieldset>
         <fieldset *ngIf="flag">
           <div class="form-group">
-            <label class="col-sm-1 control-label">封面图片</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">封面图片</label>
+            <div class="col-sm-10">
               <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
                 <span class="close" (click)="item.remove()">×</span>
                 <span class="upload-thumb">
@@ -99,34 +99,34 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">文章标签
+            <label class="col-sm-2 control-label">文章标签
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">关键字</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关键字</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">相关文章
+            <label class="col-sm-2 control-label">相关文章
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group _myLinkGood">
-            <label class="col-sm-1 control-label">关联商品</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关联商品</label>
+            <div class="col-sm-10">
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
@@ -161,7 +161,7 @@
       <div class="panel-body">
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章分类</label>
+            <label class="col-sm-2 control-label"><i>*</i>文章分类</label>
             <div class="col-sm-4">
               <select class="form-control" type="text" name="articleClassId"
                       [(ngModel)]="queryArticleData.articleClassId" required>
@@ -172,8 +172,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle" required
                      placeholder='必填项'/>
@@ -186,8 +186,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章短标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"
                      required placeholder='必填项'/>
@@ -200,9 +200,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章摘要
+            <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
 "
                      required placeholder='必填项'/>
@@ -215,8 +215,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章内容</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章内容</label>
+            <div class="col-sm-10">
               <div id="summernote" class="summernote">
                 <span> </span>
               </div>
@@ -225,8 +225,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>是否推荐</label>
-            <div class="col-sm-11 control-label">
+            <label class="col-sm-2 control-label"><i>*</i>是否推荐</label>
+            <div class="col-sm-10 control-label">
               <div class="radio c-radio pull-left">
                 <label>
                   <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"
@@ -244,8 +244,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>是否允许评论</label>
-            <div class="col-sm-11 control-label">
+            <label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>
+            <div class="col-sm-10 control-label">
               <div class="radio c-radio pull-left">
                 <label>
                   <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommentFlag"
@@ -263,8 +263,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>封面类型</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>封面类型</label>
+            <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
                   <input type="radio" value="{{item.key}}" (click)="changeState(item.key)"
@@ -277,9 +277,9 @@
         </fieldset>
         <fieldset *ngIf="flag">
           <div class="form-group">
-            <label class="col-sm-1 control-label">封面路径
+            <label class="col-sm-2 control-label">封面路径
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <label for="image-input" class="file-upload">
                 <button class="btn btn-info"><em class="fa fa-upload mr" (click)="upload()"></em>图片上传</button>
                 <input id="image-input" type="file">
@@ -289,9 +289,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">文章标签
+            <label class="col-sm-2 control-label">文章标签
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTag"/>
             </div>
@@ -299,8 +299,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">关键字</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关键字</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel"
                      [(ngModel)]="queryArticleData.articleKeyword"/>
             </div>
@@ -308,9 +308,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">相关文章
+            <label class="col-sm-2 control-label">相关文章
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel"
                      [(ngModel)]="queryArticleData.articleLink"/>
             </div>
@@ -318,8 +318,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">关联商品</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关联商品</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="goodIds" #goodIdsTem="ngModel" ngModel/>
             </div>
           </div>
@@ -346,8 +346,8 @@
       <div class="panel-body">
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章分类</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章分类</label>
+            <div class="col-sm-10">
               <select class="form-control" type="text" name="articleClassId"
                       [(ngModel)]="queryArticleData.articleClassId" required>
                 <option [value]="item.id" *ngFor="let item of articleClassList">{{item.acName}}</option>
@@ -357,8 +357,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle" required
                      placeholder='必填项'/>
@@ -371,8 +371,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章短标题</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"
                      required placeholder='必填项'/>
@@ -385,9 +385,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章摘要
+            <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
 "
                      required placeholder='必填项'/>
@@ -400,8 +400,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>文章内容</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>文章内容</label>
+            <div class="col-sm-10">
               <div id="summernote" class="summernote">
                 <span> </span>
               </div>
@@ -410,8 +410,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>是否推荐</label>
-            <div class="col-sm-9 control-label">
+            <label class="col-sm-2 control-label"><i>*</i>是否推荐</label>
+            <div class="col-sm-10 control-label">
               <div class="radio c-radio pull-left">
                 <label>
                   <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"
@@ -429,8 +429,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>是否允许评论</label>
-            <div class="col-sm-11 control-label">
+            <label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>
+            <div class="col-sm-10 control-label">
               <div class="radio c-radio pull-left">
                 <label>
                   <input type="radio" value="Y" [(ngModel)]="queryArticleData.articleCommentFlag"
@@ -448,8 +448,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label"><i>*</i>封面类型</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label"><i>*</i>封面类型</label>
+            <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
                   <input type="radio" value="{{item.key}}" (click)="changeState(item.key)"
@@ -462,9 +462,9 @@
         </fieldset>
         <fieldset *ngIf="flag">
           <div class="form-group">
-            <label class="col-sm-1 control-label">封面路径
+            <label class="col-sm-2 control-label">封面路径
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <label for="image-input" class="file-upload">
                 <button class="btn btn-info"><em class="fa fa-upload mr" (click)="upload()"></em>图片上传</button>
                 <input id="image-input" type="file">
@@ -474,9 +474,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">文章标签
+            <label class="col-sm-2 control-label">文章标签
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTag"/>
             </div>
@@ -484,8 +484,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">关键字</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关键字</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel"
                      [(ngModel)]="queryArticleData.articleKeyword"/>
             </div>
@@ -493,9 +493,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">相关文章
+            <label class="col-sm-2 control-label">相关文章
             </label>
-            <div class="col-sm-11">
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel"
                      [(ngModel)]="queryArticleData.articleLink"/>
             </div>
@@ -503,8 +503,8 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-1 control-label">关联商品</label>
-            <div class="col-sm-11">
+            <label class="col-sm-2 control-label">关联商品</label>
+            <div class="col-sm-10">
               <input class="form-control" type="text" name="goodIds" #goodIdsTem="ngModel" ngModel/>
             </div>
           </div>
