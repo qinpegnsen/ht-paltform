@@ -7,6 +7,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {IntegrationManagementComponent} from "./integration-management/integration-management.component";
 import {IntegrationChangeComponent} from "./integration-management/integration-change/integration-change.component";
 import {IntegrationDetailsComponent} from "./integration-management/integration-details/integration-details.component";
+import {CertificationComponent} from "./certification/certification.component";
 
 const userChildRoutes: Routes = [
   {path: 'integration-details', component: IntegrationDetailsComponent},
@@ -16,6 +17,7 @@ const userChildRoutes: Routes = [
 const routes: Routes = [
   {path: '',redirectTo:'users'},
   {path: 'users', component: MemberComponent},
+  {path: 'certification', component: CertificationComponent},
   {path: 'integration-management', component: IntegrationManagementComponent,children: userChildRoutes},
 ];
 @NgModule({
@@ -25,6 +27,6 @@ const routes: Routes = [
     SharedModule,
     RzhButtonsModule
   ],
-  declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent]
+  declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent,CertificationComponent]
 })
 export class MemberModule { }

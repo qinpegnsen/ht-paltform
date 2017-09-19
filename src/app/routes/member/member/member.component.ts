@@ -44,7 +44,7 @@ export class MemberComponent implements OnInit {
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
       curPage:activePage,
-      pageSize:6,
+      pageSize:10,
       sortColumns:'',
       custName:this.custName,
       custTruename:this.custTruename,

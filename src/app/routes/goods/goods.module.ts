@@ -17,6 +17,7 @@ import {ManageService} from "./manage/manage.service";
 import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {AuditGoodsComponent} from "./audit-goods/audit-goods.component";
 import {WholesaleComponent} from "./wholesale/wholesale.component";
+import { CertificationComponent } from '../member/certification/certification.component';
 
 
 
@@ -72,6 +73,7 @@ const routes: Routes = [
     AuditGoodsComponent,
     PublishedComponent,
     WholesaleComponent,
+    CertificationComponent,
   ],
   providers: [
     GoodsService,

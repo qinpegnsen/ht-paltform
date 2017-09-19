@@ -13,6 +13,8 @@
             {{help.kindName}}
           </option>
         </select>
+        <!--<input type="number" class="col-sm-2 problem-box num" name="sort" [(ngModel)]="b.kindId">-->
+        <!--<input type="text"  [(ngModel)]="b.kindId" class="form-group">-->
       </div>
       <div class="questiona text-center">
         <label class="question col-sm-1">问题：</label>
@@ -40,7 +42,6 @@
 
       <div>
         <div class="col-sm-3 " >
-
           <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" >提交信息</button>
           <button class="ml btn btn-default mr pull-right" (click)="back()" type="button">取消</button>
         </div>

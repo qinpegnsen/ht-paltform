@@ -152,6 +152,10 @@ const member = {
       text: '会员管理',
       icon: 'fa fa-user',
       link: '/main/member/users'
+    }, {
+      text: '认证审核',
+      icon: 'fa fa-user',
+      link: '/main/member/certification'
     },
     {
       text: '重消币管理',
