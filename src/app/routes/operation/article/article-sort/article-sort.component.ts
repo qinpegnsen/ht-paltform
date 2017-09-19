@@ -133,7 +133,7 @@ export class ArticleSortComponent implements OnInit {
   getChild(transId){
     let data={
       curPage:1,
-      pageSize:4,
+      pageSize:10,
       acParentId:transId
     }
     let url= "/articleClass/queryArticleClassPage";

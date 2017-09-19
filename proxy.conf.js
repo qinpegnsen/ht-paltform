@@ -36,7 +36,7 @@ const PROXY_CONFIG = [
       "/helpQuestions"
     ],
     // target: "http://192.168.10.111:8811",   //拦截 context配置路径，经过此地址
-    target: "http://192.168.10.109:8085",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.167:8081",   //拦截 context配置路径，经过此地址
     // target: "http://192.168.10.112:8080",   //拦截 context配置路径，经过此地址
     secure: false
   },
