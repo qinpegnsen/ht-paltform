@@ -7,6 +7,7 @@ import {CHINA_AREA} from "../../../core/services/china_area";
 import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {validate} from "codelyzer/walkerFactory/walkerFn";
+import {SessionService} from "../session.service";
 const swal = require('sweetalert');
 
 
@@ -14,7 +15,7 @@ const swal = require('sweetalert');
   selector: 'app-add-formwork',
   templateUrl: './add-formwork.component.html',
   styleUrls: ['./add-formwork.component.scss'],
-  providers:[AddFormworkService]
+  providers:[AddFormworkService,SessionService]
 })
 export class AddFormworkComponent implements OnInit {
   private deletebutton;//删除运费模板按钮配置
@@ -35,7 +36,7 @@ export class AddFormworkComponent implements OnInit {
   data: Array<any> = [];
   checkOptionsOnes = {};
   // public reslut: string = '';
-  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService) { }
+  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private SessionService:SessionService) { }
 
   ngOnInit() {
     // 初始化地区数据
@@ -80,6 +81,7 @@ export class AddFormworkComponent implements OnInit {
       });
     }
   }
+
 
   updateAllchildChecked(index: number | string, j: number | string, code: any) {
     this.allCheckeds[index]['allChecked'] =
@@ -159,6 +161,8 @@ export class AddFormworkComponent implements OnInit {
       this.getProvices(this.china_area[i].provices, i + '');
     }
   }
+
+
 
   /**
    *获取选择区域后的结果

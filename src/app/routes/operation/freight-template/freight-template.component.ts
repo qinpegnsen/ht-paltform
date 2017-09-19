@@ -4,13 +4,14 @@ import {asQueryList} from "@angular/core/src/view";
 import {isNullOrUndefined} from "util";
 import {FreightTemplateService} from "./freight-template.service";
 import {Page} from "../../../core/page/page";
+import {SessionService} from "../session.service";
 const swal = require('sweetalert');
 
 @Component({
   selector: 'app-freight-template',
   templateUrl: './freight-template.component.html',
   styleUrls: ['./freight-template.component.scss'],
-  providers:[FreightTemplateService]
+  providers:[FreightTemplateService,SessionService]
 })
 export class FreightTemplateComponent implements OnInit {
   private addButton;//新增运费模板按钮配置
@@ -32,7 +33,7 @@ export class FreightTemplateComponent implements OnInit {
     voList:[]
   }
 
-  constructor(private router:Router,private FreightTemplateService:FreightTemplateService) {
+  constructor(private router:Router,private FreightTemplateService:FreightTemplateService,private SessionService:SessionService) {
 
   }
 

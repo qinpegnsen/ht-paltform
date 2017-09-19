@@ -97,7 +97,7 @@
                         <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
                       </th>
                       <th class="col-md-1 unselectable text-center">
-                        <rzhDefaultSorter by="addAttach">续件(㎡)	</rzhDefaultSorter>
+                        <rzhDefaultSorter by="addAttach">续体积(㎡)	</rzhDefaultSorter>
                       </th>
                       <th class="col-md-2 unselectable text-center">
                         <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
@@ -109,7 +109,7 @@
                     <tr *ngFor="let item of moduleList;let i = index">
                       <td>{{reslut[i]}}</td>
                       <td class="text-center">
-                        <input class="text _price num form-control" name="agentName" type="number" required/>
+                        <input class="text _price num form-control" name="agentName" type="number" value="1" required/>
                       </td>
                       <td class="text-center">
                         <div class="input-group">
@@ -118,7 +118,7 @@
                         </div>
                       </td>
                       <td class="text-center">
-                        <input class="text _price num form-control" name="addAttach" type="number" required/>
+                        <input class="text _price num form-control" name="addAttach" type="number" required value="1">
                       </td>
                       <td class="text-center">
                         <div class="input-group">

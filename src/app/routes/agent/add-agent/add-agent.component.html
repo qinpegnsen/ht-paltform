@@ -4,7 +4,7 @@
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
-        <input class="form-control" required [(ngModel)]="organ.areaCode" name="areaCode" type="hidden"/>
+        <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden"/>
         <fieldset>
           <div class="form-group">
             <label class="col-sm-2 control-label"> <i>*</i> 代理商名称</label>
@@ -62,7 +62,11 @@
             </div>
             <label class="col-sm-2 control-label">座机</label>
             <div class="col-sm-4">
-              <input class="form-control" type="text" name="telephone" ngModel [pattern]="patterns.telephone"/>
+              <input class="form-control" type="text" #telephone="ngModel" name="telephone" ngModel [pattern]="patterns.telephone"/>
+              <div [hidden]="telephone.valid || telephone.pristine"
+                   class="alert alert-danger">
+                请填写正确的座机格式
+              </div>
             </div>
             <!--  <button class="btn btn-info" style="position: absolute;" type="button">上传身份证</button>
               上传组件 begin
@@ -111,14 +115,14 @@
           </div>
           <button class="btn btn-info position-absolute  left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
           <button class="btn btn-info position-absolute  left50" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)">修改经纬度</button>
-           <div class="form-group" [hidden]="!staff.isShowMap">
+          <!-- <div class="form-group" [hidden]="!staff.isShowMap">
              <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
-               <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+               <input type="text" id="keyword" class="form-control w30 search" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
                <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)">确定</button>
                <div id="container">
                </div>
              </div>
-           </div>
+           </div>-->
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -128,8 +132,8 @@
             </div>
           </div>
         </fieldset>
-        <!--身份证正面暗码<input class="form-control" required [(ngModel)]="idcardImage1uuid" name="idcardImage1uuid">-->
-        <!--<fieldset>
+        <!--身份证正面暗码<input class="form-control" required [(ngModel)]="idcardImage1uuid" name="idcardImage1uuid">
+        <fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 身份证正面暗码</label>
             <div class="col-sm-8">
@@ -141,9 +145,9 @@
               </div>
             </div>
           </div>
-        </fieldset>-->
-        <!--身份证反面暗码 <input class="form-control" required [(ngModel)]="idcardImage2uuid" name="idcardImage2uuid">-->
-        <!--<fieldset>
+        </fieldset>
+        身份证反面暗码 <input class="form-control" required [(ngModel)]="idcardImage2uuid" name="idcardImage2uuid">
+        <fieldset>
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 身份证反面暗码</label>
             <div class="col-sm-8">
@@ -163,14 +167,12 @@
           </div>
         </fieldset>
       </div>
-      <!-- <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-         <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)" >提交信息</button>
-       </div>-->
     </div>
     <!-- END panel-->
   </form>
 </div>
+
+
 <!--修改代理商-->
 <div class="col-lg-10" *ngIf="linkType=='updataArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
@@ -238,7 +240,11 @@
               </div>
               <label class="col-sm-2 control-label">座机</label>
               <div class="col-sm-4">
-                <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone" [pattern]="patterns.telephone"/>
+                <input class="form-control" type="text" name="telephone"  #telephone="ngModel" ngModel [(ngModel)]="staff.telephone" [pattern]="patterns.telephone"/>
+                <div [hidden]="telephone.valid || telephone.pristine"
+                     class="alert alert-danger">
+                  请填写正确的座机格式
+                </div>
               </div>
               <!--<button class="btn btn-info" style="position: absolute;" type="button">上传身份证</button>-->
               <!--上传组件 begin-->
@@ -287,14 +293,14 @@
             </div>
             <button class="btn btn-info position-absolute left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
             <button class="btn btn-info position-absolute left50" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)">修改经纬度</button>
-            <div class="form-group" [hidden]="!staff.isShowMap">
+           <!-- <div class="form-group" [hidden]="!staff.isShowMap">
               <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
-                <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+                <input type="text" id="keyword" class="form-control w30 search" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
                 <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)">确定</button>
                 <div id="container">
                 </div>
               </div>
-            </div>
+            </div>-->
           </fieldset>
           <fieldset>
             <div class="form-group">
@@ -318,22 +324,33 @@
   </form>
 </div>
 
-<!--路由嵌套 begin-->
-<router-outlet></router-outlet>
-<!--路由嵌套 end-->
 
-<!--<div class="model" *ngIf="aa">
+
+
+<div class="model" [class.hide]="!aa">
   <div class="model-main">
     <div class="header">
-      <span>选择区域</span><span class="icon" (click)="isShowMap1()" *ngIf="aa">关闭</span>
+      <span>选择区域</span><span class="icon" (click)="isShowMap1()"  [class.hide]="!aa">关闭</span>
+    </div>
+    <div class="clearfix latitude">
+      <div class="pull-left">
+        <span class="pull-left">经度：</span><input class="form-control" type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
+      </div>
+      <div class="pull-left">
+        <span class="pull-left" >纬度：</span><input class="form-control position-relative"  type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+      </div>
     </div>
     <div class="form-group" [hidden]="!staff.isShowMap">
-      <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
-        <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
-        <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)">确定</button>
+      <div class="pl0 pr0 isShowMap">
+        <input type="text" id="keyword" class="form-control w30 search" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
+        <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!aa">确定</button>
         <div id="container">
         </div>
       </div>
     </div>
   </div>
-</div>-->
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

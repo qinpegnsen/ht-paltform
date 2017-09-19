@@ -28,7 +28,7 @@ export class AddAgentComponent implements OnInit {
   private uid;//声明保存获取到的暗码
   public agentCode:string;//获取代理商编码
   private staff:any = {};
-  private aa;
+  private aa = false;
 
 
   constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute,private patterns: PatternService) {
@@ -295,8 +295,7 @@ export class AddAgentComponent implements OnInit {
             swal('修改区域信息成功！', '', 'success');
             //_this.AreasComponent.queryList()//实现刷新
           } else {
-            let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-            swal(res.info, errorMsg, 'error');
+            swal(res.info);
           }
         },
         error: (data) => {
