@@ -59,7 +59,7 @@ export class ArticleSortComponent implements OnInit {
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
       curPage:activePage,
-      pageSize:4,
+      pageSize:10,
       acName:this.searchKey
     }
     let url= "/articleClass/queryArticleClassPage";

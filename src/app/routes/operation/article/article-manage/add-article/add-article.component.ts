@@ -56,6 +56,7 @@ export class AddArticleComponent implements OnInit {
   private goodsName: any = '';                       //商品名
   private linkGoodStr: any = '';                     //关联商品id的拼接
   private deletebutton: Object;                       //删除按钮
+  private articleClasssId:number;                    //存储子组件发射过来的id
   constructor(public settings: SettingsService,
               private routeInfo: ActivatedRoute,
               public router: Router,
@@ -315,6 +316,16 @@ export class AddArticleComponent implements OnInit {
 
 
   /**
+   * 获取到子组件发射过来的分类编码
+   * @param menuCode
+   */
+  getData(menuCode){
+    this.articleClasssId=menuCode;
+    console.log(menuCode)
+  }
+
+
+  /**
    * 提交
    * @param obj
    * @param state
@@ -411,6 +422,7 @@ export class AddArticleComponent implements OnInit {
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.uuid = this.uuid;
     this.submitObj.goodIds = this.linkGoodStr;
+    this.submitObj.articleClassId = this.articleClasssId;
     let data = this.submitObj;
 
     this.service.postRequest(url, data);

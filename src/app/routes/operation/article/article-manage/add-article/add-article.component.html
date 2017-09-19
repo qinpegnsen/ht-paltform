@@ -8,10 +8,7 @@
           <div class="form-group">
             <label class="col-sm-1 control-label"><i>*</i>文章分类</label>
             <div class="col-sm-4">
-              <app-get-class (myData)="getKind($event)"></app-get-class>
-              <!--<select class="form-control" type="text" name="articleClassId" ngModel required>-->
-                <!--<option [value]="item.id" *ngFor="let item of articleClassList">{{item.acName}}</option>-->
-              <!--</select>-->
+              <app-get-class (myData)="getData($event)"></app-get-class>
             </div>
           </div>
         </fieldset>
@@ -60,7 +57,7 @@
             <label class="col-sm-1 control-label"><i>*</i>文章内容</label>
             <div class="col-sm-11">
               <div id="summernote" class="summernote">
-                <span>Rich text presentation here..</span>
+                <span>请输入文章的内容..</span>
               </div>
             </div>
           </div>
