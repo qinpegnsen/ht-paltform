@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 
 @Component({
   selector: 'app-mumber',
@@ -15,11 +16,15 @@ export class MemberComponent implements OnInit {
 
   private custPhone:string='';//默认查询的会员的名称
 
+  private authState:string='';//默认查询的会员的是否认证
+
+  public authStates:any;    //会员状态列表
+
   private memberListdata;//用来存储会员列表的信息
 
   private detailsbutton:Object;//查看详情按钮
 
-  constructor(public service:SubmitService) { }
+  constructor(public service:SubmitService, private tools: RzhtoolsService) { }
 
   ngOnInit() {
 
@@ -32,8 +37,10 @@ export class MemberComponent implements OnInit {
      * 初始化的时候获取快递列表的数据
      */
     this.queryMemberList()
-
-
+    this.authStates = this.tools.getEnumDataList('1028');   //会员状态枚举列表
+  }
+  search(){
+    this.queryMemberList()
   }
   /**
    *
@@ -48,7 +55,8 @@ export class MemberComponent implements OnInit {
       sortColumns:'',
       custName:this.custName,
       custTruename:this.custTruename,
-      custPhone:this.custPhone
+      custPhone:this.custPhone,
+      authState:this.authState,
     }
     let url='/cust/queryAllCust';
     this.memberListdata=new Page(this.service.getData(url,data))

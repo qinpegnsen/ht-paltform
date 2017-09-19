@@ -53,6 +53,7 @@ export class AddrightpageComponent implements OnInit {
         description: res.description,
       }
       this.submitt.postRequest(url,data,true);
+      console.log("█ data ►►►",  data);
       this.helpInterlocutionComponent.qeuryAllService();
     } else if (this.linkType == 'updateCount') {
       let url = '/helpKind/updateHelpKind';//帮助分类修改

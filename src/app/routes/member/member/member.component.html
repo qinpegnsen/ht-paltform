@@ -38,14 +38,10 @@
         </div>
         <div class="form-group clearfix mb0">
           <div class="col-md-8 col-xs-6 pl0">
-            <!--<select class="form-control" name="isOwnPlat" [(ngModel)]="query.isOwnPlat" (change)="queryDatas(1)">-->
-              <!--<option value="">全部</option>-->
-              <!--<option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>-->
-            <!--</select>-->
-            <!--<select class="form-control" name="isOwnPlat" [(ngModel)]="query.isOwnPlat" (change)="queryDatas(1)">-->
-              <!--<option value="">全部</option>-->
-              <!--<option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>-->
-            <!--</select>-->
+            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search($event)">
+              <option value="">全部</option>
+              <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
+            </select>
           </div>
           <button type="button" title="搜索" class="btn btn-primary bar-h3-btn mr ng-scope">
             <em class="icon-magnifier fa-fw"></em>
@@ -99,7 +95,12 @@
     <ng-container *ngFor="let member of memberList.data;let i = index">
       <tr>
         <td>{{i+1}}</td>
-        <td>{{member.custName}}</td>
+        <td>
+           <span  *ngIf="member.authState=='AUTH'">
+             <i class="fa fa-anchor"></i>
+           </span>
+          {{member.custName}}
+        </td>
         <td>{{member.custTruename}}</td>
         <td>
           {{member.custSex | rzhState:'1002' }}
@@ -107,26 +108,11 @@
         <td>{{member.areaName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>
-        <td *ngIf="member.isMember=='OLD'">
-          老会员
+        <td>
+          {{member.isMember | rzhState:'1004'}}
         </td>
-        <td *ngIf="member.isMember=='N'">
-          注册用户
-        </td>
-        <td *ngIf="member.isMember=='NEW'">
-          新会员
-        </td>
-        <td *ngIf="member.state=='FREEZE'">
-          冻结
-        </td>
-        <td *ngIf="member.state=='BLACK'">
-          黑名单
-        </td>
-        <td *ngIf="member.state=='STOP'">
-          禁言
-        </td>
-        <td *ngIf="member.state=='NORMAL'">
-          正常
+        <td>
+          {{member.state | rzhState:'1018'}}
         </td>
         <td>{{member.createTime}}</td>
         <td>

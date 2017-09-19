@@ -73,7 +73,7 @@ export class HelpAnswerComponent implements OnInit {
    */
   qeuryAll(){
     this.kinds = this.submit.getData("/helpKind/queryAll",'');
-    // console.log("█ this.kinds ►►►",  this.kinds);
+    console.log("█ this.kinds ►►►",  this.kinds);
   }
 
   /**

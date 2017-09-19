@@ -36,10 +36,10 @@ export class CertificationComponent implements OnInit {
   /**
    * 认证通过
    */
-  access(){
+  access(id){
     let url = '/custAuthInfo/updateState';
     let data = {
-      id: '1',
+      id:id,
       state: 'PASS',
     }
     this.submit.putRequest(url, data, true);
@@ -48,10 +48,10 @@ export class CertificationComponent implements OnInit {
   /**
    * 认证未通过
    */
-  cancel(){
+  cancel(id){
     let url = '/custAuthInfo/updateState';
     let data = {
-      id: '1',
+      id: id,
       state: 'UNPASS',
     }
     this.submit.putRequest(url, data, true);
