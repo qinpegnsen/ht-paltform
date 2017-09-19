@@ -5,6 +5,7 @@ const PROXY_CONFIG = [
       "/admin",
       "/article",
       "/goodsKind",
+      "/goodsEdit",
       "/goodsBrand",
       "/agentArea",
       "/agent",
@@ -42,17 +43,9 @@ const PROXY_CONFIG = [
   },
   {
     context: [
-      "/login2",
-      "/elder"
+      "/res"
     ],
-    target: "http://192.168.10.110:8086",   //拦截 context配置路径，经过此地址
-    secure: false
-  },
-  {
-    context: [
-      "/goodsEdit"
-    ],
-    target: "http://192.168.10.109:8088",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.167:8900",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -60,16 +53,8 @@ const PROXY_CONFIG = [
       "/upload"
     ],
     // target: "http://192.168.10.111:8813",   //拦截 context配置路径，经过此地址
-    target: "http://192.168.10.182:8003",   //拦截 context配置路径，经过此地址
+    target: "http://192.168.10.167:8900",   //拦截 context配置路径，经过此地址
     // target: "http://192.168.10.112:8082",   //拦截 context配置路径，经过此地址
-    secure: false
-  }
-  ,
-  {
-    context: [
-      "/res"
-    ],
-    target: "http://192.168.10.109:8082",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];
