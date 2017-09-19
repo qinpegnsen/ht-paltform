@@ -269,7 +269,6 @@ export class EditDetailComponent implements OnInit {
    */
   auditInputValueForNum(target,type?){
     let val = target.value, reg;
-    console.log("█ val ►►►",  val);
     if(type == 'int') reg = val.match(/\d+/);
     else reg = val.match(/\d+(\.\d{1,2})?/);
     if (!isNull(reg)){
@@ -308,13 +307,12 @@ export class EditDetailComponent implements OnInit {
    * 批量设置规格时
    * @param target
    */
-  setBatchSize(target) {
+  setBatchSize(type,target) {
     let me = this;
-    let inputObjName = $(target).prev().attr('name'),
-      inputVal = $(target).prev().val();
+    let inputVal = $(target).prev().val();
     if (!isNullOrUndefined(inputVal) && inputVal !== '') {
       me.publishData.goodsSkuList.forEach((sku) => {
-        sku[inputObjName] = inputVal
+        sku[type] = inputVal
       });
       $(target).parents('.dropdown-menu').slideUp(200);
     }

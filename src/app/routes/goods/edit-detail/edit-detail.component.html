@@ -72,7 +72,7 @@
             <option [value]="unit.id" *ngFor="let unit of unitList">{{unit.unitName}}</option>
           </select>
         </div>
-        <p class="tip" myHoverColor>请正确该商品的单位描述，确保购买者明确商品对应单价/计量单位。</p>
+        <p class="tip" myHoverColor>请正确选择该商品的单位，确保购买者明确商品对应单价/计量单位。</p>
       </dd>
     </dl>
   </fieldset>
@@ -120,7 +120,6 @@
       <dd class="col-xs-10">
         <table class="sku-table w100">
           <thead>
-          <!--当选择了规格时-->
           <tr class="text-center">
             <th class="col-xs-2" *ngFor="let attr of skuAttr"
                 [id]="attr.attrCode">{{attr.attrName}}
@@ -131,8 +130,9 @@
                 <div class="close">×</div>
                 <p>批量设置市场价</p>
                 <div class="text-center">
-                  <input class="form-control num input-sm" name="marketPrice" type="number" (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
+                  <input class="form-control num input-sm" name="__marketPrice" type="number"
+                         (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('marketPrice',$event.target)">设置</button>
                 </div>
               </div>
             </th>
@@ -142,8 +142,9 @@
                 <div class="close">×</div>
                 <p>批量设置销售价</p>
                 <div class="text-center">
-                  <input class="form-control num input-sm" name="price" type="number" (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
+                  <input class="form-control num input-sm" name="__price" type="number"
+                         (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('price',$event.target)">设置</button>
                 </div>
               </div>
             </th>
@@ -153,8 +154,9 @@
                 <div class="close">×</div>
                 <p>批量设置会员价</p>
                 <div class="text-center">
-                  <input class="form-control num input-sm" name="memberPrice" type="number" (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
+                  <input class="form-control num input-sm" name="__memberPrice" type="number"
+                         (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('memberPrice',$event.target)">设置</button>
                 </div>
               </div>
             </th>
@@ -164,47 +166,40 @@
                 <div class="close">×</div>
                 <p>批量设置库存</p>
                 <div class="text-center">
-                  <input class="form-control num input-sm" name="storageNum" type="number" [pattern]="'^[1-9]{1}\d+'"
+                  <input class="form-control num input-sm" name="__storageNum" type="number" [pattern]="'^[1-9]{1}\d+'"
                          (keyup)="auditInputValueForNum($event.target,'int')" placeholder=">10"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize($event.target)">设置</button>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('storageNum',$event.target)">设置</button>
                 </div>
               </div>
             </th>
           </tr>
           </thead>
           <tbody>
-          <!--当选择了规格时-->
           <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
             <td [hidden]="true"><input type="text" name="saGroupCode" [(ngModel)]="sku.saGroupCode"></td>
             <td *ngFor="let val of sku.attrsList" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
             <td>
-              <input class="text _price num form-control" name="marketPrice" type="number" required
-                     (keyup)="auditInputValueForNum($event.target)"
-                     [(ngModel)]="sku.marketPrice" #marketPrice="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
+                     (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
+                     [(ngModel)]="sku.marketPrice"/>
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text _price num form-control" name="price" type="number" required
-                     (keyup)="auditInputValueForNum($event.target)"
-                     [(ngModel)]="sku.price" #price="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'price'+i" type="number" required
+                     (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
+                     [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
-              <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value || !marketPrice.value"
-                    class="text-danger font12">销售价应小于市场价
-              </span>
             </td>
             <td>
-              <input class="text _price num form-control" name="memberPrice" type="number" required
-                     (keyup)="auditInputValueForNum($event.target)"
-                     [(ngModel)]="sku.memberPrice" #memberPrice="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
+                     (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
+                     [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
-              <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value || !memberPrice.value || !price.value"
-                    class="text-danger font12">会员价应小于销售价
-              </span>
             </td>
             <td>
-              <input class="text stock num form-control" name="storageNum" type="number" required
-                     (keyup)="auditInputValueForNum($event.target,'int')" [pattern]="'^[1-9]{1}\d+'"
-                     [(ngModel)]="sku.storageNum" #storageNum="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
+                     (keyup)="auditInputValueForNum($event.target,'int')" pattern="^[1-9]{1}[0-9]+"
+                     [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
               <span [hidden]="storageNum.value > 9 || !storageNum.value"
                     class="text-danger font12">库存最少为10
               </span>
@@ -256,7 +251,7 @@
               <em class="fa fa-picture-o"></em>
               打开相册图片
               <input class="w100" type="file" name="" ng2FileSelect
-                     accept="image/gif, image/jpeg, image/png, image/jpg"
+                     accept="image/*"
                      [uploader]="val.uploader" multiple/>
             </label>
             <p class="tip" myHoverColor>默认第一张图片为主图</p>
@@ -272,7 +267,7 @@
               <div class="close" (click)="removeImgSrc(val.valCode,i)">×</div>
               <div class="upload-thumb">
                 <div class="up-success"><em class="fa fa-check"></em></div>
-                <img [src]="src" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img [src]="src" (error)="removeImgSrc(val.valCode,i)">
               </div>
             </li>
             <li class="ui-state-disabled img-box" *ngFor="let item of val.uploader.queue">
@@ -281,7 +276,7 @@
               <div class="upload-thumb">
                 <div class="up-success" *ngIf="item.isSuccess"><em class="fa fa-check"></em></div>
                 <img *ngIf="item" [src]="item._file | imgUrl"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name">
+                     (error)="item.remove()" [alt]="item?.file?.name">
               </div>
             </li>
           </ul>

@@ -173,10 +173,10 @@ export class SubmitService {
       data: requestData,
       async: false,
       success: (res) => {
-        if (!isNullOrUndefined(res) && res.success) {
-          console.log("█ res ►►►",  res);
+        if (res.success) {
           result = res.data;
-          console.log("█ result ►►►",  result);
+        }else{
+          AppComponent.rzhAlt("error", '获取数据时'+res.info);
         }
       },
       error: (res) => {
