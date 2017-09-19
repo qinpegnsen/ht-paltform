@@ -19,7 +19,7 @@ export class AddArticleSortComponent implements OnInit {
   public acParentId:number;
   public id:number;
   public flag:boolean=false;
-  public stateList:Array<string>;
+  public stateList:any;
   constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,public service:SubmitService,public operationService:OperationService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -39,7 +39,11 @@ export class AddArticleSortComponent implements OnInit {
     /**
      * 状态列表
      */
-    this.stateList=['HIDE','SHOW','DEL ']
+    this.stateList=[
+      {id:'HIDE',text:'隐藏'},
+      {id:'SHOW',text:'显示'},
+      {id:'DEL',text:'删除'}
+    ]
   }
 
   /**
