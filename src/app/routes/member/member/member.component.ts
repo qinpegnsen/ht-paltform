@@ -24,7 +24,7 @@ export class MemberComponent implements OnInit {
   ngOnInit() {
 
     this.detailsbutton={
-      title:"删除",
+      title:"查看更多信息",
       type: "details"
     };
 

@@ -136,7 +136,7 @@
                   (click)="changeState('FREEZE',member.custCode)"></button>
           <button class="btn btn-info btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
                   (click)="changeState('BLACK',member.custCode)"></button>
-          <button class="btn btn-purple btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="正常"
+          <button class="btn btn-purple btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="激活"
                   (click)="changeState('NORMAL',member.custCode)"></button>
           <!--<button class="btn btn-danger btn-xs fa fa-trash" *ngIf="member.state=='NORMAL'" title="冻结"-->
                   <!--(click)="changeState('FREEZE',member.custCode)"></button>-->
