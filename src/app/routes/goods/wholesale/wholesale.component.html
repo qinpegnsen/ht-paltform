@@ -105,12 +105,9 @@
         </td>
         <td>
           <div>
-            <input class="form-control w40 text-center price-change-box num" required type="number" placeholder="0.00" [(ngModel)]="_goods[i]"    name="batchPrice" #batchPrice="ngModel" [pattern]="patterns.twodecimal">
-            <span class="btn btn-green  aa" (click)="submita(goods.goodsCode,i,data.curPage)" type="submit"><i class="fa fa-check                checkmark"></i></span>
+            <input class="form-control w40 text-center price-change-box num" required type="number" placeholder="0.00" [(ngModel)]="_goods[i]"  name="batchPrice" #batchPrice="ngModel" [pattern]="patterns.twodecimal">
+            <button class="btn btn-green  aa" type="button" (click)="submita(goods.goodsCode,i,data.curPage)" [disabled]="!batchPrice.valid" ><i class="fa fa-check checkmark"></i></button>
           </div>
-          <!--<div [hidden]="batchPrice < goods.goodsPrice.batchPrice || batchPrice.value == goods.goodsPrice.batchPrice || !goods.goodsPrice.batchPrice"-->
-          <!--class="text-danger font12">批发价小于会员价-->
-          <!--</div>-->
           <div [hidden]="batchPrice.valid || batchPrice.pristine"
                class="col-sm-9 text-danger">
             请填写批发价(最多写两位小数)
