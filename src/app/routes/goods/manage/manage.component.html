@@ -66,7 +66,6 @@
       </div>
     </div>
   </div>
-
 </div>
 <div class="panel panel-danger">
   <div class="panel-body">
@@ -92,14 +91,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center">
+      <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center font12">
         <td>{{i+1}}</td>
         <td class="text-left position-relative">
           <span class="img-box mr"><img [src]="goods.goodsImage"
                                         onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
           <div class="mb0 goods-info">
             <p>
-              <a class="goods-name" href="javascript:;">
+              <a class="goods-name font14" href="javascript:;">
                 <span class="tag font12"
                       [class.bg-info]="goods.state=='NORMAL'"
                       [class.bg-danger]="goods.state=='STOP'"
@@ -120,7 +119,7 @@
                   (click)="showSkuList(goods.goodsBaseCode,goods.goodsName)">查看所有规格
           </button>
         </td>
-        <td>{{goods.minPrice}}-{{goods.maxPrice}}</td>
+        <td>{{goods.minPrice == goods.maxPrice? goods.maxPrice:goods.minPrice+'-'+ goods.maxPrice }}</td>
         <td>{{goods.createTime}}</td>
         <td>{{goods.goodsAudit | rzhState:'1014'}}</td>
         <td>
@@ -144,7 +143,7 @@
             </button>
           </span>
           <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"
-                  routerLink="../publish/audit" [queryParams]="{baseCode: goods.goodsBaseCode}"> 审核
+                  routerLink="../publish/audit" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
           </button>
           <span *ngIf="goods.goodsAudit!='REJECT'">
             <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"

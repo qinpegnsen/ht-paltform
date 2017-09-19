@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
@@ -18,7 +18,14 @@ export class ManageComponent implements OnInit {
   private addButton;
   private buttons;
   public goodsList: Page = new Page();
-  private query: any; // 查询条件
+  private query = {
+    kindId: '',
+    goodsName: '',
+    brandName: '',
+    state: '',
+    isOwnPlat: '',
+    goodsAudit: '',
+  }; // 查询条件
   private kindList;// 分类列表
   private goodsAudits: any;  // 商品审核状态列表
   private goodsState: any;  // 商品状态列表
@@ -34,15 +41,7 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.query = {
-      kindId: '',
-      goodsName: '',
-      brandName: '',
-      state: '',
-      isOwnPlat: '',
-      goodsAudit: '',
-    }
-    me.queryDatas(1); //查询第一页商品列表
+    me.queryDatas(1); //查询商品列表
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表
@@ -114,7 +113,7 @@ export class ManageComponent implements OnInit {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    }
+    };
     let requestUrl = '/goodsQuery/query';
     let requestData = {
       curPage: activePage,

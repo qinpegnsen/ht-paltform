@@ -79,7 +79,8 @@ const routes: Routes = [
     PublishComponent,
     BrandsComponent,
     KindManageComponent,
-    ManageService
+    ManageService,
+    ManageComponent
   ]
 })
 export class GoodsModule {

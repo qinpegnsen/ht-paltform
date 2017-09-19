@@ -1,14 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {PublishComponent} from "../publish/publish.component";
 import {isNullOrUndefined, isUndefined} from "util";
-import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
-import {FileUploader} from "ng2-file-upload";
-import {GetUidService} from "../../../core/services/get-uid.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {AppComponent} from "../../../app.component";
 import {MaskService} from "../../../core/services/mask.service";
+import {Router} from "@angular/router";
+import {ManageComponent} from "../manage/manage.component";
 declare var $: any;
 
 @Component({
@@ -39,9 +37,6 @@ export class AuditGoodsComponent implements OnInit {
   public logistics:any;             // 物流规则列表
   public tplVals:any;               // 运费模板内容
   private unit:string = '件';       // 运费价格
-  addLogisticsModuleUrl = location.protocol+'//'+location.host+location.hash+'/main/operation/freight-template/add-formoek?linkType=addArticle'; //新增模流模板地址
-  lookLogisticsModuleUrl = location.protocol+'//'+location.host+location.hash+'/main/operation/freight-template'; //查看物流模板详情跳转地址
-
   private publishData: any = {
     goodsExpressInfo: {
       freightType: null,
@@ -62,8 +57,10 @@ export class AuditGoodsComponent implements OnInit {
     ]
   };// 商品发布数据，所有数据
   constructor(private publishComponent: PublishComponent,
+              private manageComponent: ManageComponent,
               private submit: SubmitService,
               private goods: GoodsService,
+              private router: Router,
               private tools: RzhtoolsService) {
   }
 

@@ -6,6 +6,7 @@ import {MaskService} from "../../core/services/mask.service";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../core/forms/submit.service";
 import {SettingsService} from "../../core/settings/settings.service";
+import { Location }from '@angular/common';
 const swal = require('sweetalert');
 
 @Injectable()
@@ -14,6 +15,7 @@ export class GoodsService {
   constructor(private ajax: AjaxService,
               private mask: MaskService,
               private router: Router,
+              public location: Location,
               private settings: SettingsService,
               private submit: SubmitService) { }
   /**
@@ -45,7 +47,7 @@ export class GoodsService {
    * @param requestData
    * @returns {any}
    */
-  publishGoods(requestUrl: string, requestData: any){
+  publishGoods(requestUrl: string, requestData: any, type?:string){
     let me = this;
     me.ajax.post({
       url: requestUrl,
@@ -55,7 +57,11 @@ export class GoodsService {
       success: (res) => {
         if (res.success) {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          me.router.navigate(['/main/goods/publish/step_three'],{queryParams: {baseCode: res.data}})
+          if(type == 'edit') {
+            me.location.back();
+          }else{
+            me.router.navigate(['/main/goods/publish/step_three'],{queryParams: {baseCode: res.data}})
+          }
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           swal(res.info,'','error');
@@ -119,7 +125,7 @@ export class GoodsService {
         console.log("█ res ►►►", res);
         if (res.success) {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
+          if (back) this.location.back()//返回上级路由
           swal({
            title: '成功',
            text: res.info,

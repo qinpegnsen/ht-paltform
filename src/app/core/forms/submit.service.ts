@@ -124,7 +124,7 @@ export class SubmitService {
 
   /**
    * 获取路由参数
-   * 适用于'?'开头的传参形式
+   * 适用于'/'开头的传参形式
    * @returns {any}
    */
   /*getParams(param) {

@@ -751,18 +751,6 @@ export class EditDetailComponent implements OnInit {
     })
   }
 
-  /**
-   * 判断图片是否全部上传成功
-   * @param allUploaders
-   * @returns {boolean}
-   */
-  private allUploaded(allUploaders) {
-    let uploadedNum = 0;
-    allUploaders.forEach((item) => {
-      if (!item.isUploading) uploadedNum += 1
-    })
-    if (uploadedNum == allUploaders.length) return true;
-  }
 
   /**
    * 生成商品基本属性列表
@@ -843,9 +831,9 @@ export class EditDetailComponent implements OnInit {
   judgeGoodsImgs(){
     let me = this, targets = me.skuImg.vals;
     if(targets.length > 0){
-      for(let target of targets){
-        if(target.uploader.queue.length == 0){
-          AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+target.valName+'的商品的图片');
+      for(let i = 0; i < targets.length; i ++ ){
+        if(isUndefined(me.goodsImgList[me.skuImg.vals[i].valCode]) || me.goodsImgList[me.skuImg.vals[i].valCode].length == 0){
+          AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+targets[i].valName+'的商品的图片');
           return false
         }
       }
@@ -925,7 +913,7 @@ export class EditDetailComponent implements OnInit {
    * 整理数据并且发布商品
    */
   private genPublishDataAndPublish() {
-    let me = this;
+    let me = this, type;
     me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
     if (me.path == 'step_two') me.publishData['kindId'] = me.kindId;
     me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码
@@ -933,7 +921,7 @@ export class EditDetailComponent implements OnInit {
     me.publishData['goodsBody'] = $('.summernote').summernote('code');  // 商品详情 PC
     me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
     console.log("█ me.publishData ►►►", me.publishData);
-    me.goods.publishGoods('/goodsEdit/save', me.publishData);
+    me.goods.publishGoods('/goodsEdit/save', me.publishData, me.path);
   }
 
 }

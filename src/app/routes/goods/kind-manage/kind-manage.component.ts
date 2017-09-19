@@ -107,12 +107,6 @@ export class KindManageComponent implements OnInit {
   }
 
 
-  ceshi33() {
-    let me = this;
-    me.tool.rzhAlt("success", "hello world!");
-    // this.toasterService.pop("info", "信息提示", "信息消息，类型：info");
-  }
-
   /**
    * 查询分类列表
    * @param event

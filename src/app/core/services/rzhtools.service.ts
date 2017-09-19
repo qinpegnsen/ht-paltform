@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {isNull, isNullOrUndefined} from "util";
 import {areaIdCardJSON} from "./areaIdCard";
 import {AjaxService} from "./ajax.service";
-import {ToasterConfig, ToasterService} from "angular2-toaster";
+import {ToasterService} from "angular2-toaster";
 import {AppComponent} from "../../app.component";
 import {SubmitService} from "../forms/submit.service";
 import {AREA_LEVEL_2_JSON} from "./area_level_2";
@@ -398,6 +398,7 @@ export class RzhtoolsService {
    * @param file
    */
   uploadImg = function (file: any) {
+    console.log("█ file ►►►",  file);
     let _this = this, ret: string,data:any = new FormData();
     data.append("limitFile", file);
     _this.ajax.post({
@@ -413,6 +414,7 @@ export class RzhtoolsService {
       },
       error: (response) => {
         AppComponent.rzhAlt('error',file.name+'上传失败','')
+        console.log("█ response ►►►", response);
       }
     });
     return ret;
