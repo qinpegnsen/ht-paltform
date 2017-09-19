@@ -322,8 +322,7 @@
                       <li class="btn p0 mr-sm btn-default" (click)="removeItem(i)">移除</li>
                     </ul>
                   </div>
-                  <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img width="100%" *ngIf="item.type== 'img'" [src]="item.value">
                   <p class="text mb0" style="line-height: 1.6" *ngIf="item.type== 'text'">{{item.value}}</p>
                   <div class="mobile-edit-area hide" *ngIf="item.type== 'text'">
                     <div class="mea-text">
@@ -440,7 +439,7 @@
                 <select class="rules-list text form-control pull-left" name="freightType"
                         [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
                         [required]="publishData.goodsExpressInfo.freightType=='TPL'">
-                  <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
+                  <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
                 </select>
                 <a class="btn btn-green btn-sm ml" target="_blank" (click)="addLogisticsModule()"><em
                   class="fa fa-truck"></em> 添加物流规则</a>
