@@ -2,8 +2,10 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
-import {isNullOrUndefined, isUndefined} from "util";
-import {SubmitService} from "../../core/forms/submit.service";
+import {SubmitService} from '../../core/forms/submit.service';
+import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+const swal = require('sweetalert');
+
 @Injectable()
 export class OperationService {
 
@@ -119,16 +121,9 @@ export class OperationService {
       async: false,
       success: (res) => {
         if (res.success) {
-          console.log("█ res ►►►",  res);
           result = res.info;
         } else {
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            result = res.info;
-            AppComponent.rzhAlt("error",result );
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
+          swal(res.info,'','error');
         }
       },
       error: (res) => {

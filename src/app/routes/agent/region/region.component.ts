@@ -116,8 +116,7 @@ export class RegionComponent implements OnInit {
             _this.router.navigate(['/main/limit'], {replaceUrl: true}); //路由跳转
             swal('已添加代理区域！', '','success');
           } else {
-            let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-            swal(res.info, errorMsg, 'error');
+            swal(res.info,'','error');
           }
         },
         error: (data) => {

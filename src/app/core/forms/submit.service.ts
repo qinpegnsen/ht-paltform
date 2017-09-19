@@ -43,13 +43,7 @@ export class SubmitService {
           result = res.data;
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            errorMsg = res.info
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
-          AppComponent.rzhAlt("error", errorMsg);
+          AppComponent.rzhAlt("error", res.info);
         }
       },
       error: (res) => {
@@ -78,13 +72,7 @@ export class SubmitService {
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           AppComponent.rzhAlt("success", res.info);
         } else {
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            errorMsg = res.info
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
-          AppComponent.rzhAlt("error", errorMsg);
+          AppComponent.rzhAlt("error", res.info);
         }
       },
       error: (res) => {
@@ -122,13 +110,7 @@ export class SubmitService {
           result = res.data;
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            errorMsg = res.info
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
-          AppComponent.rzhAlt("error", errorMsg);
+          AppComponent.rzhAlt("error", res.info);
         }
       },
       error: (res) => {

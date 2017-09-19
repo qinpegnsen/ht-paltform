@@ -58,13 +58,7 @@ export class GoodsService {
           me.router.navigate(['/main/goods/publish/step_three'],{queryParams: {baseCode: res.data}})
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            errorMsg = res.info
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
-          AppComponent.rzhAlt("error", res.info, errorMsg);
+          swal(res.info,'','error');
         }
       },
       error: (res) => {
@@ -136,13 +130,7 @@ export class GoodsService {
           result = res.data;
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          let errorMsg;
-          if (isNullOrUndefined(res.data)) {
-            errorMsg = res.info
-          } else {
-            errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          }
-          AppComponent.rzhAlt("error", res.info, errorMsg);
+          swal(res.info,'','error');
         }
       },
       error: (res) => {

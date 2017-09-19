@@ -83,8 +83,7 @@ export class RightpageComponent implements OnInit {
             swal('已添加代理区域！', '','success');
             _this.RegionComponent.controlDatas()//实现刷新
           } else {
-            let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-            swal(res.info, errorMsg, 'error');
+            swal(res.info,'','error');
           }
         },
         error: (data) => {

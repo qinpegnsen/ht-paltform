@@ -88,8 +88,7 @@ export class AddAgentComponent implements OnInit {
           //console.log('获取的暗码成功！', _this.uid);
           //_this.outputvalue.emit(true);//提交成功后向父组件传值
         } else {
-          let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-          swal(res.info, errorMsg, 'error');
+          swal(res.info,'','error');
         }
       },
       error: (data) => {
@@ -183,7 +182,7 @@ export class AddAgentComponent implements OnInit {
             swal('添加代理商提交成功！', '', 'success');
             // _this.AreasComponent.queryList()//实现刷新
           } else {
-            swal(res.info,);
+            swal(res.info);
           }
         },
         error: (data) => {
@@ -293,9 +292,8 @@ export class AddAgentComponent implements OnInit {
           if (res.success) {
             _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true});   //路由跳转
             swal('修改区域信息成功！', '', 'success');
-            //_this.AreasComponent.queryList()//实现刷新
           } else {
-            swal(res.info);
+            swal(res.info, '','error');
           }
         },
         error: (data) => {

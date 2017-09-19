@@ -98,8 +98,7 @@ export class RightpageComponent implements OnInit {
             swal('修改区域信息成功！', '','success');
             _this.AreasComponent.queryList()//实现刷新
           } else {
-            let errorMsg = res.data.substring(res.data.indexOf('$$') + 2, res.data.indexOf('@@'))
-            swal(res.info, errorMsg, 'error');
+            swal(res.info, '', 'error');
           }
         },
         error: (data) => {
