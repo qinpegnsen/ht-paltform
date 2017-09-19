@@ -78,7 +78,6 @@ export class FreightTemplateComponent implements OnInit {
         }
       });
     _this.queryList()//获取费模板列表信息
-
   }
 
   /**

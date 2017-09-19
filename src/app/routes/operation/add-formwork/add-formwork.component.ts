@@ -6,6 +6,7 @@ import {AREA_LEVEL_1_JSON} from "../../../core/services/area_level_1";
 import {CHINA_AREA} from "../../../core/services/china_area";
 import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
+import {validate} from "codelyzer/walkerFactory/walkerFn";
 const swal = require('sweetalert');
 
 
@@ -22,6 +23,9 @@ export class AddFormworkComponent implements OnInit {
   private flag = true;//声明flag用于计算方式的显示隐藏
   private moduleList = [];
   public area_model: boolean = false;
+  public one: boolean = true;
+  public twe: boolean = false;
+  public three: boolean = false;
   public reslut: Array<any> = [];
   private cru: number = 0;
   china_area = CHINA_AREA;
@@ -56,6 +60,12 @@ export class AddFormworkComponent implements OnInit {
 
   }
 
+  /**
+   * 遍历所有的地区数据（第一级，第二级的）
+   * @param index
+   * @param j
+   * @param provices
+   */
   updateAllChecked(index: number | string, j: number | string, provices: any) {
     console.log(1);
     if (this.allCheckeds[index]['allChecked']) {
@@ -74,7 +84,7 @@ export class AddFormworkComponent implements OnInit {
   updateAllchildChecked(index: number | string, j: number | string, code: any) {
     this.allCheckeds[index]['allChecked'] =
       this.data[index]['provices'].every(item => item.checked === true);
-
+    console.log(this.allCheckeds[index]['allChecked']);
     // 添加运费模板时选择区域的  全选全不选
     if (this.data[index]['provices'][j]['checked']) {
       this.checkOptionsOnes[code][0].forEach(value => value.checked = true);
@@ -128,7 +138,9 @@ export class AddFormworkComponent implements OnInit {
           this.data[index]['provices']
             .push({
               label: this.area_level1[i].areaName,
-              value: this.area_level1[i].areaName, areaCode: this.area_level1[i].areaCode, checked: false
+              value: this.area_level1[i].areaName,
+              areaCode: this.area_level1[i].areaCode,
+              checked: false
             });
           if (isArray(this.allCheckeds[index]['content'])) {
             const tempObject = {};
@@ -147,6 +159,7 @@ export class AddFormworkComponent implements OnInit {
       this.getProvices(this.china_area[i].provices, i + '');
     }
   }
+
   /**
    *获取选择区域后的结果
    */
@@ -168,12 +181,33 @@ export class AddFormworkComponent implements OnInit {
       });
       tempResult = tempResult.concat(temp);
     }
-    this.moduleList[0].reslut = tempResult.join('_');
+    // this.moduleList[0].reslut = tempResult.join('_');
     console.log(tempResult.join('_'));
     // this.moduleList[this.cru]['reslut'] = tempResult.join('_');
     this.reslut[this.cru] = tempResult.join('_');
-    this.close();
+    console.log(this.reslut[this.cru].split('_'));
+    // this.close();
     return tempResult.join('_');
+  }
+
+
+  /**
+   * 判断计量方式(按件数，重量，体积)
+   */
+  number(){
+    this.one = true;
+    this.twe = false;
+    this.three = false;
+  }
+  weight(){
+    this.one = false;
+    this.twe = true;
+    this.three = false;
+  }
+  volume(){
+    this.one = false;
+    this.twe = false;
+    this.three = true;
   }
 
 
@@ -205,22 +239,54 @@ export class AddFormworkComponent implements OnInit {
 
   close() {
     // allCheckeds[i]['content'][j]['childChecked']
-    this.allCheckeds.forEach(item => {
+   /* this.allCheckeds.forEach(item => {
       item['content'].forEach(value => {
         value['childChecked'] = false;
       })
-    })
+    })*/
   }
 
   edit(index: number) {
+    this.cru = index;
+    /*this.allCheckeds.forEach(item => {
+     item['content'].forEach(value => {
+     if (value['childChecked']) {
+     value['childChecked'] = false;
+     value['disabled'] = true;
+     }
+     })
+     })*/
+    const len = isArray(this.data) ? this.data.length : 0;
+    for (let i = 0; i < len; i++) {
+      this.data[i]['provices'].forEach(item => {
+        if (item.checked) {
+          item.checked = false;
+          item['disabled'] = true;
+
+
+        } else {
+          this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+            if (value.checked) {
+              value['disabled'] = true;
+              value.checked = false;
+            }
+          });
+        }
+      });
+
+    }
+    console.log(this.data);
+    this.allCheckeds.forEach((item) => {
+
+      // item.allChecked = false;
+    })
     this.data.forEach((item, indexs) => {
-      this.allCheckeds.forEach((item) => {
-        item.allChecked = false;
-      })
+
       this.updateAllChecked(indexs, null, item.provices);
     });
 
-    this.cru = index;
+
+
     console.log(this.cru);
   }
 

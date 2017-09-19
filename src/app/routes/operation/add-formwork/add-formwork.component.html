@@ -28,13 +28,13 @@
             <span *ngIf="flag">
             <label class="col-sm-2 control-label">计价方式</label>
             <div class="col-sm-4">
-              <label class="radio-inline c-radio">
+              <label class="radio-inline c-radio"  (click)="number()">
                 <input type="radio" name="B" checked/>
                 <span class="fa fa-circle"></span>按件数</label>
-              <label class="radio-inline c-radio">
+              <label class="radio-inline c-radio"  (click)="weight()">
                 <input type="radio" name="B"/>
                 <span class="fa fa-circle"></span> 按重量</label>
-              <label class="radio-inline c-radio">
+              <label class="radio-inline c-radio"  (click)="volume()">
                 <input type="radio" name="B"/>
                 <span class="fa fa-circle"></span>按体积</label>
               <span></span>
@@ -50,7 +50,7 @@
                 <div class="panel-body">
                   <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="areas">
                     <thead>
-                    <tr>
+                    <tr *ngIf="one">
                       <th class="col-md-5 unselectable">
                         <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
                       </th>
@@ -62,6 +62,42 @@
                       </th>
                       <th class="col-md-1 unselectable text-center">
                         <rzhDefaultSorter by="addAttach">续件(件)	</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-2 unselectable text-center">
+                        <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">操作</th>
+                    </tr>
+                    <tr *ngIf="twe">
+                      <th class="col-md-5 unselectable">
+                        <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">
+                        <rzhDefaultSorter by="agentName">首重(Kg)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-2 unselectable text-center">
+                        <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">
+                        <rzhDefaultSorter by="addAttach">续重(Kg)	</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-2 unselectable text-center">
+                        <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">操作</th>
+                    </tr>
+                    <tr *ngIf="three">
+                      <th class="col-md-5 unselectable">
+                        <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">
+                        <rzhDefaultSorter by="agentName">首体积(㎡)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-2 unselectable text-center">
+                        <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
+                      </th>
+                      <th class="col-md-1 unselectable text-center">
+                        <rzhDefaultSorter by="addAttach">续件(㎡)	</rzhDefaultSorter>
                       </th>
                       <th class="col-md-2 unselectable text-center">
                         <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
@@ -152,12 +188,12 @@
             <div>
               <label class="col-sm-2 control-label">计价方式</label>
               <div class="col-sm-4">
-                <label class="radio-inline c-radio">
-                  <input type="radio" name="B" checked/>
+                <label class="radio-inline c-radio" >
+                  <input type="radio" name="B" checked />
                   <span class="fa fa-circle"></span>按件数</label>
                 <label class="radio-inline c-radio">
                   <input type="radio" name="B"/>
-                  <span class="fa fa-circle"></span> 按重量</label>
+                  <span class="fa fa-circle" ></span> 按重量</label>
                 <label class="radio-inline c-radio">
                   <input type="radio" name="B"/>
                   <span class="fa fa-circle"></span>按体积</label>
@@ -174,9 +210,45 @@
                   <div class="panel-body">
                     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="areas">
                       <thead>
-                      <tr>
+                      <tr *ngIf='number'>
                         <th class="col-md-4 unselectable">
                           <rzhDefaultSorter by="a">运送到</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">
+                          <rzhDefaultSorter by="b">首件(件)</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-2 unselectable text-center">
+                          <rzhDefaultSorter by="c">首费(元)</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">
+                          <rzhDefaultSorter by="d">续件(件)	</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-2 unselectable text-center">
+                          <rzhDefaultSorter by="e">续费(元)</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">操作</th>
+                      </tr>
+                      <tr *ngIf='aa'>
+                        <th class="col-md-4 unselectable">
+                          <rzhDefaultSorter by="a">运送到</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">
+                          <rzhDefaultSorter by="b">首件(件)aa</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-2 unselectable text-center">
+                          <rzhDefaultSorter by="c">首费(元)</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">
+                          <rzhDefaultSorter by="d">续件(件)	</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-2 unselectable text-center">
+                          <rzhDefaultSorter by="e">续费(元)</rzhDefaultSorter>
+                        </th>
+                        <th class="col-md-1 unselectable text-center">操作</th>
+                      </tr>
+                      <tr *ngIf='bb'>
+                        <th class="col-md-4 unselectable">
+                          <rzhDefaultSorter by="a">运送到ccc</rzhDefaultSorter>
                         </th>
                         <th class="col-md-1 unselectable text-center">
                           <rzhDefaultSorter by="b">首件(件)</rzhDefaultSorter>
@@ -276,6 +348,7 @@
                                      (ngModelChange)="updateSingleChecked(i, j, name.areaCode)">
                   </nz-checkbox-group>
                   <button class="btn-info" style="position: absolute; right: 0; bottom: 0;" (click)="allCheckeds[i]['content'][j]['childChecked'] = false"> 关闭</button>
+
                 </div>
               </ng-container>
             </div>

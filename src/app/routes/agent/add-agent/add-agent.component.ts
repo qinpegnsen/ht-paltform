@@ -151,7 +151,7 @@ export class AddAgentComponent implements OnInit {
   //获取区域数据
   private getAreaData(area){
     let me = this;
-    me.organ['areaCode'] = area.areaCode;
+    me.staff['areaCode'] = area.areaCode;
   }
 
   addLimitList(value) {

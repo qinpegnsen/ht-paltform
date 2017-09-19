@@ -111,14 +111,14 @@
           </div>
           <button class="btn btn-info position-absolute  left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
           <button class="btn btn-info position-absolute  left50" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)">修改经纬度</button>
-          <!-- <div class="form-group" [hidden]="!staff.isShowMap">
+           <div class="form-group" [hidden]="!staff.isShowMap">
              <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
                <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
                <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)">确定</button>
                <div id="container">
                </div>
              </div>
-           </div>-->
+           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -179,6 +179,7 @@
       <div class="panel-default">
         <div class="panel-body">
           <input class="form-control" required [(ngModel)]="agentCode" name="agentCode" type="hidden">
+          <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden">
           <fieldset>
             <div class="form-group">
               <label class="col-sm-2 control-label"> <i>*</i> 代理商名称</label>
@@ -239,8 +240,6 @@
               <div class="col-sm-4">
                 <input class="form-control" type="text" name="telephone" ngModel [(ngModel)]="staff.telephone" [pattern]="patterns.telephone"/>
               </div>
-
-
               <!--<button class="btn btn-info" style="position: absolute;" type="button">上传身份证</button>-->
               <!--上传组件 begin-->
               <!--  <div class="form-group ">
@@ -263,7 +262,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label"><i>*</i>选择区域</label>
               <div class="col-sm-4">
-                <app-four-areas (myData)="getAreaData($event)"></app-four-areas>
+                <app-four-areas (myData)="getAreaData($event)" [selectedAreaName]="staff.fullName" ></app-four-areas>
               </div>
               <label class="col-sm-2 control-label"> <i>*</i> 详细地址</label>
               <div class="col-sm-4">
@@ -286,8 +285,8 @@
                 <input class="form-control col-sm-1 position-relative" type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
               </div>
             </div>
-            <button class="btn btn-info position-absolute top53 left50" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
-            <button class="btn btn-info position-absolute top53 left50" *ngIf="flag" type="button" (click)="isShowMap(staff)">修改经纬度</button>
+            <button class="btn btn-info position-absolute left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
+            <button class="btn btn-info position-absolute left50" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)">修改经纬度</button>
             <div class="form-group" [hidden]="!staff.isShowMap">
               <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
                 <input type="text" id="keyword" class="form-control w30 isShowlMap" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
@@ -323,7 +322,7 @@
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->
 
-<div class="model" *ngIf="aa">
+<!--<div class="model" *ngIf="aa">
   <div class="model-main">
     <div class="header">
       <span>选择区域</span><span class="icon" (click)="isShowMap1()" *ngIf="aa">关闭</span>
@@ -337,4 +336,4 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
