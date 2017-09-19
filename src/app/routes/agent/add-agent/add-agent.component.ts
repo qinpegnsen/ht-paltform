@@ -77,24 +77,24 @@ export class AddAgentComponent implements OnInit {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
 
-    /**
+    /*/!**
      * 上传文件 获取暗码
-     */
-    me.ajax.get({
-      url: '/upload/basic/uid',
-      success: (res) => {
-        if (res.success) {
-          me.uid = res.data;//把获取的暗码赋值给uid
-          //console.log('获取的暗码成功！', _this.uid);
-          //_this.outputvalue.emit(true);//提交成功后向父组件传值
-        } else {
-          swal(res.info,'','error');
-        }
-      },
-      error: (data) => {
-        //swal('获得暗码失败','','error');
-      }
-    });
+     *!/
+     me.ajax.get({
+     url: '/upload/basic/uid',
+     success: (res) => {
+     if (res.success) {
+     me.uid = res.data;//把获取的暗码赋值给uid
+     //console.log('获取的暗码成功！', _this.uid);
+     //_this.outputvalue.emit(true);//提交成功后向父组件传值
+     } else {
+     swal(res.info,'','error');
+     }
+     },
+     error: (data) => {
+     //swal('获得暗码失败','','error');
+     }
+     });*/
 
     /**
      * 请求代理商详细数据，并显示()
@@ -143,7 +143,6 @@ export class AddAgentComponent implements OnInit {
    * 关闭右侧滑动页面
    */
   cancel() {
-    //this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
     this.router.navigate(['/main/agent/agentperson']);
   }
 
@@ -286,8 +285,6 @@ export class AddAgentComponent implements OnInit {
           'description': value.description,
         },
         success: (res) => {
-          console.log("█ value ►►►",  value);
-
           console.log(res)
           if (res.success) {
             _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true});   //路由跳转

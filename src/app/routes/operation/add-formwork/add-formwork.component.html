@@ -329,6 +329,7 @@
           <td>
             <div>
               <label nz-checkbox [(ngModel)]="allCheckeds[i]['allChecked']"
+                     [nzDisabled]="allCheckeds[i]['disabled']"
                      (ngModelChange)="updateAllChecked(i, null, v.provices)">
                 <span>{{v?.label}}</span>
               </label>
@@ -338,6 +339,7 @@
             <div class="ncsc-province" *ngFor="let name of v.provices; let j = index">
               <ng-container>
                 <label nz-checkbox [(ngModel)]="v.provices[j]['checked']"
+                       [nzDisabled]="v.provices[j]['disabled']"
                        (ngModelChange)="updateAllchildChecked(i, j, name.areaCode)">
                   <span>{{name.label}}{{getCount(name.areaCode)}}</span>
                 </label>

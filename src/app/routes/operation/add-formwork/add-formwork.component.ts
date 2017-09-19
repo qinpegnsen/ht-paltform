@@ -8,6 +8,7 @@ import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {validate} from "codelyzer/walkerFactory/walkerFn";
 import {SessionService} from "../session.service";
+import {tick} from '@angular/core/testing';
 const swal = require('sweetalert');
 
 
@@ -36,7 +37,7 @@ export class AddFormworkComponent implements OnInit {
   data: Array<any> = [];
   checkOptionsOnes = {};
   // public reslut: string = '';
-  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private SessionService:SessionService) { }
+  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private session:SessionService) { }
 
   ngOnInit() {
     // 初始化地区数据
@@ -173,11 +174,11 @@ export class AddFormworkComponent implements OnInit {
     for (let i = 0; i < len; i++) {
       const temp = [];
       this.data[i]['provices'].forEach(item => {
-        if (item.checked) {
+        if (item.checked && !item.disabled) {
           temp.push(item.value);
         } else {
           this.checkOptionsOnes[item.areaCode][0].forEach(value => {
-            if (value.checked) {
+            if (value.checked && !value.disabled) {
               temp.push(value.value);
             }
           });
@@ -185,12 +186,10 @@ export class AddFormworkComponent implements OnInit {
       });
       tempResult = tempResult.concat(temp);
     }
-    // this.moduleList[0].reslut = tempResult.join('_');
-    console.log(tempResult.join('_'));
-    // this.moduleList[this.cru]['reslut'] = tempResult.join('_');
     this.reslut[this.cru] = tempResult.join('_');
-    console.log(this.reslut[this.cru].split('_'));
-    // this.close();
+    this.session.setData(this.cru, this.data);
+    this.session.setCheck(this.cru, this.checkOptionsOnes);
+    this.close();
     return tempResult.join('_');
   }
 
@@ -234,52 +233,65 @@ export class AddFormworkComponent implements OnInit {
    * 关闭时区域的子集框消失
    */
   clear() {
-    this.allCheckeds.forEach(item => {
-      item.content.forEach(item => {
-        item.childChecked = false;
-      });
-    });
+    this.close();
   }
 
   close() {
     // allCheckeds[i]['content'][j]['childChecked']
-   /* this.allCheckeds.forEach(item => {
+    this.allCheckeds.forEach(item => {
       item['content'].forEach(value => {
         value['childChecked'] = false;
       })
-    })*/
+    })
   }
 
   edit(index: number) {
     this.cru = index;
-    /*this.allCheckeds.forEach(item => {
-     item['content'].forEach(value => {
-     if (value['childChecked']) {
-     value['childChecked'] = false;
-     value['disabled'] = true;
-     }
-     })
-     })*/
-    const len = isArray(this.data) ? this.data.length : 0;
-    for (let i = 0; i < len; i++) {
-      this.data[i]['provices'].forEach(item => {
-        if (item.checked) {
-          item.checked = false;
+    this.close();
+    if (this.reslut[this.cru]) {
+      const temp = this.session.getDatas(this.reslut.length - 1);
+      const temp1 = this.session.getDatas(this.cru);
+      const check = this.session.getCheck(this.reslut.length - 1);
+      const check1 = this.session.getCheck(this.cru);
+      const len = isArray(temp) ? temp.length : 0;
+      for (let i = 0; i < len; i++) {
+        temp[i]['provices'].forEach((item, key) => {
+          if (item.checked && !temp1[i]['provices'][key]['checked']) {
+            temp1[i]['provices'][key]['checked'] = true;
+            temp1[i]['provices'][key]['disabled'] = true;
+          }
+          check[item.areaCode][0].forEach((value, j) => {
+            if (value.checked && !check1[item.areaCode][0][j]['checked']) {
+              check1[item.areaCode][0][j]['checked'] = true;
+              check1[item.areaCode][0][j]['disabled'] = true;
+            }
+          });
+        });
+      }
+      this.data = temp1;
+      this.checkOptionsOnes = check1;
+    } else {
+      this.allCheckeds.forEach((item) => {
+        if (item.allChecked) {
           item['disabled'] = true;
-
-
-        } else {
+        }
+      });
+      const len = isArray(this.data) ? this.data.length : 0;
+      for (let i = 0; i < len; i++) {
+        this.data[i]['provices'].forEach(item => {
+          if (item.checked) {
+            item['disabled'] = true;
+          }
           this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked) {
               value['disabled'] = true;
-              value.checked = false;
             }
           });
-        }
-      });
+        });
+      }
 
     }
-    console.log(this.data);
+   /* console.log(this.data);
     this.allCheckeds.forEach((item) => {
 
       // item.allChecked = false;
@@ -291,7 +303,7 @@ export class AddFormworkComponent implements OnInit {
 
 
 
-    console.log(this.cru);
+    console.log(this.cru);*/
   }
 
   show(){
