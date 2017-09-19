@@ -25,10 +25,10 @@
             <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="acSort" #sortTem="ngModel" name="acSort" required
-                     placeholder='必填项,请填写数字类型'/>
+                     placeholder='必填项,请填写数字类型' [tooltip]="tip.sort" [pattern]="patterns.doubleDigit"/>
               <div [hidden]="sortTem.valid||sortTem.untouched"
                    class="alert alert-danger">
-                排序是必填项
+                请填写0-99的整数
               </div>
             </div>
           </div>
@@ -94,10 +94,10 @@
             <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="acSort" #sortTem="ngModel" name="acSort" required
-                     placeholder='必填项,请填写数字类型'/>
+                     placeholder='必填项,请填写数字类型' [tooltip]="tip.sort" [pattern]="patterns.doubleDigit"/>
               <div [hidden]="sortTem.valid||sortTem.untouched"
                    class="alert alert-danger">
-                排序是必填项
+                请填写0-99的整数
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleSortComponent} from "../article/article-sort/article-sort.component";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {OperationService} from "../operation.service";
+import {PatternService} from "../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-add-article-sort',
@@ -20,7 +21,20 @@ export class AddArticleSortComponent implements OnInit {
   public id:number;
   public flag:boolean=false;
   public stateList:any;
-  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute,public ArticleSortComponent: ArticleSortComponent,private router: Router,public service:SubmitService,public operationService:OperationService) {
+  private tip = {
+    commisRate: '请输入小数形式，0 <= 佣金比例 < 1',
+    sort: '0-99，默认0',
+    keywords: '多个关键词请用逗号隔开'
+  }
+  constructor(
+    public settings: SettingsService,
+    private routeInfo: ActivatedRoute,
+    public ArticleSortComponent: ArticleSortComponent,
+    private router: Router,
+    public service:SubmitService,
+    public operationService:OperationService,
+    public patterns: PatternService
+  ) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
