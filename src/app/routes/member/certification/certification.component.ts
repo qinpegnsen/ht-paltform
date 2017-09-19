@@ -14,13 +14,13 @@ export class CertificationComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    this.qeuryAllService()
+    this.aqeuryAllService()
   }
 
   /**
    * 认证审核--查询分页
    */
-  qeuryAllService(event?: PageEvent){
+  aqeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/custAuthInfo/query";
@@ -42,8 +42,8 @@ export class CertificationComponent implements OnInit {
       id:id,
       state: 'PASS',
     }
-    this.submit.putRequest(url, data, true);
-    this.qeuryAllService();
+    this.submit.putRequest(url, data, false);
+    this.aqeuryAllService();
   }
   /**
    * 认证未通过
@@ -54,7 +54,7 @@ export class CertificationComponent implements OnInit {
       id: id,
       state: 'UNPASS',
     }
-    this.submit.putRequest(url, data, true);
-    this.qeuryAllService();
+    this.submit.putRequest(url, data, false);
+    this.aqeuryAllService();
   }
 }
