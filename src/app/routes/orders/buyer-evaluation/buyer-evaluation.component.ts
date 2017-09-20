@@ -23,13 +23,13 @@ export class BuyerEvaluationComponent implements OnInit {
       type: "delete",
       text:'删除'
     };
-      this.qeuryAllService();
+      this.qeuryAllService(1);
   }
 
   /**
    * 查询买家评价分页
    */
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?: PageEvent,){
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/goodsQuery/querySku";
@@ -47,13 +47,13 @@ export class BuyerEvaluationComponent implements OnInit {
    * 根据买家名搜索评价
    */
   search(){
-    this.qeuryAllService();
+    this.qeuryAllService(1);
   }
 
   /**
    * 删除买家评价
    */
-  deleteCount(delid) {
+  deleteCount(curPage,delid) {
     let me=this;
     let url = "";
     let data={
@@ -70,7 +70,7 @@ export class BuyerEvaluationComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.delRequest(url, data); //删除数据
-        me.qeuryAllService(); //更新
+        me.qeuryAllService(curPage); //更新
       }
     );
   }

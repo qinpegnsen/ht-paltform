@@ -36,7 +36,14 @@
         <td>{{count.name}}</td>
         <td>{{count.idcard}}</td>
         <td>{{count.startTime}}--{{count.endTime}}</td>
-        <td>{{count.idcardPic1}} &nbsp;{{count.idcardPic2}}&nbsp;{{count.idcardPic3}}</td>
+        <td>
+          <img  [src]="count.idcardPic1"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img  [src]="count.idcardPic2"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img  [src]="count.idcardPic3"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+         </td>
         <td>{{count.createTime}}</td>
         <td>
           <button class="btn btn-info" (click)="access(count.id)"><i class="fa fa-check"></i></button>

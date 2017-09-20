@@ -8,10 +8,12 @@ import {IntegrationManagementComponent} from "./integration-management/integrati
 import {IntegrationChangeComponent} from "./integration-management/integration-change/integration-change.component";
 import {IntegrationDetailsComponent} from "./integration-management/integration-details/integration-details.component";
 import {CertificationComponent} from "./certification/certification.component";
+import {IntegrationImportComponent} from "./integration-management/integration-import/integration-import.component";
 
 const userChildRoutes: Routes = [
   {path: 'integration-details', component: IntegrationDetailsComponent},
   {path: 'integration-change', component: IntegrationChangeComponent},
+  {path: 'integration-import', component: IntegrationImportComponent},
 ]
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
     SharedModule,
     RzhButtonsModule
   ],
-  declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent,CertificationComponent]
+  declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent,
+    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent]
 })
 export class MemberModule { }

@@ -169,6 +169,10 @@ const member = {
         {
           text: '重消币增减',
           link: '/main/member/integration-management/integration-change'
+        },
+        {
+          text: '重消币批量导入',
+          link: '/main/member/integration-management/integration-import'
         }
       ]
     }

@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService(1,$event)">
       <thead>
       <tr>
         <th class="w5 text-center">
@@ -73,7 +73,7 @@
           <img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
         </td>
         <td>
-          <app-buttons [config]="deletebutton" (click)="deleteCount(count.id)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
         </td>
       </tr>
 

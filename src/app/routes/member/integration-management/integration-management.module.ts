@@ -6,6 +6,7 @@ import { IntegrationChangeComponent } from './integration-change/integration-cha
 import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../../shared/shared.module";
 import {routes} from "../../routes";
+import { IntegrationImportComponent } from './integration-import/integration-import.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import {routes} from "../../routes";
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent]
+  declarations: [IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent, IntegrationImportComponent]
 })
 export class IntegrationManagementModule { }
