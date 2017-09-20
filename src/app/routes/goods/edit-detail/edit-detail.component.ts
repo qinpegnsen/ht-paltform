@@ -830,16 +830,19 @@ export class EditDetailComponent implements OnInit {
    */
   judgeGoodsImgs(){
     let me = this, targets = me.skuImg.vals;
-    if(targets.length > 0){
-      for(let i = 0; i < targets.length; i ++ ){
-        if(isUndefined(me.goodsImgList[me.skuImg.vals[i].valCode]) || me.goodsImgList[me.skuImg.vals[i].valCode].length == 0){
-          AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+targets[i].valName+'的商品的图片');
-          return false
+    // 当商品发布时，如果选了规格，但没有选择图片
+    if(me.path == 'step_two'){
+      if(targets.length > 0){
+        for(let i = 0; i < targets.length; i ++ ){
+          if(targets[i].uploader.queue.length == 0){
+            AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+targets[i].valName+'的商品的图片');
+            return false
+          }
         }
+      }else{
+        AppComponent.rzhAlt('warning','请选择商品规格');
+        return false
       }
-    }else{
-      AppComponent.rzhAlt('warning','请选择商品规格');
-      return false
     }
     return true
   }
