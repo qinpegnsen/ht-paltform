@@ -49,6 +49,7 @@ import {Level2AreaNamePipe} from './pipe/level-2-area-name.pipe';
 import {DecimalTwoPipe} from './pipe/decimal-two.pipe';
 import {StarsPipe} from './pipe/stars.pipe';
 import {DndModule} from "ng2-dnd";
+import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.directive";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -105,7 +106,8 @@ import {DndModule} from "ng2-dnd";
     GetKindComponent,
     Level2AreaNamePipe,
     DecimalTwoPipe,
-    StarsPipe
+    StarsPipe,
+    HoverShowLgPicDirective
   ],
   exports: [
     CommonModule,
@@ -153,7 +155,8 @@ import {DndModule} from "ng2-dnd";
     StarsPipe,
     BsDatepickerModule,
     DatepickerModule,
-    DndModule
+    DndModule,
+    HoverShowLgPicDirective
   ]
 })
 

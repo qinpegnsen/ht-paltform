@@ -7,6 +7,7 @@ import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {ManageService} from "./manage.service";
+const swal = require('sweetalert');
 declare var $: any;
 
 @Component({
@@ -84,12 +85,40 @@ export class ManageComponent implements OnInit {
     if (isUndefined(pPage)) pPage = 1;
     switch (type) {
       case 'DOWN':    // 下架
-        me.submit.putRequest('/goodsEdit/updateStateToDown', {goodsBaseCode: baseCode});
-        me.queryDatas(pPage);// 刷新当前页
+        swal({
+          title: "操作警示",
+          text: "下架后，所有sku商品都将下架<br>代理商将不能批发该商品",
+          type: "warning",
+          html: true,
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          cancelButtonText: "取消",
+          confirmButtonText: "确认下架",
+          closeOnConfirm: false
+        },
+        function(){
+          swal.close();
+          me.submit.putRequest('/goodsEdit/updateStateToDown', {goodsBaseCode: baseCode});
+          me.queryDatas(pPage);// 刷新当前页
+        });
         break;
       case 'STOP':    // 禁售
-        me.submit.putRequest('/goodsEdit/updateStateToStop', {goodsBaseCode: baseCode});
-        me.queryDatas(pPage);// 刷新当前页
+        swal({
+            title: "操作警示",
+            text: "禁售后，所有sku商品都将禁售<br>代理商将不能批发该商品",
+            type: "warning",
+            html: true,
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            cancelButtonText: "取消",
+            confirmButtonText: "确认禁售",
+            closeOnConfirm: false
+          },
+          function(){
+            swal.close();
+            me.submit.putRequest('/goodsEdit/updateStateToStop', {goodsBaseCode: baseCode});
+            me.queryDatas(pPage);// 刷新当前页
+          });
         break;
       case 'NORMAL':  // 申请上架
         me.submit.putRequest('/goodsEdit/appleToNormal', {goodsBaseCode: baseCode});

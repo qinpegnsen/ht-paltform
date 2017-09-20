@@ -353,3 +353,14 @@ input[type=number].num::-webkit-outer-spin-button {
 .item-bottom-border{
   border-bottom: 1px solid #f5f5f5;
 }
+
+.hover-big-img{
+  width: 180px !important;
+  height: 180px !important;
+  position: fixed;
+  z-index: 100;
+  display: none;
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+}

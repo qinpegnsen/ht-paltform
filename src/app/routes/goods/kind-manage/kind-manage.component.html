@@ -66,7 +66,12 @@
       <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td>{{kind.kindName}}</td>
-        <td><img height="50px" [src]="kind.kindIcon" onerror="javascript:this.src='../../../assets/img/dummy.png'"
+        <td><img class="cursor-p" height="50px" appHoverShowLgPic [myConfig]="{width:150,height:150}"
+                 [src]="kind.kindIcon"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                 alt="">
+          <img class="hover-big-img" [src]="kind.kindIcon"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt=""></td>
         <td  *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
         <td>{{kind.keywords}}</td>
