@@ -3,6 +3,7 @@ import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "../../../../core/page/page";
+import {OperationService} from "../../operation.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -20,7 +21,10 @@ export class ArticleSortComponent implements OnInit {
   private childMenuCode;                       //菜单编码，查询子集用
   private childMenuTitList:Array<any> = [];   //菜单级别面包屑
 
-  constructor(public service:SubmitService) { }
+  constructor(
+    public service:SubmitService,
+    public operationService:OperationService
+  ) { }
 
   /**
    * 初始化
@@ -97,6 +101,25 @@ export class ArticleSortComponent implements OnInit {
 
 
   /**
+   * 修改文章的状态
+   * @param data 当前获取到得数据
+   */
+  updateClassState(article) {
+    if (article.state == "SHOW") {
+      article.state = "HIDE"
+    } else if (article.state == "HIDE") {
+      article.state = "SHOW"
+    }
+    let url='/articleClass/updateArticleClassStateById';
+    let data={
+      'id': article.id,
+      'state': article.state
+    }
+    this.operationService.updataArticleState(url,data,article)
+  }
+
+
+  /**
    * 根据分类的父id查询子分类 和面包屑导航
    * @param childCode 编码
    * @param menuName  名字
@@ -126,6 +149,8 @@ export class ArticleSortComponent implements OnInit {
     me.getChild(transId)
 
   }
+
+
 
   /**
    * 根据分类的父id查询子分类,从上面分离出来的

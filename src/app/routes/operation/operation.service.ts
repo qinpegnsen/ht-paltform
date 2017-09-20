@@ -14,13 +14,33 @@ export class OperationService {
   constructor(private ajax: AjaxService,private submit: SubmitService) { }
 
   /**
-   * 获取分类列表
+   * delete 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
    */
-  getKindList(parentId?:string){
-    if(isUndefined(parentId)) parentId = '';
-    let url = '/articleClass/queryArticleClassByAcName';
-    let data = {acParentId: parentId};
-    return this.submit.getData(url,data)
+  updataArticleState(requestUrl, requestDate,article) {
+    this.ajax.del({
+      url: requestUrl,
+      data: requestDate,
+      async: false,
+      success: (data) => {
+        if (data.success) {
+          let text = '';
+          if (article.state == "SHOW") {
+            text = "显示"
+          } else if (article.state == "HIDE") {
+            text = "隐藏"
+          }
+          AppComponent.rzhAlt("success", text);
+        } else {
+          AppComponent.rzhAlt("error", data.info);
+        }
+      },
+      error: () => {
+        AppComponent.rzhAlt("error", '网络错误');
+      }
+    });
   }
 
   /**

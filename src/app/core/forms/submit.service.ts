@@ -67,7 +67,6 @@ export class SubmitService {
       data: requestDate,
       async: false,
       success: (res) => {
-        console.log("█ res ►►►", res);
         if (res.success) {
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           AppComponent.rzhAlt("success", res.info);
@@ -77,7 +76,6 @@ export class SubmitService {
       },
       error: (res) => {
         AppComponent.rzhAlt("error", '网络错误');
-        console.log('del error', res);
       }
     });
   }
