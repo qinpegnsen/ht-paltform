@@ -40,7 +40,7 @@ export class AllStockComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/agentOrd/pageAgentStAprs';
+    let requestUrl = '/agentOrd/pageAgentOrdTime';
     let requestData = {
       curPage: activePage,
       pageSize: 2,
