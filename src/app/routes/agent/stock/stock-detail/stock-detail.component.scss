@@ -1,0 +1,130 @@
+.szh-order-details{
+  width: 350px;
+  display: inline-block;
+}
+.szh-order-details .order-head {
+  background-color: #f5f5f5;
+}
+.szh-order-details .content dl{
+  margin-bottom: 10px;
+  font-size: 0;
+}
+.szh-order-details .content dt,.szh-order-details .content dd{
+  display: inline-block;
+  font-size: 12px;
+}
+.szh-order-details .content dt{
+  width: 20%;
+  text-align: right;
+  font-weight: normal;
+  color: #888;
+}
+.szh-order-details .content dd{
+  width: 80%;
+  color: #666;
+  line-height: 20px;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal;
+  font-size: 13px;
+}
+.szh-order-details .content dl.line{
+  border-top: 1px dotted #ddd;
+  position: relative;
+}
+.szh-order-details .content .more{
+  background-color: #FBFBFB;
+  width: 320px;
+  padding: 10px;
+  border: solid 1px #CCC;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 35px;
+  display: none;
+  box-shadow: 2px 2px 0 rgba(153,153,153,0.15);
+}
+.szh-order-details .content .more li{
+  color: #888;
+  line-height: 20px;
+}
+.szh-order-details .content .more li span{
+  color: #666;
+  margin-right: 20px;
+}
+.szh-order-condition{
+  position: absolute;
+  left: 350px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 25px;
+}
+.rate-of-progress{
+  min-width: 880px;
+  max-width: 1400px;
+  margin: auto;
+  padding-top: 45px;
+  padding-bottom: 45px;
+  position: relative;
+}
+.rate-of-progress dl{
+  position: absolute;
+  width: 120px;
+  top: 0;
+  text-align: center;
+  margin-bottom: 0;
+  display: inline-block;
+}
+.rate-of-progress dl:nth-child(2){
+  left: 0;
+}
+.rate-of-progress dl:nth-child(3){
+  left: 22%;
+}
+.rate-of-progress dl:nth-child(4){
+  left: 45%;
+}
+.rate-of-progress dl:nth-child(5){
+  left: 67%;
+}
+.rate-of-progress dl:nth-child(6){
+  right: 0;
+}
+.rate-of-progress dd{
+  color: #888;
+}
+.szh-progress-bar{
+  margin: auto;
+  height: 6px;
+  background-color: #ddd;
+  box-shadow: 0 0 0 3px #ddd;
+}
+.already-progress{
+  height: 100%;
+  background-color: #23b7e5;
+  border-radius: 2px;
+}
+.rate-of-progress .szh-progress-point{
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #ddd;
+  border-radius: 100%;
+  background-color: #ddd;
+  box-shadow: 0 0 0 4px #ddd;
+}
+.rate-of-progress .cur .szh-progress-point{
+  background-color: #23b7e5;
+  color: #fff;
+}
+.rate-of-progress .cur dt{
+  color: #23b7e5;
+}
+.order-footer dt,.order-footer dd{
+  display: inline-block;
+  line-height: 20px;
+}

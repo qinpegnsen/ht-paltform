@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from 'ngx-bootstrap/locale';
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-stock',

@@ -126,7 +126,7 @@ const goods = {
     }
   ]
 };
-const shop = {
+/*const shop = {
   text: '店铺管理',
   icon: 'fa fa-institution',
   link: '/main/shop',
@@ -142,7 +142,7 @@ const shop = {
       link: '/main/shop/account'
     }
   ]
-};
+};*/
 const member = {
   text: '会员管理',
   icon: 'fa fa-users',
@@ -397,7 +397,6 @@ export let menu = [
   website,
   operation,
   goods,
-  shop,
   member,
   orders,
   sale,

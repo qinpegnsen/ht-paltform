@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StockComponent} from '../stock.component';
 
 @Component({
   selector: 'app-pending-payment',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PendingPaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private StockComponent:StockComponent) { }
 
   ngOnInit() {
+    let _this = this;
+    _this.StockComponent.orderType = 2;
   }
 
 }

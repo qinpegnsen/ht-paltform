@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
   }
 
   // 检测登录状态并引流
-  private checkLogin() {
+  public checkLogin() {
 
     let url = this.location.path();
     console.log(url)

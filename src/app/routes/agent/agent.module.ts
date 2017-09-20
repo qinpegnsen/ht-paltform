@@ -16,6 +16,7 @@ import { ForDistributionComponent } from './stock/for-distribution/for-distribut
 import { AwaitingDeliveryComponent } from './stock/awaiting-delivery/awaiting-delivery.component';
 import { CompleteComponent } from './stock/complete/complete.component';
 import { CancelComponent } from './stock/cancel/cancel.component';
+import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
 
 // 子路由，用于页面嵌套显示
 const appChildRoutesfile: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
     {path: 'for-distribution', component: ForDistributionComponent},
     {path: 'awaiting-delivery', component: AwaitingDeliveryComponent},
     {path: 'complete', component: CompleteComponent},
-    {path: 'cancel', component: CancelComponent}
+    {path: 'cancel', component: CancelComponent},
+    {path: 'stock-detail', component: StockDetailComponent}
   ]}
 ];
 @NgModule({
@@ -48,6 +50,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   providers:[AgentpersonService,RegionComponent],
-  declarations: [AgentpersonComponent, RegionComponent, StockComponent, RightpageComponent, AddAgentComponent, AllStockComponent, PendingPaymentComponent, ForDistributionComponent, AwaitingDeliveryComponent, CompleteComponent, CancelComponent]
+  declarations: [AgentpersonComponent, RegionComponent, StockComponent, RightpageComponent, AddAgentComponent, AllStockComponent, PendingPaymentComponent, ForDistributionComponent, AwaitingDeliveryComponent, CompleteComponent, CancelComponent, StockDetailComponent]
 })
 export class AgentModule { }
