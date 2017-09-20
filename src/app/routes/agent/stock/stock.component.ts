@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-stock',
@@ -6,8 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
+  public orderType: number = 1;
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
+  bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor() { }
+  constructor() {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      // minDate: this.minDate.getDate() - 1,
+      // maxDate: this.maxDate.getDate() + 7,
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
   }
