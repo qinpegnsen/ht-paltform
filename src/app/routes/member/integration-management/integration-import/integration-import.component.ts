@@ -15,38 +15,39 @@ export class IntegrationImportComponent implements OnInit {
     url: '/upload/local/file',
     itemAlias:"file",
   });
+  progress: number;//进度条
   private errorFile: string;
-  private templateFile: string ="http://ovaetuonu.bkt.clouddn.com/20170920163218.xlsx";
+  private templateFile: string ="http://ovaetuonu.bkt.clouddn.com/templateCoin.xlsx";
   private data:any;//文件暗码
   constructor(private submitt:SubmitService) { }
 
   ngOnInit() {
-    let me = this;
   }
-  //上传
+ //清空选中的表格
   changeFiles(){
     if(this.uploader.queue.length > 1)this.uploader.queue[0].remove();
   }
-
+  //上传
   private upLoadExcel(submitUrl,submitData,method){
     let me = this;
-    MaskService.showMask();//上传文件比较慢，显示遮罩层
+    MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();
     //上传成功
     me.uploader.onSuccessItem = function (item, response, status, headers) {
       let res = JSON.parse(response);
+      console.log("█ res ►►►",  res);
       if (res.success) {
         console.log("█ res.data ►►►",  res.data);
         me.iimport(res.data);
         console.log("█  me.data ►►►",   me.data);
       } else {
-        AppComponent.rzhAlt('error','上传失败', '文件上传失败！');
+        AppComponent.rzhAlt('error','表格失败','表格上传失败！');
       }
     }
     // 上传失败
     me.uploader.onErrorItem = function (item, response, status, headers) {
-      AppComponent.rzhAlt('error','上传失败', '文件上传失败！');
+      AppComponent.rzhAlt('error','表格失败', '表格上传失败！');
     };
   }
   //导入

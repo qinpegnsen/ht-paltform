@@ -1,6 +1,5 @@
 .ts{
   background: #C9E7F2;
-  width: 98%;
   margin: auto;
   margin-top: 15px;
 }
@@ -8,4 +7,33 @@
   margin-left: -3px;
   margin-top: -4px;
   height: 36px;
+}
+.file{
+  display: inline-block;
+  float: left;
+  padding-left: 0;
+  min-width: 600px;
+}
+.file-lable{
+  display: block;
+}
+.upload{
+  padding: 4px 6px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+.progressa{
+  margin-right: 15px;
+  padding: 0
+}
+.progressb{
+  height: 12px;
+  margin-top: 4px;
+  min-width: 500px;
+}
+.percentage{
+  margin-left: 15px;
+}
+.allprogress{
+ min-width: 600px;
 }
