@@ -126,6 +126,9 @@ export class WholesaleComponent implements OnInit {
     }else if(isNullOrUndefined(data.goodsPrice.batchPrice)){
       AppComponent.rzhAlt("warning",'请先设置价格');
       _this.qeuryAllService(curPage);
+    }else if(data.goodsPrice.memberPrice<data.goodsPrice.batchPrice){
+      AppComponent.rzhAlt("error",'不允许批发');
+      _this.qeuryAllService(curPage);
     }
   }
 

@@ -9,11 +9,14 @@ import {IntegrationChangeComponent} from "./integration-management/integration-c
 import {IntegrationDetailsComponent} from "./integration-management/integration-details/integration-details.component";
 import {CertificationComponent} from "./certification/certification.component";
 import {IntegrationImportComponent} from "./integration-management/integration-import/integration-import.component";
+import {FileUploadModule} from "ng2-file-upload";
+import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
 
 const userChildRoutes: Routes = [
   {path: 'integration-details', component: IntegrationDetailsComponent},
   {path: 'integration-change', component: IntegrationChangeComponent},
   {path: 'integration-import', component: IntegrationImportComponent},
+  {path: 'progressmask', component: ProgressmaskComponent},
 ]
 
 const routes: Routes = [
@@ -27,9 +30,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
+    FileUploadModule,
     RzhButtonsModule
   ],
   declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent,
-    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent]
+    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent]
 })
 export class MemberModule { }

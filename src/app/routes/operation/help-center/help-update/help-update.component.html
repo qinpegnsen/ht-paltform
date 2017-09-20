@@ -16,7 +16,11 @@
       </div>
       <div class="questiona text-center">
         <label class="question col-sm-1">问题：</label>
-        <input type="text" class="col-sm-8 problem-box" name="question" [(ngModel)]="b.question">
+        <input type="text" class="col-sm-8 problem-box" name="question" [(ngModel)]="b.question" required #question="ngModel">
+        <div [hidden]="question.valid || question.pristine"
+             class="col-sm-9 pull-right text-danger">
+          请填写排序
+        </div>
       </div>
       <div class="reset-div text-edit">
         <table class="w100 edit-table">

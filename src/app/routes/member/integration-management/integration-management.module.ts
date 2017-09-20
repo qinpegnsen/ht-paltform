@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../../shared/shared.module";
 import {routes} from "../../routes";
 import { IntegrationImportComponent } from './integration-import/integration-import.component';
+import { ProgressmaskComponent } from './progressmask/progressmask.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { IntegrationImportComponent } from './integration-import/integration-imp
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent, IntegrationImportComponent]
+  declarations: [IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent, IntegrationImportComponent, ProgressmaskComponent]
 })
 export class IntegrationManagementModule { }

@@ -68,6 +68,9 @@
       <th class="w5">
         <rzhDefaultSorter>性别</rzhDefaultSorter>
       </th>
+      <th class="w5">
+        <rzhDefaultSorter>重消币</rzhDefaultSorter>
+      </th>
       <th class="w10">
         <rzhDefaultSorter>区域名称</rzhDefaultSorter>
       </th>
@@ -80,7 +83,7 @@
       <th class="w5">
         <rzhDefaultSorter>会员类别</rzhDefaultSorter>
       </th>
-      <th class="w10">
+      <th class="w5">
         <rzhDefaultSorter>状态</rzhDefaultSorter>
       </th>
       <th class="w10">
@@ -105,6 +108,7 @@
         <td>
           {{member.custSex | rzhState:'1002' }}
         </td>
+        <td>{{member.areaName}}</td>
         <td>{{member.areaName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>
