@@ -60,14 +60,14 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">分类图标</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="myImg && !kindInfo.kindIcon" [src]="myImg" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="myImg && kindInfo.kindIcon" [src]="myImg" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="myImg && !kindInfo.kindIcon" [src]="uploader.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="myImg && kindInfo.kindIcon" [src]="uploader.queue[0]._file | imgUrl" alt="">
               <img class="col-sm-5 p-sm" *ngIf="!myImg && kindInfo.kindIcon" [src]="kindInfo.kindIcon"
                    onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{kindInfo.kindIcon? '修改图片':'上传图片'}}
                 <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
-                       (change)="fileChangeListener($event)"/>
+                       (change)="fileChangeListener()"/>
               </label>
             </div>
           </div>
@@ -134,11 +134,11 @@
           <div class="form-group">
             <label class="col-sm-2"></label>
             <div class="col-sm-8">
-              <img class="p-lg w100" *ngIf="myImg" [src]="myImg" alt="">
+              <img class="p-lg w100" *ngIf="myImg" [src]="uploader.queue[0]._file | imgUrl" alt="">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{fileName}}
                 <input type="file" name="brandPic" required ng2FileSelect [uploader]="uploader"
-                       (change)="fileChangeListener($event)"/>
+                       (change)="fileChangeListener()"/>
               </label>
             </div>
           </div>

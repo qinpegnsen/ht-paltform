@@ -91,17 +91,10 @@ export class AddKindComponent implements OnInit {
    * 监听图片选择
    * @param $event
    */
-  fileChangeListener($event) {
-    let that = this;
-    let image: any = new Image();
-    let file: File = $event.target.files[0];
-    that.fileName = file.name;
-    let myReader: FileReader = new FileReader();
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      that.myImg = image.src;
-    };
-    myReader.readAsDataURL(file);
+  fileChangeListener() {
+    // 当选择了新的图片的时候，把老图片从待上传列表中移除
+    if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
+    this.myImg = true;  //表示已经选了图片
   }
 
 

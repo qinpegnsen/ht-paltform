@@ -101,6 +101,21 @@ export class AuditGoodsComponent implements OnInit {
   }
 
   /**
+   * 添加物流模板
+   */
+  addLogisticsModule(){
+    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+    window.open(preUrl + '/main/operation/freight-template/add-formoek?linkType=addArticle')
+  }
+
+  /**
+   * 查看物流模板
+   */
+  lookLogisticsModule(){
+    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+    window.open(preUrl + '/main/operation/freight-template')
+  }
+  /**
    * 获取发布页面所需数据
    */
   private getPageData() {
@@ -218,18 +233,6 @@ export class AuditGoodsComponent implements OnInit {
     };
   }
 
-  /**
-   * 根据某个属性值排序方法
-   * @param property
-   * @returns {(a:any, b:any)=>number}
-   */
-  private compare(property) {
-    return function (a, b) {
-      var value1 = a[property];
-      var value2 = b[property];
-      return value1 - value2;
-    }
-  }
 
   /**
    * 将数据生成易解析的新数组

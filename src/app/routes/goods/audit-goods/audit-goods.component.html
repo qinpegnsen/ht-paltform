@@ -143,29 +143,33 @@
             <td [hidden]="true"><input type="text" name="saGroupCode" [(ngModel)]="sku.saGroupCode"></td>
             <td *ngFor="let val of sku.attrsList" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
             <td>
-              <input class="text _price num form-control" name="marketPrice" type="number" required [readonly]="myReadOnly"
-                     [(ngModel)]="sku.marketPrice" #marketPrice="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
+                     [readonly]="myReadOnly"
+                     [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
               <em class="add-on">元</em>
             </td>
             <td>
-              <input class="text _price num form-control" name="price" type="number" required [readonly]="myReadOnly"
-                     [(ngModel)]="sku.price" #price="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'price'+i" type="number" required
+                     [readonly]="myReadOnly"
+                     [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
               <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value || !marketPrice.value"
                     class="text-danger font12">销售价应小于市场价
               </span>
             </td>
             <td>
-              <input class="text _price num form-control" name="memberPrice" type="number" required [readonly]="myReadOnly"
-                     [(ngModel)]="sku.memberPrice" #memberPrice="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
+                     [readonly]="myReadOnly"
+                     [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
               <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value || !memberPrice.value || !price.value"
                     class="text-danger font12">会员价应小于销售价
               </span>
             </td>
             <td>
-              <input class="text stock num form-control" name="storageNum" type="number" required [readonly]="myReadOnly"
-                     [(ngModel)]="sku.storageNum" #storageNum="ngModel" [ngModelOptions]="{standalone: true}"/>
+              <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
+                     [readonly]="myReadOnly"
+                     [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
               <span [hidden]="storageNum.value > 9 || !storageNum.value"
                     class="text-danger font12">库存最少为10
               </span>
@@ -294,7 +298,8 @@
                  [hidden]="publishData.goodsExpressInfo.freightType!='TPL' || publishData.goodsExpressInfo.expressTplId == ''">
               <p class="m0">
                 <strong>指定物流配送区域及运费</strong>
-                <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" [href]="lookLogisticsModuleUrl">查看详情</a>
+                <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
+                  查看详情</a>
               </p>
               <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
                 <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
