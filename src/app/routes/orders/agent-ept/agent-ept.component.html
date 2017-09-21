@@ -1,3 +1,19 @@
-<p>
-  agent-ept works!
-</p>
+<div class="panel mb">
+  <div class="panel-body p ng-scope" ng-if="search">
+    <div class="form-group mb0">
+      <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
+      <div class="col-xs-5">
+        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                placeholder="机构名称">
+      </div>
+      <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
