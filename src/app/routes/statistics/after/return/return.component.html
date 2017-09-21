@@ -11,9 +11,25 @@
       <li>默认按照“描述相符度”降序排列</li>
     </ul>
   </div>
+
+
+
   <div class="xz">
-    <button class="btn">搜索</button>
-    <select name="" id="" class="sel">
+    <button class="btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+    <!--<div class="aa">-->
+      <!--<form [formGroup]="myForm" style="width: 240px">-->
+        <!--<div class="input-group p0" style="width: 240px;margin-right: 20px;">-->
+          <!--<input  class="form-control pull-left" bsDatepicker formControlName="date" #dpr="bsDatepicker" />-->
+          <!--<span class="btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>-->
+        <!--</div>-->
+      <!--</form>-->
+    <!--</div>-->
+    <div class="row">
+      <div class="col-xs-3 form-group">
+        <input type="text" class="form-control" placeholder="Datepicker" bsDatepicker [(ngModel)]="datepickerModel" />
+      </div>
+    </div>
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>

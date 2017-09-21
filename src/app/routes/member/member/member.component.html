@@ -100,7 +100,7 @@
         <td>{{i+1}}</td>
         <td>
            <span  *ngIf="member.authState=='AUTH'">
-             <i class="icon icon-emotsmile"></i>&nbsp;
+             <i class="icon icon-user-following" title="已实名认证"></i>&nbsp;
            </span>
           {{member.custName}}
         </td>
@@ -128,9 +128,6 @@
                   (click)="changeState('BLACK',member.custCode,memberListdata.curPage)"></button>
           <button class="btn btn-purple btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="激活"
                   (click)="changeState('NORMAL',member.custCode,memberListdata.curPage)"></button>
-          <!--<button class="btn btn-danger btn-xs fa fa-trash" *ngIf="member.state=='NORMAL'" title="冻结"-->
-                  <!--(click)="changeState('FREEZE',member.custCode)"></button>-->
-        <!--</td>-->
       </tr>
       <tr *ngIf="member.isShow">
         <td class="p0" colspan="11">

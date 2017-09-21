@@ -59,9 +59,37 @@
     </select>
   </div>
 <!--图表统计-->
-  <div class="refund-table">
-    <h3>排行榜</h3>
-    <div echarts [options]="option" class=" demo-chart"></div>
+  <!--<div class="refund-table">-->
+    <!--<h3>排行榜</h3>-->
+    <!--<div echarts [options]="option" class=" demo-chart"></div>-->
+  <!--</div>-->
+
+
+  <div class="panel">
+    <tabset class="bg-white p0" [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <i class="icon icon-heart pull-right">昨天</i>
+        </ng-template>
+        <div>
+          <!-- START list group-->
+          <p>AAA</p>
+          <div echarts [options]="option" class=" demo-chart"></div>
+          <!-- END list group-->
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <i class="icon icon-heart pull-left">今天</i>
+        </ng-template>
+        <div>
+          <!-- START table responsive-->
+          <p>BBB</p>
+          <div echarts [options]="option" class=" demo-chart"></div>
+          <!-- END table responsive-->
+        </div>
+      </tab>
+    </tabset>
   </div>
   <!--表单统计-->
   <div class="panel panel-default">
