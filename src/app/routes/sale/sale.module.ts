@@ -9,7 +9,10 @@ import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import { RefundDetailsComponent } from './refund-details/refund-details.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
-
+import { AddproblemComponent } from './addproblem/addproblem.component';
+const problemcomplem:Routes=[
+  {path: 'addproblem', component: AddproblemComponent},
+]
 const routes: Routes = [
   {path:'',redirectTo:'refund-control'},
   {path: 'refund-control', component: RefundControlComponent},
@@ -18,7 +21,8 @@ const routes: Routes = [
   {path: 'return-verify', component: ReturnVerifyComponent},
   {path: 'refund-details', component:RefundDetailsComponent},
   {path: 'order-detail', component:OrderDetailComponent},
-  {path: 'msg', component: MsgComponent},
+  {path: 'msg', component: MsgComponent,children:problemcomplem},
+
 ];
 @NgModule({
   imports: [
@@ -26,9 +30,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [RefundControlComponent, RefundVerifyComponent, ReturnControlComponent, ReturnVerifyComponent, MsgComponent, RefundDetailsComponent, OrderDetailComponent],
+  declarations: [RefundControlComponent, RefundVerifyComponent, ReturnControlComponent, ReturnVerifyComponent, MsgComponent, RefundDetailsComponent, OrderDetailComponent, AddproblemComponent],
   providers: [
-    RefundControlComponent, RefundVerifyComponent, ReturnControlComponent, ReturnVerifyComponent, MsgComponent,OrderDetailComponent
+    RefundControlComponent, RefundVerifyComponent, ReturnControlComponent, ReturnVerifyComponent, MsgComponent,OrderDetailComponent,AddproblemComponent
   ]
 })
 export class SaleModule { }

@@ -105,6 +105,7 @@ export class WholesaleComponent implements OnInit {
     let _this = this, isBatch;
     if(data.isBatch == 'Y') data.isBatch = 'N';
     else data.isBatch = 'Y';
+    console.log("█ data.goodsPrice ►►►",  data.goodsPrice);
     if(!isNullOrUndefined(data.goodsPrice.batchPrice)&& data.goodsPrice.batchPrice != 0 && data.goodsPrice.batchPrice != ''){
       let url = "/goodsEdit/updateIsBatch";
       this.ajax.put({
@@ -125,19 +126,18 @@ export class WholesaleComponent implements OnInit {
       });
     }else if(isNullOrUndefined(data.goodsPrice.batchPrice)){
       AppComponent.rzhAlt("warning",'请先设置价格');
-      _this.qeuryAllService(curPage);
-    }else if(data.goodsPrice.memberPrice<data.goodsPrice.batchPrice){
-      AppComponent.rzhAlt("error",'不允许批发');
-      _this.qeuryAllService(curPage);
     }
   }
 
   /**
    * 批发价修改
    */
-  submita(goodsCode,i,curPage) {
+  submita(goods,goodsCode,i,curPage) {
+    if(goods.goodsPrice.memberPrice < goods.goodsPrice.batchPrice){
+      AppComponent.rzhAlt("error",'批发价应小于会员价');
+      return;
+    }
     let _this=this;
-    // if(_this._goods[i]<_this.goodsPrice.memberPrice){
     let url = '/goodsEdit/updateBatchPrice';
     let data = {
       goodsCode: goodsCode,
@@ -145,10 +145,7 @@ export class WholesaleComponent implements OnInit {
     }
     _this.submit.putRequest(url, data);
     _this.qeuryAllService(curPage);
-  // }else{
-    // AppComponent.rzhAlt("error","修改价格失败");
-    // }
-      console.log("█ this._goods[i] ►►►",  this._goods[i]);
+    console.log("█ this._goods[i] ►►►",  this._goods[i]);
 
   }
 }

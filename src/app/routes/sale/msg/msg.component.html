@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg">
   退款退货原因
-  <app-buttons class="pull-right" [config]="addbuttons" routerLink="adddata" [queryParams]="{linkType:'addCount'}"></app-buttons>
+  <app-buttons class="pull-right" [config]="addbuttons" routerLink="addproblem" [queryParams]="{linkType:'adddata'}"></app-buttons>
 </div>
 
 <div class="panel panel-default">
@@ -12,6 +12,19 @@
       <li>排序显示规则为排序小的在前，新增的在前。</li>
     </ul>
   </div>
+  <!--<div class="col-md-4">-->
+    <!--<div class="form-group mb0">-->
+      <!--<div class="col-md-8 col-xs-6 pl0">-->
+        <!--<input type="text" [(ngModel)]=""-->
+               <!--class="form-control border-b-grey"-->
+               <!--(change)="search($event)" placeholder="请输入原因">-->
+      <!--</div>-->
+      <!--<button type="button" title="搜索"-->
+              <!--class="btn btn-primary bar-h3-btn mr ng-scope">-->
+        <!--<em class="icon-magnifier fa-fw"></em>-->
+      <!--</button>-->
+    <!--</div>-->
+  <!--</div>-->
 
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
@@ -20,20 +33,21 @@
           <th class="w10 text-center">
             <rzhDefaultSorter by="sort">排序</rzhDefaultSorter>
           </th>
-          <th class="w25 text-center">
+          <th class="w75 text-center">
             <rzhDefaultSorter by="name">原因</rzhDefaultSorter>
           </th>
-          <th class="w40 text-center">
+          <th class="w15 text-center">
             <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let count of dataTable.data;"  class="text-center">
-          <td>{{count.unitName}}</td>
-          <td>{{count.unitName}}</td>
+        <!--<tr *ngFor="let count of dataTable.data"  class="text-center">-->
+        <tr class="text-center">
+          <td>AAAAA</td>
+          <td>DDDD</td>
           <td>
-            <app-buttons [config]="updatebuttons" routerLink="adddata" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
+            <app-buttons [config]="updatebuttons" routerLink="addproblem"[queryParams]="{linkType:'updatedata'}"></app-buttons>
           </td>
         </tr>
         </tbody>
@@ -54,3 +68,4 @@
 
 </div>
 
+<router-outlet></router-outlet>
