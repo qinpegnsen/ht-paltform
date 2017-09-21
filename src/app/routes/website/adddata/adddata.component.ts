@@ -103,7 +103,12 @@ export class AdddataComponent implements OnInit {
           remark: obj.remark,
         }
       }
-      this.adddataService.updateClass(url, data);
+      let result=this.adddataService.updateClass(url, data);
+      if(result){
+        this.dataDictionaryComponent.queryDatas()
+      }else{
+        return;
+      }
     } else {
       let result=this.adddataService.getaddData(obj);//添加数据字典key
       if(result){

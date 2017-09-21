@@ -98,21 +98,17 @@ export class AdddataService {
       url: url,
       data: data,
       async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success){
-            result=data.data;
-            let info=data.info;
-            AppComponent.rzhAlt("success",info);
-          }else{
-            AppComponent.rzhAlt("error",data.info);
-          }
+      success: (res) => {
+        result=res.success;
+        if(res.success){
+          AppComponent.rzhAlt("success", res.info);
         }else{
-           AppComponent.rzhAlt("error",data.info);
+          AppComponent.rzhAlt("error", res.info);
         }
       },
-      error: (data) => {
-        AppComponent.rzhAlt("error","修改用户失败");
+      error: (res) => {
+        result='';
+        AppComponent.rzhAlt("error", res.info);
       }
     });
     return result

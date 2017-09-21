@@ -64,7 +64,7 @@ export class DataDictionaryComponent implements OnInit {
     if (typeof event !== "undefined") activePage = event.activePage;
     let requestData = {
       curPage: activePage,
-      pageSize: 8,
+      pageSize: 10,
       name: this.searchkey
     }
     let res = this.dataDictionaryService.getdataservice(requestData)
