@@ -184,9 +184,28 @@ const orders = {
   link: '/main/orders',
   submenu: [
     {
-      text: '商品订单',
+      text: '用户订单',
       icon: 'fa fa-file-text-o',
-      link: '/main/orders/order'
+      link: '/main/orders/cust'
+    },
+    {
+      text: '代理商订单',
+      icon: 'fa fa-smile-o',
+      alert: '▼',
+      submenu: [
+        {
+          text: '订单管理',
+          link: '/main/agent/ord'
+        },
+        {
+          text: '异常订单',
+          link: '/main/orders/agent-ept'
+        },
+        {
+          text: '异常订单审核',
+          link: '/main/orders/agent-audit'
+        }
+      ]
     },
     {
       text: '评价管理',
@@ -361,11 +380,6 @@ const agent = {
       icon: 'icon-location-pin',
       link: '/main/agent/region'
     },*/
-    {
-      text: '进货管理',
-      icon: 'fa fa-cubes',
-      link: '/main/agent/stock'
-    }
   ]
 };
 const app = {

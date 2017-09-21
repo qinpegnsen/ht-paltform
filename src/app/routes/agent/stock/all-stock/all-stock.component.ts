@@ -40,7 +40,7 @@ export class AllStockComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/agentOrd/pageAgentOrdTime';
+    let requestUrl = '/agentOrd/queryAgentOrdAdmin';
     let requestData = {
       curPage: activePage,
       pageSize: 2,
@@ -74,14 +74,14 @@ export class AllStockComponent implements OnInit {
   lookLogistics(orderId){
     this.lookLogisticsOrderId = orderId;
   }
- /* /!**
+ /**
    * 取消订单回调函数
    * @param data
-   *!/
+   */
   getCancelOrderData(data){
     this.curCancelOrderId = null;
   }
-
+  /*
   /!**
    * 发货回调函数
    * @param data

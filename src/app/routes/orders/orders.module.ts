@@ -13,12 +13,13 @@ import { CanceledComponent } from './orders/canceled/canceled.component';
 import {DeliverComponent} from './orders/deliver/deliver.component';
 import { CancelComponent } from './orders/cancel/cancel.component';
 import { LookLogisticsComponent } from './orders/look-logistics/look-logistics.component';
+import { AgentEptComponent } from './agent-ept/agent-ept.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'order'},
   {
-    path: 'order', component: OrdersComponent, children: [
+    path: 'cust', component: OrdersComponent, children: [
     {path: '', redirectTo: 'all-orders'},
     {path: 'all-orders', component: AllOrdersComponent},
     {path: 'wait-for-pay', component: WaitForPayComponent},
@@ -29,8 +30,8 @@ const routes: Routes = [
     {path: 'order-detail', component: OrderDetailComponent}
   ]
   },
-  {path: 'buyer', component: BuyerEvaluationComponent}
-
+  {path: 'buyer', component: BuyerEvaluationComponent},
+  {path: 'agent-ept', component: AgentEptComponent},
 ]
 
 @NgModule({
@@ -52,11 +53,13 @@ const routes: Routes = [
     DeliverComponent,
     CancelComponent,
     LookLogisticsComponent,
-    DeliverComponent
+    DeliverComponent,
+    AgentEptComponent
   ],
   providers: [
     OrdersComponent,
-    BuyerEvaluationComponent
+    BuyerEvaluationComponent,
+    AgentEptComponent
   ]
 })
 export class OrdersModule { }

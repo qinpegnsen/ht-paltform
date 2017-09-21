@@ -15,7 +15,7 @@
     <td class="w100 p0 font12 bt0">
       <div class="order-space"></div>
       <div class="order-head p b bb0">
-        <span class="mr-xl">订单编号：2017094578774544</span>
+        <span class="mr-xl">订单编号：{{goods.ordno}}</span>
         <span class="mr-xl">下单时间：2017-05-16 17:11:52</span>
         <span class="icon-screen-smartphone">来源：移动端</span>
         <!--<span class="fa fa-desktop"> 来源：PC</span>-->
@@ -64,7 +64,7 @@
             <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" (click)="deliverOrder(goods.goodsName)">
               设置发货
             </button><br>
-            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(goods.goodsName)"> 取消订单</button><br>
+            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.goodsName)"> 取消订单</button><br>
             <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款</button>
           </td>
         </tr>
@@ -106,6 +106,8 @@
   </tr>
   </tfoot>
 </table>
-<!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>
+<app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
+<!--
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
+<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
+-->

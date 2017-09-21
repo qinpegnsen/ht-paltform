@@ -17,6 +17,7 @@ import { AwaitingDeliveryComponent } from './stock/awaiting-delivery/awaiting-de
 import { CompleteComponent } from './stock/complete/complete.component';
 import { CancelComponent } from './stock/cancel/cancel.component';
 import { StockDetailComponent } from './stock/stock-detail/stock-detail.component';
+import { CancelsComponent } from './stock/cancels/cancels.component';
 
 // 子路由，用于页面嵌套显示
 const appChildRoutesfile: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   {path: '', redirectTo:'agentperson'},
   {path: 'agentperson', component: AgentpersonComponent,children: appChildRoutes},
   {path: 'region', component: RegionComponent,children: appChildRoutes},
-  {path: 'stock', component:StockComponent,children:[
+  {path: 'ord', component:StockComponent,children:[
     {path: '', redirectTo: 'all-stock'},
     {path: 'all-stock', component: AllStockComponent},
     {path: 'pending-payment', component: PendingPaymentComponent},
@@ -50,6 +51,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   providers:[AgentpersonService,RegionComponent],
-  declarations: [AgentpersonComponent, RegionComponent, StockComponent, RightpageComponent, AddAgentComponent, AllStockComponent, PendingPaymentComponent, ForDistributionComponent, AwaitingDeliveryComponent, CompleteComponent, CancelComponent, StockDetailComponent]
+  declarations: [AgentpersonComponent, RegionComponent, StockComponent, RightpageComponent, AddAgentComponent, AllStockComponent, PendingPaymentComponent, ForDistributionComponent, AwaitingDeliveryComponent, CompleteComponent, CancelComponent, StockDetailComponent, CancelsComponent]
 })
 export class AgentModule { }
