@@ -80,7 +80,8 @@
           <td>{{count.goodsName}} </td>
           <td>{{count.goodsName}} </td>
           <td>
-            <app-buttons [config]="handlebutton" (click)="deleteCount(count.id)"></app-buttons>
+            <app-buttons [config]="handlebutton" routerLink="../refund-details"
+                         [queryParams]="{linkType:'set'}"></app-buttons>
             <app-buttons [config]="seebutton" routerLink="../refund-details"
                          [queryParams]="{linkType:'qq'}"></app-buttons>
           </td>

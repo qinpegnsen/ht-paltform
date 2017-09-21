@@ -24,9 +24,9 @@ import {AngularEchartsModule} from "ngx-echarts";
 import { ListDetailComponent } from './users/list-detail/list-detail.component';
 
 
-const listChildRoutes:Routes = [
-  {path: 'list-detail', component:ListDetailComponent},
-]
+// const listChildRoutes:Routes = [
+//   {path: 'list-detail', component:ListDetailComponent},
+// ]
 const xtszChildRoutes: Routes = [
   {path: 'cache-reset', component:CacheResetComponent},
 
@@ -35,7 +35,8 @@ const usersChildRoutes:Routes = [
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},
-  {path: 'users-new', component:UsersNewComponent,children:listChildRoutes},
+  {path: 'users-new', component:UsersNewComponent},
+  {path: 'list-detail', component:ListDetailComponent},
 ]
 
 const salesChildRoutes:Routes = [

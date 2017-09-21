@@ -28,24 +28,6 @@
             </button>
         </span>
       </p>
-      <!--按月-->
-      <!--<p class="input-group">-->
-        <!--<input class="form-control" value="{{dt | date:'yyyy-MM'}}" type="text"/>-->
-        <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" (click)="showDate()" type="button">-->
-                <!--<em class="fa fa-calendar"></em>-->
-            <!--</button>-->
-        <!--</span>-->
-      <!--</p>-->
-      <!--按周-->
-      <!--<p class="input-group">-->
-        <!--<input class="form-control" value="{{dt | date:'yyyy-MM-dd-ww'}}" type="text"/>-->
-        <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" (click)="showDate()" type="button">-->
-                <!--<em class="fa fa-calendar"></em>-->
-            <!--</button>-->
-        <!--</span>-->
-      <!--</p>-->
       <div class="date-info" *ngIf="dateShow">
         <datepicker [(ngModel)]="dt" (selectionDone)="selDate()" [minDate]="minDate" [showWeeks]="true"></datepicker>
       </div>
@@ -58,18 +40,12 @@
       <option value="month">按照月统计</option>
     </select>
   </div>
-<!--图表统计-->
-  <!--<div class="refund-table">-->
-    <!--<h3>排行榜</h3>-->
-    <!--<div echarts [options]="option" class=" demo-chart"></div>-->
-  <!--</div>-->
-
 
   <div class="panel">
     <tabset class="bg-white p0" [justified]="true">
       <tab>
         <ng-template tabHeading>
-          <i class="icon icon-heart pull-right">昨天</i>
+          <i class="icon icon-heart pull-right" style="line-height: 0">昨天</i>
         </ng-template>
         <div>
           <!-- START list group-->
@@ -80,7 +56,7 @@
       </tab>
       <tab>
         <ng-template tabHeading>
-          <i class="icon icon-heart pull-left">今天</i>
+          <i class="icon icon-heart pull-left" style="line-height: 0">今天</i>
         </ng-template>
         <div>
           <!-- START table responsive-->

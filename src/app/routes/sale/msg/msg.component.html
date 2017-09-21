@@ -1,3 +1,56 @@
-<p>
-  msg works!
-</p>
+<div class="content-heading mb-lg">
+  退款退货原因
+  <app-buttons class="pull-right" [config]="addbuttons" routerLink="adddata" [queryParams]="{linkType:'addCount'}"></app-buttons>
+</div>
+
+<div class="panel panel-default">
+  <!--操作提示-->
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>系统初始化的原因不能删除。</li>
+      <li>排序显示规则为排序小的在前，新增的在前。</li>
+    </ul>
+  </div>
+
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="sort">排序</rzhDefaultSorter>
+          </th>
+          <th class="w25 text-center">
+            <rzhDefaultSorter by="name">原因</rzhDefaultSorter>
+          </th>
+          <th class="w40 text-center">
+            <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let count of dataTable.data;"  class="text-center">
+          <td>{{count.unitName}}</td>
+          <td>{{count.unitName}}</td>
+          <td>
+            <app-buttons [config]="updatebuttons" routerLink="adddata" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
+          </td>
+        </tr>
+        </tbody>
+        <!--<tfoot>-->
+        <!--<tr>-->
+          <!--<td colspan="5">-->
+            <!--<div class="col-sm-5">-->
+              <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-7">-->
+              <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
+            <!--</div>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--</tfoot>-->
+      </table>
+    </div>
+
+</div>
+

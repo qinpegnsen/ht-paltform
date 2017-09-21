@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MsgComponent implements OnInit {
 
+  private addbuttons:object;//添加按钮
   constructor() { }
 
   ngOnInit() {
+    let me=this;
+    me.addbuttons = {
+      type: "add",
+      title: '添加',
+      text:'添加问题'
+    };
   }
+
 
 }

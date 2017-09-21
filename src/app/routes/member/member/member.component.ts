@@ -24,8 +24,6 @@ export class MemberComponent implements OnInit {
 
   public authStates:any;    //会员状态列表
 
-  // private memberListdata;//用来存储会员列表的信息
-
   private detailsbutton:Object;//查看详情按钮
 
   constructor(public service:SubmitService, private tools: RzhtoolsService) { }

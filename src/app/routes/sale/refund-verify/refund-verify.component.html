@@ -1,6 +1,6 @@
-<div *ngIf="this.flag">
+<div>
   <div class="content-heading mb-lg">
-    退款管理
+    退款审核
   </div>
 
   <div class="panel panel-default">
@@ -86,12 +86,11 @@
             <td>{{count.goodsName}} </td>
             <td>{{count.goodsName}} </td>
             <td>{{count.goodsName}} </td>
-            <td>{{count.goodsName}} </td>
             <td>
               <app-buttons [config]="handlebutton" routerLink="../refund-details"
-                           [queryParams]="{linkType:'qq'}"></app-buttons>
+                           [queryParams]="{linkType:'set'}"></app-buttons>
               <app-buttons [config]="seebutton" routerLink="../refund-details"
-                           [queryParams]="{linkType:'qq'}"></app-buttons>
+                           [queryParams]="{linkType:''}"></app-buttons>
             </td>
           </tr>
 
