@@ -2,37 +2,41 @@
   分类管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="addKind"></app-buttons>
 </div>
-<!--<div class="panel mb">
-  <div class="panel-body p ng-scope">
-    <div class="form-group mb0">
-      <div class="col-sm-5">
-        <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryDatas($event)" placeholder="分类名称">
-      </div>
-      <div class="col-sm-1 pull-left text-center">
-        <span class="ng-scope">
-           <button type="button" title="搜索" id="toSearch" (click)="queryDatas($event)"
-                   class="btn btn-primary bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
-           </button>
-          </span>
-      </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel mb p ts-bg">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>商品分类用于商家发布商品以及用户在商城导航索引商品时使用，请事先合理规划您的商品分类及层级关系后再进行操作。</li>
+      <li>
+        点击“新增分类”可增加一级分类，点击
+        <button type="button" class="btn btn-info btn-xs" title="新增"><i class="fa fa-plus"></i></button>
+        则增加该分类的下级分类。
+      </li>
+      <li>分类建立后可通过点击
+        <span class="btn btn-default btn-xs"><i class="fa fa-level-down"></i> 下一级 </span>进入其下级分类并进行相关操作。通过
+        <span class="btn btn-default btn-xs"><i class="fa fa-level-up"></i> 上一级 </span>
+        按钮可后退到上级分类列表。
+      </li>
+      <li><span class="text-danger">特别注意：如果您的商城正在运营中，因商铺、商品、分润结算等重要数据都与商品分类相关，因此尽量使用
+        <button type="button" class="btn btn-primary btn-xs" title="修改"><i class="fa fa-pencil"></i></button>
+        而避免
+        <button type="button" class="btn btn-danger btn-xs" title="删除"><i class="fa fa-trash"></i></button>
+        操作，这有可能引起商品、店铺以及结算等数据的严重错误！</span>
+      </li>
+    </ul>
   </div>
-</div>-->
-<div class="col-md-10 font15 mt mb pl text-primary">
-  <!--<i class="icon-layers mr"></i>-->
-  <span class="cursor-p" (click)="queryChildKindList()">商品分类</span>
-  <span *ngFor="let kindTit of childKindList">
+  <div class="font15 mt-lg pl-lg text-primary">
+    <!--<i class="icon-layers mr"></i>-->
+    <span class="cursor-p" (click)="queryChildKindList()">商品分类</span>
+    <span *ngFor="let kindTit of childKindList">
       <i class="fa fa-arrow-right mr ml"></i>
       <font class="cursor-p" (click)="queryChildKindList(kindTit.id,kindTit.name,true)">{{kindTit.name}}</font>
     </span>
-  <span *ngIf="childKindList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
+    <span *ngIf="childKindList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
         <i class="fa fa-level-up mr5"></i>
         上一级
       </span>
-</div>
-<div class="panel panel-default">
+  </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="kinds"
            (pageChange)="queryDatas(kinds.curPage,childKindId,$event)">
@@ -66,14 +70,14 @@
       <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td>{{kind.kindName}}</td>
-        <td><img class="cursor-p" height="50px" appHoverShowLgPic [myConfig]="{width:150,height:150}"
+        <td><img class="cursor-p" height="50px" appHoverShowLgPic
                  [src]="kind.kindIcon"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">
           <img class="hover-big-img" [src]="kind.kindIcon"
                onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt=""></td>
-        <td  *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
+               alt=""></td>
+        <td *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
         <td>{{kind.keywords}}</td>
         <td>{{kind.description}}</td>
         <td>
@@ -93,8 +97,8 @@
                  title="添加下级分类"></a>
             </span>
             <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
-                    (click)="queryChildKindList(kind.id, kind.kindName,false)">
-              <i class="fa fa-level-down"></i> 下级
+                  (click)="queryChildKindList(kind.id, kind.kindName,false)">
+              <i class="fa fa-level-down"></i> 下一级
             </span>
           </p>
           <p *ngIf="kind.state=='DEL'">

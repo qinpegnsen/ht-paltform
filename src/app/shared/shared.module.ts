@@ -50,6 +50,7 @@ import {DecimalTwoPipe} from './pipe/decimal-two.pipe';
 import {StarsPipe} from './pipe/stars.pipe';
 import {DndModule} from "ng2-dnd";
 import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.directive";
+import {PopoverModule} from "ngx-bootstrap";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -77,6 +78,7 @@ import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.dire
     TooltipModule.forRoot(),
     DndModule.forRoot(),
     TypeaheadModule.forRoot(),
+    PopoverModule.forRoot(),
     ToasterModule,
     DataTableModule,
     RzhButtonsModule,
@@ -156,7 +158,8 @@ import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.dire
     BsDatepickerModule,
     DatepickerModule,
     DndModule,
-    HoverShowLgPicDirective
+    HoverShowLgPicDirective,
+    PopoverModule
   ]
 })
 

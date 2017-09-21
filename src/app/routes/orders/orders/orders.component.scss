@@ -12,25 +12,3 @@
   color: #23b7e5;
   border-bottom: 1px solid #23b7e5;
 }
-.place-time{
-  width: 310px;
-  display: inline-block;
-}
-.place-time ._title{
-  width: 72px;
-  line-height: 36px;
-  text-align: right;
-  display: inline-block;
-}
-.place-time ._picker{
-  width: 230px;
-  float: right;
-}
-.search-term{
-  width: 360px;
-  display: inline-block;
-  vertical-align: top;
-}
-.place-time ._picker input{
-  z-index: 0;
-}

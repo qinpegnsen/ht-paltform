@@ -35,6 +35,13 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 .position-relative{
   position: relative
 }
+//操作提示背景色
+.ts-bg{
+  background: #C9E7F2;
+  width: 98%;
+  margin: auto;
+  margin-top: 15px;
+}
 //禁止文本选中
 .unselectable{
   -webkit-touch-callout: none;

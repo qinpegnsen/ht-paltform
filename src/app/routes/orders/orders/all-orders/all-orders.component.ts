@@ -5,6 +5,10 @@ import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {CancelComponent} from "../cancel/cancel.component";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from "ngx-bootstrap/locale";
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-all-orders',
@@ -15,12 +19,16 @@ export class AllOrdersComponent implements OnInit {
   public curCancelOrderId:string;
   public curDeliverOrderId:string;
   public lookLogisticsOrderId:string;
-  private beginTime:string;
-  private endTime:string;
   public goodsList: Page = new Page();
+  bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('cancelBox') cancelBox: CancelComponent;
   constructor(private parentComp:OrdersComponent,
-              private submit: SubmitService,) { }
+              private submit: SubmitService,) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
     let me = this;

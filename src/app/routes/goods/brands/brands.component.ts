@@ -62,6 +62,7 @@ export class BrandsComponent implements OnInit {
             }, () => {
               let url = '/goodsBrand/deleteBrand';
               let data = {id: brandId};
+              swal.close();
               me.submitService.delRequest(url, data);
               me.queryDatas(curPage);
             });

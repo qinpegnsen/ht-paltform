@@ -16,14 +16,14 @@ const routes: Routes = [
   {path: 'assign', component: WoAssignComponent},
   {
     path: 'manage', component: WoManageComponent, children: [
-    {path: '', redirectTo: 'all'},
-    {path: 'all', component: WoAllComponent},
-    {path: 'assign', component: WoAssignComponent},
-    {path: 'assigned', component: WoAssignedComponent},
-    {path: 'my', component: WoMyComponent},
-    {path: 'disposed', component: WoDisposedComponent},
-    {path: 'finished', component: WoFinishedComponent},
-    {path: 'abnormal', component: WoAbnormalComponent},
+    {path: '', redirectTo: 'wo-all'},
+    {path: 'wo-all', component: WoAllComponent},
+    {path: 'wo-assign', component: WoAssignComponent},
+    {path: 'wo-assigned', component: WoAssignedComponent},
+    {path: 'wo-my', component: WoMyComponent},
+    {path: 'wo-disposed', component: WoDisposedComponent},
+    {path: 'wo-finished', component: WoFinishedComponent},
+    {path: 'wo-abnormal', component: WoAbnormalComponent},
   ]
   }
 ]

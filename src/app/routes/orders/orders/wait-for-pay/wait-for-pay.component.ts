@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {OrdersComponent} from "../orders.component";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from "ngx-bootstrap/locale";
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-wait-for-pay',
@@ -8,7 +12,13 @@ import {OrdersComponent} from "../orders.component";
 })
 export class WaitForPayComponent implements OnInit {
 
-  constructor(private parentComp:OrdersComponent) { }
+  bsConfig: Partial<BsDatepickerConfig>;
+  constructor(private parentComp:OrdersComponent) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
     let me = this;

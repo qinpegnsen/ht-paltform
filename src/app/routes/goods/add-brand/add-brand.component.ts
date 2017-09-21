@@ -33,12 +33,11 @@ export class AddBrandComponent implements OnInit {
   }); //初始化上传方法
   private myImg: boolean = false;
   private upBrandImg:boolean = false;
-  private fileName:string = '选择图片';
 
 
   constructor(public settings: SettingsService, private route: ActivatedRoute,
               public patterns: PatternService,
-              private router: Router, private getUid: GetUidService,private mask: MaskService,
+              private router: Router, private getUid: GetUidService,
               public parentComp: BrandsComponent, private submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -55,7 +54,6 @@ export class AddBrandComponent implements OnInit {
     //获取当前路由
     me.route.url.subscribe(urls => {
       me.path = urls[0].path;
-      //console.log("█ this.path ►►►", this.path);
       switch (me.path) {
         //新增品牌
         case "addBrand":
@@ -132,24 +130,14 @@ export class AddBrandComponent implements OnInit {
   /**
    * 从详情去修改
    */
-  private toUpdateBrand() {
+  toUpdateBrand() {
     let me = this, brandId = me.submit.getParams('brandId');
     me.settings.closeRightPage(); //关闭右侧滑动页面
     me.router.navigate(['/main/goods/brands/upBrand'], {replaceUrl: true, preserveQueryParams: true });
   }
 
-  /**
-   * 修改图片
-   * @param id
-   */
-  private toUpBrandImg(id){
-    let me = this, brandId = me.submit.getParams('brandId');
-    me.settings.closeRightPage(); //关闭右侧滑动页面
-    me.router.navigate(['/main/goods/brands/upBrandImg'],  {replaceUrl: true, preserveQueryParams: true });
-  }
-
   //提交表单
-  private addBrandForm() {
+  addBrandForm() {
     let me = this;
     let submitUrl, submitData;
     submitData = me.brandInfo;
@@ -237,7 +225,7 @@ export class AddBrandComponent implements OnInit {
   }
 
   // 取消
-  private cancel() {
+  cancel() {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 

@@ -4,6 +4,10 @@ import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from "ngx-bootstrap/locale";
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-wait-for-send',
@@ -11,9 +15,17 @@ import {SubmitService} from "../../../../core/forms/submit.service";
   styleUrls: ['./wait-for-send.component.scss']
 })
 export class WaitForSendComponent implements OnInit {
+
+  bsConfig: Partial<BsDatepickerConfig>;
   public goodsList: Page = new Page();
   constructor(private parentComp:OrdersComponent,
-              private submit: SubmitService,) { }
+              private submit: SubmitService,) {
+
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
     let me = this;

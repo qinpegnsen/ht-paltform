@@ -12,12 +12,20 @@ $buyer-info-box-width: 200px;
 .order .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #fff;
 }
+
 .order-table-head {
   @extend .br0;@extend .bl0;
   background-color: $gray-bg-lighter;
 }
 .order-head {
   background-color: $gray-bg;
+}
+
+.tag-di{
+  display: inline;
+}
+.tag-dib{
+  display: inline-block;
 }
 
 .order{
@@ -112,4 +120,26 @@ $buyer-info-box-width: 200px;
 }
 .bs-datepicker{
   z-index: 200;
+}
+.place-time{
+  width: 310px;
+  display: inline-block;
+}
+.place-time ._title{
+  width: 72px;
+  line-height: 36px;
+  text-align: right;
+  display: inline-block;
+}
+.place-time ._picker{
+  width: 230px;
+  float: right;
+}
+.search-term{
+  width: 360px;
+  display: inline-block;
+  vertical-align: top;
+}
+.place-time ._picker input{
+  z-index: 0;
 }
