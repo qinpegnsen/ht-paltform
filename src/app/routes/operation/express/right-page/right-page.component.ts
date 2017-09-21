@@ -24,7 +24,7 @@ export class RightPageComponent implements OnInit {
     private routeInfo: ActivatedRoute,
     public service:SubmitService,
     public parent:ExpressComponent,
-    private patterns: PatternService,
+    public patterns: PatternService,
     private operationService: OperationService
   ) {
     this.settings.showRightPage("30%");

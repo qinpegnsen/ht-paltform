@@ -1,3 +1,4 @@
+<!--新增类别-->
 <div class="rightpage" *ngIf="linkType=='addClass'">
   <form class="form-validate form-horizontal" style="height: 100%" #addClass="ngForm">
     <!-- START panel-->
@@ -53,7 +54,7 @@
     <!-- END panel-->
   </form>
 </div>
-
+<!--新增子类别-->
 <div class="rightpage" *ngIf="linkType=='addChildSort'">
   <form class="form-validate form-horizontal" style="height: 100%" #addChildClass="ngForm">
     <!-- START panel-->
@@ -108,6 +109,7 @@
     <!-- END panel-->
   </form>
 </div>
+<!--修改分类-->
 <div class="rightpage" *ngIf="linkType=='updateSort'">
   <form class="form-validate form-horizontal" style="height: 100%" #updateClass="ngForm">
     <!-- START panel-->
@@ -122,7 +124,7 @@
             <label class="col-sm-3 control-label"><i>*</i>分类名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="updataData.acName" #nameTem="ngModel" name="acName"
-                     required placeholder='必填项'/>
+                     required placeholder='必填项' />
               <div [hidden]="nameTem.valid||nameTem.untouched"
                    class="alert alert-danger">
                 分类名称是必填项
@@ -132,9 +134,13 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">排序</label>
+            <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" [(ngModel)]="updataData.acSort" #sortTem="ngModel" name="acSort"/>
+              <input class="form-control" type="text" [(ngModel)]="updataData.acSort" #sortTem="ngModel" name="acSort" [pattern]="patterns.doubleDigit" [tooltip]="tip.sort"/>
+              <div [hidden]="sortTem.valid||sortTem.untouched"
+                   class="alert alert-danger">
+                请填写0-99的整数
+              </div>
             </div>
           </div>
         </fieldset>
