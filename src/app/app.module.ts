@@ -13,7 +13,6 @@ import {RoutesModule} from "./routes/routes.module";
 import {CookieService} from "angular2-cookie/core";
 import {PopupComponent} from "./routes/operationpage/popup/popup.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import { AgentEptComponent } from './routes/agent/stock/agent-ept/agent-ept.component';
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: Http) {
@@ -21,7 +20,7 @@ export function createTranslateLoader(http: Http) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AgentEptComponent],
+  declarations: [AppComponent],
   imports: [
     HttpModule, // http 请求
     BrowserAnimationsModule, // required for ng2-tag-input
