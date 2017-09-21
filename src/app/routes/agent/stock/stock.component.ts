@@ -16,12 +16,7 @@ export class StockComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor() {
-    this.bsConfig = Object.assign({}, {
-      locale: 'cn',
-      // minDate: this.minDate.getDate() - 1,
-      // maxDate: this.maxDate.getDate() + 7,
-      containerClass: 'theme-blue'
-    });
+
   }
 
   ngOnInit() {

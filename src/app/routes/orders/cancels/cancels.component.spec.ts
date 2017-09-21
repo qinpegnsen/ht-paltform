@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgentEptComponent } from './agent-ept.component';
+import { CancelsComponent } from './cancels.component';
 
-describe('AgentEptComponent', () => {
-  let component: AgentEptComponent;
-  let fixture: ComponentFixture<AgentEptComponent>;
+describe('CancelsComponent', () => {
+  let component: CancelsComponent;
+  let fixture: ComponentFixture<CancelsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgentEptComponent ]
+      declarations: [ CancelsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgentEptComponent);
+    fixture = TestBed.createComponent(CancelsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,4 +23,3 @@ describe('AgentEptComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

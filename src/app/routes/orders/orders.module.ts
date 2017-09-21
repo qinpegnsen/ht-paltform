@@ -14,6 +14,7 @@ import {DeliverComponent} from './orders/deliver/deliver.component';
 import { CancelComponent } from './orders/cancel/cancel.component';
 import { LookLogisticsComponent } from './orders/look-logistics/look-logistics.component';
 import { AgentEptComponent } from './agent-ept/agent-ept.component';
+import { CancelsComponent } from './cancels/cancels.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
     CancelComponent,
     LookLogisticsComponent,
     DeliverComponent,
-    AgentEptComponent
+    AgentEptComponent,
+    CancelsComponent
   ],
   providers: [
     OrdersComponent,

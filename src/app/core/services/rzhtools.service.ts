@@ -437,6 +437,71 @@ export class RzhtoolsService {
     return areas;
   }
 
+  /**
+   * 格式化日期
+   * @param date 日期对象
+   * @param fmt  格式化形式
+   * @returns {any}
+   */
+  static dataFormat = function (date: Date, fmt) {
+    var o = {
+      "M+": date.getMonth() + 1, //月份
+      "d+": date.getDate(), //日
+      "H+": date.getHours(), //小时
+      "m+": date.getMinutes(), //分
+      "s+": date.getSeconds(), //秒
+      "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+      "S": date.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+  }
+
+  /**
+   * 根据指定日期，获取其前后日期
+   * @param date 指定日期
+   * @param num  时间 （1代表后一天，2代表后两天，-1代表前一天......等等）
+   */
+  static getAroundDateByDate = function (date: Date, num: number) {
+    return new Date(date.getTime() + (1000 * 60 * 60 * 24) * num);
+  }
+
+  /**
+   * 根据日期获取是星期几
+   * @param date 日期
+   * @returns {string}
+   */
+  static getWeek = function (date: Date) {
+    let today = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    let week = today[date.getDay()];
+    // let weeks: Array<any> = this.getEnumDataList(SettingsService.enums.week), week: string, num: number = date.getDay() + 1;
+    // for (let i = 0; i < weeks.length; i++) {
+    // 	if (num.toString() == weeks[i]["val"]) week = weeks[i]["key"];
+    // }
+    return week;
+  }
+
+  /**
+   * 获取日期时间戳
+   * @param string 日期：2017-08-14 或 2017-08-14 15:30:00
+   * @returns {number}
+   * @constructor
+   */
+  static dateToUnix = function (string) {
+    var f = string.split(' ', 2);
+    var d = (f[0] ? f[0] : '').split('-', 3);
+    var t = (f[1] ? f[1] : '').split(':', 3);
+    return (new Date(
+      parseInt(d[0], 10) || null,
+      (parseInt(d[1], 10) || 1) - 1,
+      parseInt(d[2], 10) || null,
+      parseInt(t[0], 10) || null,
+      parseInt(t[1], 10) || null,
+      parseInt(t[2], 10) || null
+    )).getTime();
+  }
 }
 
 @Injectable()

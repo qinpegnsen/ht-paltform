@@ -5,6 +5,11 @@ import {PageEvent} from '../../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../../core/forms/submit.service';
 import {CancelComponent} from '../../../orders/orders/cancel/cancel.component';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from 'ngx-bootstrap/locale';
+defineLocale('cn', zhCn);
+
 
 @Component({
   selector: 'app-all-stock',
@@ -12,6 +17,11 @@ import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
   styleUrls: ['./all-stock.component.scss']
 })
 export class AllStockComponent implements OnInit {
+  public orderType: number = 1;
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
+  bsConfig: Partial<BsDatepickerConfig>;
+  private agentAcct;
   public curCancelOrderId:string;
   public curDeliverOrderId:string;
   public lookLogisticsOrderId:string;
@@ -20,7 +30,15 @@ export class AllStockComponent implements OnInit {
   public goodsList: Page = new Page();
   @ViewChild('cancelBox') cancelBox: CancelComponent;
 
-  constructor(private StockComponent:StockComponent,private submit: SubmitService,) { }
+  constructor(private StockComponent:StockComponent,private submit: SubmitService,) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      rangeInputFormat:"YYYY/MM/DD",
+      // minDate: this.minDate.getDate() - 1,
+      // maxDate: this.maxDate.getDate() + 7,
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
     let _this = this;
@@ -34,6 +52,8 @@ export class AllStockComponent implements OnInit {
    * @param curPage
    */
   public queryDatas(curPage, event?: PageEvent) {
+    console.log("█ 111111 ►►►",  111111);
+
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -45,7 +65,13 @@ export class AllStockComponent implements OnInit {
       curPage: activePage,
       pageSize: 2,
       sortColumns: '',
+      agentAcct:this.agentAcct,
+      goodsName:this.agentAcct,
+      ordno:this.agentAcct,
+      dateStr:this.agentAcct
     };
+    console.log("█ requestData ►►►",  requestData);
+
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
 
@@ -96,4 +122,5 @@ export class AllStockComponent implements OnInit {
   getLogisticsData(data){
     this.lookLogisticsOrderId = null;
   }*/
+
 }

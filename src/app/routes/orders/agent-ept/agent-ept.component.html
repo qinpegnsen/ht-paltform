@@ -4,16 +4,109 @@
       <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
       <div class="col-xs-5">
         <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                placeholder="机构名称">
+               placeholder="代理商订单编号" [(ngModel)]="orderNumber">
       </div>
       <div class="col-sm-1 pull-left text-center">
-        <span class="ng-scope">
-           <button type="button" title="搜索" id="toSearch"
-                   class="btn btn-primary bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
-           </button>
-          </span>
+<span class="ng-scope">
+<button type="button" title="搜索" id="toSearch"
+        class="btn btn-primary bar-h3-btn mr ng-scope">
+<em class="icon-magnifier fa-fw" (click)="queryDatas()"></em>搜索
+  </button>
+  </span>
       </div>
     </div>
   </div>
 </div>
+<ul class="clearfix order-table-head list-unstyled mb0 p b">
+  <li class="w40 pull-left text-center">商品</li>
+  <li class="w10 pull-left text-center">单价</li>
+  <li class="w10 pull-left text-center">数量</li>
+  <li class="w10 pull-left text-center">买家</li>
+  <li class="w10 pull-left text-center">订单金额（元）</li>
+  <li class="w10 pull-left text-center">交易状态</li>
+  <li class="w10 pull-left text-center">交易操作</li>
+</ul>
+<table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
+       (pageChange)="queryDatas(1,$event)" *ngIf="flag">
+  <tbody>
+  <tr class="mt" *ngFor="let goods of dataTable.data;let i = index">
+    <td class="w100 p0 font12 bt0">
+      <div class="order-space"></div>
+      <div class="order-head p b bb0">
+        <span class="mr-xl">订单编号：{{goods.ordno}}</span>
+        <span class="mr-xl">下单时间：2017-05-16 17:11:52</span>
+        <span class="icon-screen-smartphone">来源：移动端</span>
+        <!--<span class="fa fa-desktop"> 来源：PC</span>-->
+      </div>
+      <table class="w100 b">
+        <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
+          <td class="w40 p text-left position-relative bb">
+          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
+                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+            <div class="goods-lg-info">
+              <p class="mb0 font13 omg2 two-row mb-sm">
+                <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
+              </p>
+              <p class="mb0 one-row omg" *ngFor="let attr of goods.goodsBaseSaList">
+                <span class="inline">{{attr.attrName}}：</span>
+                <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
+              </p>
+            </div>
+          </td>
+          <td class="w10 bb">{{0.356 | decimalTwo}}</td>
+          <td class="w10 bb">3</td>
+          <td class="w10 bl position-relative" rowspan="2">
+          <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+                (mouseleave)="hideBuyerInfo(i)">等风来
+          </span>
+            <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
+              <div class="info-con">
+                <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
+                <dl><dt>姓名：</dt><dd>三楂红</dd></dl>
+                <dl><dt>电话：</dt><dd>13526898899</dd></dl>
+                <dl><dt>地址：</dt><dd>你都不能白金汉爵速度解决哈哈哈丢我人近几年那你就</dd></dl>
+              </div>
+            </div>
+          </td>
+          <td class="w10 bl" rowspan="2">
+            <span class="main-red font14">¥{{690.123 | decimalTwo}}</span><br>
+            <span class="font-gray">（免运费）</span><br>
+            <span class="font-gray">在线支付</span>
+          </td>
+          <td class="w10 bl" rowspan="2">
+            <p class="font-gray mb-sm cursor-p">待发货</p>
+            <p class="cursor-p mb-sm">查看详情</p>
+            <p class="cursor-p mb-sm">查看物流</p>
+          </td>
+          <td class="w10 bl" rowspan="2">
+            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" (click)="deliverOrder(goods.goodsName)">
+              设置发货
+            </button><br>
+            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.goodsName)"> 取消订单</button><br>
+            <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款</button>
+          </td>
+        </tr>
+        <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
+          <td class="w40 p text-left position-relative bb">
+          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
+                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+            <div class="goods-lg-info">
+              <p class="mb0 font13 omg2 two-row mb-sm">
+                <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
+              </p>
+              <p class="mb0 one-row omg" *ngFor="let attr of goods.agentOrdItemList">
+                <span class="inline">{{attr.attrName}}</span>
+                <span class="inline" *ngFor="let val of attr.agentOrdItemList">{{val.value}}</span>
+              </p>
+            </div>
+          </td>
+          <td class="w10 bb">{{0.356 | decimalTwo}}</td>
+          <td class="w10">3</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
+
