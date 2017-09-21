@@ -1,19 +1,19 @@
 <div class="w10 pull-left panel panel-default  special">
   <div class="panel-body">
     <div w60 pull-left class="setClass" [class.active]="flag=='DRAFT'" (click)="articleState('DRAFT')" >
-      <span>草稿箱({{stateList.data.DRAFT}})</span>
+      <span>草稿箱({{stateList.data.DRAFT?stateList.data.DRAFT:0}})</span>
     </div>
     <div w60 pull-left class="setClass" [class.active]="flag=='AUDIT'" (click)="articleState('AUDIT')">
-      <span>审核中({{stateList.data.AUDIT}})</span>
+      <span>审核中({{stateList.data.AUDIT?stateList.data.AUDIT:0}})</span>
     </div>
     <div w60 pull-left class="setClass" [class.active]="flag=='REVISE'" (click)="articleState('REVISE')">
-      <span>待修改({{stateList.data.REVISE}})</span>
+      <span>待修改({{stateList.data.REVISE?stateList.data.REVISE:0}})</span>
     </div>
     <div w60 pull-left class="setClass" [class.active]="flag=='NORMAL'" (click)="articleState('NORMAL')">
-      <span>已发表({{stateList.data.NORMAL}})</span>
+      <span>已发表({{stateList.data.NORMAL?stateList.data.NORMAL:0}})</span>
     </div>
     <div w60 pull-left class="setClass" [class.active]="flag=='DEL'" (click)="articleState('DEL')">
-      <span>已删除({{stateList.data.DEL}})</span>
+      <span>已删除({{stateList.data.DEL?stateList.data.DEL:0}})</span>
     </div>
   </div>
 </div>

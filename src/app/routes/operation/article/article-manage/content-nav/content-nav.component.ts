@@ -19,7 +19,7 @@ export class ContentNavComponent implements OnInit,OnChanges{
 
   public defaultState='DRAFT'; //组件之间传送的时候默认的是草稿的状态
 
-  public stateList; //各种状态总数列表
+  public stateList={}; //各种状态总数列表
 
   constructor(public NavService:NavService,public service:SubmitService) { }
 

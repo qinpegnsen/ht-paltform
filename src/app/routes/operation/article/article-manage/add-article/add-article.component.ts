@@ -424,8 +424,7 @@ export class AddArticleComponent implements OnInit {
     let data = this.submitObj;
 
     let result=this.operationService.addNewArticle(url, data);
-
-    if(result=='文章内容不能为空'){
+    if(result=='文章内容不能为空'||result=='请选择文章所属类型'){
       return;
     }else{
       this.router.navigate(['/main/operation/article/manage']);
