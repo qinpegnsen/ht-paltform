@@ -78,6 +78,35 @@ export class OperationService {
    * @param submitData
    * @param back:true(返回上一级)
    */
+  updataeEpress(submitUrl, submitData) {
+    let me = this, result;
+    me.ajax.put({
+      url: submitUrl,
+      data: submitData,
+      async: false,
+      success: (res) => {
+        if (res.success) {
+          AppComponent.rzhAlt("success", res.info);
+          result = res.data;
+        } else {
+          AppComponent.rzhAlt("error", res.info);
+          result = res.info;
+        }
+      },
+      error: () => {
+        AppComponent.rzhAlt("error", '网络错误');
+      }
+    })
+    return result;
+  }
+
+
+  /**
+   * POST 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
+   */
   postRequest(submitUrl, submitData, back?: boolean) {
     let me = this, result;
     me.ajax.post({
@@ -176,7 +205,6 @@ export class OperationService {
       data: requestDate,
       async: false,
       success: (res) => {
-        console.log("█ res ►►►", res);
         if (res.success) {
           AppComponent.rzhAlt("success", res.info);
           result = res.info;

@@ -89,7 +89,10 @@ export class RightPageComponent implements OnInit {
         expressUrl:obj.expressUrl,
         isUse:obj.isUse
       }
-      this.service.putRequest(url,data);
+      let result=this.operationService.updataeEpress(url,data);
+      if(result=='物流公司编码已存在'||result=='物流公司名称已存在'){
+        return;
+      }
     }
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
     this.parent.queryExpressList()
