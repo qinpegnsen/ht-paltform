@@ -21,6 +21,7 @@ export const routes = [
       {path: 'app', loadChildren: './msg/msg.module#MsgModule'},
       {path: 'edit-pw', loadChildren: './edit-pw/edit-pw.module#EditPwModule'},
       {path: 'orders', loadChildren: './orders/orders.module#OrdersModule'},
+      {path: 'WO', loadChildren: './work-orders/work-orders.module#WorkOrdersModule'},
     ]
   },
   {

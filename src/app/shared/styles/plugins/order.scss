@@ -34,6 +34,17 @@ $buyer-info-box-width: 200px;
   .b, .ba  {border: 1px solid $bd-color; } // all borders
 
 }
+// 气泡提示框的样式
+.popover.pop-style, .popover.pop-style .popover-content {
+  background: #FFFCE9;
+  border-color: #FEC500;
+}
+.popover.pop-style.top>.arrow{
+  border-top-color: #FEC500
+}
+.popover.pop-style.top>.arrow:after{
+  border-top-color: #FFFCE9
+}
 
 .search-time{
   display: inline-block;

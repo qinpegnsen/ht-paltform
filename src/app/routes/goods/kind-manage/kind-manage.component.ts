@@ -46,7 +46,7 @@ export class KindManageComponent implements OnInit {
           let url = '/goodsKind/updateStateById';
           let data = {id: kindId, state: 'DEL'};
           me.submitService.delRequest(url, data);
-          this.queryDatas(curPage, kindPid);
+          me.queryDatas(curPage, kindPid);
         }
       }
     ];

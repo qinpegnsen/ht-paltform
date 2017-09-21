@@ -17,7 +17,7 @@ import { AgentEptComponent } from './agent-ept/agent-ept.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'order'},
+  {path: '', redirectTo: 'cust'},
   {
     path: 'cust', component: OrdersComponent, children: [
     {path: '', redirectTo: 'all-orders'},

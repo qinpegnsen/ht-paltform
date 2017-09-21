@@ -69,7 +69,7 @@
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <select name="unit" required class="form-control" [(ngModel)]="publishData.unit">
-            <option [value]="unit.id" *ngFor="let unit of unitList">{{unit.unitName}}</option>
+            <option [value]="unit.unitName" *ngFor="let unit of unitList">{{unit.unitName}}</option>
           </select>
         </div>
         <p class="tip" myHoverColor>请正确选择该商品的单位，确保购买者明确商品对应单价/计量单位。</p>
@@ -413,7 +413,7 @@
         <div class="w100">
           <!--固定运费-->
           <div class="mb clearfix">
-            <span class="radio c-radio c-radio-nofont radio-box">
+            <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="FIXED" placeholder="1.00"
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
@@ -428,24 +428,22 @@
           </div>
           <!--运费模板-->
           <div class="clearfix">
-            <div>
-              <span class="radio c-radio c-radio-nofont radio-box">
-                <label>
-                <input type="radio" name="freightType" value="TPL"
-                       [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
-                <span class="fa fa-circle"></span>使用物流规则</label>
-              </span>
-              <span class="clearfix" [hidden]="publishData.goodsExpressInfo.freightType!='TPL'">
-                <select class="rules-list text form-control pull-left" name="freightType"
-                        [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
-                        [required]="publishData.goodsExpressInfo.freightType=='TPL'">
-                  <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
-                </select>
-                <a class="btn btn-green btn-sm ml" target="_blank" (click)="addLogisticsModule()"><em
-                  class="fa fa-truck"></em> 添加物流规则</a>
-                <span class="btn btn-sm btn-info fa fa-refresh" (click)="getExpressTpl()"></span>
-              </span>
-            </div>
+            <span class="radio c-radio radio-box">
+              <label>
+              <input type="radio" name="freightType" value="TPL"
+                     [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
+              <span class="fa fa-circle"></span>使用物流规则</label>
+            </span>
+            <span class="clearfix" [hidden]="publishData.goodsExpressInfo.freightType!='TPL'">
+              <select class="rules-list text form-control pull-left" name="freightType"
+                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
+                      [required]="publishData.goodsExpressInfo.freightType=='TPL'">
+                <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
+              </select>
+              <a class="btn btn-green btn-sm ml" target="_blank" (click)="addLogisticsModule()"><em
+                class="fa fa-truck"></em> 添加物流规则</a>
+              <span class="btn btn-sm btn-info fa fa-refresh" (click)="getExpressTpl()"></span>
+            </span>
             <div class="tpl-box w100 p mt"
                  *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId">
               <p class="m0">
@@ -552,7 +550,8 @@
 
   <!--商品发布按钮-->
   <fieldset class="pt-xl m0 text-center">
-    <button class="btn btn-green" type="button" [disabled]="!publishForm.form.valid" (click)="publishGoods()">
+    <button class="btn btn-green" type="button" [disabled]="!publishForm.form.valid"
+            (click)="publishGoods()">
       <em class="fa fa-upload mr"></em>{{publishForm.form.valid?'发布商品':'请填写必要信息'}}
     </button>
   </fieldset>

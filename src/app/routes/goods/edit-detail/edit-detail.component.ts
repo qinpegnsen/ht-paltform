@@ -88,6 +88,7 @@ export class EditDetailComponent implements OnInit {
 
     me.kindId = me.route.snapshot.queryParams['kindId'];
     if (me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
+    me.getPageData();// 获取当前页面需要的数据
     if (me.path == 'step_two' && isNullOrUndefined(me.kindId)) {
       me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
     } else {
@@ -118,7 +119,6 @@ export class EditDetailComponent implements OnInit {
             }
           }
         });
-        me.getPageData();// 获取当前页面需要的数据
 
         //当点击批量修改价格的按钮时
         $('.sku-table').on('click', '.s-menu', function () {
@@ -152,6 +152,7 @@ export class EditDetailComponent implements OnInit {
           me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
           me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
           me.genMblItemList();        //将html字符串生成移动端图片文字组合
+          if(!isNullOrUndefined(me.goodsBody)) $('#summernote').summernote('code', me.goodsBody);   //PC端详情
         }
       })
     }
@@ -230,9 +231,6 @@ export class EditDetailComponent implements OnInit {
       me.publishData = me.goodsEditData;                  // 商品发布数据
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-      setTimeout(function () {
-        $('#summernote').summernote('code', me.goodsBody);   //PC端详情
-      }, 0)
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
       if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
     }
@@ -830,6 +828,7 @@ export class EditDetailComponent implements OnInit {
    */
   judgeGoodsImgs(){
     let me = this, targets = me.skuImg.vals;
+    console.log("█ me.skuImg.vals ►►►",  me.skuImg.vals);
     // 当商品发布时，如果选了规格，但没有选择图片
     if(me.path == 'step_two'){
       if(targets.length > 0){
@@ -916,7 +915,7 @@ export class EditDetailComponent implements OnInit {
    * 整理数据并且发布商品
    */
   private genPublishDataAndPublish() {
-    let me = this, type;
+    let me = this;
     me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
     if (me.path == 'step_two') me.publishData['kindId'] = me.kindId;
     me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码

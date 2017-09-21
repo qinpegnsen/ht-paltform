@@ -224,6 +224,23 @@ const orders = {
     }
   ]
 };
+const workOrders = {
+  text: '工单管理',
+  icon: 'fa fa-file-text',
+  link: '/main/WO',
+  submenu: [
+    {
+      text: '指派工单',
+      icon: 'fa fa-hand-o-right',
+      link: '/main/WO/assign'
+    },
+    {
+      text: '工单管理',
+      icon: 'fa fa-file-text-o',
+      link: '/main/WO/manage'
+    }
+  ]
+};
 const sale = {
   text: '售前售后',
   icon: 'icon-earphones-alt',
@@ -413,6 +430,7 @@ export let menu = [
   goods,
   member,
   orders,
+  workOrders,
   sale,
   statistics,
   agent,
