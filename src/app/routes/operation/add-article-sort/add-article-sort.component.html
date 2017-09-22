@@ -13,7 +13,7 @@
             <label class="col-sm-3 control-label"><i>*</i>分类名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="acName" #nameTem="ngModel" name="acName" required
-                     placeholder='必填项'/>
+                     placeholder='必填项'  maxlength="128"/>
               <div [hidden]="nameTem.valid||nameTem.untouched"
                    class="alert alert-danger">
                 分类名称是必填项
@@ -69,7 +69,7 @@
             <label class="col-sm-3 control-label"><i>*</i>分类名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="acName" #nameTem="ngModel" name="acName" required
-                     placeholder='必填项'/>
+                     placeholder='必填项'  maxlength="128"/>
               <div [hidden]="nameTem.valid||nameTem.untouched"
                    class="alert alert-danger">
                 分类名称是必填项
@@ -94,7 +94,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">描述</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" [(ngModel)]="summary" name="summary"/>
+              <input class="form-control" type="text" [(ngModel)]="summary" name="summary"  maxlength="128"/>
             </div>
           </div>
         </fieldset>
@@ -124,7 +124,7 @@
             <label class="col-sm-3 control-label"><i>*</i>分类名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="updataData.acName" #nameTem="ngModel" name="acName"
-                     required placeholder='必填项' />
+                     required placeholder='必填项'  maxlength="128"/>
               <div [hidden]="nameTem.valid||nameTem.untouched"
                    class="alert alert-danger">
                 分类名称是必填项
@@ -149,7 +149,7 @@
             <label class="col-sm-3 control-label">描述</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="updataData.summary" #desTem="ngModel"
-                     name="summary"/>
+                     name="summary"  maxlength="128"/>
             </div>
           </div>
         </fieldset>

@@ -7,7 +7,7 @@
         <div class="form-group">
           <div class="col-md-8 col-xs-6 pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
-                   (change)="queryMemberList()" placeholder="请输入要查询的会员名称">
+                   (change)="queryMemberList()" maxlength="128" placeholder="请输入要查询的会员名称">
           </div>
           <button type="button" title="搜索"
                   class="btn btn-primary bar-h3-btn mr ng-scope">
@@ -17,7 +17,7 @@
         <div class="form-group mb0">
           <div class="col-md-8 col-xs-6 pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTruename"
-                   (change)="queryMemberList()" placeholder="请输入要查询的会员真实姓名">
+                   (change)="queryMemberList()" maxlength="128" placeholder="请输入要查询的会员真实姓名">
           </div>
           <button type="button" title="搜索"
                   class="btn btn-primary bar-h3-btn mr ng-scope">
@@ -28,7 +28,7 @@
       <div class="col-md-4">
         <div class="form-group clearfix">
           <div class="col-md-8 col-xs-6 pl0">
-            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone"
+            <input type="text" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone"
                    (change)="queryMemberList()" placeholder="请输入要查询的会员的手机号">
           </div>
           <button type="button" title="搜索"

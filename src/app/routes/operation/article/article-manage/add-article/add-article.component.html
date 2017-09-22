@@ -17,7 +17,7 @@
             <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
             <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel" ngModel required
-                     placeholder='必填项'/>
+                     placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
                    class="alert alert-danger">
                 文章标题是必填项
@@ -30,7 +30,7 @@
             <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
             <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel" ngModel
-                     required placeholder='必填项'/>
+                     required placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
                    class="alert alert-danger">
                 文章短标题是必填项
@@ -44,7 +44,7 @@
             </label>
             <div class="col-sm-10">
               <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" ngModel
-                     required placeholder='必填项'/>
+                     required placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
                    class="alert alert-danger">
                 文章摘要是必填项
@@ -100,7 +100,7 @@
             <label class="col-sm-2 control-label">文章标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articlekeyword" #articlekeywordTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
@@ -108,7 +108,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">关键字</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articleTag" #articleTagTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
@@ -117,7 +117,7 @@
             <label class="col-sm-2 control-label">相关文章
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articleLink" #articleLinkTem="ngModel" ngModel/>
             </div>
           </div>
         </fieldset>
@@ -174,7 +174,7 @@
             <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitle" #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle" required
-                     placeholder='必填项'/>
+                     placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
                    class="alert alert-danger">
                 文章标题是必填项
@@ -188,7 +188,7 @@
             <div class="col-sm-10">
               <input class="form-control" type="text" name="articleTitleShort" #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"
-                     required placeholder='必填项'/>
+                     required placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
                    class="alert alert-danger">
                 文章短标题是必填项
@@ -201,9 +201,7 @@
             <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
-"
-                     required placeholder='必填项'/>
+              <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract" required placeholder='必填项' maxlength="128"/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
                    class="alert alert-danger">
                 文章摘要是必填项
@@ -290,7 +288,7 @@
             <label class="col-sm-2 control-label">文章标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articlekeyword" #articlekeywordTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" name="articlekeyword" #articlekeywordTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTag"/>
             </div>
           </div>
@@ -299,7 +297,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">关键字</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleTag" #articleTagTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" name="articleTag" #articleTagTem="ngModel"
                      [(ngModel)]="queryArticleData.articleKeyword"/>
             </div>
           </div>
@@ -309,7 +307,7 @@
             <label class="col-sm-2 control-label">相关文章
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleLink" #articleLinkTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" name="articleLink" #articleLinkTem="ngModel"
                      [(ngModel)]="queryArticleData.articleLink"/>
             </div>
           </div>
@@ -356,7 +354,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" disabled name="articleTitle" #articleTitleTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articleTitle" #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle" required
                      placeholder='必填项'/>
               <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
@@ -370,7 +368,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" disabled name="articleTitleShort" #articleTitleShortTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort" #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"
                      required placeholder='必填项'/>
               <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
@@ -385,7 +383,7 @@
             <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" disabled name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
+              <input class="form-control" type="text" maxlength="128" disabled name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
 "
                      required placeholder='必填项'/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
@@ -470,7 +468,7 @@
             <label class="col-sm-2 control-label">文章标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" disabled name="articlekeyword" #articlekeywordTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articlekeyword" #articlekeywordTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTag"/>
             </div>
           </div>
@@ -489,7 +487,7 @@
             <label class="col-sm-2 control-label">相关文章
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text"  disabled name="articleLink" #articleLinkTem="ngModel"
+              <input class="form-control" type="text" maxlength="128"  disabled name="articleLink" #articleLinkTem="ngModel"
                      [(ngModel)]="queryArticleData.articleLink"/>
             </div>
           </div>

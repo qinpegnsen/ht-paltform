@@ -12,7 +12,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司代码</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressCodeTem="ngModel" ngModel name="expressCode" required placeholder='必填项' [pattern]="patterns.letter"/>
+              <input class="form-control" type="text" maxlength="128" #expressCodeTem="ngModel" ngModel name="expressCode" required placeholder='必填项' [pattern]="patterns.letter"/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
                    class="alert alert-danger">
                 请输入合法的物流公司代码
@@ -25,7 +25,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司名称</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressNameTem="ngModel" ngModel name="expressName" required placeholder='必填项'/>
+              <input class="form-control" type="text" maxlength="128"  #expressNameTem="ngModel" ngModel name="expressName" required placeholder='必填项'/>
               <div [hidden]="expressNameTem.valid||expressNameTem.untouched"
                    class="alert alert-danger">
                 输入合法的物流公司网址
@@ -37,7 +37,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司网址</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressUrlTem="ngModel" ngModel name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
+              <input class="form-control" type="text"  maxlength="128" #expressUrlTem="ngModel" ngModel name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
                    class="alert alert-danger">
                 物流公司网址不合法
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司代码</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressCodeTem="ngModel" [(ngModel)]="editData.expressCode" name="expressCode" required placeholder='必填项'/>
+              <input class="form-control" type="text" maxlength="128"  #expressCodeTem="ngModel" [(ngModel)]="editData.expressCode" name="expressCode" required placeholder='必填项'/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
                    class="alert alert-danger">
                 物流公司代码是必填项
@@ -92,7 +92,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司名称</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressNameTem="ngModel"  [(ngModel)]="editData.expressName" name="expressName" required placeholder='必填项'/>
+              <input class="form-control" type="text" maxlength="128"  #expressNameTem="ngModel"  [(ngModel)]="editData.expressName" name="expressName" required placeholder='必填项'/>
               <div [hidden]="expressNameTem.valid||expressNameTem.untouched"
                    class="alert alert-danger">
                 物流公司名称是必填项
@@ -104,7 +104,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>物流公司网址</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  #expressUrlTem="ngModel"  [(ngModel)]="editData.expressUrl" name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
+              <input class="form-control" type="text" maxlength="128" #expressUrlTem="ngModel"  [(ngModel)]="editData.expressUrl" name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
                    class="alert alert-danger">
                 请输入合法的物流公司代码
