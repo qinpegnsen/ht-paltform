@@ -82,9 +82,13 @@ export class HelpUpdateComponent implements OnInit {
    * 修改完成后提交
    */
   submit(res){
+    console.log("█ 11111 ►►►",  11111);
     let _this=this;
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-
+    console.log("█ sHTML ►►►",sHTML);
+    if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
+      sHTML='';
+    }
     let url = '/helpQuestions/updateHelpQuestions';//帮助问题修改
     let data = {
       id:this.b.id,
@@ -94,6 +98,7 @@ export class HelpUpdateComponent implements OnInit {
     }
     _this.abc=_this.operationService.updateproblem(url, data);
     let answer=_this.abc;
+    console.log("█ answer ►►►",  answer);
     if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" || answer=="帮助问题答案不能为空"){
       return;
     }else{

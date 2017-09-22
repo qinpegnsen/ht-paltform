@@ -2,68 +2,77 @@
 <div class="content-heading mb-lg">
   认证审核
 </div>
-<div class="panel panel-default">
+
+<div class="order panel mb">
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="aqeuryAllService($event)">
+    <div *ngIf="orderType!=100">
+      <ul class="order-guide list-unstyled clearfix bb">
+        <li class="pull-left" [class.cur-order]="state=='AUDIT'" (click)="aqeuryAll('AUDIT')" >待审核</li>
+        <li class="pull-left" [class.cur-order]="state=='PASS'" (click)="aqeuryAll('PASS')"  >审核通过</li>
+        <li class="pull-left" [class.cur-order]="state=='UNPASS'" (click)="aqeuryAll('UNPASS')" >审核驳回</li>
+      </ul>
+    </div>
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="aqeuryAll(state,$event)">
       <thead>
-      <tr>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="sort">电话</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="name">姓名</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="sort">身份证号</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center">
-          <rzhDefaultSorter by="email">有效期</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center">
-          <rzhDefaultSorter by="sort">照片</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="email">申请时间</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="email">审核</rzhDefaultSorter>
-        </th>
-      </tr>
+        <tr>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="sort">电话</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="name">姓名</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="sort">身份证号</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+           <rzhDefaultSorter by="email">有效期</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+           <rzhDefaultSorter by="sort">照片</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="email">申请时间</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="email">审核</rzhDefaultSorter>
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data"  class="text-center">
-        <td>{{count.custPhone}}</td>
-        <td>{{count.name}}</td>
-        <td>{{count.idcard}}</td>
-        <td>{{count.startTime}}--{{count.endTime}}</td>
-        <td>
+        <tr *ngFor="let count of dataTable.data"  class="text-center">
+          <td>{{count.custPhone}}</td>
+          <td>{{count.name}}</td>
+          <td>{{count.idcard}}</td>
+          <td>{{count.startTime}}--{{count.endTime}}</td>
+          <td>
           <img  [src]="count.idcardPic1"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          onerror="javascript:this.src='../../../assets/img/dummy.png'">
           <img  [src]="count.idcardPic2"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          onerror="javascript:this.src='../../../assets/img/dummy.png'">
           <img  [src]="count.idcardPic3"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'">
-         </td>
-        <td>{{count.createTime}}</td>
-        <td>
-          <button class="btn btn-info" (click)="access(count.id)"><i class="fa fa-check"></i></button>
-          <button class="btn btn-info" (click)="cancel(count.id)"><i class="fa fa-close"></i></button>
-        </td>
-      </tr>
+          onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          </td>
+          <td>{{count.createTime}}</td>
+          <td>
+          <button class="btn btn-danger" (click)="access(count.id)"><i class="fa fa-check"></i></button>
+          <button class="btn btn-green" (click)="cancel(count.id)"><i class="fa fa-close"></i></button>
+          </td>
+        </tr>
       </tbody>
       <tfoot>
-      <tr>
-        <td colspan="5">
-          <div class="col-sm-5">
+         <tr>
+            <td colspan="5">
+            <div class="col-sm-5">
             <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
-          </div>
-          <div class="col-sm-7">
+            </div>
+            <div class="col-sm-7">
             <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
-          </div>
-        </td>
-      </tr>
+            </div>
+            </td>
+          </tr>
       </tfoot>
     </table>
+
   </div>
 </div>
 <router-outlet></router-outlet>

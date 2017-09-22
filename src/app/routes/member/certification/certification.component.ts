@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-certification',
@@ -10,23 +11,28 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 })
 export class CertificationComponent implements OnInit {
   private data: Page = new Page();
+  private state:any;//审核状态
   constructor(private submit: SubmitService) { }
 
   ngOnInit() {
     let me = this;
-    this.aqeuryAllService()
+    this.aqeuryAll('AUDIT');
+
   }
 
   /**
    * 认证审核--查询分页
    */
-  aqeuryAllService(event?: PageEvent){
+  aqeuryAll(state,event?: PageEvent){
     let me = this, activePage = 1;
+    if(isNullOrUndefined(state)) state = 'AUDIT';
+      me.state = state;
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/custAuthInfo/query";
     let data={
       curPage: activePage,
       pageSize:10,
+      state: me.state,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
@@ -43,7 +49,7 @@ export class CertificationComponent implements OnInit {
       state: 'PASS',
     }
     this.submit.putRequest(url, data, false);
-    this.aqeuryAllService();
+    this.aqeuryAll(this.state);
   }
   /**
    * 认证未通过
@@ -55,6 +61,6 @@ export class CertificationComponent implements OnInit {
       state: 'UNPASS',
     }
     this.submit.putRequest(url, data, false);
-    this.aqeuryAllService();
+    this.aqeuryAll(this.state);
   }
 }

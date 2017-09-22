@@ -172,7 +172,6 @@ export class OperationService {
       async: false,
       success: (res) => {
         if (res.success) {
-          // console.log("█ res ►►►",  res);
           result = res.info;
         } else {
           let errorMsg;
@@ -209,6 +208,7 @@ export class OperationService {
           AppComponent.rzhAlt("success", res.info);
           result = res.info;
         } else {
+          result = res.info;
           swal(res.info,'','error');
         }
       },

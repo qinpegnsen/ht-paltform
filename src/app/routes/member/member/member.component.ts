@@ -4,6 +4,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {isUndefined} from "util";
+import {PatternService} from "../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-mumber',
@@ -26,7 +27,7 @@ export class MemberComponent implements OnInit {
 
   private detailsbutton:Object;//查看详情按钮
 
-  constructor(public service:SubmitService, private tools: RzhtoolsService) { }
+  constructor(public service:SubmitService, private tools: RzhtoolsService,private patterns:PatternService) { }
 
   ngOnInit() {
 

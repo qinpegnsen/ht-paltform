@@ -77,6 +77,9 @@ export class HelpAssortmentComponent implements OnInit {
   submit(res) {
       let me = this;
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+      if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
+        sHTML='';
+      }
       let url = '/helpQuestions/addHelpQuestions';//帮助分类添加
       let data = {
         kindId: me.kindId,
