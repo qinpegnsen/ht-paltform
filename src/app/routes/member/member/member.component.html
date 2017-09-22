@@ -28,8 +28,7 @@
       <div class="col-md-4">
         <div class="form-group clearfix">
           <div class="col-md-8 col-xs-6 pl0">
-            <input type="text" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone"
-                   (change)="queryMemberList()" placeholder="请输入要查询的会员的手机号">
+            <input type="text" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" placeholder="请输入要查询的会员的手机号">
           </div>
           <button type="button" title="搜索"
                   class="btn btn-primary bar-h3-btn mr ng-scope">
@@ -130,7 +129,7 @@
                   (click)="changeState('NORMAL',member.custCode,memberListdata.curPage)"></button>
       </tr>
       <tr *ngIf="member.isShow">
-        <td class="p0" colspan="11">
+        <td class="p0" colspan="12">
           <div class="bg-table special text-left">
             <span class="m10">头像:</span> <span>{{member.custAvatar}}</span>
           </div>

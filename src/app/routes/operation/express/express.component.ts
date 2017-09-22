@@ -49,7 +49,7 @@ export class ExpressComponent implements OnInit {
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
       curPage:activePage,
-      pageSize:8,
+      pageSize:10,
       queryKeywords:this.searchKey
     }
     let url='/basicExpress/pageQueryBasicExpress';
