@@ -8,6 +8,7 @@ import {CancelComponent} from "../cancel/cancel.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
+import {ActivatedRoute} from "@angular/router";
 defineLocale('cn', zhCn);
 
 @Component({
@@ -16,13 +17,17 @@ defineLocale('cn', zhCn);
   styleUrls: ['./all-orders.component.scss']
 })
 export class AllOrdersComponent implements OnInit {
+  private path: string;       //路由
+  public ordState: string;    //订单类型
   public curCancelOrderId:string;
   public curDeliverOrderId:string;
   public lookLogisticsOrderId:string;
   public goodsList: Page = new Page();
+  public custCode: string;
   bsConfig: Partial<BsDatepickerConfig>;
   @ViewChild('cancelBox') cancelBox: CancelComponent;
   constructor(private parentComp:OrdersComponent,
+              private route: ActivatedRoute,
               private submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
@@ -33,7 +38,36 @@ export class AllOrdersComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.parentComp.orderType = 1;
+    //获取当前路由
+    me.route.url.subscribe(urls => {
+      me.path = urls[0].path;
+      switch (me.path) {
+        case "all-orders":
+          me.parentComp.orderType = 1;
+          me.ordState = '';
+          break;
+        case "wait-for-pay":
+          me.parentComp.orderType = 2;
+          me.ordState = 'CR';
+          break;
+        case "wait-for-send":
+          me.parentComp.orderType = 3;
+          me.ordState = 'PAID';
+          break;
+        case "delivered":
+          me.parentComp.orderType = 4;
+          me.ordState = 'DELIVERY';
+          break;
+        case "finished":
+          me.parentComp.orderType = 5;
+          me.ordState = 'SUCCESS';
+          break;
+        case "canceled":
+          me.parentComp.orderType = 6;
+          me.ordState = 'CLOSE';
+          break;
+      }
+    });
     me.queryDatas(1)
   }
 
@@ -49,11 +83,12 @@ export class AllOrdersComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/goodsQuery/query';
+    let requestUrl = '/ord/queryOrd';
     let requestData = {
       curPage: activePage,
-      pageSize: 2,
-      sortColumns: '',
+      pageSize: 5,
+      custCode: _this.custCode,
+      ordState: _this.ordState
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
@@ -76,6 +111,7 @@ export class AllOrdersComponent implements OnInit {
   }
   cancelOrder(orderId){
     this.curCancelOrderId = orderId;
+    console.log("█ orderId ►►►",  orderId);
   }
   deliverOrder(orderId){
     this.curDeliverOrderId = orderId;

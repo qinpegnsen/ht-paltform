@@ -8,7 +8,9 @@ import {FileUploader} from "ng2-file-upload";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {AppComponent} from "../../../app.component";
 import {MaskService} from "../../../core/services/mask.service";
+import {Location} from "@angular/common";
 declare var $: any;
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-edit-detail',
@@ -74,6 +76,7 @@ export class EditDetailComponent implements OnInit {
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
+              private location: Location,
               private tools: RzhtoolsService) {
   }
 
@@ -185,6 +188,29 @@ export class EditDetailComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * 选择分类操作提示
+   */
+  selectKind(){
+    let me = this;
+    swal({
+        title: "操作警示",
+        text: "重新选择分类，本页面数据将不会保留",
+        type: "warning",
+        html: true,
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        cancelButtonText: "取消",
+        confirmButtonText: "确认",
+        closeOnConfirm: false
+      },
+      function(){
+        swal.close();
+        me.location.back()
+      });
+  }
+
 //添加物流模板
   addLogisticsModule(){
     let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));

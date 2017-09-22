@@ -7,7 +7,8 @@
       <dt class="col-xs-2">商品分类：</dt>
       <dd class="col-xs-10">
         <span>{{publishData.kindSelectName}}</span>
-        <button *ngIf="path!='edit'" class="btn btn-info btn-sm ml" routerLink="../step_one">选择分类</button>
+        <button *ngIf="path!='edit'" class="btn btn-info btn-sm ml" (click)="selectKind()">选择分类
+        </button>
       </dd>
     </dl>
     <dl class="clearfix">
