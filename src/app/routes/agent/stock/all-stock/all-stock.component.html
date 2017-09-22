@@ -4,7 +4,7 @@
     <span class="_title">下单时间：</span>
     <div class="_picker">
       <div class="input-group">
-        <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="agentAcct">
+        <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="agentTime">
         <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
       </div>
     </div>
@@ -48,7 +48,7 @@
       <div class="order-space"></div>
       <div class="order-head p b bb0">
         <span class="mr-xl">订单编号：{{goods.ordno}}</span>
-        <span class="mr-xl">下单时间：2017-05-16 17:11:52</span>
+        <span class="mr-xl">下单时间：{{goods.createTime}}</span>
         <span class="icon-screen-smartphone">来源：移动端</span>
         <!--<span class="fa fa-desktop"> 来源：PC</span>-->
       </div>

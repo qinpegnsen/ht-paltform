@@ -9,7 +9,7 @@ import {SubmitService} from '../../../core/forms/submit.service';
   styleUrls: ['./agent-ept.component.scss']
 })
 export class AgentEptComponent implements OnInit {
-  public goodsList: Page = new Page();
+  public goodsList;
   public flag: boolean=false;
   public orderNumber;
   public curCancelOrderId:string;
@@ -27,17 +27,15 @@ export class AgentEptComponent implements OnInit {
    */
   public queryDatas( event?: PageEvent) {
     this.flag=true;
-    console.log("█ 111111 ►►►",  111111);
-
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     }
-    let requestUrl = '/agentOrd/queryAgentOrdAdmin';
+    let requestUrl = '/agentOrd/loadByOrdno';
     let requestData = {
       ordno:this.orderNumber
     };
-    _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+    _this.goodsList = _this.submit.getData(requestUrl, requestData);
     console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 

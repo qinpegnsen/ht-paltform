@@ -9,8 +9,8 @@
       <div class="col-sm-1 pull-left text-center">
 <span class="ng-scope">
 <button type="button" title="搜索" id="toSearch"
-        class="btn btn-primary bar-h3-btn mr ng-scope">
-<em class="icon-magnifier fa-fw" (click)="queryDatas()"></em>搜索
+        class="btn btn-primary bar-h3-btn mr ng-scope" (click)="queryDatas()">
+<em class="icon-magnifier fa-fw" ></em>搜索
   </button>
   </span>
       </div>
@@ -26,14 +26,14 @@
   <li class="w10 pull-left text-center">交易状态</li>
   <li class="w10 pull-left text-center">交易操作</li>
 </ul>
-<table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
+<table class="table table-striped"
        (pageChange)="queryDatas(1,$event)" *ngIf="flag">
   <tbody>
-  <tr class="mt" *ngFor="let goods of dataTable.data;let i = index">
+  <tr class="mt">
     <td class="w100 p0 font12 bt0">
       <div class="order-space"></div>
       <div class="order-head p b bb0">
-        <span class="mr-xl">订单编号：{{goods.ordno}}</span>
+        <span class="mr-xl">订单编号：{{goodsList.ordno}}</span>
         <span class="mr-xl">下单时间：2017-05-16 17:11:52</span>
         <span class="icon-screen-smartphone">来源：移动端</span>
         <!--<span class="fa fa-desktop"> 来源：PC</span>-->

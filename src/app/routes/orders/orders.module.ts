@@ -15,6 +15,9 @@ import { CancelComponent } from './orders/cancel/cancel.component';
 import { LookLogisticsComponent } from './orders/look-logistics/look-logistics.component';
 import { AgentEptComponent } from './agent-ept/agent-ept.component';
 import { CancelsComponent } from './cancels/cancels.component';
+import { OrderReviewComponent } from './order-review/order-review.component';
+import { ToAuditComponent } from './order-review/to-audit/to-audit.component';
+import { AllOrderComponent } from './order-review/all-order/all-order.component';
 
 
 const routes: Routes = [
@@ -33,6 +36,11 @@ const routes: Routes = [
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
+  {path: 'order-review',component:OrderReviewComponent,children:[
+    {path: '', redirectTo: 'all-order'},
+    {path: 'all-order', component: AllOrderComponent},
+    {path: 'to-audit', component: ToAuditComponent},
+  ]}
 ]
 
 @NgModule({
@@ -56,7 +64,10 @@ const routes: Routes = [
     LookLogisticsComponent,
     DeliverComponent,
     AgentEptComponent,
-    CancelsComponent
+    CancelsComponent,
+    OrderReviewComponent,
+    ToAuditComponent,
+    AllOrderComponent
   ],
   providers: [
     OrdersComponent,
