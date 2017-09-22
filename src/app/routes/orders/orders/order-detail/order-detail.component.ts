@@ -15,7 +15,7 @@ export class OrderDetailComponent implements OnInit {
               private submit: SubmitService) {
   }
 
-  public orderStep = 0;
+  public orderStep = 1;
   public orderStates:any;
   public logisticsInfo:any;
 
