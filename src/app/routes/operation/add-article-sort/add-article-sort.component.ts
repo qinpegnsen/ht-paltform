@@ -120,9 +120,8 @@ export class AddArticleSortComponent implements OnInit {
         summary:obj.summary,
         acParentId:this.acParentId
       }
-      // this.AddArticleSortService.updateClass(url,data);
       this.service.putRequest(url,data);
-      this.ArticleSortComponent.getChild(this.acParentId)
+      this.ArticleSortComponent.queryArticSortleList()
 
     }
     this.router.navigate(['/main/operation/article/sort']);

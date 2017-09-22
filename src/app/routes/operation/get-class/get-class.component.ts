@@ -74,7 +74,7 @@ export class GetClassComponent implements OnInit {
    */
   getselectMenu(menuCode?){
     let menuList;
-    let getmenuCode=menuCode?menuCode:null;
+    let getmenuCode=menuCode?menuCode:0;
     this.ajax.get({
       url: '/articleClass/queryArticleClassByAcParentId',
       async:false,

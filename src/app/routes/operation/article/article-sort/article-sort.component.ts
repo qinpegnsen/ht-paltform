@@ -58,7 +58,6 @@ export class ArticleSortComponent implements OnInit {
    * @param event 点击页码时候的事件对象
    */
   public queryArticSortleList(event?:PageEvent) {
-
     let activePage = 1;
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
@@ -66,7 +65,7 @@ export class ArticleSortComponent implements OnInit {
       pageSize:10,
       acName:this.searchKey
     }
-    let url= "/articleClass/queryArticleClassPage";
+    let url= "/articleClass/queryArticleClass";
     let result=new Page(this.service.getData(url,data));
     this.articleSortListdata= result;
   }
@@ -161,7 +160,7 @@ export class ArticleSortComponent implements OnInit {
       pageSize:10,
       acParentId:transId
     }
-    let url= "/articleClass/queryArticleClassPage";
+    let url= "/articleClass/queryArticleClass";
     let result = new Page(this.service.getData(url,data));
     this.articleSortListdata= result;
   }

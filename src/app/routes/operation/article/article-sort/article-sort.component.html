@@ -61,8 +61,8 @@
         <td>
           <app-buttons [config]="updatebutton" routerLink="addSort"
                        [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
-          <app-buttons [config]="childbutton" routerLink="addSort"
-                       [queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
+          <!--<app-buttons [config]="childbutton" routerLink="addSort"-->
+                       <!--[queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>-->
           <app-buttons [config]="deletebutton" (click)="deleteSort(article.id,article.acParentId)"></app-buttons>
           <span (click)="queryChildSortList('',article.id,article.acName,false)" class="btn btn-default btn-xs"
                 *ngIf="article.haveChildren">
