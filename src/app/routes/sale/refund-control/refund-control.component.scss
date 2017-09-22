@@ -23,4 +23,14 @@
 .buyimg{
   width: 30px;
   height: 30px;
+  cursor: pointer;
+}
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 110px;
+  height: auto;
+  display: none;
+  z-index: 1000;
 }

@@ -15,6 +15,7 @@ export class RefundControlComponent implements OnInit {
   private goodsName:any;
   private seebutton:object;//查看按钮
   private handlebutton:object;//处理按钮
+  private redbutton:object;//处理过的按钮
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
 
   constructor(private submit:SubmitService,private router:Router) { }
@@ -27,10 +28,11 @@ export class RefundControlComponent implements OnInit {
       text:'查看'
     };
     me.handlebutton = {
-       title: "设置",
+       title: "处理",
        type: "set",
-       text:'设置'
+       text:'处理'
     };
+
 
     me.router.events
       .subscribe((event) => {
@@ -83,7 +85,7 @@ export class RefundControlComponent implements OnInit {
   showImg(event, i){
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
-    i.style.left =(event.clientX+130) + 'px';
+    i.style.left =(event.clientX+30) + 'px';
     // console.log("█ i.style.top = 100 ►►►",  i.style.top);
   }
 

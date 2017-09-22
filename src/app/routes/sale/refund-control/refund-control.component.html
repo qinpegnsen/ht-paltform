@@ -10,7 +10,7 @@
       <ul>
         <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。 如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
         <li>平台也可以不经过商家处理，直接处理退款申请，退款给买家。</li>
-        <li>当 处理 按钮变为灰色时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
+        <li>当  <span class="btn btn-danger btn-outline btn-xs">处理</span>按钮是红色时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
       </ul>
     </div>
 
@@ -90,32 +90,35 @@
         <tr *ngIf="count.isShow">
           <td class="p0" colspan="11">
             <div class="bg-table special text-left">
-              <span class="m20">申请原因:</span> <span>{{count.createTime}}</span>
+              <span class="">申请原因:</span> <span>{{count.createTime}}</span>
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">申请图片:</span> <span>{{count.createTime}}</span>
+              <span class="">申请图片:</span> <span>{{count.createTime}}</span>
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">订单编号:</span> <span>{{count.createTime}}</span>
+              <span class="">订单编号:</span> <span>{{count.createTime}}</span>
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">涉及商品:</span> <span> </span>
+              <span class="">涉及商品:</span> <span> </span>
             </div>
-            <div class="bg-table special text-left">
-              <span class="m20 shopimg">商品图片:</span>
-              <span></span>
+            <div class="bg-table special text-left h40">
+              <span class=" shopimg pull-left">商品图片:</span>
+              <span class="">
+                 <img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </span>
               <!--<img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
               <!--<img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
 
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">商品id:</span> <span></span>
+              <span class="">商品id:</span> <span></span>
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">商品名称:</span> <span></span>
+              <span class="">商品名称:</span> <span></span>
             </div>
             <div class="bg-table special text-left">
-              <span class="m20">商品处理备注:</span> <span></span>
+              <span class="">商品处理备注:</span> <span></span>
             </div>
           </td>
         </tr>

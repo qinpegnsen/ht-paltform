@@ -26,9 +26,9 @@ export class RefundVerifyComponent implements OnInit {
       text:'查看'
     };
     me.handlebutton = {
-      title: "设置",
+      title: "处理",
       type: "set",
-      text:'设置'
+      text:'处理'
     };
     me.router.events
       .subscribe((event) => {
