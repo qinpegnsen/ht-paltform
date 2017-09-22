@@ -7,17 +7,23 @@
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop cancel-con font12 w100">
-      <dl
-        class="bb m0 clearfix"><dt class="col-xs-3">订单名称：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+      <dl class="bb m0 clearfix"><dt class="col-xs-3">订单号：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+        ?orderId:201705468524444}}</dd></dl>
+      <dl class="bb m0 clearfix"><dt class="col-xs-3">支付方式：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+        ?orderId:201705468524444}}</dd></dl>
+      <dl class="bb m0 clearfix"><dt class="col-xs-3">支付金额：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+        ?orderId:201705468524444}}</dd></dl>
+      <dl class="bb m0 clearfix"><dt class="col-xs-3">收款人：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
+        ?orderId:201705468524444}}</dd></dl>
+      <dl class="bb m0 clearfix"><dt class="col-xs-3">收款人开户行：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
         ?orderId:201705468524444}}</dd></dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">订单编号：</dt>
+        <dt class="col-xs-3">关闭原因：</dt>
         <dd class="col-xs-9">
           <fieldset>
-            <div class="form-group">
-              <input class="form-control" required name="leader" [(ngModel)]="ordnoA"
-                     #ordno="ngModel" type="text"/>
-            </div>
+            <select class="form-control" name="goodsAudit" [(ngModel)]="query" (change)="queryDatas(1)">
+              <option *ngFor="let item of goodsAudits" [value]="item.id">{{item.info}}</option>
+            </select>
           </fieldset>
         </dd>
       </dl>

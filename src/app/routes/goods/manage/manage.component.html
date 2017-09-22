@@ -34,7 +34,7 @@
         <div class="col-md-8 col-xs-6 pl0">
           <select class="form-control" name="goodsAudit" [(ngModel)]="query.goodsAudit" (change)="queryDatas(1)">
             <option value="">全部</option>
-            <option *ngFor="let item of goodsAudits" [value]="item.key">{{item.val}}</option>
+            <option *ngFor="let item of goodsAudits" [value]="item.id">{{item.info}}</option>
           </select>
         </div>
       </div>

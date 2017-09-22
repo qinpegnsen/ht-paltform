@@ -56,7 +56,7 @@ export class AllOrderComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/agentOrd/queryAgentOrdAdmin';
+    let requestUrl = '/agentOrd/queryAgentOrdReturn';
     //格式化时间格式
     let dateStr = '';
     if (this.agentTime) {
@@ -66,11 +66,6 @@ export class AllOrderComponent implements OnInit {
     let requestData = {
       curPage: activePage,
       pageSize: 2,
-      sortColumns: '',
-      agentAcct: _this.agentAcct,
-      goodsName: _this.agentAcct,
-      ordno: _this.agentAcct,
-      dateStr: dateStr
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
     console.log("█ _this.goodsList ►►►",  _this.goodsList);

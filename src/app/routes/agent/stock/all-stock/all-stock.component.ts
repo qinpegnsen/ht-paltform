@@ -74,7 +74,7 @@ export class AllStockComponent implements OnInit {
       agentAcct: _this.agentAcct,
       goodsName: _this.agentAcct,
       ordno: _this.agentAcct,
-      dateStr: dateStr
+      dateStr: dateStr,
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
     console.log("█ _this.goodsList ►►►",  _this.goodsList);

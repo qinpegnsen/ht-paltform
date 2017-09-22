@@ -21,7 +21,6 @@ export class AgentpersonService {
       data: data,
       async:false,
       success: (data) => {
-        console.log("█ data ►►►", data );
         if (!isNull(data)) {
           result= new Page(data.data);
         }

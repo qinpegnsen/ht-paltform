@@ -190,7 +190,7 @@ const orders = {
     },
     {
       text: '代理商订单',
-      icon: 'fa fa-smile-o',
+      icon: 'fa fa-file-text',
       alert: '▼',
       submenu: [
         {
