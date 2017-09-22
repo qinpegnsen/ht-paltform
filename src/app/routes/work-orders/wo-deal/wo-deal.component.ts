@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
@@ -7,18 +7,15 @@ import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {ActivatedRoute} from "@angular/router";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 defineLocale('cn', zhCn);
 
 @Component({
-  selector: 'app-wo-assign',
-  templateUrl: './wo-assign.component.html',
-  styleUrls: ['./wo-assign.component.scss']
+  selector: 'app-wo-deal',
+  templateUrl: './wo-deal.component.html',
+  styleUrls: ['./wo-deal.component.scss']
 })
-export class WoAssignComponent implements OnInit {
-  private path: string;
-  private assign: boolean = false;
+export class WoDealComponent implements OnInit {
   private woList: Page = new Page();
   private woTypeList:any;     //工单类型列表
   private detail = [];
@@ -26,13 +23,13 @@ export class WoAssignComponent implements OnInit {
     wono: null,
     ordno: null,
     ordType: '',
-    stateEnum: 'NO',
+    stateEnum: 'DEAL',
     pageSize: 3,
     sortColumns: null
   } //搜索条件
+
   bsConfig: Partial<BsDatepickerConfig>;
   constructor(private parentComp: WoManageComponent,
-              private route: ActivatedRoute,
               private tools: RzhtoolsService,
               private submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
@@ -40,22 +37,13 @@ export class WoAssignComponent implements OnInit {
       containerClass: 'theme-blue',
       rangeInputFormat: 'YYYY/MM/DD'
     });
-    this.parentComp.woType = 2;
+    this.parentComp.woType = 5
   }
 
   ngOnInit() {
     let me = this;
     me.woTypeList = me.tools.getEnumDataList(1301);//工单类型列表
     me.queryDatas(1);
-    //获取当前路由
-    me.route.url.subscribe(urls => {
-      me.path = urls[0].path;
-      switch (me.path) {
-        case "assign":
-          me.assign = true;
-          break;
-      }
-    });
   }
 
   /**

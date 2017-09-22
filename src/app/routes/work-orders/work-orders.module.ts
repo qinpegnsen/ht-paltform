@@ -6,9 +6,10 @@ import {SharedModule} from "../../shared/shared.module";
 import {WoAllComponent} from "./wo-all/wo-all.component";
 import {WoAssignedComponent} from "./wo-assigned/wo-assigned.component";
 import {WoMyComponent} from "./wo-my/wo-my.component";
-import {WoDisposedComponent} from "./wo-disposed/wo-disposed.component";
+import {WoDealComponent} from "./wo-deal/wo-deal.component";
 import {WoFinishedComponent} from "./wo-finished/wo-finished.component";
 import {WoAbnormalComponent} from "./wo-abnormal/wo-abnormal.component";
+import {WoService} from "./wo.service";
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
     {path: 'wo-assign', component: WoAssignComponent},
     {path: 'wo-assigned', component: WoAssignedComponent},
     {path: 'wo-my', component: WoMyComponent},
-    {path: 'wo-disposed', component: WoDisposedComponent},
+    {path: 'wo-deal', component: WoDealComponent},
     {path: 'wo-finished', component: WoFinishedComponent},
     {path: 'wo-abnormal', component: WoAbnormalComponent},
   ]
@@ -39,11 +40,11 @@ const routes: Routes = [
     WoAllComponent,
     WoAssignedComponent,
     WoMyComponent,
-    WoDisposedComponent,
+    WoDealComponent,
     WoFinishedComponent,
     WoAbnormalComponent
   ],
-  providers: [WoManageComponent]
+  providers: [WoManageComponent,WoService]
 })
 export class WorkOrdersModule {
 }

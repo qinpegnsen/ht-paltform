@@ -20,7 +20,8 @@ export class WoManageComponent implements OnInit {
       locale: 'cn',
       // minDate: this.minDate.getDate() - 1,
       // maxDate: this.maxDate.getDate() + 7,
-      containerClass: 'theme-blue'
+      containerClass: 'theme-blue',
+      rangeInputFormat: 'YYYY/MM/DD'
     });
   }
 

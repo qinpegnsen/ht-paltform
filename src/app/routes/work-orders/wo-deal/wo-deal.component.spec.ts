@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WoDisposedComponent } from './wo-disposed.component';
+import { WoDealComponent } from './wo-deal.component';
 
-describe('WoDisposedComponent', () => {
-  let component: WoDisposedComponent;
-  let fixture: ComponentFixture<WoDisposedComponent>;
+describe('WoDealComponent', () => {
+  let component: WoDealComponent;
+  let fixture: ComponentFixture<WoDealComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WoDisposedComponent ]
+      declarations: [ WoDealComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WoDisposedComponent);
+    fixture = TestBed.createComponent(WoDealComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

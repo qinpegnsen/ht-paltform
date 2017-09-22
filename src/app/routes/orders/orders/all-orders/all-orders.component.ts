@@ -26,7 +26,8 @@ export class AllOrdersComponent implements OnInit {
               private submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
-      containerClass: 'theme-blue'
+      containerClass: 'theme-blue',
+      rangeInputFormat: 'YYYY/MM/DD'
     });
   }
 

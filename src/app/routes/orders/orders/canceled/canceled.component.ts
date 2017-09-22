@@ -17,7 +17,8 @@ export class CanceledComponent implements OnInit {
 
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
-      containerClass: 'theme-blue'
+      containerClass: 'theme-blue',
+      rangeInputFormat: 'YYYY/MM/DD'
     });
   }
 

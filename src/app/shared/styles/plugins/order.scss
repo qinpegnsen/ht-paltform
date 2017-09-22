@@ -115,7 +115,7 @@ $buyer-info-box-width: 200px;
 .f-bold{
   font-weight: bold;
 }
-.f-light{
+.f-normal{
   font-weight: normal;
 }
 .bs-datepicker{
@@ -124,16 +124,30 @@ $buyer-info-box-width: 200px;
 .place-time{
   width: 310px;
   display: inline-block;
+  ._title{
+    width: 72px;
+    line-height: 36px;
+    text-align: right;
+    display: inline-block;
+  }
+  ._picker{
+    width: 230px;
+    float: right;
+  }
 }
-.place-time ._title{
-  width: 72px;
-  line-height: 36px;
-  text-align: right;
+.search-group{
+  width: 240px;
   display: inline-block;
-}
-.place-time ._picker{
-  width: 230px;
-  float: right;
+  .search-title{
+    width: 30%;
+    line-height: 36px;
+    text-align: right;
+    display: inline-block;
+  }
+  .search-main{
+    width: 70%;
+    float: right;
+  }
 }
 .search-term{
   width: 360px;
@@ -142,4 +156,28 @@ $buyer-info-box-width: 200px;
 }
 .place-time ._picker input{
   z-index: 0;
+}
+.detail {
+  padding: 0;
+  background-color: #e8ecf1;
+  .detail-row {
+    padding: 0 10px;
+    line-height: 24px;
+    margin-bottom: 0;
+    text-align: left;
+    .name, .value {
+      font-weight: normal;
+      display: inline-block;
+    }
+  }
+  .detail-row:hover {
+    background-color: #e3f3ff;
+  }
+}
+.wo{
+  .tag{
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
 }

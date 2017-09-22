@@ -16,7 +16,8 @@ export class WaitForPayComponent implements OnInit {
   constructor(private parentComp:OrdersComponent) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
-      containerClass: 'theme-blue'
+      containerClass: 'theme-blue',
+      rangeInputFormat: 'YYYY/MM/DD'
     });
   }
 
