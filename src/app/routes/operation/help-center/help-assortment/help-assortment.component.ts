@@ -85,7 +85,7 @@ export class HelpAssortmentComponent implements OnInit {
         sort: res.sort,
       }
       let answer=this.operationService.addproblem(url,data);
-      if(answer=='帮助问题名称已存在' || answer=='排序不能为空' ||answer=='帮助问题答案不能为空' || answer=='问题不能为空'){
+      if(answer=='帮助问题名称已存在' || answer=='排序不能为空' ||answer=='帮助问题答案不能为空' || answer=='问题不能为空' ||answer=='答案不能为空'){
         return;
       }else{
         this.qeuryAllService();

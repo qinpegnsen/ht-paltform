@@ -20,7 +20,7 @@
           <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
           <div class="col-xs-5">
             <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                   (change)="search($event)" placeholder="关键字">
+                   (change)="search($event)" placeholder="请输入退款单号进行搜索">
           </div>
           <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
@@ -40,7 +40,7 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="sort"></rzhDefaultSorter>
         </th>
-        <th class="w20 pull-left">
+        <th class="w20 text-center">
           <rzhDefaultSorter>退单单号</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
@@ -72,8 +72,8 @@
 
         <tr class="text-center">
           <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
-          <td class="pull-left">{{count.goodsCode}}111111111111111111111111</td>
-          <td>{{count.createTime}}</td>
+          <td>{{count.goodsCode}}</td>
+          <td class="gold-star">{{count.createTime}}</td>
           <td>{{count.createTime}}</td>
           <td>{{count.goodsCode}}</td>
           <td>{{count.goodsName}} </td>
@@ -107,9 +107,6 @@
                  <img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
-              <!--<img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
-              <!--<img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
-
             </div>
             <div class="bg-table special text-left">
               <span class="">商品id:</span> <span></span>

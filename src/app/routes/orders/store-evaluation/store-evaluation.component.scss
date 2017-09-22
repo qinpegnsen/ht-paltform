@@ -4,19 +4,8 @@
   margin: auto;
   margin-top: 15px;
 }
-.bigImg{
-  position: fixed;
-  top:0;
-  left: 0;
-  width: 110px;
-  height: auto;
-  display: none;
-  z-index: 1000;
-}
-.buyimg{
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+.search{
+  margin: auto;
 }
 .special{
   padding-left: 10px;
@@ -26,4 +15,20 @@
 }
 .p0:hover{
   background: #F2F2F2;
+}
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 120px;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}
+.fa-star{
+  color: red;
+}
+.buyimg{
+  cursor: pointer;
+  width: 40px;height: 40px;
 }

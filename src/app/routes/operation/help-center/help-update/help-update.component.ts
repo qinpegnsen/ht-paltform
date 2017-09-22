@@ -84,6 +84,7 @@ export class HelpUpdateComponent implements OnInit {
   submit(res){
     let _this=this;
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+
     let url = '/helpQuestions/updateHelpQuestions';//帮助问题修改
     let data = {
       id:this.b.id,
@@ -93,7 +94,7 @@ export class HelpUpdateComponent implements OnInit {
     }
     _this.abc=_this.operationService.updateproblem(url, data);
     let answer=_this.abc;
-    if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" ||answer=="帮助问题答案不能为空"){
+    if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" || answer=="帮助问题答案不能为空"){
       return;
     }else{
       this.qeuryAll();

@@ -7,6 +7,7 @@ import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {MeasureComponent} from "../measure/measure.component";
 import {cli} from "webdriver-manager/built/lib/webdriver";
+import {PatternService} from "../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-adddata',
@@ -34,7 +35,8 @@ export class AdddataComponent implements OnInit {
 
   constructor(public settings: SettingsService, private router: Router, private adddataService: AdddataService,
               private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent,
-              private sub: SubmitService, private submitt: SubmitService, private measureComponent: MeasureComponent,) {
+              private sub: SubmitService, private submitt: SubmitService, private measureComponent: MeasureComponent,
+              private patterns:PatternService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 

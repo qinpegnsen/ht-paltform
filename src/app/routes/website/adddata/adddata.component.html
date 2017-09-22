@@ -203,13 +203,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
-              <input class="form-control num" type="number" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel"
+              <input class="form-control num" type="number" required name="sort" [pattern]="patterns.positive" [(ngModel)]="updataDataa.sort" #sort="ngModel"
                      placeholder="请填写排序"/>
             </div>
           </div>
           <div [hidden]="sort.valid || sort.pristine"
                class="col-sm-9 pull-right text-danger">
-            请填写排序
+            请填写整数
           </div>
         </fieldset>
 
@@ -253,15 +253,14 @@
             <label class="col-sm-3 control-label"><i>*</i>排序</label>
             <div class="col-sm-8">
               <input class="form-control num" type="number" required name="sort" [(ngModel)]="adddata.sort"  #sort="ngModel"
-                     placeholder="请填写排序" />
+                     [pattern]="patterns.positive"     placeholder="请填写排序" />
             </div>
           </div>
           <div [hidden]="sort.valid || sort.pristine"
                class="col-sm-9 pull-right text-danger">
-            请填写排序
+            请填写整数
           </div>
         </fieldset>
-
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">

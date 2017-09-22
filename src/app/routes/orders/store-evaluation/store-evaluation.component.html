@@ -1,0 +1,99 @@
+
+<div class="content-heading mb-lg">
+  店家评价
+</div>
+
+<div class="panel panel-default">
+  <!--操作提示-->
+  <div class="panel mb p ts">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>买家可在订单完成后对店铺进行动态评价操作</li>
+      <li>统计信息将显示在对应的店铺页面</li>
+    </ul>
+  </div>
+
+  <div class="panel mb w98 search">
+    <div class="panel-body p ng-scope" ng-if="search">
+      <div class="form-group mb0">
+        <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
+        <div class="col-xs-5">
+          <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 (change)="search($event)" placeholder="请输入评价人关键字进行搜索">
+        </div>
+        <div class="col-sm-1 pull-left text-center">
+        <span class="ng-scope">
+           <button type="button" title="搜索" id="toSearch" (click)="search($event)"
+                   class="btn btn-primary bar-h3-btn mr ng-scope">
+             <em class="icon-magnifier fa-fw"></em>搜索
+           </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAll(1,$event)">
+      <thead>
+      <tr>
+
+        <th class="w10 text-center">
+          <rzhDefaultSorter>被评商家</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter>评价人</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter>描述相符</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter>服务态度</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter>发货速度</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter>评价时间</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter>订单编号</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter>管理操作</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <!--<ng-container >-->
+
+        <tr class="text-center" *ngFor="let count of dataTable.data; let i = index">
+          <td>{{count.goodsName}}</td>
+          <td>{{count.createTime}}</td>
+          <td><span [innerHtml]="5 | stars"></span></td>
+          <td><span [innerHtml]="5 | stars"></span></td>
+          <td><span [innerHtml]="5 | stars"></span></td>
+          <td> {{count.createTime}}</td>
+          <td>{{count.goodsCode}}</td>
+          <td>
+            <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
+          </td>
+        </tr>
+      <!--</ng-container>-->
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="8">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+

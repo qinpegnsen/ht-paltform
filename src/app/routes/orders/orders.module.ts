@@ -18,6 +18,7 @@ import { CancelsComponent } from './cancels/cancels.component';
 import { OrderReviewComponent } from './order-review/order-review.component';
 import { ToAuditComponent } from './order-review/to-audit/to-audit.component';
 import { AllOrderComponent } from './order-review/all-order/all-order.component';
+import { StoreEvaluationComponent } from './store-evaluation/store-evaluation.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
+  {path: 'store', component: StoreEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'order-review',component:OrderReviewComponent,children:[
     {path: '', redirectTo: 'all-order'},
@@ -67,12 +69,15 @@ const routes: Routes = [
     CancelsComponent,
     OrderReviewComponent,
     ToAuditComponent,
-    AllOrderComponent
+    AllOrderComponent,
+    CancelsComponent,
+    StoreEvaluationComponent
   ],
   providers: [
     OrdersComponent,
     BuyerEvaluationComponent,
-    AgentEptComponent
+    AgentEptComponent,
+    StoreEvaluationComponent
   ]
 })
 export class OrdersModule { }

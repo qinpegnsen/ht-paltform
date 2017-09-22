@@ -19,7 +19,7 @@
           <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
           <div class="col-xs-5">
             <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                   (change)="search($event)" placeholder="关键字">
+                   (change)="search($event)" placeholder="请输入退款单号进行搜索">
           </div>
           <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
@@ -51,7 +51,7 @@
           <th class="w10 text-center">
             <rzhDefaultSorter>申请时间</rzhDefaultSorter>
           </th>
-          <th class="w15 text-center">
+          <th class="w13 text-center">
             <rzhDefaultSorter>涉及商品</rzhDefaultSorter>
           </th>
           <th class="w5 text-center">
@@ -60,7 +60,7 @@
           <th class="w5 text-center">
             <rzhDefaultSorter>平台处理</rzhDefaultSorter>
           </th>
-          <th class="w5 text-center">
+          <th class="w8 text-center">
             <rzhDefaultSorter>买家</rzhDefaultSorter>
           </th>
           <th class="w10 text-center">
@@ -78,8 +78,8 @@
           <tr class="text-center">
             <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
             <td>{{count.createTime}}</td>
-            <td>{{count.createTime}}</td>
-            <td>{{count.createTime}}</td>
+            <td >{{count.createTime}}</td>
+            <td class="gold-star">{{count.createTime}}</td>
             <td>{{count.goodsCode}}</td>
             <td>{{count.goodsName}} </td>
             <td>{{count.goodsName}} </td>
@@ -97,32 +97,34 @@
           <tr *ngIf="count.isShow">
             <td class="p0" colspan="11">
               <div class="bg-table special text-left">
-                <span class="m20">申请原因:</span> <span>{{count.createTime}}</span>
+                <span class="">申请原因:</span> <span>{{count.createTime}}</span>
               </div>
               <div class="bg-table special text-left">
-                <span class="m20">申请图片:</span> <span>{{count.createTime}}</span>
+                <span class="">申请图片:</span> <span>{{count.createTime}}</span>
+              </div>
+              <div class="bg-table special text-left h40">
+                <span class="pull-left">商品图片:</span>
+                <span>
+                   <img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </span>
               </div>
               <div class="bg-table special text-left">
-                <span class="m20">商品图片:</span> <span>{{count.createTime}}</span>
+                <span class="">商品ID:</span> <span> </span>
+              </div>
+              <div class="bg-table special text-left ">
+                <span class="">商家处理备注:</span>
+                <span>
+                </span>
               </div>
               <div class="bg-table special text-left">
-                <span class="m20">商品ID:</span> <span> </span>
+                <span class="">商家处理时间:</span> <span></span>
               </div>
               <div class="bg-table special text-left">
-                <span class="m20 shopimg">商家处理备注:</span>
-                <span></span>
-                <!--<img [src]="count.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
-                <!--<img [src]="count.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">-->
-
+                <span class="">买家ID:</span> <span></span>
               </div>
               <div class="bg-table special text-left">
-                <span class="m20">商家处理时间:</span> <span></span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="m20">买家ID:</span> <span></span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="m20">商家ID:</span> <span></span>
+                <span class="">商家ID:</span> <span></span>
               </div>
             </td>
           </tr>

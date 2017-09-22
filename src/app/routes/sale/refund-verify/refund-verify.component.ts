@@ -79,8 +79,8 @@ export class RefundVerifyComponent implements OnInit {
    */
   showImg(event, i){
     i.style.display = 'block';
-    i.style.top = event.clientY + 'px';
-    i.style.left =(event.clientX+130) + 'px';
+    i.style.top = (event.clientY+20) + 'px';
+    i.style.left =(event.clientX+30) + 'px';
     // console.log("█ i.style.top = 100 ►►►",  i.style.top);
   }
 
