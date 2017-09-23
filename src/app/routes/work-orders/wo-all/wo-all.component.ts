@@ -9,6 +9,7 @@ import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {WoService} from "../wo.service";
+import {ActivatedRoute} from "@angular/router";
 defineLocale('cn', zhCn);
 
 @Component({
@@ -18,10 +19,12 @@ defineLocale('cn', zhCn);
 })
 export class WoAllComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
+  public path: string;//当前路由
   private woList: Page = new Page();
   private detail = [];
   private woStateList: any; // 工单状态枚举列表
   private woTypeList: any;  // 工单类型枚举列表
+  public assign:boolean;
   private search = {
     wono: null,
     ordno: null,
@@ -33,6 +36,7 @@ export class WoAllComponent implements OnInit {
 
   constructor(private parentComp: WoManageComponent,
               private tools: RzhtoolsService,
+              private route: ActivatedRoute,
               private wo: WoService,
               private submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
@@ -40,7 +44,6 @@ export class WoAllComponent implements OnInit {
       containerClass: 'theme-blue',
       rangeInputFormat: 'YYYY/MM/DD'
     });
-    this.parentComp.woType = 1
   }
 
   ngOnInit() {
@@ -48,14 +51,51 @@ export class WoAllComponent implements OnInit {
     me.queryDatas(1);
     me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
+
+    //获取当前路由
+    me.route.url.subscribe(urls => {
+      me.path = urls[0].path;
+      switch (me.path) {
+        case "wo-all":
+          me.parentComp.woType = '';
+          me.search.stateEnum = '';
+          break;
+        case "wo-assign":
+          me.parentComp.woType = 'NO';
+          me.search.stateEnum = 'NO';
+          me.assign = true;
+          break;
+        case "wo-assigned":
+          me.parentComp.woType = 'ASSIGN';
+          me.search.stateEnum = 'ASSIGN';
+          break;
+        case "wo-my":
+          me.parentComp.woType = 'NA';
+          me.search.stateEnum = 'NA';
+          break;
+        case "wo-deal":
+          me.parentComp.woType = 'DEAL';
+          me.search.stateEnum = 'DEAL';
+          break;
+        case "wo-finished":
+          me.parentComp.woType = 'DONE';
+          me.search.stateEnum = 'DONE';
+          break;
+        case "wo-abnormal":
+          me.parentComp.woType = 'END';
+          me.search.stateEnum = 'END';
+          break;
+      }
+    });
+    me.queryDatas(1)
   }
 
   /**
    * 修改查询条件时，将另外一个条件置为空
    * @param condition
    */
-  changeCondition(condition){
-    if(condition == 'wono') this.search.ordno = null;
+  changeCondition(condition) {
+    if (condition == 'wono') this.search.ordno = null;
     else this.search.wono = null;
   }
 
@@ -63,9 +103,9 @@ export class WoAllComponent implements OnInit {
    * 平台接单
    * @param wono
    */
-  acceptNa(wono,page){
+  acceptNa(wono, page) {
     this.wo.acceptNa(wono);
-    if(isNullOrUndefined(page)) page = 1;
+    if (isNullOrUndefined(page)) page = 1;
     this.queryDatas(page);
   }
 

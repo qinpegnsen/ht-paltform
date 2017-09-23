@@ -1,17 +1,16 @@
 <div class="order panel mb">
   <div class="panel-body">
-    <div *ngIf="orderType!=100">
+    <div *ngIf="orderType!='detail'">
       <ul class="order-guide list-unstyled clearfix bb">
-        <li class="pull-left" [class.cur-order]="orderType==1" routerLink="all-orders">所有订单</li>
-        <li class="pull-left" [class.cur-order]="orderType==2" routerLink="wait-for-pay">待支付</li>
-        <li class="pull-left" [class.cur-order]="orderType==3" routerLink="wait-for-send">待发货</li>
-        <li class="pull-left" [class.cur-order]="orderType==4" routerLink="delivered">已发货</li>
-        <li class="pull-left" [class.cur-order]="orderType==5" routerLink="finished">已完成</li>
-        <li class="pull-left" [class.cur-order]="orderType==6" routerLink="canceled">已取消</li>
+        <li class="pull-left" [class.cur-order]="orderType==''" routerLink="all-orders">所有订单</li>
+        <li class="pull-left" [class.cur-order]="orderType=='PREPARE'" routerLink="wait-for-send">待发货</li>
+        <li class="pull-left" [class.cur-order]="orderType=='DELIVERY'" routerLink="delivery">已发货</li>
+        <li class="pull-left" [class.cur-order]="orderType=='SUCCESS'" routerLink="finished">已完成</li>
+        <li class="pull-left" [class.cur-order]="orderType=='CLOSE'" routerLink="canceled">已取消</li>
       </ul>
     </div>
 
-    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
+    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType=='detail'">
       <li class="pull-left" routerLink="all-orders">订单列表</li>
       <li class="pull-left cur-order">商品详情</li>
     </ul>

@@ -6,7 +6,7 @@ import {Component, OnInit} from "@angular/core";
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  public orderType: number = 1;
+  public orderType: string = '';
 
   constructor() {
   }

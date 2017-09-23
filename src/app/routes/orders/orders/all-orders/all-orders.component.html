@@ -1,4 +1,3 @@
-
 <!--查询 start-->
 <div class="row clearfix p text-right">
   <div class="place-time clearfix mb">
@@ -58,62 +57,105 @@
         <tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">
           <td class="w40 p text-left position-relative bb">
             <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
-                                                         onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+                                                         onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                                                         alt=""></span>
             <div class="goods-lg-info">
               <p class="mb0 font13 omg2 two-row mb-sm">
                 <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
               </p>
-             <!-- <p class="mb0 one-row omg" *ngFor="let attr of item.goodsBaseSaList">
-                <span class="inline">{{attr.attrName}}：</span>
-                <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
-              </p>-->
+              <!-- <p class="mb0 one-row omg" *ngFor="let attr of item.goodsBaseSaList">
+                 <span class="inline">{{attr.attrName}}：</span>
+                 <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
+               </p>-->
             </div>
           </td>
           <td class="w10 bb">{{goods.price | decimalTwo}}</td>
           <td class="w10 bb">{{goods.num}}</td>
           <ng-container *ngIf="s==0">
             <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
-            <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+            <span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
                   (mouseleave)="hideBuyerInfo(i)">{{order.linkman}}
             </span>
               <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
                 <div class="info-con">
                   <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
-                  <dl><dt>姓名：</dt><dd>{{order.linkman}}</dd></dl>
-                  <dl><dt>电话：</dt><dd>{{order.phone}}</dd></dl>
-                  <dl><dt>地址：</dt><dd>{{order.areaFullName + order.address}}</dd></dl>
+                  <dl>
+                    <dt>姓名：</dt>
+                    <dd>{{order.linkman}}</dd>
+                  </dl>
+                  <dl>
+                    <dt>电话：</dt>
+                    <dd>{{order.phone}}</dd>
+                  </dl>
+                  <dl>
+                    <dt>地址：</dt>
+                    <dd>{{order.areaFullName + order.address}}</dd>
+                  </dl>
                 </div>
               </div>
             </td>
-            <td class="w10 bl"  [attr.rowspan]="order.ordItemList.length">
+            <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
               <span class="main-red font14">¥{{order.total | decimalTwo}}</span><br>
               <span class="font-gray">（免运费）</span><br>
               <span class="font-gray">{{order.payWay | rzhState:'1017'}}</span>
             </td>
-            <td class="w10 bl"  [attr.rowspan]="order.ordItemList.length">
+            <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
               <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
               <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
                  [queryParams]="{ordno:order.ordno}">
                 查看详情</p>
-              <p class="cursor-p mb-sm" *ngIf="order.state == 'DELIVERY'|| order.state == 'SUCCESS'" myHoverColor
-                 [myHover]="'orange'"
-                 (click)="lookLogistics(order.ordno)">
-                查看物流</p>
+              <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
+                <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,order.ordno)"
+                      (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
+              <div class="szh-buyer-info text-left logistics-pop" #Logistics
+                   (mouseenter)="showLogistics(Logistics,order.ordno)"
+                   (mouseleave)="hideLogistics(Logistics)">
+                <div class="logistics-pop-body">
+                  <p class="pl mb-sm clearfix logistics-pop-head">
+                    <span class="fa fa-truck pull-left _icon"></span>
+                    <span class="pull-left">物流信息</span>
+                    <span class="pull-right" routerLink="../order-detail"
+                          [queryParams]="{ordno:order.ordno}">查看更多</span>
+                  </p>
+                  <div class="logistics-pop-main">
+                    <ul class="timeline-alt pt pb0 m0">
+                      <ng-container *ngFor="let item of LogisticsData;let a=index;">
+                        <li class="mb0" *ngIf="a<4">
+                          <div class="timeline-badge primary">
+                            <em class="fa fa-truck"></em>
+                          </div>
+                          <div class="timeline-panel _mrl">
+                            <div class="right">
+                              <div>
+                                <p>
+                                  <span class="mr">{{item.acceptTime}}</span><br>
+                                  <span>{{item.acceptStation}}</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </td>
-            <td class="w10 bl"  [attr.rowspan]="order.ordItemList.length">
-              <div *ngIf="order.state == 'PAID'">
+            <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
+              <div *ngIf="order.state == 'PREPARE' && order.isPlatCarry=='Y'">
                 <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck"
                         (click)="deliverOrder(order.ordno)">
                   设置发货
                 </button>
               </div>
-              <div *ngIf="order.state == 'CR'">
+              <div *ngIf="order.state != 'CR'">
                 <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
-                        (click)="cancelOrder(order.ordno)"> 取消订单</button>
+                        (click)="cancelOrder(order.ordno)"> 取消订单
+                </button>
               </div>
               <div *ngIf="order.state == 'CR'">
                 <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
-              </button>
+                </button>
               </div>
             </td>
           </ng-container>

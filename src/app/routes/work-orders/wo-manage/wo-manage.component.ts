@@ -10,7 +10,7 @@ defineLocale('cn', zhCn);
   styleUrls: ['./wo-manage.component.scss']
 })
 export class WoManageComponent implements OnInit {
-  public woType: number = 1;
+  public woType: string;
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
