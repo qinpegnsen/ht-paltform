@@ -48,8 +48,7 @@ export class SubmitService {
       },
       error: (res) => {
         MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-        AppComponent.rzhAlt("error", '网络错误');
-        // console.log("res");
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -75,7 +74,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", '网络错误');
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
   }
@@ -87,7 +86,7 @@ export class SubmitService {
    * @param back:true(返回上一级)
    */
   putRequest(requestUrl, requestDate, back?: boolean) {
-    let result,me = this;
+    let result, me = this;
     this.ajax.put({
       url: requestUrl,
       data: requestDate,
@@ -113,8 +112,7 @@ export class SubmitService {
       },
       error: (res) => {
         MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-        AppComponent.rzhAlt("error", '网络错误');
-        console.log('put error', res);
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;
@@ -146,7 +144,7 @@ export class SubmitService {
    * @param requestData
    * @returns {any}
    */
-      getData(requestUrl: string, requestData: any) {
+  getData(requestUrl: string, requestData: any) {
     let result: any;
     this.ajax.get({
       url: requestUrl,
@@ -154,16 +152,13 @@ export class SubmitService {
       async: false,
       success: (res) => {
         if (res.success) {
-          console.log("█ res ►►►",  res);
-
           result = res.data;
-        }else{
-          AppComponent.rzhAlt("error", '获取数据时'+res.info);
+        } else {
+          AppComponent.rzhAlt("error", '获取数据时' + res.info);
         }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", '网络错误');
-        console.log('get data error', res);
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;
