@@ -37,6 +37,9 @@ export class CancelsComponent implements OnInit {
 
   }
 
+  /**
+   * 显示关闭申请中的条件
+   */
 
   /**
    * 查询关闭订单原因

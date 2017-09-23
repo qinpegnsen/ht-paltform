@@ -15,6 +15,13 @@ import { ToAuditComponent } from './order-review/to-audit/to-audit.component';
 import { AllOrderComponent } from './order-review/all-order/all-order.component';
 import { StoreEvaluationComponent } from './store-evaluation/store-evaluation.component';
 import {OrdersService} from "./orders/orders.service";
+import {StockComponent} from './stock/stock.component';
+import {AllStockComponent} from './stock/all-stock/all-stock.component';
+import {PendingPaymentComponent} from './stock/pending-payment/pending-payment.component';
+import {ForDistributionComponent} from './stock/for-distribution/for-distribution.component';
+import {AwaitingDeliveryComponent} from './stock/awaiting-delivery/awaiting-delivery.component';
+import {CompleteComponent} from './stock/complete/complete.component';
+import {StockDetailComponent} from './stock/stock-detail/stock-detail.component';
 
 
 const routes: Routes = [
@@ -38,6 +45,16 @@ const routes: Routes = [
     {path: '', redirectTo: 'all-order'},
     {path: 'all-order', component: AllOrderComponent},
     {path: 'to-audit', component: ToAuditComponent},
+  ]},
+  {path: 'ord', component:StockComponent,children:[
+    {path: '', redirectTo: 'all-stock'},
+    {path: 'all-stock', component: AllStockComponent},
+    {path: 'pending-payment', component: PendingPaymentComponent},
+    {path: 'for-distribution', component: ForDistributionComponent},
+    {path: 'awaiting-delivery', component: AwaitingDeliveryComponent},
+    {path: 'complete', component: CompleteComponent},
+    {path: 'cancel', component: CancelComponent},
+    {path: 'stock-detail', component: StockDetailComponent}
   ]}
 ]
 
@@ -59,7 +76,16 @@ const routes: Routes = [
     OrderReviewComponent,
     ToAuditComponent,
     AllOrderComponent,
-    StoreEvaluationComponent
+    StoreEvaluationComponent,
+    StockComponent,
+    AllStockComponent,
+    PendingPaymentComponent,
+    ForDistributionComponent,
+    AwaitingDeliveryComponent,
+    CompleteComponent,
+    CancelComponent,
+    StockDetailComponent,
+    CancelsComponent
   ],
   providers: [
     OrdersComponent,

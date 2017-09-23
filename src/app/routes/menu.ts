@@ -195,7 +195,7 @@ const orders = {
       submenu: [
         {
           text: '订单管理',
-          link: '/main/agent/ord'
+          link: '/main/orders/ord'
         },
         {
           text: '异常订单',
