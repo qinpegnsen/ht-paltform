@@ -23,6 +23,8 @@ export class AllStockComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   private agentAcct;
+  private agentName;
+  private agentOrdno;
   private agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
@@ -69,11 +71,11 @@ export class AllStockComponent implements OnInit {
 
     let requestData = {
       curPage: activePage,
-      pageSize: 2,
+      pageSize: 10,
       sortColumns: '',
       agentAcct: _this.agentAcct,
-      goodsName: _this.agentAcct,
-      ordno: _this.agentAcct,
+      goodsName: _this.agentName,
+      ordno: _this.agentOrdno,
       dateStr: dateStr,
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
@@ -98,16 +100,17 @@ export class AllStockComponent implements OnInit {
   }
 
   cancelOrder(orderId) {
+    console.log("█ orderId ►►►",  orderId);
     this.curCancelOrderId = orderId;
   }
 
-  deliverOrder(orderId) {
+ /* deliverOrder(orderId) {
     this.curDeliverOrderId = orderId;
   }
 
   lookLogistics(orderId) {
     this.lookLogisticsOrderId = orderId;
-  }
+  }*/
 
   /**
    * 取消订单回调函数

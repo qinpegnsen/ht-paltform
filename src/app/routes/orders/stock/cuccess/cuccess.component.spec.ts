@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CancelComponent } from './cancel.component';
+import { CuccessComponent } from './cuccess.component';
 
-describe('CancelComponent', () => {
-  let component: CancelComponent;
-  let fixture: ComponentFixture<CancelComponent>;
+describe('CuccessComponent', () => {
+  let component: CuccessComponent;
+  let fixture: ComponentFixture<CuccessComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CancelComponent ]
+      declarations: [ CuccessComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CancelComponent);
+    fixture = TestBed.createComponent(CuccessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

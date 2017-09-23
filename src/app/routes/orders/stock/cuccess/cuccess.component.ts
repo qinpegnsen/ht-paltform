@@ -11,11 +11,11 @@ import {RzhtoolsService} from '../../../../core/services/rzhtools.service';
 defineLocale('cn', zhCn);
 
 @Component({
-  selector: 'app-cancel',
-  templateUrl: './cancel.component.html',
-  styleUrls: ['./cancel.component.scss']
+  selector: 'app-cuccess',
+  templateUrl: './cuccess.component.html',
+  styleUrls: ['./cuccess.component.scss']
 })
-export class CancelComponent implements OnInit {
+export class CuccessComponent implements OnInit {
   public orderType: number = 1;
   minDate: Date = new Date();
   maxDate: Date = new Date();
@@ -28,7 +28,7 @@ export class CancelComponent implements OnInit {
   private beginTime: string;
   private endTime: string;
   public goodsList: Page = new Page();
-  @ViewChild('cancelBox') cancelBox: CancelComponent;
+
 
   constructor(private StockComponent:StockComponent,private submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
@@ -43,6 +43,7 @@ export class CancelComponent implements OnInit {
     _this.StockComponent.orderType = 6;
     _this.queryDatas(1)
   }
+
 
 
   /**

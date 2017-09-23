@@ -22,6 +22,8 @@ import {ForDistributionComponent} from './stock/for-distribution/for-distributio
 import {AwaitingDeliveryComponent} from './stock/awaiting-delivery/awaiting-delivery.component';
 import {CompleteComponent} from './stock/complete/complete.component';
 import {StockDetailComponent} from './stock/stock-detail/stock-detail.component';
+import {CuccessComponent} from './stock/cuccess/cuccess.component';
+import { LogisticsComponent } from './stock/logistics/logistics.component';
 
 
 const routes: Routes = [
@@ -53,7 +55,7 @@ const routes: Routes = [
     {path: 'for-distribution', component: ForDistributionComponent},
     {path: 'awaiting-delivery', component: AwaitingDeliveryComponent},
     {path: 'complete', component: CompleteComponent},
-    {path: 'cancel', component: CancelComponent},
+    {path: 'success', component: CuccessComponent},
     {path: 'stock-detail', component: StockDetailComponent}
   ]}
 ]
@@ -85,7 +87,9 @@ const routes: Routes = [
     CompleteComponent,
     CancelComponent,
     StockDetailComponent,
-    CancelsComponent
+    CancelsComponent,
+    CuccessComponent,
+    LogisticsComponent
   ],
   providers: [
     OrdersComponent,

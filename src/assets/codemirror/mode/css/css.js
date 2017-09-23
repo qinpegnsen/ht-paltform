@@ -542,7 +542,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     "scrollbar-arrow-color", "scrollbar-base-color", "scrollbar-dark-shadow-color",
     "scrollbar-face-color", "scrollbar-highlight-color", "scrollbar-shadow-color",
     "scrollbar-3d-light-color", "scrollbar-track-color", "shape-inside",
-    "searchfield-cancel-button", "searchfield-decoration", "searchfield-results-button",
+    "searchfield-success-button", "searchfield-decoration", "searchfield-results-button",
     "searchfield-results-decoration", "zoom"
   ], nonStandardPropertyKeywords = keySet(nonStandardPropertyKeywords_);
 
@@ -654,7 +654,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     "rotateZ", "round", "row", "row-resize", "row-reverse", "rtl", "run-in", "running",
     "s-resize", "sans-serif", "saturation", "scale", "scale3d", "scaleX", "scaleY", "scaleZ", "screen",
     "scroll", "scrollbar", "se-resize", "searchfield",
-    "searchfield-cancel-button", "searchfield-decoration",
+    "searchfield-success-button", "searchfield-decoration",
     "searchfield-results-button", "searchfield-results-decoration",
     "semi-condensed", "semi-expanded", "separate", "serif", "show", "sidama",
     "simp-chinese-formal", "simp-chinese-informal", "single",

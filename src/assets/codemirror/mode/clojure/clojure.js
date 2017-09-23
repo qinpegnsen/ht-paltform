@@ -58,7 +58,7 @@ CodeMirror.defineMode("clojure", function (options) {
         "drop-while eduction empty empty? ensure enumeration-seq error-handler error-mode eval even? every-pred every? ex-data ex-info " +
         "extend extend-protocol extend-type extenders extends? false? ffirst file-seq filter filterv find find-keyword " +
         "find-ns find-protocol-impl find-protocol-method find-var first flatten float float-array float? floats flush fn fn? " +
-        "fnext fnil for force format frequencies future future-call future-cancel future-cancelled? future-done? future? " +
+        "fnext fnil for force format frequencies future future-call future-success future-cancelled? future-done? future? " +
         "gen-class gen-interface gensym get get-in get-method get-proxy-class get-thread-bindings get-validator group-by hash " +
         "hash-combine hash-map hash-set identical? identity if-let if-not ifn? import in-ns inc inc' init-proxy instance? " +
         "int int-array integer? interleave intern interpose into into-array ints io! isa? iterate iterator-seq juxt keep " +

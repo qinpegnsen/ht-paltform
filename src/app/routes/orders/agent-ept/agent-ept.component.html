@@ -80,7 +80,7 @@
             <p class="cursor-p mb-sm">查看物流</p>
           </td>
           <td class="w10 bl" rowspan="2">
-            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.goodsName)"> 关闭申请</button><br>
+            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.ordno)"> 关闭申请</button><br>
           </td>
         </tr>
         <tr class="text-center" *ngFor="let name of goodsList.agentOrdItemList;let j = index">
@@ -106,4 +106,3 @@
   </tbody>
 </table>
 <app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
-
