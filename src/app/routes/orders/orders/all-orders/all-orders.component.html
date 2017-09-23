@@ -148,15 +148,15 @@
                   设置发货
                 </button>
               </div>
-              <div *ngIf="order.state != 'CR'">
+             <!-- <div class="hide">
                 <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
                         (click)="cancelOrder(order.ordno)"> 取消订单
                 </button>
-              </div>
-              <div *ngIf="order.state == 'CR'">
+              </div>-->
+              <!--<div *ngIf="order.state == 'CLOSE'">
                 <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
                 </button>
-              </div>
+              </div>-->
             </td>
           </ng-container>
         </tr>
@@ -181,6 +181,7 @@
   </tr>
   </tfoot>
 </table>
-<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>
-<app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
+<!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
+<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+                   (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
+<!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->

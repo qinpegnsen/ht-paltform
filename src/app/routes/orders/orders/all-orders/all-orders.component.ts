@@ -154,6 +154,7 @@ export class AllOrdersComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
+    if(data.type) this.queryDatas(data.page)
   }
 
   /**

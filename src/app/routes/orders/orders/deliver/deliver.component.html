@@ -10,10 +10,9 @@
     <div class="pop deliver-box font12 w100">
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">订单编号：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{orderId
-        ?orderId:201705468524444}}</dd>
+        <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
       </dl>
-      <dl class="bb m0 clearfix">
+      <!--<dl class="bb m0 clearfix">
         <dt class="col-xs-3">收货人信息：</dt>
         <dd class="col-xs-9">
           <span>谢娇娇，13526819889，河南省郑州市管城回族区东风南路120号</span>
@@ -42,16 +41,13 @@
             <button class="btn btn-xs btn-green" (click)="hideEditBox(editBox)">完成编辑</button>
           </div>
         </dd>
-      </dl>
+      </dl>-->
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">快递公司：</dt>
         <dd class="col-xs-9 font14">
           <div class="w40">
-            <select name="a" id="" class="form-control input-sm">
-              <option value="0">不使用快递公司</option>
-              <option value="1">圆通</option>
-              <option value="2">申通</option>
-              <option value="3">中通</option>
+            <select name="expressCode" class="form-control input-sm" [(ngModel)]="expressCode">
+              <option [value]="item.expressCode" *ngFor="let item of expressList">{{item.expressName}}</option>
             </select>
           </div>
         </dd>
@@ -60,7 +56,7 @@
         <dt class="col-xs-3">快递单号：</dt>
         <dd class="col-xs-9 font14">
           <div class="w40">
-            <input type="text" class="form-control input-sm">
+            <input type="text" name="expressNo" class="form-control input-sm" [(ngModel)]="expressNo">
           </div>
         </dd>
       </dl>
@@ -76,7 +72,7 @@
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info">确认提交</button>
+      <button class="btn btn-info" type="button" (click)="delivery()">确认提交</button>
     </div>
   </form>
 </div>

@@ -38,4 +38,14 @@ export class OrdersService {
     let data = {ordno: '1234123451235'};
     return this.submit.getData(url, data);
   }
+
+  /**
+   * 查询物流公司列表
+   */
+  public getBasicExpressList(){
+    let url = '/basicExpress/pageQueryBasicExpress';
+    let list = this.submit.getData(url, '');
+    if(!isNullOrUndefined(list) && !isNullOrUndefined(list.voList))
+    return list.voList;
+  }
 }

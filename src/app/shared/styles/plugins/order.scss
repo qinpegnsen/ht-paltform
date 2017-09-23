@@ -125,23 +125,27 @@ $buyer-info-box-width: 200px;
   width: $buyer-info-box-width;
   background-color: #fff;
   border-radius: 4px;
+  dl{
+    margin-bottom: 3px;
+    font-size: 0;
+  }
+  dt,dd{
+    font-size: 12px;
+    display: inline-block;
+    line-height: 18px;
+  }
+  dt{
+    font-weight: normal;
+    text-align: right;
+    width: 23%;
+    margin-right:2%;
+  }
+  dd{
+    width: 75%;
+    vertical-align: top;
+  }
 }
-.szh-buyer-info dl{
-  margin-bottom: 3px;
-}
-.szh-buyer-info dt{
-  font-weight: normal;
-  text-align: right;
-  width: 24%;
-}
-.order .szh-buyer-info dd{
-  width: 75%;
-  vertical-align: top;
-}
-.szh-buyer-info dt,.order .szh-buyer-info dd{
-  display: inline-block;
-  line-height: 18px;
-}
+
 .f-bold{
   font-weight: bold;
 }
