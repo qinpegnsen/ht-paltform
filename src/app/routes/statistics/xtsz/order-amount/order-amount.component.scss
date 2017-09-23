@@ -1,0 +1,34 @@
+
+.t-item {
+  width: 100%;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.item-hd{
+  padding: 15px 15px 15px 0;
+  text-align: right;
+}
+.item-bd{
+  margin: 0;
+  padding: 15px 0 15px 15px;
+  word-wrap: break-word;
+  border-left: 1px solid #e1e1e1;
+}
+.goods-audit{
+  border-color: #37bc9b;
+}
+.goods-audit .goods-audit-title{
+  background-color: #37bc9b;
+  color: #fff;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 5px 0 5px 15px;
+}
+.goods-audit .bdr{
+  border-right: 1px dashed #eee;
+}
+.detailset{
+  min-width: 1360px;
+}

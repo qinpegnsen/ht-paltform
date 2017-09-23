@@ -4,64 +4,88 @@
 
 <div class="panel panel-default">
 <!--操作提示-->
-  <div class="panel mb p ts">
+  <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
     <ul>
       <li>图表展示了符合搜索条件订单的下单总金额和下单量排名前50位的商品</li>
     </ul>
   </div>
-  <div class="xz">
-<!--搜索按钮-->
-    <button class="btn">
-      <i class="icon icon-magnifier icona"></i>
-    </button>
-    <!--操作条件-->
-    <select name="" id="" class="sel">
+
+  <div class="w98 h50 m-auto">
+    <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+    <div class="pull-right" style="width: 300px">
+      <div class="col-xs-3 form-group" style="width: 250px">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+      </div>
+    </div>
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-    <!--操作条件-->
-    <select name="" id="" class="sel">
-      <option value="请选择">请选择</option>
-      <option value="服饰鞋帽">服饰鞋帽</option>
-      <option value="数码办公">数码办公</option>
-      <option value="礼品箱包">礼品箱包</option>
-      <option value="家居家装">家居家装</option>
-      <option value="厨房餐饮">厨房餐饮</option>
-      <option value="个性化妆">个性化妆</option>
-      <option value="食品饮料">食品饮料</option>
-      <option value="珠宝手表">珠宝手表</option>
-      <option value="汽车用品">汽车用品</option>
-      <option value="家用电器">家用电器</option>
-      <option value="运动健康">运动健康</option>
-      <option value="玩具乐器">玩具乐器</option>
-      <option value="母婴用品">母婴用品</option>
-      <option value="虚拟充值">虚拟充值</option>
-    </select>
+
+    <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
+    <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
+    <!--</select>-->
+  </div>
+
+  <div class="panel w98 m-auto">
+    <tabset class="bg-white p0" [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-clock-o fa-fw"></em>下单金额
+        </ng-template>
+        <div>
+          <!-- START list group-->
+          <div class="list-group mb0">
+            <div class="refund-table">
+              <p class="text-center font24 echars-p">排行榜</p>
+              <div echarts [options]="option" class="demo-chart w100"></div>
+            </div>
+          </div>
+          <!-- END list group-->
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-money fa-fw"></em>下单量
+        </ng-template>
+        <div>
+          <!-- START table responsive-->
+          <div class="table-responsive">
+            <div class="refund-table">
+              <p class="text-center font24 echars-p">很帅气</p>
+              <div echarts [options]="optiona" class="demo-chart w100"></div>
+            </div>
+          </div>
+          <!-- END table responsive-->
+        </div>
+      </tab>
+    </tabset>
   </div>
   <!--商品表单-->
-  <div class="panel panel-default">
+  <div class="panel panel-default mt20">
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="refund-th">
+          <th class="text-center w33">
             <rzhDefaultSorter by="name">序号</rzhDefaultSorter>
           </th>
-          <th style="width: 40%;text-align: center;border:1px solid #ccc;">
+          <th class="text-center w33">
             <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w33">
             <rzhDefaultSorter by="name">下单金额（元）</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="refund-th">aaa</td>
-          <td style="width: 40%;text-align: center;border:1px solid #ccc;">sss</td>
-          <td class="refund-th">ddd</td>
+        <tr class="text-center">
+          <td class="">aaa</td>
+          <td >sss</td>
+          <td class="">ddd</td>
         </tr>
       </table>
     </div>

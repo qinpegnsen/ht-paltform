@@ -40,23 +40,23 @@
       <thead>
       <tr>
         <th class="w6 text-center">
-          <rzhDefaultSorter by="order">序号</rzhDefaultSorter>
+          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="remark">类型码（code）</rzhDefaultSorter>
+          <rzhDefaultSorter by="code">类型码（code）</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="name"  *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
-          <rzhDefaultSorter by="name"  *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
+          <rzhDefaultSorter by="val"  *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
         </th>
         <th class="w20 text-center ">
           <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>
         </th>
         <th class="w7 text-center">
-          <rzhDefaultSorter by="stop">停启用</rzhDefaultSorter>
+          <rzhDefaultSorter by="state">停启用</rzhDefaultSorter>
         </th>
         <th class="w7 text-center">
-          <rzhDefaultSorter by="stop" *ngIf="childMenuTitList.length < 1">唯一值</rzhDefaultSorter>
+          <rzhDefaultSorter by="value" *ngIf="childMenuTitList.length < 1">唯一值</rzhDefaultSorter>
         </th>
         <th class="w25 text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>

@@ -4,71 +4,62 @@
 
 <div class="panel panel-default">
 <!--操作提示-->
-  <div class="panel mb p ts">
+  <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
     <ul>
       <li>列表展示了符合搜索条件的订单中所有商品数据，及其时间段内的下单总金额、下单量、商品销量</li>
     </ul>
   </div>
-  <div class="xz">
-<!--搜索按钮-->
-    <button class="btn">
-      <i class="icon icon-magnifier icona"></i>
-    </button>
-    <!--选择时间条件-->
-    <select name="" id="" class="sel">
+
+  <div class="w98 m-auto h50">
+    <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+    <div class="pull-right" style="width: 300px">
+      <div class="col-xs-3 form-group" style="width: 250px">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+      </div>
+    </div>
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-    <!--选择类型条件-->
-    <select name="" id="" class="sel">
-      <option value="请选择">请选择</option>
-      <option value="服饰鞋帽">服饰鞋帽</option>
-      <option value="数码办公">数码办公</option>
-      <option value="礼品箱包">礼品箱包</option>
-      <option value="家居家装">家居家装</option>
-      <option value="厨房餐饮">厨房餐饮</option>
-      <option value="个性化妆">个性化妆</option>
-      <option value="食品饮料">食品饮料</option>
-      <option value="珠宝手表">珠宝手表</option>
-      <option value="汽车用品">汽车用品</option>
-      <option value="家用电器">家用电器</option>
-      <option value="运动健康">运动健康</option>
-      <option value="玩具乐器">玩具乐器</option>
-      <option value="母婴用品">母婴用品</option>
-      <option value="虚拟充值">虚拟充值</option>
-    </select>
+
+    <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
+    <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
+    <!--</select>-->
   </div>
 <!--统计表-->
-  <div class="panel panel-default">
-    <div class="new-vip">商品销售统计表</div>
+  <div class="panel panel-default mt20">
+    <div class="table-title">商品销售统计表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="thh">
-            <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="shop">商品名称</rzhDefaultSorter>
           </th>
-          <th class="thh">
-            <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
-            <rzhDefaultSorter by="name">下单金额（元）</rzhDefaultSorter>
-          </th><th class="refund-th">
-            <rzhDefaultSorter by="name">下单量</rzhDefaultSorter>
-          </th><th class="refund-th">
-            <rzhDefaultSorter by="name">下单商品数</rzhDefaultSorter>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="money">下单金额（元）</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="count">下单量</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="shopcount">下单商品数</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="thh">aaa</td>
-          <td class="thh">sss</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
+        <tr class="text-center">
+          <td class="">aaa</td>
+          <td class="">sss</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
         </tr>
       </table>
     </div>

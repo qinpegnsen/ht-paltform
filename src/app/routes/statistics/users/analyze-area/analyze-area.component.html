@@ -4,53 +4,114 @@
 
 <div class="panel panel-default">
 <!--操作提示-->
-  <div class="panel mb p ts">
+  <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
     <ul>
       <li>统计图表展示了时间段内的订单数量、下单商品数量和订单总金额在各个区域的分布情况</li>
       <li>统计表默认按照“下单金额”降序排列</li>
     </ul>
   </div>
-  <div class="xz">
+
+  <div class="w98 m-auto h50">
 <!--选择按钮-->
-    <button class="btn">
+    <button class="statistic-btn">
       <i class="icon icon-magnifier icona"></i>
     </button>
+
+    <div class="pull-right" style="width: 300px">
+      <div class="col-xs-3 form-group" style="width: 250px">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+      </div>
+    </div>
+
     <!--时间选择条件-->
-    <select name="" id="" class="sel">
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
+
   </div>
+
+  <div class="panel w98 m-auto">
+    <tabset class="bg-white p0" [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-clock-o fa-fw"></em>下单金额
+        </ng-template>
+        <div>
+          <!-- START list group-->
+          <div class="list-group mb0">
+            <div class="refund-table">
+              <p class="text-center font24 echars-p">排行榜</p>
+              <div echarts [options]="option" class="demo-chart"></div>
+            </div>
+          </div>
+          <!-- END list group-->
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-money fa-fw"></em>下单量
+        </ng-template>
+        <div>
+          <!-- START table responsive-->
+          <div class="table-responsive">
+            <div class="refund-table">
+              <p class="text-center font24 echars-p">很帅气</p>
+              <div echarts [options]="optiona" class="demo-chart"></div>
+            </div>
+          </div>
+          <!-- END table responsive-->
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <em class="fa fa-money fa-fw"></em>下单会员数
+        </ng-template>
+        <div>
+          <!-- START table responsive-->
+          <div class="table-responsive">
+            <div class="refund-table">
+              <p class="text-center font24 echars-p">很帅气</p>
+              <div echarts [options]="optiona" class="demo-chart"></div>
+            </div>
+          </div>
+          <!-- END table responsive-->
+        </div>
+      </tab>
+    </tabset>
+  </div>
+
 <!--统计表-->
-  <div class="panel panel-default">
-    <div class="new-vip">区域分析表</div>
+  <div class="panel panel-default mt20" >
+    <div class="table-title">区域分析表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="refund-th">
+          <th class="w25 text-center">
             <rzhDefaultSorter by="name">省份</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="w25 text-center">
             <rzhDefaultSorter by="email">下单金额（元）</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="w25 text-center">
             <rzhDefaultSorter by="name">下单量</rzhDefaultSorter>
           </th>
-           <th class="refund-th">
+           <th class="w25 text-center">
             <rzhDefaultSorter by="name">下单会员数</rzhDefaultSorter>
           </th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="refund-th">aaa</td>
-          <td class="refund-th">sss</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
+        <tr class="text-center">
+          <td class="">aaa</td>
+          <td class="">sss</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
         </tr>
       </table>
     </div>

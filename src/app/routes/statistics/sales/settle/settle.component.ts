@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settle.component.scss']
 })
 export class SettleComponent implements OnInit {
-
+  datepickerModel: Date;
   constructor() { }
 
   ngOnInit() {

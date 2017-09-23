@@ -1,29 +1,59 @@
 
-<div class="content-heading mb-lg">
-  购买分析
-</div>
-
-<div class="panel panel-default">
-<!--操作提示-->
-  <div class="panel mb p ts">
-    <p class="font18">操作提示</p>
-    <ul>
-      <li>客单价分布图将根据您设置的价格区间进行分布统计，点击“设置价格区间”进入设置价格区间页面</li>
-      <li>购买时段分布图展示时间段内订单在各个时间段的分布情况，为工作时间的合理安排提供依据</li>
-    </ul>
+  <div class="content-heading mb-lg">
+    购买分析
   </div>
-  <div class="xz">
-<!--搜索按钮-->
-    <button class="btn">
-      <i class="icon icon-magnifier icona"></i>
-    </button>
-    <!--时间选择条件-->
-    <select name="" id="" class="sel">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
-    </select>
+
+  <div class="panel panel-default">
+
+    <div class="panel mb p w98 m-auto ts">
+      <p class="font18">操作提示</p>
+      <ul>
+        <li>客单价分布图将根据您设置的价格区间进行分布统计，点击“设置价格区间”进入设置价格区间页面</li>
+        <li>购买时段分布图展示时间段内订单在各个时间段的分布情况，为工作时间的合理安排提供依据</li>
+      </ul>
+    </div>
+
+    <div class="w98 m-auto h50">
+      <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+      <div class="pull-right" style="width: 300px">
+        <div class="col-xs-3 form-group" style="width: 250px">
+          <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+          <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+        </div>
+      </div>
+      <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
+        <option value="按照天统计">按照天统计</option>
+        <option value="按照周统计">按照周统计</option>
+        <option value="按照月统计">按照月统计</option>
+      </select>
+
+      <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
+      <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
+      <!--</select>-->
+    </div>
 
 
+    <!--图表-->
+    <div class="panel w98 m-auto">
+      <tabset class="bg-white p0" [justified]="true">
+        <tab>
+          <ng-template tabHeading>
+           购买时段分布
+          </ng-template>
+          <div>
+            <!-- START list group-->
+            <div class="list-group mb0">
+              <div class="refund-table">
+                <div echarts [options]="option" class="demo-chart w100"></div>
+              </div>
+            </div>
+            <!-- END list group-->
+          </div>
+        </tab>
+      </tabset>
+    </div>
   </div>
-</div>
+
+
+
+

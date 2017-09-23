@@ -4,24 +4,30 @@
 
 <div class="panel panel-default">
 <!--操作提示-->
-  <div class="panel mb p ts">
+  <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
     <ul>
       <li>统计数据色块展示了时间段内结算总数据</li>
       <li>统计表展示了时间段内店铺结算的销售和费用相关数据</li>
     </ul>
   </div>
-  <div class="xz">
-<!--搜索按钮-->
-    <button class="btn">
-      <i class="icon icon-magnifier icona"></i>
-    </button>
-    <!--选择时间条件-->
-    <select name="" id="" class="sel">
+  <div class="w98 m-auto h50">
+    <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+    <div class="pull-right" style="width: 300px">
+      <div class="col-xs-3 form-group" style="width: 250px">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+      </div>
+    </div>
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
       <option value="按照天统计">按照天统计</option>
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
+
+    <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
+    <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
+    <!--</select>-->
   </div>
 <!--图文结合-->
   <div class="row r3">
@@ -136,44 +142,44 @@
   </div>
 <!--统计表-->
   <div class="panel panel-default">
-    <div class="new-vip">销售收入统计表</div>
+    <div class="table-title">销售收入统计表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th style="width: 15%;border: 1px solid #ccc;text-align: center">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w15">
             <rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w15">
             <rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>
           </th>
-          <th class="trefund-thh">
+          <th class="text-center w15">
             <rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w15">
             <rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w15">
             <rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w15">
             <rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>
           </th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td style="width: 15%;border: 1px solid #ccc;text-align: center">aaa</td>
-          <td class="refund-th">sss</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">aaa</td>
-          <td class="refund-th">aaa</td>
-          <td class="refund-th">sss</td>
-          <td class="refund-th">ddd</td>
+        <tr class="text-center">
+          <td >aaa</td>
+          <td class="">sss</td>
+          <td class="">ddd</td>
+          <td class="">aaa</td>
+          <td class="">aaa</td>
+          <td class="">sss</td>
+          <td class="">ddd</td>
         </tr>
       </table>
       <!--<tfoot>-->

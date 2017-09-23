@@ -1,123 +1,121 @@
 <div class="content-heading mb-lg">
-  退款统计
+  退货评分
 </div>
 
 <div class="panel panel-default">
- <!--操作提示-->
-  <div class="panel mb p ts">
+
+  <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
     <ul>
-      <li>统计图展现了时间段内退款金额的走势情况</li>
-      <li>列表展示了时间段内退款详细数据，便于详细了解退款记录的具体信息</li>
+      <li>统计表为符合搜索条件店铺的动态评分信息列表</li>
+      <li>默认按照“描述相符度”降序排列</li>
     </ul>
   </div>
 
-  <div class="xz">
-    <!--搜索按钮-->
-    <button class="btn pull-right">
-      <i class="icon icon-magnifier icona"></i>
-    </button>
-    <!--日期选择 begin-->
-    <div class="caldiv mr sel-date">
-      <!--按天-->
-      <p class="input-group">
-        <input class="form-control" value="{{dt | date:'yyyy-MM-dd'}}" type="text"/>
-        <span class="input-group-btn">
-            <button class="btn btn-default" (click)="showDate()" type="button">
-                <em class="fa fa-calendar"></em>
-            </button>
-        </span>
-      </p>
-      <div class="date-info" *ngIf="dateShow">
-        <datepicker [(ngModel)]="dt" (selectionDone)="selDate()" [minDate]="minDate" [showWeeks]="true"></datepicker>
+  <div class="w98 m-auto h50">
+    <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+    <div class="pull-right" style="width: 300px">
+      <div class="col-xs-3 form-group" style="width: 250px">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
+        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
       </div>
     </div>
-    <!--日期选择 end-->
-    <!--筛选条件选择-->
-    <select name="" id="" class="sel" [(ngModel)]="kk">
-      <option value="day">按照天统计</option>
-      <option value="week">按照周统计</option>
-      <option value="month">按照月统计</option>
+    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
+      <option value="按照天统计">按照天统计</option>
+      <option value="按照周统计">按照周统计</option>
+      <option value="按照月统计">按照月统计</option>
     </select>
-  </div>
 
-  <div class="panel">
+    <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
+    <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
+    <!--</select>-->
+  </div>
+  <!--图表切换-->
+  <div class="panel w98 m-auto">
     <tabset class="bg-white p0" [justified]="true">
       <tab>
         <ng-template tabHeading>
-          <i class="icon icon-heart pull-right" style="line-height: 0">昨天</i>
+          <em class="fa fa-clock-o fa-fw"></em>Tasks Panel
         </ng-template>
         <div>
           <!-- START list group-->
-          <p>AAA</p>
-          <div echarts [options]="option" class=" demo-chart"></div>
+          <div class="list-group mb0 mt20">
+            <div class="refund-table">
+              <p class="text-center font16 f-bold">排行榜</p>
+              <div echarts [options]="option" class="demo-chart"></div>
+            </div>
+          </div>
           <!-- END list group-->
         </div>
       </tab>
       <tab>
         <ng-template tabHeading>
-          <i class="icon icon-heart pull-left" style="line-height: 0">今天</i>
+          <em class="fa fa-money fa-fw"></em>Transactions Panel
         </ng-template>
         <div>
           <!-- START table responsive-->
-          <p>BBB</p>
-          <div echarts [options]="option" class=" demo-chart"></div>
+          <div class="table-responsive">
+            <div class="refund-table">
+              <p class="text-center font16 f-bold">很帅气</p>
+              <div echarts [options]="optiona" class="demo-chart"></div>
+            </div>
+          </div>
           <!-- END table responsive-->
         </div>
       </tab>
     </tabset>
   </div>
-  <!--表单统计-->
-  <div class="panel panel-default">
-    <div class="new-vip">退款金额统计表</div>
+
+  <div class="panel panel-default mt20">
+    <div class="table-title">退款金额统计表</div>
     <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="refund-th">
-            <rzhDefaultSorter by="name">订单编号</rzhDefaultSorter>
+          <th class="text-center w10">
+            <rzhDefaultSorter by="order">订单编号</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">退款编号</rzhDefaultSorter>
           </th>
-          <th class="thh">
+          <th class="text-center w15">
             <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
           </th>
-          <th class="thh">
+          <th class="text-center w15">
             <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">会员名称</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">申请时间</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">商家处理</rzhDefaultSorter>
           </th>
-          <th class="refund-th">
+          <th class="text-center w10">
             <rzhDefaultSorter by="name">平台处理</rzhDefaultSorter>
           </th>
-
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
-          <td class="thh">aaa</td>
-          <td class="thh">sss</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
-          <td class="refund-th">ddd</td>
+        <tr class="text-center">
+          <td class="">ddd</td>
+          <td class="">ddd</td>
+          <td class="">aaa</td>
+          <td class="">sss</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
+          <td class="">ddd</td>
         </tr>
       </table>
     </div>
   </div>
 </div>
+
 

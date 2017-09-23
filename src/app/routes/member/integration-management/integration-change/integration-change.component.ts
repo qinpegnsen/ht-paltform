@@ -22,6 +22,6 @@ export class IntegrationChangeComponent implements OnInit {
       custCoin:res.custCoin,
       logType:res.logType,
     }
-    this.submitt.postRequest(url, data);
+   this.submitt.postRequest(url, data);
   }
 }

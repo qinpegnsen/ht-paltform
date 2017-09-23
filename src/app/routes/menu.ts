@@ -296,7 +296,7 @@ const statistics = {
       submenu: [
         {
           text: '订单金额区间',
-          link: '/main/stat/xtsz/set-money'
+          link: '/main/stat/xtsz/order-amount'
         },
         {
           text: '商品价格区间',
