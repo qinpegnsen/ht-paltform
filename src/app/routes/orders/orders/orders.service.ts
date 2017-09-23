@@ -28,4 +28,14 @@ export class OrdersService {
       orderLogistics: orderLogistics
     }
   }
+
+  /**
+   * 根据订单编号查询物流信息
+   * @param ordno
+   */
+  public getOrderLogisticsData(ordno){
+    let url = '/ord/tail/queryDeliveryList';
+    let data = {ordno: '1234123451235'};
+    return this.submit.getData(url, data);
+  }
 }

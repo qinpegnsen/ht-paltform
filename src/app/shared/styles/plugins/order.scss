@@ -87,8 +87,38 @@ $buyer-info-box-width: 200px;
   border-radius: 4px;
   position: absolute;
   z-index: 2;
-  left: 40%;
+  right: 60%;
   box-shadow: 1px 1px 1px 3px #FFFCE9;
+}
+.logistics-pop{
+  width: $buyer-info-box-width+120;
+  right: 70%;
+  top: 50%;
+  .logistics-pop-body{
+    background-color: #fff;
+    padding: 10px;
+  }
+  .logistics-pop-main{
+    background-color: #f5f5f5;
+  }
+  .logistics-pop-head{
+    ._icon{
+      font-size:14px;
+      line-height: 18px;
+    }
+  }
+  .timeline-alt > li > .timeline-badge {
+    position: absolute;
+    left: 8px;
+    z-index: 100;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
 }
 .szh-buyer-info .info-con{
   padding: 10px;

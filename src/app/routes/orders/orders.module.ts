@@ -30,9 +30,8 @@ const routes: Routes = [
     path: 'cust', component: OrdersComponent, children: [
     {path: '', redirectTo: 'all-orders'},
     {path: 'all-orders', component: AllOrdersComponent},
-    {path: 'wait-for-pay', component: AllOrdersComponent},
     {path: 'wait-for-send', component: AllOrdersComponent},
-    {path: 'delivered', component: AllOrdersComponent},
+    {path: 'delivery', component: AllOrdersComponent},
     {path: 'finished', component: AllOrdersComponent},
     {path: 'canceled', component: AllOrdersComponent},
     {path: 'order-detail', component: OrderDetailComponent}

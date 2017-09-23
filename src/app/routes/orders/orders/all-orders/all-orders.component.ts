@@ -9,6 +9,7 @@ import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
 import {ActivatedRoute} from "@angular/router";
+import {OrdersService} from "../orders.service";
 defineLocale('cn', zhCn);
 
 @Component({
@@ -17,17 +18,19 @@ defineLocale('cn', zhCn);
   styleUrls: ['./all-orders.component.scss']
 })
 export class AllOrdersComponent implements OnInit {
-  private path: string;       //路由
+  public path: string;       //路由
   public ordState: string;    //订单类型
-  public curCancelOrderId:string;
-  public curDeliverOrderId:string;
-  public lookLogisticsOrderId:string;
+  public curCancelOrderId: string;
+  public curDeliverOrderId: string;
+  public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
   public custCode: string;
-  bsConfig: Partial<BsDatepickerConfig>;
-  @ViewChild('cancelBox') cancelBox: CancelComponent;
-  constructor(private parentComp:OrdersComponent,
+  public LogisticsData: any;//物流信息
+  public bsConfig: Partial<BsDatepickerConfig>;
+
+  constructor(private parentComp: OrdersComponent,
               private route: ActivatedRoute,
+              public orderServe: OrdersService,
               private submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
@@ -43,32 +46,46 @@ export class AllOrdersComponent implements OnInit {
       me.path = urls[0].path;
       switch (me.path) {
         case "all-orders":
-          me.parentComp.orderType = 1;
+          me.parentComp.orderType = '';
           me.ordState = '';
           break;
-        case "wait-for-pay":
-          me.parentComp.orderType = 2;
-          me.ordState = 'CR';
-          break;
         case "wait-for-send":
-          me.parentComp.orderType = 3;
-          me.ordState = 'PAID';
+          me.parentComp.orderType = 'PREPARE';
+          me.ordState = 'PREPARE';
           break;
-        case "delivered":
-          me.parentComp.orderType = 4;
+        case "delivery":
+          me.parentComp.orderType = 'DELIVERY';
           me.ordState = 'DELIVERY';
           break;
         case "finished":
-          me.parentComp.orderType = 5;
+          me.parentComp.orderType = 'SUCCESS';
           me.ordState = 'SUCCESS';
           break;
         case "canceled":
-          me.parentComp.orderType = 6;
+          me.parentComp.orderType = 'CLOSE';
           me.ordState = 'CLOSE';
           break;
       }
     });
     me.queryDatas(1)
+  }
+
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics,ordno) {
+    Logistics.style.display = 'block';
+    /*if(isUndefined(ordno))*/ ordno = '1234123451235';
+    this.LogisticsData = this.orderServe.getOrderLogisticsData(ordno);
+  }
+
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
   }
 
   /**
@@ -98,7 +115,7 @@ export class AllOrdersComponent implements OnInit {
    * @param event
    * @param i
    */
-  showUserInfo(i){
+  showUserInfo(i) {
     i.style.display = 'block';
   }
 
@@ -106,24 +123,28 @@ export class AllOrdersComponent implements OnInit {
    * 隐藏买家信息
    * @param i
    */
-  hideBuyerInfo(i){
+  hideBuyerInfo(i) {
     i.style.display = 'none';
   }
-  cancelOrder(orderId){
+
+  cancelOrder(orderId) {
     this.curCancelOrderId = orderId;
-    console.log("█ orderId ►►►",  orderId);
+    console.log("█ orderId ►►►", orderId);
   }
-  deliverOrder(orderId){
+
+  deliverOrder(orderId) {
     this.curDeliverOrderId = orderId;
   }
-  lookLogistics(orderId){
+
+  lookLogistics(orderId) {
     this.lookLogisticsOrderId = orderId;
   }
+
   /**
    * 取消订单回调函数
    * @param data
    */
-  getCancelOrderData(data){
+  getCancelOrderData(data) {
     this.curCancelOrderId = null;
   }
 
@@ -131,14 +152,15 @@ export class AllOrdersComponent implements OnInit {
    * 发货回调函数
    * @param data
    */
-  getDeliverOrderData(data){
+  getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
   }
+
   /**
    * 查询物流回调函数
    * @param data
    */
-  getLogisticsData(data){
+  getLogisticsData(data) {
     this.lookLogisticsOrderId = null;
   }
 }

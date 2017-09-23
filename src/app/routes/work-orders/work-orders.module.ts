@@ -1,30 +1,24 @@
 import {NgModule} from "@angular/core";
-import {WoAssignComponent} from "./wo-assign/wo-assign.component";
 import {WoManageComponent} from "./wo-manage/wo-manage.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {WoAllComponent} from "./wo-all/wo-all.component";
-import {WoAssignedComponent} from "./wo-assigned/wo-assigned.component";
-import {WoMyComponent} from "./wo-my/wo-my.component";
-import {WoDealComponent} from "./wo-deal/wo-deal.component";
-import {WoFinishedComponent} from "./wo-finished/wo-finished.component";
-import {WoAbnormalComponent} from "./wo-abnormal/wo-abnormal.component";
 import {WoService} from "./wo.service";
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'assign'},
-  {path: 'assign', component: WoAssignComponent},
+  {path: 'assign', component: WoAllComponent},
   {
     path: 'manage', component: WoManageComponent, children: [
     {path: '', redirectTo: 'wo-all'},
     {path: 'wo-all', component: WoAllComponent},
-    {path: 'wo-assign', component: WoAssignComponent},
-    {path: 'wo-assigned', component: WoAssignedComponent},
-    {path: 'wo-my', component: WoMyComponent},
-    {path: 'wo-deal', component: WoDealComponent},
-    {path: 'wo-finished', component: WoFinishedComponent},
-    {path: 'wo-abnormal', component: WoAbnormalComponent},
+    {path: 'wo-assign', component: WoAllComponent},
+    {path: 'wo-assigned', component: WoAllComponent},
+    {path: 'wo-my', component: WoAllComponent},
+    {path: 'wo-deal', component: WoAllComponent},
+    {path: 'wo-finished', component: WoAllComponent},
+    {path: 'wo-abnormal', component: WoAllComponent},
   ]
   }
 ]
@@ -35,14 +29,8 @@ const routes: Routes = [
     SharedModule,
   ],
   declarations: [
-    WoAssignComponent,
     WoManageComponent,
     WoAllComponent,
-    WoAssignedComponent,
-    WoMyComponent,
-    WoDealComponent,
-    WoFinishedComponent,
-    WoAbnormalComponent
   ],
   providers: [WoManageComponent,WoService]
 })
