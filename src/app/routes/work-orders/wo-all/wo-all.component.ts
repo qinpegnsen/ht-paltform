@@ -25,6 +25,7 @@ export class WoAllComponent implements OnInit {
   private woStateList: any; // 工单状态枚举列表
   private woTypeList: any;  // 工单类型枚举列表
   public assign:boolean;
+  public curAssignWono:string;
   private search = {
     wono: null,
     ordno: null,
@@ -92,6 +93,24 @@ export class WoAllComponent implements OnInit {
       }
     });
     me.queryDatas(1)
+  }
+
+  /**
+   * 指派订单
+   * @param ordno
+   */
+  assignWoToAgent(wono){
+    this.curAssignWono = wono;
+    console.log("█ wono ►►►",  wono);
+  }
+
+  /**
+   * 获取指派订单结果，是取消操作还是指派成功
+   * @param data
+   */
+  getAssignWoResult(data){
+    this.curAssignWono = null;
+    if(data.type) this.queryDatas(data.page);
   }
 
   /**

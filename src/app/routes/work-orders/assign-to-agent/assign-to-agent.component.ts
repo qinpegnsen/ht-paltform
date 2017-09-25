@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {isNullOrUndefined, isUndefined} from "util";
-import {OrdersService} from "../../orders/orders/orders.service";
 import {SubmitService} from "../../../core/forms/submit.service";
 declare var $: any;
 
@@ -9,78 +8,59 @@ declare var $: any;
   templateUrl: './assign-to-agent.component.html',
   styleUrls: ['./assign-to-agent.component.scss']
 })
-export class AssignToAgentComponent implements OnInit {
-  public showDeliverWindow:boolean = false;
-  public expressList:any;   //物流公司列表
-  public expressNo:any;     //快递公司快递号
-  public expressCode:any;   //快递公司唯一代码
-  @Input('orderId') orderId: string;
+export class AssignToAgentComponent implements OnInit,OnChanges {
+  public showAssignWoWindow: boolean = false;
+  public agentList: any;   //代理商列表
+  public agentCode: any;      //代理商编码
+  @Input('wono') wono: string;
   @Input('page') page: string;
-  @Output() deliverGoods = new EventEmitter();
+  @Output() assignWo = new EventEmitter();
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['orderId'] && !isNullOrUndefined(this.orderId)){
-      console.log("█ orderId ►►►",  this.orderId);
+    if (changes['wono'] && !isNullOrUndefined(this.wono)) {
+      console.log("█ ordno ►►►", this.wono);
       $('.wrapper > section').css('z-index', 200);
-      this.showDeliverWindow = true;
-      this.expressNo = null;      //每次出来把上次填的订单号清除，快递公司就算了，留着吧
+      this.showAssignWoWindow = true;
     }
   }
-  constructor(private ordersServe: OrdersService,public submit:SubmitService) { }
+
+  constructor(public submit: SubmitService) {
+  }
 
   ngOnInit() {
-    this.expressList = this.ordersServe.getBasicExpressList();   //物流公司列表
+    let data = {
+      agentName:'',
+      state: 'NORMAL'
+    }
+    this.agentList = this.submit.getData('/agent/queryAgentNormal',data);
   }
 
   /**
    * 关闭组件
    * @param type true:表示操作成功，false表示取消操作
    */
-  hideWindow(type?:boolean){
+  hideWindow(type?: boolean) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
-    this.showDeliverWindow = false;
-    if(isUndefined(type)) type = false;
-    this.deliverGoods.emit({
+    this.showAssignWoWindow = false;
+    if (isUndefined(type)) type = false;
+    this.assignWo.emit({
       type: type,
       page: me.page
     })// 向外传值
   }
 
   /**
-   * 已选区域
-   * @param data
+   * 指派代理商
    */
-  getSelectArea(data){
-    console.log("█ data ►►►",  data);
-  }
-
-  /**
-   * 显示编辑框
-   * @param target
-   */
-  showEditBox(target){
-    $(target).removeClass('hide')
-  }
-  /**
-   * 显示编辑框
-   * @param target
-   */
-  hideEditBox(target){
-    $(target).addClass('hide')
-  }
-
-  /**
-   * 确认发货
-   */
-  delivery(){
-    let url = '/ord/PlantDelivery';
+  delivery() {
+    let url = '/wo/addWoAgent';
     let data = {
-      ordno: this.orderId,
-      expressCode: this.expressCode,
-      expressNo: this.expressNo
+      wono: this.wono,
+      agentCode: this.agentCode
     }
-    let result = this.submit.getRequest(url,data);
-    if(isNullOrUndefined(result)) this.hideWindow(true)
+    let result = this.submit.postRequest(url, data);
+    if (isNullOrUndefined(result)) this.hideWindow(true);
   }
 
 

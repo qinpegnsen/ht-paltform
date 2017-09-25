@@ -18,9 +18,7 @@
   line-height: 2.6;
   padding-left: 1%;
 }
-tr:first-child>th{
-  border-top:  1px solid #ccc!important;
-}
+
 .demo-chart{
   height: 400px;
 }
