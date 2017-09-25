@@ -31,7 +31,7 @@ export class WoAllComponent implements OnInit {
     ordno: null,
     ordType: '',
     stateEnum: '',
-    pageSize: 3,
+    pageSize: 10,
     sortColumns: null
   }
 
@@ -49,7 +49,6 @@ export class WoAllComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1);
     me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
 

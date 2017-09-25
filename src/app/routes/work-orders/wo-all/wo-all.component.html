@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>-->
-    <div class="search-group pull-left mr-xl mb">
+    <div class="search-group mr-xl mb">
       <span class="search-title">工单类型：</span>
       <div class="search-main">
         <select class="form-control pl-sm pr-sm" name="woType" [(ngModel)]="search.ordType" (change)="queryDatas(1)">
@@ -28,7 +28,7 @@
         </select>
       </div>
     </div>
-    <div class="search-term pull-left mb">
+    <div class="search-term mb">
       <div class="w30 pr0 pull-left">
         <select class="form-control pl-sm pr-sm" name="sss" #sType (change)="changeCondition(sType.value)">
           <option value="wono">工单编码</option>
@@ -99,16 +99,22 @@
           <th class="p-sm text-center">编号</th>
           <th class="p-sm text-center">代理商</th>
           <th class="p-sm text-center">联系电话</th>
-          <th class="p-sm text-center">联系电话</th>
-          <th class="p-sm text-center">状态</th>
-          <th class="p-sm text-center">状态</th>
-          <th class="p-sm text-center">创建时间</th>
-          <th class="p-sm text-center">更新时间</th>
+          <th class="p-sm text-center">时间</th>
+          <th class="p-sm text-center">拒单原因</th>
+          <th class="p-sm text-center">操作人</th>
+          <th class="p-sm text-center">操作人工号</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <td></td>
+        <tbody class="assign-record">
+        <tr *ngIf="!order.woAgentList"><td>暂无指派记录</td></tr>
+        <tr *ngFor="let item of order.woAgentList" class="text-center bt">
+          <td>{{item.id}}</td>
+          <td>{{item.agentName}}</td>
+          <td>{{item.moblie}}</td>
+          <td>{{item.uptime}}</td>
+          <td>{{item.reason | rzhState:'1304'}}</td>
+          <td>{{item.optMan}}</td>
+          <td>{{item.jobno}}</td>
         </tr>
         </tbody>
       </table>

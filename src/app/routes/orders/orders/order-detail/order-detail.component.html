@@ -1,34 +1,24 @@
 
-<div class="szh-order-info position-relative b">
-  <div class="szh-order-details w40">
+<div class="szh-order-info b clearfix position-relative">
+  <div class="szh-order-details">
     <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 订单信息</div>
-    <div class="content p-lg">
+    <div class="content">
       <dl>
-        <dt>买家姓名：</dt>
+        <dt>下单人账号：</dt>
         <dd>{{orderDetailData.linkman}}</dd>
       </dl>
       <dl>
-        <dt>联系电话：</dt>
+        <dt>手机号：</dt>
         <dd>{{orderDetailData.phone}}</dd>
       </dl>
       <dl>
-        <dt>收货地址：</dt>
-        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.addr}}</dd>
+        <dt>留言：</dt>
+        <dd>{{orderDetailData.note}}</dd>
       </dl>
       <dl>
-        <dt>支付方式：</dt>
-        <dd>{{orderDetailData.payWay | rzhState:'1017'}}</dd>
+        <dt>平台备注：</dt>
+        <dd>{{orderDetailData.remark}}</dd>
       </dl>
-      <ng-container *ngIf="logisticsInfo">
-        <dl>
-          <dt>物流公司：</dt>
-          <dd>{{logisticsInfo.expressName}}</dd>
-        </dl>
-        <dl>
-          <dt>快递单号：</dt>
-          <dd>{{logisticsInfo.expressNo}}</dd>
-        </dl>
-      </ng-container>
       <dl class="line pt-lg">
         <dt>订单编号：</dt>
         <dd>{{orderDetailData.ordno}}
@@ -47,6 +37,56 @@
             </ul>
           </div>
         </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="szh-order-details bl br">
+    <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 支付信息</div>
+    <div class="content">
+      <dl>
+        <dt>支付方式：</dt>
+        <dd>{{orderDetailData.payWay | rzhState:'1017'}}</dd>
+      </dl>
+      <dl>
+        <dt>下单终端：</dt>
+        <dd>{{orderDetailData.payPlat | rzhState:'1022'}}</dd>
+      </dl>
+      <dl>
+        <dt>使用重消币数量：</dt>
+        <dd>{{orderDetailData.coin}}</dd>
+      </dl>
+      <dl>
+        <dt>重消币抵扣金额：</dt>
+        <dd>{{orderDetailData.coinPay}}</dd>
+      </dl>
+      <dl>
+        <dt>运费：</dt>
+        <dd>{{orderDetailData.freight}}</dd>
+      </dl>
+      <dl>
+        <dt>最终支付：</dt>
+        <dd>{{orderDetailData.total}}</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="szh-order-details">
+    <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 收货信息</div>
+    <div class="content">
+      <dl>
+        <dt>是否平台配送：</dt>
+        <dd>{{orderDetailData.isPlatCarry | rzhState:'1001'}}</dd>
+      </dl>
+      <dl>
+        <dt>收货人：</dt>
+        <dd>{{orderDetailData.linkman}}</dd>
+      </dl>
+      <dl>
+        <dt>电话：</dt>
+        <dd>{{orderDetailData.phone}}</dd>
+      </dl>
+      <dl>
+        <dt>地址：</dt>
+        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.addr}}</dd>
       </dl>
     </div>
   </div>
@@ -160,11 +200,20 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt>运费：</dt>
-          <dd><span class="main-red font18">{{goodsData.freight == 0? '(免运费)':goodsData.freight | decimalTwo}}</span>元</dd>
+          <dd><span class="font18 ml mr">{{goodsData.freight == 0? '(免运费)':goodsData.freight |
+            decimalTwo}}</span>元</dd>
         </dl>
         <dl class="text-right mb0">
-          <dt>订单应付金额：</dt>
-          <dd><span class="main-red font20">{{goodsData.total | decimalTwo}}</span>元</dd>
+          <dt>重消币抵扣数量：</dt>
+          <dd><span class="font18 ml mr">{{goodsData.coin | decimalTwo}}</span>个</dd>
+        </dl>
+        <dl class="text-right mb0">
+          <dt>重消币抵扣金额：</dt>
+          <dd><span class="font18 ml mr">{{goodsData.coinPay | decimalTwo}}</span>元</dd>
+        </dl>
+        <dl class="text-right mb0">
+          <dt class="font14">最终支付金额：</dt>
+          <dd><span class="main-red ml font22 mr">{{goodsData.total | decimalTwo}}</span>元</dd>
         </dl>
       </td>
     </tr>
