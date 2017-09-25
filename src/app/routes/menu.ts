@@ -109,8 +109,8 @@ const goods = {
           link: '/main/goods/kind-manage'
         },
         {
-          text: '属性模板',
-          link: '/main/goods/properties'
+          text: '基本属性',
+          link: '/main/goods/basic'
         }
       ]
     },

@@ -3,7 +3,6 @@ import {PublishComponent} from "./publish/publish.component";
 import {ManageComponent} from "./manage/manage.component";
 import {BrandsComponent} from "./brands/brands.component";
 import {KindManageComponent} from "./kind-manage/kind-manage.component";
-import {PropertiesComponent} from "./properties/properties.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AddKindComponent} from "./add-kind/add-kind.component";
 import {SharedModule} from "../../shared/shared.module";
@@ -17,6 +16,7 @@ import {ManageService} from "./manage/manage.service";
 import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {AuditGoodsComponent} from "./audit-goods/audit-goods.component";
 import {WholesaleComponent} from "./wholesale/wholesale.component";
+import { BasicPropertiesComponent } from './basic-properties/basic-properties.component';
 
 
 
@@ -42,7 +42,7 @@ const routes: Routes = [
     {path: 'upKindImg', component: AddKindComponent}
   ]
   },
-  {path: 'properties', component: PropertiesComponent},
+  {path: 'basic', component: BasicPropertiesComponent},
   {
     path: 'brands', component: BrandsComponent, children: [
     {path: 'addBrand', component: AddBrandComponent},
@@ -64,7 +64,6 @@ const routes: Routes = [
     ManageComponent,
     BrandsComponent,
     KindManageComponent,
-    PropertiesComponent,
     AddKindComponent,
     AddBrandComponent,
     ChooseKindComponent,
@@ -72,6 +71,7 @@ const routes: Routes = [
     AuditGoodsComponent,
     PublishedComponent,
     WholesaleComponent,
+    BasicPropertiesComponent,
   ],
   providers: [
     GoodsService,
