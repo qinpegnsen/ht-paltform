@@ -40,6 +40,14 @@ export class AgentEptComponent implements OnInit {
   }
 
   /**
+   * 显示买家信息
+   * @param event
+   * @param i
+   */
+  showUserInfo(i) {
+    i.style.display = 'block';
+  }
+  /**
    * 隐藏买家信息
    * @param i
    */

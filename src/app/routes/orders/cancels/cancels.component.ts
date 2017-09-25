@@ -15,6 +15,7 @@ const swal = require('sweetalert');
 export class CancelsComponent implements OnInit {
   public showCancelWindow:boolean = false;
   private ordnoA;
+  private code;
   public goodsList: Page = new Page();
   private goodsAudits: any;  // 商品审核状态列表
   private query;  // 商品审核状态列表
@@ -26,6 +27,7 @@ export class CancelsComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['orderId'] && !isNullOrUndefined(this.orderId)){
       console.log("█ orderId ►►►",  this.orderId);
+
       $('.wrapper > section').css('z-index', 200);
       this.showCancelWindow = true;
       this.queryDatas();
@@ -51,8 +53,10 @@ export class CancelsComponent implements OnInit {
         data: {ordno: this.orderId},
         success: (res) => {
           console.log("█ res ►►►",  res);
+          if(!isNullOrUndefined(res.data)){
+            this.staff = res.data;
+          }
 
-          this.staff = res.data;
         },
         error: (res) => {
           console.log("post limit error");
@@ -80,24 +84,27 @@ export class CancelsComponent implements OnInit {
     this.cancelOrder.emit('hide')// 向外传值
   }
 
+  /**
+   * 代理商订单关闭申请
+   */
   canceslOrder(){
     let _this = this;
     _this.ajax.put({
-      url: '/agentOrd/closeApply',
+      url: '/agentOrd/confirmCloseApply',
       data: {
-        'ordno':_this.ordnoA,
+        'ordno':_this.orderId,
+        'reasonCode':_this.code,
       },
       success: (res) => {
         if (res.success) {
-          //_this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true}); //路由跳转
           swal('已成功取消订单', '', 'success');
-          // _this.AreasComponent.queryList()//实现刷新
+          _this.hideWindow();
         } else {
-          swal(res.info);
+          swal(res.info,'','error');
         }
       },
       error: (data) => {
-        swal('取消订单失败提交失败！', 'error');
+        swal('取消订单失败提交失败！','' ,'error');
       }
     })
   }

@@ -16,11 +16,13 @@ defineLocale('cn', zhCn);
   styleUrls: ['./complete.component.scss']
 })
 export class CompleteComponent implements OnInit {
+  private agentAcct;
+  private agentName;
+  private agentOrdno;
   public orderType: number = 1;
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentAcct;
   private agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
@@ -68,11 +70,11 @@ export class CompleteComponent implements OnInit {
 
     let requestData = {
       curPage: activePage,
-      pageSize: 2,
+      pageSize: 10,
       sortColumns: '',
       agentAcct: _this.agentAcct,
-      goodsName: _this.agentAcct,
-      ordno: _this.agentAcct,
+      goodsName: _this.agentName,
+      ordno: _this.agentOrdno,
       dateStr: dateStr,
       state:'DELIVERY'
     };

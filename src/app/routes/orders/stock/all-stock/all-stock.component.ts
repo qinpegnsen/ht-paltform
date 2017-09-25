@@ -9,7 +9,9 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/bs-moment';
 import {zhCn} from 'ngx-bootstrap/locale';
 import {RzhtoolsService} from '../../../../core/services/rzhtools.service';
+import {AllStockService} from './all-stock.service';
 defineLocale('cn', zhCn);
+const swal = require('sweetalert');
 
 
 @Component({
@@ -23,7 +25,6 @@ export class AllStockComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   private agentAcct;
-  private agentName;
   private agentOrdno;
   private agentTime;
   public curCancelOrderId: string;
@@ -34,7 +35,8 @@ export class AllStockComponent implements OnInit {
   public goodsList: Page = new Page();
   @ViewChild('cancelBox') cancelBox: CancelComponent;
 
-  constructor(private StockComponent: StockComponent, private submit: SubmitService) {
+
+  constructor(private StockComponent: StockComponent, private submit: SubmitService,private AllStockService:AllStockService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
@@ -74,12 +76,36 @@ export class AllStockComponent implements OnInit {
       pageSize: 10,
       sortColumns: '',
       agentAcct: _this.agentAcct,
-      goodsName: _this.agentName,
       ordno: _this.agentOrdno,
       dateStr: dateStr,
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
     console.log("█ _this.goodsList ►►►",  _this.goodsList);
+  }
+
+  /**
+   * 改变订单状态（设置配货）
+   */
+  distribution(getOrdno){
+    let _this = this, url: string = "/agentOrd/updateStateToPrepare", data: any;
+    swal({
+        title: '确定该商品已配货？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        data = {
+          ordno:getOrdno
+        }
+        console.log(data)
+        _this.AllStockService.ordno(url, data); //删除数据
+        _this.queryDatas(1);
+      }
+    );
   }
 
   /**

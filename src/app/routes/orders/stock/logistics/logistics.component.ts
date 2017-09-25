@@ -63,6 +63,9 @@ export class LogisticsComponent implements OnInit {
     console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
+  /***
+   * 设置发货
+   */
   canceslOrder(){
     let _this = this;
     _this.ajax.put({
@@ -74,9 +77,8 @@ export class LogisticsComponent implements OnInit {
       },
       success: (res) => {
         if (res.success) {
-          //_this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true}); //路由跳转
           swal('已成功发货', '', 'success');
-          // _this.AreasComponent.queryList()//实现刷新
+          _this.hideWindow();
         } else {
           swal(res.info);
         }

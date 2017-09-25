@@ -21,6 +21,8 @@ export class CuccessComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   private agentAcct;
+  private agentName;
+  private agentOrdno;
   private agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
@@ -69,11 +71,11 @@ export class CuccessComponent implements OnInit {
 
     let requestData = {
       curPage: activePage,
-      pageSize: 2,
+      pageSize: 10,
       sortColumns: '',
       agentAcct: _this.agentAcct,
-      goodsName: _this.agentAcct,
-      ordno: _this.agentAcct,
+      goodsName: _this.agentName,
+      ordno: _this.agentOrdno,
       dateStr: dateStr,
       state:'SUCCESS'
     };

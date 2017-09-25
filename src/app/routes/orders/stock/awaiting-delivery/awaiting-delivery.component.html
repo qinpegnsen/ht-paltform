@@ -61,8 +61,8 @@
       <div class="order-head p b bb0">
         <span class="mr-xl">订单编号：{{goods.ordno}}</span>
         <span class="mr-xl">下单时间：{{goods.createTime}}</span>
-        <span class="icon-screen-smartphone">来源：移动端</span>
-        <!--<span class="fa fa-desktop"> 来源：PC</span>-->
+       <!-- <span class="icon-screen-smartphone">来源：移动端</span>-->
+        <span class="fa fa-desktop"> 来源：PC</span>
       </div>
       <table class="w100 b">
         <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
@@ -73,9 +73,9 @@
               <p class="mb0 font13 omg2 two-row mb-sm">
                 <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
               </p>
-              <p class="mb0 one-row omg" *ngFor="let attr of goods.goodsBaseSaList">
+              <p class="mb0 one-row omg" *ngFor="let attr of name.goodsSavSet | strToJson">
                 <span class="inline">{{attr.attrName}}：</span>
-                <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
+                <span class="inline">{{attr.value}}</span>
               </p>
             </div>
           </td>
@@ -115,7 +115,7 @@
             </p>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck">
+            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" (click)="cancelOrder(name.ordno)">
               设置发货
             </button>
           </td>
@@ -141,7 +141,7 @@
   </tr>
   </tfoot>
 </table>
-<app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
+<app-logistics [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-logistics>
 <!--
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>

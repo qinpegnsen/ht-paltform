@@ -24,6 +24,8 @@ import {CompleteComponent} from './stock/complete/complete.component';
 import {StockDetailComponent} from './stock/stock-detail/stock-detail.component';
 import {CuccessComponent} from './stock/cuccess/cuccess.component';
 import { LogisticsComponent } from './stock/logistics/logistics.component';
+import {ForFistributonService} from './stock/for-distribution/for-fistributon.service';
+import {AllStockService} from './stock/all-stock/all-stock.service';
 
 
 const routes: Routes = [
@@ -95,7 +97,9 @@ const routes: Routes = [
     BuyerEvaluationComponent,
     AgentEptComponent,
     StoreEvaluationComponent,
-    OrdersService
+    OrdersService,
+    ForFistributonService,
+    AllStockService
   ]
 })
 export class OrdersModule { }
