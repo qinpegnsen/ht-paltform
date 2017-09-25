@@ -82,12 +82,12 @@
       <td>{{order.state | rzhState:'1303'}}</td>
       <td>
         <span *ngIf="order.state=='NO'">
-          <button class="btn btn-purple btn-sm fa fa-hand-o-right" title="指派"></button>
+          <button class="btn btn-purple btn-sm fa fa-hand-o-right" title="指派" (click)="assignOrd(order.wono)"></button>
           <button class="btn btn-info btn-sm icon-paper-clip" title="接单"
                   (click)="acceptNa(order.wono,woList.curPage)"></button>
         </span>
         <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                routerLink="/main/orders/cust/order-detail" [queryParams]="{}"></button>
+                routerLink="/main/orders/cust/order-detail" [queryParams]="{ordno:order.ordno}"></button>
       </td>
     </tr>
     <tr *ngIf="detail[i]">
@@ -132,3 +132,4 @@
   </tfoot>
 </table>
 </div>
+<app-assign-to-agent [orderId]="" [page]="woList.curPage"></app-assign-to-agent>

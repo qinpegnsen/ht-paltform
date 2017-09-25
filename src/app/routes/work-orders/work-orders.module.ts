@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {WoAllComponent} from "./wo-all/wo-all.component";
 import {WoService} from "./wo.service";
+import { AssignToAgentComponent } from './assign-to-agent/assign-to-agent.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   declarations: [
     WoManageComponent,
     WoAllComponent,
+    AssignToAgentComponent,
   ],
   providers: [WoManageComponent,WoService]
 })

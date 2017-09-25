@@ -25,6 +25,7 @@ export class AllOrdersComponent implements OnInit {
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
   public custCode: string;
+  public ordno: string;
   public LogisticsData: any;//物流信息
   public bsConfig: Partial<BsDatepickerConfig>;
 
@@ -89,6 +90,14 @@ export class AllOrdersComponent implements OnInit {
   }
 
   /**
+   * 切换搜索条件时
+   */
+  changeSearchType(val){
+    if(val=='custCode') this.ordno = null;
+    else this.custCode = null;
+  }
+
+  /**
    * 查询列表
    * @param event
    * @param curPage
@@ -105,6 +114,7 @@ export class AllOrdersComponent implements OnInit {
       curPage: activePage,
       pageSize: 5,
       custCode: _this.custCode,
+      ordno: _this.ordno,
       ordState: _this.ordState
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));

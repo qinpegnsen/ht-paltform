@@ -48,4 +48,20 @@ export class OrdersService {
     if(!isNullOrUndefined(list) && !isNullOrUndefined(list.voList))
     return list.voList;
   }
+
+  /**
+   * 根据订单编号获取订单详情
+   * @param ordno
+   * @returns {any}
+   */
+  public getOrderDetailByNO(ordno){
+    let url = '/ord/loadOrdByOrdno';
+    let data = {
+      ordno:ordno
+    }
+    let list = this.submit.getData(url, data);
+    if(!isNullOrUndefined(list)) return list;
+  }
+
+
 }

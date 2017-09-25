@@ -1,40 +1,37 @@
 
 <div class="szh-order-info position-relative b">
- <!-- <div class="szh-order-details w40">
-    <div class="order-head p b">订单信息</div>
-    <div class="content p-lg b bt0">
+  <div class="szh-order-details w40">
+    <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 订单信息</div>
+    <div class="content p-lg">
       <dl>
         <dt>买家姓名：</dt>
-        <dd>{{orderData.linkman}}</dd>
+        <dd>{{orderDetailData.linkman}}</dd>
       </dl>
       <dl>
         <dt>联系电话：</dt>
-        <dd>{{orderData.mobile}}</dd>
+        <dd>{{orderDetailData.phone}}</dd>
       </dl>
       <dl>
         <dt>收货地址：</dt>
-        <dd>{{orderData.addr}}</dd>
+        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.addr}}</dd>
       </dl>
       <dl>
         <dt>支付方式：</dt>
-        <dd *ngIf="orderData.payWay=='ONLINE'">在线支付</dd>
-        <dd *ngIf="orderData.payWay=='REMIT'">银行转账</dd>
+        <dd>{{orderDetailData.payWay | rzhState:'1017'}}</dd>
       </dl>
-      <dl>
-        <dt>快递公司：</dt>
-        <dd>{{express.expressName}}</dd>
-      </dl>
-      <dl>
-        <dt>快递单号：</dt>
-        <dd>{{express.expressNo}}</dd>
-      </dl>
-      <dl>
-        <dt>买家留言：</dt>
-        <dd style="word-break:break-all">{{orderData.remark}}</dd>
-      </dl>
+      <ng-container *ngIf="logisticsInfo">
+        <dl>
+          <dt>物流公司：</dt>
+          <dd>{{logisticsInfo.expressName}}</dd>
+        </dl>
+        <dl>
+          <dt>快递单号：</dt>
+          <dd>{{logisticsInfo.expressNo}}</dd>
+        </dl>
+      </ng-container>
       <dl class="line pt-lg">
         <dt>订单编号：</dt>
-        <dd>{{orderData.ordno}}
+        <dd>{{orderDetailData.ordno}}
           <span class="pull-right" (mouseenter)="showTimeList(times)"
                 (mouseleave)="hideTimesList(times)"
                 myHoverColor
@@ -44,46 +41,7 @@
           <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
             class="arrow"></span>
             <ul class="list-unstyled font12 mb0">
-              <li><span>{{orderData.createTime}}</span>买家下单时间</li>
-            </ul>
-          </div>
-        </dd>
-      </dl>
-    </div>
-  </div>-->
-  <div class="szh-order-details w40">
-    <div class="order-head p bb">订单信息</div>
-    <div class="content p-lg">
-      <dl>
-        <dt>收&nbsp;货&nbsp;人：</dt>
-        <dd>刘能13920181664天津 天津市 和平区 水上公园北路</dd>
-      </dl>
-      <dl>
-        <dt>支付方式：</dt>
-        <dd>在线支付(付款单号：940537964101561009)</dd>
-      </dl>
-      <dl>
-        <dt>发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</dt>
-        <dd>
-          <span>不需要发票</span>
-        </dd>
-      </dl>
-      <dl>
-        <dt>买家留言：</dt>
-        <dd style="word-break:break-all">1234567897897854</dd>
-      </dl>
-      <dl class="line pt-lg">
-        <dt>订单编号：</dt>
-        <dd>2270000000026200
-          <span class="pull-right" (mouseenter)="showTimeList(times)"
-                (mouseleave)="hideTimesList(times)"
-                myHoverColor
-                [myHover]="'#CC1635'">更多<i
-            class="fa fa-angle-down time-list"></i>
-          </span>
-          <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
-            class="arrow"></span>
-            <ul class="list-unstyled font12 mb0">
+              <li *ngIf="!orderStates"><span>{{orderDetailData.createTime}}</span> 创建订单</li>
               <li *ngFor="let item of orderStates"><span>{{item.createTime}}</span>{{item.state=='DELIVERY'?'已发货':item
                 .description}}</li>
             </ul>
@@ -93,7 +51,7 @@
     </div>
   </div>
   <div class="szh-order-condition bl">
-    <div class="order-head p bb">物流信息</div>
+    <div class="order-head p bb text-info"><i class="fa fa-truck"></i> 物流信息</div>
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
@@ -158,21 +116,21 @@
     <thead class="w100">
     <tr class="w100 order-head">
       <th class="w50 p text-center">商品</th>
-      <th class="w10 p text-center">单价（元）</th>
+      <th class="w10 p text-center">单价(元)</th>
       <th class="w10 p text-center">数量</th>
-      <th class="w10 p text-center">订单金额（元）</th>
+      <th class="w10 p text-center">订单金额(元)</th>
       <th class="w10 p text-center">交易操作</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="text-center">
+    <tr class="text-center" *ngFor="let goods of goodsData;let i = index">
       <td class="text-left p position-relative bb">
-          <span class="goods-img goods-md-img mr"><img [src]="000"
+          <span class="goods-img goods-md-img mr"><img [src]="goods.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'"
                                                        alt=""></span>
         <div class="goods-md-info">
           <p class="mb0 font13 omg2 two-row mb-sm">
-            <a class="goods-name" href="javascript:;">商品名</a>
+            <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
           </p>
           <p class="mb0 one-row omg font12">
             <span class="inline">颜色：</span>
@@ -180,39 +138,21 @@
           </p>
         </div>
       </td>
-      <td class="bb">{{0.356 | decimalTwo}}</td>
-      <td class="bb">3</td>
-      <td class="bl" rowspan="2">
-        <span class="main-red font14">¥{{690.123 | decimalTwo}}</span><br>
-        <span class="font-gray">（免运费）</span><br>
-        <span class="font-gray">在线支付</span>
-      </td>
-      <td class="bl" rowspan="2">
-        <p class="font-gray mb-sm cursor-p">待发货</p>
-        <button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>
-        <br>
-        <button class="m-sm btn btn-xs btn-green fa fa-truck"> 发货</button>
-        <br>
-        <button class="m-sm btn btn-xs btn-danger fa fa-retweet"> 退款</button>
-      </td>
-    </tr>
-    <tr class="text-center">
-      <td class="text-left p position-relative bb">
-          <span class="goods-img goods-md-img mr">
-            <img [src]="000" onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt=""></span>
-        <div class="goods-md-info">
-          <p class="mb0 font13 omg2 two-row mb-sm">
-            <a class="goods-name" href="javascript:;">商品名</a>
-          </p>
-          <p class="mb0 one-row omg font12">
-            <span class="inline">颜色：</span>
-            <span class="inline">红色</span>
-          </p>
-        </div>
-      </td>
-      <td class="bb">{{0.356 | decimalTwo}}</td>
-      <td class="bb">3</td>
+      <td class="bb">{{goods.price | decimalTwo}}</td>
+      <td class="bb">{{goods.num}}</td>
+      <ng-container *ngIf="i == 0">
+        <td class="bl" [attr.rowspan]="goodsData.length">
+          <span class="main-red font14">¥{{goodsData.pay | decimalTwo}}</span><br>
+          <span class="font-gray">（免运费）</span><br>
+          <span class="font-gray">{{goodsData.payWay | rzhState:'1017'}}</span>
+        </td>
+        <td class="bl" [attr.rowspan]="goodsData.length">
+          <p class="font-gray mb-sm cursor-p">{{goodsData.state | rzhState:'1019'}}</p>
+          <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>-->
+          <button class="m-sm btn btn-xs btn-green fa fa-truck" *ngIf="goodsData.state=='PREPARE'"> 发货</button>
+          <!--<button class="m-sm btn btn-xs btn-danger fa fa-retweet"> 退款</button>-->
+        </td>
+      </ng-container>
     </tr>
     </tbody>
     <tfoot>
@@ -220,15 +160,19 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt>运费：</dt>
-          <dd><span class="main-red font18">{{3.6 | decimalTwo}}</span>元</dd>
+          <dd><span class="main-red font18">{{goodsData.freight == 0? '(免运费)':goodsData.freight | decimalTwo}}</span>元</dd>
         </dl>
-        <dl
-          class="text-right mb0">
+        <dl class="text-right mb0">
           <dt>订单应付金额：</dt>
-          <dd><span class="main-red font20">{{120 | decimalTwo}}</span>元</dd>
+          <dd><span class="main-red font20">{{goodsData.total | decimalTwo}}</span>元</dd>
         </dl>
       </td>
     </tr>
     </tfoot>
   </table>
 </div>
+<ng-container *ngIf="goodsData.state=='PREPARE'">
+  <app-deliver-goods [orderId]="curDeliverOrderId"
+                     (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
+</ng-container>
+
