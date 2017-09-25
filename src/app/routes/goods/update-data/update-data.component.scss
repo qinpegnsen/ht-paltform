@@ -1,0 +1,64 @@
+.deliver-order {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.deliver-order ._popup {
+  background-color: #fff;
+  position: relative;
+  width: 600px;
+  top: 25%;
+  margin: auto;
+  z-index: 300;
+}
+
+.deliver-order dt {
+  padding: 12px;
+  text-align: right;
+  font-weight: normal;
+  color: #888;
+}
+
+.deliver-order dd {
+  color: #666;
+  padding: 12px;
+  vertical-align: top;
+  border-left: 1px solid #F0F0F0;
+}
+
+.deliver-order dt, .deliver-order dd {
+  display: inline-block;
+}
+
+.deliver-order .orderId-color {
+  color: #6ec0ff;
+}
+
+.deliver-order .mask {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.deliver-info {
+  border: 1px dashed #FEC500;
+  background-color: #FFFCE9;
+}
+
+.deliver-info dl {
+  margin-bottom: 0;
+}
+
+.deliver-info dt, .deliver-info dd {
+  padding: 3px;
+  border: none;
+  line-height: 30px;
+}
+
+.deliver-order .remark {
+  min-width: 300px;
+  max-width: 420px;
+  min-height: 60px;
+  max-height: 80px;
+}

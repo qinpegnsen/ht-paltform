@@ -17,6 +17,8 @@ import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {AuditGoodsComponent} from "./audit-goods/audit-goods.component";
 import {WholesaleComponent} from "./wholesale/wholesale.component";
 import { BasicPropertiesComponent } from './basic-properties/basic-properties.component';
+import {AddDataComponent} from "./add-data/add-data.component";
+import { UpdateDataComponent } from './update-data/update-data.component';
 
 
 
@@ -72,6 +74,8 @@ const routes: Routes = [
     PublishedComponent,
     WholesaleComponent,
     BasicPropertiesComponent,
+    AddDataComponent,
+    UpdateDataComponent
   ],
   providers: [
     GoodsService,
@@ -80,7 +84,9 @@ const routes: Routes = [
     BrandsComponent,
     KindManageComponent,
     ManageService,
-    ManageComponent
+    ManageComponent,
+    AddDataComponent,
+    UpdateDataComponent
   ]
 })
 export class GoodsModule {

@@ -1,9 +1,10 @@
 <div class="content-heading mb-lg">
   销售属性
-
+  <app-buttons class="pull-right" [config]="addbuttons"  (click)="addNewData()"></app-buttons>
 </div>
 
 <div class="panel panel-default">
+
 
   <div class="panel mb p w98 m-auto ts">
     <p class="font18">操作提示</p>
@@ -15,46 +16,44 @@
     </ul>
   </div>
 
+
+  <div class="col-sm-2" style="margin-bottom: 20px">
+    <label class="pull-left lh">属性名称分类：</label>
+    <app-get-kind (myData)="getKind($event)"></app-get-kind>
+  </div>
+
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
       <thead>
       <tr>
-        <th class="text-center w20">
+        <th class="text-center w25">
           <rzhDefaultSorter by="order">规格名称</rzhDefaultSorter>
         </th>
-        <th class="text-center w40">
+        <th class="text-center w50">
           <rzhDefaultSorter by="name">规格值</rzhDefaultSorter>
         </th>
-        <th class="text-center w20">
-          <rzhDefaultSorter by="email">所属分类</rzhDefaultSorter>
-        </th>
-        <th class="text-center w20">
+        <th class="text-center w25">
           <rzhDefaultSorter by="email">管理操作</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data" class="text-center">
-      <td class=""></td>
-      <td class=""></td>
-      <td class=""></td>
-      <td class=""></td>
+      <tr *ngFor="let count of data.baseTypeList" class="text-center">
+      <td >{{count.name}}</td>
+      <td >
+        <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>
+      </td>
+      <td >
+        <app-buttons [config]="updatebuttons"  (click)="updateNewData()" ></app-buttons>
+        <app-buttons [config]="deletebuttons" (click)="delete(count.id)"></app-buttons>
+      </td>
       </tr>
       </tbody>
-      <!--<tfoot>-->
-      <!--<tr>-->
-        <!--<td colspan="4">-->
-          <!--<div class="col-sm-5">-->
-            <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7">-->
-            <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
-          <!--</div>-->
-        <!--</td>-->
-      <!--</tr>-->
-      <!--</tfoot>-->
     </table>
   </div>
 </div>
 
+<app-add-data [showAddWindow]="showAddWindow" (addData)="getAddDataResult($event)" ></app-add-data>
+
+<app-update-data [showUpdateWindow]="showUpdateWindow" (upDate)="getUpdateResult($event)" ></app-update-data>
 

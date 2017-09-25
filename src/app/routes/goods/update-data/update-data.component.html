@@ -1,0 +1,41 @@
+
+<div class="deliver-order fadeIn" *ngIf="showUpdateWindow">
+  <div class="mask"></div>
+  <form class="_popup animated fadeIn" #updata="ngForm">
+    <div class="pop popup-hd">
+      <span class="f-bold">新增商品规格</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+
+    <div class="panel mb p w98 m-auto ts">
+      <p class="font18">操作提示</p>
+      <ul>
+        <li>规格名称与排序为必填选项，请根据提示信息按规定进行修改编辑操作。</li>
+        <li>如需要对现有的规格值进行编辑，请点击表单项规格值内容链接并打开相关内容编辑页面进行操作。</li>
+        <li>如需要增加一个新的规格值，请点击表单项规格值“新增规格值”按钮并打开相关新增页面进行操作。</li>
+      </ul>
+    </div>
+    <!--name="" [(ngModel)]=""-->
+    <!--表单-->
+    <div class="pop deliver-box font12 w100">
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">规格名称：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入必填名称" >
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">规格值：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入规格值">
+        </dd>
+      </dl>
+
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info" type="button" (click)="delivery(update.value)">确认提交</button>
+    </div>
+  </form>
+</div>
+
