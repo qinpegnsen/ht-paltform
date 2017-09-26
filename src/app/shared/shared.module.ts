@@ -52,6 +52,7 @@ import {DndModule} from "ng2-dnd";
 import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.directive";
 import {PopoverModule} from "ngx-bootstrap";
 import { StrJsonPipe } from './pipe/str-json.pipe';
+import { GetWeekPipe } from './pipe/get-week.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -111,7 +112,8 @@ import { StrJsonPipe } from './pipe/str-json.pipe';
     DecimalTwoPipe,
     StarsPipe,
     HoverShowLgPicDirective,
-    StrJsonPipe
+    StrJsonPipe,
+    GetWeekPipe
   ],
   exports: [
     CommonModule,
@@ -162,7 +164,8 @@ import { StrJsonPipe } from './pipe/str-json.pipe';
     DndModule,
     HoverShowLgPicDirective,
     PopoverModule,
-    StrJsonPipe
+    StrJsonPipe,
+    GetWeekPipe
   ]
 })
 

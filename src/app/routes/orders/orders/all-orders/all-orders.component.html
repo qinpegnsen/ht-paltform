@@ -20,11 +20,12 @@
     <div class="w70 pl-sm pr0 pull-left">
       <div class="form-group mb0 pr0">
         <div class="w80 pl0 pr0 pull-left">
-          <input *ngIf="sType.value=='ordno'" type="text" placeholder="订单编号" class="form-control border-b-grey" [(ngModel)]="ordno">
+          <input *ngIf="sType.value=='ordno'" type="text" placeholder="订单编号" class="form-control border-b-grey"
+                 [(ngModel)]="ordno" (change)="queryDatas(1)">
           <input *ngIf="sType.value=='custCode'" type="text" placeholder="买家编号" class="form-control border-b-grey"
-                 [(ngModel)]="custCode">
+                 [(ngModel)]="custCode" (change)="queryDatas(1)">
         </div>
-        <button type="button" title="搜索" (click)="queryDatas(1)"
+        <button type="button" title="搜索"
                 class="btn btn-primary bar-h3-btn mr0 ng-scope">
           <em class="icon-magnifier fa-fw"></em>
         </button>

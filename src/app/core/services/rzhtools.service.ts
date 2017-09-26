@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {isNull, isNullOrUndefined} from "util";
+import {isNull, isNullOrUndefined, isUndefined} from "util";
 import {areaIdCardJSON} from "./areaIdCard";
 import {AjaxService} from "./ajax.service";
 import {ToasterService} from "angular2-toaster";
@@ -116,7 +116,7 @@ export class RzhtoolsService {
       areaLevelOne: BasicArea = null,
       areaLevelTwo: BasicArea = null,
       arealevelThree: BasicArea = null;
-      // getAreaURL = areaJsonFile + '?v=' + (new Date().getTime()); // 清除缓存
+    // getAreaURL = areaJsonFile + '?v=' + (new Date().getTime()); // 清除缓存
     isSelectOld = isNull(isSelectOld) ? true : isSelectOld;
 
     // 取到省级区域对象
@@ -280,25 +280,25 @@ export class RzhtoolsService {
    * @param code  12位区域编码
    * @returns {any}
    */
-  public getAreaByTwelveBitCode(code){
+  public getAreaByTwelveBitCode(code) {
     let areaList = AREA_LEVEL_2_JSON;
     let level = this.getLevelByCode(code);
-    if(level == 1){
-      for(let levelOneItem of areaList){
-        if(levelOneItem.areaCode == code){
+    if (level == 1) {
+      for (let levelOneItem of areaList) {
+        if (levelOneItem.areaCode == code) {
           return levelOneItem;
         }
       }
-    }else if(level == 2){
-      let parentCode = code.substring(0,2) + '0000000000';
-      for(let area of areaList){
-        if(area.areaCode === parentCode){
-          for(let levelTwoItem of area.children){
-            if(levelTwoItem.areaCode == code) return levelTwoItem;
+    } else if (level == 2) {
+      let parentCode = code.substring(0, 2) + '0000000000';
+      for (let area of areaList) {
+        if (area.areaCode === parentCode) {
+          for (let levelTwoItem of area.children) {
+            if (levelTwoItem.areaCode == code) return levelTwoItem;
           }
         }
       }
-    }else{
+    } else {
       return null
     }
 
@@ -309,7 +309,7 @@ export class RzhtoolsService {
    * @param areaCode
    * @returns {number}
    */
-  private getLevelByCode(areaCode){
+  private getLevelByCode(areaCode) {
     let level = 0;
     if (isNullOrUndefined(areaCode)) {
       return level;
@@ -398,8 +398,8 @@ export class RzhtoolsService {
    * @param file
    */
   uploadImg = function (file: any) {
-    console.log("█ file ►►►",  file);
-    let _this = this, ret: string,data:any = new FormData();
+    console.log("█ file ►►►", file);
+    let _this = this, ret: string, data: any = new FormData();
     data.append("limitFile", file);
     _this.ajax.post({
       url: "/goodsEdit/uploadGoodsBodyImage",
@@ -410,10 +410,10 @@ export class RzhtoolsService {
       processData: false,
       success: (response) => {
         if (!isNullOrUndefined(response) && response.success) ret = response.data;
-        if(!response.success) AppComponent.rzhAlt('error',response.info,file.name+'上传失败')
+        if (!response.success) AppComponent.rzhAlt('error', response.info, file.name + '上传失败')
       },
       error: (response) => {
-        AppComponent.rzhAlt('error',file.name+'上传失败','')
+        AppComponent.rzhAlt('error', file.name + '上传失败', '')
         console.log("█ response ►►►", response);
       }
     });
@@ -427,13 +427,13 @@ export class RzhtoolsService {
    * @param level   当前级别
    * @returns {any}
    */
-  getAreaList(areaCode?:string, level?: number){
-    if(isNullOrUndefined(level)) level = 0;
+  getAreaList(areaCode?: string, level?: number) {
+    if (isNullOrUndefined(level)) level = 0;
     let data = {
       area_code: areaCode,
-      level: level+1
+      level: level + 1
     };
-    let areas = this.submit.getData('/res/area/queryAreasByCode',data);
+    let areas = this.submit.getData('/res/area/queryAreasByCode', data);
     return areas;
   }
 
@@ -469,13 +469,17 @@ export class RzhtoolsService {
   }
 
   /**
+   *
    * 根据日期获取是星期几
    * @param date 日期
+   * @param lan 语言（'cn':中文，'en':英语）默认英文
    * @returns {string}
    */
-  static getWeek = function (date: Date) {
+  static getWeek = function (date: Date, lan?) {
+    console.log("█ date ►►►",  date);
     let today = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    let week = today[date.getDay()];
+    if (!isUndefined(lan) && lan == 'cn') today = new Array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
+      let week = today[date.getDay()];
     // let weeks: Array<any> = this.getEnumDataList(SettingsService.enums.week), week: string, num: number = date.getDay() + 1;
     // for (let i = 0; i < weeks.length; i++) {
     // 	if (num.toString() == weeks[i]["val"]) week = weeks[i]["key"];

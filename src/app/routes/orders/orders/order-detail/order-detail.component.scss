@@ -102,7 +102,7 @@
   }
 }
 
-@media screen and (max-width: 1366px){
+@media screen and (max-width: 1500px){
   .szh-order-details {
     width: 33.333%;
     padding-left: 0;
@@ -204,6 +204,9 @@
 }
 
 .order-track{
+  .timeline > li > .timeline-panel, .timeline-alt > li > .timeline-panel {
+    margin-left: 45px;
+  }
   .timeline-alt > li > .timeline-badge {
     position: absolute;
     left: 8px;
@@ -215,6 +218,17 @@
     border-radius: 20px;
     line-height: 20px;
     text-align: center;
+  }
+  .logis-time{
+    display: inline-block;
+    text-align: right;
+    min-width: 170px;
+    position: absolute;
+    left: 0;
+  }
+  .every-line{
+    position: relative;
+    padding-left: 180px;
   }
 }
 

@@ -95,20 +95,46 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
-        <li class="mb0" *ngFor="let item of orderStates">
+        <li class="mb0" *ngFor="let item of orderStates;let s = index">
           <div class="timeline-badge primary">
             <em class="fa fa-truck"></em>
           </div>
           <div class="timeline-panel">
             <div class="right">
               <div>
-                <p *ngIf="item.state!='DELIVERY'">
-                  <span class="mr">{{item.createTime}}</span>
-                  <span>{{item.description}}</span>
+                <p *ngIf="item.state!='DELIVERY'" class="every-line">
+                  <span class="mr" *ngIf="s==0">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                  </span>
+                  <ng-container *ngIf="s>0">
+                    <span class="mr logis-time" *ngIf="item.day==orderStates[s-1].day">{{item.time}}</span>
+                    <span class="mr logis-time" *ngIf="item.day!=orderStates[s-1].day">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                    </span>
+                  </ng-container>
+                  <span class="every-info">{{item.description}}</span>
                 </p>
-                <p *ngFor="let detail of item.traceVos;let i=index;">
-                  <span class="mr">{{detail.acceptTime}}</span>
-                  <span>{{detail.acceptStation}}</span>
+                <p *ngFor="let detail of item.traceVos;let i=index;"class="every-line">
+                  <span class="mr logis-time" *ngIf="i==0">
+                    <ng-container *ngIf="detail.day!=orderStates[s-1].day">
+                      <b class="mr-lg">{{detail.day}}</b>
+                      <b class="mr-lg">{{detail.day | getWeek}}</b>
+                    </ng-container>
+                  {{detail.time}}</span>
+                    <ng-container *ngIf="i>0">
+                      <span class="mr logis-time" *ngIf="detail.day==item.traceVos[i-1].day">{{detail
+                        .time}}</span>
+                      <span class="mr logis-time" *ngIf="detail.day!=item.traceVos[i-1].day">
+                        <b class="mr-lg">{{detail.day}}</b>
+                        <b class="mr-lg">{{detail.day | getWeek}}</b>
+                        {{detail.time}}
+                      </span>
+                    </ng-container>
+                  <span class="every-info">{{detail.acceptStation}}</span>
                 </p>
               </div>
             </div>
