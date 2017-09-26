@@ -38,8 +38,10 @@
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group pr0 mb0">
           <div class="w80 pl0 pr0 pull-left">
-            <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="定单编码" [(ngModel)]="search.ordno">
-            <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编码" [(ngModel)]="search.wono">
+            <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="定单编码"
+                   [(ngModel)]="search.ordno">
+            <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编码"
+                   [(ngModel)]="search.wono">
           </div>
           <button type="button" title="搜索" (click)="queryDatas(1)"
                   class="btn btn-primary bar-h3-btn mr0 ng-scope">
@@ -50,94 +52,100 @@
     </div>
   </div>
   <!--查询 end-->
-  <table class="wo table table-striped" #dataTable="rzhDataTable" [rzhData]="woList" (pageChange)="queryDatas(1,$event)">
-  <thead>
-  <tr>
-    <th class="w5 text-center">更多</th>
-    <th class="w10 text-center">工单编号</th>
-    <th class="w10 text-center">工单类型</th>
-    <th class="w10 text-center">订单编号</th>
-    <th class="w10 text-center">联系人</th>
-    <th class="w10 text-center">电话</th>
-    <th class="w10 text-center">地址</th>
-    <th class="w10 text-center">创建时间</th>
-    <th class="w10 text-center">状态</th>
-    <th class="w15 text-center">管理操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-container *ngFor="let order of dataTable.data; let i = index">
-    <tr class="text-center">
-      <td (click)="showDetail(i)"><i class="icon icon-arrow-down"></i></td>
-      <td>{{order.wono}}</td>
-      <td>
-        <span *ngIf="order.ordType == 'ORD'" class="icon-handbag text-danger font16" title="购物订单"></span>
-        <span *ngIf="order.ordType == 'SELL_AFTER'" class="fa fa-tty text-green font16" title="售后订单"></span>
-      </td>
-      <td>{{order.ordno}}</td>
-      <td>{{order.linkman}}</td>
-      <td>{{order.phone}}</td>
-      <td>{{order.address}}</td>
-      <td>{{order.createTime}}</td>
-      <td>{{order.state | rzhState:'1303'}}</td>
-      <td>
+  <table class="wo table table-striped" #dataTable="rzhDataTable" [rzhData]="woList"
+         (pageChange)="queryDatas(1,$event)">
+    <thead>
+    <tr>
+      <th class="w5 text-center" *ngIf="search.stateEnum!='NO'">更多</th>
+      <th class="w10 text-center">工单编号</th>
+      <th class="w8 text-center">工单类型</th>
+      <th class="w10 text-center">订单编号</th>
+      <th class="w10 text-center">联系人</th>
+      <th class="w10 text-center">电话</th>
+      <th class="w12 text-center">地址</th>
+      <th class="w10 text-center">创建时间</th>
+      <th class="w10 text-center">状态</th>
+      <th class="w15 text-center">管理操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let order of dataTable.data; let i = index">
+      <tr class="text-center">
+        <td *ngIf="search.stateEnum!='NO'"><i *ngIf="order.state!='NO'" class="icon icon-arrow-down cursor-p"
+                                              [class.text-info]="detail[i]"
+                                              (click)="showDetail(i)"></i></td>
+        <td>{{order.wono}}</td>
+        <td>
+          <span *ngIf="order.ordType == 'ORD'" class="icon-handbag text-danger font16" title="购物订单"></span>
+          <span *ngIf="order.ordType == 'SELL_AFTER'" class="fa fa-tty text-green font16" title="售后订单"></span>
+        </td>
+        <td>{{order.ordno}}</td>
+        <td>{{order.linkman}}</td>
+        <td>{{order.phone}}</td>
+        <td><span class="font12">{{order.areaFullName}} {{order.address}}</span></td>
+        <td>{{order.createTime}}</td>
+        <td>{{order.state | rzhState:'1303'}}</td>
+        <td>
         <span *ngIf="order.state=='NO'">
           <button class="btn btn-purple btn-sm fa fa-hand-o-right" title="指派"
                   (click)="assignWoToAgent(order.wono)"></button>
           <button class="btn btn-info btn-sm icon-paper-clip" title="接单"
                   (click)="acceptNa(order.wono,woList.curPage)"></button>
         </span>
-        <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                routerLink="/main/orders/cust/order-detail" [queryParams]="{ordno:order.ordno}"></button>
+          <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
+                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
+          <!--<button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
+                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>-->
+        </td>
+      </tr>
+      <tr *ngIf="search.stateEnum!='NO' && detail[i]">
+        <td *ngIf="!order.woAgentList || order.woAgentList.length==0" colspan="20" class="record-detail">暂无指派记录……</td>
+        <td *ngIf="order.woAgentList.length > 0" colspan="20" class="p0 record-detail">
+          <table class="w100">
+            <thead>
+            <tr>
+              <th class="p-sm w5 text-center">编号</th>
+              <th class="p-sm w10 text-center">代理商</th>
+              <th class="p-sm w10 text-center">联系电话</th>
+              <th class="p-sm w10 text-center">时间</th>
+              <th class="p-sm w15 text-center">拒单原因</th>
+              <th class="p-sm w10 text-center">操作人</th>
+              <th class="p-sm w10 text-center">操作人工号</th>
+            </tr>
+            </thead>
+            <tbody class="assign-record">
+            <tr *ngFor="let item of order.woAgentList" class="text-center">
+              <td>{{item.id}}</td>
+              <td>{{item.agentName}}</td>
+              <td>{{item.moblie}}</td>
+              <td>{{item.uptime}}</td>
+              <td>{{item.reason | rzhState:'1304'}}</td>
+              <td>{{item.optMan}}</td>
+              <td>{{item.jobno}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="20">
+        <div class="col-sm-5">
+          <div class="text-muted"><strong>第 {{woList.genStartRow()}} 至 {{woList.genEndRow()}} 条，共 {{woList.totalRow}}
+            条</strong>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="pull-right">
+            <rzhBootstrapPaginator></rzhBootstrapPaginator>
+          </div>
+        </div>
       </td>
     </tr>
-    <tr *ngIf="detail[i]">
-      <td colspan="20" class="p0">
-      <table class="bg-table w100">
-        <thead>
-        <tr class="w100">
-          <th class="p-sm text-center">编号</th>
-          <th class="p-sm text-center">代理商</th>
-          <th class="p-sm text-center">联系电话</th>
-          <th class="p-sm text-center">时间</th>
-          <th class="p-sm text-center">拒单原因</th>
-          <th class="p-sm text-center">操作人</th>
-          <th class="p-sm text-center">操作人工号</th>
-        </tr>
-        </thead>
-        <tbody class="assign-record">
-        <tr *ngIf="!order.woAgentList"><td colspan="20">暂无指派记录……</td></tr>
-        <tr *ngFor="let item of order.woAgentList" class="text-center bt">
-          <td>{{item.id}}</td>
-          <td>{{item.agentName}}</td>
-          <td>{{item.moblie}}</td>
-          <td>{{item.uptime}}</td>
-          <td>{{item.reason | rzhState:'1304'}}</td>
-          <td>{{item.optMan}}</td>
-          <td>{{item.jobno}}</td>
-        </tr>
-        </tbody>
-      </table>
-      </td>
-    </tr>
-  </ng-container>
-  </tbody>
-  <tfoot>
-  <tr>
-    <td colspan="20">
-      <div class="col-sm-5">
-        <div class="text-muted"><strong>第 {{woList.genStartRow()}} 至 {{woList.genEndRow()}} 条，共 {{woList.totalRow}} 条</strong>
-        </div>
-      </div>
-      <div class="col-sm-7">
-        <div class="pull-right">
-          <rzhBootstrapPaginator></rzhBootstrapPaginator>
-        </div>
-      </div>
-    </td>
-  </tr>
-  </tfoot>
-</table>
+    </tfoot>
+  </table>
 </div>
 <ng-container *ngIf="path=='wo-all' || path=='assign' || path=='wo-assign'">
   <app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"

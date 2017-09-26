@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-orders',
@@ -8,10 +9,15 @@ import {Component, OnInit} from "@angular/core";
 export class OrdersComponent implements OnInit {
   public orderType: string = '';
 
-  constructor() {
+  constructor(private location: Location) {
   }
 
   ngOnInit() {
+  }
+
+
+  routeBack() {
+    this.location.back()
   }
 
 }

@@ -364,7 +364,7 @@ input[type=number].num::-webkit-outer-spin-button {
 .hover-big-img{
   width: 180px !important;
   height: 180px !important;
-  position: fixed;
+  position: absolute;
   z-index: 100;
   display: none;
   -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);

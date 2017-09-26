@@ -217,10 +217,19 @@ $buyer-info-box-width: 200px;
 }
 
 //指派记录
-.assign-record{
-  background-color: #f8f8f8;
-  font-size: 12px;
-  td{
-    padding: 5px 10px;
+.record-detail{
+  border: 1px solid #fce3d9;
+  thead{
+    background-color: #fcf7ef;
+  }
+  .assign-record{
+    background-color: #fff;
+    font-size: 13px;
+    tr{
+      border-top: 1px solid #fcf0e4;
+    }
+    td{
+      padding: 10px;
+    }
   }
 }

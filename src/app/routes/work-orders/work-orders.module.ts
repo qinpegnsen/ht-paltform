@@ -5,6 +5,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {WoAllComponent} from "./wo-all/wo-all.component";
 import {WoService} from "./wo.service";
 import { AssignToAgentComponent } from './assign-to-agent/assign-to-agent.component';
+import {OrderDetailComponent} from "./order-detail/order-detail.component";
+import {OrdersService} from "../orders/orders/orders.service";
 
 
 const routes: Routes = [
@@ -20,6 +22,7 @@ const routes: Routes = [
     {path: 'wo-deal', component: WoAllComponent},
     {path: 'wo-finished', component: WoAllComponent},
     {path: 'wo-abnormal', component: WoAllComponent},
+    {path: 'order-detail', component: OrderDetailComponent},
   ]
   }
 ]
@@ -33,8 +36,9 @@ const routes: Routes = [
     WoManageComponent,
     WoAllComponent,
     AssignToAgentComponent,
+    OrderDetailComponent
   ],
-  providers: [WoManageComponent,WoService]
+  providers: [WoManageComponent,WoService,OrdersService]
 })
 export class WorkOrdersModule {
 }

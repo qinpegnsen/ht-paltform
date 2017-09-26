@@ -1,6 +1,6 @@
 <div class="panel mb">
   <div class="panel-body">
-    <div>
+    <div *ngIf="!detail">
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left" [class.cur-order]="woType==''" routerLink="wo-all">所有</li>
         <li class="pull-left" [class.cur-order]="woType=='NO'" routerLink="wo-assign">未派单</li>
@@ -12,10 +12,10 @@
       </ul>
     </div>
 
-    <!--<ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType">
-      <li class="pull-left" routerLink="all-orders">订单列表</li>
+    <ul class="order-guide list-unstyled clearfix bb" *ngIf="detail">
+      <li class="pull-left" (click)="routeBack()">工单列表</li>
       <li class="pull-left cur-order">商品详情</li>
-    </ul>-->
+    </ul>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
     <!--路由嵌套 end-->

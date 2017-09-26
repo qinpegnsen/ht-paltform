@@ -51,6 +51,7 @@ export class WoAllComponent implements OnInit {
     let me = this;
     me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
+    me.parentComp.detail = false;
 
     //获取当前路由
     me.route.url.subscribe(urls => {

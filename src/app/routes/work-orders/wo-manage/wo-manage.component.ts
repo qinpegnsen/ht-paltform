@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from "@angular/common";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
@@ -11,11 +12,12 @@ defineLocale('cn', zhCn);
 })
 export class WoManageComponent implements OnInit {
   public woType: string;
+  public detail:boolean = false;
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor() {
+  constructor(public location: Location) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       // minDate: this.minDate.getDate() - 1,
@@ -26,6 +28,10 @@ export class WoManageComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  routeBack(){
+    this.location.back()
   }
 
 }
