@@ -8,61 +8,65 @@ const themeE = require('../../shared/styles/themes/theme-e.scss');
 const themeF = require('../../shared/styles/themes/theme-f.scss');
 const themeG = require('../../shared/styles/themes/theme-g.scss');
 const themeH = require('../../shared/styles/themes/theme-h.scss');
+const themeS = require('../../shared/styles/themes/theme-s.scss');
 
 @Injectable()
 export class ThemesService {
 
-    styleTag: any;
-    defaultTheme: string = 'A';
+  styleTag: any;
+  defaultTheme: string = 'A';
 
-    constructor() {
-        this.createStyle();
-        this.setTheme(this.defaultTheme);
-    }
+  constructor() {
+    this.createStyle();
+    this.setTheme(this.defaultTheme);
+  }
 
-    private createStyle() {
-        const head = document.head || document.getElementsByTagName('head')[0];
-        this.styleTag = document.createElement('style');
-        this.styleTag.type = 'text/css';
-        this.styleTag.id = 'appthemes';
-        head.appendChild(this.styleTag);
-    }
+  private createStyle() {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    this.styleTag = document.createElement('style');
+    this.styleTag.type = 'text/css';
+    this.styleTag.id = 'appthemes';
+    head.appendChild(this.styleTag);
+  }
 
-    setTheme(name) {
-        switch (name) {
-            case 'A':
-                this.injectStylesheet(themeA);
-                break;
-            case 'B':
-                this.injectStylesheet(themeB);
-                break;
-            case 'C':
-                this.injectStylesheet(themeC);
-                break;
-            case 'D':
-                this.injectStylesheet(themeD);
-                break;
-            case 'E':
-                this.injectStylesheet(themeE);
-                break;
-            case 'F':
-                this.injectStylesheet(themeF);
-                break;
-            case 'G':
-                this.injectStylesheet(themeG);
-                break;
-            case 'H':
-                this.injectStylesheet(themeH);
-                break;
-        }
+  setTheme(name) {
+    switch (name) {
+      case 'A':
+        this.injectStylesheet(themeA);
+        break;
+      case 'B':
+        this.injectStylesheet(themeB);
+        break;
+      case 'C':
+        this.injectStylesheet(themeC);
+        break;
+      case 'D':
+        this.injectStylesheet(themeD);
+        break;
+      case 'E':
+        this.injectStylesheet(themeE);
+        break;
+      case 'F':
+        this.injectStylesheet(themeF);
+        break;
+      case 'G':
+        this.injectStylesheet(themeG);
+        break;
+      case 'H':
+        this.injectStylesheet(themeH);
+        break;
+      case 'S':
+        this.injectStylesheet(themeS);
+        break;
     }
+  }
 
-    injectStylesheet(css) {
-        this.styleTag.innerHTML = css;
-    }
+  injectStylesheet(css) {
+    this.styleTag.innerHTML = css;
+  }
 
-    getDefaultTheme() {
-        return this.defaultTheme;
-    }
+  getDefaultTheme() {
+    return this.defaultTheme;
+  }
 
 }

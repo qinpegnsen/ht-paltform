@@ -24,7 +24,7 @@ import { SharedModule } from '../shared/shared.module';
         UserblockComponent,
         HeaderComponent,
         NavsearchComponent,
-        // OffsidebarComponent, //多功能栏组件，暂时不开放
+        OffsidebarComponent, //多功能栏组件，暂时不开放
         FooterComponent
     ],
     exports: [
@@ -33,7 +33,7 @@ import { SharedModule } from '../shared/shared.module';
         UserblockComponent,
         HeaderComponent,
         NavsearchComponent,
-        // OffsidebarComponent, //多功能栏组件，暂时不开放
+        OffsidebarComponent, //多功能栏组件，暂时不开放
         FooterComponent
     ]
 })

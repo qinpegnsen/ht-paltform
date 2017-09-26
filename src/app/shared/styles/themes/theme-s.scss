@@ -14,9 +14,9 @@ $content-bg:                    #f5f7fa;
 $aside-bg:                      $gray-dark;
 // NAVBAR TOP
 
-$nav-top-bg:                    $brand-danger-dark;
+$nav-top-bg:                    $brand-hawthorn;
 $nav-top-bg-start:              $nav-top-bg;
-$nav-top-bg-end:                $brand-danger;
+$nav-top-bg-end:                $brand-hawthorn-light;
 $nav-header-bg:                 transparent;
 
 $nav-top-item-mobile:           $nav-top-bg;
@@ -30,7 +30,7 @@ $nav-top-item-desktop-active:   darken($nav-top-item-desktop, 20%);
 $sidebar-bg:                      $aside-bg;
 
 $sidebar-item-color:              #e1e2e3;
-$sidebar-item-color-active:       $brand-danger;
+$sidebar-item-color-active:       $brand-hawthorn-light;
 $sidebar-item-bg-active:          darken($sidebar-bg, 1%);
 
 $sidebar-icon-color:              inherits;
@@ -209,6 +209,7 @@ body,
     }
   } // li
 }
+
 
 /* ========================================================================
    Component: offsidebar

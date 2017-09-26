@@ -30,6 +30,7 @@ $brand-pink:             #f532e5;
 $brand-purple:           #7266ba;
 $brand-dark:             #3a3f51;
 $brand-yellow:           #fad732;
+$brand-hawthorn:         #cc1635;
 
 
 // Brand color Variants
@@ -47,6 +48,7 @@ $brand-pink-light:             lighten($brand-pink, $amountOfLight);
 $brand-purple-light:           lighten($brand-purple, $amountOfLight);
 $brand-dark-light:             lighten($brand-dark, $amountOfLight);
 $brand-yellow-light:           lighten($brand-yellow, $amountOfLight);
+$brand-hawthorn-light:         lighten($brand-hawthorn, $amountOfLight);
 
 $brand-primary-dark:           darken($brand-primary, $amountOfLight);
 $brand-success-dark:           darken($brand-success, $amountOfLight);
@@ -59,6 +61,7 @@ $brand-pink-dark:              darken($brand-pink, $amountOfLight);
 $brand-purple-dark:            darken($brand-purple, $amountOfLight);
 $brand-dark-dark:              darken($brand-dark, $amountOfLight);
 $brand-yellow-dark:            darken($brand-yellow, $amountOfLight);
+$brand-hawthorn-dark:          darken($brand-hawthorn, $amountOfLight);
 
 //== Scaffolding
 //
@@ -115,7 +118,7 @@ $headings-color:          inherit;
 //## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
 
 //** Load fonts from this directory.
-$icon-font-path:          "../node_modules/bootstrap/fonts/";
+$icon-font-path:          "/node_modules/bootstrap/fonts/";
 //** File name for all font files.
 $icon-font-name:          "glyphicons-halflings-regular";
 //** Element ID within SVG icon file.
