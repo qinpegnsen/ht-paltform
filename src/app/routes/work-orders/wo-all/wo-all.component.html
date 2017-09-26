@@ -106,7 +106,7 @@
         </tr>
         </thead>
         <tbody class="assign-record">
-        <tr *ngIf="!order.woAgentList"><td>暂无指派记录</td></tr>
+        <tr *ngIf="!order.woAgentList"><td colspan="20">暂无指派记录……</td></tr>
         <tr *ngFor="let item of order.woAgentList" class="text-center bt">
           <td>{{item.id}}</td>
           <td>{{item.agentName}}</td>
@@ -139,5 +139,8 @@
   </tfoot>
 </table>
 </div>
-<app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"
-                     (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
+<ng-container *ngIf="path=='wo-all' || path=='assign' || path=='wo-assign'">
+  <app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"
+                       (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
+</ng-container>
+

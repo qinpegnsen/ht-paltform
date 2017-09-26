@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from "@angular/core";
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 declare var $: any;
@@ -8,7 +8,7 @@ declare var $: any;
   templateUrl: './assign-to-agent.component.html',
   styleUrls: ['./assign-to-agent.component.scss']
 })
-export class AssignToAgentComponent implements OnInit,OnChanges {
+export class AssignToAgentComponent implements OnInit, OnChanges, OnDestroy {
   public showAssignWoWindow: boolean = false;
   public agentList: any;   //代理商列表
   public agentCode: any;      //代理商编码
@@ -24,15 +24,19 @@ export class AssignToAgentComponent implements OnInit,OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    $('.wrapper > section').css('z-index', 114);
+  }
+
   constructor(public submit: SubmitService) {
   }
 
   ngOnInit() {
     let data = {
-      agentName:'',
+      agentName: '',
       state: 'NORMAL'
     }
-    this.agentList = this.submit.getData('/agent/queryAgentNormal',data);
+    this.agentList = this.submit.getData('/agent/queryAgentNormal', data);
   }
 
   /**

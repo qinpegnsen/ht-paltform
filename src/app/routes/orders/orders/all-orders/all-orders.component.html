@@ -185,6 +185,8 @@
   </tfoot>
 </table>
 <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
-                   (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
+<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">
+  <app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+                     (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
+</ng-container>
 <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->

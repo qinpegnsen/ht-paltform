@@ -1,15 +1,14 @@
-
 <div class="szh-order-info b clearfix position-relative">
   <div class="szh-order-details">
     <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 订单信息</div>
     <div class="content">
       <dl>
         <dt>下单人账号：</dt>
-        <dd>{{orderDetailData.linkman}}</dd>
+        <dd>{{orderDetailData.custCode}}</dd>
       </dl>
       <dl>
         <dt>手机号：</dt>
-        <dd>{{orderDetailData.phone}}</dd>
+        <dd>{{orderDetailData.cust.custPhone}}</dd>
       </dl>
       <dl>
         <dt>留言：</dt>
@@ -33,7 +32,8 @@
             <ul class="list-unstyled font12 mb0">
               <li *ngIf="!orderStates"><span>{{orderDetailData.createTime}}</span> 创建订单</li>
               <li *ngFor="let item of orderStates"><span>{{item.createTime}}</span>{{item.state=='DELIVERY'?'已发货':item
-                .description}}</li>
+                .description}}
+              </li>
             </ul>
           </div>
         </dd>
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="szh-order-details bl br">
-    <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 支付信息</div>
+    <div class="order-head p bb text-info"><i class="fa fa-money"></i> 支付信息</div>
     <div class="content">
       <dl>
         <dt>支付方式：</dt>
@@ -70,7 +70,7 @@
     </div>
   </div>
   <div class="szh-order-details">
-    <div class="order-head p bb text-info"><i class="fa fa-file-text"></i> 收货信息</div>
+    <div class="order-head p bb text-info"><i class="fa fa-cube"></i> 收货信息</div>
     <div class="content">
       <dl>
         <dt>是否平台配送：</dt>
@@ -100,14 +100,14 @@
             <em class="fa fa-truck"></em>
           </div>
           <div class="timeline-panel">
-            <div class="right" >
+            <div class="right">
               <div>
                 <p *ngIf="item.state!='DELIVERY'">
                   <span class="mr">{{item.createTime}}</span>
                   <span>{{item.description}}</span>
                 </p>
                 <p *ngFor="let detail of item.traceVos;let i=index;">
-                  <span class="mr" >{{detail.acceptTime}}</span>
+                  <span class="mr">{{detail.acceptTime}}</span>
                   <span>{{detail.acceptStation}}</span>
                 </p>
               </div>
@@ -131,22 +131,23 @@
   <dl [class.cur]="orderStep==2 || orderStep==3 || orderStep==4 || orderStep==5">
     <dt>已支付</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>{{orderStates[1].createTime}}</dd>
+    <dd><span *ngIf="orderStep==2 || orderStep==3 || orderStep==4 || orderStep==5">{{orderStates[1].createTime}}</span>
+    </dd>
   </dl>
   <dl [class.cur]="orderStep==3 || orderStep==4 || orderStep==5">
     <dt>已配货</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>{{orderStates[2].createTime}}</dd>
+    <dd><span *ngIf="orderStep==3 || orderStep==4 || orderStep==5">{{orderStates[2].createTime}}</span></dd>
   </dl>
   <dl [class.cur]="orderStep==4 || orderStep==5">
     <dt>已发货</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>{{orderStates[3].createTime}}</dd>
+    <dd><span *ngIf="orderStep==4 || orderStep==5">{{orderStates[3].createTime}}</span></dd>
   </dl>
   <dl [class.cur]="orderStep==5">
     <dt>订单完成</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>{{orderStates[4].createTime}}</dd>
+    <dd><span *ngIf="orderStep==5">{{orderStates[4].createTime}}</span></dd>
   </dl>
 </div>
 
@@ -201,7 +202,8 @@
         <dl class="text-right mb0">
           <dt>运费：</dt>
           <dd><span class="font18 ml mr">{{goodsData.freight == 0? '(免运费)':goodsData.freight |
-            decimalTwo}}</span>元</dd>
+            decimalTwo}}</span>元
+          </dd>
         </dl>
         <dl class="text-right mb0">
           <dt>重消币抵扣数量：</dt>

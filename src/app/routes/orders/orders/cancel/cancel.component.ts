@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined} from "util";
 declare var $: any;
 
@@ -7,7 +7,7 @@ declare var $: any;
   templateUrl: './cancel.component.html',
   styleUrls: ['./cancel.component.scss']
 })
-export class CancelComponent implements OnInit, OnChanges {
+export class CancelComponent implements OnInit, OnChanges,OnDestroy {
   public showCancelWindow:boolean = false;
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -18,6 +18,11 @@ export class CancelComponent implements OnInit, OnChanges {
       this.showCancelWindow = true;
     }
   }
+  ngOnDestroy(): void {
+    $('.wrapper > section').css('z-index', 114);
+  }
+
+
   constructor() { }
 
   ngOnInit() {

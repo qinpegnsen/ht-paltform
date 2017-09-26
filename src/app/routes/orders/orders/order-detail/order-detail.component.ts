@@ -41,6 +41,7 @@ export class OrderDetailComponent implements OnInit {
     if (!isNullOrUndefined(result)) {
       me.orderDetailData = result;
       me.goodsData = result.ordItemList;
+      me.getOrderStep();
     }
   }
 
@@ -57,14 +58,13 @@ export class OrderDetailComponent implements OnInit {
   }
 
   /**
-   * 获取订单的物流详情及订单进度
+   * 获取订单进度
    */
   private getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
     me.orderStates = orderStatesDetail.orderStates;
     me.logisticsInfo = orderStatesDetail.orderLogistics;
-    me.getOrderStep();
   }
 
   /**
@@ -72,21 +72,17 @@ export class OrderDetailComponent implements OnInit {
    */
   private getOrderStep() {
     let me = this, temp = [];
-    for (let state of me.orderStates) {
-      if (state.state == 'SUCCESS') {
-        temp.push(5);
-      } else if (state.state == 'DELIVERY') {
-        temp.push(4);
-      } else if (state.state == 'PREPARE') {
-        temp.push(3);
-      } else if (state.state == 'PAID') {
-        temp.push(2);
-      } else if (state.state == 'CR') {
-        temp.push(1);
-      }
+    if (me.orderDetailData.state == 'SUCCESS') {
+      me.orderStep = 5
+    } else if (me.orderDetailData.state == 'DELIVERY') {
+      me.orderStep = 4
+    } else if (me.orderDetailData.state == 'PREPARE') {
+      me.orderStep = 3
+    } else if (me.orderDetailData.state == 'PAID') {
+      me.orderStep = 2
+    } else if (me.orderDetailData.state == 'CR') {
+      me.orderStep = 1
     }
-    temp.sort();//排列
-    me.orderStep = temp[temp.length - 1];//当前进度为数组中最大的一个
   }
 
   /**

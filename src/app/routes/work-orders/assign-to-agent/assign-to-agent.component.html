@@ -15,7 +15,7 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">代理商：</dt>
         <dd class="col-xs-5 font14">
-          <select name="expressCode" class="form-control input-sm" [(ngModel)]="agentCode">
+          <select name="expressCode" class="form-control input-sm font14" [(ngModel)]="agentCode">
             <option [value]="agent.agentCode" *ngFor="let agent of agentList">{{agent.agentName}}</option>
           </select>
         </dd>
