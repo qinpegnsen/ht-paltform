@@ -102,9 +102,13 @@ $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
   .navbar-nav > li > a,
   .navbar-nav > .open > a {
     color: $nav-top-item-mobile;
-    &:hover, &:focus, .current {
+    &:hover, &:focus {
       color: $nav-top-item-mobile-active;
     }
+  }
+
+  .navbar-nav li a.current {
+    color: $nav-top-item-mobile-active;
   }
 
   // Navbar link active style
