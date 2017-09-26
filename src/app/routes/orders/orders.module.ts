@@ -47,7 +47,7 @@ const routes: Routes = [
   {path: 'order-review',component:OrderReviewComponent,children:[
     {path: '', redirectTo: 'all-order'},
     {path: 'all-order', component: AllOrderComponent},
-    {path: 'to-audit', component: ToAuditComponent},
+    {path: 'to-audit', component: ToAuditComponent}
   ]},
   {path: 'ord', component:StockComponent,children:[
     {path: '', redirectTo: 'all-stock'},
