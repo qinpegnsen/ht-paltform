@@ -405,9 +405,19 @@ const app = {
   link: '/main/app',
   submenu: [
     {
-      text: '应用设置',
+      text: '移动端管理',
       icon: 'fa fa-wrench',
-      link: '/main/app/use-set'
+      alert: '▼',
+      submenu: [
+        {
+          text: '首页操作类型',
+          link: '/main/app/app-index-opt'
+        },
+        {
+          text: '首页模板',
+          link: '/main/app/app-index-tpl'
+        }
+      ]
     },
     {
       text: '消息推送',
@@ -419,6 +429,23 @@ const app = {
 const editPw = {
   text: '密码修改',
   link: '/main/edit-pw',
+};
+const phone = {
+  text: '代理商管理',
+  icon: 'fa fa-users',
+  link: '/main/phone',
+  submenu: [
+    {
+      text: '代理商管理',
+      icon: 'fa fa-users',
+      link: '/main/agent/agentperson'
+    },
+    /*  {
+     text: '代理区域管理',
+     icon: 'icon-location-pin',
+     link: '/main/agent/region'
+     },*/
+  ]
 };
 
 /**

@@ -47,7 +47,7 @@
   <li class="w40 pull-left text-center">商品</li>
   <li class="w10 pull-left text-center">单价</li>
   <li class="w10 pull-left text-center">数量</li>
-  <li class="w10 pull-left text-center">买家</li>
+  <li class="w10 pull-left text-center">收货人</li>
   <li class="w10 pull-left text-center">订单金额（元）</li>
   <li class="w10 pull-left text-center">交易状态</li>
   <li class="w10 pull-left text-center">交易操作</li>
@@ -67,7 +67,7 @@
       <table class="w100 b">
         <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
           <td class="w40 p text-left position-relative bb">
-          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
+          <span class="goods-img goods-lg-img mr"><img [src]="name.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
             <div class="goods-lg-info">
               <p class="mb0 font13 omg2 two-row mb-sm">
@@ -87,7 +87,7 @@
           </span>
             <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
               <div class="info-con">
-                <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
+                <p class="pl mb-sm"><i class="fa fa-user"></i> 收货人信息</p>
                 <dl><dt>姓名：</dt><dd>{{goods.linkman}}</dd></dl>
                 <dl><dt>电话：</dt><dd>{{goods.mobile}}</dd></dl>
                 <dl><dt>地址：</dt><dd>{{goods.addr}}</dd></dl>

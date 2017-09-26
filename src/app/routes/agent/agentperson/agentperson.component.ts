@@ -44,32 +44,32 @@ export class AgentpersonComponent implements OnInit {
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
      */
-    this.addButton = {
+    _this.addButton = {
       type:"add",
       text:"新增代理商",
       title:'新增代理商',
     };
-    this.updatebutton = {
+    _this.updatebutton = {
       type:"update",
       title:'修改代理商',
       size: 'xs'
     };
-    this.deletebutton = {
+    _this.deletebutton = {
       type:"delete",
       title:'删除代理商',
       size: 'xs'
     };
-    this.updatebuttono = {
+    _this.updatebuttono = {
       type:"search",
       title:'修改密码',
       size: 'xs'
     };
-    this.updatebuttonio = {
+    _this.updatebuttonio = {
       type:"upload",
       title:'上传图片',
       size: 'xs'
     };
-    this.details = {
+    _this.details = {
       type:"details",
       title:'查看代理商详情',
       size: 'xs'
