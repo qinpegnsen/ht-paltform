@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     let me = this;
     if(changes['curPath'] && !isNullOrUndefined(me.curPath)){
       // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
-      me.onRouterChange(me.curPath);
+      me.getSubmenus(me.curPath);
     }
   }
 
@@ -51,24 +51,8 @@ export class HeaderComponent implements OnInit, OnChanges {
     $(function(){
       let rulHref = window.location.href;
       let path = rulHref.substring(rulHref.indexOf('/main'),rulHref.length);
-      me.onRouterChange(path);
       me.getSubmenus(path);
     })
-  }
-
-  /**
-   * 检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
-   * @param path
-   */
-  private onRouterChange(path){
-    let firstNavs = $('.my-nav');
-    for(let i = 0; i < firstNavs.length; i++){
-      let firstNav = firstNavs.eq(i).attr('route');
-      if(path.indexOf(firstNav) === 0){
-        firstNavs.eq(i).addClass('_current').parent().siblings().children('.my-nav').removeClass('_current');
-      }
-    };
-    this.getSubmenus(path)
   }
 
 

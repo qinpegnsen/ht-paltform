@@ -61,6 +61,25 @@ body,
   background-color: $aside-bg;
 }
 
+.thc-font{
+  color: $brand-danger
+}
+.thc-font-light{
+  color: $brand-danger-light
+}
+.thc-font-dark{
+  color: $brand-danger-dark
+}
+.thc-bg{
+  background-color: $brand-danger
+}
+.thc-bg-light{
+  background-color: $brand-danger-light
+}
+.thc-bg-dark{
+  background-color: $brand-danger-dark
+}
+
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */
@@ -86,6 +105,10 @@ body,
     &:hover, &:focus {
       color: $nav-top-item-mobile-active;
     }
+  }
+
+  .navbar-nav > li.active > a{
+    color: $nav-top-item-mobile-active;
   }
 
   // Navbar link active style
@@ -131,6 +154,10 @@ body,
       &:hover, &:focus {
         color: $nav-top-item-mobile-active;
       }
+    }
+
+    .navbar-nav > li.active > a{
+      color: $nav-top-item-mobile-active;
     }
 
   } // .topnavbar
@@ -219,3 +246,4 @@ body,
   background-color: $offsidebar-bg;
   color: $offsidebar-color;
 }
+

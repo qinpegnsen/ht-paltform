@@ -61,6 +61,26 @@ body,
   background-color: $aside-bg;
 }
 
+
+.thc-font{
+  color: $brand-hawthorn
+}
+.thc-font-light{
+  color: $brand-hawthorn-light
+}
+.thc-font-dark{
+  color: $brand-hawthorn-dark
+}
+.thc-bg{
+  background-color: $brand-hawthorn
+}
+.thc-bg-light{
+  background-color: $brand-hawthorn-light
+}
+.thc-bg-dark{
+  background-color: $brand-hawthorn-dark
+}
+
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */
@@ -86,6 +106,10 @@ body,
     &:hover, &:focus {
       color: $nav-top-item-mobile-active;
     }
+  }
+
+  .navbar-nav > li.active > a{
+    color: $nav-top-item-mobile-active;
   }
 
   // Navbar link active style
@@ -131,6 +155,10 @@ body,
       &:hover, &:focus {
         color: $nav-top-item-mobile-active;
       }
+    }
+
+    .navbar-nav > li.active > a{
+      color: $nav-top-item-mobile-active;
     }
 
   } // .topnavbar

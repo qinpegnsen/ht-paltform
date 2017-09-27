@@ -86,7 +86,7 @@
       </dl>
       <dl>
         <dt>地址：</dt>
-        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.addr}}</dd>
+        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.address}}</dd>
       </dl>
     </div>
   </div>
@@ -227,28 +227,31 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt>运费：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.freight == 0? '(免运费)':goodsData.freight |
-            decimalTwo}}</span>元
+          <dd>
+            <span class="font12 ml mr" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+            <ng-container *ngIf="orderDetailData.freight != 0">
+              <span class="font18 ml mr">{{orderDetailData.freight | decimalTwo}}</span>元
+            </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
           <dt>重消币抵扣数量：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.coin | decimalTwo}}</span>个</dd>
+          <dd><span class="font18 ml mr">{{orderDetailData.coin | decimalTwo}}</span>个</dd>
         </dl>
         <dl class="text-right mb0">
           <dt>重消币抵扣金额：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.coinPay | decimalTwo}}</span>元</dd>
+          <dd><span class="font18 ml mr">{{orderDetailData.coinPay | decimalTwo}}</span>元</dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">最终支付金额：</dt>
-          <dd><span class="main-red ml font22 mr">{{goodsData.total | decimalTwo}}</span>元</dd>
+          <dd><span class="main-red ml font22 mr">{{orderDetailData.total | decimalTwo}}</span>元</dd>
         </dl>
       </td>
     </tr>
     </tfoot>
   </table>
 </div>
-<ng-container *ngIf="goodsData.state=='PREPARE'">
+<ng-container *ngIf="orderDetailData.state=='PREPARE'">
   <app-deliver-goods [orderId]="curDeliverOrderId"
                      (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 </ng-container>

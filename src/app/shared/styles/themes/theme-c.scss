@@ -61,6 +61,26 @@ body,
   background-color: $aside-bg;
 }
 
+
+.thc-font{
+  color: $brand-purple
+}
+.thc-font-light{
+  color: $brand-purple-light
+}
+.thc-font-dark{
+  color: $brand-purple-dark
+}
+.thc-bg{
+  background-color: $brand-purple
+}
+.thc-bg-light{
+  background-color: $brand-purple-light
+}
+.thc-bg-dark{
+  background-color: $brand-purple-dark
+}
+
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */
@@ -86,6 +106,10 @@ body,
     &:hover, &:focus {
       color: $nav-top-item-mobile-active;
     }
+  }
+
+  .navbar-nav > li.active > a{
+    color: $nav-top-item-mobile-active;
   }
 
   // Navbar link active style
@@ -131,6 +155,10 @@ body,
       &:hover, &:focus {
         color: $nav-top-item-mobile-active;
       }
+    }
+
+    .navbar-nav > li.active > a{
+      color: $nav-top-item-mobile-active;
     }
 
   } // .topnavbar

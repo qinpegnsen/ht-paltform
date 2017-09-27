@@ -61,6 +61,25 @@ body,
   background-color: $aside-bg;
 }
 
+.thc-font{
+  color: $brand-info
+}
+.thc-font-light{
+  color: $brand-info-light
+}
+.thc-font-dark{
+  color: $brand-info-dark
+}
+.thc-bg{
+  background-color: $brand-info
+}
+.thc-bg-light{
+  background-color: $brand-info-light
+}
+.thc-bg-dark{
+  background-color: $brand-info-dark
+}
+
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */
@@ -86,6 +105,10 @@ body,
     &:hover, &:focus {
       color: $nav-top-item-mobile-active;
     }
+  }
+
+  .navbar-nav > li.active > a{
+    color: $nav-top-item-mobile-active;
   }
 
   // Navbar link active style
@@ -131,6 +154,10 @@ body,
       &:hover, &:focus {
         color: $nav-top-item-mobile-active;
       }
+    }
+
+    .navbar-nav > li.active > a{
+      color: $nav-top-item-mobile-active;
     }
 
   } // .topnavbar

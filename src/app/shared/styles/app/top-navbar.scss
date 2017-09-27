@@ -274,8 +274,11 @@ $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
         color: $nav-top-item-desktop-active;
       }
     }
+    .navbar-nav > li.active > a{
+      color: $nav-top-item-desktop-active;
+    }
 
-    // relocate search toggle button
+      // relocate search toggle button
     .navbar-nav > li > [data-toggle='navbar-search'] {
       position: static;
     }

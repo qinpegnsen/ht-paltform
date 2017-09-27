@@ -36,8 +36,8 @@
         </a>
       </li>-->
 
-      <li *ngFor="let menu of menuItems">
-        <a class="text-center pt-sm pb-sm my-nav" [title]="menu.text" [attr.route]="menu.link" [routerLink]="menu.link" [routerLinkActive]="['active']"
+      <li *ngFor="let menu of menuItems" [routerLinkActive]="['active']">
+        <a class="text-center pt-sm pb-sm my-nav" [title]="menu.text" [attr.route]="menu.link" [routerLink]="menu.link"
            (click)="getSubmenus(menu.link)">
           <div class="icon-box"><i [class]="menu.icon"></i></div>
           <span>{{menu.text}}</span>
