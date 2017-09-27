@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     for(let i = 0; i < firstNavs.length; i++){
       let firstNav = firstNavs.eq(i).attr('route');
       if(path.indexOf(firstNav) === 0){
-        firstNavs.eq(i).addClass('current').parent().siblings().children('.my-nav').removeClass('current');
+        firstNavs.eq(i).addClass('_current').parent().siblings().children('.my-nav').removeClass('_current');
       }
     };
     this.getSubmenus(path)

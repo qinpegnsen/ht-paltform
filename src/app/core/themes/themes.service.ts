@@ -14,7 +14,7 @@ const themeS = require('../../shared/styles/themes/theme-s.scss');
 export class ThemesService {
 
   styleTag: any;
-  defaultTheme: string = 'A';
+  defaultTheme: string = 'S';
 
   constructor() {
     this.createStyle();

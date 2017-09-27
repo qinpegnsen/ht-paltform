@@ -107,10 +107,6 @@ $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
     }
   }
 
-  .navbar-nav li a.current {
-    color: $nav-top-item-mobile-active;
-  }
-
   // Navbar link active style
   .navbar-nav > .active > a,
   .navbar-nav > .open   > a {
