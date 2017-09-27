@@ -7,7 +7,7 @@ import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {SettingsService} from "../../../../core/settings/settings.service";
-
+declare var $;
 @Component({
   selector: 'app-analyze-users',
   templateUrl: './analyze-users.component.html',
@@ -16,7 +16,7 @@ import {SettingsService} from "../../../../core/settings/settings.service";
 export class AnalyzeUsersComponent implements OnInit {
 
   public flag: boolean = true;//定义boolean值用来控制内容组件是否显示
-  datepickerModel: Date;
+  datepickerModel: Date= new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
   month: Array<string> = SettingsService.month; //获取月份信息
@@ -26,169 +26,35 @@ export class AnalyzeUsersComponent implements OnInit {
 
   private queryType: any = 'DAY';//日期选择
   private queryTypes: any;//日期选择
+  private queryContent: any="ORDSUM";//内容选择
+  private queryContentText: any="下单金额(元)";//内容选择
+  private queryContents;//内容选择
+
   queryTime: any = new Date();
 
   private data: any;
   now: string;
-  prev: string;
-  prevData: any;
   nowData: any;
 
   /**
    * 图表1
    */
- /* optionPrev = {
-    color: ['#3398DB'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data:[],
-        axisTick: {
-          alignWithLabel: true
-        }
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
-    series: [
-      {
-        name: '直接访问',
-        type: 'bar',
-        barWidth: '60%',
-        data:[]
-      }
-    ]
-  };*/
-  optionPrev = {
-    color: ['#cfccff'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        axisTick: {
-          alignWithLabel: true
-        }
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
-    series: [
-      {
-        name: '直接访问',
-        type: 'bar',
-        barWidth: '60%',
-        data: [10, 52, 200, 334, 390, 330, 220]
-      }
-    ]
-  };
-  /**
-   * 图表2
-   */
-  optionaNow = {
-    color: ['#cfccff'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data:[],
-        axisTick: {
-          alignWithLabel: true
-        }
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
-    series: [
-      {
-        name: '直接访问',
-        type: 'bar',
-        barWidth: '60%',
-        data: []
-      }
-    ]
-  };
+  public optionPrev = {};
 
   constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
+      containerClass: 'theme-blue'
+   });
   }
 
   ngOnInit() {
     let _this = this;
-    this.bsConfig = Object.assign({}, {
-      showWeekNumbers: true
-    });
-    /**
-     * 路由事件用来监听地址栏的变化
-     * 1.当添加代理商出现的时候，代理商列表组件隐藏
-     * 2.路由变化的时候，刷新页面
-     */
-    _this.router.events
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
-          if (event.url.indexOf('linkType') > 0) {
-            _this.flag = false;
-          } else if (event.url == '/main/users/users-new') {
-            _this.flag = true;
-            //_this.getAgentList() //刷新内容页面
-          }
-        }
-      });
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
-    this.queryTime = RzhtoolsService.getAroundDateByDate(this.queryTime, 0);
-    this.queryTime = RzhtoolsService.dataFormat(this.queryTime, 'yyyy-MM-dd');
-    this.qeuryAll(this.queryType, this.queryTime);
-    // this.now = this.data.queryTime;
-    // this.prev = this.data.contrastTime;
-    // this.nowData = this.data[this.now];
-    // this.prevData = this.data[this.prev];
-    // this.option.xAxis[0].data = this.prevData.keys;
-    // this.option.series[0].data = this.prevData.values;
-    // this.optiona.xAxis[0].data = this.nowData.keys;
-    // this.optiona.series[0].data = this.nowData.values;
+    _this.queryContents = this.tools.getEnumDataList('1402');   //内容状态枚举列表
+    _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
+    _this.qeuryAll();
   }
 
   /**
@@ -215,27 +81,79 @@ export class AnalyzeUsersComponent implements OnInit {
   /**
    * 查询
    */
-  qeuryAll(queryType: string, queryTime: string) {
+  qeuryAll(type?:string,obj?) {
     let me = this;
-    let url = "/statistical/addedCust";
+    if(!isNullOrUndefined(type)) me.queryContent = type;
+    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
+    let url = "/statistical/analyseCust";
     let data = {
-      queryType: queryType,
-      queryTime: queryTime,
+      queryType: me.queryType,
+      queryTime: me.queryTime,
+      queryContent: me.queryContent
     }
     let result = this.submit.getData(url, data);
     me.data = result;
-    me.now = me.data.queryTime;
-    me.prev = me.data.contrastTime;
-    me.nowData = me.data[me.now];
-    me.prevData = me.data[me.prev];
-    me.optionPrev.xAxis[0].data = me.prevData.keys;
-    me.optionPrev.series[0].data = me.prevData.values;
+    me.nowData =me.data;
+    me.optionPrevInfo();
+    console.log("█ me.nowData.yaxis ►►►", me.nowData.yaxis);
+    console.log("█ result ►►►",  result);
+  }
 
-    me.optionaNow.xAxis[0].data = me.nowData.keys;
-    me.optionaNow.series[0].data = me.nowData.values;
-    console.log("█ result ►►►", me.optionPrev.xAxis[0].data);
-    console.log("█ result ►►►", me.optionPrev.series[0].data);
-    // console.logoptionPrev
+  /**
+   * 绘制图表（私有）
+   */
+  private optionPrevInfo(){
+    let _this = this;
+    _this.optionPrev = {
+      title: {
+        left:"center",
+        text: '买家排行20名'
+      },
+      color: ['#3398DB'],
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      toolbox: {
+        show : true,
+        feature : {
+          dataView : {show: true, readOnly: false},
+          magicType : {show: true, type: ['line', 'bar']},
+          restore : {show: true},
+          saveAsImage : {show: true}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: _this.nowData.keys,
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name:_this.queryContentText ,
+          type: 'bar',
+          barWidth: '30%',
+          data: _this.nowData.yaxis
+        }
+      ]
+    }; //绘制图表
   }
 
   /**
@@ -253,29 +171,76 @@ export class AnalyzeUsersComponent implements OnInit {
    */
   selectInfos() {
     let _this = this, type = _this.queryType;
-    if (type == "DAY") {
-      if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
-        AppComponent.rzhAlt("error", "请选择日期");
-      } else {
-        this.qeuryAll(this.queryType,this.queryTime);
-        //TODO 业务实现
-      }
-    } else if (type == "WEEK") {
-      if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
-        AppComponent.rzhAlt("error", "请选择指定周");
-      }else{
-        this.qeuryAll(this.queryType, this.queryTime);
-        //TODO 业务实现
-      }
-    } else if (type == "MONTH") {
-      let time = _this.getMonth();
-      if (time != null) {
-        this.qeuryAll(this.queryType,this.queryTime);
-        //TODO 业务实现
-      }
+    switch (type){
+      case 'DAY':
+        _this.queryTime = RzhtoolsService.dataFormat(new Date(this.datepickerModel), "yyyy-MM-dd");
+        break;
+      case 'MONTH':
+        _this.queryTime = _this.getMonth();
+        break;
+      case 'WEEK':
+        _this.queryTime = _this.select.week;
+        break;
+    };
+
+    // if (type == "DAY") {
+    //   if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
+    //     AppComponent.rzhAlt("error", "请选择日期");
+    //   } else {
+    //     // console.log("█ type  ►►►", type);
+    //     // console.log("█ this.queryTime ►►►", this.queryTime);
+    //     _this.qeuryAll(_this.queryType, _this.queryTime);
+    //     //TODO 业务实现
+    //   }
+    // } else if (type == "WEEK") {
+    //   if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
+    //     AppComponent.rzhAlt("error", "请选择指定周");
+    //   } else {
+    //     _this.queryTime = _this.select.week;
+    //     _this.qeuryAll(_this.queryType, _this.queryTime);
+    //     //TODO 业务实现
+    //   }
+    // } else if (type == "MONTH") {
+    //   let time = _this.getMonth();
+    //   if (time != null) {
+    //     _this.queryTime = _this.getMonth();
+    //     _this.qeuryAll(_this.queryType, _this.queryTime);
+    //     //TODO 业务实现
+    //   }
+    // } else {
+    //   AppComponent.rzhAlt("error", "查询异常");
+    // }
+    if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
+      AppComponent.rzhAlt("error", "请选择日期");
     } else {
-      AppComponent.rzhAlt("error", "查询异常");
+      _this.qeuryAll();
     }
   }
+  // selectInfos() {
+  //   let _this = this, type = _this.queryType;
+  //   if (type == "DAY") {
+  //     if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
+  //       AppComponent.rzhAlt("error", "请选择日期");
+  //     } else {
+  //       this.qeuryAll(this.queryType,this.queryTime);
+  //       //TODO 业务实现
+  //     }
+  //   } else if (type == "WEEK") {
+  //     if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
+  //       AppComponent.rzhAlt("error", "请选择指定周");
+  //     }else{
+  //       this.qeuryAll(this.queryType, this.queryTime);
+  //       //TODO 业务实现
+  //     }
+  //   } else if (type == "MONTH") {
+  //     let time = _this.getMonth();
+  //     if (time != null) {
+  //       this.qeuryAll(this.queryType,this.queryTime);
+  //       //TODO 业务实现
+  //     }
+  //   } else {
+  //     AppComponent.rzhAlt("error", "查询异常");
+  //   }
+  // }
 
 }

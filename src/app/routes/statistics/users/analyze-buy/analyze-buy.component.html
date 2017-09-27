@@ -14,46 +14,57 @@
     </div>
 
     <div class="w98 m-auto h50">
-      <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
-      <div class="pull-right" style="width: 300px">
+      <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
+        <i class="icon icon-magnifier"></i>
+      </span>
+      <div class="pull-right">
         <div class="col-xs-3 form-group" style="width: 250px">
-          <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
-          <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+
+          <div *ngIf="showType.MONTH">
+            <select [(ngModel)]="select.year" class="pull-left w40 form-control" style="display: inline-block;margin-right: 20px">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month" class="w40 form-control">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+          <div *ngIf="showType.WEEK">
+            <select [(ngModel)]="select.year">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month" (change)="getWeekListByMonth()">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.week">
+              <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+
+          <div *ngIf="showType.DAY" style="margin-right:60px">
+            <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel"  (change)="test()"
+                   [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+            <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+          </div>
         </div>
       </div>
-      <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
-        <option value="按照天统计">按照天统计</option>
-        <option value="按照周统计">按照周统计</option>
-        <option value="按照月统计">按照月统计</option>
+      <select class="sel form-control pull-right" style="margin-right: 20px" name="queryType"
+              [(ngModel)]="queryType" (change)="search()">
+        <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
       </select>
-
-      <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
-      <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
-      <!--</select>-->
-    </div>
-
-
-    <!--图表-->
-    <div class="panel w98 m-auto">
-      <tabset class="bg-white p0" [justified]="true">
-        <tab>
-          <ng-template tabHeading>
-           购买时段分布
-          </ng-template>
-          <div>
-            <!-- START list group-->
-            <div class="list-group mb0">
-              <div class="refund-table">
-                <div echarts [options]="option" class="demo-chart w100"></div>
-              </div>
-            </div>
-            <!-- END list group-->
-          </div>
-        </tab>
-      </tabset>
     </div>
   </div>
 
+  <div class="page-body">
+  <!--图表-->
+  <div class="panel w100 m-auto ">
+
+    <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+  </div>
+  <div class="panel w100 m-auto" style="margin-top: 20px">
+
+    <div echarts [options]="optionNow" class="demo-chart w100"></div>
+  </div>
+</div>
 
 
 

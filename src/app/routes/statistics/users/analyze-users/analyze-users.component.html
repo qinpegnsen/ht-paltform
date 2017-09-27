@@ -1,6 +1,6 @@
 
-<div class="content-heading mb-lg">
-    会员分析
+  <div class="content-heading mb-lg">
+      会员分析
   </div>
 
   <div class="panel panel-default">
@@ -14,20 +14,21 @@
     </div>
 
     <div class="w98 m-auto h50">
-      <button class="statistic-btn btn-default m0" (click)="selectInfos()">
+      <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
         <i class="icon icon-magnifier"></i>
-      </button>
-      <div class="pull-right" style="width: 300px">
+      </span>
+      <div class="pull-right">
         <div class="col-xs-3 form-group" style="width: 250px">
 
           <div *ngIf="showType.MONTH">
-            <select [(ngModel)]="select.year">
+            <select [(ngModel)]="select.year" class="pull-left w43 form-control" style="display: inline-block;margin-right: 20px">
               <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
             </select>
-            <select [(ngModel)]="select.month">
+            <select [(ngModel)]="select.month" class="w43 form-control">
               <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
             </select>
           </div>
+
           <div *ngIf="showType.WEEK">
             <select [(ngModel)]="select.year">
               <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
@@ -40,7 +41,7 @@
             </select>
           </div>
 
-          <div *ngIf="showType.DAY">
+          <div *ngIf="showType.DAY" style="margin-right:60px">
             <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel"
                    [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
             <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
@@ -51,71 +52,46 @@
               [(ngModel)]="queryType" (change)="search()">
         <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
       </select>
-
-
     </div>
+  </div>
+
+  <div class="panel">
     <!--图表切换-->
+    <div  class=" panel w100 m0">
+      <ul class="clearfix p0">
+        <li class="w50 text-center cursor-p pull-left" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
+        <li class="w50 text-center cursor-p pull-left" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
+      </ul>
+    </div>
+
     <div class="panel w98 m-auto">
-      <tabset class="bg-white p0" [justified]="true">
-        <tab>
-          <ng-template tabHeading>
-            <em class="fa fa-shopping-cart"></em>下单金额
-          </ng-template>
-          <div>
-            <!-- START list group-->
-            <div class="list-group mb0">
-              <div class="refund-table">
-                <p class="text-center font24 echars-p">排行榜</p>
-                <div echarts [options]="option" class="demo-chart"></div>
-              </div>
-            </div>
-            <!-- END list group-->
-          </div>
-        </tab>
-        <tab>
-          <ng-template tabHeading>
-            <em class="fa fa-calendar"></em>下单量
-          </ng-template>
-          <div>
-            <!-- START table responsive-->
-            <div class="table-responsive">
-              <div class="refund-table">
-                <p class="text-center font24 echars-p">很帅气</p>
-                <div echarts [options]="optiona" class="demo-chart"></div>
-              </div>
-            </div>
-            <!-- END table responsive-->
-          </div>
-        </tab>
-      </tabset>
+
+      <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+
     </div>
 
-    <div class="panel panel-default mt20" >
-      <div class="panel-body">
-        <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
-          <thead>
-          <tr>
-            <th class="w33 text-center">
-              <rzhDefaultSorter by="name">序号</rzhDefaultSorter>
-            </th>
-            <th class="w33 text-center">
-              <rzhDefaultSorter by="name">会员名</rzhDefaultSorter>
-            </th>
-            <th class="w33 text-center">
-              <rzhDefaultSorter by="email">下单金额（元）</rzhDefaultSorter>
-            </th>
+  </div>
 
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="text-center">
-            <td class="">aaa</td>
-            <td class="">sss</td>
-            <td class="">ddd</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-
+  <div class="mt20 panel " >
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="w33 text-center">
+          <span>序号</span>
+        </th>
+        <th class="w33 text-center">
+          <span>会员名</span>
+        </th>
+        <th class="w33 text-center" >
+          <span>{{queryContentText}}</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let count of nowData.resultList;let i=index">
+        <td>{{i+1}}</td>
+        <td>{{count.custName}}</td>
+        <td>{{ queryContent=='ORDSUM'?count.ordSum:count.ordCount }}</td>
+      </tr>
+    </table>
   </div>
