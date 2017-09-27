@@ -2,3 +2,48 @@
   移动端首页操作类型
   <app-buttons class="pull-right" [config]="addButton"></app-buttons>
 </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
+      <thead>
+      <tr>
+        <th class="w5 text-center">
+          序号
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="optTypeCode">操作类型</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="optTypeName">类型名称</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="typeDesc">操作类型说明</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="isEntered">是否可输入</rzhDefaultSorter>
+        </th>
+
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="b">操作</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let file of controlData;let y = index" class="text-center">
+        <td style="padding-left: 20px">{{y+1}}</td>
+        <td>{{file.optTypeCode}}</td>
+        <td>{{file.optTypeName}}</td>
+        <td>{{file.typeDesc}}</td>
+        <td>{{file.isEntered | rzhState:'1001'}}</td>
+        <td>
+          <!--修改代理商信息按钮-->
+          <app-buttons [config]="updatebutton"></app-buttons>
+          <!--删除代理商信息按钮-->
+          <app-buttons [config]="deletebutton"></app-buttons>
+          <!--查看代理商详情按钮-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
