@@ -74,7 +74,7 @@ export class CancelsComponent implements OnInit {
     let requestData = {
       code:'refund_reason_cust'
     };
-    _this.goodsAudits = _this.submit.getData(requestUrl, requestData).voList;
+    _this.goodsAudits = _this.submit.getData(requestUrl, requestData);
     console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 

@@ -1,0 +1,185 @@
+<!--添加操作类型begin-->
+<div class="rightpage" *ngIf="this.queryId==1" >
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>新增操作类型</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 操作类型</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="optTypeCode" [(ngModel)]="limitForm.optTypeCode"
+                     #optTypeCode="ngModel" type="text"/>
+              <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
+                   class="alert alert-danger">
+                操作类型是必填项，请填写操作类型
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 类型名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="optTypeName" [(ngModel)]="limitForm.optTypeName"
+                     #optTypeName="ngModel" type="text"/>
+              <div [hidden]="optTypeName.valid || optTypeName.pristine"
+                   class="alert alert-danger">
+                区域编码是必填项，请填写区域编码
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 操作类型说明</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="typeDesc" [(ngModel)]="limitForm.typeDesc"
+                     #typeDesc="ngModel" type="text"/>
+              <div [hidden]="typeDesc.valid || typeDesc.pristine"
+                   class="alert alert-danger">
+                操作类型说明是必填项，请填写操作类型说明
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">是否可输入</label>
+            <div class="col-sm-8">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="limitForm.isEntered"/>
+                <span class="fa fa-circle"></span>是</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isEntered" value="N" [(ngModel)]="limitForm.isEntered"/>
+                <span class="fa fa-circle"></span>否</label>
+              <span></span>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--添加操作类型end-->
+
+<!--修改操作类型begin-->
+<div class="rightpage" *ngIf="this.queryId==2">
+  <form class="form-validate form-horizontal" style="height: 100%"  #addLimitForm="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>修改操作类型</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 操作类型</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="optTypeCode" [(ngModel)]="limitForm.optTypeCode"
+                     #optTypeCode="ngModel" type="text"/>
+              <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
+                   class="alert alert-danger">
+                操作类型是必填项，请填写操作类型
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 类型名称</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="optTypeName" [(ngModel)]="limitForm.optTypeName"
+                     #optTypeName="ngModel" type="text"/>
+              <div [hidden]="optTypeName.valid || optTypeName.pristine"
+                   class="alert alert-danger">
+                区域编码是必填项，请填写区域编码
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"> <i>*</i> 操作类型说明</label>
+            <div class="col-sm-8">
+              <input class="form-control" required name="typeDesc" [(ngModel)]="limitForm.typeDesc"
+                     #typeDesc="ngModel" type="text"/>
+              <div [hidden]="typeDesc.valid || typeDesc.pristine"
+                   class="alert alert-danger">
+                操作类型说明是必填项，请填写操作类型说明
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">是否可输入</label>
+            <div class="col-sm-8">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="limitForm.isEntered"/>
+                <span class="fa fa-circle"></span>是</label>
+              <label class="radio-inline c-radio">
+                <input type="radio" name="isEntered" value="N" [(ngModel)]="limitForm.isEntered"/>
+                <span class="fa fa-circle"></span>否</label>
+              <span></span>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--修改操作类型end-->
+
+<!--添加首页模板begin-->
+<div class="rightpage" *ngIf="this.queryId==3">
+  <form class="form-validate form-horizontal" style="height: 100%">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>新增首页模板</legend>
+        </fieldset>
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--添加首页模板end-->
+
+<!--修改首页模板begin-->
+<div class="rightpage" *ngIf="this.queryId==4">
+  <form class="form-validate form-horizontal" style="height: 100%">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>修改首页模板</legend>
+        </fieldset>
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit">提交信息</button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--修改首页模板end-->

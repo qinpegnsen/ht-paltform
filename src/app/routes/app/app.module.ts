@@ -6,12 +6,17 @@ import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../shared/shared.module';
 import {AppIndexOptService} from './app-index-opt/app-index-opt.service';
 import {AppIndexTplService} from './app-index-tpl/app-index-tpl.service';
+import { RightpageComponent } from './rightpage/rightpage.component';
 
 
+// 子路由，用于页面嵌套显示
+const appChildRoutesfile: Routes = [
+  {path: 'rightpage', component: RightpageComponent}
+];
 const routes: Routes = [
   {path: '', component: AppIndexOptComponent},
-  {path: 'app-index-opt', component: AppIndexOptComponent},
-  {path: 'app-index-tpl', component: AppIndexTplComponent},
+  {path: 'app-index-opt', component: AppIndexOptComponent,children: appChildRoutesfile},
+  {path: 'app-index-tpl', component: AppIndexTplComponent,children: appChildRoutesfile},
 ]
 
 @NgModule({
@@ -22,8 +27,9 @@ const routes: Routes = [
   ],
   providers: [
     AppIndexOptService,
-    AppIndexTplService
+    AppIndexTplService,
+    AppIndexOptComponent
   ],
-  declarations: [AppIndexOptComponent, AppIndexTplComponent]
+  declarations: [AppIndexOptComponent, AppIndexTplComponent, RightpageComponent]
 })
 export class AppModule { }

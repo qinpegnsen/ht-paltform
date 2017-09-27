@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg">
   移动端首页模板
-  <app-buttons class="pull-right" [config]="addButton"></app-buttons>
+  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{number:3}"></app-buttons>
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
@@ -44,7 +44,7 @@
         <td>{{file.tplType | rzhState:'1501'}}</td>
         <td>
           <!--修改代理商信息按钮-->
-          <app-buttons [config]="updatebutton"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{number:4}"></app-buttons>
           <!--删除代理商信息按钮-->
           <app-buttons [config]="deletebutton"></app-buttons>
           <!--查看代理商详情按钮-->
@@ -54,3 +54,6 @@
     </table>
   </div>
 </div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

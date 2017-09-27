@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppIndexTplService} from 'app/routes/app/app-index-tpl/app-index-tpl.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-app-index-tpl',
@@ -12,7 +13,7 @@ export class AppIndexTplComponent implements OnInit {
   private deletebutton;//删除移动端首页操作类型按钮配置
   private controlData;
 
-  constructor(private AppIndexTplService:AppIndexTplService) { }
+  constructor(private AppIndexTplService:AppIndexTplService,private routeInfo:ActivatedRoute) { }
 
   ngOnInit() {
     let _this = this;

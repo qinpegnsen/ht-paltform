@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg">
   移动端首页操作类型
-  <app-buttons class="pull-right" [config]="addButton"></app-buttons>
+  <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{number:1}"></app-buttons>
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
@@ -37,9 +37,9 @@
         <td>{{file.isEntered | rzhState:'1001'}}</td>
         <td>
           <!--修改代理商信息按钮-->
-          <app-buttons [config]="updatebutton"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{number:2,id:file.id}"></app-buttons>
           <!--删除代理商信息按钮-->
-          <app-buttons [config]="deletebutton"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="delete(file.id)"></app-buttons>
           <!--查看代理商详情按钮-->
         </td>
       </tr>
@@ -47,3 +47,6 @@
     </table>
   </div>
 </div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
