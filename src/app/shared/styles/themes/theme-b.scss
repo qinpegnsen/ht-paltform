@@ -62,22 +62,25 @@ body,
 }
 
 .thc-font{
-  color: $brand-green
+  color: $brand-green !important;
 }
 .thc-font-light{
-  color: $brand-green-light
+  color: $brand-green-light !important;
 }
 .thc-font-dark{
-  color: $brand-green-dark
+  color: $brand-green-dark !important;
 }
 .thc-bg{
-  background-color: $brand-green
+  background-color: $brand-green !important;
 }
 .thc-bg-light{
-  background-color: $brand-green-light
+  background-color: $brand-green-light !important;
 }
 .thc-bg-dark{
-  background-color: $brand-green-dark
+  background-color: $brand-green-dark !important;
+}
+.thc-tip-bg{
+  background-color: #c9eae2 !important;
 }
 
 /* ========================================================================

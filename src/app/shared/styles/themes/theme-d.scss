@@ -62,22 +62,26 @@ body,
 }
 
 .thc-font{
-  color: $brand-danger
+  color: $brand-danger !important;
 }
 .thc-font-light{
-  color: $brand-danger-light
+  color: $brand-danger-light !important;
 }
 .thc-font-dark{
-  color: $brand-danger-dark
+  color: $brand-danger-dark !important;
 }
 .thc-bg{
-  background-color: $brand-danger
+  background-color: $brand-danger !important;
 }
 .thc-bg-light{
-  background-color: $brand-danger-light
+  background-color: $brand-danger-light !important;
 }
 .thc-bg-dark{
-  background-color: $brand-danger-dark
+  background-color: $brand-danger-dark !important;
+}
+
+.thc-tip-bg{
+  background-color: #ffd9d9 !important;
 }
 
 /* ========================================================================
