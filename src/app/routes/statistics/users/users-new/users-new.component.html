@@ -15,36 +15,57 @@
     </div>
 
     <div class="w98 m-auto h50">
-      <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
+      <button class="statistic-btn btn-default m0" (click)="selectInfos()">
+        <i class="icon icon-magnifier"></i>
+      </button>
       <div class="pull-right" style="width: 300px">
         <div class="col-xs-3 form-group" style="width: 250px">
-          <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
-          <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+
+          <div *ngIf="showType.MONTH">
+            <select [(ngModel)]="select.year">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+          <div *ngIf="showType.WEEK">
+            <select [(ngModel)]="select.year">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month" (change)="getWeekListByMonth()">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.week">
+              <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+
+          <div *ngIf="showType.DAY">
+            <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel"  (change)="test()"
+                   [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+            <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+          </div>
         </div>
       </div>
-      <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
-        <option value="按照天统计">按照天统计</option>
-        <option value="按照周统计">按照周统计</option>
-        <option value="按照月统计">按照月统计</option>
+      <select class="sel form-control pull-right" style="margin-right: 20px" name="queryType"
+              [(ngModel)]="queryType" (change)="search()">
+        <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
       </select>
-
-      <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
-      <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
-      <!--</select>-->
     </div>
     <!--图表切换-->
     <div class="panel w98 m-auto">
       <tabset class="bg-white p0" [justified]="true">
         <tab>
           <ng-template tabHeading>
-            <em class="fa fa-clock-o fa-fw"></em>下单金额
+            <em class="fa fa-clock-o fa-fw"></em>{{data.contrastTime}}
           </ng-template>
           <div>
             <!-- START list group-->
             <div class="list-group mb0">
               <div class="refund-table">
-                <p class="text-center font24 echars-p">排行榜</p>
-                <div echarts [options]="option" class="demo-chart w100"></div>
+                <p class="text-center font24 echars-p">新增会员统计11</p>
+                <div echarts [options]="optionPrev" class="demo-chart w100"></div>
               </div>
             </div>
             <!-- END list group-->
@@ -52,14 +73,14 @@
         </tab>
         <tab>
           <ng-template tabHeading>
-            <em class="fa fa-money fa-fw"></em>下单量
+            <em class="fa fa-money fa-fw"></em>{{data.queryTime}}
           </ng-template>
           <div>
             <!-- START table responsive-->
             <div class="table-responsive">
               <div class="refund-table">
-                <p class="text-center font24 echars-p">很帅气</p>
-                <div echarts [options]="optiona" class="demo-chart w100"></div>
+                <p class="text-center font24 echars-p">新增会员统计22</p>
+                <div echarts [options]="optionaNow" class="demo-chart w100"></div>
               </div>
             </div>
             <!-- END table responsive-->
@@ -71,17 +92,23 @@
     <div class="panel panel-default mt20">
       <div class="table-title w100 h50 font18 ">新增会员统计表</div>
       <div class="panel-body">
-        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="qeuryAll($event)">
           <thead>
           <tr class="">
             <th class="w20 text-center">
-              <rzhDefaultSorter by="hour">小时</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.DAY">小时</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.WEEEK">星期</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.MONTH">日期</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="yestarday">昨天</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.DAY">昨天</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.WEEEK">上周</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.MONTH">上月</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="today">今天</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.DAY">今天</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.WEEEK">本周</rzhDefaultSorter>
+              <rzhDefaultSorter by="hour" *ngIf="showType.MONTH">本月</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
               <rzhDefaultSorter by="">同比</rzhDefaultSorter>
@@ -92,16 +119,16 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="text-center">
-            <td class="">aaa</td>
-            <td class="">sss</td>
-            <td class="">ddd</td>
-            <td class="">fff</td>
-            <td class="">
-              <button routerLink="../list-detail" [queryParams]="{linkType:''}" class=" btn-primary"><i
-                class="icon icon-eye">查看</i></button>
-            </td>
-          </tr>
+          <!--<tr class="text-center" *ngIf="let i of dataTable.data">-->
+            <!--<td class="">{{i.keys}}</td>-->
+            <!--<td class="">{{i.values}}</td>-->
+            <!--<td class="">{{i.values}}</td>-->
+            <!--<td class="">{{i.values}}</td>-->
+            <!--<td class="">-->
+              <!--<button routerLink="../list-detail" [queryParams]="{linkType:''}" class="btn-primary"><i-->
+                <!--class="icon icon-eye">查看</i></button>-->
+            <!--</td>-->
+          <!--</tr>-->
         </table>
       </div>
     </div>

@@ -45,6 +45,7 @@ const PROXY_CONFIG = [
       "/storeExpressTpl",
       "/helpKind",
       "/helpQuestions"
+
     ],
     target: gh + "8085",   //拦截 context配置路径，经过此地址
     secure: false
@@ -54,6 +55,13 @@ const PROXY_CONFIG = [
       "/upload"
     ],
     target: gh + "8085",   //拦截 context配置路径，经过此地址
+    secure: false
+  },
+  {
+    context: [
+      "/phone"
+    ],
+    target: bb + "8094",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {

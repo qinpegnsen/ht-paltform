@@ -25,11 +25,14 @@ export class IntegrationImportComponent implements OnInit {
   }
  //清空选中的表格
   changeFiles(){
-    if(this.uploader.queue.length > 1)this.uploader.queue[0].remove();
+    if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
+    console.log("█ 111 ►►►",  111);
   }
+
   //上传
   private upLoadExcel(submitUrl,submitData,method){
     let me = this;
+
     MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();
@@ -38,9 +41,7 @@ export class IntegrationImportComponent implements OnInit {
       let res = JSON.parse(response);
       console.log("█ res ►►►",  res);
       if (res.success) {
-        console.log("█ res.data ►►►",  res.data);
         me.iimport(res.data);
-        console.log("█  me.data ►►►",   me.data);
       } else {
         AppComponent.rzhAlt('error','表格失败','表格上传失败！');
       }

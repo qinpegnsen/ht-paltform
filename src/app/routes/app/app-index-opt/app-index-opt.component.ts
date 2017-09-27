@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
+import {Page} from '../../../core/page/page';
+import {AppIndexOptService} from './app-index-opt.service';
 
 @Component({
   selector: 'app-app-index-opt',
@@ -6,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-index-opt.component.scss']
 })
 export class AppIndexOptComponent implements OnInit {
-  private addButton;//新增移动端首页操作类型
+  private addButton;//新增移动端首页操作类型按钮配置
+  private updatebutton;//修改移动端首页操作类型按钮配置
+  private deletebutton;//删除移动端首页操作类型按钮配置
+  private controlData;
 
-  constructor() {
+  constructor(private AppIndexOptService:AppIndexOptService) {
 
   }
 
@@ -24,6 +30,35 @@ export class AppIndexOptComponent implements OnInit {
       text:"新增操作类型",
       title:'新增移动端首页操作类型',
     };
+    _this.updatebutton = {
+      type:"update",
+      title:'修改移动端首页操作类型',
+    };
+    _this.deletebutton = {
+      type:"delete",
+      title:'删除移动端首页操作类型',
+    };
+
+    _this.getAgentList();
   }
+
+
+  /**
+   * 获取移动端首页操作类型列表
+   * @param event
+   */
+  public getAgentList(){
+    let _this = this;
+    let data={
+    }
+    let url= "/phone/indexOptType/list";
+    console.log("█ 1 ►►►",  1);
+
+    this.controlData=this.AppIndexOptService.controlDatas(url,data);
+    console.log("█ this.controlData ►►►",  this.controlData);
+
+  }
+
+
 
 }

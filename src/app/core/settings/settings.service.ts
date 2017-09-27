@@ -10,9 +10,20 @@ export class SettingsService {
   public user: any;
   public app: any;
   public layout: any;
+  static yearInfo: Array<string> = new Array();
+  static month: Array<string> = new Array();
 
   constructor(private _cookieService: CookieService, private location: Location) {
-
+    //设置年份和月份
+    let nowYear: number = new Date().getFullYear();
+    for (let i = 0; i < 10; i++) {
+      SettingsService.yearInfo.push(nowYear.toString());
+      nowYear--;
+    }
+    for(let i = 0; i < 12; i++){
+      if(i<9) SettingsService.month.push("0"+(i+1).toString());
+      else SettingsService.month.push((i+1).toString());
+    }
     /**
      * 用户信息（当前登录用户）
      * 获取用户cookie信息并展示

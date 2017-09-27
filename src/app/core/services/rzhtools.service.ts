@@ -506,6 +506,31 @@ export class RzhtoolsService {
       parseInt(t[2], 10) || null
     )).getTime();
   }
+
+  /**
+   * 获取指定年月下的周集合
+   * @param year 年份，如：2017
+   * @param month 月份，如:08
+   * @returns {Array<string>}
+   */
+  getWeekListByMonth(year: string, month: string) {
+    let _this = this, ret: Array<string> = new Array();
+    console.log("█  year►►►", year);
+    console.log("█ month ►►►", month);
+    if (year && month) {
+    console.log("█ month ►►►", month);
+      _this.ajax.get({
+        url: "/statistical/getWeekList",
+        data:{queryYear:year,queryMonth:month},
+        async: false,
+        success: (response) => {
+          console.log("█ response ►►►",  response);
+          if (response.success) ret = response.data;
+        }
+      });
+    }
+    return ret;
+  }
 }
 
 @Injectable()
