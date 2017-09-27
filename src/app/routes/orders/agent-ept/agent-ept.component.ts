@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
-import {Page} from '../../../core/page/page';
 import {SubmitService} from '../../../core/forms/submit.service';
 
 @Component({
