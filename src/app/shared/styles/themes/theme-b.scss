@@ -61,26 +61,19 @@ body,
   background-color: $aside-bg;
 }
 
-.thc-font{
-  color: $brand-green !important;
-}
-.thc-font-light{
-  color: $brand-green-light !important;
-}
-.thc-font-dark{
-  color: $brand-green-dark !important;
-}
-.thc-bg{
-  background-color: $brand-green !important;
-}
-.thc-bg-light{
-  background-color: $brand-green-light !important;
-}
-.thc-bg-dark{
-  background-color: $brand-green-dark !important;
-}
-.thc-tip-bg{
-  background-color: #c9eae2 !important;
+.thc{
+  &.br { border-right: 1px solid $nav-top-bg !important;}
+  &.bl { border-left: 1px solid $nav-top-bg !important;}
+  &.bt { border-top: 1px solid $nav-top-bg !important;}
+  &.bb { border-bottom: 1px solid $nav-top-bg !important;}
+  &.b, &.ba  { border: 1px solid $nav-top-bg !important; }
+  &.font {color: $brand-green !important; }
+  &.font-light {color: $brand-green-light !important; }
+  &.font-dark {color: $brand-green-dark !important; }
+  &.bg {background-color: $brand-green !important; }
+  &.bg-light {background-color: $brand-green-light !important; }
+  &.bg-dark {background-color: $brand-green-dark !important; }
+  &.ts, &.ts-bg{background-color: #c9eae2 !important;}
 }
 
 /* ========================================================================

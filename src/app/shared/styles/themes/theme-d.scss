@@ -61,28 +61,22 @@ body,
   background-color: $aside-bg;
 }
 
-.thc-font{
-  color: $brand-danger !important;
-}
-.thc-font-light{
-  color: $brand-danger-light !important;
-}
-.thc-font-dark{
-  color: $brand-danger-dark !important;
-}
-.thc-bg{
-  background-color: $brand-danger !important;
-}
-.thc-bg-light{
-  background-color: $brand-danger-light !important;
-}
-.thc-bg-dark{
-  background-color: $brand-danger-dark !important;
+
+.thc{
+  &.br { border-right: 1px solid $nav-top-bg !important;}
+  &.bl { border-left: 1px solid $nav-top-bg !important;}
+  &.bt { border-top: 1px solid $nav-top-bg !important;}
+  &.bb { border-bottom: 1px solid $nav-top-bg !important;}
+  &.b, &.ba  { border: 1px solid $nav-top-bg !important; }
+  &.font {color: $brand-danger !important; }
+  &.font-light {color: $brand-danger-light !important; }
+  &.font-dark {color: $brand-danger-dark !important; }
+  &.bg {background-color: $brand-danger !important; }
+  &.bg-light {background-color: $brand-danger-light !important; }
+  &.bg-dark {background-color: $brand-danger-dark !important; }
+  &.ts, &.ts-bg{background-color: #ffd9d9 !important;}
 }
 
-.thc-tip-bg{
-  background-color: #ffd9d9 !important;
-}
 
 /* ========================================================================
    Component: top-navbar

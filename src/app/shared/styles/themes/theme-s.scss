@@ -59,34 +59,20 @@ body,
   background-color: $aside-bg;
 }
 
-.thc-font {
-  color: $brand-hawthorn !important;
+.thc{
+  &.br { border-right: 1px solid $nav-top-bg !important;}
+  &.bl { border-left: 1px solid $nav-top-bg !important;}
+  &.bt { border-top: 1px solid $nav-top-bg !important;}
+  &.bb { border-bottom: 1px solid $nav-top-bg !important;}
+  &.b, &.ba  { border: 1px solid $nav-top-bg !important; }
+  &.font {color: $brand-hawthorn !important; }
+  &.font-light {color: $brand-hawthorn-light !important; }
+  &.font-dark {color: $brand-hawthorn-dark !important; }
+  &.bg {background-color: $brand-hawthorn !important; }
+  &.bg-light {background-color: $brand-hawthorn-light !important; }
+  &.bg-dark {background-color: $brand-hawthorn-dark !important; }
+  &.ts, &.ts-bg{background-color: #ffd9d9 !important;}
 }
-
-.thc-font-light {
-  color: $brand-hawthorn-light !important;
-}
-
-.thc-font-dark {
-  color: $brand-hawthorn-dark !important;
-}
-
-.thc-bg {
-  background-color: $brand-hawthorn !important;
-}
-
-.thc-bg-light {
-  background-color: $brand-hawthorn-light !important;
-}
-
-.thc-bg-dark {
-  background-color: $brand-hawthorn-dark !important;
-}
-
-.thc-tip-bg {
-  background-color: #ffd9d9 !important;
-}
-
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */

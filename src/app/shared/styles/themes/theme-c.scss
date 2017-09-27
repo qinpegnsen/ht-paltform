@@ -62,28 +62,20 @@ body,
 }
 
 
-.thc-font{
-  color: $brand-purple !important;
+.thc{
+  &.br { border-right: 1px solid $nav-top-bg !important;}
+  &.bl { border-left: 1px solid $nav-top-bg !important;}
+  &.bt { border-top: 1px solid $nav-top-bg !important;}
+  &.bb { border-bottom: 1px solid $nav-top-bg !important;}
+  &.b, &.ba  { border: 1px solid $nav-top-bg !important; }
+  &.font {color: $brand-purple !important; }
+  &.font-light {color: $brand-purple-light !important; }
+  &.font-dark {color: $brand-purple-dark !important; }
+  &.bg {background-color: $brand-purple !important; }
+  &.bg-light {background-color: $brand-purple-light !important; }
+  &.bg-dark {background-color: $brand-purple-dark !important; }
+  &.ts, &.ts-bg{background-color: #d8d9f9 !important;}
 }
-.thc-font-light{
-  color: $brand-purple-light !important;
-}
-.thc-font-dark{
-  color: $brand-purple-dark !important;
-}
-.thc-bg{
-  background-color: $brand-purple !important;
-}
-.thc-bg-light{
-  background-color: $brand-purple-light !important;
-}
-.thc-bg-dark{
-  background-color: $brand-purple-dark !important;
-}
-.thc-tip-bg{
-  background-color: #d8d9f9 !important;
-}
-
 /* ========================================================================
    Component: top-navbar
  ========================================================================== */

@@ -3,8 +3,8 @@
   <div class="panel-body">
     <div *ngIf="orderType!=100">
       <ul class="order-guide list-unstyled clearfix bb">
-        <li class="pull-left" [class.cur-order]="orderType==1" routerLink="all-order">所有订单</li>
-        <li class="pull-left" [class.cur-order]="orderType==2" routerLink="to-audit">待审核</li>
+        <li class="pull-left thc" [class.font]="orderType==1" [class.bb]="orderType==1" routerLink="all-order">所有订单</li>
+        <li class="pull-left thc" [class.font]="orderType==2" [class.bb]="orderType==2" routerLink="to-audit">待审核</li>
       </ul>
       <!--查询 start-->
       <!--<div class="row clearfix p text-right">
@@ -43,7 +43,7 @@
 
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
       <li class="pull-left" routerLink="all-stock">订单列表</li>
-      <li class="pull-left cur-order">商品详情</li>
+      <li class="pull-left thc bb">商品详情</li>
     </ul>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
