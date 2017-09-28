@@ -209,15 +209,17 @@
   }
   .timeline-alt > li > .timeline-badge {
     position: absolute;
-    left: 8px;
+    left: 15px;
     z-index: 100;
     color: #fff;
-    width: 20px;
-    height: 20px;
+    width: 6px;
+    height: 6px;
+    margin-top: 8px;
     font-size: 12px;
     border-radius: 20px;
     line-height: 20px;
     text-align: center;
+    background-color: #d8d8d8;
   }
   .logis-time{
     display: inline-block;

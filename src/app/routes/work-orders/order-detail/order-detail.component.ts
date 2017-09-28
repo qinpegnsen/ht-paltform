@@ -19,10 +19,10 @@ export class OrderDetailComponent implements OnInit {
   public orderStep = 1;
   public curOrdno: string;
   public orderStates: any;
-  public logisticsInfo: any;
   public orderDetailData: any;
   public curDeliverOrderId: string;
   public goodsData: any;
+  private atime:Array<string> = new Array();
 
   ngOnInit() {
     let me = this;
@@ -63,8 +63,20 @@ export class OrderDetailComponent implements OnInit {
   private getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
-    me.orderStates = orderStatesDetail.orderStates;
-    me.logisticsInfo = orderStatesDetail.orderLogistics;
+    if(!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
+    for (let item of me.orderStates){
+      if (item.state == 'SUCCESS') {
+        me.atime[5] = item.acceptTime;
+      } else if (item.state == 'DELIVERY') {
+        me.atime[4] = item.acceptTime;
+      } else if (item.state == 'PREPARE') {
+        me.atime[3] = item.acceptTime;
+      } else if (item.state == 'PAID') {
+        me.atime[2] = item.acceptTime;
+      } else if (item.state == 'CR') {
+        me.atime[1] = item.acceptTime;
+      }
+    }
   }
 
   /**
@@ -73,15 +85,15 @@ export class OrderDetailComponent implements OnInit {
   private getOrderStep() {
     let me = this, temp = [];
     if (me.orderDetailData.state == 'SUCCESS') {
-      me.orderStep = 5
+      me.orderStep = 5;
     } else if (me.orderDetailData.state == 'DELIVERY') {
-      me.orderStep = 4
+      me.orderStep = 4;
     } else if (me.orderDetailData.state == 'PREPARE') {
-      me.orderStep = 3
+      me.orderStep = 3;
     } else if (me.orderDetailData.state == 'PAID') {
-      me.orderStep = 2
+      me.orderStep = 2;
     } else if (me.orderDetailData.state == 'CR') {
-      me.orderStep = 1
+      me.orderStep = 1;
     }
   }
 

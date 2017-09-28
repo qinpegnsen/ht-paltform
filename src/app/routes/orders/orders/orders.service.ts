@@ -16,17 +16,7 @@ export class OrdersService {
   public getOrderState(ordno) {
     let orderStates, orderLogistics;
     orderStates = this.submit.getData('/ord/tail/queryList', {ordno: '1234123451235'});
-    if (!isNullOrUndefined(orderStates) && orderStates.length > 0) {
-      for (let item of orderStates) {
-        if (item.state == 'DELIVERY') {
-          orderLogistics = item;
-        }
-      }
-    }
-    return {
-      orderStates: orderStates,
-      orderLogistics: orderLogistics
-    }
+    return orderStates;
   }
 
   /**

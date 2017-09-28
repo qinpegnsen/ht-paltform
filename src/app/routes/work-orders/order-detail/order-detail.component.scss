@@ -204,17 +204,33 @@
 }
 
 .order-track{
+  .timeline > li > .timeline-panel, .timeline-alt > li > .timeline-panel {
+    margin-left: 45px;
+  }
   .timeline-alt > li > .timeline-badge {
     position: absolute;
-    left: 8px;
+    left: 15px;
     z-index: 100;
     color: #fff;
-    width: 20px;
-    height: 20px;
+    width: 6px;
+    height: 6px;
+    margin-top: 8px;
     font-size: 12px;
     border-radius: 20px;
     line-height: 20px;
     text-align: center;
+    background-color: #d8d8d8;
+  }
+  .logis-time{
+    display: inline-block;
+    text-align: right;
+    min-width: 170px;
+    position: absolute;
+    left: 0;
+  }
+  .every-line{
+    position: relative;
+    padding-left: 180px;
   }
 }
 

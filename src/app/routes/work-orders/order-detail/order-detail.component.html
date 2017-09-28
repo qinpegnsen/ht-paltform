@@ -86,7 +86,7 @@
       </dl>
       <dl>
         <dt>地址：</dt>
-        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.addr}}</dd>
+        <dd>{{orderDetailData.areaFullName}} {{orderDetailData.address}}</dd>
       </dl>
     </div>
   </div>
@@ -95,20 +95,26 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
-        <li class="mb0" *ngFor="let item of orderStates">
-          <div class="timeline-badge primary">
-            <em class="fa fa-truck"></em>
-          </div>
+        <li class="mb0" *ngFor="let item of orderStates;let s = index">
+          <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
           <div class="timeline-panel">
             <div class="right">
               <div>
-                <p *ngIf="item.state!='DELIVERY'">
-                  <span class="mr">{{item.createTime}}</span>
-                  <span>{{item.description}}</span>
-                </p>
-                <p *ngFor="let detail of item.traceVos;let i=index;">
-                  <span class="mr">{{detail.acceptTime}}</span>
-                  <span>{{detail.acceptStation}}</span>
+                <p class="every-line">
+                  <span class="mr logis-time" *ngIf="s==0">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                  </span>
+                  <ng-container *ngIf="s>0">
+                    <span class="mr logis-time" *ngIf="item.day==orderStates[s-1].day">{{item.time}}</span>
+                    <span class="mr logis-time" *ngIf="item.day!=orderStates[s-1].day">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                    </span>
+                  </ng-container>
+                  <span class="every-info">{{item.acceptStation}}</span>
                 </p>
               </div>
             </div>
@@ -126,28 +132,28 @@
   <dl class="cur">
     <dt>提交订单</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>{{orderStates[0].createTime}}</dd>
+    <dd>{{atime[1]}}</dd>
   </dl>
   <dl [class.cur]="orderStep==2 || orderStep==3 || orderStep==4 || orderStep==5">
     <dt>已支付</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd><span *ngIf="orderStep==2 || orderStep==3 || orderStep==4 || orderStep==5">{{orderStates[1].createTime}}</span>
+    <dd><span *ngIf="orderStep==2 || orderStep==3 || orderStep==4 || orderStep==5">{{atime[2]}}</span>
     </dd>
   </dl>
   <dl [class.cur]="orderStep==3 || orderStep==4 || orderStep==5">
     <dt>已配货</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd><span *ngIf="orderStep==3 || orderStep==4 || orderStep==5">{{orderStates[2].createTime}}</span></dd>
+    <dd><span *ngIf="orderStep==3 || orderStep==4 || orderStep==5">{{atime[3]}}</span></dd>
   </dl>
   <dl [class.cur]="orderStep==4 || orderStep==5">
     <dt>已发货</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd><span *ngIf="orderStep==4 || orderStep==5">{{orderStates[3].createTime}}</span></dd>
+    <dd><span *ngIf="orderStep==4 || orderStep==5">{{atime[4]}}</span></dd>
   </dl>
   <dl [class.cur]="orderStep==5">
     <dt>订单完成</dt>
     <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd><span *ngIf="orderStep==5">{{orderStates[4].createTime}}</span></dd>
+    <dd><span *ngIf="orderStep==5">{{atime[5]}}</span></dd>
   </dl>
 </div>
 
@@ -201,21 +207,24 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt>运费：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.freight == 0? '(免运费)':goodsData.freight |
-            decimalTwo}}</span>元
+          <dd>
+            <span class="font12 ml mr" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+            <ng-container *ngIf="orderDetailData.freight != 0">
+              <span class="font18 ml mr">{{orderDetailData.freight | decimalTwo}}</span>元
+            </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
           <dt>重消币抵扣数量：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.coin | decimalTwo}}</span>个</dd>
+          <dd><span class="font18 ml mr">{{orderDetailData.coin | decimalTwo}}</span>个</dd>
         </dl>
         <dl class="text-right mb0">
           <dt>重消币抵扣金额：</dt>
-          <dd><span class="font18 ml mr">{{goodsData.coinPay | decimalTwo}}</span>元</dd>
+          <dd><span class="font18 ml mr">{{orderDetailData.coinPay | decimalTwo}}</span>元</dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">最终支付金额：</dt>
-          <dd><span class="main-red ml font22 mr">{{goodsData.total | decimalTwo}}</span>元</dd>
+          <dd><span class="main-red ml font22 mr">{{orderDetailData.total | decimalTwo}}</span>元</dd>
         </dl>
       </td>
     </tr>
