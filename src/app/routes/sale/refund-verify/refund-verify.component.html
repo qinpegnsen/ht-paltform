@@ -1,6 +1,6 @@
 <div>
   <div class="content-heading mb-lg">
-    退款审核
+    退款管理
   </div>
 
   <div class="panel panel-default">
@@ -8,10 +8,9 @@
     <div class="panel mb p ts thc">
       <p class="font18">操作提示</p>
       <ul>
-        <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。
-          如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。
-        </li>
+        <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。 如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
         <li>平台也可以不经过商家处理，直接处理退款申请，退款给买家。</li>
+        <li>当  <span class="btn btn-danger btn-outline btn-xs">处理</span>按钮是红色时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
       </ul>
     </div>
 
@@ -20,13 +19,12 @@
         <div class="form-group mb0">
           <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
           <div class="col-xs-5">
-            <input type="text" [(ngModel)]="goodsName"
-                   class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                   (change)="search($event)" placeholder="请输入退款单号进行搜索">
+            <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                   (change)="queryAllService($event)" placeholder="请输入退款单号进行搜索">
           </div>
           <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
-           <button type="button" title="搜索" id="toSearch" (click)="search($event)"
+           <button type="button" title="搜索" id="toSearch"
                    class="btn btn-primary bar-h3-btn mr ng-scope">
              <em class="icon-magnifier fa-fw"></em>搜索
            </button>
@@ -36,101 +34,69 @@
       </div>
     </div>
     <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
-             (pageChange)="qeuryAllService($event)">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="refundList"  (pageChange)="queryAllService($event)">
         <thead>
         <tr>
           <th class="w5 text-center">
             <rzhDefaultSorter by="sort"></rzhDefaultSorter>
           </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter>退单单号</rzhDefaultSorter>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="1">退单单号</rzhDefaultSorter>
           </th>
           <th class="w10 text-center">
-            <rzhDefaultSorter>订单编号</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter>退款金额（元）</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter>申请时间</rzhDefaultSorter>
-          </th>
-          <th class="w13 text-center">
-            <rzhDefaultSorter>涉及商品</rzhDefaultSorter>
-          </th>
-          <th class="w5 text-center">
-            <rzhDefaultSorter>商家处理</rzhDefaultSorter>
-          </th>
-          <th class="w5 text-center">
-            <rzhDefaultSorter>平台处理</rzhDefaultSorter>
-          </th>
-          <th class="w8 text-center">
-            <rzhDefaultSorter>买家</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter>商家名称</rzhDefaultSorter>
+            <rzhDefaultSorter by="2">退款金额（元）</rzhDefaultSorter>
           </th>
           <th class="w15 text-center">
-            <rzhDefaultSorter>管理操作</rzhDefaultSorter>
+            <rzhDefaultSorter by="4">申请人（买家）</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="3">申请时间</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="7">处理状态</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="8">管理操作</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
 
-        <ng-container *ngFor="let count of dataTable.data; let i = index">
+        <ng-container *ngFor="let item of dataTable.data; let i = index">
 
           <tr class="text-center">
-            <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
-            <td>{{count.createTime}}</td>
-            <td>{{count.createTime}}</td>
-            <td class="gold-star">{{count.createTime}}</td>
-            <td>{{count.goodsCode}}</td>
-            <td>{{count.goodsName}}</td>
-            <td>{{count.goodsName}}</td>
-            <td>{{count.goodsName}}</td>
-            <td>{{count.goodsName}}</td>
-            <td>{{count.goodsName}}</td>
+            <td (click)="showDetail(i)"><i class="icon icon-arrow-down"></i></td>
+            <td>{{item.afterNo}}</td>
+            <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
+            <td>{{item.custCode}}</td>
+            <td>{{item.createTime}}</td>
+            <td>{{item.state | rzhState:'1602'}} </td>
             <td>
-              <app-buttons [config]="handlebutton" routerLink="../refund-details"
-                           [queryParams]="{linkType:'set'}"></app-buttons>
-              <app-buttons [config]="seebutton" routerLink="../refund-details"
-                           [queryParams]="{linkType:''}"></app-buttons>
+              <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="../after-details"
+                      [queryParams]="{afterNo:item.afterNo,afterType:'deal'}">处理</button>
+              <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
+                      [queryParams]="{afterNo:item.afterNo,afterType:'detail'}">详情
+              </button>
             </td>
           </tr>
 
-          <tr *ngIf="count.isShow">
+          <tr *ngIf="detail[i]">
             <td class="p0" colspan="11">
               <div class="bg-table special text-left">
-                <span class="">申请原因:</span> <span>{{count.createTime}}</span>
+                <span class="">申请原因：</span> <span>{{item.reason}}</span>
               </div>
               <div class="bg-table special text-left">
-                <span class="">申请图片:</span> <span>{{count.createTime}}</span>
+                <span class="">订单编号：</span> <span>{{item.ordno}}</span>
               </div>
-              <div class="bg-table special text-left h40">
-                <span class="pull-left">商品图片:</span>
-                <span>
-                   <img [src]="count.goodsImage" alt="" class="buyimg pull-left" (mousemove)="showImg($event,i)"
-                        (mouseout)="hideImg(i)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                  <img [src]="count.goodsImage" #i class="bigImg" alt=""
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                </span>
+              <div class="bg-table special text-left h35">
+                <span class=" shopimg pull-left">商品图片：</span>
+                <span class="">
+                 <img [src]="item.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img [src]="item.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </span>
               </div>
               <div class="bg-table special text-left">
-                <span class="">商品ID:</span> <span> </span>
-              </div>
-              <div class="bg-table special text-left ">
-                <span class="">商家处理备注:</span>
-                <span>
-                </span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="">商家处理时间:</span> <span></span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="">买家ID:</span> <span></span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="">商家ID:</span> <span></span>
+                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
               </div>
             </td>
           </tr>
@@ -138,15 +104,12 @@
         </tbody>
         <tfoot>
         <tr>
-          <td colspan="11">
+          <td colspan="9">
             <div class="col-sm-5">
-              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
-                条</strong></div>
+              <div class="text-muted"><strong>第 {{refundList.genStartRow()}} 至 {{refundList.genEndRow()}} 条，共 {{refundList.totalRow}} 条</strong></div>
             </div>
             <div class="col-sm-7">
-              <div style="float: right">
-                <rzhBootstrapPaginator></rzhBootstrapPaginator>
-              </div>
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
             </div>
           </td>
         </tr>

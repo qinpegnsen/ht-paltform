@@ -1,0 +1,116 @@
+<div class="content-heading mb-lg">
+  退款详情
+</div>
+
+<div class="panel panel-default detailset">
+
+  <div class="panel-body">
+    <div class="ordernum">
+      <span>订单编号：{{afterData.ordno}}</span>
+    </div>
+    <div class="panel-body">
+      <div>
+        <div class="">
+          <legend class="m0" style="height: 51px;line-height: 51px;">买家退款申请</legend>
+        </div>
+        <table class="t-items p w100">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-1">品牌名称：</td>
+            <td class="item-bd col-sm-9 mb0">{{afterData.createTime}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-1">申请时间：</td>
+            <td class="item-bd col-sm-9 mb0">{{afterData.createTime}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">申请人（买家）：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.custPhone}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">订单编号：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.ordno}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">商品名称：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.goodsName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">退款金额：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.reqMoney}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">是否收到货：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.isReceive}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">退款原因：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.reason}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">退款说明：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.reasonRmk}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">凭证：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.createTime}}</td>
+          </tr>
+        </table>
+
+        <div>
+          <div class="">
+            <legend class="m0" style="height: 51px;line-height: 51px;">平台退款通知</legend>
+          </div>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">处理时间：</td>
+              <td class="item-bd col-sm-10 mb0">1213</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">处理备注：</td>
+              <td class="item-bd col-sm-10 mb0">123</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">审核结果：</td>
+              <td class="item-bd col-sm-10 mb0">123</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <div class="">
+            <legend class="m0" style="height: 51px;line-height: 51px;">订单支付信息</legend>
+          </div>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">支付方式：</td>
+              <td class="item-bd col-sm-10 mb0"></td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">订单总额：</td>
+              <td class="item-bd col-sm-10 mb0"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="goods-audit panel panel-danger detailset" (keydown.Enter)="false" *ngIf="linkType=='set'">
+    <fieldset class="p0 panel-body">
+      <legend class="m0 goods-audit-title">退款/退货处理</legend>
+      <table class="w100">
+        <tr>
+          <td class="col-xs-8 p">
+          <textarea class="form-control w66" name="goodsJingle" required
+                   [(ngModel)]="audit.opinion" placeholder="请填写处理意见"
+                   cols="10" rows="3"></textarea>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <fieldset class="pt-xl m0 text-center">
+      <button class="btn btn-green" type="button" (click)="audit()" [disabled]="!audit.opinion">
+        <em class="fa fa-upload mr"></em>提交处理结果
+      </button>
+    </fieldset>
+  </form>
+</div>
