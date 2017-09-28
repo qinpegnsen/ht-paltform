@@ -83,6 +83,6 @@ const routes: Routes = [
     RefundComponent,
     ReturnComponent,
     ListDetailComponent,
-    OrderAmountComponent]
+    OrderAmountComponent,]
 })
 export class StatisticsModule { }

@@ -55,33 +55,32 @@
   </div>
 <!--图文结合-->
   <div class="money">
+ <!-- *ngFor="let order of result"-->
     <div class="row r3">
       <div class="col-md-4" style="min-width: 33%">
         <!-- START panel-->
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="row">
-
               <div class="col-xs-9">
                 <div class="">总销售额（元）</div>
-                <p class="text-md m0">New Comments!</p>
+                <p class="text-md m0">{{data.ordSum}}</p>
               </div>
               <div class="col-xs-3 text-right">
                 <em class="fa fa-calculator fa-3x tp-em"></em>
               </div>
             </div>
           </div>
-          <!-- END panel-->
         </div>
       </div>
       <div class="col-md-4" style="min-width: 33%">
-        <!-- START panel-->
+
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="row">
               <div class="col-xs-9 ">
                 <div class="">总订单量（元）</div>
-                <p class="text-md m0">New Tasks!</p>
+                <p class="text-md m0"> {{ data.ordCount}}</p>
               </div>
               <div class="col-xs-3 text-right">
                 <em class="fa fa-calculator fa-3x tp-em"></em>
@@ -111,51 +110,51 @@
 
   </div>
   <!--订单列表-->
-  <div class="panel panel-default">
-    <div class="table-title">订单列表</div>
-    <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
-        <thead>
-        <tr>
-        <th class="w20 text-center">
-          <rzhDefaultSorter by="name">订单号</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center">
-            <rzhDefaultSorter by="name">买家</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center" >
-            <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center" >
-            <rzhDefaultSorter by="name">下单时间</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center">
-            <rzhDefaultSorter by="name">订单金额（元）</rzhDefaultSorter>
-        </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-center">
-          <td class="">aaa</td>
-          <td class="">sss</td>
-          <td>ddd</td>
-          <td class="">aaa</td>
-          <td class="">aaa</td>
-        </tr>
-      </table>
-      <!--<tfoot>-->
-      <!--<tr>-->
-      <!--<td colspan="5">-->
-      <!--<div class="col-sm-5">-->
-      <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
-      <!--</div>-->
-      <!--<div class="col-sm-7">-->
-      <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
-      <!--</div>-->
-      <!--</td>-->
-      <!--</tr>-->
-      <!--</tfoot>-->
-    </div>
-  </div>
+  <!--<div class="panel panel-default">-->
+    <!--<div class="table-title">订单列表</div>-->
+    <!--<div class="panel-body">-->
+      <!--<table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">-->
+        <!--<thead>-->
+        <!--<tr>-->
+        <!--<th class="w20 text-center">-->
+          <!--<rzhDefaultSorter by="name">订单号</rzhDefaultSorter>-->
+        <!--</th>-->
+        <!--<th class="w20 text-center">-->
+            <!--<rzhDefaultSorter by="name">买家</rzhDefaultSorter>-->
+        <!--</th>-->
+        <!--<th class="w20 text-center" >-->
+            <!--<rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>-->
+        <!--</th>-->
+        <!--<th class="w20 text-center" >-->
+            <!--<rzhDefaultSorter by="name">下单时间</rzhDefaultSorter>-->
+        <!--</th>-->
+        <!--<th class="w20 text-center">-->
+            <!--<rzhDefaultSorter by="name">订单金额（元）</rzhDefaultSorter>-->
+        <!--</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr class="text-center">-->
+          <!--<td class="">aaa</td>-->
+          <!--<td class="">sss</td>-->
+          <!--<td>ddd</td>-->
+          <!--<td class="">aaa</td>-->
+          <!--<td class="">aaa</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+      <!--&lt;!&ndash;<tfoot>&ndash;&gt;-->
+      <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+      <!--&lt;!&ndash;<td colspan="5">&ndash;&gt;-->
+      <!--&lt;!&ndash;<div class="col-sm-5">&ndash;&gt;-->
+      <!--&lt;!&ndash;<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--&lt;!&ndash;<div class="col-sm-7">&ndash;&gt;-->
+      <!--&lt;!&ndash;<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--&lt;!&ndash;</td>&ndash;&gt;-->
+      <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+      <!--&lt;!&ndash;</tfoot>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 

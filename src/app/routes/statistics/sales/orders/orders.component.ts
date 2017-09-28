@@ -81,7 +81,7 @@ export class OrdersComponent implements OnInit {
     let me = this;
     if(!isNullOrUndefined(type)) me.queryContent = type;
     me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
-    let url = "/statistical/analyseCust";
+    let url = "/statistical/ordCount";
     let data = {
       queryType: me.queryType,
       queryTime: me.queryTime,
@@ -90,9 +90,19 @@ export class OrdersComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
+    //
+    if(me.queryContent=='ORDSUM') {
+      me.nowData.queryTime_yaxis = me.nowData[me.nowData.queryTime + "_ordSum"].yaxis;
+      me.nowData.queryTime_keys = me.nowData[me.nowData.queryTime + "_ordSum"].keys;
+      me.nowData.contrastTime_yaxis = me.nowData[me.nowData.contrastTime + "_ordSum"].yaxis;
+      me.nowData.contrastTime_keys = me.nowData[me.nowData.contrastTime + "_ordSum"].keys;
+    }else {
+      me.nowData.queryTime_yaxis = me.nowData[me.nowData.queryTime + "_ordCount"].yaxis;
+      me.nowData.queryTime_keys = me.nowData[me.nowData.queryTime + "_ordCount"].keys;
+      me.nowData.contrastTime_yaxis = me.nowData[me.nowData.contrastTime + "_ordCount"].yaxis;
+      me.nowData.contrastTime_keys = me.nowData[me.nowData.contrastTime + "_ordCount"].keys;
+  }
     me.optionPrevInfo();
-    console.log("█ me.nowData.yaxis ►►►", me.nowData.yaxis);
-    console.log("█ result ►►►",  result);
   }
 
   /**
@@ -130,7 +140,7 @@ export class OrdersComponent implements OnInit {
       xAxis: [
         {
           type: 'category',
-          data: _this.nowData.keys,
+          data: _this.nowData.queryTime_keys,
           axisTick: {
             alignWithLabel: true
           }
@@ -146,7 +156,13 @@ export class OrdersComponent implements OnInit {
           name:_this.queryContentText ,
           type: 'bar',
           barWidth: '30%',
-          data: _this.nowData.yaxis
+          data: _this.nowData.queryTime_yaxis
+        },
+        {
+          name:_this.queryContentText ,
+          type: 'bar',
+          barWidth: '30%',
+          data: _this.nowData.contrastTime_yaxis
         }
       ]
     }; //绘制图表

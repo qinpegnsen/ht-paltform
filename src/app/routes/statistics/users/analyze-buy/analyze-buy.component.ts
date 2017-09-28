@@ -40,8 +40,6 @@ export class AnalyzeBuyComponent implements OnInit {
    * 图表1
    */
   public optionPrev = {};
-
-
   /**
    * 图表2
    */
@@ -81,7 +79,6 @@ export class AnalyzeBuyComponent implements OnInit {
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
   }
-
 
   /**
    * 查询

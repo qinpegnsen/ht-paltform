@@ -94,9 +94,10 @@ export class AnalyzeUsersComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-    me.optionPrevInfo();
-    console.log("█ me.nowData.yaxis ►►►", me.nowData.yaxis);
     console.log("█ result ►►►",  result);
+    me.optionPrevInfo();
+    console.log("█ me.nowData.yaxis ►►►", me.nowData);
+
   }
 
   /**
@@ -164,7 +165,6 @@ export class AnalyzeUsersComponent implements OnInit {
     if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]); //获取周列表
   }
 
-
   /**
    * 查询对应的数据信息（新增会员数）
    * @param type 查询状态，如：日、周、月（DAY、WEEK、MONTH）
@@ -216,31 +216,5 @@ export class AnalyzeUsersComponent implements OnInit {
       _this.qeuryAll();
     }
   }
-  // selectInfos() {
-  //   let _this = this, type = _this.queryType;
-  //   if (type == "DAY") {
-  //     if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
-  //       AppComponent.rzhAlt("error", "请选择日期");
-  //     } else {
-  //       this.qeuryAll(this.queryType,this.queryTime);
-  //       //TODO 业务实现
-  //     }
-  //   } else if (type == "WEEK") {
-  //     if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
-  //       AppComponent.rzhAlt("error", "请选择指定周");
-  //     }else{
-  //       this.qeuryAll(this.queryType, this.queryTime);
-  //       //TODO 业务实现
-  //     }
-  //   } else if (type == "MONTH") {
-  //     let time = _this.getMonth();
-  //     if (time != null) {
-  //       this.qeuryAll(this.queryType,this.queryTime);
-  //       //TODO 业务实现
-  //     }
-  //   } else {
-  //     AppComponent.rzhAlt("error", "查询异常");
-  //   }
-  // }
 
 }

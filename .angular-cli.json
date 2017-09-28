@@ -31,6 +31,7 @@
         "../node_modules/summernote/dist/summernote.js",
         "../node_modules/echarts/dist/echarts.min.js",
         "assets/datatables/js/jquery.dataTables.min.js",
+        "assets/map/china.js",
         "app/core/preloader/preloader.js",
         "assets/datatables/js/dataTables.bootstrap.min.js"
       ],

@@ -379,7 +379,7 @@ const statistics = {
           link: '/main/stat/after/return'
         }
       ]
-    }
+    } ,
   ]
 };
 const agent = {
