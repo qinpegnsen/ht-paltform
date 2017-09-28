@@ -144,7 +144,7 @@ export class WoAllComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/woAgent/query';
+    let requestUrl = '/wo/query';
     me.search['curPage'] = activePage;
     me.woList = new Page(me.submit.getData(requestUrl, me.search));
     me.detail = [];//每次切换新页面，详情都关闭
