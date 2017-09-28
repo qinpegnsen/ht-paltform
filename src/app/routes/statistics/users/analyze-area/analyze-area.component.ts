@@ -36,6 +36,7 @@ export class AnalyzeAreaComponent implements OnInit {
   private data: any;
   now: string;
   nowData: any;
+  area: any;
 
   public option={};
   constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService) {
@@ -108,12 +109,7 @@ export class AnalyzeAreaComponent implements OnInit {
               show: true
             }
           },
-          data:
-            [_this.nowData.areaMap]
-          // [
-          // {name:"_this.nowData.areaMap.a"，value:_this.nowData.areaMap.a}
-          // ]
-            // {name: '北京', value: this.randomData()},
+          data: _this.nowData.areaMap
         },
         {
           name: '下单量',
@@ -127,7 +123,7 @@ export class AnalyzeAreaComponent implements OnInit {
               show: true
             }
           },
-          data: [_this.nowData.areaMap]
+          data: _this.nowData.areaMap
         },
         {
           name: '下单会员数',
@@ -141,7 +137,7 @@ export class AnalyzeAreaComponent implements OnInit {
               show: true
             }
           },
-          data: [_this.nowData.areaMap]
+          data: _this.nowData.areaMap
         }
       ]
     };
@@ -183,6 +179,8 @@ export class AnalyzeAreaComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
+    // me.area=me.nowData.areaMap;
+    console.log("█ name ►►►", me.area);
     me.getOption();
   }
 

@@ -11,8 +11,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>序号</label>
             <div class="col-sm-8">
-              <input class="form-control num" type="number" required name="sort" ngModel #sort="ngModel" [pattern]="patterns.positive"
-                     placeholder="请填写序号"/>
+              <input class="form-control num" type="number" required name="sort" ngModel #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写序号"/>
             </div>
           </div>
           <div [hidden]="sort.valid || sort.pristine"

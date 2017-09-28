@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {isUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
@@ -67,7 +66,6 @@ export class BasicPropertiesComponent implements OnInit {
     let result=_this.submit.getData(requestUrl, requestData);
     _this.data = result;
   }
-
 
   //删除
   delete(delid) {
