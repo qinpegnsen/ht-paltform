@@ -57,12 +57,24 @@
   color: #bbb;
 }
 
-.step-two .pro-name {
-  text-align: right;
-  font-weight: normal;
+.base-attr{
   font-size: 12px;
-  line-height: 36px;
+  display: table;
+  .base-attr-list{
+    display: table-cell;
+    padding-bottom: 8px;
+  }
+  .pro-name{
+    display: table-cell;
+    text-align: right;
+    font-weight: normal;
+    line-height: 16px;
+  }
+  .form-control{
+    font-size: 12px;
+  }
 }
+
 
 .specs h5 {
   line-height: 24px;

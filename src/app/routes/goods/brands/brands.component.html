@@ -37,9 +37,10 @@
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
         <div class="btn-group w100" dropdown>
-          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b class="caret pull-right"></b>
+          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b
+            class="caret pull-right"></b>
           </button>
-          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu" >
+          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu">
             <li (click)="selected('', '请选择分类')">
               <a href="#">请选择分类</a>
             </li>
@@ -92,7 +93,8 @@
         <td>{{i+1}}</td>
         <td class="hidden-sm">{{brand.brandInitial}}</td>
         <td>{{brand.brandName}}</td>
-        <td><img height="50px" [src]="brand.brandPic" appHoverShowLgPic onerror="javascript:this.src='../../../assets/img/dummy.png'"
+        <td><img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">
           <img class="hover-big-img" [src]="brand.brandPic"
                onerror="javascript:this.src='../../../assets/img/dummy.png'"

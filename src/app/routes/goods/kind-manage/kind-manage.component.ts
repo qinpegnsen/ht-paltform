@@ -53,6 +53,24 @@ export class KindManageComponent implements OnInit {
   }
 
   /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY + 20) + 'px';
+    target.style.left = (event.clientX + 30) + 'px';
+  }
+
+  /**
+   * 隐藏大图
+   * @param event
+   */
+  hideImg(event){
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
+  }
+  /**
    * 修改状态
    * @param show
    * @param kindId

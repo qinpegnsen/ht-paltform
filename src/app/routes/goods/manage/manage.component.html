@@ -74,29 +74,35 @@
       <thead>
       <tr>
         <th class="w5 unselectable text-center">序号</th>
-        <th class="w35 unselectable hidden-sm">
+        <th class="w30 unselectable hidden-sm">
           <rzhDefaultSorter by="goodsName">商品名</rzhDefaultSorter>
         </th>
         <th class="w15 unselectable">
           <rzhDefaultSorter by="sku">规格/规格值</rzhDefaultSorter>
         </th>
-        <th class="w10 unselectable text-center">
+        <th class="w8 unselectable text-center">
           <rzhDefaultSorter by="price">价格（元）</rzhDefaultSorter>
         </th>
         <th class="w10 unselectable text-center">
           <rzhDefaultSorter by="time">发布时间</rzhDefaultSorter>
         </th>
-        <th class="w10 unselectable text-center">审核状态</th>
-        <th class="w20 unselectable text-center">操作</th>
+        <th class="w10 unselectable text-center">
+          <rzhDefaultSorter by="time">重消币抵扣</rzhDefaultSorter>
+        </th>
+        <th class="w7 unselectable text-center">审核状态</th>
+        <th class="w15 unselectable text-center">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center font12">
         <td>{{i+1}}</td>
         <td class="text-left position-relative">
-          <span class="img-box mr"><img [src]="goods.goodsImage"
+          <span class="mr">
+            <img [src]="goods.goodsImage" class="goods-lg-img" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+            <img [src]="goods.goodsImage" class="hover-big-img"
                                         onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
-          <div class="mb0 goods-info">
+          <div class="mb0 goods-lg-info">
             <p>
               <a class="goods-name font14" href="javascript:;">
                 <span class="tag font12"
@@ -115,12 +121,19 @@
               <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
             </p>
           </div>
-          <button class="btn btn-xs btn-primary btn-outline font12"
+          <button class="btn btn-xs btn-primary btn-outline font12 mt-sm"
                   (click)="showSkuList(goods.goodsBaseCode,goods.goodsName)">查看所有规格
           </button>
         </td>
-        <td>{{goods.minPrice == goods.maxPrice? goods.maxPrice:goods.minPrice+'-'+ goods.maxPrice }}</td>
+        <td class="font14">{{goods.minPrice == goods.maxPrice? goods.maxPrice:goods.minPrice+'-'+ goods.maxPrice }}</td>
         <td>{{goods.createTime}}</td>
+        <td>
+          <label class="switch switch-md" title="开启/关闭">
+            <input [checked]="goods.isUseCoin=='Y'" type="checkbox"
+                   (change)="changeIsUseCoin(goods.isUseCoin=='Y',goods.goodsBaseCode, goodsList.curPage)">
+            <span></span>
+          </label>
+        </td>
         <td>{{goods.goodsAudit | rzhState:'1014'}}</td>
         <td>
           <span *ngIf="goods.goodsAudit=='PASS'">
@@ -149,6 +162,10 @@
             <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
                          *ngFor="let option of buttons"></app-buttons>
           </span>
+          <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
+                  routerLink="../publish/audit"
+                  [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">
+          </button>
         </td>
       </tr>
       </tbody>

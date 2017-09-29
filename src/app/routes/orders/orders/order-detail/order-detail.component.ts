@@ -15,13 +15,16 @@ export class OrderDetailComponent implements OnInit {
               public ordersService: OrdersService,
               private submit: SubmitService) {
   }
+
   public orderStep = 1;
   public curOrdno: string;
   public orderStates: any;
   public orderDetailData: any;
   public curDeliverOrderId: string;
   public goodsData: any;
-  private atime:Array<string> = new Array();
+  public expressData: any;
+  public hasDeliverData: boolean = false;
+  private atime: Array<string> = new Array();
 
   ngOnInit() {
     let me = this;
@@ -61,11 +64,13 @@ export class OrderDetailComponent implements OnInit {
   private getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
-    if(!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
-    for (let item of me.orderStates){
+    if (!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
+    for (let item of me.orderStates) {
       if (item.state == 'SUCCESS') {
         me.atime[5] = item.acceptTime;
+        me.hasDeliverData = true;
       } else if (item.state == 'DELIVERY') {
+        me.hasDeliverData = true;
         me.atime[4] = item.acceptTime;
       } else if (item.state == 'PREPARE') {
         me.atime[3] = item.acceptTime;
@@ -75,6 +80,7 @@ export class OrderDetailComponent implements OnInit {
         me.atime[1] = item.acceptTime;
       }
     }
+    if(me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
   }
 
   /**
@@ -109,8 +115,8 @@ export class OrderDetailComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if(data.type) {
-      AppComponent.rzhAlt('success','操作成功');
+    if (data.type) {
+      AppComponent.rzhAlt('success', '操作成功');
       this.getOrderDetailInfo();//获取订单的物流详情及订单进度
       this.getOrderDetail(); //获取订单详情
     }

@@ -86,21 +86,21 @@ export class ManageComponent implements OnInit {
     switch (type) {
       case 'DOWN':    // 下架
         swal({
-          title: "操作警示",
-          text: "下架后，所有sku商品都将下架<br>代理商将不能批发该商品",
-          type: "warning",
-          html: true,
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          cancelButtonText: "取消",
-          confirmButtonText: "确认下架",
-          closeOnConfirm: false
-        },
-        function(){
-          swal.close();
-          me.submit.putRequest('/goodsEdit/updateStateToDown', {goodsBaseCode: baseCode});
-          me.queryDatas(pPage);// 刷新当前页
-        });
+            title: "操作警示",
+            text: "下架后，所有sku商品都将下架<br>代理商将不能批发该商品",
+            type: "warning",
+            html: true,
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            cancelButtonText: "取消",
+            confirmButtonText: "确认下架",
+            closeOnConfirm: false
+          },
+          function () {
+            swal.close();
+            me.submit.putRequest('/goodsEdit/updateStateToDown', {goodsBaseCode: baseCode});
+            me.queryDatas(pPage);// 刷新当前页
+          });
         break;
       case 'STOP':    // 禁售
         swal({
@@ -114,7 +114,7 @@ export class ManageComponent implements OnInit {
             confirmButtonText: "确认禁售",
             closeOnConfirm: false
           },
-          function(){
+          function () {
             swal.close();
             me.submit.putRequest('/goodsEdit/updateStateToStop', {goodsBaseCode: baseCode});
             me.queryDatas(pPage);// 刷新当前页
@@ -132,6 +132,43 @@ export class ManageComponent implements OnInit {
   }
 
   /**
+   *更改商品是否可用重消币
+   * @param type
+   * @param baseCode
+   * @param curPage
+   */
+  changeIsUseCoin(type, baseCode, curPage) {
+    let isUseCoin, requestData, requestUrl;
+    isUseCoin = type ? 'N' : 'Y';
+    requestUrl = '/goodsEdit/updateIsUseCoin';
+    requestData = {
+      goodsBaseCode: baseCode,
+      isUseCoin: isUseCoin
+    };
+    this.submit.putRequest(requestUrl, requestData);
+    this.queryDatas(curPage);
+  }
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY + 20) + 'px';
+    target.style.left = (event.clientX + 30) + 'px';
+  }
+
+  /**
+   * 隐藏大图
+   * @param event
+   */
+  hideImg(event){
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
+  }
+
+  /**
    * 查询列表
    * @param event
    * @param curPage
@@ -142,7 +179,8 @@ export class ManageComponent implements OnInit {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    };
+    }
+    ;
     let requestUrl = '/goodsQuery/query';
     let requestData = {
       curPage: activePage,
@@ -163,18 +201,18 @@ export class ManageComponent implements OnInit {
    */
   showSkuList(baseCode, name) {
     let list = this.submit.getData('/goodsQuery/load', {goodsBaseCode: baseCode});// 获取需要展示的数据
-    this.skuTemplete = this.manage.skuTemplate(list,name);
+    this.skuTemplete = this.manage.skuTemplate(list, name);
     $('body').append(this.skuTemplete);
   }
 
   private domActions() {
-    setTimeout(function(){
+    setTimeout(function () {
       $('body').on('click', '.popup-colse', function () {
         $('body .sku-box').fadeOut(200);
-        setTimeout(function(){
+        setTimeout(function () {
           $('body .sku-box').remove()
-        },300)
+        }, 300)
       })
-    },0)
+    }, 0)
   }
 }

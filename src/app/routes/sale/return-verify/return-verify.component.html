@@ -76,10 +76,10 @@
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
               <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="../after-details"
-                      [queryParams]="{afterNo:item.afterNo,afterType:'deal'}">处理
+                      [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理
               </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
-                      [queryParams]="{afterNo:item.afterNo,afterType:'detail'}">详情
+                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">详情
               </button>
             </td>
           </tr>

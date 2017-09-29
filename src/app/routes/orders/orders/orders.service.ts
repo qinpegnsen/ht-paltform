@@ -14,8 +14,8 @@ export class OrdersService {
    * @returns {{orderStates: any, orderLogistics: any}}
    */
   public getOrderState(ordno) {
-    let orderStates, orderLogistics;
-    orderStates = this.submit.getData('/ord/tail/queryList', {ordno: '1234123451235'});
+    let orderStates;
+    orderStates = this.submit.getData('/ord/tail/queryList', {ordno: ordno});
     return orderStates;
   }
 
@@ -23,20 +23,20 @@ export class OrdersService {
    * 根据订单编号查询物流信息
    * @param ordno
    */
-  public getOrderLogisticsData(ordno){
+  public getOrderLogisticsData(ordno) {
     let url = '/ord/tail/queryDeliveryList';
-    let data = {ordno: '1234123451235'};
+    let data = {ordno: ordno};
     return this.submit.getData(url, data);
   }
 
   /**
    * 查询物流公司列表
    */
-  public getBasicExpressList(){
+  public getBasicExpressList() {
     let url = '/basicExpress/pageQueryBasicExpress';
     let list = this.submit.getData(url, '');
-    if(!isNullOrUndefined(list) && !isNullOrUndefined(list.voList))
-    return list.voList;
+    if (!isNullOrUndefined(list) && !isNullOrUndefined(list.voList))
+      return list.voList;
   }
 
   /**
@@ -44,13 +44,27 @@ export class OrdersService {
    * @param ordno
    * @returns {any}
    */
-  public getOrderDetailByNO(ordno){
+  public getOrderDetailByNO(ordno) {
     let url = '/ord/loadOrdByOrdno';
     let data = {
-      ordno:ordno
+      ordno: ordno
     }
     let list = this.submit.getData(url, data);
-    if(!isNullOrUndefined(list)) return list;
+    if (!isNullOrUndefined(list)) return list;
+  }
+
+  /**
+   * 获取物流公司及运单号
+   * @param ordno
+   * @returns {any}
+   */
+  public getExpressInfo(ordno) {
+    let url = '/ord/tail/loadByDelivery';
+    let data = {
+      ordno: ordno
+    }
+    let expressData = this.submit.getData(url, data);
+    if (!isNullOrUndefined(expressData)) return expressData;
   }
 
 

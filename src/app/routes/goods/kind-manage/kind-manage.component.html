@@ -70,7 +70,7 @@
       <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td>{{kind.kindName}}</td>
-        <td><img class="cursor-p" height="50px" appHoverShowLgPic
+        <td><img class="cursor-p" height="50px"  (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  [src]="kind.kindIcon"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">

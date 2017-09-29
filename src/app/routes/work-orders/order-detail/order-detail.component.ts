@@ -22,6 +22,8 @@ export class OrderDetailComponent implements OnInit {
   public orderDetailData: any;
   public curDeliverOrderId: string;
   public goodsData: any;
+  public hasDeliverData:boolean = false;
+  public expressData:any;
   private atime:Array<string> = new Array();
 
   ngOnInit() {
@@ -67,8 +69,10 @@ export class OrderDetailComponent implements OnInit {
     for (let item of me.orderStates){
       if (item.state == 'SUCCESS') {
         me.atime[5] = item.acceptTime;
+        me.hasDeliverData = true;
       } else if (item.state == 'DELIVERY') {
         me.atime[4] = item.acceptTime;
+        me.hasDeliverData = true;
       } else if (item.state == 'PREPARE') {
         me.atime[3] = item.acceptTime;
       } else if (item.state == 'PAID') {
@@ -77,6 +81,7 @@ export class OrderDetailComponent implements OnInit {
         me.atime[1] = item.acceptTime;
       }
     }
+    if(me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
   }
 
   /**

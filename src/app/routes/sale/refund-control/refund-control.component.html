@@ -10,7 +10,8 @@
       <ul>
         <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。 如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
         <li>平台也可以不经过商家处理，直接处理退款申请，退款给买家。</li>
-        <li>当  <span class="btn btn-danger btn-outline btn-xs">处理</span>按钮是红色时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
+        <li>当<span class="btn btn-purple btn-xs fa fa-check-square-o">处理</span>
+          按钮不可用时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
       </ul>
     </div>
 
@@ -74,9 +75,9 @@
           <td>
             <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="../after-details"
                     [disabled]="item.state!='WAIT'"
-                    [queryParams]="{afterNo:item.afterNo,afterType:'deal'}">处理</button>
+                    [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理</button>
             <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
-                    [queryParams]="{afterNo:item.afterNo,afterType:'detail'}">详情
+                    [queryParams]="{afterNo:item.afterNo,type:'detail'}">详情
             </button>
           </td>
         </tr>

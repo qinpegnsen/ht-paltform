@@ -41,9 +41,9 @@
       <dt class="col-xs-2"><i>*</i>商品属性：</dt>
       <dd class="col-xs-10">
         <div class="w80 clearfix">
-          <label class="col-sm-4 base-attr" *ngFor="let attrType of baseAttrList;let i = index">
+          <label class="col-sm-4 base-attr pl0" *ngFor="let attrType of baseAttrList;let i = index">
             <span class="col-xs-3 pl-sm pr-sm pro-name">{{attrType.name}}</span>
-            <div class="col-xs-9 pl-sm pr-sm">
+            <div class="col-xs-9 pl-sm pr-sm base-attr-list">
               <select class="form-control" name="baseAttr" [disabled]="myReadOnly">
                 <option *ngFor="let attr of attrType.goodsEnumValList" [value]="attr.id"
                         [class]="attr.idx">{{attr.enumValue}}

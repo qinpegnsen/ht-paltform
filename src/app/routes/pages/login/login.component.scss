@@ -5,11 +5,21 @@
 .text-info {
   color: #ffffff;
 }
-.login-tip{
+
+.login-tip {
   position: absolute;
   margin-top: 50px;
 }
 
-.form .input{
+.form .input {
   color: #ddd;
+}
+
+.video-bg {
+  position: fixed;
+  width: 1920px;
+  height: 1080px;
+  left: 0;
+  top: 0;
+  z-index: -1;
 }

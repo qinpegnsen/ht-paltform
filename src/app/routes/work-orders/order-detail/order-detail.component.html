@@ -88,12 +88,22 @@
         <dt>地址：</dt>
         <dd>{{orderDetailData.areaFullName}} {{orderDetailData.address}}</dd>
       </dl>
+      <ng-container *ngIf="hasDeliverData">
+        <dl>
+          <dt>快递公司：</dt>
+          <dd>{{expressData.expressName}}</dd>
+        </dl>
+        <dl>
+          <dt>物流单号：</dt>
+          <dd>{{expressData.expressNo}}</dd>
+        </dl>
+      </ng-container>
     </div>
   </div>
   <div class="szh-order-condition bl">
     <div class="order-head p bb text-info"><i class="fa fa-truck"></i> 物流信息</div>
     <!--订单跟踪-->
-    <div class="order-track">
+    <div class="order-track" *ngIf="hasDeliverData">
       <ul class="timeline-alt pb0 mb0">
         <li class="mb0" *ngFor="let item of orderStates;let s = index">
           <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
@@ -122,11 +132,12 @@
         </li>
       </ul>
     </div>
+    <div class="order-track" *ngIf="!hasDeliverData">暂无物流信息</div>
   </div>
 </div>
 <div class="rate-of-progress mt-xl mb-xl w100">
   <div class="szh-progress-bar w90">
-    <div class="already-progress" [class.w1]="orderStep==1" [class.w25]="orderStep==2" [class.w50]="orderStep==3"
+    <div class="already-progress" [class.w0]="orderStep==1" [class.w25]="orderStep==2" [class.w50]="orderStep==3"
          [class.w75]="orderStep==4" [class.w100]="orderStep==5"></div>
   </div>
   <dl class="cur">

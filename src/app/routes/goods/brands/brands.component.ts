@@ -39,7 +39,7 @@ export class BrandsComponent implements OnInit {
         size: "xs",
         callback: function (result, brandId, curPage) {
           result.then((id) => {
-            me.router.navigate(['/main/goods/brands/upBrand'], {queryParams: {page: curPage,brandId:brandId}});
+            me.router.navigate(['/main/goods/brands/upBrand'], {queryParams: {page: curPage, brandId: brandId}});
           })
         }
       },
@@ -75,7 +75,7 @@ export class BrandsComponent implements OnInit {
         size: "xs",
         callback: function (result, brandId, curPage) {
           result.then((id) => {
-            me.router.navigate(['/main/goods/brands/brandDetail'], {queryParams: {page: curPage,brandId:brandId}});
+            me.router.navigate(['/main/goods/brands/brandDetail'], {queryParams: {page: curPage, brandId: brandId}});
           })
         }
       }
@@ -87,7 +87,7 @@ export class BrandsComponent implements OnInit {
    * @param id
    * @param name
    */
-  selected(id,name){
+  selected(id, name) {
     this.brandKind = id;
     this.selectKindName = name;
     this.queryDatas(1)
@@ -109,6 +109,25 @@ export class BrandsComponent implements OnInit {
     };
     this.submitService.putRequest(requestUrl, requestData);
     this.queryDatas(curPage);
+  }
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY + 20) + 'px';
+    target.style.left = (event.clientX + 30) + 'px';
+  }
+
+  /**
+   * 隐藏大图
+   * @param event
+   */
+  hideImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
   }
 
   /**

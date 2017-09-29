@@ -602,9 +602,9 @@ export class EditDetailComponent implements OnInit {
    * 输入框计数器
    */
   private counter(target) {
-    let hadLength = $(target).val().length;
+    let hadLength = target.val().length;
     let leaveLength = 500 - hadLength;
-    $(target).parents('.mea-text').find('.counter').html(leaveLength);
+    target.parents('.mea-text').find('.counter').html(leaveLength);
     return hadLength;
   }
 
@@ -614,7 +614,7 @@ export class EditDetailComponent implements OnInit {
    */
   showEdit(target) {
     $('.app-img-box ._edit').addClass('hide');
-    $('.app-box .mobile-edit-area').removeClass('hide');
+    $('.app-box .mobile-edit-area.new-text').removeClass('hide');
     this.counter(target);
     this.scrollBottom();//使移动端详情编辑滚动条一直保持在最底部
   }
@@ -644,9 +644,14 @@ export class EditDetailComponent implements OnInit {
    * @param index
    */
   insertMblText(target?, index?) {
-    let me = this;
-    if (!isUndefined(target)) $(target).parents('.app-img-box').find('._edit').addClass('hide');
-    let textArea = $('.mobile-edit-area .textarea');
+    let me = this,textArea;
+    if (!isUndefined(target)){
+      $(target).parents('.app-img-box').find('._edit').addClass('hide');
+      textArea = $(target).parents('.mobile-edit-area').find('.textarea');
+    } else {
+      $('.new-text').addClass('hide');
+      textArea = $('.new-text').find('.textarea');
+    }
     if (me.counter(textArea) > 0) {
       let obj = {
         type: 'text',
@@ -654,6 +659,7 @@ export class EditDetailComponent implements OnInit {
       };
       if (!isUndefined(index)) me.mblItemList[index] = obj;
       else me.mblItemList.push(obj);
+      console.log("█ obj ►►►",  me.mblItemList);
       textArea.val('');// 清除文本区域内容
       me.hideEdit();// 隐藏文本编辑区域
     }

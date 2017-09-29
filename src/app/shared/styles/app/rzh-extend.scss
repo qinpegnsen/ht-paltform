@@ -113,6 +113,7 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 /*多行文本溢出隐藏，设置-webkit-line-clamp: n */
 .omg2{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;/** 显示的行数 **/overflow: hidden;}
 
+.w0{width: 0px}
 .w1{width: 1%}
 .w2{width: 2%}
 .w3{width: 3%}
@@ -362,9 +363,19 @@ input[type=number].num::-webkit-outer-spin-button {
 }
 
 .hover-big-img{
-  width: 180px !important;
-  height: 180px !important;
-  position: absolute;
+  width: 160px !important;
+  height: 160px !important;
+  position: fixed;
+  z-index: 100;
+  display: none;
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+}
+.hover-md-img{
+  width: 120px !important;
+  height: 120px !important;
+  position: fixed;
   z-index: 100;
   display: none;
   -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);

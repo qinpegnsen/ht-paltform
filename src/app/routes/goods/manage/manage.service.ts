@@ -18,7 +18,10 @@ export class ManageService {
         attrStr += `<dl class="font12 mb0"><dt class="inline">`+attr.attrName+`</dt>：<dd class="inline">`+attr.value+`</dd></dl>`
       };
       _item += `<tr class="item-bottom-border"><td class="position-relative p">
-      <div class="goods-xs-img"><img width="100%" height="100%" src="`+item.goodsImage+`" alt=""></div>
+      <div>
+        <img src="`+item.goodsImage+`" class="goods-xs-img hover-img" alt="">
+        <img src="`+item.goodsImage+`" class="hover-md-img" alt="">
+      </div>
       <div class="mb0 goods-xs-info"><div class="goods-name" href="javascript:;">`+attrStr+`</div></div></td>
       <td class="text-center">`+item.goodsPrice.price+`</td>
       <td class="text-center">`+item.storageNum+`</td>
