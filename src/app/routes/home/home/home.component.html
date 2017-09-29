@@ -2,18 +2,19 @@
   管理首页
 </div>
 
-<div class="panel panel-default">
+<div class=" panel-default">
   <!--图文结合-->
   <div class="row r3">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <!-- START panel-->
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
 
             <div class="col-xs-9">
-              <div class="">下单金额（元）</div>
-              <p class="text-md m0"></p>
+              <div class=" font14 f-bold">下单金额（元）</div>
+              <div class="font14">期间内新增订单金额</div>
+              <p class="text-md m0">{{data.ordSum}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -23,35 +24,54 @@
         <!-- END panel-->
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <!-- START panel-->
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
             <div class="col-xs-9 ">
-              <div class="">退款金额（元）</div>
-              <p class="text-md m0">New Tasks!</p>
+              <div class="font14 f-bold">下单量</div>
+              <div class="font14">期间内新增订单数量</div>
+              <p class="text-md m0">{{data.ordCount}}</p>
             </div>
             <div class="col-xs-3 text-right">
-              <em class="fa fa-gavel fa-3x tp-em"></em>
+              <em class="fa fa-calendar fa-3x tp-em"></em>
             </div>
           </div>
         </div>
       </div>
       <!-- END panel-->
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">新增会员</div>
+              <div class="font14">期间内新注册会员数量</div>
+              <p class="text-md m0">{{data.newAddCust}}</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="icon icon-user-follow fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
       <!-- START panel-->
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
 
             <div class="col-xs-9 ">
-              <div class="">实收金额（元）</div>
-              <p class="text-md m0">New Orders!</p>
+              <div class="font14 f-bold">会员数量</div>
+              <div class="font14">平台所有会员数量</div>
+              <p class="text-md m0">{{data.allCust}}</p>
             </div>
             <div class="col-xs-3 text-right">
-              <em class="fa fa-tags fa-3x tp-em"></em>
+              <em class="fa fa-group fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -60,103 +80,135 @@
     </div>
   </div>
   <div class="row r3">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <!-- START panel-->
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
 
             <div class="col-xs-9">
-              <div class="">实收佣金（元）</div>
-              <p class="text-md m0">New Comments!</p>
-            </div>
-            <div class="col-xs-3 text-right">
-              <em class="fa fa-pie-chart fa-3x tp-em"></em>
-            </div>
-          </div>
-        </div>
-        <!-- END panel-->
-      </div>
-    </div>
-    <div class="col-md-4">
-      <!-- START panel-->
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-9 ">
-              <div class="">店铺费用（元）</div>
-              <p class="text-md m0">New Tasks!</p>
+              <div class="font14 f-bold">新增商品</div>
+              <div class="font14 ">短期内省增商品数量</div>
+              <p class="text-md m0">{{data.newAddGoods}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-cube fa-3x tp-em"></em>
             </div>
           </div>
         </div>
+        <!-- END panel-->
       </div>
-      <!-- END panel-->
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">商品数量</div>
+              <div class="font14">平台所有商品数量</div>
+              <p class="text-md m0">{{data.allGoods}}</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-cubes fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
       <!-- START panel-->
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
 
             <div class="col-xs-9 ">
-              <div class="">总收入（元）</div>
-              <p class="text-md m0">New Orders!</p>
+              <div class="font14 f-bold">新增店铺</div>
+              <div class="font14">短期内行申请店铺总数</div>
+              <p class="text-md m0">{{data.newAddStore}}</p>
             </div>
             <div class="col-xs-3 text-right">
-              <em class="fa fa-calculator fa-3x tp-em"></em>
+              <em class="fa fa-institution fa-3x tp-em"></em>
             </div>
           </div>
         </div>
       </div>
       <!-- END panel-->
     </div>
-  </div>
-  <!--统计表-->
-  <!--<div class="panel panel-default">-->
-    <!--<div class="table-title">销售收入统计表</div>-->
-    <!--<div class="panel-body">-->
-      <!--<table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">-->
-        <!--<thead>-->
-        <!--<tr>-->
-          <!--<th class="text-center w10">-->
-            <!--<rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>-->
-          <!--</th>-->
-          <!--<th class="text-center w15">-->
-            <!--<rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>-->
-          <!--</th>-->
+    <div class="col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
 
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr class="text-center">-->
-          <!--<td >aaa</td>-->
-          <!--<td class="">sss</td>-->
-          <!--<td class="">ddd</td>-->
-          <!--<td class="">aaa</td>-->
-          <!--<td class="">aaa</td>-->
-          <!--<td class="">sss</td>-->
-          <!--<td class="">ddd</td>-->
-        <!--</tr>-->
-      <!--</table>-->
-    <!--</div>-->
-  <!--</div>-->
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">店铺数量</div>
+              <div class="font14">平台所有店铺的数量</div>
+              <p class="text-md m0">{{data.allStore}}</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-pie-chart fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!--图表切换-->
+<div class="panel m-auto">
+  <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+</div>
+
+<!--TOP20-->
+<div class="mt20 panel w48 pull-left" style="display: inline-block">
+  <div class="table-title">店铺销售排名</div>
+  <div class="panel-body">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="w33 text-center">
+        <span>序号</span>
+      </th>
+      <th class="w33 text-center">
+        <span>店铺名称</span>
+      </th>
+      <th class="w33 text-center">
+        <span>销量</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let stop of data.storeRanking;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{stop.storeName}}</td>
+      <td>{{stop.saleSum}}</td>
+    </tr>
+  </table>
+  </div>
+</div>
+<div class="mt20 panel w48 pull-right">
+  <div class="table-title">商品销售排名</div>
+  <div class="panel-body">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="w33 text-center">
+        <span>序号</span>
+      </th>
+      <th class="w33 text-center">
+        <span>商品名称</span>
+      </th>
+      <th class="w33 text-center">
+        <span>销量</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let goods of data.goodsRanking;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{goods.goodsName}}</td>
+      <td>{{goods.goodsCount}}</td>
+    </tr>
+  </table>
+  </div>
+</div>

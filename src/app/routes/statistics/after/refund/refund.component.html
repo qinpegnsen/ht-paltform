@@ -17,10 +17,11 @@
         <i class="icon icon-magnifier"></i>
       </span>
     <div class="pull-right">
-      <div class="col-xs-3 form-group" style="width: 250px">
+      <div class="col-xs-3 form-group" style="width: 400px">
 
         <div *ngIf="showType.MONTH">
-          <select [(ngModel)]="select.year" class="pull-left w43 form-control" style="display: inline-block;margin-right: 20px">
+          <select [(ngModel)]="select.year" class="pull-left w43 form-control"
+                  style="display: inline-block;margin-right: 20px">
             <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
           </select>
           <select [(ngModel)]="select.month" class="w43 form-control">
@@ -29,13 +30,13 @@
         </div>
 
         <div *ngIf="showType.WEEK">
-          <select [(ngModel)]="select.year">
+          <select [(ngModel)]="select.year" class="form-control w21 pull-left mr5">
             <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
           </select>
-          <select [(ngModel)]="select.month" (change)="getWeekListByMonth()">
+          <select [(ngModel)]="select.month" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">
             <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
           </select>
-          <select [(ngModel)]="select.week">
+          <select [(ngModel)]="select.week" class="form-control w55">
             <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
           </select>
         </div>
@@ -52,39 +53,41 @@
       <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
     </select>
   </div>
+
+</div>
+
+<!--图表切换-->
+<div class="panel">
   <!--图表切换-->
-  <div class="panel">
-    <!--图表切换-->
-      <div echarts [options]="option" class="demo-chart w100"></div>
-  </div>
+  <div echarts [options]="option" class="demo-chart w100"></div>
+</div>
 
-  <div class="panel panel-default mt20">
-    <div class="table-title">退款金额统计表</div>
-    <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
-        <thead>
-        <tr>
-          <th class="text-center w33">
-            <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
-          </th>
-          <th class="text-center w33">
-            <rzhDefaultSorter by="name">退款数量</rzhDefaultSorter>
-          </th>
-          <th class="text-center w33">
-            <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
-          </th>
+<div class="panel panel-default mt20">
+  <div class="table-title">退款金额统计表</div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th class="text-center w33">
+          <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
+        </th>
+        <th class="text-center w33">
+          <rzhDefaultSorter by="name">退款数量</rzhDefaultSorter>
+        </th>
+        <th class="text-center w33">
+          <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
+        </th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-center" *ngFor="let refund of nowData.rankingRefund">
-          <td>{{refund.storeName}}</td>
-          <td>{{refund.refundCount}}</td>
-          <td>{{refund.refundSum}}</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let refund of nowData.rankingRefund">
+        <td>{{refund.storeName}}</td>
+        <td>{{refund.refundCount}}</td>
+        <td>{{refund.refundSum}}</td>
 
-        </tr>
-      </table>
-    </div>
+      </tr>
+    </table>
   </div>
 </div>
 

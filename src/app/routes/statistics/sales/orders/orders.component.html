@@ -17,7 +17,7 @@
         <i class="icon icon-magnifier"></i>
       </span>
     <div class="pull-right">
-      <div class="col-xs-3 form-group" style="width: 250px">
+      <div class="col-xs-3 form-group" style="width: 400px">
 
         <div *ngIf="showType.MONTH">
           <select [(ngModel)]="select.year" class="pull-left w43 form-control" style="display: inline-block;margin-right: 20px">
@@ -29,13 +29,13 @@
         </div>
 
         <div *ngIf="showType.WEEK">
-          <select [(ngModel)]="select.year">
+          <select [(ngModel)]="select.year" class="form-control w21 pull-left mr5">
             <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
           </select>
-          <select [(ngModel)]="select.month" (change)="getWeekListByMonth()">
+          <select [(ngModel)]="select.month" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">
             <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
           </select>
-          <select [(ngModel)]="select.week">
+          <select [(ngModel)]="select.week" class="form-control w55">
             <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
           </select>
         </div>
@@ -53,9 +53,9 @@
     </select>
 
   </div>
+</div>
 <!--图文结合-->
   <div class="money">
- <!-- *ngFor="let order of result"-->
     <div class="row r3">
       <div class="col-md-4" style="min-width: 33%">
         <!-- START panel-->
@@ -156,5 +156,5 @@
       <!--&lt;!&ndash;</tfoot>&ndash;&gt;-->
     <!--</div>-->
   <!--</div>-->
-</div>
+
 

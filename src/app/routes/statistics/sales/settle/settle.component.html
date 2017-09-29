@@ -3,7 +3,7 @@
 </div>
 
 <div class="panel panel-default">
-<!--操作提示-->
+  <!--操作提示-->
   <div class="panel mb p w98 m-auto ts thc">
     <p class="font18">操作提示</p>
     <ul>
@@ -24,11 +24,9 @@
       <option value="按照周统计">按照周统计</option>
       <option value="按照月统计">按照月统计</option>
     </select>
-
-    <!--<select  class="sel form-control pull-right" style="margin-right: 20px" name="authState" [(ngModel)]="authState" (change)="search($event)">-->
-    <!--<option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>-->
-    <!--</select>-->
   </div>
+</div>
+
 <!--图文结合-->
   <div class="row r3">
     <div class="col-md-4">
@@ -42,7 +40,7 @@
               <p class="text-md m0">New Comments!</p>
             </div>
             <div class="col-xs-3 text-right">
-            <em class="fa fa-shopping-cart fa-3x tp-em"></em>
+              <em class="fa fa-shopping-cart fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -59,7 +57,7 @@
               <p class="text-md m0">New Tasks!</p>
             </div>
             <div class="col-xs-3 text-right">
-            <em class="fa fa-gavel fa-3x tp-em"></em>
+              <em class="fa fa-gavel fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -77,7 +75,7 @@
               <p class="text-md m0">New Orders!</p>
             </div>
             <div class="col-xs-3 text-right">
-            <em class="fa fa-tags fa-3x tp-em"></em>
+              <em class="fa fa-tags fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -140,61 +138,49 @@
       <!-- END panel-->
     </div>
   </div>
-<!--统计表-->
-  <div class="panel panel-default">
-    <div class="table-title">销售收入统计表</div>
-    <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
-        <thead>
-        <tr>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>
-          </th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-center">
-          <td >aaa</td>
-          <td class="">sss</td>
-          <td class="">ddd</td>
-          <td class="">aaa</td>
-          <td class="">aaa</td>
-          <td class="">sss</td>
-          <td class="">ddd</td>
-        </tr>
-      </table>
-      <!--<tfoot>-->
-      <!--<tr>-->
-        <!--<td colspan="5">-->
-          <!--<div class="col-sm-5">-->
-            <!--<div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7">-->
-            <!--<div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>-->
-          <!--</div>-->
-        <!--</td>-->
-      <!--</tr>-->
-      <!--</tfoot>-->
-    </div>
+<!--统计表-->
+<div class="panel panel-default">
+  <div class="table-title">销售收入统计表</div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+      <thead>
+      <tr>
+        <th class="text-center w10">
+          <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>
+        </th>
+        <th class="text-center w15">
+          <rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center">
+        <td>aaa</td>
+        <td class="">sss</td>
+        <td class="">ddd</td>
+        <td class="">aaa</td>
+        <td class="">aaa</td>
+        <td class="">sss</td>
+        <td class="">ddd</td>
+      </tr>
+    </table>
   </div>
 </div>
+
 

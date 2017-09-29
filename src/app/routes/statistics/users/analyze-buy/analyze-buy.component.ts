@@ -147,7 +147,7 @@ export class AnalyzeBuyComponent implements OnInit {
       ],
       series: [
         {
-          name: '下单量',
+          name: '下单价',
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.yaxis

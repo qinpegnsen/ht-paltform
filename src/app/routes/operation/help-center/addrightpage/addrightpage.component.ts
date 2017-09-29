@@ -50,7 +50,7 @@ export class AddrightpageComponent implements OnInit {
     if (this.linkType == 'aa') {
       let url = '/helpKind/addHelpKind';//帮助分类添加
       let data = {
-        name: res.name,
+        kindName: res.kindName,
         sort: res.sort,
         description: res.description,
       }

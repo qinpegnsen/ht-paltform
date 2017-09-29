@@ -115,7 +115,7 @@ export class OrdersComponent implements OnInit {
         left:"center",
         text: '下单金额统计'
       },
-      color: ['#3398DB'],
+      color: ['#3398DB','#42DBB1'],
       tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -153,13 +153,13 @@ export class OrdersComponent implements OnInit {
       ],
       series: [
         {
-          name:_this.queryContentText ,
+          name:'今天' ,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.queryTime_yaxis
         },
         {
-          name:_this.queryContentText ,
+          name:'昨天',
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.contrastTime_yaxis

@@ -24,10 +24,6 @@ export class UsersNewComponent implements OnInit {
   select: any = {}; //选择的年份和月份信息
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
-  echartsIntance: any; //用于封装echart实例
-  xData: Array<any> = new Array(); //x轴信息
-  yData: Array<any> = new Array(); //y轴信息
-  ceshi: any;
 
   private queryType: any = 'DAY';//日期选择
   private queryTypes: any;//日期选择
@@ -81,6 +77,7 @@ export class UsersNewComponent implements OnInit {
   }
 
 
+
   /**
    * 获取年份和月份信息
    */
@@ -101,6 +98,7 @@ export class UsersNewComponent implements OnInit {
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
   }
+
 
 
   /**
@@ -125,7 +123,7 @@ export class UsersNewComponent implements OnInit {
   /**
    * 绘制图表（私有）
    */
-  private optionPrevInfo(){
+  private optionPrevInfo() {
     let _this = this;
     console.log("█ .prev ►►►", _this.prev);
     _this.optionPrev = {
@@ -136,7 +134,7 @@ export class UsersNewComponent implements OnInit {
         data: [_this.prev, _this.now],
         align: 'left'
       },
-      color: ['#3398DB','#42DBB1'],
+      color: ['#3398DB', '#42DBB1'],
       tooltip: {
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -144,12 +142,12 @@ export class UsersNewComponent implements OnInit {
         }
       },
       toolbox: {
-        show : true,
-        feature : {
-          dataView : {show: true, readOnly: false},
-          magicType : {show: true, type: ['line', 'bar']},
-          restore : {show: true},
-          saveAsImage : {show: true}
+        show: true,
+        feature: {
+          dataView: {show: true, readOnly: false},
+          magicType: {show: true, type: ['line', 'bar']},
+          restore: {show: true},
+          saveAsImage: {show: true}
         }
       },
       grid: {
@@ -196,7 +194,6 @@ export class UsersNewComponent implements OnInit {
     let _this = this, time = _this.getMonth();
     if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]); //获取周列表
   }
-
   test() {
   }
 

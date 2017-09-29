@@ -23,10 +23,7 @@ export class RefundComponent implements OnInit {
 
   private queryType: any = 'DAY';//日期选择
   private queryTypes: any;//日期选择
-  private queryContent: any="ORDSUM";//内容选择
-  private queryContentText: any="下单金额(元)";//内容选择
   private queryContents;//内容选择
-
   queryTime: any = new Date();
 
   private data: any;
@@ -83,22 +80,16 @@ export class RefundComponent implements OnInit {
    */
   qeuryAll(type?:string,obj?) {
     let me = this;
-    if(!isNullOrUndefined(type)) me.queryContent = type;
-    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
     let url = "/statistical/refundStatis";
     let data = {
       queryType: me.queryType,
       queryTime: me.queryTime,
-      queryContent: me.queryContent
     }
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-   me.nowtime= me.nowData.sumRefund
-    console.log("█ result ►►►",  result);
+    me.nowtime= me.nowData.sumRefund
     me.optionPrevInfo();
-    console.log("█ me.nowData.yaxis ►►►", me.nowData);
-
   }
 
   /**
@@ -149,7 +140,7 @@ export class RefundComponent implements OnInit {
       ],
       series: [
         {
-          name:_this.queryContentText ,
+          name:'退款金额' ,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowtime.yaxis
