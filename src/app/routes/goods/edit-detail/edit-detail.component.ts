@@ -602,9 +602,10 @@ export class EditDetailComponent implements OnInit {
    * 输入框计数器
    */
   private counter(target) {
-    let hadLength = target.val().length;
+    let obj = $(target);
+    let hadLength = obj.val().length;
     let leaveLength = 500 - hadLength;
-    target.parents('.mea-text').find('.counter').html(leaveLength);
+    obj.parents('.mea-text').find('.counter').html(leaveLength);
     return hadLength;
   }
 
@@ -652,14 +653,13 @@ export class EditDetailComponent implements OnInit {
       $('.new-text').addClass('hide');
       textArea = $('.new-text').find('.textarea');
     }
-    if (me.counter(textArea) > 0) {
+    if (textArea.val().length > 0) {
       let obj = {
         type: 'text',
         value: textArea.val()
       };
       if (!isUndefined(index)) me.mblItemList[index] = obj;
       else me.mblItemList.push(obj);
-      console.log("█ obj ►►►",  me.mblItemList);
       textArea.val('');// 清除文本区域内容
       me.hideEdit();// 隐藏文本编辑区域
     }
