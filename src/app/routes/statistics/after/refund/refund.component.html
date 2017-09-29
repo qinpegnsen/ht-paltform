@@ -64,46 +64,24 @@
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
         <thead>
         <tr>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="order">订单编号</rzhDefaultSorter>
-          </th>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">退款编号</rzhDefaultSorter>
-          </th>
-          <th class="text-center w15">
+          <th class="text-center w33">
             <rzhDefaultSorter by="email">店铺名称</rzhDefaultSorter>
           </th>
-          <th class="text-center w15">
-            <rzhDefaultSorter by="email">商品名称</rzhDefaultSorter>
+          <th class="text-center w33">
+            <rzhDefaultSorter by="name">退款数量</rzhDefaultSorter>
           </th>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">会员名称</rzhDefaultSorter>
-          </th>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">申请时间</rzhDefaultSorter>
-          </th>
-          <th class="text-center w10">
+          <th class="text-center w33">
             <rzhDefaultSorter by="name">退款金额</rzhDefaultSorter>
           </th>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">商家处理</rzhDefaultSorter>
-          </th>
-          <th class="text-center w10">
-            <rzhDefaultSorter by="name">平台处理</rzhDefaultSorter>
-          </th>
+
         </tr>
         </thead>
         <tbody>
         <tr class="text-center" *ngFor="let refund of nowData.rankingRefund">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{refund.storeName}}</td>
+          <td>{{refund.refundCount}}</td>
+          <td>{{refund.refundSum}}</td>
+
         </tr>
       </table>
     </div>

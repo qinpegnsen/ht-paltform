@@ -7,7 +7,6 @@ import {Router} from "@angular/router";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {AppComponent} from "../../../../app.component";
 declare var $: any;
-var china = require('china');
 @Component({
   selector: 'app-analyze-area',
   templateUrl: './analyze-area.component.html',

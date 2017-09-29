@@ -1,16 +1,24 @@
-@import '../../../shared/styles/app/variables.scss';
-@import '../../../shared/styles/app/media-queries.scss';
-.home-container {
-    margin: 0 auto;
-    max-width: $container-md;
-
-    .home-logo {
-        width: 240px;
-    }
-
-    .home-text {
-        @media only screen and (max-width: $mq-tablet) {
-            text-align: center;
-        }
-    }
+//@import '../../../shared/styles/app/variables.scss';
+//@import '../../../shared/styles/app/media-queries.scss';
+//.home-container {
+//    margin: 0 auto;
+//    max-width: $container-md;
+//
+//    .home-logo {
+//        width: 240px;
+//    }
+//
+//    .home-text {
+//        @media only screen and (max-width: $mq-tablet) {
+//            text-align: center;
+//        }
+//    }
+//}
+.r3{
+  width: 100%;
+  margin: auto;
+}
+.tp-em{
+  margin-top: 8px;
+  opacity: 0.3;
 }

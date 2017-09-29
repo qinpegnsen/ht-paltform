@@ -374,10 +374,6 @@ const statistics = {
           text: '退款统计',
           link: '/main/stat/after/refund'
         },
-        {
-          text: '退货统计',
-          link: '/main/stat/after/return'
-        }
       ]
     } ,
   ]

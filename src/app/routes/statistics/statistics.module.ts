@@ -19,8 +19,6 @@ import { HotSaleComponent } from './goods/hot-sale/hot-sale.component';
 import { SaleDetailComponent } from './goods/sale-detail/sale-detail.component';
 import { AfterComponent } from './after/after.component';
 import { RefundComponent } from './after/refund/refund.component';
-import { ReturnComponent } from './after/return/return.component';
-import {AngularEchartsModule} from "ngx-echarts";
 import { ListDetailComponent } from './users/list-detail/list-detail.component';
 import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component';
 
@@ -47,7 +45,6 @@ const goodsChildRoutes:Routes = [
 ]
 const afterChildRoutes:Routes = [
   {path: 'refund', component:RefundComponent},
-  {path: 'return', component:ReturnComponent},
 ]
 const routes: Routes = [
   {path: '',redirectTo:'xtsz'},
@@ -81,7 +78,6 @@ const routes: Routes = [
     SaleDetailComponent,
     AfterComponent,
     RefundComponent,
-    ReturnComponent,
     ListDetailComponent,
     OrderAmountComponent,]
 })
