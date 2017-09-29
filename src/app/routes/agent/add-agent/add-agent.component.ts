@@ -29,6 +29,7 @@ export class AddAgentComponent implements OnInit {
   public agentCode:string;//获取代理商编码
   private staff:any = {};
   private aa = false;
+  private placeSearch: any;
 
 
   constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute,private patterns: PatternService) {
@@ -44,8 +45,30 @@ export class AddAgentComponent implements OnInit {
       let map = new AMap.Map("container", {
         resizeEnable: true,
         zoom: 13,//地图显示的缩放级别
+        center: [116.397428, 39.90923],
         keyboardEnable: false
       });
+
+      AMap.service('AMap.PlaceSearch',function(){//回调函数
+        //实例化PlaceSearch
+        me.placeSearch= new AMap.PlaceSearch();
+        //TODO: 使用placeSearch对象调用关键字搜索的功能
+      })
+
+      me.placeSearch.search('郑州金水区', function(status, result) {
+        let lat = result.poiList.pois[0].location.lat;
+        let lng = result.poiList.pois[0].location.lng;
+        map.setCenter(new AMap.LngLat(lng, lat));
+      });
+
+      AMap.plugin('AMap.Geocoder',function(){
+        var drving = new AMap.Geocoder({
+          map:map
+        })
+        drving.search([
+          {keyword:'北京西站',city:'北京'}
+        ]);
+      })
 
       // 搜索定位
       AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {

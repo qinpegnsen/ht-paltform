@@ -19,6 +19,7 @@ export class PatternService {
   public _URL: string; //网址
   public twodecimal:string;//两位小数
   public positive:string;
+  public str:string;//除了文字
   constructor() {
     this.num = '^[0-9]*$'; //数字正则
     this.letter = '^[A-Za-z]*$'; //字母正则
@@ -34,6 +35,7 @@ export class PatternService {
     this.doubleDigit = '^[0-9]{1,2}$'; // 两位为整数（0-99）
     this.twodecimal='^[0-9]+(.[0-9]{1,2})?$';//两位小数
     this.positive = '^[0-9]+$'; // 整数
+    this.str = '[^\u4e00-\u9fa5]+'; //除中文的任何数字包括字符
   }
 
 }

@@ -97,7 +97,9 @@ const routes: Routes = [
     StoreEvaluationComponent,
     OrdersService,
     ForFistributonService,
-    AllStockService
+    AllStockService,
+    AwaitingDeliveryComponent,
+    StockComponent
   ]
 })
 export class OrdersModule { }

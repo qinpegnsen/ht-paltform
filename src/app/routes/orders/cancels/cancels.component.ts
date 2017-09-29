@@ -21,6 +21,7 @@ export class CancelsComponent implements OnInit {
   private query;  // 商品审核状态列表
   public staff={};
   public ordno:string;//获取区域编码
+  private reqMoney;
 
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -94,6 +95,7 @@ export class CancelsComponent implements OnInit {
       data: {
         'ordno':_this.orderId,
         'reasonCode':_this.code,
+        'reqMoney':_this.reqMoney
       },
       success: (res) => {
         if (res.success) {

@@ -412,6 +412,10 @@ const app = {
         {
           text: '首页模板',
           link: '/main/app/app-index-tpl'
+        },
+        {
+          text: '首页设置',
+          link: '/main/app/app-set'
         }
       ]
     },

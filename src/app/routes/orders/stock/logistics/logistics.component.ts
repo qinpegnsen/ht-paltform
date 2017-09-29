@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SubmitService} from '../../../../core/forms/submit.service';
 import {AjaxService} from '../../../../core/services/ajax.service';
 import {Page} from '../../../../core/page/page';
+import {AwaitingDeliveryComponent} from '../awaiting-delivery/awaiting-delivery.component';
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -35,7 +36,7 @@ export class LogisticsComponent implements OnInit {
   }
 
 
-  constructor(private ajax:AjaxService, private submit: SubmitService,private routeInfo:ActivatedRoute) { }
+  constructor(private ajax:AjaxService, private submit: SubmitService,private routeInfo:ActivatedRoute,private AwaitingDeliveryComponent:AwaitingDeliveryComponent) { }
 
   ngOnInit() {
     let _this = this;
@@ -79,6 +80,7 @@ export class LogisticsComponent implements OnInit {
         if (res.success) {
           swal('已成功发货', '', 'success');
           _this.hideWindow();
+          _this.AwaitingDeliveryComponent.queryDatas(1);
         } else {
           swal(res.info);
         }
