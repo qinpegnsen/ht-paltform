@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
-import {AddDataComponent} from "../add-data/add-data.component";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-basic-properties',
@@ -18,11 +18,9 @@ export class BasicPropertiesComponent implements OnInit {
   private kindList;// 分类列表
   private kindId:string;
   public data: Page = new Page();
-
   private showAddWindow:boolean = false;
   private showUpdateWindow:boolean = false;
-
-  constructor( private submit: SubmitService,private goods: GoodsService,private childComp: AddDataComponent) { }
+  constructor( private submit: SubmitService,private goods: GoodsService) { }
 
   ngOnInit() {
     let me = this;
@@ -49,7 +47,7 @@ export class BasicPropertiesComponent implements OnInit {
    */
   getKind(data) {
     this.kindId = data.kindId;
-    this.queryDatas()
+    this.queryDatas();
   }
 
   /**
@@ -64,6 +62,7 @@ export class BasicPropertiesComponent implements OnInit {
       kindId:_this.kindId,
     };
     let result=_this.submit.getData(requestUrl, requestData);
+    console.log("█ result ►►►",  result);
     _this.data = result;
   }
 
@@ -89,7 +88,6 @@ export class BasicPropertiesComponent implements OnInit {
       }
     );
   }
-
   addNewData() {
     this.showAddWindow = true;
   }
@@ -102,11 +100,11 @@ export class BasicPropertiesComponent implements OnInit {
    */
   getAddDataResult(data) {
     this.showAddWindow = false;
-    if(data.type == 'success') this.queryDatas()
+    if(data == 'success') this.queryDatas()
   }
   getUpdateResult(data) {
     this.showUpdateWindow = false;
-    if(data.type == 'success') this.queryDatas()
+    if(data == 'success') this.queryDatas()
   }
 
 

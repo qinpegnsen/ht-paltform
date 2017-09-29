@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {BasicPropertiesComponent} from "../basic-properties/basic-properties.component";
@@ -8,14 +8,18 @@ declare var $: any;
   templateUrl: './update-data.component.html',
   styleUrls: ['./update-data.component.scss']
 })
-export class UpdateDataComponent implements OnInit {
+export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   @Input('showUpdateWindow') showUpdateWindow: boolean;
   @Output() upDate = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showUpdateWindow']) {
-      $('.wrapper > section').css('z-index', 200);
+      if(this.showUpdateWindow) $('.wrapper > section').css('z-index', 200);
+      else $('.wrapper > section').css('z-index', 114);
     }
+  }
+  ngOnDestroy(): void {
+    $('.wrapper > section').css('z-index', 114);
   }
   constructor(private submit:SubmitService,private basicPropertiesComponent:BasicPropertiesComponent ) { }
 

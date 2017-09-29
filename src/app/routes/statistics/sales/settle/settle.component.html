@@ -12,18 +12,15 @@
     </ul>
   </div>
   <div class="w98 m-auto h50">
-    <button class="statistic-btn btn-default m0"><i class="icon icon-magnifier"></i></button>
-    <div class="pull-right" style="width: 300px">
-      <div class="col-xs-3 form-group" style="width: 250px">
-        <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" #dpr="bsDatepicker"/>
-        <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+    <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
+        <i class="icon icon-magnifier"></i>
+      </span>
+    <div class="w90" >
+      <div class="col-xs-3 form-group pull-right" >
+         <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" type="daterange" [(ngModel)]="dates" >
+         <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
       </div>
     </div>
-    <select name="" id="" class="sel form-control pull-right" style="margin-right: 20px">
-      <option value="按照天统计">按照天统计</option>
-      <option value="按照周统计">按照周统计</option>
-      <option value="按照月统计">按照月统计</option>
-    </select>
   </div>
 </div>
 
@@ -37,7 +34,7 @@
 
             <div class="col-xs-9">
               <div class="">订单金额（元）</div>
-              <p class="text-md m0">New Comments!</p>
+              <p class="text-md m0">{{data.ordPay}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -54,7 +51,7 @@
           <div class="row">
             <div class="col-xs-9 ">
               <div class="">退款金额（元）</div>
-              <p class="text-md m0">New Tasks!</p>
+              <p class="text-md m0">{{data.refundPay}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-gavel fa-3x tp-em"></em>
@@ -72,7 +69,7 @@
 
             <div class="col-xs-9 ">
               <div class="">实收金额（元）</div>
-              <p class="text-md m0">New Orders!</p>
+              <p class="text-md m0">{{data.realPay}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-tags fa-3x tp-em"></em>
@@ -92,7 +89,7 @@
 
             <div class="col-xs-9">
               <div class="">实收佣金（元）</div>
-              <p class="text-md m0">New Comments!</p>
+              <p class="text-md m0">{{data.extraction}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-pie-chart fa-3x tp-em"></em>
@@ -107,27 +104,10 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-xs-9 ">
-              <div class="">店铺费用（元）</div>
-              <p class="text-md m0">New Tasks!</p>
-            </div>
-            <div class="col-xs-3 text-right">
-              <em class="fa fa-cube fa-3x tp-em"></em>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END panel-->
-    </div>
-    <div class="col-md-4">
-      <!-- START panel-->
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <div class="row">
 
             <div class="col-xs-9 ">
               <div class="">总收入（元）</div>
-              <p class="text-md m0">New Orders!</p>
+              <p class="text-md m0">{{data.balance}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calculator fa-3x tp-em"></em>
@@ -143,41 +123,33 @@
 <div class="panel panel-default">
   <div class="table-title">销售收入统计表</div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+    <table class="table table-striped" (pageChange)="qeuryAll($event)">
       <thead>
       <tr>
         <th class="text-center w10">
-          <rzhDefaultSorter by="name">店铺名称</rzhDefaultSorter>
+          <span by="name">店铺名称</span>
         </th>
         <th class="text-center w15">
-          <rzhDefaultSorter by="email">订单金额（元）</rzhDefaultSorter>
+          <span by="email">订单金额（元）</span>
         </th>
         <th class="text-center w15">
-          <rzhDefaultSorter by="name">收取佣金（元）</rzhDefaultSorter>
+          <span by="name">实收金额（元）</span>
         </th>
         <th class="text-center w15">
-          <rzhDefaultSorter by="name">退单金额（元）</rzhDefaultSorter>
+          <span by="name">退单金额（元）</span>
         </th>
         <th class="text-center w15">
-          <rzhDefaultSorter by="name">退会佣金（元）</rzhDefaultSorter>
-        </th>
-        <th class="text-center w15">
-          <rzhDefaultSorter by="name">店铺费用（元）</rzhDefaultSorter>
-        </th>
-        <th class="text-center w15">
-          <rzhDefaultSorter by="name">结算金额（元）</rzhDefaultSorter>
+          <span by="name">收取佣金（元）</span>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr class="text-center">
-        <td>aaa</td>
-        <td class="">sss</td>
-        <td class="">ddd</td>
-        <td class="">aaa</td>
-        <td class="">aaa</td>
-        <td class="">sss</td>
-        <td class="">ddd</td>
+      <tr class="text-center" *ngFor="let refund of data.resultList">
+        <td>{{refund.toName}}</td>
+        <td class="">{{refund.ordPay}}</td>
+        <td class="">{{refund.realPay}}</td>
+        <td class="">{{refund.refundPay}}</td>
+        <td class="">{{refund.extraction}}</td>
       </tr>
     </table>
   </div>

@@ -1,24 +1,30 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {BasicPropertiesComponent} from "../basic-properties/basic-properties.component";
 declare var $: any;
 @Component({
   selector: 'app-add-data',
   templateUrl: './add-data.component.html',
   styleUrls: ['./add-data.component.scss']
 })
-export class AddDataComponent implements OnInit,OnChanges{
+export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
   @Input('showAddWindow') showAddWindow: boolean;
   @Output() addData = new EventEmitter();
   @Output() upDate = new EventEmitter();
   private kindId:string;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
-      $('.wrapper > section').css('z-index', 200);
+      console.log("█ this.showAddWindow ►►►",  this.showAddWindow);
+      if(this.showAddWindow) $('.wrapper > section').css('z-index', 200);
+      else $('.wrapper > section').css('z-index', 114);
     }
   }
+  ngOnDestroy(): void {
+    $('.wrapper > section').css('z-index', 114);
+  }
 
-  constructor(private submit:SubmitService) {
+  constructor(private submit:SubmitService,private basicPropertiesComponent:BasicPropertiesComponent) {
   }
 
   ngOnInit() {
@@ -31,6 +37,7 @@ export class AddDataComponent implements OnInit,OnChanges{
   hideWindow(type?: string) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
+    console.log("█ $('.wrapper > section').css('z-index') ►►►",  $('.wrapper > section').css('z-index'));
     this.showAddWindow = false;
     if (isUndefined(type)) type = 'cancel';
     this.addData.emit(type)
@@ -44,7 +51,7 @@ export class AddDataComponent implements OnInit,OnChanges{
       vals: obj.vals
     }
     let result=this.submit.postRequest(url, data);
-
+    this.hideWindow("success");
     console.log("█ result ►►►",  result);
   }
 
