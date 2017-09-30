@@ -4,7 +4,7 @@
 <div class="panel panel-default">
   <div class="new-vip">会员详情列表</div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="qeuryAll($event)">
       <thead>
       <tr>
         <th class="">
@@ -34,16 +34,16 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="">ddd</td>
-        <td class="">ddd</td>
-        <td class="">aaa</td>
-        <td class="">sss</td>
-        <td class="">ddd</td>
-        <td class="">ddd</td>
-        <td class="">ddd</td>
-        <td class="">ddd</td>
-      </tr>
+      <!--<tr *ngFor="let order of dataTable.data.voList">-->
+        <!--<td>{{order.custId}}</td>-->
+        <!--<td>{{order.custName}}</td>-->
+        <!--<td>{{order.areaName}}</td>-->
+        <!--<td>{{order.custEmail}}</td>-->
+        <!--<td>{{order.custPhone}}</td>-->
+        <!--<td>{{order.coin}}</td>-->
+        <!--<td>{{order.custPhoneBind}}</td>-->
+        <!--<td>{{order.authState}}</td>-->
+      <!--</tr>-->
     </table>
   </div>
 </div>

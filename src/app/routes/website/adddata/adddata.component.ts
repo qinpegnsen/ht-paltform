@@ -17,10 +17,8 @@ import {PatternService} from "../../../core/forms/pattern.service";
 })
 export class AdddataComponent implements OnInit {
   private adddata = {name: '', remark: '', code: '', isUniqueVal: ''};
-  private adddatas = {sort: '', unitName: ''};
   public updataData: any;
   public updataDataa: any;
-  public addchildData: any;
   private isName: boolean;
   public linkType: string;
   public id: number;

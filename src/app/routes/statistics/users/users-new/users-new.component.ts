@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {zhCn} from "ngx-bootstrap/locale";
 import {defineLocale} from "ngx-bootstrap";
 import {SubmitService} from "../../../../core/forms/submit.service";
@@ -42,7 +42,7 @@ export class UsersNewComponent implements OnInit {
   public optionPrev = {};
 
 
-  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService) {
+  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService,private routeInfo:ActivatedRoute) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -69,7 +69,6 @@ export class UsersNewComponent implements OnInit {
           }
         }
       });
-
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     _this.qeuryAll(_this.queryType, _this.queryTime);
@@ -118,6 +117,8 @@ export class UsersNewComponent implements OnInit {
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
     me.optionPrevInfo();
+    // console.log("█ me.now ►►►",  me.now);
+    // console.log("█ me.nowData ►►►",  me.nowData);
   }
 
   /**

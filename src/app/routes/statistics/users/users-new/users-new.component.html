@@ -96,8 +96,8 @@
         <td class="">{{nowData.yaxis[i]}}</td>
         <td class="">{{nowData.yaxis[i]}}</td>
         <td class="">
-          <button routerLink="../list-detail" [queryParams]="{linkType:''}" class="btn-primary"><i
-            class="icon icon-eye">查看</i></button>
+          <span routerLink="../list-detail" [queryParams]="{linkType:'',nowtime:now,prevtime:prev}" class=" btn btn-primary"><i
+            class="icon icon-eye">查看</i></span>
         </td>
       </tr>
     </table>

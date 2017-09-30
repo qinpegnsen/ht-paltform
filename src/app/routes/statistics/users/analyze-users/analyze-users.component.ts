@@ -94,7 +94,6 @@ export class AnalyzeUsersComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-    console.log("█ result ►►►",  result);
     me.optionPrevInfo();
     console.log("█ me.nowData.yaxis ►►►", me.nowData);
 
