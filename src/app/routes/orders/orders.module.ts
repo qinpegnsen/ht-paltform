@@ -25,6 +25,7 @@ import {CuccessComponent} from './stock/cuccess/cuccess.component';
 import { LogisticsComponent } from './stock/logistics/logistics.component';
 import {ForFistributonService} from './stock/for-distribution/for-fistributon.service';
 import {AllStockService} from './stock/all-stock/all-stock.service';
+import {OrderService} from "./order.service";
 
 
 const routes: Routes = [
@@ -99,7 +100,8 @@ const routes: Routes = [
     ForFistributonService,
     AllStockService,
     AwaitingDeliveryComponent,
-    StockComponent
+    StockComponent,
+    OrderService
   ]
 })
 export class OrdersModule { }

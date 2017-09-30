@@ -1,28 +1,26 @@
-<div class="szh-order-info position-relative">
-  <div class="szh-order-details w40">
-    <div class="order-head p b">订单信息</div>
-    <div class="content p-lg b bt0">
+<div class="szh-order-info position-relative clearfix">
+  <div class="szh-order-details">
+    <div class="order-head p bl bt bb"><span class="fa fa-info-circle mr _orderInfo"></span><span>订单信息</span></div>
+    <div class="content p-lg bl bt bb bt0">
       <dl>
-        <dt>收&nbsp;货&nbsp;人：</dt>
-        <dd>刘能13920181664天津 天津市 和平区 水上公园北路</dd>
+        <dt>买家留言：</dt>
+        <dd>{{orderData.note}}</dd>
       </dl>
       <dl>
         <dt>支付方式：</dt>
-        <dd>在线支付(付款单号：940537964101561009)</dd>
+        <dd>{{orderData.payWay | rzhState :'1017'}}</dd>
       </dl>
       <dl>
-        <dt>发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票：</dt>
-        <dd>
-          <span>不需要发票</span>
-        </dd>
+        <dt>运费：</dt>
+        <dd><span>￥{{orderData.freightPrice | number:'1.2-2'}}</span></dd>
       </dl>
       <dl>
-        <dt>买家留言：</dt>
-        <dd style="word-break:break-all">1234567897897854</dd>
+        <dt>应付总额：</dt>
+        <dd><span>￥{{orderData.pay | number:'1.2-2'}}</span></dd>
       </dl>
-      <dl class="line pt-lg">
+      <dl class="line">
         <dt>订单编号：</dt>
-        <dd>2270000000026200
+        <dd>{{orderData.ordno}}
           <span class="pull-right" (mouseenter)="showTimeList(times)"
                 (mouseleave)="hideTimesList(times)"
                 myHoverColor
@@ -32,143 +30,295 @@
           <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
             class="arrow"></span>
             <ul class="list-unstyled font12 mb0">
-              <li><span>2017-01-17 10:28:21</span>买家下单</li>
-              <li><span>2017-01-17 10:28:21</span>买家下单</li>
-              <li><span>2017-01-17 10:28:21</span>买家下单</li>
+              <li><span>{{orderData.createTime}}</span>买家下单时间</li>
             </ul>
           </div>
         </dd>
       </dl>
     </div>
   </div>
+  <div class="szh-order-details">
+    <div class="order-head p b"><span class="fa fa-user mr _orderInfo"></span><span>收货信息</span></div>
+    <div class="content p-lg b bt0">
+      <dl>
+        <dt>收货人：</dt>
+        <dd>{{orderData.linkman}}</dd>
+      </dl>
+      <dl>
+        <dt>联系电话：</dt>
+        <dd>{{orderData.mobile}}</dd>
+      </dl>
+      <dl>
+        <dt>收货地址：</dt>
+        <dd>{{orderData.addr}}</dd>
+      </dl>
+      <dl *ngIf="orderData.state=='DELIVERY'">
+        <dt>快递公司：</dt>
+        <dd>{{deliveryData?.expressName}}</dd>
+      </dl>
+      <dl *ngIf="orderData.state=='DELIVERY'">
+        <dt>快递单号：</dt>
+        <dd>{{deliveryData?.expressNo}}</dd>
+      </dl>
+    </div>
+  </div>
   <div class="szh-order-condition bt br bb">
-    <p class="font16"><i class="icon-ok-circle green"></i>订单状态：<span>订单已经提交，等待买家付款</span></p>
-    <ul class="list-unstyled font12">
-      <li>1. 买家尚未对该订单进行支付。</li>
-      <li>2. 如果买家未对该笔订单进行支付操作，系统将于订单生成
-        <time>24</time>
-        小时后自动关闭。
-      </li>
-    </ul>
-    <dl>
-      <dt>物流信息</dt>
-      <dd class="pl-xl">
-        <ul class="list-unstyled">
-          <li>1. 买家尚未对该订单进行支付。</li>
-          <li>2. 如果买家未对该笔订单进行支付操作，系统将于订单生成
-            <time>24</time>
-            小时后自动关闭。
+    <div class="order-head _position"><i class="fa fa-truck mr"></i><span>包裹信息</span></div>
+    <!--物流信息-->
+    <div class="_logistics order-track" *ngIf="orderData.state=='DELIVERY'">
+      <ul class="timeline-alt p0">
+        <ng-container *ngFor="let item of logisticsData;let s=index;">
+          <li class="mb0">
+            <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
+            <div class="timeline-panel">
+              <div class="right">
+                <div>
+                  <p class="every-line">
+                  <span class="mr logis-time" *ngIf="s==0">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                  </span>
+                    <ng-container *ngIf="s>0">
+                      <span class="mr logis-time" *ngIf="item.day==logisticsData[s-1].day">{{item.time}}</span>
+                      <span class="mr logis-time" *ngIf="item.day!=logisticsData[s-1].day">
+                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                      {{item.time}}
+                    </span>
+                    </ng-container>
+                    <span class="every-info">{{item.acceptStation}}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </li>
-        </ul>
-      </dd>
-    </dl>
+        </ng-container>
+      </ul>
+    </div>
   </div>
 </div>
-<div class="rate-of-progress mt-xl mb-xl w100">
-  <!-- [class.w1]="orderStep==1" [class.w25]="orderStep==2" [class.w50]="orderStep==3" [class.w75]="orderStep==4" [
-  class.w100]="orderStep==5"-->
+<!--其他的状态-->
+<div class="rate-of-progress mt-xl mb-xl w100" *ngIf="orderData.state!='CLOSE'">
   <div class="szh-progress-bar w90">
-    <div class="already-progress w50"></div>
+    <div *ngIf="orderData.state=='CR'" class="already-progress _w0"></div>
+    <div *ngIf="orderData.state=='PAID'" class="already-progress w25"></div>
+    <div *ngIf="orderData.state=='PREPARE'" class="already-progress w50"></div>
+    <div *ngIf="orderData.state=='DELIVERY'" class="already-progress w75"></div>
+    <div *ngIf="orderData.state=='SUCCESS'" class="already-progress w100"></div>
   </div>
-  <dl class="cur">
-    <dt>提交订单</dt>
-    <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>2017-05-19 10:03:22</dd>
-  </dl>
-  <dl class="cur">
-    <dt>完成付款</dt>
-    <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>2017-05-19 10:03:22</dd>
-  </dl>
-  <dl class="cur">
-    <dt>商家发货</dt>
-    <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>2017-05-19 10:03:22</dd>
-  </dl>
-  <dl>
-    <dt>确认收货</dt>
-    <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>2017-05-19 10:03:22</dd>
-  </dl>
-  <dl>
-    <dt>评价</dt>
-    <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
-    <dd>2017-05-19 10:03:22</dd>
-  </dl>
+  <ng-container *ngIf="orderData.state=='CR'">
+    <dl class="cur">
+      <dt>提交订单</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[1]}}</dd>
+    </dl>
+    <dl>
+      <dt>已支付</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>已配货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>已发货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>订单完成</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+  </ng-container>
+  <ng-container *ngIf="orderData.state=='PAID'">
+    <dl class="cur">
+      <dt>提交订单</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[1]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已支付</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[2]}}</dd>
+    </dl>
+    <dl>
+      <dt>已配货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>已发货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>订单完成</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+  </ng-container>
+  <ng-container *ngIf="orderData.state=='PREPARE'">
+    <dl class="cur">
+      <dt>提交订单</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[1]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已支付</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[2]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已配货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[3]}}</dd>
+    </dl>
+    <dl>
+      <dt>已发货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+    <dl>
+      <dt>订单完成</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+  </ng-container>
+  <ng-container *ngIf="orderData.state=='DELIVERY'">
+    <dl class="cur">
+      <dt>提交订单</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[1]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已支付</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[2]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已配货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[3]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已发货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[4]}}</dd>
+    </dl>
+    <dl>
+      <dt>订单完成</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd></dd>
+    </dl>
+  </ng-container>
+  <ng-container *ngIf="orderData.state=='SUCCESS'">
+    <dl class="cur">
+      <dt>提交订单</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[1]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已支付</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[2]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已配货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[3]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>已发货</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[4]}}</dd>
+    </dl>
+    <dl class="cur">
+      <dt>订单完成</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{atime[5]}}</dd>
+    </dl>
+  </ng-container>
 </div>
+
+<!--订单关闭的状态-->
+<div class="rate-of-progress mt-xl mb-xl w100" *ngIf="orderData.state=='CLOSE'">
+  <div *ngIf="orderData.state=='CLOSE'" class="already-progress _w0"></div>
+  <ng-container *ngIf="orderData.state=='CLOSE'">
+    <dl class="cur">
+      <dt>订单关闭</dt>
+      <dd class="szh-progress-point fa fa-check mt mb-lg"></dd>
+      <dd>{{orderData.createTime}}</dd>
+    </dl>
+  </ng-container>
+</div>
+
+<!--订单信息-->
 <div class="w100">
   <table class="w100 b">
     <thead class="w100">
     <tr class="w100 order-head">
       <th class="w50 p text-center">商品</th>
-      <th class="w10 p text-center">单价（元）</th>
+      <th class="w10 p text-center">单价</th>
       <th class="w10 p text-center">数量</th>
-      <th class="w10 p text-center">订单金额（元）</th>
-      <th class="w10 p text-center">交易操作</th>
+      <th class="w10 p text-center">订单金额</th>
+      <th class="w10 p text-center">操作</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="text-center">
+    <tr class="text-center" *ngFor="let item of orderData.agentOrdItemList;let i=index;">
       <td class="text-left p position-relative bb">
-          <span class="goods-img goods-md-img mr"><img [src]="000"
+          <span class="goods-img goods-md-img mr"><img [src]="item.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'"
                                                        alt=""></span>
         <div class="goods-md-info">
-          <p class="mb0 font13 omg2 two-row mb-sm">
-            <a class="goods-name" href="javascript:;">商品名</a>
+          <p class="mb0 font13 omg2 one-row mb-sm">
+            <a class="goods-name" href="javascript:;">{{item.goodsName}}</a>
           </p>
-          <p class="mb0 one-row omg font12">
-            <span class="inline">颜色：</span>
-            <span class="inline">红色</span>
-          </p>
-        </div>
-      </td>
-      <td class="bb">{{0.356 | decimalTwo}}</td>
-      <td class="bb">3</td>
-      <td class="bl" rowspan="2">
-        <span class="main-red font14">¥{{690.123 | decimalTwo}}</span><br>
-        <span class="font-gray">（免运费）</span><br>
-        <span class="font-gray">在线支付</span>
-      </td>
-      <td class="bl" rowspan="2">
-        <p class="font-gray mb-sm cursor-p">待发货</p>
-        <button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>
-        <br>
-        <button class="m-sm btn btn-xs btn-green fa fa-truck"> 发货</button>
-        <br>
-        <button class="m-sm btn btn-xs btn-danger fa fa-retweet"> 退款</button>
-      </td>
-    </tr>
-    <tr class="text-center">
-      <td class="text-left p position-relative bb">
-          <span class="goods-img goods-md-img mr">
-            <img [src]="000" onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt=""></span>
-        <div class="goods-md-info">
-          <p class="mb0 font13 omg2 two-row mb-sm">
-            <a class="goods-name" href="javascript:;">商品名</a>
-          </p>
-          <p class="mb0 one-row omg font12">
-            <span class="inline">颜色：</span>
-            <span class="inline">红色</span>
+          <p class="mb0 one-row omg font12" *ngFor="let info of jsonToObject(item.goodsSavSet)">
+            <span class="inline">{{info.attrName}}：</span>
+            <span class="inline">{{info.value}}</span>
           </p>
         </div>
       </td>
-      <td class="bb">{{0.356 | decimalTwo}}</td>
-      <td class="bb">3</td>
+      <td class="bb">￥{{item.batchPrice| number:'1.2-2'}}</td>
+      <td class="bb">{{item.batchNum}}</td>
+      <td class="bl" *ngIf="i==0" [attr.rowspan]="orderData.agentOrdItemList.length">
+        <span class="main-red font14">￥{{item.batchPrice*item.batchNum | number:'1.2-2'}}</span><br>
+        <span class="font-gray">{{orderData.payWay | rzhState :'1017'}}</span>
+      </td>
+      <td class="bl" *ngIf="i==0" [attr.rowspan]="orderData.agentOrdItemList.length">
+        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CR'"-->
+                <!--(click)="goPay(orderData.ordno)"> 去支付-->
+        <!--</button>-->
+        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CR'"-->
+                <!--(click)="cancelOrder(item.ordno)"> 取消订单-->
+        <!--</button>-->
+        <!--<button *ngIf="orderData.state=='DELIVERY'" (click)="confirmRecive(goods.ordno)" class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet">确认收货-->
+        <!--</button>-->
+        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CLOSE'"-->
+                <!--(click)="againBuy(item.goodsCode,item.batchNum)"> 重新购买-->
+        <!--</button>-->
+        <!--<button *ngIf="orderData.state=='SUCCESS'" class="m-sm btn btn-xs btn-warning fa fa-shopping-cart"-->
+                <!--(click)="againBuy(item.goodsCode,item.batchNum)"> 再进货-->
+        <!--</button>-->
+        <br>
+      </td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
-          <dt>运费：</dt>
-          <dd><span class="main-red font18">{{3.6 | decimalTwo}}</span>元</dd>
+          <dt class="w8">运费：</dt>
+          <dd class="w8"><span class="main-red font20">￥{{orderData.freightPrice | number:'1.2-2'}}</span></dd>
         </dl>
-        <dl
-          class="text-right mb0">
-          <dt>订单应付金额：</dt>
-          <dd><span class="main-red font20">{{120 | decimalTwo}}</span>元</dd>
+        <dl class="text-right mb0">
+          <dt class="w8">订单应付金额：</dt>
+          <dd class="w8"><span class="main-red font20">￥{{orderData.pay | number:'1.2-2'}}</span></dd>
         </dl>
       </td>
     </tr>

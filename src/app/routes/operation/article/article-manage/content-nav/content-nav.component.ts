@@ -34,8 +34,11 @@ export class ContentNavComponent implements OnInit,OnChanges{
     this.sendState.emit(this.defaultState)
   }
 
+  /**
+   * 输入属性改变当前的状态的总数
+   */
   ngOnChanges(){
-    this.stateList=this.totalRow
+    this.stateList=this.totalRow;
   }
   /**
    * 点击的时候获取文章的状态

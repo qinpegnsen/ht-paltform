@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../../../core/services/ajax.service";
 import {isNull} from "util";
+import {AppComponent} from "../../../../../app.component";
 
 @Injectable()
 export class NavService {
@@ -24,7 +25,7 @@ export class NavService {
           if(data.success){
             result=data;
           }else{
-            console.log('查询文章状态总数 返回的success为假');
+            AppComponent.rzhAlt("error", data.info);
           }
         }else{
           console.log('查询文章状态总数 返回的数据为空');

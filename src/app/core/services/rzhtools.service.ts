@@ -248,6 +248,15 @@ export class RzhtoolsService {
   };
 
   /**
+   * json 转 object
+   * @param val
+   * @returns {any}
+   */
+  static jsonToObject(val: string) {
+    return JSON.parse(val);
+  }
+
+  /**
    * 通过行政区域代码 6位字符，获得市级代码
    * @param areaCode
    * @returns {string} 6位全区域代码，不足补0
