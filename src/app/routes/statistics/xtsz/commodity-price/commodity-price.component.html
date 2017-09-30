@@ -16,78 +16,30 @@
     <div class="panel-body">
       <div>
         <table class="t-items p w100">
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间0：</td>
-            <td class="item-bd col-sm-9 mb0">
-              <input type="text" class="form-control w70" placeholder="0" disabled>
+          <tr class="t-item clearfix" *ngFor="let order of data;let i=index">
+            <td class="item-hd col-sm-1 font12" *ngIf="!order.isShow">
+              <span>{{order.remark}}</span>
+            </td>
+            <td class="item-hd col-sm-1 font12"  *ngIf="order.isShow">
+              <input type="text" class="form-control"  [(ngModel)]="remark">
+            </td>
+
+            <td class="item-bd col-sm-9 mb0"  *ngIf="!order.isShow">
+              <span class="w70">{{order.info}}</span>
+            </td>
+            <td class="item-bd col-sm-9 mb0"  *ngIf="order.isShow">
+              <input type="text" class="form-control w70" [(ngModel)]="updata">
+            </td>
+
+            <td>
+              <span class="btn btn-info" *ngIf="!order.isShow" (click)="showDetail(order,order.code)">修改</span>
+            </td>
+            <td *ngIf="order.isShow">
+             <span class="btn btn-info" (click)="submitt(order.code,order)" >提交</span>
+              <button class="btn btn-green" (click)="cancel(order)" >取消</button>
             </td>
           </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间1：</td>
-            <td class="item-bd col-sm-9 mb0">
-              <input type="text" class="form-control w70" >
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间2：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70" >
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间3：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间4：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间5：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间6：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间7：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间8：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70">
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间9：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70" >
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12">商品价格区间10：</td>
-            <td class="item-bd col-sm-7 mb0">
-              <input type="text" class="form-control w70" >
-            </td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-1 font12"></td>
-            <td class="item-bd col-sm-7 mb0">
-              <span class="btn btn-info">提交设置</span>
-            </td>
-          </tr>
+
         </table>
 
       </div>

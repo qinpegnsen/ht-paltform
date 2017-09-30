@@ -20,7 +20,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i>会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control" type="text"  name="tel" ngModel required #tel="ngModel" [pattern]="patterns.phone"/>
+                  <input class="form-control" type="text"  name="tel" [(ngModel)]="custtel" required #tel="ngModel" [pattern]="patterns.phone"/>
                 </div>
               </div>
               <div [hidden]="tel.valid || tel.pristine"
@@ -34,8 +34,7 @@
                 <label class="col-sm-3 control-label"><i>*</i>增减类型：</label>
                 <div class="col-sm-8">
                   <label class="radio-inline c-radio">
-                    <input type="radio" name="logType" value="RECHARGE" checked
-                          [(ngModel)]="logType"/>
+                    <input type="radio" name="logType" value="RECHARGE" checked [(ngModel)]="logType" />
                     <span class="fa fa-circle"></span>充值</label>
                   <label class="radio-inline c-radio">
                     <input type="radio" name="logType" value="DEDUCT" ngModel/>
@@ -48,7 +47,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i>重消币：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="custCoin" ngModel required #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
+                  <input class="form-control num" type="number"  name="custCoin" [(ngModel)]="count" required #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
                 </div>
               </div>
               <div [hidden]="custCoin.valid || custCoin.pristine"

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {PatternService} from "../../../../core/forms/pattern.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-integration-change',
@@ -8,10 +9,13 @@ import {PatternService} from "../../../../core/forms/pattern.service";
   styleUrls: ['./integration-change.component.scss']
 })
 export class IntegrationChangeComponent implements OnInit {
-  public logType='RECHARGE'
-  constructor(private submitt: SubmitService,private patterns: PatternService) { }
-
+  constructor(private submitt: SubmitService,private patterns: PatternService,private router:Router) { }
+  private logType:any='RECHARGE';
+  private count;
+  private custtel;
   ngOnInit() {
+    this.count="";
+    this.custtel="";
   }
 
   //提交
@@ -23,5 +27,6 @@ export class IntegrationChangeComponent implements OnInit {
       logType:res.logType,
     }
    this.submitt.postRequest(url, data);
+   this.router.navigate(['/main/member/integration-management/integration-change']);
   }
 }
