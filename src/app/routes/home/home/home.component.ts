@@ -85,8 +85,6 @@ export class HomeComponent implements OnInit {
     me.prev = me.data.yesterdaySale;
     me.shopnow=me.data.storeRanking;
     me.goodsnow=me.data.goodsRanking;
-    console.log("█ me.data ►►►",  me.data);
-    console.log("█   me.goodsnow ►►►",me.data.goodsRanking );
     me.optionPrevInfo();
   }
 

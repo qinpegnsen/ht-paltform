@@ -117,8 +117,7 @@ export class UsersNewComponent implements OnInit {
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
     me.optionPrevInfo();
-    // console.log("█ me.now ►►►",  me.now);
-    // console.log("█ me.nowData ►►►",  me.nowData);
+
   }
 
   /**

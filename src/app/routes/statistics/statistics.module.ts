@@ -21,11 +21,13 @@ import { AfterComponent } from './after/after.component';
 import { RefundComponent } from './after/refund/refund.component';
 import { ListDetailComponent } from './users/list-detail/list-detail.component';
 import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component';
+import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.component';
 
-// const xtszChildRoutes:Routes = [
-//   {path: 'cache-reset', component:CacheResetComponent},
-//   {path: 'order-amount', component:OrderAmountComponent},
-// ]
+const xtszChildRoutes:Routes = [
+  {path: 'cache-reset', component:CacheResetComponent},
+  {path: 'order-amount', component:OrderAmountComponent},
+  {path: 'commodity-price', component:CommodityPriceComponent},
+]
 const usersChildRoutes:Routes = [
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
@@ -47,7 +49,7 @@ const afterChildRoutes:Routes = [
 ]
 const routes: Routes = [
   {path: '',redirectTo:'users'},
-  // {path: 'xtsz', component:XtszComponent,children:xtszChildRoutes},
+  {path: 'xtsz', component:XtszComponent,children:xtszChildRoutes},
   {path: 'users', component: UsersComponent,children:usersChildRoutes},
   {path: 'sales', component:SalesComponent,children:salesChildRoutes},
   {path: 'goods', component: GoodsComponent,children:goodsChildRoutes},
@@ -78,6 +80,7 @@ const routes: Routes = [
     AfterComponent,
     RefundComponent,
     ListDetailComponent,
-    OrderAmountComponent,]
+    OrderAmountComponent,
+    CommodityPriceComponent,]
 })
 export class StatisticsModule { }

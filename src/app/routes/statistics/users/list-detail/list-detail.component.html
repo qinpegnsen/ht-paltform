@@ -4,47 +4,92 @@
 <div class="panel panel-default">
   <div class="new-vip">会员详情列表</div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="qeuryAll($event)">
+    <table class="table table-striped" #memberList="rzhDataTable" [rzhData]="memberListdata"
+           (pageChange)="queryMemberList($event)">
       <thead>
       <tr>
-        <th class="">
-          <rzhDefaultSorter >会员ID</rzhDefaultSorter>
+        <th class="w5">
+          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter>会员名称</rzhDefaultSorter>
+        <th class="w10">
+          <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >会员邮箱</rzhDefaultSorter>
+        <th class="w10">
+          <rzhDefaultSorter by="name">真实姓名</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >会员手机</rzhDefaultSorter>
+        <th class="w5">
+          <rzhDefaultSorter by="sex">性别</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >可用预期款（元）</rzhDefaultSorter>
+        <th class="w5">
+          <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >允许购买</rzhDefaultSorter>
+        <th class="w10">
+          <rzhDefaultSorter by="area">区域名称</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >允许发言</rzhDefaultSorter>
+        <th class="w10">
+          <rzhDefaultSorter by="birthday">生日</rzhDefaultSorter>
         </th>
-        <th class="">
-          <rzhDefaultSorter >会员状态</rzhDefaultSorter>
+        <th class="w10">
+          <rzhDefaultSorter by="tel">手机号</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter by="grade">会员类别</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter by="create">创建时间</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
-      <!--<tr *ngFor="let order of dataTable.data.voList">-->
-        <!--<td>{{order.custId}}</td>-->
-        <!--<td>{{order.custName}}</td>-->
-        <!--<td>{{order.areaName}}</td>-->
-        <!--<td>{{order.custEmail}}</td>-->
-        <!--<td>{{order.custPhone}}</td>-->
-        <!--<td>{{order.coin}}</td>-->
-        <!--<td>{{order.custPhoneBind}}</td>-->
-        <!--<td>{{order.authState}}</td>-->
-      <!--</tr>-->
+      <ng-container *ngFor="let member of memberList.data;let i = index">
+        <tr>
+          <td>{{i+1}}</td>
+          <td>
+           <span  *ngIf="member.authState=='AUTH'">
+             <i class="icon icon-user-following gold-star" title="已实名认证"></i>&nbsp;
+           </span>
+            {{member.custName}}
+          </td>
+          <td>{{member.custTruename}}</td>
+          <td>
+            {{member.custSex | rzhState:'1002' }}
+          </td>
+          <td>{{member.coin}}</td>
+          <td>{{member.areaName}}</td>
+          <td>{{member.custBirthday}}</td>
+          <td>{{member.custPhone}}</td>
+          <td>
+            {{member.isMember | rzhState:'1004'}}
+          </td>
+          <td>
+            {{member.state | rzhState:'1018'}}
+          </td>
+          <td>{{member.createTime}}</td>
+
+        </tr>
+      </ng-container>
+      </tbody>
+      <tfoot>
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{memberListdata.genStartRow()}} 至
+              {{memberListdata.genEndRow()}} 条，共 {{memberListdata.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-md-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
     </table>
+
   </div>
 </div>
 

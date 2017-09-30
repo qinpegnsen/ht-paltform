@@ -288,26 +288,26 @@ const statistics = {
   icon: 'fa fa-bar-chart',
   link: '/main/stat',
   submenu: [
-    // {
-    //   text: '统计设置',
-    //   icon: 'fa fa-cogs',
-    //   link: '/main/stat/xtsz',
-    //   alert: '▼',
-    //   submenu: [
-    //     {
-    //       text: '订单金额区间',
-    //       link: '/main/stat/xtsz/order-amount'
-    //     },
-    //     {
-    //       text: '商品价格区间',
-    //       link: '/main/stat/xtsz/set-price'
-    //     },
-    //     {
-    //       text: '统计缓存重置',
-    //       link: '/main/stat/xtsz/cache-reset'
-    //     }
-    //   ]
-    // },
+    {
+      text: '统计设置',
+      icon: 'fa fa-cogs',
+      link: '/main/stat/xtsz',
+      alert: '▼',
+      submenu: [
+        {
+          text: '订单金额区间',
+          link: '/main/stat/xtsz/order-amount'
+        },
+        {
+          text: '商品价格区间',
+          link: '/main/stat/xtsz/commodity-price'
+        },
+        {
+          text: '统计缓存重置',
+          link: '/main/stat/xtsz/cache-reset'
+        }
+      ]
+    },
     {
       text: '会员统计',
       icon: 'fa fa-users',

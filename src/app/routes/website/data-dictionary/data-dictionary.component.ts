@@ -151,9 +151,8 @@ export class DataDictionaryComponent implements OnInit {
       code: childCode
     }
     let url = "/datadict/querryDatadictList";
-    let result = me.dataDictionaryService.queryData(url, data);
-    me.data = new Page(result);
-    // me.data = result;
+    let res = me.dataDictionaryService.queryData(url, data);
+    me.data = new Page(res);
   }
 
   // 返回上一级菜单列表
