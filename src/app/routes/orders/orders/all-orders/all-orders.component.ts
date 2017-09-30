@@ -77,7 +77,7 @@ export class AllOrdersComponent implements OnInit {
    */
   showLogistics(Logistics,ordno) {
     Logistics.style.display = 'block';
-    /*if(isUndefined(ordno))*/ ordno = '1234123451235';
+    if(isUndefined(ordno)) ordno = ordno;
     this.LogisticsData = this.orderServe.getOrderLogisticsData(ordno);
   }
 

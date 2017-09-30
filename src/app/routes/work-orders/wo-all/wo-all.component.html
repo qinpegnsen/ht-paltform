@@ -94,8 +94,8 @@
         </span>
           <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
                   routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
-          <!--<button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>-->
+          <button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
+                  routerLink="/main/sale/after-details" [queryParams]="{wono:order.wono,type:'detail'}"></button>
         </td>
       </tr>
       <tr *ngIf="search.stateEnum!='NO' && detail[i]">

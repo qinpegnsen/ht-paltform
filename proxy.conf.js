@@ -17,6 +17,7 @@ const PROXY_CONFIG = [
       "/goodsBrand",
       "/agentArea",
       "/agent",
+      "/after",
       "/agentOrd",
       "/articleClass",
       "/articleComment",
@@ -42,7 +43,6 @@ const PROXY_CONFIG = [
       "/store",
       "/storeExpressTpl",
       "/expressTpl",
-      "/storeExpressTpl",
       "/helpKind",
       "/helpQuestions",
       "/wo/",
@@ -67,23 +67,10 @@ const PROXY_CONFIG = [
   },
   {
     context: [
-      "/ord"
-    ],
-    target: gh + "8085",   //拦截 context配置路径，经过此地址
-    secure: false
-  },
-  {
-    context: [
-      "/basicExpress"
-    ],
-    target: gh + "8082",   //拦截 context配置路径，经过此地址
-    secure: false
-  },
-  {
-    context: [
+      "/basicExpress",
       "/res"
     ],
-    target: gh + "8082",   //拦截 context配置路径，经过此地址
+    target: br + "8068",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];

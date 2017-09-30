@@ -4,6 +4,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {AfterService} from "../after.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-refund-details',
@@ -12,13 +13,14 @@ import {AfterService} from "../after.service";
 })
 export class AfterDetailsComponent implements OnInit {
 
-  private type: string;//类型,处理/查看详情
-  private afterNo: string;//售后编码
-  private afterData: any;//售后详情数据
-  private opinion: string;//审核意见
-  private goodsAudits: any;//商品审核是否通过枚举
-  private isPass: string = 'Y';//是否同意退货
-  private isAgree: string = 'Y';//是否同意退货
+  private type: string;             //类型,处理/查看详情
+  private afterNo: string;          //售后编码
+  private wono: string;             //工单编码
+  private afterData: any;           //售后详情数据
+  private opinion: string;          //审核意见
+  private goodsAudits: any;         //商品审核是否通过枚举
+  private isPass: string = 'Y';     //是否同意退货
+  private isAgree: string = 'Y';    //是否同意退货
 
 
   constructor(private router: Router,
@@ -31,9 +33,14 @@ export class AfterDetailsComponent implements OnInit {
     let me = this;
     me.type = me.submit.getParams('type');
     me.afterNo = me.submit.getParams('afterNo');
+    me.wono = me.submit.getParams('wono');
 
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
-    this.afterData = this.after.getAfterDetail(me.afterNo);
+    let data;
+    if (!isNullOrUndefined(me.afterNo)) data = {afterNo: me.afterNo};
+    if (!isNullOrUndefined(me.wono)) data = {wono: me.wono};
+    me.afterData = this.after.getAfterDetail(data);
+    if(isNullOrUndefined(me.afterData)) me.afterData = null;
 
   }
 

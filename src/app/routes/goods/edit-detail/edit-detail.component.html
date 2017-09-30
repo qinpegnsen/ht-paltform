@@ -15,7 +15,8 @@
       <dt class="col-xs-2"><i>*</i>商品名称：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
-          <input class="form-control" type="text" required name="goodsName" [(ngModel)]="publishData.goodsName">
+          <input class="form-control" type="text" required name="goodsName" maxlength="50"
+                 [(ngModel)]="publishData.goodsName">
         </div>
         <p class="tip" myHoverColor>商品标题名称长度至少3个字符，最长50个汉字</p>
       </dd>
@@ -24,8 +25,8 @@
       <dt class="col-xs-2"><i>*</i>商品卖点：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
-          <textarea class="form-control" name="goodsJingle" required [(ngModel)]="publishData.goodsJingle" id=""
-                    cols="10" rows="3"></textarea>
+          <textarea class="form-control" name="goodsJingle" required [(ngModel)]="publishData.goodsJingle"
+                    maxlength="140" cols="10" rows="3"></textarea>
         </div>
         <p class="tip" myHoverColor>商品卖点可填写商品的简介或特点，最长不能超过140个汉字</p>
       </dd>
@@ -328,7 +329,7 @@
                   <div class="mobile-edit-area hide" *ngIf="item.type== 'text'">
                     <div class="mea-text">
                       <p class="text-tip">还可以输入 <i class="counter">500</i>字 </p>
-                      <div class="pl pr"><textarea class="textarea form-control p-sm" rows="3"
+                      <div class="pl pr"><textarea class="textarea form-control p-sm" rows="3" maxlength="500"
                                                    (keyup)="counter($event.target)"></textarea></div>
                       <div class="button">
                         <a class="btn btn-sm btn-primary" (click)="insertMblText($event.target,i)"
@@ -343,7 +344,7 @@
               <div class="mobile-edit-area new-text hide">
                 <div class="mea-text">
                   <p class="text-tip">还可以输入 <i class="counter">500</i>字 </p>
-                  <div class="pl pr"><textarea class="textarea form-control p-sm" rows="3"
+                  <div class="pl pr"><textarea class="textarea form-control p-sm" rows="3" maxlength="500"
                                                (keyup)="counter($event.target)"></textarea></div>
                   <div class="button">
                     <a class="btn btn-sm btn-primary" (click)="insertMblText()" href="javascript:void(0);">确认</a>

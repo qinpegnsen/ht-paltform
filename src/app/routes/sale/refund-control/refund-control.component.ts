@@ -3,6 +3,8 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Router} from "@angular/router";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {AfterService} from "../after.service";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-refund-control',
@@ -12,28 +14,56 @@ const swal = require('sweetalert');
 export class RefundControlComponent implements OnInit {
 
   private refundList: Page = new Page();
-  private seebutton: object;//查看按钮
-  private handlebutton: object;//处理按钮
   private detail = [];
-  private redbutton: object;//处理过的按钮
+  private isReceiveList: object;  //是否收到货枚举列
+  private afterStateList: object; //售后单状态枚举列
+  private search: any = {
+    curPage: null,
+    pageSize: 10,
+    returnType: 'REFUND',
+    state: '',
+    isReceive: '',
+    afterNo: null,
+    phone: null,
+    ordno: null,
+    goodsBaseCode: null,
+    agentCode: null
+  };
 
-  constructor(private submit: SubmitService, private router: Router) {
+  constructor(private submit: SubmitService,
+              private router: Router,
+              private tools: RzhtoolsService,
+              private after: AfterService) {
   }
 
   ngOnInit() {
     let me = this;
-    me.seebutton = {
-      title: "查看",
-      type: "details",
-      text: '查看'
-    };
-    me.handlebutton = {
-      title: "处理",
-      type: "set",
-      text: '处理'
-    };
-
+    me.afterStateList = me.tools.getEnumDataList(1602);
+    me.isReceiveList = me.tools.getEnumDataList(1001);
     this.queryAllService();
+  }
+
+  /**
+   * 切换搜索条件时
+   */
+  changeSearchType(val) {
+    if (val == 'afterNo') {
+      this.search.phone = null;
+      this.search.ordno = null;
+      this.search.baseCode = null;
+    } else if (val == 'phone') {
+      this.search.afterNo = null;
+      this.search.ordno = null;
+      this.search.baseCode = null;
+    } else if (val == 'ordno') {
+      this.search.afterNo = null;
+      this.search.phone = null;
+      this.search.baseCode = null;
+    } else if (val == 'baseCode') {
+      this.search.ordno = null;
+      this.search.afterNo = null;
+      this.search.phone = null;
+    }
   }
 
   /**
@@ -43,15 +73,10 @@ export class RefundControlComponent implements OnInit {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/after/queryAfterGoodsReqPages";
-    let data = {
-      curPage: activePage,
-      pageSize: 10,
-      returnType: 'REFUND'
-    }
-    let result = this.submit.getData(url, data);
+    me.search.curPage = activePage;
+    let result = this.submit.getData(url, me.search);
     me.refundList = new Page(result);
     me.detail = [];
-    console.log("█ result ►►►", result);
   }
 
   /**

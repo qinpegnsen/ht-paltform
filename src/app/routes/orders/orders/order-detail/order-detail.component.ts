@@ -47,6 +47,29 @@ export class OrderDetailComponent implements OnInit {
   }
 
   /**
+   * 是否是当前状态
+   * @param index
+   * @returns {boolean}
+   */
+  ifCurrent(index:number){
+    let me = this;
+    switch (index){
+      case 1:
+        return true;
+      case 2:
+        if(me.orderStep==2 || me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+      case 3:
+        if(me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+      case 4:
+        if(me.orderStep==4 || me.orderStep==5) return true;
+      case 5:
+        if(me.orderStep==5) return true;
+      default:
+        return false;
+    }
+  }
+
+  /**
    * 显示订单状态的时间列表
    * @param target
    */

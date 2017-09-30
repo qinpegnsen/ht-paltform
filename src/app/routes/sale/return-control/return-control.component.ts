@@ -4,6 +4,8 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {NavigationEnd, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {AfterService} from "../after.service";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {isUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-return-control',
@@ -13,30 +15,57 @@ const swal = require('sweetalert');
 export class ReturnControlComponent implements OnInit {
 
   private returnList: Page = new Page();
-  private goodsName: any;
-  private seebutton: object;//查看按钮
-  private handlebutton: object;//处理按钮
-  private LogisticsData: object;//物流信息
-  private detail = [];
-  // private returnList:any;
+  private LogisticsData: object;  //物流信息
+  private detail = [];             //是否显示详情的list
+  private isReceiveList: object;  //是否收到货枚举列
+  private afterStateList: object; //售后单状态枚举列
+  private search: any = {
+    curPage: null,
+    pageSize: 10,
+    returnType: 'RETURN',
+    state: '',
+    isReceive: '',
+    afterNo: null,
+    phone: null,
+    ordno: null,
+    goodsBaseCode: null,
+    agentCode: null
+  };
 
-  constructor(private submit: SubmitService, private router: Router,
+  constructor(private submit: SubmitService,
+              private router: Router,
+              private tools: RzhtoolsService,
               private after: AfterService) {
   }
 
   ngOnInit() {
     let me = this;
-    me.seebutton = {
-      title: "查看",
-      type: "details",
-      text: '查看'
-    };
-    me.handlebutton = {
-      title: "处理",
-      type: "set",
-      text: '处理'
-    };
+    me.afterStateList = me.tools.getEnumDataList(1602);
+    me.isReceiveList = me.tools.getEnumDataList(1001);
     this.queryAllService();
+  }
+
+  /**
+   * 切换搜索条件时
+   */
+  changeSearchType(val) {
+    if (val == 'afterNo') {
+      this.search.phone = null;
+      this.search.ordno = null;
+      this.search.baseCode = null;
+    } else if (val == 'phone') {
+      this.search.afterNo = null;
+      this.search.ordno = null;
+      this.search.baseCode = null;
+    } else if (val == 'ordno') {
+      this.search.afterNo = null;
+      this.search.phone = null;
+      this.search.baseCode = null;
+    } else if (val == 'baseCode') {
+      this.search.ordno = null;
+      this.search.afterNo = null;
+      this.search.phone = null;
+    }
   }
 
   /**
@@ -46,16 +75,10 @@ export class ReturnControlComponent implements OnInit {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/after/queryAfterGoodsReqPages";
-    let data = {
-      curPage: activePage,
-      pageSize: 10,
-      goodsName: me.goodsName,
-      returnType: 'RETURN'
-    }
-    let result = this.submit.getData(url, data);
+    me.search.curPage = activePage;
+    let result = this.submit.getData(url, me.search);
     me.returnList = new Page(result);
     me.detail = [];
-    console.log("█ result ►►►", result);
   }
 
   /**
@@ -81,8 +104,8 @@ export class ReturnControlComponent implements OnInit {
    */
   showLogistics(Logistics, afterNo) {
     Logistics.style.display = 'block';
-    /*if(isUndefined(ordno))*/
-    afterNo = '1234123451235';
+    if (!isUndefined(afterNo)) afterNo = afterNo;
+    else return;
     this.LogisticsData = this.after.getOrderLogisticsData(afterNo);
   }
 

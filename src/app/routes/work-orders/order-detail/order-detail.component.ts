@@ -60,6 +60,29 @@ export class OrderDetailComponent implements OnInit {
   }
 
   /**
+   * 是否是当前状态
+   * @param index
+   * @returns {boolean}
+   */
+  ifCurrent(index:number){
+    let me = this;
+    switch (index){
+      case 1:
+        return true;
+      case 2:
+        if(me.orderStep==2 || me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+      case 3:
+        if(me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+      case 4:
+        if(me.orderStep==4 || me.orderStep==5) return true;
+      case 5:
+        if(me.orderStep==5) return true;
+      default:
+        return false;
+    }
+  }
+
+  /**
    * 获取订单进度
    */
   private getOrderDetailInfo() {
@@ -99,27 +122,6 @@ export class OrderDetailComponent implements OnInit {
       me.orderStep = 2;
     } else if (me.orderDetailData.state == 'CR') {
       me.orderStep = 1;
-    }
-  }
-
-  /**
-   * 发货
-   * @param orderId
-   */
-  deliverOrder() {
-    this.curDeliverOrderId = this.curOrdno;
-  }
-
-  /**
-   * 发货回调函数
-   * @param data
-   */
-  getDeliverOrderData(data) {
-    this.curDeliverOrderId = null;
-    if(data.type) {
-      AppComponent.rzhAlt('success','操作成功');
-      this.getOrderDetailInfo();//获取订单的物流详情及订单进度
-      this.getOrderDetail(); //获取订单详情
     }
   }
 

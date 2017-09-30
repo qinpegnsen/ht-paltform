@@ -2,8 +2,7 @@
   退款详情
 </div>
 
-<div class="panel panel-default">
-
+<div class="panel panel-default" *ngIf="afterData">
   <div class="panel-body">
     <div class="ordernum">
       <span>退单编号：{{afterData.afterNo}}</span>
@@ -31,8 +30,8 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">商品名称：</td>
             <td class="item-bd col-sm-10 mb0">
-              {{afterData.goodsName}}<a routerLink="../../goods/publish/edit"
-                                        [queryParams]="{baseCode: afterData.goodsBaseCode}">查看</a>
+              {{afterData.goodsName}}
+              <a routerLink="../../goods/publish/edit" [queryParams]="{baseCode: afterData.goodsBaseCode}">查看</a>
             </td>
           </tr>
           <tr class="t-item clearfix">

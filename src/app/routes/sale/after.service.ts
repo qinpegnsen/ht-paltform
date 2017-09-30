@@ -7,19 +7,18 @@ export class AfterService {
   constructor(private submit:SubmitService) { }
 
   /**
-   * 根据订单编号查询物流信息
-   * @param ordno
+   * 根据售后编号查询物流信息
+   * @param afterNo
    */
   public getOrderLogisticsData(afterNo){
     let url = '/after/loadAfterTail';
-    let data = {afterNo: '553402412955017216'};
+    let data = {afterNo: afterNo};
     return this.submit.getData(url, data);
   }
 
-  public getAfterDetail(afterNo){
+  public getAfterDetail(requestData){
     let url = '/after/loadReqByAfterNo';
-    let data = {afterNo: afterNo};
-    return this.submit.getData(url, data);
+    return this.submit.getData(url, requestData);
   }
 
 }
