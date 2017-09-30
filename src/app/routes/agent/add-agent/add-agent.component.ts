@@ -53,13 +53,12 @@ export class AddAgentComponent implements OnInit {
         //实例化PlaceSearch
         me.placeSearch= new AMap.PlaceSearch();
         //TODO: 使用placeSearch对象调用关键字搜索的功能
+        me.placeSearch.search('郑州金水区', function(status, result) {
+          let lat = result.poiList.pois[0].location.lat;
+          let lng = result.poiList.pois[0].location.lng;
+          map.setCenter(new AMap.LngLat(lng, lat));
+        });
       })
-
-      me.placeSearch.search('郑州金水区', function(status, result) {
-        let lat = result.poiList.pois[0].location.lat;
-        let lng = result.poiList.pois[0].location.lng;
-        map.setCenter(new AMap.LngLat(lng, lat));
-      });
 
       AMap.plugin('AMap.Geocoder',function(){
         var drving = new AMap.Geocoder({
@@ -100,24 +99,6 @@ export class AddAgentComponent implements OnInit {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
 
-    /*/!**
-     * 上传文件 获取暗码
-     *!/
-     me.ajax.get({
-     url: '/upload/basic/uid',
-     success: (res) => {
-     if (res.success) {
-     me.uid = res.data;//把获取的暗码赋值给uid
-     //console.log('获取的暗码成功！', _this.uid);
-     //_this.outputvalue.emit(true);//提交成功后向父组件传值
-     } else {
-     swal(res.info,'','error');
-     }
-     },
-     error: (data) => {
-     //swal('获得暗码失败','','error');
-     }
-     });*/
 
     /**
      * 请求代理商详细数据，并显示()
