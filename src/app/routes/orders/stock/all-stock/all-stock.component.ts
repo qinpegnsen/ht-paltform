@@ -126,7 +126,6 @@ export class AllStockComponent implements OnInit {
   }
 
   cancelOrder(orderId) {
-    console.log("█ orderId ►►►",  orderId);
     this.curCancelOrderId = orderId;
   }
 
