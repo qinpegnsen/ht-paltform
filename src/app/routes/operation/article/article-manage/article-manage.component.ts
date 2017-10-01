@@ -11,9 +11,7 @@ export class ArticleManageComponent implements OnInit{
   private totalRow                            //文章各种状态的总条数
   public flag:boolean;                        //定义boolean值用来控制内容组件是否显示
 
-  constructor() {
-
-  }
+  constructor() {}
 
   /**linkType
    * 初始化
@@ -28,8 +26,6 @@ export class ArticleManageComponent implements OnInit{
         type: "add"
       };
   }
-
-
   /**
    * 获取当前点击的状态
    * @param state
@@ -45,6 +41,4 @@ export class ArticleManageComponent implements OnInit{
   getEmitTotalRow(obj){
     this.totalRow=obj;
   }
-
-
 }

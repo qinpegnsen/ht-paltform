@@ -31,7 +31,6 @@ export class ContentNavComponent implements OnInit,OnChanges{
     let data={}
     let url= "/article/getCountByState";
     this.stateList=this.NavService.queryTotalRow(url,data);
-    console.log("█ this.stateList ►►►",  this.stateList);
     this.sendState.emit(this.defaultState)
   }
 

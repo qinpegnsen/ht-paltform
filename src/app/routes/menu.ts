@@ -52,9 +52,30 @@ const operation = {
       ]
     },
     {
+      text: '消息通知模板',
+      icon: 'icon-book-open',
+      link: '/main/operation/message-inform',
+      alert: '▼',
+      submenu: [
+        {
+          text: '平台模板',
+          link: '/main/operation/message-inform/platform-tpl'
+        },
+        {
+          text: '代理商模板',
+          link: '/main/operation/message-inform/agent-tpl'
+        }
+      ]
+    },
+    {
       text: '保障服务',
       icon: 'icon-diamond',
       link: '/main/operation/ensure'
+    },
+    {
+      text: '系统消息',
+      icon: 'icon-diamond',
+      link: '/main/operation/sys-message'
     },
     {
       text: '售后保障',

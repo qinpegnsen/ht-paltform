@@ -30,6 +30,10 @@ import {OperationService} from "./operation.service";
 import {GoodsService} from "../goods/goods.service";
 import {MaskService} from "../../core/services/mask.service";
 import { GetClassComponent } from './get-class/get-class.component';
+import { MessageInformComponent } from './message-inform/message-inform.component';
+import { SysMessageComponent } from './sys-message/sys-message.component';
+import { AgentTplComponent } from './message-inform/agent-tpl/agent-tpl.component';
+import { PlatformTplComponent } from './message-inform/platform-tpl/platform-tpl.component';
 
 
 const addSort: Routes = [
@@ -65,10 +69,17 @@ const helpChildRoutes: Routes = [
   {path: 'help-answer', component: HelpAnswerComponent,children:helpdRoutes},
 ]
 
+const messageChildRoutes: Routes = [
+  {path: 'agent-tpl', component: HelpInterlocutionComponent},
+  {path: 'platform-tpl', component: PlatformTplComponent}
+]
+
 const routes: Routes = [
   {path: '',redirectTo:'express'},
   {path: 'express', component: ExpressComponent,children:expressChildRoute},
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
+  {path: 'sys-message', component: SysMessageComponent},
+  {path: 'message-inform', component: MessageInformComponent,children:messageChildRoutes},
   {path: 'help-center', component: HelpCenterComponent,children:helpChildRoutes},
   {path: 'ensure', component:EnsureComponent},
   {path: 'after-ensure', component: AfterEnsureComponent},
@@ -84,7 +95,7 @@ const routes: Routes = [
     NzModalModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService]
 })
 export class OperationModule { }

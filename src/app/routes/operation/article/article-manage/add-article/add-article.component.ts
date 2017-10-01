@@ -42,7 +42,7 @@ export class AddArticleComponent implements OnInit {
   public articleId: number                          // 路由传递过来的文章的id
   public queryArticleData: any                      //用来保存根据文章的id查询出来的文章的信息
   public articleCoverType;                          //初始化的时候设置默认选中的值
-  public articleCoverTypes;                         //初始化的时候设置默认选中的值
+  public articleCoverTypes;                         //文章封面的类型数据
   public submitObj;                                 //用来保存提交的时候的数据，在addArticleExtra里面使用
   public submitState;                               //用来保存提交的时候的状态，在addArticleExtra里面使用
   public autionOptions;                             //审核状态的列表
@@ -82,9 +82,8 @@ export class AddArticleComponent implements OnInit {
 
     this.articleCoverTypes = [
       {key: 'AUTO', text: '自动'},
-      {key: 'ONE', text: '一个封面'},
-      {key: 'THREE', text: '三个封面'}
-
+      {key: 'ONE', text: '单图'},
+      {key: 'THREE', text: '三图'}
     ]
 
     this.deletebutton = {//删除按钮

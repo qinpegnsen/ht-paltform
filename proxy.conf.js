@@ -45,7 +45,8 @@ const PROXY_CONFIG = [
       "/expressTpl",
       "/helpKind",
       "/helpQuestions",
-      "/wo/",
+      "/wo",
+      "/ord",
       "/statistical"
     ],
     target: gh + "8085",   //拦截 context配置路径，经过此地址
@@ -70,7 +71,7 @@ const PROXY_CONFIG = [
       "/basicExpress",
       "/res"
     ],
-    target: br + "8068",   //拦截 context配置路径，经过此地址
+    target: sz + "8082",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];
