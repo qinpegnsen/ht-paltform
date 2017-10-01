@@ -25,8 +25,8 @@ export class PlatformTplComponent implements OnInit {
    */
   ngOnInit() {
     this.addbutton={
-      title:"新增代理商模板",
-      text:"新增代理商模板",
+      title:"新增平台模板",
+      text:"新增平台模板",
       type: "add"
     };
     this.updatebutton={

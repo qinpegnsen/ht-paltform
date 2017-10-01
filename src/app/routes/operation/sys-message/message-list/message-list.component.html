@@ -1,4 +1,3 @@
-
 <ul class="clearfix order-table-head list-unstyled mb0 p b">
   <li class="w10 pull-left text-left">全选</li>
   <li class="w60 pull-left text-center">消息内容</li>
@@ -7,129 +6,34 @@
 </ul>
 <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
        (pageChange)="queryDatas(1,$event)">
-  <!--<tbody>-->
-  <!--<tr class="mt" *ngFor="let order of dataTable.data;let i = index">-->
-    <!--<td class="w100 p0 font12 bt0">-->
-      <!--<div class="order-space"></div>-->
-      <!--<div class="order-head p b bb0">-->
-        <!--<span class="mr-xl">订单编号：{{order.ordno}}</span>-->
-        <!--&lt;!&ndash;<span class="mr-xl">店铺：{{goods.storeName}}</span>&ndash;&gt;-->
-        <!--<span class="mr-xl">下单时间：{{order.createTime}}</span>-->
-        <!--<span>来源：{{order.payPlat | rzhState:'1015'}}</span>-->
-        <!--&lt;!&ndash;<span class="fa fa-desktop"> 来源：PC</span>&ndash;&gt;-->
-      <!--</div>-->
-      <!--<table class="w100 b">-->
-        <!--<tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">-->
-          <!--<td class="w40 p text-left position-relative bb">-->
-            <!--<span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"-->
-                                                         <!--onerror="javascript:this.src='../../../assets/img/dummy.png'"-->
-                                                         <!--alt=""></span>-->
-            <!--<div class="goods-lg-info">-->
-              <!--<p class="mb0 font13 omg2 two-row mb-sm">-->
-                <!--<a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>-->
-              <!--</p>-->
-              <!--<p class="mb0 one-row omg" *ngFor="let attr of goods.goodsSavSet | strToJson">-->
-                <!--<span class="inline">{{attr.attrName}}：</span>-->
-                <!--<span class="inline">{{attr.value}}</span>-->
-              <!--</p>-->
-            <!--</div>-->
-          <!--</td>-->
-          <!--<td class="w10"-->
-              <!--[class.bb]="s != order.ordItemList.length-1"><span>¥{{goods.price | decimalTwo}}</span></td>-->
-          <!--<td class="w10" [class.bb]="s != order.ordItemList.length-1">{{goods.num}}</td>-->
-          <!--<ng-container *ngIf="s==0">-->
-            <!--<td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">-->
-            <!--<span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"-->
-                  <!--(mouseleave)="hideBuyerInfo(i)">{{order.linkman}}-->
-            <!--</span>-->
-              <!--<div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">-->
-                <!--<div class="info-con">-->
-                  <!--<p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>-->
-                  <!--<dl>-->
-                    <!--<dt>姓名：</dt>-->
-                    <!--<dd>{{order.linkman}}</dd>-->
-                  <!--</dl>-->
-                  <!--<dl>-->
-                    <!--<dt>电话：</dt>-->
-                    <!--<dd>{{order.phone}}</dd>-->
-                  <!--</dl>-->
-                  <!--<dl>-->
-                    <!--<dt>地址：</dt>-->
-                    <!--<dd>{{order.areaFullName + order.address}}</dd>-->
-                  <!--</dl>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</td>-->
-            <!--<td class="w10 bl" [attr.rowspan]="order.ordItemList.length">-->
-              <!--<span class="main-red font14">¥{{order.total | decimalTwo}}</span><br>-->
-              <!--<span class="font-gray">{{order.freight == 0? '(免运费)':order.freight | decimalTwo}}</span><br>-->
-              <!--<span class="font-gray">{{order.payWay | rzhState:'1017'}}</span>-->
-            <!--</td>-->
-            <!--<td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">-->
-              <!--<p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>-->
-              <!--<p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"-->
-                 <!--[queryParams]="{ordno:order.ordno}">-->
-                <!--查看详情</p>-->
-              <!--<p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">-->
-                <!--<span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,order.ordno)"-->
-                      <!--(mouseleave)="hideLogistics(Logistics)">查看物流</span></p>-->
-              <!--<div class="szh-buyer-info text-left logistics-pop" #Logistics-->
-                   <!--(mouseenter)="showLogistics(Logistics,order.ordno)"-->
-                   <!--(mouseleave)="hideLogistics(Logistics)">-->
-                <!--<div class="logistics-pop-body">-->
-                  <!--<p class="pl mb-sm clearfix logistics-pop-head">-->
-                    <!--<span class="fa fa-truck pull-left _icon"></span>-->
-                    <!--<span class="pull-left">物流信息</span>-->
-                    <!--<a class="pull-right" routerLink="../order-detail"-->
-                       <!--[queryParams]="{ordno:order.ordno}">查看更多</a>-->
-                  <!--</p>-->
-                  <!--<div class="logistics-pop-main">-->
-                    <!--<ul class="timeline-alt pt pb0 m0">-->
-                      <!--<ng-container *ngFor="let item of LogisticsData;let a=index;">-->
-                        <!--<li class="mb0" *ngIf="a<4">-->
-                          <!--<div class="timeline-badge primary">-->
-                            <!--<em class="fa fa-truck"></em>-->
-                          <!--</div>-->
-                          <!--<div class="timeline-panel _mrl">-->
-                            <!--<div class="right">-->
-                              <!--<div>-->
-                                <!--<p>-->
-                                  <!--<span class="mr">{{item.acceptTime}}</span><br>-->
-                                  <!--<span>{{item.acceptStation}}</span>-->
-                                <!--</p>-->
-                              <!--</div>-->
-                            <!--</div>-->
-                          <!--</div>-->
-                        <!--</li>-->
-                      <!--</ng-container>-->
-                    <!--</ul>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</td>-->
-            <!--<td class="w10 bl" [attr.rowspan]="order.ordItemList.length">-->
-              <!--<div *ngIf="order.state == 'PREPARE' && order.isPlatCarry=='Y'">-->
-                <!--<button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck"-->
-                        <!--(click)="deliverOrder(order.ordno)">-->
-                  <!--设置发货-->
-                <!--</button>-->
-              <!--</div>-->
-              <!--&lt;!&ndash; <div class="hide">-->
-                 <!--<button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"-->
-                         <!--(click)="cancelOrder(order.ordno)"> 取消订单-->
-                 <!--</button>-->
-               <!--</div>&ndash;&gt;-->
-              <!--&lt;!&ndash;<div *ngIf="order.state == 'CLOSE'">-->
-                <!--<button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款-->
-                <!--</button>-->
-              <!--</div>&ndash;&gt;-->
-            <!--</td>-->
-          <!--</ng-container>-->
-        <!--</tr>-->
-      <!--</table>-->
-    <!--</td>-->
-  <!--</tr>-->
-  <!--</tbody>-->
+  <thead>
+  <tr>
+    <th class="w5">
+      <div class="checkbox c-checkbox m0">
+        <label class="unselectable">
+          <input type="checkbox" class="_all" />
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
+    </th>
+    <th class="w95">
+      <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-trash thc font"
+              (click)="cancelOrder(goods.ordno)">
+        删除
+      </button>
+      <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-flag-o thc font"
+              (click)="cancelOrder(goods.ordno)">
+        标记已读
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr >
+    <td>111</td>
+
+  </tr>
+  </tbody>
   <!--<tfoot>-->
   <!--<tr>-->
     <!--<td colspan="10" class="bt0">-->
@@ -148,6 +52,6 @@
   <!--</tfoot>-->
 </table>
 <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
-  <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"-->
-                     <!--(deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
+<!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"-->
+<!--(deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
 <!--</ng-container>-->
