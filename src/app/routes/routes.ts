@@ -1,7 +1,6 @@
-import {LayoutComponent} from '../layout/layout.component';
-import {LoginComponent} from './pages/login/login.component';
-import {PagesComponent} from './pages/pages/pages.component';
-import {ButtonDemoComponent} from "./buttons/buttonDemo/button-demo.component";
+import {LayoutComponent} from "../layout/layout.component";
+import {LoginComponent} from "./pages/login/login.component";
+import {PagesComponent} from "./pages/pages/pages.component";
 // 设置路由指向
 export const routes = [
   {

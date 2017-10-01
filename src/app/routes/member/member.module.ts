@@ -13,9 +13,9 @@ import {FileUploadModule} from "ng2-file-upload";
 import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
 
 const userChildRoutes: Routes = [
-  {path: 'integration-details', component: IntegrationDetailsComponent},
-  {path: 'integration-change', component: IntegrationChangeComponent},
-  {path: 'integration-import', component: IntegrationImportComponent},
+  {path: 'details', component: IntegrationDetailsComponent},
+  {path: 'change', component: IntegrationChangeComponent},
+  {path: 'import', component: IntegrationImportComponent},
   {path: 'progressmask', component: ProgressmaskComponent},
 ]
 
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: '',redirectTo:'users'},
   {path: 'users', component: MemberComponent},
   {path: 'certification', component: CertificationComponent},
-  {path: 'integration-management', component: IntegrationManagementComponent,children: userChildRoutes},
+  {path: 'inte-manage', component: IntegrationManagementComponent,children: userChildRoutes},
 ];
 @NgModule({
   imports: [

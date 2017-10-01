@@ -15,6 +15,10 @@ import { ProgressmaskComponent } from './progressmask/progressmask.component';
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [IntegrationManagementComponent, IntegrationDetailsComponent, IntegrationChangeComponent, IntegrationImportComponent, ProgressmaskComponent]
+  declarations: [IntegrationManagementComponent,
+    IntegrationDetailsComponent,
+    IntegrationChangeComponent,
+    IntegrationImportComponent,
+    ProgressmaskComponent]
 })
 export class IntegrationManagementModule { }

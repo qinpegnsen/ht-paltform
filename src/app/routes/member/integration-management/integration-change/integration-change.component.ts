@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {PatternService} from "../../../../core/forms/pattern.service";
-import {Router} from "@angular/router";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-integration-change',
@@ -9,24 +9,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./integration-change.component.scss']
 })
 export class IntegrationChangeComponent implements OnInit {
-  constructor(private submitt: SubmitService,private patterns: PatternService,private router:Router) { }
-  private logType:any='RECHARGE';
-  private count;
-  private custtel;
+  private data: any = {
+    phone: null,
+    custCoin: null,
+    logType: 'RECHARGE'
+  };
+  public tel: string;
+  public custCoin: string;
+
+  constructor(private submitt: SubmitService, private patterns: PatternService) {
+  }
+
   ngOnInit() {
-    this.count="";
-    this.custtel="";
   }
 
   //提交
-  submit(res){
+  submit() {
     let url = '/custCoin/addCustCoin';
-    let data = {
-      phone: res.tel,
-      custCoin:res.custCoin,
-      logType:res.logType,
+    let res = this.submitt.postRequest(url, this.data);
+    if (isNullOrUndefined(res)) {
+      this.data.phone = '';
+      this.data.custCoin = ''
     }
-   this.submitt.postRequest(url, data);
-   this.router.navigate(['/main/member/integration-management/integration-change']);
   }
 }

@@ -20,10 +20,11 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i>会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control" type="text"  name="tel" [(ngModel)]="custtel" required #tel="ngModel" [pattern]="patterns.phone"/>
+                  <input class="form-control" type="text"  name="tel" [(ngModel)]="data.phone" required #tel="ngModel"
+                         [pattern]="patterns.phone"/>
                 </div>
               </div>
-              <div [hidden]="tel.valid || tel.pristine"
+              <div [hidden]="tel.valid || tel.pristine || tel.value==''"
                    class="col-sm-9 pull-right text-danger">
                 请填写正确手机号
               </div>
@@ -34,10 +35,11 @@
                 <label class="col-sm-3 control-label"><i>*</i>增减类型：</label>
                 <div class="col-sm-8">
                   <label class="radio-inline c-radio">
-                    <input type="radio" name="logType" value="RECHARGE" checked [(ngModel)]="logType" />
+                    <input type="radio" name="logType" value="RECHARGE"
+                          [(ngModel)]="data.logType"/>
                     <span class="fa fa-circle"></span>充值</label>
                   <label class="radio-inline c-radio">
-                    <input type="radio" name="logType" value="DEDUCT" ngModel/>
+                    <input type="radio" name="logType" value="DEDUCT" [(ngModel)]="data.logType"/>
                     <span class="fa fa-circle"></span>扣除</label>
                 </div>
               </div>
@@ -47,17 +49,18 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i>重消币：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="custCoin" [(ngModel)]="count" required #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
+                  <input class="form-control num" type="number"  name="custCoin" [(ngModel)]="data.custCoin" required
+                         #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
                 </div>
               </div>
-              <div [hidden]="custCoin.valid || custCoin.pristine"
+              <div [hidden]="custCoin.valid || custCoin.pristine || custCoin.value==''"
                    class="col-sm-9 pull-right text-danger">
                 请填写重消币(最多写两位小数)
               </div>
             </fieldset>
           </div>
           <div class="panel-footer">
-            <button class="btn btn-info sub" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid">提交信息  </button>
+            <button class="btn btn-info sub" type="submit" (click)="submit()" [disabled]="!res.form.valid">提交信息  </button>
           </div>
         </div>
         <!-- END panel-->

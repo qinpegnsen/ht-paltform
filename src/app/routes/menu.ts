@@ -111,14 +111,14 @@ const goods = {
   link: '/main/goods',
   submenu: [
     {
+      text: '管理商品',
+      icon: 'fa fa-cubes',
+      link: '/main/goods/manage'
+    },
+    {
       text: '商品发布',
       icon: 'fa fa-cube',
       link: '/main/goods/publish'
-    },
-    {
-      text: '商品管理',
-      icon: 'fa fa-cubes',
-      link: '/main/goods/manage'
     },
     {
       text: '分类管理',
@@ -126,7 +126,7 @@ const goods = {
       alert: '▼',
       submenu: [
         {
-          text: '分类管理',
+          text: '管理分类',
           link: '/main/goods/kind-manage'
         },
         {
@@ -170,10 +170,11 @@ const member = {
   link: '/main/member',
   submenu: [
     {
-      text: '会员管理',
+      text: '管理会员',
       icon: 'fa fa-user',
       link: '/main/member/users'
-    }, {
+    },
+    {
       text: '认证审核',
       icon: 'fa fa-user',
       link: '/main/member/certification'
@@ -185,15 +186,15 @@ const member = {
       submenu: [
         {
           text: '重消币明细',
-          link: '/main/member/integration-management/integration-details'
+          link: '/main/member/inte-manage/details'
         },
         {
           text: '重消币增减',
-          link: '/main/member/integration-management/integration-change'
+          link: '/main/member/inte-manage/change'
         },
         {
           text: '重消币批量导入',
-          link: '/main/member/integration-management/integration-import'
+          link: '/main/member/inte-manage/import'
         }
       ]
     }
@@ -215,7 +216,7 @@ const orders = {
       alert: '▼',
       submenu: [
         {
-          text: '订单管理',
+          text: '管理订单',
           link: '/main/orders/ord'
         },
         {
@@ -256,7 +257,7 @@ const workOrders = {
       link: '/main/WO/assign'
     },
     {
-      text: '工单管理',
+      text: '管理工单',
       icon: 'fa fa-file-text-o',
       link: '/main/WO/manage'
     }
@@ -271,6 +272,7 @@ const sale = {
       text: '退款',
       icon: 'fa fa-money',
       alert: '▼',
+      link: '/main/sale/refund-control',
       submenu: [
         {
           text: '退款管理',
@@ -405,7 +407,7 @@ const agent = {
   link: '/main/agent',
   submenu: [
     {
-      text: '代理商管理',
+      text: '管理代理商',
       icon: 'fa fa-users',
       link: '/main/agent/agentperson'
     },
