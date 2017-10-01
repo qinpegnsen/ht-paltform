@@ -1,3 +1,74 @@
-<p>
-  agent-tpl works!
-</p>
+<div class="content-heading mb-lg">
+  代理商消息模板
+  <app-buttons class="pull-right" [config]="addbutton" routerLink="rightPage"
+               [queryParams]="{type:'add'}"></app-buttons>
+</div>
+<div class="panel mb panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #agentTplList="rzhDataTable" [rzhData]="agentTplData"
+           (pageChange)="queryExpressList($event)">
+      <thead>
+      <tr>
+        <th class="w10">
+          <rzhDefaultSorter by="name">模板编码</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter by="email">模板名称</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter>消息图标</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter>模板</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter>菜单URL</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter>备注</rzhDefaultSorter>
+        </th>
+        <th class="w20">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let agentTpl of agentTplList.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{agentTpl.expressName}}</td>
+        <td>{{agentTpl.expressCode}}</td>
+        <td>{{agentTpl.expressUrl}}</td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="agentTpl.isUse=='Y'" (change)="isUse(agentTpl)"/>
+            <span></span>
+          </label>
+        </td>
+        <td>
+          <app-buttons [config]="updatebutton" routerLink="rightPage"
+                       [queryParams]="{type:'edit',id:agentTpl.id}"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteSort(agentTpl.id)"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <!--<tfoot>-->
+      <!--<tr class="text-center">-->
+        <!--<td colspan="12">-->
+          <!--<div class="col-md-5">-->
+            <!--<div class="text-muted pull-left"><strong>第 {{expressListdata.genStartRow()}} 至-->
+              <!--{{expressListdata.genEndRow()}} 条，共 {{expressListdata.totalRow}}-->
+              <!--条</strong></div>-->
+          <!--</div>-->
+          <!--<div class="col-md-7">-->
+            <!--<div class="pull-right">-->
+              <!--<rzhBootstrapPaginator></rzhBootstrapPaginator>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+      <!--</tfoot>-->
+    </table>
+  </div>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
+

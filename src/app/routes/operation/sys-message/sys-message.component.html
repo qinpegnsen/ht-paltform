@@ -1,3 +1,13 @@
-<p>
-  sys-message works!
-</p>
+<div class="order panel mb">
+  <div class="panel-body">
+    <div *ngIf="orderType!='detail'">
+      <ul class="order-guide list-unstyled clearfix bb">
+        <li class="pull-left thc" [class.font]="orderType==''" [class.bb]="orderType==''" routerLink="all-orders">全部消息
+        </li>
+      </ul>
+    </div>
+    <!--路由嵌套 begin-->
+    <router-outlet></router-outlet>
+    <!--路由嵌套 end-->
+  </div>
+</div>

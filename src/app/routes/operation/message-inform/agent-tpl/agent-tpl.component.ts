@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgentTplComponent implements OnInit {
 
-  private expressAddbutton:Object;     //新增快递公司按钮
+  private addbutton:Object;                                       //新增代理商消息模板按钮
 
   constructor() { }
 
@@ -16,11 +16,12 @@ export class AgentTplComponent implements OnInit {
    * 2 获取模板的列表
    */
   ngOnInit() {
-    this.expressAddbutton={
-      title:"新增快递公司",
-      text:"新增快递公司",
+    this.addbutton={
+      title:"新增代理商模板",
+      text:"新增代理商模板",
       type: "add"
     };
+
   }
 
 }

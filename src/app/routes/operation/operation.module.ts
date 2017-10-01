@@ -34,6 +34,8 @@ import { MessageInformComponent } from './message-inform/message-inform.componen
 import { SysMessageComponent } from './sys-message/sys-message.component';
 import { AgentTplComponent } from './message-inform/agent-tpl/agent-tpl.component';
 import { PlatformTplComponent } from './message-inform/platform-tpl/platform-tpl.component';
+import { MessageListComponent } from './sys-message/message-list/message-list.component';
+import { EditTplComponent } from './message-inform/edit-tpl/edit-tpl.component';
 
 
 const addSort: Routes = [
@@ -70,15 +72,19 @@ const helpChildRoutes: Routes = [
 ]
 
 const messageChildRoutes: Routes = [
-  {path: 'agent-tpl', component: HelpInterlocutionComponent},
+  {path: 'agent-tpl', component: AgentTplComponent},
   {path: 'platform-tpl', component: PlatformTplComponent}
+]
+const sysMessageChildRoutes: Routes = [
+  {path: '',redirectTo:'message-list'},
+  {path: 'message-list', component: MessageListComponent}
 ]
 
 const routes: Routes = [
   {path: '',redirectTo:'express'},
   {path: 'express', component: ExpressComponent,children:expressChildRoute},
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
-  {path: 'sys-message', component: SysMessageComponent},
+  {path: 'sys-message', component: SysMessageComponent,children:sysMessageChildRoutes},
   {path: 'message-inform', component: MessageInformComponent,children:messageChildRoutes},
   {path: 'help-center', component: HelpCenterComponent,children:helpChildRoutes},
   {path: 'ensure', component:EnsureComponent},
@@ -95,7 +101,7 @@ const routes: Routes = [
     NzModalModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, EditTplComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService]
 })
 export class OperationModule { }

@@ -1,3 +1,74 @@
-<p>
-  platform-tpl works!
-</p>
+<div class="content-heading mb-lg">
+  平台消息模板
+  <app-buttons class="pull-right" [config]="addbutton" (click)="addTpl()"></app-buttons>
+</div>
+<div class="panel mb panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #platformTplList="rzhDataTable" [rzhData]="platformTplData"
+           (pageChange)="queryExpressList($event)">
+      <thead>
+      <tr>
+        <th class="w10">
+          <rzhDefaultSorter by="name">模板编码</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter by="email">模板名称</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter>消息图标</rzhDefaultSorter>
+        </th>
+        <th class="w20">
+          <rzhDefaultSorter>模板</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter>菜单权限</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter>菜单URL</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter>备注</rzhDefaultSorter>
+        </th>
+        <th class="w10">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let platformTpl of platformTplList.data;let i = index">
+        <td>{{platformTpl.tplCode}}</td>
+        <td>{{platformTpl.tplName}}</td>
+        <td>{{platformTpl.icon}}</td>
+        <td>{{platformTpl.tpl}}</td>
+        <td>{{platformTpl.limitMenu}}</td>
+        <td>{{platformTpl.url}}</td>
+        <td>{{platformTpl.remark}}</td>
+        <td>
+        <app-buttons [config]="deletebutton" (click)="deleteTpl(platformTpl.id)"></app-buttons>
+        <app-buttons [config]="updatebutton" (click)="updateTpl(platformTpl.tplCode)"></app-buttons>
+      </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{platformTplData.genStartRow()}} 至
+              {{platformTplData.genEndRow()}} 条，共 {{platformTplData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-md-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
+<app-edit-tpl  [type]="curType" [tplCode]="curTplCode"  [page]="platformTplData.curPage"
+                    (emitTplData)="getTplData($event)"></app-edit-tpl>
+

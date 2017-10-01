@@ -14,7 +14,7 @@ export class OperationService {
   constructor(private ajax: AjaxService,private submit: SubmitService) { }
 
   /**
-   * delete 请求
+   * delete 请求  特殊的提示
    * @param submitUrl
    * @param submitData
    * @param back:true(返回上一级)
@@ -39,6 +39,30 @@ export class OperationService {
       },
       error: () => {
         AppComponent.rzhAlt("error", '网络错误');
+      }
+    });
+  }
+
+  /**
+   * delete 请求
+   * @param submitUrl
+   * @param submitData
+   * @param back:true(返回上一级)
+   */
+  delRequest(requestUrl, requestDate) {
+    this.ajax.del({
+      url: requestUrl,
+      data: requestDate,
+      async: false,
+      success: (res) => {
+        if (res.success) {
+          AppComponent.rzhAlt("success", res.info);
+        } else {
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
   }

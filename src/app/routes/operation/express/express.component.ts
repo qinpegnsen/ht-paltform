@@ -24,6 +24,11 @@ export class ExpressComponent implements OnInit {
    * 2.对按钮进行配置
    */
   ngOnInit() {
+    this.expressAddbutton={
+      title:"新增快递公司",
+      text:"新增快递公司",
+      type: "add"
+    };
     this.updatebutton={
       title:"编辑",
       type: "update"
@@ -32,12 +37,7 @@ export class ExpressComponent implements OnInit {
       title:"删除",
       type: "delete"
     };
-    this.expressAddbutton={
-      title:"新增快递公司",
-      text:"新增快递公司",
-      type: "add"
-    };
-   this.queryExpressList()
+    this.queryExpressList()
 
   }
 
@@ -79,8 +79,6 @@ export class ExpressComponent implements OnInit {
         }
         that.service.delRequest(url,data)
         that.queryExpressList()
-      } else {
-        swal("Cancelled", "Your imaginary file is safe :)", "error");
       }
     });
   }
