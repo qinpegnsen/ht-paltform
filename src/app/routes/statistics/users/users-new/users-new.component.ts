@@ -125,7 +125,6 @@ export class UsersNewComponent implements OnInit {
    */
   private optionPrevInfo() {
     let _this = this;
-    console.log("█ .prev ►►►", _this.prev);
     _this.optionPrev = {
       title: {
         text: '新增会员统计'
@@ -193,8 +192,6 @@ export class UsersNewComponent implements OnInit {
   getWeekListByMonth() {
     let _this = this, time = _this.getMonth();
     if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]); //获取周列表
-  }
-  test() {
   }
 
   /**

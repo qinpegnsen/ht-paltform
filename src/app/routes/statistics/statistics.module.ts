@@ -24,7 +24,7 @@ import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component
 import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.component';
 
 const xtszChildRoutes:Routes = [
-  {path: 'cache-reset', component:CacheResetComponent},
+  // {path: 'cache-reset', component:CacheResetComponent},
   {path: 'order-amount', component:OrderAmountComponent},
   {path: 'commodity-price', component:CommodityPriceComponent},
 ]

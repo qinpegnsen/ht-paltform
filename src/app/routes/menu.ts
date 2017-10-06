@@ -1,4 +1,7 @@
 /**
+ * Created by xiejiaojiao on 2017/10/6.
+ */
+/**
  * 菜单管理（一级路由的link不可删掉，将根据一级路由取子菜单）
  * 请保持每个一级菜单及其子菜单main后面的路径一致
  * @type {{text: string; link: string; icon: string; submenu: [{text: string; link: string},{text: string; link: string}]}}
@@ -148,22 +151,22 @@ const goods = {
   ]
 };
 /*const shop = {
-  text: '店铺管理',
-  icon: 'fa fa-institution',
-  link: '/main/shop',
-  submenu: [
-    {
-      text: '店铺管理',
-      icon: 'fa fa-institution',
-      link: '/main/shop/manage'
-    },
-    {
-      text: '店铺账号管理',
-      icon: 'fa fa-institution',
-      link: '/main/shop/account'
-    }
-  ]
-};*/
+ text: '店铺管理',
+ icon: 'fa fa-institution',
+ link: '/main/shop',
+ submenu: [
+ {
+ text: '店铺管理',
+ icon: 'fa fa-institution',
+ link: '/main/shop/manage'
+ },
+ {
+ text: '店铺账号管理',
+ icon: 'fa fa-institution',
+ link: '/main/shop/account'
+ }
+ ]
+ };*/
 const member = {
   text: '会员管理',
   icon: 'fa fa-users',
@@ -324,11 +327,11 @@ const statistics = {
         {
           text: '商品价格区间',
           link: '/main/stat/xtsz/commodity-price'
-        },
-        {
-          text: '统计缓存重置',
-          link: '/main/stat/xtsz/cache-reset'
         }
+       /* {
+         text: '统计缓存重置',
+         link: '/main/stat/xtsz/cache-reset'
+         }*/
       ]
     },
     {
@@ -411,11 +414,11 @@ const agent = {
       icon: 'fa fa-users',
       link: '/main/agent/agentperson'
     },
-  /*  {
-      text: '代理区域管理',
-      icon: 'icon-location-pin',
-      link: '/main/agent/region'
-    },*/
+    /*  {
+     text: '代理区域管理',
+     icon: 'icon-location-pin',
+     link: '/main/agent/region'
+     },*/
   ]
 };
 const app = {

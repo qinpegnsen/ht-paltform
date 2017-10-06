@@ -31,7 +31,7 @@
           </div>
 
           <div *ngIf="showType.WEEK" >
-            <select [(ngModel)]="select.year" class="form-control w21 pull-left mr5">
+            <select [(ngModel)]="select.year" class="form-control w23 pull-left mr5">
               <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
             </select>
             <select [(ngModel)]="select.month" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">
@@ -60,6 +60,7 @@
   <div class="panel m-auto">
     <div echarts [options]="optionPrev" class="demo-chart w100"></div>
   </div>
+
   <div class="panel panel-default mt20">
   <div class="table-title w100 h50 font18 ">新增会员统计表</div>
   <div class="panel-body">

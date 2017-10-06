@@ -22,7 +22,7 @@
             </td>
 
             <td class="item-hd col-sm-1 font12" *ngIf="order.isShow">
-              <input type="text" class="form-control" [(ngModel)]="remark">
+              <input type="text" class="form-control" [(ngModel)]="order.remark" >
             </td>
 
             <td class="item-bd col-sm-9 mb0"  *ngIf="!order.isShow">
@@ -40,7 +40,6 @@
               <button class="btn btn-green" (click)="cancel(order)" >取消</button>
             </td>
           </tr>
-
         </table>
 
       </div>

@@ -1,8 +1,8 @@
 <div class="content-heading mb-lg">
   会员详情列表
+  <span class="btn btn-info pull-right" (click)="back()" > 返回</span>
 </div>
 <div class="panel panel-default">
-  <div class="new-vip">会员详情列表</div>
   <div class="panel-body">
     <table class="table table-striped" #memberList="rzhDataTable" [rzhData]="memberListdata"
            (pageChange)="queryMemberList($event)">
