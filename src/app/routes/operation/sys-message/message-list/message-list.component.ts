@@ -50,7 +50,7 @@ export class MessageListComponent implements OnInit {
   updateIsRead(id){
     let url='/notifyAdmin/updateIsRead';
     let data={
-      id:id
+      ids:id
     };
     this.platformInfoData=this.operationService.updateproblem(url,data);
 
@@ -62,7 +62,7 @@ export class MessageListComponent implements OnInit {
    *1.首先获取到当前选择的id
    */
   updateMoreIsRead(){
-    let url='/notifyAdmin/deleteByIdStr';
+    let url='/notifyAdmin/updateIsRead';
     let obj=$("._every[checked='checked']");
     for(let i=0;i<obj.length;i++){
       this.idArr.push($(obj[i]).val())
@@ -70,7 +70,7 @@ export class MessageListComponent implements OnInit {
     console.log("█ this.idArr ►►►",  this.idArr);
     let idStr= this.idArr.join(',');
     let data={
-      id:idStr
+      ids	:idStr
     };
     this.platformInfoData=this.operationService.updateproblem(url,data);
     this.queryAdminNotify();
