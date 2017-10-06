@@ -19,20 +19,22 @@ export class IntegrationImportComponent implements OnInit {
   private errorFile: string;
   private templateFile: string ="http://ovaetuonu.bkt.clouddn.com/templateCoin.xlsx";
   private data:any;//文件暗码
+  private onOff: boolean = false;
   constructor(private submitt:SubmitService) { }
 
   ngOnInit() {
   }
  //清空选中的表格
   changeFiles(){
+    this.onOff = true;
     if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
-    console.log("█ 111 ►►►",  111);
   }
 
   //上传
   private upLoadExcel(submitUrl,submitData,method){
     let me = this;
-
+  if(this.onOff){
+    this.onOff = false;
     MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();
@@ -50,6 +52,7 @@ export class IntegrationImportComponent implements OnInit {
     me.uploader.onErrorItem = function (item, response, status, headers) {
       AppComponent.rzhAlt('error','表格失败', '表格上传失败！');
     };
+  }
   }
   //导入
   private iimport(uid){

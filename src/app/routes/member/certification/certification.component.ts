@@ -63,4 +63,22 @@ export class CertificationComponent implements OnInit {
     this.submit.putRequest(url, data, false);
     this.aqeuryAll(this.state);
   }
+
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event, i){
+    i.style.display = 'block';
+    i.style.top = event.clientY + 'px';
+    i.style.left = (event.clientX +30) + 'px';
+    // console.log("█ i.style.top = 100 ►►►",  i.style.top);
+  }
+
+  /**
+   * 鼠标离开时大图随之隐藏
+   */
+  hideImg(i) {
+    i.style.display = 'none';
+  }
 }

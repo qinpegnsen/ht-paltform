@@ -48,12 +48,15 @@
           <td>{{count.idcard}}</td>
           <td>{{count.startTime}}--{{count.endTime}}</td>
           <td>
-          <img  [src]="count.idcardPic1"
+          <img  [src]="count.idcardPic1" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)" class="idimg"
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          <img  [src]="count.idcardPic2"
+            <img [src]="count.idcardPic1" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img  [src]="count.idcardPic2" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)" class="idimg"
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          <img  [src]="count.idcardPic3"
+            <img [src]="count.idcardPic2" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img  [src]="count.idcardPic3" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)" class="idimg"
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
+            <img [src]="count.idcardPic3" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </td>
           <td>{{count.createTime}}</td>
           <td *ngIf="state=='AUDIT'">

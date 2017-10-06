@@ -98,8 +98,7 @@
         <td>{{goods.createTime}}</td>
         <td>
           <label class="switch switch-md" title="是否允许批发">
-            <input [checked]="goods.isBatch == 'Y'" type="checkbox"
-                   (change)="startState(goods,data.curPage)">
+            <input type="checkbox" [checked]="goods.isBatch === 'Y'" (change)="startState(goods,data.curPage)">
             <span></span>
           </label>
         </td>

@@ -12,3 +12,15 @@
   color: #23b7e5;
   border-bottom: 1px solid #23b7e5;
 }
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 120px;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}
+.idimg{
+  cursor:pointer;
+}

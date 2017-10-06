@@ -53,6 +53,17 @@ export class AnalyzeAreaComponent implements OnInit {
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     _this.qeuryAll();
     _this.getOption();
+    _this.select.year = new Date().getFullYear();
+    _this.select.month = new Date().getMonth()+1;
+    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month);
+    _this.weekForMonth.forEach(ele => {
+      let start =  new Date(ele.split('~')[0]).getTime();
+      let end =  new Date(ele.split('~')[1]).getTime();
+      let now = new Date().getTime();
+      if(now > start && now < end){
+        _this.select.week = ele;
+      };
+    });
   }
 
   randomData() {

@@ -20,11 +20,13 @@ export class WholesaleComponent implements OnInit {
   private goodsName: any = ''; //商品名
   private brandName: any = ''; //品牌名
   private kindId: any = ''; //品牌名
-  public brandList:any;   //品牌列表
+  public brandList: any;   //品牌列表
   public _goods = [];
   public value: any = {};
-  constructor(private ajax: AjaxService,private submit: SubmitService,
-              private goods: GoodsService,private router:Router,private patterns: PatternService) { }
+
+  constructor(private ajax: AjaxService, private submit: SubmitService,
+              private goods: GoodsService, private router: Router, private patterns: PatternService) {
+  }
 
   ngOnInit() {
     this.qeuryAllService(1);
@@ -34,7 +36,7 @@ export class WholesaleComponent implements OnInit {
   /**
    * 品牌名称
    */
-  search(){
+  search() {
     this.qeuryAllService(1);
   }
 
@@ -61,10 +63,10 @@ export class WholesaleComponent implements OnInit {
    * @param data  选择分类组件输出数据
    */
   getBrandList(kindId?) {
-    if(isUndefined(kindId)) kindId = '';
-    let list = this.goods.getBrandListByKind(kindId),newList = [];
-    if(!isNullOrUndefined(list)) {
-      for(let item of list){
+    if (isUndefined(kindId)) kindId = '';
+    let list = this.goods.getBrandListByKind(kindId), newList = [];
+    if (!isNullOrUndefined(list)) {
+      for (let item of list) {
         let obj = {
           id: item.id,
           text: item.brandName,
@@ -78,66 +80,71 @@ export class WholesaleComponent implements OnInit {
   /**
    * 批发商品管理--查询分页
    */
-  qeuryAllService(curPage,event?: PageEvent,){
+  qeuryAllService(curPage, event?: PageEvent,) {
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    };
-    let url = "/goodsQuery/querySku";
-    let data={
-      curPage: activePage,
-      pageSize:10,
-      kindId:me.kindId,
-      goodsName:me.goodsName,
-      brandName:me.brandName,
     }
-    let result = this.submit.getData(url,data);
+    ;
+    let url = "/goodsQuery/querySku";
+    let data = {
+      curPage: activePage,
+      pageSize: 10,
+      kindId: me.kindId,
+      goodsName: me.goodsName,
+      brandName: me.brandName,
+    }
+    let result = this.submit.getData(url, data);
     me.data = new Page(result);
-    console.log("█  ►►►",result);
+    console.log("█  ►►►", result);
   }
 
   /**
    * 是否允许批发
    */
-  startState(data,curPage) {
+  startState(data, curPage) {
     let _this = this, isBatch;
-    if(data.isBatch == 'Y') data.isBatch = 'N';
+    if (data.isBatch == 'Y') data.isBatch = 'N';
     else data.isBatch = 'Y';
-    console.log("█ data.goodsPrice ►►►",  data.goodsPrice);
-    if(!isNullOrUndefined(data.goodsPrice.batchPrice)&& data.goodsPrice.batchPrice != 0 && data.goodsPrice.batchPrice != ''){
+    if (!isNullOrUndefined(data.goodsPrice.batchPrice) && data.goodsPrice.batchPrice != 0 && data.goodsPrice.batchPrice != '') {
+      console.log("█ data.isBatch ►►►", data.isBatch);
       let url = "/goodsEdit/updateIsBatch";
       this.ajax.put({
         url: url,
         data: {
-          goodsCode:data.goodsCode ,
-          isBatch:data.isBatch,
+          goodsCode: data.goodsCode,
+          isBatch: data.isBatch,
         },
         success: (res) => {
-          if (res.success) AppComponent.rzhAlt("success",res.info);
-          else AppComponent.rzhAlt("error",res.info);
-          _this.qeuryAllService(curPage)
+          if (res.success) AppComponent.rzhAlt("success", res.info);
+          else AppComponent.rzhAlt("error", res.info);
+          data.isBatch = 'N';
+          // _this.qeuryAllService(curPage)
         },
         error: (data) => {
-          AppComponent.rzhAlt("error",data.info);
+          AppComponent.rzhAlt("error", data.info);
           _this.qeuryAllService(curPage)
         }
       });
-    }else if(isNullOrUndefined(data.goodsPrice.batchPrice)){
-      AppComponent.rzhAlt("warning",'请先设置价格');
+    } else if (isNullOrUndefined(data.goodsPrice.batchPrice) || data.goodsPrice.batchPrice == 0 || data.goodsPrice.batchPrice == '') {
+      setTimeout(() => {
+        data.isBatch = 'N';
+      }, 0)
+      AppComponent.rzhAlt("warning", '请先设置价格');
     }
   }
 
   /**
    * 批发价修改
    */
-  submita(goods,goodsCode,i,curPage) {
-    if(goods.goodsPrice.memberPrice < goods.goodsPrice.batchPrice){
-      AppComponent.rzhAlt("error",'批发价应小于会员价');
+  submita(goods, goodsCode, i, curPage) {
+    if (goods.goodsPrice.memberPrice < goods.goodsPrice.batchPrice) {
+      AppComponent.rzhAlt("error", '批发价应小于会员价');
       return;
     }
-    let _this=this;
+    let _this = this;
     let url = '/goodsEdit/updateBatchPrice';
     let data = {
       goodsCode: goodsCode,
@@ -145,7 +152,7 @@ export class WholesaleComponent implements OnInit {
     }
     _this.submit.putRequest(url, data);
     _this.qeuryAllService(curPage);
-    console.log("█ this._goods[i] ►►►",  this._goods[i]);
+    console.log("█ this._goods[i] ►►►", this._goods[i]);
 
   }
 }

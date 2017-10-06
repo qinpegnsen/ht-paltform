@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, Data, NavigationEnd, Router} from "@angular/router";
 import {zhCn} from "ngx-bootstrap/locale";
 import {defineLocale} from "ngx-bootstrap";
 import {SubmitService} from "../../../../core/forms/submit.service";
@@ -21,14 +21,17 @@ export class UsersNewComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
   month: Array<string> = SettingsService.month; //获取月份信息
-  select: any = {}; //选择的年份和月份信息
-  showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
+  // info:Date=new Date();
+  select: any = {}; //选择的年份和月份信息
+
+  showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
 
   private queryType: any = 'DAY';//日期选择
+  contrastTime: any = new Date();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
-  contrastTime: any = new Date();
+info: any = new Date();
 
   private data: any;
   now: string;
@@ -72,7 +75,17 @@ export class UsersNewComponent implements OnInit {
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     _this.qeuryAll(_this.queryType, _this.queryTime);
-
+    _this.select.year = new Date().getFullYear();
+    _this.select.month = new Date().getMonth()+1;
+    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month);
+    _this.weekForMonth.forEach(ele => {
+      let start =  new Date(ele.split('~')[0]).getTime();
+      let end =  new Date(ele.split('~')[1]).getTime();
+      let now = new Date().getTime();
+      if(now > start && now < end){
+        _this.select.week = ele;
+      };
+    });
   }
 
 
