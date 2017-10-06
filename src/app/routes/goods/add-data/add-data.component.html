@@ -26,20 +26,29 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">属性名称：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" name='name'  ngModel placeholder="请输入属性名称">
+          <input type="text" class="form-control" name='name' required ngModel  #name="ngModel" placeholder="请输入属性名称">
         </dd>
+        <dl [hidden]="name.valid || name.pristine"
+            class="col-sm-9 pull-right text-danger add">
+          请输入名称
+        </dl>
       </dl>
+
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">属性值：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" name='vals'  ngModel placeholder="请输入属性值">
+          <input type="text" class="form-control" name='vals'  ngModel required #vals="ngModel" placeholder="请输入属性值">
         </dd>
+        <dl [hidden]="vals.valid || vals.pristine"
+                 class="col-sm-9 pull-right text-danger add">
+        请输入名称
+      </dl>
       </dl>
 
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="button" (click)="delivery(add.value)">确认提交</button>
+      <button class="btn btn-info" type="button" (click)="delivery(add.value)"  [disabled]="!add.form.valid">确认提交</button>
     </div>
   </form>
 </div>

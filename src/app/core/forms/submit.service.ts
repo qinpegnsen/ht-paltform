@@ -41,6 +41,7 @@ export class SubmitService {
            });*/
           result = res.data;
         } else {
+          result = res.info;
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           AppComponent.rzhAlt("error", res.info);
         }

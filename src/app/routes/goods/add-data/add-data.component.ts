@@ -28,7 +28,9 @@ export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
   }
 
   ngOnInit() {
+
   }
+
 
   /**
    * 关闭组件
@@ -50,9 +52,13 @@ export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
       name: obj.name,
       vals: obj.vals
     }
-    let result=this.submit.postRequest(url, data);
-    this.hideWindow("success");
-    console.log("█ result ►►►",  result);
+    let result=this.submit.postRequest(url, data,true);
+    console.log("█ result.info ►►►",  result);
+    if(result=="分类id不能为空"){
+      return;
+    }else{
+      this.hideWindow("success");
+    }
   }
 
   //查询分类
