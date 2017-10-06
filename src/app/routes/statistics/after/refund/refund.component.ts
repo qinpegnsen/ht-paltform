@@ -110,7 +110,7 @@ export class RefundComponent implements OnInit {
     let _this = this;
     _this.option = {
       title: {
-        left:"center",
+        left:"47%",
         text: '退款金额统计'
       },
       color: ['#3398DB'],
@@ -122,6 +122,7 @@ export class RefundComponent implements OnInit {
       },
       toolbox: {
         show : true,
+        right:"3%",
         feature : {
           dataView : {show: true, readOnly: false},
           magicType : {show: true, type: ['line', 'bar']},

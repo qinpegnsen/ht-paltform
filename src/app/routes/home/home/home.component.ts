@@ -93,14 +93,17 @@ export class HomeComponent implements OnInit {
    */
   private optionPrevInfo() {
     let _this = this;
-    // console.log("█ .prev ►►►", _this.prev.keys);
     _this.optionPrev = {
       title: {
-        text: '新增会员统计'
+        text: '销售走势',
+        left:"47%"
       },
       legend: {
         data: ['昨天','今天'],
-        align: 'left'
+        align: 'left',
+        left:"46%",
+        top:"8%",
+        bottom:"10%"
       },
       color: ['#3398DB', '#42DBB1'],
       tooltip: {
@@ -111,6 +114,7 @@ export class HomeComponent implements OnInit {
       },
       toolbox: {
         show: true,
+        right:"3%",
         feature: {
           dataView: {show: true, readOnly: false},
           magicType: {show: true, type: ['line', 'bar']},

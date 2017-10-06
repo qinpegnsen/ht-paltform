@@ -119,7 +119,7 @@
         </td>
         <td>{{member.createTime}}</td>
         <td>
-          <app-buttons [config]="detailsbutton" class="btn-xs" (click)="showDetail(member)"></app-buttons>
+          <app-buttons [config]="detailsbutton" class="btn-xs font12" (click)="showDetail(member)"></app-buttons>
 
           <button class="btn btn-danger btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
                   (click)="changeState('FREEZE',member.custCode,memberListdata.curPage)"></button>

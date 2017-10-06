@@ -154,61 +154,64 @@
   </div>
 </div>
 
-<!--图表切换-->
-<div class="panel m-auto">
-  <div echarts [options]="optionPrev" class="demo-chart w100"></div>
-</div>
+<div class="a">
+  <!--图表切换-->
+  <div class="panel m-auto">
+    <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+  </div>
 
-<!--TOP20-->
-<div class="mt20 panel w48 pull-left" style="display: inline-block">
-  <div class="table-title">店铺销售排名</div>
-  <div class="panel-body">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="w33 text-center">
-        <span>序号</span>
-      </th>
-      <th class="w33 text-center">
-        <span>店铺名称</span>
-      </th>
-      <th class="w33 text-center">
-        <span>销量</span>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="text-center" *ngFor="let stop of data.storeRanking;let i=index">
-      <td>{{i+1}}</td>
-      <td>{{stop.storeName}}</td>
-      <td>{{stop.saleSum}}</td>
-    </tr>
-  </table>
+  <!--TOP20-->
+  <div class="mt20 panel w48 pull-left" style="display: inline-block">
+    <div class="table-title">店铺销售排名</div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="w33 text-center">
+            <span>序号</span>
+          </th>
+          <th class="w33 text-center">
+            <span>店铺名称</span>
+          </th>
+          <th class="w33 text-center">
+            <span>销量</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" *ngFor="let stop of data.storeRanking;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{stop.storeName}}</td>
+          <td>{{stop.saleSum}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
-<div class="mt20 panel w48 pull-right">
-  <div class="table-title">商品销售排名</div>
-  <div class="panel-body">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="w33 text-center">
-        <span>序号</span>
-      </th>
-      <th class="w33 text-center">
-        <span>商品名称</span>
-      </th>
-      <th class="w33 text-center">
-        <span>销量</span>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="text-center" *ngFor="let goods of data.goodsRanking;let i=index">
-      <td>{{i+1}}</td>
-      <td>{{goods.goodsName}}</td>
-      <td>{{goods.goodsCount}}</td>
-    </tr>
-  </table>
+  <div class="mt20 panel w48 pull-right">
+    <div class="table-title">商品销售排名</div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="w33 text-center">
+            <span>序号</span>
+          </th>
+          <th class="w33 text-center">
+            <span>商品名称</span>
+          </th>
+          <th class="w33 text-center">
+            <span>销量</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" *ngFor="let goods of data.goodsRanking;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{goods.goodsName}}</td>
+          <td>{{goods.goodsCount}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
+
 </div>

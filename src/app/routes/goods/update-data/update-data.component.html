@@ -15,9 +15,16 @@
         <li>如需要增加一个新的规格值，请点击表单项规格值“新增规格值”按钮并打开相关新增页面进行操作。</li>
       </ul>
     </div>
-    <!--name="" [(ngModel)]=""-->
     <!--表单-->
     <div class="pop deliver-box font12 w100">
+
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">商品分类：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <app-get-kind (myData)="getKind($event)"></app-get-kind>
+        </dd>
+      </dl>
+
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">规格名称：</dt>
         <dd class="orderId-color col-xs-9 font14">

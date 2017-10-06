@@ -117,7 +117,7 @@ export class AnalyzeUsersComponent implements OnInit {
     let _this = this;
     _this.optionPrev = {
       title: {
-        left:"center",
+        left:"47%",
         text: '买家排行20名'
       },
       color: ['#3398DB'],
@@ -129,6 +129,7 @@ export class AnalyzeUsersComponent implements OnInit {
       },
       toolbox: {
         show : true,
+        right:"3%",
         feature : {
           dataView : {show: true, readOnly: false},
           magicType : {show: true, type: ['line', 'bar']},

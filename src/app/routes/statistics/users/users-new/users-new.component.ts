@@ -140,11 +140,15 @@ info: any = new Date();
     let _this = this;
     _this.optionPrev = {
       title: {
-        text: '新增会员统计'
+        text: '新增会员统计',
+        left:"47%",
       },
       legend: {
         data: [_this.prev, _this.now],
-        align: 'left'
+        align: 'left',
+        left:"46%",
+        top:"8%",
+        bottom:"10%"
       },
       color: ['#3398DB', '#42DBB1'],
       tooltip: {
@@ -155,6 +159,7 @@ info: any = new Date();
       },
       toolbox: {
         show: true,
+        right:"3%",
         feature: {
           dataView: {show: true, readOnly: false},
           magicType: {show: true, type: ['line', 'bar']},

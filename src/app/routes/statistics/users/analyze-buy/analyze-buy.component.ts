@@ -129,6 +129,7 @@ export class AnalyzeBuyComponent implements OnInit {
       },
       toolbox: {
         show : true,
+        right:"3%",
         feature : {
           dataView : {show: true, readOnly: false},
           magicType : {show: true, type: ['line', 'bar']},
