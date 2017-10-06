@@ -11,4 +11,25 @@
 }
 th{
   position: relative;
+  vertical-align: middle !important;
+}
+.myCircle{
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 100%;
+  background-color: #0e90d2;
+}
+.qpsMl{
+  margin-left:20px !important;
+}
+.qpssMl{
+  margin-left:10px !important;
+}
+td{
+  position:relative;
+}
+.qpssMl{
+  position:absolute;top:14px;
+  left: 20px;
 }

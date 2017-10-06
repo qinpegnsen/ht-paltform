@@ -4,20 +4,20 @@
   <li class="w20 pull-left text-center">发送时间</li>
   <li class="w10 pull-left text-center">操作</li>
 </ul>
-<table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
-       (pageChange)="queryDatas(1,$event)">
+<table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="platformInfoData"
+       (pageChange)="queryDatas($event)">
   <thead>
   <tr>
-    <th class="w5">
+    <th class="w3 text-center">
       <div class="checkbox c-checkbox m0">
         <label class="unselectable">
-          <input type="checkbox" class="_all" />
+          <input type="checkbox" class="_all"/>
           <span class="fa fa-check"></span>
         </label>
       </div>
     </th>
-    <th class="w95">
-      <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-trash thc font"
+    <th class="w65">
+      <button class="btn btn-xs btn-outline btn-warning fa fa-trash thc font qpsMl"
               (click)="cancelOrder(goods.ordno)">
         删除
       </button>
@@ -29,27 +29,42 @@
   </tr>
   </thead>
   <tbody>
-  <tr >
-    <td>111</td>
+  <tr  *ngFor="let platformInfo of platformInfoData.voList;let i = index">
+    <td class="text-center">
+      <div class="checkbox c-checkbox m0">
+        <label class="unselectable">
+          <input type="checkbox" class="_all"/>
+          <span class="fa fa-check"></span>
+        </label>
+      </div>
+    </td>
+    <td>
+      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id)"></a>
+      <a class="qpssMl">{{platformInfo.msg}}</a>
+    </td>
+    <td class="text-center">{{platformInfo.createTime}}</td>
+    <td class="text-center">
+      <app-buttons [config]="deletebutton" (click)="deleteTpl(platformInfo.id)"></app-buttons>
 
+    </td>
   </tr>
   </tbody>
-  <!--<tfoot>-->
-  <!--<tr>-->
-    <!--<td colspan="10" class="bt0">-->
-      <!--<div class="col-sm-5">-->
-        <!--<div class="text-muted"><strong>第 {{goodsList.genStartRow()}} 至 {{goodsList.genEndRow()}} 条，共-->
-          <!--{{goodsList.totalRow}}-->
-          <!--条</strong></div>-->
-      <!--</div>-->
-      <!--<div class="col-sm-7">-->
-        <!--<div class="pull-right">-->
-          <!--<rzhBootstrapPaginator></rzhBootstrapPaginator>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</td>-->
-  <!--</tr>-->
-  <!--</tfoot>-->
+  <tfoot>
+  <tr>
+    <td colspan="10" class="bt0">
+      <div class="col-sm-5">
+        <div class="text-muted"><strong>第 {{platformInfoData.genStartRow()}} 至 {{platformInfoData.genEndRow()}} 条，共
+          {{platformInfoData.totalRow}}
+          条</strong></div>
+      </div>
+      <div class="col-sm-7">
+        <div class="pull-right">
+          <rzhBootstrapPaginator></rzhBootstrapPaginator>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tfoot>
 </table>
 <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
 <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"-->

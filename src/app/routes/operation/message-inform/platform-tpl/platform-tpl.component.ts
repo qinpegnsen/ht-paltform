@@ -102,7 +102,7 @@ export class PlatformTplComponent implements OnInit {
   }
 
   /**
-   * 弹窗提交
+   * 提交
    * @param data
    */
   getTplData(data) {

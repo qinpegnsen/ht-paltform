@@ -7,6 +7,8 @@ import {AjaxService} from "../../core/services/ajax.service";
 import {CookieService} from "angular2-cookie/core";
 import {LayoutComponent} from "../layout.component";
 import {isNullOrUndefined} from "util";
+import {Page} from "../../core/page/page";
+import {SubmitService} from "../../core/forms/submit.service";
 const screenfull = require('screenfull');
 const browser = require('jquery.browser');
 declare var $: any;
@@ -18,6 +20,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit, OnChanges {
 
+  private platformInfoData:any;                           //平台消息的数据
   @Input() private curPath;
   ngOnChanges(changes: SimpleChanges): void {
     let me = this;
@@ -34,7 +37,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   @ViewChild('fsbutton') fsbutton;
 
   constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
-              private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent) {
+              private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent,private submitService:SubmitService) {
     // 只显示指定的
     if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
   }
@@ -53,8 +56,24 @@ export class HeaderComponent implements OnInit, OnChanges {
       let path = rulHref.substring(rulHref.indexOf('/main'),rulHref.length);
       me.getSubmenus(path);
     })
+
+    this.queryAdminNotify()
   }
 
+
+  /**
+   * 获取通知的消息列表，默认只展示第一页的内容
+   */
+  queryAdminNotify(){
+    let url='/notifyAdminTpl/pageQuery';
+    let data={
+      curPage:1,
+      pageSize:4,
+      sortColumns:''
+    };
+    this.platformInfoData=new Page(this.submitService.getData(url,data));
+    console.log("█ this.platformTplData ►►►",  this.platformInfoData);
+  }
 
   //显示、隐藏当前登录的用户信息
   toggleUserBlock(event) {

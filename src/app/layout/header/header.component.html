@@ -70,54 +70,27 @@
       <li class="dropdown dropdown-list" dropdown>
         <a dropdownToggle title="新消息">
           <i class="icon-bell"></i>
-          <div class="label label-danger">11</div>
+          <div class="label label-danger unselectable">{{platformInfoData.totalRow}}</div>
         </a>
         <ul *dropdownMenu class="dropdown-menu animated flipInX">
           <li>
             <div class="list-group">
-              <a class="list-group-item">
-                <div class="media-box">
+              <a class="list-group-item" *ngFor="let platformInfo of platformInfoData.voList;let i = index">
+                <div class="media-box _qpsStyle">
                   <div class="pull-left">
-                    <i class="fa fa-twitter fa-2x text-info"></i>
+                    <i class="{{platformInfo.icon}}"></i>
                   </div>
-                  <div class="media-box-body clearfix">
-                    <p class="m0">New followers</p>
+                  <div class="media-box-body clearfix ">
+                    <p class="m0">{{platformInfo.tplName}}</p>
                     <p class="m0 text-muted">
-                      <small>1 new follower</small>
+                      <small>{{platformInfo.tpl}}</small>
                     </p>
                   </div>
                 </div>
               </a>
-              <a class="list-group-item">
-                <div class="media-box">
-                  <div class="pull-left">
-                    <i class="fa fa-envelope fa-2x text-warning"></i>
-                  </div>
-                  <div class="media-box-body clearfix">
-                    <p class="m0">New e-mails</p>
-                    <p class="m0 text-muted">
-                      <small>You have 10 new emails</small>
-                    </p>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item">
-                <div class="media-box">
-                  <div class="pull-left">
-                    <i class="fa fa-tasks fa-2x text-success"></i>
-                  </div>
-                  <div class="media-box-body clearfix">
-                    <p class="m0">Pending Tasks</p>
-                    <p class="m0 text-muted">
-                      <small>11 pending task</small>
-                    </p>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item">
-                <small translate="topbar.notification.MORE">More notifications</small>
-                <span class="label label-danger pull-right">14</span>
-              </a>
+              <div class="text-center">
+                <a class="qpsMore thc font" routerLink="/main/operation/sys-message/message-list">查看更多</a>
+              </div>
             </div>
           </li>
         </ul>
