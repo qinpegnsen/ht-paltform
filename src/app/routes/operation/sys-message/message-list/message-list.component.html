@@ -4,42 +4,42 @@
   <li class="w20 pull-left text-center">发送时间</li>
   <li class="w10 pull-left text-center">操作</li>
 </ul>
-<table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="platformInfoData"
+<table class="table" #dataTable="rzhDataTable" [rzhData]="platformInfoData"
        (pageChange)="queryDatas($event)">
   <thead>
   <tr>
     <th class="w3 text-center">
       <div class="checkbox c-checkbox m0">
         <label class="unselectable">
-          <input type="checkbox" class="_all"/>
+          <input type="checkbox" class="_all" (change)="getAllId()"/>
           <span class="fa fa-check"></span>
         </label>
       </div>
     </th>
     <th class="w65">
       <button class="btn btn-xs btn-outline btn-warning fa fa-trash thc font qpsMl"
-              (click)="cancelOrder(goods.ordno)">
+              (click)="delMoreInfo()">
         删除
       </button>
       <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-flag-o thc font"
-              (click)="cancelOrder(goods.ordno)">
+              (click)="updateMoreIsRead()">
         标记已读
       </button>
     </th>
   </tr>
   </thead>
   <tbody>
-  <tr  *ngFor="let platformInfo of platformInfoData.voList;let i = index">
+  <tr  *ngFor="let platformInfo of platformInfoData.voList;let i = index" [class.trBg]="platformInfo.isRead=='N'" >
     <td class="text-center">
       <div class="checkbox c-checkbox m0">
         <label class="unselectable">
-          <input type="checkbox" class="_all"/>
+          <input type="checkbox" class="_every" value="{{platformInfo.id}}" #every (change)="getId(every)"/>
           <span class="fa fa-check"></span>
         </label>
       </div>
     </td>
     <td>
-      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id)"></a>
+      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id,$event.target)"></a>
       <a class="qpssMl">{{platformInfo.msg}}</a>
     </td>
     <td class="text-center">{{platformInfo.createTime}}</td>

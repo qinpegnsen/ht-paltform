@@ -256,6 +256,7 @@ export class RzhtoolsService {
     return JSON.parse(val);
   }
 
+
   /**
    * 通过行政区域代码 6位字符，获得市级代码
    * @param areaCode
@@ -485,10 +486,10 @@ export class RzhtoolsService {
    * @returns {string}
    */
   static getWeek = function (date: Date, lan?) {
-    console.log("█ date ►►►",  date);
+    console.log("█ date ►►►", date);
     let today = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     if (!isUndefined(lan) && lan == 'cn') today = new Array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
-      let week = today[date.getDay()];
+    let week = today[date.getDay()];
     // let weeks: Array<any> = this.getEnumDataList(SettingsService.enums.week), week: string, num: number = date.getDay() + 1;
     // for (let i = 0; i < weeks.length; i++) {
     // 	if (num.toString() == weeks[i]["val"]) week = weeks[i]["key"];
@@ -527,13 +528,13 @@ export class RzhtoolsService {
     console.log("█  year►►►", year);
     console.log("█ month ►►►", month);
     if (year && month) {
-    console.log("█ month ►►►", month);
+      console.log("█ month ►►►", month);
       _this.ajax.get({
         url: "/statistical/getWeekList",
-        data:{queryYear:year,queryMonth:month},
+        data: {queryYear: year, queryMonth: month},
         async: false,
         success: (response) => {
-          console.log("█ response ►►►",  response);
+          console.log("█ response ►►►", response);
           if (response.success) ret = response.data;
         }
       });
@@ -542,9 +543,6 @@ export class RzhtoolsService {
   }
 
 }
-
-
-
 
 
 @Injectable()
