@@ -36,7 +36,7 @@
           <th class="w15 text-center">
             <rzhDefaultSorter by="createtime">申请时间</rzhDefaultSorter>
           </th>
-          <th class="w10 text-center">
+          <th class="w10 text-center"  *ngIf="state=='AUDIT'">
             <rzhDefaultSorter by="examine">审核</rzhDefaultSorter>
           </th>
         </tr>
@@ -56,9 +56,9 @@
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </td>
           <td>{{count.createTime}}</td>
-          <td>
-          <button class="btn btn-danger" (click)="access(count.id)"><i class="fa fa-check"></i></button>
-          <button class="btn btn-green" (click)="cancel(count.id)"><i class="fa fa-close"></i></button>
+          <td *ngIf="state=='AUDIT'">
+          <button class="btn btn-danger" (click)="access(count.id)" ><i class="fa fa-check"></i></button>
+          <button class="btn btn-green" (click)="cancel(count.id)" ><i class="fa fa-close"></i></button>
           </td>
         </tr>
       </tbody>

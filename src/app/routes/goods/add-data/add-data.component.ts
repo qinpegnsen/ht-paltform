@@ -37,7 +37,7 @@ export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
   hideWindow(type?: string) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
-    console.log("█ $('.wrapper > section').css('z-index') ►►►",  $('.wrapper > section').css('z-index'));
+    // console.log("█ $('.wrapper > section').css('z-index') ►►►",  $('.wrapper > section').css('z-index'));
     this.showAddWindow = false;
     if (isUndefined(type)) type = 'cancel';
     this.addData.emit(type)
