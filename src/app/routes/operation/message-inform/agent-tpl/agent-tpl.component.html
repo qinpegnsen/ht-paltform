@@ -1,7 +1,6 @@
 <div class="content-heading mb-lg">
   代理商消息模板
-  <app-buttons class="pull-right" [config]="addbutton" routerLink="rightPage"
-               [queryParams]="{type:'add'}"></app-buttons>
+  <app-buttons class="pull-right" [config]="addbutton" (click)="addTpl()"></app-buttons>
 </div>
 <div class="panel mb panel-default">
   <div class="panel-body">
@@ -33,42 +32,39 @@
       <tbody>
       <tr *ngFor="let agentTpl of agentTplList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{agentTpl.expressName}}</td>
-        <td>{{agentTpl.expressCode}}</td>
-        <td>{{agentTpl.expressUrl}}</td>
+        <td>{{agentTpl.tplCode}}</td>
+        <td>{{agentTpl.tplName}}</td>
+        <td>{{agentTpl.icon}}</td>
+        <td>{{agentTpl.tpl}}</td>
+        <td>{{agentTpl.url}}</td>
+        <td>{{agentTpl.remark}}</td>
         <td>
-          <label class="switch">
-            <input type="checkbox" [checked]="agentTpl.isUse=='Y'" (change)="isUse(agentTpl)"/>
-            <span></span>
-          </label>
-        </td>
-        <td>
-          <app-buttons [config]="updatebutton" routerLink="rightPage"
-                       [queryParams]="{type:'edit',id:agentTpl.id}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="deleteSort(agentTpl.id)"></app-buttons>
-        </td>
+          <app-buttons [config]="deletebutton" (click)="deleteTpl(agentTpl.id)"></app-buttons>
+          <app-buttons [config]="updatebutton" (click)="updateTpl(agentTpl.tplCode)"></app-buttons>
       </tr>
       </tbody>
-      <!--<tfoot>-->
-      <!--<tr class="text-center">-->
-        <!--<td colspan="12">-->
-          <!--<div class="col-md-5">-->
-            <!--<div class="text-muted pull-left"><strong>第 {{expressListdata.genStartRow()}} 至-->
-              <!--{{expressListdata.genEndRow()}} 条，共 {{expressListdata.totalRow}}-->
-              <!--条</strong></div>-->
-          <!--</div>-->
-          <!--<div class="col-md-7">-->
-            <!--<div class="pull-right">-->
-              <!--<rzhBootstrapPaginator></rzhBootstrapPaginator>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</td>-->
-      <!--</tr>-->
-      <!--</tfoot>-->
+      <tfoot>
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{agentTplData.genStartRow()}} 至
+              {{agentTplData.genEndRow()}} 条，共 {{agentTplData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-md-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
     </table>
   </div>
 </div>
+
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->
-
+<app-edit-tpl  [type]="curType" [tplCode]="curTplCode"  [page]="agentTplData.curPage"
+               (emitTplData)="getTplData($event)"></app-edit-tpl>

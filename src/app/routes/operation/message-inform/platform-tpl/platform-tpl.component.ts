@@ -16,7 +16,7 @@ export class PlatformTplComponent implements OnInit {
   private updatebutton:Object;                           //修改按钮
   private deletebutton:Object;                           //删除按钮
   private curType:any;                                   //弹框的类型
-  private curTplCode:number;                             //当前的模板变慢
+  private curTplCode:number;                             //当前的模板编码
   constructor(public operationService:OperationService) { }
 
   /**
@@ -102,7 +102,7 @@ export class PlatformTplComponent implements OnInit {
   }
 
   /**
-   * 发货回调函数
+   * 弹窗提交
    * @param data
    */
   getTplData(data) {
