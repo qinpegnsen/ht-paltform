@@ -51,6 +51,10 @@ const operation = {
         {
           text: '文章分类',
           link: '/main/operation/article/sort'
+        },
+        {
+          text: '文章审核',
+          link: '/main/operation/article/audit'
         }
       ]
     },
