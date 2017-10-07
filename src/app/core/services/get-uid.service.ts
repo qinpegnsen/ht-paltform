@@ -29,7 +29,7 @@ export class GetUidService {
         }
       },
       error: () => {
-        swal('连接数据库失败','','error')
+        swal('获取暗码连接数据库失败','','error')
       }
     });
     return result;

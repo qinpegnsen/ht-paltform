@@ -1,3 +1,58 @@
 <div class="content-heading mb-lg">
-  文章管理
+  文章审核
+</div>
+<div class="col-md-12 panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
+           (pageChange)="queryArticManleList($event)">
+      <thead>
+      <tr>
+        <th class="w5">
+          序号
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
+        </th>
+        <th class="w20">
+          <rzhDefaultSorter>封面</rzhDefaultSorter>
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
+        </th>
+        <th class="w15">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let article of articleList.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{article.articleTitle}}</td>
+        <td>{{article.articleClass.acName}}</td>
+        <td><img src="{{article.articleCover.url }}" class="qpsImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
+        <td *ngIf="article.articleGoods.length==0">否</td>
+        <td *ngIf="article.articleGoods.length>0">是</td>
+        <td>
+          <app-buttons [config]="auditbutton" routerLink="addArticle" [queryParams]="{linkType:'auditArticle',id:article.id}" ></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="12">
+          <div class="col-sm-5">
+            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至 {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>

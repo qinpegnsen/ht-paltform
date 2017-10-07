@@ -10,10 +10,10 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
-import {MaskService} from "../../../../../core/services/mask.service";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
+
 @Component({
   selector: 'app-add-article',
   templateUrl: './add-article.component.html',
@@ -160,7 +160,15 @@ export class AddArticleComponent implements OnInit {
 
 
   /**
-   * 选择分类
+   * 获取到子组件发射过来的分类编码
+   * @param menuCode
+   */
+  getData(menuCode){
+    this.articleClasssId=menuCode;
+  }
+
+  /**
+   * 文章关联商品选择分类
    * @param data  选择分类组件输出数据
    */
   getKind(data) {
@@ -170,7 +178,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
-   * 选择品牌名
+   * 文章关联商品选择品牌名
    * @param data  选择分类组件输出数据
    */
   getBrandList(kindId?) {
@@ -189,7 +197,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
-   * 品牌名搜索
+   * 文章关联商品品牌名搜索
    */
   refreshValue(value: any): void {
     this.brandName = value.text;
@@ -197,14 +205,14 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
-   * 商品名称搜索
+   * 文章关联商品商品名称搜索
    */
   search() {
     this.getLinkGoods();
   }
 
   /**
-   * 获取关联的商品的数据
+   * 文章关联商品获取关联的商品的数据
    */
   getLinkGoods() {
     let url = "/goodsQuery/queryForArticle";
@@ -240,7 +248,6 @@ export class AddArticleComponent implements OnInit {
     this.uuid = this.GetUidService.getUid();
   }
 
-
   /**
    * 编辑器上传图片并显示
    * @param file
@@ -251,7 +258,6 @@ export class AddArticleComponent implements OnInit {
       $("#summernote").summernote('insertImage', img, '');
     }
   }
-
 
   /**
    *为文章关联商品
@@ -264,14 +270,14 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
-   * 取消
+   * 新增文章取消
    */
   cancel() {
     this.router.navigate(['/main/operation/article/manage']);
   }
 
   /**
-   * 取消弹框
+   * 取消弹框(关联商品)
    */
   closeAlert() {
     this.goodShow = !this.goodShow;
@@ -280,7 +286,7 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
-   * 获取弹框选择的商品的信息
+   * 获取弹框选择的商品的信息（关联商品提交时）
    */
   alertResult() {
     let  me = this;
@@ -314,18 +320,8 @@ export class AddArticleComponent implements OnInit {
     }
   }
 
-
   /**
-   * 获取到子组件发射过来的分类编码
-   * @param menuCode
-   */
-  getData(menuCode){
-    this.articleClasssId=menuCode;
-  }
-
-
-  /**
-   * 提交
+   * 提交（文章新增修改的提交）
    * @param obj
    * @param state
    */
@@ -374,7 +370,6 @@ export class AddArticleComponent implements OnInit {
       me.uploader.onErrorItem = function (item, response, status, headers) {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       };
-
     } else if (this.linkType == 'updataArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let url = '/article/updateArticle';

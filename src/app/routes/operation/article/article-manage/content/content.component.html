@@ -45,9 +45,9 @@
             <span></span>
           </label>
         </td>
-        <td><img src="{{article.articleCover.url }}" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
-        <td *ngIf="!article.articleGoods">否</td>
-        <td *ngIf="article.articleGoods">是</td>
+        <td><img src="{{article.articleCover.url }}" class="qpsImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
+        <td *ngIf="article.articleGoods.length==0">否</td>
+        <td *ngIf="article.articleGoods.length>0">是</td>
         <td [hidden]="articleState=='DEL'">
           <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
           <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'" (click)="delArticle(article.id)"></app-buttons>
