@@ -37,8 +37,8 @@ export class OperationService {
           AppComponent.rzhAlt("error", data.info);
         }
       },
-      error: () => {
-        AppComponent.rzhAlt("error", '网络错误');
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
   }
@@ -88,8 +88,8 @@ export class OperationService {
           result = res.info;
         }
       },
-      error: () => {
-        AppComponent.rzhAlt("error", '网络错误');
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -117,8 +117,8 @@ export class OperationService {
           result = res.info;
         }
       },
-      error: () => {
-        AppComponent.rzhAlt("error", '网络错误');
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -173,8 +173,8 @@ export class OperationService {
           AppComponent.rzhAlt("error", res.info);
         }
       },
-      error: () => {
-        AppComponent.rzhAlt("error", '关联商品连接服务错误');
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -208,7 +208,7 @@ export class OperationService {
         }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", '网络错误');
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -237,7 +237,7 @@ export class OperationService {
         }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", '网络错误');
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
