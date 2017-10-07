@@ -7,25 +7,25 @@
         <th class="w5">
           序号
         </th>
-        <th class="w15">
+        <th class="w20">
           <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
         </th>
         <th class="w10">
           <rzhDefaultSorter by="email">分类</rzhDefaultSorter>
         </th>
-        <th class="w10" *ngIf="articleState=='NORMAL'">
+        <th class="w12" *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否置顶</rzhDefaultSorter>
         </th>
-        <th class="w10" *ngIf="articleState=='NORMAL'">
+        <th class="w13" *ngIf="articleState=='NORMAL'">
           <rzhDefaultSorter>是否推荐</rzhDefaultSorter>
         </th>
-        <th class="w20">
+        <th class="w15">
           <rzhDefaultSorter>封面</rzhDefaultSorter>
         </th>
-        <th class="w15">
+        <th class="w10">
           <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
         </th>
-        <th class="w15" [hidden]="articleState=='DEL'">操作</th>
+        <th class="w15" [hidden]="articleState=='DEL'||articleState=='AUDIT'">操作</th>
       </tr>
       </thead>
       <tbody>
@@ -48,7 +48,7 @@
         <td><img src="{{article.articleCover.url }}" class="qpsImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
-        <td [hidden]="articleState=='DEL'">
+        <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
           <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
           <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'" (click)="delArticle(article.id)"></app-buttons>
           <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>

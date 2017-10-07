@@ -224,9 +224,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * @param data
    */
   isTop(article){
-    console.log(this.articleState)
     let that=this;
-    console.log(article)
     if(article.isTop=="Y"){
       article.isTop="N"
     }else if(article.isTop=="N"){

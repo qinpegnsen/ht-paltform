@@ -25,6 +25,8 @@ export class ArticleAuditComponent implements OnInit {
       title:"审核",
       type: "agree"
     };
+
+
   }
 
   /**

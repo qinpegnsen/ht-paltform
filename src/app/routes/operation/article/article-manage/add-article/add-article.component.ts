@@ -128,8 +128,7 @@ export class AddArticleComponent implements OnInit {
     if (this.linkType == 'updataArticle' || this.linkType == 'auditArticle') {
       let url = '/article/queryArticle';
       let data = {
-        articleId: this.articleId,
-        queryState: 'BLACK'
+        articleId: this.articleId
       }
       this.queryArticleData = this.service.getData(url, data);
       console.log(this.queryArticleData)
@@ -300,7 +299,7 @@ export class AddArticleComponent implements OnInit {
       $("._myAppend").css("height", '300px')
     }
 
-    let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" ></i></label></div>`
+    let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`
 
     $("._myAppend").find($('li')).children('div').append(str);//在给每个里追加一个删除按钮
     $('._myAppend').on('click','._del',function(){

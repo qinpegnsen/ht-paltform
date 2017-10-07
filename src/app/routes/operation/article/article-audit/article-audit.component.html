@@ -34,7 +34,7 @@
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
         <td>
-          <app-buttons [config]="auditbutton" routerLink="addArticle" [queryParams]="{linkType:'auditArticle',id:article.id}" ></app-buttons>
+          <app-buttons [config]="auditbutton" routerLink="/main/operation/article/auditPage" [queryParams]="{id:article.id}" ></app-buttons>
         </td>
       </tr>
       </tbody>
@@ -56,3 +56,4 @@
     </table>
   </div>
 </div>
+<router-outlet></router-outlet>

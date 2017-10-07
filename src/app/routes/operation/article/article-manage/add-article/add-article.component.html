@@ -596,17 +596,17 @@
                 <li *ngFor="let item of linkGoodsList; let i = index" class="list-group-item" dnd-sortable
                     [sortableIndex]="i">
                   <div class="clearfix">
-                    <div class="p0 _span col-lg-1">
+                    <div class="p0 _span col-lg-1 p0">
                       <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 p0">
                       <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-2">
-                      <span class="extra p10 ml _desc"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    <div class="col-lg-3 p0">
+                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
                     </div>
                   </div>
                 </li>
@@ -631,13 +631,13 @@
                       <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
-                    <div class="col-lg-6 _copy">
+                    <div class="col-lg-6 _copy p0">
                       <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-2">
-                      <span class="extra p10 ml _desc"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    <div class="col-lg-3 p0">
+                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
                     </div>
                   </div>
                 </li>
