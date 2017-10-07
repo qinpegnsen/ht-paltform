@@ -30,7 +30,6 @@ export class ContentService {
       error: (data) => {
         let info=data.info;
         swal(info,'','success')
-        console.log(1)
       }
     });
     return flag;
@@ -62,7 +61,8 @@ export class ContentService {
           console.log('是否置顶 返回的数据为空');
         }
       },
-      error: () => {
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
         console.log('是否置顶 连接数据库失败');
       }
     });
@@ -94,7 +94,8 @@ export class ContentService {
           console.log('是否推荐 返回的数据为空');
         }
       },
-      error: () => {
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
         console.log('是否推荐 连接数据库失败');
       }
     });
@@ -126,7 +127,8 @@ export class ContentService {
           console.log('是否置顶 返回的数据为空');
         }
       },
-      error: () => {
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
         console.log('是否置顶 连接数据库失败');
       }
     });
@@ -155,8 +157,9 @@ export class ContentService {
           console.log('是否置顶 返回的success为假');
         }
       },
-      error: () => {
+      error: (res) => {
         console.log('是否置顶 连接数据库失败');
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;
