@@ -43,9 +43,9 @@ export class ListDetailComponent implements OnInit {
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/cust/queryAllCust";
     let data={
-      createTimeBegin:me.nowtime,
-      createTimeEnd:me.prevtime,
-     authState:me.authState
+      createTimeBegin:me.prevtime,
+      createTimeEnd:me.nowtime,
+     // authState:me.authState
     }
     let result = this.submit.getData(url,data);
     me.memberListdata = new Page(result);

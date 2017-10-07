@@ -74,13 +74,15 @@ export class LoginComponent implements OnInit {
         'pwd': me.password
       },
       success: (result) => {
+        console.log("█ result ►►►",  result);
         MaskService.hideMask();
         end = new Date().getTime();
         if (result.success) {
           let user =  result.data;
-          localStorage.setItem('loginInfo', JSON.stringify(user)); //用户信息存入localStorage
+          console.log("█ user ►►►",  user);
+          sessionStorage.setItem('loginInfo', JSON.stringify(user)); //用户信息存入localStorage
           me.myMenu.addMenu(result.data.menuVOList);// 生成菜单
-          me.setting.user.name = user.staffName,me.setting.user.job = user.mgrName; //修改user变量
+          me.setting.user.name = user.staffName,me.setting.user.job = user.storeName; //修改user变量
           me.router.navigate(['/main/home'], {replaceUrl: true}); //路由跳转
         }
         else {

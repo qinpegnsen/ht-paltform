@@ -89,7 +89,6 @@ info: any = new Date();
   }
 
 
-
   /**
    * 获取年份和月份信息
    */
@@ -110,8 +109,6 @@ info: any = new Date();
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
   }
-
-
 
   /**
    * 查询

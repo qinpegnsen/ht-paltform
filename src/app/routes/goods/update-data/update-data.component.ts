@@ -45,6 +45,6 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
       enumTypeId: obj.enumTypeId
     }
     let result=this.submit.putRequest(url, data);
-    this.basicPropertiesComponent.queryDatas();
+    this.basicPropertiesComponent.queryBaseEnumList();
   }
 }

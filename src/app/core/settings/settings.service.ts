@@ -29,7 +29,7 @@ export class SettingsService {
      * 获取用户cookie信息并展示
      */
     let loginInfo: any = this._cookieService.getObject('loginInfo'), name = '游客', job = '无';
-    if (!isNullOrUndefined(loginInfo)) name = loginInfo.staffName, job = loginInfo.department;
+    if (!isNullOrUndefined(loginInfo)) name = loginInfo.staffName, job = loginInfo.storeName;
     this.user = {
       name: name,
       job: job,

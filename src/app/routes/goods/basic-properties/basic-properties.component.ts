@@ -39,7 +39,7 @@ export class BasicPropertiesComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    this.queryDatas();
+    this.queryBaseEnumList();
   }
   /**
    * 选择分类
@@ -47,7 +47,7 @@ export class BasicPropertiesComponent implements OnInit {
    */
   getKind(data) {
     this.kindId = data.kindId;
-    this.queryDatas();
+    this.queryBaseEnumList();
   }
 
   /**
@@ -55,7 +55,7 @@ export class BasicPropertiesComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryDatas(event?: PageEvent) {
+  queryBaseEnumList() {
     let _this = this;
     let requestUrl = '/goodsEnum/queryBaseEnumList';
     let requestData = {
@@ -84,7 +84,7 @@ export class BasicPropertiesComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.delRequest(url, data); //删除数据
-        me.queryDatas(); //更新
+        me.queryBaseEnumList(); //更新
       }
     );
   }
@@ -100,11 +100,11 @@ export class BasicPropertiesComponent implements OnInit {
    */
   getAddDataResult(data) {
     this.showAddWindow = false;
-    if(data == 'success') this.queryDatas()
+    if(data == 'success') this.queryBaseEnumList()
   }
   getUpdateResult(data) {
     this.showUpdateWindow = false;
-    if(data == 'success') this.queryDatas()
+    if(data == 'success') this.queryBaseEnumList()
   }
 
 

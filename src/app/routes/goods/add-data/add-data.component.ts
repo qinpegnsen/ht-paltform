@@ -8,23 +8,25 @@ declare var $: any;
   templateUrl: './add-data.component.html',
   styleUrls: ['./add-data.component.scss']
 })
-export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
+export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('showAddWindow') showAddWindow: boolean;
   @Output() addData = new EventEmitter();
   @Output() upDate = new EventEmitter();
-  private kindId:string;
+  private kindId: any;
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
-      console.log("█ this.showAddWindow ►►►",  this.showAddWindow);
-      if(this.showAddWindow) $('.wrapper > section').css('z-index', 200);
+      console.log("█ this.showAddWindow ►►►", this.showAddWindow);
+      if (this.showAddWindow) $('.wrapper > section').css('z-index', 200);
       else $('.wrapper > section').css('z-index', 114);
     }
   }
+
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private submit:SubmitService,private basicPropertiesComponent:BasicPropertiesComponent) {
+  constructor(private submit: SubmitService, private basicPropertiesComponent: BasicPropertiesComponent) {
   }
 
   ngOnInit() {
@@ -45,19 +47,22 @@ export class AddDataComponent implements OnInit,OnChanges,OnDestroy{
     this.addData.emit(type)
   }
 
-  delivery(obj){
+  /*
+   * 确认提交
+   * */
+  delivery(obj) {
     let url = '/goodsEnum/addGoodsBaseEnum';
     let data = {
-      kindId:this.kindId,
+      kindId: this.kindId,
       name: obj.name,
       vals: obj.vals
     }
-    let result=this.submit.postRequest(url, data,true);
-    console.log("█ result.info ►►►",  result);
-    if(result=="分类id不能为空"){
+    let result = this.submit.postRequest(url, data, true);
+    if (result == "分类id不能为空") {
       return;
-    }else{
+    } else {
       this.hideWindow("success");
+      this.basicPropertiesComponent.queryBaseEnumList();
     }
   }
 
