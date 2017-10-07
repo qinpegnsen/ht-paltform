@@ -10,14 +10,17 @@ declare var $: any;
   providers: [GoodsService]
 })
 export class GetKindComponent implements OnInit {
-  private myKindName:string = '';
+  private myKindName: string = '';
   private kindId: string;
   private kindList: any;
   private show: boolean;
+  private isLastLevel: boolean = false;
 
   @Output() myData = new EventEmitter();
 
-  constructor(private goods: GoodsService) {  };
+
+  constructor(private goods: GoodsService) {
+  };
 
   ngOnInit() {
     /**
@@ -29,7 +32,7 @@ export class GetKindComponent implements OnInit {
     $('body').click(function (e) {
       let event = e.target.attributes['class'];
       if (isNullOrUndefined(event) || isNullOrUndefined(event.nodeValue) || event.nodeValue.indexOf("rzh-sel-kind") <= 0) {
-        if(_this.show) {      //当窗口处于显示状态，则关闭选框并输出数据
+        if (_this.show) {      //当窗口处于显示状态，则关闭选框并输出数据
           _this.myConfirm();
         }
       }
@@ -38,18 +41,17 @@ export class GetKindComponent implements OnInit {
 
   /**
    * 获取分类
-   * @param myKindId
-   * @param myKindName
+   * @param kind
    */
-  getKindList(myKindId, myKindName, level) {
-    let me = this;
+  getKindList(kind: any) {
+    let me = this, level = kind.level, myKindName = kind.kindName, myKindId = kind.id, haveChildren = kind.haveChildren;
     if (level == 1) me.myKindName = '';
-    if(me.myKindName == '') me.myKindName = myKindName;
-    else me.myKindName += '>' + myKindName;
+    if (me.myKindName == '') me.myKindName = myKindName; else me.myKindName += '>' + myKindName;
     me.kindId = myKindId;
-    if(level == 3){
-      me.myConfirm(); // 如果是第三级，关闭窗口
-    }else{  //不是第三级则获取下一级
+    if (!haveChildren) {
+      me.isLastLevel = true; //最后一级
+      me.myConfirm(); // 如果是最后一级，关闭窗口
+    } else {  //不是最后一级，获取下一级
       me.kindList = me.goods.getKindList(myKindId);
     }
 
@@ -62,11 +64,11 @@ export class GetKindComponent implements OnInit {
     let me = this;
     if (me.show) {
       me.show = false;
-    }else {
+    } else {
       me.show = true;
       me.myKindName == '';
     }
-    if(me.show) me.kindList = me.goods.getKindList()
+    if (me.show) me.kindList = me.goods.getKindList()
   }
 
   /**
@@ -78,7 +80,8 @@ export class GetKindComponent implements OnInit {
     this.kindList = this.goods.getKindList();
     this.myData.emit({
       kindId: this.kindId,
-      myKindName: this.myKindName
+      myKindName: this.myKindName,
+      isLastLevel:this.isLastLevel
     });
   }
 
@@ -93,7 +96,8 @@ export class GetKindComponent implements OnInit {
     }
     this.myData.emit({
       kindId: this.kindId,
-      myKindName: this.myKindName
+      myKindName: this.myKindName,
+      isLastLevel:this.isLastLevel
     });
   }
 

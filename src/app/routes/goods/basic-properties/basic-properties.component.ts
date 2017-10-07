@@ -55,14 +55,14 @@ export class BasicPropertiesComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryBaseEnumList() {
+  queryBaseEnumList(kindId?) {
+    console.log("█ 11111 ►►►",  11111);
     let _this = this;
     let requestUrl = '/goodsEnum/queryBaseEnumList';
     let requestData = {
-      kindId:_this.kindId,
+      kindId:kindId?kindId:_this.kindId,
     };
     let result=_this.submit.getData(requestUrl, requestData);
-    console.log("█ result ►►►",  result);
     _this.data = result;
   }
 

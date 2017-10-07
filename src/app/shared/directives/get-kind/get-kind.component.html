@@ -5,7 +5,7 @@
   <div class="selectBox rzh-sel-kind" *ngIf="show">
     <div class="_list rzh-sel-kind">
       <button type="button" *ngFor="let kind of kindList"
-              (click)="getKindList(kind.id,kind.kindName,kind.level)" class="_item btn btn-default rzh-sel-kind"><em
+              (click)="getKindList(kind)" class="_item btn btn-default rzh-sel-kind"><em
         class="elderCity-class-for-sel mr icon-arrow-right rzh-sel-kind"></em>{{kind.kindName}}</button>
     </div>
     <div class="_footer rzh-sel-kind">
