@@ -21,7 +21,7 @@ export class AppIndexTplService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          result= data;
+          result= data.data;
         }
       },
       error: (data) => {

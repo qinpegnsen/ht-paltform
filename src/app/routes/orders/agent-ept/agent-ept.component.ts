@@ -14,7 +14,7 @@ export class AgentEptComponent implements OnInit {
   public curCancelOrderId:string;
 
 
-  constructor(private submit: SubmitService,) { }
+  constructor(private submit: SubmitService) { }
 
   ngOnInit() {
   }
@@ -35,7 +35,6 @@ export class AgentEptComponent implements OnInit {
       ordno:this.orderNumber
     };
     _this.goodsList = _this.submit.getData(requestUrl, requestData);
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**

@@ -22,7 +22,7 @@ export class AppIndexOptService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
-          result= data;
+          result= data.data;
         }
       },
       error: (data) => {

@@ -76,17 +76,12 @@
             <span class="font-gray" *ngIf="goodsList.payWay=='REMIT'">银行汇款</span>
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goodsList.agentOrdItemList.length">
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='CR'">待支付</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='PAID'">待配货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='PREPARE'">待发货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='DELIVERY'">已发货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='SUCCESS'">已完成</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goodsList.state=='CLOSE'">已取消</p>
+            <p class="font-gray mb-sm cursor-p">{{goodsList.state | rzhState :'1019'}}</p>
             <p class="cursor-p mb-sm">查看详情</p>
             <p class="cursor-p mb-sm">查看物流</p>
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goodsList.agentOrdItemList.length">
-            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.ordno)"> 关闭申请</button><br>
+            <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.ordno)" [hidden]="goodsList.state =='CR'||goodsList.state == 'CLOSE'"> 关闭申请</button><br>
           </td>
         </tr>
       </table>

@@ -9,7 +9,6 @@ import {FileUploader} from "ng2-file-upload";
 import {isNullOrUndefined} from 'util';
 import {AppComponent} from '../../../app.component';
 import {GetUidService} from '../../../core/services/get-uid.service';
-import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 const swal = require('sweetalert');
 
 @Component({

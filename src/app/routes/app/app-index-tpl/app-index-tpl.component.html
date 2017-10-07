@@ -43,11 +43,8 @@
         <td>{{file.tplAuthor}}</td>
         <td>{{file.tplType | rzhState:'1501'}}</td>
         <td>
-          <!--修改代理商信息按钮-->
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{number:4}"></app-buttons>
-          <!--删除代理商信息按钮-->
           <app-buttons [config]="deletebutton"></app-buttons>
-          <!--查看代理商详情按钮-->
         </td>
       </tr>
       </tbody>
