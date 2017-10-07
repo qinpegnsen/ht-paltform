@@ -125,7 +125,7 @@ export class AddArticleComponent implements OnInit {
      * 根据id查询文章的数据
      * @type {string}
      */
-    if (this.linkType == 'updataArticle' || this.linkType == 'auditArticle') {
+    if (this.linkType == 'updateArticle' || this.linkType == 'auditArticle') {
       let url = '/article/queryArticle';
       let data = {
         articleId: this.articleId
@@ -369,11 +369,20 @@ export class AddArticleComponent implements OnInit {
       me.uploader.onErrorItem = function (item, response, status, headers) {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       };
-    } else if (this.linkType == 'updataArticle') {
+    } else if (this.linkType == 'updateArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+      let idStr = ''; //获取关联的商品
+      let goodObj = $("._myAppend").find('._copy').find('input');
+      for (let i = 0; i < goodObj.length; i++) {
+        idStr += `${$(goodObj[i]).val()},`
+      }
+      this.linkGoodStr = idStr.slice(0, idStr.length - 1);
+      console.log("█ obj ►►►",  obj);
+      console.log("█ this.linkGoodStr ►►►",  this.linkGoodStr);
       let url = '/article/updateArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
       obj.addArticleEnum = state //默认文章的类型是草稿
+      obj.goodIds = this.linkGoodStr;
       obj.articleId = this.articleId
       let data = obj;
       this.service.postRequest(url, data);

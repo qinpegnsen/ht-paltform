@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../../../core/forms/submit.service";
+import {ContentService} from "../../article-manage/content/content.service";
 
 @Component({
   selector: 'app-audit-page',
@@ -16,6 +17,8 @@ export class AuditPageComponent implements OnInit {
   public autionOptions;                             //审核状态的列表
   constructor(
     private routeInfo: ActivatedRoute,
+    public ContentService: ContentService,
+    public router: Router,
     public service: SubmitService) { }
 
   /**
@@ -41,5 +44,28 @@ export class AuditPageComponent implements OnInit {
       {id: 'SUCCESS', name: '成功'},
       {id: 'FAILURE', name: '失败'}
     ]
+  }
+
+  /**
+   * 提交审核
+   */
+  submit(obj){
+    let data = {
+      articleId: this.articleId,
+      auditState: obj.auditState,
+      reason: obj.reason
+    }
+    let url = "/article/AuditArticle";
+    let result = this.ContentService.auditArticle(url, data)
+    if (result) {
+      this.router.navigate(['/main/operation/article/audit']);
+    }
+  }
+
+  /**
+   * 取消审核
+   */
+  cancel() {
+    this.router.navigate(['/main/operation/article/audit']);
   }
 }

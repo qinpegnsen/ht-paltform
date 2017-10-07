@@ -152,7 +152,7 @@
   </form>
 </div>
 <!--修改文章-->
-<div class="col-lg-10" *ngIf="linkType=='updataArticle'">
+<div class="col-lg-10" *ngIf="linkType=='updateArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addArticle="ngForm">
     <!-- START panel-->
     <div class="panel-default">
@@ -273,6 +273,27 @@
         </fieldset>
         <fieldset *ngIf="flag">
           <div class="form-group">
+            <label class="col-sm-2 control-label">封面图片</label>
+            <div class="col-sm-10">
+              <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
+                <span class="close" (click)="item.remove()">×</span>
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                </span>
+              </span>
+              <div class="">
+                <label for="image-input" class="btn btn-default file-upload col-sm-3">
+                  <i class="icon-cloud-upload mr"></i>{{fileName}}
+                  <input type="file" name="coverImg" ngModel ng2FileSelect [uploader]="uploader"
+                         multiple maxlength="3"/>
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="flag">
+          <div class="form-group">
             <label class="col-sm-2 control-label">封面路径
             </label>
             <div class="col-sm-10">
@@ -316,7 +337,11 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">关联商品</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="goodIds" #goodIdsTem="ngModel" ngModel/>
+              <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
+              <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
+            </div>
+            <div class="_myAppend col-sm-12">
+
             </div>
           </div>
         </fieldset>

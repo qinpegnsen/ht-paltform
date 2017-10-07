@@ -49,7 +49,7 @@
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
         <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
-          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updataArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
+          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updateArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
           <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'" (click)="delArticle(article.id)"></app-buttons>
           <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>
           <app-buttons [config]="auditbutton" routerLink="addArticle" [queryParams]="{linkType:'auditArticle',id:article.id}" *ngIf="articleState=='AUDIT'" ></app-buttons>
