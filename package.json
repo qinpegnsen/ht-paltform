@@ -5,12 +5,11 @@
   "scripts": {
     "ng": "ng",
     "install": "napa",
-    "start": "ng serve --host 192.168.10.172 --port 4000 --proxy-config proxy.conf.js",
+    "start": "ng serve --host 192.168.10.112 --port 4100 --proxy-config proxy.conf.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "moderningzr": "modernizr -c modernizr-config.json -d src/modernizr.js",
-    "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update",
     "e2e": "ng e2e"
   },
   "private": true,
