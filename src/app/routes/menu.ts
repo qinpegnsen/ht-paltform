@@ -326,11 +326,11 @@ const statistics = {
       submenu: [
         {
           text: '订单金额区间',
-          link: '/main/stat/xtsz/order-amount'
+          link: '/main/stat/order-amount'
         },
         {
           text: '商品价格区间',
-          link: '/main/stat/xtsz/commodity-price'
+          link: '/main/stat/commodity-price'
         }
        /* {
          text: '统计缓存重置',
@@ -346,19 +346,19 @@ const statistics = {
       submenu: [
         {
           text: '新增会员',
-          link: '/main/stat/users/users-new'
+          link: '/main/stat/users-new'
         },
         {
           text: '会员分析',
-          link: '/main/stat/users/analyze-users'
+          link: '/main/stat/analyze-users'
         },
         {
           text: '区域分析',
-          link: '/main/stat/users/analyze-area'
+          link: '/main/stat/analyze-area'
         },
         {
           text: '购买分析',
-          link: '/main/stat/users/analyze-buy'
+          link: '/main/stat/analyze-buy'
         }
       ]
     },
@@ -370,11 +370,11 @@ const statistics = {
       submenu: [
         {
           text: '结算统计',
-          link: '/main/stat/sales/settle'
+          link: '/main/stat/settle'
         },
         {
           text: '订单统计',
-          link: '/main/stat/sales/orders'
+          link: '/main/stat/orders'
         }
       ]
     },
@@ -386,11 +386,11 @@ const statistics = {
       submenu: [
         {
           text: '热卖商品',
-          link: '/main/stat/goods/hot-sale'
+          link: '/main/stat/hot-sale'
         },
         {
           text: '商品销售明细',
-          link: '/main/stat/goods/sale-detail'
+          link: '/main/stat/sale-detail'
         }
       ]
     },
@@ -402,7 +402,7 @@ const statistics = {
       submenu: [
         {
           text: '退款统计',
-          link: '/main/stat/after/refund'
+          link: '/main/stat/refund'
         },
       ]
     } ,

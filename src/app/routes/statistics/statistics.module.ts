@@ -23,37 +23,21 @@ import { ListDetailComponent } from './users/list-detail/list-detail.component';
 import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component';
 import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.component';
 
-const xtszChildRoutes:Routes = [
-  // {path: 'cache-reset', component:CacheResetComponent},
+
+const routes: Routes = [
+  {path: '',redirectTo:'order-amount'},
   {path: 'order-amount', component:OrderAmountComponent},
   {path: 'commodity-price', component:CommodityPriceComponent},
-]
-const usersChildRoutes:Routes = [
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},
   {path: 'users-new', component:UsersNewComponent},
   {path: 'list-detail', component:ListDetailComponent},
-]
-
-const salesChildRoutes:Routes = [
   {path: 'settle', component:SettleComponent},
   {path: 'orders', component:OrdersComponent},
-]
-const goodsChildRoutes:Routes = [
   {path: 'hot-sale', component:HotSaleComponent},
   {path: 'sale-detail', component:SaleDetailComponent},
-]
-const afterChildRoutes:Routes = [
   {path: 'refund', component:RefundComponent},
-]
-const routes: Routes = [
-  {path: '',redirectTo:'users'},
-  {path: 'xtsz', component:XtszComponent,children:xtszChildRoutes},
-  {path: 'users', component: UsersComponent,children:usersChildRoutes},
-  {path: 'sales', component:SalesComponent,children:salesChildRoutes},
-  {path: 'goods', component: GoodsComponent,children:goodsChildRoutes},
-  {path: 'after', component: AfterComponent,children:afterChildRoutes},
 ];
 
 @NgModule({
