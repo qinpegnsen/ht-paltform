@@ -63,6 +63,8 @@ export class BasicPropertiesComponent implements OnInit {
     };
     let result=_this.submit.getData(requestUrl, requestData);
     _this.data = result;
+    console.log("█  ►►►",_this.data);
+    // console.log("█  result.baseTypeList.kindId ►►►",   result.baseTypeList.kindId);
   }
 
   //删除

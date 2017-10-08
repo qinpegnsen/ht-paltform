@@ -183,8 +183,7 @@ export class SubmitService {
       async: false,
       success: (res) => {
         if (res.success) {
-          console.log("█ res ►►►",  res);
-
+          // console.log("█ res ►►►",  res);
           result = res.data;
         } else {
           AppComponent.rzhAlt("error", '获取数据时' + res.info);

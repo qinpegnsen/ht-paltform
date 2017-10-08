@@ -113,7 +113,8 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     StarsPipe,
     HoverShowLgPicDirective,
     StrJsonPipe,
-    GetWeekPipe
+    GetWeekPipe,
+
   ],
   exports: [
     CommonModule,
@@ -165,7 +166,8 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     HoverShowLgPicDirective,
     PopoverModule,
     StrJsonPipe,
-    GetWeekPipe
+    GetWeekPipe,
+
   ]
 })
 

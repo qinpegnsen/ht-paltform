@@ -4,6 +4,7 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {AppComponent} from "../../../../app.component";
 import {MaskService} from "../../../../core/services/mask.service";
 import {isNullOrUndefined} from "util";
+declare var $: any;
 const swal = require('sweetalert');
 @Component({
   selector: 'app-integration-import',
@@ -34,6 +35,7 @@ export class IntegrationImportComponent implements OnInit {
     let me = this;
   if(this.onOff){
     this.onOff = false;
+    // $( "button" ).css({"background":"red"});
     MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();

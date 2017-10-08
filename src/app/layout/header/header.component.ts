@@ -72,7 +72,6 @@ export class HeaderComponent implements OnInit, OnChanges {
       sortColumns:''
     };
     this.platformInfoData=new Page(this.submitService.getData(url,data));
-    console.log("█ this.platformTplData ►►►",  this.platformInfoData);
   }
 
   //显示、隐藏当前登录的用户信息

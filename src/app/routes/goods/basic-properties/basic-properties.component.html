@@ -37,8 +37,8 @@
         </th>
       </tr>
       </thead>
-      <tbody>
-      <tr *ngFor="let count of data.baseTypeList" class="text-center">
+      <tbody dnd-sortable-container [sortableData]="data.baseTypeList">
+      <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i">
       <td >{{count.name}}</td>
       <td >
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>
