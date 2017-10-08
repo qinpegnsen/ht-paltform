@@ -266,7 +266,6 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 .h67{height: 67px}
 .h68{height: 68px}
 .h69{height: 69px}
-.h70{height: 70px}
 .h71{height: 71px}
 .h72{height: 72px}
 .h73{height: 73px}
@@ -304,11 +303,16 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 .left99{left: 99%}
 .left50{left: 50%}
 
+.d-play{
+  display: inline-block;
+}
+
 input[type=number].num {
   -moz-appearance:textfield;
 }
 input[type=number].num::-webkit-inner-spin-button,
 input[type=number].num::-webkit-outer-spin-button {
+  .h70{height: 70px}
   -webkit-appearance: none;
   margin: 0;
 }

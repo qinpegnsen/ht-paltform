@@ -19,7 +19,7 @@
       <div class="col-xs-3 form-group" style="width:400px">
 
         <div *ngIf="showType.MONTH">
-          <select [(ngModel)]="select.year" class="pull-left w43 form-control" style="display: inline-block;margin-right: 20px">
+          <select [(ngModel)]="select.year" class="pull-left w43 form-control d-play" style="margin-right: 20px">
             <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
           </select>
           <select [(ngModel)]="select.month" class="w43 form-control">

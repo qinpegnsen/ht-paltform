@@ -20,10 +20,9 @@ export class ListDetailComponent implements OnInit {
 
   ngOnInit() {
     let _this=this;
-    _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
-
-    _this.nowtime = _this.routeInfo.snapshot.queryParams['nowtime'];
-    _this.prevtime = _this.routeInfo.snapshot.queryParams['prevtime'];
+    _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏路由的参数
+    _this.nowtime = _this.routeInfo.snapshot.queryParams['nowtime'];//获取当天时间
+    _this.prevtime = _this.routeInfo.snapshot.queryParams['prevtime'];//获取前一天时间
     this.qeuryAll();
   }
 
@@ -31,7 +30,6 @@ export class ListDetailComponent implements OnInit {
    *返回上个页面
    */
   back(){
-    // this.router.navigate(['/main/stat/users/users-new']);
     this.location.back();
   }
 
@@ -45,10 +43,8 @@ export class ListDetailComponent implements OnInit {
     let data={
       createTimeBegin:me.prevtime,
       createTimeEnd:me.nowtime,
-     // authState:me.authState
     }
     let result = this.submit.getData(url,data);
     me.memberListdata = new Page(result);
-    console.log("█ me.data ►►►", result);
   }
 }

@@ -52,7 +52,6 @@ export class SettleComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData = me.data;
-    console.log("█ result ►►►", result);
   }
 
   /**

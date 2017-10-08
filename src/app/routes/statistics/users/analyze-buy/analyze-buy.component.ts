@@ -56,9 +56,8 @@ export class AnalyzeBuyComponent implements OnInit {
     let _this = this;
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
-    _this.qeuryAll(_this.queryType, _this.queryTime);
-    _this.select.year = new Date().getFullYear();
-    _this.select.month = new Date().getMonth()+1;
+    _this.select.year = new Date().getFullYear();//获取默认年
+    _this.select.month = new Date().getMonth()+1;//获取默认月
     _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month);
     _this.weekForMonth.forEach(ele => {
       let start =  new Date(ele.split('~')[0]).getDate();
@@ -67,9 +66,10 @@ export class AnalyzeBuyComponent implements OnInit {
       if(now > start && now <end){
         _this.select.week = ele;
       }else if(now==start||now==end){
-        _this.select.week = ele;
+        _this.select.week = ele;//获取默认周
       } ;
     });
+    _this.qeuryAll();
   }
 
   /**
@@ -96,18 +96,17 @@ export class AnalyzeBuyComponent implements OnInit {
   /**
    * 查询
    */
-  qeuryAll(queryType: string, queryTime: any) {
+  qeuryAll() {
     let me = this;
     let url = "/statistical/analyseBuy";
     let data = {
-      queryType: queryType,
-      queryTime: queryTime,
+      queryType:me.queryType,
+      queryTime:me.queryTime,
     }
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData = me.data.rangeCount;
     me.timeData = me.data.hoursCount;
-
     me.optionPrevInfo();
     me.optionNowInfo();
   }
@@ -167,7 +166,7 @@ export class AnalyzeBuyComponent implements OnInit {
           data: _this.nowData.yaxis
         },
       ]
-    }; //绘制图表
+    };
   }
   private optionNowInfo(){
     let _this = this;
@@ -248,11 +247,10 @@ export class AnalyzeBuyComponent implements OnInit {
         _this.queryTime = _this.select.week;
         break;
     };
-
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {
-      _this.qeuryAll(_this.queryType, _this.queryTime);
+      _this.qeuryAll();
     }
   }
 
