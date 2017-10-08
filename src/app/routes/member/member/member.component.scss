@@ -15,3 +15,20 @@ td,th{
   padding: 3px 10px;
   line-height: 1.8;
 }
+.detail-btn{
+  margin-right: -9px;
+}
+.buyimg{
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+}
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 110px;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}

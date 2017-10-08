@@ -91,4 +91,20 @@ export class MemberComponent implements OnInit {
     this.service.putRequest(url,data);
     this.queryMemberList(curPage);
   }
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event, i) {
+    i.style.display = 'block';
+    i.style.top = (event.clientY + 15) + 'px';
+    i.style.left = (event.clientX + 20) + 'px';
+  }
+
+  /**
+   * 鼠标离开时大图随之隐藏
+   */
+  hideImg(i) {
+    i.style.display = 'none';
+  }
 }

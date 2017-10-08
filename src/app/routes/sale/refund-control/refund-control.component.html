@@ -131,9 +131,9 @@
               <span class="">订单编号：</span> <span>{{item.ordno}}</span>
             </div>
             <div class="bg-table special text-left h35">
-              <span class=" shopimg pull-left">商品图片：</span>
+              <span class="shopimg pull-left">商品图片：</span>
               <span class="">
-                 <img [src]="item.goodsImage" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                 <img [src]="item.goodsImage" alt="" class="buyimg"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="item.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
             </div>

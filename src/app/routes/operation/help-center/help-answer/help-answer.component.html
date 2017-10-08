@@ -8,7 +8,7 @@
     <div class="panel-body p ng-scope" ng-if="search">
       <div class="" >
         <label class="pull-left lh">问题分类：</label>
-          <span class="col-sm-1">
+          <span class="col-sm-2">
              <select class="form-control" type="text" [(ngModel)]="kindId"  name="id"  (change)="searchdata($event)">
                  <option [value]="help.id" *ngFor="let help of kinds">
                  {{help.kindName}}
