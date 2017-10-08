@@ -10,6 +10,7 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
+import {callFun} from "ng2-dnd/src/dnd.utils";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -38,7 +39,6 @@ export class AddArticleComponent implements OnInit {
   public contents: string;
   public reason: string;
   public flag: boolean = false;                    //开关，用来判断是否显示图片路径
-  public articleClassList;                          // 文章分类列表的数据
   public articleId: number                          // 路由传递过来的文章的id
   public queryArticleData: any                      //用来保存根据文章的id查询出来的文章的信息
   public articleCoverType;                          //初始化的时候设置默认选中的值
@@ -57,6 +57,7 @@ export class AddArticleComponent implements OnInit {
   private linkGoodStr: any = '';                     //关联商品id的拼接
   private deletebutton: Object;                       //删除按钮
   private articleClasssId:number;                    //存储子组件发射过来的id
+  private emitClasssId:number;                       //修改审核的时候把当前的id发送到子组件
   constructor(public settings: SettingsService,
               private routeInfo: ActivatedRoute,
               public router: Router,
@@ -80,12 +81,6 @@ export class AddArticleComponent implements OnInit {
 
     this.articleCoverType = 'AUTO'//文章封面类型默认的样式
 
-    this.articleCoverTypes = [
-      {key: 'AUTO', text: '自动'},
-      {key: 'ONE', text: '单图'},
-      {key: 'THREE', text: '三图'}
-    ]
-
     this.deletebutton = {//删除按钮
       title: "删除",
       type: "delete"
@@ -93,59 +88,14 @@ export class AddArticleComponent implements OnInit {
 
 
     /**
-     * 调用富文本编辑器，初始化编辑器
+     * 文章的封面三种类型
+     * @type {[{key: string; text: string},{key: string; text: string},{key: string; text: string}]}
      */
-
-    setTimeout(() => {
-      let me = this;
-      $('#summernote').summernote({
-        height: 280,
-        dialogsInBody: true,
-        callbacks: {
-          onChange: (contents, $editable) => {
-            this.contents = contents;
-            // console.log(contents);
-          },
-          onImageUpload: function (files) {
-            for (let file of files) me.sendFile(file);
-          }
-        }
-      });
-    }, 0);
-
-
-    /**
-     * 解决拖拽时候默认出现的框
-     */
-    setTimeout(() => {
-      $(".note-dropzone").css("display", 'none')
-    }, 0)
-
-    /**
-     * 根据id查询文章的数据
-     * @type {string}
-     */
-    if (this.linkType == 'updateArticle' || this.linkType == 'auditArticle') {
-      let url = '/article/queryArticle';
-      let data = {
-        articleId: this.articleId
-      }
-      this.queryArticleData = this.service.getData(url, data);
-      console.log(this.queryArticleData)
-      setTimeout(() => {
-        $('#summernote').summernote({
-          height: 280,
-          dialogsInBody: true,
-          callbacks: {
-            onChange: (contents, $editable) => {
-              this.contents = contents;
-              // console.log(contents);
-            }
-          }
-        });
-        $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);//给编辑器赋值
-      }, 0);
-    }
+    this.articleCoverTypes = [
+      {key: 'AUTO', text: '自动'},
+      {key: 'ONE', text: '单图'},
+      {key: 'THREE', text: '三图'}
+    ]
 
     /**
      * 审核时候的两种状态
@@ -155,8 +105,89 @@ export class AddArticleComponent implements OnInit {
       {id: 'SUCCESS', name: '成功'},
       {id: 'FAILURE', name: '失败'}
     ]
+
+
+    /**
+     * 解决拖拽时候默认出现的框
+     */
+    setTimeout(() => {
+      $(".note-dropzone").css("display", 'none')
+    }, 0)
+
+    this.getDataById()
   }
 
+  /**
+   * 修改或者是审核的时候根据id查询文章的数据或者新增的时候初始化编辑器的值
+   */
+  getDataById(){
+    if (this.linkType == 'updateArticle' || this.linkType == 'auditArticle') {
+      let url = '/article/queryArticle';
+      let data = {
+        articleId: this.articleId
+      }
+      this.queryArticleData = this.service.getData(url, data);
+      this.emitClasssId=this.queryArticleData.articleClassId;//获取到当前的类别id，并且展示其名称
+      console.log("█ expr ►►►",  this.queryArticleData.coverType);
+      this.coverType(this.queryArticleData.coverType);//初始化的时候对上传的文件的数量做修改，要不然默认都是1
+      console.log("█ this.emitClasssId ►►►",  this.emitClasssId);
+      console.log(this.queryArticleData);
+      setTimeout(() => {//初始化编辑器和给编辑器赋值
+        let me = this;
+        $('#summernote').summernote({
+          height: 280,
+          dialogsInBody: true,
+          callbacks: {
+            onChange: (contents, $editable) => {
+              me.contents = contents;
+              // console.log(contents);
+            },
+            onImageUpload: function (files) {
+              for (let file of files) me.sendFile(file);
+            }
+          }
+        });
+        $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);
+      }, 0);
+      if(this.linkType == 'updateArticle' ){//如果是修改的时候要添加删除按钮
+        console.log("█ 1 ►►►",  1);
+        setTimeout(()=>{
+          let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`;
+          console.log("█ $(\"._myAppend\").find($('li')).children('div') ►►►",  $("._myAppend").find($('li')).children('div'));
+          $("._myAppend").find($('li')).children('div').append(str);//在给每个里追加一个删除按钮
+          $('._myAppend').on('click','._del',function(){
+            this.excuDel(this)
+          })
+        },0)
+
+      }
+    }else if(this.linkType == 'addArticle'){
+      setTimeout(() => {//新增的时候初始化编辑器的值
+        let me = this;
+        $('#summernote').summernote({
+          height: 280,
+          dialogsInBody: true,
+          callbacks: {
+            onChange: (contents, $editable) => {
+              me.contents = contents;
+              // console.log(contents);
+            },
+            onImageUpload: function (files) {
+              for (let file of files) me.sendFile(file);
+            }
+          }
+        });
+      }, 0);
+
+    }
+  }
+
+  /**
+   * 修改的时候删除文章封面的图片
+   */
+  remove(obj){
+    $(obj).css("display",'none');
+  }
 
   /**
    * 获取到子组件发射过来的分类编码
@@ -234,16 +265,24 @@ export class AddArticleComponent implements OnInit {
   coverType(code) {
     if (code == 'ONE' || code == 'THREE') {
       this.flag = true;
-      if (code == 'THREE') {
+      if (code == 'THREE') {//这里重新写的原因是为了让下次点击的时候没有图片
         this.uploader = new FileUploader({
           url: uploadUrl,
           itemAlias: "limitFile",
           queueLimit: 3
         });
+        console.log("█ 3 ►►►",  3);
+      }else if(code == 'ONE'){//这里重新写的原因是为了让下次点击的时候没有图片
+        this.uploader = new FileUploader({
+          url: uploadUrl,
+          itemAlias: "limitFile",
+          queueLimit: 1
+        });
       }
     } else {
       this.flag = false;
     }
+
     this.uuid = this.GetUidService.getUid();
   }
 
@@ -301,7 +340,12 @@ export class AddArticleComponent implements OnInit {
 
     let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`
 
-    $("._myAppend").find($('li')).children('div').append(str);//在给每个里追加一个删除按钮
+    let obj=$("._myAppend").find($('li')).children('div');
+    for(let i=0;i<obj.length;i++){//循环一遍给没有删除按钮的加删除按钮
+      if($(obj[i]).find('._del').length==0){
+        $(obj[i]).append(str)
+      }
+    }
     $('._myAppend').on('click','._del',function(){
       me.excuDel(this)
     })
@@ -353,6 +397,7 @@ export class AddArticleComponent implements OnInit {
       me.uploader.onSuccessItem = function (item, response, status, headers) {
         let res = JSON.parse(response);
         if (res.success) {
+          console.log("█ me.uploader.queue ►►►",  me.uploader.queue);
           me.addArticleExtra()
         } else {
           AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
@@ -377,11 +422,12 @@ export class AddArticleComponent implements OnInit {
         idStr += `${$(goodObj[i]).val()},`
       }
       this.linkGoodStr = idStr.slice(0, idStr.length - 1);
-      console.log("█ obj ►►►",  obj);
-      console.log("█ this.linkGoodStr ►►►",  this.linkGoodStr);
       let url = '/article/updateArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
+      console.log("█ sHTML ►►►",  sHTML);
       obj.addArticleEnum = state //默认文章的类型是草稿
+      obj.articleClassId = this.articleClasssId;
+      console.log("█ this.articleClasssId ►►►",  this.articleClasssId);
       obj.goodIds = this.linkGoodStr;
       obj.articleId = this.articleId
       let data = obj;
@@ -405,7 +451,7 @@ export class AddArticleComponent implements OnInit {
    * 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
    */
   addArticleExtra() {
-    var sHTML = $('#summernote').summernote('code')//获取编辑器的值
+    let sHTML = $('#summernote').summernote('code')//获取编辑器的值
     if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
       sHTML='';
     }
@@ -419,6 +465,7 @@ export class AddArticleComponent implements OnInit {
     let url = '/article/addArticle';
 
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
+    console.log("█ this.submitObj.articleContent ►►►",  this.submitObj.articleContent);
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.uuid = this.uuid;
     this.submitObj.goodIds = this.linkGoodStr;

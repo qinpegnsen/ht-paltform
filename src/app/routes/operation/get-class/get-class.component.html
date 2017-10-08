@@ -1,4 +1,4 @@
-<input class="form-control rzh-sel-city"  placeholder="请选择菜单" (focus)="showSelectMenu()" [(ngModel)]="menuNameText"/>
+<input class="form-control rzh-sel-city"  placeholder="请选择文章分类" (focus)="showSelectMenu()" [(ngModel)]="menuNameText"/>
 <div class="slectArea rzh-sel-city"  *ngIf="show">
   <div class="area-list rzh-sel-city">
     <button type="button" *ngFor="let menuList of menuLists"  class="area-item btn btn-default rzh-sel-city" (click)="getMenuName(menuList.id,menuList.acName)">

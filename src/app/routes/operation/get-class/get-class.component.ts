@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined} from 'util';
 import {AjaxService} from "../../../core/services/ajax.service";
+import {AppComponent} from "../../../app.component";
 declare var $: any;
 
 @Component({
@@ -8,10 +9,9 @@ declare var $: any;
   templateUrl: './get-class.component.html',
   styleUrls: ['./get-class.component.scss']
 })
-export class GetClassComponent implements OnInit {
-  /**
-   * 输入属性sysCode  用来查询当前系统下面的素所有菜单
-   */
+export class GetClassComponent implements OnInit, OnChanges{
+
+  @Input('articleClassId') articleClassId: string; //当前的文章类别的id
 
   private show: boolean = false;//选择菜单得的下弹框默认是隐藏的，只有在聚焦的时候才会出现
 
@@ -31,6 +31,9 @@ export class GetClassComponent implements OnInit {
   constructor(private ajax:AjaxService) { }
 
   ngOnInit() {
+
+    console.log("█ 1 ►►►",  1);
+
     /**
      * 点击区域选框外页面时，关闭选框
      * @type {SelectAreaComponent}
@@ -52,6 +55,40 @@ export class GetClassComponent implements OnInit {
   }
 
   /**
+   * 1.根据类型显示不同的内容
+   * 2.如果模板的编码存在，获取当前load的信息
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['articleClassId']) {
+      console.log("█ id ►►►",  this.articleClassId);
+      this.getCurArticleInfo()
+    }
+
+  }
+
+  /**
+   * 修改或者是审核的时候获取到当前的类别
+   */
+  getCurArticleInfo(){
+    let url='/articleClass/loadArticleClassById';
+    let data={id:this.articleClassId};
+    this.ajax.get({
+      url: url,
+      data:data,
+      async:false,
+      success: (data) => {
+        this.menuNameText=data.data.acName;
+        this.selsectMenuCode=data.data.id;
+        this.cityConfirm()
+       console.log(data)
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+  }
+d
+  /**
    * 菜单点击的时候执行的方法
    */
   getMenuName(menuCode,menuName){
@@ -63,9 +100,8 @@ export class GetClassComponent implements OnInit {
       this.menuNameText+=menuName;
     }
     this.selsectMenuCode=menuCode;
-
+    this.myData.emit(this.selsectMenuCode);//菜单点击的时候加发射当前的文章分类id
     this.menuLists=this.getselectMenu(menuCode);
-
   }
 
   /**
@@ -110,6 +146,6 @@ export class GetClassComponent implements OnInit {
     if (this.menuNameText == '') {
       this.selsectMenuCode = ''
     }
-    this.myData.emit(this.selsectMenuCode)
+    this.myData.emit(this.selsectMenuCode);
   }
 }

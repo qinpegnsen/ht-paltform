@@ -17,20 +17,20 @@ export class EditTplComponent implements OnInit {
   @Output() emitTplData = new EventEmitter();
 
   /**
-   * 1.根据类型显示不同的内容
-   * 2.如果模板的编码存在，获取当前load的信息
-   */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['type'] && !isNullOrUndefined(this.type)) {
-      console.log("█ curType ►►►", this.type);
-      $('.wrapper > section').css('z-index', 200);
-      this.showDeliverWindow = true;
-      if(changes['tplCode'] && !isNullOrUndefined(this.tplCode)){
-        console.log("█ this.tplCode ►►►",  this.tplCode);
-        this.loadByTplCode()
-      }
+ * 1.根据类型显示不同的内容
+ * 2.如果模板的编码存在，获取当前load的信息
+ */
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes['type'] && !isNullOrUndefined(this.type)) {
+    console.log("█ curType ►►►", this.type);
+    $('.wrapper > section').css('z-index', 200);
+    this.showDeliverWindow = true;
+    if(changes['tplCode'] && !isNullOrUndefined(this.tplCode)){
+      console.log("█ this.tplCode ►►►",  this.tplCode);
+      this.loadByTplCode()
     }
   }
+}
 
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
