@@ -31,7 +31,7 @@ export class UsersNewComponent implements OnInit {
   contrastTime: any = new Date();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
-info: any = new Date();
+   info: any = new Date();
 
   private data: any;
   now: string;
@@ -77,17 +77,18 @@ info: any = new Date();
     _this.qeuryAll(_this.queryType, _this.queryTime);
     _this.select.year = new Date().getFullYear();
     _this.select.month = new Date().getMonth()+1;
-    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month);
+    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month,);
     _this.weekForMonth.forEach(ele => {
-      let start =  new Date(ele.split('~')[0]).getTime();
-      let end =  new Date(ele.split('~')[1]).getTime();
-      let now = new Date().getTime();
-      if(now > start && now < end){
+      let start =  new Date(ele.split('~')[0]).getDate();
+      let end =  new Date(ele.split('~')[1]).getDate();
+      let now = new Date().getDate();
+      if(now > start && now <end){
         _this.select.week = ele;
-      };
+      }else if(now==start||now==end){
+        _this.select.week = ele;
+      } ;
     });
   }
-
 
   /**
    * 获取年份和月份信息

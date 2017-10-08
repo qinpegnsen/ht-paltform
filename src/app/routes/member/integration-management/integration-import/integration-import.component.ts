@@ -18,7 +18,6 @@ export class IntegrationImportComponent implements OnInit {
   progress: number;//进度条
   private errorFile: string;
   private templateFile: string ="http://ovaetuonu.bkt.clouddn.com/templateCoin.xlsx";
-  private data:any;//文件暗码
   private onOff: boolean = false;
   constructor(private submitt:SubmitService) { }
 

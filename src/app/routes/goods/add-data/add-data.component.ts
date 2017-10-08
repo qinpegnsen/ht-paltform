@@ -77,6 +77,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
 
   //查询分类
   getKind(data) {
+
     this.kindId = data.kindId;
     this.isLastLevel = data.isLastLevel;
   }
