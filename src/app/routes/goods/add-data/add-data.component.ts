@@ -34,7 +34,6 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-
   }
 
 
@@ -80,6 +79,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
 
     this.kindId = data.kindId;
     this.isLastLevel = data.isLastLevel;
+    console.log("█  this.kindId  ►►►",   this.kindId );
   }
 
 }

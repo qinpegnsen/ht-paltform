@@ -4,8 +4,9 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {AppComponent} from "../../../../app.component";
 import {MaskService} from "../../../../core/services/mask.service";
 import {isNullOrUndefined} from "util";
-declare var $: any;
+import {cli} from "webdriver-manager/built/lib/webdriver";
 const swal = require('sweetalert');
+declare var $: any;
 @Component({
   selector: 'app-integration-import',
   templateUrl: './integration-import.component.html',
@@ -23,10 +24,11 @@ export class IntegrationImportComponent implements OnInit {
   constructor(private submitt:SubmitService) { }
 
   ngOnInit() {
+
   }
  //清空选中的表格
   changeFiles(){
-    this.onOff = true;
+    this.onOff = true; $("button").css({backgroundColor:"#37bc9b",border:"2px solid #37bc9b"})
     if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
   }
 
@@ -35,14 +37,14 @@ export class IntegrationImportComponent implements OnInit {
     let me = this;
   if(this.onOff){
     this.onOff = false;
-    // $( "button" ).css({"background":"red"});
+
     MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();
     //上传成功
     me.uploader.onSuccessItem = function (item, response, status, headers) {
+      $("button").css({backgroundColor:"#f05050",border:"2px solid #f05050"})
       let res = JSON.parse(response);
-      console.log("█ res ►►►",  res);
       if (res.success) {
         me.iimport(res.data);
       } else {
@@ -62,7 +64,7 @@ export class IntegrationImportComponent implements OnInit {
       uid:uid
     }
     let result=this.submitt.postRequest(url, data,false);
-    console.log(result);
+    // console.log(result);
     this.errorFile = result;
   }
 }
