@@ -37,13 +37,13 @@ export class IntegrationImportComponent implements OnInit {
     let me = this;
   if(this.onOff){
     this.onOff = false;
-
     MaskService.showMask();//上传表格比较慢，显示遮罩层
     //执行上传
     me.uploader.uploadAll();
     //上传成功
     me.uploader.onSuccessItem = function (item, response, status, headers) {
-      $("button").css({backgroundColor:"#f05050",border:"2px solid #f05050"})
+      $("button").css({backgroundColor:"#f05050",border:"2px solid #f05050"});
+      $('button').attr("disabled","disabled");
       let res = JSON.parse(response);
       if (res.success) {
         me.iimport(res.data);
@@ -64,7 +64,6 @@ export class IntegrationImportComponent implements OnInit {
       uid:uid
     }
     let result=this.submitt.postRequest(url, data,false);
-    // console.log(result);
     this.errorFile = result;
   }
 }
