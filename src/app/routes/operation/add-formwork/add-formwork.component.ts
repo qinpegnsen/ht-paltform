@@ -371,7 +371,7 @@ export class AddFormworkComponent implements OnInit {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
             swal('添加运费模板提交成功！', '','success');
           } else {
-            swal('添加成功但保存信息有误====！', 'error');
+            swal('添加运费模板提交失败！', 'error');
           }
         },
         error: (data) => {

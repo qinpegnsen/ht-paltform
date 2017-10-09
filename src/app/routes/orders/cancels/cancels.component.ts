@@ -17,7 +17,7 @@ export class CancelsComponent implements OnInit {
   private ordnoA;
   private code;
   public goodsList: Page = new Page();
-  private goodsAudits: any;  // 商品审核状态列表
+  private goodsAudits: any;
   private query;  // 商品审核状态列表
   public staff={};
   public ordno:string;//获取区域编码

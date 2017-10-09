@@ -37,13 +37,31 @@
       </div>
     </div>
     </div>
-    <div class="main_right" *ngIf="curItem!='' && curItem!=null">
+    <div class="main_right" *ngIf="curItem!='' && curItem!=null && isShowContent">
       <div class="main_left_header">
         <span>{{curItem.tplName}}</span>
       </div>
       <div class="main_left_prompting">
         <span style="display:block;"><strong>模块操作小提示</strong></span>
-        <span style="display:block;">{{curItem.tplDesc }}</span>
+        <span style="display:block; padding-bottom: 10px;">{{curItem.tplDesc }}</span>
+      </div>
+      <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
+        <div *ngIf="curItem.tplType == 'IMG'">
+          <div style="margin-left: 20px; padding-top: 15px; display: block"><strong>图片：</strong></div>
+          <div style="margin-top: 6px;" class="main_right_opt_img"></div>
+        </div>
+        <div *ngIf="curItem.tplType == 'TXT'">
+          <div style="margin-left: 20px; padding-top: 15px; display: block"><strong>文字：</strong></div>
+          <textarea style="margin: 6px 0 0 20px;width: 260px"></textarea>
+        </div>
+        <h5><strong>操作类型：</strong></h5>
+        <div style="width: 280px;height: 37px;margin: auto;border-radius: 5px; border: 1px solid #c0c0c0">
+          <select class="form-control" name="optTypeList"  [(ngModel)]="optType" style="width: 120px; display: inline">
+            <option  *ngFor="let item of optTypeList" [ngValue]="item">{{item.optTypeName}}</option>
+          </select>
+          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" style="width: 157.8px;height: 35px;display: inline;     margin-left: -2.7px;" type="text" (ngModel)="optType" [disabled]="optType.isEntered=='N'">
+        </div>
+        <div style="margin-left: 20px; margin-top: 10px">{{optType.typeDesc}}</div>
       </div>
     </div>
   </div>
