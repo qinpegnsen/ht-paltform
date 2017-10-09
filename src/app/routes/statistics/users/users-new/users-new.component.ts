@@ -28,7 +28,7 @@ export class UsersNewComponent implements OnInit {
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
 
   private queryType: any = 'DAY';//日期选择
-  contrastTime: any = new Date();
+  contrastTime: any = new Date().getSeconds();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
    info: any = new Date();
