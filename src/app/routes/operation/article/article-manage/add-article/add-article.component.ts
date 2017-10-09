@@ -34,7 +34,7 @@ export class AddArticleComponent implements OnInit {
     queueLimit: 1
   });
 
-  private uuid: any;
+  private uuid=[];
   public linkType: string;
   public contents: string;
   public reason: string;
@@ -271,7 +271,6 @@ export class AddArticleComponent implements OnInit {
           itemAlias: "limitFile",
           queueLimit: 3
         });
-        console.log("█ 3 ►►►",  3);
       }else if(code == 'ONE'){//这里重新写的原因是为了让下次点击的时候没有图片
         this.uploader = new FileUploader({
           url: uploadUrl,
@@ -282,9 +281,8 @@ export class AddArticleComponent implements OnInit {
     } else {
       this.flag = false;
     }
-
-    this.uuid = this.GetUidService.getUid();
   }
+
 
   /**
    * 编辑器上传图片并显示
@@ -364,6 +362,62 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
+   * 图片上传
+   */
+  uploadImg(){
+    let me = this;
+    /**
+     * 构建form时，传入自定义参数
+     * @param item
+     */
+    me.uploader.onBuildItemForm = function (fileItem, form) {
+      form.append('uuid', me.GetUidService.getUid());
+      me.uuid.push(me.GetUidService.getUid());
+    };
+
+    /**
+     * 执行上传
+     */
+    me.uploader.uploadAll();
+    /**
+     * 上传成功处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploader.onSuccessItem = function (item, response, status, headers) {
+      let res = JSON.parse(response);
+      if (res.success) {
+        console.log("█ '上传图片成功' ►►►",  '上传图片成功');
+      } else {
+        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+      }
+    };
+
+
+
+    /**
+     * 上传失败处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploader.onErrorItem = function (item, response, status, headers) {
+      AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+    };
+
+
+    /**
+     * 所有图片都上传成功后执行添加文章
+     */
+    me.uploader.onCompleteAll=function(){
+      me.addArticleExtra();
+    }
+  }
+
+  /**
    * 提交（文章新增修改的提交）
    * @param obj
    * @param state
@@ -373,47 +427,8 @@ export class AddArticleComponent implements OnInit {
     this.submitState = state;
     let me = this;
     if (me.linkType == 'addArticle') {
-      this.addArticleExtra()//没有图片上传的时候也可以调用
-      /**
-       * 构建form时，传入自定义参数
-       * @param item
-       */
-      me.uploader.onBuildItemForm = function (fileItem, form) {
-        form.append('uuid', me.uuid);
-      };
+      me.uploadImg();
 
-      /**
-       * 执行上传
-       */
-      me.uploader.uploadAll();
-
-      /**
-       * 上传成功处理
-       * @param item 上传列表
-       * @param response 返回信息
-       * @param status 状态
-       * @param headers 头信息
-       */
-      me.uploader.onSuccessItem = function (item, response, status, headers) {
-        let res = JSON.parse(response);
-        if (res.success) {
-          console.log("█ me.uploader.queue ►►►",  me.uploader.queue);
-          me.addArticleExtra()
-        } else {
-          AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-        }
-      };
-
-      /**
-       * 上传失败处理
-       * @param item 上传列表
-       * @param response 返回信息
-       * @param status 状态
-       * @param headers 头信息
-       */
-      me.uploader.onErrorItem = function (item, response, status, headers) {
-        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
-      };
     } else if (this.linkType == 'updateArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let idStr = ''; //获取关联的商品
@@ -465,13 +480,15 @@ export class AddArticleComponent implements OnInit {
     let url = '/article/addArticle';
 
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
-    console.log("█ this.submitObj.articleContent ►►►",  this.submitObj.articleContent);
+    this.submitObj.uuid = this.uuid.join(',');
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
-    this.submitObj.uuid = this.uuid;
+    console.log("█ this.uuid ►►►", this.uuid.length);
+    console.log("█ this.uuid ►►►", this.uuid);
+    console.log("█ this.uuid ►►►",  this.submitObj.uuid);
     this.submitObj.goodIds = this.linkGoodStr;
     this.submitObj.articleClassId = this.articleClasssId;
     let data = this.submitObj;
-
+    console.log("█ data ►►►",  data);
     let result=this.operationService.addNewArticle(url, data);
     if(result=='文章内容不能为空'||result=='请选择文章所属类型'){
       return;
@@ -479,6 +496,4 @@ export class AddArticleComponent implements OnInit {
       this.router.navigate(['/main/operation/article/manage']);
     }
   }
-
-
 }
