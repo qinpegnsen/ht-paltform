@@ -62,13 +62,13 @@ export class WoAllComponent implements OnInit {
           me.search.stateEnum = '';
           break;
         case "assign":
-          me.parentComp.woType = 'NO';
-          me.search.stateEnum = 'NO';
+          me.parentComp.woType = 'NO,MANUAL';
+          me.search.stateEnum = 'NO,MANUAL';
           me.assign = true;
           break;
         case "wo-assign":
           me.parentComp.woType = 'NO';
-          me.search.stateEnum = 'NO';
+          me.search.stateEnum = 'NO,MANUAL';
           break;
         case "wo-assigned":
           me.parentComp.woType = 'ASSIGN';
