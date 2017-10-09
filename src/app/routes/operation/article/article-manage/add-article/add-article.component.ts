@@ -10,7 +10,6 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
-import {callFun} from "ng2-dnd/src/dnd.utils";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -371,8 +370,9 @@ export class AddArticleComponent implements OnInit {
      * @param item
      */
     me.uploader.onBuildItemForm = function (fileItem, form) {
-      form.append('uuid', me.GetUidService.getUid());
-      me.uuid.push(me.GetUidService.getUid());
+      let uuid=me.GetUidService.getUid();
+      form.append('uuid',uuid);
+      me.uuid.push(uuid);
     };
 
     /**
@@ -396,7 +396,6 @@ export class AddArticleComponent implements OnInit {
     };
 
 
-
     /**
      * 上传失败处理
      * @param item 上传列表
@@ -413,6 +412,7 @@ export class AddArticleComponent implements OnInit {
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
+      console.log("█ 3333 ►►►",  3333);
       me.addArticleExtra();
     }
   }
@@ -427,8 +427,7 @@ export class AddArticleComponent implements OnInit {
     this.submitState = state;
     let me = this;
     if (me.linkType == 'addArticle') {
-      me.uploadImg();
-
+      me.uploadImg();//执行图片上传的方法
     } else if (this.linkType == 'updateArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let idStr = ''; //获取关联的商品
