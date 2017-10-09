@@ -75,7 +75,7 @@
         <ul *dropdownMenu class="dropdown-menu animated flipInX">
           <li>
             <div class="list-group">
-              <a class="list-group-item" *ngFor="let platformInfo of platformInfoData.voList;let i = index">
+              <a class="list-group-item" *ngFor="let platformInfo of platformInfoData.voList;let i = index"  routerLink="/main/operation/sys-message/message-list">
                 <div class="media-box _qpsStyle">
                   <div class="pull-left">
                     <i class="{{platformInfo.icon}}"></i>
