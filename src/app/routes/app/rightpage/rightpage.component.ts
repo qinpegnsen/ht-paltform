@@ -9,6 +9,7 @@ import {FileUploader} from "ng2-file-upload";
 import {isNullOrUndefined} from 'util';
 import {AppComponent} from '../../../app.component';
 import {GetUidService} from '../../../core/services/get-uid.service';
+import {AppIndexTplComponent} from '../app-index-tpl/app-index-tpl.component';
 const swal = require('sweetalert');
 
 @Component({
@@ -18,6 +19,8 @@ const swal = require('sweetalert');
 })
 export class RightpageComponent implements OnInit {
   private queryId:number;//获取添加，修改的ID
+  private  tplImgUUid;//获取模板效果图的图片暗码
+  private  tplCheckedImgUUid;//获取模板选中效果图的图片暗码
   private limitForm = {
     optTypeCode: '',
     typeDesc:'',
@@ -36,7 +39,7 @@ export class RightpageComponent implements OnInit {
     itemAlias:"limitFile"
   }); //初始化上传方法
 
-  constructor(public settings: SettingsService,private routeInfo:ActivatedRoute,private ajax:AjaxService,private router:Router,private AppIndexOptComponent:AppIndexOptComponent,private patterns: PatternService,private mask: MaskService,private getUid:GetUidService) {
+  constructor(public settings: SettingsService,private routeInfo:ActivatedRoute,private ajax:AjaxService,private router:Router,private AppIndexOptComponent:AppIndexOptComponent,private patterns: PatternService,private mask: MaskService,private getUid:GetUidService,private GetUidService:GetUidService,private AppIndexTplComponent:AppIndexTplComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -44,14 +47,32 @@ export class RightpageComponent implements OnInit {
     let _this = this;
     _this.queryId = this.routeInfo.snapshot.queryParams['number'];
     _this.id = this.routeInfo.snapshot.queryParams['id'];
-    _this.queryData();//请求详细数据，并显示
+    _this.queryData();//请求移动端首页模板类型详细数据，并显示
+    _this.queryTplData();//请求移动端首页模板详细数据，并显示
+    _this.getTplImgUUid();//获取模板效果图的图片暗码
+    _this.getTplCheckedImgUUid();//获取模板选中效果图的图片暗码
   }
 
   // 取消
   cancel(){
     let _this = this;
     _this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
+  }
 
+  /**
+   * 获取模板效果图的图片暗码
+   */
+  public getTplImgUUid(){
+   let _this = this;
+    _this.tplImgUUid = this.GetUidService.getUid();
+  }
+
+  /**
+   * 获取模板选中效果图的图片暗码
+   */
+  public getTplCheckedImgUUid(){
+    let _this = this;
+    _this.tplCheckedImgUUid = this.GetUidService.getUid();
   }
 
   /**
@@ -70,19 +91,36 @@ export class RightpageComponent implements OnInit {
   }
 
   /**
-   * 请求移动端首页模板类型详细数据，并显示()
+ * 请求移动端首页模板类型详细数据，并显示()
+ */
+queryData(){
+  if(typeof(this.id)) {
+    this.ajax.get({
+      url: '/phone/indexOptType/load',
+      async: false, //同步请求
+      data: {id: this.id},
+      success: (res) => {
+        this.limitForm = res;
+
+      },
+      error: (res) => {
+        console.log("post limit error");
+      }
+    });
+  }
+}
+
+  /**
+   * 请求移动端首页模板详细数据，并显示()
    */
-  queryData(){
-
+  queryTplData(){
     if(typeof(this.id)) {
-
       this.ajax.get({
-        url: '/phone/indexOptType/load',
+        url: '/phone/indexTpl/load',
         async: false, //同步请求
         data: {id: this.id},
         success: (res) => {
           this.limitForm = res;
-
         },
         error: (res) => {
           console.log("post limit error");
@@ -152,39 +190,52 @@ export class RightpageComponent implements OnInit {
     //添加首页模板
     else if(_this.queryId == 3){
       _this.uploadImg(value);
-
     }
     //修改首页模板
-    else{
-      _this.ajax.post({
-        url: '/phone/indexTpl/update',
-        data: {
-          'tplCode': value.tplCode,
-          'tplName': value.tplName,
-          'tplUrl': value.tplUrl,
-          'tplImg':value.tplImg,
-          'tplCheckedImg':value.tplCheckedImg,
-          'tplDesc':value.tplDesc,
-          'tplImgCount':value.tplImgCount,
-          'tplAuthor':value.tplAuthor,
-          'tplType':value.tplType
-        },
-        success: (res) => {
-          if (res.success) {
-            _this.router.navigate(['/main//app/app-index-opt'], {replaceUrl: true}); //路由跳转
-            swal('修改首页模板提交成功！', '','success');
-            _this.AppIndexOptComponent.getAgentList()//实现刷新
-          } else {
-            swal('修改首页模板提交失败====！', 'error');
-          }
-        },
-        error: (data) => {
-          swal('修改首页模板提交失败！', '','error');
-        }
-      })
+    else if(_this.queryId == 4){
+      _this.loadImg(value);
     }
   }
 
+  /**
+   * 修改首页模板
+    * @param value
+   */
+  private upTplDatas(value){
+    let _this = this;
+    _this.ajax.post({
+      url: '/phone/indexTpl/update',
+      data: {
+        'id':_this.id,
+        'tplCode': value.tplCode,
+        'tplName': value.tplName,
+        'tplUrl': value.tplUrl,
+        'tplImg':_this.tplImgUUid,
+        'tplCheckedImg':_this.tplCheckedImgUUid,
+        'tplDesc':value.tplDesc,
+        'tplImgCount':value.tplImgCount,
+        'tplAuthor':value.tplAuthor,
+        'tplType':value.tplType
+      },
+      success: (res) => {
+        if (res.success) {
+          _this.router.navigate(['/main/app/app-index-tpl'], {replaceUrl: true}); //路由跳转
+          swal('修改首页模板提交成功！', '','success');
+          _this.AppIndexTplComponent.getAgentList()//实现刷新
+        } else {
+          swal('修改首页模板提交失败====！', 'error');
+        }
+      },
+      error: (data) => {
+        swal('修改首页模板提交失败！', '','error');
+      }
+    })
+  }
+
+  /**
+   * 添加首页模板
+   * @param value
+   */
   private submitDatas(value){
     let _this = this;
     _this.ajax.post({
@@ -193,8 +244,8 @@ export class RightpageComponent implements OnInit {
         'tplCode': value.tplCode,
         'tplName': value.tplName,
         'tplUrl': value.tplUrl,
-        'tplImg':value.tplImg,
-        'tplCheckedImg':value.tplCheckedImg,
+        'tplImg':_this.tplImgUUid,
+        'tplCheckedImg':_this.tplCheckedImgUUid,
         'tplDesc':value.tplDesc,
         'tplImgCount':value.tplImgCount,
         'tplAuthor':value.tplAuthor,
@@ -202,9 +253,9 @@ export class RightpageComponent implements OnInit {
       },
       success: (res) => {
         if (res.success) {
-          _this.router.navigate(['/main//app/app-index-opt'], {replaceUrl: true}); //路由跳转
+          _this.router.navigate(['/main/app/app-index-tpl'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '','success');
-          _this.AppIndexOptComponent.getAgentList()//实现刷新
+          _this.AppIndexTplComponent.getAgentList()//实现刷新
         } else {
           swal('添加首页模板提交失败====！', 'error');
         }
@@ -216,7 +267,7 @@ export class RightpageComponent implements OnInit {
   }
 
   /**
-   * 商品规格图片上传
+   * 添加首页模板图片上传
    */
   private uploadImg(value) {
     let me = this, uploadedNum = 0;
@@ -238,6 +289,8 @@ export class RightpageComponent implements OnInit {
         }
       })
       uploader.onCompleteAll = function () {
+        console.log("█ 22222 ►►►",  22222);
+
         uploadedNum += 1;     // 该组上传完之后uploadedNum+1；
         if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
           me.submitDatas(value)     //整理数据并且提交数据
@@ -246,6 +299,42 @@ export class RightpageComponent implements OnInit {
       // 每张图片上传结束后，判断如果是最后一组图片则提交，不是最后一组会进入下一个循环
       if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
         me.submitDatas(value)       //整理数据并且提交数据
+      }
+    })
+  }
+
+
+  /**
+   * 修改首页模板图片上传
+   */
+  private loadImg(value) {
+    let me = this, uploadedNum = 0;
+    let allUploaders = [
+      me.uploader,
+      me.uploaders
+    ];
+    allUploaders.forEach((uploader, i) => {
+      uploader.uploadAll();//全部上传
+      if (!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
+      uploader.queue.forEach((item, index) => {
+        item.onSuccess = function (response, status, headers) {
+          if (!isNullOrUndefined(response)) {
+            let res = JSON.parse(response);
+            if (!res.success) {
+              AppComponent.rzhAlt('error',uploader.queue[0]._file.name+'上传失败')
+            }
+          }
+        }
+      })
+      uploader.onCompleteAll = function () {
+        uploadedNum += 1;     // 该组上传完之后uploadedNum+1；
+        if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
+          me.upTplDatas(value)     //整理数据并且提交数据
+        }
+      }
+      // 每张图片上传结束后，判断如果是最后一组图片则提交，不是最后一组会进入下一个循环
+      if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
+        me.upTplDatas(value)       //整理数据并且提交数据
       }
     })
   }

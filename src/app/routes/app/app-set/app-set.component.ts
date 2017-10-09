@@ -14,8 +14,11 @@ export class AppSetComponent implements OnInit {
   private contentList = [];
   private item;
   private curItem;
+  private flag = [];
   private isShowContent=false;
-  public optType = {};
+  public optType: Array<any> = new Array();
+  public isEntered: Array<any> = new Array();
+  public typeDesc: Array<any> = new Array();
   private optTypeList: any;
 
   constructor(private submit: SubmitService, private routeInfo: ActivatedRoute) {
@@ -48,7 +51,7 @@ export class AppSetComponent implements OnInit {
    */
   public addTpl(item) {
     this.isShowContent=false;
-    this.moduleList.push({reslut: '../../../assets/img/bg1.jpg', index: this.moduleList.length + 1, data: item});
+    this.moduleList.push({reslut:item.tplCheckedImg, index: this.moduleList.length + 1, data: item});
 
   }
 
@@ -65,6 +68,30 @@ export class AppSetComponent implements OnInit {
       this.contentList.push(i);
     }
 
+  }
+
+  /**
+   * 上传图片时鼠标滑过显示遮罩层
+   */
+  showMask1(i){
+    this.flag[i]=true;
+  }
+
+  /**
+   * 上传图片时鼠标离开时遮罩层消失
+   */
+  hideMask1(i){
+    this.flag[i]=false;
+  }
+
+  /**
+   * 获取点击下拉框是当前的模板类型和模板类型小提示
+   * @param i
+   */
+  public showDesc(i){
+    let _this = this;
+    _this.isEntered[i]= _this.optType[i].isEntered;
+    _this.typeDesc[i]= _this.optType[i].typeDesc;
   }
 
   /**

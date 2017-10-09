@@ -56,10 +56,7 @@ export class AppIndexOptComponent implements OnInit {
     let data={
     }
     let url= "/phone/indexOptType/list";
-    console.log("█ 1 ►►►",  1);
-
     this.controlData=this.AppIndexOptService.controlDatas(url,data);
-    console.log("█ this.controlData ►►►",  this.controlData);
   }
 
   /**

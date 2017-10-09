@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppIndexTplService} from 'app/routes/app/app-index-tpl/app-index-tpl.service';
 import {ActivatedRoute} from '@angular/router';
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-app-index-tpl',
@@ -13,7 +14,7 @@ export class AppIndexTplComponent implements OnInit {
   private deletebutton;//删除移动端首页操作类型按钮配置
   private controlData;
 
-  constructor(private AppIndexTplService:AppIndexTplService,private routeInfo:ActivatedRoute) { }
+  constructor(private AppIndexTplService:AppIndexTplService,private routeInfo:ActivatedRoute,private AppIndexTplServiceL:AppIndexTplService) { }
 
   ngOnInit() {
     let _this = this;
@@ -53,6 +54,31 @@ export class AppIndexTplComponent implements OnInit {
 
     this.controlData=this.AppIndexTplService.controlDatas(url,data);
     console.log('█ this.controlData ►►►',  this.controlData);
+  }
 
+  /**
+   * 删除移动端首页操作列表
+   * @param event
+   */
+  delete(delCodeId) {
+    let _this = this, url: string = "/phone/indexTpl/delete", data: any;
+    swal({
+        title: '确认删除此信息？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        data = {
+          id:delCodeId
+        }
+        console.log(data)
+        _this.AppIndexTplService.delCode(url, data); //删除数据
+        _this.getAgentList()//实现刷新
+      }
+    );
   }
 }

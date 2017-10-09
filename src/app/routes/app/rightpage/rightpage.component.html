@@ -288,7 +288,7 @@
 
 <!--修改首页模板begin-->
 <div class="rightpage" *ngIf="this.queryId==4">
-  <form class="form-validate form-horizontal" style="height: 100%">
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -353,13 +353,13 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板选中效果图</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplCheckedImg && myImg" [src]="uploaders.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl"
                    alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && myImg" [src]="uploaders.queue[0]._file | imgUrl" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && !myImg" [src]="limitForm.tplCheckedImg">
+              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && !myImgs" [src]="limitForm.tplCheckedImg">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{limitForm.tplCheckedImg? '修改模板选中效果图':'上传模板选中效果图'}}
-                <input class="w100" type="file" name="tplCheckedImg"  ng2FileSelect [uploader]="uploaders" (change)="fileChangeListener($event)"/>
+                <input class="w100" type="file" name="tplCheckedImg"  ng2FileSelect [uploader]="uploaders" (change)="fileChangeListeners($event)"/>
               </label>
             </div>
           </div>
@@ -420,7 +420,7 @@
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit">提交信息</button>
+        <button class="ml btn btn-info pull-left" type="submit" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
       </div>
     </div>
     <!-- END panel-->

@@ -76,6 +76,7 @@
     width: 1006px;
     height: 700px;
     background: #E5E7EA;
+    background: #E5E7EA;
   }
   .main_right{
     float: right;
@@ -94,24 +95,108 @@
     .main_right_opt{
       height: 355px;
       background: white;
-      h5{
-        padding-left: 20px;
-        padding-top: 20px;
+      .main_right_optIMGa{
+        margin-left: 20px;
+        padding-top: 15px;
+        display: block;
       }
       .main_right_opt_img{
         width: 260px;
         height: 150px;
         border: 1px dotted #c0c0c0;
         margin: auto;
+        position:relative;
+        margin-top: 6px;
+        a{
+          position:absolute;
+          left:0;
+          right:0;
+          top:0;
+          bottom:0;
+          margin:auto;
+          background: rgba(0,0,0,0.3);
+          text-decoration: none;
+          color: white;
+          span{
+            font-size: 25px;
+            padding-left: 120px;
+            line-height: 150px;
+          }
+        }
+    }
+    .main_right_optIMG{
+      cursor: pointer;
+      div:nth-child(1){
+        margin-left: 20px;
+        padding-top: 15px;
+        display: block;
       }
     }
   }
 }
+}
 .main_left_header{
-  width: 100%;
-  height: 50px;
+width: 100%;
+height: 50px;
+background: white;
+font-size: 20px;
+padding-left: 20px;
+line-height: 50px;
+}
+.main_left_prompting{
+span:nth-child(1){
+  display:block;
+}
+span:nth-child(2){
+  display:block;
+  padding-bottom: 10px;
+}
+}
+.main_right_optTXT{
+  div{
+    margin-left: 20px;
+    padding-top: 15px;
+    display: block;
+  }
+  textarea{
+    margin: 6px 0 0 20px;
+    width: 260px;
+  }
+}
+.main_right_optModel{
+  width: 280px;
+  height: 37px;
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid #c0c0c0;
+  input{
+    width: 157.8px;
+    height: 35px;
+    display: inline;
+    margin-left: -2.7px;
+  }
+}
+.main_right_optTypeDesc{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.main_right_footer{
+  position: absolute;
+  bottom: 52px;
+  width: 300px;
+  height: 54px;
   background: white;
-  font-size: 20px;
-  padding-left: 20px;
-  line-height: 50px;
+  border-top:1px solid #c0c0c0;
+  button:nth-child(1){
+    height: 53px;
+    width: 150px;
+    border: none;
+    font-size: 16px;
+  }
+  button:nth-child(2){
+    height: 53px;
+    width: 146px;
+    border: none;
+    font-size: 16px;
+  }
 }
