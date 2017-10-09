@@ -32,3 +32,9 @@
 .detailset{
   min-width: 1360px;
 }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+  background: #fff;
+}
+.remark-padding{
+  padding: 0 10px;
+}

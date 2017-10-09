@@ -14,6 +14,7 @@ export class BasicPropertiesComponent implements OnInit {
   private addbuttons;//添加按钮
   private updatebuttons: Object;//修改按钮
   private deletebuttons: Object;//删除按钮
+  private selectGoodsType:any; //选择的分类信息
 
   private kindList;// 分类列表
   private kindId:string;
@@ -46,8 +47,10 @@ export class BasicPropertiesComponent implements OnInit {
    * @param data  选择分类组件输出数据
    */
   getKind(data) {
-    this.kindId = data.kindId;
-    this.queryBaseEnumList();
+    let _this = this;
+    _this.selectGoodsType = data;
+    _this.kindId = data.kindId;
+    _this.queryBaseEnumList();
   }
 
   /**
@@ -63,8 +66,6 @@ export class BasicPropertiesComponent implements OnInit {
     };
     let result=_this.submit.getData(requestUrl, requestData);
     _this.data = result;
-    console.log("█  ►►►",_this.data);
-    // console.log("█  result.baseTypeList.kindId ►►►",   result.baseTypeList.kindId);
   }
 
   //删除
@@ -89,9 +90,15 @@ export class BasicPropertiesComponent implements OnInit {
       }
     );
   }
+  /*
+  * 添加弹窗
+  * */
   addNewData() {
     this.showAddWindow = true;
   }
+  /*
+  * 修改弹窗
+  * */
   updateNewData() {
     this.showUpdateWindow = true;
   }

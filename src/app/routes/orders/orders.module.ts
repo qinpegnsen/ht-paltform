@@ -89,7 +89,7 @@ const routes: Routes = [
     StockDetailComponent,
     CancelsComponent,
     CuccessComponent,
-    LogisticsComponent
+    LogisticsComponent,
   ],
   providers: [
     OrdersComponent,

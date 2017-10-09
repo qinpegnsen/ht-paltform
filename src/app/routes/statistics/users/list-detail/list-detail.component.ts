@@ -42,7 +42,9 @@ export class ListDetailComponent implements OnInit {
     let url = "/cust/queryAllCust";
     let data={
       createTimeBegin:me.prevtime,
-      createTimeEnd:me.nowtime,
+      createTimeEnd:me.nowtime
+
+      // createTimeBegin:me.nowtime,
     }
     let result = this.submit.getData(url,data);
     me.memberListdata = new Page(result);

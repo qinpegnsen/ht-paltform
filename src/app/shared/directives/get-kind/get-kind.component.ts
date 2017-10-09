@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {isNullOrUndefined} from "util";
 import {GoodsService} from "../../../routes/goods/goods.service";
 declare var $: any;
@@ -15,8 +15,8 @@ export class GetKindComponent implements OnInit {
   private kindList: any;
   private show: boolean;
   private isLastLevel: boolean = false;
-
   @Output() myData = new EventEmitter();
+  @Input() defaultData: any = {};
 
 
   constructor(private goods: GoodsService) {
@@ -29,6 +29,7 @@ export class GetKindComponent implements OnInit {
      * @private
      */
     let _this = this;
+    if (!isNullOrUndefined(_this.defaultData) && _this.defaultData != "") _this.setValue();
     $('body').click(function (e) {
       let event = e.target.attributes['class'];
       if (isNullOrUndefined(event) || isNullOrUndefined(event.nodeValue) || event.nodeValue.indexOf("rzh-sel-kind") <= 0) {
@@ -62,42 +63,51 @@ export class GetKindComponent implements OnInit {
    */
   showSelectKind() {
     let me = this;
-    if (me.show) {
-      me.show = false;
-    } else {
-      me.show = true;
-      me.myKindName == '';
-    }
+    if (me.show) me.show = false;
+    else me.show = true, me.myKindName == '';
     if (me.show) me.kindList = me.goods.getKindList()
   }
 
   /**
-   * 重置城市信息
+   * 重置数据
    */
   refresh() {
-    this.myKindName = '';
-    this.kindId = '';
-    this.kindList = this.goods.getKindList();
-    this.myData.emit({
-      kindId: this.kindId,
-      myKindName: this.myKindName,
-      isLastLevel:this.isLastLevel
-    });
+    let _this = this;
+    _this.myKindName = '';
+    _this.kindId = '';
+    _this.kindList = this.goods.getKindList();
+    _this.setMyData();
   }
-
 
   /**
    * 确定
    */
   myConfirm() {
-    this.show = false;
-    if (this.kindId == '' || isNullOrUndefined(this.kindId)) {
-      this.myKindName = ''
-    }
+    let _this = this;
+    _this.show = false;
+    if (_this.kindId == '' || isNullOrUndefined(_this.kindId)) _this.myKindName = '';
+    _this.setMyData();
+  }
+
+  /**
+   * 动态赋值
+   */
+  private setValue() {
+    let _this = this;
+    _this.myKindName = this.defaultData.myKindName;
+    _this.kindId = this.defaultData.kindId;
+    _this.isLastLevel = this.defaultData.isLastLevel;
+    _this.setMyData();
+  }
+
+  /**
+   * 设置myData信息（对外提供数据）
+   */
+  private setMyData() {
     this.myData.emit({
       kindId: this.kindId,
       myKindName: this.myKindName,
-      isLastLevel:this.isLastLevel
+      isLastLevel: this.isLastLevel
     });
   }
 
