@@ -10,6 +10,7 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
+import {MaskService} from "../../../../../core/services/mask.service";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -167,9 +168,8 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           callbacks: {
-            onChange: (contents, $editable) => {
+            onChange: (contents) => {
               me.contents = contents;
-              // console.log(contents);
             },
             onImageUpload: function (files) {
               for (let file of files) me.sendFile(file);
@@ -290,7 +290,12 @@ export class AddArticleComponent implements OnInit {
   sendFile(file) {
     let _this = this, img = _this.tools.uploadImg(file);
     if (!isNullOrUndefined(img)) {
-      $("#summernote").summernote('insertImage', img, '');
+      $("#summernote").summernote('insertImage', img,function($image){
+        $image.css({
+          width: '100px',
+          height: '100px'
+        });
+      });
     }
   }
 
@@ -316,8 +321,9 @@ export class AddArticleComponent implements OnInit {
    */
   closeAlert() {
     this.goodShow = !this.goodShow;
-    // MaskService.simpleHideMask(); //隐藏遮罩层
-    $("session").css('z-index', 0)
+    $("session").css('z-index', 0);
+    $(".note-dropzone").css("display",'none');//解决关联商品后编辑器有遮罩层层的bug
+    this.listTeamOne=[];//清空已经选择的数组
   }
 
   /**
@@ -328,7 +334,7 @@ export class AddArticleComponent implements OnInit {
     this.closeAlert();//关闭弹窗
 
     $("._myAppend").append($(".panel-success").find('li'));//把已经选择的追加到里面
-    this.listTeamOne=[];//清空已经选择的数组
+
     if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
       $("._myAppend").css("height", '0px')
     }else{

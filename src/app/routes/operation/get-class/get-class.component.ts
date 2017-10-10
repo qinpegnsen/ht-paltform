@@ -58,7 +58,6 @@ export class GetClassComponent implements OnInit, OnChanges{
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['articleClassId']) {
-      console.log("█ id ►►►",  this.articleClassId);
       this.getCurArticleInfo()
     }
 
@@ -85,7 +84,7 @@ export class GetClassComponent implements OnInit, OnChanges{
       }
     });
   }
-d
+
   /**
    * 菜单点击的时候执行的方法
    */
@@ -100,6 +99,9 @@ d
     this.selsectMenuCode=menuCode;
     this.myData.emit(this.selsectMenuCode);//菜单点击的时候加发射当前的文章分类id
     this.menuLists=this.getselectMenu(menuCode);
+    if(this.menuLists.length==0){
+      this.cityConfirm();
+    }
   }
 
   /**
