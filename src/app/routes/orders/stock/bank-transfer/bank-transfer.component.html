@@ -3,9 +3,11 @@
 
 
   <!--表单-->
-
+  <form class="_popup animated fadeIn" #addForm="ngForm">
   <div class="pop deliver-box font12 w100">
-    <form class="_popup animated fadeIn" #addForm="ngForm">
+
+
+    <!--<form class="_popup animated fadeIn" #addForm="ngForm">-->
       <div class="pop popup-hd">
         <span class="f-bold">银行转账信息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
@@ -57,39 +59,43 @@
         <dt class="col-xs-3 lh40">付款凭证：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
-                <span class="close" (click)="item.remove()">×</span>
+                <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
                 <span class="upload-thumb">
-                  <img *ngIf="item" [src]="item._file | imgUrl"
-                               onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                  <img *ngIf="item" [src]="item._file | imgUrl" (mousemove)="showImg($event,i)"
+                       (mouseout)="hideImg(i)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
                                class="_img">
+                  <img [src]="item._file | imgUrl" #i class="bigImg" alt=""
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <input type="text" placeholder="aaaaaa" class="form-control d-play pull-right" style="width: 230px;
+    margin-left: 10px;"  name="imgremark" [(ngModel)]="summary">
                 </span>
               </span>
           <label class="btn btn-default file-upload">
-            <i class="icon-cloud-upload mr"></i>{{uploader.queue.length > 0? uploader.queue[0]._file.name:'选择图片'}}
-            <input class="w100" type="file" name="" (click)="uploadImg()" ng2FileSelect [uploader]="uploader"
-                   (change)="fileChangeListeners($event)"/>
+            <i class="icon-cloud-upload mr"></i>
+            <input class="w100" type="file" ng2FileSelect [uploader]="uploader"/>
           </label>
         </dd>
-        <!--<div [hidden]="tc3rd.valid || tc3rd.pristine"-->
-             <!--class="col-sm-9 pull-right text-danger">-->
-          <!--请上传图片-->
-        <!--</div>-->
       </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">付款时间：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入付款时间">
+          <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+          <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
         </dd>
-        <!--<div [hidden]="tc3rd.valid || tc3rd.pristine"-->
-             <!--class="col-sm-9 pull-right text-danger">-->
-          <!--请输入交易流水码-->
-        <!--</div>-->
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">付款备注：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入付款备注" name="remark" ngModel
+          >
+        </dd>
       </dl>
       <div class="panel-footer text-right">
         <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
         <button class="btn btn-info" type="submit" (click)="addRemitCallBack(addForm.value)">确认提交</button>
       </div>
-    </form>
-  </div>
+
+  </div></form>
 </div>
 

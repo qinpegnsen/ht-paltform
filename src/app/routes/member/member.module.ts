@@ -11,6 +11,7 @@ import {CertificationComponent} from "./certification/certification.component";
 import {IntegrationImportComponent} from "./integration-management/integration-import/integration-import.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
+import { ReasonRejecComponent } from './reason-rejec/reason-rejec.component';
 
 const userChildRoutes: Routes = [
   {path: 'details', component: IntegrationDetailsComponent},
@@ -34,6 +35,6 @@ const routes: Routes = [
     RzhButtonsModule
   ],
   declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent,
-    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent]
+    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent, ReasonRejecComponent]
 })
 export class MemberModule { }

@@ -3,6 +3,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 
 @Component({
   selector: 'app-certification',
@@ -12,13 +13,13 @@ import {isNullOrUndefined} from "util";
 export class CertificationComponent implements OnInit {
   private data: Page = new Page();
   private state:any;//审核状态
-  constructor(private submit: SubmitService) { }
+  constructor(private submit: SubmitService,private rzhtoolsService:RzhtoolsService) { }
 
   ngOnInit() {
     let me = this;
     this.aqeuryAll('AUDIT');
-
   }
+
 
   /**
    * 认证审核--查询分页
@@ -27,6 +28,7 @@ export class CertificationComponent implements OnInit {
     let me = this, activePage = 1;
     if(isNullOrUndefined(state)) state = 'AUDIT';
       me.state = state;
+
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/custAuthInfo/query";
     let data={

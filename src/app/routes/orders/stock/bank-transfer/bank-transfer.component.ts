@@ -4,6 +4,9 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {FileUploader} from "ng2-file-upload";
 import {GetUidService} from "../../../../core/services/get-uid.service";
 import {AppComponent} from "../../../../app.component";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 declare var $: any;
 @Component({
   selector: 'app-bank-transfer',
@@ -12,10 +15,22 @@ declare var $: any;
 })
 export class BankTransferComponent implements OnInit {
 
+  datepickerModel: Date= new Date();
+  bsConfig: Partial<BsDatepickerConfig>;
+
+  public showSec: boolean = true;
+  private summary;
+  myTime: Date = new Date();
+  queryTime: any = new Date();
+  private time;
   private uuid;
   public selectBank:any;
   private code;
   private myImgs: any;//上传首页模板效果图
+  public imgs={
+    pic:"",
+    summary:""
+  }
   /**
    * 图片上传
    * @type {FileUploader}
@@ -26,7 +41,7 @@ export class BankTransferComponent implements OnInit {
   public uploader:FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias:"limitFile",
-    queueLimit: 1
+    queueLimit: 5
   });
   @Input('orderId') orderId: string;
   @Input('goodspay') goodspay: string;
@@ -42,10 +57,18 @@ export class BankTransferComponent implements OnInit {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private submit:SubmitService, public GetUidService: GetUidService,) { }
+  constructor(private submit:SubmitService, public GetUidService: GetUidService, private tools: RzhtoolsService,) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
+      containerClass: 'theme-blue'
+    });
+
+  }
 
   ngOnInit() {
     this.seletAllByTypeCode();
+    this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
   }
   /**
    * 关闭组件
@@ -63,20 +86,32 @@ export class BankTransferComponent implements OnInit {
 * */
   addRemitCallBack(obj) {
     this.uploadImg(obj);
+    this.aa(obj);
 }
 
 aa(obj){
-  let url = "/agentOrd/addRemitCallBack";
+    console.log("█ this.uuid ►►►",  this.uuid);
+    console.log("█ this.summary ►►►",  this.summary);
+  let url = "/agentOrd/addAgentOrdPayRecRemit";
+  let hour = this.myTime.getHours();
+  let minutes = this.myTime.getMinutes();
+  let seconds = this.myTime.getSeconds();
+  this.imgs.pic=this.uuid;
+  this.imgs.summary=this.summary;
+  this.time = this.addZero(hour) + ':' + this.addZero(minutes) + ':' + this.addZero(seconds);
   let data = {
     ordno: this.orderId,
     acct: this.goodspay,
     tc3rd:obj.tc3rd,
     bank:this.code,
     bacctName: obj.bacctName,
-    voucherUrl: this.uuid,
-    tradeTime: '',
+    finacePlatRecPicJson:JSON.stringify(this.imgs),
+    tradeTime:this.queryTime+" "+this.time,
+    remark:obj.remark
   }
-  let result = this.submit.postRequest(url,data);
+  console.log("█ data.finacePlatRecPicJson ►►►",  data.finacePlatRecPicJson);
+  let result = this.submit.postRequest(url,data,true);
+  console.log("█ result ►►►",  result);
 }
 
 
@@ -91,11 +126,6 @@ aa(obj){
     this.selectBank=this.submit.getData(url, data);
   }
 
-  fileChangeListeners() {
-    // 当选择了新的图片的时候，把老图片从待上传列表中移除
-    if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
-    this.myImgs = true;  //表示已经选了图片
-  }
   /**
    * 图片上传
    */
@@ -105,9 +135,13 @@ aa(obj){
      * 构建form时，传入自定义参数
      * @param item
      */
-    me.uploader.onBuildItemForm = function (fileItem, form) {
-      this.uuid=me.GetUidService.getUid();
-      form.append('uuid', this.uuid);
+    me.uploader.onBuildItemForm = function (fileItem: any, form: any) {
+      // let uuid=me.GetUidService.getUid();
+      // form.append('uuid',uuid);
+      // me.uuid.push();
+
+      me.uuid=me.GetUidService.getUid();
+      form.append('uuid', me.uuid);
     };
 
     /**
@@ -152,4 +186,27 @@ aa(obj){
     }
   }
 
+  /**
+   * 时分秒1数转换为2
+   */
+  addZero(num) {
+    return num > 10 ? num + '' : '0' + num;
+  }
+
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event, i) {
+    i.style.display = 'block';
+    i.style.top = (event.clientY + 15) + 'px';
+    i.style.left = (event.clientX + 20) + 'px';
+  }
+
+  /**
+   * 鼠标离开时大图随之隐藏
+   */
+  hideImg(i) {
+    i.style.display = 'none';
+  }
 }

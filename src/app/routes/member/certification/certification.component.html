@@ -30,11 +30,14 @@
           <th class="w20 text-center">
            <rzhDefaultSorter by="time">有效期</rzhDefaultSorter>
           </th>
-          <th class="w20 text-center">
+          <th class="w20 text-center" *ngIf="state=='PASS'">
            <rzhDefaultSorter by="picture">照片</rzhDefaultSorter>
           </th>
           <th class="w15 text-center">
             <rzhDefaultSorter by="createtime">申请时间</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="reason"  *ngIf="state=='UNPASS'">驳回原因</rzhDefaultSorter>
           </th>
           <th class="w10 text-center"  *ngIf="state=='AUDIT'">
             <rzhDefaultSorter by="examine">审核</rzhDefaultSorter>
@@ -46,7 +49,9 @@
           <td>{{count.custPhone}}</td>
           <td>{{count.name}}</td>
           <td>{{count.idcard}}</td>
-          <td>{{count.startTime}}--{{count.endTime}}</td>
+          <td *ngIf="count.endTime!=null">{{count.startTime | date:"yyyy-MM-dd"}}--{{count.endTime | date:"yyyy-MM-dd"}}</td>
+          <td *ngIf="count.endTime==null">{{count.startTime | date:"yyyy-MM-dd"}}--永久</td>
+
           <td>
           <img  [src]="count.idcardPic1" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)" class="idimg"
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
@@ -59,9 +64,10 @@
             <img [src]="count.idcardPic3" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </td>
           <td>{{count.createTime}}</td>
+          <td *ngIf="state=='UNPASS'">111111</td>
           <td *ngIf="state=='AUDIT'">
-          <button class="btn btn-danger" (click)="access(count.id)" ><i class="fa fa-check"></i></button>
-          <button class="btn btn-green" (click)="cancel(count.id)" ><i class="fa fa-close"></i></button>
+          <button class="btn btn-green" (click)="access(count.id)" ><i class="fa fa-check"></i></button>
+          <button class="btn btn-danger" (click)="cancel(count.id)" ><i class="fa fa-close"></i></button>
           </td>
         </tr>
       </tbody>
