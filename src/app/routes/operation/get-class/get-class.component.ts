@@ -32,8 +32,6 @@ export class GetClassComponent implements OnInit, OnChanges{
 
   ngOnInit() {
 
-    console.log("█ 1 ►►►",  1);
-
     /**
      * 点击区域选框外页面时，关闭选框
      * @type {SelectAreaComponent}

@@ -29,14 +29,14 @@ export class CommodityPriceComponent implements OnInit {
     let result = this.submit.getData(url,data);
     me.data = result;
   }
-  submitt(code,data1){
+  submitt(code,data1,info,remark){
     data1.isShow = !data1.isShow;
    let url = '/datadict/updateDatadict';
    let data = {
      typeCode: 'goods_price_range',
      code: code,
-     info:this.updata,
-     remark:this.remark
+     info:info,
+     remark:remark
    }
    let result=this.submit.putRequest(url, data,false);
    this.qeuryAll();
@@ -44,7 +44,7 @@ export class CommodityPriceComponent implements OnInit {
  }
   showDetail(data:any,code){
     data.isShow = !data.isShow;
-    this.updata = this.submit.getData("/datadict/loadInfoByCode", {code:code});
+    this.updata = this.submit.getData("/datadict/loadDatadictByCode", {code:code});
     console.log("█ this.updata  ►►►",  this.updata );
   }
   cancel(data2){

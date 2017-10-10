@@ -5,7 +5,6 @@
 
 <div class="panel panel-default">
 
-
   <div class="panel mb p w98 m-auto ts thc">
     <p class="font18">操作提示</p>
     <ul>
@@ -53,7 +52,7 @@
   </div>
 </div>
 
-<app-add-data [showAddWindow]="showAddWindow" (addData)="getAddDataResult($event)" ></app-add-data>
+<app-add-data [showAddWindow]="showAddWindow" [selTypeData]="selectGoodsType" (addData)="getAddDataResult($event)" ></app-add-data>
 
 <app-update-data [showUpdateWindow]="showUpdateWindow" (upDate)="getUpdateResult($event)" ></app-update-data>
 

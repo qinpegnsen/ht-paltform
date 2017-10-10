@@ -105,8 +105,8 @@
                [queryParams]="{ordno:goods.ordno}">查看详情</p>-->
             <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'">查看详情</p>
           </td>
-          <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-
+          <td class="w10 bl" >
+              <span class="btn btn-info" (click)="addBankData(name.ordno,goods.pay)" *ngIf="goods.payWay=='REMIT'">确认收货</span>
           </td>
         </tr>
       </table>
@@ -131,7 +131,5 @@
   </tfoot>
 </table>
 <app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
-<!--
-<app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
--->
+
+  <app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" (bankDate)="getBankResult($event)" ></app-bank-transfer>

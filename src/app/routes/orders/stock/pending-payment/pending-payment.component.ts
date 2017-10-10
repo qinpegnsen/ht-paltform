@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {StockComponent} from '../stock.component';
 import {Page} from '../../../../core/page/page';
 import {PageEvent} from '../../../../shared/directives/ng2-datatable/DataTable';
@@ -31,6 +31,10 @@ export class PendingPaymentComponent implements OnInit {
   private beginTime: string;
   private endTime: string;
   public goodsList: Page = new Page();
+  private orderId1:any;
+  private goodspay1:any;
+
+  private showBankWindow:boolean = false;
   @ViewChild('cancelBox') cancelBox: CancelComponent;
 
   constructor(private StockComponent:StockComponent,private submit: SubmitService) {
@@ -120,18 +124,20 @@ export class PendingPaymentComponent implements OnInit {
   }
 
   /*
-   /!**
+   * 添加弹窗
+   * */
+  addBankData(orderId,goodspay) {
+    this.orderId1=orderId;
+    this.goodspay1=goodspay
+    this.showBankWindow = true;
+  }
+
+  /**
    * 发货回调函数
    * @param data
-   *!/
-   getDeliverOrderData(data){
-   this.curDeliverOrderId = null;
-   }
-   /!**
-   * 查询物流回调函数
-   * @param data
-   *!/
-   getLogisticsData(data){
-   this.lookLogisticsOrderId = null;
-   }*/
+   */
+  getBankResult(data) {
+    this.showBankWindow = false;
+    if(data == 'success') this.queryDatas(1)
+  }
 }

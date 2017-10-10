@@ -1,0 +1,95 @@
+<div class="deliver-order fadeIn" *ngIf="showBankWindow">
+  <div class="mask"></div>
+
+
+  <!--表单-->
+
+  <div class="pop deliver-box font12 w100">
+    <form class="_popup animated fadeIn" #addForm="ngForm">
+      <div class="pop popup-hd">
+        <span class="f-bold">银行转账信息</span>
+        <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+      </div>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">订单编号：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <span>{{orderId}}</span>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">需支付金额：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <span>{{goodspay | number:'1.2-2'}}</span>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">交易流水码：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入交易流水码" name="tc3rd" ngModel required #tc3rd="ngModel">
+        </dd>
+        <div [hidden]="tc3rd.valid || tc3rd.pristine"
+             class="col-sm-9 pull-right text-danger">
+          请输入交易流水码
+        </div>
+      </dl>
+      <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">付款账号开户行：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
+            <option *ngFor="let item of selectBank" [value]="item.code">{{item.remark}}</option>
+          </select>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">付款人：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入付款人" name="bacctName" ngModel required
+                 #bacctName="ngModel">
+        </dd>
+        <div [hidden]="bacctName.valid || bacctName.pristine"
+                  class="col-sm-9 pull-right text-danger">
+        请输入付款人
+      </div>
+      </dl>
+
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">付款凭证：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
+                <span class="close" (click)="item.remove()">×</span>
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl"
+                               onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                               class="_img">
+                </span>
+              </span>
+          <label class="btn btn-default file-upload">
+            <i class="icon-cloud-upload mr"></i>{{uploader.queue.length > 0? uploader.queue[0]._file.name:'选择图片'}}
+            <input class="w100" type="file" name="" (click)="uploadImg()" ng2FileSelect [uploader]="uploader"
+                   (change)="fileChangeListeners($event)"/>
+          </label>
+        </dd>
+        <!--<div [hidden]="tc3rd.valid || tc3rd.pristine"-->
+             <!--class="col-sm-9 pull-right text-danger">-->
+          <!--请上传图片-->
+        <!--</div>-->
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">付款时间：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入付款时间">
+        </dd>
+        <!--<div [hidden]="tc3rd.valid || tc3rd.pristine"-->
+             <!--class="col-sm-9 pull-right text-danger">-->
+          <!--请输入交易流水码-->
+        <!--</div>-->
+      </dl>
+      <div class="panel-footer text-right">
+        <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
+        <button class="btn btn-info" type="submit" (click)="addRemitCallBack(addForm.value)">确认提交</button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -21,22 +21,22 @@
               <span>{{order.remark}}</span>
             </td>
 
-            <td class="item-hd col-sm-1 font12" *ngIf="order.isShow">
-              <input type="text" class="form-control" [(ngModel)]="order.remark" >
+            <td class="item-hd col-sm-1 font12 " *ngIf="order.isShow">
+              <input type="text" class="form-control remark-padding" disabled [(ngModel)]="updata.remark" >
             </td>
 
             <td class="item-bd col-sm-9 mb0"  *ngIf="!order.isShow">
               <span class="w70">{{order.info}}</span>
             </td>
             <td class="item-bd col-sm-9 mb0"  *ngIf="order.isShow">
-              <input type="text" class="form-control w70" [(ngModel)]="updata">
+              <input type="text" class="form-control w70" [(ngModel)]="updata.info">
             </td>
 
             <td>
               <span class="btn btn-info" *ngIf="!order.isShow" (click)="showDetail(order,order.code)">修改</span>
             </td>
             <td *ngIf="order.isShow">
-              <span class="btn btn-info" (click)="submitt(order.code,order,remark)" >提交</span>
+              <span class="btn btn-info" (click)="submitt(order.code,order,updata.info,updata.remark)" >提交</span>
               <button class="btn btn-green" (click)="cancel(order)" >取消</button>
             </td>
           </tr>

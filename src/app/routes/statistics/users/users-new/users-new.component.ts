@@ -28,7 +28,7 @@ export class UsersNewComponent implements OnInit {
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
 
   private queryType: any = 'DAY';//日期选择
-  contrastTime: any = new Date();
+  contrastTime: any = new Date().getSeconds();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
    info: any = new Date();
@@ -128,6 +128,14 @@ export class UsersNewComponent implements OnInit {
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
     me.optionPrevInfo();
+    console.log("█ now ►►►",  me.now);
+    console.log("█ prev ►►►",  me.prev);
+
+    console.log("█ me.prev ►►►",me.prev);
+    console.log("█  _this.prevData.keys ►►►",  me.prevData.keys);
+    console.log("█  _this.prevData.keys ►►►",  me.prev+"-"+me.prevData.keys[0]);
+    console.log("█  _this.prevData.keys ►►►",  me.now+"-"+me.prevData.keys[0]);
+
   }
 
   /**
