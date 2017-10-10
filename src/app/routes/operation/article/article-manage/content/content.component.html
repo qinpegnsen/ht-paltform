@@ -23,7 +23,10 @@
           <rzhDefaultSorter>封面</rzhDefaultSorter>
         </th>
         <th class="w10">
-          <rzhDefaultSorter by="city">关联商品</rzhDefaultSorter>
+          <rzhDefaultSorter>关联商品</rzhDefaultSorter>
+        </th>
+        <th class="w10" *ngIf="articleState=='REVISE'">
+          <rzhDefaultSorter>失败原因</rzhDefaultSorter>
         </th>
         <th class="w15" [hidden]="articleState=='DEL'||articleState=='AUDIT'">操作</th>
       </tr>
@@ -56,6 +59,7 @@
         </td>
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
+        <td *ngIf="articleState=='REVISE'">{{article.articleVerifyReason}}</td>
         <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
           <app-buttons [config]="updatebutton" routerLink="addArticle"
                        [queryParams]="{linkType:'updateArticle',id:article.id}"

@@ -404,14 +404,14 @@ export class RzhtoolsService {
   }
 
   /**
-   * 上传商品图片
+   * 上传文章编辑器图片
    * @param file
    */
   uploadImg = function (file: any) {
     let _this = this, ret: string, data: any = new FormData();
     data.append("limitFile", file);
     _this.ajax.post({
-      url: "/goodsEdit/uploadGoodsBodyImage",
+      url: "/article/uploadArticleContentImage",
       data: data,
       async: false,
       cache: false,
