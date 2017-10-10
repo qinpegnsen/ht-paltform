@@ -291,7 +291,7 @@ export class AddArticleComponent implements OnInit {
     let _this = this, img = _this.tools.uploadImg(file);
     if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img,function($image){
-        $image.css({
+        $image.css({//设置图片的大小
           width: '20%'
         });
       });
