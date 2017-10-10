@@ -10,7 +10,6 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
-import {MaskService} from "../../../../../core/services/mask.service";
 declare var $: any;
 
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -34,7 +33,7 @@ export class AddArticleComponent implements OnInit {
     queueLimit: 1
   });
 
-  private uuid=[];
+  private uuid=[];                                 //存储暗码的数组
   public linkType: string;
   public contents: string;
   public reason: string;
@@ -127,6 +126,7 @@ export class AddArticleComponent implements OnInit {
         articleId: this.articleId
       }
       this.queryArticleData = this.service.getData(url, data);
+      console.log("█ this.queryArticleData ►►►",  this.queryArticleData);
       this.emitClasssId=this.queryArticleData.articleClassId;//获取到当前的类别id，并且展示其名称
       console.log("█ expr ►►►",  this.queryArticleData.coverType);
       this.coverType(this.queryArticleData.coverType);//初始化的时候对上传的文件的数量做修改，要不然默认都是1
@@ -292,8 +292,7 @@ export class AddArticleComponent implements OnInit {
     if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img,function($image){
         $image.css({
-          width: '100px',
-          height: '100px'
+          width: '20%'
         });
       });
     }
@@ -429,11 +428,17 @@ export class AddArticleComponent implements OnInit {
    * @param state
    */
   submit(obj, state) {
+    console.log("█ 1 ►►►",  1);
     this.submitObj = obj;
     this.submitState = state;
     let me = this;
     if (me.linkType == 'addArticle') {
-      me.uploadImg();//执行图片上传的方法
+      console.log("█  ►►►", me.uuid.length );
+      if(me.uuid.length==0){
+        this.addArticleExtra()
+      }else{
+        me.uploadImg();//执行图片上传的方法
+      }
     } else if (this.linkType == 'updateArticle') {
       var sHTML = $('#summernote').summernote('code')//获取编辑器的值
       let idStr = ''; //获取关联的商品
@@ -487,9 +492,6 @@ export class AddArticleComponent implements OnInit {
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.uuid = this.uuid.join(',');
     this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
-    console.log("█ this.uuid ►►►", this.uuid.length);
-    console.log("█ this.uuid ►►►", this.uuid);
-    console.log("█ this.uuid ►►►",  this.submitObj.uuid);
     this.submitObj.goodIds = this.linkGoodStr;
     this.submitObj.articleClassId = this.articleClasssId;
     let data = this.submitObj;

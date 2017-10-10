@@ -82,7 +82,8 @@
                 <span class="close" (click)="item.remove()">×</span>
                 <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                       class="_img">
                 </span>
               </span>
               <div>
@@ -100,7 +101,8 @@
             <label class="col-sm-2 control-label">文章标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" name="articlekeyword" #articlekeywordTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articlekeyword" #articlekeywordTem="ngModel"
+                     ngModel/>
             </div>
           </div>
         </fieldset>
@@ -108,7 +110,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">关键字</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" name="articleTag" #articleTagTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articleTag" #articleTagTem="ngModel"
+                     ngModel/>
             </div>
           </div>
         </fieldset>
@@ -117,7 +120,8 @@
             <label class="col-sm-2 control-label">相关文章
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" name="articleLink" #articleLinkTem="ngModel" ngModel/>
+              <input class="form-control" type="text" maxlength="128" name="articleLink" #articleLinkTem="ngModel"
+                     ngModel/>
             </div>
           </div>
         </fieldset>
@@ -197,7 +201,9 @@
             <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract" required placeholder='必填项' maxlength="128"/>
+              <input class="form-control" type="text" name="articleAbstract" #articleAbstractTem="ngModel"
+                     [(ngModel)]="queryArticleData.articleBody.articleAbstract" required placeholder='必填项'
+                     maxlength="128"/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
                    class="alert alert-danger">
                 文章摘要是必填项
@@ -237,15 +243,17 @@
                 <span class="close" (click)="item.remove()">×</span>
                 <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                       class="_img">
                 </span>
               </span>
               <!--修改图片的时候如果有封面图片就展示封面图片-->
               <span class="ui-state-disabled pull-left _uploadImg" #coverImg>
-                <span class="close" (click)="remove(coverImg)">×</span>
+                <span class="close" (click)="remove(coverImg)" *ngIf="queryArticleData.articleCoverVO!=null">×</span>
                 <span class="upload-thumb">
-                  <img *ngIf="queryArticleData.articleCover.url" src="{{queryArticleData.articleCover.url}}"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'" class="_img">
+                    <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
+                      <img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}" class="qpsBgImg" alt=""  onerror="javascript:this.src='../../../assets/img/dummy.png';">
+                    </ng-container>
                 </span>
               </span>
               <div>
@@ -302,23 +310,23 @@
                          onerror="javascript:this.src='../../../assets/img/dummy.png';">
                   </div>
                   <!--<div class="col-lg-6 p0">-->
-                    <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
-                    <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
-                      <!--{{standard.attrName}}：{{standard.value}}-->
-                    <!--</div>-->
-                    <!--<input type="hidden" value="{{item.goodsCode}}">-->
+                  <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
+                  <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
+                  <!--{{standard.attrName}}：{{standard.value}}-->
+                  <!--</div>-->
+                  <!--<input type="hidden" value="{{item.goodsCode}}">-->
                   <!--</div>-->
                   <!--<div class="col-lg-3 p0">-->
-                    <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
+                  <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
                   <!--</div> <!--<div class="col-lg-6 p0">-->
-                    <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
-                    <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
-                      <!--{{standard.attrName}}：{{standard.value}}-->
-                    <!--</div>-->
-                    <!--<input type="hidden" value="{{item.goodsCode}}">-->
+                  <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
+                  <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
+                  <!--{{standard.attrName}}：{{standard.value}}-->
+                  <!--</div>-->
+                  <!--<input type="hidden" value="{{item.goodsCode}}">-->
                   <!--</div>-->
                   <!--<div class="col-lg-3 p0">-->
-                    <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
+                  <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
                   <!--</div>-->
                 </div>
               </li>
@@ -358,7 +366,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>文章标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleTitle" #articleTitleTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articleTitle"
+                     #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle" required
                      placeholder='必填项'/>
               <div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"
@@ -372,7 +381,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i>*</i>文章短标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort" #articleTitleShortTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort"
+                     #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"
                      required placeholder='必填项'/>
               <div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"
@@ -387,7 +397,8 @@
             <label class="col-sm-2 control-label"><i>*</i>文章摘要
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleAbstract" #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
+              <input class="form-control" type="text" maxlength="128" disabled name="articleAbstract"
+                     #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract
 "
                      required placeholder='必填项'/>
               <div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"
@@ -409,7 +420,8 @@
             <div class="col-sm-10 control-label">
               <div class="radio c-radio pull-left">
                 <label>
-                  <input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"
+                  <input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommend"
+                         name="articleCommend"
                          #articleCommendY class="col-sm-2"/>
                   <span class="fa fa-circle"></span>是
                 </label>
@@ -472,7 +484,8 @@
             <label class="col-sm-2 control-label">文章标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articlekeyword" #articlekeywordTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articlekeyword"
+                     #articlekeywordTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTag"/>
             </div>
           </div>
@@ -491,7 +504,8 @@
             <label class="col-sm-2 control-label">相关文章
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128"  disabled name="articleLink" #articleLinkTem="ngModel"
+              <input class="form-control" type="text" maxlength="128" disabled name="articleLink"
+                     #articleLinkTem="ngModel"
                      [(ngModel)]="queryArticleData.articleLink"/>
             </div>
           </div>
@@ -563,7 +577,8 @@
             <div class="form-group clearfix">
               <span class="pull-left query-name lh">选择品牌：</span>
               <div class="col-md-8 col-xs-6 pl0">
-                <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled"  (data)="refreshValue($event)" placeholder="全部品牌">
+                <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled" (data)="refreshValue($event)"
+                           placeholder="全部品牌">
                 </ng-select>
               </div>
             </div>
@@ -595,7 +610,8 @@
             <div class="panel-heading">
               可以选择的商品（向右边框拖选择商品）
             </div>
-            <div class="panel-body  _scroll" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="linkGoodsList">
+            <div class="panel-body  _scroll" dnd-sortable-container [dropZones]="['boxers-zone']"
+                 [sortableData]="linkGoodsList">
               <ul class="list-group">
                 <li *ngFor="let item of linkGoodsList; let i = index" class="list-group-item" dnd-sortable
                     [sortableIndex]="i">
@@ -606,7 +622,9 @@
                     </div>
                     <div class="col-lg-6 p0">
                       <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
-                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
+                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
+                        {{standard.attrName}}：{{standard.value}}
+                      </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
                     <div class="col-lg-3 p0">
@@ -626,7 +644,8 @@
             <div class="panel-heading">
               已经选择的商品（向左边框拖取消选择）
             </div>
-            <div class="panel-body _scroll" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
+            <div class="panel-body _scroll" dnd-sortable-container [dropZones]="['boxers-zone']"
+                 [sortableData]="listTeamOne">
               <ul class="list-group">
                 <li *ngFor="let item of listTeamOne; let i = index" class="list-group-item" dnd-sortable
                     [sortableIndex]="i">
@@ -637,7 +656,9 @@
                     </div>
                     <div class="col-lg-6 _copy p0">
                       <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
-                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">{{standard.attrName}}：{{standard.value}}</div>
+                      <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
+                        {{standard.attrName}}：{{standard.value}}
+                      </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
                     <div class="col-lg-3 p0">
@@ -653,7 +674,7 @@
     </div>
     <div class="mr mb clearfix">
       <span class="btn btn-default ml lr pull-right" (click)="closeAlert();">放弃操作</span>
-      <button class="ml btn btn-info  ml pull-right" type="button" (click)="alertResult()" >提交信息</button>
+      <button class="ml btn btn-info  ml pull-right" type="button" (click)="alertResult()">提交信息</button>
     </div>
   </div>
 </div>

@@ -117,7 +117,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:6,
+      pageSize:8,
       articleState:this.articleState,
       articleTitle:this.searchKey,
       isTopState:booelean

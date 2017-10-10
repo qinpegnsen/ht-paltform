@@ -78,7 +78,7 @@
   padding-right:30px;
 }
 ._img{
-  width:300px;height:200px;
+  width:100px;height:100px;
 }
 ._uploadImg{
   display: inline-block;
@@ -94,4 +94,9 @@
 ._updateClass{
   max-height: 300px;
   overflow-y: scroll;
+}
+.qpsBgImg{
+  width:100px !important;
+  height: 100px !important;
+  margin-right: 15px;
 }

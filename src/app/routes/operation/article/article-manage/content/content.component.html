@@ -32,7 +32,7 @@
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
         <td>{{article.articleTitle}}</td>
-        <td>{{article.articleClass.acName}}</td>
+        <td>{{article.acName}}</td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
             <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article)"/>
@@ -45,15 +45,28 @@
             <span></span>
           </label>
         </td>
-        <td><img src="{{article.articleCover.url }}" class="qpsImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
+        <td>
+          <ng-container *ngIf="article.articleCoverVO!=null">
+            <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url }}" class="qpsImg" alt=""
+                 onerror="javascript:this.src='../../../assets/img/dummy.png';">
+          </ng-container>
+          <ng-container *ngIf="article.articleCoverVO==null">
+            无封面
+          </ng-container>
+        </td>
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
         <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
-          <app-buttons [config]="updatebutton" routerLink="addArticle" [queryParams]="{linkType:'updateArticle',id:article.id}" [hidden]="articleState=='AUDIT'"></app-buttons>
-          <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'" (click)="delArticle(article.id)"></app-buttons>
-          <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'" (click)="publishArticle(article.id)"></app-buttons>
-          <app-buttons [config]="auditbutton" routerLink="addArticle" [queryParams]="{linkType:'auditArticle',id:article.id}" *ngIf="articleState=='AUDIT'" ></app-buttons>
-          <!--<app-buttons [config]="detailsbutton" (click)="selecteArticle(article.id)"></app-buttons>-->
+          <app-buttons [config]="updatebutton" routerLink="addArticle"
+                       [queryParams]="{linkType:'updateArticle',id:article.id}"
+                       [hidden]="articleState=='AUDIT'"></app-buttons>
+          <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'"
+                       (click)="delArticle(article.id)"></app-buttons>
+          <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'"
+                       (click)="publishArticle(article.id)"></app-buttons>
+          <app-buttons [config]="auditbutton" routerLink="addArticle"
+                       [queryParams]="{linkType:'auditArticle',id:article.id}"
+                       *ngIf="articleState=='AUDIT'"></app-buttons>
         </td>
       </tr>
       </tbody>
@@ -61,7 +74,8 @@
       <tr>
         <td colspan="12">
           <div class="col-sm-5">
-            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至 {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
+            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至
+              {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
               条</strong></div>
           </div>
           <div class="col-sm-7">
