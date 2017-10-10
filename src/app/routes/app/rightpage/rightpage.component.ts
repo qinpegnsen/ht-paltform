@@ -6,7 +6,6 @@ import {AppIndexOptComponent} from '../app-index-opt/app-index-opt.component';
 import {PatternService} from '../../../core/forms/pattern.service';
 import {MaskService} from "../../../core/services/mask.service";
 import {FileUploader} from "ng2-file-upload";
-import {isNullOrUndefined} from 'util';
 import {AppComponent} from '../../../app.component';
 import {GetUidService} from '../../../core/services/get-uid.service';
 import {AppIndexTplComponent} from '../app-index-tpl/app-index-tpl.component';
@@ -178,6 +177,8 @@ queryData(){
     }
     //修改首页模板
     else if(_this.queryId == 4){
+      console.log("█ 1 ►►►",  1);
+      
       _this.uploadImg(value);
     }
   }
@@ -208,7 +209,7 @@ queryData(){
           swal('修改首页模板提交成功！', '','success');
           _this.AppIndexTplComponent.getAgentList()//实现刷新
         } else {
-          swal('修改首页模板提交失败====！', 'error');
+          swal('修改首页模板提交失败====！', '', 'error');
         }
       },
       error: (data) => {
@@ -262,12 +263,13 @@ queryData(){
      * @param item
      */
     me.uploader.onBuildItemForm = function (fileItem, form) {
-      console.log("█ fileItem ►►►",  fileItem);
+      console.log("█ 2 ►►►",  2);
+      
       let uuid=me.GetUidService.getUid();
+      console.log("█ 3 ►►►",  3);
+      
       form.append('uuid',uuid);
       me.tplImgUUid=uuid;
-      console.log("█ me.tplImgUUid ►►►",  me.tplImgUUid);
-
     };
 
     /**
@@ -299,6 +301,7 @@ queryData(){
      * @param headers 头信息
      */
     me.uploader.onErrorItem = function (item, response, status, headers) {
+      console.log("█ 3 ►►►",  3);
       AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
     };
 
@@ -307,6 +310,8 @@ queryData(){
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
+      console.log("█ 2 ►►►",  2);
+
       // me.submitDatas();
       me.uploadImg1(value);
     }
@@ -365,7 +370,7 @@ queryData(){
 
 
     /**
-     * 所有图片都上传成功后执行添加文章
+     * 所有图片都上传成功后
      */
     me.uploaders.onCompleteAll=function(){
       if(me.queryId == 3){

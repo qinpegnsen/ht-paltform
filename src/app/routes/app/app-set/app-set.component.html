@@ -31,9 +31,9 @@
       </div>
     </div>
     <div class="main_center">
-      <div style="margin-top: 30px; height: 630px; overflow-y:  auto">
-      <div style="width: 300px;margin: auto; background: white; cursor: pointer" *ngFor="let item of moduleList;let i = index" (click)="addTplCont(item.data)">
-        <img style="width: 300px; height: 100px" src="{{item.reslut}}"/>
+      <div class="main_centerOne">
+      <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index" (click)="addTplCont(item.data,i + 1)">
+        <img style="" src="{{item.reslut}}"/>
       </div>
     </div>
     </div>
@@ -48,10 +48,15 @@
       <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
         <div class="main_right_optIMG" *ngIf="curItem.tplType == 'IMG'">
           <div class="main_right_optIMGa"><strong>图片：</strong></div>
-          <div (change)="fileChangeListener($event)" style="margin-top: 6px;" class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
-            <img src="../../../../assets/img/bg1.jpg"/>
+          <div (change)="fileChangeListener(i)" style="margin-top: 6px;" class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
+            <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploaders[i].queue">
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                </span>
+              </span>
             <a title='选择要上传的文件' *ngIf="flag[i]"><span class="fa fa-plus"></span>
-              <input type="file" name="tplImg"  ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)">
+              <input type="file" name="tplImg"  ng2FileSelect [uploader]="uploaders[i]" (change)="fileChangeListener($event)">
             </a>
           </div>
         </div>
@@ -64,13 +69,15 @@
           <select class="form-control" name="optTypeList"  [(ngModel)]="optType[i]" (change)="showDesc(i)"  style="width: 120px; display: inline">
             <option  *ngFor="let item of optTypeList" [ngValue]="item">{{item.optTypeName}}</option>
           </select>
-          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text"  [disabled]="isEntered[i]=='N'">
+          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text" [(ngModel)]="optKey[i]" [disabled]="isEntered[i]=='N'">
         </div>
         <div class="main_right_optTypeDesc">{{typeDesc[i]}}</div>
+        <div class="main_right_optTypeDesc" style="display: none">{{optTypeCode[i]}}</div>
+        <div class="main_right_optTypeDesc" style="display: none">{{ord}}</div>
       </div>
       <div class="main_right_footer">
-        <button class="mb-sm btn-lg btn btn-primary btn-outline">提交</button>
-        <button class="mb-sm btn-lg btn btn-warning btn-outline">取消</button>
+        <button class="mb-sm btn-lg btn btn-warning btn-outline" type="button" (click)="cancel()">取消</button>
+        <button class="mb-sm btn-lg btn btn-primary btn-outline" type="submit" (click)="addModel(ord)">提交</button>
       </div>
     </div>
 
