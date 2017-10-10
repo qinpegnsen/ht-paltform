@@ -32,7 +32,8 @@ const routes: Routes = [
   providers: [
     AppIndexOptService,
     AppIndexTplService,
-    AppIndexOptComponent
+    AppIndexOptComponent,
+    AppIndexTplComponent
   ],
   declarations: [AppIndexOptComponent, AppIndexTplComponent, RightpageComponent, AppSetComponent]
 })

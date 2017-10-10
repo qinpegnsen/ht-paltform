@@ -48,15 +48,18 @@
       <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
         <div class="main_right_optIMG" *ngIf="curItem.tplType == 'IMG'">
           <div class="main_right_optIMGa"><strong>图片：</strong></div>
-          <div style="margin-top: 6px;" class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
-            <a title='选择要上传的文件' *ngIf="flag[i]"><span class="fa fa-plus"></span></a>
+          <div (change)="fileChangeListener($event)" style="margin-top: 6px;" class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
+            <img src="../../../../assets/img/bg1.jpg"/>
+            <a title='选择要上传的文件' *ngIf="flag[i]"><span class="fa fa-plus"></span>
+              <input type="file" name="tplImg"  ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)">
+            </a>
           </div>
         </div>
         <div class="main_right_optTXT" *ngIf="curItem.tplType == 'TXT'">
           <div><strong>文字：</strong></div>
           <textarea></textarea>
         </div>
-        <h5><strong>操作类型：</strong></h5>
+        <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
         <div class="main_right_optModel">
           <select class="form-control" name="optTypeList"  [(ngModel)]="optType[i]" (change)="showDesc(i)"  style="width: 120px; display: inline">
             <option  *ngFor="let item of optTypeList" [ngValue]="item">{{item.optTypeName}}</option>

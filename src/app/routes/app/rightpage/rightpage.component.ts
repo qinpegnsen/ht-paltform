@@ -20,6 +20,7 @@ const swal = require('sweetalert');
 export class RightpageComponent implements OnInit {
   private queryId:number;//获取添加，修改的ID
   private  tplImgUUid;//获取模板效果图的图片暗码
+  private  uuid=[];//获取模板效果图的图片暗码数组
   private  tplCheckedImgUUid;//获取模板选中效果图的图片暗码
   private limitForm = {
     optTypeCode: '',
@@ -32,7 +33,7 @@ export class RightpageComponent implements OnInit {
   private tplImg:string;
   public uploader:FileUploader = new FileUploader({
     url: '/upload/basic/upload',
-    itemAlias:"limitFile"
+    itemAlias:"limitFile",
   }); //初始化上传方法
   public uploaders:FileUploader = new FileUploader({
     url: '/upload/basic/upload',
@@ -49,8 +50,6 @@ export class RightpageComponent implements OnInit {
     _this.id = this.routeInfo.snapshot.queryParams['id'];
     _this.queryData();//请求移动端首页模板类型详细数据，并显示
     _this.queryTplData();//请求移动端首页模板详细数据，并显示
-    _this.getTplImgUUid();//获取模板效果图的图片暗码
-    _this.getTplCheckedImgUUid();//获取模板选中效果图的图片暗码
   }
 
   // 取消
@@ -59,27 +58,13 @@ export class RightpageComponent implements OnInit {
     _this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
-  /**
-   * 获取模板效果图的图片暗码
-   */
-  public getTplImgUUid(){
-   let _this = this;
-    _this.tplImgUUid = this.GetUidService.getUid();
-  }
-
-  /**
-   * 获取模板选中效果图的图片暗码
-   */
-  public getTplCheckedImgUUid(){
-    let _this = this;
-    _this.tplCheckedImgUUid = this.GetUidService.getUid();
-  }
 
   /**
    * 监听图片选择
    * @param $event
    */
   fileChangeListener() {
+
     // 当选择了新的图片的时候，把老图片从待上传列表中移除
     if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
     this.myImg = true;  //表示已经选了图片
@@ -193,7 +178,7 @@ queryData(){
     }
     //修改首页模板
     else if(_this.queryId == 4){
-      _this.loadImg(value);
+      _this.uploadImg(value);
     }
   }
 
@@ -266,76 +251,128 @@ queryData(){
     })
   }
 
-  /**
-   * 添加首页模板图片上传
-   */
-  private uploadImg(value) {
-    let me = this, uploadedNum = 0;
-    let allUploaders = [
-      me.uploader,
-      me.uploaders
-    ];
-    allUploaders.forEach((uploader, i) => {
-      uploader.uploadAll();//全部上传
-      if (!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
-      uploader.queue.forEach((item, index) => {
-        item.onSuccess = function (response, status, headers) {
-          if (!isNullOrUndefined(response)) {
-            let res = JSON.parse(response);
-            if (!res.success) {
-              AppComponent.rzhAlt('error',uploader.queue[0]._file.name+'上传失败')
-            }
-          }
-        }
-      })
-      uploader.onCompleteAll = function () {
-        console.log("█ 22222 ►►►",  22222);
 
-        uploadedNum += 1;     // 该组上传完之后uploadedNum+1；
-        if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
-          me.submitDatas(value)     //整理数据并且提交数据
-        }
+  /**
+   * 图片上传
+   */
+  uploadImg(value){
+    let me = this;
+    /**
+     * 构建form时，传入自定义参数
+     * @param item
+     */
+    me.uploader.onBuildItemForm = function (fileItem, form) {
+      console.log("█ fileItem ►►►",  fileItem);
+      let uuid=me.GetUidService.getUid();
+      form.append('uuid',uuid);
+      me.tplImgUUid=uuid;
+      console.log("█ me.tplImgUUid ►►►",  me.tplImgUUid);
+
+    };
+
+    /**
+     * 执行上传
+     */
+    me.uploader.uploadAll();
+    /**
+     * 上传成功处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploader.onSuccessItem = function (item, response, status, headers) {
+      let res = JSON.parse(response);
+      if (res.success) {
+        console.log("█ '上传图片成功' ►►►",  '上传图片成功');
+      } else {
+        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
-      // 每张图片上传结束后，判断如果是最后一组图片则提交，不是最后一组会进入下一个循环
-      if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
-        me.submitDatas(value)       //整理数据并且提交数据
-      }
-    })
+    };
+
+
+    /**
+     * 上传失败处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploader.onErrorItem = function (item, response, status, headers) {
+      AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+    };
+
+
+    /**
+     * 所有图片都上传成功后执行添加文章
+     */
+    me.uploader.onCompleteAll=function(){
+      // me.submitDatas();
+      me.uploadImg1(value);
+    }
   }
 
 
   /**
-   * 修改首页模板图片上传
+   * 图片上传
    */
-  private loadImg(value) {
-    let me = this, uploadedNum = 0;
-    let allUploaders = [
-      me.uploader,
-      me.uploaders
-    ];
-    allUploaders.forEach((uploader, i) => {
-      uploader.uploadAll();//全部上传
-      if (!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
-      uploader.queue.forEach((item, index) => {
-        item.onSuccess = function (response, status, headers) {
-          if (!isNullOrUndefined(response)) {
-            let res = JSON.parse(response);
-            if (!res.success) {
-              AppComponent.rzhAlt('error',uploader.queue[0]._file.name+'上传失败')
-            }
-          }
-        }
-      })
-      uploader.onCompleteAll = function () {
-        uploadedNum += 1;     // 该组上传完之后uploadedNum+1；
-        if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
-          me.upTplDatas(value)     //整理数据并且提交数据
-        }
+  uploadImg1(value){
+    let me = this;
+    /**
+     * 构建form时，传入自定义参数
+     * @param item
+     */
+    me.uploaders.onBuildItemForm = function (fileItem, form) {
+      console.log("█ fileItem ►►►",  fileItem);
+      let uuid=me.GetUidService.getUid();
+      form.append('uuid',uuid);
+      me.tplCheckedImgUUid=uuid;
+      console.log("█ me.tplCheckedImgUUid ►►►",  me.tplCheckedImgUUid);
+
+    };
+
+    /**
+     * 执行上传
+     */
+    me.uploaders.uploadAll();
+    /**
+     * 上传成功处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploaders.onSuccessItem = function (item, response, status, headers) {
+      let res = JSON.parse(response);
+      if (res.success) {
+        console.log("█ '上传图片成功' ►►►",  '上传图片成功');
+      } else {
+        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
-      // 每张图片上传结束后，判断如果是最后一组图片则提交，不是最后一组会进入下一个循环
-      if (uploadedNum == allUploaders.length) {  // 当有图片上传，并且是图片组的最后一个时
-        me.upTplDatas(value)       //整理数据并且提交数据
+    };
+
+
+    /**
+     * 上传失败处理
+     * @param item 上传列表
+     * @param response 返回信息
+     * @param status 状态
+     * @param headers 头信息
+     */
+    me.uploaders.onErrorItem = function (item, response, status, headers) {
+      AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
+    };
+
+
+    /**
+     * 所有图片都上传成功后执行添加文章
+     */
+    me.uploaders.onCompleteAll=function(){
+      if(me.queryId == 3){
+        me.submitDatas(value);
+      }else if(me.queryId == 4){
+        me.upTplDatas(value);
       }
-    })
+    }
   }
 }
