@@ -314,7 +314,7 @@
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
-                  <div class="col-lg-5 p0">商品</div>
+                  <div class="col-lg-6 p0">商品</div>
                   <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
                   <div class="col-lg-2 p0 text-center"><span  class="extra p10 ml _desc">操作</span></div>
                 </div>
@@ -325,7 +325,7 @@
                   <img src="{{item.goodsImage}}" alt="" class='_special'
                        onerror="javascript:this.src='../../../assets/img/dummy.png';">
                 </div>
-                <div class="col-lg-5 p0">
+                <div class="col-lg-6 p0">
                   <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
                   <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
                     {{standard.attrName}}：{{standard.value}}

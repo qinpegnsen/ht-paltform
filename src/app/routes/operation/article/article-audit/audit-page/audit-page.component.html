@@ -61,7 +61,7 @@
             <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
-                  <input type="radio" value="{{item.key}}"
+                  <input type="radio" value="{{item.key}}" disabled
                          [(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>
                   <span class="fa fa-circle"></span>{{item.text}}
                 </label>
@@ -115,7 +115,7 @@
             </div>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset *ngIf="queryArticleData.articleGoods.length>0">
           <div class="form-group">
             <label class="col-sm-2 control-label text-left">关联商品</label>
             <div class="_myAppend col-sm-12">
