@@ -453,6 +453,11 @@ const app = {
       text: '消息推送',
       icon: 'icon-speech',
       link: '/main/app/msg-push'
+    },
+    {
+      text: '系统公告',
+      icon: 'icon-speech',
+      link: '/main/app/sys-notice'
     }
   ]
 };

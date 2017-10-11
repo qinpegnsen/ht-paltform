@@ -1,0 +1,73 @@
+<!--新增快递公司-->
+<div class="rightpage">
+  <form class="form-validate form-horizontal" style="height: 100%" #notice="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>新增系统公告</legend>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>标题</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="128" #titleTem="ngModel" ngModel name="title" required
+                     placeholder='必填项'/>
+              <div [hidden]="titleTem.valid||titleTem.untouched"
+                   class="alert alert-danger">
+                标题是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>内容</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="128" #contentTem="ngModel" ngModel name="content"
+                     required placeholder='必填项'/>
+              <div [hidden]="contentTem.valid||contentTem.untouched"
+                   class="alert alert-danger">
+                内容是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>跳转链接</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="128" #urlTem="ngModel" ngModel name="url" required
+                     placeholder='必填项' [pattern]="patterns._URL"/>
+              <div [hidden]="urlTem.valid||urlTem.untouched"
+                   class="alert alert-danger">
+                请输入合法的地址
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i>*</i>结束时间</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="128" #endTimeTem="ngModel" ngModel name="endTime"
+                     required placeholder='必填项'/>
+              <div [hidden]="endTimeTem.valid||endTimeTem.untouched"
+                   class="alert alert-danger">
+                结束时间是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(notice.value)"
+                [disabled]="notice.invalid">提交信息
+        </button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+

@@ -1,0 +1,74 @@
+<div class="content-heading mb-lg">
+  系统公告
+  <app-buttons class="pull-right" [config]="noticeAddbutton" routerLink="addNotice"></app-buttons>
+</div>
+
+<div class="panel mb panel-default">
+
+  <div class="panel-body">
+    <table class="table table-striped" #noticeList="rzhDataTable" [rzhData]="noticeListdata"
+           (pageChange)="queryExpressList($event)">
+      <thead>
+      <tr>
+        <th class="w5">
+          序号
+        </th>
+        <th class="w15">
+          <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
+        </th>
+        <th class="w17">
+          <rzhDefaultSorter by="email">内容</rzhDefaultSorter>
+        </th>
+        <th class="w17">
+          <rzhDefaultSorter>地址</rzhDefaultSorter>
+        </th>
+        <th class="w10">
+          <rzhDefaultSorter>读否</rzhDefaultSorter>
+        </th>
+        <th class="w13">
+          <rzhDefaultSorter>创建时间</rzhDefaultSorter>
+        </th>
+        <th class="w13">
+          <rzhDefaultSorter>结束时间</rzhDefaultSorter>
+        </th>
+        <th class="w10">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let notice of noticeList.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{notice.title}}</td>
+        <td>{{notice.content}}</td>
+        <td>{{notice.url}}</td>
+        <td *ngIf="notice.isRead==null">否</td>
+        <td *ngIf="notice.isRead=='Y'">是</td>
+        <td>{{notice.createTime}}</td>
+        <td>{{notice.endTime}}</td>
+        <td>
+          <app-buttons [config]="deletebutton" (click)="deleteSort(notice.id)"></app-buttons>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{noticeListdata.genStartRow()}} 至
+              {{noticeListdata.genEndRow()}} 条，共 {{noticeListdata.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-md-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
+
