@@ -52,9 +52,8 @@
         <div [hidden]="bacctName.valid || bacctName.pristine"
                   class="col-sm-9 pull-right text-danger">
         请输入付款人
-      </div>
+        </div>
       </dl>
-
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">付款凭证：</dt>
         <dd class="orderId-color col-xs-9 font14">
@@ -67,8 +66,8 @@
                                class="_img">
                   <img [src]="item._file | imgUrl" #i class="bigImg" alt=""
                        onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <input type="text" placeholder="aaaaaa" class="form-control d-play pull-right" style="width: 230px;
-    margin-left: 10px;"  name="imgremark" [(ngModel)]="summary">
+                <input type="text" placeholder="请输入备注" class="form-control d-play pull-right" style="width: 230px;
+    margin-left: 10px;"  name="imgremark" [(ngModel)]="summary" required>
                 </span>
               </span>
           <label class="btn btn-default file-upload">
@@ -80,9 +79,10 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">付款时间：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+          <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
           <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
-          <span></span>
+          <!--<input type="text" [(ngModel)]="queryTime" name="queryTime">-->
+          <!--<span>{{queryTime + " " +time}}</span>-->
         </dd>
       </dl>
       <dl class="bb m0 clearfix">
@@ -94,7 +94,7 @@
       </dl>
       <div class="panel-footer text-right">
         <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="submit" (click)="addRemitCallBack(addForm.value)">确认提交</button>
+        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)" [disabled]="!addForm.form.valid">确认提交</button>
       </div>
 
   </div></form>

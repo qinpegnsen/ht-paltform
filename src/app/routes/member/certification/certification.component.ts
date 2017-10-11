@@ -23,7 +23,6 @@ export class CertificationComponent implements OnInit {
     this.aqeuryAll('AUDIT');
   }
 
-
   /**
    * 认证审核--查询分页
    */

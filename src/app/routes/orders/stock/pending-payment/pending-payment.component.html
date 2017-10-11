@@ -106,7 +106,7 @@
             <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'">查看详情</p>
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-              <span class="btn btn-info" (click)="addBankData(name.ordno,goods.pay)" *ngIf="goods.payWay=='REMIT'">确认付款</span>
+              <span class="btn btn-info" (click)="addBankData(name.ordno,goods.pay,goodsList.curPage)" *ngIf="goods.payWay=='REMIT'">确认付款</span>
           </td>
         </tr>
       </table>
@@ -132,4 +132,5 @@
 </table>
 <app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
 
-  <app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" (bankDate)="getBankResult($event)" ></app-bank-transfer>
+  <app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" [curPage]="curPage1"
+                     (bankDate)="getBankResult($event)" ></app-bank-transfer>

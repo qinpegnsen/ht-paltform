@@ -33,6 +33,7 @@ export class PendingPaymentComponent implements OnInit {
   public goodsList: Page = new Page();
   private orderId1:any;
   private goodspay1:any;
+  private curPage1:any;
 
   private showBankWindow:boolean = false;
   @ViewChild('cancelBox') cancelBox: CancelComponent;
@@ -69,7 +70,6 @@ export class PendingPaymentComponent implements OnInit {
     if (this.agentTime) {
       dateStr = RzhtoolsService.dataFormat(this.agentTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.agentTime[1], 'yyyy/MM/dd');
     }
-
     let requestData = {
       curPage: activePage,
       pageSize: 10,
@@ -114,7 +114,7 @@ export class PendingPaymentComponent implements OnInit {
   }
 
   /**
-   * 取消订单回调函数
+   * 取消付款回调函数
    * @param data
    */
   getCancelOrderData(data) {
@@ -124,14 +124,16 @@ export class PendingPaymentComponent implements OnInit {
   /*
    * 添加弹窗
    * */
-  addBankData(orderId,goodspay) {
+  addBankData(orderId,goodspay,curPage) {
     this.orderId1=orderId;
-    this.goodspay1=goodspay
+    this.goodspay1=goodspay;
+    this.curPage1=curPage;
     this.showBankWindow = true;
+
   }
 
   /**
-   * 发货回调函数
+   * 付款回调函数
    * @param data
    */
   getBankResult(data) {
