@@ -10,12 +10,11 @@
 .deliver-order ._popup {
   background-color: #fff;
   position: relative;
-  width: 600px;
-  top: 20%;
+  width:600px;
+  top: 10%;
   margin: auto;
   z-index: 300;
-  overflow-y:auto;
-  height: 600px;
+  height: 700px;
 }
 
 .deliver-order dt {
@@ -72,9 +71,9 @@
     line-height: 40px
   }
 }
-.pop{
-  margin-top: 2%;
-}
+//.pop{
+//  margin-top: 2%;
+//}
 .bigImg{
   position: fixed;
   top:0;

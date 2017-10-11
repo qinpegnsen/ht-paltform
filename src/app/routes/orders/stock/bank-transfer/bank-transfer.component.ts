@@ -90,8 +90,6 @@ export class BankTransferComponent implements OnInit {
 }
 
 aa(obj){
-    console.log("█ this.uuid ►►►",  this.uuid);
-    console.log("█ this.summary ►►►",  this.summary);
   let url = "/agentOrd/addAgentOrdPayRecRemit";
   let hour = this.myTime.getHours();
   let minutes = this.myTime.getMinutes();

@@ -13,6 +13,9 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 export class CertificationComponent implements OnInit {
   private data: Page = new Page();
   private state:any;//审核状态
+  private showReasonWindow:boolean = false;
+  private orderId1:any;
+
   constructor(private submit: SubmitService,private rzhtoolsService:RzhtoolsService) { }
 
   ngOnInit() {
@@ -50,22 +53,9 @@ export class CertificationComponent implements OnInit {
       id:id,
       state: 'PASS',
     }
-    this.submit.putRequest(url, data, false);
+    this.submit.putRequest(url, data, true);
     this.aqeuryAll(this.state);
   }
-  /**
-   * 认证未通过
-   */
-  cancel(id){
-    let url = '/custAuthInfo/updateState';
-    let data = {
-      id: id,
-      state: 'UNPASS',
-    }
-    this.submit.putRequest(url, data, false);
-    this.aqeuryAll(this.state);
-  }
-
 
   /**
    * 鼠标放在图片上时大图随之移动
@@ -74,7 +64,6 @@ export class CertificationComponent implements OnInit {
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
     i.style.left = (event.clientX +30) + 'px';
-    // console.log("█ i.style.top = 100 ►►►",  i.style.top);
   }
 
   /**
@@ -82,5 +71,19 @@ export class CertificationComponent implements OnInit {
    */
   hideImg(i) {
     i.style.display = 'none';
+  }
+
+  /*
+   * 添加弹窗
+   * */
+  addNewData(orderId) {
+    console.log("█ orderId ►►►",  orderId);
+    this.orderId1=orderId;
+    this.showReasonWindow = true;
+  }
+
+  getReason(data) {
+    this.showReasonWindow = false;
+    if(data == 'success') this.aqeuryAll('AUDIT');
   }
 }

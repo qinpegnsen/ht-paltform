@@ -1,3 +1,27 @@
-<p>
-  reason-rejec works!
-</p>
+
+<div class="deliver-order fadeIn" *ngIf="showReasonWindow">
+  <div class="mask"></div>
+  <form class="_popup animated fadeIn" #updata="ngForm">
+    <div class="pop popup-hd">
+      <span class="f-bold">编辑退款驳回原因</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+
+    <!--表单-->
+    <div class="pop deliver-box font12 w100">
+
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3 lh40">驳回原因:</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel >
+        </dd>
+      </dl>
+
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info" type="button" (click)="delivery(updata.value)">确认提交</button>
+    </div>
+  </form>
+</div>
+
