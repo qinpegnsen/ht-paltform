@@ -126,7 +126,6 @@ export class AddArticleComponent implements OnInit {
         articleId: this.articleId
       }
       this.queryArticleData = this.service.getData(url, data);
-      console.log("█ this.queryArticleData ►►►",  this.queryArticleData);
       this.emitClasssId=this.queryArticleData.articleClassId;//获取到当前的类别id，并且展示其名称
       this.coverType(this.queryArticleData.coverType);//初始化的时候对上传的文件的数量做修改，要不然默认都是1
       setTimeout(() => {//初始化编辑器和给编辑器赋值

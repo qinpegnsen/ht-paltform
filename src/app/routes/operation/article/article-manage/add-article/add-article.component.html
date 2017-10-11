@@ -133,7 +133,14 @@
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
             <div class="_myAppend col-sm-12">
-
+              <div class="list-group-item">
+                <div class="clearfix">
+                  <div class="_spanW col-lg-1 p0"></div>
+                  <div class="col-lg-6 p0">商品</div>
+                  <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
+                  <div class="col-lg-2 p0 text-center"><span  class="extra p10 ml _desc">操作</span></div>
+                </div>
+              </div>
             </div>
           </div>
         </fieldset>
@@ -303,26 +310,34 @@
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
-            <div class="_myAppend col-sm-12 _updateClass">
-              <li *ngFor="let item of queryArticleData.articleGoods; let i = index" class="list-group-item">
+            <ul class="_myAppend col-sm-12 _updateClass" [class.height0]="queryArticleData.articleGoods.length==0">
+              <div class="list-group-item">
                 <div class="clearfix">
-                  <div class="p0 _span col-lg-1 p0">
-                    <img src="{{item.goodsImage}}" alt="" class='_special'
-                         onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                  </div>
-                  <div class="col-lg-6 p0">
-                    <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
-                    <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
-                      {{standard.attrName}}：{{standard.value}}
-                    </div>
-                    <input type="hidden" value="{{item.goodsCode}}">
-                  </div>
-                  <div class="col-lg-3 p0">
-                    <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
-                  </div>
+                  <div class="_spanW col-lg-1 p0"></div>
+                  <div class="col-lg-5 p0">商品</div>
+                  <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
+                  <div class="col-lg-2 p0 text-center"><span  class="extra p10 ml _desc">操作</span></div>
                 </div>
-              </li>
-            </div>
+              </div>
+              <li *ngFor="let item of queryArticleData.articleGoods; let i = index" class="list-group-item">
+              <div class="clearfix">
+                <div class="p0 _span col-lg-1 p0">
+                  <img src="{{item.goodsImage}}" alt="" class='_special'
+                       onerror="javascript:this.src='../../../assets/img/dummy.png';">
+                </div>
+                <div class="col-lg-5 p0">
+                  <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
+                  <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
+                    {{standard.attrName}}：{{standard.value}}
+                  </div>
+                  <input type="hidden" value="{{item.goodsCode}}">
+                </div>
+                <div class="col-lg-3 p0 text-center">
+                  <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
+                </div>
+              </div>
+            </li>
+            </ul>
           </div>
         </fieldset>
         <fieldset>
@@ -410,8 +425,8 @@
                       </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-3 p0">
-                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    <div class="col-lg-3 p0 text-center">
+                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.price}}</span></span>
                     </div>
                   </div>
                 </li>
@@ -444,8 +459,8 @@
                       </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-3 p0">
-                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>
+                    <div class="col-lg-3 p0 text-center">
+                      <span class="extra p10 ml"><span>￥ {{item.goodsPrice.price}}</span></span>
                     </div>
                   </div>
                 </li>

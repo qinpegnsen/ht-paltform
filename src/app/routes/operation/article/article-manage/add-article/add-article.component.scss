@@ -86,6 +86,7 @@
 }
 ._myAppend{
   margin-top:15px;
+  min-height: 0px !important;
   overflow-y: scroll;
  }
 .control-label{
@@ -99,4 +100,10 @@
   width:100px !important;
   height: 100px !important;
   margin-right: 15px;
+}
+._spanW{
+  width:60px
+}
+.height0{
+  height:0px !important;
 }
