@@ -132,7 +132,7 @@
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
-            <div class="_myAppend col-sm-12">
+            <div class="_myAppend col-sm-12" [class.height0]="copylistTeamOne.length==0">
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
@@ -310,7 +310,7 @@
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
-            <ul class="_myAppend col-sm-12 _updateClass" [class.height0]="queryArticleData.articleGoods.length==0">
+            <ul class="_myAppend col-sm-12 _updateClass">
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>

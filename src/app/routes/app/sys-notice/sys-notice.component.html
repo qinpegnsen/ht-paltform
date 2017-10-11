@@ -1,13 +1,14 @@
 <div class="content-heading mb-lg">
   系统公告
-  <app-buttons class="pull-right" [config]="noticeAddbutton" routerLink="addNotice"></app-buttons>
+  <app-buttons class="pull-right ml-lg" [config]="noticeAddbutton" routerLink="addNotice"></app-buttons>
+  <app-buttons class="pull-right" [config]="delEXpireAddbutton" (click)="delEXpireNotice()"></app-buttons>
 </div>
 
 <div class="panel mb panel-default">
 
   <div class="panel-body">
     <table class="table table-striped" #noticeList="rzhDataTable" [rzhData]="noticeListdata"
-           (pageChange)="queryExpressList($event)">
+           (pageChange)="queryNoticeList($event)">
       <thead>
       <tr>
         <th class="w5">

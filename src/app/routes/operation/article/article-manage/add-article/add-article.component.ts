@@ -51,6 +51,7 @@ export class AddArticleComponent implements OnInit {
   public brandList: any;                              //品牌列表
   linkGoodsList: Array<any>;                          //可以选择的商品
   listTeamOne: Array<any> = [];                       //已经选择的商品
+  copylistTeamOne: Array<any> = [];                   //已经赋值选择的商品
   private brandName: any = '';                       //品牌名
   private goodsName: any = '';                       //商品名
   private linkGoodStr: any = '';                     //关联商品id的拼接
@@ -315,6 +316,7 @@ export class AddArticleComponent implements OnInit {
     this.goodShow = !this.goodShow;
     $("session").css('z-index', 0);
     $(".note-dropzone").css("display",'none');//解决关联商品后编辑器有遮罩层层的bug
+    this.copylistTeamOne=this.listTeamOne;//先把数组复制下，用来判断关联商品的样式
     this.listTeamOne=[];//清空已经选择的数组
   }
 
