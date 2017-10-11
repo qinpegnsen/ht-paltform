@@ -15,6 +15,7 @@ export class AuditPageComponent implements OnInit {
   public articleCommend: any                        //文章是否推荐
   public articleCommentFlag: any                    //文章是否评论
   public autionOptions;                             //审核状态的列表
+  public articleCoverTypes;                         //文章封面的类型数据
   constructor(
     private routeInfo: ActivatedRoute,
     public ContentService: ContentService,
@@ -43,8 +44,18 @@ export class AuditPageComponent implements OnInit {
     this.autionOptions = [
       {id: 'SUCCESS', name: '成功'},
       {id: 'FAILURE', name: '失败'}
-    ]
-  }
+    ];
+
+    /**
+     * 文章的封面三种类型
+     * @type {[{key: string; text: string},{key: string; text: string},{key: string; text: string}]}
+     */
+    this.articleCoverTypes = [
+      {key: 'AUTO', text: '自动'},
+      {key: 'ONE', text: '单图'},
+      {key: 'THREE', text: '三图'}
+    ];
+  };
 
   /**
    * 提交审核
@@ -54,7 +65,7 @@ export class AuditPageComponent implements OnInit {
       articleId: this.articleId,
       auditState: obj.auditState,
       reason: obj.reason
-    }
+    };
     let url = "/article/AuditArticle";
     let result = this.ContentService.auditArticle(url, data)
     if (result) {

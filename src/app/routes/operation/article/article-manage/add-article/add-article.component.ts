@@ -94,7 +94,7 @@ export class AddArticleComponent implements OnInit {
       {key: 'AUTO', text: '自动'},
       {key: 'ONE', text: '单图'},
       {key: 'THREE', text: '三图'}
-    ]
+    ];
 
     /**
      * 审核时候的两种状态
@@ -126,6 +126,7 @@ export class AddArticleComponent implements OnInit {
         articleId: this.articleId
       }
       this.queryArticleData = this.service.getData(url, data);
+      console.log("█ this.queryArticleData ►►►",  this.queryArticleData);
       this.emitClasssId=this.queryArticleData.articleClassId;//获取到当前的类别id，并且展示其名称
       this.coverType(this.queryArticleData.coverType);//初始化的时候对上传的文件的数量做修改，要不然默认都是1
       setTimeout(() => {//初始化编辑器和给编辑器赋值
@@ -247,7 +248,6 @@ export class AddArticleComponent implements OnInit {
     }
     this.linkGoods = this.operationService.linkGoods(url, data);
     if (this.linkGoods) this.linkGoodsList = this.linkGoods.voList;
-    console.log("█  this.linkGoodsList ►►►", this.linkGoodsList);
   }
 
 
@@ -422,7 +422,6 @@ export class AddArticleComponent implements OnInit {
    * @param state
    */
   submit(obj, state) {
-    console.log("█ 1 ►►►",  1);
     this.submitObj = obj;
     this.submitState = state;
     let me = this;
@@ -443,7 +442,6 @@ export class AddArticleComponent implements OnInit {
       this.linkGoodStr = idStr.slice(0, idStr.length - 1);
       let url = '/article/updateArticle';
       obj.articleContent = sHTML;  //赋值编辑器的值
-      console.log("█ sHTML ►►►",  sHTML);
       obj.addArticleEnum = state //默认文章的类型是草稿
       obj.articleClassId = this.articleClasssId;
       console.log("█ this.articleClasssId ►►►",  this.articleClasssId);

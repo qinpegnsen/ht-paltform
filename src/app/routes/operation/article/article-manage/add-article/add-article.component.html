@@ -227,7 +227,7 @@
             <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
-                  <input type="radio" value="{{item.key}}" (click)="changeState(item.key)"
+                  <input type="radio" value="{{item.key}}" (click)="coverType(item.key)"
                          [(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>
                   <span class="fa fa-circle"></span>{{item.text}}
                 </label>
@@ -236,35 +236,36 @@
           </div>
         </fieldset>
         <fieldset *ngIf="queryArticleData.coverType!='AUTO'">
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">封面图片</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">-->
-                <!--<span class="close" (click)="item.remove()">×</span>-->
-                <!--<span class="upload-thumb">-->
-                  <!--<img *ngIf="item" [src]="item._file | imgUrl"-->
-                       <!--onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"-->
-                       <!--class="_img">-->
-                <!--</span>-->
-              <!--</span>-->
-              <!--&lt;!&ndash;修改图片的时候如果有封面图片就展示封面图片&ndash;&gt;-->
-              <!--<span class="ui-state-disabled pull-left _uploadImg" #coverImg>-->
-                <!--<span class="close" (click)="remove(coverImg)" *ngIf="queryArticleData.articleCoverVO!=null">×</span>-->
-                <!--<span class="upload-thumb">-->
-                    <!--<ng-container *ngIf="queryArticleData.articleCoverVO!=null">-->
-                      <!--<img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}" class="qpsBgImg" alt=""  onerror="javascript:this.src='../../../assets/img/dummy.png';">-->
-                    <!--</ng-container>-->
-                <!--</span>-->
-              <!--</span>-->
-              <!--<div>-->
-                <!--<label for="image-input" class="btn btn-default file-upload col-sm-3">-->
-                  <!--<i class="icon-cloud-upload mr"></i>{{fileName}}-->
-                  <!--<input type="file" name="coverImg" ngModel ng2FileSelect [uploader]="uploader"-->
-                         <!--multiple maxlength="3"/>-->
-                <!--</label>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">封面图片</label>
+            <div class="col-sm-10">
+              <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
+                <span class="close" (click)="item.remove()">×</span>
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                       class="_img">
+                </span>
+              </span>
+              <!--修改图片的时候如果有封面图片就展示封面图片-->
+              <span class="ui-state-disabled pull-left _uploadImg" #coverImg>
+                <span class="close" (click)="remove(coverImg)" *ngIf="queryArticleData.articleCoverVO!=null">×</span>
+                <span class="upload-thumb">
+                    <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
+                      <img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}"
+                           class="qpsBgImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';">
+                    </ng-container>
+                </span>
+              </span>
+              <div>
+                <label for="image-input" class="btn btn-default file-upload col-sm-3">
+                  <i class="icon-cloud-upload mr"></i>{{fileName}}
+                  <input type="file" name="coverImg" ngModel ng2FileSelect [uploader]="uploader"
+                         multiple maxlength="3"/>
+                </label>
+              </div>
+            </div>
+          </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -309,25 +310,16 @@
                     <img src="{{item.goodsImage}}" alt="" class='_special'
                          onerror="javascript:this.src='../../../assets/img/dummy.png';">
                   </div>
-                  <!--<div class="col-lg-6 p0">-->
-                  <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
-                  <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
-                  <!--{{standard.attrName}}：{{standard.value}}-->
-                  <!--</div>-->
-                  <!--<input type="hidden" value="{{item.goodsCode}}">-->
-                  <!--</div>-->
-                  <!--<div class="col-lg-3 p0">-->
-                  <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
-                  <!--</div> <!--<div class="col-lg-6 p0">-->
-                  <!--<span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>-->
-                  <!--<div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">-->
-                  <!--{{standard.attrName}}：{{standard.value}}-->
-                  <!--</div>-->
-                  <!--<input type="hidden" value="{{item.goodsCode}}">-->
-                  <!--</div>-->
-                  <!--<div class="col-lg-3 p0">-->
-                  <!--<span class="extra p10 ml"><span>￥ {{item.goodsPrice.memberPrice}}</span></span>-->
-                  <!--</div>-->
+                  <div class="col-lg-6 p0">
+                    <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
+                    <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
+                      {{standard.attrName}}：{{standard.value}}
+                    </div>
+                    <input type="hidden" value="{{item.goodsCode}}">
+                  </div>
+                  <div class="col-lg-3 p0">
+                    <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
+                  </div>
                 </div>
               </li>
             </div>
@@ -348,212 +340,212 @@
 </div>
 <!--审核文章-->
 <!--<div class="col-lg-10" *ngIf="linkType=='auditArticle'">-->
-  <!--<form class="form-validate form-horizontal" style="height: 100%" #aduit="ngForm">-->
-    <!--&lt;!&ndash; START panel&ndash;&gt;-->
-    <!--<div class="panel-default">-->
-      <!--<div class="panel-body">-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>文章分类</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" disabled name="articleTitle" #articleTitleTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleClass" required-->
-                     <!--placeholder='必填项'/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>文章标题</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articleTitle"-->
-                     <!--#articleTitleTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleTitle" required-->
-                     <!--placeholder='必填项'/>-->
-              <!--<div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"-->
-                   <!--class="alert alert-danger">-->
-                <!--文章标题是必填项-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>文章短标题</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort"-->
-                     <!--#articleTitleShortTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleTitleShort"-->
-                     <!--required placeholder='必填项'/>-->
-              <!--<div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"-->
-                   <!--class="alert alert-danger">-->
-                <!--文章短标题是必填项-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>文章摘要-->
-            <!--</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articleAbstract"-->
-                     <!--#articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract-->
+<!--<form class="form-validate form-horizontal" style="height: 100%" #aduit="ngForm">-->
+<!--&lt;!&ndash; START panel&ndash;&gt;-->
+<!--<div class="panel-default">-->
+<!--<div class="panel-body">-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>文章分类</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" disabled name="articleTitle" #articleTitleTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleClass" required-->
+<!--placeholder='必填项'/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>文章标题</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" maxlength="128" disabled name="articleTitle"-->
+<!--#articleTitleTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleTitle" required-->
+<!--placeholder='必填项'/>-->
+<!--<div [hidden]="articleTitleTem.valid||articleTitleTem.untouched"-->
+<!--class="alert alert-danger">-->
+<!--文章标题是必填项-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>文章短标题</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort"-->
+<!--#articleTitleShortTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleTitleShort"-->
+<!--required placeholder='必填项'/>-->
+<!--<div [hidden]="articleTitleShortTem.valid||articleTitleShortTem.untouched"-->
+<!--class="alert alert-danger">-->
+<!--文章短标题是必填项-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>文章摘要-->
+<!--</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" maxlength="128" disabled name="articleAbstract"-->
+<!--#articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract-->
 <!--"-->
-                     <!--required placeholder='必填项'/>-->
-              <!--<div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"-->
-                   <!--class="alert alert-danger">-->
-                <!--文章摘要是必填项-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>文章内容</label>-->
-            <!--<textarea name="" id="" cols="30" rows="10" disabled>{{queryArticleData.articleBody}}</textarea>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>是否推荐</label>-->
-            <!--<div class="col-sm-10 control-label">-->
-              <!--<div class="radio c-radio pull-left">-->
-                <!--<label>-->
-                  <!--<input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommend"-->
-                         <!--name="articleCommend"-->
-                         <!--#articleCommendY class="col-sm-2"/>-->
-                  <!--<span class="fa fa-circle"></span>是-->
-                <!--</label>-->
-                <!--<label>-->
-                  <!--<input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"-->
-                         <!--#articleCommendN class="col-sm-2"/>-->
-                  <!--<span class="fa fa-circle"></span>否-->
-                <!--</label>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>-->
-            <!--<div class="col-sm-10 control-label">-->
-              <!--<div class="radio c-radio pull-left">-->
-                <!--<label>-->
-                  <!--<input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommentFlag"-->
-                         <!--name="articleCommentFlag" #articleCommendY class="col-sm-2"/>-->
-                  <!--<span class="fa fa-circle"></span>是-->
-                <!--</label>-->
-                <!--<label>-->
-                  <!--<input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommentFlag"-->
-                         <!--name="articleCommentFlag" #articleCommendN class="col-sm-2"/>-->
-                  <!--<span class="fa fa-circle"></span>否-->
-                <!--</label>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>封面类型</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">-->
-                <!--<label>-->
-                  <!--<input type="radio" value="{{item.key}}" disabled (click)="changeState(item.key)"-->
-                         <!--[(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>-->
-                  <!--<span class="fa fa-circle"></span>{{item.text}}-->
-                <!--</label>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset *ngIf="flag">-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">封面路径-->
-            <!--</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<label for="image-input" class="file-upload">-->
-                <!--<button class="btn btn-info"><em class="fa fa-upload mr" disabled (click)="upload()"></em>图片上传</button>-->
-                <!--<input id="image-input" type="file">-->
-              <!--</label>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">文章标签-->
-            <!--</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articlekeyword"-->
-                     <!--#articlekeywordTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleTag"/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">关键字</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" disabled name="articleTag" #articleTagTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleKeyword"/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">相关文章-->
-            <!--</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articleLink"-->
-                     <!--#articleLinkTem="ngModel"-->
-                     <!--[(ngModel)]="queryArticleData.articleLink"/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label">关联商品</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" disabled name="goodIds" #goodIdsTem="ngModel" ngModel/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>审核结果</label>-->
-            <!--<div class="col-sm-4">-->
-              <!--<select class="form-control" type="text" name="auditState" [(ngModel)]="auditResult" required>-->
-                <!--<option [value]="item.id" *ngFor="let item of autionOptions">{{item.name}}</option>-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset *ngIf="auditResult=='FAILURE'">-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-2 control-label"><i>*</i>原因</label>-->
-            <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" name="reason" #reasonTem="ngModel" [(ngModel)]="reason" required-->
-                     <!--placeholder='请输入未审核通过的原因'/>-->
-              <!--<div [hidden]="reasonTem.valid||reasonTem.untouched"-->
-                   <!--class="alert alert-danger">-->
-                <!--文章标题是必填项-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-        <!--<fieldset>-->
-          <!--<div class="pull-right form-group special">-->
-            <!--<button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>-->
-            <!--<button class="ml btn btn-info pull-left" type="submit" (click)="submit(aduit.value,'AUDIT')"-->
-                    <!--[disabled]="aduit.invalid">确认审核-->
-            <!--</button>-->
-          <!--</div>-->
-        <!--</fieldset>-->
-      <!--</div>-->
+<!--required placeholder='必填项'/>-->
+<!--<div [hidden]="articleAbstractTem.valid||articleAbstractTem.untouched"-->
+<!--class="alert alert-danger">-->
+<!--文章摘要是必填项-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>文章内容</label>-->
+<!--<textarea name="" id="" cols="30" rows="10" disabled>{{queryArticleData.articleBody}}</textarea>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>是否推荐</label>-->
+<!--<div class="col-sm-10 control-label">-->
+<!--<div class="radio c-radio pull-left">-->
+<!--<label>-->
+<!--<input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommend"-->
+<!--name="articleCommend"-->
+<!--#articleCommendY class="col-sm-2"/>-->
+<!--<span class="fa fa-circle"></span>是-->
+<!--</label>-->
+<!--<label>-->
+<!--<input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommend" name="articleCommend"-->
+<!--#articleCommendN class="col-sm-2"/>-->
+<!--<span class="fa fa-circle"></span>否-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>是否允许评论</label>-->
+<!--<div class="col-sm-10 control-label">-->
+<!--<div class="radio c-radio pull-left">-->
+<!--<label>-->
+<!--<input type="radio" value="Y" disabled [(ngModel)]="queryArticleData.articleCommentFlag"-->
+<!--name="articleCommentFlag" #articleCommendY class="col-sm-2"/>-->
+<!--<span class="fa fa-circle"></span>是-->
+<!--</label>-->
+<!--<label>-->
+<!--<input type="radio" value="N" [(ngModel)]="queryArticleData.articleCommentFlag"-->
+<!--name="articleCommentFlag" #articleCommendN class="col-sm-2"/>-->
+<!--<span class="fa fa-circle"></span>否-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>封面类型</label>-->
+<!--<div class="col-sm-10">-->
+<!--<div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">-->
+<!--<label>-->
+<!--<input type="radio" value="{{item.key}}" disabled (click)="changeState(item.key)"-->
+<!--[(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>-->
+<!--<span class="fa fa-circle"></span>{{item.text}}-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset *ngIf="flag">-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label">封面路径-->
+<!--</label>-->
+<!--<div class="col-sm-10">-->
+<!--<label for="image-input" class="file-upload">-->
+<!--<button class="btn btn-info"><em class="fa fa-upload mr" disabled (click)="upload()"></em>图片上传</button>-->
+<!--<input id="image-input" type="file">-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label">文章标签-->
+<!--</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" maxlength="128" disabled name="articlekeyword"-->
+<!--#articlekeywordTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleTag"/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label">关键字</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" disabled name="articleTag" #articleTagTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleKeyword"/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label">相关文章-->
+<!--</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" maxlength="128" disabled name="articleLink"-->
+<!--#articleLinkTem="ngModel"-->
+<!--[(ngModel)]="queryArticleData.articleLink"/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label">关联商品</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" disabled name="goodIds" #goodIdsTem="ngModel" ngModel/>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>审核结果</label>-->
+<!--<div class="col-sm-4">-->
+<!--<select class="form-control" type="text" name="auditState" [(ngModel)]="auditResult" required>-->
+<!--<option [value]="item.id" *ngFor="let item of autionOptions">{{item.name}}</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset *ngIf="auditResult=='FAILURE'">-->
+<!--<div class="form-group">-->
+<!--<label class="col-sm-2 control-label"><i>*</i>原因</label>-->
+<!--<div class="col-sm-10">-->
+<!--<input class="form-control" type="text" name="reason" #reasonTem="ngModel" [(ngModel)]="reason" required-->
+<!--placeholder='请输入未审核通过的原因'/>-->
+<!--<div [hidden]="reasonTem.valid||reasonTem.untouched"-->
+<!--class="alert alert-danger">-->
+<!--文章标题是必填项-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--<fieldset>-->
+<!--<div class="pull-right form-group special">-->
+<!--<button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>-->
+<!--<button class="ml btn btn-info pull-left" type="submit" (click)="submit(aduit.value,'AUDIT')"-->
+<!--[disabled]="aduit.invalid">确认审核-->
+<!--</button>-->
+<!--</div>-->
+<!--</fieldset>-->
+<!--</div>-->
 
-    <!--</div>-->
-    <!--&lt;!&ndash; END panel&ndash;&gt;-->
-  <!--</form>-->
+<!--</div>-->
+<!--&lt;!&ndash; END panel&ndash;&gt;-->
+<!--</form>-->
 <!--</div>-->
 
 <!--关联商品的弹框-->

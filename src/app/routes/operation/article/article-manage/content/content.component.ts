@@ -141,7 +141,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let that=this;
     swal({
       title: "您确定要删除吗？",
-      text: "您确定要删除这条数据？",
+      text: "",
       type: "warning",
       showCancelButton: true,
       closeOnConfirm: false,
