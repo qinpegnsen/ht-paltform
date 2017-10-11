@@ -25,8 +25,6 @@ export class ArticleAuditComponent implements OnInit {
       title:"审核",
       type: "agree"
     };
-
-
   }
 
   /**
@@ -40,7 +38,7 @@ export class ArticleAuditComponent implements OnInit {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:6,
+      pageSize:8,
       articleState:'AUDIT',
       articleTitle:'',
       isTopState:'N'

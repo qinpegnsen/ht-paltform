@@ -126,12 +126,8 @@ export class AddArticleComponent implements OnInit {
         articleId: this.articleId
       }
       this.queryArticleData = this.service.getData(url, data);
-      console.log("█ this.queryArticleData ►►►",  this.queryArticleData);
       this.emitClasssId=this.queryArticleData.articleClassId;//获取到当前的类别id，并且展示其名称
-      console.log("█ expr ►►►",  this.queryArticleData.coverType);
       this.coverType(this.queryArticleData.coverType);//初始化的时候对上传的文件的数量做修改，要不然默认都是1
-      console.log("█ this.emitClasssId ►►►",  this.emitClasssId);
-      console.log(this.queryArticleData);
       setTimeout(() => {//初始化编辑器和给编辑器赋值
         let me = this;
         $('#summernote').summernote({
@@ -150,7 +146,6 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);
       }, 0);
       if(this.linkType == 'updateArticle' ){//如果是修改的时候要添加删除按钮
-        console.log("█ 1 ►►►",  1);
         setTimeout(()=>{
           let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`;
           console.log("█ $(\"._myAppend\").find($('li')).children('div') ►►►",  $("._myAppend").find($('li')).children('div'));
@@ -159,7 +154,6 @@ export class AddArticleComponent implements OnInit {
             this.excuDel(this)
           })
         },0)
-
       }
     }else if(this.linkType == 'addArticle'){
       setTimeout(() => {//新增的时候初始化编辑器的值

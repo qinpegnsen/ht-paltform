@@ -29,8 +29,16 @@
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
         <td>{{article.articleTitle}}</td>
-        <td>{{article.articleClass.acName}}</td>
-        <td><img src="{{article.articleCover.url }}" class="qpsImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';"></td>
+        <td>{{article.acName}}</td>
+        <td>
+          <ng-container *ngIf="article.articleCoverVO!=null">
+            <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url }}" class="qpsImg" alt=""
+                 onerror="javascript:this.src='../../../assets/img/dummy.png';">
+          </ng-container>
+          <ng-container *ngIf="article.articleCoverVO==null">
+            无封面
+          </ng-container>
+        </td>
         <td *ngIf="article.articleGoods.length==0">否</td>
         <td *ngIf="article.articleGoods.length>0">是</td>
         <td>
