@@ -30,3 +30,7 @@
   height: 100px !important;
   margin-right: 15px;
 }
+._myMask{
+  position: absolute;z-index: 66666;
+  left:0;top:0;bottom:0;right:0;background: rgba(0,0,0,0);
+}

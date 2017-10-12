@@ -1,0 +1,28 @@
+.cancel-order .popup{
+  width: 550px;
+  z-index: 300;
+}
+.cancel-con dt{
+  padding: 12px;
+  text-align: right;
+  font-weight: normal;
+  color: #888;
+}
+.cancel-con dd{
+  color: #666;
+  padding: 12px;
+  vertical-align: top;
+  border-left: 1px solid #F0F0F0;
+}
+.cancel-con dt,.cancel-con dd{
+  display: inline-block;
+}
+.cancel-order .mask{
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.cancel-con .orderId-color{
+  color: #6ec0ff;
+}
+.cancel-reason li label{
+  font-weight: normal;
+}

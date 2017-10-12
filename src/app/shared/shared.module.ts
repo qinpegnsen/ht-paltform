@@ -87,7 +87,7 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     SelectAreaModule,
     SelectModule,
     AngularEchartsModule,
-    FoueAreasModule
+    FoueAreasModule,
   ],
   providers: [
     ColorsService,

@@ -13,7 +13,7 @@
       <li class="font">首页编辑完成后，需要点击“发布首页”按钮，移动端首页才会显示编辑后的内容</li>
     </ul>
   </div>
- <!--发布首页按钮-->
+  <!--发布首页按钮-->
   <button class="mb-sm btn btn-info" style="margin-left: 15px" type="button">发布首页</button>
   <!--模板首页设置主体模块-->
   <div class="main">
@@ -32,10 +32,14 @@
     </div>
     <div class="main_center">
       <div class="main_centerOne">
-      <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index" (click)="addTplCont(item.data,i + 1)">
-        <img style="" src="{{item.reslut}}"/>
+        <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index" (click)="addTplCont(item.data,i + 1)">
+          <img style="" src="{{item.reslut}}" (click)="show(i)"/>
+          <div class="main_centerTwe_one" *ngIf="flags[i]">
+            <button class="mb-sm btn btn-danger btn-outline" type="button" (click)="deleteModel(i+1)">删除</button><br>
+            <button *ngIf="item.indexData" style="position: relative; top: -3px; left: 304px" class="mb-sm btn btn-danger btn-outline" type="button" (click)="addNewData(item.indexData)">设置</button>
+          </div>
+        </div>
       </div>
-    </div>
     </div>
     <div class="main_right" *ngIf="curItem!='' && curItem!=null && isShowContent">
       <div class="main_left_header">
@@ -48,38 +52,41 @@
       <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
         <div class="main_right_optIMG" *ngIf="curItem.tplType == 'IMG'">
           <div class="main_right_optIMGa"><strong>图片：</strong></div>
-          <div (change)="fileChangeListener(i)" style="margin-top: 6px;" class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
+          <div  (change)="fileChangeListener(i)"
+               [style.background-image]="'url(' + contents[i]+ ')'"
+               class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
             <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploaders[i].queue">
-                <span class="upload-thumb">
+                <span class="upload-thumb" >
                   <img *ngIf="item" [src]="item._file | imgUrl"
                        onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
                 </span>
               </span>
             <a title='选择要上传的文件' *ngIf="flag[i]"><span class="fa fa-plus"></span>
-              <input type="file" name="tplImg"  ng2FileSelect [uploader]="uploaders[i]" (change)="fileChangeListener($event)">
+              <input type="file" name="tplImg" ng2FileSelect [uploader]="uploaders[i]" (change)="fileChangeListener($event)">
             </a>
           </div>
         </div>
         <div class="main_right_optTXT" *ngIf="curItem.tplType == 'TXT'">
           <div><strong>文字：</strong></div>
-          <textarea></textarea>
+          <textarea [(ngModel)]="contents[i]"></textarea>
         </div>
         <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
         <div class="main_right_optModel">
-          <select class="form-control" name="optTypeList"  [(ngModel)]="optType[i]" (change)="showDesc(i)"  style="width: 120px; display: inline">
-            <option  *ngFor="let item of optTypeList" [ngValue]="item">{{item.optTypeName}}</option>
+          <select class="form-control" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)" style="width: 120px; display: inline">
+            <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}</option>
           </select>
           <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text" [(ngModel)]="optKey[i]" [disabled]="isEntered[i]=='N'">
         </div>
         <div class="main_right_optTypeDesc">{{typeDesc[i]}}</div>
-        <div class="main_right_optTypeDesc" style="display: none">{{optTypeCode[i]}}</div>
-        <div class="main_right_optTypeDesc" style="display: none">{{ord}}</div>
+        <div class="hidden-field">{{optTypeCode[i]}}</div>
+        <div class="hidden-field">{{ord}}</div>
       </div>
       <div class="main_right_footer">
         <button class="mb-sm btn-lg btn btn-warning btn-outline" type="button" (click)="cancel()">取消</button>
         <button class="mb-sm btn-lg btn btn-primary btn-outline" type="submit" (click)="addModel(ord)">提交</button>
       </div>
     </div>
-
   </div>
 </div>
+
+<app-logistics [showAddWindow]="showAddWindow" [indexId]="indexId" [indexData]="indexData" (upDate)="getUpdateResult($event)" ></app-logistics>

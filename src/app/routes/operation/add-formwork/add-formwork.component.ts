@@ -6,9 +6,7 @@ import {AREA_LEVEL_1_JSON} from "../../../core/services/area_level_1";
 import {CHINA_AREA} from "../../../core/services/china_area";
 import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
-import {validate} from "codelyzer/walkerFactory/walkerFn";
 import {SessionService} from "../session.service";
-import {tick} from '@angular/core/testing';
 const swal = require('sweetalert');
 
 

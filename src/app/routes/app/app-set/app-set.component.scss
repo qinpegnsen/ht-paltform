@@ -106,6 +106,9 @@
         margin: auto;
         position:relative;
         margin-top: 6px;
+        margin-top: 6px;
+        background-size: 300px 150px;
+        background-repeat:no-repeat;
         a{
           position:absolute;
           left:0;
@@ -215,10 +218,28 @@ span:nth-child(2){
   overflow-y:  auto;
 }
 .main_centerTwe{
+  position:relative;
   width: 300px;
   margin: auto;
   background: white;
   cursor: pointer;
+  .main_centerTwe_one{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    background: rgba(0,0,0,0.3);
+    button:nth-child(1){
+      position: relative;
+      top: 0px;
+      left: 304px;
+    }
+  }
+
   img{
     width: 300px;
     height: 100px;
@@ -233,5 +254,7 @@ span:nth-child(2){
     width: 260px;
     height: 150px;
   }
-
+}
+.hidden-field{
+  display: none
 }

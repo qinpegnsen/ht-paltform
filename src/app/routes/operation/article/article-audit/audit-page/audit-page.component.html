@@ -11,8 +11,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label text-left"><i>*</i>文章分类</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" disabled name="articleTitle" #articleTitleTem="ngModel"
-                     [(ngModel)]="queryArticleData.articleClass"/>
+              <input class="form-control" type="text" disabled name="articleClass" #articleTitleTem="ngModel"
+                     [(ngModel)]="queryArticleData.acName"/>
             </div>
           </div>
         </fieldset>
@@ -50,8 +50,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label text-left"><i>*</i>文章内容</label>
             <div class="col-sm-10">
-              <textarea class="col-sm-12 _myTextarea"
-                        disabled>{{queryArticleData.articleBody.articleContent}}</textarea>
+              <div class="_myMask"></div>
+              <div id="summernote" class="summernote"></div>
             </div>
           </div>
         </fieldset>
@@ -69,17 +69,15 @@
             </div>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset *ngIf="queryArticleData.articleCoverVO!=null">
           <div class="form-group">
             <label class="col-sm-2 control-label text-left">封面图片</label>
             <div class="col-sm-10">
               <!--审核图片的时候如果有封面图片就展示封面图片-->
               <span class="ui-state-disabled pull-left _uploadImg" #coverImg>
                 <span class="upload-thumb">
-                    <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
                       <img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}"
                            class="qpsBgImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                    </ng-container>
                 </span>
               </span>
             </div>
@@ -87,7 +85,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label text-left">文章标签{{queryArticleData.articleTa}}
+            <label class="col-sm-2 control-label text-left">文章标签
             </label>
             <div class="col-sm-10">
               <input class="form-control" type="text" maxlength="128" disabled name="articlekeyword"
