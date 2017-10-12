@@ -1,0 +1,69 @@
+<div class="cancel-order fadeIn" *ngIf="showAddWindow">
+  <div class="mask" (click)="hideWindow()"></div>
+  <div class="popup animated fadeIn">
+    <div class="pop popup-hd">
+      <span class="f-bold">选择需要显示的客户端类型：</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="pop cancel-con font12 w100">
+      <input class="form-control" required [(ngModel)]="expressCode" name="reasonCode" type="hidden"/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">
+          网页：
+        </dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox" [checked]="web=='Y'"  title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">手机端：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox" [checked]="wap=='Y'"  title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">
+          微信：
+        </dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox" [checked]="wx=='Y'"  title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">
+          安卓：
+        </dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox" [checked]="android=='Y'" title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">
+          苹果：
+        </dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox" [checked]="ios=='Y'"  title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
+    </div>
+  </div>
+</div>

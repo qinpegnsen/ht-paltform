@@ -178,7 +178,7 @@ queryData(){
     //修改首页模板
     else if(_this.queryId == 4){
       console.log("█ 1 ►►►",  1);
-      
+
       _this.uploadImg(value);
     }
   }
@@ -263,11 +263,7 @@ queryData(){
      * @param item
      */
     me.uploader.onBuildItemForm = function (fileItem, form) {
-      console.log("█ 2 ►►►",  2);
-      
       let uuid=me.GetUidService.getUid();
-      console.log("█ 3 ►►►",  3);
-      
       form.append('uuid',uuid);
       me.tplImgUUid=uuid;
     };
