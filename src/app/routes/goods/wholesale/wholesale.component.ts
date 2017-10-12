@@ -98,7 +98,6 @@ export class WholesaleComponent implements OnInit {
     }
     let result = this.submit.getData(url, data);
     me.data = new Page(result);
-    console.log("█  ►►►", result);
   }
 
   /**
@@ -109,7 +108,6 @@ export class WholesaleComponent implements OnInit {
     if (data.isBatch == 'Y') data.isBatch = 'N';
     else data.isBatch = 'Y';
     if (!isNullOrUndefined(data.goodsPrice.batchPrice) && data.goodsPrice.batchPrice != 0 && data.goodsPrice.batchPrice != '') {
-      console.log("█ data.isBatch ►►►", data.isBatch);
       let url = "/goodsEdit/updateIsBatch";
       this.ajax.put({
         url: url,
@@ -119,9 +117,8 @@ export class WholesaleComponent implements OnInit {
         },
         success: (res) => {
           if (res.success) AppComponent.rzhAlt("success", res.info);
-          else AppComponent.rzhAlt("error", res.info);
-          data.isBatch = 'N';
-          // _this.qeuryAllService(curPage)
+          else AppComponent.rzhAlt("error", res.info) ,data.isBatch = 'N';
+          //;
         },
         error: (data) => {
           AppComponent.rzhAlt("error", data.info);

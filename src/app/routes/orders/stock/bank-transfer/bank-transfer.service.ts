@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../../core/services/ajax.service";
 import {isNull} from "util";
 import {Page} from "../../../../core/page/page";
+import {AppComponent} from "../../../../app.component";
 
 @Injectable()
 export class BankTransferService {
@@ -22,9 +23,11 @@ export class BankTransferService {
         console.log("█ res ►►►",  res);
         if (!isNull(data)) {
           if(res.success){
+            console.log("█ res.info ►►►",  res.info);
             result=res;
+            AppComponent.rzhAlt("success",res.info);
           }else{
-            console.log('返回的success为假');
+            AppComponent.rzhAlt("errror",res.info);
           }
         }else{
           console.log('返回的数据为空');

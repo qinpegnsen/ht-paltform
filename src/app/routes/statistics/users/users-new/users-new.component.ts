@@ -22,7 +22,6 @@ export class UsersNewComponent implements OnInit {
   yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
   month: Array<string> = SettingsService.month; //获取月份信息
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
-  // info:Date=new Date();
   select: any = {}; //选择的年份和月份信息
 
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
@@ -31,8 +30,12 @@ export class UsersNewComponent implements OnInit {
   contrastTime: any = new Date().getSeconds();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
-   info: any = new Date();
+  info: any = new Date();
 
+  private time1;
+  private time2;
+  private time5;
+  private time6;
   private data: any;
   now: string;
   prev: string;
@@ -44,8 +47,7 @@ export class UsersNewComponent implements OnInit {
    */
   public optionPrev = {};
 
-
-  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService,private routeInfo:ActivatedRoute) {
+  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService, private routeInfo: ActivatedRoute) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -55,37 +57,21 @@ export class UsersNewComponent implements OnInit {
 
   ngOnInit() {
     let _this = this;
-    /**
-     * 路由事件用来监听地址栏的变化
-     * 1.当添加代理商出现的时候，代理商列表组件隐藏
-     * 2.路由变化的时候，刷新页面
-     */
-    _this.router.events
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
-          if (event.url.indexOf('linkType') > 0) {
-            _this.flag = false;
-          } else if (event.url == '/main/users/users-new') {
-            _this.flag = true;
-            //_this.getAgentList() //刷新内容页面
-          }
-        }
-      });
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     _this.select.year = new Date().getFullYear();//获取默认年
-    _this.select.month = new Date().getMonth()+1;//获取默认月
-    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month,);
+    _this.select.month = new Date().getMonth() + 1;//获取默认月
+    _this.weekForMonth = _this.tools.getWeekListByMonth(_this.select.year, _this.select.month,);
     _this.weekForMonth.forEach(ele => {
-      let start =  new Date(ele.split('~')[0]).getDate();
-      let end =  new Date(ele.split('~')[1]).getDate();
+      let start = new Date(ele.split('~')[0]).getDate();
+      let end = new Date(ele.split('~')[1]).getDate();
       let now = new Date().getDate();
-      if(now > start && now <end){
+      if (now > start && now < end) {
         _this.select.week = ele;
-      }else if(now==start||now==end){
+      } else if (now == start || now == end) {
         _this.select.week = ele;//获取默认周
-      } ;
+      }
+      ;
     });
     _this.qeuryAll();
   }
@@ -128,14 +114,7 @@ export class UsersNewComponent implements OnInit {
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
     me.optionPrevInfo();
-    console.log("█ now ►►►",  me.now);
-    console.log("█ prev ►►►",  me.prev);
-
-    console.log("█ me.prev ►►►",me.prev);
-    console.log("█  _this.prevData.keys ►►►",  me.prevData.keys);
-    console.log("█  _this.prevData.keys ►►►",  me.prev+"-"+me.prevData.keys[0]);
-    console.log("█  _this.prevData.keys ►►►",  me.now+"-"+me.prevData.keys[0]);
-
+    console.log("█ this.data.queryTimeList ►►►",  this.data.queryTimeList);
   }
 
   /**
@@ -146,14 +125,14 @@ export class UsersNewComponent implements OnInit {
     _this.optionPrev = {
       title: {
         text: '新增会员统计',
-        left:"47%",
+        left: "47%",
       },
       legend: {
         data: [_this.prev, _this.now],
         align: 'left',
-        left:"46%",
-        top:"8%",
-        bottom:"10%"
+        left: "46%",
+        top: "8%",
+        bottom: "10%"
       },
       color: ['#3398DB', '#42DBB1'],
       tooltip: {
@@ -164,7 +143,7 @@ export class UsersNewComponent implements OnInit {
       },
       toolbox: {
         show: true,
-        right:"3%",
+        right: "3%",
         feature: {
           dataView: {show: true, readOnly: false},
           magicType: {show: true, type: ['line', 'bar']},
@@ -214,7 +193,8 @@ export class UsersNewComponent implements OnInit {
    */
   getWeekListByMonth() {
     let _this = this, time = _this.getMonth();
-    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]); //获取周列表
+    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]);
+    //获取周列表
   }
 
   /**
@@ -223,7 +203,7 @@ export class UsersNewComponent implements OnInit {
    */
   selectInfos() {
     let _this = this, type = _this.queryType;
-    switch (type){
+    switch (type) {
       case 'DAY':
         _this.queryTime = RzhtoolsService.dataFormat(new Date(this.datepickerModel), "yyyy-MM-dd");
         break;
@@ -233,7 +213,8 @@ export class UsersNewComponent implements OnInit {
       case 'WEEK':
         _this.queryTime = _this.select.week;
         break;
-    };
+    }
+    ;
 
     // if (type == "DAY") {
     //   if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
@@ -267,5 +248,58 @@ export class UsersNewComponent implements OnInit {
     } else {
       _this.qeuryAll();
     }
+  }
+
+  /**
+   * 时分秒1数转换为2
+   */
+  addZero(num) {
+    return num > 9 ? num + '' + ":00:00" : '0' + num + ":00:00";
+  }
+
+
+  details(val,i) {
+    console.log("█ i ►►►",  i);
+    let _this = this;
+    if (_this.showType.DAY) { //按天查询时，详情信息
+      let prevtime: string, nowtime: string, date: string;
+      date = RzhtoolsService.dataFormat(_this.datepickerModel, "yyyy-MM-dd");
+      prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
+      nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
+      _this.router.navigate(["main/stat/list-detail"], {
+        queryParams: {
+          linkType: '',
+          prevtime: prevtime,
+          nowtime: nowtime
+        }
+      });
+    } else if (_this.showType.MONTH) {//按月查询
+      let prevtime: string, nowtime: string, date: string;
+      date = this.select.year + "-" + this.select.month
+      prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)-1), "yyyy-MM-dd HH:mm:ss");
+      nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
+      _this.router.navigate(["main/stat/list-detail"], {
+        queryParams: {
+          linkType: '',
+          prevtime: prevtime,
+          nowtime: nowtime
+        }
+      });
+    }
+    else if (_this.showType.WEEK) {//按周查询
+      let prevtime: string, nowtime: string, date: string;
+      date = this.data.queryTimeList[i];
+      console.log("█ this.data ►►►",  this.data);
+      prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)-1), "yyyy-MM-dd HH:mm:ss") ;
+      nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)), "yyyy-MM-dd HH:mm:ss") ;
+      _this.router.navigate(["main/stat/list-detail"], {
+        queryParams: {
+          linkType: '',
+          prevtime: prevtime,
+          nowtime: nowtime
+        }
+      });
+    }
+
   }
 }

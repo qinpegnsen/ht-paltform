@@ -184,7 +184,7 @@ export class SubmitService {
         if (res.success) {
           // console.log("█ res ►►►",  res);
           result = res.data;
-          console.log("█ res ►►►",  result);
+          // console.log("█ res ►►►",  result);
         } else {
           AppComponent.rzhAlt("error", res.info);
         }
@@ -193,7 +193,7 @@ export class SubmitService {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
-    console.log("█ result ►►►", result );
+    // console.log("█ result ►►►", result );
     return result;
   }
 

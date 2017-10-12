@@ -23,7 +23,8 @@
             {{uploader.queue.length > 0? uploader.queue[0]._file.name:'选择文件'}}
             <input class="w100" type="file" name="brandPic"  ng2FileSelect [uploader]="uploader" (change)="changeFiles()"/>
           </label>
-          <button class="btn btn-danger upload" (click)="upLoadExcel();" [disabled]="uploader.queue.length==0"><i class="glyphicon glyphicon-folder-open mr"></i>导入</button>
+          <button class="btn btn-green upload" [disabled]="uploader.queue[0] && uploader.queue[0].isSuccess"   (click)="upLoadExcel();"
+          ><i class="glyphicon glyphicon-folder-open mr"></i>导入</button>
           <a *ngIf="errorFile" [href]="errorFile"> 下载未成功导入信息 </a>
         </div>
       </div>

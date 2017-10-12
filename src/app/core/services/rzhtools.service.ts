@@ -479,6 +479,15 @@ export class RzhtoolsService {
   }
 
   /**
+   * 根据指定时间，获取其前后日期
+   * @param date 指定日期
+   * @param num  时间 （1代表后一小时，2代表后两小时，-1代表前一小时......等等）
+   */
+  static getAroundDateByHour = function (date: Date, num: number) {
+    return new Date(date.getTime() + (1000 * 60 * 60) * num);
+  }
+
+  /**
    *
    * 根据日期获取是星期几
    * @param date 日期
@@ -486,7 +495,6 @@ export class RzhtoolsService {
    * @returns {string}
    */
   static getWeek = function (date: Date, lan?) {
-    console.log("█ date ►►►", date);
     let today = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     if (!isUndefined(lan) && lan == 'cn') today = new Array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
     let week = today[date.getDay()];
@@ -525,16 +533,12 @@ export class RzhtoolsService {
    */
   getWeekListByMonth(year: string, month: string) {
     let _this = this, ret: Array<string> = new Array();
-    console.log("█  year►►►", year);
-    console.log("█ month ►►►", month);
     if (year && month) {
-      console.log("█ month ►►►", month);
       _this.ajax.get({
         url: "/statistical/getWeekList",
         data: {queryYear: year, queryMonth: month},
         async: false,
         success: (response) => {
-          console.log("█ response ►►►", response);
           if (response.success) ret = response.data;
         }
       });

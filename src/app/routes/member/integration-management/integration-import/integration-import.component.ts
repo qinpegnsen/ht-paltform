@@ -15,7 +15,7 @@ declare var $: any;
 export class IntegrationImportComponent implements OnInit {
   public uploader:FileUploader = new FileUploader({//初始化上传方法
     url: '/upload/local/file',
-    itemAlias:"file",
+    itemAlias:"file"
   });
   progress: number;//进度条
   private errorFile: string;
@@ -24,11 +24,12 @@ export class IntegrationImportComponent implements OnInit {
   constructor(private submitt:SubmitService) { }
 
   ngOnInit() {
-
+    console.log("█ this.uploader ►►►",  this.uploader);
   }
  //清空选中的表格
   changeFiles(){
-    this.onOff = true; $("button").css({backgroundColor:"#37bc9b",border:"2px solid #37bc9b"})
+    this.onOff = true;
+    // $("button").css({backgroundColor:"#37bc9b",border:"2px solid #37bc9b"});
     if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
   }
 
@@ -42,11 +43,11 @@ export class IntegrationImportComponent implements OnInit {
     me.uploader.uploadAll();
     //上传成功
     me.uploader.onSuccessItem = function (item, response, status, headers) {
-      $("button").css({backgroundColor:"#f05050",border:"2px solid #f05050"});
-      $('button').attr("disabled","disabled");
       let res = JSON.parse(response);
       if (res.success) {
-        me.iimport(res.data);
+        me.iimport(res.data);//上传成功后导入
+        AppComponent.rzhAlt('success',res.info);
+        // me.uploader.removeFromQueue(item);
       } else {
         AppComponent.rzhAlt('error','表格失败','表格上传失败！');
       }

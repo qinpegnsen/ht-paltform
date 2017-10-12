@@ -24,6 +24,7 @@ export class ListDetailComponent implements OnInit {
     _this.nowtime = _this.routeInfo.snapshot.queryParams['nowtime'];//获取当天时间
     _this.prevtime = _this.routeInfo.snapshot.queryParams['prevtime'];//获取前一天时间
     this.qeuryAll();
+
   }
 
   /* *
@@ -43,8 +44,6 @@ export class ListDetailComponent implements OnInit {
     let data={
       createTimeBegin:me.prevtime,
       createTimeEnd:me.nowtime
-
-      // createTimeBegin:me.nowtime,
     }
     let result = this.submit.getData(url,data);
     me.memberListdata = new Page(result);
