@@ -69,17 +69,15 @@
             </div>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset *ngIf="queryArticleData.articleCoverVO!=null">
           <div class="form-group">
             <label class="col-sm-2 control-label text-left">封面图片</label>
             <div class="col-sm-10">
               <!--审核图片的时候如果有封面图片就展示封面图片-->
               <span class="ui-state-disabled pull-left _uploadImg" #coverImg>
                 <span class="upload-thumb">
-                    <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
                       <img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}"
                            class="qpsBgImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                    </ng-container>
                 </span>
               </span>
             </div>
