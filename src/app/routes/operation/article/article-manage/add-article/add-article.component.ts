@@ -58,6 +58,9 @@ export class AddArticleComponent implements OnInit {
   private deletebutton: Object;                       //删除按钮
   private articleClasssId:number;                    //存储子组件发射过来的id
   private emitClasssId:number;                       //修改审核的时候把当前的id发送到子组件
+  public linkGoodsLength:number=0;                   //获取到选择的商品的长度 从而决定关联商品html的高度
+  public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传
+
   constructor(public settings: SettingsService,
               private routeInfo: ActivatedRoute,
               public router: Router,
@@ -147,12 +150,13 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);
       }, 0);
       if(this.linkType == 'updateArticle' ){//如果是修改的时候要添加删除按钮
+        let me = this;
         setTimeout(()=>{
           let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`;
-          console.log("█ $(\"._myAppend\").find($('li')).children('div') ►►►",  $("._myAppend").find($('li')).children('div'));
+
           $("._myAppend").find($('li')).children('div').append(str);//在给每个里追加一个删除按钮
           $('._myAppend').on('click','._del',function(){
-            this.excuDel(this)
+            me.excuDel(this)
           })
         },0)
       }
@@ -255,7 +259,13 @@ export class AddArticleComponent implements OnInit {
    * 点击选择封面类型，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件
    * @param code
    */
-  coverType(code) {
+  coverType(code,flag?) {
+    this.coverCode=code;
+
+    if(flag){//如果是true的话证明是前面的HTML页面点击事件，这时候让变空，否则是初始化的时候就调用了
+      this.queryArticleData.articleCoverVO=null;
+    }
+
     if (code == 'ONE' || code == 'THREE') {
       this.flag = true;
       if (code == 'THREE') {//这里重新写的原因是为了让下次点击的时候没有图片
@@ -329,10 +339,10 @@ export class AddArticleComponent implements OnInit {
 
     $("._myAppend").append($(".panel-success").find('li'));//把已经选择的追加到里面
 
-    if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
+    if( $('._myAppend').find($('li')).length==0){ //如果长度为0，把他隐藏
       $("._myAppend").css("height", '0px')
     }else{
-      $("._myAppend").css("height", '300px')
+      $("._myAppend").removeClass('height0').css('height','300px')
     }
 
     let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`
@@ -355,8 +365,9 @@ export class AddArticleComponent implements OnInit {
    */
   excuDel(obj){
     $(obj).parents('.list-group-item').remove();
-    if( $('._myAppend').find($('.list-group-item')).length==0){ //如果长度为0，把他隐藏
-      $("._myAppend").css("height", '0px')
+    console.log("█ $('._myAppend').find($('.list-group-item')).length ►►►",  $('._myAppend').find($('.list-group-item')).length);
+    if( $('._myAppend').find($('li')).length==0){ //如果长度为0，把他隐藏
+      $("._myAppend").css("height", '0px');
     }
   }
 
@@ -412,8 +423,7 @@ export class AddArticleComponent implements OnInit {
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
-      console.log("█ 3333 ►►►",  3333);
-      me.addArticleExtra();
+      me.articleExtra();
     }
   }
 
@@ -427,48 +437,25 @@ export class AddArticleComponent implements OnInit {
     this.submitState = state;
     let me = this;
     if (me.linkType == 'addArticle') {
-      console.log("█  ►►►", me.uuid.length );
-      if(me.uuid.length==0){
-        this.addArticleExtra()
+      if(me.coverCode=='AUTO'){
+        this.articleExtra();
       }else{
         me.uploadImg();//执行图片上传的方法
       }
     } else if (this.linkType == 'updateArticle') {
-      var sHTML = $('#summernote').summernote('code')//获取编辑器的值
-      let idStr = ''; //获取关联的商品
-      let goodObj = $("._myAppend").find('._copy').find('input');
-      for (let i = 0; i < goodObj.length; i++) {
-        idStr += `${$(goodObj[i]).val()},`
-      }
-      this.linkGoodStr = idStr.slice(0, idStr.length - 1);
-      let url = '/article/updateArticle';
-      obj.articleContent = sHTML;  //赋值编辑器的值
-      obj.addArticleEnum = state //默认文章的类型是草稿
-      obj.articleClassId = this.articleClasssId;
-      console.log("█ this.articleClasssId ►►►",  this.articleClasssId);
-      obj.goodIds = this.linkGoodStr;
-      obj.articleId = this.articleId
-      let data = obj;
-      this.service.postRequest(url, data);
-      this.router.navigate(['/main/operation/article/manage']);
-    } else if (this.linkType == 'auditArticle') {
-      let data = {
-        articleId: this.articleId,
-        auditState: obj.auditState,
-        reason: obj.reason
-      }
-      let url = "/article/AuditArticle";
-      let result = this.ContentService.auditArticle(url, data)
-      if (result) {
-        this.router.navigate(['/main/operation/article/manage']);
+
+      if(me.queryArticleData.coverType=='AUTO'){
+        me.articleExtra();
+      }else{
+        me.uploadImg();//执行图片上传的方法
       }
     }
   }
 
   /**
-   * 把新增文章单独写出来，初始化(没有图片上传)和当图片上传成功的时候都可以调用
+   * 新增修改的时候都可以调用
    */
-  addArticleExtra() {
+  articleExtra() {
     let sHTML = $('#summernote').summernote('code')//获取编辑器的值
     if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
       sHTML='';
@@ -479,16 +466,25 @@ export class AddArticleComponent implements OnInit {
       idStr += `${$(obj[i]).val()},`
     }
     this.linkGoodStr = idStr.slice(0, idStr.length - 1);
-
-    let url = '/article/addArticle';
-
+    this.submitObj.goodIds = this.linkGoodStr;
+    this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.uuid = this.uuid.join(',');
-    this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
-    this.submitObj.goodIds = this.linkGoodStr;
     this.submitObj.articleClassId = this.articleClasssId;
+    this.submitObj.articleCommend = 'N';//文章推荐标志
+    this.submitObj.articleCommentFlag = 'N';//	文章是否允许评论
     let data = this.submitObj;
-    console.log("█ data ►►►",  data);
+    switch (this.linkType){
+      //新增地址
+      case "addArticle" :
+        var url = '/article/addArticle' ;
+        break;
+      //修改地址
+      case "updateArticle" :
+        var url = '/article/updateArticle' ;
+        this.submitObj.articleId = this.articleId;
+        break;
+    }
     let result=this.operationService.addNewArticle(url, data);
     if(result=='文章内容不能为空'||result=='请选择文章所属类型'){
       return;
