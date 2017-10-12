@@ -36,7 +36,7 @@
           <img style="" src="{{item.reslut}}" (click)="show(i)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <button class="mb-sm btn btn-danger btn-outline" type="button" (click)="deleteModel(i+1)">删除</button><br>
-            <button style="position: relative; top: -3px; left: 304px" class="mb-sm btn btn-danger btn-outline" type="button" (click)="addNewData()">选择</button>
+            <button *ngIf="item.indexData" style="position: relative; top: -3px; left: 304px" class="mb-sm btn btn-danger btn-outline" type="button" (click)="addNewData(item.indexData)">设置</button>
           </div>
         </div>
       </div>
@@ -90,4 +90,4 @@
   </div>
 </div>
 
-<app-logistics [showAddWindow]="showAddWindow" (upDate)="getUpdateResult($event)" ></app-logistics>
+<app-logistics [showAddWindow]="showAddWindow" [indexId]="indexId" [indexData]="indexData" (upDate)="getUpdateResult($event)" ></app-logistics>

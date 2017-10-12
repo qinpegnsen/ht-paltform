@@ -6,14 +6,14 @@
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop cancel-con font12 w100">
-      <input class="form-control" required [(ngModel)]="expressCode" name="reasonCode" type="hidden"/>
+      <input class="form-control" required [(ngModel)]="indexId" name="indexId"/>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">
           网页：
         </dt>
         <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox" [checked]="web=='Y'"  title="是否启动"/>
+          <label class="switch">{{indexData.web}}
+            <input type="checkbox"  [checked]="indexData.web=='Y'" (change)="changeIndexData('web')" title="是否启动"/>
             <span></span>
           </label>
         </dd>
@@ -21,8 +21,8 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">手机端：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox" [checked]="wap=='Y'"  title="是否启动"/>
+          <label class="switch">{{indexData.wap}}
+            <input type="checkbox"  [checked]="indexData.wap=='Y'" (change)="changeIndexData('wap')" title="是否启动"/>
             <span></span>
           </label>
         </dd>
@@ -32,8 +32,8 @@
           微信：
         </dt>
         <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox" [checked]="wx=='Y'"  title="是否启动"/>
+          <label class="switch">{{indexData.wx}}
+            <input type="checkbox"  [checked]="indexData.wx=='Y'" (change)="changeIndexData('wx')" title="是否启动"/>
             <span></span>
           </label>
         </dd>
@@ -43,8 +43,8 @@
           安卓：
         </dt>
         <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox" [checked]="android=='Y'" title="是否启动"/>
+          <label class="switch">{{indexData.android}}
+            <input type="checkbox" [checked]="indexData.android=='Y'" (change)="changeIndexData('android')" title="是否启动"/>
             <span></span>
           </label>
         </dd>
@@ -54,8 +54,8 @@
           苹果：
         </dt>
         <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox" [checked]="ios=='Y'"  title="是否启动"/>
+          <label class="switch">{{indexData.ios}}
+            <input type="checkbox" [checked]="indexData.ios=='Y'"  (change)="changeIndexData('ios')" title="是否启动"/>
             <span></span>
           </label>
         </dd>
@@ -63,7 +63,7 @@
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
+      <button class="btn btn-info" type="submit" (click)="canceslOrder(indexId)">确认提交</button>
     </div>
   </div>
 </div>

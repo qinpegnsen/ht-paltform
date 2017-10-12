@@ -9,24 +9,19 @@ import {AppIndexTplService} from './app-index-tpl/app-index-tpl.service';
 import { RightpageComponent } from './rightpage/rightpage.component';
 import { AppSetComponent } from './app-set/app-set.component';
 import {FileUploadModule} from 'ng2-file-upload';
-import { SysNoticeComponent } from './sys-notice/sys-notice.component';
-import { AddNoticeComponent } from './sys-notice/add-notice/add-notice.component';
-import {OperationService} from "../operation/operation.service";
+import {LogisticsComponent} from './logistics/logistics.component';
+import {AppSetService} from './app-set/app-set.service';
 
 
 // 子路由，用于页面嵌套显示
 const appChildRoutesfile: Routes = [
   {path: 'rightpage', component: RightpageComponent}
 ];
-const addNotice: Routes = [
-  {path: 'addNotice', component: AddNoticeComponent}
-];
 const routes: Routes = [
   {path: '', component: AppIndexOptComponent},
   {path: 'app-index-opt', component: AppIndexOptComponent,children: appChildRoutesfile},
   {path: 'app-index-tpl', component: AppIndexTplComponent,children: appChildRoutesfile},
-  {path: 'app-set', component: AppSetComponent},
-  {path: 'sys-notice', component: SysNoticeComponent,children: addNotice}
+  {path: 'app-set', component: AppSetComponent}
 ]
 
 @NgModule({
@@ -41,8 +36,8 @@ const routes: Routes = [
     AppIndexTplService,
     AppIndexOptComponent,
     AppIndexTplComponent,
-    OperationService
+    AppSetService
   ],
-  declarations: [AppIndexOptComponent, AppIndexTplComponent, RightpageComponent, AppSetComponent, SysNoticeComponent, AddNoticeComponent]
+  declarations: [AppIndexOptComponent, AppIndexTplComponent, RightpageComponent, AppSetComponent,LogisticsComponent]
 })
 export class AppModule { }

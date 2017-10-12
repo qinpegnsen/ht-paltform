@@ -38,6 +38,8 @@ export class AppSetComponent implements OnInit {
   public uploaders: Array<FileUploader> = new Array();
   private optTypeList: any;
   private myImg: any;
+  private indexId: any;
+  private indexData: any;
   public id: string;
   public curCancelOrderId: string;
   private showAddWindow:boolean = false;
@@ -60,18 +62,21 @@ export class AppSetComponent implements OnInit {
     _this.isShowContent = false;
   }
 
-
-
   /*
    * 添加弹窗
    * */
-  addNewData() {
+  addNewData(indexData) {
+    this.indexId = indexData.id;
+    this.indexData=indexData;
     this.showAddWindow = true;
   }
 
-  getUpdateResult(data) {
+  /**
+   * 提交设置在某端显示
+   * @param data
+   */
+  getUpdateResult() {
     this.showAddWindow = false;
-    // if(data == 'success')
   }
 
   /**
@@ -120,6 +125,7 @@ export class AppSetComponent implements OnInit {
       this.moduleList.push({
         reslut: _this.indexTpls[indexTpl].phoneIndexTpl.tplCheckedImg,
         index: this.moduleList.length + 1,
+        indexData: _this.indexTpls[indexTpl],
         data: _this.indexTpls[indexTpl].phoneIndexTpl
       });
       _this.phoneIndexId[indexTpl] = _this.indexTpls[indexTpl].id;
@@ -133,7 +139,7 @@ export class AppSetComponent implements OnInit {
    */
   public addTpl(item) {
     this.isShowContent = false;
-    this.moduleList.push({reslut: item.tplCheckedImg, index: this.moduleList.length + 1, data: item});
+    this.moduleList.push({reslut: item.tplCheckedImg, index: this.moduleList.length + 1,indexData:null, data: item});
   }
 
   /* **

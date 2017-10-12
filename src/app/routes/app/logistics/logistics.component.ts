@@ -12,10 +12,11 @@ const swal = require('sweetalert');
 export class LogisticsComponent implements OnInit {
   public showCancelWindow:boolean = false;
 
-  @Input('orderId') orderId: string;
   @Output() upDate = new EventEmitter();
   @Output() cancelOrder = new EventEmitter();
   @Input('showAddWindow') showAddWindow: boolean;
+  @Input('indexId') indexId:string;
+  @Input('indexData') indexData:any;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
@@ -32,6 +33,24 @@ export class LogisticsComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  public changeIndexData(client){
+    if(client=='web'){
+      this.indexData.web= this.indexData.web=='Y'?'N':'Y';
+    }
+    else if(client=='wap'){
+      this.indexData.wap= this.indexData.wap=='Y'?'N':'Y';
+    }
+    else if(client=='wx'){
+      this.indexData.wx= this.indexData.wx=='Y'?'N':'Y';
+    }
+    else  if(client=='android'){
+      this.indexData.android= this.indexData.android=='Y'?'N':'Y';
+    }
+    else if(client=='ios'){
+      this.indexData.ios= this.indexData.ios=='Y'?'N':'Y';
+    }
+  }
   /**
    * 关闭组件
    * @param type true:表示操作成功，false表示取消操作
@@ -40,20 +59,25 @@ export class LogisticsComponent implements OnInit {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
     // console.log("█ $('.wrapper > section').css('z-index') ►►►",  $('.wrapper > section').css('z-index'));
-    this.showAddWindow = false;
+    me.showAddWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.upDate.emit(type)
+    me.upDate.emit(type)
   }
 
   /**
    * 选择需要显示的客户端类型
    */
-  canceslOrder(){
+  canceslOrder(indexId){
     let _this = this;
     _this.ajax.post({
       url: '/phone/index/updateShow',
       data: {
-
+        id:indexId,
+        web:_this.indexData.web,
+        wap:_this.indexData.wap,
+        wx:_this.indexData.wx,
+        android:_this.indexData.android,
+        ios:_this.indexData.ios,
       },
       success: (res) => {
         if (res.success) {
