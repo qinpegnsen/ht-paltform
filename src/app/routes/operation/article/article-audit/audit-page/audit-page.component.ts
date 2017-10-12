@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../../../core/forms/submit.service";
 import {ContentService} from "../../article-manage/content/content.service";
-
+declare var $: any;
 @Component({
   selector: 'app-audit-page',
   templateUrl: './audit-page.component.html',
@@ -36,6 +36,17 @@ export class AuditPageComponent implements OnInit {
     this.articleCommend=this.queryArticleData.articleCommend;
     this.articleCommentFlag=this.queryArticleData.articleCommentFlag;
 
+    setTimeout(() => {//初始化编辑器和给编辑器赋值
+      let me = this;
+      $('#summernote').summernote({
+        height: 280,
+        dialogsInBody: true,
+        callbacks: {
+          onChange: (contents, $editable) => {}
+        }
+      });
+      $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);
+    }, 0);
 
     /**
      * 审核时候的两种状态

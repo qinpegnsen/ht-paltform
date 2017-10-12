@@ -132,13 +132,13 @@
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
-            <div class="_myAppend col-sm-12" [class.height0]="copylistTeamOne.length==0">
+            <div class="_myAppend col-sm-12" [class.height0]="linkGoodsLength==0">
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
                   <div class="col-lg-6 p0">商品</div>
                   <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
-                  <div class="col-lg-2 p0 text-center"><span  class="extra p10 ml _desc">操作</span></div>
+                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml _desc">操作</span></div>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@
             <div class="col-sm-10">
               <div class="radio c-radio pull-left" *ngFor="let item of articleCoverTypes">
                 <label>
-                  <input type="radio" value="{{item.key}}" (click)="coverType(item.key)"
+                  <input type="radio" value="{{item.key}}" (click)="coverType(item.key,'true')"
                          [(ngModel)]="queryArticleData.coverType" name="articleCoverType" class="col-sm-2"/>
                   <span class="fa fa-circle"></span>{{item.text}}
                 </label>
@@ -255,15 +255,14 @@
                 </span>
               </span>
               <!--修改图片的时候如果有封面图片就展示封面图片-->
-              <span class="ui-state-disabled pull-left _uploadImg" #coverImg>
-                <span class="close" (click)="remove(coverImg)" *ngIf="queryArticleData.articleCoverVO!=null">×</span>
-                <span class="upload-thumb">
-                    <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
-                      <img *ngFor="let item of queryArticleData.articleCoverVO;let i = index" src="{{item.url }}"
-                           class="qpsBgImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                    </ng-container>
+              <ng-container *ngIf="queryArticleData.articleCoverVO!=null">
+                <span class="ui-state-disabled pull-left _uploadImg" #coverImg  *ngFor="let item of queryArticleData.articleCoverVO;let i = index">
+                        <span class="close" (click)="remove(coverImg)">×</span>
+                        <span class="upload-thumb">
+                              <img  src="{{item.url }}" class="qpsBgImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png';">
+                        </span>
                 </span>
-              </span>
+              </ng-container>
               <div>
                 <label for="image-input" class="btn btn-default file-upload col-sm-3">
                   <i class="icon-cloud-upload mr"></i>{{fileName}}
@@ -310,33 +309,33 @@
               <input class="form-control" type="hidden" name="goodIds" #goodIdsTem="ngModel" ngModel/>
               <div class='_linkGoods' (click)="linkGood()"><i class="fa fa-plus"></i>添加商品</div>
             </div>
-            <ul class="_myAppend col-sm-12 _updateClass">
+            <ul class="_myAppend col-sm-12 _updateClass" [class.height0]="queryArticleData.articleGoods.length==0">
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
                   <div class="col-lg-6 p0">商品</div>
                   <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
-                  <div class="col-lg-2 p0 text-center"><span  class="extra p10 ml _desc">操作</span></div>
+                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml _desc">操作</span></div>
                 </div>
               </div>
               <li *ngFor="let item of queryArticleData.articleGoods; let i = index" class="list-group-item">
-              <div class="clearfix">
-                <div class="p0 _span col-lg-1 p0">
-                  <img src="{{item.goodsImage}}" alt="" class='_special'
-                       onerror="javascript:this.src='../../../assets/img/dummy.png';">
-                </div>
-                <div class="col-lg-6 p0">
-                  <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
-                  <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
-                    {{standard.attrName}}：{{standard.value}}
+                <div class="clearfix">
+                  <div class="p0 _span col-lg-1 p0">
+                    <img src="{{item.goodsImage}}" alt="" class='_special'
+                         onerror="javascript:this.src='../../../assets/img/dummy.png';">
                   </div>
-                  <input type="hidden" value="{{item.goodsCode}}">
+                  <div class="col-lg-6 p0">
+                    <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
+                    <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
+                      {{standard.attrName}}：{{standard.value}}
+                    </div>
+                    <input type="hidden" value="{{item.goodsCode}}">
+                  </div>
+                  <div class="col-lg-3 p0 text-center">
+                    <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
+                  </div>
                 </div>
-                <div class="col-lg-3 p0 text-center">
-                  <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
-                </div>
-              </div>
-            </li>
+              </li>
             </ul>
           </div>
         </fieldset>
