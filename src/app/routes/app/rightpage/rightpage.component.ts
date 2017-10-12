@@ -257,12 +257,16 @@ queryData(){
    * 图片上传
    */
   uploadImg(value){
+    console.log("█ 2222222222 ►►►",  2222222222);
+
     let me = this;
     /**
      * 构建form时，传入自定义参数
      * @param item
      */
     me.uploader.onBuildItemForm = function (fileItem, form) {
+      console.log("█ 33333333333333 ►►►",  33333333333333);
+
       let uuid=me.GetUidService.getUid();
       form.append('uuid',uuid);
       me.tplImgUUid=uuid;
@@ -306,8 +310,8 @@ queryData(){
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
-      console.log("█ 2 ►►►",  2);
-
+  console.log("█ 4444444444 ►►►",  4444444444);
+  
       // me.submitDatas();
       me.uploadImg1(value);
     }

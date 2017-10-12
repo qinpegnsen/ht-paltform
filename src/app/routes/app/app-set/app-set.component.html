@@ -50,7 +50,6 @@
         <span>{{curItem.tplDesc }}</span>
       </div>
       <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
-        <div>获取ID{{ids[i]}}</div>
         <div class="main_right_optIMG" *ngIf="curItem.tplType == 'IMG'">
           <div class="main_right_optIMGa"><strong>图片：</strong></div>
           <div  (change)="fileChangeListener(i)"
