@@ -418,7 +418,9 @@ export class RzhtoolsService {
       contentType: false,
       processData: false,
       success: (response) => {
-        if (!isNullOrUndefined(response) && response.success) ret = response.data;
+        if (!isNullOrUndefined(response) && response.success) {
+          ret = response.data;
+        }
         if (!response.success) AppComponent.rzhAlt('error', response.info, file.name + '上传失败')
       },
       error: (response) => {
