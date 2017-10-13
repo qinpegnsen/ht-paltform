@@ -15,25 +15,25 @@
   <div class="panel-body">
     <div class="panel-body">
       <div>
-        <table class="t-items p w100">
+        <table class="t-items p w100 ">
           <tr class="t-item clearfix" *ngFor="let order of data;let i=index">
-            <td class="item-hd col-sm-1 font12" *ngIf="!order.isShow">
-              <span>{{order.remark}}</span>
+            <td class="item-hd col-sm-2 font12" *ngIf="!order.isShow">
+              <span>{{order.remark}}:</span>
             </td>
 
-            <td class="item-hd col-sm-1 font12 " *ngIf="order.isShow">
+            <td class="item-hd col-sm-2" *ngIf="order.isShow">
               <input type="text" class="form-control remark-padding" disabled [(ngModel)]="updata.remark" >
             </td>
 
-            <td class="item-bd col-sm-9 mb0"  *ngIf="!order.isShow">
-              <span class="w70">{{order.info}}</span>
+            <td class="item-bd col-sm-7 mb0"  *ngIf="!order.isShow">
+              <span class="w85">{{order.info}}</span>
             </td>
-            <td class="item-bd col-sm-9 mb0"  *ngIf="order.isShow">
-              <input type="text" class="form-control w70" [(ngModel)]="updata.info">
+            <td class="item-bd col-sm-7 mb0"  *ngIf="order.isShow">
+              <input type="text" class="form-control  num w85"  [disabled]="i==0" type="number" [pattern]="patterns.twodecimal"[(ngModel)]="updata.info">
             </td>
 
-            <td>
-              <span class="btn btn-info" *ngIf="!order.isShow" (click)="showDetail(order,order.code)">修改</span>
+            <td *ngIf="!order.isShow">
+              <span class="btn btn-info" (click)="showDetail(order,order.code)">修改</span>
             </td>
             <td *ngIf="order.isShow">
               <span class="btn btn-info" (click)="submitt(order.code,order,updata.info,updata.remark)" >提交</span>
