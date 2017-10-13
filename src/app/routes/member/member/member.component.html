@@ -54,7 +54,7 @@
     <thead>
     <tr>
       <th class="w5">
-        <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+        <rzhDefaultSorter by="sort"></rzhDefaultSorter>
       </th>
       <th class="w10">
         <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
@@ -94,7 +94,9 @@
     <tbody>
     <ng-container *ngFor="let member of memberList.data;let i = index">
       <tr>
-        <td>{{i+1}}</td>
+        <td (click)="showDetail(member)">
+          <i class="icon icon-arrow-down"></i>
+        </td>
         <td>
            <span  *ngIf="member.authState=='AUTH'">
              <i class="icon icon-user-following gold-star" title="已实名认证"></i>&nbsp;
@@ -117,8 +119,6 @@
         </td>
         <td>{{member.createTime}}</td>
         <td>
-          <app-buttons [config]="detailsbutton" class="btn-xs font12 detail-btn" (click)="showDetail(member)"></app-buttons>
-
           <button class="btn btn-danger btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
                   (click)="changeState('FREEZE',member.custCode,memberListdata.curPage)"></button>
           <button class="btn btn-info btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
@@ -129,7 +129,7 @@
       <tr *ngIf="member.isShow">
         <td class="p0" colspan="12">
           <div class="bg-table special text-left h55">
-            <span class="m10 pull-left">头像:</span>
+            <span class="m10 pull-left _myLineHeight mr">头像:</span>
             <span class="">
                  <img [src]="member.custAvatar" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="member.custAvatar" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
