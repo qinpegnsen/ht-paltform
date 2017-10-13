@@ -7,44 +7,70 @@
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop cancel-con font12 w100">
-      <input class="form-control" required [(ngModel)]="staff.id" name="reasonCode"/>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">订单号：</dt><dd class="orderId-color col-xs-9 font14">{{orderId
-        }} <dd/>
+      <input class="form-control" required [(ngModel)]="staff.id" name="reasonCode" type="hidden"/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">订单号：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">支付账号：</dt><dd class="orderId-color col-xs-9 font14">{{staff.acct
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">支付账号：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.acct}} </dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">收款账号开户行：</dt><dd class="orderId-color col-xs-9 font14">{{staff.bank
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">收款账号开户行：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.bank}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">收款人：</dt><dd class="orderId-color col-xs-9 font14">{{staff.bacctName
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">收款人：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.bacctName}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">交易流水码：</dt><dd class="orderId-color col-xs-9 font14">{{staff.tc3rd
-        }}
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">交易流水码：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.tc3rd}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">支付方式：</dt><dd class="orderId-color col-xs-9 font14">{{staff.payWay | rzhState :'1017'
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">支付方式：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.payWay | rzhState :'1017'}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">关闭原因：</dt><dd class="orderId-color col-xs-9 font14">{{staff.closeCause
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">关闭原因：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.closeCause}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">申请金额：</dt><dd class="orderId-color col-xs-9 font14">{{staff.reqMoney
-        }} <dd/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">申请金额：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.reqMoney}}</dd>
       </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">审核结果：</dt><dd class="orderId-color col-xs-9 font14"> <dd/>
-
-      </dl>
-      <dl class="bb m0 clearfix"><dt class="col-xs-3">审核意见：</dt>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">审核结果：</dt>
         <dd class="orderId-color col-xs-9 font14">
-
-        <dd/>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="result" checked value="PASS" [(ngModel)]="result"/>
+            <span class="fa fa-circle"></span>通过</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="result" value="UNPASS" [(ngModel)]="result" />
+            <span class="fa fa-circle"></span>未通过</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="result" value="REJECT" [(ngModel)]="result"/>
+            <span class="fa fa-circle"></span>彻底驳回'</label>
+          <span></span>
+        </dd>
       </dl>
+      <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">审核意见：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <select class="form-control" name="goodsAudit" [(ngModel)]="code" (change)="queryDatas(1)">
+            <option *ngFor="let item of goodsAudits" [value]="item.code">{{item.info}}</option>
+          </select>
+        </dd>
+      </dl>
+
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
       <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
     </div>
   </div>
+
 </div>
 

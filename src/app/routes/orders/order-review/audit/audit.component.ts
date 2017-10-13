@@ -3,6 +3,7 @@ import {Page} from '../../../../core/page/page';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute} from '@angular/router';
 import {AjaxService} from '../../../../core/services/ajax.service';
+import {SubmitService} from '../../../../core/forms/submit.service';
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -19,6 +20,9 @@ export class AuditComponent implements OnInit {
   public ordno:string;//获取区域编码
   private staff:any = {};
   private id;
+  private goodsAudits: any;
+  private code;
+  private result;
 
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -28,10 +32,11 @@ export class AuditComponent implements OnInit {
       this.loadAgent();
       $('.wrapper > section').css('z-index', 200);
       this.showCancelWindow = true;
+      this.queryDatas();
     }
   }
 
-  constructor(private routeInfo:ActivatedRoute,private ajax:AjaxService) { }
+  constructor(private routeInfo:ActivatedRoute,private ajax:AjaxService,private submit: SubmitService) { }
 
   ngOnInit() {
     let _this = this;
@@ -39,13 +44,18 @@ export class AuditComponent implements OnInit {
     _this.ordno = this.routeInfo.snapshot.queryParams['ordno'];
   }
 
+  /**
+   *
+   */
   hideWindow(){
     $('.wrapper > section').css('z-index', 114);
     this.showCancelWindow = false;
     this.cancelOrder.emit('hide')// 向外传值
   }
 
-
+  /**
+   *查询审核中的详细数据
+   */
   loadAgent(){
       this.ajax.get({
         url: '/agentOrd/loadAgentOrdReturn',
@@ -62,7 +72,9 @@ export class AuditComponent implements OnInit {
       });
   }
 
-
+  /**
+   * 提交审核
+   */
   canceslOrder(){
     let _this = this;
     _this.ajax.put({
@@ -70,8 +82,8 @@ export class AuditComponent implements OnInit {
       data: {
         'returnId':_this.staff.id,
         'ordno':_this.orderId,
-        'result':'',
-        'opinionCode':'',
+        'result':_this.result,
+        'opinionCode':_this.code,
       },
       success: (res) => {
         if (res.success) {
@@ -85,6 +97,19 @@ export class AuditComponent implements OnInit {
         swal('申请发货提交失败！', 'error');
       }
     })
+  }
+
+  /**
+   * 查询审核意见（从数据字典中获取）
+   */
+  queryDatas(){
+    let _this = this, activePage = 1;
+    let requestUrl = '/datadict/queryAllByTypeCode';
+    let requestData = {
+      typeCode:'refund_reason_plat'
+    };
+    _this.goodsAudits = _this.submit.getData(requestUrl, requestData);
+    console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
 
