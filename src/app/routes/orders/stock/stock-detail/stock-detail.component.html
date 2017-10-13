@@ -261,11 +261,10 @@
   <table class="w100 b">
     <thead class="w100">
     <tr class="w100 order-head">
-      <th class="w50 p text-center">商品</th>
-      <th class="w10 p text-center">单价</th>
-      <th class="w10 p text-center">数量</th>
-      <th class="w10 p text-center">订单金额</th>
-      <th class="w10 p text-center">操作</th>
+      <th class="w45 p text-center">商品</th>
+      <th class="w20 p text-center">单价</th>
+      <th class="w15 p text-center">数量</th>
+      <th class="w20 p text-center">订单金额</th>
     </tr>
     </thead>
     <tbody>
@@ -289,23 +288,6 @@
       <td class="bl" *ngIf="i==0" [attr.rowspan]="orderData.agentOrdItemList.length">
         <span class="main-red font14">￥{{item.batchPrice*item.batchNum | number:'1.2-2'}}</span><br>
         <span class="font-gray">{{orderData.payWay | rzhState :'1017'}}</span>
-      </td>
-      <td class="bl" *ngIf="i==0" [attr.rowspan]="orderData.agentOrdItemList.length">
-        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CR'"-->
-                <!--(click)="goPay(orderData.ordno)"> 去支付-->
-        <!--</button>-->
-        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CR'"-->
-                <!--(click)="cancelOrder(item.ordno)"> 取消订单-->
-        <!--</button>-->
-        <!--<button *ngIf="orderData.state=='DELIVERY'" (click)="confirmRecive(goods.ordno)" class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet">确认收货-->
-        <!--</button>-->
-        <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban" *ngIf="orderData.state=='CLOSE'"-->
-                <!--(click)="againBuy(item.goodsCode,item.batchNum)"> 重新购买-->
-        <!--</button>-->
-        <!--<button *ngIf="orderData.state=='SUCCESS'" class="m-sm btn btn-xs btn-warning fa fa-shopping-cart"-->
-                <!--(click)="againBuy(item.goodsCode,item.batchNum)"> 再进货-->
-        <!--</button>-->
-        <br>
       </td>
     </tr>
     </tbody>

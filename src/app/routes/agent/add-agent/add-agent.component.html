@@ -335,10 +335,10 @@
     </div>
     <div class="clearfix latitude">
       <div class="pull-left">
-        <span class="pull-left">经度：</span><input class="form-control" type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
+        <span class="pull-left">经度：</span><input class="form-control" type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng" disabled/>
       </div>
       <div class="pull-left">
-        <span class="pull-left" >纬度：</span><input class="form-control position-relative"  type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+        <span class="pull-left" >纬度：</span><input class="form-control position-relative"  type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat" disabled/>
       </div>
     </div>
     <div class="form-group" [hidden]="!staff.isShowMap">
