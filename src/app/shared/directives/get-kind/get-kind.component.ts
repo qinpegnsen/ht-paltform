@@ -15,6 +15,7 @@ export class GetKindComponent implements OnInit {
   private kindList: any;
   private show: boolean;
   private isLastLevel: boolean = false;
+  private level:any;
   @Output() myData = new EventEmitter();
   @Input() defaultData: any = {};
 
@@ -45,10 +46,12 @@ export class GetKindComponent implements OnInit {
    * @param kind
    */
   getKindList(kind: any) {
+    console.log("█  kind.level ►►►",   kind.level);
     let me = this, level = kind.level, myKindName = kind.kindName, myKindId = kind.id, haveChildren = kind.haveChildren;
     if (level == 1) me.myKindName = '';
     if (me.myKindName == '') me.myKindName = myKindName; else me.myKindName += '>' + myKindName;
     me.kindId = myKindId;
+    me.level=level;
     if (!haveChildren) {
       me.isLastLevel = true; //最后一级
       me.myConfirm(); // 如果是最后一级，关闭窗口
@@ -97,6 +100,7 @@ export class GetKindComponent implements OnInit {
     _this.myKindName = this.defaultData.myKindName;
     _this.kindId = this.defaultData.kindId;
     _this.isLastLevel = this.defaultData.isLastLevel;
+    _this.level = this.defaultData.level;
     _this.setMyData();
   }
 
@@ -107,7 +111,8 @@ export class GetKindComponent implements OnInit {
     this.myData.emit({
       kindId: this.kindId,
       myKindName: this.myKindName,
-      isLastLevel: this.isLastLevel
+      isLastLevel: this.isLastLevel,
+      level:this.level
     });
   }
 

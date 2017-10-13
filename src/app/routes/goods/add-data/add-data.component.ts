@@ -17,9 +17,9 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('showAddWindow') showAddWindow: boolean;
   @Input() selTypeData: any; //选中的商品分类
   @Output() addData = new EventEmitter();
-  @Output() upDate = new EventEmitter();
   private kindId: any;
   private isLastLevel: boolean;
+  private level:any
 
   private Id: any;
 
@@ -60,8 +60,9 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
    * */
   delivery(obj) {
     let _this = this, selInfo = _this.selTypeData;
+    console.log("█ this.selTypeData ►►►",  this.selTypeData);
     if ((isNullOrUndefined(this.kindId) || this.kindId == "") && selInfo) _this.getKind(selInfo);
-    if (this.isLastLevel) {
+    if (this.level==3) {
       let url = '/goodsEnum/addGoodsBaseEnum';
       let data = {
         kindId: this.kindId,
@@ -70,21 +71,20 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
       }
       let result = this.addDataService.addGoodsBaseEnum(url, data);
       console.log("█ result ►►►",  result);
-      if (result == "分类中未选中最后一级") {
+      if (result == "请选择三级分类") {
         return;
       } else {
         this.hideWindow("success");
         this.basicPropertiesComponent.queryBaseEnumList(this.kindId);
       }
     } else {
-      AppComponent.rzhAlt("error", "分类未选中最后一级");
+      AppComponent.rzhAlt("error", "请选择三级分类");
     }
   }
-
   //查询分类
   getKind(data) {
     this.kindId = data.kindId;
-    this.isLastLevel = data.isLastLevel;
+    // this.isLastLevel = data.isLastLevel;
+    this.level=data.level
   }
-
 }

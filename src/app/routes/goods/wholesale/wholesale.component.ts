@@ -98,6 +98,7 @@ export class WholesaleComponent implements OnInit {
     }
     let result = this.submit.getData(url, data);
     me.data = new Page(result);
+    console.log("█ result ►►►",  result);
   }
 
   /**
@@ -118,7 +119,6 @@ export class WholesaleComponent implements OnInit {
         success: (res) => {
           if (res.success) AppComponent.rzhAlt("success", res.info);
           else AppComponent.rzhAlt("error", res.info) ,data.isBatch = 'N';
-          //;
         },
         error: (data) => {
           AppComponent.rzhAlt("error", data.info);
@@ -139,7 +139,8 @@ export class WholesaleComponent implements OnInit {
   submita(goods, goodsCode, i, curPage) {
     if (goods.goodsPrice.memberPrice < goods.goodsPrice.batchPrice) {
       AppComponent.rzhAlt("error", '批发价应小于会员价');
-      return;
+      goods.isBatch = 'N';
+      // return;
     }
     let _this = this;
     let url = '/goodsEdit/updateBatchPrice';
@@ -149,7 +150,5 @@ export class WholesaleComponent implements OnInit {
     }
     _this.submit.putRequest(url, data);
     _this.qeuryAllService(curPage);
-    console.log("█ this._goods[i] ►►►", this._goods[i]);
-
   }
 }
