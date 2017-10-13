@@ -46,8 +46,10 @@ export class IntegrationImportComponent implements OnInit {
       let res = JSON.parse(response);
       if (res.success) {
         me.iimport(res.data);//上传成功后导入
-        AppComponent.rzhAlt('success',res.info);
-        // me.uploader.removeFromQueue(item);
+        me.uploader.removeFromQueue(item);
+        setTimeout(()=>{
+          me.uploader.progress=0;
+        },0);
       } else {
         AppComponent.rzhAlt('error','表格失败','表格上传失败！');
       }

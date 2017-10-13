@@ -23,19 +23,13 @@ export class UsersNewComponent implements OnInit {
   month: Array<string> = SettingsService.month; //获取月份信息
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
   select: any = {}; //选择的年份和月份信息
-
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
-
   private queryType: any = 'DAY';//日期选择
   contrastTime: any = new Date().getSeconds();
   private queryTypes: any;//日期选择
   queryTime: any = new Date();
   info: any = new Date();
 
-  private time1;
-  private time2;
-  private time5;
-  private time6;
   private data: any;
   now: string;
   prev: string;
@@ -114,7 +108,6 @@ export class UsersNewComponent implements OnInit {
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
     me.optionPrevInfo();
-    console.log("█ this.data.queryTimeList ►►►",  this.data.queryTimeList);
   }
 
   /**
@@ -251,15 +244,9 @@ export class UsersNewComponent implements OnInit {
   }
 
   /**
-   * 时分秒1数转换为2
-   */
-  addZero(num) {
-    return num > 9 ? num + '' + ":00:00" : '0' + num + ":00:00";
-  }
-
-
+   * 详情查看
+  */
   details(val,i) {
-    console.log("█ i ►►►",  i);
     let _this = this;
     if (_this.showType.DAY) { //按天查询时，详情信息
       let prevtime: string, nowtime: string, date: string;

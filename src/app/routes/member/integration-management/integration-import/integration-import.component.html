@@ -12,7 +12,6 @@
         <li>填写数据：用户的手机号、充值重消币数量</li>
         <li>执行导入</li>
         <li>查看导入结果，请下载未成功导入信息</li>
-        <li>当按钮为 <span class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-folder-open mr"></i>导入</span> 时不能导入文件，请先选择要导入的文件，为 <span class="btn btn-green btn-xs"><i class="glyphicon glyphicon-folder-open mr"></i>导入</span>时可以导入文件</li>
       </ul>
     </div>
 
@@ -21,7 +20,7 @@
         <div class="col-xs-5 file" >
           <label class="btn btn-default file-upload w35 pull-left file-lable">
             {{uploader.queue.length > 0? uploader.queue[0]._file.name:'选择文件'}}
-            <input class="w100" type="file" name="brandPic"  ng2FileSelect [uploader]="uploader" (change)="changeFiles()"/>
+            <input class="w100" type="file" name="brandPic"  ng2FileSelect [uploader]="uploader" multiple  (change)="changeFiles()"/>
           </label>
           <button class="btn btn-green upload" [disabled]="uploader.queue[0] && uploader.queue[0].isSuccess"   (click)="upLoadExcel();"
           ><i class="glyphicon glyphicon-folder-open mr"></i>导入</button>
