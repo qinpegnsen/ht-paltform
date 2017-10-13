@@ -26,6 +26,7 @@ export class WoAllComponent implements OnInit {
   private woTypeList: any;  // 工单类型枚举列表
   public assign:boolean;
   public curAssignWono:string;
+  public curDeliverOrderId: string;
   private search = {
     wono: null,
     ordno: null,
@@ -113,6 +114,10 @@ export class WoAllComponent implements OnInit {
     if(data.type) this.queryDatas(data.page);
   }
 
+  deliverOrder(orderId) {
+    this.curDeliverOrderId = orderId;
+  }
+
   /**
    * 修改查询条件时，将另外一个条件置为空
    * @param condition
@@ -158,4 +163,12 @@ export class WoAllComponent implements OnInit {
     this.detail[index] = !this.detail[index];
   }
 
+  /**
+   * 发货回调函数
+   * @param data
+   */
+  getDeliverOrderData(data) {
+    this.curDeliverOrderId = null;
+    if(data.type) this.queryDatas(data.page)
+  }
 }

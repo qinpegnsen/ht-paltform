@@ -92,6 +92,11 @@
           <button class="btn btn-info btn-sm icon-paper-clip" title="接单"
                   (click)="acceptNa(order.wono,woList.curPage)"></button>
         </span>
+          <!--<button  *ngIf="order.state=='NA'" class="m-sm btn btn-xs btn-outline btn-green fa fa-truck"-->
+                  <!--(click)="deliverOrder(order.ordno)">-->
+            <!--设置发货-->
+          <!--</button>-->
+
           <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
                   routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
           <button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
@@ -151,4 +156,5 @@
   <app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"
                        (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
 </ng-container>
+
 

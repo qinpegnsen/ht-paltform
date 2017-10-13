@@ -7,6 +7,7 @@ import {WoService} from "./wo.service";
 import { AssignToAgentComponent } from './assign-to-agent/assign-to-agent.component';
 import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrdersService} from "../orders/orders/orders.service";
+import {DeliverComponent} from "./deliver/deliver.component";
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     WoManageComponent,
     WoAllComponent,
     AssignToAgentComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    DeliverComponent
   ],
   providers: [WoManageComponent,WoService,OrdersService]
 })
