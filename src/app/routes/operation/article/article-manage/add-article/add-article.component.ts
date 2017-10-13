@@ -10,8 +10,8 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
-declare var $: any;
 
+declare var $: any;
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
 
 @Component({
@@ -19,7 +19,9 @@ const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的�
   templateUrl: './add-article.component.html',
   styleUrls: ['./add-article.component.scss']
 })
+
 export class AddArticleComponent implements OnInit {
+
   /**
    * 图片上传
    * @type {FileUploader}
@@ -32,7 +34,6 @@ export class AddArticleComponent implements OnInit {
     itemAlias: "limitFile",
     queueLimit: 1
   });
-
   private uuid=[];                                 //存储暗码的数组
   public linkType: string;
   public contents: string;
@@ -48,10 +49,10 @@ export class AddArticleComponent implements OnInit {
   public goodShow: boolean = false;                 //关联商品的弹框
   public linkGoods: any;                             //关联商品的数据
   private kindId: any = '';                          //品牌名
-  public brandList: any;                              //品牌列表
-  linkGoodsList: Array<any>;                          //可以选择的商品
-  listTeamOne: Array<any> = [];                       //已经选择的商品
-  copylistTeamOne: Array<any> = [];                   //已经赋值选择的商品
+  public brandList: any;                             //品牌列表
+  public linkGoodsList: Array<any>;                  //可以选择的商品
+  public listTeamOne: Array<any> = [];               //已经选择的商品
+  public copylistTeamOne: Array<any> = [];           //已经赋值选择的商品
   private brandName: any = '';                       //品牌名
   private goodsName: any = '';                       //商品名
   private linkGoodStr: any = '';                     //关联商品id的拼接
@@ -61,7 +62,8 @@ export class AddArticleComponent implements OnInit {
   public linkGoodsLength:number=0;                   //获取到选择的商品的长度 从而决定关联商品html的高度
   public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传
 
-  constructor(public settings: SettingsService,
+  constructor(
+              public settings: SettingsService,
               private routeInfo: ActivatedRoute,
               public router: Router,
               public GetUidService: GetUidService,
@@ -81,14 +83,11 @@ export class AddArticleComponent implements OnInit {
   ngOnInit() {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
-
     this.articleCoverType = 'AUTO'//文章封面类型默认的样式
-
     this.deletebutton = {//删除按钮
       title: "删除",
       type: "delete"
     };
-
 
     /**
      * 文章的封面三种类型
@@ -108,7 +107,6 @@ export class AddArticleComponent implements OnInit {
       {id: 'SUCCESS', name: '成功'},
       {id: 'FAILURE', name: '失败'}
     ]
-
 
     /**
      * 解决拖拽时候默认出现的框
@@ -254,7 +252,6 @@ export class AddArticleComponent implements OnInit {
     if (this.linkGoods) this.linkGoodsList = this.linkGoods.voList;
   }
 
-
   /**
    * 点击选择封面类型，然后来决定是否显示封面路径,同时获取暗码，写到图片上传的点击事件
    * @param code
@@ -286,7 +283,6 @@ export class AddArticleComponent implements OnInit {
     }
   }
 
-
   /**
    * 编辑器上传图片并显示
    * @param file
@@ -294,7 +290,6 @@ export class AddArticleComponent implements OnInit {
   sendFile(file) {
     let _this = this, img = _this.tools.uploadImg(file);
     if (!isNullOrUndefined(img)) {
-      console.log("█ 1 ►►►",  1);
       $("#summernote").summernote('insertImage', img,function($image){
         $image.css({//设置图片的大小
           width: '20%'

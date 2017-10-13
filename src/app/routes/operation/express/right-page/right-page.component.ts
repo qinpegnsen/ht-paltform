@@ -11,6 +11,7 @@ import {OperationService} from "../../operation.service";
   templateUrl: './right-page.component.html',
   styleUrls: ['./right-page.component.scss']
 })
+
 export class RightPageComponent implements OnInit {
 
   public type:string;           //储存地址栏传递过来的类型，从而显示不同的页面
@@ -61,12 +62,17 @@ export class RightPageComponent implements OnInit {
     ]
   }
 
-  // 取消
+  /**
+   * 取消
+   */
   cancel(){
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 
-  // 提交
+  /**
+   * 提交
+   * @param obj
+   */
   submit(obj){
     if(this.type=='add'){
       let url='/basicExpress/addBasicExpress';

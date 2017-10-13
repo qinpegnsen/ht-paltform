@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {OperationService} from "../../operation.service";
 import {Page} from "../../../../core/page/page";
+
 const swal = require('sweetalert');
 
 @Component({
@@ -55,7 +56,6 @@ export class PlatformTplComponent implements OnInit {
       tplName:'',
     };
     this.platformTplData=new Page(this.operationService.linkGoods(url,data));
-    console.log("█ this.platformTplData ►►►",  this.platformTplData);
   }
 
   /**
@@ -91,7 +91,6 @@ export class PlatformTplComponent implements OnInit {
   updateTpl(tplCode){
     this.curType = 'update';
     this.curTplCode=tplCode;
-    console.log("█ tplCode ►►►",  tplCode);
   }
 
   /**

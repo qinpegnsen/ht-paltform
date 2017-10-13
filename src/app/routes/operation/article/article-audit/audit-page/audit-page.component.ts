@@ -16,6 +16,7 @@ export class AuditPageComponent implements OnInit {
   public articleCommentFlag: any                    //文章是否评论
   public autionOptions;                             //审核状态的列表
   public articleCoverTypes;                         //文章封面的类型数据
+
   constructor(
     private routeInfo: ActivatedRoute,
     public ContentService: ContentService,
@@ -32,7 +33,6 @@ export class AuditPageComponent implements OnInit {
       articleId: this.articleId
     }
     this.queryArticleData = this.service.getData(url, data);
-    console.log("█ this.queryArticleData ►►►",  this.queryArticleData);
     this.articleCommend=this.queryArticleData.articleCommend;
     this.articleCommentFlag=this.queryArticleData.articleCommentFlag;
 

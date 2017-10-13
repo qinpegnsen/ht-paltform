@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {OperationService} from "../../operation.service";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+
 const swal = require('sweetalert');
 declare var $: any;
+
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
@@ -27,10 +29,10 @@ export class MessageListComponent implements OnInit {
     };
     this.queryAdminNotify()
   }
+
   /**
    * 获取通知的消息列表，默认只展示第一页的内容
    */
-
   queryAdminNotify(event?:PageEvent){
     let activePage = 1;
     if(typeof event !== "undefined") {activePage =event.activePage};
@@ -53,7 +55,6 @@ export class MessageListComponent implements OnInit {
       ids:id
     };
     this.platformInfoData=this.operationService.updateproblem(url,data);
-
     this.queryAdminNotify();
   }
 
@@ -67,7 +68,6 @@ export class MessageListComponent implements OnInit {
     for(let i=0;i<obj.length;i++){
       this.idArr.push($(obj[i]).val())
     }
-    console.log("█ this.idArr ►►►",  this.idArr);
     let idStr= this.idArr.join(',');
     let data={
       ids	:idStr
@@ -75,7 +75,6 @@ export class MessageListComponent implements OnInit {
     this.platformInfoData=this.operationService.updateproblem(url,data);
     this.queryAdminNotify();
   }
-
 
   /**
    * 单选框勾选时执行的方法
@@ -110,7 +109,6 @@ export class MessageListComponent implements OnInit {
 
   }
 
-
   /**
    * 点击全选按钮获取所有的id
    */
@@ -126,7 +124,6 @@ export class MessageListComponent implements OnInit {
       $("._every").attr("checked", false);
     }
   }
-
 
   /**
    * 删除模板 首先进行确认是否删除，删除后刷新页面

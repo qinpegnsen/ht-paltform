@@ -4,6 +4,7 @@ import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "../../../../core/page/page";
 import {OperationService} from "../../operation.service";
+
 const swal = require('sweetalert');
 
 @Component({
@@ -11,6 +12,7 @@ const swal = require('sweetalert');
   templateUrl: './article-sort.component.html',
   styleUrls: ['./article-sort.component.scss']
 })
+
 export class ArticleSortComponent implements OnInit {
   private articleSortAddbutton:Object;        //新增分类按钮
   private childbutton:Object;                 //新增子分类按钮
@@ -57,7 +59,7 @@ export class ArticleSortComponent implements OnInit {
    * 获取文章分类的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
    */
-  public queryArticSortleList(event?:PageEvent) {
+  queryArticSortleList(event?:PageEvent) {
     let activePage = 1;
     if(typeof event !== "undefined") {activePage =event.activePage};
     let data={
@@ -66,8 +68,7 @@ export class ArticleSortComponent implements OnInit {
       acName:this.searchKey
     }
     let url= "/articleClass/queryArticleClass";
-    let result=new Page(this.service.getData(url,data));
-    this.articleSortListdata= result;
+    this.articleSortListdata=new Page(this.service.getData(url,data));
   }
 
   /**
@@ -93,11 +94,9 @@ export class ArticleSortComponent implements OnInit {
           }
          that.service.delRequest(url,data)
          that.getChild(acParentId)
-
         }
       });
   }
-
 
   /**
    * 修改文章的状态
@@ -116,7 +115,6 @@ export class ArticleSortComponent implements OnInit {
     }
     this.operationService.updataArticleState(url,data,article)
   }
-
 
   /**
    * 根据分类的父id查询子分类 和面包屑导航
@@ -148,8 +146,6 @@ export class ArticleSortComponent implements OnInit {
     me.getChild(transId)
 
   }
-
-
 
   /**
    * 根据分类的父id查询子分类,从上面分离出来的

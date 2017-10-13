@@ -5,6 +5,7 @@ import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTabl
 import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
 import {Page} from "../../../../../core/page/page";
+
 const swal = require('sweetalert');
 
 @Component({
@@ -12,6 +13,7 @@ const swal = require('sweetalert');
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
+
 export class ContentComponent implements OnInit,OnChanges  {
 
   @Input()                                //导航栏传过来的文章的状态，从而获取不同的文章列表
@@ -197,7 +199,6 @@ export class ContentComponent implements OnInit,OnChanges  {
     }
   }
 
-
   /**
    * 文章是否推荐
    * @param data 当前获取到得数据
@@ -240,5 +241,4 @@ export class ContentComponent implements OnInit,OnChanges  {
       this.queryArticManleList('Y')//调用文章的列表
     }
   }
-
 }

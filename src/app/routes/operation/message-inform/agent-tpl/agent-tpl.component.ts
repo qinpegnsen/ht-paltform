@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import {OperationService} from "../../operation.service";
+
 const swal = require('sweetalert');
 
 @Component({
@@ -9,8 +10,8 @@ const swal = require('sweetalert');
   templateUrl: './agent-tpl.component.html',
   styleUrls: ['./agent-tpl.component.scss']
 })
-export class AgentTplComponent implements OnInit {
 
+export class AgentTplComponent implements OnInit {
   private addbutton:Object;                                       //新增代理商消息模板按钮
   private updatebutton:Object;                                    //修改按钮
   private deletebutton:Object;                                    //删除按钮
@@ -25,7 +26,6 @@ export class AgentTplComponent implements OnInit {
    * 2 获取模板的列表
    */
   ngOnInit() {
-
     this.addbutton={
       title:"新增代理商模板",
       text:"新增代理商模板",
@@ -39,9 +39,7 @@ export class AgentTplComponent implements OnInit {
       title:"删除",
       type: "delete"
     };
-
     this.queryAgentTpl();
-
   }
 
   /**
@@ -59,7 +57,6 @@ export class AgentTplComponent implements OnInit {
       tplName:'',
     };
     this.agentTplData=new Page(this.operationService.linkGoods(url,data));
-    console.log("█ this.agentTplData ►►►",  this.agentTplData);
   }
 
   /**
@@ -95,7 +92,6 @@ export class AgentTplComponent implements OnInit {
   updateTpl(tplCode){
     this.curType = 'update';
     this.curTplCode=tplCode;
-    console.log("█ tplCode ►►►",  tplCode);
   }
 
   /**

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+
 const swal = require('sweetalert');
 
 @Component({
@@ -13,10 +14,10 @@ export class ExpressComponent implements OnInit {
 
   private expressListdata;            //用来存储快递公司的信息
   private searchKey:string='';        //默认查询的分类的名称
-
   private expressAddbutton:Object;     //新增快递公司按钮
   private updatebutton:Object;         //修改按钮
   private deletebutton:Object;         //删除按钮
+
   constructor(public service:SubmitService) {}
 
   /**
@@ -38,7 +39,6 @@ export class ExpressComponent implements OnInit {
       type: "delete"
     };
     this.queryExpressList()
-
   }
 
   /**

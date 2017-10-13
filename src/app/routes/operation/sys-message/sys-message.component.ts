@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sys-message.component.scss']
 })
 export class SysMessageComponent implements OnInit {
+
   constructor() { }
 
   ngOnInit() {
 
   }
-
-
 }

@@ -33,7 +33,7 @@ export class ArticleAuditComponent implements OnInit {
    * @paddArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
    * @pbooelean  是否调取置顶的列表
    */
-  public queryArticManleList(event?:PageEvent) {
+  queryArticManleList(event?:PageEvent) {
     let activePage = 1;
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={

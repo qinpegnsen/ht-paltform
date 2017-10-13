@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined, isUndefined} from "util";
 import {OperationService} from "../../operation.service";
+
 declare var $: any;
 
 @Component({
@@ -8,6 +9,7 @@ declare var $: any;
   templateUrl: './edit-tpl.component.html',
   styleUrls: ['./edit-tpl.component.scss']
 })
+
 export class EditTplComponent implements OnInit {
   public showDeliverWindow: boolean = false;
   public tplData: any;                                        //当前模板的数据
@@ -20,25 +22,25 @@ export class EditTplComponent implements OnInit {
  * 1.根据类型显示不同的内容
  * 2.如果模板的编码存在，获取当前load的信息
  */
-ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
   if (changes['type'] && !isNullOrUndefined(this.type)) {
-    console.log("█ curType ►►►", this.type);
     $('.wrapper > section').css('z-index', 200);
     this.showDeliverWindow = true;
     if(changes['tplCode'] && !isNullOrUndefined(this.tplCode)){
-      console.log("█ this.tplCode ►►►",  this.tplCode);
       this.loadByTplCode()
     }
   }
 }
 
+  /**
+   * 组件销毁
+   */
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
 
   constructor(public operationService:OperationService) {
   }
-
 
   ngOnInit() {}
 
@@ -51,7 +53,6 @@ ngOnChanges(changes: SimpleChanges): void {
       tplCode:this.tplCode,
     };
     this.tplData=this.operationService.linkGoods(url,data);
-    console.log("█ this.tplData ►►►",  this.tplData);
   }
 
   /**
@@ -67,7 +68,6 @@ ngOnChanges(changes: SimpleChanges): void {
       page: me.page
     })// 向外传值
   }
-
 
   /**
    * 修改模板的内容
@@ -85,7 +85,6 @@ ngOnChanges(changes: SimpleChanges): void {
       remark: this.tplData.remark,
     }
     let result = this.operationService.updateproblem(url, data);
-    console.log("█ result ►►►",  result);
     if (result) this.hideWindow(true)
   }
 }
