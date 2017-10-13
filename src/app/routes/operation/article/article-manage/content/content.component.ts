@@ -47,25 +47,6 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 3.调用文章列表的方法
    */
   ngOnInit() {
-    /**
-     * 路由事件用来监听地址栏的变化
-     * 1.当新增文章出现的时候，内容组件隐藏
-     * 2.路由变化的时候，刷新页面
-     */
-
-    this.router.events
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          if(event.url.indexOf('linkType')>0){
-            this.flag=false;
-          }else if(event.url=='/main/operation/article/manage'){
-            this.flag=true;
-            this.queryArticManleList('N') //刷新内容页面
-            this.getTotalRow()
-          }
-        }
-      });
-
     this.updatebutton={
       title:"编辑",
       type: "update"
@@ -86,8 +67,25 @@ export class ContentComponent implements OnInit,OnChanges  {
       title:"审核",
       type: "agree"
     };
-
     this.queryArticManleList('N')//调用文章的列表
+    /**
+     * 路由事件用来监听地址栏的变化
+     * 1.当新增文章出现的时候，内容组件隐藏
+     * 2.路由变化的时候，刷新页面
+     */
+    let that=this;
+    that.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          if(event.url.indexOf('linkType')>0){
+            that.flag=false;
+          }else if(event.url=='/main/operation/article/manage'){
+            that.flag=true;
+            that.queryArticManleList('N') //刷新内容页面
+            that.getTotalRow()
+          }
+        }
+      });
   }
 
   /**
