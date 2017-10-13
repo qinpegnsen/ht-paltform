@@ -56,7 +56,7 @@ export class AllOrderComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/agentOrd/queryAgentOrdReturn';
+    let requestUrl = '/agentOrd/queryAgentOrdReturnList';
     //格式化时间格式
     let dateStr = '';
     if (this.agentTime) {

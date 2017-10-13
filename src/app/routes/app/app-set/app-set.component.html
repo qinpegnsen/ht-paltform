@@ -36,7 +36,7 @@
           <img style="" src="{{item.reslut}}" (click)="show(i)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <button class="mb-sm btn btn-danger btn-outline" type="button" (click)="deleteModel(i+1)">删除</button><br>
-            <button *ngIf="item.indexData" style="position: relative; top: -3px; left: 304px" class="mb-sm btn btn-danger btn-outline" type="button" (click)="addNewData(item.indexData)">设置</button>
+            <button *ngIf="phoneIndexId[i]" style="position: relative; top: -3px; left: 304px" class="mb-sm btn btn-danger btn-outline" type="button" (click)="addNewData(item.indexData)">设置</button>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
         </div>
         <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
         <div class="main_right_optModel">
-          <select class="form-control" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)" style="width: 120px; display: inline">
+          <select class="form-control" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)" style="width: 49%; display: inline">
             <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}</option>
           </select>
           <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text" [(ngModel)]="optKey[i]" [disabled]="isEntered[i]=='N'">

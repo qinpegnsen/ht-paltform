@@ -1,39 +1,4 @@
 
-<!--查询 start-->
-<div class="row clearfix p text-right">
-  <div class="place-time clearfix mb">
-    <span class="_title">下单时间：</span>
-    <div class="_picker">
-      <div class="input-group">
-        <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="agentTime">
-        <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
-      </div>
-    </div>
-  </div>
-  <div class="search-term clearfix ml mb">
-    <div class="w100 pl-sm pr0 pull-left">
-      <div class="form-group mb0 pr0">
-        <div class="w100 pl0 pr0 pull-left">
-          <input type="text" class="form-control border-b-grey" [(ngModel)]="agentAcct" placeholder="请填写代理商账号"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="search-term clearfix ml mb">
-    <div class="w100 pl-sm pr0 pull-left">
-      <div class="form-group mb0 pr0">
-        <div class="w70 pl0 pr0 pull-left">
-          <input type="text" class="form-control border-b-grey" [(ngModel)]="agentOrdno" placeholder="请填写订单编号"/>
-        </div>
-        <button type="button" title="搜索"
-                class="btn btn-primary bar-h3-btn mr0 ng-scope"  (click)="queryDatas()">
-          <em class="icon-magnifier fa-fw"></em>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--查询 end-->
 <ul class="clearfix order-table-head list-unstyled mb0 p b">
   <li class="w40 pull-left text-center">商品</li>
   <li class="w10 pull-left text-center">单价</li>
@@ -92,25 +57,15 @@
             <span class="font-gray" *ngIf="goods.payWay=='REMIT'">银行汇款</span>
           </td>
           <td class="w10 bl  position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='CR'">待支付</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='PAID'">待配货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='PREPARE'">待发货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='DELIVERY'">已发货</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='SUCCESS'">已完成</p>
-            <p class="font-gray mb-sm cursor-p" *ngIf="goods.state=='CLOSE'">已取消</p>
-            <!--<p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
-               [queryParams]="{ordno:goods.ordno}">查看详情</p>-->
+            <p class="font-gray mb-sm cursor-p">{{goods.stAft | rzhState :'1801'}}</p>
             <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'">查看详情</p>
             <p class="cursor-p mb-sm" myHoverColor [myHover]="'orange'">
               查看物流
             </p>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" *ngIf="goods.state=='PREPARE'" (click)="cancelOrder(name.ordno)">
-              设置发货
-            </button>
-            <button  class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet" *ngIf="goods.state=='PAID'" (click)="distribution(name.ordno)">
-              设置配货
+            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" *ngIf="goods.stAft=='AUDIT'" (click)="cancelOrder(name.ordno)">
+              审核
             </button>
           </td>
         </tr>
@@ -135,7 +90,7 @@
   </tr>
   </tfoot>
 </table>
-<app-logistics [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-logistics>
+<app-audit [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-audit>
 <!--
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>

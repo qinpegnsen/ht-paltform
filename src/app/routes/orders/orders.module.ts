@@ -28,6 +28,8 @@ import {AllStockService} from './stock/all-stock/all-stock.service';
 import {OrderService} from "./order.service";
 import { BankTransferComponent } from './stock/bank-transfer/bank-transfer.component';
 import {FileUploadModule} from "_ng2-file-upload@1.2.1@ng2-file-upload";
+import {AllOrderService} from './order-review/all-order/all-order.service';
+import { AuditComponent } from './order-review/audit/audit.component';
 
 
 const routes: Routes = [
@@ -95,6 +97,7 @@ const routes: Routes = [
     CuccessComponent,
     LogisticsComponent,
     BankTransferComponent,
+    AuditComponent,
   ],
   providers: [
     OrdersComponent,
@@ -107,7 +110,8 @@ const routes: Routes = [
     AwaitingDeliveryComponent,
     StockComponent,
     OrderService,
-    AllStockComponent
+    AllStockComponent,
+    AllOrderService
   ]
 })
 export class OrdersModule { }

@@ -107,10 +107,10 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"> <i>*</i>坐标_经纬度</label>
             <div class="col-sm-2">
-              <input class="form-control col-sm-1" type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
+              <input class="form-control col-sm-1" type="text" name="coordinateLng" readonly required ngModel [(ngModel)]="staff.coordinateLng"/>
             </div>
             <div class="col-sm-2">
-              <input class="form-control col-sm-1 position-relative" type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+              <input class="form-control col-sm-1 position-relative" type="text" readonly required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
             </div>
           </div>
           <button class="btn btn-info position-absolute  left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
@@ -285,10 +285,10 @@
             <div class="form-group">
               <label class="col-sm-2 control-label"> <i>*</i>坐标_经纬度</label>
               <div class="col-sm-2">
-                <input class="form-control col-sm-1" type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
+                <input class="form-control col-sm-1" readonly type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
               </div>
               <div class="col-sm-2">
-                <input class="form-control col-sm-1 position-relative" type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
+                <input class="form-control col-sm-1 position-relative" readonly type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
               </div>
             </div>
             <button class="btn btn-info position-absolute left50" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)">标注经纬度</button>
@@ -330,7 +330,8 @@
 <div class="model" [class.hide]="!aa">
   <div class="model-main">
     <div class="header">
-      <span>选择区域</span><span class="icon" (click)="isShowMap1()"  [class.hide]="!aa">关闭</span>
+      <span>选择区域</span><!--<span class="icon" (click)="isShowMap1()"  [class.hide]="!aa">关闭</span>-->
+      <i style="padding-right: 15px; cursor: pointer" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!aa" class="fa fa-remove"> </i>
     </div>
     <div class="clearfix latitude">
       <div class="pull-left">

@@ -16,11 +16,8 @@ const swal = require('sweetalert');
 })
 export class LogisticsComponent implements OnInit {
   public showCancelWindow:boolean = false;
-  private ordnoA;
   public goodsList: Page = new Page();
   private goodsAudits: any;  // 商品审核状态列表
-  private query;  // 商品审核状态列表
-  public staff={};
   public ordno:string;//获取区域编码
   private expressNos;
   private expressCode;
@@ -57,7 +54,7 @@ export class LogisticsComponent implements OnInit {
    */
   queryDatas(){
     let _this = this, activePage = 1;
-    let requestUrl = '/basicExpress/queryAllBasicExpress';
+    let requestUrl = '/basicExpress/queryBasicExpressIsUseList';
     let requestData = {
       queryKeywords:''
     };

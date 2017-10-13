@@ -173,13 +173,19 @@ queryData(){
     }
     //添加首页模板
     else if(_this.queryId == 3){
-      _this.uploadImg(value);
+      _this.uploadImg();
+      _this.uploadImg1();
+      _this.submitDatas(value);
     }
     //修改首页模板
     else if(_this.queryId == 4){
-      console.log("█ 1 ►►►",  1);
-
-      _this.uploadImg(value);
+      if(_this.uploader.queue.length>0) {//上传第一张
+        _this.uploadImg();
+      }
+      if(_this.uploaders.queue.length>0) {//上传第二张
+        _this.uploadImg1();
+      }
+      _this.upTplDatas(value);
     }
   }
 
@@ -256,17 +262,13 @@ queryData(){
   /**
    * 图片上传
    */
-  uploadImg(value){
-    console.log("█ 2222222222 ►►►",  2222222222);
-
+  uploadImg(){
     let me = this;
     /**
      * 构建form时，传入自定义参数
      * @param item
      */
     me.uploader.onBuildItemForm = function (fileItem, form) {
-      console.log("█ 33333333333333 ►►►",  33333333333333);
-
       let uuid=me.GetUidService.getUid();
       form.append('uuid',uuid);
       me.tplImgUUid=uuid;
@@ -301,7 +303,6 @@ queryData(){
      * @param headers 头信息
      */
     me.uploader.onErrorItem = function (item, response, status, headers) {
-      console.log("█ 3 ►►►",  3);
       AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
     };
 
@@ -310,10 +311,7 @@ queryData(){
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
-  console.log("█ 4444444444 ►►►",  4444444444);
-  
       // me.submitDatas();
-      me.uploadImg1(value);
     }
   }
 
@@ -321,18 +319,16 @@ queryData(){
   /**
    * 图片上传
    */
-  uploadImg1(value){
+  uploadImg1(){
     let me = this;
     /**
      * 构建form时，传入自定义参数
      * @param item
      */
     me.uploaders.onBuildItemForm = function (fileItem, form) {
-      console.log("█ fileItem ►►►",  fileItem);
       let uuid=me.GetUidService.getUid();
       form.append('uuid',uuid);
       me.tplCheckedImgUUid=uuid;
-      console.log("█ me.tplCheckedImgUUid ►►►",  me.tplCheckedImgUUid);
 
     };
 
@@ -373,11 +369,11 @@ queryData(){
      * 所有图片都上传成功后
      */
     me.uploaders.onCompleteAll=function(){
-      if(me.queryId == 3){
-        me.submitDatas(value);
-      }else if(me.queryId == 4){
-        me.upTplDatas(value);
-      }
+      // if(me.queryId == 3){
+      //   me.submitDatas(value);
+      // }else if(me.queryId == 4){
+      //   me.upTplDatas(value);
+      // }
     }
   }
 }

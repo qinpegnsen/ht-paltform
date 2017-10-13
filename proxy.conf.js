@@ -49,8 +49,9 @@ const PROXY_CONFIG = [
       "/wo",
       "/ord",
       "/statistical",
+      "/login"
     ],
-    target: sz + "8080",   //拦截 context配置路径，经过此地址
+    target: gh + "8085",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -62,8 +63,7 @@ const PROXY_CONFIG = [
   },
   {
     context: [
-      "/phone",
-      "/login"
+      "/phone"
     ],
     target: bb + "8094",   //拦截 context配置路径，经过此地址
     secure: false
@@ -73,7 +73,7 @@ const PROXY_CONFIG = [
       "/basicExpress",
       "/res"
     ],
-    target: sz + "8082",   //拦截 context配置路径，经过此地址
+    target: gh + "8082",   //拦截 context配置路径，经过此地址
     secure: false
   },
 ];
