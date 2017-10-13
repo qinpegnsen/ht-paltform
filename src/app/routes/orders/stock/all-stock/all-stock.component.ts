@@ -32,6 +32,11 @@ export class AllStockComponent implements OnInit {
   public lookLogisticsOrderId: string;
   private beginTime: string;
   private endTime: string;
+
+  private orderId1:any;
+  private goodspay1:any;
+  private curPage1:any;
+  private showBankWindow:boolean = false;
   public goodsList: Page = new Page();
   @ViewChild('cancelBox') cancelBox: CancelComponent;
 
@@ -129,14 +134,6 @@ export class AllStockComponent implements OnInit {
     this.curCancelOrderId = orderId;
   }
 
- /* deliverOrder(orderId) {
-    this.curDeliverOrderId = orderId;
-  }
-
-  lookLogistics(orderId) {
-    this.lookLogisticsOrderId = orderId;
-  }*/
-
   /**
    * 取消订单回调函数
    * @param data
@@ -146,19 +143,23 @@ export class AllStockComponent implements OnInit {
   }
 
   /*
-   /!**
-   * 发货回调函数
+   * 添加弹窗
+   * */
+  addBankData(orderId,goodspay,curPage) {
+    this.orderId1=orderId;
+    this.goodspay1=goodspay;
+    this.curPage1=curPage;
+    this.showBankWindow = true;
+
+  }
+
+  /**
+   * 付款回调函数
    * @param data
-   *!/
-   getDeliverOrderData(data){
-   this.curDeliverOrderId = null;
-   }
-   /!**
-   * 查询物流回调函数
-   * @param data
-   *!/
-   getLogisticsData(data){
-   this.lookLogisticsOrderId = null;
-   }*/
+   */
+  getBankResult(data) {
+    this.showBankWindow = false;
+    if(data == 'success') this.queryDatas(1)
+  }
 
 }

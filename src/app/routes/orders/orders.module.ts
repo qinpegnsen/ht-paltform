@@ -111,7 +111,8 @@ const routes: Routes = [
     StockComponent,
     OrderService,
     AllStockComponent,
-    AllOrderService
+    AllOrderService,
+    PendingPaymentComponent
   ]
 })
 export class OrdersModule { }

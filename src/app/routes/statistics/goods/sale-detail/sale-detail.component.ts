@@ -91,7 +91,7 @@ export class SaleDetailComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     // me.nowData =me.data;
-    console.log("█ result ►►►",  result);
+    // console.log("█ result ►►►",  result);
   }
   /**
    * 根据指定年月获取周列表
