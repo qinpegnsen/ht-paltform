@@ -1,4 +1,7 @@
 /**
+ * Created by xiejiaojiao on 2017/10/13.
+ */
+/**
  * Created by xiejiaojiao on 2017/10/6.
  */
 /**
@@ -75,20 +78,20 @@ const operation = {
       ]
     },
     /*{
-      text: '保障服务',
-      icon: 'icon-diamond',
-      link: '/main/operation/ensure'
-    },*/
+     text: '保障服务',
+     icon: 'icon-diamond',
+     link: '/main/operation/ensure'
+     },*/
     {
       text: '系统消息',
       icon: 'icon-diamond',
       link: '/main/operation/sys-message'
     },
     /*{
-      text: '售后保障',
-      icon: 'fa fa-shield',
-      link: '/main/operation/after-ensure'
-    },*/
+     text: '售后保障',
+     icon: 'fa fa-shield',
+     link: '/main/operation/after-ensure'
+     },*/
     {
       text: '运费模板管理',
       icon: 'fa fa-book',
@@ -328,11 +331,11 @@ const statistics = {
           text: '订单金额区间',
           link: '/main/stat/order-amount'
         }/*,
-        {
-          text: '商品价格区间',
-          link: '/main/stat/commodity-price'
-        }*/
-       /* {
+         {
+         text: '商品价格区间',
+         link: '/main/stat/commodity-price'
+         }*/
+        /* {
          text: '统计缓存重置',
          link: '/main/stat/xtsz/cache-reset'
          }*/

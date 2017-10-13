@@ -46,7 +46,6 @@ export class GetKindComponent implements OnInit {
    * @param kind
    */
   getKindList(kind: any) {
-    console.log("█  kind.level ►►►",   kind.level);
     let me = this, level = kind.level, myKindName = kind.kindName, myKindId = kind.id, haveChildren = kind.haveChildren;
     if (level == 1) me.myKindName = '';
     if (me.myKindName == '') me.myKindName = myKindName; else me.myKindName += '>' + myKindName;

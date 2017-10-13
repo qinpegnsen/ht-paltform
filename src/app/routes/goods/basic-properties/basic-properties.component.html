@@ -37,7 +37,7 @@
       </tr>
       </thead>
       <tbody dnd-sortable-container [sortableData]="data.baseTypeList">
-      <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i">
+      <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i" title="拖动可调整顺序">
       <td >{{count.name}}</td>
       <td >
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>

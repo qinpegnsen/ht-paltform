@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {PatternService} from "../../../../core/forms/pattern.service";
 
 @Component({
   selector: 'app-order-amount',
@@ -12,11 +13,14 @@ export class OrderAmountComponent implements OnInit {
   public info: string;
   public updata: any;
   private remark:any;
-  constructor(private submit: SubmitService) { }
+  constructor(private submit: SubmitService,private patterns:PatternService) { }
 
   ngOnInit() {
     this.qeuryAll();
   }
+  /*
+  * 查询订单金额
+  * */
   qeuryAll(){
     let me = this;
     let url = "/datadict/queryAllByTypeCode";
@@ -25,13 +29,15 @@ export class OrderAmountComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
     me.data = result;
-    console.log("█ result. ►►►",me.data);
   }
+  /*
+  * 修改
+  * */
   submitt(code,data1,info,remark){
     data1.isShow = !data1.isShow;
     let url = '/datadict/updateDatadict';
     let data = {
-      typeCode: 'goods_price_range',
+      typeCode: 'orders_range',
       code: code,
       info:info,
       remark:remark,
