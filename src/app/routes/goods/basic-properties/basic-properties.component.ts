@@ -1,9 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
 import {cli} from "webdriver-manager/built/lib/webdriver";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-basic-properties',
@@ -11,6 +12,8 @@ const swal = require('sweetalert');
   styleUrls: ['./basic-properties.component.scss']
 })
 export class BasicPropertiesComponent implements OnInit {
+
+  @Input() selType: any; //选中的商品分类
   private addbuttons;//添加按钮
   private updatebuttons: Object;//修改按钮
   private deletebuttons: Object;//删除按钮
@@ -24,6 +27,7 @@ export class BasicPropertiesComponent implements OnInit {
   constructor( private submit: SubmitService,private goods: GoodsService) { }
 
   ngOnInit() {
+
     let me = this;
     me.kindList = me.goods.getKindList(); //获取分类列表
     //按钮配置
@@ -59,7 +63,9 @@ export class BasicPropertiesComponent implements OnInit {
    * @param curPage
    */
   queryBaseEnumList(kindId?) {
-    let _this = this;
+    let _this = this,sel= _this.selType;
+    console.log("█ this.selTypeData ►►►",  this.selType);
+    if ((isNullOrUndefined(this.kindId) || this.kindId == "") && sel) _this.getKind(sel);
     let requestUrl = '/goodsEnum/queryBaseEnumList';
     let requestData = {
       kindId:kindId?kindId:_this.kindId,

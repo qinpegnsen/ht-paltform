@@ -17,15 +17,15 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('showAddWindow') showAddWindow: boolean;
   @Input() selTypeData: any; //选中的商品分类
   @Output() addData = new EventEmitter();
+  private selData:any;
+
   private kindId: any;
-  private isLastLevel: boolean;
   private level:any
 
   private Id: any;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
-      console.log("█ this.selTypeData ►►►", this.selTypeData);
       if (this.showAddWindow) $('.wrapper > section').css('z-index', 200);
       else $('.wrapper > section').css('z-index', 114);
     }
@@ -60,7 +60,6 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
    * */
   delivery(obj) {
     let _this = this, selInfo = _this.selTypeData;
-    console.log("█ this.selTypeData ►►►",  this.selTypeData);
     if ((isNullOrUndefined(this.kindId) || this.kindId == "") && selInfo) _this.getKind(selInfo);
     if (this.level==3) {
       let url = '/goodsEnum/addGoodsBaseEnum';
@@ -75,7 +74,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
         return;
       } else {
         this.hideWindow("success");
-        this.basicPropertiesComponent.queryBaseEnumList(this.kindId);
+        // this.basicPropertiesComponent.queryBaseEnumList(this.kindId);
       }
     } else {
       AppComponent.rzhAlt("error", "请选择三级分类");
@@ -84,7 +83,9 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   //查询分类
   getKind(data) {
     this.kindId = data.kindId;
-    // this.isLastLevel = data.isLastLevel;
-    this.level=data.level
+    this.level=data.level;
+    this.selData=data
+    console.log("█  this.selData ►►►",  this.selData);
   }
+
 }
