@@ -107,7 +107,9 @@
                [queryParams]="{ordno:goods.ordno}">查看详情</p>
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-              <span class="btn btn-info" (click)="addBankData(name.ordno,goods.pay,goodsList.curPage)" *ngIf="goods.payWay=='REMIT'">确认收款</span>
+            <button  class="m-sm btn btn-xs btn-outline btn-info fa fa-jpy" *ngIf="goods.payWay=='REMIT'"(click)="addBankData(name.ordno,goods.pay,goodsList.curPage)" >
+              确认收款
+            </button>
           </td>
         </tr>
       </table>
