@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   shopnow:any;
   goodsnow:any;
 
+
   /**
    * 图表1
    */
@@ -80,12 +81,15 @@ export class HomeComponent implements OnInit {
     let data = {}
     let result = this.submit.getData(url, data);
     console.log("█ result ►►►",  result);
-    me.data = result;
-    me.now = me.data.todaySale;
-    me.prev = me.data.yesterdaySale;
-    me.shopnow=me.data.storeRanking;
-    me.goodsnow=me.data.goodsRanking;
-    me.optionPrevInfo();
+    if(result){
+      me.data = result;
+      me.now = me.data.todaySale;
+      me.prev = me.data.yesterdaySale;
+      me.shopnow=me.data.storeRanking;
+      me.goodsnow=me.data.goodsRanking;
+      me.optionPrevInfo();
+    }
+
   }
 
   /**

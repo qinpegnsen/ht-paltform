@@ -5,6 +5,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import { FileUploader } from 'ng2-file-upload';
 import {isNullOrUndefined} from "util";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {queue} from 'rxjs/scheduler/queue';
 const swal = require('sweetalert');
 declare var $:any;
 declare var AMap:any;
@@ -48,14 +49,13 @@ export class AddAgentComponent implements OnInit {
       let map = new AMap.Map("container", {
         resizeEnable: true,
         zoom: 13,//地图显示的缩放级别
-        center: [116.397428, 39.90923],
         keyboardEnable: false
       });
 
       AMap.service('AMap.PlaceSearch',function(){//回调函数
         //实例化PlaceSearch
         me.placeSearch= new AMap.PlaceSearch();
-        //TODO: 使用placeSearch对象调用关键字搜索的功能
+        //TODO: 使用pla ceSearch对象调用关键字搜索的功能
         me.placeSearch.search(me.selectArea, function(status, result) {
           let lat = result.poiList.pois[0].location.lat;
           let lng = result.poiList.pois[0].location.lng;
@@ -102,10 +102,13 @@ export class AddAgentComponent implements OnInit {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
 
+    this.queryAgent();//请求代理商详细数据
+  }
 
-    /**
-     * 请求代理商详细数据，并显示()
-     */
+  /**
+   * 请求代理商详细数据，并显示()
+   */
+  queryAgent(){
     if(!isNullOrUndefined(this.agentCode)) {
       this.ajax.get({
         url: '/agent/loadByAgentCode',
@@ -122,7 +125,6 @@ export class AddAgentComponent implements OnInit {
         }
       });
     }
-
   }
 
   /**

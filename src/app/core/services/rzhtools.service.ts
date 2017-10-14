@@ -497,7 +497,7 @@ export class RzhtoolsService {
   static getWeek = function (date: Date, lan?) {
     let today = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     if (!isUndefined(lan) && lan == 'cn') today = new Array('周一', '周二', '周三', '周四', '周五', '周六', '周日');
-    let week = today[date.getDay()];
+    let week = today[date.getDay()-1];
     // let weeks: Array<any> = this.getEnumDataList(SettingsService.enums.week), week: string, num: number = date.getDay() + 1;
     // for (let i = 0; i < weeks.length; i++) {
     // 	if (num.toString() == weeks[i]["val"]) week = weeks[i]["key"];

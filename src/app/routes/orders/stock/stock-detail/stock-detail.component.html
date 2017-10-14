@@ -65,7 +65,7 @@
   <div class="szh-order-condition bt br bb">
     <div class="order-head _position"><i class="fa fa-truck mr"></i><span>包裹信息</span></div>
     <!--物流信息-->
-    <div class="_logistics order-track" *ngIf="orderData.state=='DELIVERY'">
+    <div class="_logistics order-track" *ngIf="orderData.state!='CR'">
       <ul class="timeline-alt p0">
         <ng-container *ngFor="let item of logisticsData;let s=index;">
           <li class="mb0">
