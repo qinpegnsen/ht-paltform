@@ -30,8 +30,6 @@ export class AllStockComponent implements OnInit {
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private beginTime: string;
-  private endTime: string;
 
   private orderId1:any;
   private goodspay1:any;

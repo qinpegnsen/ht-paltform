@@ -4,6 +4,8 @@ import {isNullOrUndefined} from 'util';
 import {ActivatedRoute} from '@angular/router';
 import {AjaxService} from '../../../../core/services/ajax.service';
 import {SubmitService} from '../../../../core/forms/submit.service';
+import {ToAuditComponent} from '../to-audit/to-audit.component';
+import {AllOrderComponent} from '../all-order/all-order.component';
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -36,7 +38,7 @@ export class AuditComponent implements OnInit {
     }
   }
 
-  constructor(private routeInfo:ActivatedRoute,private ajax:AjaxService,private submit: SubmitService) { }
+  constructor(private routeInfo:ActivatedRoute,private ajax:AjaxService,private submit: SubmitService,private ToAuditComponent:ToAuditComponent,private AllOrderComponent:AllOrderComponent) { }
 
   ngOnInit() {
     let _this = this;
@@ -89,6 +91,8 @@ export class AuditComponent implements OnInit {
         if (res.success) {
           swal('已成功申请', '', 'success');
           _this.hideWindow();
+          _this.AllOrderComponent.queryDatas(1);
+          _this.ToAuditComponent.queryDatas(1);
         } else {
           swal(res.info);
         }
