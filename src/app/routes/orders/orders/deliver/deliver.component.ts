@@ -21,8 +21,9 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['orderId'] && !isNullOrUndefined(this.orderId)) {
-      console.log("█ orderId ►►►", this.orderId);
       $('.wrapper > section').css('z-index', 200);
+      this.expressList = this.ordersServe.getBasicExpressList();   //物流公司列表
+      console.log("█ expr ►►►",  this.expressList);
       this.showDeliverWindow = true;
       this.expressNo = null;      //每次出来把上次填的订单号清除，快递公司就算了，留着吧
     }
@@ -36,7 +37,7 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    this.expressList = this.ordersServe.getBasicExpressList();   //物流公司列表
+
   }
 
 

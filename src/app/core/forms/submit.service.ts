@@ -184,7 +184,7 @@ export class SubmitService {
         if (res.success) {
           // console.log("█ res ►►►",  res);
           result = res.data;
-          // console.log("█ res ►►►",  result);
+          console.log("█ res ►►►",  result);
         } else {
           AppComponent.rzhAlt("error", res.info);
         }
