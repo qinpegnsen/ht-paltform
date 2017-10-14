@@ -60,7 +60,8 @@ export class AddArticleComponent implements OnInit {
   private articleClasssId:number;                    //存储子组件发射过来的id
   private emitClasssId:number;                       //修改审核的时候把当前的id发送到子组件
   public linkGoodsLength:number=0;                   //获取到选择的商品的长度 从而决定关联商品html的高度
-  public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传
+  public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传的类型
+  public coverChange:boolean=false;                  //修改的时候是否点击修改封面了，点击执行图片上传
 
   constructor(
               public settings: SettingsService,
@@ -258,9 +259,9 @@ export class AddArticleComponent implements OnInit {
    */
   coverType(code,flag?) {
     this.coverCode=code;
-
-    if(flag){//如果是true的话证明是前面的HTML页面点击事件，这时候让变空，否则是初始化的时候就调用了
+    if(flag){//如果是true的话证明是前面的HTML页面点击事件，这时候让变空，否则是初始化的时候就调用然后清空就出现问题了
       this.queryArticleData.articleCoverVO=null;
+      this.coverChange=true;
     }
 
     if (code == 'ONE' || code == 'THREE') {
@@ -361,7 +362,6 @@ export class AddArticleComponent implements OnInit {
    */
   excuDel(obj){
     $(obj).parents('.list-group-item').remove();
-    console.log("█ $('._myAppend').find($('.list-group-item')).length ►►►",  $('._myAppend').find($('.list-group-item')).length);
     if( $('._myAppend').find($('li')).length==0){ //如果长度为0，把他隐藏
       $("._myAppend").css("height", '0px');
     }
@@ -428,7 +428,7 @@ export class AddArticleComponent implements OnInit {
    * @param obj
    * @param state
    */
-  submit(obj, state) {
+  submit(obj, state?) {
     this.submitObj = obj;
     this.submitState = state;
     let me = this;
@@ -439,11 +439,10 @@ export class AddArticleComponent implements OnInit {
         me.uploadImg();//执行图片上传的方法
       }
     } else if (this.linkType == 'updateArticle') {
-
-      if(me.queryArticleData.coverType=='AUTO'){
-        me.articleExtra();
-      }else{
+      if(me.coverChange&&me.coverCode!='AUTO'){//如果点击修改封面了并且不是没图就执行图片上传
         me.uploadImg();//执行图片上传的方法
+      }else{
+        me.articleExtra();
       }
     }
   }
@@ -463,7 +462,6 @@ export class AddArticleComponent implements OnInit {
     }
     this.linkGoodStr = idStr.slice(0, idStr.length - 1);
     this.submitObj.goodIds = this.linkGoodStr;
-    this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.uuid = this.uuid.join(',');
     this.submitObj.articleClassId = this.articleClasssId;
@@ -474,6 +472,7 @@ export class AddArticleComponent implements OnInit {
       //新增地址
       case "addArticle" :
         var url = '/article/addArticle' ;
+        this.submitObj.addArticleEnum = this.submitState //默认文章的类型是草稿
         break;
       //修改地址
       case "updateArticle" :

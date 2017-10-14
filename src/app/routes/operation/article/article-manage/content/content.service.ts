@@ -3,7 +3,6 @@ import {AjaxService} from "../../../../../core/services/ajax.service";
 import {Page} from "../../../../../core/page/page";
 import {isNull} from "util";
 import {AppComponent} from "../../../../../app.component";
-const swal = require('sweetalert');
 @Injectable()
 export class ContentService {
   //不用公共的服务，因为返回的不一样,这里是boolean值
@@ -27,9 +26,8 @@ export class ContentService {
           AppComponent.rzhAlt("error",info);
         }
       },
-      error: (data) => {
-        let info=data.info;
-        swal(info,'','success')
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return flag;
@@ -49,13 +47,13 @@ export class ContentService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
+          let info=data.info;
           if(data.success){
-            console.log(data)
             let info=data.info;
             AppComponent.rzhAlt("success",info);
             result=true;
           }else{
-            console.log('是否置顶 返回的success为假');
+            AppComponent.rzhAlt("error",info);
           }
         }else{
           console.log('是否置顶 返回的数据为空');
@@ -63,7 +61,6 @@ export class ContentService {
       },
       error: (res) => {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
-        console.log('是否置顶 连接数据库失败');
       }
     });
     return result;
@@ -83,12 +80,12 @@ export class ContentService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
+          let info=data.info;
           if(data.success){
-            let info=data.info;
             AppComponent.rzhAlt("success",info);
             result=true;
           }else{
-            console.log('是否推荐 返回的success为假');
+            AppComponent.rzhAlt("success",info);
           }
         }else{
           console.log('是否推荐 返回的数据为空');
@@ -96,7 +93,6 @@ export class ContentService {
       },
       error: (res) => {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
-        console.log('是否推荐 连接数据库失败');
       }
     });
     return result;
@@ -116,12 +112,12 @@ export class ContentService {
       async:false,
       success: (data) => {
         if (!isNull(data)) {
+          let info=data.info;
           if(data.success){
-            let info=data.info;
             AppComponent.rzhAlt("success",info);
             result=true;
           }else{
-            console.log('是否置顶 返回的success为假');
+            AppComponent.rzhAlt("error",info);
           }
         }else{
           console.log('是否置顶 返回的数据为空');
@@ -129,7 +125,6 @@ export class ContentService {
       },
       error: (res) => {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
-        console.log('是否置顶 连接数据库失败');
       }
     });
     return result;
@@ -148,23 +143,18 @@ export class ContentService {
       data: data,
       async:false,
       success: (data) => {
+        let info=data.info;
         if(data.success){
-          console.log(data)
-          let info=data.info;
           AppComponent.rzhAlt("success",info);
           result=true;
         }else{
-          console.log('是否置顶 返回的success为假');
+          AppComponent.rzhAlt("error",info);
         }
       },
       error: (res) => {
-        console.log('是否置顶 连接数据库失败');
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;
   }
-
-
-
 }

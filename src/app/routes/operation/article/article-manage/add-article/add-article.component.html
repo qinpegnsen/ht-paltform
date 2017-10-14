@@ -163,7 +163,7 @@
 </div>
 <!--修改文章-->
 <div class="col-lg-10" *ngIf="linkType=='updateArticle'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addArticle="ngForm">
+  <form class="form-validate form-horizontal" style="height: 100%" #updateArticle="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -342,8 +342,8 @@
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'AUDIT')"
-                    [disabled]="addArticle.invalid">发表文章
+            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(updateArticle.value)"
+                    [disabled]="updateArticle.invalid">保存
             </button>
           </div>
         </fieldset>

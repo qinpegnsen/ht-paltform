@@ -82,7 +82,7 @@ export class ContentComponent implements OnInit,OnChanges  {
           }else if(event.url=='/main/operation/article/manage'){
             that.flag=true;
             that.queryArticManleList('N') //刷新内容页面
-            that.getTotalRow()
+            that.getTotalRow();
           }
         }
       });
@@ -100,10 +100,10 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 得到各种状态的总条数，很多地方用到
    */
   public getTotalRow(){
-    let data={}
+    let data={};
     let url= "/article/getCountByState";
-    this.TotalRow=this.NavService.queryTotalRow(url,data) //刷新导航页面
-    this.emitTotalRow.emit(this.TotalRow)
+    this.TotalRow=this.NavService.queryTotalRow(url,data); //刷新导航页面
+    this.emitTotalRow.emit(this.TotalRow);
   }
 
   /**
@@ -157,7 +157,8 @@ export class ContentComponent implements OnInit,OnChanges  {
         }
         let  flag = that.ContentService.confirmDel(url,data)
         if(flag){
-          that.queryArticManleList('N')
+          that.queryArticManleList('N');
+          that.getTotalRow();
         }
       } else {
         swal("Cancelled", "Your imaginary file is safe :)", "error");
@@ -176,7 +177,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let result=this.ContentService.publishArticle(url,data)
     if(result){
       this.queryArticManleList('N')//调用文章的列表，刷新页面
-      this.getTotalRow()
+      this.getTotalRow();
     }
   }
 
