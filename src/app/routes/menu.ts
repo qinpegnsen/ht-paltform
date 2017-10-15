@@ -308,12 +308,12 @@ const sale = {
           link: '/main/sale/return-verify'
         }
       ]
-    },
+    }/*,
     {
       text: '退货退款原因',
       icon: 'icon-question',
       link: '/main/sale/msg'
-    }
+    }*/
   ]
 };
 const statistics = {
