@@ -4,6 +4,7 @@ import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {isNullOrUndefined} from "util";
 import {StockComponent} from "../stock.component";
 import {OrderService} from "../../order.service";
+import {SubmitService} from "../../../../core/forms/submit.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -19,11 +20,13 @@ export class StockDetailComponent implements OnInit {
   public deliveryData;                                    //快递公司的信息
   public ordno;                                           //订单号
   public atime:Array<string> = new Array();             //存储状态时间的数组
+  public PayRecData;                                     //支付记录数据
   constructor(
     private parentComp:StockComponent,
     private routeInfo:ActivatedRoute,
     public orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private submit: SubmitService
   ) { }
 
   /**
@@ -39,6 +42,7 @@ export class StockDetailComponent implements OnInit {
     this.getOrderData();
     this.showLogistics();
     this.getDelivery();
+    this.getPayRec(); //获取订单的支付记录
   }
 
   /**
@@ -54,6 +58,18 @@ export class StockDetailComponent implements OnInit {
     if(isNullOrUndefined(this.orderData)){
       this.orderData='';//避免报错
     }
+  }
+
+  /**
+   * 获取支付记录的信息
+   */
+  getPayRec() {
+    let url='/agentOrd/loadAgentOrdPayRec';
+    let data={
+      ordno:this.ordno
+    }
+    this.PayRecData=this.submit.getData(url, data);
+    console.log("█ this.PayRecData ►►►",  this.PayRecData);
   }
 
   /**
