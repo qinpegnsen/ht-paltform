@@ -334,13 +334,25 @@ export class AddArticleComponent implements OnInit {
     let  me = this;
     this.closeAlert();//关闭弹窗
 
-    $("._myAppend").append($(".panel-success").find('li'));//把已经选择的追加到里面
+    let selectGood=$(".panel-success").find('li');//在拖拽里面选择的商品;
+    let articlelinkGood=$("._myAppend").find('li');//已经为文章关联的商品;
+    if($('._myAppend').find($('li')).length==0){ //如果文章关联的商品的长度为0直接追加
+      $("._myAppend").append(selectGood);
+    }else{//如果追加的时候长度大于0，首先看看在已经关联的商品里面有没有现在选择的商品，因为关联同样的产品好几个没有意义
+      for(let i=0;i<$(selectGood[i]).length;i++){
+        for(let j=0;j<$(articlelinkGood[j]).length;j++){
+          if($(selectGood[i]).find("input:hidden").val()!=$(articlelinkGood[j]).find("input:hidden").val()){
+            $("._myAppend").append(selectGood[i]);//把已经选择的并且之前没有选择过的追加到关联商品里面
+          }
+        }
+      }
+    };
 
-    if( $('._myAppend').find($('li')).length==0){ //如果长度为0，把他隐藏
-      $("._myAppend").css("height", '0px')
+    if( $('._myAppend').find($('li')).length==0){ //追加完之后如果长度为0，把他隐藏
+      $("._myAppend").css("height", '0px');
     }else{
-      $("._myAppend").removeClass('height0').css('height','300px')
-    }
+      $("._myAppend").removeClass('height0').css('height','300px');
+    };
 
     let str = `<div class="col-lg-2 text-center _del" ><label  class="extra p10 ml _desc"><i   class="icon-trash" style="color:red"></i></label></div>`
 
