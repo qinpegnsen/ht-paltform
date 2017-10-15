@@ -244,10 +244,10 @@ const orders = {
       icon: 'fa fa-smile-o',
       alert: '▼',
       submenu: [
-        {
+        /*{
           text: '店铺评价',
           link: '/main/orders/store'
-        },
+        },*/
         {
           text: '买家评价',
           link: '/main/orders/buyer'
