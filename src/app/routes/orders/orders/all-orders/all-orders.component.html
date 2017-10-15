@@ -107,7 +107,7 @@
               <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
               <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
                  [queryParams]="{ordno:order.ordno}">
-                查看详情</p>
+                查看详情{{order.state}}</p>
               <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
                 <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,order.ordno)"
                       (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
@@ -119,7 +119,7 @@
                     <span class="fa fa-truck pull-left _icon"></span>
                     <span class="pull-left">物流信息</span>
                     <a class="pull-right" routerLink="../order-detail"
-                       [queryParams]="{ordno:order.ordno}">查看更多</a>
+                       [queryParams]="{ordno:order.ordno}">查看更多 </a>
                   </p>
                   <div class="logistics-pop-main">
                     <ul class="timeline-alt pt pb0 m0">
@@ -146,6 +146,7 @@
               </div>
             </td>
             <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
+
               <div *ngIf="order.state == 'PREPARE' && order.isPlatCarry=='Y'">
                 <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck"
                         (click)="deliverOrder(order.ordno)">
@@ -186,8 +187,8 @@
   </tfoot>
 </table>
 <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">
+<!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
   <app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
                      (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-</ng-container>
+<!--</ng-container>-->
 <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->

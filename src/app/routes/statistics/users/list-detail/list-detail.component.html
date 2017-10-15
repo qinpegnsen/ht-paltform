@@ -7,45 +7,45 @@
     <table class="table table-striped" #memberList="rzhDataTable" [rzhData]="memberListdata"
            (pageChange)="queryMemberList($event)">
       <thead>
-      <tr>
-        <th class="w5">
+      <tr >
+        <th class="w5" class="text-center">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="name">真实姓名</rzhDefaultSorter>
         </th>
-        <th class="w5">
+        <th class="w5" class="text-center">
           <rzhDefaultSorter by="sex">性别</rzhDefaultSorter>
         </th>
-        <th class="w5">
+        <th class="w5" class="text-center">
           <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="area">区域名称</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="birthday">生日</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="tel">手机号</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="grade">会员类别</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
         </th>
-        <th class="w10">
+        <th class="w10" class="text-center">
           <rzhDefaultSorter by="create">创建时间</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
       <ng-container *ngFor="let member of memberList.data;let i = index">
-        <tr>
+        <tr class="text-center">
           <td>{{i+1}}</td>
           <td>
            <span  *ngIf="member.authState=='AUTH'">

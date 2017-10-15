@@ -31,8 +31,8 @@ export class NavService {
           console.log('查询文章状态总数 返回的数据为空');
         }
       },
-      error: () => {
-        console.log('查询文章状态总数 连接数据库失败');
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;

@@ -3,45 +3,43 @@
 </div>
 <div class="panel mb">
   <div class="panel-body p ng-scope" ng-if="search">
-      <div class="col-md-4">
-        <div class="form-group">
-          <div class="col-md-8 col-xs-6 pl0">
+      <div class="col-md-12">
+        <div class="form-group col-md-3">
+          <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
                    (change)="queryMemberList()" maxlength="128" placeholder="请输入要查询的会员名称">
           </div>
-          <button type="button" title="搜索" (click)="queryMemberList()"
-                  class="btn btn-primary bar-h3-btn mr ng-scope">
-            <i class="icon-magnifier fa-fw"></i>
-          </button>
         </div>
-        <div class="form-group mb0">
-          <div class="col-md-8 col-xs-6 pl0">
+        <div class="form-group mb0 col-md-3">
+          <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTruename"
                    (change)="queryMemberList()"  maxlength="128" placeholder="请输入要查询的会员真实姓名">
           </div>
-          <button type="button" title="搜索" (click)="queryMemberList()"
-                  class="btn btn-primary bar-h3-btn mr ng-scope">
-            <i class="icon-magnifier fa-fw"></i>
-          </button>
+        </div>
+        <div class="form-group col-md-3 clearfix">
+          <div class="pl0">
+            <input type="text" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="form-group clearfix">
-          <div class="col-md-8 col-xs-6 pl0">
-            <input type="number" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
-          </div>
-          <button type="button" title="搜索" (click)="queryMemberList()"
-                  class="btn btn-primary bar-h3-btn mr ng-scope">
-            <i class="icon-magnifier fa-fw"></i>
-          </button>
-        </div>
-        <div class="form-group clearfix mb0">
-          <div class="col-md-8 col-xs-6 pl0">
+      <div class="col-md-12">
+        <div class="form-group clearfix col-md-3 mb0">
+          <div class="pl0">
             <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search($event)">
               <option value="">全部</option>
               <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
             </select>
           </div>
+        </div>
+        <div class="form-group clearfix col-md-3 mb0">
+          <div class="pl0">
+            <select class="form-control" name="state" [(ngModel)]="state" (change)="search($event)">
+              <option value="">全部</option>
+              <option *ngFor="let item of states" [value]="item.key">{{item.val}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group clearfix mb0 col-md-2">
           <button type="button" title="搜索" class="btn btn-primary bar-h3-btn mr ng-scope">
             <i class="icon-magnifier fa-fw"></i>
           </button>
@@ -56,7 +54,7 @@
     <thead>
     <tr>
       <th class="w5">
-        <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+        <rzhDefaultSorter by="sort"></rzhDefaultSorter>
       </th>
       <th class="w10">
         <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
@@ -89,14 +87,16 @@
         <rzhDefaultSorter by="create">创建时间</rzhDefaultSorter>
       </th>
       <th class="w15">
-        <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
+        <rzhDefaultSorter by="manage">管理操作 </rzhDefaultSorter>
       </th>
     </tr>
     </thead>
     <tbody>
     <ng-container *ngFor="let member of memberList.data;let i = index">
       <tr>
-        <td>{{i+1}}</td>
+        <td (click)="showDetail(member)">
+          <i class="icon icon-arrow-down"></i>
+        </td>
         <td>
            <span  *ngIf="member.authState=='AUTH'">
              <i class="icon icon-user-following gold-star" title="已实名认证"></i>&nbsp;
@@ -108,7 +108,7 @@
           {{member.custSex | rzhState:'1002' }}
         </td>
         <td>{{member.coin}}</td>
-        <td>{{member.areaName}}</td>
+        <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>
         <td>
@@ -119,8 +119,6 @@
         </td>
         <td>{{member.createTime}}</td>
         <td>
-          <app-buttons [config]="detailsbutton" class="btn-xs font12 detail-btn" (click)="showDetail(member)"></app-buttons>
-
           <button class="btn btn-danger btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
                   (click)="changeState('FREEZE',member.custCode,memberListdata.curPage)"></button>
           <button class="btn btn-info btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
@@ -131,7 +129,7 @@
       <tr *ngIf="member.isShow">
         <td class="p0" colspan="12">
           <div class="bg-table special text-left h55">
-            <span class="m10 pull-left">头像:</span>
+            <span class="m10 pull-left _myLineHeight mr">头像:</span>
             <span class="">
                  <img [src]="member.custAvatar" alt="" class="buyimg pull-left"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="member.custAvatar" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">

@@ -27,7 +27,7 @@ import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.
 const routes: Routes = [
   {path: '',redirectTo:'order-amount'},
   {path: 'order-amount', component:OrderAmountComponent},
-  {path: 'commodity-price', component:CommodityPriceComponent},
+  // {path: 'commodity-price', component:CommodityPriceComponent},
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},

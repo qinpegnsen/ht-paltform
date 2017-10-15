@@ -107,6 +107,9 @@
             <button  class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet" *ngIf="goods.state=='PAID'" (click)="distribution(name.ordno)">
               设置配货
             </button>
+            <button  class="m-sm btn btn-xs btn-outline btn-info fa fa-jpy" *ngIf="goods.payWay=='REMIT'&& goods.state=='CR'"(click)="addBankData(name.ordno,goods.pay,goodsList.curPage)" >
+              确认收款
+            </button>
           </td>
         </tr>
       </table>
@@ -135,3 +138,5 @@
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
 -->
+<app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" [curPage]="curPage1"
+                   (bankDate)="getBankResult($event)" ></app-bank-transfer>

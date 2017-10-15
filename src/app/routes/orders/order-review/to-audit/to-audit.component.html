@@ -65,11 +65,8 @@
             </p>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-truck" *ngIf="goods.state=='PREPARE'" (click)="cancelOrder(name.ordno)">
-              设置发货
-            </button>
-            <button  class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet" *ngIf="goods.state=='PAID'" (click)="distribution(name.ordno)">
-              设置配货
+            <button class="m-sm btn btn-xs btn-outline btn-green fa fa-exclamation-circle" (click)="cancelOrder(name.ordno)">
+              审核
             </button>
           </td>
         </tr>
@@ -94,7 +91,7 @@
   </tr>
   </tfoot>
 </table>
-<app-logistics [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-logistics>
+<app-audit [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-audit>
 <!--
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>

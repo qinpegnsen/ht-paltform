@@ -22,8 +22,10 @@ export class MemberComponent implements OnInit {
   private custPhone:string='';//默认查询的会员的名称
 
   private authState:string='';//默认查询的会员的是否认证
+  private state:string='';//默认查询的会员的状态
 
-  public authStates:any;    //会员状态列表
+  public authStates:any;    //会员认证列表
+  public states:any;    //会员状态列表
 
   private detailsbutton:Object;//查看详情按钮
 
@@ -41,6 +43,7 @@ export class MemberComponent implements OnInit {
      */
     this.queryMemberList(1);
     this.authStates = this.tools.getEnumDataList('1028');   //会员状态枚举列表
+    this.states = this.tools.getEnumDataList('1018');   //会员状态枚举列表
   }
   search(){
     this.queryMemberList(1);
@@ -64,6 +67,7 @@ export class MemberComponent implements OnInit {
       custTruename:this.custTruename,
       custPhone:this.custPhone,
       authState:this.authState,
+      state:this.state,
     }
     let url='/cust/queryAllCust';
     this.memberListdata=new Page(this.service.getData(url,data))

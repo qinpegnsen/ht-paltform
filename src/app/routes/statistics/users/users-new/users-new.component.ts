@@ -276,7 +276,7 @@ export class UsersNewComponent implements OnInit {
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
       date = this.data.queryTimeList[i];
-      console.log("█ this.data ►►►",  this.data);
+      // console.log("█ this.data ►►►",  this.data);
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)-1), "yyyy-MM-dd HH:mm:ss") ;
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)), "yyyy-MM-dd HH:mm:ss") ;
       _this.router.navigate(["main/stat/list-detail"], {

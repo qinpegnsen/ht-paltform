@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined, isUndefined} from "util";
-import {OrdersService} from "../orders.service";
-import {SubmitService} from "../../../../core/forms/submit.service";
+import {OrdersService} from "../../orders/orders/orders.service";
+import {SubmitService} from "../../../core/forms/submit.service";
 declare var $: any;
 
 @Component({
@@ -21,10 +21,13 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['orderId'] && !isNullOrUndefined(this.orderId)) {
+      console.log("█ orderId ►►►", this.orderId);
       $('.wrapper > section').css('z-index', 200);
-      this.expressList = this.ordersServe.getBasicExpressList();   //物流公司列表
-      console.log("█ expr ►►►",  this.expressList);
       this.showDeliverWindow = true;
+      let url='/basicExpress/queryBasicExpressIsUseList';
+      let data='';
+      this.expressList = this.ordersServe.basicExpressList(url,data);   //物流公司列表
+      console.log("█ this.expressList ►►►",  this.expressList);
       this.expressNo = null;      //每次出来把上次填的订单号清除，快递公司就算了，留着吧
     }
   }

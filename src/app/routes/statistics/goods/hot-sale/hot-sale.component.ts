@@ -107,7 +107,7 @@ export class HotSaleComponent implements OnInit {
     me.data = result;
     me.nowData =me.data;
     me.optionPrevInfo();
-    console.log("█ result ►►►",  result);
+    // console.log("█ result ►►►",  result);
   }
 
   /**

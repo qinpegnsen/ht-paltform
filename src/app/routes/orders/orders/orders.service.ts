@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {isNullOrUndefined} from "util";
+import {AjaxService} from "../../../core/services/ajax.service";
+import {AppComponent} from "../../../app.component";
 
 @Injectable()
 export class OrdersService {
 
-  constructor(private submit: SubmitService) {
+  constructor(private submit: SubmitService,private ajax: AjaxService) {
   }
 
   /**
@@ -33,11 +35,36 @@ export class OrdersService {
    * 查询物流公司列表
    */
   public getBasicExpressList() {
-    let url = '/basicExpress/pageQueryBasicExpress';
+    let url = '/basicExpress/queryBasicExpressIsUseList';
     let list = this.submit.getData(url, '');
-    if (!isNullOrUndefined(list) && !isNullOrUndefined(list.voList))
-      return list.voList;
+    if (!isNullOrUndefined(list))
+      return list;
   }
+
+  /**
+   * 查询物流公司列表  get 成功不提示
+   */
+  public basicExpressList(url,data){
+    let result;
+    this.ajax.get({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        let info=res.info;
+        if(res.success){
+          result=res.data;
+        }else{
+          AppComponent.rzhAlt("error",info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
 
   /**
    * 根据订单编号获取订单详情

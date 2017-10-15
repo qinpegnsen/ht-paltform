@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../core/forms/submit.service';
+const swal = require('sweetalert');
 
 @Component({
   selector: 'app-agent-ept',
@@ -30,11 +31,12 @@ export class AgentEptComponent implements OnInit {
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     }
-    let requestUrl = '/agentOrd/loadByOrdno';
+    let requestUrl = '/agentOrd/loadAgentOrdUnusual';
     let requestData = {
       ordno:this.orderNumber
     };
     _this.goodsList = _this.submit.getData(requestUrl, requestData);
+    swal(this.goodsList.info,'','error');
   }
 
   /**

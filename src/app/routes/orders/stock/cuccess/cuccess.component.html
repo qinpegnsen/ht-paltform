@@ -103,11 +103,8 @@
             <p class="font-gray mb-sm cursor-p">{{goods.state | rzhState :'1019'}}</p>
             <!--<p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
                [queryParams]="{ordno:goods.ordno}">查看详情</p>-->
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'">查看详情</p>
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics)"
-               (mouseleave)="hideLogistics(Logistics)">
-              查看物流
-            </p>
+            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../stock-detail"
+               [queryParams]="{ordno:goods.ordno}">查看详情</p>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
 

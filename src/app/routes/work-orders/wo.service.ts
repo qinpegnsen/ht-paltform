@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {SubmitService} from "../../core/forms/submit.service";
+import {AjaxService} from "../../core/services/ajax.service";
 
 @Injectable()
 export class WoService {
 
-  constructor(private submit: SubmitService) { }
+  constructor(private submit: SubmitService,private ajax: AjaxService) { }
 
   /**
    * 平台接单
