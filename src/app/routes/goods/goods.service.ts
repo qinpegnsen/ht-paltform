@@ -150,18 +150,19 @@ export class GoodsService {
 
 
   /**
-   * 根据店铺编码获取物流模板
+   * 根据店铺编码获取运费模板
    * @returns {any}
    */
   getExpressTplByStoreCode(){
     let me = this, storeCode;
     let loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
+    console.log("█ loginInfo ►►►",  loginInfo);
     if(isNullOrUndefined(loginInfo)){
       AppComponent.rzhAlt('warning','获取运费模板失败，请登录后重试');
       return null;
     }else if(!isNullOrUndefined(loginInfo.storeCode)){
-      // storeCode = loginInfo.storeCode;
-      storeCode = 'SZH_PLAT_SELF_STORE';
+      storeCode = loginInfo.storeCode;
+      // storeCode = 'SZH_PLAT_SELF_STORE';
       return me.submit.getData('/expressTpl/queryByStoreCode',{storeCode: storeCode})
     }
   }

@@ -55,6 +55,9 @@
           <rzhDefaultSorter by="kindParentId">上级分类</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="sort">排序</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="keywords">关键字</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -78,6 +81,7 @@
                onerror="javascript:this.src='../../../assets/img/dummy.png'"
                alt=""></td>
         <td *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
+        <td>{{kind.sort}}</td>
         <td>{{kind.keywords}}</td>
         <td>{{kind.description}}</td>
         <td>

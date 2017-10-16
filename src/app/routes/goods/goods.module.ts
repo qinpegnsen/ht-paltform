@@ -24,18 +24,21 @@ import { UpdateDataComponent } from './update-data/update-data.component';
 
 // 父路由，用于页面嵌套显示
 const routes: Routes = [
-  {path: '', redirectTo: 'publish'},
+  {path: '', redirectTo: 'manage'},
   {
     path: 'publish', component: PublishComponent, children: [
     {path: '', redirectTo: 'step_one'},
     {path: 'step_one', component: ChooseKindComponent},
     {path: 'step_two', component: EditDetailComponent},
     {path: 'step_three', component: PublishedComponent},
-    {path: 'edit', component: EditDetailComponent},
-    {path: 'audit', component: AuditGoodsComponent}
   ]
   },
-  {path: 'manage', component: ManageComponent},
+  {path: 'manage', children: [
+    {path: '', component: ManageComponent},
+    {path: 'edit', component: EditDetailComponent},
+    {path: 'detail', component: AuditGoodsComponent},
+    {path: 'audit', component: AuditGoodsComponent}
+  ]},
   {path: 'wholesale', component: WholesaleComponent},
   {
     path: 'kind-manage', component: KindManageComponent, children: [

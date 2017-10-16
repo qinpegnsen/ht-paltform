@@ -156,14 +156,14 @@
             </button>
           </span>
           <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"
-                  routerLink="../publish/audit" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
+                  routerLink="../audit" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
           </button>
           <span *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL'">
             <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
                          *ngFor="let option of buttons"></app-buttons>
           </span>
           <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
-                  routerLink="../publish/audit"
+                  routerLink="../detail"
                   [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">
           </button>
         </td>

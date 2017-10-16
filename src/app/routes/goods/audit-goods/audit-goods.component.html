@@ -14,7 +14,6 @@
         <div class="w50">
           <div>{{publishData.goodsName}}</div>
         </div>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly">商品标题名称长度至少3个字符，最长50个汉字</p>
       </dd>
     </dl>
     <dl class="clearfix">
@@ -23,7 +22,6 @@
         <div class="w50">
           <div>{{publishData.goodsJingle}}</div>
         </div>
-        <p class="tip" myHoverColor>商品卖点可填写商品的简介或特点，最长不能超过140个汉字</p>
       </dd>
     </dl>
     <dl class="clearfix">
@@ -34,7 +32,6 @@
             <option *ngFor="let brand of brandsList" [value]="brand.id">{{brand.brandName}}</option>
           </select>
         </div>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly">选择您的商品品牌，有利于商品通过品牌索引方式被找到；如没有您想要的品牌，可从“品牌管理”功能中添加并提交后台审核后再选择。</p>
       </dd>
     </dl>
     <dl class="clearfix">
@@ -52,7 +49,6 @@
             </div>
           </label>
         </div>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly">正确选择商品属性直接影响搜索筛选的准确与否，请根据实际情况认真选择填写。</p>
       </dd>
     </dl>
   </fieldset>
@@ -68,7 +64,6 @@
             <option [value]="unit.id" *ngFor="let unit of unitList">{{unit.unitName}}</option>
           </select>
         </div>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly">请正确该商品的单位描述，确保购买者明确商品对应单价/计量单位。</p>
       </dd>
     </dl>
   </fieldset>
@@ -106,9 +101,6 @@
             </li>
           </ul>
         </div>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly">
-          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
-        </p>
       </dd>
     </dl>
     <!--sku表格-->
@@ -177,8 +169,6 @@
           </tr>
           </tbody>
         </table>
-        <p class="tip" myHoverColor [class.hide]="myReadOnly"> 点击 <em class="icon-note"></em> 可批量修改所在列的值。 <br>
-          当规格值较多时，可在操作区域通过滑动滚动条查看超出隐藏区域。</p>
       </dd>
     </dl>
     <!--商品图片-->
@@ -356,7 +346,7 @@
 </form>
 
 <!--商品审核-->
-<form class="goods-audit panel panel-danger" (keydown.Enter)="false">
+<form class="goods-audit panel panel-danger" (keydown.Enter)="false" *ngIf="path=='audit'">
   <fieldset class="p0 panel-body">
     <legend class="m0 goods-audit-title">商品审核</legend>
     <table class="w100">

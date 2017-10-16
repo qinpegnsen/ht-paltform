@@ -546,6 +546,23 @@ export class RzhtoolsService {
     return ret;
   }
 
+
+  /**
+   * 审核input框的value合不合要求，只能输入整数或两位小数的限制方法
+   * @param target 在HTML里的($event.targets)
+   * @param type ('int':整数，其他默认两位小数)
+   */
+  auditInputValueForNum(target,type?:string){
+    let val = target.value, reg;
+    if(type == 'int') reg = val.match(/\d+/);
+    else reg = val.match(/\d+(\.\d{1,2})?/);
+    if (!isNull(reg)){
+      target.value = reg[0];
+    }else {
+      target.value = val.substring(0,val.length-1)
+    }
+  }
+
 }
 
 

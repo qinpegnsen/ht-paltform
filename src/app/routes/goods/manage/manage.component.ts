@@ -59,7 +59,7 @@ export class ManageComponent implements OnInit {
         type: "update",
         size: "xs",
         callback: function (baseCode, curPage) {
-          me.router.navigate(['/main/goods/publish/edit'], {queryParams: {page: curPage, baseCode: baseCode}});
+          me.router.navigate(['/main/goods/manage/edit'], {queryParams: {page: curPage, baseCode: baseCode}});
         }
       }
     ];

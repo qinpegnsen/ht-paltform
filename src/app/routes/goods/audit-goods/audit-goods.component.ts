@@ -5,7 +5,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ManageComponent} from "../manage/manage.component";
 declare var $: any;
 
@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./audit-goods.component.scss']
 })
 export class AuditGoodsComponent implements OnInit {
+  private path: string;           //当前路由
   private kindId: string;         //商品分类id
   private saleAttrList: any;       // 所有规格数据
   private brandsList: any;        // 品牌列表
@@ -33,10 +34,10 @@ export class AuditGoodsComponent implements OnInit {
   private goodsBody: any;          //商品详情
   private audit: any;              // 商品审核
   private goodsAudits: any;        // 商品审核状态列表
-  public storeCode:string;          //店铺编码
-  public logistics:any;             // 物流规则列表
-  public tplVals:any;               // 运费模板内容
-  private unit:string = '件';       // 运费价格
+  public storeCode: string;          //店铺编码
+  public logistics: any;             // 物流规则列表
+  public tplVals: any;               // 运费模板内容
+  private unit: string = '件';       // 运费价格
   private publishData: any = {
     goodsExpressInfo: {
       freightType: null,
@@ -58,6 +59,7 @@ export class AuditGoodsComponent implements OnInit {
   };// 商品发布数据，所有数据
   constructor(private publishComponent: PublishComponent,
               private manageComponent: ManageComponent,
+              private route: ActivatedRoute,
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
@@ -68,6 +70,10 @@ export class AuditGoodsComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.goodsBaseCode = me.submit.getParams('baseCode');
+
+    me.route.url.subscribe(paths => {
+      me.path = paths[0].path;
+    })
     me.getPageData();// 获取当前页面需要的数据
     me.publishComponent.step = 0;
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
@@ -84,9 +90,9 @@ export class AuditGoodsComponent implements OnInit {
       result: 'PASS',
       goodsBaseCode: me.goodsBaseCode
     }
-      /**
-       * JQuery初始化后执行事件
-       */
+    /**
+     * JQuery初始化后执行事件
+     */
     $(function () {
       me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
       me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
@@ -103,18 +109,19 @@ export class AuditGoodsComponent implements OnInit {
   /**
    * 添加物流模板
    */
-  addLogisticsModule(){
-    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+  addLogisticsModule() {
+    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
     window.open(preUrl + '/main/operation/freight-template/add-formoek?linkType=addArticle')
   }
 
   /**
    * 查看物流模板
    */
-  lookLogisticsModule(){
-    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+  lookLogisticsModule() {
+    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
     window.open(preUrl + '/main/operation/freight-template')
   }
+
   /**
    * 获取发布页面所需数据
    */
@@ -143,31 +150,31 @@ export class AuditGoodsComponent implements OnInit {
     me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
     me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
     me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-    if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
+    if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
   }
 
   /**
    * 获取运费模板
    */
-  getExpressTpl(){
+  getExpressTpl() {
     let me = this;
     let expressTpl = me.goods.getExpressTplByStoreCode();// 获取物流模板
-    if(!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
+    if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
   /**
    * 根据运费模板ID获取模板内容
    * @param tplId
    */
-  getTplValById(){
-    let me = this,tplId = me.publishData.goodsExpressInfo.expressTplId;
+  getTplValById() {
+    let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
     let result = me.goods.getTplVal(tplId);
-    if(!isNullOrUndefined(result)) me.tplVals = result;
-    if(me.tplVals.valuationType == 'VOLUME'){
+    if (!isNullOrUndefined(result)) me.tplVals = result;
+    if (me.tplVals.valuationType == 'VOLUME') {
       me.unit = 'm³'
-    }else if(me.tplVals.valuationType == 'WEIGHT'){
+    } else if (me.tplVals.valuationType == 'WEIGHT') {
       me.unit = 'kg'
-    }else{
+    } else {
       me.unit = '件'
     }
   }

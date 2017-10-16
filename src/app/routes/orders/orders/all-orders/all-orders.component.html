@@ -100,7 +100,8 @@
             </td>
             <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
               <span class="main-red font14">¥{{order.total | decimalTwo}}</span><br>
-              <span class="font-gray">{{order.freight == 0? '(免运费)':order.freight | decimalTwo}}</span><br>
+              <span class="font-gray" *ngIf="order.freight == 0">免运费</span>
+              <span class="font-gray" *ngIf="order.freight > 0">运费：{{order.freight | decimalTwo}}</span><br>
               <span class="font-gray">{{order.payWay | rzhState:'1017'}}</span>
             </td>
             <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">

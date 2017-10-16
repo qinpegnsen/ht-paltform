@@ -17,11 +17,11 @@ export class PublishedComponent implements OnInit {
   }
 
   private lookDetail(){
-    // this.router.navigate(['/main/goods/publish/step_three'])
+    this.router.navigate(['/main/goods/manage/detail'],{ preserveQueryParams: true })
   }
 
   private editGoods(){
-    this.router.navigate(['/main/goods/publish/edit'],{ preserveQueryParams: true })
+    this.router.navigate(['/main/goods/manage/edit'],{ preserveQueryParams: true })
   }
 
   private publishNew(){
@@ -29,7 +29,7 @@ export class PublishedComponent implements OnInit {
   }
 
   private goodsList(){
-    // this.router.navigate(['/main/goods/publish'])
+    this.router.navigate(['/main/goods/manage'])
   }
 
 }

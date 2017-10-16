@@ -4,6 +4,8 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {OrdersService} from "../orders.service";
 import {isNullOrUndefined} from "util";
 import {AppComponent} from "../../../../app.component";
+import {PopoverConfig} from "ngx-bootstrap";
+declare var $:any;
 
 @Component({
   selector: 'app-order-detail',
@@ -84,6 +86,16 @@ export class OrderDetailComponent implements OnInit {
   }
 
   /**
+   * 显示重消币抵扣数量
+   */
+  showCoinNum(obj){
+    $(obj).removeClass('hide')
+  }
+  hideCoinNum(obj){
+    $(obj).addClass('hide')
+  }
+
+  /**
    * 获取订单进度
    */
   private getOrderDetailInfo() {
@@ -99,7 +111,7 @@ export class OrderDetailComponent implements OnInit {
         me.atime[4] = item.acceptTime;
       } else if (item.state == 'PREPARE') {
         me.atime[3] = item.acceptTime;
-      } else if (item.state == 'PAID') {
+      } else if (item.state == 'PAID' || item.state == 'ASSIGNED') {
         me.atime[2] = item.acceptTime;
       } else if (item.state == 'CR') {
         me.atime[1] = item.acceptTime;
@@ -119,7 +131,7 @@ export class OrderDetailComponent implements OnInit {
       me.orderStep = 4;
     } else if (me.orderDetailData.state == 'PREPARE') {
       me.orderStep = 3;
-    } else if (me.orderDetailData.state == 'PAID') {
+    } else if (me.orderDetailData.state == 'PAID' || me.orderDetailData.state == 'ASSIGNED') {
       me.orderStep = 2;
     } else if (me.orderDetailData.state == 'CR') {
       me.orderStep = 1;

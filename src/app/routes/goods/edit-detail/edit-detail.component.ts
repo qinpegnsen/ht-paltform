@@ -258,7 +258,7 @@ export class EditDetailComponent implements OnInit {
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-      if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
+      if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
     }
   }
 
@@ -267,7 +267,7 @@ export class EditDetailComponent implements OnInit {
    */
   getExpressTpl(){
     let me = this;
-    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取物流模板
+    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
     if(!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
@@ -289,17 +289,10 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 审核input框的value合不合要求
+   * 审核input框的value合不合要求，只能输入两位小数的限制方法
    */
   auditInputValueForNum(target,type?){
-    let val = target.value, reg;
-    if(type == 'int') reg = val.match(/\d+/);
-    else reg = val.match(/\d+(\.\d{1,2})?/);
-    if (!isNull(reg)){
-      target.value = reg[0];
-    }else {
-      target.value = val.substring(0,val.length-1)
-    }
+    this.tools.auditInputValueForNum(target,type);
   }
 
   /**
@@ -472,7 +465,7 @@ export class EditDetailComponent implements OnInit {
         valCode: getValObj.attr('id'),
         value: getValObj.val(),
         idx: getValObj.attr('name'),
-        code: getValObj.next().attr('id'),
+        enumValId: getValObj.next().attr('id'),
       };
       attrsList.push(attrTemp);
     }
@@ -481,8 +474,10 @@ export class EditDetailComponent implements OnInit {
       type: spec.attr('id'),
       goodsBaseCode: me.goodsBaseCode,
     };
+    console.log("█ me.enum ►►►",  me.enum);
     if (me.judgeSkuListHasInputVal()) me.enum.skuList = me.publishData.goodsSkuList;    // 当表格中已经输入了价格则将带价格的skuList传过去保存
     let skuData = me.goods.getSkuData('/goodsEdit/genesku', me.enum);
+    console.log("█ skuData ►►►",  skuData);
     if (!isNullOrUndefined(skuData)) {
       me.genClearArray(skuData.data);   // 将数据生成易解析的新数组
     }

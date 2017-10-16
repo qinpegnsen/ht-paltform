@@ -418,11 +418,13 @@
             <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="FIXED" placeholder="1.00"
-                     [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
+                     [(ngModel)]="publishData.goodsExpressInfo.freightType"
+                     [checked]="publishData.goodsExpressInfo.freightType=='FIXED'"/>
               <span class="fa fa-circle"></span>使用固定运费</label>
             </span>
             <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
               <input class="text price num form-control pull-left" name="fixedFreight" type="number"
+                     (keyup)="auditInputValueForNum($event.target)"
                      [required]="publishData.goodsExpressInfo.freightType=='FIXED'"
                      [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
               <em class="add-on">元</em>
@@ -433,6 +435,7 @@
             <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="TPL"
+                     [checked]="publishData.goodsExpressInfo.freightType=='TPL'"
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用物流规则</label>
             </span>
