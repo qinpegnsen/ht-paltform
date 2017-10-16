@@ -50,7 +50,7 @@
         </td>
         <td>
           <ng-container *ngIf="article.articleCoverVO!=null">
-            <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url }}" class="qpsImg" alt=""
+            <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url}}" class="qpsImg" alt=""
                  onerror="javascript:this.src='../../../assets/img/dummy.png';">
           </ng-container>
           <ng-container *ngIf="article.articleCoverVO==null">

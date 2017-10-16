@@ -62,6 +62,7 @@ export class AddArticleComponent implements OnInit {
   public linkGoodsLength:number=0;                   //获取到选择的商品的长度 从而决定关联商品html的高度
   public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传的类型
   public coverChange:boolean=false;                  //修改的时候是否点击修改封面了，点击执行图片上传
+  public coverID=[];                                  //存储删除封面图片的id的数组
 
   constructor(
               public settings: SettingsService,
@@ -182,7 +183,15 @@ export class AddArticleComponent implements OnInit {
   /**
    * 修改的时候删除文章封面的图片
    */
-  remove(obj){
+  remove(obj,coverId){
+    this.coverID.push(coverId);
+    let delLength=this.coverID.length;
+    this.uploader = new FileUploader({
+      url: uploadUrl,
+      itemAlias: "limitFile",
+      queueLimit: delLength
+    });
+
     $(obj).css("display",'none');
   }
 
@@ -453,6 +462,8 @@ export class AddArticleComponent implements OnInit {
     } else if (this.linkType == 'updateArticle') {
       if(me.coverChange&&me.coverCode!='AUTO'){//如果点击修改封面了并且不是没图就执行图片上传
         me.uploadImg();//执行图片上传的方法
+      }else if(me.coverCode!='THRESS'){//如果默认的封面是3张图片上传也执行图片上传
+        me.uploadImg();//执行图片上传的方法
       }else{
         me.articleExtra();
       }
@@ -475,7 +486,8 @@ export class AddArticleComponent implements OnInit {
     this.linkGoodStr = idStr.slice(0, idStr.length - 1);
     this.submitObj.goodIds = this.linkGoodStr;
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
-    this.submitObj.uuid = this.uuid.join(',');
+    this.submitObj.uuid = this.uuid.join(',');//暗码
+    this.submitObj.coverIds = this.coverID.join(',');//删除封面图片的id
     this.submitObj.articleClassId = this.articleClasssId;
     this.submitObj.articleCommend = 'N';//文章推荐标志
     this.submitObj.articleCommentFlag = 'N';//	文章是否允许评论
