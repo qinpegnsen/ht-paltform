@@ -9,7 +9,7 @@
 const PROXY_CONFIG = [
   {
     context: [
-
+      "/login",
       "/admin",
       "/article",
       "/goodsKind",
@@ -45,27 +45,27 @@ const PROXY_CONFIG = [
       "/expressTpl",
       "/helpKind",
       "/helpQuestions",
-      "/helpQuestions",
       "/wo",
+      "/notifyAdminTpl",
+      "/notifyAdmin",
       "/ord",
-      "/statistical",
-      "/login"
+      "/statistical"
     ],
-    target: gh + "8085",   //拦截 context配置路径，经过此地址
+    target: zyg + "8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
     context: [
       "/upload"
     ],
-    target: bb + "8092",   //拦截 context配置路径，经过此地址
+    target: zyg + "8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
     context: [
       "/phone"
     ],
-    target: bb + "8094",   //拦截 context配置路径，经过此地址
+    target: zyg + "8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -73,9 +73,9 @@ const PROXY_CONFIG = [
       "/basicExpress",
       "/res"
     ],
-    target: gh + "8082",   //拦截 context配置路径，经过此地址
+    target: zyg + "8900",   //拦截 context配置路径，经过此地址
     secure: false
-  },
+  }
 ];
 
 module.exports = PROXY_CONFIG;
