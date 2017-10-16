@@ -175,12 +175,13 @@ export class MessageListComponent implements OnInit {
           that.idArr.push($(obj[i]).val())
         }
         let idStr= that.idArr.join(',');
-console.log("█ idStr ►►►",  idStr);
         let data={
           idStr:idStr
         }
         that.operationService.delRequest(url,data)
-        that.queryAdminNotify()
+        that.queryAdminNotify();
+        $("._all").prop('checked',false);
+        $("._all").attr('checked',false);
       }
     });
   }
