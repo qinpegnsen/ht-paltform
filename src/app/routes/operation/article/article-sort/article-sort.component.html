@@ -1,47 +1,47 @@
 <div class="content-heading mb-lg">
-  文章分类
+  <span class="thc font">文章分类</span>
   <div class="pull-right" ng-if="search">
     <app-buttons class="pull-right" [config]="articleSortAddbutton" routerLink="addSort"
                  [queryParams]="{linkType:'addClass'}"></app-buttons>
   </div>
 </div>
 <div class="panel panel-default">
-  <div class="col-md-10 font15 mt mb pl text-primary">
-    <i class="icon-layers mr"></i>
-    <span class="cursor-p" (click)="queryChildSortList()">文章分类</span>
-    <span *ngFor="let menuTit of childMenuTitList">
-      <i class="fa fa-arrow-right mr ml"></i>
-      <font class="cursor-p" (click)="queryChildSortList('',menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
-    </span>
-    <span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
-      <i class="fa fa-level-up mr5"></i>
-      返回上一级
-    </span>
-  </div>
+  <!--<div class="col-md-10 font15 mt mb pl text-primary">-->
+    <!--<i class="icon-layers mr"></i>-->
+    <!--<span class="cursor-p" (click)="queryChildSortList()">文章分类</span>-->
+    <!--<span *ngFor="let menuTit of childMenuTitList">-->
+      <!--<i class="fa fa-arrow-right mr ml"></i>-->
+      <!--<font class="cursor-p" (click)="queryChildSortList('',menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>-->
+    <!--</span>-->
+    <!--<span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">-->
+      <!--<i class="fa fa-level-up mr5"></i>-->
+      <!--返回上一级-->
+    <!--</span>-->
+  <!--</div>-->
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleSortListdata"
            (pageChange)="queryArticSortleList($event)">
       <thead>
       <tr>
-        <th class="w5">
+        <th class="w5 thc font">
           序号
         </th>
-        <th class="w15">
-          <rzhDefaultSorter by="name">分类名称</rzhDefaultSorter>
+        <th class="w15 thc font">
+          分类名称
         </th>
-        <th class="w25">
-          <rzhDefaultSorter by="email">描述</rzhDefaultSorter>
+        <th class="w25 thc font">
+          描述
         </th>
-        <th class="w10">
-          <rzhDefaultSorter>状态</rzhDefaultSorter>
+        <th class="w10 thc font">
+          状态
         </th>
-        <th class="w10">
-          <rzhDefaultSorter>排序</rzhDefaultSorter>
+        <th class="w10 thc font">
+          排序
         </th>
-        <th class="w10">
-          <rzhDefaultSorter by="city">创建时间</rzhDefaultSorter>
+        <th class="w10 thc font">
+          创建时间
         </th>
-        <th class="w25">操作</th>
+        <th class="w25 thc font">操作</th>
       </tr>
       </thead>
       <tbody>

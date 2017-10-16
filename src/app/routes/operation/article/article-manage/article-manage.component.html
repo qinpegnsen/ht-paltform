@@ -1,5 +1,7 @@
 <div class="content-heading mb-lg">
-  文章管理
+  <span class="thc font">文章管理</span>
+  <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"
+               [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
 <div class="panel mb">
   <div class="panel-body p ng-scope" ng-if="search">
@@ -17,8 +19,6 @@
           </span>
       </div>
     </div>
-    <app-buttons class="pull-right" [config]="articleManAddbutton" routerLink="addArticle"
-                 [queryParams]="{linkType:'addArticle'}"></app-buttons>
   </div>
 </div>
 

@@ -65,13 +65,14 @@ export class HeaderComponent implements OnInit, OnChanges {
    * 获取通知的消息列表，默认只展示第一页的内容
    */
   queryAdminNotify(){
-    let url='/notifyAdminTpl/pageQuery';
+    let url='/notifyAdmin/pageQuery';
     let data={
       curPage:1,
       pageSize:4,
       sortColumns:''
     };
     this.platformInfoData=new Page(this.submitService.getData(url,data));
+    console.log("█ this.platformInfoData ►►►",  this.platformInfoData);
   }
 
   //显示、隐藏当前登录的用户信息

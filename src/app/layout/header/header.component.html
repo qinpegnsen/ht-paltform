@@ -78,13 +78,13 @@
               <a class="list-group-item" *ngFor="let platformInfo of platformInfoData.voList;let i = index"  routerLink="/main/operation/sys-message/message-list">
                 <div class="media-box _qpsStyle">
                   <div class="pull-left">
-                    <i class="{{platformInfo.icon}}">1111111111111111</i>
+                    <i class="{{platformInfo.icon}}"></i>
                   </div>
                   <div class="media-box-body clearfix ">
-                    <p class="m0">{{platformInfo.tplName}}</p>
-                    <p class="m0 text-muted">
-                      <small>{{platformInfo.tpl}}</small>
-                    </p>
+                    <p class="m0">{{platformInfo.msg}}</p>
+                    <!--<p class="m0 text-muted">-->
+                      <!--<small>{{platformInfo.tpl}}</small>-->
+                    <!--</p>-->
                   </div>
                 </div>
               </a>

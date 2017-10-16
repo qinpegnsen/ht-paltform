@@ -85,7 +85,9 @@ export class EditTplComponent implements OnInit {
       remark: this.tplData.remark,
     }
     let result = this.operationService.updateproblem(url, data);
-    if (result==null) this.hideWindow(true);
+    if (result=='成功修改管理员消息模板') {
+      this.hideWindow(true)
+    };
   }
 
   /**
@@ -102,7 +104,8 @@ export class EditTplComponent implements OnInit {
       url: obj.url,
       remark: obj.remark,
     }
-    let result = this.operationService.addNewArticle(url, data);
-    if (result==null) this.hideWindow(true);
+    let result = this.operationService.addproblem(url, data);
+    console.log("█ result ►►►",  result);
+    if (result=='成功添加管理员消息模板') this.hideWindow(true);
   }
 }

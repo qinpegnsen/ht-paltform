@@ -1,5 +1,5 @@
 <div class="content-heading mb-lg">
-  快递公司列表
+  <span class="thc font">快递公司列表</span>
   <app-buttons class="pull-right" [config]="expressAddbutton" routerLink="rightPage"
                [queryParams]="{type:'add'}"></app-buttons>
 </div>
@@ -13,7 +13,7 @@
       <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
            <button type="button" title="搜索" id="toSearch" (click)="queryExpressList()"
-                   class="btn btn-primary bar-h3-btn mr ng-scope">
+                   class="btn btn-primary bar-h3-btn mr ng-scope ">
              <em class="icon-magnifier fa-fw"></em>搜索
            </button>
           </span>
@@ -28,22 +28,22 @@
            (pageChange)="queryExpressList($event)">
       <thead>
       <tr>
-        <th class="w5">
+        <th class="w5 thc font">
           序号
         </th>
-        <th class="w20">
-          <rzhDefaultSorter by="name">公司名称</rzhDefaultSorter>
+        <th class="w20 thc font">
+          公司名称
         </th>
-        <th class="w25">
-          <rzhDefaultSorter by="email">公司编号</rzhDefaultSorter>
+        <th class="w25 thc font">
+          公司编号
         </th>
-        <th class="w20">
-          <rzhDefaultSorter>公司网址</rzhDefaultSorter>
+        <th class="w20 thc font">
+          公司网址
         </th>
-        <th class="w10">
-          <rzhDefaultSorter>状态</rzhDefaultSorter>
+        <th class="w10 thc font">
+          状态
         </th>
-        <th class="w20">操作</th>
+        <th class="w20 thc font">操作</th>
       </tr>
       </thead>
       <tbody>
