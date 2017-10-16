@@ -22,10 +22,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   private kindId: any;
   private level:any
 
-  private Id: any;
-
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("█ this.selTypeData ►►►",  this.selTypeData);
     if (changes['showAddWindow']) {
       if (this.showAddWindow) $('.wrapper > section').css('z-index', 200);
       else $('.wrapper > section').css('z-index', 114);

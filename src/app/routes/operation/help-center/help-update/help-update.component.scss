@@ -1,11 +1,4 @@
-.ts{
-  background: #C9E7F2;
-  width: 98%;
-  margin: auto;
-  margin-top: 15px;
-}
-.text-edit{
-}
+
 .edit-table{
   height: 100px;
   margin: auto;
@@ -34,11 +27,18 @@
   margin: auto;
 }
 .select select{
-  margin-left: 60px;
+  margin-left: 35px;
 }
 .questiona{
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .button-operation{
-  margin-right:70px;
+  margin-right:88px;
 }
+.note-editor .note-frame .panel .panel-default{
+  margin-left: -15px;
+}
+.p-left{
+  padding-left: 30px;
+}
+

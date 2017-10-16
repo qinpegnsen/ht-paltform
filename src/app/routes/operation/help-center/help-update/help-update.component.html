@@ -7,16 +7,16 @@
     <div class="panel-body help-center-width">
 
       <div class="select">
-        <span style="margin-left: 20px">问题分类：</span>
-        <select id="" class="" name="kindId" [(ngModel)]="b.kindId" disabled>
+        <span style="margin-left: 20px;padding-left: 6px">问题分类：</span>
+        <select id="" class="form-control w20 d-play" name="kindId" [(ngModel)]="b.kindId" disabled>
           <option [value]="help.id" *ngFor="let help of kinds" >
             {{help.kindName}}
           </option>
         </select>
       </div>
       <div class="questiona text-center">
-        <label class="question col-sm-1">问题：</label>
-        <input type="text" class="col-sm-8 problem-box" name="question" [(ngModel)]="b.question" required #question="ngModel">
+        <span class="question col-sm-1 p-left">问题：</span>
+        <input type="text" class="form-control w20" name="question" [(ngModel)]="b.question" required #question="ngModel">
         <div [hidden]="question.valid || question.pristine"
              class="col-sm-9 pull-right text-danger">
           请填写问题
@@ -25,9 +25,9 @@
       <div class="reset-div text-edit">
         <table class="w100 edit-table">
           <tr class="w100">
-            <td class="col-sm-1 text-content text-center">答案：</td>
+            <td class="col-sm-1 text-content text-center p-left">答案：</td>
             <td class="w100">
-              <div class="col-sm-9">
+              <div class="col-sm-9" style="margin-left: -15px">
                 <div id="summernote" class="summernote"></div>
               </div>
             </td>
@@ -36,8 +36,8 @@
       </div>
 
       <div class="questiona">
-        <label class="question col-sm-1 text-center">排序：</label>
-        <input type="number" class="col-sm-2 problem-box num" name="sort" required [(ngModel)]="b.sort" #sort="ngModel" [pattern]="patterns.positive">
+        <span class="question col-sm-1 text-center p-left">排序：</span>
+        <input type="number" class="num form-control w20" name="sort" required [(ngModel)]="b.sort" #sort="ngModel" [pattern]="patterns.positive">
         <div [hidden]="sort.valid || sort.pristine"
              class="col-sm-9 pull-right text-danger">
           请填写整数
@@ -47,7 +47,7 @@
       <div>
         <div class="col-sm-3 " >
           <button class="ml btn btn-info pull-right button-operation" type="submit" (click)="submit(res.value)" [disabled]="!res.form.valid">提交信息</button>
-          <button class="ml btn btn-default mr pull-right" (click)="back()" type="button">取消</button>
+          <button class="ml btn btn-default mr pull-right aa" (click)="back()" type="button">取消</button>
         </div>
       </div>
 

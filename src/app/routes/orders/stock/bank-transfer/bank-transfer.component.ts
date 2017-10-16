@@ -64,7 +64,7 @@ export class BankTransferComponent implements OnInit {
 
   ngOnDestroy(): void {
     $('.wrapper > section' && '.wrapper > footer ').css('z-index', 10);
-}
+  }
 
   constructor(private submit: SubmitService, public GetUidService: GetUidService, private tools: RzhtoolsService,
               private pendingPaymentComponent: PendingPaymentComponent, public router: Router,
@@ -78,6 +78,7 @@ export class BankTransferComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formatSelDate(); //格式化所选日期及时间
     this.seletAllByTypeCode();//银行选择
   }
 
@@ -93,18 +94,23 @@ export class BankTransferComponent implements OnInit {
     this.bankDate.emit(type)
   }
 
+  /**
+   * 格式化所选日期及时间
+   */
+  private  formatSelDate() {
+    let _this = this;
+    _this.queryTime = RzhtoolsService.dataFormat(new Date(_this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
+    _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间
+  }
+
   /*
    * 添加付款人信息
    * */
   addRemitCallBack(obj) {
-    this.queryTime = RzhtoolsService.dataFormat(new Date(this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
+    this.formatSelDate();
     let url = "/agentOrd/addAgentOrdPayRecRemit";
-    let hour = this.myTime.getHours();
-    let minutes = this.myTime.getMinutes();
-    let seconds = this.myTime.getSeconds();
     this.imgs.pic = this.uuid;
     this.imgs.summary = this.summary;
-    this.time = this.addZero(hour) + ':' + this.addZero(minutes) + ':' + this.addZero(seconds);
     let data = {
       ordno: this.orderId,
       acct: this.goodspay,
@@ -118,14 +124,12 @@ export class BankTransferComponent implements OnInit {
     let result = this.bankTransferService.bankTransfer(url, data);
     if (result.success) {
       this.code = null;
-      this.uploader.queue=null;
+      this.uploader.queue = null;
       this.hideWindow("success");
       this.pendingPaymentComponent.queryDatas(this.curPage)
     } else {
       AppComponent.rzhAlt("error", result.info);
     }
-    console.log("█ result ►►►", result);
-
   }
 
 
@@ -144,7 +148,7 @@ export class BankTransferComponent implements OnInit {
    * 图片上传
    */
   uploadImg(obj) {
-    console.log("█ this.uploadImg ►►►",  this.uploadImg);
+    console.log("█ this.uploadImg ►►►", this.uploadImg);
     let me = this;
     /**
      * 构建form时，传入自定义参数
@@ -167,7 +171,7 @@ export class BankTransferComponent implements OnInit {
      * @param headers 头信息
      */
     me.uploader.onSuccessItem = function (item, response, status, headers) {
-       me.addRemitCallBack(obj);
+      me.addRemitCallBack(obj);
       let res = JSON.parse(response);
       if (res.success) {
         console.log("█ '上传图片成功' ►►►", '上传图片成功');

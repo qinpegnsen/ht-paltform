@@ -108,8 +108,6 @@ export class AnalyzeUsersComponent implements OnInit {
     me.data = result;
     me.nowData =me.data;
     me.optionPrevInfo();
-    // console.log("█ me.nowData.yaxis ►►►", me.nowData);
-
   }
 
   /**

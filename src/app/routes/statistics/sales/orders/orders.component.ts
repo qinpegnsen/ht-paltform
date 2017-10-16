@@ -32,6 +32,7 @@ export class OrdersComponent implements OnInit {
 
   private data: any;
   now: string;
+  prev:string;
   nowData: any;
 
   /**
@@ -103,7 +104,10 @@ export class OrdersComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-    //
+    me.now =  me.nowData.queryTime;
+    me.prev =  me.nowData.contrastTime;
+
+
     if(me.queryContent=='ORDSUM') {
       me.nowData.queryTime_yaxis = me.nowData[me.nowData.queryTime + "_ordSum"].yaxis;
       me.nowData.queryTime_keys = me.nowData[me.nowData.queryTime + "_ordSum"].keys;
@@ -167,13 +171,13 @@ export class OrdersComponent implements OnInit {
       ],
       series: [
         {
-          name:'今天' ,
+          name:_this.now ,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.queryTime_yaxis
         },
         {
-          name:'昨天',
+          name:_this.prev,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.contrastTime_yaxis

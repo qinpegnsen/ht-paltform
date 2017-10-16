@@ -8,6 +8,7 @@ import {AppComponent} from "../../../app.component";
 import {isNullOrUndefined, isUndefined} from "util";
 import {GoodsService} from "../goods.service";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 
 @Component({
   selector: 'app-wholesale',
@@ -24,7 +25,7 @@ export class WholesaleComponent implements OnInit {
   public _goods = [];
   public value: any = {};
 
-  constructor(private ajax: AjaxService, private submit: SubmitService,
+  constructor(private ajax: AjaxService, private submit: SubmitService,private rzhtools:RzhtoolsService,
               private goods: GoodsService, private router: Router, private patterns: PatternService) {
   }
 
@@ -33,6 +34,15 @@ export class WholesaleComponent implements OnInit {
     this.getBrandList()
   }
 
+  /**
+   * 输入两位小数
+   * @param target
+   * @param type
+   */
+
+  twoNum(target,type?){
+    this.rzhtools.auditInputValueForNum(target,type);
+  }
   /**
    * 品牌名称
    */

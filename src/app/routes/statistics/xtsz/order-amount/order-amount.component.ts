@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {PatternService} from "../../../../core/forms/pattern.service";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 
 @Component({
   selector: 'app-order-amount',
@@ -13,11 +14,15 @@ export class OrderAmountComponent implements OnInit {
   public info: string;
   public updata: any;
   private remark:any;
-  constructor(private submit: SubmitService,private patterns:PatternService) { }
+  constructor(private submit: SubmitService,private patterns:PatternService,private rzhtools:RzhtoolsService) { }
 
   ngOnInit() {
     this.qeuryAll();
   }
+
+    twoNum(target,type?){
+      this.rzhtools.auditInputValueForNum(target,type);
+    }
   /*
   * 查询订单金额
   * */
@@ -46,8 +51,11 @@ export class OrderAmountComponent implements OnInit {
     this.qeuryAll();
     console.log("█ result ►►►",  result);
   }
-  showDetail(data:any,code){
-    data.isShow = !data.isShow;
+  showDetail(data:any,code,i){
+    for(let j=0;j<data.length;j++){
+      data[j].isShow =false;
+    }
+    data[i].isShow = !data[i].isShow;
     this.updata = this.submit.getData("/datadict/loadDatadictByCode", {code:code});
     console.log("█ this.updata  ►►►",  this.updata );
   }

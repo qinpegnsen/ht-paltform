@@ -59,17 +59,13 @@
     <!--图表切换-->
     <div  class=" panel w100 m0">
       <ul class="clearfix p0">
-        <li class="w50 text-center cursor-p pull-left ooooo" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
-        <li class="w50 text-center cursor-p pull-left ooooo" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
+        <li class="w50 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
+        <li class="w50 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
       </ul>
     </div>
-
     <div class="panel w98 m-auto">
-
       <div echarts [options]="optionPrev" class="demo-chart w100"></div>
-
     </div>
-
   </div>
 
   <div class="mt20 panel panel-default">

@@ -54,7 +54,18 @@
 </div>
 
   <div class="panel">
-    <div echarts [options]="option" class="demo-chart w100" style="height: 500px"></div>
+
+    <div  class=" panel w100 m0">
+      <ul class="clearfix p0">
+        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
+        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
+        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCUSTCOUNT'" (click)="qeuryAll('ORDCUSTCOUNT')">下单会员数</li>
+      </ul>
+    </div>
+    <div class="panel w98 m-auto">
+      <div echarts [options]="option" class="demo-chart w100" style="height: 500px"></div>
+    </div>
+
   </div>
 
 
@@ -69,13 +80,13 @@
         <th class="w25 text-center">
           <rzhDefaultSorter by="name">省份</rzhDefaultSorter>
         </th>
-        <th class="w25 text-center">
+        <th class="w25 text-center" *ngIf="queryContent=='ORDSUM'">
           <rzhDefaultSorter by="email">下单金额（元）</rzhDefaultSorter>
         </th>
-        <th class="w25 text-center">
+        <th class="w25 text-center" *ngIf="queryContent=='ORDCOUNT'">
           <rzhDefaultSorter by="name">下单量</rzhDefaultSorter>
         </th>
-        <th class="w25 text-center">
+        <th class="w25 text-center" *ngIf="queryContent=='ORDCUSTCOUNT'">
           <rzhDefaultSorter by="name">下单会员数</rzhDefaultSorter>
         </th>
       </tr>
@@ -83,9 +94,9 @@
       <tbody>
       <tr class="text-center" *ngFor="let area of nowData.resultList">
         <td>{{area.areaName}}</td>
-        <td>{{area.ordSum}}</td>
-        <td>{{area.ordCount}}</td>
-        <td>{{area.custCount}}</td>
+        <td *ngIf="queryContent=='ORDSUM'">{{area.ordSum}}</td>
+        <td *ngIf="queryContent=='ORDCOUNT'">{{area.ordCount}}</td>
+        <td *ngIf="queryContent=='ORDCUSTCOUNT'">{{area.custCount}}</td>
     </table>
   </div>
 </div>

@@ -65,28 +65,26 @@ export class AnalyzeAreaComponent implements OnInit {
       } ;
     });
     _this.qeuryAll();
-    _this.getOption();
   }
 
-  private getOption() {
+  private getOption(maxs) {
     let _this=this;
     _this.option = {
       title: {
         text: '下单金额区域分析',
-        subtext: '纯属虚构',
         left: 'center'
       },
       tooltip: {
         trigger: 'item'
       },
-      legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['下单金额', '下单量', '下单会员数']
-      },
+      // legend: {
+      //   orient: 'vertical',
+      //   left: 'left',
+      //   data: ['下单金额', '下单量', '下单会员数']
+      // },
       visualMap: {
         min: 0,
-        max: 2500,
+        max: maxs,
         left: 'left',
         top: 'bottom',
         text: ['高', '低'],           // 文本，默认为数值文本
@@ -105,7 +103,7 @@ export class AnalyzeAreaComponent implements OnInit {
       },
       series: [
         {
-          name: '下单金额',
+          name:_this.queryContentText,
           type: 'map',
           mapType: 'china',
           roam: false,
@@ -117,37 +115,8 @@ export class AnalyzeAreaComponent implements OnInit {
               show: true
             }
           },
-          data:
-            [_this.nowData.areaMap]
+          data:_this.nowData.areaMap
         },
-        {
-          name: '下单量',
-          type: 'map',
-          mapType: 'china',
-          label: {
-            normal: {
-              show: true
-            },
-            emphasis: {
-              show: true
-            }
-          },
-          data: [_this.nowData.areaMap]
-        },
-        {
-          name: '下单会员数',
-          type: 'map',
-          mapType: 'china',
-          label: {
-            normal: {
-              show: true
-            },
-            emphasis: {
-              show: true
-            }
-          },
-          data: [_this.nowData.areaMap]
-        }
       ]
     };
   }
@@ -178,7 +147,7 @@ export class AnalyzeAreaComponent implements OnInit {
   qeuryAll(type?:string,obj?) {
     let me = this;
     if(!isNullOrUndefined(type)) me.queryContent = type;
-    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
+    // me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
     let url = "/statistical/analyseArea";
     let data = {
       queryType: me.queryType,
@@ -188,7 +157,15 @@ export class AnalyzeAreaComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-    me.getOption();
+    let maxs;
+    if(me.queryContent=='ORDSUM'){
+      maxs=me.nowData.resultList[0].ordSum;
+    }else if(me.queryContent=='ORDCOUNT'){
+      maxs=me.nowData.resultList[0].ordCount;
+    }else if(me.queryContent=='ORDCUSTCOUNT'){
+      maxs=me.nowData.resultList[0].custCount;
+    }
+    me.getOption(maxs);
   }
 
   /**
