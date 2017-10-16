@@ -26,7 +26,7 @@
       </dl>
 
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40">规格名称：</dt>
+        <dt class="col-xs-3 lh40">属性名称：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <input type="text" class="form-control"  name="name" [(ngModel)]="name">
         </dd>
@@ -36,11 +36,9 @@
         <!--请输入规格名称-->
       <!--</dl>-->
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40">规格值：</dt>
+        <dt class="col-xs-3 lh40">属性值：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <ng-container *ngFor="let vall of val">
-            <input type="text" class="form-control mb" name="val" [(ngModel)]="vall.enumValue">
-          </ng-container>
+          <input type="text" class="form-control mb" name="valStr" [(ngModel)]="valStr">
         </dd>
       </dl>
       <!--<dl [hidden]="val.valid || val.pristine"-->

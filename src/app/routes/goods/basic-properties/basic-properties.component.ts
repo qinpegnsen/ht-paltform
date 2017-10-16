@@ -48,7 +48,6 @@ export class BasicPropertiesComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    this.queryBaseEnumList();
   }
   /**
    * 选择分类
@@ -74,8 +73,6 @@ export class BasicPropertiesComponent implements OnInit {
       kindId:kindId?kindId:_this.kindId,
     };
     let result=_this.submit.getData(requestUrl, requestData);
-    console.log("█ result ►►►",  result);
-    console.log("█ result.baseTypeList  ►►►",  result.baseTypeList);
     _this.data = result;
   }
 

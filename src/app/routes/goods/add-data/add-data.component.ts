@@ -70,12 +70,10 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
         vals: obj.vals
       }
       let result = this.addDataService.addGoodsBaseEnum(url, data);
-      console.log("█ result ►►►",  result);
       if (result == "请选择三级分类") {
         return;
       } else {
         this.hideWindow("success");
-        // this.basicPropertiesComponent.queryBaseEnumList(this.kindId);
       }
     } else {
       AppComponent.rzhAlt("error", "请选择三级分类");

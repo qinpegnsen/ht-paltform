@@ -14,11 +14,18 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   @Input('name') name: string;
   @Input('val') val:any;
   @Input('id') id:string;
+  private valStr: string='';
 
   @Input() selTypeData: any; //选中的商品分类
   @Output() upDate = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("█ this.val ►►►",  this.val);
+    this.valStr='';
+    if(!isUndefined(this.val) && this.val.length > 0){
+      for(let i = 0; i < this.val.length; i ++){
+        this.valStr += this.val[i].enumValue +',';
+        this.valStr = this.valStr.substring(0,this.valStr.length-1)
+      }
+    }
     if (changes['showUpdateWindow']) {
       if(this.showUpdateWindow) $('.wrapper > section').css('z-index', 200);
       else $('.wrapper > section').css('z-index', 114);
@@ -55,7 +62,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
       id: this.val[0].enumTypeId,
       kindId:this.selTypeData.kindId,
       name: obj.name,
-      vals: obj.val
+      vals: obj.valStr
     }
     let result=this.submit.postRequest(url, data);
     this.hideWindow("success");

@@ -54,15 +54,17 @@ export class ProblemDetailsComponent implements OnInit {
    */
   qeuryAllService(){
     this.kind = this.submit.getData("/helpKind/queryAll",'');
-    console.log("█ this.kinds ►►►",  this.kind);
   }
+
+  /**
+   * 查询问题
+   */
   allproblem(){
     let url = "/helpQuestions/queryAll";
     let data={
       kindId:this.id,
     }
     this.result = this.submit.getData(url,data);
-    console.log("█ result ►►►",  this.result);
   }
 
   /**

@@ -95,7 +95,6 @@ export class HelpUpdateComponent implements OnInit {
     }
     _this.abc=_this.operationService.updateproblem(url, data);
     let answer=_this.abc;
-    console.log("█ answer ►►►",  answer);
     if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" || answer=="帮助问题答案不能为空"){
       return;
     }else{
