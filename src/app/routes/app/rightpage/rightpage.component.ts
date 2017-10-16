@@ -21,11 +21,16 @@ export class RightpageComponent implements OnInit {
   private  tplImgUUid;//获取模板效果图的图片暗码
   private  uuid=[];//获取模板效果图的图片暗码数组
   private  tplCheckedImgUUid;//获取模板选中效果图的图片暗码
-  private limitForm = {
+  private optForm = {
     optTypeCode: '',
     typeDesc:'',
     isEntered:''
-  }
+  }//首页模板类型
+  private tplForm = {
+    optTypeCode: '',
+    typeDesc:'',
+    isEntered:''
+  }//首页模板
   public id:string;//获取首页模板ID
   private myImg: any;//上传首页模板效果图
   private myImgs: any;//上传首页模板效果图
@@ -78,14 +83,15 @@ export class RightpageComponent implements OnInit {
  * 请求移动端首页模板类型详细数据，并显示()
  */
 queryData(){
+  let that=this;
   if(typeof(this.id)) {
     this.ajax.get({
       url: '/phone/indexOptType/load',
       async: false, //同步请求
       data: {id: this.id},
       success: (res) => {
-        this.limitForm = res;
-
+        that.optForm = res;
+        console.log("█ this.optForm  ►►►",  this.optForm );
       },
       error: (res) => {
         console.log("post limit error");
@@ -104,7 +110,7 @@ queryData(){
         async: false, //同步请求
         data: {id: this.id},
         success: (res) => {
-          this.limitForm = res;
+          this.tplForm = res;
         },
         error: (res) => {
           console.log("post limit error");

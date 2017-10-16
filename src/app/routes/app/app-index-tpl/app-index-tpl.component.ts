@@ -25,16 +25,16 @@ export class AppIndexTplComponent implements OnInit {
      */
     _this.addButton = {
       type:'add',
-      text:'新增操作类型',
-      title:'新增移动端首页操作类型',
+      text:'新增首页模板',
+      title:'新增首页模板',
     };
     _this.updatebutton = {
       type:'update',
-      title:'修改移动端首页操作类型',
+      title:'修改首页模板',
     };
     _this.deletebutton = {
       type:'delete',
-      title:'删除移动端首页操作类型',
+      title:'删除首页模板',
     };
 
     _this.getAgentList();

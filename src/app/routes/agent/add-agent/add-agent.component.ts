@@ -42,10 +42,10 @@ export class AddAgentComponent implements OnInit {
   ngOnInit() {
     let me = this;
     //页面完成后加载地图
-    console.log("█ me.selectArea ►►►",  me.selectArea);
 
     setTimeout(() => {
       //实例化地图
+
       let map = new AMap.Map("container", {
         resizeEnable: true,
         zoom: 13,//地图显示的缩放级别
@@ -63,6 +63,23 @@ export class AddAgentComponent implements OnInit {
         });
       })
 
+      //设置监听，获取地图经纬度
+      var clickEventListener = map.on('click', function (e) {
+        me.staff.coordinateLng = e.lnglat.getLng();//经度
+        me.staff.coordinateLat = e.lnglat.getLat();//纬度
+      });
+
+      var marker = new AMap.Marker({
+        map:map,
+        bubble:true
+      })
+
+      /**
+       * 点击出来标注点
+       */
+      map.on('click',function(e){
+        marker.setPosition(e.lnglat);
+      })
       AMap.plugin('AMap.Geocoder',function(){
         var drving = new AMap.Geocoder({
           map:map
@@ -90,12 +107,6 @@ export class AddAgentComponent implements OnInit {
           placeSearch.search(e.poi.name)
         });
       })
-
-      //设置监听，获取地图经纬度
-      var clickEventListener = map.on('click', function (e) {
-        me.staff.coordinateLng = e.lnglat.getLng();//经度
-        me.staff.coordinateLat = e.lnglat.getLat();//纬度
-      });
 
     }, 1);
 

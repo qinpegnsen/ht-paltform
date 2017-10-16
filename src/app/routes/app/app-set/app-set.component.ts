@@ -37,6 +37,8 @@ export class AppSetComponent implements OnInit {
   public uploaders: Array<FileUploader> = new Array();//清空选中模板的图片
   private optTypeList: any;//操作类型的列表
   private myImg: any;//上传图片
+  private tplImgCount: any;//模板图片数量
+  private isAdd: boolean = true;//是否是新增内容
   private indexId: any;//没有发布的选中模板的ID
   private indexData: any;//已经发布成功的选中模板ID
   public id: string;//删除选中模板的ID
@@ -184,7 +186,8 @@ export class AppSetComponent implements OnInit {
          * 查询模板信息说明这个模板已经发布过了
          * 把上传图片循环（因为模板值不止一个，也是未知的）模板值上传图片只能唯一，但是可以有多个模板值
          */
-        for (let i = 0; i < res.length; i++) {
+        this.tplImgCount=res.length;
+        for (let i = 0; i < this.tplImgCount; i++) {
           this.contents[i] = res[i].content;//选中模板的图片暗码或者内容
           this.ids[i] = res[i].id;//提交后选中模板中的每个模板值的ID
 
@@ -222,11 +225,11 @@ export class AppSetComponent implements OnInit {
     this.isShowContent = true;
     let _this = this;
     _this.indexId = _this.phoneIndexId[i - 1];
-    console.log('█ _this.indexId ►►►', _this.indexId);
-
     if (typeof(_this.indexId) != 'undefined') {//去load
+      _this.isAdd=false;
       _this.queryContentList(item, _this.indexId, i);
     } else { //显示添加页面
+      _this.isAdd=true;
       _this.curItem = item;
       _this.ord = i;
       /**
@@ -242,7 +245,8 @@ export class AppSetComponent implements OnInit {
       _this.ids.splice(0, _this.ids.length);//提交后选中模板中的每个模板值的ID
       _this.optTypeIndex.splice(0, _this.optTypeIndex.length);//选中模板的下标
 
-      for (let i = 0; i < item.tplImgCount; i++) {
+      _this.tplImgCount=item.tplImgCount;
+      for (let i = 0; i < _this.tplImgCount; i++) {
         this.contentList.push(i);
         let uploader: FileUploader = new FileUploader({
           url: '/upload/basic/upload',
@@ -308,7 +312,21 @@ export class AppSetComponent implements OnInit {
    * 添加首页模板内容
    */
   addModel() {
-    this.uploadImg()
+    let _this=this;
+    let flag = true;
+    if (_this.isAdd) {//说明是新增，新增判断是否上传图片
+      let imgCount = _this.tplImgCount;
+      for (let i = 0; i < imgCount; i++) {
+        if (_this.uploaders[i].queue.length < 1) {
+          flag = false;
+          swal("第" + (i + 1) + "个图片未上传");
+          break;
+        }
+      }
+    }
+    if(flag){
+      this.uploadImg()
+    }
   }
 
   /**
@@ -344,7 +362,7 @@ export class AppSetComponent implements OnInit {
           _this.isEntered.splice(0, _this.isEntered.length);
           _this.optKey.splice(0, _this.optKey.length);
         } else {
-          swal('添加首页模板提交失败====！', 'error');
+          swal('添加首页模板提交失败====！', '', 'error');
         }
       },
       error: (data) => {
@@ -466,11 +484,9 @@ export class AppSetComponent implements OnInit {
        * @param item
        */
       me.uploaders[i].onBuildItemForm = function (fileItem, form) {
-        console.log('█ fileItem ►►►', fileItem);
         let uuid = me.GetUidService.getUid();
         form.append('uuid', uuid);
         me.contents[i] = uuid;
-        console.log('█ me.contents ►►►', me.contents);
       };
       /**
        * 执行上传
@@ -507,10 +523,10 @@ export class AppSetComponent implements OnInit {
      * 所有图片都上传成功后提交
      */
     if (i == imgCount) {
-      if (me.updateIds.length > 0) {
-        me.updateContent();//调用修改模板
-      } else {
+      if (me.isAdd) {
         me.addContent();//调用添加模板
+      } else {
+        me.updateContent();//调用修改模板
       }
     }
   }

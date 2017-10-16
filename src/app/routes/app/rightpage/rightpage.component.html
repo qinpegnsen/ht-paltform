@@ -11,7 +11,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 操作类型</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="optTypeCode" [(ngModel)]="limitForm.optTypeCode"
+              <input class="form-control" required name="optTypeCode" [(ngModel)]="optForm.optTypeCode"
                      #optTypeCode="ngModel" type="text"/>
               <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
                    class="alert alert-danger">
@@ -24,11 +24,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 类型名称</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="optTypeName" [(ngModel)]="limitForm.optTypeName"
+              <input class="form-control" required name="optTypeName" [(ngModel)]="optForm.optTypeName"
                      #optTypeName="ngModel" type="text"/>
               <div [hidden]="optTypeName.valid || optTypeName.pristine"
                    class="alert alert-danger">
-                区域编码是必填项，请填写区域编码
+                类型名称是必填项，请填写类型名称
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 操作类型说明</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="typeDesc" [(ngModel)]="limitForm.typeDesc"
+              <input class="form-control" required name="typeDesc" [(ngModel)]="optForm.typeDesc"
                      #typeDesc="ngModel" type="text"/>
               <div [hidden]="typeDesc.valid || typeDesc.pristine"
                    class="alert alert-danger">
@@ -51,10 +51,10 @@
             <label class="col-sm-3 control-label">是否可输入</label>
             <div class="col-sm-8">
               <label class="radio-inline c-radio">
-                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="limitForm.isEntered"/>
+                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="optForm.isEntered" required/>
                 <span class="fa fa-circle"></span>是</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="isEntered" value="N" [(ngModel)]="limitForm.isEntered"/>
+                <input type="radio" name="isEntered" value="N" [(ngModel)]="optForm.isEntered" required/>
                 <span class="fa fa-circle"></span>否</label>
               <span></span>
             </div>
@@ -84,7 +84,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 操作类型</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="optTypeCode" [(ngModel)]="limitForm.optTypeCode"
+              <input class="form-control" required name="optTypeCode" [(ngModel)]="optForm.optTypeCode"
                      #optTypeCode="ngModel" type="text"/>
               <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
                    class="alert alert-danger">
@@ -97,11 +97,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 类型名称</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="optTypeName" [(ngModel)]="limitForm.optTypeName"
+              <input class="form-control" required name="optTypeName" [(ngModel)]="optForm.optTypeName"
                      #optTypeName="ngModel" type="text"/>
               <div [hidden]="optTypeName.valid || optTypeName.pristine"
                    class="alert alert-danger">
-                区域编码是必填项，请填写区域编码
+                类型名称是必填项，请填写类型名称
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"> <i>*</i> 操作类型说明</label>
             <div class="col-sm-8">
-              <input class="form-control" required name="typeDesc" [(ngModel)]="limitForm.typeDesc"
+              <input class="form-control" required name="typeDesc" [(ngModel)]="optForm.typeDesc"
                      #typeDesc="ngModel" type="text"/>
               <div [hidden]="typeDesc.valid || typeDesc.pristine"
                    class="alert alert-danger">
@@ -121,13 +121,13 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">是否可输入</label>
+            <label class="col-sm-3 control-label"> <i>*</i>是否可输入</label>
             <div class="col-sm-8">
               <label class="radio-inline c-radio">
-                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="limitForm.isEntered"/>
+                <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="optForm.isEntered" required/>
                 <span class="fa fa-circle"></span>是</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="isEntered" value="N" [(ngModel)]="limitForm.isEntered"/>
+                <input type="radio" name="isEntered" value="N" [(ngModel)]="optForm.isEntered" required/>
                 <span class="fa fa-circle"></span>否</label>
               <span></span>
             </div>
@@ -157,7 +157,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 首页模板</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplCode" [(ngModel)]="limitForm.tplCode"
+              <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
                      #tplCode="ngModel" type="text"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
                    class="alert alert-danger">
@@ -170,7 +170,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板名称</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplName" [(ngModel)]="limitForm.tplName"
+              <input class="form-control" required name="tplName" [(ngModel)]="tplForm.tplName"
                      #tplName="ngModel" type="text"/>
               <div [hidden]="tplName.valid || tplName.pristine"
                    class="alert alert-danger">
@@ -183,7 +183,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板路径</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplUrl" [(ngModel)]="limitForm.tplUrl"
+              <input class="form-control" required name="tplUrl" [(ngModel)]="tplForm.tplUrl"
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
                    class="alert alert-danger">
@@ -194,14 +194,14 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板效果图</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="!tplForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl"
                    alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplImg && !myImg" [src]="limitForm.tplImg">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplImg && !myImg" [src]="tplForm.tplImg">
               <label class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{limitForm.tplCheckedImg? '修改模板选中效果图':'上传模板效果图'}}
+                <i class="icon-cloud-upload mr"></i>{{tplForm.tplCheckedImg? '修改模板选中效果图':'上传模板效果图'}}
                 <input class="w100" type="file" name="tplImg"  ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
               </label>
             </div>
@@ -209,14 +209,14 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板选中效果图</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 实际效果</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="!tplForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl"
                    alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && !myImgs" [src]="limitForm.tplCheckedImg">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplCheckedImg && !myImgs" [src]="tplForm.tplCheckedImg">
               <label class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{limitForm.tplCheckedImg? '修改模板选中效果图':'上传模板选中效果图'}}
+                <i class="icon-cloud-upload mr"></i>{{tplForm.tplCheckedImg? '修改模板选中效果图':'上传模板选中效果图'}}
                 <input class="w100" type="file" name="tplCheckedImg"  ng2FileSelect [uploader]="uploaders" (change)="fileChangeListeners($event)"/>
               </label>
             </div>
@@ -224,10 +224,10 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板说明</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板内容要求</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplDesc" [(ngModel)]="limitForm.tplDesc"
-                     #tplDesc="ngModel" type="text"/>
+              <input class="form-control" required name="tplDesc" [(ngModel)]="tplForm.tplDesc"
+                     #tplDesc="ngModel" type="text" placeholder="例如：图片格式,文字大小"/>
               <div [hidden]="tplDesc.valid || tplDesc.pristine"
                    class="alert alert-danger">
                 模板说明是必填项，请填写模板说明
@@ -239,7 +239,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板数量</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplImgCount" [(ngModel)]="limitForm.tplImgCount"
+              <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
               <div [hidden]="tplImgCount.valid || tplImgCount.pristine"
                    class="alert alert-danger">
@@ -252,24 +252,24 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 首页作者</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplAuthor" [(ngModel)]="limitForm.tplAuthor"
+              <input class="form-control" required name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
                    class="alert alert-danger">
-                操作类型是必填项，请填写操作类型
+                首页作者是必填项，请填写首页作者
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">模板类型</label>
+            <label class="col-sm-4 control-label"> <i>*</i>模板类型</label>
             <div class="col-sm-7">
               <label class="radio-inline c-radio">
-                <input type="radio" name="tplType" checked value="IMG" [(ngModel)]="limitForm.tplType"/>
+                <input type="radio" name="tplType" checked value="IMG" [(ngModel)]="tplForm.tplType" required/>
                 <span class="fa fa-circle"></span>图片</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="tplType" value="TXT" [(ngModel)]="limitForm.tplType"/>
+                <input type="radio" name="tplType" value="TXT" [(ngModel)]="tplForm.tplType" required/>
                 <span class="fa fa-circle"></span>文字</label>
               <span></span>
             </div>
@@ -299,7 +299,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 首页模板</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplCode" [(ngModel)]="limitForm.tplCode"
+              <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
                      #tplCode="ngModel" type="text"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
                    class="alert alert-danger">
@@ -312,7 +312,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板名称</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplName" [(ngModel)]="limitForm.tplName"
+              <input class="form-control" required name="tplName" [(ngModel)]="tplForm.tplName"
                      #tplName="ngModel" type="text"/>
               <div [hidden]="tplName.valid || tplName.pristine"
                    class="alert alert-danger">
@@ -325,7 +325,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板路径</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplUrl" [(ngModel)]="limitForm.tplUrl"
+              <input class="form-control" required name="tplUrl" [(ngModel)]="tplForm.tplUrl"
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
                    class="alert alert-danger">
@@ -336,14 +336,14 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板效果图</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="!tplForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl"
                    alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplImg && !myImg" [src]="limitForm.tplImg">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplImg && myImg" [src]="uploader.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplImg && !myImg" [src]="tplForm.tplImg">
               <label class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{limitForm.tplCheckedImg? '修改模板选中效果图':'上传模板效果图'}}
+                <i class="icon-cloud-upload mr"></i>{{tplForm.tplCheckedImg? '修改模板选中效果图':'上传模板效果图'}}
                 <input class="w100" type="file" name="tplImg"  ng2FileSelect [uploader]="uploader" (change)="fileChangeListener($event)"/>
               </label>
             </div>
@@ -351,14 +351,14 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板选中效果图</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 实际效果</label>
             <div class="col-sm-7">
-              <img class="col-sm-5 p-sm" *ngIf="!limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="!tplForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl"
                    alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl" alt="">
-              <img class="col-sm-5 p-sm" *ngIf="limitForm.tplCheckedImg && !myImgs" [src]="limitForm.tplCheckedImg">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplCheckedImg && myImgs" [src]="uploaders.queue[0]._file | imgUrl" alt="">
+              <img class="col-sm-5 p-sm" *ngIf="tplForm.tplCheckedImg && !myImgs" [src]="tplForm.tplCheckedImg">
               <label class="btn btn-default file-upload">
-                <i class="icon-cloud-upload mr"></i>{{limitForm.tplCheckedImg? '修改模板选中效果图':'上传模板选中效果图'}}
+                <i class="icon-cloud-upload mr"></i>{{tplForm.tplCheckedImg? '修改模板选中效果图':'上传模板选中效果图'}}
                 <input class="w100" type="file" name="tplCheckedImg"  ng2FileSelect [uploader]="uploaders" (change)="fileChangeListeners($event)"/>
               </label>
             </div>
@@ -366,9 +366,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板说明</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板内容说明</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplDesc" [(ngModel)]="limitForm.tplDesc"
+              <input class="form-control" required name="tplDesc" [(ngModel)]="tplForm.tplDesc"
                      #tplDesc="ngModel" type="text"/>
               <div [hidden]="tplDesc.valid || tplDesc.pristine"
                    class="alert alert-danger">
@@ -381,7 +381,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 模板数量</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplImgCount" [(ngModel)]="limitForm.tplImgCount"
+              <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
               <div [hidden]="tplImgCount.valid || tplImgCount.pristine"
                    class="alert alert-danger">
@@ -394,24 +394,24 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i>*</i> 首页作者</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplAuthor" [(ngModel)]="limitForm.tplAuthor"
+              <input class="form-control" required name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
                    class="alert alert-danger">
-                操作类型是必填项，请填写操作类型
+                首页作者是必填项，请填写首页作者
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">模板类型</label>
+            <label class="col-sm-4 control-label"> <i>*</i>模板类型</label>
             <div class="col-sm-7">
               <label class="radio-inline c-radio">
-                <input type="radio" name="tplType" checked value="IMG" [(ngModel)]="limitForm.tplType"/>
+                <input type="radio" name="tplType" checked value="IMG" [(ngModel)]="tplForm.tplType" required/>
                 <span class="fa fa-circle"></span>图片</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="tplType" value="TXT" [(ngModel)]="limitForm.tplType"/>
+                <input type="radio" name="tplType" value="TXT" [(ngModel)]="tplForm.tplType" required/>
                 <span class="fa fa-circle"></span>文字</label>
               <span></span>
             </div>
