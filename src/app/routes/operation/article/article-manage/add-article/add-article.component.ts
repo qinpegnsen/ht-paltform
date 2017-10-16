@@ -63,6 +63,7 @@ export class AddArticleComponent implements OnInit {
   public coverCode='AUTO';                            //封面的编码，用来判断是否执行图片上传的类型
   public coverChange:boolean=false;                  //修改的时候是否点击修改封面了，点击执行图片上传
   public coverID=[];                                  //存储删除封面图片的id的数组
+  public removeCover:boolean=false;                  //上传图片的按钮
 
   constructor(
               public settings: SettingsService,
@@ -191,8 +192,8 @@ export class AddArticleComponent implements OnInit {
       itemAlias: "limitFile",
       queueLimit: delLength
     });
-
     $(obj).css("display",'none');
+    this.removeCover=true;
   }
 
   /**
@@ -269,10 +270,10 @@ export class AddArticleComponent implements OnInit {
   coverType(code,flag?) {
     this.coverCode=code;
     if(flag){//如果是true的话证明是前面的HTML页面点击事件，这时候让变空，否则是初始化的时候就调用然后清空就出现问题了
-      this.queryArticleData.articleCoverVO=null;
       this.coverChange=true;
+      this.queryArticleData.articleCoverVO=null;
+      this.removeCover=true;
     }
-
     if (code == 'ONE' || code == 'THREE') {
       this.flag = true;
       if (code == 'THREE') {//这里重新写的原因是为了让下次点击的时候没有图片
