@@ -85,7 +85,7 @@ export class EditTplComponent implements OnInit {
       remark: this.tplData.remark,
     }
     let result = this.operationService.updateproblem(url, data);
-    if (result) this.hideWindow(true)
+    if (result==null) this.hideWindow(true);
   }
 
   /**
@@ -103,7 +103,6 @@ export class EditTplComponent implements OnInit {
       remark: obj.remark,
     }
     let result = this.operationService.addNewArticle(url, data);
-    console.log("█ result ►►►",  result);
-    if (result==null) this.hideWindow(true)
+    if (result==null) this.hideWindow(true);
   }
 }
