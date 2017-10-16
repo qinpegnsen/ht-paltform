@@ -72,7 +72,7 @@ export class EditTplComponent implements OnInit {
   /**
    * 修改模板的内容
    */
-  delivery() {
+  update() {
     let url = '/notifyAdminTpl/updateNotifyAdminTpl';
     let data = {
       id:this.tplData.id ,
@@ -86,5 +86,24 @@ export class EditTplComponent implements OnInit {
     }
     let result = this.operationService.updateproblem(url, data);
     if (result) this.hideWindow(true)
+  }
+
+  /**
+   * 新增模板的内容
+   */
+  add(obj) {
+    let url = '/notifyAdminTpl/addNotifyAdminTpl';
+    let data = {
+      tplCode: obj.tplCode,
+      tplName: obj.tplName,
+      icon:obj.icon,
+      tpl: obj.tpl,
+      limitMenu:obj.limitMenu,
+      url: obj.url,
+      remark: obj.remark,
+    }
+    let result = this.operationService.addNewArticle(url, data);
+    console.log("█ result ►►►",  result);
+    if (result==null) this.hideWindow(true)
   }
 }

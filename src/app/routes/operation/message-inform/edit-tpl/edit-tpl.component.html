@@ -1,8 +1,91 @@
 <div class="deliver-order fadeIn" *ngIf="showDeliverWindow">
+  <!--新增开始-->
+  <ng-container *ngIf="type=='add'">
+    <div class="mask"></div>
+    <form class="_popup animated fadeIn" #addTpl="ngForm">
+      <div class="pop popup-hd">
+        <span class="f-bold">新增模板消息</span>
+        <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+      </div>
+      <!--表单-->
+      <div class="pop deliver-box font12 w100">
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>模板编码：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #tplCodeTem="ngModel"
+                   name="tplCode"/>
+            <div [hidden]="tplCodeTem.valid||tplCodeTem.untouched"
+                 class="alert alert-danger">
+              模板编码是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>模板名称：</dt>
+          <dd class="col-xs-5 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #tplNameTem="ngModel" name="tplName"/>
+            <div [hidden]="tplNameTem.valid||tplNameTem.untouched"
+                 class="alert alert-danger">
+              模板名称是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>消息图标：</dt>
+          <dd class="col-xs-5 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #iconTem="ngModel" name="icon"/>
+            <div [hidden]="iconTem.valid||iconTem.untouched"
+                 class="alert alert-danger">
+              消息图标是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>模板：</dt>
+          <dd class="col-xs-5 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #tplTem="ngModel" name="tpl"/>
+            <div [hidden]="tplTem.valid||tplTem.untouched" class="alert alert-danger">
+              模板是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>菜单权限：</dt>
+          <dd class="col-xs-5 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #limitMenuTem="ngModel" name="limitMenu"/>
+            <div [hidden]="limitMenuTem.valid||limitMenuTem.untouched" class="alert alert-danger">
+              菜单权限是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3"><i>*</i>菜单URL：</dt>
+          <dd class="col-xs-5 font14">
+            <input class="form-control" type="text" maxlength="128" required ngModel #urlTem="ngModel" name="url"/>
+            <div [hidden]="urlTem.valid||urlTem.untouched" class="alert alert-danger">
+              菜单URL是必填项
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">备注：</dt>
+          <dd class="col-xs-6 font14">
+          <textarea name="remark" class="form-control p remark font12" id="12" cols="30" rows="3" ngModel
+                    placeholder="您可以输入一些发货备忘信息（仅卖家自己可见）"></textarea>
+          </dd>
+        </dl>
+      </div>
+      <div class="panel-footer text-right">
+        <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
+        <button class="btn btn-info" type="button" (click)="add(addTpl.value)" [disabled]="addTpl.invalid">确认提交</button>
+      </div>
+    </form>
+  </ng-container>
+  <!--新增结束-->
   <!--修改开始时-->
   <ng-container *ngIf="type=='update'">
     <div class="mask"></div>
-    <form class="_popup animated fadeIn">
+    <form class="_popup animated fadeIn" #updateTpl="ngForm">
       <div class="pop popup-hd">
         <span class="f-bold">编辑模板消息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
@@ -12,43 +95,64 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板编码：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input class="form-control" type="text" disabled maxlength="128"
+            <input class="form-control" type="text"  maxlength="128" required #tplCodeTem="ngModel"
                    [(ngModel)]="tplData.tplCode" name="tplCode"/>
+            <div [hidden]="tplCodeTem.valid||tplCodeTem.untouched"
+                 class="alert alert-danger">
+              模板编码是必填项
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板名称：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"  [(ngModel)]="tplData.tplName"
+            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.tplName" required #tplNameTem="ngModel"
                    name="tplName"/>
+            <div [hidden]="tplNameTem.valid||tplNameTem.untouched"
+                 class="alert alert-danger">
+              模板名称是必填项
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">消息图标：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"  [(ngModel)]="tplData.icon"
+            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.icon" required #iconTem="ngModel"
                    name="icon"/>
+            <div [hidden]="iconTem.valid||iconTem.untouched"
+                 class="alert alert-danger">
+              消息图标
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"  [(ngModel)]="tplData.tpl"
+            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.tpl" required #tplTem="ngModel"
                    name="tpl"/>
+            <div [hidden]="tplTem.valid||tplTem.untouched" class="alert alert-danger">
+              模板是必填项
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">菜单权限：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"  [(ngModel)]="tplData.limitMenu"
+            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.limitMenu" required #limitMenuTem="ngModel"
                    name="limitMenu"/>
+            <div [hidden]="limitMenuTem.valid||limitMenuTem.untouched" class="alert alert-danger">
+              菜单权限是必填项
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">菜单URL：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"  [(ngModel)]="tplData.url"
+            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.url" required #urlTem="ngModel"
                    name="url"/>
+            <div [hidden]="urlTem.valid||urlTem.untouched" class="alert alert-danger">
+              菜单URL是必填项
+            </div>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
@@ -62,78 +166,10 @@
       </div>
       <div class="panel-footer text-right">
         <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="button" (click)="delivery()">确认提交</button>
+        <button class="btn btn-info" type="button" (click)="update()" [disabled]="updateTpl.invalid">确认提交</button>
       </div>
     </form>
   </ng-container>
   <!--修改结束-->
-
-  <!--新增开始-->
-  <ng-container *ngIf="type=='add'">
-    <div class="mask"></div>
-    <form class="_popup animated fadeIn">
-      <div class="pop popup-hd">
-        <span class="f-bold">编辑模板消息</span>
-        <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
-      </div>
-      <!--表单-->
-      <div class="pop deliver-box font12 w100">
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">模板编码：</dt>
-          <dd class="orderId-color col-xs-9 font14">
-            <input class="form-control" type="text" maxlength="128"
-                    name="tplCode"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">模板名称：</dt>
-          <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"
-                   name="tplName"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">消息图标：</dt>
-          <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"
-                   name="icon"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">模板：</dt>
-          <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"
-                   name="tpl"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">菜单权限：</dt>
-          <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"
-                   name="limitMenu"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">菜单URL：</dt>
-          <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128"
-                   name="url"/>
-          </dd>
-        </dl>
-        <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">模板内容：</dt>
-          <dd class="col-xs-6 font14">
-          <textarea name="remark" class="form-control p remark font12" id="12" cols="30" rows="3"
-                    placeholder="您可以输入一些发货备忘信息（仅卖家自己可见）"></textarea>
-          </dd>
-        </dl>
-      </div>
-      <div class="panel-footer text-right">
-        <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="button" (click)="delivery()">确认提交</button>
-      </div>
-    </form>
-  </ng-container>
-  <!--新增结束-->
 </div>
 
