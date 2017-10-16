@@ -24,6 +24,10 @@ export class BasicPropertiesComponent implements OnInit {
   public data: Page = new Page();
   private showAddWindow:boolean = false;
   private showUpdateWindow:boolean = false;
+
+  private name1:any;
+  private val1:any;
+  private id1:any;
   constructor( private submit: SubmitService,private goods: GoodsService) { }
 
   ngOnInit() {
@@ -64,13 +68,14 @@ export class BasicPropertiesComponent implements OnInit {
    */
   queryBaseEnumList(kindId?) {
     let _this = this,sel= _this.selType;
-    console.log("█ this.selTypeData ►►►",  this.selType);
     if ((isNullOrUndefined(this.kindId) || this.kindId == "") && sel) _this.getKind(sel);
     let requestUrl = '/goodsEnum/queryBaseEnumList';
     let requestData = {
       kindId:kindId?kindId:_this.kindId,
     };
     let result=_this.submit.getData(requestUrl, requestData);
+    console.log("█ result ►►►",  result);
+    console.log("█ result.baseTypeList  ►►►",  result.baseTypeList);
     _this.data = result;
   }
 
@@ -105,7 +110,9 @@ export class BasicPropertiesComponent implements OnInit {
   /*
   * 修改弹窗
   * */
-  updateNewData() {
+  updateNewData(name,val) {
+    this.name1=name,
+    this.val1=val,
     this.showUpdateWindow = true;
   }
   /**

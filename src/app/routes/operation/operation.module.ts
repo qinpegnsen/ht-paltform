@@ -58,21 +58,19 @@ const expressChildRoute: Routes = [
 const appChildRoutes: Routes = [
   {path: 'add-formoek', component: AddFormworkComponent}
 ]
-
-
 const rightChildRoutes: Routes = [
   {path: 'help-assortment', component:HelpAssortmentComponent},
-  {path: 'problem-details', component:ProblemDetailsComponent},
   {path: 'addrightpage', component:AddrightpageComponent}
 ]
 const helpdRoutes: Routes = [
   {path: 'help-assortment', component:HelpAssortmentComponent},
-  {path: 'help-update', component:HelpUpdateComponent},
 ]
 
 const helpChildRoutes: Routes = [
   {path: 'help-interlocution', component: HelpInterlocutionComponent,children:rightChildRoutes},
+  {path: 'problem-details', component:ProblemDetailsComponent},
   {path: 'help-answer', component: HelpAnswerComponent,children:helpdRoutes},
+  {path: 'help-update', component:HelpUpdateComponent},
 ]
 
 const messageChildRoutes: Routes = [

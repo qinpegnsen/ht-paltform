@@ -39,23 +39,6 @@ export class HelpAnswerComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    /**
-     * 路由事件用来监听地址栏的变化
-     * 1.当添加代理商出现的时候，代理商列表组件隐藏
-     * 2.路由变化的时候，刷新页面
-     */
-    me.router.events
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log(event.url)
-          if(event.url.indexOf('routers')>0){
-            me.flag=false;
-          }else if(event.url=='/main/operation/help-center/help-answer'){
-            me.flag=true;
-            this.qeuryAllService() //刷新内容页面
-          }
-        }
-      });
       this.qeuryAllService();
       this.qeuryAll();
     // me.kindId = me.kinds[0].id;   //帮助问题默认分类
@@ -73,7 +56,6 @@ export class HelpAnswerComponent implements OnInit {
    */
   qeuryAll(){
     this.kinds = this.submit.getData("/helpKind/queryAll",'');
-    console.log("█ this.kinds ►►►",  this.kinds);
   }
 
   /**
@@ -90,7 +72,6 @@ export class HelpAnswerComponent implements OnInit {
       kindId:me.kindId,
     }
     let result = this.submit.getData(url,data);
-    console.log("█ result ►►►",  result);
     me.data = new Page(result);
   }
 

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {BasicPropertiesComponent} from "../basic-properties/basic-properties.component";
+import {cli} from "webdriver-manager/built/lib/webdriver";
 declare var $: any;
 @Component({
   selector: 'app-update-data',
@@ -10,9 +11,14 @@ declare var $: any;
 })
 export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   @Input('showUpdateWindow') showUpdateWindow: boolean;
-  @Output() upDate = new EventEmitter();
+  @Input('name') name: string;
+  @Input('val') val:any;
+  @Input('id') id:string;
 
+  @Input() selTypeData: any; //选中的商品分类
+  @Output() upDate = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("█ this.val ►►►",  this.val);
     if (changes['showUpdateWindow']) {
       if(this.showUpdateWindow) $('.wrapper > section').css('z-index', 200);
       else $('.wrapper > section').css('z-index', 114);
@@ -25,6 +31,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
 
   ngOnInit() {
   }
+
   /**
    * 关闭组件
    * @param type true:表示操作成功，false表示取消操作
@@ -37,14 +44,21 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
     this.upDate.emit(type)
   }
 
-  delivery(obj){
-    let url = '/goodsEnum/updateGoodsEnumVal';
+
+  /**
+   * 修改基本属性
+   * @param obj
+   */
+  confirm(obj){
+    let url = '/goodsEnum/updateBaseEnum';
     let data = {
-      id: obj.id,
+      id: this.val[0].enumTypeId,
+      kindId:this.selTypeData.kindId,
       name: obj.name,
-      enumTypeId: obj.enumTypeId
+      vals: obj.val
     }
-    let result=this.submit.putRequest(url, data);
+    let result=this.submit.postRequest(url, data);
+    this.hideWindow("success");
     this.basicPropertiesComponent.queryBaseEnumList();
   }
 }

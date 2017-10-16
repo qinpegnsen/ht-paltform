@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'adddata', component: AdddataComponent},
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
   {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},
-  {path: 'measure', component: MeasureComponent,  children:appChildRoutes}
+  {path: 'measure', component: MeasureComponent,children:appChildRoutes}
 ];
 
 @NgModule({

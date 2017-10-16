@@ -49,7 +49,6 @@ export class HelpUpdateComponent implements OnInit {
 
     //帮助问题修改时，先获取数据
     me.b=me.submitt.getData("/helpQuestions/loadHelpQuestions", {id:me.kindid});
-    console.log("█ me.b ►►►",  me.b);
   }
 
   /**
@@ -75,14 +74,12 @@ export class HelpUpdateComponent implements OnInit {
    */
   qeuryAll(){
     this.kinds = this.submitt.getData("/helpKind/queryAll",'');
-    console.log("█ this.kinds ►►►",  this.kinds);
   }
 
   /**
    * 修改完成后提交
    */
   submit(res){
-    console.log("█ 11111 ►►►",  11111);
     let _this=this;
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
     console.log("█ sHTML ►►►",sHTML);

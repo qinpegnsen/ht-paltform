@@ -42,7 +42,7 @@
           <td>{{a.createTime}}</td>
           <td>
             <app-buttons [config]="deletebutton" (click)="delete(a.id)"></app-buttons>
-            <app-buttons [config]="updatebutton" routerLink="/main/operation/help-center/help-answer/help-update" [queryParams]="{linkType:'routers',id:a.id}"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="../help-update" [queryParams]="{linkType:'routers',id:a.id}"></app-buttons>
           </td>
         </tr>
         </tbody>

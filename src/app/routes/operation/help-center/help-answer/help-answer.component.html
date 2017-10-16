@@ -70,7 +70,7 @@
           <td>{{count.createTime}}</td>
           <td>
             <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
-            <app-buttons [config]="updatebutton" routerLink="help-update" [queryParams]="{linkType:'routers',id:count.id}"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="../help-update" [queryParams]="{linkType:'routers',id:count.id}"></app-buttons>
 
           </td>
         </tr>

@@ -50,22 +50,6 @@ export class HelpInterlocutionComponent implements OnInit {
       title: "查看",
       type: "details"
     };
-    /**
-     * 路由事件用来监听地址栏的变化
-     * 1.当添加代理商出现的时候，代理商列表组件隐藏
-     * 2.路由变化的时候，刷新页面
-     */
-    me.router.events
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          if(event.url.indexOf('routers')>0){
-            me.flag=false;
-          }else if(event.url=='/main/operation/help-center/help-interlocution'){
-            me.flag=true;
-            this.qeuryAllService() //刷新内容页面
-          }
-        }
-      });
     this.qeuryAllService();
   }
 

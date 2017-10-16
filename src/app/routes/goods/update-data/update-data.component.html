@@ -21,27 +21,36 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">商品分类：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <app-get-kind (myData)="getKind($event)"></app-get-kind>
+          <input type="text" name="kindName"  class="form-control" [(ngModel)] ="selTypeData.myKindName" disabled>
         </dd>
       </dl>
 
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">规格名称：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入必填名称" >
+          <input type="text" class="form-control"  name="name" [(ngModel)]="name">
         </dd>
       </dl>
+      <!--<dl [hidden]="name.valid || name.pristine"-->
+          <!--class="col-sm-9 pull-right text-danger add">-->
+        <!--请输入规格名称-->
+      <!--</dl>-->
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">规格值：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入规格值">
+          <ng-container *ngFor="let vall of val">
+            <input type="text" class="form-control mb" name="val" [(ngModel)]="vall.enumValue">
+          </ng-container>
         </dd>
       </dl>
-
+      <!--<dl [hidden]="val.valid || val.pristine"-->
+          <!--class="col-sm-9 pull-right text-danger add">-->
+        <!--请输入规格值-->
+      <!--</dl>-->
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="button" (click)="delivery(update.value)">确认提交</button>
+      <button class="btn btn-info" type="button" (click)="confirm(updata.value)" [disabled]="!updata.form.valid">确认提交</button>
     </div>
   </form>
 </div>

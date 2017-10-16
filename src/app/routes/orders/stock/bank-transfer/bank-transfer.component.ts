@@ -72,7 +72,8 @@ export class BankTransferComponent implements OnInit {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
-      containerClass: 'theme-blue'
+      containerClass: 'theme-blue',
+      rangeInputFormat: 'YYYY-MM-DD'
     });
   }
 
@@ -108,7 +109,7 @@ export class BankTransferComponent implements OnInit {
       ordno: this.orderId,
       acct: this.goodspay,
       tc3rd: obj.tc3rd,
-      bank: this.code,
+      bankCode: this.code,
       bacctName: obj.bacctName,
       finacePlatRecPicJson: JSON.stringify(this.imgs),
       tradeTime: this.queryTime + " " + this.time,

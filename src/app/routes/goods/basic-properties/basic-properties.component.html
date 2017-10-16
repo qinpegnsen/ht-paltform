@@ -43,7 +43,7 @@
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>
       </td>
       <td >
-        <app-buttons [config]="updatebuttons"  (click)="updateNewData()" ></app-buttons>
+        <app-buttons [config]="updatebuttons"  (click)="updateNewData(count.name,count.goodsEnumValList)" ></app-buttons>
         <app-buttons [config]="deletebuttons" (click)="delete(count.id)"></app-buttons>
       </td>
       </tr>
@@ -54,5 +54,6 @@
 
 <app-add-data [showAddWindow]="showAddWindow" [selTypeData]="selectGoodsType" (addData)="getAddDataResult($event)" ></app-add-data>
 
-<app-update-data [showUpdateWindow]="showUpdateWindow" (upDate)="getUpdateResult($event)" ></app-update-data>
+<app-update-data [showUpdateWindow]="showUpdateWindow"  [name]="name1" [val]="val1" [selTypeData]="selectGoodsType"
+                 (upDate)="getUpdateResult($event)" ></app-update-data>
 

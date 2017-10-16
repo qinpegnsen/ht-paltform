@@ -8,7 +8,7 @@
 
       <div class="select">
         <span style="margin-left: 20px">问题分类：</span>
-        <select id="" name="kindId" [(ngModel)]="b.kindId" disabled>
+        <select id="" class="" name="kindId" [(ngModel)]="b.kindId" disabled>
           <option [value]="help.id" *ngFor="let help of kinds" >
             {{help.kindName}}
           </option>
