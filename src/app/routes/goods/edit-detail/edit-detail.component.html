@@ -202,7 +202,7 @@
               <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target,'int')" pattern="^[1-9]{1}[0-9]+"
                      [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
-              <span [hidden]="storageNum.value > 9 || !storageNum.value"
+              <span [hidden]="storageNum.value > 9"
                     class="text-danger font12">库存最少为10
               </span>
             </td>
