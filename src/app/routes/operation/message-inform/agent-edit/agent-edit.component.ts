@@ -4,13 +4,14 @@ import {OperationService} from "../../operation.service";
 
 declare var $: any;
 
-@Component({
-  selector: 'app-edit-tpl',
-  templateUrl: './edit-tpl.component.html',
-  styleUrls: ['./edit-tpl.component.scss']
-})
 
-export class EditTplComponent implements OnInit {
+@Component({
+  selector: 'app-agent-edit',
+  templateUrl: './agent-edit.component.html',
+  styleUrls: ['./agent-edit.component.scss']
+})
+export class AgentEditComponent implements OnInit {
+
   public showDeliverWindow: boolean = false;
   public tplData: any;                                        //当前模板的数据
   @Input('type') type: string;                                //根据不同的类型呈现不同的内容
@@ -19,18 +20,18 @@ export class EditTplComponent implements OnInit {
   @Output() emitTplData = new EventEmitter();
 
   /**
- * 1.根据类型显示不同的内容
- * 2.如果模板的编码存在，获取当前load的信息
- */
+   * 1.根据类型显示不同的内容
+   * 2.如果模板的编码存在，获取当前load的信息
+   */
   ngOnChanges(changes: SimpleChanges): void {
-  if (changes['type'] && !isNullOrUndefined(this.type)) {
-    $('.wrapper > section').css('z-index', 200);
-    this.showDeliverWindow = true;
-    if(changes['tplCode'] && !isNullOrUndefined(this.tplCode)){
-      this.loadByTplCode()
+    if (changes['type'] && !isNullOrUndefined(this.type)) {
+      $('.wrapper > section').css('z-index', 200);
+      this.showDeliverWindow = true;
+      if(changes['tplCode'] && !isNullOrUndefined(this.tplCode)){
+        this.loadByTplCode()
+      }
     }
   }
-}
 
   /**
    * 组件销毁
@@ -48,11 +49,12 @@ export class EditTplComponent implements OnInit {
    * 根据当前的编码查询信息
    */
   loadByTplCode(){
-    let url='/notifyAdminTpl/loadByTplCode';
+    let url='/notifyAgentTpl/loadByTplCode';
     let data={
       tplCode:this.tplCode,
     };
     this.tplData=this.operationService.linkGoods(url,data);
+    console.log("█ this.tplData ►►►",  this.tplData);
   }
 
   /**
@@ -73,7 +75,7 @@ export class EditTplComponent implements OnInit {
    * 修改模板的内容
    */
   update() {
-    let url = '/notifyAdminTpl/updateNotifyAdminTpl';
+    let url = '/notifyAgentTpl/updateNotifyAdminTpl';
     let data = {
       id:this.tplData.id ,
       tplCode: this.tplData.tplCode,
@@ -94,7 +96,7 @@ export class EditTplComponent implements OnInit {
    * 新增模板的内容
    */
   add(obj) {
-    let url = '/notifyAdminTpl/addNotifyAdminTpl';
+    let url = '/notifyAgentTpl/addNotifyAgentTpl';
     let data = {
       tplCode: obj.tplCode,
       tplName: obj.tplName,

@@ -35,9 +35,10 @@ import { SysMessageComponent } from './sys-message/sys-message.component';
 import { AgentTplComponent } from './message-inform/agent-tpl/agent-tpl.component';
 import { PlatformTplComponent } from './message-inform/platform-tpl/platform-tpl.component';
 import { MessageListComponent } from './sys-message/message-list/message-list.component';
-import { EditTplComponent } from './message-inform/edit-tpl/edit-tpl.component';
 import { ArticleAuditComponent } from './article/article-audit/article-audit.component';
 import { AuditPageComponent } from './article/article-audit/audit-page/audit-page.component';
+import { PlatformEditComponent } from './message-inform/platform-edit/platform-edit.component';
+import { AgentEditComponent } from './message-inform/agent-edit/agent-edit.component';
 
 
 const addSort: Routes = [
@@ -103,7 +104,7 @@ const routes: Routes = [
     NzModalModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, EditTplComponent, ArticleAuditComponent, AuditPageComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService]
 })
 export class OperationModule { }

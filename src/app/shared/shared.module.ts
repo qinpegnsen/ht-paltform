@@ -167,7 +167,6 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     PopoverModule,
     StrJsonPipe,
     GetWeekPipe,
-
   ]
 })
 

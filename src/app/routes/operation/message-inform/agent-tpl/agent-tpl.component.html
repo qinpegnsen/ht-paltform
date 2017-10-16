@@ -65,5 +65,5 @@
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->
-<app-edit-tpl  [type]="curType" [tplCode]="curTplCode"  [page]="agentTplData.curPage"
-               (emitTplData)="getTplData($event)"></app-edit-tpl>
+<app-agent-edit  [type]="curType" [tplCode]="curTplCode"  [page]="agentTplData.curPage"
+               (emitTplData)="getTplData($event)"></app-agent-edit>
