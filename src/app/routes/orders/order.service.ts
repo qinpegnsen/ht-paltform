@@ -52,6 +52,7 @@ export class OrderService {
         let info=data.info;
         if(data.success){
           result=data.data;
+          console.log("█ result ►►►",  result);
         }else{
           AppComponent.rzhAlt("error",info);
         }

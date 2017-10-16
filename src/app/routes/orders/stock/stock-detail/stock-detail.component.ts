@@ -81,6 +81,7 @@ export class StockDetailComponent implements OnInit {
       ordno:this.ordno
     }
     this.deliveryData=this.orderService.getShopList(url,data);
+    console.log("█ this.deliveryData ►►►",  this.deliveryData);
   }
 
   /**

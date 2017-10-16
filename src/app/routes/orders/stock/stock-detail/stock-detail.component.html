@@ -6,9 +6,28 @@
         <dt>买家留言：</dt>
         <dd>{{orderData.note}}</dd>
       </dl>
-      <dl>
+      <dl class="line">
         <dt>支付方式：</dt>
-        <dd>{{orderData.payWay | rzhState :'1017'}}</dd>
+        <dd>{{orderData.payWay | rzhState :'1017'}}
+          <span class="pull-right" (mouseenter)="showTimeList(remit)"
+                (mouseleave)="hideTimesList(remit)"
+                myHoverColor
+                [myHover]="'#CC1635'" *ngIf="orderData.payWay=='REMIT'">更多<i
+            class="fa fa-angle-down time-list"></i>
+          </span>
+          <div class="more b w100" #remit (mouseenter)="showTimeList(remit)" (mouseleave)="hideTimesList(remit)"><span
+            class="arrow"></span>
+            <ul class="list-unstyled font12 mb0">
+              <li>开户行：<span>{{PayRecData.bank}}</span></li>
+              <li>收款人名称：<span>{{PayRecData.staffName}}</span></li>
+              <li>买家下单时间：<span>{{PayRecData.tradeTime}}</span></li>
+              <li>交易流水码：<span>{{PayRecData.tc3rd}}</span></li>
+              <li *ngIf="orderData.payWay=='REMIT'">付款凭证：
+                <span><img src="{{PayRecData.voucherUrl }}" class="qpsImg" alt=""  onerror="javascript:this.src='../../../assets/img/dummy.png';"></span>
+              </li>
+            </ul>
+          </div>
+        </dd>
       </dl>
       <dl>
         <dt>运费：</dt>
@@ -30,7 +49,7 @@
           <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
             class="arrow"></span>
             <ul class="list-unstyled font12 mb0">
-              <li><span>{{orderData.createTime}}</span>买家下单时间</li>
+              <li>买家下单时间：<span>{{orderData.createTime}}</span></li>
             </ul>
           </div>
         </dd>
