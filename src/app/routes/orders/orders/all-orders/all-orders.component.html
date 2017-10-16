@@ -13,7 +13,7 @@
     <div class="w30 pr0 pull-left">
       <select class="form-control pl-sm pr-sm" name="sss" #sType (change)="changeSearchType(sType.value)">
         <option value="ordno">订单编号</option>
-        <option value="custCode">买家账号</option>
+        <option value="custPhone">买家手机号</option>
         <!--<option value="22">商品名称</option>-->
       </select>
     </div>
@@ -22,8 +22,8 @@
         <div class="w80 pl0 pr0 pull-left">
           <input *ngIf="sType.value=='ordno'" type="text" placeholder="订单编号" class="form-control border-b-grey"
                  [(ngModel)]="ordno">
-          <input *ngIf="sType.value=='custCode'" type="text" placeholder="买家编号" class="form-control border-b-grey"
-                 [(ngModel)]="custCode">
+          <input *ngIf="sType.value=='custPhone'" type="text" placeholder="买家手机号" class="form-control border-b-grey"
+                 [(ngModel)]="custPhone">
         </div>
         <button type="button" title="搜索" (click)="queryDatas(1)"
                 class="btn btn-primary bar-h3-btn mr0 ng-scope">

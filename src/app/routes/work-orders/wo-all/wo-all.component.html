@@ -31,16 +31,16 @@
     <div class="search-term mb">
       <div class="w30 pr0 pull-left">
         <select class="form-control pl-sm pr-sm" name="sss" #sType (change)="changeCondition(sType.value)">
-          <option value="wono">工单编码</option>
+          <option value="wono">工单编号</option>
           <option value="ordno">订单编号</option>
         </select>
       </div>
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group pr0 mb0">
           <div class="w80 pl0 pr0 pull-left">
-            <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="定单编码"
+            <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="订单编号"
                    [(ngModel)]="search.ordno" (change)="queryDatas(1)">
-            <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编码"
+            <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编号"
                    [(ngModel)]="search.wono" (change)="queryDatas(1)">
           </div>
           <button type="submit" title="搜索"
@@ -89,7 +89,7 @@
         <span *ngIf="order.state=='NO' || order.state=='MANUAL'">
           <button class="btn btn-purple btn-sm fa fa-hand-o-right" title="指派"
                   (click)="assignWoToAgent(order.wono)"></button>
-          <button class="btn btn-info btn-sm icon-paper-clip" title="接单"
+          <button class="btn btn-info btn-sm fa fa-check" title="接单"
                   (click)="acceptNa(order.wono,woList.curPage)"></button>
         </span>
           <!--<button  *ngIf="order.state=='NA'" class="m-sm btn btn-xs btn-outline btn-green fa fa-truck"-->

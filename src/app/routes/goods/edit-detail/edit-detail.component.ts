@@ -289,7 +289,7 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 审核input框的value合不合要求，只能输入两位小数的限制方法
+   * 审核input框的value合不合要求
    */
   auditInputValueForNum(target,type?){
     this.tools.auditInputValueForNum(target,type);

@@ -4,7 +4,6 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {OrdersService} from "../orders.service";
 import {isNullOrUndefined} from "util";
 import {AppComponent} from "../../../../app.component";
-import {PopoverConfig} from "ngx-bootstrap";
 declare var $:any;
 
 @Component({
