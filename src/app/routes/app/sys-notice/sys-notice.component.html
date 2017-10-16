@@ -1,5 +1,5 @@
 <div class="content-heading mb-lg">
-  系统公告
+  <span  class="thc font">系统公告</span>
   <app-buttons class="pull-right ml-lg" [config]="noticeAddbutton" routerLink="addNotice"></app-buttons>
   <app-buttons class="pull-right" [config]="delEXpireAddbutton" (click)="delEXpireNotice()"></app-buttons>
 </div>
@@ -11,28 +11,28 @@
            (pageChange)="queryNoticeList($event)">
       <thead>
       <tr>
-        <th class="w5">
+        <th class="w5 thc font">
           序号
         </th>
-        <th class="w15">
-          <rzhDefaultSorter by="name">标题</rzhDefaultSorter>
+        <th class="w15 thc font">
+          标题
         </th>
-        <th class="w17">
-          <rzhDefaultSorter by="email">内容</rzhDefaultSorter>
+        <th class="w17 thc font">
+          内容
         </th>
-        <th class="w17">
-          <rzhDefaultSorter>地址</rzhDefaultSorter>
+        <th class="w17 thc font">
+          地址
         </th>
-        <th class="w10">
-          <rzhDefaultSorter>读否</rzhDefaultSorter>
+        <th class="w10 thc font">
+          读否
         </th>
-        <th class="w13">
-          <rzhDefaultSorter>创建时间</rzhDefaultSorter>
+        <th class="w13 thc font">
+          创建时间
         </th>
-        <th class="w13">
-          <rzhDefaultSorter>结束时间</rzhDefaultSorter>
+        <th class="w13 thc font">
+          结束时间
         </th>
-        <th class="w10">操作</th>
+        <th class="w10 thc font">操作</th>
       </tr>
       </thead>
       <tbody>
