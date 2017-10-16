@@ -35,7 +35,8 @@ export class AfterDetailsComponent implements OnInit {
     me.afterNo = me.submit.getParams('afterNo');
     me.wono = me.submit.getParams('wono');
 
-    me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
+    me.goodsAudits = this.tools.getEnumDataList(1001);  // 商品审核是否通过
+    console.log("█ me.goodsAudits ►►►",  me.goodsAudits);
     let data;
     if (!isNullOrUndefined(me.afterNo)) data = {afterNo: me.afterNo};
     if (!isNullOrUndefined(me.wono)) data = {wono: me.wono};
@@ -52,7 +53,8 @@ export class AfterDetailsComponent implements OnInit {
     MaskService.showMask();//显示遮罩层
     let data = {
       afterNo: me.afterData.afterNo,
-      opinion: me.opinion
+      opinion: me.opinion,
+      isAgree: 'Y'
     }
     me.submit.postRequest('/after/agreeRefundMoney', data, true);
   }
@@ -70,7 +72,6 @@ export class AfterDetailsComponent implements OnInit {
     }
     me.submit.postRequest('/after/dealReturnGoods', data, true);
   }
-
   /**
    * 审核退货商品
    */

@@ -107,7 +107,7 @@
               <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
               <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
                  [queryParams]="{ordno:order.ordno}">
-                查看详情{{order.state}}</p>
+                查看详情</p>
               <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
                 <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,order.ordno)"
                       (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>

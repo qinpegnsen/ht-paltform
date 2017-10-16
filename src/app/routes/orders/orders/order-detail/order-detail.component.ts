@@ -28,6 +28,7 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
+    me.parentComp.orderType = 'detail';
     me.curOrdno = me.submit.getParams('ordno');
     me.getOrderDetailInfo();//获取订单的物流详情及订单进度
     me.getOrderDetail(); //获取订单详情
@@ -41,6 +42,7 @@ export class OrderDetailComponent implements OnInit {
     let result = me.ordersService.getOrderDetailByNO(me.curOrdno);
     if (!isNullOrUndefined(result)) {
       me.orderDetailData = result;
+      console.log("█ me.orderDetailData ►►►",  me.orderDetailData);
       me.goodsData = result.ordItemList;
       me.getOrderStep();
     }
@@ -110,7 +112,7 @@ export class OrderDetailComponent implements OnInit {
    * 获取订单当前进度
    */
   private getOrderStep() {
-    let me = this, temp = [];
+    let me = this;
     if (me.orderDetailData.state == 'SUCCESS') {
       me.orderStep = 5;
     } else if (me.orderDetailData.state == 'DELIVERY') {
