@@ -118,15 +118,15 @@
             <div class="right">
               <div>
                 <p class="every-line">
-                  <span class="mr logis-time text-left" *ngIf="s==0">
-                      <b class="mr-lg">{{item.day}}</b>
+                  <span class="mr logis-time" *ngIf="s==0">
+                      <b class="mr-lg pull-left">{{item.day}}</b>
                       <b class="mr-lg">{{item.day | getWeek}}</b>
                       {{item.time}}
                   </span>
                   <ng-container *ngIf="s>0">
                     <span class="mr logis-time" *ngIf="item.day==orderStates[s-1].day">{{item.time}}</span>
                     <span class="mr logis-time" *ngIf="item.day!=orderStates[s-1].day">
-                      <b class="mr-lg">{{item.day}}</b>
+                      <b class="mr-lg pull-left">{{item.day}}</b>
                       <b class="mr-lg">{{item.day | getWeek}}</b>
                       {{item.time}}
                     </span>
