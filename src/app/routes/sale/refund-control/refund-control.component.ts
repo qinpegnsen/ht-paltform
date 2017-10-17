@@ -5,6 +5,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Router} from "@angular/router";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {AfterService} from "../after.service";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-refund-control',
@@ -75,6 +76,7 @@ export class RefundControlComponent implements OnInit {
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
+    if (isNullOrUndefined(result)) return;
     me.refundList = new Page(result);
     me.detail = [];
   }

@@ -4,6 +4,7 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {NavigationEnd, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-return-verify',
@@ -72,6 +73,7 @@ export class ReturnVerifyComponent implements OnInit {
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
+    if (isNullOrUndefined(result)) return;
     me.returnList = new Page(result);
     me.detail = [];
   }

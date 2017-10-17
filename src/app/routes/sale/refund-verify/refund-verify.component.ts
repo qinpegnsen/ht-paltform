@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-refund-verify',
@@ -70,6 +71,7 @@ export class RefundVerifyComponent implements OnInit {
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
+    if (isNullOrUndefined(result)) return;
     me.refundList = new Page(result);
     me.detail = [];
   }
