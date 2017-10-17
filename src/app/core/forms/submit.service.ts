@@ -5,12 +5,10 @@ import {ActivatedRoute} from "@angular/router";
 import {AppComponent} from "../../app.component";
 import {MaskService} from "../services/mask.service";
 import {Page} from "../page/page";
-const swal = require('sweetalert');
 
 @Injectable()
 export class SubmitService {
-
-  public platformInfoData: any;//用来存储模板的数据，否则这里刷新不了
+  public platformInfoData;//存储消息的的数据
   constructor(private ajax: AjaxService,
               private mask: MaskService,
               private settings: SettingsService,
@@ -185,7 +183,6 @@ export class SubmitService {
       success: (res) => {
         if (res.success) {
           result = res.data;
-          that.platformInfoData=res.data;
         } else {
           AppComponent.rzhAlt("error", res.info);
         }
@@ -194,7 +191,6 @@ export class SubmitService {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
-    // console.log("█ result ►►►", result );
     return result;
   }
 
@@ -212,9 +208,7 @@ export class SubmitService {
       async: false,
       success: (res) => {
         if (res.success) {
-          result = res.data;
-          that.platformInfoData=new Page(res.data);
-          console.log("█ that.platformInfoData ►►►",  that.platformInfoData);
+          result = new Page(res.data);
         } else {
           AppComponent.rzhAlt("error", res.info);
         }
@@ -223,7 +217,6 @@ export class SubmitService {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
-    // console.log("█ result ►►►", result );
     return result;
   }
 }

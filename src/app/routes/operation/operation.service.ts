@@ -49,6 +49,7 @@ export class OperationService {
    * @param back:true(返回上一级)
    */
   delRequest(requestUrl, requestDate) {
+    let that = this;
     this.ajax.del({
       url: requestUrl,
       data: requestDate,

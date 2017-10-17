@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
+import {AfterViewChecked, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
 import {UserblockService} from "../sidebar/userblock/userblock.service";
 import {SettingsService} from "../../core/settings/settings.service";
 import {MenuService} from "../../core/menu/menu.service";
@@ -18,9 +18,9 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
 
-  private platformInfoData:any;                           //平台消息的数据
+  public data:any;
   @Input() private curPath;
   ngOnChanges(changes: SimpleChanges): void {
     let me = this;
@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnChanges {
       me.getSubmenus(me.curPath);
     }
   }
+
 
   navCollapsed = true;
   menuItems = [];
@@ -47,8 +48,6 @@ export class HeaderComponent implements OnInit, OnChanges {
     if (browser.msie) { // 不支持ie
       this.fsbutton.nativeElement.style.display = 'none';
     }
-
-
     let me = this;
     // 初始化时检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
     $(function(){
@@ -56,10 +55,8 @@ export class HeaderComponent implements OnInit, OnChanges {
       let path = rulHref.substring(rulHref.indexOf('/main'),rulHref.length);
       me.getSubmenus(path);
     })
-
     this.queryAdminNotify()
   }
-
 
   /**
    * 获取通知的消息列表，默认只展示第一页的内容
@@ -71,7 +68,11 @@ export class HeaderComponent implements OnInit, OnChanges {
       pageSize:3,
       sortColumns:''
     };
-    this.submitService.messageData(url,data);
+    this.data=this.submitService.messageData(url,data);
+  }
+
+  ngDoCheck(){
+    this.queryAdminNotify();
   }
 
   //显示、隐藏当前登录的用户信息
