@@ -53,6 +53,7 @@ import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.dire
 import {PopoverModule} from "ngx-bootstrap";
 import { StrJsonPipe } from './pipe/str-json.pipe';
 import { GetWeekPipe } from './pipe/get-week.pipe';
+import { StrToNumberPipe } from './pipe/str-to-number.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -114,7 +115,7 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     HoverShowLgPicDirective,
     StrJsonPipe,
     GetWeekPipe,
-
+    StrToNumberPipe,
   ],
   exports: [
     CommonModule,
@@ -167,6 +168,7 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
     PopoverModule,
     StrJsonPipe,
     GetWeekPipe,
+    StrToNumberPipe
   ]
 })
 

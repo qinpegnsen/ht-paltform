@@ -98,7 +98,7 @@ export class OrderDetailComponent implements OnInit {
         me.hasDeliverData = true;
       } else if (item.state == 'PREPARE') {
         me.atime[3] = item.acceptTime;
-      } else if (item.state == 'PAID') {
+      } else if (item.state == 'PAID'|| item.state == 'ASSIGNED') {
         me.atime[2] = item.acceptTime;
       } else if (item.state == 'CR') {
         me.atime[1] = item.acceptTime;

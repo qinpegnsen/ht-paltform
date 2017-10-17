@@ -42,6 +42,7 @@ export class ButtonsComponent implements OnInit {
     "primary": "btn-primary",
     "success": "btn-success",
     "info": "btn-info",
+    "thc": "btn-thc",
     "warning": "btn-warning",
     "danger": "btn-danger",
     "inverse": "btn-inverse",
@@ -98,6 +99,8 @@ export class ButtonsComponent implements OnInit {
     switch (this.type) {
       case "add":
         return {btnClass: ButtonsComponent.buttonStyles.info, iconClass: "fa fa-plus"};
+      case "add-thc":
+        return {btnClass: ButtonsComponent.buttonStyles.thc, iconClass: "fa fa-plus"};
       case "agree":
         return {btnClass: ButtonsComponent.buttonStyles.success, iconClass: "fa fa-check"};
       case "back":

@@ -35,10 +35,10 @@ export class EditDetailComponent implements OnInit {
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
   private myReadOnly: boolean = false;     // 商品详情或审核商品时是只读状态
   private goodsBody: any;          //商品详情
-  public storeCode:string;          //店铺编码
-  public logistics:any;             // 物流规则列表
-  public tplVals:any;               // 运费模板内容
-  private unit:string = '件';       // 运费价格
+  public storeCode: string;          //店铺编码
+  public logistics: any;             // 物流规则列表
+  public tplVals: any;               // 运费模板内容
+  private unit: string = '件';       // 运费价格
 
   private publishData: any = {
     goodsExpressInfo: {
@@ -155,7 +155,7 @@ export class EditDetailComponent implements OnInit {
           me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
           me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
           me.genMblItemList();        //将html字符串生成移动端图片文字组合
-          if(!isNullOrUndefined(me.goodsBody)) $('#summernote').summernote('code', me.goodsBody);   //PC端详情
+          if (!isNullOrUndefined(me.goodsBody)) $('#summernote').summernote('code', me.goodsBody);   //PC端详情
         }
       })
     }
@@ -192,7 +192,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 选择分类操作提示
    */
-  selectKind(){
+  selectKind() {
     let me = this;
     swal({
         title: "操作警示",
@@ -205,20 +205,21 @@ export class EditDetailComponent implements OnInit {
         confirmButtonText: "确认",
         closeOnConfirm: false
       },
-      function(){
+      function () {
         swal.close();
         me.location.back()
       });
   }
 
 //添加物流模板
-  addLogisticsModule(){
-    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+  addLogisticsModule() {
+    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
     window.open(preUrl + '/main/operation/freight-template/add-formoek?linkType=addArticle')
   }
+
 //查看物流模板
-  lookLogisticsModule(){
-    let preUrl = window.location.href.substring(0,window.location.href.indexOf('/main'));
+  lookLogisticsModule() {
+    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
     window.open(preUrl + '/main/operation/freight-template')
   }
 
@@ -265,25 +266,25 @@ export class EditDetailComponent implements OnInit {
   /**
    * 获取运费模板
    */
-  getExpressTpl(){
+  getExpressTpl() {
     let me = this;
     let expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
-    if(!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
+    if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
   /**
    * 根据运费模板ID获取模板内容
    * @param tplId
    */
-  getTplValById(){
-    let me = this,tplId = me.publishData.goodsExpressInfo.expressTplId;
+  getTplValById() {
+    let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
     let result = me.goods.getTplVal(tplId);
-    if(!isNullOrUndefined(result)) me.tplVals = result;
-    if(me.tplVals.valuationType == 'VOLUME'){
+    if (!isNullOrUndefined(result)) me.tplVals = result;
+    if (me.tplVals.valuationType == 'VOLUME') {
       me.unit = 'm³'
-    }else if(me.tplVals.valuationType == 'WEIGHT'){
+    } else if (me.tplVals.valuationType == 'WEIGHT') {
       me.unit = 'kg'
-    }else{
+    } else {
       me.unit = '件'
     }
   }
@@ -291,8 +292,8 @@ export class EditDetailComponent implements OnInit {
   /**
    * 审核input框的value合不合要求
    */
-  auditInputValueForNum(target,type?){
-    this.tools.auditInputValueForNum(target,type);
+  auditInputValueForNum(target, type?) {
+    this.tools.auditInputValueForNum(target, type);
   }
 
   /**
@@ -324,7 +325,7 @@ export class EditDetailComponent implements OnInit {
    * 批量设置规格时
    * @param target
    */
-  setBatchSize(type,target) {
+  setBatchSize(type, target) {
     let me = this;
     let inputVal = $(target).prev().val();
     if (!isNullOrUndefined(inputVal) && inputVal !== '') {
@@ -474,10 +475,10 @@ export class EditDetailComponent implements OnInit {
       type: spec.attr('id'),
       goodsBaseCode: me.goodsBaseCode,
     };
-    console.log("█ me.enum ►►►",  me.enum);
+    console.log("█ me.enum ►►►", me.enum);
     if (me.judgeSkuListHasInputVal()) me.enum.skuList = me.publishData.goodsSkuList;    // 当表格中已经输入了价格则将带价格的skuList传过去保存
     let skuData = me.goods.getSkuData('/goodsEdit/genesku', me.enum);
-    console.log("█ skuData ►►►",  skuData);
+    console.log("█ skuData ►►►", skuData);
     if (!isNullOrUndefined(skuData)) {
       me.genClearArray(skuData.data);   // 将数据生成易解析的新数组
     }
@@ -640,8 +641,8 @@ export class EditDetailComponent implements OnInit {
    * @param index
    */
   insertMblText(target?, index?) {
-    let me = this,textArea;
-    if (!isUndefined(target)){
+    let me = this, textArea;
+    if (!isUndefined(target)) {
       $(target).parents('.app-img-box').find('._edit').addClass('hide');
       textArea = $(target).parents('.mobile-edit-area').find('.textarea');
     } else {
@@ -803,10 +804,11 @@ export class EditDetailComponent implements OnInit {
       for (var i = 0; i < me.skuImg.vals.length; i++) {
         item = me.skuImg.vals[i];
         let itemImgSrcs = me.goodsImgList[item.valCode];
-        if(isNullOrUndefined(itemImgSrcs)) {
-          AppComponent.rzhAlt('warning','请上传规格为'+item.valName+'的商品的图片');
+        if (isNullOrUndefined(itemImgSrcs)) {
+          AppComponent.rzhAlt('warning', '请上传规格为' + item.valName + '的商品的图片');
           return null;// 当某个规格没有图片时，提示必须上传
-        };
+        }
+        ;
         if (!isNullOrUndefined(itemImgSrcs)) {
           for (let k = 0; k < itemImgSrcs.length; k++) {
             const temp: any = {attrCode: '', valCode: '', valName: '', idx: '', goodsImage: ''};
@@ -847,7 +849,7 @@ export class EditDetailComponent implements OnInit {
    */
   publishGoods() {
     let me = this;
-    if(me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeLogistics()){
+    if (me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeLogistics()) {
       MaskService.showMask();//显示遮罩层
       me.uploadImgs();// 先上传图片
     }
@@ -857,20 +859,20 @@ export class EditDetailComponent implements OnInit {
    * 判断商品图片是否上传
    * @returns {boolean}
    */
-  judgeGoodsImgs(){
+  judgeGoodsImgs() {
     let me = this, targets = me.skuImg.vals;
-    console.log("█ me.skuImg.vals ►►►",  me.skuImg.vals);
+    console.log("█ me.skuImg.vals ►►►", me.skuImg.vals);
     // 当商品发布时，如果选了规格，但没有选择图片
-    if(me.path == 'step_two'){
-      if(targets.length > 0){
-        for(let i = 0; i < targets.length; i ++ ){
-          if(targets[i].uploader.queue.length == 0){
-            AppComponent.rzhAlt('warning','请上传'+me.skuImg.attrName+'为'+targets[i].valName+'的商品的图片');
+    if (me.path == 'step_two') {
+      if (targets.length > 0) {
+        for (let i = 0; i < targets.length; i++) {
+          if (targets[i].uploader.queue.length == 0) {
+            AppComponent.rzhAlt('warning', '请上传' + me.skuImg.attrName + '为' + targets[i].valName + '的商品的图片');
             return false
           }
         }
-      }else{
-        AppComponent.rzhAlt('warning','请选择商品规格');
+      } else {
+        AppComponent.rzhAlt('warning', '请选择商品规格');
         return false
       }
     }
@@ -878,28 +880,39 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 比较两个数字的大小
+   * @param arg1
+   * @param arg2
+   * @returns {boolean}
+   */
+  compareNumber(arg1: string, arg2: string) {
+    let num1 = Number(arg1), num2 = Number(arg2);
+    if(num1 < num2 || num1 == num2) return true;
+  }
+
+  /**
    * 判断物流规则是否正确
    * @returns {boolean}
    */
-  judgeLogistics(){
+  judgeLogistics() {
     let me = this;
-    if(me.publishData.isFreight == 'Y'){
+    if (me.publishData.isFreight == 'Y') {
       let obj = me.publishData.goodsExpressInfo;
-      if(!isNullOrUndefined(obj.freightType)){
+      if (!isNullOrUndefined(obj.freightType)) {
         //如果使用物流模板
-        if(obj.freightType == 'TPL'){
-          if(obj.expressTplId == '' || isNullOrUndefined(obj.expressTplId)){
-            AppComponent.rzhAlt('warning','请选择物流模板');
+        if (obj.freightType == 'TPL') {
+          if (obj.expressTplId == '' || isNullOrUndefined(obj.expressTplId)) {
+            AppComponent.rzhAlt('warning', '请选择物流模板');
             return false;
           }
-        }else{
-          if(obj.fixedFreight == '' || isNullOrUndefined(obj.fixedFreight)){
-            AppComponent.rzhAlt('warning','请设置固定运费');
+        } else {
+          if (obj.fixedFreight == '' || isNullOrUndefined(obj.fixedFreight)) {
+            AppComponent.rzhAlt('warning', '请设置固定运费');
             return false;
           }
         }
-      }else{
-        AppComponent.rzhAlt('warning','请设置运费');
+      } else {
+        AppComponent.rzhAlt('warning', '请设置运费');
         return false;
       }
     }
@@ -910,35 +923,35 @@ export class EditDetailComponent implements OnInit {
    * 判断价格或库存是否符合要求
    * @returns {boolean}
    */
-  judgeSkuPrices(){
+  judgeSkuPrices() {
     let me = this;
-    if(me.skuImg.vals.length > 0){
+    if (me.skuImg.vals.length > 0) {
       let target = me.publishData.goodsSkuList;
-      for (let item of target){
-        if(Number(item.marketPrice) == 0){
-          AppComponent.rzhAlt('warning','请输入商品的市场价');
+      for (let item of target) {
+        if (Number(item.marketPrice) == 0) {
+          AppComponent.rzhAlt('warning', '请输入商品的市场价');
           return false;
-        } else if(Number(item.price) == 0){
-          AppComponent.rzhAlt('warning','请输入商品价格');
+        } else if (Number(item.price) == 0) {
+          AppComponent.rzhAlt('warning', '请输入商品价格');
           return false;
-        } else if(Number(item.memberPrice) == 0){
-          AppComponent.rzhAlt('warning','请输入商品的会员价');
+        } else if (Number(item.memberPrice) == 0) {
+          AppComponent.rzhAlt('warning', '请输入商品的会员价');
           return false;
-        } else if(Number(item.price) > Number(item.marketPrice)){
-          AppComponent.rzhAlt('warning','商品价格应小于市场价');
+        } else if (Number(item.price) > Number(item.marketPrice)) {
+          AppComponent.rzhAlt('warning', '商品价格应小于市场价');
           return false;
-        } else if(Number(item.memberPrice) > Number(item.price)){
-          AppComponent.rzhAlt('warning','会员价应小于商品价格');
+        } else if (Number(item.memberPrice) > Number(item.price)) {
+          AppComponent.rzhAlt('warning', '会员价应小于商品价格');
           return false;
-        }else if(Number(item.storageNum)<10){
-          AppComponent.rzhAlt('warning','商品库存必须大于10');
+        } else if (Number(item.storageNum) < 10) {
+          AppComponent.rzhAlt('warning', '商品库存必须大于10');
           return false;
-        }else{
+        } else {
           return true
         }
       }
-    }else{
-      AppComponent.rzhAlt('warning','请选择商品规格');
+    } else {
+      AppComponent.rzhAlt('warning', '请选择商品规格');
     }
   }
 
@@ -947,7 +960,7 @@ export class EditDetailComponent implements OnInit {
    */
   private genPublishDataAndPublish() {
     let me = this;
-    if(isNullOrUndefined(me.genGoodsImgList())) {
+    if (isNullOrUndefined(me.genGoodsImgList())) {
       MaskService.hideMask();//关闭遮罩层
       return;
     }                //当某个规格没有图片时直接结束发布

@@ -1,5 +1,6 @@
 @import '../app/variables';
 @import '../bootstrap/bootstrap/mixins/gradients';
+@import '../bootstrap/bootstrap/mixins/_buttons.scss';
 @import '../app/media-queries';
 
 //
@@ -74,6 +75,9 @@ body,
   &.bg-light {background-color: $brand-info-light !important; }
   &.bg-dark {background-color: $brand-info-dark !important; }
   &.ts, &.ts-bg{background-color: #C9E7F2 !important;}
+  &.btn-thc{
+    @include button-variant(#fff, $brand-info, rgba(0,0,0,0));
+  }
 }
 /* ========================================================================
    Component: top-navbar

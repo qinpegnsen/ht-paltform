@@ -192,7 +192,8 @@
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
                      [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
-              <ng-container *ngIf="marketPrice.value > 0 && price.value>0">
+              <ng-container *ngIf="marketPrice.value > 0 && price.value >0">
+                <span>{{price.value < marketPrice.value}}</span>
                 <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value"
                       class="text-danger font12"> 销售价<=市场价
                 </span>
