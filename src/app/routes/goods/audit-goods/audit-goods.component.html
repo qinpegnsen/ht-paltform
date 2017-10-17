@@ -61,7 +61,7 @@
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <select name="unit" required class="form-control" [disabled]="myReadOnly" [(ngModel)]="publishData.unit">
-            <option [value]="unit.id" *ngFor="let unit of unitList">{{unit.unitName}}</option>
+            <option [value]="unit.unitName" *ngFor="let unit of unitList">{{unit.unitName}}</option>
           </select>
         </div>
       </dd>
@@ -279,7 +279,7 @@
           <div class="clearfix" [class.hide]="myReadOnly && publishData.goodsExpressInfo.freightType=='FIXED'">
             <div *ngIf="myReadOnly" class="clearfix">
               <label class="pull-left mr mt-sm">使用的物流规则</label>
-              <select class="rules-list text form-control pull-left" name="freightType" disabled
+              <select class="rules-list text form-control pull-left" name="tplFreight" disabled
                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
                 <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
               </select>
