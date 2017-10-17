@@ -13,14 +13,17 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40">驳回原因:</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel >
+          <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel required #verifyReason="ngModel">
         </dd>
+        <div [hidden]="verifyReason.valid || verifyReason.pristine"
+             class="col-sm-9 pull-right text-danger reason">
+          请输入驳回原因
+        </div>
       </dl>
-
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="button" (click)="delivery(updata.value)">确认提交</button>
+      <button class="btn btn-info" type="button" (click)="delivery(updata.value)" [disabled]="!updata.form.valid">确认提交</button>
     </div>
   </form>
 </div>

@@ -34,8 +34,6 @@ export class SettleComponent implements OnInit {
 
   ngOnInit() {
     let _this = this;
-    console.log("█ _this.queryTimeBegin ►►►",  _this.queryTimeBegin);
-    console.log("█ _this.queryTimeEnd ►►►",  _this.queryTimeEnd);
     _this.queryTimeBegin = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTimeBegin), 0), 'yyyy-MM-dd');
     _this.queryTimeEnd = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTimeEnd), 0), 'yyyy-MM-dd');
     _this.qeuryAll();

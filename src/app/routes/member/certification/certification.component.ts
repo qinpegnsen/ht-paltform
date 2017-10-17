@@ -58,7 +58,7 @@ export class CertificationComponent implements OnInit {
   /**
    * 鼠标放在图片上时大图随之移动
    */
-  showImg(event,i,j,k){
+  showImg(event,i){
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
     i.style.left = (event.clientX +30) + 'px';

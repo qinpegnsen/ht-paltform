@@ -24,7 +24,7 @@ export class IntegrationImportComponent implements OnInit {
   constructor(private submitt:SubmitService) { }
 
   ngOnInit() {
-    console.log("█ this.uploader ►►►",  this.uploader);
+    // console.log("█ this.uploader ►►►",  this.uploader);
   }
  //清空选中的表格
   changeFiles(){

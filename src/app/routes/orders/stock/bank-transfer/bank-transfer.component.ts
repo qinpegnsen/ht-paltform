@@ -148,7 +148,7 @@ export class BankTransferComponent implements OnInit {
    * 图片上传
    */
   uploadImg(obj) {
-    console.log("█ this.uploadImg ►►►", this.uploadImg);
+    // console.log("█ this.uploadImg ►►►", this.uploadImg);
     let me = this;
     /**
      * 构建form时，传入自定义参数

@@ -49,17 +49,26 @@ export class OrderAmountComponent implements OnInit {
     }
     let result=this.submit.putRequest(url, data,false);
     this.qeuryAll();
-    console.log("█ result ►►►",  result);
   }
+
+  /**
+   * 修改按钮隐藏，确认取消按钮展示
+   * @param data
+   * @param code
+   * @param i
+   */
   showDetail(data:any,code,i){
     for(let j=0;j<data.length;j++){
       data[j].isShow =false;
     }
     data[i].isShow = !data[i].isShow;
     this.updata = this.submit.getData("/datadict/loadDatadictByCode", {code:code});
-    console.log("█ this.updata  ►►►",  this.updata );
   }
 
+  /**
+   * 取消
+   * @param data2
+   */
   cancel(data2){
     data2.isShow = !data2.isShow;
   }

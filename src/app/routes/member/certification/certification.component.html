@@ -51,7 +51,6 @@
           <td>{{count.idcard}}</td>
           <td *ngIf="count.endTime!=null">{{count.startTime | date:"yyyy-MM-dd"}}--{{count.endTime | date:"yyyy-MM-dd"}}</td>
           <td *ngIf="count.endTime==null">{{count.startTime | date:"yyyy-MM-dd"}}--永久</td>
-
           <td>
           <img  [src]="count.idcardPic1" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)" class="idimg"
           onerror="javascript:this.src='../../../assets/img/dummy.png'">

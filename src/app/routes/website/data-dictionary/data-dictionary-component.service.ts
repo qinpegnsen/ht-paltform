@@ -41,7 +41,6 @@ export class DataDictionaryComponentService {
       data: data,
       async:false,
       success: (data) => {
-        console.log("data====----==",data);
         let info=data.info;
         if(data.success){
           AppComponent.rzhAlt("success",info);
