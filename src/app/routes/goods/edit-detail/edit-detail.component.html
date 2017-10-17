@@ -440,7 +440,7 @@
               <span class="fa fa-circle"></span>使用物流规则</label>
             </span>
             <span class="clearfix" [hidden]="publishData.goodsExpressInfo.freightType!='TPL'">
-              <select class="rules-list text form-control pull-left" name="freightType"
+              <select class="rules-list text form-control pull-left" name="tplFreight"
                       [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
                       [required]="publishData.goodsExpressInfo.freightType=='TPL'">
                 <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>

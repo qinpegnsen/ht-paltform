@@ -555,7 +555,7 @@ export class RzhtoolsService {
    */
   auditInputValueForNum(target,type?:string){
     let val = target.value, reg;
-    if(type == 'int') reg = val.match(/^[1-9]{1}[0-9]+/);
+    if(type == 'int') reg = val.match(/^[1-9]{1}[0-9]*/);
     else reg = val.match(/\d+(\.\d{1,2})?/);
     if (!isNull(reg)){
       target.value = reg[0];
