@@ -28,7 +28,8 @@
       <dt class="col-xs-2"><i>*</i>商品品牌：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
-          <select class="form-control" name="brandCode" required [(ngModel)]="publishData.brandCode" [disabled]="myReadOnly">
+          <select class="form-control" name="brandCode" required [(ngModel)]="publishData.brandCode"
+                  [disabled]="myReadOnly">
             <option *ngFor="let brand of brandsList" [value]="brand.id">{{brand.brandName}}</option>
           </select>
         </div>
@@ -82,7 +83,8 @@
         <div class="clearfix enumType" *ngFor="let saleAttr of saleAttrList;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
             <span class="_attrName">{{saleAttr.name}}</span>
-            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1" [readonly]="myReadOnly"
+            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1"
+                                           [readonly]="myReadOnly"
                                            [value]="saleAttr.name" (change)="changeSpec($event.target)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
@@ -95,7 +97,8 @@
               </label>
               <span class="_value">{{val.enumValue}}</span>
               <label class="w66 hide">
-                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue" [readonly]="myReadOnly"
+                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue"
+                       [readonly]="myReadOnly"
                        (change)="changeSpec($event.target)"/><a class="hide" [id]="val.id"></a>
               </label>
             </li>
@@ -139,31 +142,38 @@
                      [readonly]="myReadOnly"
                      [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
               <em class="add-on">元</em>
+              <span [hidden]="marketPrice.value != 0" class="text-danger font12"> 市场价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'price'+i" type="number" required
                      [readonly]="myReadOnly"
                      [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
-              <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value || !marketPrice.value"
-                    class="text-danger font12">销售价应小于市场价
-              </span>
+              <ng-container *ngIf="marketPrice.value > 0 && price.value>0">
+                <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value"
+                      class="text-danger font12"> 销售价<=市场价
+                </span>
+              </ng-container>
+              <span [hidden]="price.value != 0" class="text-danger font12"> 销售价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
                      [readonly]="myReadOnly"
                      [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
-              <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value || !memberPrice.value || !price.value"
-                    class="text-danger font12">会员价应小于销售价
-              </span>
+              <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
+                <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value"
+                      class="text-danger font12"> 会员价<=销售价
+                </span>
+              </ng-container>
+              <span [hidden]="memberPrice.value != 0" class="text-danger font12"> 会员价>0 </span>
             </td>
             <td>
               <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
                      [readonly]="myReadOnly"
                      [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
-              <span [hidden]="storageNum.value > 9 || !storageNum.value"
-                    class="text-danger font12">库存最少为10
+              <span [hidden]="storageNum.value > 9"
+                    class="text-danger font12"> 库存>=10
               </span>
             </td>
           </tr>
@@ -280,7 +290,7 @@
             <div *ngIf="myReadOnly" class="clearfix">
               <label class="pull-left mr mt-sm">使用的物流规则</label>
               <select class="rules-list text form-control pull-left" name="tplFreight" disabled
-                     [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
+                      [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
                 <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
               </select>
             </div>
@@ -294,7 +304,7 @@
               <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
                 <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
                   <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
-                  <p class="col-xs-5 m0 one-row omg p-sm text-right" >
+                  <p class="col-xs-5 m0 one-row omg p-sm text-right">
                     {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
                     .addPrice}}元</p>
                 </li>
@@ -351,19 +361,19 @@
     <legend class="m0 goods-audit-title">商品审核</legend>
     <table class="w100">
       <tr>
-      <td class="col-xs-2 text-right bdr">审核结果：</td>
-      <td class="col-xs-2 p-lg">
-        <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
-          <label>
-            <input type="radio" name="publish" [value]="item.key"  [(ngModel)]="audit.result" />
-            <span class="fa fa-circle"></span>{{item.val}}</label>
-        </div>
-      </td>
-      <td class="col-xs-8 p">
+        <td class="col-xs-2 text-right bdr">审核结果：</td>
+        <td class="col-xs-2 p-lg">
+          <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
+            <label>
+              <input type="radio" name="publish" [value]="item.key" [(ngModel)]="audit.result"/>
+              <span class="fa fa-circle"></span>{{item.val}}</label>
+          </div>
+        </td>
+        <td class="col-xs-8 p">
          <textarea class="form-control w66" name="goodsJingle" required
                    [(ngModel)]="audit.opinion" placeholder="请填写审核意见"
                    cols="10" rows="3"></textarea>
-      </td>
+        </td>
       </tr>
     </table>
   </fieldset>

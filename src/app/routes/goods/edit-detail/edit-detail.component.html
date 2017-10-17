@@ -183,27 +183,40 @@
             <td>
               <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
-                     [(ngModel)]="sku.marketPrice"/>
+                     [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
               <em class="add-on">元</em>
+              <span [hidden]="marketPrice.value != 0" class="text-danger font12"> 市场价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'price'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
                      [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
+              <ng-container *ngIf="marketPrice.value > 0 && price.value>0">
+                <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value"
+                      class="text-danger font12"> 销售价<=市场价
+                </span>
+              </ng-container>
+              <span [hidden]="price.value != 0" class="text-danger font12"> 销售价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
                      [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
+              <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
+                <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value"
+                      class="text-danger font12"> 会员价<=销售价
+                </span>
+              </ng-container>
+              <span [hidden]="memberPrice.value != 0" class="text-danger font12"> 会员价>0 </span>
             </td>
             <td>
               <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target,'int')" pattern="^[1-9]{1}[0-9]+"
                      [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
-              <span [hidden]="storageNum.value > 9"
-                    class="text-danger font12">库存最少为10
+              <span [hidden]="!storageNum.value || storageNum.value > 9"
+                    class="text-danger font12"> 库存>=10
               </span>
             </td>
           </tr>
