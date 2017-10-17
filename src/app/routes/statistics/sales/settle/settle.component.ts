@@ -24,7 +24,7 @@ export class SettleComponent implements OnInit {
   dates: any;
   public bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private tools: RzhtoolsService, private submit: SubmitService) {
+  constructor(private submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',
@@ -34,6 +34,8 @@ export class SettleComponent implements OnInit {
 
   ngOnInit() {
     let _this = this;
+    console.log("█ _this.queryTimeBegin ►►►",  _this.queryTimeBegin);
+    console.log("█ _this.queryTimeEnd ►►►",  _this.queryTimeEnd);
     _this.queryTimeBegin = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTimeBegin), 0), 'yyyy-MM-dd');
     _this.queryTimeEnd = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTimeEnd), 0), 'yyyy-MM-dd');
     _this.qeuryAll();
@@ -55,7 +57,7 @@ export class SettleComponent implements OnInit {
   }
 
   /**
-   * 查询对应的数据信息（新增会员数）
+   * 查询对应的数据信息（结算统计）
    * @param type 查询状态，如：日、周、月（DAY、WEEK、MONTH）
    */
   selectInfos() {

@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg">
+<div class="content-heading mb-lg thc font">
   地区设置
   <!--添加地区按钮配置-->
   <!--<app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>-->
@@ -42,7 +42,7 @@
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="areas">
       <thead>
       <tr>
-        <th class="unselectable text-center w5">
+        <th class="unselectable text-center w5 thc font">
           序号
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -54,7 +54,7 @@
         <th class="col-md-2 unselectable text-center">
           <rzhDefaultSorter by="level">所在层级</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">操作</th>
+        <th class="col-md-2 unselectable text-center thc font">操作</th>
       </tr>
       </thead>
       <tbody>

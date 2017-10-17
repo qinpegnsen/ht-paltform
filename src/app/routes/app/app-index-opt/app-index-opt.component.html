@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg">
+<div class="content-heading mb-lg thc font">
   移动端首页操作类型
   <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{number:1}"></app-buttons>
 </div>
@@ -7,7 +7,7 @@
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
       <thead>
       <tr>
-        <th class="w5 text-center">
+        <th class="w5 text-center thc font">
           序号
         </th>
         <th class="w20 text-center">

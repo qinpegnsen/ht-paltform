@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg">
+<div class="content-heading mb-lg thc font">
   商品管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="/main/goods/publish/step_one"></app-buttons>
 </div>
@@ -73,7 +73,7 @@
            (pageChange)="queryDatas(1,$event)">
       <thead>
       <tr>
-        <th class="w5 unselectable text-center">序号</th>
+        <th class="w5 unselectable text-center thc font">序号</th>
         <th class="w30 unselectable hidden-sm">
           <rzhDefaultSorter by="goodsName">商品名</rzhDefaultSorter>
         </th>
@@ -87,10 +87,10 @@
           <rzhDefaultSorter by="time">发布时间</rzhDefaultSorter>
         </th>
         <th class="w10 unselectable text-center">
-          <rzhDefaultSorter by="time">重消币抵扣</rzhDefaultSorter>
+          <rzhDefaultSorter by="coin">重消币抵扣</rzhDefaultSorter>
         </th>
-        <th class="w7 unselectable text-center">审核状态</th>
-        <th class="w15 unselectable text-center">操作</th>
+        <th class="w7 unselectable text-center thc font">审核状态</th>
+        <th class="w15 unselectable text-center thc font">操作</th>
       </tr>
       </thead>
       <tbody>

@@ -10,11 +10,11 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-
             <div class="col-xs-9">
               <div class=" font14 f-bold">下单金额（元）</div>
               <div class="font14">期间内新增订单金额</div>
-              <p class="text-md m0">{{data.ordSum}}</p>
+              <p class="text-md m0" *ngIf="data.ordSum!=null">{{data.ordSum | decimalTwo}}</p>
+              <p class="text-md m0" *ngIf="data.ordSum==null">0.00</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -32,7 +32,8 @@
             <div class="col-xs-9 ">
               <div class="font14 f-bold">下单量</div>
               <div class="font14">期间内新增订单数量</div>
-              <p class="text-md m0">{{data.ordCount}}</p>
+              <p class="text-md m0" *ngIf="data.ordCount!=null">{{data.ordCount}}</p>
+              <p class="text-md m0" *ngIf="data.ordCount==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calendar fa-3x tp-em"></em>
@@ -50,7 +51,8 @@
             <div class="col-xs-9 ">
               <div class="font14 f-bold">新增会员</div>
               <div class="font14">期间内新注册会员数量</div>
-              <p class="text-md m0">{{data.newAddCust}}</p>
+              <p class="text-md m0" *ngIf="data.newAddCust!=null">{{data.newAddCust}}</p>
+              <p class="text-md m0" *ngIf="data.newAddCust==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="icon icon-user-follow fa-3x tp-em"></em>
@@ -68,7 +70,8 @@
             <div class="col-xs-9 ">
               <div class="font14 f-bold">会员数量</div>
               <div class="font14">平台所有会员数量</div>
-              <p class="text-md m0">{{data.allCust}}</p>
+              <p class="text-md m0" *ngIf="data.allCust!=null">{{data.allCust}}</p>
+              <p class="text-md m0" *ngIf="data.allCust==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-group fa-3x tp-em"></em>
@@ -89,7 +92,8 @@
             <div class="col-xs-9">
               <div class="font14 f-bold">新增商品</div>
               <div class="font14 ">短期内省增商品数量</div>
-              <p class="text-md m0">{{data.newAddGoods}}</p>
+              <p class="text-md m0" *ngIf="data.newAddGoods!=null">{{data.newAddGoods}}</p>
+              <p class="text-md m0" *ngIf="data.newAddGoods==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-cube fa-3x tp-em"></em>
@@ -106,7 +110,8 @@
             <div class="col-xs-9 ">
               <div class="font14 f-bold">商品数量</div>
               <div class="font14">平台所有商品数量</div>
-              <p class="text-md m0">{{data.allGoods}}</p>
+              <p class="text-md m0" *ngIf="data.allGoods!=null">{{data.allGoods}}</p>
+              <p class="text-md m0" *ngIf="data.allGoods==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-cubes fa-3x tp-em"></em>
@@ -120,11 +125,11 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-
             <div class="col-xs-9 ">
               <div class="font14 f-bold">新增店铺</div>
               <div class="font14">短期内行申请店铺总数</div>
-              <p class="text-md m0">{{data.newAddStore}}</p>
+              <p class="text-md m0" *ngIf="data.newAddStore!=null">{{data.newAddStore}}</p>
+              <p class="text-md m0" *ngIf="data.newAddStore==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-institution fa-3x tp-em"></em>
@@ -138,11 +143,11 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-
             <div class="col-xs-9 ">
               <div class="font14 f-bold">店铺数量</div>
               <div class="font14">平台所有店铺的数量</div>
-              <p class="text-md m0">{{data.allStore}}</p>
+              <p class="text-md m0" *ngIf="data.allStore!=null">{{data.allStore}}</p>
+              <p class="text-md m0" *ngIf="data.allStore==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-pie-chart fa-3x tp-em"></em>

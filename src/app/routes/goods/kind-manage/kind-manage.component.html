@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg">
+<div class="content-heading mb-lg thc font">
   分类管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="addKind"></app-buttons>
 </div>
@@ -42,7 +42,7 @@
            (pageChange)="queryDatas(kinds.curPage,childKindId,$event)">
       <thead>
       <tr>
-        <th class="unselectable text-center w5">
+        <th class="unselectable text-center w5 thc font">
           序号
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -66,7 +66,7 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="orgSign">状态</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">管理操作</th>
+        <th class="col-md-2 unselectable text-center thc font">管理操作</th>
       </tr>
       </thead>
       <tbody>

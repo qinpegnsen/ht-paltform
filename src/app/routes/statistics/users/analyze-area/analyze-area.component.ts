@@ -77,11 +77,6 @@ export class AnalyzeAreaComponent implements OnInit {
       tooltip: {
         trigger: 'item'
       },
-      // legend: {
-      //   orient: 'vertical',
-      //   left: 'left',
-      //   data: ['下单金额', '下单量', '下单会员数']
-      // },
       visualMap: {
         min: 0,
         max: maxs,
@@ -147,7 +142,6 @@ export class AnalyzeAreaComponent implements OnInit {
   qeuryAll(type?:string,obj?) {
     let me = this;
     if(!isNullOrUndefined(type)) me.queryContent = type;
-    // me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
     let url = "/statistical/analyseArea";
     let data = {
       queryType: me.queryType,
@@ -157,13 +151,17 @@ export class AnalyzeAreaComponent implements OnInit {
     let result = this.submit.getData(url, data);
     me.data = result;
     me.nowData =me.data;
-    let maxs;
-    if(me.queryContent=='ORDSUM'){
-      maxs=me.nowData.resultList[0].ordSum;
-    }else if(me.queryContent=='ORDCOUNT'){
-      maxs=me.nowData.resultList[0].ordCount;
-    }else if(me.queryContent=='ORDCUSTCOUNT'){
-      maxs=me.nowData.resultList[0].custCount;
+    let maxs;//地图最大值
+    if(isNullOrUndefined(me.nowData.resultList) || me.nowData.resultList.length==0){
+      maxs=100;
+    }else if(!isNullOrUndefined(me.nowData.resultList) && me.nowData.resultList.length>0){
+      if(me.queryContent=='ORDSUM'){
+        maxs=me.nowData.resultList[0].ordSum;
+      }else if(me.queryContent=='ORDCOUNT'){
+        maxs=me.nowData.resultList[0].ordCount;
+      }else if(me.queryContent=='ORDCUSTCOUNT'){
+        maxs=me.nowData.resultList[0].custCount;
+      }
     }
     me.getOption(maxs);
   }

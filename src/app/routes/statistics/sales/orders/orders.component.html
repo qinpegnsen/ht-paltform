@@ -64,7 +64,8 @@
             <div class="row">
               <div class="col-xs-9">
                 <div class="">总销售额（元）</div>
-                <p class="text-md m0">{{data.ordSum}}</p>
+                <p class="text-md m0" *ngIf="data.ordSum!=null">{{data.ordSum | decimalTwo}}</p>
+                <p class="text-md m0" *ngIf="data.ordSum==null">0.00</p>
               </div>
               <div class="col-xs-3 text-right">
                 <em class="fa fa-calculator fa-3x tp-em"></em>
@@ -80,7 +81,8 @@
             <div class="row">
               <div class="col-xs-9 ">
                 <div class="">总订单量</div>
-                <p class="text-md m0"> {{ data.ordCount}}</p>
+                <p class="text-md m0" *ngIf=" data.ordCount!=null">{{ data.ordCount}}</p>
+                <p class="text-md m0" *ngIf=" data.ordCount==null">0</p>
               </div>
               <div class="col-xs-3 text-right">
                 <em class="fa fa-calculator fa-3x tp-em"></em>

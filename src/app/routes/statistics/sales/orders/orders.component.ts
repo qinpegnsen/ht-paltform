@@ -183,7 +183,7 @@ export class OrdersComponent implements OnInit {
           data: _this.nowData.contrastTime_yaxis
         }
       ]
-    }; //绘制图表
+    };
   }
 
   /**
@@ -196,7 +196,7 @@ export class OrdersComponent implements OnInit {
 
 
   /**
-   * 查询对应的数据信息（新增会员数）
+   * 查询对应的数据信息（订单统计）
    * @param type 查询状态，如：日、周、月（DAY、WEEK、MONTH）
    */
   selectInfos() {
@@ -212,34 +212,6 @@ export class OrdersComponent implements OnInit {
         _this.queryTime = _this.select.week;
         break;
     };
-
-    // if (type == "DAY") {
-    //   if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
-    //     AppComponent.rzhAlt("error", "请选择日期");
-    //   } else {
-    //     // console.log("█ type  ►►►", type);
-    //     // console.log("█ this.queryTime ►►►", this.queryTime);
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else if (type == "WEEK") {
-    //   if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
-    //     AppComponent.rzhAlt("error", "请选择指定周");
-    //   } else {
-    //     _this.queryTime = _this.select.week;
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else if (type == "MONTH") {
-    //   let time = _this.getMonth();
-    //   if (time != null) {
-    //     _this.queryTime = _this.getMonth();
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else {
-    //   AppComponent.rzhAlt("error", "查询异常");
-    // }
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {

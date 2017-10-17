@@ -108,7 +108,6 @@ export class WholesaleComponent implements OnInit {
     }
     let result = this.submit.getData(url, data);
     me.data = new Page(result);
-    console.log("█ result ►►►",  result);
   }
 
   /**

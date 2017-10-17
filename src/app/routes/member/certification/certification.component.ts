@@ -40,7 +40,6 @@ export class CertificationComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
-    console.log(me.data);
   }
 
   /**
