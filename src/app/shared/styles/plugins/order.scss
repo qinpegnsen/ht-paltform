@@ -236,3 +236,9 @@ $buyer-info-box-width: 200px;
 .overflow-y-auto{
   overflow-y: auto;
 }
+
+.price-wid{
+  display: inline-block;
+  min-width: 70px;
+  text-align: left;
+}

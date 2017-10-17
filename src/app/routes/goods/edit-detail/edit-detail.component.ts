@@ -803,6 +803,10 @@ export class EditDetailComponent implements OnInit {
       for (var i = 0; i < me.skuImg.vals.length; i++) {
         item = me.skuImg.vals[i];
         let itemImgSrcs = me.goodsImgList[item.valCode];
+        if(isNullOrUndefined(itemImgSrcs)) {
+          AppComponent.rzhAlt('warning','请上传规格为'+item.valName+'的商品的图片');
+          return null;// 当某个规格没有图片时，提示必须上传
+        };
         if (!isNullOrUndefined(itemImgSrcs)) {
           for (let k = 0; k < itemImgSrcs.length; k++) {
             const temp: any = {attrCode: '', valCode: '', valName: '', idx: '', goodsImage: ''};
@@ -943,6 +947,10 @@ export class EditDetailComponent implements OnInit {
    */
   private genPublishDataAndPublish() {
     let me = this;
+    if(isNullOrUndefined(me.genGoodsImgList())) {
+      MaskService.hideMask();//关闭遮罩层
+      return;
+    }                //当某个规格没有图片时直接结束发布
     me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
     if (me.path == 'step_two') me.publishData['kindId'] = me.kindId;
     me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码

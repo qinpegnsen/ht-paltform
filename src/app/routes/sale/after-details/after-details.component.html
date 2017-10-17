@@ -31,7 +31,7 @@
             <td class="item-hd col-sm-2">商品名称：</td>
             <td class="item-bd col-sm-10 mb0">
               {{afterData.goodsName}}
-              <a routerLink="../../goods/publish/edit" [queryParams]="{baseCode: afterData.goodsBaseCode}">查看</a>
+              <a routerLink="../../goods/publish/edit" [queryParams]="{baseCode: afterData.goodsBaseCode}">(查看)</a>
             </td>
           </tr>
           <tr class="t-item clearfix">
@@ -109,7 +109,6 @@
       <table class="w100">
         <tr>
           <td class="item-hd col-sm-2">处理意见：</td>
-          <ng-container *ngIf="afterData.returnType=='RETURN'">
             <td class="item-bd col-sm-2" *ngIf="afterData.state=='WAIT'">
               <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
                 <label>
@@ -117,6 +116,7 @@
                   <span class="fa fa-circle"></span>{{item.val}}</label>
               </div>
             </td>
+          <ng-container *ngIf="afterData.returnType=='RETURN'">
             <td class="item-bd col-sm-2" *ngIf="afterData.state=='DELIVERY'">
               <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
                 <label>

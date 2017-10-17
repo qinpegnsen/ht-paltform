@@ -71,8 +71,8 @@
     <tbody>
     <ng-container *ngFor="let order of dataTable.data; let i = index">
       <tr class="text-center">
-        <td *ngIf="search.stateEnum!='NO'"><i *ngIf="order.state!='NO'" class="icon icon-arrow-down cursor-p"
-                                              [class.text-info]="detail[i]"
+        <td *ngIf="search.stateEnum!='NO'"><i *ngIf="order.state!='NO'" class="icon icon-arrow-down cursor-p thc"
+                                              [class.font]="detail[i]"
                                               (click)="showDetail(i)"></i></td>
         <td>{{order.wono}}</td>
         <td>
@@ -112,9 +112,9 @@
               <th class="p-sm w5 text-center">编号</th>
               <th class="p-sm w10 text-center">代理商</th>
               <th class="p-sm w10 text-center">联系电话</th>
+              <th class="p-sm w10 text-center">工单状态</th>
               <th class="p-sm w15 text-center">拒单原因</th>
               <th class="p-sm w10 text-center">操作人</th>
-              <th class="p-sm w10 text-center">工单状态</th>
               <th class="p-sm w10 text-center">操作时间</th>
             </tr>
             </thead>
@@ -123,9 +123,9 @@
               <td>{{item.id}}</td>
               <td>{{item.agentName}}</td>
               <td>{{item.moblie}}</td>
+              <td>{{item.state | rzhState:'1305'}}</td>
               <td>{{item.reason | rzhState:'1304'}}</td>
               <td>{{item.optMan}}</td>
-              <td>{{item.state | rzhState:'1305'}}</td>
               <td>{{item.uptime}}</td>
             </tr>
             </tbody>

@@ -3,11 +3,7 @@
     <div class="order-head p bb text-info"><span class="thc font"><i class="fa fa-file-text"></i> 订单信息</span></div>
     <div class="content">
       <dl>
-        <dt>下单人账号：</dt>
-        <dd>{{orderDetailData.custCode}}</dd>
-      </dl>
-      <dl>
-        <dt>手机号：</dt>
+        <dt>买家手机号：</dt>
         <dd>{{orderDetailData.cust.custPhone}}</dd>
       </dl>
       <dl>
@@ -79,7 +75,8 @@
   <div class="szh-order-details">
     <div class="order-head p bb text-info"><span class="thc font"><i class="fa fa-cube"></i> 收货信息</span></div>
     <div class="content take-info">
-      <dl *ngIf="orderDetailData.state!='CR'">
+      <!--当订单为刚创建或刚支付或已关闭时不显示是否平台配送，即指派工单后才显示-->
+      <dl *ngIf="orderDetailData.state!='CR' && orderDetailData.state!='PAID' && orderDetailData.state!='CLOSE'">
         <dt>是否平台配送：</dt>
         <dd>{{orderDetailData.isPlatCarry | rzhState:'1001'}}</dd>
       </dl>
@@ -204,16 +201,16 @@
     <tbody>
     <tr class="text-center" *ngFor="let goods of goodsData;let i = index">
       <td class="text-left p position-relative bb">
-          <span class="goods-img goods-md-img mr"><img [src]="goods.goodsImage"
+          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'"
                                                        alt=""></span>
-        <div class="goods-md-info">
+        <div class="goods-lg-info">
           <p class="mb0 font13 omg2 two-row mb-sm">
             <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
           </p>
-          <p class="mb0 one-row omg font12">
-            <span class="inline">颜色：</span>
-            <span class="inline">红色</span>
+          <p class="mb0 one-row omg font12" *ngFor="let attr of goods.goodsSavSet | strToJson">
+            <span class="inline">{{attr.attrName}}：</span>
+            <span class="inline">{{attr.value}}</span>
           </p>
         </div>
       </td>
@@ -237,20 +234,21 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt class="font14">商品总额：</dt>
-          <dd><span class="ml font18 mr">{{orderDetailData.total | decimalTwo}}</span>元</dd>
+          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total | decimalTwo}}</span></dd>
         </dl>
         <dl class="text-right mb0">
           <dt>运费：</dt>
           <dd>
             <span class="font12 ml mr" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
-              <span class="font18 ml mr">{{orderDetailData.freight | decimalTwo}}</span>元
+              <span class="font18 ml-sm mr price-wid">¥{{orderDetailData.freight | decimalTwo}}</span>
             </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">应付金额：</dt>
-          <dd><span class="ml font18 mr">{{orderDetailData.total+orderDetailData.freight | decimalTwo}}</span>元</dd>
+          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total+orderDetailData.freight |
+            decimalTwo}}</span></dd>
         </dl>
         <dl class="text-right mb0">
           <dt>
@@ -259,11 +257,11 @@
                triggers="mouseenter:mouseleave"></i>
             重消币抵扣金额：
           </dt>
-          <dd><span class="font18 ml mr">{{orderDetailData.coinPay | decimalTwo}}</span>元</dd>
+          <dd><span class="font18 ml-sm mr price-wid">¥{{orderDetailData.coinPay | decimalTwo}}</span></dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">最终支付金额：</dt>
-          <dd><span class="main-red ml font22 mr">{{orderDetailData.pay | decimalTwo}}</span>元</dd>
+          <dd><span class="main-red ml-sm font22 mr price-wid">¥{{orderDetailData.pay | decimalTwo}}</span></dd>
         </dl>
       </td>
     </tr>

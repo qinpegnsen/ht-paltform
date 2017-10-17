@@ -3,7 +3,7 @@
     <div *ngIf="!detail">
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="woType==''" [class.bb]="woType==''" routerLink="wo-all">所有</li>
-        <li class="pull-left thc" [class.font]="woType=='NO'" [class.bb]="woType=='NO'" routerLink="wo-assign">未派单</li>
+        <li class="pull-left thc" [class.font]="woType=='NO'" [class.bb]="woType=='NO'" routerLink="wo-assign">待派单</li>
         <li class="pull-left thc" [class.font]="woType=='ASSIGN'" [class.bb]="woType=='ASSIGN'"
             routerLink="wo-assigned">已派单</li>
         <li class="pull-left thc" [class.font]="woType=='NA'" [class.bb]="woType=='NA'" routerLink="wo-my">平台接单</li>

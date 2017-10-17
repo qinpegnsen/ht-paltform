@@ -54,7 +54,7 @@ export class AfterDetailsComponent implements OnInit {
     let data = {
       afterNo: me.afterData.afterNo,
       opinion: me.opinion,
-      isAgree: 'Y'
+      isAgree: me.isAgree
     }
     me.submit.postRequest('/after/agreeRefundMoney', data, true);
   }

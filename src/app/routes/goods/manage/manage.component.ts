@@ -50,7 +50,7 @@ export class ManageComponent implements OnInit {
     me.domActions()
 
     me.addButton = {
-      type: 'add',
+      type: 'add-thc',
       text: '发布商品',
     };
     me.buttons = [

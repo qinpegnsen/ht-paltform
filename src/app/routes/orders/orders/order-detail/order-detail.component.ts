@@ -43,7 +43,6 @@ export class OrderDetailComponent implements OnInit {
     let result = me.ordersService.getOrderDetailByNO(me.curOrdno);
     if (!isNullOrUndefined(result)) {
       me.orderDetailData = result;
-      console.log("█ me.orderDetailData ►►►",  me.orderDetailData);
       me.goodsData = result.ordItemList;
       me.getOrderStep();
     }
