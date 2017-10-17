@@ -124,7 +124,10 @@
               <td>{{item.agentName}}</td>
               <td>{{item.moblie}}</td>
               <td>{{item.state | rzhState:'1305'}}</td>
-              <td>{{item.reason | rzhState:'1304'}}</td>
+              <td>
+                <span *ngIf="item.reason!='OTHER'">{{item.reason | rzhState:'1306'}}</span>
+                <span *ngIf="item.reason=='OTHER'">{{item.other}}</span>
+              </td>
               <td>{{item.optMan}}</td>
               <td>{{item.uptime}}</td>
             </tr>
