@@ -502,7 +502,6 @@ export class RzhtoolsService {
     // for (let i = 0; i < weeks.length; i++) {
     // 	if (num.toString() == weeks[i]["val"]) week = weeks[i]["key"];
     // }
-    console.log("█ week ►►►",  week);
     return week;
   }
 
