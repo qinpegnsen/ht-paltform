@@ -152,6 +152,33 @@ export class OperationService {
     return result;
   }
 
+  /**
+   * POST 请求
+   * @param submitUrl
+   * @param submitData  返回info
+   *
+   */
+  tplRequest(submitUrl, submitData) {
+    let me = this, result;
+    me.ajax.post({
+      url: submitUrl,
+      data: submitData,
+      async: false,
+      success: (res) => {
+        result=res.info;
+        if(res.success){
+          AppComponent.rzhAlt("success", res.info);
+        }else{
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: () => {
+        result='';
+        AppComponent.rzhAlt("error", "请输入数字类型");
+      }
+    })
+    return result;
+  }
 
   /**
    * get 请求   获取关联的商品
