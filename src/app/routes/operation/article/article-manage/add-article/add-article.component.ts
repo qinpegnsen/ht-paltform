@@ -418,7 +418,6 @@ export class AddArticleComponent implements OnInit {
     me.uploader.onSuccessItem = function (item, response, status, headers) {
       let res = JSON.parse(response);
       if (res.success) {
-        console.log("█ '上传图片成功' ►►►",  '上传图片成功');
       } else {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
@@ -466,7 +465,6 @@ export class AddArticleComponent implements OnInit {
       }else if(me.coverCode=='THREE'){//如果默认的封面是3张图片上传也执行图片上传
         me.uploadImg();//执行图片上传的方法
       }else{
-        console.log("█ 1 ►►►",  1);
         me.articleExtra();
       }
     }
