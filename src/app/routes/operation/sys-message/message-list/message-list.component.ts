@@ -75,6 +75,10 @@ export class MessageListComponent implements OnInit {
     };
     this.platformInfoData=this.operationService.updateproblem(url,data);
     this.queryAdminNotify();
+    if($('._all').prop("checked")){//如果全选按钮被勾选了，让它没有勾选
+      $('._all').prop("checked",false);
+      $('._all').attr("checked",false);
+    }
   }
 
   /**
