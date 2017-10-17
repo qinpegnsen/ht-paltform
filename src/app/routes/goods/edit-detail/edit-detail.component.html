@@ -193,8 +193,7 @@
                      [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="marketPrice.value > 0 && price.value >0">
-                <span>{{price.value < marketPrice.value}}</span>
-                <span [hidden]="price.value < marketPrice.value || price.value == marketPrice.value"
+                <span [hidden]="compareNumber(price.value,marketPrice.value)"
                       class="text-danger font12"> 销售价<=市场价
                 </span>
               </ng-container>
@@ -206,7 +205,7 @@
                      [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
-                <span [hidden]="memberPrice.value < price.value || memberPrice.value == price.value"
+                <span [hidden]="compareNumber(memberPrice.value,price.value)"
                       class="text-danger font12"> 会员价<=销售价
                 </span>
               </ng-container>
