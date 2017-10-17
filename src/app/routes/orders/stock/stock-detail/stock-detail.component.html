@@ -315,7 +315,7 @@
       <td class="bb">￥{{item.batchPrice| number:'1.2-2'}}</td>
       <td class="bb">{{item.batchNum}}</td>
       <td class="bl" *ngIf="i==0" [attr.rowspan]="orderData.agentOrdItemList.length">
-        <span class="main-red font14">￥{{item.totalGoodsPrice}}</span><br>
+        <span class="main-red font14">￥{{orderData.totalGoodsPrice}}</span><br>
         <span class="font-gray">{{orderData.payWay | rzhState :'1017'}}</span>
       </td>
     </tr>

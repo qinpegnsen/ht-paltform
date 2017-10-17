@@ -33,11 +33,13 @@ export class AppSetComponent implements OnInit {
   private optKey: Array<any> = new Array();//获取选中模板的input中的操作内容
   private contents: Array<any> = new Array();//获取选中模板的图片暗码或者内容
   private updateIds: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
+  private updateImgs: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
   private ids: Array<any> = new Array();//提交后选中模板中的每个模板值的ID
   public uploaders: Array<FileUploader> = new Array();//清空选中模板的图片
   private optTypeList: any;//操作类型的列表
   private myImg: any;//上传图片
   private tplImgCount: any;//模板图片数量
+  private tplType: any;//模板类型
   private isAdd: boolean = true;//是否是新增内容
   private indexId: any;//没有发布的选中模板的ID
   private indexData: any;//已经发布成功的选中模板ID
@@ -104,6 +106,7 @@ export class AppSetComponent implements OnInit {
     if (typeof(upid) != 'undefined') {
       _this.updateIds.push(i);
     }
+    _this.updateImgs[i] = 1;
   }
 
 
@@ -186,7 +189,8 @@ export class AppSetComponent implements OnInit {
          * 查询模板信息说明这个模板已经发布过了
          * 把上传图片循环（因为模板值不止一个，也是未知的）模板值上传图片只能唯一，但是可以有多个模板值
          */
-        this.tplImgCount=res.length;
+        this.tplImgCount = res.length;
+        this.tplType = res[0].tplType;
         for (let i = 0; i < this.tplImgCount; i++) {
           this.contents[i] = res[i].content;//选中模板的图片暗码或者内容
           this.ids[i] = res[i].id;//提交后选中模板中的每个模板值的ID
@@ -226,10 +230,10 @@ export class AppSetComponent implements OnInit {
     let _this = this;
     _this.indexId = _this.phoneIndexId[i - 1];
     if (typeof(_this.indexId) != 'undefined') {//去load
-      _this.isAdd=false;
+      _this.isAdd = false;
       _this.queryContentList(item, _this.indexId, i);
     } else { //显示添加页面
-      _this.isAdd=true;
+      _this.isAdd = true;
       _this.curItem = item;
       _this.ord = i;
       /**
@@ -245,7 +249,8 @@ export class AppSetComponent implements OnInit {
       _this.ids.splice(0, _this.ids.length);//提交后选中模板中的每个模板值的ID
       _this.optTypeIndex.splice(0, _this.optTypeIndex.length);//选中模板的下标
 
-      _this.tplImgCount=item.tplImgCount;
+      _this.tplImgCount = item.tplImgCount;
+      _this.tplType = item.tplType;
       for (let i = 0; i < _this.tplImgCount; i++) {
         this.contentList.push(i);
         let uploader: FileUploader = new FileUploader({
@@ -282,6 +287,22 @@ export class AppSetComponent implements OnInit {
     if (_this.isEntered[i] == 'N') {
       _this.optKey[i] = '0';
     }
+
+    let upid = _this.ids[i];
+    if (typeof(upid) != 'undefined') {
+      _this.updateIds.push(i);
+    }
+
+  }
+
+  changeInputValue(event, i) {
+    let _this = this;
+    _this.optKey[i] = event.target.value;
+    let upid = _this.ids[i];
+    if (typeof(upid) != 'undefined') {
+      _this.updateIds.push(i);
+    }
+
   }
 
   /**
@@ -312,19 +333,19 @@ export class AppSetComponent implements OnInit {
    * 添加首页模板内容
    */
   addModel() {
-    let _this=this;
+    let _this = this;
     let flag = true;
-    if (_this.isAdd) {//说明是新增，新增判断是否上传图片
+    if (_this.isAdd && _this.tplType == 'IMG') {//说明是新增，新增判断是否上传图片
       let imgCount = _this.tplImgCount;
       for (let i = 0; i < imgCount; i++) {
         if (_this.uploaders[i].queue.length < 1) {
           flag = false;
-          swal("第" + (i + 1) + "个图片未上传");
+          swal('第' + (i + 1) + '个图片未上传');
           break;
         }
       }
     }
-    if(flag){
+    if (flag) {
       this.uploadImg()
     }
   }
@@ -380,57 +401,73 @@ export class AppSetComponent implements OnInit {
    */
   updateContent() {
     let _this = this;
-    for (let h = 0; h < _this.updateIds.length; h++) {
-      let updateIndex = _this.updateIds[h];
-      _this.updateIndexContentIds.push(_this.ids[updateIndex]);
-      _this.updateContents.push(_this.contents[updateIndex]);
-      _this.updateOptTypeCode.push(_this.optTypeCode[updateIndex]);
-      _this.updateOptKey.push(_this.optKey[updateIndex]);
-    }
-    _this.ajax.post({
-      url: '/phone/index/updateContent',
-      data: {
-        phoneIndexId: _this.indexId,
-        phoneIndexContentId: _this.updateIndexContentIds.join(','),
-        tplType: _this.curItem.tplType,
-        contents: _this.updateContents.join(','),
-        optTypeCodes: _this.updateOptTypeCode.join(','),
-        optKeys: _this.updateOptKey.join(',')
-      },
-      success: (res) => {
-        if (res.success) {
-          _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
-          swal('添加首页模板提交成功！', '', 'success');
-          _this.isShowContent = false;
-
-          /**
-           * 清空模板的信息
-           */
-          _this.contentList.splice(0, _this.contentList.length);
-          _this.uploaders.splice(0, _this.uploaders.length);
-
-          _this.contents.splice(0, _this.contents.length);
-          _this.optTypeCode.splice(0, _this.optTypeCode.length);
-          _this.typeDesc.splice(0, _this.typeDesc.length);
-          _this.isEntered.splice(0, _this.isEntered.length);
-          _this.optKey.splice(0, _this.optKey.length);
-
-
-          _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
-          _this.updateContents.splice(0, _this.updateContents.length);
-          _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
-          _this.updateOptKey.splice(0, _this.updateOptKey.length);
-
-          _this.updateIds.splice(0, _this.updateIds.length);
-
+    let flag = true;
+    let uplength = _this.updateIds.length;
+    if (uplength > 0) {
+      for (let h = 0; h < uplength; h++) {
+        let updateIndex = _this.updateIds[h];
+        _this.updateIndexContentIds.push(_this.ids[updateIndex]);
+        if (_this.updateImgs[h] == 1 || _this.tplType == 'TXT') {
+          _this.updateContents.push(_this.contents[updateIndex]);
         } else {
-          swal('添加首页模板提交失败====！', 'error');
+          _this.updateContents.push('');
         }
-      },
-      error: (data) => {
-        swal('添加首页模板提交失败！', '', 'error');
+        _this.updateOptTypeCode.push(_this.optTypeCode[updateIndex]);
+        _this.updateOptKey.push(_this.optKey[updateIndex]);
       }
-    })
+    } else {
+      flag = false;
+      swal('未做任何修改！', '', 'success');
+    }
+    console.log('█ _this.updateContents ►►►', _this.updateContents);
+    console.log('█ _this.updateContents.join(\',\') ►►►', _this.updateContents.join(','));
+    if (flag) {
+      _this.ajax.post({
+        url: '/phone/index/updateContent',
+        data: {
+          phoneIndexId: _this.indexId,
+          phoneIndexContentId: _this.updateIndexContentIds.join(','),
+          tplType: _this.curItem.tplType,
+          contents: _this.updateContents.join(','),
+          optTypeCodes: _this.updateOptTypeCode.join(','),
+          optKeys: _this.updateOptKey.join(',')
+        },
+        success: (res) => {
+          if (res.success) {
+            _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
+            swal('修改首页模板提交成功！', '', 'success');
+            _this.isShowContent = false;
+
+            /**
+             * 清空模板的信息
+             */
+            _this.contentList.splice(0, _this.contentList.length);
+            _this.uploaders.splice(0, _this.uploaders.length);
+
+            _this.contents.splice(0, _this.contents.length);
+            _this.optTypeCode.splice(0, _this.optTypeCode.length);
+            _this.typeDesc.splice(0, _this.typeDesc.length);
+            _this.isEntered.splice(0, _this.isEntered.length);
+            _this.optKey.splice(0, _this.optKey.length);
+
+
+            _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
+            _this.updateContents.splice(0, _this.updateContents.length);
+            _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
+            _this.updateOptKey.splice(0, _this.updateOptKey.length);
+
+            _this.updateIds.splice(0, _this.updateIds.length);
+            _this.updateImgs.splice(0, _this.updateImgs.length);
+
+          } else {
+            swal('修改首页模板提交失败====！', 'error');
+          }
+        },
+        error: (data) => {
+          swal('修改首页模板提交失败！', '', 'error');
+        }
+      })
+    }
   }
 
   /**
@@ -463,6 +500,7 @@ export class AppSetComponent implements OnInit {
           console.log(data)
           _this.AppSetService.delCode(url, data); //删除数据
         }
+        _this.phoneIndexId.splice(i - 1, 1);//删除添加后返回的ID
         _this.moduleList.splice(i - 1, 1);//删除选中模板后，模板下标上移
         _this.flags[i - 1] = false;//删除选中模板后，遮罩层上移
         _this.isShowContent = false;

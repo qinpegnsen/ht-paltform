@@ -75,7 +75,8 @@
           <select class="form-control" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)" style="width: 49%; display: inline">
             <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}</option>
           </select>
-          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text" [(ngModel)]="optKey[i]" [disabled]="isEntered[i]=='N'">
+          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}" (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'">
+          <input [(ngModel)]="optKey[i]" type="hidden">
         </div>
         <div class="main_right_optTypeDesc">{{typeDesc[i]}}</div>
         <div class="hidden-field">{{optTypeCode[i]}}</div>

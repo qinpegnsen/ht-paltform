@@ -48,7 +48,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label">是否可输入</label>
+            <label class="col-sm-3 control-label"> <i>*</i>是否可输入</label>
             <div class="col-sm-8">
               <label class="radio-inline c-radio">
                 <input type="radio" name="isEntered" checked value="Y" [(ngModel)]="optForm.isEntered" required/>
@@ -187,7 +187,7 @@
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
                    class="alert alert-danger">
-                模板路径是必填项，请填写模板路径
+                模板路径是必填项，请填写正确路径格式
               </div>
             </div>
           </div>
@@ -237,7 +237,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板数量</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板内容数量</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
@@ -329,7 +329,7 @@
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
                    class="alert alert-danger">
-                模板路径是必填项，请填写模板路径
+                模板路径是必填项，请填写正确路径格式
               </div>
             </div>
           </div>
@@ -379,7 +379,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i>*</i> 模板数量</label>
+            <label class="col-sm-4 control-label"> <i>*</i> 模板内容数量</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
