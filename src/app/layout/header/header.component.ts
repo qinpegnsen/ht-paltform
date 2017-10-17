@@ -68,11 +68,10 @@ export class HeaderComponent implements OnInit, OnChanges {
     let url='/notifyAdmin/pageQuery';
     let data={
       curPage:1,
-      pageSize:4,
+      pageSize:3,
       sortColumns:''
     };
-    this.platformInfoData=new Page(this.submitService.getData(url,data));
-    console.log("█ this.platformInfoData ►►►",  this.platformInfoData);
+    this.submitService.messageData(url,data);
   }
 
   //显示、隐藏当前登录的用户信息

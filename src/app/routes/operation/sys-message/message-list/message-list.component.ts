@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OperationService} from "../../operation.service";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+import {HeaderComponent} from "../../../../layout/header/header.component";
 
 const swal = require('sweetalert');
 declare var $: any;
@@ -16,7 +17,7 @@ export class MessageListComponent implements OnInit {
   private platformInfoData:any;                           //平台消息的数据
   private deletebutton:Object;                            //删除按钮
   private idArr=[]                                        //存放id的数组
-  constructor(public operationService:OperationService) { }
+  constructor(public operationService:OperationService,public headerComponent:HeaderComponent) { }
 
   /**
    * 1.对按钮进行赋值
@@ -86,7 +87,6 @@ export class MessageListComponent implements OnInit {
     } else {
       $(obj).attr("checked", false)
       $(obj).prop("checked", false);
-      console.log("█ this.idArr ►►►",  this.idArr);
     }
     this.inputSelect();
   }
@@ -146,8 +146,9 @@ export class MessageListComponent implements OnInit {
         let data={
           id:delSortId
         }
-        that.operationService.delRequest(url,data)
-        that.queryAdminNotify()
+        that.operationService.delRequest(url,data);
+        that.queryAdminNotify();
+        that.headerComponent.queryAdminNotify();
       }
     });
   }

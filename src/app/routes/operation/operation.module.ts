@@ -39,6 +39,8 @@ import { ArticleAuditComponent } from './article/article-audit/article-audit.com
 import { AuditPageComponent } from './article/article-audit/audit-page/audit-page.component';
 import { PlatformEditComponent } from './message-inform/platform-edit/platform-edit.component';
 import { AgentEditComponent } from './message-inform/agent-edit/agent-edit.component';
+import {HeaderComponent} from "../../layout/header/header.component";
+import {LayoutComponent} from "../../layout/layout.component";
 
 
 const addSort: Routes = [
@@ -105,6 +107,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
-  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService]
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService,HeaderComponent,LayoutComponent]
 })
 export class OperationModule { }

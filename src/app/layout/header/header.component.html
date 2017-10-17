@@ -70,21 +70,21 @@
       <li class="dropdown dropdown-list" dropdown>
         <a dropdownToggle title="新消息">
           <i class="icon-bell"></i>
-          <div class="label label-danger unselectable">{{platformInfoData.totalRow}}</div>
+          <div class="label label-danger unselectable">{{submitService.platformInfoData.totalRow}}</div>
         </a>
         <ul *dropdownMenu class="dropdown-menu animated flipInX">
           <li>
             <div class="list-group">
-              <a class="list-group-item" *ngFor="let platformInfo of platformInfoData.voList;let i = index"  routerLink="/main/operation/sys-message/message-list">
+              <a class="list-group-item qpsHeight" *ngFor="let platformInfo of submitService.platformInfoData.voList;let i = index"  routerLink="/main/operation/sys-message/message-list">
                 <div class="media-box _qpsStyle">
                   <div class="pull-left">
                     <i class="{{platformInfo.icon}}"></i>
                   </div>
                   <div class="media-box-body clearfix ">
-                    <p class="m0">{{platformInfo.msg}}</p>
-                    <!--<p class="m0 text-muted">-->
-                      <!--<small>{{platformInfo.tpl}}</small>-->
-                    <!--</p>-->
+                    <p class="m0 qpsP">{{platformInfo.msg}}</p>
+                    <p class="m0 text-muted">
+                      <small>{{platformInfo.createTime}}111</small>
+                    </p>
                   </div>
                 </div>
               </a>

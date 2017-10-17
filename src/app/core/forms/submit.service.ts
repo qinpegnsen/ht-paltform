@@ -4,11 +4,13 @@ import {SettingsService} from "../settings/settings.service";
 import {ActivatedRoute} from "@angular/router";
 import {AppComponent} from "../../app.component";
 import {MaskService} from "../services/mask.service";
+import {Page} from "../page/page";
 const swal = require('sweetalert');
 
 @Injectable()
 export class SubmitService {
 
+  public platformInfoData: any;//用来存储模板的数据，否则这里刷新不了
   constructor(private ajax: AjaxService,
               private mask: MaskService,
               private settings: SettingsService,
@@ -175,7 +177,7 @@ export class SubmitService {
    * @returns {any}
    */
   getData(requestUrl: string, requestData: any) {
-    let result: any;
+    let result: any,that=this;
     this.ajax.get({
       url: requestUrl,
       data: requestData,
@@ -183,6 +185,7 @@ export class SubmitService {
       success: (res) => {
         if (res.success) {
           result = res.data;
+          that.platformInfoData=res.data;
         } else {
           AppComponent.rzhAlt("error", res.info);
         }
@@ -195,4 +198,32 @@ export class SubmitService {
     return result;
   }
 
+  /**
+   * get 获取数据 模板专用 直接返回分页数据
+   * @param requestUrl
+   * @param requestData
+   * @returns {any}
+   */
+  messageData(requestUrl: string, requestData: any) {
+    let result: any,that=this;
+    this.ajax.get({
+      url: requestUrl,
+      data: requestData,
+      async: false,
+      success: (res) => {
+        if (res.success) {
+          result = res.data;
+          that.platformInfoData=new Page(res.data);
+          console.log("█ that.platformInfoData ►►►",  that.platformInfoData);
+        } else {
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    // console.log("█ result ►►►", result );
+    return result;
+  }
 }
