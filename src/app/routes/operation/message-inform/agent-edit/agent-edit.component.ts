@@ -87,7 +87,7 @@ export class AgentEditComponent implements OnInit {
       remark: this.tplData.remark,
     }
     let result = this.operationService.updateproblem(url, data);
-    if (result=='成功修改管理员消息模板') {
+    if (result=='成功修改代理商消息模板') {
       this.hideWindow(true)
     };
   }
@@ -106,8 +106,7 @@ export class AgentEditComponent implements OnInit {
       url: obj.url,
       remark: obj.remark,
     }
-    let result = this.operationService.addproblem(url, data);
-    console.log("█ result ►►►",  result);
-    if (result=='成功添加管理员消息模板') this.hideWindow(true);
+    let result = this.operationService.tplRequest(url, data);
+    if (result=='成功添加代理商消息模板') this.hideWindow(true);
   }
 }

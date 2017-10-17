@@ -172,9 +172,8 @@ export class OperationService {
           AppComponent.rzhAlt("error", res.info);
         }
       },
-      error: () => {
-        result='';
-        AppComponent.rzhAlt("error", "请输入数字类型");
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     })
     return result;
@@ -209,7 +208,7 @@ export class OperationService {
 
 
   /**
-   * POST 请求
+   * POST 请求  成功没提示
    * @param submitUrl
    * @param submitData
    * @param back:true(返回上一级)
@@ -242,7 +241,7 @@ export class OperationService {
 
 
   /**
-   * put 请求
+   * put 请求  成功有提示
    * @param submitUrl
    * @param submitData
    * @param back:true(返回上一级)
@@ -259,7 +258,7 @@ export class OperationService {
           result = res.info;
         } else {
           result = res.info;
-          swal(res.info,'','error');
+          AppComponent.rzhAlt("error", res.info);
         }
       },
       error: (res) => {

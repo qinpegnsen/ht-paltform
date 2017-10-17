@@ -105,7 +105,6 @@ export class PlatformEditComponent implements OnInit {
       remark: obj.remark,
     }
     let result = this.operationService.tplRequest(url, data);
-    console.log("█ result ►►►",  result);
     if (result=='成功添加管理员消息模板') this.hideWindow(true);
   }
 }

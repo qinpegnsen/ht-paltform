@@ -76,12 +76,12 @@ export class AgentTplComponent implements OnInit {
     },function(isConfirm){
       if (isConfirm) {
         swal.close(); //关闭弹框
-        let url='/notifyAdminTpl/deleteNotifyAdminTpl';
+        let url='/notifyAgentTpl/deleteNotifyAgentTpl';
         let data={
           id:delSortId
         }
-        that.operationService.delRequest(url,data)
-        that.queryAgentTpl()
+        that.operationService.delRequest(url,data);
+        that.queryAgentTpl();
       }
     });
   }
