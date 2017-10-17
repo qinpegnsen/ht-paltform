@@ -239,7 +239,6 @@ export class OperationService {
     return result;
   }
 
-
   /**
    * put 请求  成功有提示
    * @param submitUrl

@@ -130,7 +130,7 @@ export class MessageListComponent implements OnInit {
   }
 
   /**
-   * 删除模板 首先进行确认是否删除，删除后刷新页面
+   * 删除单个消息 首先进行确认是否删除，删除后刷新页面
    */
   deleteTpl(delSortId){
     let that=this;
