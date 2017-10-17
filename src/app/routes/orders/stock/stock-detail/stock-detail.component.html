@@ -18,13 +18,15 @@
           <div class="more b w100" #remit (mouseenter)="showTimeList(remit)" (mouseleave)="hideTimesList(remit)"><span
             class="arrow"></span>
             <ul class="list-unstyled font12 mb0">
-              <li>开户行：<span>{{PayRecData.bank}}</span></li>
-              <li>收款人名称：<span>{{PayRecData.staffName}}</span></li>
-              <li>买家下单时间：<span>{{PayRecData.tradeTime}}</span></li>
               <li>交易流水码：<span>{{PayRecData.tc3rd}}</span></li>
+              <li>开户行：<span>{{PayRecData.bank}}</span></li>
+              <li>付款人：<span>{{PayRecData.bacctName}}</span></li>
               <li *ngIf="orderData.payWay=='REMIT'">付款凭证：
                 <span><img src="{{PayRecData.voucherUrl }}" class="qpsImg" alt=""  onerror="javascript:this.src='../../../assets/img/dummy.png';"></span>
               </li>
+              <li>凭证备注</li>
+              <li>付款时间：<span>{{PayRecData.tradeTime}}</span></li>
+              <li>付款备注</li>
             </ul>
           </div>
         </dd>
