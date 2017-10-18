@@ -56,9 +56,11 @@ export class HeaderComponent implements OnInit, OnChanges {
       let path = rulHref.substring(rulHref.indexOf('/main'), rulHref.length);
       me.getSubmenus(path);
     })
-    setTimeout(() => {//每5秒钟请求一次，如果用docheck钩子的话，文章关联商品的时候卡顿
+    this.queryAdminNotify();
+    setInterval(() => {//每5秒钟请求一次，如果用docheck钩子的话，文章关联商品的时候卡顿
       this.queryAdminNotify();
-    }, 5000)
+    }, 5000);
+
   }
 
   /**

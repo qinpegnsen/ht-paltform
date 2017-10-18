@@ -453,7 +453,8 @@
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
                     <div class="col-lg-6 _copy p0">
-                      <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
+                      <span (mousemove)="showGoodName($event,j)"  (mouseout)="hideGoodName(j)" class="pl0 ml qpsP">{{item.goodsName}}</span><br>
+                      <span #j class="pl0 ml hoverName">{{item.goodsName}}</span>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
                         {{standard.attrName}}：{{standard.value}}
                       </div>

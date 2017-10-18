@@ -188,7 +188,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+        // AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;
