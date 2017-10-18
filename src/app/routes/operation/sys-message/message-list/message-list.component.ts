@@ -147,9 +147,9 @@ export class MessageListComponent implements OnInit {
     },function(isConfirm){
       if (isConfirm) {
         swal.close(); //关闭弹框
-        let url='/notifyAdmin/deleteById';
+        let url='/notifyAdmin/deleteByIdStr';
         let data={
-          id:delSortId
+          idStr:delSortId
         }
         that.operationService.delRequest(url,data);
         that.queryAdminNotify();
