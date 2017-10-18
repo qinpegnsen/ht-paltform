@@ -366,6 +366,7 @@ export class AddArticleComponent implements OnInit {
       $("._myAppend").append(selectGood);
     }else{//如果追加的时候长度大于0，首先看看在已经关联的商品里面有没有现在选择的商品，因为关联同样的产品好几个没有意义
       for(let i=0;i<$(selectGood[i]).length;i++){
+        console.log("█ $(selectGood[i]).find(\"input:hidden\").val() ►►►",  $(selectGood[i]).find("input:hidden").val());
         for(let j=0;j<$(articlelinkGood[j]).length;j++){
           if($(selectGood[i]).find("input:hidden").val()!=$(articlelinkGood[j]).find("input:hidden").val()){
             $("._myAppend").append(selectGood[i]);//把已经选择的并且之前没有选择过的追加到关联商品里面

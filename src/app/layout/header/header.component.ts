@@ -18,13 +18,14 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
+export class HeaderComponent implements OnInit, OnChanges {
 
-  private platformInfoData:any;                           //代理商系统消息的数据
+  private platformInfoData: any;                           //代理商系统消息的数据
   @Input() private curPath;
+
   ngOnChanges(changes: SimpleChanges): void {
     let me = this;
-    if(changes['curPath'] && !isNullOrUndefined(me.curPath)){
+    if (changes['curPath'] && !isNullOrUndefined(me.curPath)) {
       // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
       me.getSubmenus(me.curPath);
     }
@@ -38,9 +39,9 @@ export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
   @ViewChild('fsbutton') fsbutton;
 
   constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
-              private ajax: AjaxService, private router: Router,private cookieService:CookieService,private layout:LayoutComponent,private submitService:SubmitService) {
+              private ajax: AjaxService, private router: Router, private cookieService: CookieService, private layout: LayoutComponent, private submitService: SubmitService) {
     // 只显示指定的
-    if(typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
+    if (typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
   }
 
   ngOnInit() {
@@ -50,29 +51,27 @@ export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
     }
     let me = this;
     // 初始化时检测当前路由与一级导航路由是否匹配，匹配则为一级导航添加激活状态
-    $(function(){
+    $(function () {
       let rulHref = window.location.href;
-      let path = rulHref.substring(rulHref.indexOf('/main'),rulHref.length);
+      let path = rulHref.substring(rulHref.indexOf('/main'), rulHref.length);
       me.getSubmenus(path);
     })
-    this.queryAdminNotify()
+    setTimeout(() => {//每5秒钟请求一次，如果用docheck钩子的话，文章关联商品的时候卡顿
+      this.queryAdminNotify();
+    }, 5000)
   }
 
   /**
    * 获取通知的消息列表，默认只展示第一页的内容
    */
-  queryAdminNotify(){
-    let url='/notifyAdmin/pageQuery';
-    let data={
-      curPage:1,
-      pageSize:3,
-      sortColumns:''
+  queryAdminNotify() {
+    let url = '/notifyAdmin/pageQuery';
+    let data = {
+      curPage: 1,
+      pageSize: 3,
+      sortColumns: ''
     };
-    this.platformInfoData=new Page(this.submitService.getData(url,data));
-  }
-
-  ngDoCheck(){
-    this.queryAdminNotify();
+    this.platformInfoData = new Page(this.submitService.getData(url, data));
   }
 
   //显示、隐藏当前登录的用户信息
@@ -143,7 +142,7 @@ export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
    *
    * @param text
    */
-  getSubmenus(link){
+  getSubmenus(link) {
     let menus = this.menu.getSubMenu(link);
     this.layout.submenus(menus)
   }
