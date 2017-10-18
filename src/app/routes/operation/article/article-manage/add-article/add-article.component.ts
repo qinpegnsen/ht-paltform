@@ -122,6 +122,22 @@ export class AddArticleComponent implements OnInit {
   }
 
   /**
+   * 鼠标放在info 上显示商品名字
+   */
+  showGoodName(event,i){
+    i.style.display = 'block';
+    i.style.top = 17 + 'px';
+    i.style.left = '0px';
+  }
+
+  /**
+   * 鼠标离开时隐藏商品名字
+   */
+  hideGoodName(i) {
+    i.style.display = 'none';
+  }
+
+  /**
    * 修改或者是审核的时候根据id查询文章的数据或者新增的时候初始化编辑器的值
    */
   getDataById(){

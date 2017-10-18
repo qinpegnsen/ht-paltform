@@ -410,7 +410,7 @@
             <div class="panel-body  _scroll" dnd-sortable-container [dropZones]="['boxers-zone']"
                  [sortableData]="linkGoodsList">
               <ul class="list-group">
-                <li *ngFor="let item of linkGoodsList; let i = index" class="list-group-item" dnd-sortable
+                <li *ngFor="let item of linkGoodsList; let i = index" class="list-group-item myhover" dnd-sortable
                     [sortableIndex]="i">
                   <div class="clearfix">
                     <div class="p0 _span col-lg-1 p0">
@@ -418,7 +418,8 @@
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
                     <div class="col-lg-6 p0">
-                      <span (click)="showDetail(shop)" class="pl0 ml">{{item.goodsName}}</span><br>
+                      <span class="pl0 ml qpsP" (mousemove)="showGoodName($event,j)"  (mouseout)="hideGoodName(j)">{{item.goodsName}}</span><br>
+                      <span #j class="pl0 ml hoverName">{{item.goodsName}}</span>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
                         {{standard.attrName}}：{{standard.value}}
                       </div>
