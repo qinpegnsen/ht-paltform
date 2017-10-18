@@ -20,12 +20,15 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i>*</i> 会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="tel" [(ngModel)]="data.phone" required #tel="ngModel" (keyup)="queryCoin()" [pattern]="patterns.phone"/>
+                  <input class="form-control num" type="number"  name="tel"  [(ngModel)]="data.phone" required #tel="ngModel" (keyup)="queryCoin()" [pattern]="patterns.phone"/>
                 </div>
               </div>
               <div  class="col-sm-9 pull-right text-danger">
-                <span *ngIf="coin!=null">重消币值：</span>
-                <span>{{coin}}</span>
+                <span *ngIf="sum!=null" class="font-color">当前重消币值：</span>
+                <span>{{sum?.coin}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span *ngIf="sum!=null" class="font-color">可充入最大重消币值：</span>
+                <span>{{sum?.recharge}}</span>
+
               </div>
               <div [hidden]="tel.valid || tel.pristine || tel.value==''"
                    class="col-sm-9 pull-right text-danger">

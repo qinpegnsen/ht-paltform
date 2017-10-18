@@ -24,16 +24,18 @@
       </div>
       <div class="col-md-12">
         <div class="form-group clearfix col-md-3 mb0">
-          <div class="pl0">
-            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search($event)">
+          <span class="pull-left query-name lh">会员类别:</span>
+          <div class="pl0 col-md-10 col-xs-6">
+            <select class="form-control sel-all" name="authState" [(ngModel)]="authState" (change)="search($event)">
               <option value="">全部</option>
               <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
             </select>
           </div>
         </div>
         <div class="form-group clearfix col-md-3 mb0">
-          <div class="pl0">
-            <select class="form-control" name="state" [(ngModel)]="state" (change)="search($event)">
+          <span class="pull-left query-name lh">会员状态:</span>
+          <div class="pl0 col-md-10 col-xs-6">
+            <select class="form-control sel-all" name="state" [(ngModel)]="state" (change)="search($event)">
               <option value="">全部</option>
               <option *ngFor="let item of states" [value]="item.key">{{item.val}}</option>
             </select>
@@ -97,9 +99,11 @@
         <td (click)="showDetail(member)">
           <i class="icon icon-arrow-down"></i>
         </td>
-        <td>
+        <td class="pull-left">
            <span  *ngIf="member.authState=='AUTH'">
              <i class="icon icon-user-following gold-star" title="已实名认证"></i>&nbsp;
+           </span>
+          <span *ngIf="member.authState!='AUTH'" class="custName" style="">
            </span>
           {{member.custName}}
         </td>
@@ -107,7 +111,7 @@
         <td>
           {{member.custSex | rzhState:'1002' }}
         </td>
-        <td>{{member.coin}}</td>
+        <td>{{member.coin | decimalTwo}}</td>
         <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>

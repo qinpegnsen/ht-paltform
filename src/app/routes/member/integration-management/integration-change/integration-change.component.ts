@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./integration-change.component.scss']
 })
 export class IntegrationChangeComponent implements OnInit {
-  private coin:any;
+  private sum:any;
   private data: any = {
     phone: null,
     custCoin: null,
@@ -21,6 +21,7 @@ export class IntegrationChangeComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.queryCoin();
   }
 
   /**
@@ -32,9 +33,9 @@ export class IntegrationChangeComponent implements OnInit {
     let data = {
       phone:this.data.phone
     }
-   _this.coin=this.submitt.getData(url, data);
+   _this.sum=this.submitt.getData(url, data);
+    console.log("█ sum ►►►",  _this.sum);
   }
-
   /**
    * 提交
    */
