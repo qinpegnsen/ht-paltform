@@ -30,7 +30,6 @@ export class CertificationComponent implements OnInit {
     let me = this, activePage = 1;
     if(isNullOrUndefined(state)) state = 'AUDIT';
       me.state = state;
-
     if (typeof event !== "undefined") activePage = event.activePage;
     let url = "/custAuthInfo/query";
     let data={
@@ -60,15 +59,15 @@ export class CertificationComponent implements OnInit {
    */
   showImg(event,i){
     i.style.display = 'block';
-    i.style.top = event.clientY + 'px';
-    i.style.left = (event.clientX +30) + 'px';
+    i.style.top = (event.clientY-100) + 'px';
+    i.style.left = (event.clientX-600) + 'px';
 
   }
 
   /**
    * 鼠标离开时大图随之隐藏
    */
-  hideImg(i,j,k) {
+  hideImg(i) {
     i.style.display = 'none';
   }
 
@@ -76,7 +75,6 @@ export class CertificationComponent implements OnInit {
    * 添加弹窗
    * */
   addNewData(orderId) {
-    console.log("█ orderId ►►►",  orderId);
     this.orderId1=orderId;
     this.showReasonWindow = true;
   }

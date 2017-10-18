@@ -34,11 +34,8 @@ export class HomeComponent implements OnInit {
   now: any;
   prev: any;
   nowData: any;
-
-
   shopnow:any;
   goodsnow:any;
-
 
   /**
    * 图表1
@@ -80,7 +77,6 @@ export class HomeComponent implements OnInit {
     let url = "/statistical/adminIndex";
     let data = {}
     let result = this.submit.getData(url, data);
-    console.log("█ result ►►►",  result);
     if(result){
       me.data = result;
       me.now = me.data.todaySale;
@@ -89,7 +85,6 @@ export class HomeComponent implements OnInit {
       me.goodsnow=me.data.goodsRanking;
       me.optionPrevInfo();
     }
-
   }
 
   /**
