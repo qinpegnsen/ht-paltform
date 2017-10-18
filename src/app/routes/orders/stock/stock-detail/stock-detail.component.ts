@@ -54,7 +54,6 @@ export class StockDetailComponent implements OnInit {
       ordno:this.ordno
     }
     this.orderData=this.orderService.getShopList(url,data);
-    console.log("█ this.orderData ►►►",  this.orderData);
     if(isNullOrUndefined(this.orderData)){
       this.orderData='';//避免报错
     }
@@ -77,8 +76,8 @@ export class StockDetailComponent implements OnInit {
    */
   showImg(event,i){
     i.style.display = 'block';
-    i.style.top = event.clientY + 'px';
-    i.style.left = event.clientX+ 'px';
+    i.style.top = (event.clientY+10) + 'px';
+    i.style.left = (event.clientX+10)+ 'px';
   }
 
   /**
