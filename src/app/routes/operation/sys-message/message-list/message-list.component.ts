@@ -33,7 +33,7 @@ export class MessageListComponent implements OnInit {
   }
 
   /**
-   * 获取通知的消息列表，默认只展示第一页的内容
+   * 获取通知的消息列表
    */
   queryAdminNotify(event?:PageEvent){
     let activePage = 1;
@@ -186,6 +186,7 @@ export class MessageListComponent implements OnInit {
         }
         that.operationService.delRequest(url,data)
         that.queryAdminNotify();
+        that.headerComponent.queryAdminNotify();
         $("._all").prop('checked',false);
         $("._all").attr('checked',false);
       }

@@ -8,7 +8,7 @@
           序号
         </th>
         <th class="w15 thc font">
-          标题
+          短标题
         </th>
         <th class="w10 thc font">
           分类
@@ -34,7 +34,11 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{article.articleTitle}}</td>
+        <td>
+          <span>{{article.articleTitleShort}}</span>
+          <i class="icon-info myhover" (mousemove)="showImg($event,j)"  (mouseout)="hideImg(j)"></i>
+          <span #j class="hoverTitle">{{article.articleTitle}}</span>
+        </td>
         <td>{{article.acName}}</td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">

@@ -5,3 +5,14 @@ th,td{
   width:50px !important;
   height: 50px !important;
 }
+.hoverTitle{
+  position: fixed;
+  top:0;
+  left: 0;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}
+.myhover{
+  cursor: pointer;
+}

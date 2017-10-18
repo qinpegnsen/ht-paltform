@@ -20,7 +20,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
 
-  public data:any;
+  private platformInfoData:any;                           //代理商系统消息的数据
   @Input() private curPath;
   ngOnChanges(changes: SimpleChanges): void {
     let me = this;
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit, OnChanges ,DoCheck{
       pageSize:3,
       sortColumns:''
     };
-    this.data=this.submitService.messageData(url,data);
+    this.platformInfoData=new Page(this.submitService.getData(url,data));
   }
 
   ngDoCheck(){

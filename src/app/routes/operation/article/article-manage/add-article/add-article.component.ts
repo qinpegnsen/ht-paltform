@@ -303,7 +303,7 @@ export class AddArticleComponent implements OnInit {
     if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img,function($image){
         $image.css({//设置图片的大小
-          width: '20%'
+          width: '100%'
         });
       });
     }

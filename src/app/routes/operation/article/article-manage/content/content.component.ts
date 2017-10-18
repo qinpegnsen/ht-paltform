@@ -240,4 +240,21 @@ export class ContentComponent implements OnInit,OnChanges  {
       this.queryArticManleList('Y')//调用文章的列表
     }
   }
+
+  /**
+   * 鼠标放在info 上显示标题
+   */
+  showImg(event,i){
+    i.style.display = 'block';
+    i.style.top = (event.clientY+10) + 'px';
+    i.style.left = (event.clientX+15)+ 'px';
+  }
+
+  /**
+   * 鼠标离开时隐藏标题
+   */
+  hideImg(i) {
+    i.style.display = 'none';
+  }
+
 }
