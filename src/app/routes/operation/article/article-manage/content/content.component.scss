@@ -6,13 +6,19 @@ th,td{
   height: 50px !important;
 }
 .hoverTitle{
-  position: fixed;
-  top:0;
-  left: 0;
+  position: absolute;
+  white-space: nowrap;
+  //width: 500px;
+  left: -80px;right:0;
+  margin: auto;
   height: auto;
   display: none;
   z-index: 1000;
 }
 .myhover{
   cursor: pointer;
+}
+.rec{
+  border: 1px solid red;
+  border-radius: 5px;
 }
