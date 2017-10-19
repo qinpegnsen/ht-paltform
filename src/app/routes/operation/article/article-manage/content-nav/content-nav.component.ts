@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {NavService} from "./nav.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-content-nav',
@@ -17,7 +18,7 @@ export class ContentNavComponent implements OnInit,OnChanges{
   public defaultState='DRAFT';            //组件之间传送的时候默认的是草稿的状态
   public stateList={};                    //各种状态总数列表
 
-  constructor(public NavService:NavService,public service:SubmitService) { }
+  constructor(public NavService:NavService,public service:SubmitService,public router:Router) { }
 
   /**
    * 初始化的时候获取所有状态的总条数
@@ -43,6 +44,7 @@ export class ContentNavComponent implements OnInit,OnChanges{
    */
   articleState(state){
     this.flag=state;//给点击的当前的状态添加样式
+    this.router.navigate(['/main/operation/article/manage']);
     this.sendState.emit(state)
   }
 }
