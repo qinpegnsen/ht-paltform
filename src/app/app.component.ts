@@ -98,7 +98,6 @@ export class AppComponent implements OnInit {
 
     let url = this.location.path();
     console.log(url)
-    console.log(this)
     let loginCookie = this.cookieService.get("SZH_LINFO_ADMIN");
     if (url !== "/pages/login") {
       if (!loginCookie) this.router.navigate(['/pages/login'], {replaceUrl: true}); //路由跳转

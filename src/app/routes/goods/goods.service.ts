@@ -158,28 +158,12 @@ export class GoodsService {
     let loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
     console.log("█ loginInfo ►►►",  loginInfo);
     if(isNullOrUndefined(loginInfo)){
-      AppComponent.rzhAlt('warning','获取运费模板失败，请登录后重试');
+      AppComponent.rzhAlt('warning','未获取到店铺信息，请登录后重试');
       return null;
     }else if(!isNullOrUndefined(loginInfo.storeCode)){
       storeCode = loginInfo.storeCode;
       // storeCode = 'SZH_PLAT_SELF_STORE';
       return me.submit.getData('/expressTpl/queryByStoreCode',{storeCode: storeCode})
-    }
-  }
-
-  /**
-   * 根据运费模板ID获取运费模板值
-   * @param tplId   运费模板ID
-   * @returns {any}   运费模板值
-   */
-  getTplVal(tplId){
-    let me = this;
-    let tpls = me.getExpressTplByStoreCode();
-    console.log("█ tplId ►►►",  tplId);
-    for(let tpl of tpls){
-      if(tpl.id == tplId){
-        return tpl;
-      }
     }
   }
 

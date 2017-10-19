@@ -448,7 +448,7 @@
             <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="TPL"
-                     [checked]="publishData.goodsExpressInfo.freightType=='TPL'"
+                     (ngModelChange)="getExpressTpl(publishData.goodsExpressInfo.freightType)"
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用物流规则</label>
             </span>
@@ -460,7 +460,7 @@
               </select>
               <a class="btn btn-green btn-sm ml" target="_blank" (click)="addLogisticsModule()"><em
                 class="fa fa-truck"></em> 添加物流规则</a>
-              <span class="btn btn-sm btn-info fa fa-refresh" (click)="getExpressTpl()"></span>
+              <span class="btn btn-sm btn-info fa fa-refresh" title="刷新物流规则" (click)="getExpressTpl()"></span>
             </span>
             <div class="tpl-box w100 p mt"
                  *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId">

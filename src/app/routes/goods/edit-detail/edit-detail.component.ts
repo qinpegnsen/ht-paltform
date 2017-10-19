@@ -228,7 +228,6 @@ export class EditDetailComponent implements OnInit {
    */
   private getPageData() {
     let me = this, pageData;
-    me.getExpressTpl(); //获取物流模板
     if (me.path != 'step_two') {
       pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
     } else {
@@ -266,9 +265,13 @@ export class EditDetailComponent implements OnInit {
   /**
    * 获取运费模板
    */
-  getExpressTpl() {
-    let me = this;
-    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
+  getExpressTpl(target?) {
+    let me = this, expressTpl;
+    console.log("█ target ►►►",  target);
+    // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
+    if(isNullOrUndefined(target) || target == 'FIXED') {
+      expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
+    }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
@@ -278,7 +281,7 @@ export class EditDetailComponent implements OnInit {
    */
   getTplValById() {
     let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
-    let result = me.goods.getTplVal(tplId);
+    let result = me.getTplVal(tplId);
     if (!isNullOrUndefined(result)) me.tplVals = result;
     if (me.tplVals.valuationType == 'VOLUME') {
       me.unit = 'm³'
@@ -286,6 +289,20 @@ export class EditDetailComponent implements OnInit {
       me.unit = 'kg'
     } else {
       me.unit = '件'
+    }
+  }
+
+  /**
+   * 根据运费模板ID获取运费模板值
+   * @param tplId   运费模板ID
+   * @returns {any}   运费模板值
+   */
+  private getTplVal(tplId) {
+    let me = this;
+    for (let tpl of me.logistics ) {
+      if (tpl.id == tplId) {
+        return tpl;
+      }
     }
   }
 
@@ -887,7 +904,7 @@ export class EditDetailComponent implements OnInit {
    */
   compareNumber(arg1: string, arg2: string) {
     let num1 = Number(arg1), num2 = Number(arg2);
-    if(num1 < num2 || num1 == num2) return true;
+    if (num1 < num2 || num1 == num2) return true;
   }
 
   /**

@@ -39,11 +39,11 @@
         <div class="form-group pr0 mb0">
           <div class="w80 pl0 pr0 pull-left">
             <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="订单编号"
-                   [(ngModel)]="search.ordno" (change)="queryDatas(1)">
+                   [(ngModel)]="search.ordno">
             <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编号"
-                   [(ngModel)]="search.wono" (change)="queryDatas(1)">
+                   [(ngModel)]="search.wono">
           </div>
-          <button type="submit" title="搜索"
+          <button type="submit" title="搜索" (click)="queryDatas(1)"
                   class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
             <em class="icon-magnifier fa-fw"></em>
           </button>

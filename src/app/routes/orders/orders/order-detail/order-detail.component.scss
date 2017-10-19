@@ -1,5 +1,9 @@
 .szh-order-info{
   font-size: 0;
+  .user-note{
+    max-height: 100px;
+    overflow-y: auto;
+  }
 }
 .szh-order-details {
   width: 260px;

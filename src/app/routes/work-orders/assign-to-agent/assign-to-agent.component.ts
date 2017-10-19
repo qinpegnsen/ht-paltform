@@ -21,6 +21,7 @@ export class AssignToAgentComponent implements OnInit, OnChanges, OnDestroy {
       console.log("█ ordno ►►►", this.wono);
       $('.wrapper > section').css('z-index', 200);
       this.showAssignWoWindow = true;
+      this.getAgentList()
     }
   }
 
@@ -32,6 +33,13 @@ export class AssignToAgentComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
+
+  }
+
+  /**
+   * 获取代理商列表
+   */
+  getAgentList(){
     let data = {
       agentName: '',
       state: 'NORMAL'

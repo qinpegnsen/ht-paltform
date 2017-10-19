@@ -113,7 +113,7 @@ export class AllOrdersComponent implements OnInit {
     let requestData = {
       curPage: activePage,
       pageSize: 5,
-      custCode: _this.custPhone,
+      custPhone: _this.custPhone,
       ordno: _this.ordno,
       ordState: _this.ordState
     };

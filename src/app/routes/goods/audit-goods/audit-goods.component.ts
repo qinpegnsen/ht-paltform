@@ -159,7 +159,7 @@ export class AuditGoodsComponent implements OnInit {
    */
   getExpressTpl() {
     let me = this;
-    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取物流模板
+    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
@@ -169,7 +169,7 @@ export class AuditGoodsComponent implements OnInit {
    */
   getTplValById() {
     let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
-    let result = me.goods.getTplVal(tplId);
+    let result = me.getTplVal(tplId);
     if (!isNullOrUndefined(result)) me.tplVals = result;
     if (me.tplVals.valuationType == 'VOLUME') {
       me.unit = 'm³'
@@ -177,6 +177,20 @@ export class AuditGoodsComponent implements OnInit {
       me.unit = 'kg'
     } else {
       me.unit = '件'
+    }
+  }
+
+  /**
+   * 根据运费模板ID获取运费模板值
+   * @param tplId   运费模板ID
+   * @returns {any}   运费模板值
+   */
+  private getTplVal(tplId) {
+    let me = this;
+    for (let tpl of me.logistics ) {
+      if (tpl.id == tplId) {
+        return tpl;
+      }
     }
   }
 
