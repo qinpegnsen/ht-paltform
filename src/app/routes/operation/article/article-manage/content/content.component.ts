@@ -92,6 +92,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 输入属性变化的时候再次查询，获取当前状态下的系统列表
    */
   ngOnChanges(){
+    console.log("█ this.searchKey ►►►",  this.searchKey);
     this.articleState=this.state;
     this.queryArticManleList('N')
   }
@@ -119,7 +120,8 @@ export class ContentComponent implements OnInit,OnChanges  {
       curPage:activePage,
       pageSize:8,
       articleState:this.articleState,
-      articleTitle:this.searchKey,
+      // articleTitle:this.searchKey,
+      articleShortTitle:this.searchKey,
       isTopState:booelean
     }
 
