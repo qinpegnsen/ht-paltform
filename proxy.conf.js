@@ -9,9 +9,8 @@
 const PROXY_CONFIG = [
   {
     context: [
-
+      "/login",
       "/admin",
-      "/article",
       "/goodsKind",
       "/goodsEdit",
       "/goodsBrand",
@@ -19,11 +18,9 @@ const PROXY_CONFIG = [
       "/agent",
       "/after",
       "/agentOrd",
-      "/articleClass",
       "/articleComment",
       "/articleSyd",
       "/custAddr",
-      "/cust",
       "/custFavorites",
       "/custInvoice",
       "/custAuthInfo",
@@ -47,21 +44,26 @@ const PROXY_CONFIG = [
       "/helpQuestions",
       "/helpQuestions",
       "/wo",
-      "/notifyAdminTpl",
-      "/notifyAdmin",
       "/ord",
       "/statistical",
-      "/login",
-      "/phone"
+      "/notifyAdminTpl",
+      "/notifyAgentTpl",
+      "/notifyAdmin",
+      "/announce",
+      "/articleClass",
+      "/ord",
+      "/phone",
+      "/article",
+      "/cust"
     ],
-    target: gh  + "8085",   //拦截 context配置路径，经过此地址
+    target: gh + "8085",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
     context: [
       "/upload"
     ],
-    target: gh + "8082",   //拦截 context配置路径，经过此地址
+    target: wp + "8003",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -71,7 +73,7 @@ const PROXY_CONFIG = [
     ],
     target: gh + "8082",   //拦截 context配置路径，经过此地址
     secure: false
-  },
+  }
 ];
 
 module.exports = PROXY_CONFIG;
