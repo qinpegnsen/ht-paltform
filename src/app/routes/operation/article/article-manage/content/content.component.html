@@ -14,13 +14,13 @@
           分类
         </th>
         <th class="w12" *ngIf="articleState=='NORMAL'">
-          <span class="thc font">是否置顶</span>
+          <span class="thc font mr2">是否置顶</span>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="topTemplate"
                  triggers="mouseenter:mouseleave"  ></i>
           <template #topTemplate class="topColor"><span></span>选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</template>
         </th>
         <th class="w13" *ngIf="articleState=='NORMAL'">
-          <span class="thc font">是否推荐</span>
+          <span class="thc font mr2">是否推荐</span>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="recTemplate"
              triggers="mouseenter:mouseleave"></i>
           <template #recTemplate class="topColor"><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec thc font"> 推荐 </span>）突出显示</template>
@@ -42,7 +42,7 @@
         <td>{{i+1}}</td>
         <td>
           <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
-          <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
+          <i class="icon-info mr5" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>
           <span>{{article.articleTitleShort}}</span>
         </td>

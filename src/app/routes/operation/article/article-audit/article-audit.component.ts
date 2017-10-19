@@ -38,7 +38,7 @@ export class ArticleAuditComponent implements OnInit {
     if(typeof event !== "undefined") activePage =event.activePage;
     let data={
       curPage:activePage,
-      pageSize:8,
+      pageSize:10,
       articleState:'AUDIT',
       articleTitle:'',
       isTopState:'N'
@@ -46,7 +46,5 @@ export class ArticleAuditComponent implements OnInit {
     let url= "/article/queryAllArticleBySort";
     let result=new Page(this.service.getData(url,data));
     this.articleManListdata= result;
-    console.log("█ expr ►►►",  result);
-
   }
 }
