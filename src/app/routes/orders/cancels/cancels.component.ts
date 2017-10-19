@@ -99,14 +99,14 @@ export class CancelsComponent implements OnInit {
       },
       success: (res) => {
         if (res.success) {
-          swal('已成功取消订单', '', 'success');
+          swal('关闭申请已提交', '', 'success');
           _this.hideWindow();
         } else {
           swal(res.info,'','error');
         }
       },
       error: (data) => {
-        swal('取消订单失败提交失败！','' ,'error');
+        swal('关闭申请提交失败！','' ,'error');
       }
     })
   }

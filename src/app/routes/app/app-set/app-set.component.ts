@@ -104,7 +104,7 @@ export class AppSetComponent implements OnInit {
      */
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds[i]=i;
+      _this.updateIds[i] = i;
     }
     _this.updateImgs[i] = 1;
   }
@@ -290,7 +290,7 @@ export class AppSetComponent implements OnInit {
 
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds[i]=i;
+      _this.updateIds[i] = i;
     }
 
   }
@@ -305,7 +305,7 @@ export class AppSetComponent implements OnInit {
     _this.optKey[i] = event.target.value;
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds[i]=i;
+      _this.updateIds[i] = i;
     }
 
   }
@@ -373,20 +373,7 @@ export class AppSetComponent implements OnInit {
         if (res.success) {
           _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '', 'success');
-          _this.isShowContent = false;
           _this.phoneIndexId[_this.ord - 1] = res.data;
-
-          /**
-           * 清空模板的信息
-           */
-          _this.contentList.splice(0, _this.contentList.length);
-          _this.uploaders.splice(0, _this.uploaders.length);
-
-          _this.contents.splice(0, _this.contents.length);
-          _this.optTypeCode.splice(0, _this.optTypeCode.length);
-          _this.typeDesc.splice(0, _this.typeDesc.length);
-          _this.isEntered.splice(0, _this.isEntered.length);
-          _this.optKey.splice(0, _this.optKey.length);
         } else {
           swal('添加首页模板提交失败====！', '', 'error');
         }
@@ -395,6 +382,17 @@ export class AppSetComponent implements OnInit {
         swal('添加首页模板提交失败！', '', 'error');
       }
     })
+    this.isShowContent = false;
+    /**
+     * 清空模板的信息
+     */
+    _this.contentList.splice(0, _this.contentList.length);
+    _this.uploaders.splice(0, _this.uploaders.length);
+    _this.contents.splice(0, _this.contents.length);
+    _this.optTypeCode.splice(0, _this.optTypeCode.length);
+    _this.typeDesc.splice(0, _this.typeDesc.length);
+    _this.isEntered.splice(0, _this.isEntered.length);
+    _this.optKey.splice(0, _this.optKey.length);
   }
 
 
@@ -411,21 +409,22 @@ export class AppSetComponent implements OnInit {
     if (uplength > 0) {
       for (let h = 0; h < uplength; h++) {
         let updateIndex = _this.updateIds[h];
-        _this.updateIndexContentIds.push(_this.ids[updateIndex]);
-        if (_this.updateImgs[h] == 1 || _this.tplType == 'TXT') {
-          _this.updateContents.push(_this.contents[updateIndex]);
-        } else {
-          _this.updateContents.push('');
+        if (typeof(updateIndex) != 'undefined') {
+          _this.updateIndexContentIds.push(_this.ids[updateIndex]);
+          if (_this.updateImgs[h] == 1 || _this.tplType == 'TXT') {
+            _this.updateContents.push(_this.contents[updateIndex]);
+          } else {
+            _this.updateContents.push('0');
+          }
+          _this.updateOptTypeCode.push(_this.optTypeCode[updateIndex]);
+          _this.updateOptKey.push(_this.optKey[updateIndex]);
         }
-        _this.updateOptTypeCode.push(_this.optTypeCode[updateIndex]);
-        _this.updateOptKey.push(_this.optKey[updateIndex]);
       }
     } else {
       flag = false;
       swal('未做任何修改！', '', 'success');
     }
-    console.log('█ _this.updateContents ►►►', _this.updateContents);
-    console.log('█ _this.updateContents.join(\',\') ►►►', _this.updateContents.join(','));
+
     if (flag) {
       _this.ajax.post({
         url: '/phone/index/updateContent',
@@ -441,25 +440,6 @@ export class AppSetComponent implements OnInit {
           if (res.success) {
             _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
             swal('修改首页模板提交成功！', '', 'success');
-            _this.isShowContent = false;
-
-            /**
-             * 清空模板的信息
-             */
-            _this.contentList.splice(0, _this.contentList.length);//清空选中模板的详细信息
-            _this.uploaders.splice(0, _this.uploaders.length);//清空选中模板的图片
-            _this.contents.splice(0, _this.contents.length);//清空选中模板的图片暗码或者内容
-            _this.optTypeCode.splice(0, _this.optTypeCode.length);
-            _this.typeDesc.splice(0, _this.typeDesc.length);
-            _this.isEntered.splice(0, _this.isEntered.length);
-            _this.optKey.splice(0, _this.optKey.length);
-            _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
-            _this.updateContents.splice(0, _this.updateContents.length);
-            _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
-            _this.updateOptKey.splice(0, _this.updateOptKey.length);
-            _this.updateIds.splice(0, _this.updateIds.length);
-            _this.updateImgs.splice(0, _this.updateImgs.length);
-
           } else {
             swal('修改首页模板提交失败====！', 'error');
           }
@@ -468,6 +448,24 @@ export class AppSetComponent implements OnInit {
           swal('修改首页模板提交失败！', '', 'error');
         }
       })
+
+      _this.isShowContent = false;
+      /**
+       * 清空模板的信息
+       */
+      _this.contentList.splice(0, _this.contentList.length);//清空选中模板的详细信息
+      _this.uploaders.splice(0, _this.uploaders.length);//清空选中模板的图片
+      _this.contents.splice(0, _this.contents.length);//清空选中模板的图片暗码或者内容
+      _this.optTypeCode.splice(0, _this.optTypeCode.length);
+      _this.typeDesc.splice(0, _this.typeDesc.length);
+      _this.isEntered.splice(0, _this.isEntered.length);
+      _this.optKey.splice(0, _this.optKey.length);
+      _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
+      _this.updateContents.splice(0, _this.updateContents.length);
+      _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
+      _this.updateOptKey.splice(0, _this.updateOptKey.length);
+      _this.updateIds.splice(0, _this.updateIds.length);
+      _this.updateImgs.splice(0, _this.updateImgs.length);
     }
   }
 
@@ -538,7 +536,7 @@ export class AppSetComponent implements OnInit {
        * @param status 状态
        * @param headers 头信息
        */
-      me.uploaders[i].onSuccessItem = function (item, response,status, headers) {
+      me.uploaders[i].onSuccessItem = function (item, response, status, headers) {
         let res = JSON.parse(response);
         if (res.success) {
           item.remove();

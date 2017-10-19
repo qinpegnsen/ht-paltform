@@ -10,6 +10,7 @@ import {defineLocale} from 'ngx-bootstrap/bs-moment';
 import {zhCn} from 'ngx-bootstrap/locale';
 import {RzhtoolsService} from '../../../../core/services/rzhtools.service';
 import {AllStockService} from './all-stock.service';
+import {StockService} from '../stock.service';
 defineLocale('cn', zhCn);
 const swal = require('sweetalert');
 
@@ -37,9 +38,10 @@ export class AllStockComponent implements OnInit {
   private showBankWindow:boolean = false;
   public goodsList: Page = new Page();
   @ViewChild('cancelBox') cancelBox: CancelComponent;
+  public LogisticsData: any;//物流信息
 
 
-  constructor(private StockComponent: StockComponent, private submit: SubmitService,private AllStockService:AllStockService) {
+  constructor(private StockComponent: StockComponent, private submit: SubmitService,private AllStockService:AllStockService,private StockService:StockService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
@@ -148,6 +150,23 @@ export class AllStockComponent implements OnInit {
     this.curPage1=curPage;
     this.showBankWindow = true;
 
+  }
+
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics,ordno) {
+    Logistics.style.display = 'block';
+    if(isUndefined(ordno)) ordno = ordno;
+    this.LogisticsData = this.StockService.getOrderLogisticsData(ordno);
+  }
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
   }
 
   /**

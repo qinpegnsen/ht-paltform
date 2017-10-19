@@ -30,6 +30,10 @@ import { BankTransferComponent } from './stock/bank-transfer/bank-transfer.compo
 import {FileUploadModule} from "_ng2-file-upload@1.2.1@ng2-file-upload";
 import {AllOrderService} from './order-review/all-order/all-order.service';
 import { AuditComponent } from './order-review/audit/audit.component';
+import {ReviewDetailComponent} from './order-review/review-detail/review-detail.component';
+import {StockService} from './stock/stock.service';
+import {OrderReviewService} from './order-review/order-review.service';
+import { EptDetailComponent } from './ept-detail/ept-detail.component';
 
 
 const routes: Routes = [
@@ -48,10 +52,12 @@ const routes: Routes = [
   {path: 'buyer', component: BuyerEvaluationComponent},
   {path: 'store', component: StoreEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
+  {path: 'ept-detail', component: EptDetailComponent},
   {path: 'order-review',component:OrderReviewComponent,children:[
     {path: '', redirectTo: 'all-order'},
     {path: 'all-order', component: AllOrderComponent},
-    {path: 'to-audit', component: ToAuditComponent}
+    {path: 'to-audit', component: ToAuditComponent},
+    {path: 'review-detail', component: ReviewDetailComponent}
   ]},
   {path: 'ord', component:StockComponent,children:[
     {path: '', redirectTo: 'all-stock'},
@@ -98,6 +104,8 @@ const routes: Routes = [
     LogisticsComponent,
     BankTransferComponent,
     AuditComponent,
+    ReviewDetailComponent,
+    EptDetailComponent,
   ],
   providers: [
     OrdersComponent,
@@ -115,7 +123,9 @@ const routes: Routes = [
     PendingPaymentComponent,
     AllOrderComponent,
     ToAuditComponent,
-    OrderReviewComponent
+    OrderReviewComponent,
+    StockService,
+    OrderReviewService
   ]
 })
 export class OrdersModule { }

@@ -9,6 +9,7 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/bs-moment';
 import {zhCn} from 'ngx-bootstrap/locale';
 import {RzhtoolsService} from '../../../../core/services/rzhtools.service';
+import {StockService} from '../stock.service';
 defineLocale('cn', zhCn);
 @Component({
   selector: 'app-complete',
@@ -31,8 +32,9 @@ export class CompleteComponent implements OnInit {
   private endTime: string;
   public goodsList: Page = new Page();
   @ViewChild('cancelBox') cancelBox: CancelComponent;
+  private LogisticsData;//查看物流
 
-  constructor(private StockComponent:StockComponent,private submit: SubmitService) {
+  constructor(private StockComponent:StockComponent,private submit: SubmitService,private StockService:StockService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
@@ -78,6 +80,23 @@ export class CompleteComponent implements OnInit {
       state:'DELIVERY'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+  }
+
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics,ordno) {
+    Logistics.style.display = 'block';
+    if(isUndefined(ordno)) ordno = ordno;
+    this.LogisticsData = this.StockService.getOrderLogisticsData(ordno);
+  }
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
   }
 
   /**

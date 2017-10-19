@@ -105,10 +105,42 @@
                [queryParams]="{ordno:goods.ordno}">查看详情</p>-->
             <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../stock-detail"
                [queryParams]="{ordno:goods.ordno}">查看详情</p>
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics)"
-               (mouseleave)="hideLogistics(Logistics)">
-              查看物流
-            </p>
+            <p class="cursor-p mb-sm text-gray-dark" *ngIf="goods.state=='DELIVERY'|| goods.state=='SUCCESS'">
+                <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,goods.ordno)"
+                      (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
+            <div class="szh-buyer-info text-left logistics-pop" #Logistics
+                 (mouseenter)="showLogistics(Logistics,goods.ordno)"
+                 (mouseleave)="hideLogistics(Logistics)">
+              <div class="logistics-pop-body">
+                <p class="pl mb-sm clearfix logistics-pop-head">
+                  <span class="fa fa-truck pull-left _icon"></span>
+                  <span class="pull-left">物流信息</span>
+                  <a class="pull-right" routerLink="../stock-detail"
+                     [queryParams]="{ordno:goods.ordno}">查看更多 </a>
+                </p>
+                <div class="logistics-pop-main">
+                  <ul class="timeline-alt pt pb0 m0">
+                    <ng-container *ngFor="let item of LogisticsData;let a=index;">
+                      <li class="mb0" *ngIf="a<4">
+                        <div class="timeline-badge primary">
+                          <em class="fa fa-truck"></em>
+                        </div>
+                        <div class="timeline-panel _mrl">
+                          <div class="right">
+                            <div>
+                              <p>
+                                <span class="mr">{{item.acceptTime}}</span><br>
+                                <span>{{item.acceptStation}}</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
 

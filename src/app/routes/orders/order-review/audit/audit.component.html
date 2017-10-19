@@ -12,19 +12,19 @@
         <dt class="col-xs-3">订单号：</dt>
         <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
       </dl>
-      <dl class="bb m0 clearfix">
+      <dl class="bb m0 clearfix" *ngIf="staff.payWay != 'ONLINE'">
         <dt class="col-xs-3">支付账号：</dt>
         <dd class="orderId-color col-xs-9 font14">{{staff.acct}} </dd>
       </dl>
-      <dl class="bb m0 clearfix">
+      <dl class="bb m0 clearfix" *ngIf="staff.payWay != 'ONLINE'">
         <dt class="col-xs-3">收款账号开户行：</dt>
         <dd class="orderId-color col-xs-9 font14">{{staff.bank}}</dd>
       </dl>
-      <dl class="bb m0 clearfix">
+      <dl class="bb m0 clearfix" *ngIf="staff.payWay != 'ONLINE'">
         <dt class="col-xs-3">收款人：</dt>
         <dd class="orderId-color col-xs-9 font14">{{staff.bacctName}}</dd>
       </dl>
-      <dl class="bb m0 clearfix">
+      <dl class="bb m0 clearfix" *ngIf="staff.payWay != 'REMIT'">
         <dt class="col-xs-3">交易流水码：</dt>
         <dd class="orderId-color col-xs-9 font14">{{staff.tc3rd}}</dd>
       </dl>
@@ -51,7 +51,7 @@
             <span class="fa fa-circle"></span>未通过</label>
           <label class="radio-inline c-radio">
             <input type="radio" name="result" value="REJECT" [(ngModel)]="result"/>
-            <span class="fa fa-circle"></span>彻底驳回'</label>
+            <span class="fa fa-circle"></span>彻底驳回</label>
           <span></span>
         </dd>
       </dl>

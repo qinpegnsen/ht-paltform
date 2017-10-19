@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../core/forms/submit.service';
+import {PatternService} from '../../../core/forms/pattern.service';
+import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+import {OrderService} from '../order.service';
 const swal = require('sweetalert');
 
 @Component({
@@ -13,9 +16,10 @@ export class AgentEptComponent implements OnInit {
   public flag: boolean=false;
   public orderNumber;
   public curCancelOrderId:string;
+  public isDisplay:boolean=true;//关闭申请的按钮
+  private LogisticsData;//物流信息
 
-
-  constructor(private submit: SubmitService) { }
+  constructor(private submit: SubmitService,private patterns: PatternService,private OrderService:OrderService) { }
 
   ngOnInit() {
   }
@@ -57,11 +61,29 @@ export class AgentEptComponent implements OnInit {
   cancelOrder(orderId){
     this.curCancelOrderId = orderId;
   }
+
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics,ordno) {
+    Logistics.style.display = 'block';
+    if(isUndefined(ordno)) ordno = ordno;
+    this.LogisticsData = this.OrderService.getOrderLogisticsData(ordno);
+  }
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
+  }
   /**
    * 取消订单回调函数
    * @param data
    */
   getCancelOrderData(data){
     this.curCancelOrderId = null;
+    this.isDisplay=false;//申请成功后关闭申请按钮隐藏
   }
 }

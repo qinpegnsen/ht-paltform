@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {SubmitService} from "../../../core/forms/submit.service";
-import {isNullOrUndefined} from "util";
-import {AjaxService} from "../../../core/services/ajax.service";
-import {AppComponent} from "../../../app.component";
+import { Injectable } from '@angular/core';
+import {AjaxService} from '../../../core/services/ajax.service';
+import {SubmitService} from '../../../core/forms/submit.service';
+import {isNullOrUndefined} from 'util';
+import {AppComponent} from '../../../app.component';
 
 @Injectable()
-export class OrdersService {
+export class StockService {
 
   constructor(private submit: SubmitService,private ajax: AjaxService) {
-  }
 
+  }
 
   public getOrderLogisticsData(ordno) {
     let url = '/ord/tail/queryDeliveryList';
@@ -93,12 +93,4 @@ public getOrderState(ordno) {
     let expressData = this.submit.getData(url, data);
     if (!isNullOrUndefined(expressData)) return expressData;
   }
-
-
-  public addRemark(data){
-    let url = '/ord/updateOrdRemark';
-    this.submit.postRequest(url, data);
-  }
-
-
 }
