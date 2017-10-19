@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg thc font">
   会员详情列表
-  <span class="btn btn-info pull-right" (click)="back()" > 返回</span>
+  <!--<span class="btn btn-info pull-right" (click)="back()" > 返回</span>-->
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
@@ -11,7 +11,8 @@
         <th class="w5" class="text-center">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="w10" class="text-center">
+        <th class="w10" class="pull-left">
+           <span class="custName" style=""> </span>
           <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
         </th>
         <th class="w10" class="text-center">
@@ -47,9 +48,11 @@
       <ng-container *ngFor="let member of memberList.data;let i = index">
         <tr class="text-center">
           <td>{{i+1}}</td>
-          <td>
+          <td class="pull-left">
            <span  *ngIf="member.authState=='AUTH'">
-             <i class="icon icon-user-following gold-star" title="已实名认证"></i>&nbsp;
+             <i class="icon icon-user-following gold-star " title="已实名认证"></i>&nbsp;
+           </span>
+            <span *ngIf="member.authState!='AUTH'" class="custName" style="">
            </span>
             {{member.custName}}
           </td>

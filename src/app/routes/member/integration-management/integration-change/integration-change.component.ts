@@ -23,6 +23,10 @@ export class IntegrationChangeComponent implements OnInit {
   ngOnInit() {
   }
 
+  testPhone(phone){
+    if(/^1[0-9]{10}$/.test(phone)) return true;
+  }
+
   /**
    * 查询重消币
    */
@@ -46,6 +50,6 @@ export class IntegrationChangeComponent implements OnInit {
       this.sum.coin='';
       this.sum.recharge=''
     }
-    this.queryCoin();
+    // this.queryCoin();
   }
 }

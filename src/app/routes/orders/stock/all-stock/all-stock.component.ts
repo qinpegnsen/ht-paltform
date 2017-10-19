@@ -83,7 +83,6 @@ export class AllStockComponent implements OnInit {
       dateStr: dateStr,
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**

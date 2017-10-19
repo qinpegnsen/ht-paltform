@@ -57,7 +57,7 @@ export class PendingPaymentComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+   queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;

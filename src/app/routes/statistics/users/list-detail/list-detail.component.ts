@@ -4,10 +4,12 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import { Location }from '@angular/common';
+import {UsersNewComponent} from "../users-new/users-new.component";
 @Component({
   selector: 'app-list-detail',
   templateUrl: './list-detail.component.html',
-  styleUrls: ['./list-detail.component.scss']
+  styleUrls: ['./list-detail.component.scss'],
+  providers:[UsersNewComponent]
 })
 export class ListDetailComponent implements OnInit {
   private linkType:string;
@@ -16,7 +18,7 @@ export class ListDetailComponent implements OnInit {
   private prevtime:any;
   private authState:string='';//默认查询的会员的是否认证
 
-  constructor( private routeInfo: ActivatedRoute,private submit: SubmitService,private location: Location) { }
+  constructor( private routeInfo: ActivatedRoute,private submit: SubmitService,private location: Location,private usersNewComponent:UsersNewComponent) { }
 
   ngOnInit() {
     let _this=this;
@@ -32,6 +34,7 @@ export class ListDetailComponent implements OnInit {
    */
   back(){
     this.location.back();
+    // this.usersNewComponent.selectInfos()
   }
 
   /*

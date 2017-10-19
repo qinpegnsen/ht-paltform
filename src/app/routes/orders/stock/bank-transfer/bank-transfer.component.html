@@ -62,13 +62,11 @@
                 <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
                 <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl" (mousemove)="showImg($event,i)"
-                       (mouseout)="hideImg(i)"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                       (mouseout)="hideImg(i)" [alt]="item?.file?.name"
                                class="_img">
-                  <img [src]="item._file | imgUrl" #i class="bigImg" alt=""
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img [src]="item._file | imgUrl" #i class="bigImg" alt="">
                 <input type="text" placeholder="请输入备注" class="form-control d-play pull-right" style="width: 230px;
-    margin-left: 10px;"  name="imgremark" [(ngModel)]="summary" required>
+    margin-left: 10px;"  name="imgremark" [(ngModel)]="summary" required multiple>
                 </span>
               </span>
           <label class="btn btn-default file-upload">
@@ -77,6 +75,17 @@
           </label>
         </dd>
       </dl>
+    <dl class="bb m0 clearfix">
+      <dt class="col-xs-3 lh40"><i>*</i>支付账号：</dt>
+      <dd class="orderId-color col-xs-9 font14">
+        <input type="text" class="form-control" placeholder="请输入支付账号" name="acct" ngModel required
+               #acct="ngModel" [pattern]="patterns.backcard">
+      </dd>
+      <div [hidden]="acct.valid || acct.pristine"
+           class="col-sm-9 pull-right text-danger">
+        请输入正确支付账号
+      </div>
+    </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40"><i>*</i>付款时间：</dt>
         <dd class="orderId-color col-xs-9 font14">

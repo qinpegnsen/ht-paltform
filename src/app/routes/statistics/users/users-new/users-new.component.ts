@@ -8,6 +8,8 @@ import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {SettingsService} from "../../../../core/settings/settings.service";
 import {isNullOrUndefined} from "util";
 import {AppComponent} from "../../../../app.component";
+
+declare var $: any;
 defineLocale('cn', zhCn);
 @Component({
   selector: 'app-users-new',
@@ -207,34 +209,6 @@ export class UsersNewComponent implements OnInit {
         _this.queryTime = _this.select.week;
         break;
     };
-
-    // if (type == "DAY") {
-    //   if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
-    //     AppComponent.rzhAlt("error", "请选择日期");
-    //   } else {
-    //     // console.log("█ type  ►►►", type);
-    //     // console.log("█ this.queryTime ►►►", this.queryTime);
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else if (type == "WEEK") {
-    //   if (isNullOrUndefined(_this.select.week) || _this.select.week == "") {
-    //     AppComponent.rzhAlt("error", "请选择指定周");
-    //   } else {
-    //     _this.queryTime = _this.select.week;
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else if (type == "MONTH") {
-    //   let time = _this.getMonth();
-    //   if (time != null) {
-    //     _this.queryTime = _this.getMonth();
-    //     _this.qeuryAll(_this.queryType, _this.queryTime);
-    //     //TODO 业务实现
-    //   }
-    // } else {
-    //   AppComponent.rzhAlt("error", "查询异常");
-    // }
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {
@@ -252,39 +226,40 @@ export class UsersNewComponent implements OnInit {
       date = RzhtoolsService.dataFormat(_this.datepickerModel, "yyyy-MM-dd");
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
-      _this.router.navigate(["main/stat/users-new/list-detail"], {
-        queryParams: {
-          linkType: '',
-          prevtime: prevtime,
-          nowtime: nowtime
-        }
-      });
+
+      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
     } else if (_this.showType.MONTH) {//按月查询
       let prevtime: string, nowtime: string, date: string;
       date = this.select.year + "-" + this.select.month
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)-1), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
-      _this.router.navigate(["main/stat/users-new/list-detail"], {
-        queryParams: {
-          linkType: '',
-          prevtime: prevtime,
-          nowtime: nowtime
-        }
-      });
+      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
+      // _this.router.navigate(["main/stat/users-new/list-detail"], {
+      //   queryParams: {
+      //     linkType: '',
+      //     prevtime: prevtime,
+      //     nowtime: nowtime
+      //   }
+      // });
     }
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
       date = this.data.queryTimeList[i];
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)-1), "yyyy-MM-dd HH:mm:ss") ;
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)), "yyyy-MM-dd HH:mm:ss") ;
-      _this.router.navigate(["main/stat/users-new/list-detail"], {
-        queryParams: {
-          linkType: '',
-          prevtime: prevtime,
-          nowtime: nowtime
-        }
-      });
+      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
+      // _this.router.navigate(["main/stat/users-new/list-detail"], {
+      //   queryParams: {
+      //     linkType: '',
+      //     prevtime: prevtime,
+      //     nowtime: nowtime
+      //   }
+      // });
     }
+
 
   }
 }
