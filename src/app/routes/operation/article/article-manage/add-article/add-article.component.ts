@@ -359,21 +359,23 @@ export class AddArticleComponent implements OnInit {
   alertResult() {
     let  me = this;
     this.closeAlert();//关闭弹窗
-
     let selectGood=$(".panel-success").find('li');//在拖拽里面选择的商品;
     let articlelinkGood=$("._myAppend").find('li');//已经为文章关联的商品;
     if($('._myAppend').find($('li')).length==0){ //如果文章关联的商品的长度为0直接追加
       $("._myAppend").append(selectGood);
     }else{//如果追加的时候长度大于0，首先看看在已经关联的商品里面有没有现在选择的商品，因为关联同样的产品好几个没有意义
-      for(let i=0;i<$(selectGood[i]).length;i++){
-        for(let j=0;j<$(articlelinkGood[j]).length;j++){
-          if($(selectGood[i]).find("input:hidden").val()!=$(articlelinkGood[j]).find("input:hidden").val()){
-            $("._myAppend").append(selectGood[i]);//把已经选择的并且之前没有选择过的追加到关联商品里面
-          }
+      for(let i=0;i<selectGood.length;i++){
+        let flag=true;
+        for(let j=0;j<articlelinkGood.length;j++){
+          if($(selectGood[i]).find("input:hidden").val()==$(articlelinkGood[j]).find("input:hidden").val()){
+            flag=false;
+          };
+        };
+        if(flag){
+          $("._myAppend").append(selectGood[i]);//把已经选择的并且之前没有选择过的追加到关联商品里面;
         }
       }
     };
-
     if( $('._myAppend').find($('li')).length==0){ //追加完之后如果长度为0，把他隐藏
       $("._myAppend").css("height", '0px');
     }else{
