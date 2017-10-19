@@ -64,7 +64,8 @@
 }
 ._scroll{
   height:500px;
-  overflow-y: scroll;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 .query-name{
   line-height: 35px;
@@ -106,4 +107,21 @@
 }
 .height0{
   height:0px;
+}
+.myhover{
+  cursor: move !important;
+}
+.qpsP{
+  width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;display: block;
+}
+.hoverName{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: auto;
+  width:100%;
+  display: none;
+  z-index: 100000;
+  background: #fff;
+  white-space:pre-wrap;
 }

@@ -2,6 +2,23 @@ th,td{
   text-align: center;
 }
 .qpsImg{
-  width:50px !important;
+  //width:50px !important;
   height: 50px !important;
+}
+.hoverTitle{
+  position: absolute;
+  white-space: nowrap;
+  //width: 500px;
+  left: -80px;right:0;
+  margin: auto;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}
+.myhover{
+  cursor: pointer;
+}
+.rec{
+  border: 1px solid red;
+  border-radius: 5px;
 }

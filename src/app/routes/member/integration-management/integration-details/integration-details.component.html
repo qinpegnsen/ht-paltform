@@ -39,7 +39,10 @@
         <td *ngIf="count.coin<0" style="color:red">
           {{count.coin}}
         </td>
-        <td *ngIf="count.coin>0" style="color:green">
+        <!--<td *ngIf="count.coin==0">-->
+          <!--{{count.coin}}-->
+        <!--</td>-->
+        <td *ngIf="count.coin>=0" style="color:green">
           {{count.coin}}
         </td>
         <td>{{count.description}}</td>

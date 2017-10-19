@@ -3,6 +3,12 @@
   margin: auto;
   margin-top: 15px;
 }
+li{
+  list-style: none;
+}
+.b-radius{
+  border-radius: 50%;
+}
 .sc{
   margin-left: -3px;
   margin-top: -4px;
@@ -18,7 +24,9 @@
   display: block;
 }
 .upload{
-  padding: 6px 6px;
+  height: 35px;
+  line-height: 35px;
+  padding: 8px 10px;
   margin-right: 10px;
   border-radius: 3px;
 }
@@ -39,4 +47,18 @@
 }
 .a{
   background: red;
+}
+.btn{
+  padding:0 3px ;
+}
+a{
+  text-decoration: none;
+  color: #fff;
+}
+.upload-input{
+  height: 35px;
+  line-height: 35px;
+}
+.up{
+  padding: 0 10px;
 }

@@ -71,7 +71,6 @@ export class MemberComponent implements OnInit {
     }
     let url='/cust/queryAllCust';
     this.memberListdata=new Page(this.service.getData(url,data))
-    console.log(this.memberListdata)
   }
 
   /**
