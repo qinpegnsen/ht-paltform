@@ -478,8 +478,6 @@ export class AddArticleComponent implements OnInit {
     } else if (this.linkType == 'updateArticle') {
       if(me.coverChange&&me.coverCode!='AUTO'){//如果点击修改封面了并且不是没图就执行图片上传
         me.uploadImg();//执行图片上传的方法
-      }else if(me.coverCode=='THREE'){//如果默认的封面是3张图片上传也执行图片上传
-        me.uploadImg();//执行图片上传的方法
       }else{
         me.articleExtra();
       }
