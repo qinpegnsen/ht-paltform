@@ -123,11 +123,11 @@
         </td>
         <td>{{member.createTime}}</td>
         <td>
-          <button class="btn btn-danger btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
+          <button class="btn btn-info btn-xs fa fa-pause" *ngIf="member.state=='NORMAL'" title="冻结"
                   (click)="changeState('FREEZE',member.custCode,memberListdata.curPage)"></button>
-          <button class="btn btn-info btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
+          <button class="btn btn-danger btn-xs fa fa-trash" *ngIf="member.state=='FREEZE'" title="删除"
                   (click)="changeState('BLACK',member.custCode,memberListdata.curPage)"></button>
-          <button class="btn btn-purple btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="激活"
+          <button class="btn btn-green btn-xs fa fa-play" *ngIf="member.state=='FREEZE'" title="激活"
                   (click)="changeState('NORMAL',member.custCode,memberListdata.curPage)"></button>
       </tr>
       <tr *ngIf="member.isShow">

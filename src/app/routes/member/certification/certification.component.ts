@@ -59,8 +59,8 @@ export class CertificationComponent implements OnInit {
    */
   showImg(event,i){
     i.style.display = 'block';
-    i.style.top = (event.clientY-100) + 'px';
-    i.style.left = (event.clientX-600) + 'px';
+    i.style.top = (event.clientY-150) + 'px';
+    i.style.left = (event.clientX-500) + 'px';
 
   }
 
