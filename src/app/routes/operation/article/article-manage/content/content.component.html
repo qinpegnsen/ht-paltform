@@ -13,16 +13,17 @@
         <th class="w10 thc font">
           分类
         </th>
-        <th class="w12 thc font" *ngIf="articleState=='NORMAL'">
-          是否置顶<i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="topTemplate"
+        <th class="w12" *ngIf="articleState=='NORMAL'">
+          <span class="thc font">是否置顶</span>
+          <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="topTemplate"
                  triggers="mouseenter:mouseleave"  ></i>
-          <template #topTemplate><span></span>选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</template>
+          <template #topTemplate class="topColor"><span></span>选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</template>
         </th>
-        <th class="w13 thc font" *ngIf="articleState=='NORMAL'">
-          是否推荐
+        <th class="w13" *ngIf="articleState=='NORMAL'">
+          <span class="thc font">是否推荐</span>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="recTemplate"
              triggers="mouseenter:mouseleave"></i>
-          <template #recTemplate><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec"> 推荐 </span>）突出显示</template>
+          <template #recTemplate class="topColor"><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec thc font"> 推荐 </span>）突出显示</template>
         </th>
         <th class="w20 thc font">
           封面
