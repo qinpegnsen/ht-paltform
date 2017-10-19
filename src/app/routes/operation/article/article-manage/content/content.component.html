@@ -13,13 +13,16 @@
         <th class="w10 thc font">
           分类
         </th>
-        <th class="w12 thc font position-relative" *ngIf="articleState=='NORMAL'">
-          是否置顶 <i class="icon-info myhover" (mousemove)="showInfo($event,j)"  (mouseout)="hideInfo(j)"></i>
-          <span #j class="hoverTitle">选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</span>
+        <th class="w12 thc font" *ngIf="articleState=='NORMAL'">
+          是否置顶<i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="topTemplate"
+                 triggers="mouseenter:mouseleave"  ></i>
+          <template #topTemplate><span></span>选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</template>
         </th>
-        <th class="w13 thc font position-relative" *ngIf="articleState=='NORMAL'">
-          是否推荐 <i class="icon-info myhover" (mousemove)="showInfo($event,j)"  (mouseout)="hideInfo(j)"></i>
-          <span #j class="hoverTitle">选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec"> 推荐 </span>）突出显示</span>
+        <th class="w13 thc font" *ngIf="articleState=='NORMAL'">
+          是否推荐
+          <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="recTemplate"
+             triggers="mouseenter:mouseleave"></i>
+          <template #recTemplate><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec"> 推荐 </span>）突出显示</template>
         </th>
         <th class="w20 thc font">
           封面
@@ -37,9 +40,10 @@
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
         <td class="position-relative">
+          <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
+          <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
+             triggers="mouseenter:mouseleave"></i>
           <span>{{article.articleTitleShort}}</span>
-          <i class="icon-info myhover" (mousemove)="showImg($event,j)"  (mouseout)="hideImg(j)"></i>
-          <span #j class="hoverTitle">长标题：{{article.articleTitle}}</span>
         </td>
         <td>{{article.acName}}</td>
         <td *ngIf="articleState=='NORMAL'">
