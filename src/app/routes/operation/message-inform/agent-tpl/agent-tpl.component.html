@@ -33,7 +33,7 @@
       <tr *ngFor="let agentTpl of agentTplList.data;let i = index">
         <td>{{agentTpl.tplCode}}</td>
         <td>{{agentTpl.tplName}}</td>
-        <td>{{agentTpl.icon}}</td>
+        <td><i class="{{agentTpl.icon}}"></i></td>
         <td>{{agentTpl.tpl}}</td>
         <td>{{agentTpl.url}}</td>
         <td>{{agentTpl.remark}}</td>
