@@ -206,8 +206,7 @@ export class UsersNewComponent implements OnInit {
       case 'WEEK':
         _this.queryTime = _this.select.week;
         break;
-    }
-    ;
+    };
 
     // if (type == "DAY") {
     //   if (!_this.datepickerModel || isNullOrUndefined(_this.datepickerModel)) {
@@ -253,7 +252,7 @@ export class UsersNewComponent implements OnInit {
       date = RzhtoolsService.dataFormat(_this.datepickerModel, "yyyy-MM-dd");
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
-      _this.router.navigate(["main/stat/list-detail"], {
+      _this.router.navigate(["main/stat/users-new/list-detail"], {
         queryParams: {
           linkType: '',
           prevtime: prevtime,
@@ -265,7 +264,7 @@ export class UsersNewComponent implements OnInit {
       date = this.select.year + "-" + this.select.month
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)-1), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
-      _this.router.navigate(["main/stat/list-detail"], {
+      _this.router.navigate(["main/stat/users-new/list-detail"], {
         queryParams: {
           linkType: '',
           prevtime: prevtime,
@@ -276,10 +275,9 @@ export class UsersNewComponent implements OnInit {
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
       date = this.data.queryTimeList[i];
-      // console.log("█ this.data ►►►",  this.data);
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)-1), "yyyy-MM-dd HH:mm:ss") ;
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)), "yyyy-MM-dd HH:mm:ss") ;
-      _this.router.navigate(["main/stat/list-detail"], {
+      _this.router.navigate(["main/stat/users-new/list-detail"], {
         queryParams: {
           linkType: '',
           prevtime: prevtime,

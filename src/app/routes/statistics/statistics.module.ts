@@ -23,7 +23,9 @@ import { ListDetailComponent } from './users/list-detail/list-detail.component';
 import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component';
 import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.component';
 
-
+const listRoutes: Routes = [
+  {path: 'list-detail', component:ListDetailComponent},
+]
 const routes: Routes = [
   {path: '',redirectTo:'order-amount'},
   {path: 'order-amount', component:OrderAmountComponent},
@@ -31,8 +33,11 @@ const routes: Routes = [
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},
-  {path: 'users-new', component:UsersNewComponent},
-  {path: 'list-detail', component:ListDetailComponent},
+  {path: 'users-new', children:[
+    {path: '',component:UsersNewComponent},
+    {path: 'list-detail', component:ListDetailComponent},
+  ]
+  },
   {path: 'settle', component:SettleComponent},
   {path: 'orders', component:OrdersComponent},
   {path: 'hot-sale', component:HotSaleComponent},
