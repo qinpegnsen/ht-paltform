@@ -154,7 +154,7 @@ export class RefundComponent implements OnInit {
       ],
       series: [
         {
-          name:'退款金额' ,
+          name:'退款金额（元）' ,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowtime.yaxis

@@ -96,7 +96,7 @@ export class HotSaleComponent implements OnInit {
   qeuryAll(type?:string,obj?) {
     let me = this;
     if(!isNullOrUndefined(type)) me.queryContent = type;
-    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
+    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单商品数';
     let url = "/statistical/hotsGoods";
     let data = {
       queryType: me.queryType,
@@ -118,7 +118,7 @@ export class HotSaleComponent implements OnInit {
     _this.optionPrev = {
       title: {
         left:"center",
-        text: '买家排行20名'
+        text: '热卖商品50强'
       },
       color: ['#3398DB'],
       tooltip: {

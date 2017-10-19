@@ -94,7 +94,7 @@ export class OrdersComponent implements OnInit {
   qeuryAll(type?:string,obj?) {
     let me = this;
     if(!isNullOrUndefined(type)) me.queryContent = type;
-    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单数量';
+    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额':'下单量';
     let url = "/statistical/ordCount";
     let data = {
       queryType: me.queryType,
@@ -130,7 +130,7 @@ export class OrdersComponent implements OnInit {
     _this.optionPrev = {
       title: {
         left:"center",
-        text: '下单金额统计'
+        text: this.queryContentText+"统计"
       },
       color: ['#3398DB','#42DBB1'],
       tooltip: {

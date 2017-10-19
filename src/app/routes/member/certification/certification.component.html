@@ -37,7 +37,7 @@
             <rzhDefaultSorter by="createtime">申请时间</rzhDefaultSorter>
           </th>
           <th class="w15 text-center"*ngIf="state!='AUDIT'">
-            <rzhDefaultSorter by="time">通过时间</rzhDefaultSorter>
+            <rzhDefaultSorter by="time">审核时间</rzhDefaultSorter>
           </th>
           <th class="w15 text-center"*ngIf="state=='UNPASS'">
             <rzhDefaultSorter by="reason"  >驳回原因</rzhDefaultSorter>
@@ -65,7 +65,7 @@
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
             <img [src]="count.idcardPic3" #k class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </td>
-          <td>{{count.startTime}}</td>
+          <td>{{count.createTime}}</td>
           <td *ngIf="state!='AUDIT'">{{count.verifyTime}}</td>
           <td *ngIf="state=='UNPASS'">{{count.verifyReason}}</td>
           <td *ngIf="state=='AUDIT'">
