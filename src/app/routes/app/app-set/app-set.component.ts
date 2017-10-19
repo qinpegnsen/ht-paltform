@@ -104,7 +104,7 @@ export class AppSetComponent implements OnInit {
      */
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds.push(i);
+      _this.updateIds[i]=i;
     }
     _this.updateImgs[i] = 1;
   }
@@ -290,17 +290,22 @@ export class AppSetComponent implements OnInit {
 
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds.push(i);
+      _this.updateIds[i]=i;
     }
 
   }
 
+  /**
+   * 监听模板类型操作的输入框
+   * @param event
+   * @param i
+   */
   changeInputValue(event, i) {
     let _this = this;
     _this.optKey[i] = event.target.value;
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
-      _this.updateIds.push(i);
+      _this.updateIds[i]=i;
     }
 
   }
@@ -441,21 +446,17 @@ export class AppSetComponent implements OnInit {
             /**
              * 清空模板的信息
              */
-            _this.contentList.splice(0, _this.contentList.length);
-            _this.uploaders.splice(0, _this.uploaders.length);
-
-            _this.contents.splice(0, _this.contents.length);
+            _this.contentList.splice(0, _this.contentList.length);//清空选中模板的详细信息
+            _this.uploaders.splice(0, _this.uploaders.length);//清空选中模板的图片
+            _this.contents.splice(0, _this.contents.length);//清空选中模板的图片暗码或者内容
             _this.optTypeCode.splice(0, _this.optTypeCode.length);
             _this.typeDesc.splice(0, _this.typeDesc.length);
             _this.isEntered.splice(0, _this.isEntered.length);
             _this.optKey.splice(0, _this.optKey.length);
-
-
             _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
             _this.updateContents.splice(0, _this.updateContents.length);
             _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
             _this.updateOptKey.splice(0, _this.updateOptKey.length);
-
             _this.updateIds.splice(0, _this.updateIds.length);
             _this.updateImgs.splice(0, _this.updateImgs.length);
 
@@ -537,7 +538,7 @@ export class AppSetComponent implements OnInit {
        * @param status 状态
        * @param headers 头信息
        */
-      me.uploaders[i].onSuccessItem = function (item, response, status, headers) {
+      me.uploaders[i].onSuccessItem = function (item, response,status, headers) {
         let res = JSON.parse(response);
         if (res.success) {
           item.remove();
