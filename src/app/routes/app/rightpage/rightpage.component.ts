@@ -143,7 +143,7 @@ queryData(){
             swal('添加模板类型提交成功！', '','success');
             _this.AppIndexOptComponent.getAgentList()//实现刷新
           } else {
-            swal('添加模板类型提交失败====！', 'error');
+            swal('添加模板类型提交失败====！','', 'error');
           }
         },
         error: (data) => {
@@ -255,7 +255,7 @@ queryData(){
           swal('添加首页模板提交成功！', '','success');
           _this.AppIndexTplComponent.getAgentList()//实现刷新
         } else {
-          swal('添加首页模板提交失败====！', 'error');
+          swal('添加首页模板提交失败====！','', 'error');
         }
       },
       error: (data) => {

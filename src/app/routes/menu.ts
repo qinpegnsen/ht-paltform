@@ -77,21 +77,11 @@ const operation = {
         }
       ]
     },
-    /*{
-     text: '保障服务',
-     icon: 'icon-diamond',
-     link: '/main/operation/ensure'
-     },*/
     {
       text: '系统消息',
       icon: 'icon-diamond',
       link: '/main/operation/sys-message'
     },
-    /*{
-     text: '售后保障',
-     icon: 'fa fa-shield',
-     link: '/main/operation/after-ensure'
-     },*/
     {
       text: '运费模板管理',
       icon: 'fa fa-book',
@@ -244,10 +234,6 @@ const orders = {
       icon: 'fa fa-smile-o',
       alert: '▼',
       submenu: [
-        /*{
-          text: '店铺评价',
-          link: '/main/orders/store'
-        },*/
         {
           text: '买家评价',
           link: '/main/orders/buyer'
@@ -308,12 +294,7 @@ const sale = {
           link: '/main/sale/return-verify'
         }
       ]
-    }/*,
-    {
-      text: '退货退款原因',
-      icon: 'icon-question',
-      link: '/main/sale/msg'
-    }*/
+    }
   ]
 };
 const statistics = {
@@ -330,15 +311,7 @@ const statistics = {
         {
           text: '订单金额区间',
           link: '/main/stat/order-amount'
-        }/*,
-         {
-         text: '商品价格区间',
-         link: '/main/stat/commodity-price'
-         }*/
-        /* {
-         text: '统计缓存重置',
-         link: '/main/stat/xtsz/cache-reset'
-         }*/
+        }
       ]
     },
     {
@@ -451,6 +424,7 @@ const app = {
           link: '/main/app/app-set'
         }
       ]
+
     },
     // {
     //   text: '消息推送',
@@ -467,23 +441,6 @@ const app = {
 const editPw = {
   text: '密码修改',
   link: '/main/edit-pw',
-};
-const phone = {
-  text: '代理商管理',
-  icon: 'fa fa-users',
-  link: '/main/phone',
-  submenu: [
-    {
-      text: '代理商管理',
-      icon: 'fa fa-users',
-      link: '/main/agent/agentperson'
-    },
-    /*  {
-     text: '代理区域管理',
-     icon: 'icon-location-pin',
-     link: '/main/agent/region'
-     },*/
-  ]
 };
 
 /**
