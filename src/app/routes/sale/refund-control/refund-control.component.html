@@ -66,7 +66,7 @@
                      class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
-                    class="btn btn-primary bar-h3-btn mr0 ng-scope">
+                    class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
               <em class="icon-magnifier fa-fw"></em>
             </button>
           </div>
@@ -117,7 +117,7 @@
                     [disabled]="item.state!='WAIT'"
                     [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理</button>
             <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
-                    [queryParams]="{afterNo:item.afterNo,type:'detail'}">详情
+                    [queryParams]="{afterNo:item.afterNo,type:'detail'}">
             </button>
           </td>
         </tr>

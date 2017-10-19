@@ -55,7 +55,7 @@
                      class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
-                    class="btn btn-primary bar-h3-btn mr0 ng-scope">
+                    class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
               <em class="icon-magnifier fa-fw"></em>
             </button>
           </div>
@@ -105,12 +105,12 @@
               <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="../after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理</button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
-                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">详情
+                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>
             </td>
           </tr>
 
-          <tr >
+          <tr *ngIf="detail[i]">
             <td class="p0" colspan="11">
               <div class="bg-table special text-left">
                 <span class="">申请原因：</span> <span>{{item.reason}}</span>
@@ -121,7 +121,7 @@
               <div class="bg-table special text-left h35">
                 <span class=" shopimg pull-left">商品图片：</span>
                 <span class="">
-                 <img [src]="item.goodsImage" alt="" class="buyimg pull-left"  (click)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                 <img [src]="item.goodsImage" alt="" class="buyimg pull-left" (click)="showImg($event,i)"  (mouseout)="hideImg(i)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="item.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
               </div>

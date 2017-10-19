@@ -824,7 +824,7 @@ export class EditDetailComponent implements OnInit {
     } else if (me.defaultUploader.queue.length > 0) {
       AppComponent.rzhAlt('warning', '数据缺失', "请选择商品规格");
     }
-    console.log("█ goodsImgList ►►►", goodsImgList);
+    // console.log("█ goodsImgList ►►►", goodsImgList);
     return goodsImgList;
   }
 

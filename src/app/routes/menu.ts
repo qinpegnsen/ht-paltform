@@ -111,6 +111,11 @@ const goods = {
   link: '/main/goods',
   submenu: [
     {
+      text: '商品审核',
+      icon: 'fa fa-cube',
+      link: '/main/goods/unAudit'
+    },
+    {
       text: '管理商品',
       icon: 'fa fa-cubes',
       link: '/main/goods/manage'

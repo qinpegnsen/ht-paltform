@@ -1,18 +1,8 @@
 <div class="content-heading mb-lg thc font">
-  商品管理
-  <app-buttons class="pull-right" [config]="addButton" routerLink="/main/goods/publish/step_one"></app-buttons>
+  商品审核
 </div>
 <div class="panel mb">
   <div class="panel-body p ng-scope">
-    <div class="search-group ml-xl mb">
-      <span class="search-title">审核状态：</span>
-      <div class="search-main">
-        <select class="form-control" name="goodsAudit" [(ngModel)]="query.goodsAudit" (change)="queryDatas(1)">
-          <option value="">全部</option>
-          <option *ngFor="let item of goodsAudits" [value]="item.key">{{item.val}}</option>
-        </select>
-      </div>
-    </div>
     <div class="search-group ml-xl mb">
       <span class="search-title">商品状态：</span>
       <div class="search-main">
@@ -22,6 +12,12 @@
         </select>
       </div>
     </div>
+    <div class="search-term ml-xl mb clearfix">
+      <span class="w19 tag-dib align-middle text-right">分类：</span>
+      <div class="w66 tag-dib search-main">
+        <app-get-kind (myData)="getKind($event)"></app-get-kind>
+      </div>
+    </div>
     <div class="search-group ml-xl mb">
       <span class="search-title">自营：</span>
       <div class="search-main">
@@ -29,12 +25,6 @@
           <option value="">全部</option>
           <option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>
         </select>
-      </div>
-    </div>
-    <div class="search-term ml-xl mb clearfix">
-      <span class="w19 tag-dib align-middle text-right">分类：</span>
-      <div class="w66 tag-dib search-main">
-        <app-get-kind (myData)="getKind($event)"></app-get-kind>
       </div>
     </div>
     <div class="tag-dib align-top">
@@ -130,32 +120,9 @@
         </td>
         <td>{{goods.goodsAudit | rzhState:'1014'}}</td>
         <td>
-          <span *ngIf="goods.goodsAudit=='PASS'">
-            <button class="btn btn-warning btn-xs fa fa-level-down" *ngIf="goods.state=='NORMAL'" title="下架"
-                    (click)="changeState('DOWN',goods.goodsBaseCode, goodsList.curPage)"> 下架
-            </button>
-            <button class="btn btn-danger btn-xs fa fa-lock" *ngIf="goods.state=='NORMAL'" title="禁售"
-                    (click)="changeState('STOP',goods.goodsBaseCode, goodsList.curPage)"> 禁售
-            </button>
-            <button class="btn btn-green btn-xs fa fa-unlock-alt" *ngIf="goods.state=='STOP'" title="解禁"
-                    (click)="changeState('BAN',goods.goodsBaseCode, goodsList.curPage)"> 解禁
-            </button>
-            <button class="btn btn-success btn-xs fa fa-level-up" *ngIf="goods.state=='DOWN'"
-                    title="申请上架" (click)="changeState('NORMAL',goods.goodsBaseCode, goodsList.curPage)"> 上架
-            </button>
-          </span>
-          <span *ngIf="goods.goodsAudit=='UNPASS'">
-            <button class="btn btn-success btn-xs fa fa-level-up" *ngIf="goods.state=='DOWN'"
-                    title="申请上架" (click)="changeState('NORMAL',goods.goodsBaseCode, goodsList.curPage)"> 上架
-            </button>
-          </span>
           <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"
                   routerLink="../audit" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
           </button>
-          <span *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL'">
-            <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
-                         *ngFor="let option of buttons"></app-buttons>
-          </span>
           <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
                   routerLink="../detail"
                   [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">

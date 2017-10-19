@@ -73,6 +73,7 @@ export class AuditGoodsComponent implements OnInit {
 
     me.route.url.subscribe(paths => {
       me.path = paths[0].path;
+      console.log("█ me.path2 ►►►",  me.path);
     })
     me.getPageData();// 获取当前页面需要的数据
     me.publishComponent.step = 0;
@@ -240,6 +241,17 @@ export class AuditGoodsComponent implements OnInit {
     };
   }
 
+
+  /**
+   * 比较两个数字的大小
+   * @param arg1
+   * @param arg2
+   * @returns {boolean}
+   */
+  compareNumber(arg1: string, arg2: string) {
+    let num1 = Number(arg1), num2 = Number(arg2);
+    if (num1 < num2 || num1 == num2) return true;
+  }
 
   /**
    * 将数据生成易解析的新数组

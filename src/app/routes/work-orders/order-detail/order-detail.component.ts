@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {isNullOrUndefined} from "util";
 import {OrdersService} from "../../orders/orders/orders.service";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {AppComponent} from "../../../app.component";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
+declare var $:any;
 
 @Component({
   selector: 'app-order-detail',
@@ -22,6 +22,7 @@ export class OrderDetailComponent implements OnInit {
   public orderDetailData: any;
   public curDeliverOrderId: string;
   public goodsData: any;
+  public remark: string;
   public hasDeliverData:boolean = false;
   public expressData:any;
   private atime:Array<string> = new Array();
@@ -58,6 +59,47 @@ export class OrderDetailComponent implements OnInit {
   hideTimesList(target) {
     target.style.display = 'none';
   }
+
+  /**
+   * 显示备注编辑框
+   * @param target
+   */
+  dropdownToggle(target){
+    $(target).show()
+  }
+
+  /**
+   * 输入框计数器
+   */
+  counter(target) {
+    let obj = $(target);
+    let hadLength = obj.val().length;
+    let leaveLength = 100 - hadLength;
+    obj.parents('.mea-text').find('.counter').html(leaveLength);
+    return hadLength;
+  }
+  /**
+   * 隐藏移动端文本编辑框
+   * @param target
+   */
+  hideEdit(target) {
+    $(target).fadeOut(200);
+  }
+
+  /**
+   * 更新备注
+   * @param target
+   */
+  editPrimary(target){
+    let data = {
+      ordno: this.curOrdno,
+      remark: this.remark
+    }
+    this.ordersService.addRemark(data);
+    this.getOrderDetail(); //获取订单详情
+    this.hideEdit(target);
+  }
+
 
   /**
    * 是否是当前状态

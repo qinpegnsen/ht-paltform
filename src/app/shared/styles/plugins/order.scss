@@ -14,71 +14,108 @@ $buyer-info-box-width: 200px;
 }
 
 .order-table-head {
-  @extend .br0;@extend .bl0;
+  @extend .br0;
+  @extend .bl0;
   background-color: $gray-bg-lighter;
 }
+
 .order-head {
   background-color: $gray-bg;
 }
 
-.tag-di{
+.tag-di {
   display: inline;
 }
-.tag-dib{
+
+.tag-dib {
   display: inline-block;
 }
 
-.order{
-  .b0 { border-width: 0 !important; }
-  .bl0 { border-left-width: 0 !important; }
-  .br0 { border-right-width: 0 !important; }
-  .bt0 { border-top-width: 0 !important; }
-  .bb0 { border-bottom-width: 0 !important; }
+.order {
+  .b0 {
+    border-width: 0 !important;
+  }
+  .bl0 {
+    border-left-width: 0 !important;
+  }
+  .br0 {
+    border-right-width: 0 !important;
+  }
+  .bt0 {
+    border-top-width: 0 !important;
+  }
+  .bb0 {
+    border-bottom-width: 0 !important;
+  }
 
-  .br { border-right: 1px solid $bd-color;}
-  .bl { border-left: 1px solid $bd-color;}
-  .bt { border-top: 1px solid $bd-color;}
-  .bb { border-bottom: 1px solid $bd-color;}
-  .b, .ba  {border: 1px solid $bd-color; } // all borders
+  .br {
+    border-right: 1px solid $bd-color;
+  }
+  .bl {
+    border-left: 1px solid $bd-color;
+  }
+  .bt {
+    border-top: 1px solid $bd-color;
+  }
+  .bb {
+    border-bottom: 1px solid $bd-color;
+  }
+  .b, .ba {
+    border: 1px solid $bd-color;
+  }
+  // all borders
 
 }
+
 // 气泡提示框的样式
 .popover.pop-style, .popover.pop-style .popover-content {
   background: #FFFCE9;
   border-color: #FEC500;
 }
-.popover.pop-style.top>.arrow{
+
+.popover.pop-style.top > .arrow {
   border-top-color: #FEC500
 }
-.popover.pop-style.top>.arrow:after{
+
+.popover.pop-style.top > .arrow:after {
   border-top-color: #FFFCE9
 }
 
-.search-time{
+.search-time {
   display: inline-block;
   width: 200px;
 }
-.gray-bg{ background-color: $gray-bg;}
-.gray-bg-lighter{ background-color: $gray-bg-lighter;}
+
+.gray-bg {
+  background-color: $gray-bg;
+}
+
+.gray-bg-lighter {
+  background-color: $gray-bg-lighter;
+}
 
 .order-space {
   height: 10px;
 }
-.one-row{
+
+.one-row {
   height: 18px;
   line-height: 18px;
   overflow: hidden;
 }
-.two-row{
+
+.two-row {
   height: 36px;
   line-height: 18px;
   overflow: hidden;
 }
-.goods-img img{
+
+.goods-img img {
   width: 100%;
   height: 100%;
 }
-.szh-buyer-info{
+
+.szh-buyer-info {
   display: none;
   width: $buyer-info-box-width+12;
   padding: 5px;
@@ -90,20 +127,21 @@ $buyer-info-box-width: 200px;
   right: 60%;
   box-shadow: 1px 1px 1px 3px #FFFCE9;
 }
-.logistics-pop{
+
+.logistics-pop {
   width: $buyer-info-box-width+120;
   right: 70%;
   top: 50%;
-  .logistics-pop-body{
+  .logistics-pop-body {
     background-color: #fff;
     padding: 10px;
   }
-  .logistics-pop-main{
+  .logistics-pop-main {
     background-color: #f5f5f5;
   }
-  .logistics-pop-head{
-    ._icon{
-      font-size:14px;
+  .logistics-pop-head {
+    ._icon {
+      font-size: 14px;
       line-height: 18px;
     }
   }
@@ -120,77 +158,85 @@ $buyer-info-box-width: 200px;
     text-align: center;
   }
 }
-.szh-buyer-info .info-con{
+
+.szh-buyer-info .info-con {
   padding: 10px;
   width: $buyer-info-box-width;
   background-color: #fff;
   border-radius: 4px;
-  dl{
+  dl {
     margin-bottom: 3px;
     font-size: 0;
   }
-  dt,dd{
+  dt, dd {
     font-size: 12px;
     display: inline-block;
     line-height: 18px;
   }
-  dt{
+  dt {
     font-weight: normal;
     text-align: right;
     width: 23%;
-    margin-right:2%;
+    margin-right: 2%;
   }
-  dd{
+  dd {
     width: 75%;
     vertical-align: top;
   }
 }
 
-.f-bold{
+.f-bold {
   font-weight: bold;
 }
-.f-normal{
+
+.f-normal {
   font-weight: normal;
 }
-.bs-datepicker{
+
+.bs-datepicker {
   z-index: 200;
 }
-.place-time{
+
+.place-time {
   width: 310px;
   display: inline-block;
-  ._title{
+  ._title {
     width: 72px;
     line-height: 36px;
     text-align: right;
     display: inline-block;
   }
-  ._picker{
+  ._picker {
     width: 230px;
     float: right;
   }
 }
-.search-group{
+
+.search-group {
   width: 240px;
   display: inline-block;
-  .search-title{
+  .search-title {
     width: 30%;
     line-height: 36px;
     text-align: right;
     display: inline-block;
   }
-  .search-main{
+  .search-main {
     width: 70%;
     float: right;
   }
 }
-.search-term{
+
+.search-term {
   width: 360px;
   display: inline-block;
   vertical-align: top;
 }
-.place-time ._picker input{
+
+.place-time ._picker input {
   z-index: 0;
 }
+
 .detail {
   padding: 0;
   background-color: #e8ecf1;
@@ -208,8 +254,9 @@ $buyer-info-box-width: 200px;
     background-color: #e3f3ff;
   }
 }
-.wo{
-  .tag{
+
+.wo {
+  .tag {
     padding: 2px 4px;
     border-radius: 3px;
     font-size: 12px;
@@ -217,28 +264,34 @@ $buyer-info-box-width: 200px;
 }
 
 //指派记录
-.record-detail{
+.record-detail {
   border: 1px solid #fce3d9;
-  thead{
+  thead {
     background-color: #fcf7ef;
   }
-  .assign-record{
+  .assign-record {
     background-color: #fff;
     font-size: 13px;
-    tr{
+    tr {
       border-top: 1px solid #fcf0e4;
     }
-    td{
+    td {
       padding: 10px;
     }
   }
 }
-.overflow-y-auto{
+
+.overflow-y-auto {
   overflow-y: auto;
 }
 
-.price-wid{
+.price-wid {
   display: inline-block;
-  min-width: 70px;
+  min-width: 110px;
   text-align: left;
 }
+
+.icon-info {
+  width: 10px;
+}
+

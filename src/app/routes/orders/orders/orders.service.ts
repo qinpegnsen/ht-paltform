@@ -95,4 +95,10 @@ export class OrdersService {
   }
 
 
+  public addRemark(data){
+    let url = '/ord/updateOrdRemark';
+    this.submit.postRequest(url, data);
+  }
+
+
 }

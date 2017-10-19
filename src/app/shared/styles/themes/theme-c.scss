@@ -76,7 +76,7 @@ body,
   &.bg-light {background-color: $brand-purple-light !important; }
   &.bg-dark {background-color: $brand-purple-dark !important; }
   &.ts, &.ts-bg{background-color: #d8d9f9 !important;}
-  &.btn-thc{
+  &.btn-thc, .btn-thc{
     @include button-variant(#fff, $brand-purple, rgba(0,0,0,0));
   }
 }

@@ -15,6 +15,17 @@
 }
 .szh-order-details .content{
   padding: 15px 10px;
+  .text-tip{
+    line-height:20px;
+    margin: 0;
+    padding: 5px 10px;
+    color: #333;
+  }
+  .text-area{
+    max-width: 98%;
+    min-width: 96%;
+    margin: auto;
+  }
 }
 
 .szh-order-details .content dl {
@@ -111,14 +122,14 @@
     vertical-align: top;
   }
   .szh-order-condition{
-    position: inherit;
+    position: initial;
     width: 100%;
-    top: inherit;
-    left: inherit;
-    right: inherit;
-    bottom: inherit;
-    height: 300px;
+    min-height: 100px;
+    max-height: 300px;
     background-color: #fff;
+    .order-track{
+      position: initial;
+    }
   }
 }
 .rate-of-progress {
@@ -234,3 +245,9 @@
   }
 }
 
+.coin-number{
+  position: absolute;
+  right: 100%;
+  width: 120px;
+  background-color: #fff;
+}

@@ -76,7 +76,7 @@ body,
   &.bg-light {background-color: $brand-danger-light !important; }
   &.bg-dark {background-color: $brand-danger-dark !important; }
   &.ts, &.ts-bg{background-color: #ffd9d9 !important;}
-  &.btn-thc{
+  &.btn-thc, .btn-thc{
     @include button-variant(#fff, $brand-danger, rgba(0,0,0,0));
   }
 }

@@ -26,7 +26,7 @@
                  [(ngModel)]="custPhone">
         </div>
         <button type="button" title="搜索" (click)="queryDatas(1)"
-                class="btn btn-primary bar-h3-btn mr0 ng-scope">
+                class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
           <em class="icon-magnifier fa-fw"></em>
         </button>
       </div>
@@ -119,29 +119,34 @@
                   <p class="pl mb-sm clearfix logistics-pop-head">
                     <span class="fa fa-truck pull-left _icon"></span>
                     <span class="pull-left">物流信息</span>
-                    <a class="pull-right" routerLink="../order-detail"
+                    <a class="pull-right" *ngIf="LogisticsData" routerLink="../order-detail"
                        [queryParams]="{ordno:order.ordno}">查看更多 </a>
                   </p>
                   <div class="logistics-pop-main">
-                    <ul class="timeline-alt pt pb0 m0">
-                      <ng-container *ngFor="let item of LogisticsData;let a=index;">
-                        <li class="mb0" *ngIf="a<4">
-                          <div class="timeline-badge primary">
-                            <em class="fa fa-truck"></em>
-                          </div>
-                          <div class="timeline-panel _mrl">
-                            <div class="right">
-                              <div>
-                                <p>
-                                  <span class="mr">{{item.acceptTime}}</span><br>
-                                  <span>{{item.acceptStation}}</span>
-                                </p>
+                    <ng-container *ngIf="LogisticsData">
+                      <ul class="timeline-alt pt pb0 m0">
+                        <ng-container *ngFor="let item of LogisticsData;let a=index;">
+                          <li class="mb0" *ngIf="a<4">
+                            <div class="timeline-badge primary">
+                              <em class="fa fa-truck"></em>
+                            </div>
+                            <div class="timeline-panel _mrl">
+                              <div class="right">
+                                <div>
+                                  <p>
+                                    <span class="mr">{{item.acceptTime}}</span><br>
+                                    <span>{{item.acceptStation}}</span>
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </li>
-                      </ng-container>
-                    </ul>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </ng-container>
+                    <ng-container *ngIf="!LogisticsData">
+                      <p class="mb0 p-sm">暂无物流信息</p>
+                    </ng-container>
                   </div>
                 </div>
               </div>

@@ -19,12 +19,14 @@ import {WholesaleComponent} from "./wholesale/wholesale.component";
 import { BasicPropertiesComponent } from './basic-properties/basic-properties.component';
 import {AddDataComponent} from "./add-data/add-data.component";
 import { UpdateDataComponent } from './update-data/update-data.component';
+import { UnAuditComponent } from './un-audit/un-audit.component';
 
 
 
 // 父路由，用于页面嵌套显示
 const routes: Routes = [
-  {path: '', redirectTo: 'manage'},
+  {path: '', redirectTo: 'unAudit'},
+  {path: 'unAudit', component: UnAuditComponent},
   {
     path: 'publish', component: PublishComponent, children: [
     {path: '', redirectTo: 'step_one'},
@@ -78,7 +80,8 @@ const routes: Routes = [
     WholesaleComponent,
     BasicPropertiesComponent,
     AddDataComponent,
-    UpdateDataComponent
+    UpdateDataComponent,
+    UnAuditComponent
   ],
   providers: [
     GoodsService,

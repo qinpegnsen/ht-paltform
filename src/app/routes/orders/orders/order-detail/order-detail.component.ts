@@ -23,6 +23,7 @@ export class OrderDetailComponent implements OnInit {
   public orderDetailData: any;
   public curDeliverOrderId: string;
   public goodsData: any;
+  public remark: string;
   public expressData: any;
   public hasDeliverData: boolean = false;
   private atime: Array<string> = new Array();
@@ -91,6 +92,46 @@ export class OrderDetailComponent implements OnInit {
   }
   hideCoinNum(obj){
     $(obj).addClass('hide')
+  }
+
+  /**
+   * 显示备注编辑框
+   * @param target
+   */
+  dropdownToggle(target){
+    $(target).show()
+  }
+
+  /**
+   * 输入框计数器
+   */
+  counter(target) {
+    let obj = $(target);
+    let hadLength = obj.val().length;
+    let leaveLength = 100 - hadLength;
+    obj.parents('.mea-text').find('.counter').html(leaveLength);
+    return hadLength;
+  }
+  /**
+   * 隐藏移动端文本编辑框
+   * @param target
+   */
+  hideEdit(target) {
+    $(target).fadeOut(200);
+  }
+
+  /**
+   * 更新备注
+   * @param target
+   */
+  editPrimary(target){
+    let data = {
+      ordno: this.curOrdno,
+      remark: this.remark
+    }
+    this.ordersService.addRemark(data);
+    this.getOrderDetail(); //获取订单详情
+    this.hideEdit(target);
   }
 
   /**
