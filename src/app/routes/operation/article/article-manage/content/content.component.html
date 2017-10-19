@@ -40,7 +40,7 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td class="position-relative">
+        <td>
           <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>

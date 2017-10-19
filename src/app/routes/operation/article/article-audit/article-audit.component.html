@@ -11,7 +11,7 @@
           序号
         </th>
         <th class="w15 thc font">
-          标题
+          短标题
         </th>
         <th class="w10 thc font">
           分类
@@ -28,7 +28,12 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{article.articleTitle}}</td>
+        <td>
+          <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
+          <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
+             triggers="mouseenter:mouseleave"></i>
+          <span>{{article.articleTitleShort}}</span>
+        </td>
         <td>{{article.acName}}</td>
         <td>
           <ng-container *ngIf="article.articleCoverVO!=null">
