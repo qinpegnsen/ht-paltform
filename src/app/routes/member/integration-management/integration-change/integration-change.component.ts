@@ -21,7 +21,6 @@ export class IntegrationChangeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.queryCoin();
   }
 
   /**
@@ -34,7 +33,6 @@ export class IntegrationChangeComponent implements OnInit {
       phone:this.data.phone
     }
    _this.sum=this.submitt.getData(url, data);
-    console.log("█ sum ►►►",  _this.sum);
   }
   /**
    * 提交
@@ -44,7 +42,10 @@ export class IntegrationChangeComponent implements OnInit {
     let res = this.submitt.postRequest(url, this.data);
     if (isNullOrUndefined(res)) {
       this.data.phone = '';
-      this.data.custCoin = ''
+      this.data.custCoin = '';
+      this.sum.coin='';
+      this.sum.recharge=''
     }
+    this.queryCoin();
   }
 }
