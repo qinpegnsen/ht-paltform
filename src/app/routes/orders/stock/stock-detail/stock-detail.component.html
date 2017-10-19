@@ -28,7 +28,7 @@
           </div>
         </dd>
       </dl>
-      <dl>
+      <dl *ngIf="orderData.payWay=='REMIT'">
         <dt>付款凭证：</dt>
         <dd>
           <span (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)">
