@@ -1,0 +1,47 @@
+
+<div class="cancel-order fadeIn"  *ngIf="showCancelWindow">
+  <div class="mask" (click)="hideWindow()"></div>
+  <div class="popup animated fadeIn">
+    <div class="pop popup-hd">
+      <span class="f-bold">退款</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="pop cancel-con font12 w100">
+      <input class="form-control" required [(ngModel)]="staff.id" name="reasonCode" type="hidden"/>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">订单号：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">退款金额：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.acct}} </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">汇款账号开户行：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.bank}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">汇款账号：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.bacctName}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">汇款人：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.tc3rd}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">汇款凭证：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.payWay | rzhState :'1017'}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">回款时间：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{staff.closeCause}}</dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
+    </div>
+  </div>
+
+</div>
+

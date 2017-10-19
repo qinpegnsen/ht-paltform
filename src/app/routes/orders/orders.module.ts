@@ -30,6 +30,8 @@ import { BankTransferComponent } from './stock/bank-transfer/bank-transfer.compo
 import {FileUploadModule} from "_ng2-file-upload@1.2.1@ng2-file-upload";
 import {AllOrderService} from './order-review/all-order/all-order.service';
 import { AuditComponent } from './order-review/audit/audit.component';
+import { ToRefundComponent } from './order-review/to-refund/to-refund.component';
+import { RefundComponent } from './order-review/refund/refund.component';
 import {ReviewDetailComponent} from './order-review/review-detail/review-detail.component';
 import {StockService} from './stock/stock.service';
 import {OrderReviewService} from './order-review/order-review.service';
@@ -57,7 +59,9 @@ const routes: Routes = [
     {path: '', redirectTo: 'all-order'},
     {path: 'all-order', component: AllOrderComponent},
     {path: 'to-audit', component: ToAuditComponent},
-    {path: 'review-detail', component: ReviewDetailComponent}
+    {path: 'review-detail', component: ReviewDetailComponent},
+    {path: 'to-audit', component: ToAuditComponent},
+    {path: 'to-refund', component: ToRefundComponent}
   ]},
   {path: 'ord', component:StockComponent,children:[
     {path: '', redirectTo: 'all-stock'},
@@ -104,6 +108,8 @@ const routes: Routes = [
     LogisticsComponent,
     BankTransferComponent,
     AuditComponent,
+    ToRefundComponent,
+    RefundComponent,
     ReviewDetailComponent,
     EptDetailComponent,
   ],
@@ -123,6 +129,8 @@ const routes: Routes = [
     PendingPaymentComponent,
     AllOrderComponent,
     ToAuditComponent,
+    OrderReviewComponent,
+    ToRefundComponent,
     OrderReviewComponent,
     StockService,
     OrderReviewService
