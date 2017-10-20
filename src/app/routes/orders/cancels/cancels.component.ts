@@ -79,10 +79,10 @@ export class CancelsComponent implements OnInit {
     console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
-  hideWindow(){
+  hideWindow(bol){
     $('.wrapper > section').css('z-index', 114);
     this.showCancelWindow = false;
-    this.cancelOrder.emit('hide')// 向外传值
+    this.cancelOrder.emit({hide:'hide',bol:bol})// 向外传值
   }
 
   /**
@@ -100,7 +100,7 @@ export class CancelsComponent implements OnInit {
       success: (res) => {
         if (res.success) {
           swal('关闭申请已提交', '', 'success');
-          _this.hideWindow();
+          _this.hideWindow(true);
         } else {
           swal(res.info,'','error');
         }

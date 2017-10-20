@@ -82,8 +82,10 @@ export class AgentEptComponent implements OnInit {
    * 取消订单回调函数
    * @param data
    */
-  getCancelOrderData(data){
+  getCancelOrderData(obj){
     this.curCancelOrderId = null;
-    this.isDisplay=false;//申请成功后关闭申请按钮隐藏
+    if(obj.bol){
+      this.isDisplay=false;//申请成功后关闭申请按钮隐藏
+    }
   }
 }

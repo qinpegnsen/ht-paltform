@@ -5,7 +5,6 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import { FileUploader } from 'ng2-file-upload';
 import {isNullOrUndefined} from "util";
 import {PatternService} from "../../../core/forms/pattern.service";
-import {queue} from 'rxjs/scheduler/queue';
 const swal = require('sweetalert');
 declare var $:any;
 declare var AMap:any;
@@ -42,6 +41,9 @@ export class AddAgentComponent implements OnInit {
   ngOnInit() {
     let me = this;
     //页面完成后加载地图
+    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
+    this.queryAgent();//请求代理商详细数据
 
     setTimeout(() => {
       //实例化地图
@@ -57,8 +59,14 @@ export class AddAgentComponent implements OnInit {
         me.placeSearch= new AMap.PlaceSearch();
         //TODO: 使用pla ceSearch对象调用关键字搜索的功能
         me.placeSearch.search(me.selectArea, function(status, result) {
-          let lat = result.poiList.pois[0].location.lat;
-          let lng = result.poiList.pois[0].location.lng;
+          let lng,lat;
+          if(me.linkType == 'updataArticle'){
+            lng = me.staff.coordinateLng;
+            lat = me.staff.coordinateLat;
+          }else{
+            lat = result.poiList.pois[0].location.lat;
+            lng = result.poiList.pois[0].location.lng;
+          }
           map.setCenter(new AMap.LngLat(lng, lat));
         });
       })
@@ -73,6 +81,9 @@ export class AddAgentComponent implements OnInit {
         map:map,
         bubble:true
       })
+      if(me.linkType == 'updataArticle'){
+        marker.setPosition(new AMap.LngLat(me.staff.coordinateLng,me.staff.coordinateLat));
+      }
 
       /**
        * 点击出来标注点
@@ -107,13 +118,10 @@ export class AddAgentComponent implements OnInit {
           placeSearch.search(e.poi.name)
         });
       })
-
     }, 1);
 
-    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
-    this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
 
-    this.queryAgent();//请求代理商详细数据
+
   }
 
   /**
