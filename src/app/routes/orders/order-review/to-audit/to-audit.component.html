@@ -122,7 +122,7 @@
   </tr>
   </tfoot>
 </table>
-<app-refund (cancelOrder)="getCancelOrderData($event)"></app-refund>
+<app-audit [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-audit>
 <!--
 <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
