@@ -145,14 +145,19 @@
           </div>
         </fieldset>
         <fieldset>
-          <div class="pull-right form-group special">
-            <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-success pull-left" type="submit" (click)="submit(addArticle.value,'DRAFT')"
-                    [disabled]="addArticle.invalid">存草稿
-            </button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(addArticle.value,'AUDIT')"
-                    [disabled]="addArticle.invalid">发表
-            </button>
+          <div class="form-group">
+            <label class="col-sm-1 text-right mr-xl pr0"></label>
+            <div class="col-sm-10">
+              <div class="pull-right form-group special">
+                <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+                <button class="ml btn btn-success pull-left" type="submit" (click)="submit(addArticle.value,'DRAFT')"
+                        [disabled]="addArticle.invalid">存草稿
+                </button>
+                <button class="ml btn btn-info pull-left mr15" type="submit" (click)="submit(addArticle.value,'AUDIT')"
+                        [disabled]="addArticle.invalid">发表
+                </button>
+              </div>
+            </div>
           </div>
         </fieldset>
       </div>
@@ -340,11 +345,16 @@
           </div>
         </fieldset>
         <fieldset>
-          <div class="pull-right form-group special">
-            <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left" type="submit" (click)="submit(updateArticle.value)"
-                    [disabled]="updateArticle.invalid">保存
-            </button>
+          <div class="form-group">
+            <label class="col-sm-1 text-right mr-xl pr0"></label>
+            <div class="col-sm-10">
+              <div class="pull-right form-group special">
+                <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+                <button class="ml btn btn-info pull-left mr15" type="submit" (click)="submit(updateArticle.value)"
+                        [disabled]="updateArticle.invalid">保存
+                </button>
+              </div>
+            </div>
           </div>
         </fieldset>
       </div>
