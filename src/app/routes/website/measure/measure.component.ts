@@ -24,7 +24,7 @@ export class MeasureComponent implements OnInit {
     let me = this;
     //按钮配置
     me.addbuttons = {
-      type: "add",
+      type: "add-thc",
       title: '添加',
       text:'添加计量单位'
     };

@@ -34,7 +34,7 @@ export class RegionComponent implements OnInit {
      * @type {{type: string, text: string, title: string}}
        */
     this.addButton = {
-      type:"add",
+      type:"add-thc",
       text:"新增区域代理",
       title:'新增区域代理',
     };

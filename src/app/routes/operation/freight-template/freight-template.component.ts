@@ -44,7 +44,7 @@ export class FreightTemplateComponent implements OnInit {
      * @type {{type: string, text: string, title: string}}
      */
     _this.addButton = {
-      type:"add",
+      type:"add-thc",
       text:"新增运费模板",
       title:'新增运费模板',
     };

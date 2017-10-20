@@ -26,7 +26,7 @@ export class KindManageComponent implements OnInit {
     let me = this;
     me.queryDatas(1, 0);
     me.addButton = {
-      type: 'add',
+      type: 'add-thc',
       text: '新增分类',
     };
     me.buttons = [

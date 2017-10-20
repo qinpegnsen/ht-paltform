@@ -49,7 +49,7 @@ export class AreasComponent implements OnInit {
     this.queryId = this.routeInfo.snapshot.queryParams['id'];
     //按钮配置
     this.addButton = {
-      type:"add",
+      type:"add-thc",
       text:"新增数据",
       title:'新增数据',
       size: 'xs'

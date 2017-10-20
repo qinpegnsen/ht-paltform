@@ -36,7 +36,7 @@ export class BasicPropertiesComponent implements OnInit {
     me.kindList = me.goods.getKindList(); //获取分类列表
     //按钮配置
     me.addbuttons = {
-      type: "add",
+      type: "add-thc",
       title: '添加',
       text:'添加基本属性'
     };

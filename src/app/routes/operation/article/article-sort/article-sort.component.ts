@@ -50,7 +50,7 @@ export class ArticleSortComponent implements OnInit {
     this.articleSortAddbutton={
       title:"新增分类",
       text:"新增分类",
-      type: "add"
+      type: "add-thc"
     };
     this.queryArticSortleList()
   }

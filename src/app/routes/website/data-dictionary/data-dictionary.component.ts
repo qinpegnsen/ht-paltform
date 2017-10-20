@@ -34,7 +34,7 @@ export class DataDictionaryComponent implements OnInit {
     let me = this;
     //按钮配置
     me.addButton = {
-      type: "add",
+      type: "add-thc",
       text: "添加key",
       title: '添加key'
     };

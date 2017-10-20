@@ -106,7 +106,7 @@
       <ng-container *ngFor="let item of dataTable.data; let i = index">
 
         <tr class="text-center">
-          <td (click)="showDetail(i)"><i class="icon icon-arrow-down"></i></td>
+          <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
           <td>{{item.afterNo}}</td>
           <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
           <td>{{item.custCode}}</td>

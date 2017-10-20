@@ -399,6 +399,22 @@ const agent = {
       icon: 'fa fa-users',
       link: '/main/agent/agentperson'
     },
+    {
+      text: '提现管理',
+      icon: 'fa fa-users',
+      link: '/main/agent/deposit',
+      alert: '▼',
+      submenu: [
+        {
+          text: '提现审核',
+          link: '/main/agent/deposit-audit'
+        },
+        {
+          text: '提现记录',
+          link: '/main/agent/deposit-record'
+        }
+      ]
+    },
     /*  {
      text: '代理区域管理',
      icon: 'icon-location-pin',

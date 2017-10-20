@@ -17,11 +17,7 @@ export class MsgComponent implements OnInit {
   ngOnInit() {
     let me=this;
     me.addbuttons = {
-      type: "add",
-      title: '添加',
-      text:'添加问题'
-    };  me.addbuttons = {
-      type: "add",
+      type: "add-thc",
       title: '添加',
       text:'添加问题'
     };

@@ -25,7 +25,7 @@ export class SysNoticeComponent implements OnInit {
     this.noticeAddbutton={
       title:"新增系统公告",
       text:"新增系统公告",
-      type: "add"
+      type: "add-thc"
     };
     this.delEXpireAddbutton={
       title:"删除到期的公告",

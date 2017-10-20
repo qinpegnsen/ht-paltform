@@ -23,7 +23,7 @@ export class ArticleManageComponent implements OnInit{
     this.articleManAddbutton={
         text:"新增文章",
         title:"新增文章",
-        type: "add"
+        type: "add-thc"
       };
   }
   /**

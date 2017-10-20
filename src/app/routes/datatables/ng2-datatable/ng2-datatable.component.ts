@@ -24,7 +24,7 @@ export class Ng2DatatableComponent implements OnInit {
       {
         text:"添加",
         title:"添加",
-        type: "add",
+        type: "add-thc",
         callback:function(result){
           result.then((id)=>{
             alert(id);

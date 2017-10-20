@@ -14,7 +14,7 @@
           </div>
         </dd>
       </dl>
-      <dl>
+      <dl *ngIf="orderDetailData.state!='CR'">
         <dt>平台备注：</dt>
         <dd class="position-relative">
           <span>{{orderDetailData.remark}}</span>

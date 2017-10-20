@@ -29,7 +29,7 @@ export class AgentTplComponent implements OnInit {
     this.addbutton={
       title:"新增代理商模板",
       text:"新增代理商模板",
-      type: "add"
+      type: "add-thc"
     };
     this.updatebutton={
       title:"编辑",

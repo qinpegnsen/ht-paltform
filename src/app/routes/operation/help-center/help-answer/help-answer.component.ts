@@ -27,7 +27,7 @@ export class HelpAnswerComponent implements OnInit {
     let me = this;
     //按钮配置
     me.addButton = {
-      type: "add",
+      type: "add-thc",
       text: "添加问题",
       title: '添加分类'
     };

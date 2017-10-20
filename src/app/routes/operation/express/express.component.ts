@@ -28,7 +28,7 @@ export class ExpressComponent implements OnInit {
     this.expressAddbutton={
       title:"新增快递公司",
       text:"新增快递公司",
-      type: "add"
+      type: "add-thc"
     };
     this.updatebutton={
       title:"编辑",

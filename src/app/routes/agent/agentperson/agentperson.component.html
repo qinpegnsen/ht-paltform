@@ -89,10 +89,10 @@
           <app-buttons [config]="updatebutton" routerLink="appAgent" [queryParams]="{linkType:'updataArticle',agentCode:file.agentCode}"></app-buttons>
           <!--删除代理商信息按钮-->
           <app-buttons [config]="deletebutton" (click)="delete(file.id)" *ngIf="file.state=='FREEZE'"></app-buttons>
-          <!--查看代理商详情按钮-->
-          <app-buttons [config]="details" title="查看代理商详情" routerLink="rightpage" [queryParams]="{id:3,agentCode:file.agentCode}"></app-buttons>
           <!--修改代理商密码按钮-->
           <button class="btn btn-default fa fa-pencil btn-xs" title="重置密码" (click)="resetPwd(file.agentCode)"></button>
+          <!--查看代理商详情按钮-->
+          <app-buttons [config]="details" title="查看代理商详情" routerLink="rightpage" [queryParams]="{id:3,agentCode:file.agentCode}"></app-buttons>
         </td>
       </tr>
       </tbody>

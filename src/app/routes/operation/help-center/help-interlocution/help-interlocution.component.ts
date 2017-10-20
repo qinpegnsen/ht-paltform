@@ -30,7 +30,7 @@ export class HelpInterlocutionComponent implements OnInit {
 
     //按钮配置
     me.addButton = {
-      type: "add",
+      type: "add-thc",
       text: "添加分类",
       title: '添加分类'
     };
@@ -44,7 +44,7 @@ export class HelpInterlocutionComponent implements OnInit {
     };
     me.addchildbutton = {
       title: "添加问题",
-      type: "add"
+      type: "add-thc"
     };
     me.seebutton = {
       title: "查看",

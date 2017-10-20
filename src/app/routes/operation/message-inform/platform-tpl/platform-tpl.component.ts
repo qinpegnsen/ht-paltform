@@ -28,7 +28,7 @@ export class PlatformTplComponent implements OnInit {
     this.addbutton={
       title:"新增平台模板",
       text:"新增平台模板",
-      type: "add"
+      type: "add-thc"
     };
     this.updatebutton={
       title:"编辑",

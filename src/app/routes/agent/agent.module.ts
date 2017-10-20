@@ -9,6 +9,9 @@ import { AddAgentComponent } from './add-agent/add-agent.component';
 import {AgentpersonService} from "./agentperson/agentperson.service";
 import {FileUploader} from "ng2-file-upload/index";
 import {FileUploadModule} from "ng2-file-upload/index";
+import { DepositAuditComponent } from './deposit-audit/deposit-audit.component';
+import { DepositRecordComponent } from './deposit-record/deposit-record.component';
+import { AddRecordComponent } from './add-record/add-record.component';
 
 // 子路由，用于页面嵌套显示
 const appChildRoutesfile: Routes = [
@@ -23,6 +26,8 @@ const routes: Routes = [
   {path: '', redirectTo:'agentperson'},
   {path: 'agentperson', component: AgentpersonComponent,children: appChildRoutes},
   {path: 'region', component: RegionComponent,children: appChildRoutes},
+  {path: 'deposit-audit', component: DepositAuditComponent},
+  {path: 'deposit-record', component: DepositRecordComponent},
 ];
 @NgModule({
   imports: [
@@ -32,6 +37,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   providers:[AgentpersonService,RegionComponent],
-  declarations: [AgentpersonComponent, RegionComponent, RightpageComponent, AddAgentComponent]
+  declarations: [AgentpersonComponent, RegionComponent, RightpageComponent, AddAgentComponent, DepositAuditComponent, DepositRecordComponent, AddRecordComponent]
 })
 export class AgentModule { }

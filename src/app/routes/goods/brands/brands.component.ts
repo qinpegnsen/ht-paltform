@@ -29,7 +29,7 @@ export class BrandsComponent implements OnInit {
     me.queryDatas(1);// 获取品牌数据
     me.kindList = me.goods.getKindList(); //获取分类列表
     me.addButton = {
-      type: 'add',
+      type: 'add-thc',
       text: '新增品牌',
     };
     me.buttons = [
@@ -173,7 +173,6 @@ export class BrandsComponent implements OnInit {
       brandRecommend: _this.brandRecommend
     };
     _this.brands = new Page(_this.submitService.getData(requestUrl, requestData));
-    // console.log("█ _this.brands ►►►", _this.brands);
   }
 
 

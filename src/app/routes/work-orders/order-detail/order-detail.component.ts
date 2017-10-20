@@ -130,17 +130,17 @@ export class OrderDetailComponent implements OnInit {
   private getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
-    if(!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
-    for (let item of me.orderStates){
+    if (!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
+    for (let item of me.orderStates) {
       if (item.state == 'SUCCESS') {
         me.atime[5] = item.acceptTime;
         me.hasDeliverData = true;
       } else if (item.state == 'DELIVERY') {
-        me.atime[4] = item.acceptTime;
         me.hasDeliverData = true;
+        me.atime[4] = item.acceptTime;
       } else if (item.state == 'PREPARE') {
         me.atime[3] = item.acceptTime;
-      } else if (item.state == 'PAID'|| item.state == 'ASSIGNED') {
+      } else if (item.state == 'PAID' || item.state == 'ASSIGNED') {
         me.atime[2] = item.acceptTime;
       } else if (item.state == 'CR') {
         me.atime[1] = item.acceptTime;
@@ -153,14 +153,14 @@ export class OrderDetailComponent implements OnInit {
    * 获取订单当前进度
    */
   private getOrderStep() {
-    let me = this, temp = [];
+    let me = this;
     if (me.orderDetailData.state == 'SUCCESS') {
       me.orderStep = 5;
     } else if (me.orderDetailData.state == 'DELIVERY') {
       me.orderStep = 4;
     } else if (me.orderDetailData.state == 'PREPARE') {
       me.orderStep = 3;
-    } else if (me.orderDetailData.state == 'PAID') {
+    } else if (me.orderDetailData.state == 'PAID' || me.orderDetailData.state == 'ASSIGNED') {
       me.orderStep = 2;
     } else if (me.orderDetailData.state == 'CR') {
       me.orderStep = 1;

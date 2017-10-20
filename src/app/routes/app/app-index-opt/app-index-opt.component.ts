@@ -30,7 +30,7 @@ export class AppIndexOptComponent implements OnInit {
      * @type {{type: string, text: string, title: string}}
      */
     _this.addButton = {
-      type:"add",
+      type:"add-thc",
       text:"新增操作类型",
       title:'新增移动端首页操作类型',
     };

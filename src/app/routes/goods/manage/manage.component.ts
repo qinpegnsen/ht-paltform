@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
