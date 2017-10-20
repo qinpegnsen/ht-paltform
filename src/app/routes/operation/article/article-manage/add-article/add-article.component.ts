@@ -416,6 +416,9 @@ export class AddArticleComponent implements OnInit {
      * 构建form时，传入自定义参数
      * @param item
      */
+    if(me.uploader.queue.length==0){//解决单图或者是3图模式删除了图片但是没有提示bug
+      AppComponent.rzhAlt('info', '请上传与封面类型数量一致图片');
+    }
     me.uploader.onBuildItemForm = function (fileItem, form) {
       let uuid=me.GetUidService.getUid();
       form.append('uuid',uuid);
@@ -426,6 +429,7 @@ export class AddArticleComponent implements OnInit {
      * 执行上传
      */
     me.uploader.uploadAll();
+
     /**
      * 上传成功处理
      * @param item 上传列表
@@ -479,6 +483,8 @@ export class AddArticleComponent implements OnInit {
       }
     } else if (this.linkType == 'updateArticle') {
       if(me.coverChange&&me.coverCode!='AUTO'){//如果点击修改封面了并且不是没图就执行图片上传
+        me.uploadImg();//执行图片上传的方法
+      }else if(me.coverCode=='THREE'&&me.removeCover){//如果默认的封面是3张图片上传并且修改了其中的几张图片也执行图片上传
         me.uploadImg();//执行图片上传的方法
       }else{
         me.articleExtra();
