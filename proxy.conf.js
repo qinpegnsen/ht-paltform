@@ -20,6 +20,9 @@ const PROXY_CONFIG = [
       "/agentOrd",
       "/articleComment",
       "/articleSyd",
+      "/articleClass",
+      "/article",
+      "/cust",
       "/custAddr",
       "/custFavorites",
       "/custInvoice",
@@ -42,7 +45,6 @@ const PROXY_CONFIG = [
       "/expressTpl",
       "/helpKind",
       "/helpQuestions",
-      "/helpQuestions",
       "/wo",
       "/ord",
       "/statistical",
@@ -50,28 +52,21 @@ const PROXY_CONFIG = [
       "/notifyAgentTpl",
       "/notifyAdmin",
       "/announce",
-      "/articleClass",
       "/ord",
       "/phone",
-      "/article",
-      "/cust"
+      "/finaceDraw",
     ],
-    target: wp + "8080",   //拦截 context配置路径，经过此地址
-    secure: false
-  },
-  {
-    context: [
-      "/upload"
-    ],
-    target: wp + "8003",   //拦截 context配置路径，经过此地址
+    // target: wp  + "8080",   //拦截 context配置路径，经过此地址
+    target: zyg  + "8081",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
     context: [
       "/basicExpress",
+      "/upload",
       "/res"
     ],
-    target: gh + "8082",   //拦截 context配置路径，经过此地址
+    target: zyg  + "8900",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];
