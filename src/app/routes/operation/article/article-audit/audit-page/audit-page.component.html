@@ -20,7 +20,7 @@
           <div class="form-group">
             <label class="col-sm-1 text-right mr-xl pr0"><i>*</i>标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleTitle"
+              <input class="form-control" type="text" maxlength="50" disabled name="articleTitle"
                      #articleTitleTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitle"/>
             </div>
@@ -30,7 +30,7 @@
           <div class="form-group">
             <label class="col-sm-1 text-right mr-xl pr0"><i>*</i>短标题</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleTitleShort"
+              <input class="form-control" type="text" maxlength="50" disabled name="articleTitleShort"
                      #articleTitleShortTem="ngModel"
                      [(ngModel)]="queryArticleData.articleTitleShort"/>
             </div>
@@ -41,7 +41,7 @@
             <label class="col-sm-1 text-right mr-xl pr0"><i>*</i>摘要
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articleAbstract"
+              <input class="form-control" type="text" maxlength="50" disabled name="articleAbstract"
                      #articleAbstractTem="ngModel" [(ngModel)]="queryArticleData.articleBody.articleAbstract"/>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <label class="col-sm-1 text-right mr-xl pr0">标签
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" maxlength="128" disabled name="articlekeyword"
+              <input class="form-control" type="text" maxlength="50" disabled name="articlekeyword"
                      #articlekeywordTem="ngModel" [(ngModel)]="queryArticleData.articleTag"/>
             </div>
           </div>
@@ -107,7 +107,7 @@
             <!--<label class="col-sm-1 text-right mr-xl pr0">相关文章-->
             <!--</label>-->
             <!--<div class="col-sm-10">-->
-              <!--<input class="form-control" type="text" maxlength="128" disabled name="articleLink"-->
+              <!--<input class="form-control" type="text" maxlength="50" disabled name="articleLink"-->
                      <!--#articleLinkTem="ngModel"-->
                      <!--[(ngModel)]="queryArticleData.articleLink"/>-->
             <!--</div>-->

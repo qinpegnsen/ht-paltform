@@ -11,7 +11,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>标题</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" maxlength="128" #titleTem="ngModel" ngModel name="title" required
+              <input class="form-control" type="text" maxlength="50" #titleTem="ngModel" ngModel name="title" required
                      placeholder='必填项'/>
               <div [hidden]="titleTem.valid||titleTem.untouched"
                    class="alert alert-danger">
@@ -24,7 +24,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i>*</i>内容</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" maxlength="128" #contentTem="ngModel" ngModel name="content"
+              <input class="form-control" type="text" maxlength="50" #contentTem="ngModel" ngModel name="content"
                      required placeholder='必填项'/>
               <div [hidden]="contentTem.valid||contentTem.untouched"
                    class="alert alert-danger">

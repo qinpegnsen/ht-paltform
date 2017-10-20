@@ -7,18 +7,18 @@
         <div class="form-group col-md-3">
           <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
-                   (change)="queryMemberList()" maxlength="128" placeholder="请输入要查询的会员名称">
+                   (change)="queryMemberList()" maxlength="50" placeholder="请输入要查询的会员名称">
           </div>
         </div>
         <div class="form-group mb0 col-md-3">
           <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTruename"
-                   (change)="queryMemberList()"  maxlength="128" placeholder="请输入要查询的会员真实姓名">
+                   (change)="queryMemberList()"  maxlength="50" placeholder="请输入要查询的会员真实姓名">
           </div>
         </div>
         <div class="form-group col-md-3 clearfix">
           <div class="pl0">
-            <input type="text" maxlength="128" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
+            <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
           </div>
         </div>
       </div>

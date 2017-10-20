@@ -12,7 +12,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>模板编码：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input class="form-control" type="text" maxlength="128" required ngModel #tplCodeTem="ngModel"
+            <input class="form-control" type="text" maxlength="50" required ngModel #tplCodeTem="ngModel"
                    name="tplCode"/>
             <div [hidden]="tplCodeTem.valid||tplCodeTem.untouched"
                  class="alert alert-danger">
@@ -23,7 +23,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>模板名称：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" required ngModel #tplNameTem="ngModel" name="tplName"/>
+            <input class="form-control" type="text" maxlength="50" required ngModel #tplNameTem="ngModel" name="tplName"/>
             <div [hidden]="tplNameTem.valid||tplNameTem.untouched"
                  class="alert alert-danger">
               模板名称是必填项
@@ -33,7 +33,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>消息图标：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" required ngModel #iconTem="ngModel" name="icon"/>
+            <input class="form-control" type="text" maxlength="50" required ngModel #iconTem="ngModel" name="icon"/>
             <div [hidden]="iconTem.valid||iconTem.untouched"
                  class="alert alert-danger">
               消息图标是必填项
@@ -43,7 +43,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>模板：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" required ngModel #tplTem="ngModel" name="tpl"/>
+            <input class="form-control" type="text" maxlength="50" required ngModel #tplTem="ngModel" name="tpl"/>
             <div [hidden]="tplTem.valid||tplTem.untouched" class="alert alert-danger">
               模板是必填项
             </div>
@@ -52,7 +52,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>菜单URL：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" required ngModel #urlTem="ngModel" name="url"/>
+            <input class="form-control" type="text" maxlength="50" required ngModel #urlTem="ngModel" name="url"/>
             <div [hidden]="urlTem.valid||urlTem.untouched" class="alert alert-danger">
               菜单URL是必填项
             </div>
@@ -86,7 +86,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板编码：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input class="form-control" type="text"  maxlength="128" required #tplCodeTem="ngModel"
+            <input class="form-control" type="text"  maxlength="50" required #tplCodeTem="ngModel"
                    [(ngModel)]="tplData.tplCode" name="tplCode"/>
             <div [hidden]="tplCodeTem.valid||tplCodeTem.untouched"
                  class="alert alert-danger">
@@ -97,7 +97,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板名称：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.tplName" required #tplNameTem="ngModel"
+            <input class="form-control" type="text" maxlength="50" [(ngModel)]="tplData.tplName" required #tplNameTem="ngModel"
                    name="tplName"/>
             <div [hidden]="tplNameTem.valid||tplNameTem.untouched"
                  class="alert alert-danger">
@@ -108,7 +108,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">消息图标：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.icon" required #iconTem="ngModel"
+            <input class="form-control" type="text" maxlength="50" [(ngModel)]="tplData.icon" required #iconTem="ngModel"
                    name="icon"/>
             <div [hidden]="iconTem.valid||iconTem.untouched"
                  class="alert alert-danger">
@@ -119,7 +119,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">模板：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.tpl" required #tplTem="ngModel"
+            <input class="form-control" type="text" maxlength="50" [(ngModel)]="tplData.tpl" required #tplTem="ngModel"
                    name="tpl"/>
             <div [hidden]="tplTem.valid||tplTem.untouched" class="alert alert-danger">
               模板是必填项
@@ -129,7 +129,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">菜单URL：</dt>
           <dd class="col-xs-5 font14">
-            <input class="form-control" type="text" maxlength="128" [(ngModel)]="tplData.url" required #urlTem="ngModel"
+            <input class="form-control" type="text" maxlength="50" [(ngModel)]="tplData.url" required #urlTem="ngModel"
                    name="url"/>
             <div [hidden]="urlTem.valid||urlTem.untouched" class="alert alert-danger">
               菜单URL是必填项

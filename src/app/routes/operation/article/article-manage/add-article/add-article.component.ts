@@ -516,12 +516,10 @@ export class AddArticleComponent implements OnInit {
     }
     let idStr = ''; //获取关联的商品
     let obj = $("._myAppend").find('._copy').find('input');
-    console.log("█ obj ►►►",  obj);
     for (let i = 0; i < obj.length; i++) {
       idStr += `${$(obj[i]).val()},`
     };
     this.linkGoodStr = idStr.slice(0, idStr.length - 1);
-    console.log("█  this.linkGoodStr ►►►",   this.linkGoodStr);
     this.submitObj.goodIds = this.linkGoodStr;
     this.submitObj.articleContent = sHTML;  //把编辑器的值保存下来
     this.submitObj.uuid = this.uuid.join(',');//暗码
@@ -543,7 +541,7 @@ export class AddArticleComponent implements OnInit {
         break;
     }
     let result=this.operationService.addNewArticle(url, data);
-    if(result=='文章内容不能为空'||result=='请选择文章所属类型'){
+    if(result=='文章内容不能为空'||result=='请选择文章分类'){
       return;
     }else{
       this.router.navigate(['/main/operation/article/manage']);
