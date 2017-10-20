@@ -9,24 +9,24 @@
       <thead>
       <tr>
         <th class="w10 thc font">
-          模板编码
-        </th>
-        <th class="w10 thc font">
-          模板名称
-        </th>
-        <th class="w10 thc font">
           消息图标
         </th>
-        <th class="w20 thc font">
+        <th class="w10 thc font text-left">
+          模板编码
+        </th>
+        <th class="w10 thc font text-left">
+          模板名称
+        </th>
+        <th class="w20 thc font text-left">
           模板
         </th>
-        <th class="w15 thc font">
+        <th class="w15 thc font text-left">
           菜单权限
         </th>
-        <th class="w15 thc font">
+        <th class="w15 thc font text-left">
           菜单URL
         </th>
-        <th class="w10 thc font">
+        <th class="w10 thc font text-left">
           备注
         </th>
         <th class="w10 thc font">操作</th>
@@ -34,13 +34,13 @@
       </thead>
       <tbody>
       <tr *ngFor="let platformTpl of platformTplList.data;let i = index">
-        <td>{{platformTpl.tplCode}}</td>
-        <td>{{platformTpl.tplName}}</td>
         <td><i class="{{platformTpl.icon}}"></i></td>
-        <td>{{platformTpl.tpl}}</td>
-        <td>{{platformTpl.limitMenu}}</td>
-        <td>{{platformTpl.url}}</td>
-        <td>{{platformTpl.remark}}</td>
+        <td class="text-left">{{platformTpl.tplCode}}</td>
+        <td class="text-left">{{platformTpl.tplName}}</td>
+        <td class="text-left">{{platformTpl.tpl}}</td>
+        <td class="text-left">{{platformTpl.limitMenu}}</td>
+        <td class="text-left">{{platformTpl.url}}</td>
+        <td class="text-left">{{platformTpl.remark}}</td>
         <td>
           <app-buttons [config]="updatebutton" (click)="updateTpl(platformTpl.tplCode)"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="deleteTpl(platformTpl.id)"></app-buttons>

@@ -14,13 +14,13 @@
         <th class="w5 thc font">
           序号
         </th>
-        <th class="w15 thc font">
+        <th class="w15 thc font text-left">
           标题
         </th>
-        <th class="w17 thc font">
+        <th class="w17 thc font text-left">
           内容
         </th>
-        <th class="w17 thc font">
+        <th class="w17 thc font text-left">
           地址
         </th>
         <th class="w10 thc font">
@@ -38,9 +38,9 @@
       <tbody>
       <tr *ngFor="let notice of noticeList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{notice.title}}</td>
-        <td>{{notice.content}}</td>
-        <td>{{notice.url}}</td>
+        <td class="text-left">{{notice.title}}</td>
+        <td class="text-left">{{notice.content}}</td>
+        <td class="text-left">{{notice.url}}</td>
         <td *ngIf="notice.isRead==null">否</td>
         <td *ngIf="notice.isRead=='Y'">是</td>
         <td>{{notice.createTime}}</td>
