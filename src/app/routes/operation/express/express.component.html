@@ -31,13 +31,13 @@
         <th class="w5 thc font">
           序号
         </th>
-        <th class="w20 thc font">
-          公司名称
-        </th>
         <th class="w25 thc font">
           公司编号
         </th>
-        <th class="w20 thc font">
+        <th class="w20 thc font text-left">
+          公司名称
+        </th>
+        <th class="w20 thc font text-left">
           公司网址
         </th>
         <th class="w10 thc font">
@@ -49,9 +49,9 @@
       <tbody>
       <tr *ngFor="let express of expressList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>{{express.expressName}}</td>
         <td>{{express.expressCode}}</td>
-        <td>{{express.expressUrl}}</td>
+        <td class="text-left">{{express.expressName}}</td>
+        <td class="text-left">{{express.expressUrl}}</td>
         <td>
           <label class="switch">
             <input type="checkbox" [checked]="express.isUse=='Y'" (change)="isUse(express)"/>

@@ -7,29 +7,31 @@
         <th class="w5 thc font">
           序号
         </th>
-        <th class="w15 thc font">
-          短标题
-        </th>
-        <th class="w10 thc font">
+        <th class="w12 thc font">
           分类
+        </th>
+        <th class="w10 thc font text-left">
+          短标题
         </th>
         <th class="w12" *ngIf="articleState=='NORMAL'">
           <span class="thc font mr2">是否置顶</span>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="topTemplate"
-                 triggers="mouseenter:mouseleave"  ></i>
+             triggers="mouseenter:mouseleave"></i>
           <template #topTemplate class="topColor"><span></span>选择置顶的资讯，将出现在APP客户端资讯模块靠前的位置</template>
         </th>
         <th class="w13" *ngIf="articleState=='NORMAL'">
           <span class="thc font mr2">是否推荐</span>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="recTemplate"
              triggers="mouseenter:mouseleave"></i>
-          <template #recTemplate class="topColor"><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span class="rec thc font"> 推荐 </span>）突出显示</template>
-        </th>
-        <th class="w25 thc font">
-          封面
+          <template #recTemplate class="topColor"><span></span>选择推荐的资讯，在APP客户端资讯列表中，增加图标（<span
+            class="rec thc font"> 推荐 </span>）突出显示
+          </template>
         </th>
         <th class="w10 thc font">
           关联商品
+        </th>
+        <th class="w25 thc font">
+          封面
         </th>
         <th class="w25 thc font" *ngIf="articleState=='REVISE'">
           失败原因
@@ -40,13 +42,13 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>
+        <td>{{article.acName}}</td>
+        <td class="text-left">
           <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
           <i class="icon-info mr5" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>
           <span>{{article.articleTitleShort}}</span>
         </td>
-        <td>{{article.acName}}</td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
             <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article)"/>
@@ -59,6 +61,8 @@
             <span></span>
           </label>
         </td>
+        <td *ngIf="article.articleGoods.length==0">否</td>
+        <td *ngIf="article.articleGoods.length>0">是</td>
         <td>
           <ng-container *ngIf="article.articleCoverVO!=null">
             <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url}}" class="qpsImg" alt=""
@@ -68,8 +72,6 @@
             无封面
           </ng-container>
         </td>
-        <td *ngIf="article.articleGoods.length==0">否</td>
-        <td *ngIf="article.articleGoods.length>0">是</td>
         <td *ngIf="articleState=='REVISE'">{{article.articleVerifyReason}}</td>
         <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
           <app-buttons [config]="updatebutton" routerLink="addArticle"

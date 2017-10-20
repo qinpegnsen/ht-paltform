@@ -48,12 +48,12 @@ const operation = {
       alert: '▼',
       submenu: [
         {
-          text: '文章管理',
-          link: '/main/operation/article/manage'
-        },
-        {
           text: '文章分类',
           link: '/main/operation/article/sort'
+        },
+        {
+          text: '文章管理',
+          link: '/main/operation/article/manage'
         },
         {
           text: '文章审核',

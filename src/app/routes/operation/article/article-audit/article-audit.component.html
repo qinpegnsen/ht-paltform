@@ -10,17 +10,17 @@
         <th class="w5 thc font">
           序号
         </th>
-        <th class="w15 thc font">
+        <th class="w20 thc font">
+          分类
+        </th>
+        <th class="w15 thc font text-left">
           短标题
         </th>
         <th class="w10 thc font">
-          分类
-        </th>
-        <th class="w20 thc font">
-          封面
-        </th>
-        <th class="w15 thc font">
           关联商品
+        </th>
+        <th class="w30 thc font">
+          封面
         </th>
         <th class="w15 thc font">操作</th>
       </tr>
@@ -28,13 +28,15 @@
       <tbody>
       <tr *ngFor="let article of articleList.data;let i = index">
         <td>{{i+1}}</td>
-        <td>
+        <td>{{article.acName}}</td>
+        <td class="text-left">
           <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
           <i class="icon-info mr5" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>
           <span>{{article.articleTitleShort}}</span>
         </td>
-        <td>{{article.acName}}</td>
+        <td *ngIf="article.articleGoods.length==0">否</td>
+        <td *ngIf="article.articleGoods.length>0">是</td>
         <td>
           <ng-container *ngIf="article.articleCoverVO!=null">
             <img *ngFor="let item of article.articleCoverVO;let i = index" src="{{item.url }}" class="qpsImg" alt=""
@@ -44,10 +46,9 @@
             无封面
           </ng-container>
         </td>
-        <td *ngIf="article.articleGoods.length==0">否</td>
-        <td *ngIf="article.articleGoods.length>0">是</td>
         <td>
-          <app-buttons [config]="auditbutton" routerLink="/main/operation/article/auditPage" [queryParams]="{id:article.id}" ></app-buttons>
+          <app-buttons [config]="auditbutton" routerLink="/main/operation/article/auditPage"
+                       [queryParams]="{id:article.id}"></app-buttons>
         </td>
       </tr>
       </tbody>
@@ -55,7 +56,8 @@
       <tr>
         <td colspan="12">
           <div class="col-sm-5">
-            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至 {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
+            <div class="text-muted pull-left"><strong>第 {{articleManListdata.genStartRow()}} 至
+              {{articleManListdata.genEndRow()}} 条，共 {{articleManListdata.totalRow}}
               条</strong></div>
           </div>
           <div class="col-sm-7">

@@ -417,7 +417,6 @@ export class AddArticleComponent implements OnInit {
      * @param item
      */
     if(me.uploader.queue.length==0){//解决单图或者是3图模式删除了图片但是没有提示bug
-
       if(this.linkType == 'updateArticle'){//修改时候防止选择了封面类型，却不上传
         if(me.queryArticleData.coverType=='THREE'){
           AppComponent.rzhAlt('error', '请上传 3 张封面图片');
