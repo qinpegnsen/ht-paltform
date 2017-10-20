@@ -44,10 +44,10 @@
         <td>{{i+1}}</td>
         <td>{{article.acName}}</td>
         <td class="text-left">
-          <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
-          <i class="icon-info mr5" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
-             triggers="mouseenter:mouseleave"></i>
           <span>{{article.articleTitleShort}}</span>
+          <i class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
+          triggers="mouseenter:mouseleave"></i>
+          <template #popTemplate>长标题：<span>{{article.articleTitle}}</span></template>
         </td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
