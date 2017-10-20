@@ -77,7 +77,6 @@ export class ContentComponent implements OnInit,OnChanges  {
     that.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
-          console.log("█ event.url ►►►",  event.url);
           if(event.url.indexOf('linkType')>0){
             that.flag=false;
           }else if(event.url=='/main/operation/article/manage'){
@@ -111,7 +110,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 获取文章管理的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
    * @paddArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
-   * @pbooelean  是否调取置顶的列表  ，只有发表成功后可以置顶
+   * @pbooelean  是否调取置顶的列表  ，只有发表成功后可以置顶  现在已经去掉了，传N和传Y是一样的，都是传查置顶的列表
    */
   public queryArticManleList(booelean,event?:PageEvent,addArticlestate?) {
     let activePage = 1;
