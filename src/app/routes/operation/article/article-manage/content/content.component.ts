@@ -77,6 +77,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     that.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          console.log("█ event.url ►►►",  event.url);
           if(event.url.indexOf('linkType')>0){
             that.flag=false;
           }else if(event.url=='/main/operation/article/manage'){
@@ -92,7 +93,6 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 输入属性变化的时候再次查询，获取当前状态下的系统列表
    */
   ngOnChanges(){
-    console.log("█ this.searchKey ►►►",  this.searchKey);
     this.articleState=this.state;
     this.queryArticManleList('N')
   }

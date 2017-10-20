@@ -54,8 +54,8 @@
       </div>
     </td>
     <td>
-      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id,$event.target)"></a>
-      <a class="qpssMl" routerLink="{{platformInfo.url}}">{{platformInfo.msg}}</a>
+      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id)"></a>
+      <a class="qpssMl" (click)="updateIsRead(platformInfo.id,true,platformInfo.url)">{{platformInfo.msg}}</a>
     </td>
     <td class="text-center">{{platformInfo.createTime}}</td>
     <td class="text-center">
