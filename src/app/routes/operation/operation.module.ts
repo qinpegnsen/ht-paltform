@@ -105,6 +105,6 @@ const routes: Routes = [
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
-  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService,HeaderComponent,LayoutComponent]
+  providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService,HeaderComponent,LayoutComponent,ArticleAuditComponent]
 })
 export class OperationModule { }

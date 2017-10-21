@@ -4,7 +4,7 @@
 <div class="col-md-12 panel panel-default">
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
-           (pageChange)="queryArticManleList($event)">
+           (pageChange)="queryArticManleList(1,$event)">
       <thead>
       <tr>
         <th class="w5 thc font">
@@ -48,7 +48,7 @@
         </td>
         <td>
           <app-buttons [config]="auditbutton" routerLink="/main/operation/article/auditPage"
-                       [queryParams]="{id:article.id}"></app-buttons>
+                       [queryParams]="{id:article.id,curPage:articleManListdata.curPage}"></app-buttons>
         </td>
       </tr>
       </tbody>

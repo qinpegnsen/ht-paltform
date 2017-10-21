@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubmitService} from "../../../../../core/forms/submit.service";
 import {ContentService} from "../../article-manage/content/content.service";
+import { Location }from '@angular/common';
+import {ArticleAuditComponent} from "../article-audit.component";
+
 declare var $: any;
 @Component({
   selector: 'app-audit-page',
@@ -16,11 +19,14 @@ export class AuditPageComponent implements OnInit {
   public articleCommentFlag: any                    //文章是否评论
   public autionOptions;                             //审核状态的列表
   public articleCoverTypes;                         //文章封面的类型数据
+  public curPage;                                   //当前的页面
 
   constructor(
     private routeInfo: ActivatedRoute,
     public ContentService: ContentService,
     public router: Router,
+    public location: Location,
+    public articleAuditComponent: ArticleAuditComponent,
     public service: SubmitService) { }
 
   /**
@@ -28,6 +34,7 @@ export class AuditPageComponent implements OnInit {
    */
   ngOnInit() {
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
+    this.curPage = this.routeInfo.snapshot.queryParams['curPage'];//获取地址栏传递过来的文章给的id
     let url = '/article/queryArticle';
     let data = {
       articleId: this.articleId
@@ -80,14 +87,9 @@ export class AuditPageComponent implements OnInit {
     let url = "/article/AuditArticle";
     let result = this.ContentService.auditArticle(url, data)
     if (result) {
+      this.location.back();
+      sessionStorage.setItem('auditCurPage',this.curPage);
       this.router.navigate(['/main/operation/article/audit']);
     }
-  }
-
-  /**
-   * 取消审核
-   */
-  cancel() {
-    this.router.navigate(['/main/operation/article/audit']);
   }
 }

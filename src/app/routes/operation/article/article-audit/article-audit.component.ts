@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 
 @Component({
   selector: 'app-article-audit',
@@ -20,7 +21,8 @@ export class ArticleAuditComponent implements OnInit {
    * 2.对审核按钮进行赋值
    */
   ngOnInit() {
-    this.queryArticManleList();
+    let curPage=sessionStorage.getItem('auditCurPage');
+    this.queryArticManleList(curPage?curPage:1);
     this.auditbutton={
       title:"审核",
       type: "agree"
@@ -33,9 +35,14 @@ export class ArticleAuditComponent implements OnInit {
    * @paddArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
    * @pbooelean  是否调取置顶的列表
    */
-  queryArticManleList(event?:PageEvent) {
+  queryArticManleList(curPage,event?:PageEvent) {
+    sessionStorage.removeItem('auditCurPage');
     let activePage = 1;
-    if(typeof event !== "undefined") activePage =event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(isNumber(curPage)){
+      activePage =curPage
+    };
     let data={
       curPage:activePage,
       pageSize:10,
