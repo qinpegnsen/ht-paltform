@@ -1,7 +1,7 @@
 <div class="col-md-10 panel panel-default" *ngIf="flag">
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
-           (pageChange)="queryArticManleList('N',$event)">
+           (pageChange)="queryArticManleList('N',1,$event)">
       <thead>
       <tr>
         <th class="w5 thc font">
@@ -51,13 +51,13 @@
         </td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
-            <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article)"/>
+            <input type="checkbox" [checked]="article.isTop=='Y'" (change)="isTop(article,articleManListdata.curPage)"/>
             <span></span>
           </label>
         </td>
         <td *ngIf="articleState=='NORMAL'">
           <label class="switch">
-            <input type="checkbox" [checked]="article.articleCommend=='Y'" (change)="isRecom(article)"/>
+            <input type="checkbox" [checked]="article.articleCommend=='Y'" (change)="isRecom(article,articleManListdata.curPage)"/>
             <span></span>
           </label>
         </td>
@@ -75,15 +75,12 @@
         <td *ngIf="articleState=='REVISE'">{{article.articleVerifyReason}}</td>
         <td [hidden]="articleState=='DEL'||articleState=='AUDIT'">
           <app-buttons [config]="updatebutton" routerLink="addArticle"
-                       [queryParams]="{linkType:'updateArticle',id:article.id}"
+                       [queryParams]="{linkType:'updateArticle',id:article.id,curPage:articleManListdata.curPage}"
                        [hidden]="articleState=='AUDIT'"></app-buttons>
           <app-buttons [config]="deletebutton" [hidden]="articleState=='AUDIT'"
-                       (click)="delArticle(article.id)"></app-buttons>
+                       (click)="delArticle(article.id,articleManListdata.curPage)"></app-buttons>
           <app-buttons [config]="publishbutton" *ngIf="articleState=='DRAFT'"
-                       (click)="publishArticle(article.id)"></app-buttons>
-          <app-buttons [config]="auditbutton" routerLink="addArticle"
-                       [queryParams]="{linkType:'auditArticle',id:article.id}"
-                       *ngIf="articleState=='AUDIT'"></app-buttons>
+                       (click)="publishArticle(article.id,articleManListdata.curPage)"></app-buttons>
         </td>
       </tr>
       </tbody>

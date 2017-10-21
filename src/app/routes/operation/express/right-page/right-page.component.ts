@@ -103,6 +103,6 @@ export class RightPageComponent implements OnInit {
       }
     }
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
-    this.parent.queryExpressList(this.curPage)
+    this.parent.queryExpressList(this.curPage);
   }
 }

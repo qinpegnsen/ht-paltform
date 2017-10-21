@@ -10,6 +10,8 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
+import {ContentComponent} from "../content/content.component";
+import {Location} from "@angular/common";
 
 declare var $: any;
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
@@ -86,6 +88,8 @@ export class AddArticleComponent implements OnInit {
   ngOnInit() {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     this.articleId = this.routeInfo.snapshot.queryParams['id'];//获取地址栏传递过来的文章给的id
+    let curPage = this.routeInfo.snapshot.queryParams['curPage'];//当前的页码
+    sessionStorage.setItem('curPage',curPage)//由于这里的情况特殊不能采取传统的方式
     this.articleCoverType = 'AUTO'//文章封面类型默认的样式
     this.deletebutton = {//删除按钮
       title: "删除",

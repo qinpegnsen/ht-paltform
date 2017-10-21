@@ -5,6 +5,8 @@ import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTabl
 import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
 import {Page} from "../../../../../core/page/page";
+import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
+import {isNullOrUndefined} from "util";
 
 const swal = require('sweetalert');
 
@@ -69,7 +71,7 @@ export class ContentComponent implements OnInit,OnChanges  {
       title:"审核",
       type: "agree"
     };
-    this.queryArticManleList('N')//调用文章的列表
+    this.queryArticManleList('N',1)//调用文章的列表
     /**
      * 路由事件用来监听地址栏的变化
      * 1.当新增文章出现的时候，内容组件隐藏
@@ -83,7 +85,8 @@ export class ContentComponent implements OnInit,OnChanges  {
             that.flag=false;
           }else if(event.url=='/main/operation/article/manage'){
             that.flag=true;
-            that.queryArticManleList('N') //刷新内容页面
+            let curPage =sessionStorage.getItem('curPage');
+            that.queryArticManleList('N',curPage?curPage:1) //刷新内容页面
             that.getTotalRow();
           }
         }
@@ -95,7 +98,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    */
   ngOnChanges(){
     this.articleState=this.state;
-    this.queryArticManleList('N')
+    this.queryArticManleList('N',1)
   }
 
   /**
@@ -114,12 +117,17 @@ export class ContentComponent implements OnInit,OnChanges  {
    * @paddArticlestate 新增文章的时候传递过来的状态，然后刷新当前状态
    * @pbooelean  是否调取置顶的列表  ，只有发表成功后可以置顶  现在已经去掉了，传N和传Y是一样的，都是传查置顶的列表
    */
-  public queryArticManleList(booelean,event?:PageEvent,addArticlestate?) {
+  public queryArticManleList(booelean,curPage,event?:PageEvent,addArticlestate?) {
+    sessionStorage.removeItem('curPage');//刷新了当前页后，立马清除存储 ，要不初始化进来还是当前页
     let activePage = 1;
-    if(typeof event !== "undefined") activePage =event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(isNumber(curPage)){
+      activePage =curPage
+    };
     let data={
       curPage:activePage,
-      pageSize:10,
+      pageSize:3,
       articleState:this.articleState,
       // articleTitle:this.searchKey,
       articleShortTitle:this.searchKey,
@@ -140,7 +148,7 @@ export class ContentComponent implements OnInit,OnChanges  {
   /**
    * 删除文章 首先进行确认是否删除
    */
-  delArticle(delId){
+  delArticle(delId,curPage){
     let that=this;
     swal({
       title: "您确定要删除吗？",
@@ -160,7 +168,7 @@ export class ContentComponent implements OnInit,OnChanges  {
         }
         let  flag = that.ContentService.confirmDel(url,data)
         if(flag){
-          that.queryArticManleList('N');
+          that.queryArticManleList('N',curPage);
           that.getTotalRow();
         }
       } else {
@@ -172,32 +180,15 @@ export class ContentComponent implements OnInit,OnChanges  {
   /**
    * 发布文章
    */
-  publishArticle(id){
+  publishArticle(id,curPage){
     let data={
       articleId:id
     }
     let url= "/article/publishArticle";
     let result=this.ContentService.publishArticle(url,data)
     if(result){
-      this.queryArticManleList('N')//调用文章的列表，刷新页面
+      this.queryArticManleList('N',curPage)//调用文章的列表，刷新页面
       this.getTotalRow();
-    }
-  }
-
-  /**
-   * 审核文章
-   */
-  auditArticle(id){
-    let data={
-      articleId:id,
-      auditState:'SUCCESS',
-      reason:''
-    }
-    let url= "/article/AuditArticle";
-    let result=this.ContentService.auditArticle(url,data)
-    if(result){
-      this.queryArticManleList('N')//调用文章的列表，刷新页面
-      this.getTotalRow()
     }
   }
 
@@ -205,7 +196,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 文章是否推荐
    * @param data 当前获取到得数据
    */
-  isRecom(article){
+  isRecom(article,curPage){
     if(article.articleCommend=="Y"){
       article.articleCommend="N"
     }else if(article.articleCommend=="N"){
@@ -218,7 +209,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let url= "/article/updateArticleIsCommend";
     let result=this.ContentService.isRecom(url,data)
     if(result){
-      this.queryArticManleList('N')
+      this.queryArticManleList('N',curPage)
     }
   }
 
@@ -226,7 +217,7 @@ export class ContentComponent implements OnInit,OnChanges  {
    * 文章是否置顶,置顶成功以后调用专门呈现置顶成功后的文章列表接口,刷新页面
    * @param data
    */
-  isTop(article){
+  isTop(article,curPage){
     let that=this;
     if(article.isTop=="Y"){
       article.isTop="N"
@@ -240,7 +231,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let url= "/article/pubArticle";
     let result=that.ContentService.isTop(url,data)
     if(result){
-      this.queryArticManleList('N')//调用文章的列表
+      this.queryArticManleList('N',curPage)//调用文章的列表
     }
   }
 }
