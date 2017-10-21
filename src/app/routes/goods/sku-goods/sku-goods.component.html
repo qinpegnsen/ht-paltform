@@ -8,9 +8,9 @@
     <table class="w100">
       <thead class="bg-gray-lighter">
       <tr>
-        <td class="col-xs-8 p">商品规格</td>
-        <td class="col-xs-2 p text-center">价格</td>
-        <td class="col-xs-2 p text-center">库存</td>
+        <td class="w66 p">商品规格</td>
+        <td class="w17 p text-center">价格</td>
+        <td class="w17 p text-center">库存</td>
       </tr>
       </thead>
     </table>
@@ -18,7 +18,7 @@
       <table class="w100">
         <tbody>
         <tr class="item-bottom-border" *ngFor="let item of skuData;let i = index">
-          <td class="position-relative p">
+          <td class="w66 position-relative p">
             <div>
               <img [src]="item.goodsImage" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                    class="goods-xs-img"
@@ -34,8 +34,8 @@
               </div>
             </div>
           </td>
-          <td class="text-center main-red">¥{{item.goodsPrice.price | decimalTwo}}</td>
-          <td class="text-center">{{item.storageNum}}</td>
+          <td class="w17 text-center main-red">¥{{item.goodsPrice.price | decimalTwo}}</td>
+          <td class="w17 text-center">{{item.storageNum}}</td>
         </tr>
         </tbody>
       </table>
