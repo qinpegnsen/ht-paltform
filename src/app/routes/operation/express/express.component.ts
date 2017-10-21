@@ -103,6 +103,6 @@ export class ExpressComponent implements OnInit {
       isUse:express.isUse
     }
     let url= "/basicExpress/updateBasicExpress";
-    this.service.putRequest(url,data)
+    this.service.putRequest(url,data);
   }
 }
