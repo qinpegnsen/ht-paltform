@@ -21,6 +21,7 @@ export class AddArticleSortComponent implements OnInit {
   public id:number;
   public flag:boolean=false;
   public stateList:any;
+  public curPage:any;
   private tip = {
     commisRate: '请输入小数形式，0 <= 佣金比例 < 1',
     sort: '0-99，默认0',
@@ -41,6 +42,7 @@ export class AddArticleSortComponent implements OnInit {
   ngOnInit() {
     this.linkType = this.routeInfo.snapshot.queryParams['linkType'];
     this.acParentId = this.routeInfo.snapshot.queryParams['acParentId'];
+    this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
 
     this.id = this.routeInfo.snapshot.queryParams['id'];//如果id存在的话，就说明是修改，这时候才执行以下的代码
     /**
@@ -94,7 +96,7 @@ export class AddArticleSortComponent implements OnInit {
       }
       let result=this.operationService.postRequest(url,data);
       if(result){
-        this.ArticleSortComponent.queryArticSortleList()
+        this.ArticleSortComponent.queryArticSortleList(this.curPage)
       }else{
         return;
       }
@@ -121,8 +123,7 @@ export class AddArticleSortComponent implements OnInit {
         acParentId:this.acParentId
       }
       this.service.putRequest(url,data);
-      this.ArticleSortComponent.queryArticSortleList()
-
+      this.ArticleSortComponent.queryArticSortleList(this.curPage)
     }
     this.router.navigate(['/main/operation/article/sort']);
 

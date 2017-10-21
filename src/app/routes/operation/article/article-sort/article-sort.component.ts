@@ -4,6 +4,7 @@ import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "../../../../core/page/page";
 import {OperationService} from "../../operation.service";
+import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 
 const swal = require('sweetalert');
 
@@ -52,16 +53,20 @@ export class ArticleSortComponent implements OnInit {
       text:"新增分类",
       type: "add-thc"
     };
-    this.queryArticSortleList()
+    this.queryArticSortleList(1)
   }
 
   /**
    * 获取文章分类的列表数据(初始化的时候和点击页码的时候都会调用)
    * @param event 点击页码时候的事件对象
    */
-  queryArticSortleList(event?:PageEvent) {
+  queryArticSortleList(curPage,event?:PageEvent) {
     let activePage = 1;
-    if(typeof event !== "undefined") {activePage =event.activePage};
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(isNumber(curPage)){
+      activePage =curPage
+    };
     let data={
       curPage:activePage,
       pageSize:10,
@@ -74,7 +79,7 @@ export class ArticleSortComponent implements OnInit {
   /**
    * 删除分类 首先进行确认是否删除
    */
-  deleteSort(delSortId,acParentId){
+  deleteSort(delSortId,acParentId,curPage){
     let that=this;
     swal({
         title: "您确定要删除吗？",
@@ -92,8 +97,9 @@ export class ArticleSortComponent implements OnInit {
           let data={
             id:delSortId
           }
-         that.service.delRequest(url,data)
-         that.getChild(acParentId)
+         that.service.delRequest(url,data);
+         // that.getChild(acParentId);
+         that.queryArticSortleList(curPage);
         }
       });
   }

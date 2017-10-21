@@ -20,7 +20,7 @@
   <!--</div>-->
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleSortListdata"
-           (pageChange)="queryArticSortleList($event)">
+           (pageChange)="queryArticSortleList(1,$event)">
       <thead>
       <tr>
         <th class="w5 thc font">
@@ -60,10 +60,10 @@
         <td>{{article.createTime}}</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="addSort"
-                       [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId}"></app-buttons>
+                       [queryParams]="{linkType:'updateSort',id:article.id,acParentId:article.acParentId,curPage:articleSortListdata.curPage}"></app-buttons>
           <!--<app-buttons [config]="childbutton" routerLink="addSort"-->
                        <!--[queryParams]="{linkType:'addChildSort',id:article.id,acParentId:article.acParentId}"></app-buttons>-->
-          <app-buttons [config]="deletebutton" (click)="deleteSort(article.id,article.acParentId)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteSort(article.id,article.acParentId,articleSortListdata.curPage)"></app-buttons>
           <span (click)="queryChildSortList('',article.id,article.acName,false)" class="btn btn-default btn-xs"
                 *ngIf="article.haveChildren">
           <i class="fa fa-level-down"></i>
