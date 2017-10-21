@@ -85,7 +85,7 @@
           <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
                 (mouseleave)="hideBuyerInfo(i)">{{name.agentName}}
           </span>
-            <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
+            <div class="szh-buyer-info text-left" #i>
               <div class="info-con">
                 <p class="pl mb-sm"><i class="fa fa-user"></i> 收货人信息</p>
                 <dl><dt>姓名：</dt><dd>{{goods.linkman}}</dd></dl>
@@ -108,7 +108,7 @@
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
             <button  class="m-sm btn btn-xs btn-outline btn-info fa fa-jpy"
-                     *ngIf="goods.payWay=='REMIT' && goods.state=='CR'" (click)="addBankData(name.ordno,goods.pay,goodsList.curPage)" >
+                     *ngIf="goods.payWay=='REMIT' && goods.state=='CR'" (click)="addBankData(name.ordno,goods.pay,goodsList.curPage)">
               确认收款
             </button>
           </td>
@@ -134,7 +134,6 @@
   </tr>
   </tfoot>
 </table>
-<app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
 
-  <app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" [curPage]="curPage1"
-                     (bankDate)="getBankResult($event)" ></app-bank-transfer>
+<app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
+ <app-bank-transfer [showBankWindow]="showBankWindow" [orderId]="orderId1" [goodspay]="goodspay1" [curPage]="curPage1" (bankDate)="getBankResult($event)" ></app-bank-transfer>

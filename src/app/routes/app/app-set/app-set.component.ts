@@ -7,6 +7,7 @@ import {AppComponent} from '../../../app.component';
 import {AjaxService} from '../../../core/services/ajax.service';
 import {GetUidService} from '../../../core/services/get-uid.service';
 import {AppSetService} from './app-set.service';
+import {cli} from "webdriver-manager/built/lib/webdriver";
 const swal = require('sweetalert');
 
 @Component({
@@ -141,11 +142,13 @@ export class AppSetComponent implements OnInit {
     for (let indexTpl = 0; indexTpl < _this.indexTpls.length; indexTpl++) {
       this.moduleList.push({
         reslut: _this.indexTpls[indexTpl].phoneIndexTpl.tplCheckedImg,
+        tplWidth: _this.indexTpls[indexTpl].phoneIndexTpl.tplWidth,
+        tplHeight: _this.indexTpls[indexTpl].phoneIndexTpl.tplHeight,
         index: this.moduleList.length + 1,
         indexData: _this.indexTpls[indexTpl],
         data: _this.indexTpls[indexTpl].phoneIndexTpl
       });
-      _this.phoneIndexId[indexTpl] = _this.indexTpls[indexTpl].id;
+      _this.phoneIndexId[indexTpl] = _this.indexTpls[indexTpl].indexId;
     }
   }
 
@@ -158,7 +161,13 @@ export class AppSetComponent implements OnInit {
     //隐藏模板信息是否显示
     this.isShowContent = false;
     //点击模板的时候pus到中心，添加选中的模板
-    this.moduleList.push({reslut: item.tplCheckedImg, index: this.moduleList.length + 1, indexData: null, data: item});
+    this.moduleList.push({
+      reslut: item.tplCheckedImg,
+      tplWidth: item.tplWidth,
+      tplHeight: item.tplHeight,
+      index: this.moduleList.length + 1,
+      indexData: null,
+      data: item});
   }
 
   /**

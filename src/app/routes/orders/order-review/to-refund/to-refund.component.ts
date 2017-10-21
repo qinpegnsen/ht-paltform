@@ -22,6 +22,8 @@ export class ToRefundComponent implements OnInit {
   private agentAcct;
   private agentTime;
   public orderId1: string;
+  public goodspay1: string;
+  public curPage1: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   private beginTime: string;
@@ -87,8 +89,10 @@ export class ToRefundComponent implements OnInit {
     i.style.display = 'none';
   }
 
-  refund(orderId) {
+  refund(orderId,goodspay,curPage) {
     this.orderId1 = orderId;
+    this.goodspay1 = goodspay;
+    this.curPage1=curPage;
     this.showRefundWindow=true;
   }
 

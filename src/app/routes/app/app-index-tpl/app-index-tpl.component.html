@@ -19,7 +19,7 @@
         <th class="w15 text-center">
           <rzhDefaultSorter by="tplDesc">首页模板说明</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
+        <th class="w5 text-center">
           <rzhDefaultSorter by="tplImgCount">模板内容数量</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
@@ -31,8 +31,14 @@
         <th class="w10 text-center">
           <rzhDefaultSorter by="tplAuthor">首页作者</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="tplAuthor">模板类型</rzhDefaultSorter>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="tplType">模板类型</rzhDefaultSorter>
+        </th>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="tplWidth">模板宽度</rzhDefaultSorter>
+        </th>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="tplHeight">模板高度</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="b">操作</rzhDefaultSorter>
@@ -49,6 +55,8 @@
         <td><span><img class="img" src="{{file.tplImg}}" /></span></td>
         <td><span><img class="img"  src="{{file.tplCheckedImg}}" /></span></td>
         <td>{{file.tplAuthor}}</td>
+        <td>{{file.tplWidth}}</td>
+        <td>{{file.tplHeight}}</td>
         <td>{{file.tplType | rzhState:'1501'}}</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{number:4,id:file.id}"></app-buttons>

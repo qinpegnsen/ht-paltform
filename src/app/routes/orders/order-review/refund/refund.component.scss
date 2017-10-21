@@ -1,28 +1,54 @@
-.cancel-order .popup{
+.cancel-order .popup {
   width: 550px;
   z-index: 300;
 }
-.cancel-con dt{
+
+.cancel-con dt {
   padding: 12px;
   text-align: right;
   font-weight: normal;
   color: #888;
 }
-.cancel-con dd{
+
+.cancel-con dd {
   color: #666;
   padding: 12px;
   vertical-align: top;
   border-left: 1px solid #F0F0F0;
 }
-.cancel-con dt,.cancel-con dd{
+
+.cancel-con dt, .cancel-con dd {
   display: inline-block;
 }
-.cancel-order .mask{
+
+.cancel-order .mask {
   background-color: rgba(0, 0, 0, 0.6);
 }
-.cancel-con .orderId-color{
+
+.cancel-con .orderId-color {
   color: #6ec0ff;
 }
-.cancel-reason li label{
+
+.cancel-reason li label {
   font-weight: normal;
 }
+
+.col-xs-3 i {
+  color: #a94644;
+}
+
+._img {
+  width: 50px;
+  height: 50px;
+}
+
+.bigImga{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: auto;
+  display: none;
+  z-index: 1000;
+}
+

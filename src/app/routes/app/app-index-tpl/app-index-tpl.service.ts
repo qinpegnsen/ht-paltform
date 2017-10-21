@@ -13,8 +13,6 @@ export class AppIndexTplService {
    * @param event
    */
   public controlDatas(url,data) {
-    console.log("█ 2 ►►►",  2);
-
     var result;
     this.ajax.get({
       url: url,

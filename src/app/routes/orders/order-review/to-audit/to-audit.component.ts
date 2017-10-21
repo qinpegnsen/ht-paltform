@@ -51,8 +51,6 @@ export class ToAuditComponent implements OnInit {
    * @param curPage
    */
   public queryDatas(curPage, event?: PageEvent) {
-    console.log('█ this.agentTime ►►►', this.agentTime);
-
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -72,7 +70,6 @@ export class ToAuditComponent implements OnInit {
       stAft:'AUDIT'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**

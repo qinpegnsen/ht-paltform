@@ -213,6 +213,8 @@ queryData(){
         'tplDesc':value.tplDesc,
         'tplImgCount':value.tplImgCount,
         'tplAuthor':value.tplAuthor,
+        'tplWidth':value.tplWidth,
+        'tplHeight':value.tplHeight,
         'tplType':value.tplType
       },
       success: (res) => {
@@ -247,6 +249,8 @@ queryData(){
         'tplDesc':value.tplDesc,
         'tplImgCount':value.tplImgCount,
         'tplAuthor':value.tplAuthor,
+        'tplWidth':value.tplWidth,
+        'tplHeight':value.tplHeight,
         'tplType':value.tplType
       },
       success: (res) => {

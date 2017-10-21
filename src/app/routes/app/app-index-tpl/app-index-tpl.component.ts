@@ -53,7 +53,6 @@ export class AppIndexTplComponent implements OnInit {
     console.log('█ 1 ►►►',  1);
 
     this.controlData=this.AppIndexTplService.controlDatas(url,data);
-    console.log('█ this.controlData ►►►',  this.controlData);
   }
 
   /**

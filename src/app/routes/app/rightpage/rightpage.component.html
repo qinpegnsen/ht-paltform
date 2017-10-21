@@ -252,7 +252,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i class="main-red">*</i> 首页作者</label>
             <div class="col-sm-7">
-              <input class="form-control" required name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
+              <input class="form-control"  name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
                    class="alert alert-danger">
@@ -261,6 +261,35 @@
             </div>
           </div>
         </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"> 模板宽度</label>
+            <div class="col-sm-7">
+              <input class="form-control" required name="tplWidth" [(ngModel)]="tplForm.tplWidth"
+                     #tplWidth="ngModel" type="text"/>
+              <div [hidden]="tplWidth.valid || tplWidth.pristine"
+                   class="alert alert-danger">
+                模板宽度是必填项，请填写模板宽度
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"> 模板高度</label>
+            <div class="col-sm-7">
+              <input class="form-control" required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
+                     #tplHeight="ngModel" type="text"/>
+              <div [hidden]="tplHeight.valid || tplHeight.pristine"
+                   class="alert alert-danger">
+                模板高度是必填项，请填写模板高度
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset>
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i class="main-red">*</i>模板类型</label>
@@ -403,6 +432,35 @@
             </div>
           </div>
         </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"> 模板宽度</label>
+            <div class="col-sm-7">
+              <input class="form-control"  required  name="tplWidth" [(ngModel)]="tplForm.tplWidth"
+                     #tplWidth="ngModel" type="text"/>
+              <div [hidden]="tplWidth.valid || tplWidth.pristine"
+                   class="alert alert-danger">
+                模板宽度是必填项，请填写模板宽度
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">  模板高度</label>
+            <div class="col-sm-7">
+              <input class="form-control"  required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
+                     #tplHeight="ngModel" type="text"/>
+              <div [hidden]="tplHeight.valid || tplHeight.pristine"
+                   class="alert alert-danger">
+                模板高度是必填项，请填写模板高度
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
         <fieldset>
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i class="main-red">*</i>模板类型</label>

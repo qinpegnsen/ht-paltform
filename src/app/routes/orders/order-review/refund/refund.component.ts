@@ -49,6 +49,7 @@ export class RefundComponent implements OnInit {
 
   @Input('curPage') curPage: string;
   @Input('orderId') orderId: string;
+  @Input('goodspay') goodspay: string;
   @Output() refundDate = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
