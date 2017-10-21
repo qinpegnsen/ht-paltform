@@ -136,9 +136,9 @@
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
-                  <div class="col-lg-6 p0">商品</div>
-                  <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
-                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml _desc">操作</span></div>
+                  <div class="col-lg-5 p0">商品</div>
+                  <div class="col-lg-4 p0 text-left"><span class="extra p10 ml"><span>价格</span></span></div>
+                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml">操作</span></div>
                 </div>
               </div>
             </div>
@@ -318,9 +318,9 @@
               <div class="list-group-item">
                 <div class="clearfix">
                   <div class="_spanW col-lg-1 p0"></div>
-                  <div class="col-lg-6 p0">商品</div>
-                  <div class="col-lg-3 p0 text-center"><span class="extra p10 ml"><span>价格</span></span></div>
-                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml _desc">操作</span></div>
+                  <div class="col-lg-5 p0">商品</div>
+                  <div class="col-lg-4 p0 text-left"><span class="extra p10 ml"><span>价格</span></span></div>
+                  <div class="col-lg-2 p0 text-center"><span class="extra p10 ml">操作</span></div>
                 </div>
               </div>
               <li *ngFor="let item of queryArticleData.articleGoods; let i = index" class="list-group-item">
@@ -329,14 +329,14 @@
                     <img src="{{item.goodsImage}}" alt="" class='_special'
                          onerror="javascript:this.src='../../../assets/img/dummy.png';">
                   </div>
-                  <div class="col-lg-6 p0">
-                    <span (click)="showDetail(shop)" class="pl0 ml">{{item.name}}</span><br>
+                  <div class="col-lg-5 p0 _copy">
+                    <span  class="pl0 ml">{{item.name}}</span><br>
                     <div *ngFor="let standard of item.goodsSavSets" class="pl0 ml">
                       {{standard.attrName}}：{{standard.value}}
                     </div>
                     <input type="hidden" value="{{item.goodsCode}}">
                   </div>
-                  <div class="col-lg-3 p0 text-center">
+                  <div class="col-lg-4 p0 text-left">
                     <span class="extra p10 ml"><span>￥ {{item.price}}</span></span>
                   </div>
                 </div>
@@ -427,7 +427,7 @@
                       <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
-                    <div class="col-lg-6 p0">
+                    <div class="col-lg-5 p0">
                       <span class="pl0 ml qpsP" (mousemove)="showGoodName($event,j)"  (mouseout)="hideGoodName(j)">{{item.goodsName}}</span><br>
                       <span #j class="pl0 ml hoverName">{{item.goodsName}}</span>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
@@ -435,7 +435,7 @@
                       </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-3 p0 text-center">
+                    <div class="col-lg-4 p0">
                       <span class="extra p10 ml"><span>￥ {{item.goodsPrice.price}}</span></span>
                     </div>
                   </div>
@@ -462,7 +462,7 @@
                       <img src="{{item.goodsImage}}" alt="" class='_special'
                            onerror="javascript:this.src='../../../assets/img/dummy.png';">
                     </div>
-                    <div class="col-lg-6 _copy p0">
+                    <div class="col-lg-5 _copy p0">
                       <span (mousemove)="showGoodName($event,j)"  (mouseout)="hideGoodName(j)" class="pl0 ml qpsP">{{item.goodsName}}</span><br>
                       <span #j class="pl0 ml hoverName">{{item.goodsName}}</span>
                       <div *ngFor="let standard of item.goodsSavSetList" class="pl0 ml">
@@ -470,7 +470,7 @@
                       </div>
                       <input type="hidden" value="{{item.goodsCode}}">
                     </div>
-                    <div class="col-lg-3 p0 text-center">
+                    <div class="col-lg-4 p0">
                       <span class="extra p10 ml"><span>￥ {{item.goodsPrice.price}}</span></span>
                     </div>
                   </div>

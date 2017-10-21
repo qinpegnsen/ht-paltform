@@ -393,7 +393,6 @@ export class AddArticleComponent implements OnInit {
     $('._myAppend').on('click','._del',function(){
       me.excuDel(this)
     })
-
   }
 
   /**
@@ -515,7 +514,7 @@ export class AddArticleComponent implements OnInit {
       sHTML='';
     }
     let idStr = ''; //获取关联的商品
-    let obj = $("._myAppend").find('._copy').find('input');
+    let obj = $("._myAppend").find('._copy').find('input:hidden');
     for (let i = 0; i < obj.length; i++) {
       idStr += `${$(obj[i]).val()},`
     };
