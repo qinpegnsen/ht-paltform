@@ -7,15 +7,14 @@
         <fieldset class="b0">
           <legend>新增快递公司</legend>
         </fieldset>
-
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司代码</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司代码</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50" #expressCodeTem="ngModel" ngModel name="expressCode" required placeholder='必填项' [pattern]="patterns.letter"/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
                    class="alert alert-danger">
-                请输入合法的物流公司代码
+                请输入合法的公司代码
               </div>
             </div>
           </div>
@@ -23,24 +22,24 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司名称</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50"  #expressNameTem="ngModel" ngModel name="expressName" required placeholder='必填项'/>
               <div [hidden]="expressNameTem.valid||expressNameTem.untouched"
                    class="alert alert-danger">
-                输入合法的物流公司网址
+                公司名称是必填项
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司网址</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司网址</label>
             <div class="col-sm-8">
               <input class="form-control" type="text"  maxlength="50" #expressUrlTem="ngModel" ngModel name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
                    class="alert alert-danger">
-                物流公司网址不合法
+                请输入合法的公司网址
               </div>
             </div>
           </div>
@@ -55,7 +54,6 @@
             </div>
           </div>
         </fieldset>
-
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
@@ -74,40 +72,38 @@
         <fieldset class="b0">
           <legend>修改快递公司</legend>
         </fieldset>
-
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司代码</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司代码</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" maxlength="50"  #expressCodeTem="ngModel" [(ngModel)]="editData.expressCode" name="expressCode" required placeholder='必填项'/>
+              <input class="form-control" type="text" maxlength="50"  #expressCodeTem="ngModel" [(ngModel)]="editData.expressCode" name="expressCode" required placeholder='必填项' [pattern]="patterns.letter"/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
                    class="alert alert-danger">
-                物流公司代码是必填项
+                请输入合法的公司代码
               </div>
             </div>
           </div>
         </fieldset>
-
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司名称</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50"  #expressNameTem="ngModel"  [(ngModel)]="editData.expressName" name="expressName" required placeholder='必填项'/>
               <div [hidden]="expressNameTem.valid||expressNameTem.untouched"
                    class="alert alert-danger">
-                物流公司名称是必填项
+                公司名称是必填项
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>物流公司网址</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司网址</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50" #expressUrlTem="ngModel"  [(ngModel)]="editData.expressUrl" name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
                    class="alert alert-danger">
-                请输入合法的物流公司代码
+                请输入合法的公司网址
               </div>
             </div>
           </div>
@@ -122,7 +118,6 @@
             </div>
           </div>
         </fieldset>
-
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
