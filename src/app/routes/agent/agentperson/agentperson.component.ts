@@ -81,7 +81,7 @@ export class AgentpersonComponent implements OnInit {
      * 1.当添加代理商出现的时候，代理商列表组件隐藏
      * 2.路由变化的时候，刷新页面
      */
-   /* _this.router.events
+    _this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           console.log(event.url)
@@ -92,9 +92,9 @@ export class AgentpersonComponent implements OnInit {
             _this.getAgentList() //刷新内容页面
           }
         }
-      });*/
+      });
 
-    this.getAgentList()
+    // this.getAgentList()
   }
 
   //获取区域数据

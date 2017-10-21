@@ -6,7 +6,6 @@ import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {ManageService} from "./manage.service";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -31,12 +30,12 @@ export class ManageComponent implements OnInit {
   private goodsAudits: any;  // 商品审核状态列表
   private goodsState: any;  // 商品状态列表
   private isOwnPlats: any;  //是否自营列表
-  private skuTemplete: any;  // sku商品列表
+  private curBaseCode: string;  // 当前商品基本编号
+  private curName: string;    // 当前商品名称
 
   constructor(private router: Router,
               private tools: RzhtoolsService,
               private submit: SubmitService,
-              public manage: ManageService,
               private goodsService: GoodsService) {
   }
 
@@ -47,7 +46,6 @@ export class ManageComponent implements OnInit {
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表
     me.isOwnPlats = this.tools.getEnumDataList('1001');  // 店铺是否自营
-    me.domActions()
 
     me.addButton = {
       type: 'add-thc',
@@ -200,19 +198,16 @@ export class ManageComponent implements OnInit {
    * 显示窗口组件，加载sku列表
    */
   showSkuList(baseCode, name) {
-    let list = this.submit.getData('/goodsQuery/load', {goodsBaseCode: baseCode});// 获取需要展示的数据
-    this.skuTemplete = this.manage.skuTemplate(list, name);
-    $('body').append(this.skuTemplete);
+    this.curBaseCode = baseCode;
+    this.curName = name;
   }
 
-  private domActions() {
-    setTimeout(function () {
-      $('body').on('click', '.popup-colse', function () {
-        $('body .sku-box').fadeOut(200);
-        setTimeout(function () {
-          $('body .sku-box').remove()
-        }, 300)
-      })
-    }, 0)
+  /**
+   * 查看sku商品的回调函数
+   * @param data
+   */
+  getSkuData(data) {
+    this.curBaseCode = null;
+    if(data.type) this.queryDatas(data.page)
   }
 }

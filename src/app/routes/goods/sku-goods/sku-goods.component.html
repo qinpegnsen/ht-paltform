@@ -1,0 +1,44 @@
+<div class="sku-box fadeIn" *ngIf="showWindow">
+  <div class="mask"></div>
+  <div class="_popup animated fadeIn">
+    <div class="pop popup-hd font14">
+      查看商品<span class="font16">“{{curName}}”</span>的所有规格
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <table class="w100">
+      <thead class="bg-gray-lighter">
+      <tr>
+        <td class="col-xs-8 p">商品规格</td>
+        <td class="col-xs-2 p text-center">价格</td>
+        <td class="col-xs-2 p text-center">库存</td>
+      </tr>
+      </thead>
+    </table>
+    <div class="pop sku-con font12 w100">
+      <table class="w100">
+        <tbody>
+        <tr class="item-bottom-border" *ngFor="let item of skuData;let i = index">
+          <td class="position-relative p">
+            <div>
+              <img [src]="item.goodsImage" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                   class="goods-xs-img"
+                   alt="">
+              <img [src]="item.goodsImage" class="hover-big-img" alt="">
+            </div>
+            <div class="mb0 goods-xs-info">
+              <div class="goods-name">
+                <dl class="font12 mb0" *ngFor="let attr of item.goodsSavSetList">
+                  <dt class="inline">{{attr.attrName}}：</dt>
+                  <dd class="inline">{{attr.value}}</dd>
+                </dl>
+              </div>
+            </div>
+          </td>
+          <td class="text-center main-red">¥{{item.goodsPrice.price | decimalTwo}}</td>
+          <td class="text-center">{{item.storageNum}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

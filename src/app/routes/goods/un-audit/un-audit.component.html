@@ -109,7 +109,9 @@
                   (click)="showSkuList(goods.goodsBaseCode,goods.goodsName)">查看所有规格
           </button>
         </td>
-        <td class="font14">{{goods.minPrice == goods.maxPrice? goods.maxPrice:goods.minPrice+'-'+ goods.maxPrice }}</td>
+        <td class="font14 main-red">{{goods.minPrice == goods.maxPrice? '¥'+goods.maxPrice:'¥'+goods.minPrice+'∽¥'+
+          goods.maxPrice}}
+        </td>
         <td>{{goods.createTime}}</td>
         <td>
           <label class="switch switch-md" title="开启/关闭">
@@ -153,3 +155,6 @@
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->
+
+<app-sku-goods [curCode]="curBaseCode" [curName]="curName" [page]="goodsList.curPage"
+               (looked)="getSkuData($event)"></app-sku-goods>

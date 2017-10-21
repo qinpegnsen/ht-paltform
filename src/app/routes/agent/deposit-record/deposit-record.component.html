@@ -17,9 +17,6 @@
           <rzhDefaultSorter by="bacctName">收款人姓名</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-left">
-          <rzhDefaultSorter by="way">汇款方式</rzhDefaultSorter>
-        </th>
-        <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="acct">收款人账户</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-left">
@@ -29,9 +26,12 @@
           <rzhDefaultSorter by="drawMoney">提现金额</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
-          <rzhDefaultSorter by="voncer">汇款凭证</rzhDefaultSorter>
+          <rzhDefaultSorter by="way">平台汇款方式</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="voncer">汇款凭证</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="remark">汇款备注</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -45,10 +45,10 @@
           <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
           <td class="text-left">{{item.agentName}}</td>
           <td class="text-left">{{item.bacctName}}</td>
-          <td class="text-left">{{item.payWay | rzhState: '1803'}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
           <td><span class="main-red">¥{{item.drawMoney}}</span></td>
+          <td>{{item.payWay | rzhState: '1803'}}</td>
           <td>
             <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"
                  (mouseleave)="hideImg($event)"
@@ -56,7 +56,7 @@
             <img [src]="item.voucherUrl" class="hover-biger-img"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
           </td>
-          <td>{{item.remark}}</td>
+          <td class="text-left font12">{{item.remark}}</td>
           <td>{{item.doneTime}}</td>
         </tr>
 

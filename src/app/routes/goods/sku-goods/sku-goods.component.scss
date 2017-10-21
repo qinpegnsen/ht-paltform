@@ -1,0 +1,25 @@
+.sku-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sku-box ._popup {
+  background-color: #fff;
+  position: relative;
+  width: 600px;
+  top: 25%;
+  margin: auto;
+  z-index: 300;
+}
+
+.sku-box .mask {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sku-con {
+  max-height: 500px;
+  overflow: auto;
+}

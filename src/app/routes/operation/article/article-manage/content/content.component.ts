@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ContentService} from "./content.service";
 import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTable";
 import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
@@ -25,6 +25,7 @@ export class ContentComponent implements OnInit,OnChanges  {
   public articleState;                     //用来储存文章的状态
   public articleManListdata;               //存储文章列表的数据
   public TotalRow;                         //存储文章列表的数据
+  public path;                              //当前路由
   public flag:boolean=true;               //定义boolean值用来控制内容组件是否显示
   private updatebutton:Object;             //更新文章按钮
   private deletebutton:Object;             //删除文章按钮
@@ -36,6 +37,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     private router:Router,
     public ContentService:ContentService,
     public NavService:NavService,
+    private route: ActivatedRoute,
     public service:SubmitService
   ) {
     this.articleState='DRAFT'
