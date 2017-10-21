@@ -226,7 +226,6 @@ export class UsersNewComponent implements OnInit {
       date = RzhtoolsService.dataFormat(_this.datepickerModel, "yyyy-MM-dd");
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
-
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
       window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
     } else if (_this.showType.MONTH) {//按月查询
@@ -236,13 +235,6 @@ export class UsersNewComponent implements OnInit {
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
       window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
-      // _this.router.navigate(["main/stat/users-new/list-detail"], {
-      //   queryParams: {
-      //     linkType: '',
-      //     prevtime: prevtime,
-      //     nowtime: nowtime
-      //   }
-      // });
     }
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
@@ -251,13 +243,6 @@ export class UsersNewComponent implements OnInit {
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), Number.parseInt(i)), "yyyy-MM-dd HH:mm:ss") ;
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
       window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
-      // _this.router.navigate(["main/stat/users-new/list-detail"], {
-      //   queryParams: {
-      //     linkType: '',
-      //     prevtime: prevtime,
-      //     nowtime: nowtime
-      //   }
-      // });
     }
 
 

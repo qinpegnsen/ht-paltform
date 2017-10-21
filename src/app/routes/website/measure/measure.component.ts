@@ -51,7 +51,6 @@ export class MeasureComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
      me.data = new Page(result);
-     // console.log(me.data)
   }
 
  //计量单位--删除

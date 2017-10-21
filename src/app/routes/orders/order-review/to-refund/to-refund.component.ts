@@ -7,6 +7,7 @@ import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {FileUploader} from "ng2-file-upload";
 
 @Component({
   selector: 'app-to-refund',
@@ -20,12 +21,14 @@ export class ToRefundComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   private agentAcct;
   private agentTime;
-  public curCancelOrderId: string;
+  public orderId1: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   private beginTime: string;
   private endTime: string;
   public goodsList: Page = new Page();
+  private showRefundWindow:boolean = false;
+
   @ViewChild('cancelBox') cancelBox: CancelComponent;
   constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
@@ -46,8 +49,6 @@ export class ToRefundComponent implements OnInit {
    * @param curPage
    */
   public queryDatas(curPage, event?: PageEvent) {
-    console.log('█ this.agentTime ►►►', this.agentTime);
-
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -63,13 +64,11 @@ export class ToRefundComponent implements OnInit {
 
     let requestData = {
       curPage: activePage,
-      pageSize: 2,
+      pageSize: 10,
       stAft:'AUDIT'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
-
 
   /**
    * 显示买家信息
@@ -88,25 +87,18 @@ export class ToRefundComponent implements OnInit {
     i.style.display = 'none';
   }
 
-  cancelOrder(orderId) {
-    this.curCancelOrderId = orderId;
-  }
-
-  deliverOrder(orderId) {
-    this.curDeliverOrderId = orderId;
-  }
-
-  lookLogistics(orderId) {
-    this.lookLogisticsOrderId = orderId;
+  refund(orderId) {
+    this.orderId1 = orderId;
+    this.showRefundWindow=true;
   }
 
   /**
    * 取消订单回调函数
    * @param data
    */
-  getCancelOrderData(data) {
-    this.curCancelOrderId = null;
+  goRefund(data) {
+    this.orderId1 = null;
+    this.showRefundWindow=false;
   }
-
 
 }

@@ -14,7 +14,7 @@ declare var $: any;
 @Component({
   selector: 'app-help-assortment',
   templateUrl: './help-assortment.component.html',
-  styleUrls: ['./help-assortment.component.scss']
+  styleUrls: ['./help-assortment.component.scss'],
 })
 export class HelpAssortmentComponent implements OnInit {
   public contents: string;

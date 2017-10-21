@@ -1,5 +1,5 @@
 
-<div class="cancel-order fadeIn"  *ngIf="showCancelWindow">
+<div class="cancel-order fadeIn"  *ngIf="showRefundWindow">
   <div class="mask" (click)="hideWindow()"></div>
   <div class="popup animated fadeIn">
     <div class="pop popup-hd">
@@ -7,34 +7,69 @@
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop cancel-con font12 w100">
-      <input class="form-control" required [(ngModel)]="staff.id" name="reasonCode" type="hidden"/>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">订单号：</dt>
         <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
       </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">退款金额：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.acct}} </dd>
+        <dd class="orderId-color col-xs-9 font14">
+          111111
+        </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">汇款账号开户行：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.bank}}</dd>
+        <dt class="col-xs-3 lh40"><i>*</i>汇款账号开户行：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
+            <option value="">请选择银行</option>
+            <option *ngFor="let item of selectBank" [value]="item.payBankCode">{{item.remark}}</option>
+          </select>
+        </dd>
       </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">汇款账号：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.bacctName}}</dd>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="number" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel" [pattern]="patterns.backcard">
+        </dd>
+        <div [hidden]="payAcct.valid || payAcct.pristine"
+             class="col-sm-9 pull-right text-danger">
+          请输入汇款账号
+        </div>
       </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">汇款人：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.tc3rd}}</dd>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
+        </dd>
+        <div [hidden]="payBacctName.valid || payBacctName.pristine"
+             class="col-sm-9 pull-right text-danger">
+          请输入汇款人
+        </div>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">汇款凭证：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.payWay | rzhState :'1017'}}</dd>
+        <dt class="col-xs-3 lh40"><i>*</i>汇款凭证：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
+                <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
+                <span class="upload-thumb">
+                  <img *ngIf="item" [src]="item._file | imgUrl" (mousemove)="showImg($event,i)"
+                       (mouseout)="hideImg(i)" [alt]="item?.file?.name"
+                       class="_img">
+                  <img [src]="item._file | imgUrl" #i class="bigImg" alt="">
+                </span>
+              </span>
+          <label class="btn btn-default file-upload">
+            <i class="icon-cloud-upload mr"></i>
+            <input class="w100" type="file" ng2FileSelect [uploader]="uploader"/>
+          </label>
+        </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">回款时间：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{staff.closeCause}}</dd>
+        <dt class="col-xs-3">汇款时间：</dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+          <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
+        </dd>
       </dl>
     </div>
     <div class="panel-footer text-right">

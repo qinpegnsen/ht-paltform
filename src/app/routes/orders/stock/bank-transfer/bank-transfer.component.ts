@@ -90,7 +90,10 @@ export class BankTransferComponent implements OnInit {
     $('.wrapper > section').css('z-index', 114);
     this.showBankWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.bankDate.emit(type)
+    this.bankDate.emit(type);
+    this.code = null;
+    this.summary=null;
+    this.uploader.queue = [];
   }
 
   /**
