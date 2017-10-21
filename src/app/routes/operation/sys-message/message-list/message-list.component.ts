@@ -46,7 +46,7 @@ export class MessageListComponent implements OnInit {
     let url='/notifyAdmin/pageQuery';
     let data={
       curPage:activePage,
-      pageSize:3,
+      pageSize:10,
       sortColumns:''
     };
     this.platformInfoData=new Page(this.operationService.linkGoods(url,data));

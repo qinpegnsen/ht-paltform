@@ -72,6 +72,6 @@ export class AddNoticeComponent implements OnInit {
     }
     let result=this.operationService.addNewArticle(url,data);
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
-    this.parent.queryNoticeList();
+    this.parent.queryNoticeList(1);
   }
 }
