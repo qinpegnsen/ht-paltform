@@ -102,7 +102,7 @@
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}} </td>
             <td>
-              <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="after-details"
+              <button class="btn btn-purple btn-sm fa fa-check" routerLink="after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理</button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'detail'}">

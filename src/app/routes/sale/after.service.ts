@@ -16,8 +16,13 @@ export class AfterService {
     return this.submit.getData(url, data);
   }
 
-  public getAfterDetail(requestData){
+  public loadReqByAfterNo(requestData){
     let url = '/after/loadReqByAfterNo';
+    return this.submit.getData(url, requestData);
+  }
+
+  public loadReqByWono(requestData){
+    let url = '/after/loadReqByWono';
     return this.submit.getData(url, requestData);
   }
 

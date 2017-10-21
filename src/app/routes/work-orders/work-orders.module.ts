@@ -4,10 +4,12 @@ import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {WoAllComponent} from "./wo-all/wo-all.component";
 import {WoService} from "./wo.service";
-import { AssignToAgentComponent } from './assign-to-agent/assign-to-agent.component';
+import {AssignToAgentComponent} from './assign-to-agent/assign-to-agent.component';
 import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrdersService} from "../orders/orders/orders.service";
 import {DeliverComponent} from "./deliver/deliver.component";
+import {AfterDetailsComponent} from "./after-details/after-details.component";
+import {AfterService} from "../sale/after.service";
 
 
 const routes: Routes = [
@@ -24,6 +26,7 @@ const routes: Routes = [
     {path: 'wo-finished', component: WoAllComponent},
     {path: 'wo-abnormal', component: WoAllComponent},
     {path: 'order-detail', component: OrderDetailComponent},
+    {path: 'after-detail', component: AfterDetailsComponent},
   ]
   }
 ]
@@ -38,9 +41,10 @@ const routes: Routes = [
     WoAllComponent,
     AssignToAgentComponent,
     OrderDetailComponent,
-    DeliverComponent
+    DeliverComponent,
+    AfterDetailsComponent
   ],
-  providers: [WoManageComponent,WoService,OrdersService]
+  providers: [WoManageComponent, WoService, OrdersService, AfterService]
 })
 export class WorkOrdersModule {
 }

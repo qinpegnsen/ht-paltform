@@ -13,6 +13,7 @@ defineLocale('cn', zhCn);
 export class WoManageComponent implements OnInit {
   public woType: string;
   public detail:boolean = false;
+  public detailType:string;
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;

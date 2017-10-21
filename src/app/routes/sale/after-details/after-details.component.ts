@@ -15,7 +15,6 @@ export class AfterDetailsComponent implements OnInit {
 
   private type: string;             //类型,处理/查看详情
   private afterNo: string;          //售后编码
-  private wono: string;             //工单编码
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据
   private opinion: string;          //审核意见
@@ -34,16 +33,14 @@ export class AfterDetailsComponent implements OnInit {
     let me = this;
     me.type = me.submit.getParams('type');
     me.afterNo = me.submit.getParams('afterNo');
-    me.wono = me.submit.getParams('wono');
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
 
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
-    console.log("█ me.LogisticsData ►►►",  me.LogisticsData);
+    console.log("█ me.LogisticsData ►►►", me.LogisticsData);
     let data;
     if (!isNullOrUndefined(me.afterNo)) data = {afterNo: me.afterNo};
-    if (!isNullOrUndefined(me.wono)) data = {wono: me.wono};
-    me.afterData = this.after.getAfterDetail(data);
-    if(isNullOrUndefined(me.afterData)) me.afterData = null;
+    me.afterData = this.after.loadReqByAfterNo(data);
+    if (isNullOrUndefined(me.afterData)) me.afterData = null;
 
   }
 
@@ -74,6 +71,7 @@ export class AfterDetailsComponent implements OnInit {
     }
     me.submit.postRequest('/after/dealReturnGoods', data, true);
   }
+
   /**
    * 审核退货商品
    */
@@ -87,6 +85,7 @@ export class AfterDetailsComponent implements OnInit {
     }
     me.submit.postRequest('/after/checkRefundGoods', data, true);
   }
+
   /**
    * 鼠标放在图片上时大图随之移动
    */
