@@ -18,7 +18,7 @@
           <div class="panel-body">
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label"><i class='main-red'>*</i> 会员手机号：</label>
+                <label class="col-sm-3 control-label"><i class="main-red">*</i> 会员手机号：</label>
                 <div class="col-sm-8">
                   <input class="form-control num" type="number"  name="tel"  [(ngModel)]="data.phone" required #tel="ngModel" (blur)="queryCoin()" [pattern]="patterns.phone"/>
                 </div>
@@ -38,7 +38,7 @@
 
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label"><i class='main-red'>*</i> 增减类型：</label>
+                <label class="col-sm-3 control-label"><i class="main-red">*</i> 增减类型：</label>
                 <div class="col-sm-8">
                   <label class="radio-inline c-radio">
                     <input type="radio" name="logType" value="RECHARGE"
@@ -53,7 +53,7 @@
 
             <fieldset>
               <div class="form-group">
-                <label class="col-sm-3 control-label"><i class='main-red'>*</i> 重消币：</label>
+                <label class="col-sm-3 control-label"><i class="main-red">*</i> 重消币：</label>
                 <div class="col-sm-8">
                   <input class="form-control num" type="number" maxlength="8" name="custCoin" [(ngModel)]="data.custCoin" required  #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
                 </div>

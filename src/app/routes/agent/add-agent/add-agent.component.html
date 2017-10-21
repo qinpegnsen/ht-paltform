@@ -7,7 +7,7 @@
         <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden"/>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 代理商名称</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 代理商名称</label>
             <div class="col-sm-4">
               <input class="form-control" required name="agentName" [(ngModel)]="staff.agentName"
                      #agentName="ngModel" type="text"/>
@@ -16,7 +16,7 @@
                 代理商名称是必填项，请填写代理商名称
               </div>
             </div>
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 代理商登录账户</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 代理商登录账户</label>
             <div class="col-sm-4">
               <input class="form-control" required name="agentAcct" [(ngModel)]="staff.agentAcct"
                      #agentAcct="ngModel" type="text"/>
@@ -29,7 +29,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 负责人</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 负责人</label>
             <div class="col-sm-4">
               <input class="form-control" required name="leader" [(ngModel)]="staff.leader"
                      #leader="ngModel" type="text"/>
@@ -38,7 +38,7 @@
                 负责人是必填项，请填写负责人
               </div>
             </div>
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 身份证号</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 身份证号</label>
             <div class="col-sm-4">
               <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
                      #idcard="ngModel" type="text" style="position: relative" [pattern]="patterns.idcard"/>
@@ -51,7 +51,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 联系电话</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 联系电话</label>
             <div class="col-sm-4">
               <input class="form-control" required name="moblie" [(ngModel)]="staff.moblie"
                      #moblie="ngModel" type="text" [pattern]="patterns.phone"/>
@@ -72,11 +72,11 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"><i class='main-red'>*</i>选择区域</label>
+            <label class="col-sm-2 control-label"><i class="main-red">*</i>选择区域</label>
             <div class="col-sm-4">
               <app-four-areas (myData)="getAreaData($event)" name="selectArea" [(ngModel)]="selectArea"></app-four-areas>
             </div>
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 详细地址</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 详细地址</label>
             <div class="col-sm-4">
               <input class="form-control" required name="address" [(ngModel)]="staff.address"
                      #address="ngModel" type="text"/>
@@ -89,7 +89,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i>坐标_经纬度</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i>坐标_经纬度</label>
             <div class="col-sm-2">
               <input class="form-control col-sm-1" type="text" name="coordinateLng" readonly required ngModel [(ngModel)]="staff.coordinateLng"/>
             </div>
@@ -110,7 +110,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label"> <i class='main-red'>*</i>代理点描述</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i>代理点描述</label>
             <div class="col-sm-10">
               <textarea class="form-control" name="description" ngModel [(ngModel)]="staff.description" required placeholder="请添加代理商描述"></textarea>
             </div>
@@ -140,7 +140,7 @@
           <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden">
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 代理商名称</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 代理商名称</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="agentName" [(ngModel)]="staff.agentName"
                        #agentName="ngModel" type="text"/>
@@ -149,7 +149,7 @@
                   代理商名称是必填项，请填写代理商名称
                 </div>
               </div>
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 代理商登录账户</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 代理商登录账户</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="agentAcct" [(ngModel)]="staff.agentAcct"
                        #agentAcct="ngModel" type="text" readonly/>
@@ -163,7 +163,7 @@
           </fieldset>
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 负责人</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 负责人</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="leader" [(ngModel)]="staff.leader"
                        #leader="ngModel" type="text"/>
@@ -172,7 +172,7 @@
                   负责人是必填项，请填写负责人
                 </div>
               </div>
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 身份证号</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 身份证号</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
                        #idcard="ngModel" type="text" style="position: relative" [pattern]="patterns.idcard"/>
@@ -185,7 +185,7 @@
           </fieldset>
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 联系电话</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 联系电话</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="moblie" [(ngModel)]="staff.moblie"
                        #moblie="ngModel" type="text" [pattern]="patterns.phone"/>
@@ -206,11 +206,11 @@
           </fieldset>
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"><i class='main-red'>*</i>选择区域</label>
+              <label class="col-sm-2 control-label"><i class="main-red">*</i>选择区域</label>
               <div class="col-sm-4">
                 <app-four-areas (myData)="getAreaData($event)" [selectedAreaName]="staff.fullName" ></app-four-areas>
               </div>
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i> 详细地址</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i> 详细地址</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="address" [(ngModel)]="staff.address"
                        #address="ngModel" type="text"/>
@@ -223,7 +223,7 @@
           </fieldset>
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i>坐标_经纬度</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i>坐标_经纬度</label>
               <div class="col-sm-2">
                 <input class="form-control col-sm-1" readonly type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
               </div>
@@ -236,7 +236,7 @@
           </fieldset>
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-2 control-label"> <i class='main-red'>*</i>代理点描述</label>
+              <label class="col-sm-2 control-label"> <i class="main-red">*</i>代理点描述</label>
               <div class="col-sm-10">
                 <textarea class="form-control" name="description" ngModel [(ngModel)]="staff.description" required placeholder="请添加代理商描述"></textarea>
               </div>

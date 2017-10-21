@@ -25,7 +25,7 @@
         </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class='main-red'>*</i>交易流水码：</dt>
+        <dt class="col-xs-3 lh40"><i class="main-red">*</i>交易流水码：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <input type="text" class="form-control" placeholder="请输入交易流水码" name="tc3rd" ngModel required #tc3rd="ngModel">
         </dd>
@@ -36,7 +36,7 @@
       </dl>
       <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class='main-red'>*</i>付款账号开户行：</dt>
+        <dt class="col-xs-3 lh40"><i class="main-red">*</i>付款账号开户行：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
             <option value="">请选择银行</option>
@@ -45,7 +45,7 @@
         </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class='main-red'>*</i>付款人：</dt>
+        <dt class="col-xs-3 lh40"><i class="main-red">*</i>付款人：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <input type="text" class="form-control" placeholder="请输入付款人" name="bacctName" ngModel required
                  #bacctName="ngModel">
@@ -56,7 +56,7 @@
         </div>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class='main-red'>*</i>付款凭证：</dt>
+        <dt class="col-xs-3 lh40"><i class="main-red">*</i>付款凭证：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
                 <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
@@ -76,7 +76,7 @@
         </dd>
       </dl>
     <dl class="bb m0 clearfix">
-      <dt class="col-xs-3 lh40"><i class='main-red'>*</i>支付账号：</dt>
+      <dt class="col-xs-3 lh40"><i class="main-red">*</i>支付账号：</dt>
       <dd class="orderId-color col-xs-9 font14">
         <input type="text" class="form-control" placeholder="请输入支付账号" name="acct" ngModel required
                #acct="ngModel" [pattern]="patterns.backcard">
@@ -87,7 +87,7 @@
       </div>
     </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class='main-red'>*</i>付款时间：</dt>
+        <dt class="col-xs-3 lh40"><i class="main-red">*</i>付款时间：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
           <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
