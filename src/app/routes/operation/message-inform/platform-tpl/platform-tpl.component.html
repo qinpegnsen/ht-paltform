@@ -5,7 +5,7 @@
 <div class="panel mb panel-default">
   <div class="panel-body">
     <table class="table table-striped" #platformTplList="rzhDataTable" [rzhData]="platformTplData"
-           (pageChange)="queryExpressList($event)">
+           (pageChange)="queryPlatformTpl(1,$event)">
       <thead>
       <tr>
         <th class="w10 thc font">
@@ -42,8 +42,8 @@
         <td class="text-left">{{platformTpl.url}}</td>
         <td class="text-left">{{platformTpl.remark}}</td>
         <td>
-          <app-buttons [config]="updatebutton" (click)="updateTpl(platformTpl.tplCode)"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="deleteTpl(platformTpl.id)"></app-buttons>
+          <app-buttons [config]="updatebutton" (click)="updateTpl(platformTpl.tplCode,platformTplData.curPage)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteTpl(platformTpl.id,platformTplData.curPage)"></app-buttons>
         </td>
       </tr>
       </tbody>

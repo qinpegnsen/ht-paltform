@@ -10,8 +10,6 @@ import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../../../core/services/rzhtools.service";
 import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
-import {ContentComponent} from "../content/content.component";
-import {Location} from "@angular/common";
 
 declare var $: any;
 const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)

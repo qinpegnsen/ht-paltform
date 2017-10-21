@@ -16,9 +16,8 @@
   </tr>
   </thead>
 </table>
-
 <table class="table" #dataTable="rzhDataTable" [rzhData]="platformInfoData"
-       (pageChange)="queryDatas($event)">
+       (pageChange)="queryAdminNotify(1,$event)">
   <thead>
   <tr>
     <th class="w5 text-center">
@@ -31,11 +30,11 @@
     </th>
     <th class="w65">
       <button class="btn btn-xs btn-outline btn-warning fa fa-trash thc font qpsMl"
-              (click)="delMoreInfo()">
+              (click)="delMoreInfo(platformInfoData.curPage)">
         删除
       </button>
       <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-flag-o thc font"
-              (click)="updateMoreIsRead()">
+              (click)="updateMoreIsRead(platformInfoData.curPage)">
         标记已读
       </button>
     </th>
@@ -54,12 +53,12 @@
       </div>
     </td>
     <td>
-      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id)"></a>
-      <a class="qpssMl" (click)="updateIsRead(platformInfo.id,true,platformInfo.url)">{{platformInfo.msg}}</a>
+      <a href="javascript:;" *ngIf="platformInfo.isRead=='N'" class="myCircle" title="标记已读" (click)="updateIsRead(platformInfo.id,'','',platformInfoData.curPage)"></a>
+      <a class="qpssMl" (click)="updateIsRead(platformInfo.id,true,platformInfo.url,platformInfoData.curPage)">{{platformInfo.msg}}</a>
     </td>
     <td class="text-center">{{platformInfo.createTime}}</td>
     <td class="text-center">
-      <app-buttons [config]="deletebutton" (click)="deleteTpl(platformInfo.id)"></app-buttons>
+      <app-buttons [config]="deletebutton" (click)="deleteTpl(platformInfo.id,platformInfoData.curPage)"></app-buttons>
     </td>
   </tr>
   </tbody>

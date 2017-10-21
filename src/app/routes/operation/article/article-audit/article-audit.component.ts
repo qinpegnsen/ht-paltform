@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-article-audit',
@@ -40,7 +40,7 @@ export class ArticleAuditComponent implements OnInit {
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
-    }else if(isNumber(curPage)){
+    }else if(!isNullOrUndefined(curPage)){
       activePage =curPage
     };
     let data={

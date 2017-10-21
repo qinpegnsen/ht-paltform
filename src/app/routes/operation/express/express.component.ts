@@ -3,7 +3,6 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
-import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 
 const swal = require('sweetalert');
 
@@ -50,7 +49,7 @@ export class ExpressComponent implements OnInit {
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
-    }else if(isNumber(curPage)){
+    }else if(!isNullOrUndefined(curPage)){
       activePage =curPage
     };
     let data={

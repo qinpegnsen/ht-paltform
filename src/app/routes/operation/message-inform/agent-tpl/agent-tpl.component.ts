@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../../core/page/page";
 import {OperationService} from "../../operation.service";
+import {isNullOrUndefined} from "util";
 
 const swal = require('sweetalert');
 
@@ -18,6 +19,7 @@ export class AgentTplComponent implements OnInit {
   private agentTplData:any;                                       //代理商模板的数据
   private curType:any;                                            //弹框的类型
   private curTplCode:number;                                      //当前的模板编码
+  private curPage:number;                                         //当前的页面
 
   constructor(public operationService:OperationService) { }
 
@@ -39,15 +41,19 @@ export class AgentTplComponent implements OnInit {
       title:"删除",
       type: "delete"
     };
-    this.queryAgentTpl();
+    this.queryAgentTpl(1);
   }
 
   /**
    * 查询平台的模板
    */
-  queryAgentTpl(event?:PageEvent){
+  queryAgentTpl(curPage,event?:PageEvent){
     let activePage = 1;
-    if(typeof event !== "undefined") {activePage =event.activePage};
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let url='/notifyAgentTpl/pageQuery';
     let data={
       curPage:activePage,
@@ -62,7 +68,7 @@ export class AgentTplComponent implements OnInit {
   /**
    * 删除模板 首先进行确认是否删除，删除后刷新页面
    */
-  deleteTpl(delSortId){
+  deleteTpl(delSortId,curPage){
     let that=this;
     swal({
       title: "您确定要删除吗？",
@@ -81,7 +87,7 @@ export class AgentTplComponent implements OnInit {
           id:delSortId
         }
         that.operationService.delRequest(url,data);
-        that.queryAgentTpl();
+        that.queryAgentTpl(curPage);
       }
     });
   }
@@ -89,9 +95,10 @@ export class AgentTplComponent implements OnInit {
   /**
    * 修改模板
    */
-  updateTpl(tplCode){
+  updateTpl(tplCode,curPage){
     this.curType = 'update';
     this.curTplCode=tplCode;
+    this.curPage=curPage;
   }
 
   /**
@@ -107,7 +114,7 @@ export class AgentTplComponent implements OnInit {
    */
   getTplData(data) {
     this.curType = null;//输入属性发生变化的时候，弹窗才会打开，所以每次后来都清空，造成变化的迹象
-    this.queryAgentTpl(data.page)
+    this.queryAgentTpl(this.curPage)
   }
 
 }

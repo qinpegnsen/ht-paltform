@@ -5,7 +5,7 @@
 <div class="panel mb panel-default">
   <div class="panel-body">
     <table class="table table-striped" #agentTplList="rzhDataTable" [rzhData]="agentTplData"
-           (pageChange)="queryExpressList($event)">
+           (pageChange)="queryAgentTpl(1,$event)">
       <thead>
       <tr>
         <th class="w10 thc font">
@@ -38,8 +38,8 @@
         <td class="text-left">{{agentTpl.url}}</td>
         <td class="text-left">{{agentTpl.remark}}</td>
         <td>
-          <app-buttons [config]="deletebutton" (click)="deleteTpl(agentTpl.id)"></app-buttons>
-          <app-buttons [config]="updatebutton" (click)="updateTpl(agentTpl.tplCode)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteTpl(agentTpl.id,agentTplData.curPage)"></app-buttons>
+          <app-buttons [config]="updatebutton" (click)="updateTpl(agentTpl.tplCode,agentTplData.curPage)"></app-buttons>
       </tr>
       </tbody>
       <tfoot>
