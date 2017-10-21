@@ -9,7 +9,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>序号</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>序号</label>
             <div class="col-sm-8">
               <input class="form-control num" type="number" required name="sort" ngModel #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写序号"/>
             </div>
@@ -21,7 +21,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>名称</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="kindName" ngModel #kindName="ngModel"
                      placeholder="请填写名称"/>
@@ -65,7 +65,7 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>序号</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>序号</label>
             <div class="col-sm-8">
               <input class="form-control num" type="number" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写序号"/>
             </div>
@@ -77,7 +77,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>名称</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>名称</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" required name="kindName" [(ngModel)]="updataDataa.kindName" #kindName="ngModel"
                      placeholder="请填写名称"/>

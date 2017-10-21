@@ -10,7 +10,7 @@
         <input class="form-control" required [(ngModel)]="organ.areaCode" name="areaCode" type="hidden"/>
        <!-- <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>区域</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>区域</label>
             <div class="col-sm-8">
               <app-select-area [required]="true" [selectedAreaName]="organ.areaCode | areaName" (myData)="getAreaData($event)"></app-select-area>
             </div>
@@ -18,7 +18,7 @@
         </fieldset>-->
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i>*</i>选择区域</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>选择区域</label>
             <div class="col-sm-8">
               <app-four-areas (myData)="getAreaData($event)"></app-four-areas>
             </div>

@@ -9,7 +9,7 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品名称：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品名称：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <div>{{publishData.goodsName}}</div>
@@ -17,7 +17,7 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品卖点：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品卖点：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <div>{{publishData.goodsJingle}}</div>
@@ -25,7 +25,7 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品品牌：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品品牌：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <select class="form-control" name="brandCode" required [(ngModel)]="publishData.brandCode"
@@ -36,7 +36,7 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品属性：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品属性：</dt>
       <dd class="col-xs-10">
         <div class="w80 clearfix">
           <label class="col-sm-4 base-attr pl0" *ngFor="let attrType of baseAttrList;let i = index">
@@ -58,7 +58,7 @@
   <fieldset class="m0 p0">
     <legend class="m0">商品交易信息</legend>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>计量单位：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>计量单位：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
           <select name="unit" required class="form-control" [disabled]="myReadOnly" [(ngModel)]="publishData.unit">
@@ -71,10 +71,10 @@
 
   <!--商品规格及图片-->
   <fieldset class="m0 p0">
-    <legend class="m0"><i>*</i>商品规格及图片</legend>
+    <legend class="m0"><i class='main-red'>*</i>商品规格及图片</legend>
     <!--商品规格-->
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品规格：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品规格：</dt>
       <dd class="col-xs-10 specs">
         <h5 class="clearfix m0">
           <span class="col-sm-2 col-xs-3 text-right">规格</span>
@@ -108,7 +108,7 @@
     </dl>
     <!--sku表格-->
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品价格及库存：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品价格及库存：</dt>
       <dd class="col-xs-10">
         <table class="sku-table w100">
           <thead>
@@ -118,16 +118,16 @@
                 [id]="attr.attrCode">{{attr.attrName}}
             </th>
             <th class="col-xs-2">
-              <label class="s-menu mb0 cursor-p"><i>*</i>市场价</label>
+              <label class="s-menu mb0 cursor-p"><i class='main-red'>*</i>市场价</label>
             </th>
             <th class="col-xs-2">
-              <label class="s-menu mb0 cursor-p"><i>*</i>销售价</label>
+              <label class="s-menu mb0 cursor-p"><i class='main-red'>*</i>销售价</label>
             </th>
             <th class="col-xs-2">
-              <label class="s-menu mb0 cursor-p"><i>*</i>会员价</label>
+              <label class="s-menu mb0 cursor-p"><i class='main-red'>*</i>会员价</label>
             </th>
             <th class="col-xs-2">
-              <label class="s-menu mb0 cursor-p"><i>*</i>库存</label>
+              <label class="s-menu mb0 cursor-p"><i class='main-red'>*</i>库存</label>
             </th>
           </tr>
           </thead>
@@ -183,7 +183,7 @@
     </dl>
     <!--商品图片-->
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>商品图片：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>商品图片：</dt>
       <dd class="col-xs-10 pic-list">
         <!--当选择了第一规格时-->
         <div class="goodspics" *ngFor="let val of skuImg.vals;let idx = index;" [id]="val.valCode">
@@ -261,13 +261,13 @@
   <fieldset class="m0 p0 logistics">
     <legend class="m0">商品物流信息</legend>
     <dl class="clearfix">
-      <dt class="col-xs-2"><i>*</i>运费：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>运费：</dt>
       <dd class="col-xs-10 col-md-8">
         <div [class.hide]="!myReadOnly">{{publishData.isFreight == 'Y'? '有': '无'}}</div>
       </dd>
     </dl>
     <dl class="clearfix" *ngIf="publishData.isFreight == 'Y'">
-      <dt class="col-xs-2"><i>*</i>设置运费：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>设置运费：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w100">
           <!--固定运费-->
@@ -315,18 +315,18 @@
       </dd>
     </dl>
     <dl class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
-      <dt class="col-xs-2"><i>*</i>物流参数：</dt>
+      <dt class="col-xs-2"><i class='main-red'>*</i>物流参数：</dt>
       <dd class="col-xs-10">
         <div class="w50">
           <div class="clearfix mb">
-            <span class="pull-left mr"><i>*</i>重量：</span>
+            <span class="pull-left mr"><i class='main-red'>*</i>重量：</span>
             <span class="pull-left">
               {{publishData.goodsExpressInfo.weight}}
               <em class="add-on">kg</em>
             </span>
           </div>
           <div class="clearfix">
-            <span class="pull-left mr"><i>*</i>体积：</span>
+            <span class="pull-left mr"><i class='main-red'>*</i>体积：</span>
             <span class="pull-left">
               {{publishData.goodsExpressInfo.volume}}
               <em class="add-on">m³</em>
