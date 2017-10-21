@@ -19,6 +19,7 @@ export class RightPageComponent implements OnInit {
   public isUseList:any;         //是否启用的数组
   public editData:any;          //根据id查询出来的数据
   public bingID:string="Y";     //是否启用的数组
+  public curPage;                //修改的对象当前在第几页
 
   constructor(
     public settings: SettingsService,
@@ -37,6 +38,7 @@ export class RightPageComponent implements OnInit {
    */
   ngOnInit() {
     this.type = this.routeInfo.snapshot.queryParams['type'];
+    this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
 
     /**
      * 获取地址栏的参数，并且根据id查询当前id的信息，从而做修改
@@ -101,6 +103,6 @@ export class RightPageComponent implements OnInit {
       }
     }
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
-    this.parent.queryExpressList()
+    this.parent.queryExpressList(this.curPage)
   }
 }

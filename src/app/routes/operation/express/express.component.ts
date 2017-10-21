@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+import {isNullOrUndefined} from "util";
+import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 
 const swal = require('sweetalert');
 
@@ -38,15 +40,19 @@ export class ExpressComponent implements OnInit {
       title:"删除",
       type: "delete"
     };
-    this.queryExpressList()
+    this.queryExpressList(1)
   }
 
   /**
    * 查询快递公司的列表
    */
-  queryExpressList(event?:PageEvent){
+  queryExpressList(curPage,event?:PageEvent){
     let activePage = 1;
-    if(typeof event !== "undefined") {activePage =event.activePage};
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(isNumber(curPage)){
+      activePage =curPage
+    };
     let data={
       curPage:activePage,
       pageSize:10,
@@ -59,7 +65,7 @@ export class ExpressComponent implements OnInit {
   /**
    * 删除分类 首先进行确认是否删除，删除后刷新页面
    */
-  deleteSort(delSortId){
+  deleteSort(delSortId,curPage){
     let that=this;
     swal({
       title: "您确定要删除吗？",
@@ -78,7 +84,7 @@ export class ExpressComponent implements OnInit {
           id:delSortId
         }
         that.service.delRequest(url,data)
-        that.queryExpressList()
+        that.queryExpressList(curPage)
       }
     });
   }

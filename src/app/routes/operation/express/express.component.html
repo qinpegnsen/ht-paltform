@@ -22,10 +22,9 @@
   </div>
 </div>
 <div class="panel mb panel-default">
-
   <div class="panel-body">
     <table class="table table-striped" #expressList="rzhDataTable" [rzhData]="expressListdata"
-           (pageChange)="queryExpressList($event)">
+           (pageChange)="queryExpressList(1,$event)">
       <thead>
       <tr>
         <th class="w5 thc font">
@@ -60,8 +59,8 @@
         </td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="rightPage"
-                       [queryParams]="{type:'edit',id:express.id}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="deleteSort(express.id)"></app-buttons>
+                       [queryParams]="{type:'edit',id:express.id,curPage:expressListdata.curPage}"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteSort(express.id,expressListdata.curPage)"></app-buttons>
         </td>
       </tr>
       </tbody>
