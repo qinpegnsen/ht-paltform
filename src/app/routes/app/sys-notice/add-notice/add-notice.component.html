@@ -9,7 +9,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>标题</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 标题</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50" #titleTem="ngModel" ngModel name="title" required
                      placeholder='必填项'/>
@@ -22,7 +22,7 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>内容</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 内容</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="50" #contentTem="ngModel" ngModel name="content"
                      required placeholder='必填项'/>
@@ -35,20 +35,20 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>跳转链接</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 跳转链接</label>
             <div class="col-sm-8">
               <input class="form-control" type="text" maxlength="128" #urlTem="ngModel" ngModel name="url" required
                      placeholder='必填项'>
               <div [hidden]="urlTem.valid||urlTem.untouched"
                    class="alert alert-danger">
-                地址是必填项
+                跳转链接是必填项
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>结束时间</label>
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i> 结束时间</label>
             <div class="col-sm-8">
               <input type="text" class="form-control" maxlength="128" #endTimeTem="ngModel" [(ngModel)]="date"  name="endTime" placeholder="请选择日期" bsDatepicker #dp="bsDatepicker" [minDate]="minDate"[bsConfig]="bsConfig" required>
               <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>

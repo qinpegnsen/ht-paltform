@@ -44,7 +44,7 @@
         <td>
           <app-buttons [config]="updatebutton" (click)="updateTpl(platformTpl.tplCode)"></app-buttons>
           <app-buttons [config]="deletebutton" (click)="deleteTpl(platformTpl.id)"></app-buttons>
-      </td>
+        </td>
       </tr>
       </tbody>
       <tfoot>
@@ -69,6 +69,6 @@
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->
-<app-platform-edit  [type]="curType" [tplCode]="curTplCode"  [page]="platformTplData.curPage"
-                    (emitTplData)="getTplData($event)"></app-platform-edit>
+<app-platform-edit [type]="curType" [tplCode]="curTplCode" [page]="platformTplData.curPage"
+                   (emitTplData)="getTplData($event)"></app-platform-edit>
 
