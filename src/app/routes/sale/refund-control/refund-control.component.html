@@ -8,10 +8,13 @@
     <div class="panel mb p ts thc">
       <p class="font18">操作提示</p>
       <ul>
-        <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。 如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
+        <li>买家提交退款申请，选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。
+          如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。
+        </li>
         <li>平台也可以不经过商家处理，直接处理退款申请，退款给买家。</li>
         <li>当<span class="btn btn-purple btn-xs fa fa-check-square-o disabled">处理</span>
-          按钮不可用时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。</li>
+          按钮不可用时，说明该笔退款需买卖方进行下一步操作或退款已完成，则平台此时不能进行操作。
+        </li>
       </ul>
     </div>
 
@@ -75,96 +78,107 @@
     </div>
     <!--搜索 end-->
     <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="refundList"  (pageChange)="queryAllService($event)">
-      <thead>
-      <tr>
-        <th class="w5 text-center">
-          <rzhDefaultSorter by="sort"></rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="1">退单单号</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="2">退款金额（元）</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="4">申请人（买家）</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="3">申请时间</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="7">处理状态</rzhDefaultSorter>
-        </th>
-        <th class="w20 text-center">
-          <rzhDefaultSorter by="8">管理操作</rzhDefaultSorter>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-
-      <ng-container *ngFor="let item of dataTable.data; let i = index">
-
-        <tr class="text-center">
-          <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
-          <td>{{item.afterNo}}</td>
-          <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
-          <td>{{item.custCode}}</td>
-          <td>{{item.createTime}}</td>
-          <td>{{item.state | rzhState:'1602'}} </td>
-          <td>
-            <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="../after-details"
-                    [disabled]="item.state!='WAIT'"
-                    [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理</button>
-            <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="../after-details"
-                    [queryParams]="{afterNo:item.afterNo,type:'detail'}">
-            </button>
-          </td>
+      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="refundList"
+             (pageChange)="queryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w5 text-center">
+            <rzhDefaultSorter by="sort"></rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="1">退单单号</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="2">退款金额（元）</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="4">申请人（买家）</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="3">申请时间</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="7">处理状态</rzhDefaultSorter>
+          </th>
+          <th class="w20 text-center">
+            <rzhDefaultSorter by="8">管理操作</rzhDefaultSorter>
+          </th>
         </tr>
+        </thead>
+        <tbody>
 
-        <tr *ngIf="detail[i]">
-          <td class="p0" colspan="11">
-            <div class="bg-table special text-left">
-              <span class="">申请原因：</span> <span>{{item.reason}}</span>
-            </div>
-            <div class="bg-table special text-left">
-              <span class="">订单编号：</span> <span>{{item.ordno}}</span>
-            </div>
-            <div class="bg-table special text-left h35">
-              <span class="shopimg pull-left">商品图片：</span>
-              <span class="">
-                 <img [src]="item.goodsImage" alt="" class="buyimg"  (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"   onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <img [src]="item.goodsImage" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </span>
-            </div>
-            <div class="bg-table special text-left">
-              <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
-            </div>
-            <ng-container *ngIf="item.state!='WAIT'">
+        <ng-container *ngFor="let item of dataTable.data; let i = index">
+
+          <tr class="text-center">
+            <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
+            <td>{{item.afterNo}}</td>
+            <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
+            <td>{{item.custCode}}</td>
+            <td>{{item.createTime}}</td>
+            <td>{{item.state | rzhState:'1602'}}</td>
+            <td>
+              <button class="btn btn-purple btn-sm fa fa-check-square-o" routerLink="after-details"
+                      [disabled]="item.state!='WAIT'"
+                      [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理
+              </button>
+              <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
+                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="detail[i]">
+            <td class="p0" colspan="11">
               <div class="bg-table special text-left">
-                <span class="">操作人：</span> <span>{{item.optMan}}</span>
+                <span class="">申请原因：</span> <span>{{item.reason}}</span>
               </div>
               <div class="bg-table special text-left">
-                <span class="">退款说明：</span> <span>{{item.opinion}}</span>
+                <span class="">订单编号：</span> <span>{{item.ordno}}</span>
               </div>
-            </ng-container>
+              <div class="bg-table special text-left h35">
+                <span class="shopimg pull-left">商品图片：</span>
+                <span class="">
+                 <img [src]="item.goodsImage" alt="" class="buyimg" (mousemove)="showImg($event)"
+                      (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                 <img [src]="item.goodsImage" class="hover-big-img" alt=""
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
+              </div>
+              <ng-container *ngIf="item.state!='WAIT'">
+                <div class="bg-table special text-left">
+                  <span class="">操作人：</span> <span>{{item.optMan}}</span>
+                </div>
+                <div class="bg-table special text-left">
+                  <span class="">退款说明：</span> <span>{{item.opinion}}</span>
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="9">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{refundList.genStartRow()}} 至 {{refundList.genEndRow()}} 条，共
+                {{refundList.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right">
+                <rzhBootstrapPaginator></rzhBootstrapPaginator>
+              </div>
+            </div>
           </td>
         </tr>
-      </ng-container>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="9">
-          <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{refundList.genStartRow()}} 至 {{refundList.genEndRow()}} 条，共 {{refundList.totalRow}} 条</strong></div>
-          </div>
-          <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
-          </div>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
-  </div>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </div>
+
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->

@@ -54,8 +54,12 @@
             <td class="item-hd col-sm-2">凭证：</td>
             <td class="item-bd col-sm-10 mb0">
               <span *ngFor="let item of afterData.afterGoodsReqVouList">
-                <img class="goods-md-img mr" [src]="item.vpic"
-                     onerror="javascript:this.src='../../../../assets/img/dummy.png'" alt=""></span>
+                <img class="goods-md-img mr" [src]="item.vpic" (mousemove)="showImg($event)"
+                     (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
+                     alt="">
+                <img [src]="item.vpic" class="hover-big-img" alt=""
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </span>
             </td>
           </tr>
         </table>
@@ -64,7 +68,7 @@
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
-              <legend class="m0" style="height: 51px;line-height: 51px;">平台退款处理</legend>
+              <legend class="m0" style="height: 51px;line-height: 51px;">{{afterData.returnType=='RETURN'?'平台退货处理':'平台退款处理'}}</legend>
             </div>
             <table class="t-items p w100">
               <tr class="t-item clearfix">

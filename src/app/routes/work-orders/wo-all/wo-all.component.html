@@ -62,7 +62,7 @@
       <th class="w10 text-center thc font">订单编号</th>
       <th class="w10 text-center thc font">联系人</th>
       <th class="w10 text-center thc font">电话</th>
-      <th class="w12 text-center thc font">地址</th>
+      <th class="w12 text-left thc font">地址</th>
       <th class="w10 text-center thc font">创建时间</th>
       <th class="w10 text-center thc font">状态</th>
       <th class="w15 text-center thc font">管理操作</th>
@@ -82,7 +82,7 @@
         <td>{{order.ordno}}</td>
         <td>{{order.linkman}}</td>
         <td>{{order.phone}}</td>
-        <td><span class="font12">{{order.areaFullName}} {{order.address}}</span></td>
+        <td class="text-left"><span class="font12">{{order.areaFullName}} {{order.address}}</span></td>
         <td>{{order.createTime}}</td>
         <td>{{order.state | rzhState:'1303'}}</td>
         <td>

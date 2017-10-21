@@ -92,16 +92,18 @@ export class RefundControlComponent implements OnInit {
   /**
    * 鼠标放在图片上时大图随之移动
    */
-  showImg(event, i) {
-    i.style.display = 'block';
-    i.style.top = (event.clientY + 15) + 'px';
-    i.style.left = (event.clientX + 20) + 'px';
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY + 15) + 'px';
+    target.style.left = (event.clientX + 20) + 'px';
   }
 
   /**
    * 鼠标离开时大图随之隐藏
    */
-  hideImg(i) {
-    i.style.display = 'none';
+  hideImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
   }
 }

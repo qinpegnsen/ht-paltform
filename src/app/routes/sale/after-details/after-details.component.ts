@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
@@ -86,6 +86,23 @@ export class AfterDetailsComponent implements OnInit {
       isPass: me.isPass
     }
     me.submit.postRequest('/after/checkRefundGoods', data, true);
+  }
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY + 15) + 'px';
+    target.style.left = (event.clientX + 20) + 'px';
+  }
+
+  /**
+   * 鼠标离开时大图随之隐藏
+   */
+  hideImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
   }
 
 }

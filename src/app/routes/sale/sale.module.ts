@@ -15,11 +15,23 @@ const problemcomplem: Routes = [
 ]
 const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
-  {path: 'refund-control', component: RefundControlComponent},
-  {path: 'refund-verify', component: RefundVerifyComponent},
-  {path: 'return-control', component: ReturnControlComponent},
-  {path: 'return-verify', component: ReturnVerifyComponent},
-  {path: 'after-details', component: AfterDetailsComponent},
+  {path: 'refund-control', children: [
+    {path: '', component: RefundControlComponent},
+    {path: 'after-details', component: AfterDetailsComponent},
+  ]},
+  {path: 'refund-verify', children: [
+    {path: '', component: RefundVerifyComponent},
+    {path: 'after-details', component: AfterDetailsComponent},
+  ]},
+  {path: 'return-control', children: [
+    {path: '', component: ReturnControlComponent},
+    {path: 'after-details', component: AfterDetailsComponent},
+  ]},
+  {path: 'return-verify', children: [
+    {path: '', component: ReturnVerifyComponent},
+    {path: 'after-details', component: AfterDetailsComponent},
+  ]},
+  // {path: 'after-details', component: AfterDetailsComponent},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 
 ];

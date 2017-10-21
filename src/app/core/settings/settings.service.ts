@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {isNullOrUndefined} from 'util';
-import {CookieService} from 'angular2-cookie/core';
-import { Location }from '@angular/common';
+import {Injectable} from "@angular/core";
+import {isNullOrUndefined} from "util";
+import {CookieService} from "angular2-cookie/core";
+import {Location} from "@angular/common";
 declare var $: any;
 
 @Injectable()
@@ -20,16 +20,16 @@ export class SettingsService {
       SettingsService.yearInfo.push(nowYear.toString());
       nowYear--;
     }
-    for(let i = 0; i < 12; i++){
-      if(i<9) SettingsService.month.push("0"+(i+1).toString());
-      else SettingsService.month.push((i+1).toString());
+    for (let i = 0; i < 12; i++) {
+      if (i < 9) SettingsService.month.push("0" + (i + 1).toString());
+      else SettingsService.month.push((i + 1).toString());
     }
     /**
      * 用户信息（当前登录用户）
      * 获取用户cookie信息并展示
      */
-    let loginInfo: any = JSON.parse(localStorage.getItem('loginInfo')), name = '游客', job = '无',picture='';
-    if (!isNullOrUndefined(loginInfo)) name = loginInfo.staffName, job = loginInfo.storeName,picture=loginInfo.avatar;
+    let loginInfo: any = JSON.parse(localStorage.getItem('loginInfo')), name = '游客', job = '无', picture = '';
+    if (!isNullOrUndefined(loginInfo)) name = loginInfo.staffName, job = loginInfo.storeName, picture = loginInfo.avatar;
     this.user = {
       name: name,
       job: job,
@@ -66,6 +66,7 @@ export class SettingsService {
     };
 
   }
+
 
   getAppSetting(name) {
     return name ? this.app[name] : this.app;
@@ -132,11 +133,11 @@ export class SettingsService {
    * 针对路由跳转的右弹窗
    * by 高洁
    */
-  closeRightPageAndRouteBack(){
+  closeRightPageAndRouteBack() {
     this.closeRightPage();//关闭右侧滑动页面
     let that = this;
-    setTimeout(function(){
+    setTimeout(function () {
       that.location.back();//返回上级路由
-    },100)
+    }, 100)
   }
 }
