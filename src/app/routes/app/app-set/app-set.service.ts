@@ -31,4 +31,28 @@ export class AppSetService {
     });
   }
 
+  /**
+   * 发布首页
+   * @param url
+   * @param data
+   */
+  release(url,data) {
+    this.ajax.get({
+      url:url,
+      data: data,
+      async:false,
+      success: (data) => {
+        let info=data.info;
+        if(data.success){
+          AppComponent.rzhAlt("success",info);
+        }else{
+          AppComponent.rzhAlt("error",info);
+        }
+      },
+      error: () => {
+        console.log('连接数据库失败');
+      }
+    });
+  }
+
 }

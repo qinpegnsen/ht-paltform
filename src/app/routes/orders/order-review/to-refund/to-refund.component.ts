@@ -67,7 +67,8 @@ export class ToRefundComponent implements OnInit {
     let requestData = {
       curPage: activePage,
       pageSize: 10,
-      stAft:'AUDIT'
+      stAftDone:'DONE',
+      refundState:'ING'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }

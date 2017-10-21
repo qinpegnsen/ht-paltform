@@ -576,6 +576,30 @@ export class AppSetComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * 首页发布
+   */
+  release() {
+    let me=this;
+    let url = "/phone/index/release";
+    let data={
+
+    }
+    swal({
+        title: '首页发布后会替换当前使用的首页，你确定要发布吗？',
+        // type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        me.AppSetService.release(url, data);
+      }
+    );
+  }
 }
 
 

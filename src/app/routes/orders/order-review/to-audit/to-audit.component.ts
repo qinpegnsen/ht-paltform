@@ -63,11 +63,10 @@ export class ToAuditComponent implements OnInit {
     if (this.agentTime) {
       dateStr = RzhtoolsService.dataFormat(this.agentTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.agentTime[1], 'yyyy/MM/dd');
     }
-
     let requestData = {
       curPage: activePage,
       pageSize: 10,
-      stAft:'AUDIT'
+      stAftAudit:'AUDIT'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }

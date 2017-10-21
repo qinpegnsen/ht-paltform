@@ -1,81 +1,83 @@
 
 <div class="cancel-order fadeIn"  *ngIf="showRefundWindow">
   <div class="mask" (click)="hideWindow()"></div>
-  <div class="popup animated fadeIn">
-    <div class="pop popup-hd">
-      <span class="f-bold">退款</span>
-      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
-    </div>
-    <div class="pop cancel-con font12 w100">
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">订单号：</dt>
-        <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">退款金额：</dt>
-        <dd class="orderId-color col-xs-9 font14">
-         {{goodspay | number:'1.2-2'}}
-        </dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class="main-red">*</i>汇款账号开户行：</dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
-            <option value="">请选择银行</option>
-            <option *ngFor="let item of selectBank" [value]="item.payBankCode">{{item.remark}}</option>
-          </select>
-        </dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3"> <i>*</i>汇款账号：</dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <input type="number" class="form-control num" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel" [pattern]="patterns.backcard">
-        </dd>
-        <div [hidden]="payAcct.valid || payAcct.pristine"
-             class="col-sm-9 pull-right text-danger">
-          请输入正确汇款账号
-        </div>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3"><i>*</i>汇款人：</dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
-        </dd>
-        <div [hidden]="payBacctName.valid || payBacctName.pristine"
-             class="col-sm-9 pull-right text-danger">
-          请输入汇款人
-        </div>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40"><i class="main-red">*</i>汇款凭证：</dt>
-        <dd class="orderId-color col-xs-9 font14">
+
+    <div class="popup animated fadeIn">  <form class="_popup animated fadeIn" #addForm="ngForm">
+      <div class="pop popup-hd">
+        <span class="f-bold">退款</span>
+        <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+      </div>
+      <div class="pop cancel-con font12 w100">
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">订单号：</dt>
+          <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">退款金额：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            111111
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3 lh40"><i>*</i>汇款账号开户行：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
+              <option value="">请选择银行</option>
+              <option *ngFor="let item of selectBank" [value]="item.code">{{item.remark}}</option>
+            </select>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">汇款账号：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel">
+          </dd>
+          <div [hidden]="payAcct.valid || payAcct.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入汇款账号
+          </div>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">汇款人：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
+          </dd>
+          <div [hidden]="payBacctName.valid || payBacctName.pristine"
+               class="col-sm-9 pull-right text-danger">
+            请输入汇款人
+          </div>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3 lh40"><i>*</i>汇款凭证：</dt>
+          <dd class="orderId-color col-xs-9 font14">
           <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
                 <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
                 <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl" (mousemove)="showImg($event,i)"
                        (mouseout)="hideImg(i)" [alt]="item?.file?.name"
                        class="_img">
-                  <img [src]="item._file | imgUrl" #i class="bigImga" alt="">
+                  <img [src]="item._file | imgUrl" #i class="bigImg" alt="">
                 </span>
               </span>
-          <label class="btn btn-default file-upload">
-            <i class="icon-cloud-upload mr"></i>
-            <input class="w100" type="file" ng2FileSelect [uploader]="uploader" multiple />
-          </label>
-        </dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3"><i>*</i>汇款时间：</dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
-          <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
-        </dd>
-      </dl>
-    </div>
-    <div class="panel-footer text-right">
-      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
-    </div>
-  </div>
+            <label class="btn btn-default file-upload">
+              <i class="icon-cloud-upload mr"></i>
+              <input class="w100" type="file" ng2FileSelect [uploader]="uploader"/>
+            </label>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">汇款时间：</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+            <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
+          </dd>
+        </dl>
+      </div>
+      <div class="panel-footer text-right">
+        <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
+        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)" [disabled]="addForm.invalid||uploader.queue.length==0">确认提交</button>
+      </div>
+
+  </form> </div>
 </div>
 
