@@ -1,10 +1,11 @@
 <ul class="clearfix order-table-head list-unstyled mb0 p b">
-  <li class="w40 pull-left text-center">商品</li>
+  <li class="w30 pull-left text-center">商品</li>
   <li class="w10 pull-left text-center">单价</li>
   <li class="w10 pull-left text-center">数量</li>
   <li class="w10 pull-left text-center">买家</li>
   <li class="w10 pull-left text-center">订单金额（元）</li>
   <li class="w10 pull-left text-center">交易状态</li>
+  <li class="w10 pull-left text-center">退款状态</li>
   <li class="w10 pull-left text-center">交易操作</li>
 </ul>
 <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
@@ -16,11 +17,12 @@
       <div class="order-head p b bb0">
         <span class="mr-xl">订单编号：{{goods.ordno}}</span>
         <span class="mr-xl">下单时间：{{goods.createTime}}</span>
+        <!--<span class="icon-screen-smartphone">来源：移动端</span>-->
         <span class="fa fa-desktop"> 来源：PC</span>
       </div>
       <table class="w100 b">
         <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
-          <td class="w40 p text-left position-relative bb">
+          <td class="w30 p text-left position-relative bb">
           <span class="goods-img goods-lg-img mr"><img [src]="name.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
             <div class="goods-lg-info">
@@ -93,6 +95,22 @@
                 </div>
               </div>
             </div>
+          </td>
+          <td class="w10 bl position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdReturnList.length">
+            <ng-container *ngFor="let return of goods.agentOrdReturnList">
+            <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+                  (mouseleave)="hideBuyerInfo(i)">{{return.refundState | rzhState :'1804'}}
+            </span>
+              <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)"
+                   style="width:300px!important;">
+                <div class="info-con" style="width:291px!important;">
+                  <p class="pl mb-sm"><i class="fa fa-user"></i> 退款信息</p>
+                  <dl><dt>申请时间：</dt> <dd>{{return.createTime}}</dd> </dl>
+                  <dl><dt>审核时间：</dt><dd>{{return.auditTime}}</dd> </dl>
+                  <dl><dt>退款时间：</dt> <dd>{{return.tradeTime}}</dd></dl>
+                </div>
+              </div>
+            </ng-container>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
             <button class="m-sm btn btn-xs btn-outline btn-green fa fa-exclamation-circle" (click)="cancelOrder(name.ordno)">

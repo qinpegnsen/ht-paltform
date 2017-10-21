@@ -63,13 +63,23 @@
               查看物流
             </p>
           </td>
-          <td class="w10 bl  position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <p class="font-gray mb-sm cursor-p">{{goods.stAft | rzhState :'1801'}}</p>
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'">查看详情</p>
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'orange'">
-              查看物流
-            </p>
+          <td class="w10 bl position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdReturnList.length">
+            <ng-container *ngFor="let return of goods.agentOrdReturnList">
+            <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+                (mouseleave)="hideBuyerInfo(i)">{{return.refundState | rzhState :'1804'}}
+            </span>
+              <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)"
+                   style="width:300px!important;">
+                <div class="info-con" style="width:291px!important;">
+                  <p class="pl mb-sm"><i class="fa fa-user"></i> 退款信息</p>
+                  <dl><dt>申请时间：</dt> <dd>{{return.createTime}}</dd> </dl>
+                  <dl><dt>审核时间：</dt><dd>{{return.auditTime}}</dd> </dl>
+                  <dl><dt>退款时间：</dt> <dd>{{return.tradeTime}}</dd></dl>
+                </div>
+              </div>
+            </ng-container>
           </td>
+
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
             <button class="m-sm btn btn-xs btn-outline btn-info fa fa-jpy" *ngIf="goods.payWay=='REMIT'"
                     (click)="refund(name.ordno,goods.pay,goodsList.curPage)" >
