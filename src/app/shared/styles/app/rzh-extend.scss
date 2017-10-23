@@ -51,6 +51,12 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
   -ms-user-select: none;
   user-select: none;
 }
+
+//鼠标悬停时出现小手
+.cursor-pointer{
+  cursor: pointer
+}
+
 .clear{clear:both;}
 .color-f50{color: #f50;}
 .font12{font-size: 12px}

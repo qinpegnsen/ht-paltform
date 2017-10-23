@@ -10,7 +10,7 @@
         <th class="w5 text-center thc font">
           序号
         </th>
-        <th class="w10 text-center">
+        <th class="w5 text-center">
           <rzhDefaultSorter by="tplName">模板名称</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
@@ -28,17 +28,17 @@
         <th class="w10 text-center">
           <rzhDefaultSorter by="tplCheckedImg">实际效果</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="tplAuthor">首页作者</rzhDefaultSorter>
-        </th>
-        <th class="w5 text-center">
-          <rzhDefaultSorter by="tplType">模板类型</rzhDefaultSorter>
-        </th>
         <th class="w5 text-center">
           <rzhDefaultSorter by="tplWidth">模板宽度</rzhDefaultSorter>
         </th>
         <th class="w5 text-center">
           <rzhDefaultSorter by="tplHeight">模板高度</rzhDefaultSorter>
+        </th>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="tplAuthor">首页作者</rzhDefaultSorter>
+        </th>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="tplType">模板类型</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="b">操作</rzhDefaultSorter>
@@ -52,11 +52,11 @@
         <td>{{file.tplUrl}}</td>
         <td>{{file.tplDesc}}</td>
         <td>{{file.tplImgCount}}</td>
-        <td><span><img class="img" src="{{file.tplImg}}" /></span></td>
-        <td><span><img class="img"  src="{{file.tplCheckedImg}}" /></span></td>
-        <td>{{file.tplAuthor}}</td>
+        <td class="cursor-pointer"><span><img class="img" src="{{file.tplImg}}" /></span></td>
+        <td class="cursor-pointer"><span><img class="img"  src="{{file.tplCheckedImg}}" /></span></td>
         <td>{{file.tplWidth}}</td>
         <td>{{file.tplHeight}}</td>
+        <td>{{file.tplAuthor}}</td>
         <td>{{file.tplType | rzhState:'1501'}}</td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{number:4,id:file.id}"></app-buttons>

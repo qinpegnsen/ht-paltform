@@ -19,12 +19,14 @@ const appChildRoutesfile: Routes = [
 ];
 // 子路由，用于页面嵌套显示
 const appChildRoutes: Routes = [
-  {path: 'rightpage', component: RightpageComponent},
+  {path: '', component: AgentpersonComponent,children:[
+    {path: 'rightpage', component: RightpageComponent},
+  ]},
   {path: 'appAgent', component: AddAgentComponent,children: appChildRoutesfile}
 ];
 const routes: Routes = [
   {path: '', redirectTo:'agentperson'},
-  {path: 'agentperson', component: AgentpersonComponent,children: appChildRoutes},
+  {path: 'agentperson', children: appChildRoutes},
   {path: 'region', component: RegionComponent,children: appChildRoutes},
   {path: 'deposit-audit', component: DepositAuditComponent},
   {path: 'deposit-record', component: DepositRecordComponent},

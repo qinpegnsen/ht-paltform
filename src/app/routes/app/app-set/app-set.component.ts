@@ -350,6 +350,14 @@ export class AppSetComponent implements OnInit {
    */
   moveUp(){
     let _this = this;
+    if(_this.ord>1) {
+      let m1 = _this.moduleList[_this.ord - 1];
+      let m2 = _this.moduleList[_this.ord - 1 - 1];
+      _this.moduleList[_this.ord - 1] = m2;
+      _this.moduleList[_this.ord - 1 - 1] = m1;
+      _this.flags[_this.ord-1]=false;
+      _this.flags[_this.ord-1-1]=true;
+    }
     _this.ajax.post({
       url: '/phone/index/updateOrd',
       data: {
@@ -357,16 +365,7 @@ export class AppSetComponent implements OnInit {
         moves: '1',
         sx: 'SY'
       },
-      success: (res) => {
-        if (res.success) {
-          if(_this.ord>1) {
-            let m1 = _this.moduleList[_this.ord - 1];
-            let m2 = _this.moduleList[_this.ord - 1 - 1];
-            _this.moduleList[_this.ord - 1] = m2;
-            _this.moduleList[_this.ord - 1 - 1] = m1;
-          }
-        }
-      },
+
       error: (data) => {
         swal('失败！', '', 'error');
       }
@@ -377,22 +376,20 @@ export class AppSetComponent implements OnInit {
    */
   moveDown(){
     let _this = this;
+    if(_this.ord<_this.moduleList.length) {
+      let m1=_this.moduleList[_this.ord-1];
+      let m2 = _this.moduleList[_this.ord + 1 - 1];
+      _this.moduleList[_this.ord - 1] = m2;
+      _this.moduleList[_this.ord + 1 - 1] = m1;
+      _this.flags[_this.ord-1]=false;
+      _this.flags[_this.ord+1-1]=true;
+    }
     _this.ajax.post({
       url: '/phone/index/updateOrd',
       data: {
         indexId: _this.indexId,
         moves: '1',
         sx: 'XY'
-      },
-      success: (res) => {
-        if (res.success) {
-          if(_this.ord<_this.moduleList.length) {
-            let m1=_this.moduleList[_this.ord-1];
-            let m2 = _this.moduleList[_this.ord + 1 - 1];
-            _this.moduleList[_this.ord - 1] = m2;
-            _this.moduleList[_this.ord + 1 - 1] = m1;
-          }
-        }
       },
       error: (data) => {
         swal('失败！', '', 'error');
