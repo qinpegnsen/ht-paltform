@@ -56,8 +56,7 @@ const PROXY_CONFIG = [
       "/phone",
       "/finaceDraw",
     ],
-    // target: wp  + "8080",   //拦截 context配置路径，经过此地址
-    target: zyg  + "8081",   //拦截 context配置路径，经过此地址
+    target: bb  + "8094",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -66,7 +65,7 @@ const PROXY_CONFIG = [
       "/upload",
       "/res"
     ],
-    target: zyg  + "8900",   //拦截 context配置路径，经过此地址
+    target: bb  + "8092",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];

@@ -7,7 +7,6 @@ import {AppComponent} from '../../../app.component';
 import {AjaxService} from '../../../core/services/ajax.service';
 import {GetUidService} from '../../../core/services/get-uid.service';
 import {AppSetService} from './app-set.service';
-import {cli} from "webdriver-manager/built/lib/webdriver";
 const swal = require('sweetalert');
 
 @Component({
@@ -74,7 +73,7 @@ export class AppSetComponent implements OnInit {
    * 添加弹窗
    * */
   addNewData(indexData) {
-    this.indexId = indexData.id;//没有发布的选中模板的ID
+    this.indexId = indexData.indexId;//没有发布的选中模板的ID
     this.indexData = indexData;//已经发布成功的选中模板ID
     this.showAddWindow = true;//设置首页在某端显示的弹窗显示
   }
@@ -103,10 +102,7 @@ export class AppSetComponent implements OnInit {
      * 如果没有ID的时候是undefined
      * @type {any}
      */
-    let upid = _this.ids[i];
-    if (typeof(upid) != 'undefined') {
-      _this.updateIds[i] = i;
-    }
+    _this.addUpdateId(i);
     _this.updateImgs[i] = 1;
   }
 
@@ -297,11 +293,19 @@ export class AppSetComponent implements OnInit {
       _this.optKey[i] = '0';
     }
 
+    _this.addUpdateId(i);
+
+  }
+
+  /**
+   * addUpdateId
+   */
+  addUpdateId(i){
+    let _this = this;
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
       _this.updateIds[i] = i;
     }
-
   }
 
   /**
@@ -312,10 +316,8 @@ export class AppSetComponent implements OnInit {
   changeInputValue(event, i) {
     let _this = this;
     _this.optKey[i] = event.target.value;
-    let upid = _this.ids[i];
-    if (typeof(upid) != 'undefined') {
-      _this.updateIds[i] = i;
-    }
+
+    _this.addUpdateId(i);
 
   }
 
@@ -341,6 +343,61 @@ export class AppSetComponent implements OnInit {
    */
   hideMask1(i) {
     this.flag[i] = false;
+  }
+
+  /**
+   * 模板上移
+   */
+  moveUp(){
+    let _this = this;
+    _this.ajax.post({
+      url: '/phone/index/updateOrd',
+      data: {
+        indexId: _this.indexId,
+        moves: '1',
+        sx: 'SY'
+      },
+      success: (res) => {
+        if (res.success) {
+          if(_this.ord>1) {
+            let m1 = _this.moduleList[_this.ord - 1];
+            let m2 = _this.moduleList[_this.ord - 1 - 1];
+            _this.moduleList[_this.ord - 1] = m2;
+            _this.moduleList[_this.ord - 1 - 1] = m1;
+          }
+        }
+      },
+      error: (data) => {
+        swal('失败！', '', 'error');
+      }
+    })
+  }
+  /**
+   * 模板下移
+   */
+  moveDown(){
+    let _this = this;
+    _this.ajax.post({
+      url: '/phone/index/updateOrd',
+      data: {
+        indexId: _this.indexId,
+        moves: '1',
+        sx: 'XY'
+      },
+      success: (res) => {
+        if (res.success) {
+          if(_this.ord<_this.moduleList.length) {
+            let m1=_this.moduleList[_this.ord-1];
+            let m2 = _this.moduleList[_this.ord + 1 - 1];
+            _this.moduleList[_this.ord - 1] = m2;
+            _this.moduleList[_this.ord + 1 - 1] = m1;
+          }
+        }
+      },
+      error: (data) => {
+        swal('失败！', '', 'error');
+      }
+    })
   }
 
   /**
@@ -382,7 +439,9 @@ export class AppSetComponent implements OnInit {
         if (res.success) {
           _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '', 'success');
-          _this.phoneIndexId[_this.ord - 1] = res.data;
+          _this.indexId=res.data.indexId;
+          _this.phoneIndexId[_this.ord - 1] = _this.indexId;
+          _this.moduleList[_this.ord - 1].indexData = res.data;
         } else {
           swal('添加首页模板提交失败====！', '', 'error');
         }
@@ -484,6 +543,7 @@ export class AppSetComponent implements OnInit {
   deleteModel(i) {
     let _this = this, url: string = '/phone/index/delete', data: any;
     let indexId = _this.phoneIndexId[i - 1];
+
     swal({
         title: '确认删除此模板？',
         type: 'info',
@@ -503,9 +563,8 @@ export class AppSetComponent implements OnInit {
          */
         if (typeof(indexId) != 'undefined') {
           data = {
-            id: indexId
+            indexId: indexId
           }
-          console.log(data)
           _this.AppSetService.delCode(url, data); //删除数据
         }
         _this.phoneIndexId.splice(i - 1, 1);//删除添加后返回的ID
