@@ -129,7 +129,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     };
     let data={
       curPage:activePage,
-      pageSize:1,
+      pageSize:10,
       articleState:this.articleState,
       // articleTitle:this.searchKey,
       articleShortTitle:this.searchKey,
