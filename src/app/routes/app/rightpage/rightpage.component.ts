@@ -35,10 +35,15 @@ export class RightpageComponent implements OnInit {
   private myImg: any;//上传首页模板效果图
   private myImgs: any;//上传首页模板效果图
   private tplImg:string;
-  public uploader:FileUploader = new FileUploader({
+  public uploader: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
-    itemAlias:"limitFile",
-  }); //初始化上传方法
+    itemAlias: "limitFile",
+    queueLimit: 1
+  });
+  // public uploader:FileUploader = new FileUploader({
+  //   url: '/upload/basic/upload',
+  //   itemAlias:"limitFile",
+  // }); //初始化上传方法
   public uploaders:FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias:"limitFile"

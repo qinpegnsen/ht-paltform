@@ -21,11 +21,13 @@ export class HelpAssortmentComponent implements OnInit {
   private linkType:string;
   private kinds:any;
   private kindId: string;
+  private curPage:any;
   constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService, private tools: RzhtoolsService,private operationService: OperationService,public patterns:PatternService) { }
 
   ngOnInit() {
     let me=this;
-    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    me.linkType = me.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    me.curPage = me.routeInfo.snapshot.queryParams['curPage'];
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
       $('#summernote').summernote({
@@ -33,7 +35,7 @@ export class HelpAssortmentComponent implements OnInit {
         dialogsInBody: true,
         callbacks: {
           onChange: (contents, $editable) => {
-            this.contents = contents;
+            me.contents = contents;
           },
           onImageUpload: function (files) {
             for (let file of files) me.sendFile(file);

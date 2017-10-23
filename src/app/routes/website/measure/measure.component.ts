@@ -4,6 +4,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {isNullOrUndefined, isNumber, isString} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-measure',
@@ -36,12 +37,16 @@ export class MeasureComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    this.qeuryAllService()
+    this.qeuryAllService(1)
   }
   //计量单位--查询分页
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?: PageEvent){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let url = "/goodsUnit/queryPage";
     let data={
       curPage: activePage,
@@ -54,7 +59,7 @@ export class MeasureComponent implements OnInit {
   }
 
  //计量单位--删除
-  deleteCount(delid) {
+  deleteCount(delid,curPage) {
     let me=this;
     let url = "/goodsUnit/deleteGoodsUnit";
     let data={
@@ -71,7 +76,7 @@ export class MeasureComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.delRequest(url, data); //删除数据
-        me.qeuryAllService(); //更新
+        me.qeuryAllService(curPage); //更新
       }
     );
   }

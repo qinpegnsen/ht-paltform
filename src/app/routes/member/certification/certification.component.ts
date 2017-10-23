@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 
 @Component({
@@ -15,26 +15,31 @@ export class CertificationComponent implements OnInit {
   private state:any;//审核状态
   private showReasonWindow:boolean = false;
   private orderId1:any;
+  private curPage1:any;
 
   constructor(private submit: SubmitService,private rzhtoolsService:RzhtoolsService) { }
 
   ngOnInit() {
     let me = this;
-    this.aqeuryAll('AUDIT');
+    this.aqeuryAll('AUDIT',1);
   }
 
   /**
    * 认证审核--查询分页
    */
-  aqeuryAll(state,event?: PageEvent){
+  aqeuryAll(state,curPage,event?: PageEvent){
     let me = this, activePage = 1;
     if(isNullOrUndefined(state)) state = 'AUDIT';
       me.state = state;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if (typeof event !== 'undefined') {
+      activePage = event.activePage;
+    } else if (!isUndefined(curPage)) {
+      activePage = curPage;
+    }
     let url = "/custAuthInfo/query";
     let data={
       curPage: activePage,
-      pageSize:10,
+      pageSize:2,
       state: me.state,
     }
     let result = this.submit.getData(url,data);
@@ -44,14 +49,14 @@ export class CertificationComponent implements OnInit {
   /**
    * 认证通过
    */
-  access(id){
+  access(id,curPage){
     let url = '/custAuthInfo/updateState';
     let data = {
       id:id,
       state: 'PASS',
     }
-    this.submit.putRequest(url, data, true);
-    this.aqeuryAll(this.state);
+    this.submit.putRequest(url, data);
+    this.aqeuryAll(this.state,curPage);
   }
 
   /**
@@ -74,13 +79,14 @@ export class CertificationComponent implements OnInit {
   /*
    * 添加弹窗
    * */
-  addNewData(orderId) {
+  addNewData(orderId,curPage) {
     this.orderId1=orderId;
     this.showReasonWindow = true;
+    this.curPage1=curPage;
   }
 
   getReason(data) {
     this.showReasonWindow = false;
-    if(data == 'success') this.aqeuryAll('AUDIT');
+    if(data == 'success') this.aqeuryAll('AUDIT',1);
   }
 }

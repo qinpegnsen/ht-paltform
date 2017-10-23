@@ -6,13 +6,13 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService(1,$event)">
         <thead>
         <tr>
           <th class="w5 text-center">
             <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
           </th>
-          <th class="w17 pull-left">
+          <th class="w17 text-left">
             <rzhDefaultSorter by="name">名称</rzhDefaultSorter>
           </th>
           <th class="w18 text-center">
@@ -35,7 +35,7 @@
         <tbody>
         <tr *ngFor="let count of dataTable.data;let i=index"  class="text-center">
           <td>{{i+1}}</td>
-          <td class="pull-left">{{count.kindName}}</td>
+          <td class="text-left">{{count.kindName}}</td>
           <td>{{count.description}}</td>
           <!--<td>{{count.icon}}</td>-->
           <td>
@@ -49,8 +49,8 @@
           <td>{{count.createTime}}</td>
           <td>
             <!--<app-buttons [config]="addchildbutton" routerLink="help-assortment" [queryParams]="{linkType:'routers',id:count.id}"></app-buttons>-->
-            <app-buttons [config]="updatebutton" routerLink="addrightpage" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
-            <app-buttons [config]="deletebutton" (click)="delete(count.id)"></app-buttons>
+            <app-buttons [config]="updatebutton" routerLink="addrightpage" [queryParams]="{linkType:'updateCount',id:count.id,curPage:data.curPage}"></app-buttons>
+            <app-buttons [config]="deletebutton" (click)="delete(count.id,data.curPage)"></app-buttons>
             <app-buttons [config]="seebutton" routerLink="../problem-details"  [queryParams]="{linkType:'routers',id:count.id}" ></app-buttons>
           </td>
         </tr>

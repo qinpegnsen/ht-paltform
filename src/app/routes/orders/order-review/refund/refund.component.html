@@ -55,10 +55,10 @@
                 <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl" (mousemove)="showImg($event,i)"
                        (mouseout)="hideImg(i)" [alt]="item?.file?.name"
-                       class="_img">
-                  <img [src]="item._file | imgUrl" #i class="bigImg" alt="">
+                       class="refund-img">
+                  <img [src]="item._file | imgUrl" #i class="refund-bigImg" alt="">
                 </span>
-              </span>
+           </span>
             <label class="btn btn-default file-upload">
               <i class="icon-cloud-upload mr"></i>
               <input class="w100" type="file" ng2FileSelect [uploader]="uploader"/>

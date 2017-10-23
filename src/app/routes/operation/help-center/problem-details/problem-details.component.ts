@@ -3,6 +3,9 @@ import {AjaxService} from "../../../../core/services/ajax.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AppComponent} from "../../../../app.component";
+import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+import {isNullOrUndefined} from "util";
+import {Page} from "../../../../core/page/page";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-problem-details',
@@ -14,6 +17,7 @@ export class ProblemDetailsComponent implements OnInit {
   private addButton;//添加按钮
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
+  private data: Page = new Page();
   private result:any;
   private kind:any;
 
@@ -24,7 +28,6 @@ export class ProblemDetailsComponent implements OnInit {
 
     let me=this;
     me.id = this.routeInfo.snapshot.queryParams['id'];//获取地址栏的参数
-    console.log(me.id)
     //按钮配置
     me.addButton = {
       type: "add-thc",
@@ -39,7 +42,7 @@ export class ProblemDetailsComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    this.allproblem();
+    this.allproblem(1);
   }
 
   /**
@@ -59,12 +62,21 @@ export class ProblemDetailsComponent implements OnInit {
   /**
    * 查询问题
    */
-  allproblem(){
-    let url = "/helpQuestions/queryAll";
+  allproblem(curPage,event?: PageEvent){
+    let me = this, activePage = 1;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
+    let url = "/helpQuestions/pageQuery";
     let data={
+      curPage: activePage,
+      pageSize:2,
       kindId:this.id,
     }
-    this.result = this.submit.getData(url,data);
+   let result = this.submit.getData(url,data);
+    me.data = new Page(result);
   }
 
   /**
@@ -94,7 +106,7 @@ export class ProblemDetailsComponent implements OnInit {
   /**
    * 删除
    */
-  delete(delid) {
+  delete(delid,curPage) {
     let me=this;
     let url = "/helpQuestions/deleteHelpQuestions";
     let data={
@@ -111,7 +123,7 @@ export class ProblemDetailsComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.putRequest(url, data); //删除数据
-        me.qeuryAllService(); //更新
+        me.allproblem(this.curPage); //更新
       }
     );
   }

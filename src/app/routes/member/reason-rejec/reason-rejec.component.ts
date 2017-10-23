@@ -15,7 +15,7 @@ export class ReasonRejecComponent implements OnInit {
   @Input('orderId') orderId: string;
   @Input('showReasonWindow') showReasonWindow: boolean;
   @Output() upDate = new EventEmitter();
-
+  @Input('curPage') curPage: any;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showReasonWindow'] && changes['orderId']) {
       if(this.showReasonWindow && this.orderId && !isNullOrUndefined(this.orderId)) $('.wrapper > section').css('z-index', 200);
@@ -28,7 +28,6 @@ export class ReasonRejecComponent implements OnInit {
   constructor(private reasonRejecService:ReasonRejecService,private certificationComponent:CertificationComponent) { }
 
   ngOnInit() {
-    console.log("█ this.orderId ►►►",  this.orderId);
   }
   /**
    * 关闭组件
@@ -53,6 +52,6 @@ export class ReasonRejecComponent implements OnInit {
     }
     let a=this.reasonRejecService.reasonReject(url, data);
     this.hideWindow("success");
-    this.certificationComponent.aqeuryAll('AUDIT');
+    this.certificationComponent.aqeuryAll('AUDIT',this.curPage);
   }
 }

@@ -30,6 +30,7 @@ export class AdddataComponent implements OnInit {
   private remark: string;
   private keyName: string;
   private keys: string;
+  private curPage:any;
 
   constructor(public settings: SettingsService, private router: Router, private adddataService: AdddataService,
               private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent,
@@ -41,6 +42,7 @@ export class AdddataComponent implements OnInit {
   ngOnInit() {
     //路由中获取对应参数
     let _this = this;
+    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
     _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
     _this.acParentId = _this.routeInfo.snapshot.queryParams['acParentId'];
     _this.code = _this.routeInfo.snapshot.queryParams['code'];
@@ -56,7 +58,6 @@ export class AdddataComponent implements OnInit {
     ;
     if (_this.linkType == "updateCount") {//计量单位--若为修改操作,获取信息
       _this.updataDataa = _this.sub.getData("/goodsUnit/loadById", {id: _this.id}); //获取数据字典key
-      console.log(_this.updataDataa)
 
     }
   }
@@ -80,9 +81,8 @@ export class AdddataComponent implements OnInit {
         remark: obj.remark
       }
       let result=this.adddataService.addClass(url, data);
-      console.log("█ result ►►►",  result);
       if(result){
-        this.dataDictionaryComponent.queryDatas()
+        this.dataDictionaryComponent.queryDatas(this.curPage)
       }else{
         return;
       }
@@ -105,19 +105,19 @@ export class AdddataComponent implements OnInit {
       }
       let result=this.adddataService.updateClass(url, data);
       if(result){
-        this.dataDictionaryComponent.queryDatas()
+        this.dataDictionaryComponent.queryDatas(this.curPage)
       }else{
         return;
       }
     } else {
       let result=this.adddataService.getaddData(obj);//添加数据字典key
       if(result){
-        this.dataDictionaryComponent.queryDatas()
+        this.dataDictionaryComponent.queryDatas(this.curPage)
       }else{
         return;
       }
     }
-    if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(); //第一层，更新第一层数据
+    if (isNullOrUndefined(this.typeCode)) this.dataDictionaryComponent.queryDatas(this.curPage); //第一层，更新第一层数据
     else this.dataDictionaryComponent.queryChildSortList(this.dataDictionaryComponent.childMenuCode, this.dataDictionaryComponent.childMenuName, true);//第2层，更新第2层数据
     this.settings.closeRightPageAndRouteBack();
   }
@@ -133,7 +133,7 @@ export class AdddataComponent implements OnInit {
         unitName: res.unitName
       }
       this.submitt.postRequest(url, data, true);
-      this.measureComponent.qeuryAllService();
+      this.measureComponent.qeuryAllService(this.curPage);
     }
     else if (this.linkType == 'updateCount') {
       let url = '/goodsUnit/updateGoodsUnit';//计量单位修改
@@ -143,7 +143,7 @@ export class AdddataComponent implements OnInit {
         unitName: res.unitName
       }
       this.submitt.putRequest(url, data,true);
-      this.measureComponent.qeuryAllService();
+      this.measureComponent.qeuryAllService(this.curPage);
     }
   }
 }

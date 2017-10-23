@@ -151,7 +151,6 @@ export class RefundComponent implements OnInit {
      */
     me.uploader.onBuildItemForm = function (fileItem: any, form: any) {
       me.uuid = me.GetUidService.getUid();
-      console.log("█ expr ►►►",  me.uuid);
       form.append('uuid', me.uuid);
     };
 
@@ -191,8 +190,8 @@ export class RefundComponent implements OnInit {
    */
   showImg(event, i) {
     i.style.display = 'block';
-    i.style.top = (event.clientY + 15) + 'px';
-    i.style.left = (event.clientX + 20) + 'px';
+    i.style.top = event.clientY + 'px';
+    i.style.left = (event.clientX -650) + 'px';
   }
 
   /**

@@ -14,7 +14,7 @@ export class AddrightpageComponent implements OnInit {
   public id: number;
   public linkType: string;
   public updataDataa: any;
-
+  private curPage:any;
   constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
               private sub: SubmitService, private submitt: SubmitService,
               private helpInterlocutionComponent:HelpInterlocutionComponent,public patterns:PatternService) {
@@ -26,8 +26,8 @@ export class AddrightpageComponent implements OnInit {
      * 路由中获取对应参数
      */
     let _this = this;
+    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
     _this.id = _this.routeInfo.snapshot.queryParams['id'];
-    console.log("█ _this.id  ►►►",  _this.id );
     _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
 
     if (_this.linkType == "updateCount") {//分类帮助--若为修改操作,获取信息
@@ -55,8 +55,7 @@ export class AddrightpageComponent implements OnInit {
         description: res.description,
       }
       this.submitt.postRequest(url,data,true);
-      console.log("█ data ►►►",  data);
-      this.helpInterlocutionComponent.qeuryAllService();
+      this.helpInterlocutionComponent.qeuryAllService(this.curPage);
     } else if (this.linkType == 'updateCount') {
       let url = '/helpKind/updateHelpKind';//帮助分类修改
       let data = {
@@ -66,8 +65,7 @@ export class AddrightpageComponent implements OnInit {
         description:res.description,
       }
       this.submitt.putRequest(url,data,true);
-      console.log("█ data ►►►",  data);
-      this.helpInterlocutionComponent.qeuryAllService();
+      this.helpInterlocutionComponent.qeuryAllService(this.curPage);
     }
   }
 }

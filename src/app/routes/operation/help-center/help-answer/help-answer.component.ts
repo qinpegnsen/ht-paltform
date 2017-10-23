@@ -6,6 +6,7 @@ import {AjaxService} from "../../../../core/services/ajax.service";
 import {AppComponent} from "../../../../app.component";
 import {NavigationEnd, Router} from "@angular/router";
 import {SettingsService} from "../../../../core/settings/settings.service";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-help-answer',
@@ -39,7 +40,7 @@ export class HelpAnswerComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-      this.qeuryAllService();
+      this.qeuryAllService(1);
       this.qeuryAll();
     // me.kindId = me.kinds[0].id;   //帮助问题默认分类
   }
@@ -48,7 +49,7 @@ export class HelpAnswerComponent implements OnInit {
    * 查找
    */
   searchdata(){
-    this.qeuryAllService();
+    this.qeuryAllService(1);
   }
 
   /**
@@ -61,13 +62,17 @@ export class HelpAnswerComponent implements OnInit {
   /**
    * 帮助分类--查询分页
    */
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?: PageEvent){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let url = "/helpQuestions/pageQuery";
     let data={
       curPage: activePage,
-      pageSize:10,
+      pageSize:2,
       question:me.searchkey,
       kindId:me.kindId,
     }
@@ -102,7 +107,7 @@ export class HelpAnswerComponent implements OnInit {
   /**
    * 删除
    */
-  delete(delid) {
+  delete(delid,curPage) {
     let me=this;
     let url = "/helpQuestions/deleteHelpQuestions";
     let data={
@@ -119,7 +124,7 @@ export class HelpAnswerComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.putRequest(url, data); //删除数据
-        me.qeuryAllService(); //更新
+        me.qeuryAllService(curPage); //更新
       }
     );
   }

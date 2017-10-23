@@ -1,11 +1,12 @@
-
 <div class="content-heading mb-lg thc font">
   计量单位
-  <app-buttons class="pull-right" [config]="addbuttons" routerLink="adddata" [queryParams]="{linkType:'addCount'}"></app-buttons>
+  <app-buttons class="pull-right" [config]="addbuttons" routerLink="adddata"
+               [queryParams]="{linkType:'addCount',curPage:data.curPage}"></app-buttons>
 </div>
 <div class="panel panel-default">
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+           (pageChange)="qeuryAllService(1,$event)">
       <thead>
       <tr>
         <th class="w10 text-center">
@@ -23,26 +24,30 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data;let i = index"  class="text-center">
+      <tr *ngFor="let count of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td>{{count.unitName}}</td>
         <td>{{count.sort}}</td>
         <td>
-          <app-buttons [config]="updatebuttons" routerLink="adddata" [queryParams]="{linkType:'updateCount',id:count.id}"></app-buttons>
-          <app-buttons [config]="deletebuttons" (click)="deleteCount(count.id)"></app-buttons>
+          <app-buttons [config]="updatebuttons" routerLink="adddata"
+                       [queryParams]="{linkType:'updateCount',id:count.id,curPage:data.curPage}"></app-buttons>
+          <app-buttons [config]="deletebuttons" (click)="deleteCount(count.id,data.curPage)"></app-buttons>
         </td>
       </tr>
       </tbody>
       <tfoot>
       <tr>
-      <td colspan="5">
-      <div class="col-sm-5">
-      <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
-      </div>
-      <div class="col-sm-7">
-      <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
-      </div>
-      </td>
+        <td colspan="5">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
       </tr>
       </tfoot>
     </table>

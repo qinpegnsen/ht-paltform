@@ -2,7 +2,7 @@
   数据字典列表
   <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
 </div>
-<div class="panel mb"  *ngIf="childMenuTitList.length < 1">
+<div class="panel mb" *ngIf="childMenuTitList.length < 1">
   <div class="panel-body p ng-scope" ng-if="search">
     <div class="form-group mb0">
       <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
@@ -36,7 +36,7 @@
     </span>
   </div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas(1,$event)">
       <thead>
       <tr>
         <th class="w6 text-center">
@@ -46,8 +46,8 @@
           <rzhDefaultSorter by="code">类型码（code）</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
-          <rzhDefaultSorter by="name"  *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
-          <rzhDefaultSorter by="val"  *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
+          <rzhDefaultSorter by="name" *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
+          <rzhDefaultSorter by="val" *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
         </th>
         <th class="w20 text-center ">
           <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>
@@ -64,7 +64,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let elder of dataTable.data;let x=index"  class="text-center">
+      <tr *ngFor="let elder of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
         <td>{{elder.code}}</td>
         <td *ngIf="elder.name !='' && elder.name!=null && elder.name!=undefined">{{elder.name}}</td>
@@ -73,8 +73,10 @@
         <td>
           <!--是否启用-->
           <label class="switch">
-            <input type="checkbox" *ngIf="elder.enable == 'Y'" [checked]="true" (change)="startState(elder)" title="是否启动"/>
-            <input type="checkbox" *ngIf="elder.enable == 'N'" [checked]="false" (change)="startState(elder)" title="是否启动"/>
+            <input type="checkbox" *ngIf="elder.enable == 'Y'" [checked]="true" (change)="startState(elder)"
+                   title="是否启动"/>
+            <input type="checkbox" *ngIf="elder.enable == 'N'" [checked]="false" (change)="startState(elder)"
+                   title="是否启动"/>
             <span></span>
           </label>
         </td>
@@ -89,12 +91,12 @@
         </td>
         <td>
           <app-buttons [config]="updatebutton" routerLink="adddata" *ngIf="!elder.typeCode"
-                       [queryParams]="{linkType:'updateSort',code:elder.code}"></app-buttons>
+                       [queryParams]="{linkType:'updateSort',code:elder.code,curPage:data.curPage}"></app-buttons>
           <app-buttons [config]="updatebutton" routerLink="adddata" *ngIf="elder.typeCode"
-                       [queryParams]="{keys:elder.info,linkType:'updateSort',code:elder.code,typeCode:elder.typeCode}"></app-buttons>
+                       [queryParams]="{keys:elder.info,linkType:'updateSort',code:elder.code,typeCode:elder.typeCode,curPage:data.curPage}"></app-buttons>
           <app-buttons [config]="addchildbutton" routerLink="adddata" *ngIf="childMenuTitList.length < 1"
-                       [queryParams]="{key:elder.name,linkType:'addChildSort',code:elder.code}"></app-buttons>
-          <app-buttons [config]="deletebutton" (click)="delete(elder.code)"></app-buttons>
+                       [queryParams]="{key:elder.name,linkType:'addChildSort',code:elder.code,curPage:data.curPage}"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="delete(elder.code,data.curPage)"></app-buttons>
           <span class="btn btn-default" *ngIf="childMenuTitList.length < 1"
                 (click)="queryChildSortList(elder.code,elder.name,false)">
           <i class="fa fa-level-down"></i>
@@ -105,14 +107,17 @@
       </tbody>
       <tfoot>
       <tr>
-      <td colspan="7">
-      <div class="col-sm-5">
-      <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
-      </div>
-      <div class="col-sm-7">
-      <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
-      </div>
-      </td>
+        <td colspan="7">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
       </tr>
       </tfoot>
     </table>

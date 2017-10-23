@@ -5,13 +5,13 @@
   </div>
   <div class="panel mb">
     <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
+      <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="allproblem(1,$event)">
         <thead>
         <tr>
           <th class="w10 text-center">
             <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
           </th>
-          <th class="w20 pull-left">
+          <th class="w20 text-left">
             <rzhDefaultSorter by="answer">问题</rzhDefaultSorter>
           </th>
           <th class="w10 text-center">
@@ -26,9 +26,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr  *ngFor="let a of result;let i=index" style="list-style: none"  class="text-center" >
+        <tr  *ngFor="let a of dataTable.data;let i=index" style="list-style: none"  class="text-center" >
           <td>{{i+1}}</td>
-          <td [innerHtml]="a.question" class="pull-left"></td>
+          <td [innerHtml]="a.question" class="text-left"></td>
           <td>
             <!--是否显示-->
             <label class="switch">
@@ -39,11 +39,23 @@
           </td>
           <td>{{a.createTime}}</td>
           <td>
-            <app-buttons [config]="deletebutton" (click)="delete(a.id)"></app-buttons>
+            <app-buttons [config]="deletebutton" (click)="delete(a.id,data.curPage)"></app-buttons>
             <app-buttons [config]="updatebutton" routerLink="../help-update" [queryParams]="{linkType:'routers',id:a.id}"></app-buttons>
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </div>
 </div>

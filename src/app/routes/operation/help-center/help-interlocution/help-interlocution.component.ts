@@ -5,6 +5,7 @@ import {AjaxService} from "../../../../core/services/ajax.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AppComponent} from "../../../../app.component";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-help-interlocution',
@@ -50,19 +51,23 @@ export class HelpInterlocutionComponent implements OnInit {
       title: "查看",
       type: "details"
     };
-    this.qeuryAllService();
+    this.qeuryAllService(1);
   }
 
   /**
    * 帮助分类--查询分页
    */
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?: PageEvent){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let url = "/helpKind/pageQueryAll";
     let data={
       curPage: activePage,
-      pageSize:10,
+      pageSize:2,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
@@ -94,7 +99,7 @@ export class HelpInterlocutionComponent implements OnInit {
   /**
    * 删除
    */
-  delete(delid) {
+  delete(delid,curPage) {
     let me=this;
     let url = "/helpKind/deleteHelpKind";
     let data={
@@ -111,7 +116,7 @@ export class HelpInterlocutionComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         me.submit.putRequest(url, data); //删除数据
-        me.qeuryAllService(); //更新
+        me.qeuryAllService(curPage); //更新
       }
     );
   }

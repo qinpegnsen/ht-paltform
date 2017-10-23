@@ -50,18 +50,22 @@ export class DataDictionaryComponent implements OnInit {
       title: "添加val",
       type: "add"
     };
-    this.queryDatas()
+    this.queryDatas(1)
   }
 
    //查询key列表
   searchdata() {
-    this.queryDatas()
+    this.queryDatas(1)
   }
 
   //查询数据字典信息列表
-  public queryDatas(event?: PageEvent) {
+  public queryDatas(curPage,event?: PageEvent) {
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let requestData = {
       curPage: activePage,
       pageSize: 10,
@@ -95,8 +99,8 @@ export class DataDictionaryComponent implements OnInit {
             }
           }
         _this.dataDictionaryService.delCode(url, data); //删除数据
-        if(length<1) _this.queryDatas(); //更新（第一层）
-        else _this.queryChildSortList(_this.childMenuCode,_this.childMenuName,true); //更新（第二层）
+        if(length<1) _this.queryDatas(this.curPage); //更新（第一层）
+        else _this.queryChildSortList(_this.childMenuCode,_this.childMenuName,true,this.curPage); //更新（第二层）
       }
     );
   }
@@ -129,7 +133,7 @@ export class DataDictionaryComponent implements OnInit {
     if (typeof event !== "undefined") activePage = event.activePage;
     if (isNullOrUndefined(childCode)) {
       me.childMenuCode = null, me.childMenuName = null, me.childMenuTitList = []; //清空子集查询
-      me.queryDatas();
+      me.queryDatas(1);
       return;
     } else {
       me.childMenuCode = childCode;
