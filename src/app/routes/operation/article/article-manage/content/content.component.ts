@@ -5,7 +5,6 @@ import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTabl
 import {NavService} from "app/routes/operation/article/article-manage/content-nav/nav.service";
 import {SubmitService} from "../../../../../core/forms/submit.service";
 import {Page} from "../../../../../core/page/page";
-import {isNumber} from "ngx-bootstrap/timepicker/timepicker.utils";
 import {isNullOrUndefined} from "util";
 
 const swal = require('sweetalert');
@@ -122,7 +121,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
-    }else if(isNumber(curPage)){
+    }else if(!isNullOrUndefined(curPage)){
       activePage =curPage
     };
     let data={

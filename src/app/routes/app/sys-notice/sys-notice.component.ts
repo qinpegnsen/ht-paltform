@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 
 @Component({
@@ -36,16 +37,20 @@ export class SysNoticeComponent implements OnInit {
       title:"删除",
       type: "delete"
     };
-    this.queryNoticeList()
+    this.queryNoticeList(1)
 
   }
 
   /**
    * 查询系统公告的列表
    */
-  queryNoticeList(event?:PageEvent){
+  queryNoticeList(curPage,event?:PageEvent){
     let activePage = 1;
-    if(typeof event !== "undefined") {activePage =event.activePage};
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let data={
       curPage:activePage,
       pageSize:10
@@ -57,7 +62,7 @@ export class SysNoticeComponent implements OnInit {
   /**
    * 删除公告 首先进行确认是否删除，删除后刷新页面
    */
-  deleteSort(delId){
+  deleteSort(delId,curPage){
     let that=this;
     swal({
       title: "您确定要删除吗？",
@@ -76,7 +81,7 @@ export class SysNoticeComponent implements OnInit {
           id:delId
         }
         that.service.delRequest(url,data)
-        that.queryNoticeList()
+        that.queryNoticeList(curPage)
       }
     });
   }
@@ -101,7 +106,7 @@ export class SysNoticeComponent implements OnInit {
         let url='/announce/deleteExpire';
         let data={}
         that.service.delRequest(url,data)
-        that.queryNoticeList()
+        that.queryNoticeList(1);
       }
     });
   }
