@@ -8,6 +8,7 @@ import {isUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {FileUploader} from "ng2-file-upload";
+import {OrderReviewService} from "../order-review.service";
 
 @Component({
   selector: 'app-to-refund',
@@ -26,13 +27,14 @@ export class ToRefundComponent implements OnInit {
   public curPage1: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
+  private LogisticsData//物流信息
   private beginTime: string;
   private endTime: string;
   public goodsList: Page = new Page();
   private showRefundWindow:boolean = false;
 
   @ViewChild('cancelBox') cancelBox: CancelComponent;
-  constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService) {
+  constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService,private orderReviewService:OrderReviewService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
@@ -97,6 +99,22 @@ export class ToRefundComponent implements OnInit {
     this.showRefundWindow=true;
   }
 
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics,ordno) {
+    Logistics.style.display = 'block';
+    if(isUndefined(ordno)) ordno = ordno;
+    this.LogisticsData = this.orderReviewService.getOrderLogisticsData(ordno);
+  }
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
+  }
   /**
    * 取消订单回调函数
    * @param data

@@ -100,9 +100,7 @@ export class HelpUpdateComponent implements OnInit {
       return;
     }else{
       // this.qeuryAll();
-      this.router.navigate(['/main/operation/help-center/help-answer']);
-      console.log("█ expr ►►►",this.curPage);
-      this.helpAnswerComponent.qeuryAllService(this.curPage)
+      _this.router.navigate(['/main/operation/help-center/help-answer']);
     }
 
   }

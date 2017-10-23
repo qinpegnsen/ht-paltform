@@ -15,7 +15,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">退款金额：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            111111
+           {{goodspay}}
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
@@ -28,7 +28,7 @@
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">汇款账号：</dt>
+          <dt class="col-xs-3"><i>*</i>汇款账号：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel">
           </dd>
@@ -38,7 +38,7 @@
           </div>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">汇款人：</dt>
+          <dt class="col-xs-3"><i>*</i>汇款人：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
           </dd>
@@ -66,7 +66,7 @@
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3">汇款时间：</dt>
+          <dt class="col-xs-3"><i>*</i>汇款时间：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
             <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>

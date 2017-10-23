@@ -111,7 +111,7 @@
                 查看详情</p>
               <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
                 <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,order.ordno)"
-                      (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
+                      (mouseleave)="hideLogistics(Logistics)" class="logistics">查看物流</span></p>
               <div class="szh-buyer-info text-left logistics-pop" #Logistics
                    (mouseenter)="showLogistics(Logistics,order.ordno)"
                    (mouseleave)="hideLogistics(Logistics)">
