@@ -85,7 +85,10 @@ export class ContentComponent implements OnInit,OnChanges  {
           }else if(event.url=='/main/operation/article/manage'){
             that.flag=true;
             let curPage =sessionStorage.getItem('curPage');
-            that.queryArticManleList('N',curPage?curPage:1) //刷新内容页面
+            if(curPage=='undefined'){//新增的时候 isnullOrundefined不行
+              curPage='1';
+            }
+            that.queryArticManleList('N',curPage) //刷新内容页面
             that.getTotalRow();
           }
         }
@@ -126,7 +129,7 @@ export class ContentComponent implements OnInit,OnChanges  {
     };
     let data={
       curPage:activePage,
-      pageSize:10,
+      pageSize:1,
       articleState:this.articleState,
       // articleTitle:this.searchKey,
       articleShortTitle:this.searchKey,
