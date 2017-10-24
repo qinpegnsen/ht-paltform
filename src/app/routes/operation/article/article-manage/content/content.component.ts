@@ -210,9 +210,9 @@ export class ContentComponent implements OnInit,OnChanges  {
     }
     let url= "/article/updateArticleIsCommend";
     let result=this.ContentService.isRecom(url,data)
-    if(result){
-      this.queryArticManleList('N',curPage)
-    }
+    // if(result){  //这里暂时不需要刷新页面
+    //   this.queryArticManleList('N',curPage)
+    // }
   }
 
   /**
