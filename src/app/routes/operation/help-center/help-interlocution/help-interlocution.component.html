@@ -2,7 +2,7 @@
 <div *ngIf="flag">
   <div class="content-heading mb-lg thc font">
     帮助分类
-    <app-buttons class="pull-right" [config]="addButton" routerLink="addrightpage" [queryParams]="{linkType:'aa'}"></app-buttons>
+    <app-buttons class="pull-right" [config]="addButton" routerLink="addrightpage" [queryParams]="{linkType:'aa',curPage:data.curPage}"></app-buttons>
   </div>
   <div class="panel panel-default">
     <div class="panel-body">

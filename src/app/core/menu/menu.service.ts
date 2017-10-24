@@ -37,7 +37,7 @@ export class MenuService {
   }
   foreachPushMenu(items:Array<menuVO>) {
     let menuItems:Array<MenuItem> = [],menuItem:MenuItem;
-    console.log("█ items ►►►",  items);
+    // console.log("█ items ►►►",  items);
     items.forEach((item) => {
       menuItem = new MenuItem();
       //设置菜单显示名称
@@ -73,7 +73,7 @@ export class MenuService {
    */
   getMenu() {
     let menus = JSON.parse(localStorage.getItem("userMenu"));
-    return menus; //cookie中取出
+    return menu; //cookie中取出
   }
 
   /**

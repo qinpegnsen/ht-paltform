@@ -24,13 +24,13 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
-      if (this.showAddWindow) $('.wrapper > section').css('z-index', 200);
-      else $('.wrapper > section').css('z-index', 114);
+      if (this.showAddWindow) $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 100);
+      else $('.wrapper > section'&& '.wrapper > footer ').css('z-index',10);
     }
   }
 
   ngOnDestroy(): void {
-    $('.wrapper > section').css('z-index', 114);
+    $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 10);
   }
 
   constructor(private submit: SubmitService, private basicPropertiesComponent: BasicPropertiesComponent,

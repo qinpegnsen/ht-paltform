@@ -25,12 +25,14 @@ export class HelpUpdateComponent implements OnInit {
   public kindid: number;
   private curPage:any;
   constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location,private operationService:OperationService,public patterns:PatternService,private helpAnswerComponent:HelpAnswerComponent) { }
+              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location,private operationService:OperationService,public patterns:PatternService, private route: ActivatedRoute,
+              private helpAnswerComponent:HelpAnswerComponent) { }
 
   ngOnInit() {
     let me = this;
     me.kindid = me.routeInfo.snapshot.queryParams['id'];
     me.curPage = this.routeInfo.snapshot.queryParams['curPage'];
+    sessionStorage.setItem('curPage',me.curPage)
     me.linkType = me.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
@@ -48,9 +50,8 @@ export class HelpUpdateComponent implements OnInit {
       });
       $('#summernote').summernote('code', me.b.answer); //编辑器赋值
     }, 0);
+    me.b=me.submitt.getData("/helpQuestions/loadHelpQuestions", {id:me.kindid});//帮助问题修改时，先获取数据
     me.qeuryAll();
-    //帮助问题修改时，先获取数据
-    me.b=me.submitt.getData("/helpQuestions/loadHelpQuestions", {id:me.kindid});
   }
 
   /**
@@ -81,7 +82,7 @@ export class HelpUpdateComponent implements OnInit {
   /**
    * 修改完成后提交
    */
-  submit(res){
+  submit(res,){
     let _this=this;
     var sHTML = $('#summernote').summernote('code')//获取编辑器的值
     if(sHTML=='<p><br></p>'){   //默认就有的标签，提交的时候如果文章内容为空，不跳转页面
@@ -99,9 +100,8 @@ export class HelpUpdateComponent implements OnInit {
     if(answer=="帮助问题名称不能为空" || answer=="帮助问题排序不能为空" || answer=="帮助问题答案不能为空"){
       return;
     }else{
-      // this.qeuryAll();
-      _this.router.navigate(['/main/operation/help-center/help-answer']);
+      _this.location.back();
+      _this.helpAnswerComponent.qeuryAllService(_this.curPage)
     }
-
   }
 }

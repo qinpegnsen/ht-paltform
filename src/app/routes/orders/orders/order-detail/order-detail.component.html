@@ -73,7 +73,8 @@
       </dl>
       <dl>
         <dt>运费：</dt>
-        <dd>{{!orderDetailData.freight?'0.00':orderDetailData.freight | decimalTwo}}</dd>
+        <dd *ngIf="orderDetailData.freight!='0'">{{!orderDetailData.freight?'0.00':orderDetailData.freight | decimalTwo}}</dd>
+        <dd *ngIf="orderDetailData.freight=='0'">免运费</dd>
       </dl>
       <dl>
         <dt>应付金额：</dt>
@@ -261,9 +262,9 @@
           <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total | decimalTwo}}</span></dd>
         </dl>
         <dl class="text-right mb0">
-          <dt>运费：</dt>
+          <dt class="font14">运费：</dt>
           <dd>
-            <span class="font12 ml mr" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+            <span class="ml-sm font12 mr price-wid" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
               <span class="font18 ml-sm mr price-wid">¥{{orderDetailData.freight | decimalTwo}}</span>
             </ng-container>

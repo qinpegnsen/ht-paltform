@@ -42,7 +42,29 @@ export class HelpAnswerComponent implements OnInit {
     };
       this.qeuryAllService(1);
       this.qeuryAll();
+    /**
+     * 路由事件用来监听地址栏的变化
+     * 1.当新增文章出现的时候，内容组件隐藏
+     * 2.路由变化的时候，刷新页面
+     */
+    let that=this;
+    that.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          if(event.url.indexOf('linkType')>0){
+            that.flag=false;
+          }else if(event.url=='/main/operation/help-center/help-answer'){
+            that.flag=true;
+            let curPage =sessionStorage.getItem('curPage');
+            if(curPage=='undefined'){//新增的时候 isnullOrundefined不行
+              curPage='1';
+            }
+            that.qeuryAllService(curPage) //刷新内容页面
+          }
+        }
+      });
     // me.kindId = me.kinds[0].id;   //帮助问题默认分类
+
   }
 
   /**
@@ -72,7 +94,7 @@ export class HelpAnswerComponent implements OnInit {
     let url = "/helpQuestions/pageQuery";
     let data={
       curPage: activePage,
-      pageSize:2,
+      pageSize:10,
       question:me.searchkey,
       kindId:me.kindId,
     }

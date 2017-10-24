@@ -67,7 +67,7 @@ export class HelpInterlocutionComponent implements OnInit {
     let url = "/helpKind/pageQueryAll";
     let data={
       curPage: activePage,
-      pageSize:2,
+      pageSize:10,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);

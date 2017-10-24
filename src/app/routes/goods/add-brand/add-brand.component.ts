@@ -215,6 +215,14 @@ export class AddBrandComponent implements OnInit {
   }
 
   /**
+   * 获取路由参数
+   * 适用于'?'开头的传参形式
+   * @returns {any}
+   */
+  public getParams(name) {
+    return this.route.snapshot.queryParams[name];
+  }
+  /**
    * 刷新父页面数据
    */
   private refreshParentCompData(){
