@@ -10,7 +10,7 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w15 text-left">
           <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
@@ -22,7 +22,7 @@
         <th class="w15 text-center">
           <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w15 text-left">
           <rzhDefaultSorter by="descript">操作描述</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
@@ -33,19 +33,16 @@
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index"  class="text-center">
         <td>{{x+1}}</td>
-        <td>{{count.custName}}</td>
+        <td class="text-left">{{count.custName}}</td>
         <td>{{count.name}}</td>
         <td>{{count.phone}}</td>
         <td *ngIf="count.coin<0" style="color:red">
           {{count.coin}}
         </td>
-        <!--<td *ngIf="count.coin==0">-->
-          <!--{{count.coin}}-->
-        <!--</td>-->
         <td *ngIf="count.coin>=0" style="color:green">
           {{count.coin}}
         </td>
-        <td>{{count.description}}</td>
+        <td class="text-left">{{count.description}}</td>
         <td>{{count.createTime}}</td>
       </tr>
       </tbody>

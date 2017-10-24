@@ -36,6 +36,7 @@ import {ReviewDetailComponent} from './order-review/review-detail/review-detail.
 import {StockService} from './stock/stock.service';
 import {OrderReviewService} from './order-review/order-review.service';
 import { EptDetailComponent } from './ept-detail/ept-detail.component';
+import { RefundDetailComponent } from './order-review/refund-detail/refund-detail.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,7 @@ const routes: Routes = [
     {path: 'all-order', component: AllOrderComponent},
     {path: 'to-audit', component: ToAuditComponent},
     {path: 'review-detail', component: ReviewDetailComponent},
+    {path: 'refund-detail', component: RefundDetailComponent},
     {path: 'to-audit', component: ToAuditComponent},
     {path: 'to-refund', component: ToRefundComponent}
   ]},
@@ -112,6 +114,7 @@ const routes: Routes = [
     RefundComponent,
     ReviewDetailComponent,
     EptDetailComponent,
+    RefundDetailComponent,
   ],
   providers: [
     OrdersComponent,
@@ -133,7 +136,8 @@ const routes: Routes = [
     ToRefundComponent,
     OrderReviewComponent,
     StockService,
-    OrderReviewService
+    OrderReviewService,
+    RefundDetailComponent
   ]
 })
 export class OrdersModule { }

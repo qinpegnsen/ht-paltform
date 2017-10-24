@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
    */
   public optionPrev = {};
 
-
   constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',

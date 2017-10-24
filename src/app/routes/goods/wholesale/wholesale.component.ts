@@ -101,7 +101,7 @@ export class WholesaleComponent implements OnInit {
     let url = "/goodsQuery/querySku";
     let data = {
       curPage: activePage,
-      pageSize: 3,
+      pageSize: 10,
       kindId: me.kindId,
       goodsName: me.goodsName,
       brandName: me.brandName,

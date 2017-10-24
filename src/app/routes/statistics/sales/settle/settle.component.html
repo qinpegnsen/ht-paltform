@@ -31,11 +31,10 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-
             <div class="col-xs-9">
               <div class="">订单金额（元）</div>
-              <p class="text-md m0" *ngIf="data.ordPay!=null">{{data.ordPay}}</p>
-              <p class="text-md m0" *ngIf="data.ordPay==null">0.00</p>
+              <p class="text-md m0" *ngIf="data.ordPay!=null">{{data.ordPay | decimalTwo}}</p>
+              <!--<p class="text-md m0" *ngIf="data.ordPay==null">0.00</p>-->
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -52,8 +51,8 @@
           <div class="row">
             <div class="col-xs-9 ">
               <div class="">退款金额（元）</div>
-              <p class="text-md m0" *ngIf="data.refundPay!=null">{{data.refundPay}}</p>
-              <p class="text-md m0" *ngIf="data.refundPay==null">0.00</p>
+              <p class="text-md m0" *ngIf="data.refundPay!=null">{{data.refundPay | decimalTwo}}</p>
+              <!--<p class="text-md m0" *ngIf="data.refundPay==null">0.00</p>-->
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-gavel fa-3x tp-em"></em>
@@ -71,8 +70,8 @@
 
             <div class="col-xs-9 ">
               <div class="">实收金额（元）</div>
-              <p class="text-md m0" *ngIf="data.realPay!=null">{{data.realPay}}</p>
-              <p class="text-md m0" *ngIf="data.realPay==null">0.00</p>
+              <p class="text-md m0" *ngIf="data.realPay!=null">{{data.realPay  | decimalTwo}}</p>
+              <!--<p class="text-md m0" *ngIf="data.realPay==null">0.00</p>-->
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-tags fa-3x tp-em"></em>
@@ -92,8 +91,8 @@
 
             <div class="col-xs-9">
               <div class="">实收佣金（元）</div>
-              <p class="text-md m0" *ngIf="data.extraction!=null">{{data.extraction}}</p>
-              <p class="text-md m0" *ngIf="data.extraction==null">0.00</p>
+              <p class="text-md m0" *ngIf="data.extraction!=null">{{data.extraction | decimalTwo}}</p>
+              <!--<p class="text-md m0" *ngIf="data.extraction==null">0.00</p>-->
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-pie-chart fa-3x tp-em"></em>
@@ -108,11 +107,10 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <div class="row">
-
             <div class="col-xs-9 ">
               <div class="">总收入（元）</div>
-              <p class="text-md m0" *ngIf="data.balance!=null">{{data.balance}}</p>
-              <p class="text-md m0" *ngIf="data.balance==null">0.00</p>
+              <p class="text-md m0" *ngIf="data.balance!=null">{{data.balance | decimalTwo}}</p>
+              <!--<p class="text-md m0" *ngIf="data.balance==null">0.00</p>-->
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calculator fa-3x tp-em"></em>
@@ -151,10 +149,10 @@
       <tbody>
       <tr class="text-center" *ngFor="let refund of data.resultList">
         <td>{{refund.toName}}</td>
-        <td class="">{{refund.ordPay}}</td>
-        <td class="">{{refund.realPay}}</td>
-        <td class="">{{refund.refundPay}}</td>
-        <td class="">{{refund.extraction}}</td>
+        <td class="">{{refund.ordPay | decimalTwo}}</td>
+        <td class="">{{refund.realPay | decimalTwo}}</td>
+        <td class="">{{refund.refundPay | decimalTwo}}</td>
+        <td class="">{{refund.extraction | decimalTwo}}</td>
       </tr>
     </table>
   </div>

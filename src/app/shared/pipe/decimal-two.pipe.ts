@@ -8,7 +8,7 @@ export class DecimalTwoPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if(isNullOrUndefined(value) || value == '') value = 0;
-    let val = value.toFixed(2);
+    let val = Number(value).toFixed(2);
     return val;
   }
 

@@ -1,7 +1,7 @@
 <div class="content-heading mb-lg thc font">异常订单审核</div>
 <div class="order panel mb">
   <div class="panel-body">
-    <div *ngIf="orderType!=100">
+    <div *ngIf="orderType!=100 && orderType!=111">
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="orderType==1" [class.bb]="orderType==1" routerLink="all-order">所有订单</li>
         <li class="pull-left thc" [class.font]="orderType==2" [class.bb]="orderType==2" routerLink="to-audit">待审核</li>
@@ -42,8 +42,12 @@
       <!--查询 end-->
     </div>
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
-      <li class="pull-left" routerLink="all-stock" routerLink="all-order">订单列表</li>
+      <li class="pull-left" routerLink="all-stock">订单列表</li>
       <li class="pull-left thc bb">商品详情</li>
+    </ul>
+    <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==111">
+      <li class="pull-left" routerLink="to-refund">订单列表</li>
+      <li class="pull-left thc bb">退款详情</li>
     </ul>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
