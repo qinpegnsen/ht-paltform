@@ -4,7 +4,7 @@
     <div class="mask"></div>
     <form class="_popup animated fadeIn" #addTpl="ngForm">
       <div class="pop popup-hd">
-        <span class="f-bold">新增模板消息</span>
+        <span class="f-bold thc font">新增模板消息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
       </div>
       <!--表单-->
@@ -67,8 +67,8 @@
         </dl>
       </div>
       <div class="panel-footer text-right">
-        <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="button" (click)="add(addTpl.value)" [disabled]="addTpl.invalid">确认提交</button>
+        <button class="btn btn-default thc font b" type="button" (click)="hideWindow()">放弃操作</button>
+        <button class="btn btn-info thc bg" type="button" (click)="add(addTpl.value)" [disabled]="addTpl.invalid">确认提交</button>
       </div>
     </form>
   </ng-container>
@@ -78,7 +78,7 @@
     <div class="mask"></div>
     <form class="_popup animated fadeIn" #updateTpl="ngForm">
       <div class="pop popup-hd">
-        <span class="f-bold">编辑模板消息</span>
+        <span class="f-bold thc font">编辑模板消息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
       </div>
       <!--表单-->
@@ -146,8 +146,8 @@
         </dl>
       </div>
       <div class="panel-footer text-right">
-        <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="button" (click)="update()" [disabled]="updateTpl.invalid">确认提交</button>
+        <button class="btn btn-default thc font b" type="button" (click)="hideWindow()">放弃操作</button>
+        <button class="btn btn-info thc bg" type="button" (click)="update()" [disabled]="updateTpl.invalid">确认提交</button>
       </div>
     </form>
   </ng-container>

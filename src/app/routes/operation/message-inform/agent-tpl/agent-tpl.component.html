@@ -38,8 +38,8 @@
         <td class="text-left">{{agentTpl.url}}</td>
         <td class="text-left">{{agentTpl.remark}}</td>
         <td>
-          <app-buttons [config]="deletebutton" (click)="deleteTpl(agentTpl.id,agentTplData.curPage)"></app-buttons>
           <app-buttons [config]="updatebutton" (click)="updateTpl(agentTpl.tplCode,agentTplData.curPage)"></app-buttons>
+          <app-buttons [config]="deletebutton" (click)="deleteTpl(agentTpl.id,agentTplData.curPage)"></app-buttons>
       </tr>
       </tbody>
       <tfoot>

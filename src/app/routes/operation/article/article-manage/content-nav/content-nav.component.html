@@ -1,18 +1,18 @@
 <div class="w10 pull-left panel panel-default  special">
   <div class="panel-body">
-    <div class="setClass" [class.active]="flag=='DRAFT'" (click)="articleState('DRAFT')" >
+    <div class="setClass thc" [class.ts]="flag=='DRAFT'" (click)="articleState('DRAFT')" >
       <span class="ml25">草稿箱({{stateList?.data.DRAFT?stateList.data.DRAFT:0}})</span>
     </div>
-    <div class="setClass" [class.active]="flag=='AUDIT'" (click)="articleState('AUDIT')">
+    <div class="setClass thc" [class.ts]="flag=='AUDIT'" (click)="articleState('AUDIT')">
       <span class="ml25">审核中({{stateList?.data.AUDIT?stateList.data.AUDIT:0}})</span>
     </div>
-    <div class="setClass" [class.active]="flag=='REVISE'" (click)="articleState('REVISE')">
+    <div class="setClass thc" [class.ts]="flag=='REVISE'" (click)="articleState('REVISE')">
       <span class="ml25">待修改({{stateList?.data.REVISE?stateList.data.REVISE:0}})</span>
     </div>
-    <div class="setClass" [class.active]="flag=='NORMAL'" (click)="articleState('NORMAL')">
+    <div class="setClass thc" [class.ts]="flag=='NORMAL'" (click)="articleState('NORMAL')">
       <span class="ml25">已发表({{stateList?.data.NORMAL?stateList.data.NORMAL:0}})</span>
     </div>
-    <div class="setClass" [class.active]="flag=='DEL'" (click)="articleState('DEL')">
+    <div class="setClass thc" [class.ts]="flag=='DEL'" (click)="articleState('DEL')">
       <span class="ml25">已删除({{stateList?.data.DEL?stateList.data.DEL:0}})</span>
     </div>
   </div>

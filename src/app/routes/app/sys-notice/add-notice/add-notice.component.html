@@ -5,7 +5,7 @@
     <div class="panel-default">
       <div class="panel-body">
         <fieldset class="b0">
-          <legend>新增系统公告</legend>
+          <legend class="thc font">新增系统公告</legend>
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -61,8 +61,8 @@
         </fieldset>
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submit(notice.value)"
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left thc bg" type="submit" (click)="submit(notice.value)"
                 [disabled]="notice.invalid">提交信息
         </button>
       </div>

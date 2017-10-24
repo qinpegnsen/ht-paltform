@@ -56,7 +56,7 @@ const PROXY_CONFIG = [
       "/phone",
       "/finaceDraw",
     ],
-    target: bb  + "8094",   //拦截 context配置路径，经过此地址
+    target: gh  + "8085",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
