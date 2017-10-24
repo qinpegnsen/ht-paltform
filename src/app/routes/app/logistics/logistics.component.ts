@@ -72,7 +72,7 @@ export class LogisticsComponent implements OnInit {
     _this.ajax.post({
       url: '/phone/index/updateShow',
       data: {
-        id:indexId,
+        indexId:indexId,
         web:_this.indexData.web,
         wap:_this.indexData.wap,
         wx:_this.indexData.wx,
