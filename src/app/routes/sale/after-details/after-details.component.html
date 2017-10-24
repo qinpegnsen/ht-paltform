@@ -26,14 +26,15 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">订单编号：</td>
             <td class="item-bd col-sm-10 mb0">
-              <a routerLink="../../orders/cust/order-detail" [queryParams]="{ordno: afterData.ordno}">{{afterData.ordno}}</a>
+              <a routerLink="/main/orders/cust/order-detail" [queryParams]="{ordno: afterData.ordno}">{{afterData
+                .ordno}}</a>
             </td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">商品名称：</td>
             <td class="item-bd col-sm-10 mb0">
               {{afterData.goodsName}}
-              <a routerLink="../../goods/publish/edit" [queryParams]="{baseCode: afterData.goodsBaseCode}">(查看)</a>
+              <a routerLink="/main/goods/manage/detail" [queryParams]="{baseCode: afterData.goodsBaseCode}">(查看)</a>
             </td>
           </tr>
           <tr class="t-item clearfix">

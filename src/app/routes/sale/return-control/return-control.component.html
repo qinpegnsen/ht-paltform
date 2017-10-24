@@ -112,7 +112,8 @@
             <td>{{item.createTime}}</td>
             <td class="position-relative font13">
               <p class="mb-sm">{{item.state | rzhState:'1602'}}</p>
-              <p class="cursor-p mb-sm text-gray-dark" *ngIf="item.state=='DELIVERY'" myHoverColor [myHover]="'orange'"
+              <p class="cursor-p mb0 text-gray-dark tag-dib pl pr" *ngIf="item.state=='DELIVERY'" myHoverColor
+                 [myHover]="'orange'"
                  (mouseenter)="showLogistics(Logistics,item.afterNo)"
                  (mouseleave)="hideLogistics(Logistics)">退货跟踪 </p>
               <div class="szh-buyer-info text-left logistics-pop" #Logistics
