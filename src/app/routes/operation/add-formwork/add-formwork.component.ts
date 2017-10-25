@@ -289,19 +289,6 @@ export class AddFormworkComponent implements OnInit {
       }
 
     }
-   /* console.log(this.data);
-    this.allCheckeds.forEach((item) => {
-
-      // item.allChecked = false;
-    })
-    this.data.forEach((item, indexs) => {
-
-      this.updateAllChecked(indexs, null, item.provices);
-    });
-
-
-
-    console.log(this.cru);*/
   }
 
   show(){
@@ -322,9 +309,9 @@ export class AddFormworkComponent implements OnInit {
    */
   add(){
     this.moduleList.push({reslut: '', index: this.moduleList.length + 1});
-    //this.moduleList.push('1')
     console.log("█ this.moduleList ►►►",  this.moduleList);
   }
+
 
   /**
    * 删除运费模板值信息
@@ -357,13 +344,15 @@ export class AddFormworkComponent implements OnInit {
    *添加运费模板
    * @param value
    */
-  addLimitList(value){
+  addFormwork(value){
     let _this = this;
     //添加区域信息
     if(_this.linkType == 'addArticle'){
       _this.ajax.post({
         url: '/expressTpl/addStoreExpressTpl',
-        data: {},
+        data: {
+
+        },
         success: (res) => {
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转

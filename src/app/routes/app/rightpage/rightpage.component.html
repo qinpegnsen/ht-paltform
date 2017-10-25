@@ -155,13 +155,13 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i class="main-red">*</i> 首页模板</label>
+            <label class="col-sm-4 control-label"> <i class="main-red">*</i> 模板编码</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
-                     #tplCode="ngModel" type="text"/>
+                     #tplCode="ngModel" type="text" placeholder="请添加数字或英文字符" [pattern]="patterns.tplCode"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
                    class="alert alert-danger">
-                首页模板是必填项，请填写首页模板
+                模板编码是必填项，请填写模板编码
               </div>
             </div>
           </div>
@@ -252,7 +252,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"> <i class="main-red">*</i> 首页作者</label>
             <div class="col-sm-7">
-              <input class="form-control"  name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
+              <input class="form-control" required  name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
                    class="alert alert-danger">
@@ -264,10 +264,10 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> 模板宽度</label>
+            <label class="col-sm-4 control-label"> <i class="main-red">*</i>模板宽度</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplWidth" [(ngModel)]="tplForm.tplWidth"
-                     #tplWidth="ngModel" type="text"/>
+                     #tplWidth="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplWidth.valid || tplWidth.pristine"
                    class="alert alert-danger">
                 模板宽度是必填项，请填写模板宽度
@@ -278,10 +278,10 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> 模板高度</label>
+            <label class="col-sm-4 control-label"> <i class="main-red">*</i>模板高度</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
-                     #tplHeight="ngModel" type="text"/>
+                     #tplHeight="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplHeight.valid || tplHeight.pristine"
                    class="alert alert-danger">
                 模板高度是必填项，请填写模板高度
@@ -326,13 +326,13 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> <i class="main-red">*</i> 首页模板</label>
+            <label class="col-sm-4 control-label"> <i class="main-red">*</i> 模板编码</label>
             <div class="col-sm-7">
               <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
-                     #tplCode="ngModel" type="text"/>
+                     #tplCode="ngModel" type="text" placeholder="请添加数字或英文字符" [pattern]="patterns.tplCode"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
                    class="alert alert-danger">
-                首页模板是必填项，请填写首页模板
+                模板编码是必填项，请填写模板编码
               </div>
             </div>
           </div>
@@ -435,10 +435,10 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"> 模板宽度</label>
+            <label class="col-sm-4 control-label"> <i class="main-red">*</i>模板宽度</label>
             <div class="col-sm-7">
               <input class="form-control"  required  name="tplWidth" [(ngModel)]="tplForm.tplWidth"
-                     #tplWidth="ngModel" type="text"/>
+                     #tplWidth="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplWidth.valid || tplWidth.pristine"
                    class="alert alert-danger">
                 模板宽度是必填项，请填写模板宽度
@@ -449,10 +449,10 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">  模板高度</label>
+            <label class="col-sm-4 control-label">  <i class="main-red">*</i>模板高度</label>
             <div class="col-sm-7">
               <input class="form-control"  required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
-                     #tplHeight="ngModel" type="text"/>
+                     #tplHeight="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplHeight.valid || tplHeight.pristine"
                    class="alert alert-danger">
                 模板高度是必填项，请填写模板高度

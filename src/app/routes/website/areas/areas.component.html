@@ -3,39 +3,17 @@
   <!--添加地区按钮配置-->
   <!--<app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{id:1}"></app-buttons>-->
 </div>
-<!--<div class="panel mb">
-  <div class="panel-body p ng-scope">
-    <div class="form-group col-md-4 mb0">
-      <div class="col-md-8 col-xs-6 pl0">
-        <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="areaName" (change)="queryAreasList()" placeholder="地区名称">
-      </div>
-      <button type="button" title="搜索"
-              class="btn btn-primary bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
-      </button>
-    </div>
-    <div class="form-group col-md-4 mb0">
-      <div class="col-md-8 col-xs-6 pl0">
-        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="area_code" (change)="queryAreasList()" placeholder="地区编码">
-      </div>
-      <button type="button" title="搜索"
-              class="btn btn-primary bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
-      </button>
-    </div>
-  </div>
-</div>-->
+
 <div class="panel panel-default">
   <div class="col-md-10 font15 mt mb pl text-primary">
-    <i class="icon-layers mr"></i>
-    <span class="cursor-p" (click)="queryChildSortList()">地区管理</span>
+    <i class="icon-layers mr thc font"></i>
+    <span class="cursor-p thc font" (click)="queryChildSortList()">地区管理</span>
     <span *ngFor="let menuTit of childMenuTitList">
-      <i class="fa fa-arrow-right mr ml"></i>
-      <font class="cursor-p" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
+      <i class="fa fa-arrow-right mr ml thc font"></i>
+      <font class="cursor-p thc font" (click)="queryChildSortList(menuTit.code,menuTit.name,true)">{{menuTit.name}}</font>
     </span>
-    <span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
-      <i class="fa fa-level-up mr5"></i>
-      返回上一级
+    <span *ngIf="childMenuTitList.length>0" (click)="goBackMenu()">
+            <button  class="m-sm btn btn-xs btn-outline fa fa-level-up _myWhiteBg thc font b" title="同意退款" > 返回上一级</button>
     </span>
   </div>
   <div class="panel-body">
@@ -68,7 +46,10 @@
           <app-buttons [config]="updatebutton" routerLink="rightpage" [queryParams]="{id:2,areaCode:organ.areaCode}"></app-buttons>
           &lt;!&ndash;删除区域信息按钮&ndash;&gt;
           <app-buttons [config]="deletebutton" (click)="delete(organ.areaCode)"></app-buttons>-->
-          <span class="btn btn-default btn-xs"  *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>
+          <!--<span class="btn btn-default btn-xs"  *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>-->
+          <span *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)">
+            <button  class="m-sm btn btn-xs btn-outline fa fa-level-down _myWhiteBg thc font b" title="同意退款" > 下级</button>
+          </span>
         </td>
       </tr>
       </tbody>

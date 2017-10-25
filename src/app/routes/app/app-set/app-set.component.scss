@@ -237,6 +237,10 @@ span:nth-child(2){
       top: 0px;
       left: 304px;
     }
+    ul{
+      position: relative;
+      left: 260px;
+    }
     ul li{
       list-style: none;
       width: 25px;
@@ -257,4 +261,7 @@ span:nth-child(2){
 }
 .hidden-field{
   display: none
+}
+.winner{
+  color: red;
 }
