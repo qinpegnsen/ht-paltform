@@ -3,12 +3,14 @@ import {SubmitService} from "../../../../core/forms/submit.service";
 import {PatternService} from "../../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
 import {ActivatedRoute} from "@angular/router";
+import {IntegrationChangeService} from "./integration-change.service";
 
 
 @Component({
   selector: 'app-integration-change',
   templateUrl: './integration-change.component.html',
-  styleUrls: ['./integration-change.component.scss']
+  styleUrls: ['./integration-change.component.scss'],
+  providers:[IntegrationChangeService]
 })
 export class IntegrationChangeComponent implements OnInit {
   private sum:any;
@@ -17,7 +19,8 @@ export class IntegrationChangeComponent implements OnInit {
     custCoin: null,
     logType: 'RECHARGE'
   };
-  constructor(private submitt: SubmitService, private patterns: PatternService,private route: ActivatedRoute) {
+  constructor(private submitt: SubmitService, private patterns: PatternService,private route: ActivatedRoute,
+  private integrationChangeService:IntegrationChangeService) {
   }
 
   ngOnInit() {
@@ -36,8 +39,9 @@ export class IntegrationChangeComponent implements OnInit {
     let data = {
       phone:this.data.phone
     }
-   _this.sum=this.submitt.getData(url, data);
+   _this.sum=this.integrationChangeService.getData(url, data);
   }
+
   /**
    * 提交
    */
@@ -50,6 +54,5 @@ export class IntegrationChangeComponent implements OnInit {
       this.sum.coin='';
       this.sum.recharge=''
     }
-    // this.queryCoin();
   }
 }
