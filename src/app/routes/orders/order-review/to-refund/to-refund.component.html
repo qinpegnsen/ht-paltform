@@ -100,13 +100,13 @@
               </div>
             </div>
           </td>
-
-          <td class="w10 bl position-relative" *ngIf="j==0" [attr.rowspan]="dataTable.data.length">
+          <td class="w10 bl position-relative p-refund" *ngIf="j==0" [attr.rowspan]="dataTable.data.length">
             <ng-container *ngFor="let return of goods.agentOrdReturnList">
             <p class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
                 (mouseleave)="hideBuyerInfo(i)">{{return.refundState | rzhState :'1804'}}
             </p>
-              <p class=""myHoverColor [myHover]="'#CC1635'" routerLink="../refund-detail" style="padding-top: 6px">退款详情 </p>
+              <p class=""myHoverColor [myHover]="'#CC1635'" routerLink="../refund-detail"
+                 [queryParams]="{ordno:goods.ordno}" style="padding-top: 6px">退款详情 </p>
               <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)"
                    style="width:300px!important;">
                 <div class="info-con" style="width:291px!important;">

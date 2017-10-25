@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderReviewComponent} from "../order-review.component";
+import {SubmitService} from "../../../../core/forms/submit.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-refund-detail',
@@ -7,12 +9,25 @@ import {OrderReviewComponent} from "../order-review.component";
   styleUrls: ['./refund-detail.component.scss']
 })
 export class RefundDetailComponent implements OnInit {
-
-  constructor(private orderReviewComponent:OrderReviewComponent) { }
+  public ordno;  //订单号
+  private refund;
+  constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService,
+              private routeInfo:ActivatedRoute,) { }
 
   ngOnInit() {
     let me=this;
     me.orderReviewComponent.orderType = 111;
+    this.ordno = me.routeInfo.snapshot.queryParams['ordno'];//获取进货记录未付款页面跳转过来的参数
+    this.queryRefund();
   }
+
+  queryRefund() {
+      let url = '/agentOrd/queryRefundDetails';
+      let data = {
+        ordno:this.ordno
+      }
+      this.refund=this.submit.getRequest(url, data);
+      console.log("█ refund ►►►",  this.refund);
+    }
 
 }

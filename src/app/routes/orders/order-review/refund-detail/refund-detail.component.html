@@ -1,109 +1,141 @@
 <div class="p-lg">
   <div class="row">
-    <div class="col-lg-9">
-      <!-- START timeline-->
+    <div class="col-lg-12">
       <ul class="timeline">
-        <!--<li class="timeline-separator" data-datetime="Today"></li>-->
-        <!-- START timeline item-->
-        <li>
+        <li class="" *ngIf="refund.bacctName!=null">
           <div class="timeline-badge primary">
             <em class="fa fa-edit"></em>
           </div>
           <div class="timeline-panel">
-            <div class="popover left">
+            <div class="popover" [ngClass]="timelineAlt ? 'right' : 'left'">
+              <h4 class="popover-title">申请信息</h4>
               <div class="arrow"></div>
               <div class="popover-content">
-                <div class="table-grid table-grid-align-middle mb">
-                  <div class="col col-xs">
-                    <img class="media-object img-circle thumb48"  [src]="'un'" alt=""
-                         onerror="javascript:this.src='../../../../assets/img/dummy.png'" />
-                  </div>
-                  <div class="col">
-                    <p class="m0">
-                      <a class="text-muted" href="#">
-                        <strong>Aiden Curtis</strong>
-                      </a>
-                  </div>
-                </div>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" style="height: 250px">
+                  <li class="pb" *ngIf="refund.payWay=='REMIT'">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">退款账号开户行：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.bank}}</span></p>
+                  </li>
                   <li class="pb">
-                    <span class=" mr">操作时间：</span>
-                    <span class="text-info">framework-docs-part1.pdf</span>
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">退款账号：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.acct}}</span></p>
+                  </li>
+                  <li class="pb" *ngIf="refund.payWay=='REMIT'">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">收款人姓名：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.bacctName}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">订单号：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.ordno}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">支付方式：</span></p>
+                    <p class="text-info pull-right w62"><span
+                      class="text-left">{{refund.payWay  | rzhState :'1017'}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">申请金额：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.reqMoney}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">操作人员：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.staffName}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">申请时间：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.createTime}}</span></p>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </li>
-        <!-- END timeline item-->
-        <!-- START timeline item-->
-        <li class="timeline-inverted">
+
+        <li class="timeline-inverted" *ngIf="refund.agentOrdReturnAudit!=null && refund.bacctName!=null">
           <div class="timeline-badge green">
             <em class="icon icon-user-following"></em>
           </div>
           <div class="timeline-panel">
-            <div class="popover right">
+            <div class="popover right" style="height: 200px">
+              <h4 class="popover-title">审核信息</h4>
               <div class="arrow"></div>
               <div class="popover-content">
-                <div class="table-grid table-grid-align-middle mb">
-                  <div class="col col-xs">
-                    <img class="media-object img-circle thumb48"  [src]="'un'" alt=""
-                         onerror="javascript:this.src='../../../../assets/img/dummy.png'" />
-                  </div>
-                  <div class="col">
-                    <p class="m0">
-                      <a class="text-muted" href="#">
-                        <strong>James Payne</strong>
-                      </a>
-                  </div>
-                </div>
-                <div class="media bb p">
-                  <ul class="list-unstyled">
-                    <li class="pb">
-                      <span class=" mr">操作时间：</span>
-                      <span class="text-info">framework-docs-part1.pdf</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- START timeline item-->
-        <li>
-          <div class="timeline-badge info">
-            <em class="fa fa-dollar"></em>
-          </div>
-          <div class="timeline-panel">
-            <div class="popover left">
-              <div class="arrow"></div>
-              <div class="popover-content">
-                <div class="table-grid table-grid-align-middle mb">
-                  <div class="col col-xs">
-                    <img class="media-object img-circle thumb48"  [src]="'un'" alt=""
-                         onerror="javascript:this.src='../../../../assets/img/dummy.png'" />
-                  </div>
-                  <div class="col">
-                    <p class="m0">
-                      <span class="text-muted" href="#">
-                        <strong>Samantha Murphy</strong>
-                      </span>
-                  </div>
-                </div>
                 <ul class="list-unstyled">
                   <li class="pb">
-                    <span class=" mr">操作时间：</span>
-                    <span class="text-info">framework-docs-part1.pdf</span>
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">订单号：</span></p>
+                    <p class="text-info pull-right w62"><span
+                      class="text-left">{{refund.agentOrdReturnAudit.ordno}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">审核结果：</span></p>
+                    <p class="text-info pull-right w62"><span
+                      class="text-left">{{refund.agentOrdReturnAudit.result}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">审核意见：</span></p>
+                    <p class="text-info pull-right w62"><span
+                      class="text-left">{{refund.agentOrdReturnAudit.opinion}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">操作人员：</span></p>
+                    <p class="text-info pull-right w62"><span
+                      class="text-left">{{refund.agentOrdReturnAudit.staffName}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">审核时间：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.agentOrdReturnAudit.createTime}}</span>
+                    </p>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </li>
-        <!-- END timeline item-->
+        <!--*ngIf="refund.agentOrdReturnAudit=='null'"-->
+        <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null && refund.agentOrdReturnAudit.result=='PASS'" >
+          <div class="timeline-badge info">
+            <em class="fa fa-dollar"></em>
+          </div>
+          <div class="timeline-panel">
+            <div class="popover" [ngClass]="timelineAlt ? 'right' : 'left'">
+              <h4 class="popover-title">退款信息</h4>
+              <div class="arrow"></div>
+              <div class="popover-content">
+                <ul class="list-unstyled" style="height: 188px">
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">汇款人姓名：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.payBacctName}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">汇款账号：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.payAcct}}</span></p>
+                  </li>
+                  <li class="pb"  *ngIf="refund.payWay=='REMIT'">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">汇款开户行：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.payBank}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">汇款时间 ：</span></p>
+                    <p class="text-info pull-right w62"><span class="text-left">{{refund.tradeTime}}</span></p>
+                  </li>
+                  <li class="pb">
+                    <p class=" mr pull-left d-play w35"><span class="pull-right">汇款凭证：</span></p>
+                    <p class="text-info pull-right w62">
+                <span class="text-left">
+                <img [src]="refund.voucherUrl" alt=" " onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+                </span>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
       </ul>
-      <!-- END timeline-->
+
     </div>
 
   </div>
 </div>
+
+
