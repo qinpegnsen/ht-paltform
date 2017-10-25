@@ -265,7 +265,7 @@ export class AppSetComponent implements OnInit {
         this.uploaders.push(uploader);
       }
     }
-
+    _this.show(i-1);
   }
 
   /**
@@ -345,6 +345,27 @@ export class AppSetComponent implements OnInit {
     this.flag[i] = false;
   }
 
+
+  /**
+   * 上移下移模板时翻新moduleList
+   */
+  fanxin(){
+    let _this = this;
+    let newModuleList: Array<any> = new Array();
+    for(let k=0;k<_this.moduleList.length;k++){
+      let item=_this.moduleList[k].data;
+      newModuleList.push({
+        reslut: item.tplCheckedImg,
+        tplWidth: item.tplWidth,
+        tplHeight: item.tplHeight,
+        index: newModuleList.length + 1,
+        indexData: _this.moduleList[k].indexData,
+        data: item});
+      _this.phoneIndexId[k] = _this.moduleList[k].indexData.indexId;
+    }
+    _this.moduleList=newModuleList
+  }
+
   /**
    * 模板上移
    */
@@ -357,7 +378,10 @@ export class AppSetComponent implements OnInit {
       _this.moduleList[_this.ord - 1 - 1] = m1;
       _this.flags[_this.ord-1]=false;
       _this.flags[_this.ord-1-1]=true;
+      _this.fanxin();
+      _this.ord=_this.ord-1;
     }
+
     _this.ajax.post({
       url: '/phone/index/updateOrd',
       data: {
@@ -365,7 +389,6 @@ export class AppSetComponent implements OnInit {
         moves: '1',
         sx: 'SY'
       },
-
       error: (data) => {
         swal('失败！', '', 'error');
       }
@@ -383,7 +406,10 @@ export class AppSetComponent implements OnInit {
       _this.moduleList[_this.ord + 1 - 1] = m1;
       _this.flags[_this.ord-1]=false;
       _this.flags[_this.ord+1-1]=true;
+      _this.ord=_this.ord+1;
+      _this.fanxin();
     }
+
     _this.ajax.post({
       url: '/phone/index/updateOrd',
       data: {

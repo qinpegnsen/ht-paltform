@@ -31,14 +31,15 @@
     </div>
     <div class="main_center">
       <div class="main_centerOne">
-        <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index" (click)="addTplCont(item.data,i + 1)">
-          <img style="" src="{{item.reslut}}"  [attr.width]="item.tplWidth" [attr.height]="item.tplHeight" (click)="show(i)"/>
+        <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index">
+          <img style="width: 300px" src="{{item.reslut}}"  [attr.width]="item.tplWidth" [attr.height]="item.tplHeight"
+               (click)="addTplCont(item.data,i + 1)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <ul>
               <li (click)="deleteModel(i+1)" title="删除模板"><i class="fa fa-close"></i><br></li>
               <li *ngIf="phoneIndexId[i]" title="设置" (click)="addNewData(item.indexData)"><i class="fa fa-gear"></i></li>
-              <li (click)="moveUp()" title="上移"><i class="fa fa-arrow-up"></i></li>
-              <li (click)="moveDown()" title="下移"><i class="fa fa-arrow-down"></i></li>
+              <li *ngIf="phoneIndexId[i]" (click)="moveUp()" title="上移"><i class="fa fa-arrow-up"></i></li>
+              <li *ngIf="phoneIndexId[i]" (click)="moveDown()" title="下移"><i class="fa fa-arrow-down"></i></li>
             </ul>
           </div>
         </div>
