@@ -23,7 +23,7 @@
       <div class="main_left_center">
         <ul class="clearfix pl20 pt20">
           <li style="cursor: pointer" *ngFor="let item of items;let i = index" (click)="addTpl(item)">
-            <img src="{{item.tplImg}}"/>
+            <img src="{{item.tplImg}}" class="animationImg"/>
             <span style="display: block">{{item.tplName}}</span>
           </li>
         </ul>

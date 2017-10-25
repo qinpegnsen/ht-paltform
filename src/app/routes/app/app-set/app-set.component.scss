@@ -266,3 +266,20 @@ span:nth-child(2){
 .winner{
   color: red;
 }
+.animationImg{
+  width:100px;
+  height:100px;
+  background:yellow;
+  transition:width 1s, height 1s;
+  -moz-transition:width 1s, height 1s, -moz-transform 1s; /* Firefox 4 */
+  -webkit-transition:width 1s, height 1s, -webkit-transform 1s; /* Safari and Chrome */
+  -o-transition:width 1s, height 1s, -o-transform 1s; /* Opera */
+}
+.animationImg:hover{
+  width:100px;
+  height:100px;
+  transform:rotate(360deg);
+  -moz-transform:rotate(360deg); /* Firefox 4 */
+  -webkit-transform:rotate(360deg); /* Safari and Chrome */
+  -o-transform:rotate(360deg); /* Opera */
+}

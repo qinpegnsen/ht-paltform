@@ -99,14 +99,6 @@
           </div>
           <button class="btn btn-info position-absolute  left50 icon-location-pin" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)"> 标注经纬度</button>
           <button class="btn btn-info position-absolute  left50 icon-location-pin" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)"> 修改经纬度</button>
-          <!-- <div class="form-group" [hidden]="!staff.isShowMap">
-             <div class="col-sm-9 pull-right pl0 pr0 isShowMap">
-               <input type="text" id="keyword" class="form-control w30 search" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
-               <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)">确定</button>
-               <div id="container">
-               </div>
-             </div>
-           </div>-->
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -137,7 +129,7 @@
       <div class="panel-default">
         <div class="panel-body">
           <input class="form-control" required [(ngModel)]="agentCode" name="agentCode" type="hidden">
-          <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden">
+          <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode">
           <fieldset>
             <div class="form-group">
               <label class="col-sm-2 control-label"> <i class="main-red">*</i> 代理商名称</label>

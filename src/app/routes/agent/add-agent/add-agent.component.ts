@@ -41,10 +41,16 @@ export class AddAgentComponent implements OnInit {
   ngOnInit() {
     let me = this;
     //页面完成后加载地图
-    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
-    this.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
-    this.queryAgent();//请求代理商详细数据
+    me.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    me.agentCode = this.routeInfo.snapshot.queryParams['agentCode'];//获取代理商的编码
+    me.queryAgent();//请求代理商详细数据
+    me.refreshMap();//修改代理商信息时刷新地图
+  }
 
+  /**
+   * 地图
+   */
+  refreshMap(){
     setTimeout(() => {
       //实例化地图
 
@@ -52,7 +58,7 @@ export class AddAgentComponent implements OnInit {
         resizeEnable: true,
         zoom: 13,//地图显示的缩放级别
         keyboardEnable: false
-      });
+      }),me = this;
 
       AMap.service('AMap.PlaceSearch',function(){//回调函数
         //实例化PlaceSearch
@@ -119,9 +125,6 @@ export class AddAgentComponent implements OnInit {
         });
       })
     }, 1);
-
-
-
   }
 
   /**
@@ -178,8 +181,10 @@ export class AddAgentComponent implements OnInit {
   private getAreaData(area){
     let me = this;
     me.staff['areaCode'] = area.areaCode;
+    console.log("█ me.staff ►►►",  me.staff);
+
     me.selectArea = area.adr;
-    me.ngOnInit()
+    me.refreshMap()
   }
 
   addLimitList(value) {
