@@ -23,15 +23,15 @@
       <table class="w100 b">
         <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
           <td class="w30 p text-left position-relative bb">
-          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
+          <span class="goods-img goods-lg-img mr"><img [src]="name.goodsImage"
                                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
             <div class="goods-lg-info">
               <p class="mb0 font13 omg2 two-row mb-sm">
                 <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
               </p>
-              <p class="mb0 one-row omg" *ngFor="let attr of goods.goodsBaseSaList">
+              <p class="mb0 one-row omg" *ngFor="let attr of name.goodsSavSet | strToJson">
                 <span class="inline">{{attr.attrName}}：</span>
-                <span class="inline" *ngFor="let val of attr.goodsBaseSavList">{{val.value}}、</span>
+                <span class="inline">{{attr.value}}</span>
               </p>
             </div>
           </td>
@@ -118,7 +118,6 @@
               </div>
             </ng-container>
           </td>
-
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="dataTable.data.length">
             <button class="m-sm btn btn-xs btn-outline btn-info fa fa-jpy" *ngIf="goods.payWay=='REMIT'"
                     (click)="refund(name.ordno,goods.pay,goodsList.curPage)" >
