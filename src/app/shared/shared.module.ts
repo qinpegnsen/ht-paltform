@@ -54,7 +54,6 @@ import {PopoverModule} from "ngx-bootstrap";
 import { StrJsonPipe } from './pipe/str-json.pipe';
 import { GetWeekPipe } from './pipe/get-week.pipe';
 import { StrToNumberPipe } from './pipe/str-to-number.pipe';
-import {GetUidService} from "../core/services/get-uid.service";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -94,8 +93,7 @@ import {GetUidService} from "../core/services/get-uid.service";
   providers: [
     ColorsService,
     RzhtoolsService,
-    SubmitService,
-    GetUidService
+    SubmitService
   ],
   declarations: [
     FlotDirective,
