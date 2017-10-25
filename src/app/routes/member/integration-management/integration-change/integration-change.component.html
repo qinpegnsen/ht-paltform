@@ -20,7 +20,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i class="main-red">*</i> 会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number"  name="tel"  [(ngModel)]="data.phone" required #tel="ngModel" (blur)="queryCoin()" [pattern]="patterns.phone"/>
+                  <input class="form-control num" type="number" name="tel"  [(ngModel)]="data.phone" required #tel="ngModel" (blur)="queryCoin()" [pattern]="patterns.phone"/>
                 </div>
               </div>
               <div  class="col-sm-9 pull-right text-danger" *ngIf="testPhone(data.phone)" >

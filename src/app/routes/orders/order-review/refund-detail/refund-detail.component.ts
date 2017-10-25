@@ -27,7 +27,7 @@ export class RefundDetailComponent implements OnInit {
         ordno:this.ordno
       }
       this.refund=this.submit.getRequest(url, data);
-      console.log("█ refund ►►►",  this.refund);
+      // console.log("█ refund ►►►",  this.refund);
     }
 
 }
