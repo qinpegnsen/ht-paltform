@@ -1,7 +1,7 @@
 <div class="p-lg">
   <div class="row">
     <div class="col-lg-12">
-      <ul class="timeline">
+      <ul class="timeline" *ngIf="refund.bacctName!=null">
         <li class="" *ngIf="refund.bacctName!=null">
           <div class="timeline-badge primary">
             <em class="fa fa-edit"></em>
@@ -59,8 +59,8 @@
             <div class="popover right" style="height: 200px">
               <h4 class="popover-title">审核信息</h4>
               <div class="arrow"></div>
-              <div class="popover-content">
-                <ul class="list-unstyled">
+              <div class="popover-content" >
+                <ul class="list-unstyled" >
                   <li class="pb">
                     <p class=" mr pull-left d-play w35"><span class="pull-right">订单号：</span></p>
                     <p class="text-info pull-right w62"><span
@@ -91,7 +91,28 @@
             </div>
           </div>
         </li>
-        <!--*ngIf="refund.agentOrdReturnAudit=='null'"-->
+
+        <li class="timeline-inverted" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit==null">
+          <div class="timeline-badge green">
+            <em class="icon icon-user-following"></em>
+          </div>
+          <div class="timeline-panel">
+            <div class="popover right" style="height: 200px">
+              <h4 class="popover-title">审核信息</h4>
+              <div class="arrow"></div>
+              <div class="popover-content" >
+                <ul class="list-unstyled" >
+                  <li class="pb no-information">
+                    <p class=" mr pull-left d-play w35 font20"><span class="pull-right">审核信息：</span></p>
+                    <p class="text-info pull-right w62 font20"><span
+                      class="text-left">暂无审核信息</span></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
         <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null && refund.agentOrdReturnAudit.result=='PASS'" >
           <div class="timeline-badge info">
             <em class="fa fa-dollar"></em>
@@ -122,7 +143,12 @@
                     <p class=" mr pull-left d-play w35"><span class="pull-right">汇款凭证：</span></p>
                     <p class="text-info pull-right w62">
                 <span class="text-left">
-                <img [src]="refund.voucherUrl" alt=" " onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+                <img [src]="refund.voucherUrl" alt=" " (mousemove)="showImg($event)"
+                     (mouseout)="hideImg($event)"
+                     onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+
+                  <img [src]="refund.voucherUrl" class="bigImg" alt=""
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
                     </p>
                   </li>

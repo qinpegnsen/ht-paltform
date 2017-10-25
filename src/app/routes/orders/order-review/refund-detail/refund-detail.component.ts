@@ -21,6 +21,9 @@ export class RefundDetailComponent implements OnInit {
     this.queryRefund();
   }
 
+  /**
+   * 查询退款详情
+   */
   queryRefund() {
       let url = '/agentOrd/queryRefundDetails';
       let data = {
@@ -29,5 +32,25 @@ export class RefundDetailComponent implements OnInit {
       this.refund=this.submit.getRequest(url, data);
       // console.log("█ refund ►►►",  this.refund);
     }
+
+
+
+  /**
+   * 鼠标放在图片上时大图随之移动
+   */
+  showImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'block';
+    target.style.top = (event.clientY -40) + 'px';
+    target.style.left = (event.clientX + 40) + 'px';
+  }
+
+  /**
+   * 鼠标离开时大图随之隐藏
+   */
+  hideImg(event) {
+    let target = event.target.nextElementSibling;
+    target.style.display = 'none';
+  }
 
 }
