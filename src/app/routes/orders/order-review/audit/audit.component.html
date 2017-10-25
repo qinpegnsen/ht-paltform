@@ -2,6 +2,7 @@
 <div class="cancel-order fadeIn"  *ngIf="showCancelWindow">
   <div class="mask" (click)="hideWindow()"></div>
   <div class="popup animated fadeIn">
+    <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
     <div class="pop popup-hd">
       <span class="f-bold">审核</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
@@ -41,7 +42,7 @@
         <dd class="orderId-color col-xs-9 font14">{{staff.reqMoney}}</dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">审核结果：</dt>
+        <dt class="col-xs-3"><i>*</i>审核结果：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <label class="radio-inline c-radio">
             <input type="radio" name="result" checked value="PASS" [(ngModel)]="result"/>
@@ -57,19 +58,19 @@
       </dl>
       <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">审核意见：</dt>
+        <dt class="col-xs-3"><i>*</i>审核意见：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <select class="form-control" name="goodsAudit" [(ngModel)]="code" (change)="queryDatas(1)">
             <option *ngFor="let item of goodsAudits" [value]="item.code">{{item.info}}</option>
           </select>
         </dd>
       </dl>
-
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
+      <button class="btn btn-info" type="submit" (click)="canceslOrder()" [disabled]="!addForm.form.valid">确认提交</button>
     </div>
+    </form>
   </div>
 
 </div>
