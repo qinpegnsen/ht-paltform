@@ -1,25 +1,18 @@
-.ts{
-  background: #C9E7F2;
-  width: 98%;
-  margin: auto;
-  margin-top: 15px;
-}
-.text-edit{
-}
+
 .edit-table{
   height: 100px;
   margin: auto;
 }
 .text-content{
-  height: 360px;
   vertical-align: top;
   padding-top: 10px;
 }
 .summernote{
   padding: 0;
-  height: 500px;
 }
-
+.note-editor.note-frame .note-editing-area{
+  min-height: 300px;
+}
 .help-center-width{
   min-width: 800px;
 }
@@ -30,14 +23,20 @@
   margin-bottom: 20px;
 }
 .select{
-  margin-bottom: 20px;
+  margin-bottom: 20px!important;
+  margin: auto;
 }
-.select select{
-  margin-left: 60px;
+.update-height{
+  height: 35px;
 }
 .questiona{
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .button-operation{
-  margin-right:70px;
+  margin-right:88px;
 }
+.note-editor .note-frame .panel .panel-default{
+  margin-left: -15px;
+}
+
+
