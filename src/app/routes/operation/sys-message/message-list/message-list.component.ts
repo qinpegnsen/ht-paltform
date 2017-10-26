@@ -6,6 +6,7 @@ import {HeaderComponent} from "../../../../layout/header/header.component";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {Router} from "@angular/router";
 import {isNullOrUndefined} from "util";
+import {AppComponent} from "../../../../app.component";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -73,20 +74,24 @@ export class MessageListComponent implements OnInit {
    *1.首先获取到当前选择的id
    */
   updateMoreIsRead(curPage){
-    let url='/notifyAdmin/updateIsRead';
-    let obj=$("._every[checked='checked']");
-    for(let i=0;i<obj.length;i++){
-      this.idArr.push($(obj[i]).val())
-    }
-    let idStr= this.idArr.join(',');
-    let data={
-      ids	:idStr
-    };
-    this.platformInfoData=this.operationService.updateproblem(url,data);
-    this.queryAdminNotify(curPage);
-    if($('._all').prop("checked")){//如果全选按钮被勾选了，让它没有勾选
-      $('._all').prop("checked",false);
-      $('._all').attr("checked",false);
+    let obj = $("._every[checked='checked']");
+    if(obj.length==0) {
+      AppComponent.rzhAlt("info", '请先进行选择');
+    }else{
+      let url = '/notifyAdmin/updateIsRead';
+      for(let i=0;i<obj.length;i++){
+        this.idArr.push($(obj[i]).val())
+      }
+      let idStr= this.idArr.join(',');
+      let data={
+        ids	:idStr
+      };
+      this.platformInfoData=this.operationService.updateproblem(url,data);
+      this.queryAdminNotify(curPage);
+      if($('._all').prop("checked")){//如果全选按钮被勾选了，让它没有勾选
+        $('._all').prop("checked",false);
+        $('._all').attr("checked",false);
+      }
     }
   }
 
@@ -171,33 +176,37 @@ export class MessageListComponent implements OnInit {
    */
   delMoreInfo(curPage){
     let that=this;
-    swal({
-      title: "您确定要删除吗？",
-      text: "您确定要删除这条消息？",
-      type: "warning",
-      showCancelButton: true,
-      cancelButtonText: '取消',
-      closeOnConfirm: false,
-      confirmButtonText: "确认",
-      confirmButtonColor: "#ec6c62"
-    },function(isConfirm){
-      if (isConfirm) {
-        swal.close(); //关闭弹框
-        let url='/notifyAdmin/deleteByIdStr';
-        let obj=$("._every[checked='checked']");
-        for(let i=0;i<obj.length;i++){
-          that.idArr.push($(obj[i]).val())
+    if($("._every[checked='checked']").length==0){
+      AppComponent.rzhAlt("info", '请先进行选择');
+    }else{
+      swal({
+        title: "您确定要删除吗？",
+        text: "您确定要删除这条消息？",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonText: '取消',
+        closeOnConfirm: false,
+        confirmButtonText: "确认",
+        confirmButtonColor: "#ec6c62"
+      },function(isConfirm){
+        if (isConfirm) {
+          swal.close(); //关闭弹框
+          let url='/notifyAdmin/deleteByIdStr';
+          let obj=$("._every[checked='checked']");
+          for(let i=0;i<obj.length;i++){
+            that.idArr.push($(obj[i]).val())
+          }
+          let idStr= that.idArr.join(',');
+          let data={
+            idStr:idStr
+          }
+          that.operationService.delRequest(url,data)
+          that.queryAdminNotify(curPage);
+          that.headerComponent.queryAdminNotify();
+          $("._all").prop('checked',false);
+          $("._all").attr('checked',false);
         }
-        let idStr= that.idArr.join(',');
-        let data={
-          idStr:idStr
-        }
-        that.operationService.delRequest(url,data)
-        that.queryAdminNotify(curPage);
-        that.headerComponent.queryAdminNotify();
-        $("._all").prop('checked',false);
-        $("._all").attr('checked',false);
-      }
-    });
+      });
+    }
   }
 }
