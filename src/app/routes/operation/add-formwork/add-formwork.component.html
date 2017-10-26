@@ -8,8 +8,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i class="main-red">*</i> 运费模板名称</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text"
-                     placeholder="请填写运费模板名称"/>
+              <input class="form-control" type="text" placeholder="请填写运费模板名称" required name="modelname" #modelname="ngModel" ngModel/>
               </div>
             </div>
         </fieldset>
@@ -350,7 +349,6 @@
                                      (ngModelChange)="updateSingleChecked(i, j, name.areaCode)">
                   </nz-checkbox-group>
                   <button class="btn-info" style="position: absolute; right: 0; bottom: 0;" (click)="allCheckeds[i]['content'][j]['childChecked'] = false"> 关闭</button>
-
                 </div>
               </ng-container>
             </div>
