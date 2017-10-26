@@ -112,8 +112,8 @@
                 <div class="info-con" style="width:291px!important;">
                   <p class="pl mb-sm"><i class="fa fa-user"></i> 退款信息</p>
                   <dl><dt>申请时间：</dt> <dd>{{return.createTime}}</dd> </dl>
-                  <dl><dt>审核时间：</dt><dd>{{return.auditTime}}</dd> </dl>
-                  <!--<dl *ngIf="return.refundState=='ING'"><dt>退款时间：</dt> <dd>{{return.tradeTime}}</dd></dl>-->
+                  <dl *ngIf="return.agentOrdReturnAudit!=null"><dt>审核时间：</dt><dd>{{return.auditTime}}</dd> </dl>
+                  <dl *ngIf="return.refundState=='YES'"><dt>退款时间：</dt> <dd>{{return.tradeTime}}</dd></dl>
                 </div>
               </div>
             </ng-container>

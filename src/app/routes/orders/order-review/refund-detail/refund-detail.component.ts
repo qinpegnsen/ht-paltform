@@ -30,10 +30,7 @@ export class RefundDetailComponent implements OnInit {
         ordno:this.ordno
       }
       this.refund=this.submit.getRequest(url, data);
-      // console.log("█ refund ►►►",  this.refund);
     }
-
-
 
   /**
    * 鼠标放在图片上时大图随之移动

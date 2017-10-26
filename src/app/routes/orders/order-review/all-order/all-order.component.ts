@@ -71,6 +71,7 @@ export class AllOrderComponent implements OnInit {
       stAftDone:'DONE'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**

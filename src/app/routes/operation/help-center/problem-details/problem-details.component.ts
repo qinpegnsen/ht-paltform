@@ -72,7 +72,7 @@ export class ProblemDetailsComponent implements OnInit {
     let url = "/helpQuestions/pageQuery";
     let data={
       curPage: activePage,
-      pageSize:2,
+      pageSize:10,
       kindId:this.id,
     }
    let result = this.submit.getData(url,data);

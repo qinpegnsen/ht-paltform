@@ -292,9 +292,7 @@ export class AppSetComponent implements OnInit {
     if (_this.isEntered[i] == 'N') {
       _this.optKey[i] = '0';
     }
-
     _this.addUpdateId(i);
-
   }
 
   /**

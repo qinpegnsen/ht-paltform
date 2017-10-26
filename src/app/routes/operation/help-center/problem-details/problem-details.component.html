@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         <tr  *ngFor="let a of dataTable.data;let i=index" style="list-style: none"  class="text-center" >
-          <td>{{i+1}}</td>
+          <td>{{a.sort}}</td>
           <td [innerHtml]="a.question" class="text-left"></td>
           <td>
             <!--是否显示-->

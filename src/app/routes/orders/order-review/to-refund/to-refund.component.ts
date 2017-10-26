@@ -65,7 +65,6 @@ export class ToRefundComponent implements OnInit {
     if (this.agentTime) {
       dateStr = RzhtoolsService.dataFormat(this.agentTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.agentTime[1], 'yyyy/MM/dd');
     }
-
     let requestData = {
       curPage: activePage,
       pageSize: 10,
@@ -73,6 +72,7 @@ export class ToRefundComponent implements OnInit {
       refundState:'ING'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+    // console.log("█  _this.goodsList ►►►",   _this.goodsList);
   }
 
   /**
