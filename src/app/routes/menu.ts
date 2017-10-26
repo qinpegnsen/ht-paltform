@@ -1,9 +1,4 @@
-/**
- * Created by xiejiaojiao on 2017/10/13.
- */
-/**
- * Created by xiejiaojiao on 2017/10/6.
- */
+
 /**
  * 菜单管理（一级路由的link不可删掉，将根据一级路由取子菜单）
  * 请保持每个一级菜单及其子菜单main后面的路径一致
@@ -214,6 +209,11 @@ const orders = {
       text: '用户订单',
       icon: 'fa fa-file-text-o',
       link: '/main/orders/cust'
+    },
+    {
+      text: '待发货',
+      icon: 'fa fa-file-text-o',
+      link: '/main/orders/prepare'
     },
     {
       text: '代理商订单',

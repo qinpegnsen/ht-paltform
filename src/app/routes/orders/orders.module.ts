@@ -53,6 +53,7 @@ const routes: Routes = [
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
+  {path: 'prepare', component: AllOrdersComponent},
   {path: 'store', component: StoreEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'ept-detail', component: EptDetailComponent},

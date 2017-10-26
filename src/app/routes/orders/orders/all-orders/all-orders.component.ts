@@ -54,6 +54,10 @@ export class AllOrdersComponent implements OnInit {
           me.parentComp.orderType = 'PREPARE';
           me.ordState = 'PREPARE';
           break;
+        case "prepare":
+          me.parentComp.orderType = 'PREPARE';
+          me.ordState = 'PREPARE';
+          break;
         case "delivery":
           me.parentComp.orderType = 'DELIVERY';
           me.ordState = 'DELIVERY';
