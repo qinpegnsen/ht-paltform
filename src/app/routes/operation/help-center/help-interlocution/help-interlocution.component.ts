@@ -73,7 +73,6 @@ export class HelpInterlocutionComponent implements OnInit {
     me.data = new Page(result);
   }
 
-
   /**
    * 隐藏显示
    */
