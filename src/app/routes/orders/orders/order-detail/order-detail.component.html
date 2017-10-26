@@ -245,9 +245,9 @@
           <span class="font-gray">{{goodsData.payWay | rzhState:'1017'}}</span>
         </td>
         <td class="bl" [attr.rowspan]="goodsData.length">
-          <p class="font-gray mb-sm cursor-p">{{goodsData.state | rzhState:'1019'}}</p>
+          <p class="font-gray mb-sm cursor-p">{{orderDetailData.state | rzhState:'1019'}}</p>
           <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>-->
-          <button class="m-sm btn btn-xs btn-green fa fa-truck" *ngIf="goodsData.state=='PREPARE'"
+          <button class="m-sm btn btn-xs btn-green fa fa-truck" *ngIf="orderDetailData.state=='PREPARE'"
                   (click)="deliverOrder()"> 发货
           </button>
         </td>

@@ -23,29 +23,27 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="form-group clearfix col-md-3 mb0">
-          <span class="pull-left query-name lh">会员类别:</span>
-          <div class="pl0 col-md-10 col-xs-6">
-            <select class="form-control sel-all" name="authState" [(ngModel)]="authState" (change)="search($event)">
+        <div class="search-group ml-xl mb">
+          <span class="search-title">会员类别：</span>
+          <div class="search-main">
+            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search($event)">
               <option value="">全部</option>
               <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
             </select>
           </div>
         </div>
-        <div class="form-group clearfix col-md-3 mb0">
-          <span class="pull-left query-name lh">会员状态:</span>
-          <div class="pl0 col-md-10 col-xs-6">
-            <select class="form-control sel-all" name="state" [(ngModel)]="state" (change)="search($event)">
+        <div class="search-group ml-xl mb">
+          <span class="search-title">会员状态：</span>
+          <div class="search-main">
+            <select class="form-control" name="state" [(ngModel)]="state" (change)="search($event)">
               <option value="">全部</option>
               <option *ngFor="let item of states" [value]="item.key">{{item.val}}</option>
             </select>
           </div>
         </div>
-        <div class="form-group clearfix mb0 col-md-2">
-          <button type="button" title="搜索" class="btn thc btn-thc bar-h3-btn mr ng-scope">
-            <i class="icon-magnifier fa-fw"></i>
-          </button>
-        </div>
+        <button type="button" title="搜索" class="btn thc btn-thc ml align-top">
+          <i class="icon-magnifier fa-fw"></i>
+        </button>
       </div>
   </div>
 </div>

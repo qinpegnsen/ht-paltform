@@ -12,9 +12,9 @@
         </select>
       </div>
     </div>
-    <div class="search-term ml-xl mb clearfix">
-      <span class="w19 tag-dib align-middle text-right">分类：</span>
-      <div class="w66 tag-dib search-main">
+    <div class="search-group ml-xl mb clearfix">
+      <span class="search-title">分类：</span>
+      <div class="search-main">
         <app-get-kind (myData)="getKind($event)"></app-get-kind>
       </div>
     </div>
@@ -37,17 +37,17 @@
         </div>
       </div>
       <div class="search-group ml-xl mb align-top">
-        <div class="w72 mr-sm pull-left">
+        <span class="search-title"></span>
+        <div class="search-main">
           <input type="text" [(ngModel)]="query.brandName"
                  class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
         </div>
-        <button type="button" title="搜索" (click)="queryDatas(1)"
-                class="btn thc btn-thc bar-h3-btn mr ng-scope">
-          <em class="icon-magnifier fa-fw"></em>
-        </button>
       </div>
-    </div>
-
+      <button type="button" title="搜索" (click)="queryDatas(1)"
+              class="btn thc btn-thc align-top ml">
+        <em class="icon-magnifier fa-fw"></em>
+      </button>
+      </div>
   </div>
 </div>
 <div class="panel panel-danger">

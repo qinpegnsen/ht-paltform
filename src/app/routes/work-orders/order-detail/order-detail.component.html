@@ -243,8 +243,8 @@
           <span class="font-gray" *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight | decimalTwo}}</span><br>
           <span class="font-gray">{{goodsData.payWay | rzhState:'1017'}}</span>
         </td>
-        <td class="bl" [attr.rowspan]="goodsData.length">
-          <p class="font-gray mb-sm cursor-p">{{goodsData.state | rzhState:'1019'}}</p>
+        <td class="bl" [attr.rowspan]="orderDetailData.length">
+          <p class="font-gray mb-sm cursor-p">{{orderDetailData.state | rzhState:'1019'}}</p>
         </td>
       </ng-container>
     </tr>
