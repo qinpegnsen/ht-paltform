@@ -9,9 +9,9 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>序号</label>
+            <label class="col-sm-3 control-label"><i class="main-red">*</i>排序</label>
             <div class="col-sm-8">
-              <input class="form-control num" type="number" required name="sort" ngModel #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写序号"/>
+              <input class="form-control num" type="number" required name="sort" ngModel #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写排序"/>
             </div>
           </div>
           <div [hidden]="sort.valid || sort.pristine"
@@ -65,9 +65,9 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>序号</label>
+            <label class="col-sm-3 control-label"><i class="main-red">*</i>排序</label>
             <div class="col-sm-8">
-              <input class="form-control num" type="number" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写序号"/>
+              <input class="form-control num" type="number" required name="sort" [(ngModel)]="updataDataa.sort" #sort="ngModel" [pattern]="patterns.positive" placeholder="请填写排序"/>
             </div>
           </div>
           <div [hidden]="sort.valid || sort.pristine"
@@ -97,7 +97,6 @@
             </div>
           </div>
         </fieldset>
-
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">

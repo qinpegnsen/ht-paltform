@@ -16,7 +16,6 @@ export class StockComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor() {
-
   }
 
   ngOnInit() {

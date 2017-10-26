@@ -20,14 +20,17 @@
           <th class="w20 text-center">
             <rzhDefaultSorter by="creattime">创建时间</rzhDefaultSorter>
           </th>
-          <th class="w40 text-center">
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="creattime">排序</rzhDefaultSorter>
+          </th>
+          <th class="w25 text-center">
             <rzhDefaultSorter >管理操作</rzhDefaultSorter>
           </th>
         </tr>
         </thead>
         <tbody>
         <tr  *ngFor="let a of dataTable.data;let i=index" style="list-style: none"  class="text-center" >
-          <td>{{a.sort}}</td>
+          <td>{{i+1}}</td>
           <td [innerHtml]="a.question" class="text-left"></td>
           <td>
             <!--是否显示-->
@@ -38,6 +41,7 @@
             </label>
           </td>
           <td>{{a.createTime}}</td>
+          <td>{{a.sort}}</td>
           <td>
             <app-buttons [config]="deletebutton" (click)="delete(a.id,data.curPage)"></app-buttons>
             <app-buttons [config]="updatebutton" routerLink="../help-update" [queryParams]="{linkType:'routers',id:a.id}"></app-buttons>

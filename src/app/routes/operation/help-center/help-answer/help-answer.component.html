@@ -47,8 +47,11 @@
           <th class="w20 text-center">
             <rzhDefaultSorter by="state">状态</rzhDefaultSorter>
           </th>
-          <th class="w25 text-center">
+          <th class="w15 text-center">
             <rzhDefaultSorter by="creattime">创建时间</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="creattime">排序</rzhDefaultSorter>
           </th>
           <th class="w20 text-center">
             <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
@@ -68,6 +71,7 @@
             </label>
           </td>
           <td>{{count.createTime}}</td>
+          <td>{{count.sort}}</td>
           <td>
             <app-buttons [config]="updatebutton" routerLink="../help-update" [queryParams]="{linkType:'routers',id:count.id,curPage:data.curPage}"></app-buttons>
             <app-buttons [config]="deletebutton" (click)="delete(count.id,data.curPage)"></app-buttons>
