@@ -38,22 +38,20 @@ export class AddFormworkComponent implements OnInit {
   constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private session:SessionService) { }
 
   ngOnInit() {
+    let _this = this;
     // 初始化地区数据
-    this.getallCheckeds();
-    console.log(this.data);
-    console.log(this.allCheckeds); // 这个可以控制显示与隐藏
-    console.log(this.checkOptionsOnes);
-    this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    _this.getallCheckeds();
+    _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
 
     /**
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
      */
-    this.updatebutton = {
+    _this.updatebutton = {
       type:"update",
       title:'修改运费模板值',
     };
-    this.deletebutton = {
+    _this.deletebutton = {
       type:"delete",
       title:'删除运费模板值',
     };
@@ -67,59 +65,61 @@ export class AddFormworkComponent implements OnInit {
    * @param provices
    */
   updateAllChecked(index: number | string, j: number | string, provices: any) {
-    console.log(1);
-    if (this.allCheckeds[index]['allChecked']) {
-      this.data[index]['provices'].forEach(item => item.checked = true);
+    let _this = this;
+    if (_this.allCheckeds[index]['allChecked']) {
+      _this.data[index]['provices'].forEach(item => item.checked = true);
       provices.forEach(item => {
-        this.checkOptionsOnes[item.areaCode][0].forEach(items => items.checked = true);
+        _this.checkOptionsOnes[item.areaCode][0].forEach(items => items.checked = true);
       });
     } else {
-      this.data[index]['provices'].forEach(item => item.checked = false);
+      _this.data[index]['provices'].forEach(item => item.checked = false);
       provices.forEach(item => {
-        this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = false);
+        _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = false);
       });
     }
   }
 
 
   updateAllchildChecked(index: number | string, j: number | string, code: any) {
-    this.allCheckeds[index]['allChecked'] =
-      this.data[index]['provices'].every(item => item.checked === true);
-    console.log(this.allCheckeds[index]['allChecked']);
+    let _this = this;
+    _this.allCheckeds[index]['allChecked'] =
+      _this.data[index]['provices'].every(item => item.checked === true);
     // 添加运费模板时选择区域的  全选全不选
-    if (this.data[index]['provices'][j]['checked']) {
-      this.checkOptionsOnes[code][0].forEach(value => value.checked = true);
+    if (_this.data[index]['provices'][j]['checked']) {
+      _this.checkOptionsOnes[code][0].forEach(value => value.checked = true);
     } else {
-      this.checkOptionsOnes[code][0].forEach(value => value.checked = false);
+      _this.checkOptionsOnes[code][0].forEach(value => value.checked = false);
     }
   }
 
   updateSingleChecked(index: number | string, j: number | string, code: string) {
-    if (this.checkOptionsOnes[code][0].every(item => item.checked === false)) {
-      this.data[index]['provices'][j]['checked'] = false;
+    let _this = this;
+    if (_this.checkOptionsOnes[code][0].every(item => item.checked === false)) {
+      _this.data[index]['provices'][j]['checked'] = false;
     } else if (this.checkOptionsOnes[code][0].every(item => item.checked === true)) {
-      this.data[index]['provices'][j]['checked'] = true;
+      _this.data[index]['provices'][j]['checked'] = true;
     } else {
-      this.data[index]['provices'][j]['checked'] = false;
+      _this.data[index]['provices'][j]['checked'] = false;
     }
-    this.allCheckeds[index]['allChecked'] =
-      this.data[index]['provices'].every(item => item.checked === true);
+    _this.allCheckeds[index]['allChecked'] =
+      _this.data[index]['provices'].every(item => item.checked === true);
   }
 
   getCheckOptionsOnes(code: string) {
-    const len = isArray(this.area_level2) ? this.area_level2.length : 0;
+    let _this = this;
+    const len = isArray(_this.area_level2) ? this.area_level2.length : 0;
     for (let i = 0; i < len; i++) {
-      if (this.area_level2[i]['areaCode'] === code) {
-        const length = isArray(this.area_level2[i]['children']) ? this.area_level2[i]['children'].length : 0;
+      if (_this.area_level2[i]['areaCode'] === code) {
+        const length = isArray(_this.area_level2[i]['children']) ? _this.area_level2[i]['children'].length : 0;
         const temp = [];
-        this.checkOptionsOnes[this.area_level2[i]['areaCode']] = [];
+        _this.checkOptionsOnes[_this.area_level2[i]['areaCode']] = [];
         for (let j = 0; j < length; j++) {
           temp.push({
-            label: this.area_level2[i]['children'][j]['areaName'],
-            value: this.area_level2[i]['children'][j]['areaName'], checked: false
+            label: _this.area_level2[i]['children'][j]['areaName'],
+            value: _this.area_level2[i]['children'][j]['areaName'], checked: false
           });
         }
-        this.checkOptionsOnes[this.area_level2[i]['areaCode']].push(temp);
+        _this.checkOptionsOnes[_this.area_level2[i]['areaCode']].push(temp);
         break;
       }
     }
@@ -131,33 +131,35 @@ export class AddFormworkComponent implements OnInit {
    * @param index
    */
   getProvices(provices: Array<string>, index: string) {
+    let _this = this;
     const len = isArray(this.area_level1) ? this.area_level1.length : 0;
     for (let i = 0; i < len; i++) {
       provices.forEach((item, indexs) => {
-        if (item === this.area_level1[i]['areaCode']) {
-          this.getCheckOptionsOnes(item);
-          this.data[index]['provices']
+        if (item === _this.area_level1[i]['areaCode']) {
+          _this.getCheckOptionsOnes(item);
+          _this.data[index]['provices']
             .push({
-              label: this.area_level1[i].areaName,
-              value: this.area_level1[i].areaName,
-              areaCode: this.area_level1[i].areaCode,
+              label: _this.area_level1[i].areaName,
+              value: _this.area_level1[i].areaName,
+              areaCode: _this.area_level1[i].areaCode,
               checked: false
             });
-          if (isArray(this.allCheckeds[index]['content'])) {
+          if (isArray(_this.allCheckeds[index]['content'])) {
             const tempObject = {};
             tempObject['childChecked'] = false;
-            this.allCheckeds[index]['content'].push(tempObject);
+            _this.allCheckeds[index]['content'].push(tempObject);
           }
         }
       });
     }
   }
   getallCheckeds() {
-    const len = isArray(this.china_area) ? this.china_area.length : 0;
+    let _this = this;
+    const len = isArray(this.china_area) ? _this.china_area.length : 0;
     for (let i = 0; i < len; i++) {
-      this.allCheckeds.push({allChecked: false, content: []});
-      this.data.push({label: this.china_area[i].chinaAreaName, provices: []});
-      this.getProvices(this.china_area[i].provices, i + '');
+      _this.allCheckeds.push({allChecked: false, content: []});
+      _this.data.push({label: _this.china_area[i].chinaAreaName, provices: []});
+      _this.getProvices(_this.china_area[i].provices, i + '');
     }
   }
 
@@ -167,15 +169,16 @@ export class AddFormworkComponent implements OnInit {
    *获取选择区域后的结果
    */
   getResult(): string {
-    const len = isArray(this.data) ? this.data.length : 0;
+    let _this = this;
+    const len = isArray(_this.data) ? _this.data.length : 0;
     let tempResult = [];
     for (let i = 0; i < len; i++) {
       const temp = [];
-      this.data[i]['provices'].forEach(item => {
+      _this.data[i]['provices'].forEach(item => {
         if (item.checked && !item.disabled) {
           temp.push(item.value);
         } else {
-          this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+          _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked && !value.disabled) {
               temp.push(value.value);
             }
@@ -184,10 +187,10 @@ export class AddFormworkComponent implements OnInit {
       });
       tempResult = tempResult.concat(temp);
     }
-    this.reslut[this.cru] = tempResult.join('_');
-    this.session.setData(this.cru, this.data);
-    this.session.setCheck(this.cru, this.checkOptionsOnes);
-    this.close();
+    _this.reslut[_this.cru] = tempResult.join('_');
+    _this.session.setData(_this.cru, _this.data);
+    _this.session.setCheck(_this.cru, _this.checkOptionsOnes);
+    _this.close();
     return tempResult.join('_');
   }
 
@@ -196,19 +199,22 @@ export class AddFormworkComponent implements OnInit {
    * 判断计量方式(按件数，重量，体积)
    */
   number(){
-    this.one = true;
-    this.twe = false;
-    this.three = false;
+    let _this = this;
+    _this.one = true;
+    _this.twe = false;
+    _this.three = false;
   }
   weight(){
-    this.one = false;
-    this.twe = true;
-    this.three = false;
+    let _this = this;
+    _this.one = false;
+    _this.twe = true;
+    _this.three = false;
   }
   volume(){
-    this.one = false;
-    this.twe = false;
-    this.three = true;
+    let _this = this;
+    _this.one = false;
+    _this.twe = false;
+    _this.three = true;
   }
 
 
@@ -218,8 +224,8 @@ export class AddFormworkComponent implements OnInit {
    * @returns {string}
    */
   getCount(areaCode: string) {
-    let count = 0;
-    this.checkOptionsOnes[areaCode][0].forEach(item => {
+    let count = 0,_this = this;
+    _this.checkOptionsOnes[areaCode][0].forEach(item => {
       if (item.checked === true) {
         count ++ ;
       }
@@ -231,12 +237,14 @@ export class AddFormworkComponent implements OnInit {
    * 关闭时区域的子集框消失
    */
   clear() {
-    this.close();
+    let _this = this;
+    _this.close();
   }
 
   close() {
+    let _this = this;
     // allCheckeds[i]['content'][j]['childChecked']
-    this.allCheckeds.forEach(item => {
+    _this.allCheckeds.forEach(item => {
       item['content'].forEach(value => {
         value['childChecked'] = false;
       })
@@ -244,13 +252,14 @@ export class AddFormworkComponent implements OnInit {
   }
 
   edit(index: number) {
-    this.cru = index;
-    this.close();
-    if (this.reslut[this.cru]) {
-      const temp = this.session.getDatas(this.reslut.length - 1);
-      const temp1 = this.session.getDatas(this.cru);
-      const check = this.session.getCheck(this.reslut.length - 1);
-      const check1 = this.session.getCheck(this.cru);
+    let _this = this;
+    _this.cru = index;
+    _this.close();
+    if (_this.reslut[this.cru]) {
+      const temp = _this.session.getDatas(_this.reslut.length - 1);
+      const temp1 = _this.session.getDatas(_this.cru);
+      const check = _this.session.getCheck(_this.reslut.length - 1);
+      const check1 = _this.session.getCheck(_this.cru);
       const len = isArray(temp) ? temp.length : 0;
       for (let i = 0; i < len; i++) {
         temp[i]['provices'].forEach((item, key) => {
@@ -266,21 +275,21 @@ export class AddFormworkComponent implements OnInit {
           });
         });
       }
-      this.data = temp1;
-      this.checkOptionsOnes = check1;
+      _this.data = temp1;
+      _this.checkOptionsOnes = check1;
     } else {
-      this.allCheckeds.forEach((item) => {
+      _this.allCheckeds.forEach((item) => {
         if (item.allChecked) {
           item['disabled'] = true;
         }
       });
-      const len = isArray(this.data) ? this.data.length : 0;
+      const len = isArray(this.data) ? _this.data.length : 0;
       for (let i = 0; i < len; i++) {
-        this.data[i]['provices'].forEach(item => {
+        _this.data[i]['provices'].forEach(item => {
           if (item.checked) {
             item['disabled'] = true;
           }
-          this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+          _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked) {
               value['disabled'] = true;
             }
@@ -301,15 +310,16 @@ export class AddFormworkComponent implements OnInit {
    * 关闭右侧滑动页面
    */
   cancel() {
-    this.router.navigate(['/main/operation/freight-template']);
+    let _this = this
+    _this.router.navigate(['/main/operation/freight-template']);
   }
 
   /**
    * 添加运费模板值的时候table数组增加
    */
   add(){
-    this.moduleList.push({reslut: '', index: this.moduleList.length + 1});
-    console.log("█ this.moduleList ►►►",  this.moduleList);
+    let _this = this
+    _this.moduleList.push({reslut: '', index: _this.moduleList.length + 1});
   }
 
 
@@ -332,7 +342,6 @@ export class AddFormworkComponent implements OnInit {
         data = {
           id:delCodeId
         }
-        console.log(data)
         _this.AddFormworkService.delCode(url, data); //删除数据
         _this.moduleList.splice(i,1)
         _this.reslut[i] = '';
