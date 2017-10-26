@@ -422,12 +422,13 @@
         </div>
       </dd>
     </dl>
-    <dl class="clearfix" *ngIf="publishData.isFreight == 'Y'">
-      <dt class="col-xs-2"><i class="main-red">*</i>设置运费：</dt>
-      <dd class="col-xs-10 col-md-8">
-        <div class="w100">
-          <!--固定运费-->
-          <div class="mb clearfix">
+    <ng-container *ngIf="publishData.isFreight == 'Y' && publishData.goodsExpressInfo">
+      <dl class="clearfix">
+        <dt class="col-xs-2"><i class="main-red">*</i>设置运费：</dt>
+        <dd class="col-xs-10 col-md-8">
+          <div class="w100">
+            <!--固定运费-->
+            <div class="mb clearfix">
             <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="FIXED" placeholder="1.00"
@@ -435,16 +436,16 @@
                      [checked]="publishData.goodsExpressInfo.freightType=='FIXED'"/>
               <span class="fa fa-circle"></span>使用固定运费</label>
             </span>
-            <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
+              <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
               <input class="text price num form-control pull-left" name="fixedFreight" type="number"
                      (keyup)="auditInputValueForNum($event.target)"
                      [required]="publishData.goodsExpressInfo.freightType=='FIXED'"
                      [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
               <em class="add-on">元</em>
             </span>
-          </div>
-          <!--运费模板-->
-          <div class="clearfix">
+            </div>
+            <!--运费模板-->
+            <div class="clearfix">
             <span class="radio c-radio radio-box">
               <label>
               <input type="radio" name="freightType" value="TPL"
@@ -452,7 +453,7 @@
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用物流规则</label>
             </span>
-            <span class="clearfix" [hidden]="publishData.goodsExpressInfo.freightType!='TPL'">
+              <span class="clearfix" [hidden]="publishData.goodsExpressInfo.freightType!='TPL'">
               <select class="rules-list text form-control pull-left" name="tplFreight"
                       [(ngModel)]="publishData.goodsExpressInfo.expressTplId" (change)="getTplValById()"
                       [required]="publishData.goodsExpressInfo.freightType=='TPL'">
@@ -462,50 +463,52 @@
                 class="fa fa-truck"></em> 添加物流规则</a>
               <span class="btn btn-sm btn-info fa fa-refresh" title="刷新物流规则" (click)="getExpressTpl()"></span>
             </span>
-            <div class="tpl-box w100 p mt"
-                 *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId">
-              <p class="m0">
-                <strong>指定物流配送区域及运费</strong>
-                <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
-                  查看详情</a>
-              </p>
-              <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
-                <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
-                  <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
-                  <p class="col-xs-5 m0 one-row omg p-sm text-right" >
-                    {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
-                    .addPrice}}元</p>
-                </li>
-              </ul>
+              <div class="tpl-box w100 p mt"
+                   *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId">
+                <p class="m0">
+                  <strong>指定物流配送区域及运费</strong>
+                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
+                    查看详情</a>
+                </p>
+                <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
+                  <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
+                    <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
+                    <p class="col-xs-5 m0 one-row omg p-sm text-right" >
+                      {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
+                      .addPrice}}元</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </dd>
-    </dl>
-    <dl class="clearfix" *ngIf="publishData.isFreight == 'Y' && publishData.goodsExpressInfo.freightType=='TPL'">
-      <dt class="col-xs-2"><i class="main-red">*</i>物流参数：</dt>
-      <dd class="col-xs-10">
-        <div class="w50">
-          <div class="clearfix mb">
-            <span class="pull-left mr"><i class="main-red">*</i>重量：</span>
-            <span class="pull-left">
+        </dd>
+      </dl>
+      <dl class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
+        <dt class="col-xs-2"><i class="main-red">*</i>物流参数：</dt>
+        <dd class="col-xs-10">
+          <div class="w50">
+            <div class="clearfix mb">
+              <span class="pull-left mr"><i class="main-red">*</i>重量：</span>
+              <span class="pull-left">
               <input class="text weight num form-control" name="weight" type="number" required placeholder="1.00"
                      [(ngModel)]="publishData.goodsExpressInfo.weight">
               <em class="add-on">kg</em>
             </span>
-          </div>
-          <div class="clearfix">
-            <span class="pull-left mr"><i class="main-red">*</i>体积：</span>
-            <span class="pull-left">
+            </div>
+            <div class="clearfix">
+              <span class="pull-left mr"><i class="main-red">*</i>体积：</span>
+              <span class="pull-left">
               <input class="text weight num form-control" name="volume" type="number" required placeholder="1.00"
                      [(ngModel)]="publishData.goodsExpressInfo.volume">
               <em class="add-on">m³</em>
             </span>
+            </div>
           </div>
-        </div>
-        <p class="tip" myHoverColor>如选择物流规则具有体积或重量运费时，需设定商品物流参数，默认为“1”单位，小数点后保留2位。</p>
-      </dd>
-    </dl>
+          <p class="tip" myHoverColor>如选择物流规则具有体积或重量运费时，需设定商品物流参数，默认为“1”单位，小数点后保留2位。</p>
+        </dd>
+      </dl>
+    </ng-container>
+
   </fieldset>
 
   <!--商品其他信息-->
