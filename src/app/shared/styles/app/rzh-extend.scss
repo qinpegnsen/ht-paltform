@@ -1018,9 +1018,7 @@ input[type=number].num::-webkit-outer-spin-button {
   -moz-box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
 }
-.m-auto{
-  margin: auto;
-}
+.m-auto{  margin: auto}
 
 
 /*商品详情中图片过款问题，写在组件内的样式不起作用，于是写在公共样式里*/

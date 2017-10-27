@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
   <!--操作提示-->
-  <div class="panel mb p w98 m-auto ts thc">
+  <div class="panel mb p w98 m-auto ts thc user-top">
     <p class="font18">操作提示</p>
     <ul>
       <li>图表展示了符合搜索条件订单的下单总金额和下单量排名前50位的商品</li>
@@ -75,7 +75,7 @@
 </div>
 <!--商品表单-->
 <div class="panel panel-default mt20">
-  <div class="table-title">热卖商品统计表</div>
+  <div class="table-title thc ts statics-font">热卖商品统计表</div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
       <thead>

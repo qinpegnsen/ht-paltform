@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
 
-  <div class="panel mb p w98 m-auto ts thc">
+  <div class="panel mb p w98 m-auto ts thc user-top">
     <p class="font18">操作提示</p>
     <ul>
       <li>统计表为符合搜索条件店铺的动态评分信息列表</li>
@@ -62,7 +62,7 @@
 </div>
 
 <div class="panel panel-default mt20">
-  <div class="table-title">退款金额统计表</div>
+  <div class="table-title thc ts statics-font">退款金额统计表</div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
       <thead>

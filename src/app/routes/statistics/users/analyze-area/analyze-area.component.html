@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
 <!--操作提示-->
-  <div class="panel mb p w98 m-auto ts thc">
+  <div class="panel mb p w98 m-auto ts thc user-top">
     <p class="font18">操作提示</p>
     <ul>
       <li>统计图表展示了时间段内的订单数量、下单商品数量和订单总金额在各个区域的分布情况</li>
@@ -72,7 +72,7 @@
 
 <!--统计表-->
 <div class="panel panel-default mt20" >
-  <div class="table-title">区域分析表</div>
+  <div class="table-title thc ts statics-font">区域分析表</div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
       <thead>

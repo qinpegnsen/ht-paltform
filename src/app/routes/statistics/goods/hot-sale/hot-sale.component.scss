@@ -1,4 +1,4 @@
-li{
+.panel .clearfix li{
   list-style: none;
   height: 50px;
   line-height: 50px;
@@ -13,4 +13,13 @@ li.qh{
 }
 .form-control{
   padding: 6px 10px;
+}
+.ts{
+  margin-top: 0;
+}
+.user-top{
+  margin-top: 15px;
+}
+.statics-font{
+  color:#595b5f;
 }
