@@ -156,7 +156,7 @@
                         [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 处理
                 </button>
               </ng-container>
-              <ng-container *ngIf="item.state=='DELIVERY' && item.isPlat != 'N'">
+              <ng-container *ngIf="item.state=='DELIVERY'">
                 <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
                         [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
                 </button>
