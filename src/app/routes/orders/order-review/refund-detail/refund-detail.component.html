@@ -71,7 +71,7 @@
                   <li class="pb">
                     <p class=" mr pull-left d-play w35"><span class="pull-right">审核结果：</span></p>
                     <p class="text-info pull-right w62 refund-height"><span
-                      class="text-left">{{refund.agentOrdReturnAudit.result}}</span></p>
+                      class="text-left">{{refund.agentOrdReturnAudit.result | rzhState :'1014'}}</span></p>
                   </li>
                   <li class="pb">
                     <p class=" mr pull-left d-play w35"><span class="pull-right">审核意见：</span></p>
@@ -116,7 +116,7 @@
         </li>
 
         <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null &&
-        refund.agentOrdReturnAudit.result=='PASS'" >
+          refund.refundState=='YES'" >
           <div class="timeline-badge info">
             <em class="fa fa-dollar"></em>
           </div>
