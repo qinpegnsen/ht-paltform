@@ -2,6 +2,13 @@
   移动端首页模板
   <app-buttons class="pull-right" [config]="addButton" routerLink="rightpage" [queryParams]="{number:3}"></app-buttons>
 </div>
+<!--操作提示-->
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>首页设置中在连续四次发布后仍没有使用过的模板即可删除</li>
+  </ul>
+</div>
 <div class="panel panel-default">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
