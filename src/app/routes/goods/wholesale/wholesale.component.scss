@@ -10,6 +10,15 @@
   width: 80px;
   height:80px;
 }
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 160px;
+  height:auto;
+  display: none;
+  z-index: 1000;
+}
 .lh{
   line-height: 2.5;
 }

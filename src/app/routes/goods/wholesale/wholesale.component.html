@@ -73,8 +73,16 @@
       <tr *ngFor="let goods of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td class="text-left position-relative">
-          <span class="goods-lg-img mr a"><img [src]="goods.goodsImage" class="imga"
-                                        onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+          <span class="goods-lg-img mr a">
+
+            <img [src]="goods.goodsImage" class="goods-lg-img" (mousemove)="showImg($event)"
+                 (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+            <img [src]="goods.goodsImage" class="hover-big-img"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+            <!--<img [src]="goods.goodsImage" class="imga"-->
+                                        <!--onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">-->
+          </span>
           <div class="mb0 goods-info">
             <p>
                 {{goods.goodsName}}
