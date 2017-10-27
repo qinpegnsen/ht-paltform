@@ -37,6 +37,7 @@ import {StockService} from './stock/stock.service';
 import {OrderReviewService} from './order-review/order-review.service';
 import { EptDetailComponent } from './ept-detail/ept-detail.component';
 import { RefundDetailComponent } from './order-review/refund-detail/refund-detail.component';
+import { PrepareComponent } from './orders/prepare/prepare.component';
 
 
 const routes: Routes = [
@@ -53,7 +54,7 @@ const routes: Routes = [
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
-  {path: 'prepare', component: AllOrdersComponent},
+  {path: 'prepare', component: PrepareComponent},
   {path: 'store', component: StoreEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'ept-detail', component: EptDetailComponent},
@@ -86,6 +87,7 @@ const routes: Routes = [
 
   ],
   declarations: [
+    PrepareComponent,
     OrdersComponent,
     AllOrdersComponent,
     BuyerEvaluationComponent,
@@ -116,6 +118,7 @@ const routes: Routes = [
     ReviewDetailComponent,
     EptDetailComponent,
     RefundDetailComponent,
+    PrepareComponent,
   ],
   providers: [
     OrdersComponent,
