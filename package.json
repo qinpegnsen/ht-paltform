@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "install": "napa",
-    "start": "ng serve --host 192.168.10.117 --port 4000 --proxy-config proxy.conf.js",
+    "start": "ng serve --host 192.168.10.153 --port 4000 --proxy-config proxy.conf.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@agm/core": "1.0.0-beta.0",
     "@angular/animations": "4.0.2",
+    "@angular/common": "4.0.2",
     "@angular/compiler": "4.0.2",
     "@angular/core": "4.0.2",
     "@angular/forms": "4.0.2",
