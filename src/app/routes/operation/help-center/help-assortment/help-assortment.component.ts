@@ -10,6 +10,7 @@ import {isNullOrUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {OperationService} from "../../operation.service";
 import {PatternService} from "../../../../core/forms/pattern.service";
+import {AppComponent} from "../../../../app.component";
 declare var $: any;
 @Component({
   selector: 'app-help-assortment',
@@ -93,6 +94,7 @@ export class HelpAssortmentComponent implements OnInit {
       if(answer=='帮助问题名称已存在' || answer=='排序不能为空' ||answer=='帮助问题答案不能为空' || answer=='问题不能为空' ||answer=='答案不能为空'){
         return;
       }else{
+        AppComponent.rzhAlt("success", "添加问题成功");
         this.qeuryAllService();
         this.router.navigate(['/main/operation/help-center/help-answer']);
       }
