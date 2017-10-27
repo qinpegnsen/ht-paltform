@@ -143,7 +143,6 @@ export class OrdersComponent implements OnInit {
         show : true,
         right:"3%",
         feature : {
-          dataView : {show: true, readOnly: false},
           magicType : {show: true, type: ['line', 'bar']},
           restore : {show: true},
           saveAsImage : {show: true}

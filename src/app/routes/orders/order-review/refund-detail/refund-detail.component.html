@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-lg-12">
       <ul class="timeline" *ngIf="refund.bacctName!=null">
+
+        <li class="timeline-separator" data-datetime="开始"></li>
+
         <li class="" *ngIf="refund.bacctName!=null">
           <div class="timeline-badge primary">
             <em class="fa fa-edit"></em>
@@ -112,7 +115,8 @@
           </div>
         </li>
 
-        <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null && refund.agentOrdReturnAudit.result=='PASS'" >
+        <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null &&
+        refund.agentOrdReturnAudit.result=='PASS'" >
           <div class="timeline-badge info">
             <em class="fa fa-dollar"></em>
           </div>
@@ -156,6 +160,7 @@
             </div>
           </div>
         </li>
+
       </ul>
 
     </div>
