@@ -293,6 +293,6 @@
     </tfoot>
   </table>
 </div>
-<ng-container *ngIf="goodsData.state=='PREPARE'">
+<ng-container *ngIf="orderDetailData.state=='PREPARE'">
   <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 </ng-container>
