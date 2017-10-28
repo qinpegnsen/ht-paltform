@@ -8,6 +8,8 @@ import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {SessionService} from "../session.service";
 import {FreightTemplateComponent} from '../freight-template/freight-template.component';
+import {isNullOrUndefined} from 'util';
+import {PatternService} from '../../../core/forms/pattern.service';
 const swal = require('sweetalert');
 
 
@@ -20,13 +22,15 @@ const swal = require('sweetalert');
 export class AddFormworkComponent implements OnInit {
   private deletebutton;//删除运费模板按钮配置
   private updatebutton;//修改运费模板按钮配置
-  public linkType:string;
+  public linkType: string;
   private flag = true;//声明flag用于计算方式的显示隐藏
   private moduleList = [];
   public area_model: boolean = false;
   public one: boolean = true;
   public twe: boolean = false;
   public three: boolean = false;
+  private staff: any = {};
+  private id;
   // public area: Array<any> = [];
   private cru: number = 0;
 
@@ -37,27 +41,50 @@ export class AddFormworkComponent implements OnInit {
   data: Array<any> = [];
   checkOptionsOnes = {};
   // public area: string = '';
-  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private session:SessionService,private FreightTemplateComponent:FreightTemplateComponent) { }
+  constructor(private routeInfo: ActivatedRoute, private router: Router, private ajax: AjaxService, private session: SessionService, private FreightTemplateComponent: FreightTemplateComponent,private patterns: PatternService) {
+  }
 
   ngOnInit() {
     let _this = this;
     // 初始化地区数据
     _this.getallCheckeds();
     _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
+    _this.id = this.routeInfo.snapshot.queryParams['id'];
 
     /**
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
      */
     _this.updatebutton = {
-      type:"update",
-      title:'修改运费模板值',
+      type: "update",
+      title: '修改运费模板值',
     };
     _this.deletebutton = {
-      type:"delete",
-      title:'删除运费模板值',
+      type: "delete",
+      title: '删除运费模板值',
     };
+    _this.queryFormwork();//请求模板详细数据并显示
 
+  }
+
+  /**
+   * 请求模板详细数据并显示
+   */
+  queryFormwork() {
+    this.ajax.get({
+      url: '/expressTpl/loadStoreExpressTpl',
+      async: false, //同步请求
+      data: {id: this.id},
+      success: (res) => {
+        console.log("█ res ►►►", res);
+
+        this.staff = res.data;
+        if (isNullOrUndefined(this.staff)) this.staff = {}
+      },
+      error: (res) => {
+        console.log("post limit error");
+      }
+    });
   }
 
   /**
@@ -155,6 +182,7 @@ export class AddFormworkComponent implements OnInit {
       });
     }
   }
+
   getallCheckeds() {
     let _this = this;
     const len = isArray(this.china_area) ? _this.china_area.length : 0;
@@ -164,7 +192,6 @@ export class AddFormworkComponent implements OnInit {
       _this.getProvices(_this.china_area[i].provices, i + '');
     }
   }
-
 
 
   /**
@@ -183,13 +210,19 @@ export class AddFormworkComponent implements OnInit {
           _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked && !value.disabled) {
               temp.push(value.value);
+              console.log(value.areaCode);
             }
           });
         }
       });
       tempResult = tempResult.concat(temp);
     }
-    _this.moduleList[_this.cru].area = tempResult.join(',');
+    if(_this.linkType=='addArticle'){
+      _this.moduleList[_this.cru].area = tempResult.join(',');
+    }else if(_this.linkType=='updataArticle'){
+      _this. staff.storeExpressTplValList[_this.cru].area = tempResult.join(',');
+    }
+
     _this.session.setData(_this.cru, _this.data);
     _this.session.setCheck(_this.cru, _this.checkOptionsOnes);
     _this.close();
@@ -200,19 +233,21 @@ export class AddFormworkComponent implements OnInit {
   /**
    * 判断计量方式(按件数，重量，体积)
    */
-  number(){
+  number() {
     let _this = this;
     _this.one = true;
     _this.twe = false;
     _this.three = false;
   }
-  weight(){
+
+  weight() {
     let _this = this;
     _this.one = false;
     _this.twe = true;
     _this.three = false;
   }
-  volume(){
+
+  volume() {
     let _this = this;
     _this.one = false;
     _this.twe = false;
@@ -226,10 +261,10 @@ export class AddFormworkComponent implements OnInit {
    * @returns {string}
    */
   getCount(areaCode: string) {
-    let count = 0,_this = this;
+    let count = 0, _this = this;
     _this.checkOptionsOnes[areaCode][0].forEach(item => {
       if (item.checked === true) {
-        count ++ ;
+        count++;
       }
     });
     return count === 0 ? '' : '(' + count + ')';
@@ -257,57 +292,109 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     _this.cru = index;
     _this.close();
-    if (_this.moduleList[this.cru].area) {
-      const temp = _this.session.getDatas(_this.moduleList.length - 1);
-      const temp1 = _this.session.getDatas(_this.cru);
-      const check = _this.session.getCheck(_this.moduleList.length - 1);
-      const check1 = _this.session.getCheck(_this.cru);
-      const len = isArray(temp) ? temp.length : 0;
-      for (let i = 0; i < len; i++) {
-        temp[i]['provices'].forEach((item, key) => {
-          if (item.checked && !temp1[i]['provices'][key]['checked']) {
-            temp1[i]['provices'][key]['checked'] = true;
-            temp1[i]['provices'][key]['disabled'] = true;
+    switch (_this.linkType){
+      case 'addArticle':
+        if (_this.moduleList[this.cru].area) {
+          const temp = _this.session.getDatas(_this.moduleList.length - 1);
+          const temp1 = _this.session.getDatas(_this.cru);
+          const check = _this.session.getCheck(_this.moduleList.length - 1);
+          const check1 = _this.session.getCheck(_this.cru);
+          const len = isArray(temp) ? temp.length : 0;
+          for (let i = 0; i < len; i++) {
+            temp[i]['provices'].forEach((item, key) => {
+              if (item.checked && !temp1[i]['provices'][key]['checked']) {
+                temp1[i]['provices'][key]['checked'] = true;
+                temp1[i]['provices'][key]['disabled'] = true;
+              }
+              check[item.areaCode][0].forEach((value, j) => {
+                if (value.checked && !check1[item.areaCode][0][j]['checked']) {
+                  check1[item.areaCode][0][j]['checked'] = true;
+                  check1[item.areaCode][0][j]['disabled'] = true;
+                }
+              });
+            });
           }
-          check[item.areaCode][0].forEach((value, j) => {
-            if (value.checked && !check1[item.areaCode][0][j]['checked']) {
-              check1[item.areaCode][0][j]['checked'] = true;
-              check1[item.areaCode][0][j]['disabled'] = true;
+          _this.data = temp1;
+          _this.checkOptionsOnes = check1;
+        } else {
+          _this.allCheckeds.forEach((item) => {
+            if (item.allChecked) {
+              item['disabled'] = true;
             }
           });
-        });
-      }
-      _this.data = temp1;
-      _this.checkOptionsOnes = check1;
-    } else {
-      _this.allCheckeds.forEach((item) => {
-        if (item.allChecked) {
-          item['disabled'] = true;
-        }
-      });
-      const len = isArray(this.data) ? _this.data.length : 0;
-      for (let i = 0; i < len; i++) {
-        _this.data[i]['provices'].forEach(item => {
-          if (item.checked) {
-            item['disabled'] = true;
+          const len = isArray(this.data) ? _this.data.length : 0;
+          for (let i = 0; i < len; i++) {
+            _this.data[i]['provices'].forEach(item => {
+              if (item.checked) {
+                item['disabled'] = true;
+              }
+              _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+                if (value.checked) {
+                  value['disabled'] = true;
+                }
+              });
+            });
           }
-          _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
-            if (value.checked) {
-              value['disabled'] = true;
-            }
-          });
-        });
-      }
 
+        };
+        break;
+      case 'updataArticle':
+        if (_this.staff.storeExpressTplValList[this.cru].area) {
+          const temp = _this.session.getDatas(_this.staff.storeExpressTplValList.length - 1);
+          const temp1 = _this.session.getDatas(_this.cru);
+          const check = _this.session.getCheck(_this.staff.storeExpressTplValList.length - 1);
+          const check1 = _this.session.getCheck(_this.cru);
+          const len = isArray(temp) ? temp.length : 0;
+          for (let i = 0; i < len; i++) {
+            temp[i]['provices'].forEach((item, key) => {
+              if (item.checked && !temp1[i]['provices'][key]['checked']) {
+                temp1[i]['provices'][key]['checked'] = true;
+                temp1[i]['provices'][key]['disabled'] = true;
+              }
+              check[item.areaCode][0].forEach((value, j) => {
+                if (value.checked && !check1[item.areaCode][0][j]['checked']) {
+                  check1[item.areaCode][0][j]['checked'] = true;
+                  check1[item.areaCode][0][j]['disabled'] = true;
+                }
+              });
+            });
+          }
+          _this.data = temp1;
+          _this.checkOptionsOnes = check1;
+        } else {
+          _this.allCheckeds.forEach((item) => {
+            if (item.allChecked) {
+              item['disabled'] = true;
+            }
+          });
+          const len = isArray(this.data) ? _this.data.length : 0;
+          for (let i = 0; i < len; i++) {
+            _this.data[i]['provices'].forEach(item => {
+              if (item.checked) {
+                item['disabled'] = true;
+              }
+              _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+                if (value.checked) {
+                  value['disabled'] = true;
+                }
+              });
+            });
+          }
+
+        };
+        break;
     }
+
   }
 
-  show(){
+  show() {
     this.flag = true;//等于true时，计价方式显示出来，初始化时是显示状态
   }
-  hide(){
+
+  hide() {
     this.flag = false;//等于false时，计价方式隐藏
   }
+
   /**
    * 关闭右侧滑动页面
    */
@@ -319,9 +406,14 @@ export class AddFormworkComponent implements OnInit {
   /**
    * 添加运费模板值的时候table数组增加
    */
-  add(){
+  add() {
     let _this = this;
-    _this.moduleList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice:'', addAttach:'',addPrice: ''});
+    //
+    if(_this.linkType=='addArticle'){
+        _this.moduleList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice: '', addAttach: '', addPrice: ''});
+    }else if(_this.linkType=='updataArticle'){
+        _this.staff.storeExpressTplValList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice: '', addAttach: '', addPrice: ''});
+    }
   }
 
 
@@ -329,8 +421,9 @@ export class AddFormworkComponent implements OnInit {
    * 删除运费模板值信息
    * @param event
    */
-  delete(delCodeId,i) {
-    let _this = this, url: string = "/expressTpl/delteStoreExpressTplVal", data: any;
+  delete(delCodeId, i) {
+    // let _this = this, url: string = "/expressTpl/delteStoreExpressTplVal", data: any;
+    let _this = this;
     swal({
         title: '确认删除此信息？',
         type: 'info',
@@ -341,11 +434,11 @@ export class AddFormworkComponent implements OnInit {
       },
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
-        data = {
-          id:delCodeId
-        }
-        _this.AddFormworkService.delCode(url, data); //删除数据
-        _this.moduleList.splice(i,1)
+        // data = {
+        //
+        // }
+        // _this.AddFormworkService.delCode(url, data); //删除数据
+        _this.moduleList.splice(i, 1)
         _this.moduleList[i].area = '';
       }
     );
@@ -355,18 +448,20 @@ export class AddFormworkComponent implements OnInit {
    *添加运费模板
    * @param value
    */
-  addFormwork(formData){
-    let json ={
-      tplName: formData.value.tplName,
-      isFree: formData.value.isFree,
-      valuationType: formData.value.valuationType,
-      sellerCode: 'SZH_PLAT_SELF_STORE',
-      storeCode: 'SZH_PLAT_SELF_STORE',
-      storeExpressTplValList: this.moduleList
-    }
+  addFormwork(formData) {
+
     let _this = this;
     //添加区域信息
-    if(_this.linkType == 'addArticle'){
+    if (_this.linkType == 'addArticle') {
+      let json = {
+        tplName: formData.value.tplName,
+        isFree: formData.value.isFree,
+        valuationType: formData.value.valuationType,
+        sellerCode: 'SZH_PLAT_SELF_STORE',
+        storeCode: 'SZH_PLAT_SELF_STORE',
+        id:this.id,
+        storeExpressTplValList: this.moduleList
+      }
       _this.ajax.post({
         url: '/expressTpl/addStoreExpressTpl',
         data: {
@@ -375,14 +470,43 @@ export class AddFormworkComponent implements OnInit {
         success: (res) => {
           if (res.success) {
             _this.router.navigate(['/main/operation/freight-template'], {replaceUrl: true}); //路由跳转
-            swal('添加运费模板提交成功！', '','success');
+            swal('添加运费模板提交成功！', '', 'success');
             _this.FreightTemplateComponent.queryList()//实现刷新
           } else {
             swal(res.info);
           }
         },
         error: (data) => {
-          swal('添加运费模板提交失败！', '','error');
+          swal('添加运费模板提交失败！', '', 'error');
+        }
+      })
+    }
+    else if (_this.linkType == 'updataArticle') {
+      let json = {
+        tplName: formData.value.tplName,
+        isFree: formData.value.isFree,
+        valuationType: formData.value.valuationType,
+        sellerCode: 'SZH_PLAT_SELF_STORE',
+        storeCode: 'SZH_PLAT_SELF_STORE',
+        id:this.id,
+        storeExpressTplValList: this.staff.storeExpressTplValList
+      }
+      _this.ajax.put({
+        url: '/expressTpl/updateStoreExpressTpl',
+        data: {
+          storeExpressStr: JSON.stringify(json)
+        },
+        success: (res) => {
+          if (res.success) {
+            _this.router.navigate(['/main/operation/freight-template'], {replaceUrl: true}); //路由跳转
+            swal('修改运费模板提交成功！', '', 'success');
+            _this.FreightTemplateComponent.queryList()//实现刷新
+          } else {
+            swal(res.info);
+          }
+        },
+        error: (data) => {
+          swal('修改运费模板提交失败！', '', 'error');
         }
       })
     }

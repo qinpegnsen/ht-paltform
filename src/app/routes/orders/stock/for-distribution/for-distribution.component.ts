@@ -94,7 +94,7 @@ export class ForDistributionComponent implements OnInit {
   distribution(getOrdno){
     let _this = this, url: string = "/agentOrd/updateStateToPrepare", data: any;
     swal({
-        title: '确定该商品已配货？',
+        title: '您确定要为该商品配货？',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮

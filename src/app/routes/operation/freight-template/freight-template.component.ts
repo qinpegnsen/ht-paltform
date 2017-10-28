@@ -81,6 +81,7 @@ export class FreightTemplateComponent implements OnInit {
     _this.queryList()//获取费模板列表信息
   }
 
+
   /**
    * 查询运费模板列表信息
    * @param event
@@ -107,7 +108,7 @@ export class FreightTemplateComponent implements OnInit {
   delete(delCodeId) {
     let _this = this, url: string = "/expressTpl/delteStoreExpressTpl", data: any;
     swal({
-        title: '确认删除此信息？',
+        title: '确认删除此信息？(如果有商品正在使用此模板，商品默认使用固定运费！)',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮
@@ -121,9 +122,7 @@ export class FreightTemplateComponent implements OnInit {
         }
         console.log(data)
         _this.FreightTemplateService.delCode(url, data); //删除数据
-        let datas={id:delCodeId}
-        let urls= "/expressTpl/queryByStoreCode";
-        _this.FreightTemplateService.controlDatas(urls,datas);//实现局部刷新
+       _this.queryList();//实现刷新
       }
     );
   }

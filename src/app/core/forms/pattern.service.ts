@@ -21,6 +21,7 @@ export class PatternService {
   public positive:string;
   public str:string;//除了文字
   public tplCode:string;//只能输入英文和数字的(用于添加APP首页模板的模板编码)
+  public integer:string;//正整数
   constructor() {
     this.num = '^[0-9]*$'; //数字正则
     this.letter = '^[A-Za-z]*$'; //字母正则
@@ -38,6 +39,7 @@ export class PatternService {
     this.positive = '^[0-9]+$'; // 整数
     this.str = '[^\u4e00-\u9fa5]+'; //除中文的任何数字包括字符
     this.tplCode = '^[A-Za-z0-9]+$'; //只能输入英文和数字的(用于添加APP首页模板的模板编码)
+    this.integer = '^[0-9]*[1-9][0-9]*$'; //只能正整数
   }
 
 }
