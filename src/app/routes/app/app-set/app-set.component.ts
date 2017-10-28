@@ -428,23 +428,7 @@ export class AppSetComponent implements OnInit {
     let _this = this;
     let flag = true;
     if (_this.isAdd && _this.tplType == 'IMG') {//说明是新增，新增判断是否上传图片
-      //校验添加首页模板内容时的图片必填
       let imgCount = _this.tplImgCount;
-      for (let i = 0; i < imgCount; i++) {
-        if (_this.uploaders[i].queue.length < 1) {
-          flag = false;
-          swal('第' + (i + 1) + '个图片未上传');
-          break;
-        };
-      };
-      //校验添加首页模板内容时的操作类型必填
-      for (let j = 0; j < imgCount; j++) {
-        if($('.optTypeList')[j].value==''){
-          flag = false;
-          swal('第' + (j + 1) + '个操作类型没有选');
-          break;
-        }
-      };
       //校验添加首页模板内容时的操作类型值必填
       for (let n = 0; n < imgCount; n++) {
         if($('.optKey')[n].value==''){
@@ -456,6 +440,22 @@ export class AppSetComponent implements OnInit {
           }
         }
       }
+      //校验添加首页模板内容时的操作类型必填
+      for (let j = 0; j < imgCount; j++) {
+        if($('.optTypeList')[j].value==''){
+          flag = false;
+          swal('第' + (j + 1) + '个操作类型没有选');
+          break;
+        }
+      };
+      //校验添加首页模板内容时的图片必填
+      for (let i = 0; i < imgCount; i++) {
+        if (_this.uploaders[i].queue.length < 1) {
+          flag = false;
+          swal('第' + (i + 1) + '个图片未上传');
+          break;
+        };
+      };
     }
     if (flag) {
       this.uploadImg()

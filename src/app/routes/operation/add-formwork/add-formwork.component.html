@@ -1,6 +1,6 @@
 <!--添加运费模板begin-->
 <div class="col-lg-10" *ngIf="linkType=='addArticle'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm" (ngSubmit)="addFormwork(addLimitForm)">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -8,33 +8,33 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"><i class="main-red">*</i> 运费模板名称</label>
             <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="请填写运费模板名称" required name="modelname" #modelname="ngModel" ngModel/>
+              <input class="form-control" type="text" placeholder="请填写运费模板名称" required name="tplName" #modelname="ngModel" ngModel/>
               </div>
             </div>
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-2 control-label">是否包邮</label>
+            <label class="col-sm-2 control-label"><i class="main-red">*</i> 是否包邮</label>
             <div class="col-sm-4">
               <label class="radio-inline c-radio">
-                <input type="radio" name="A" checked (click)="show()"/>
+                <input type="radio" name="isFree" value="Y" checked (click)="show()" ngModel required/>
                 <span class="fa fa-circle"></span>自定义运费</label>
               <label class="radio-inline c-radio">
-                <input type="radio" name="A" (click)="hide()"/>
+                <input type="radio" name="isFree" value="N"  (click)="hide()" ngModel required/>
                 <span class="fa fa-circle"></span>卖家承担运费</label>
               <span></span>
             </div>
             <span *ngIf="flag">
-            <label class="col-sm-2 control-label">计价方式</label>
+            <label class="col-sm-2 control-label"> <i class="main-red">*</i> 计价方式</label>
             <div class="col-sm-4">
               <label class="radio-inline c-radio"  (click)="number()">
-                <input type="radio" name="B" checked/>
+                <input type="radio" name="valuationType" checked value="NUM" ngModel required/>
                 <span class="fa fa-circle"></span>按件数</label>
               <label class="radio-inline c-radio"  (click)="weight()">
-                <input type="radio" name="B"/>
+                <input type="radio" name="valuationType" value="WEIGHT" ngModel required/>
                 <span class="fa fa-circle"></span> 按重量</label>
               <label class="radio-inline c-radio"  (click)="volume()">
-                <input type="radio" name="B"/>
+                <input type="radio" name="valuationType" value="VOLUME" ngModel required/>
                 <span class="fa fa-circle"></span>按体积</label>
               <span></span>
             </div>
@@ -106,22 +106,22 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of moduleList;let i = index">
-                      <td>{{reslut[i]}}</td>
+                      <td>{{item.area}}</td>
                       <td class="text-center">
-                        <input class="text _price num form-control" name="agentName" type="number" value="1" required/>
+                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required/>
                       </td>
                       <td class="text-center">
                         <div class="input-group">
-                          <input class="form-control" type="text">
+                          <input class="form-control" type="text" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" required>
                           <span class="input-group-addon money">￥</span>
                         </div>
                       </td>
                       <td class="text-center">
-                        <input class="text _price num form-control" name="addAttach" type="number" required value="1">
+                        <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1">
                       </td>
                       <td class="text-center">
                         <div class="input-group">
-                          <input class="form-control" type="text">
+                          <input class="form-control" type="text" [(ngModel)]="item.addPrice" name="addPrice{{i}}" required>
                           <span class="input-group-addon">￥</span>
                         </div>
                       </td>
@@ -145,7 +145,7 @@
         <fieldset>
           <div class="pull-right form-group special">
             <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-            <button class="ml btn btn-info pull-left"  type="button" [disabled]="!addLimitForm.form.valid" (click)="addFormwork(addLimitForm.value)">提交信息</button>
+            <button class="ml btn btn-info pull-left"  type="submit" [disabled]="!addLimitForm.form.valid">提交信息</button>
           </div>
         </fieldset>
       </div>

@@ -7,6 +7,7 @@ import {CHINA_AREA} from "../../../core/services/china_area";
 import {isArray} from "rxjs/util/isArray";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {SessionService} from "../session.service";
+import {FreightTemplateComponent} from '../freight-template/freight-template.component';
 const swal = require('sweetalert');
 
 
@@ -26,16 +27,17 @@ export class AddFormworkComponent implements OnInit {
   public one: boolean = true;
   public twe: boolean = false;
   public three: boolean = false;
-  public reslut: Array<any> = [];
+  // public area: Array<any> = [];
   private cru: number = 0;
+
   china_area = CHINA_AREA;
   area_level1 = AREA_LEVEL_1_JSON;
   area_level2 = AREA_LEVEL_3_JSON;
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  // public reslut: string = '';
-  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private session:SessionService) { }
+  // public area: string = '';
+  constructor(private routeInfo:ActivatedRoute, private router:Router,private AddFormworkService:AddFormworkService,private ajax:AjaxService,private session:SessionService,private FreightTemplateComponent:FreightTemplateComponent) { }
 
   ngOnInit() {
     let _this = this;
@@ -187,11 +189,11 @@ export class AddFormworkComponent implements OnInit {
       });
       tempResult = tempResult.concat(temp);
     }
-    _this.reslut[_this.cru] = tempResult.join('_');
+    _this.moduleList[_this.cru].area = tempResult.join(',');
     _this.session.setData(_this.cru, _this.data);
     _this.session.setCheck(_this.cru, _this.checkOptionsOnes);
     _this.close();
-    return tempResult.join('_');
+    return tempResult.join(',');
   }
 
 
@@ -255,10 +257,10 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     _this.cru = index;
     _this.close();
-    if (_this.reslut[this.cru]) {
-      const temp = _this.session.getDatas(_this.reslut.length - 1);
+    if (_this.moduleList[this.cru].area) {
+      const temp = _this.session.getDatas(_this.moduleList.length - 1);
       const temp1 = _this.session.getDatas(_this.cru);
-      const check = _this.session.getCheck(_this.reslut.length - 1);
+      const check = _this.session.getCheck(_this.moduleList.length - 1);
       const check1 = _this.session.getCheck(_this.cru);
       const len = isArray(temp) ? temp.length : 0;
       for (let i = 0; i < len; i++) {
@@ -318,8 +320,8 @@ export class AddFormworkComponent implements OnInit {
    * 添加运费模板值的时候table数组增加
    */
   add(){
-    let _this = this
-    _this.moduleList.push({reslut: '', index: _this.moduleList.length + 1});
+    let _this = this;
+    _this.moduleList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice:'', addAttach:'',addPrice: ''});
   }
 
 
@@ -344,7 +346,7 @@ export class AddFormworkComponent implements OnInit {
         }
         _this.AddFormworkService.delCode(url, data); //删除数据
         _this.moduleList.splice(i,1)
-        _this.reslut[i] = '';
+        _this.moduleList[i].area = '';
       }
     );
   }
@@ -353,21 +355,30 @@ export class AddFormworkComponent implements OnInit {
    *添加运费模板
    * @param value
    */
-  addFormwork(value){
+  addFormwork(formData){
+    let json ={
+      tplName: formData.value.tplName,
+      isFree: formData.value.isFree,
+      valuationType: formData.value.valuationType,
+      sellerCode: 'SZH_PLAT_SELF_STORE',
+      storeCode: 'SZH_PLAT_SELF_STORE',
+      storeExpressTplValList: this.moduleList
+    }
     let _this = this;
     //添加区域信息
     if(_this.linkType == 'addArticle'){
       _this.ajax.post({
         url: '/expressTpl/addStoreExpressTpl',
         data: {
-
+          storeExpressStr: JSON.stringify(json)
         },
         success: (res) => {
           if (res.success) {
-            _this.router.navigate(['/main/website/areas'], {replaceUrl: true}); //路由跳转
+            _this.router.navigate(['/main/operation/freight-template'], {replaceUrl: true}); //路由跳转
             swal('添加运费模板提交成功！', '','success');
+            _this.FreightTemplateComponent.queryList()//实现刷新
           } else {
-            swal('添加运费模板提交失败！', '', 'error');
+            swal(res.info);
           }
         },
         error: (data) => {
