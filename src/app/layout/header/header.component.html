@@ -65,6 +65,11 @@
           <i class="icon-user"></i>
         </a>
       </li>
+      <li class="visible-lg">
+        <a #fsbutton (click)="toggleFullScreen($event)">
+          <em class="fa fa-expand"></em>
+        </a>
+      </li>
       <!-- 显示、隐藏用户头像 end-->
       <!-- 弹出菜单 begin-->
       <li class="dropdown dropdown-list" dropdown>
@@ -97,11 +102,11 @@
       </li>
       <!--弹出菜单 end-->
       <!-- 多功能侧边栏 begin-->
-      <li>
-        <a (click)="toggleOffsidebar()">
-          <i class="icon-notebook"></i>
-        </a>
-      </li>
+      <!--<li>-->
+        <!--<a (click)="toggleOffsidebar()">-->
+          <!--<i class="icon-notebook"></i>-->
+        <!--</a>-->
+      <!--</li>-->
       <!-- 多功能侧边栏 end-->
       <!-- Fullscreen (only desktops)-->
      <!-- <li class="visible-lg">
