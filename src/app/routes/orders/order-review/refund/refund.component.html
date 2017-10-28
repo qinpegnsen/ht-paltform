@@ -2,11 +2,13 @@
 <div class="cancel-order fadeIn"  *ngIf="showRefundWindow">
   <div class="mask" (click)="hideWindow()"></div>
 
-    <div class="popup animated fadeIn">  <form class="_popup animated fadeIn" #addForm="ngForm">
+    <div class="popup animated fadeIn">
+      <form class="_popup animated fadeIn" #addForm="ngForm">
       <div class="pop popup-hd">
-        <span class="f-bold">退款信息</span>
+        <span class="">退款信息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
       </div>
+
       <div class="pop cancel-con font12 w100">
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">订单号：</dt>
@@ -19,7 +21,7 @@
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3 lh40"><i>*</i>汇款账号开户行：</dt>
+          <dt class="col-xs-3 lh40"><i>*</i>&nbsp;汇款账号开户行：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <select class="form-control" name="selectBanks" [(ngModel)]="code" (change)="seletAllByTypeCode()">
               <option value="">请选择银行</option>
@@ -28,7 +30,7 @@
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3"><i>*</i>汇款账号：</dt>
+          <dt class="col-xs-3 refund-color"><i>*</i>&nbsp;<span>汇款账号：</span></dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel">
           </dd>
@@ -38,7 +40,7 @@
           </div>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3"><i>*</i>汇款人：</dt>
+          <dt class="col-xs-3"><i>*</i>&nbsp;汇款人：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
           </dd>
@@ -48,7 +50,7 @@
           </div>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3 lh40"><i>*</i>汇款凭证：</dt>
+          <dt class="col-xs-3 lh40"><i>*</i>&nbsp;汇款凭证：</dt>
           <dd class="orderId-color col-xs-9 font14">
           <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploader.queue">
                 <span class="close" (click)="item.remove()" style="margin-right: 10px">×</span>
@@ -66,7 +68,7 @@
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
-          <dt class="col-xs-3"><i>*</i>汇款时间：</dt>
+          <dt class="col-xs-3"><i>*</i>&nbsp;汇款时间：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
             <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>

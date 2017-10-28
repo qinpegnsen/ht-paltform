@@ -39,7 +39,7 @@ export class CertificationComponent implements OnInit {
     let url = "/custAuthInfo/query";
     let data={
       curPage: activePage,
-      pageSize:2,
+      pageSize:10,
       state: me.state,
     }
     let result = this.submit.getData(url,data);

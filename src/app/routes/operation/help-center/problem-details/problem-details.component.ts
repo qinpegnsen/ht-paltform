@@ -25,7 +25,6 @@ export class ProblemDetailsComponent implements OnInit {
   constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router, private routeInfo: ActivatedRoute,) { }
 
   ngOnInit() {
-
     let me=this;
     me.id = this.routeInfo.snapshot.queryParams['id'];//获取地址栏的参数
     //按钮配置
