@@ -475,6 +475,7 @@ export class AddArticleComponent implements OnInit {
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
+      console.log("█ 1 ►►►",  1);
       me.articleExtra();
     }
   }

@@ -10,6 +10,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {AfterDetailsComponent} from './after-details/after-details.component';
 import {AddproblemComponent} from './addproblem/addproblem.component';
 import {AfterService} from "./after.service";
+import { InspectGoodsComponent } from './inspect-goods/inspect-goods.component';
 const problemcomplem: Routes = [
   {path: 'addproblem', component: AddproblemComponent},
 ]
@@ -31,6 +32,10 @@ const routes: Routes = [
     {path: '', component: ReturnVerifyComponent},
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
+  {path: 'inspect-goods', children: [
+    {path: '', component: InspectGoodsComponent},
+    {path: 'after-details', component: AfterDetailsComponent},
+  ]},
   // {path: 'after-details', component: AfterDetailsComponent},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 
@@ -48,7 +53,8 @@ const routes: Routes = [
     ReturnVerifyComponent,
     MsgComponent,
     AfterDetailsComponent,
-    AddproblemComponent],
+    AddproblemComponent,
+    InspectGoodsComponent],
   providers: [
     RefundControlComponent,
     RefundVerifyComponent,

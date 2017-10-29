@@ -75,7 +75,7 @@ const operation = {
     {
       text: '系统消息',
       icon: 'icon-diamond',
-      link: '/main/operation/sys-message'
+      link: '/main/operation/ '
     },
     {
       text: '运费模板管理',
@@ -297,6 +297,10 @@ const sale = {
         {
           text: '退货审核',
           link: '/main/sale/return-verify'
+        },
+        {
+          text: '平台验货',
+          link: '/main/sale/inspect-goods'
         }
       ]
     }
