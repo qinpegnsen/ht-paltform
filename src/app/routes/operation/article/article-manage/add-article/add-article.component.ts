@@ -475,7 +475,6 @@ export class AddArticleComponent implements OnInit {
      * 所有图片都上传成功后执行添加文章
      */
     me.uploader.onCompleteAll=function(){
-      console.log("█ 1 ►►►",  1);
       me.articleExtra();
     }
   }
@@ -543,7 +542,7 @@ export class AddArticleComponent implements OnInit {
         break;
     }
     let result=this.operationService.addNewArticle(url, data);
-    if(result=='文章内容不能为空'||result=='请选择文章分类'){
+    if(result=='文章内容不能为空'||result=='请选择文章分类'||'输入项中不能包含非法字符。,fieldName:articleContent'){
       return;
     }else{
       this.router.navigate(['/main/operation/article/manage']);
