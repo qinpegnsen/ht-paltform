@@ -1,11 +1,11 @@
 <div class="p-lg">
   <div class="row">
     <div class="col-lg-12">
-      <ul class="timeline" *ngIf="refund.ordno!=null">
+      <ul class="timeline" *ngIf="refund.reqMoney!=null">
 
         <li class="timeline-separator" data-datetime="开始"></li>
 
-        <li class="" *ngIf="refund.ordno!=null">
+        <li class="" *ngIf="refund.reqMoney!=null">
           <div class="timeline-badge primary">
             <em class="fa fa-edit"></em>
           </div>
@@ -54,7 +54,7 @@
           </div>
         </li>
 
-        <li class="timeline-inverted" *ngIf="refund.agentOrdReturnAudit!=null && refund.ordno!=null">
+        <li class="timeline-inverted" *ngIf="refund.agentOrdReturnAudit!=null && refund.reqMoney!=null">
           <div class="timeline-badge green">
             <em class="icon icon-user-following"></em>
           </div>
@@ -94,7 +94,7 @@
           </div>
         </li>
 
-        <li class="timeline-inverted" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit==null">
+        <li class="timeline-inverted" *ngIf="refund.reqMoney!=null && refund.agentOrdReturnAudit==null">
           <div class="timeline-badge green">
             <em class="icon icon-user-following"></em>
           </div>
@@ -115,7 +115,7 @@
           </div>
         </li>
 
-        <li class="timeline-end" *ngIf="refund.bacctName!=null && refund.agentOrdReturnAudit!=null &&
+        <li class="timeline-end" *ngIf="refund.reqMoney!=null && refund.agentOrdReturnAudit!=null &&
           refund.refundState=='YES'" >
           <div class="timeline-badge info">
             <em class="fa fa-dollar"></em>
