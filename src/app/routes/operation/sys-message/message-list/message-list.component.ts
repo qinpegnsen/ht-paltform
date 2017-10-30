@@ -65,7 +65,8 @@ export class MessageListComponent implements OnInit {
     this.platformInfoData=this.operationService.updateproblem(url,data);
     this.queryAdminNotify(curPage);
     if(bol){
-      this.router.navigateByUrl(detailUrl);
+      let url=$.trim(detailUrl);
+      this.router.navigateByUrl(url);
     }
   }
 

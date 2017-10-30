@@ -5,6 +5,7 @@ import {NavigationEnd, Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {isNullOrUndefined} from "util";
+declare var $:any;
 const swal = require('sweetalert');
 @Component({
   selector: 'app-inspect-goods',
@@ -17,6 +18,7 @@ export class InspectGoodsComponent implements OnInit {
   private seebutton: object;//查看按钮
   private detail = [];
   private isReceiveList: object; //售后单状态枚举列
+  private selectText: string; //选择查询的状态
   private search: any = {
     curPage: null,
     pageSize: 10,
@@ -78,6 +80,24 @@ export class InspectGoodsComponent implements OnInit {
     if (isNullOrUndefined(result)) return;
     me.returnList = new Page(result);
     me.detail = [];
+  }
+
+  /**
+   * 改变收货的状态
+   */
+  selectState(obj){
+    if( $(obj)[0].className.indexOf('bb')>1){
+      return;
+    }else{
+      $(obj).parents('.order-guide').find('.bb').removeClass("bb");
+      $(obj).addClass("bb");//边框
+    };
+    let selectCon=$.trim($(".order-guide .bb").text());//获取文本之后再把多余的空格去掉，要不然html大代码一整理就出错了
+    if(selectCon=='待验货'){
+      this.selectText='DELIVERY'
+    }else{
+      this.selectText='AGREE'
+    };
   }
 
   /**

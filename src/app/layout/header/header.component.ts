@@ -76,6 +76,14 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.platformInfoData = new Page(this.submitService.getData(url, data));
   }
 
+  /**
+   * 消息弹框点击直接跳转到传过来的url页面
+   */
+  linkDetail(detailUrl){
+    let url=$.trim(detailUrl);
+    this.router.navigateByUrl(url);
+  }
+
   //显示、隐藏当前登录的用户信息
   toggleUserBlock(event) {
     event.preventDefault();

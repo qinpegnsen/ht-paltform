@@ -75,7 +75,7 @@ const operation = {
     {
       text: '系统消息',
       icon: 'icon-diamond',
-      link: '/main/operation/ '
+      link: '/main/operation/sys-message'
     },
     {
       text: '运费模板管理',

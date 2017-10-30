@@ -77,16 +77,16 @@
           <i class="icon-bell"></i>
           <div class="label label-danger unselectable">{{platformInfoData.totalRow}}</div>
         </a>
-        <ul *dropdownMenu class="dropdown-menu animated flipInX">
+        <ul *dropdownMenu class="dropdown-menu animated flipInX positionRight">
           <li>
             <div class="list-group">
-              <a class="list-group-item qpsHeight" *ngFor="let platformInfo of platformInfoData.voList;let i = index"  routerLink="/main/operation/sys-message/message-list">
+              <a class="list-group-item qpsHeight" *ngFor="let platformInfo of platformInfoData.voList;let i = index"  (click)="linkDetail(platformInfo.url)">
                 <div class="media-box _qpsStyle">
                   <div class="pull-left">
                     <i class="{{platformInfo.icon}} lineHeight35"></i>
                   </div>
                   <div class="media-box-body clearfix ">
-                    <p class="m0 qpsP">{{platformInfo.msg}}</p>
+                    <p class="m0 qpsP" [class.width185]="platformInfo.icon">{{platformInfo.msg}}</p>
                     <p class="m0 text-muted">
                       <small>{{platformInfo.createTime}}</small>
                     </p>
