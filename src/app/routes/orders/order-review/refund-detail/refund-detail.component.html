@@ -125,7 +125,7 @@
               <h4 class="popover-title">退款信息</h4>
               <div class="arrow"></div>
               <div class="popover-content">
-                <ul class="list-unstyled" style="height: 188px">
+                <ul class="list-unstyled" *ngIf="refund.payWay=='REMIT'" style="height: 188px">
                   <li class="pb">
                     <p class=" mr pull-left d-play w35"><span class="pull-right">汇款人姓名：</span></p>
                     <p class="text-info pull-right w62 refund-height"><span class="text-left">{{refund.payBacctName}}</span></p>
@@ -154,6 +154,35 @@
                        onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
                     </p>
+                  </li>
+                </ul>
+                <ul class="list-unstyled"  *ngIf="refund.payWay=='WXPAY || ALIPAY'">
+                  <li class="pb no-information">
+                    <p class=" mr pull-left d-play w35 font20"><span class="pull-right">退款信息：</span></p>
+                    <p class="text-info pull-right w62 font20"><span
+                      class="text-left">退回至原支付账户</span></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline-end" *ngIf="refund.reqMoney!=null && refund.agentOrdReturnAudit!=null &&
+          refund.refundState!=='YES'" >
+          <div class="timeline-badge info">
+            <em class="fa fa-dollar"></em>
+          </div>
+          <div class="timeline-panel">
+            <div class="popover right" style="height: 200px">
+              <h4 class="popover-title">退款信息</h4>
+              <div class="arrow"></div>
+              <div class="popover-content" >
+                <ul class="list-unstyled" >
+                  <li class="pb no-information">
+                    <p class=" mr pull-left d-play w35 font20"><span class="pull-right">审核信息：</span></p>
+                    <p class="text-info pull-right w62 font20"><span
+                      class="text-left">暂无退款信息</span></p>
                   </li>
                 </ul>
               </div>

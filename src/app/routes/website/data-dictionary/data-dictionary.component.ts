@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
-import {isNullOrUndefined} from "util";
+import {isNull, isNullOrUndefined} from "util";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {DataDictionaryComponentService} from "./data-dictionary-component.service";
 import {AppComponent} from "../../../app.component";
@@ -26,6 +26,7 @@ export class DataDictionaryComponent implements OnInit {
   private childMenuTitList: Array<any> = []; //菜单级别面包屑
   private data: Page = new Page();
 
+  private codeVal=this.code;
   constructor(private ajax: AjaxService, private dataDictionaryService: DataDictionaryComponentService) {
 
   }
@@ -50,13 +51,22 @@ export class DataDictionaryComponent implements OnInit {
       title: "添加val",
       type: "add"
     };
-    this.queryDatas(1)
+    this.queryDatas(1);
+    // this.queryAll();
   }
 
    //查询key列表
   searchdata() {
     this.queryDatas(1)
   }
+
+//   queryAll(){
+//     if(isNull(this.codeVal)){
+//       this.queryDatas(1);
+//     }else if(!isNull(this.codeVal)){
+//       this.queryChildSortList();
+//     }
+// }
 
   //查询数据字典信息列表
   public queryDatas(curPage,event?: PageEvent) {
