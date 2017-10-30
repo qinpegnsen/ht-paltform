@@ -43,8 +43,6 @@ export class AfterDetailsComponent implements OnInit {
     me.afterData = this.after.loadReqByAfterNo(data);
     me.afterTailList = this.after.loadAfterTailList(data);
     if (isNullOrUndefined(me.afterData)) me.afterData = null;
-
-    me.expressData = me.after.getExpressInfo(me.afterData.ordno);
   }
 
   /**

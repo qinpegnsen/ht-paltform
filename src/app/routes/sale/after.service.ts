@@ -31,19 +31,4 @@ export class AfterService {
     let url = '/after/loadReqByWono';
     return this.submit.getData(url, requestData);
   }
-
-  /**
-   * 获取物流公司及运单号
-   * @param ordno
-   * @returns {any}
-   */
-  public getExpressInfo(ordno) {
-    let url = '/ord/tail/loadByDelivery';
-    let data = {
-      ordno: ordno
-    }
-    let expressData = this.submit.getData(url, data);
-    if (!isNullOrUndefined(expressData)) return expressData;
-  }
-
 }
