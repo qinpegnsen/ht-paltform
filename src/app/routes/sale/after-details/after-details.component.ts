@@ -17,6 +17,7 @@ export class AfterDetailsComponent implements OnInit {
   private afterNo: string;          //售后编码
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据
+  private afterTailList: any;       //查看售后单跟踪信息
   private opinion: string;          //审核意见
   private goodsAudits: any;         //商品审核是否通过枚举
   private isPass: string = 'Y';     //是否同意退货
@@ -40,6 +41,7 @@ export class AfterDetailsComponent implements OnInit {
     let data;
     if (!isNullOrUndefined(me.afterNo)) data = {afterNo: me.afterNo};
     me.afterData = this.after.loadReqByAfterNo(data);
+    me.afterTailList = this.after.loadAfterTailList(data);
     if (isNullOrUndefined(me.afterData)) me.afterData = null;
 
     me.expressData = me.after.getExpressInfo(me.afterData.ordno);

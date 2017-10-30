@@ -22,6 +22,11 @@ export class AfterService {
     return this.submit.getData(url, requestData);
   }
 
+  public loadAfterTailList(requestData){
+    let url = '/after/loadAfterTailList';
+    return this.submit.getData(url, requestData);
+  }
+
   public loadReqByWono(requestData){
     let url = '/after/loadReqByWono';
     return this.submit.getData(url, requestData);

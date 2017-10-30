@@ -73,7 +73,7 @@
           </tr>
         </table>
 
-        <!--平台同意申请并退款-->
+        <!--平台同意申请-->
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
@@ -82,25 +82,25 @@
             <table class="t-items p w100">
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">处理时间：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.updateTime}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].updateTime}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">审核人：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].optName}}</td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">审核结果：</td>
-                <td class="item-bd col-sm-10 mb0" *ngIf="afterData.returnType=='RETURN'">
-                  {{afterData.state=='AGREE'?'通过':'已驳回'}}
-                </td>
-                <td class="item-bd col-sm-10 mb0" *ngIf="afterData.returnType=='REFUND'">
-                  {{afterData.state=='AGREE'?'通过':'已驳回'}}
+                <td class="item-bd col-sm-10 mb0">
+                  {{afterTailList[1].state | rzhState:'1701'}}
                 </td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">处理意见：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].description}}</td>
               </tr>
             </table>
           </div>
         </ng-container>
-
 
         <!--退货订单已发货-->
         <div *ngIf="afterData.state=='DELIVERY'">
@@ -165,15 +165,19 @@
           <table class="t-items p w100">
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">处理时间：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.updateTime}}</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].updateTime}}</td>
             </tr>
             <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">处理备注：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
+              <td class="item-hd col-sm-2">操作人：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].optName}}</td>
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">审核结果：</td>
-              <td class="item-bd col-sm-10 mb0">已验收</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state  | rzhState:'1701'}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">处理备注：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].description}}</td>
             </tr>
           </table>
       </div>
