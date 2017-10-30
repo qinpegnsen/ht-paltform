@@ -54,6 +54,7 @@ import {PopoverModule} from "ngx-bootstrap";
 import { StrJsonPipe } from './pipe/str-json.pipe';
 import { GetWeekPipe } from './pipe/get-week.pipe';
 import { StrToNumberPipe } from './pipe/str-to-number.pipe';
+import { GetDatePipe } from './pipe/get-date.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -96,6 +97,7 @@ import { StrToNumberPipe } from './pipe/str-to-number.pipe';
     SubmitService
   ],
   declarations: [
+    GetDatePipe,
     FlotDirective,
     SparklineDirective,
     EasypiechartDirective,
@@ -116,8 +118,10 @@ import { StrToNumberPipe } from './pipe/str-to-number.pipe';
     StrJsonPipe,
     GetWeekPipe,
     StrToNumberPipe,
+    GetDatePipe,
   ],
   exports: [
+    GetDatePipe,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

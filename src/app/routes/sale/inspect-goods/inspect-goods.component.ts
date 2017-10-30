@@ -21,13 +21,15 @@ export class InspectGoodsComponent implements OnInit {
     curPage: null,
     pageSize: 10,
     returnType: 'RETURN',
-    state: 'WAIT',
     isReceive: '',
     afterNo: null,
+    state: '',
     phone: null,
     ordno: null,
     goodsBaseCode: null,
-    agentCode: null
+    agentCode: null,
+    stateDelivery: 'DELIVERY',
+    stateAgree: 'AGREE',
   };
 
   constructor(private submit: SubmitService, private router: Router,
@@ -70,7 +72,7 @@ export class InspectGoodsComponent implements OnInit {
   queryAllService(event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
-    let url = "/after/queryAfterGoodsReqPages";
+    let url = "/after/queryAfterGoodsReqCheckPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
     if (isNullOrUndefined(result)) return;

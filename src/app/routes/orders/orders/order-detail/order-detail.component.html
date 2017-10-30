@@ -130,6 +130,22 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
+        <li *ngIf="orderDetailData.state=='CLOSE'">
+          <div class="timeline-badge gray-bg thc bg"></div>
+          <div class="timeline-panel">
+            <div class="right">
+              <div>
+                <p class="every-line">
+                  <span class="mr logis-time text-left">
+                      <b class="mr-lg">{{orderDetailData.closeTime | getDate}}</b>
+                      <b class="mr-lg">{{orderDetailData.closeTime | getWeek}}</b>
+                  </span>
+                  <span class="every-info thc font">订单已关闭</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
         <li class="mb0" *ngFor="let item of orderStates;let s = index">
           <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
           <div class="timeline-panel">
@@ -150,21 +166,6 @@
                     </span>
                   </ng-container>
                   <span class="every-info">{{item.acceptStation}}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li *ngIf="orderDetailData.state=='CLOSE'">
-          <div class="timeline-badge gray-bg thc bg"></div>
-          <div class="timeline-panel">
-            <div class="right">
-              <div>
-                <p class="every-line">
-                  <span class="mr logis-time text-left">
-                      <b class="mr-lg">{{orderDetailData.closeTime}}</b>
-                  </span>
-                  <span class="every-info thc font">订单已关闭</span>
                 </p>
               </div>
             </div>
@@ -258,35 +259,48 @@
     <tr>
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
-          <dt class="font14">商品总额：</dt>
-          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total | decimalTwo}}</span></dd>
+          <dt class="font14 w10">商品总额：</dt>
+          <dd class="w10 text-left">
+            <span class="ml-sm font18 mr main-red  price-wid">¥ {{orderDetailData.total | number:'1.2-2'}}</span>
+          </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt class="font14">运费：</dt>
-          <dd>
-            <span class="ml-sm font12 mr price-wid" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+          <dt class="w10">运费：</dt>
+          <dd class="w10 text-left">
+            <span class="ml-sm font18 mr main-red  price-wid" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">¥ 0</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
-              <span class="font18 ml-sm mr price-wid">¥{{orderDetailData.freight | decimalTwo}}</span>
+              <span class="font18 ml-sm main-red mr price-wid">¥ {{orderDetailData.freight | number:'1.2-2'}}</span>
             </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt class="font14">应付金额：</dt>
-          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total+orderDetailData.freight |
-            decimalTwo}}</span></dd>
+          <dt class="font14 w10">应付金额：</dt>
+          <dd class="w10 text-left">
+            <span class="ml-sm font18 mr main-red  price-wid">¥ {{orderDetailData.total+orderDetailData.freight |
+            number:'1.2-2'}}</span>
+          </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt>
-            <template #popTemplate>重消币抵扣数量：<span>{{orderDetailData.coin | decimalTwo}}</span></template>
+          <dt class="10">
+            <template #popTemplate>
+              重消币抵扣数量：
+              <span  *ngIf="orderDetailData.coinPay != null" >{{orderDetailData.coin | number:'1.2-2'}}</span>
+              <span  *ngIf="orderDetailData.coinPay == null" >0</span>
+            </template>
             <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
                triggers="mouseenter:mouseleave"></i>
             重消币抵扣金额：
           </dt>
-          <dd><span class="font18 ml-sm mr price-wid">¥{{orderDetailData.coinPay | decimalTwo}}</span></dd>
+          <dd class="w10 text-left">
+            <span *ngIf="orderDetailData.coinPay == null" class="font18 main-red  ml-sm mr price-wid">¥ 0</span>
+            <span *ngIf="orderDetailData.coinPay != null" class="font18 main-red  ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
+          </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt class="font14">最终支付金额：</dt>
-          <dd><span class="main-red ml-sm font22 mr price-wid">¥{{orderDetailData.pay | decimalTwo}}</span></dd>
+          <dt class="font14 w10">最终支付金额：</dt>
+          <dd class="w10 text-left">
+            <span class="main-red ml-sm font22 mr price-wid">¥ {{orderDetailData.pay | number:'1.2-2'}}</span>
+          </dd>
         </dl>
       </td>
     </tr>

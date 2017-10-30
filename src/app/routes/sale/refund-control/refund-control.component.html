@@ -132,6 +132,15 @@
               <div class="bg-table special text-left">
                 <span class="">订单编号：</span> <span>{{item.ordno}}</span>
               </div>
+              <div class="bg-table special text-left">
+                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="">商品名称：</span> <span>{{item.goodsName}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="">商品数量：</span> <span>{{item.num}}</span>
+              </div>
               <div class="bg-table special text-left h35">
                 <span class="shopimg pull-left">商品图片：</span>
                 <span class="">
@@ -141,15 +150,13 @@
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
               </div>
-              <div class="bg-table special text-left">
-                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
-              </div>
+
               <ng-container *ngIf="item.state!='WAIT'">
                 <div class="bg-table special text-left">
-                  <span class="">操作人：</span> <span>{{item.optMan}}</span>
+                  <span class="">审核人：</span> <span>{{item.optMan}}</span>
                 </div>
                 <div class="bg-table special text-left">
-                  <span class="">退款说明：</span> <span>{{item.opinion}}</span>
+                  <span class="">审核说明：</span> <span>{{item.opinion}}</span>
                 </div>
               </ng-container>
             </td>

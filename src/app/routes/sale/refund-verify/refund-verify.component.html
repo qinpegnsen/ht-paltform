@@ -118,6 +118,15 @@
               <div class="bg-table special text-left">
                 <span class="">订单编号：</span> <span>{{item.ordno}}</span>
               </div>
+              <div class="bg-table special text-left">
+                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="">商品名称：</span> <span>{{item.goodsName}}</span>
+              </div>
+              <div class="bg-table special text-left">
+                <span class="">商品数量：</span> <span>{{item.num}}</span>
+              </div>
               <div class="bg-table special text-left h35">
                 <span class=" shopimg pull-left">商品图片：</span>
                 <span class="">
@@ -126,9 +135,6 @@
                  <img [src]="item.goodsImage" class="hover-big-img" alt=""
                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
-              </div>
-              <div class="bg-table special text-left">
-                <span class="">商品编码：</span> <span>{{item.goodsCode}}</span>
               </div>
             </td>
           </tr>
