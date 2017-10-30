@@ -228,7 +228,8 @@ export class AddFormworkComponent implements OnInit {
       _this.moduleList[_this.cru].area = tempAreaCode.join(',');
       _this.moduleList[_this.cru].area_cn = tempResult.join(',');
     }else if(_this.linkType=='updataArticle'){
-      _this. staff.storeExpressTplValList[_this.cru].area = tempResult.join(',');
+      _this.staff.storeExpressTplValList[_this.cru].area = tempAreaCode.join(',');
+      _this.staff.storeExpressTplValList[_this.cru].area_cn = tempResult.join(',');
     }
 
     _this.session.setData(_this.cru, _this.data);
@@ -472,7 +473,7 @@ export class AddFormworkComponent implements OnInit {
     if (_this.linkType == 'addArticle') {
       let json = {
         tplName: formData.value.tplName,
-        isFree: formData.value.isFree,
+        isFree: 'N',
         valuationType: formData.value.valuationType,
         sellerCode: 'SZH_PLAT_SELF_STORE',
         storeCode: 'SZH_PLAT_SELF_STORE',
@@ -499,9 +500,13 @@ export class AddFormworkComponent implements OnInit {
       })
     }
     else if (_this.linkType == 'updataArticle') {
+      if (_this.staff.storeExpressTplValList[_this.cru]['area_cn']) {
+        delete _this.staff.storeExpressTplValList[_this.cru]['area_cn']
+        console.log(_this.staff.storeExpressTplValList['area_cn']);
+      }
       let json = {
         tplName: formData.value.tplName,
-        isFree: formData.value.isFree,
+        isFree: 'N',
         valuationType: formData.value.valuationType,
         sellerCode: 'SZH_PLAT_SELF_STORE',
         storeCode: 'SZH_PLAT_SELF_STORE',
