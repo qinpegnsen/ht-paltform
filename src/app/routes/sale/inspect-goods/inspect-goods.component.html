@@ -11,7 +11,8 @@
         <li>买家提交退货申请，平台审核通过后买家可退货给配货方。</li>
         <li>买家将货物寄出后，平台将验收货物，验收通过则会退款给买家。</li>
         <li>选择预存款方式支付的,卖家同意并经过平台确认后会将金额以预存款的形式返还给买家。买家选择在线支付方式的，会把在线支付金额原路返回到账号上。
-          如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。</li>
+          如果订单同时使用了在线支付方式和预存款支付方式，则会优先使用在线支付方式退款，当在线退款可退款金额为0后才会使用预存款方式退款。
+        </li>
       </ul>
     </div>
 
@@ -103,14 +104,9 @@
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
-              <!--<button class="btn btn-purple btn-sm fa fa-check" routerLink="after-details"-->
-                      <!--[queryParams]="{afterNo:item.afterNo,type:'deal'}">处理-->
-              <!--</button>-->
-              <!--<ng-container *ngIf="item.state=='DELIVERY'">-->
-                <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
-                        [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
-                </button>
-              <!--</ng-container>-->
+              <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
+                      [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
+              </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>

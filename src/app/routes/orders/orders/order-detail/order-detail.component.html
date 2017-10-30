@@ -73,7 +73,9 @@
       </dl>
       <dl>
         <dt>运费：</dt>
-        <dd *ngIf="orderDetailData.freight!='0'">{{!orderDetailData.freight?'0.00':orderDetailData.freight | decimalTwo}}</dd>
+        <dd *ngIf="orderDetailData.freight!='0'">{{!orderDetailData.freight?'0.00':orderDetailData.freight |
+          decimalTwo}}
+        </dd>
         <dd *ngIf="orderDetailData.freight=='0'">免运费</dd>
       </dl>
       <dl>
@@ -84,7 +86,8 @@
         <dt>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>
-          重消币抵扣金额：</dt>
+          重消币抵扣金额：
+        </dt>
         <dd>{{!orderDetailData.coinPay?'0.00':orderDetailData.coinPay | decimalTwo}}</dd>
       </dl>
       <dl>
@@ -130,32 +133,38 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
-        <li *ngIf="orderDetailData.state=='CLOSE'">
+        <li class="mb0" *ngIf="orderDetailData.state=='CLOSE'">
           <div class="timeline-badge gray-bg thc bg"></div>
           <div class="timeline-panel">
             <div class="right">
               <div>
                 <p class="every-line">
-                  <span class="mr logis-time text-left">
-                      <b class="mr-lg">{{orderDetailData.closeTime | getDate}}</b>
-                      <b class="mr-lg">{{orderDetailData.closeTime | getWeek}}</b>
-                  </span>
-                  <span class="every-info thc font">订单已关闭</span>
+                    <span class="mr logis-time">
+                      <b class="mr-lg pull-left">{{orderDetailData.day}}</b>
+                      <b class="mr-lg">{{orderDetailData.day | getWeek}}</b>
+                      {{orderDetailData.time}}
+                    </span>
+                  <span class="every-info">订单已关闭</span>
                 </p>
               </div>
             </div>
           </div>
         </li>
         <li class="mb0" *ngFor="let item of orderStates;let s = index">
-          <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
+          <div class="timeline-badge gray-bg thc" [class.bg]="s==0&&orderDetailData.state!='CLOSE'"></div>
           <div class="timeline-panel">
             <div class="right">
               <div>
                 <p class="every-line">
                   <span class="mr logis-time" *ngIf="s==0">
-                      <b class="mr-lg pull-left">{{item.day}}</b>
-                      <b class="mr-lg">{{item.day | getWeek}}</b>
+                    <ng-container *ngIf="item.day==orderDetailData.day">
                       {{item.time}}
+                    </ng-container>
+                      <ng-container *ngIf="item.day!=orderDetailData.day">
+                        <b class="mr-lg pull-left">{{item.day}}</b>
+                        <b class="mr-lg">{{item.day | getWeek}}</b>
+                        {{item.time}}
+                      </ng-container>
                   </span>
                   <ng-container *ngIf="s>0">
                     <span class="mr logis-time" *ngIf="item.day==orderStates[s-1].day">{{item.time}}</span>
@@ -267,7 +276,8 @@
         <dl class="text-right mb0">
           <dt class="w10">运费：</dt>
           <dd class="w10 text-left">
-            <span class="ml-sm font18 mr main-red  price-wid" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">¥ 0</span>
+            <span class="ml-sm font18 mr main-red  price-wid"
+                  *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">¥ 0</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
               <span class="font18 ml-sm main-red mr price-wid">¥ {{orderDetailData.freight | number:'1.2-2'}}</span>
             </ng-container>
@@ -284,8 +294,8 @@
           <dt class="10">
             <template #popTemplate>
               重消币抵扣数量：
-              <span  *ngIf="orderDetailData.coinPay != null" >{{orderDetailData.coin | number:'1.2-2'}}</span>
-              <span  *ngIf="orderDetailData.coinPay == null" >0</span>
+              <span *ngIf="orderDetailData.coinPay != null">{{orderDetailData.coin | number:'1.2-2'}}</span>
+              <span *ngIf="orderDetailData.coinPay == null">0</span>
             </template>
             <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
                triggers="mouseenter:mouseleave"></i>
