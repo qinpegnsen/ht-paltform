@@ -21,6 +21,7 @@ export class AfterDetailsComponent implements OnInit {
   private goodsAudits: any;         //商品审核是否通过枚举
   private isPass: string = 'Y';     //是否同意退货
   private isAgree: string = 'Y';    //是否同意退货
+  public expressData: any;          //获取快递的公司和单号
 
 
   constructor(private router: Router,
@@ -42,6 +43,7 @@ export class AfterDetailsComponent implements OnInit {
     me.afterData = this.after.loadReqByAfterNo(data);
     if (isNullOrUndefined(me.afterData)) me.afterData = null;
 
+    me.expressData = me.after.getExpressInfo(me.afterData.ordno);
   }
 
   /**
