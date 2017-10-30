@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
-import {asQueryList} from "@angular/core/src/view";
 import {isNullOrUndefined} from "util";
 import {FreightTemplateService} from "./freight-template.service";
 import {Page} from "../../../core/page/page";
@@ -33,7 +32,7 @@ export class FreightTemplateComponent implements OnInit {
     voList:[]
   }
 
-  constructor(private router:Router,private FreightTemplateService:FreightTemplateService,private SessionService:SessionService) {
+  constructor(private router:Router,private FreightTemplateService:FreightTemplateService) {
 
   }
 
@@ -108,7 +107,7 @@ export class FreightTemplateComponent implements OnInit {
   delete(delCodeId) {
     let _this = this, url: string = "/expressTpl/delteStoreExpressTpl", data: any;
     swal({
-        title: '确认删除此信息？(如果有商品正在使用此模板，商品默认使用固定运费！)',
+        title: '确认删除此信息？(如果有商品正在使用此模板，商品默认无运费！)',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮

@@ -145,7 +145,9 @@ export class AddFormworkComponent implements OnInit {
         for (let j = 0; j < length; j++) {
           temp.push({
             label: _this.area_level2[i]['children'][j]['areaName'],
-            value: _this.area_level2[i]['children'][j]['areaName'], checked: false
+            value: _this.area_level2[i]['children'][j]['areaName'],
+            checked: false,
+            areaCode: _this.area_level2[i]['children'][j]['areaCode']
           });
         }
         _this.checkOptionsOnes[_this.area_level2[i]['areaCode']].push(temp);
@@ -201,24 +203,30 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     const len = isArray(_this.data) ? _this.data.length : 0;
     let tempResult = [];
+    let tempAreaCode = [];
     for (let i = 0; i < len; i++) {
       const temp = [];
+      const tempe = [];
       _this.data[i]['provices'].forEach(item => {
         if (item.checked && !item.disabled) {
           temp.push(item.value);
+          tempe.push(item.areaCode);
         } else {
           _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked && !value.disabled) {
               temp.push(value.value);
-              console.log(value.areaCode);
+              tempe.push(value.areaCode);
+              console.log(value.tempAreaCode);
             }
           });
         }
       });
       tempResult = tempResult.concat(temp);
+      tempAreaCode = tempAreaCode.concat(tempe)
     }
     if(_this.linkType=='addArticle'){
-      _this.moduleList[_this.cru].area = tempResult.join(',');
+      _this.moduleList[_this.cru].area = tempAreaCode.join(',');
+      _this.moduleList[_this.cru].area_cn = tempResult.join(',');
     }else if(_this.linkType=='updataArticle'){
       _this. staff.storeExpressTplValList[_this.cru].area = tempResult.join(',');
     }
@@ -226,7 +234,7 @@ export class AddFormworkComponent implements OnInit {
     _this.session.setData(_this.cru, _this.data);
     _this.session.setCheck(_this.cru, _this.checkOptionsOnes);
     _this.close();
-    return tempResult.join(',');
+    return tempAreaCode.join(',');
   }
 
 
@@ -438,8 +446,13 @@ export class AddFormworkComponent implements OnInit {
         //
         // }
         // _this.AddFormworkService.delCode(url, data); //删除数据
-        _this.moduleList.splice(i, 1)
-        _this.moduleList[i].area = '';
+        if(_this.linkType=='addArticle'){
+          _this.moduleList.splice(i, 1)
+          _this.moduleList[i].area = '';
+        }else if(_this.linkType=='updataArticle'){
+          _this.staff.storeExpressTplValList.splice(i, 1)
+          _this.staff.storeExpressTplValList[i].area = '';
+        }
       }
     );
   }
@@ -449,8 +462,12 @@ export class AddFormworkComponent implements OnInit {
    * @param value
    */
   addFormwork(formData) {
-
+    // area
     let _this = this;
+    if (_this.moduleList[_this.cru]['area_cn']) {
+      delete _this.moduleList[_this.cru]['area_cn']
+      console.log(_this.moduleList['area_cn']);
+    }
     //添加区域信息
     if (_this.linkType == 'addArticle') {
       let json = {

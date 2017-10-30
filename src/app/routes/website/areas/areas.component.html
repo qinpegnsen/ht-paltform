@@ -48,7 +48,7 @@
           <app-buttons [config]="deletebutton" (click)="delete(organ.areaCode)"></app-buttons>-->
           <!--<span class="btn btn-default btn-xs"  *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)"><i class="fa fa-level-down"></i>下级</span>-->
           <span *ngIf="childMenuTitList.length < 3" (click)="queryChildSortList(organ.areaCode,organ.areaName,false)">
-            <button  class="m-sm btn btn-xs btn-outline fa fa-level-down _myWhiteBg thc font b" title="同意退款" > 下级</button>
+            <button  class="m-sm btn btn-xs btn-outline fa fa-level-down _myWhiteBg thc font b" title="查看下级" > 下级</button>
           </span>
         </td>
       </tr>
