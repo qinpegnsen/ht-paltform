@@ -79,12 +79,17 @@
                 <td class="item-bd col-sm-10 mb0">{{afterData.updateTime}}</td>
               </tr>
               <tr class="t-item clearfix">
-                <td class="item-hd col-sm-2">处理备注：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
+                <td class="item-hd col-sm-2">审核结果：</td>
+                <td class="item-bd col-sm-10 mb0" *ngIf="afterData.returnType=='RETURN'">
+                  {{afterData.state=='AGREE'?'通过':'已驳回'}}
+                </td>
+                <td class="item-bd col-sm-10 mb0" *ngIf="afterData.returnType=='REFUND'">
+                  {{afterData.state=='AGREE'?'通过':'已驳回'}}
+                </td>
               </tr>
               <tr class="t-item clearfix">
-                <td class="item-hd col-sm-2">审核结果：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.returnType=='RETURN'?'同意退货':'同意退款'}}</td>
+                <td class="item-hd col-sm-2">处理意见：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
               </tr>
             </table>
           </div>

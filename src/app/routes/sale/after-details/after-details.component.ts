@@ -37,7 +37,6 @@ export class AfterDetailsComponent implements OnInit {
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
 
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
-    console.log("█ me.LogisticsData ►►►", me.LogisticsData);
     let data;
     if (!isNullOrUndefined(me.afterNo)) data = {afterNo: me.afterNo};
     me.afterData = this.after.loadReqByAfterNo(data);
