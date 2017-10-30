@@ -9,7 +9,11 @@ import {AdddataComponent} from "./adddata/adddata.component";
 import { RightpageComponent } from './rightpage/rightpage.component';
 import {DataDictionaryComponentService} from "./data-dictionary/data-dictionary-component.service";
 import {MeasureService} from "./measure/measure.service";
+import { DataValComponent } from './data-val/data-val.component';
 
+const valRoutes: Routes = [
+  {path: 'adddata', component: AdddataComponent},
+]
 const appChildRoutes: Routes = [
   {path: 'adddata', component: AdddataComponent},
   {path: 'rightpage', component: RightpageComponent}
@@ -18,7 +22,12 @@ const routes: Routes = [
   {path:'',redirectTo:'areas'},
   {path: 'adddata', component: AdddataComponent},
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
-  {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},
+  {path: 'dataDictionary',
+    children:[
+      {path: '',component:DataDictionaryComponent,children:appChildRoutes},
+      {path: 'data-val', component:DataValComponent,children:valRoutes},
+
+    ]},
   {path: 'measure', component: MeasureComponent,children:appChildRoutes}
 ];
 
@@ -28,7 +37,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent],
+  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, DataValComponent],
   providers:[DataDictionaryComponent,DataDictionaryComponentService,MeasureService,MeasureComponent]
 })
 export class WebsiteModule { }

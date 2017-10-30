@@ -1,11 +1,11 @@
 <div class="p-lg">
   <div class="row">
     <div class="col-lg-12">
-      <ul class="timeline" *ngIf="refund.bacctName!=null">
+      <ul class="timeline" *ngIf="refund.ordno!=null">
 
         <li class="timeline-separator" data-datetime="开始"></li>
 
-        <li class="" *ngIf="refund.bacctName!=null">
+        <li class="" *ngIf="refund.ordno!=null">
           <div class="timeline-badge primary">
             <em class="fa fa-edit"></em>
           </div>
@@ -54,7 +54,7 @@
           </div>
         </li>
 
-        <li class="timeline-inverted" *ngIf="refund.agentOrdReturnAudit!=null && refund.bacctName!=null">
+        <li class="timeline-inverted" *ngIf="refund.agentOrdReturnAudit!=null && refund.ordno!=null">
           <div class="timeline-badge green">
             <em class="icon icon-user-following"></em>
           </div>
