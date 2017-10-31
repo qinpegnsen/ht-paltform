@@ -282,18 +282,6 @@
   </ng-container>
 </div>
 
-<!--订单关闭的状态-->
-<div class="rate-of-progress mt-xl mb-xl w100" *ngIf="orderData.state=='CLOSE'">
-  <div *ngIf="orderData.state=='CLOSE'" class="already-progress _w0 thc bg"></div>
-  <ng-container *ngIf="orderData.state=='CLOSE'">
-    <dl class="cur">
-      <dt class="thc font">订单关闭</dt>
-      <dd class="szh-progress-point fa fa-check mt mb-lg thc bg"></dd>
-      <dd>{{orderData.createTime}}</dd>
-    </dl>
-  </ng-container>
-</div>
-
 <!--订单信息-->
 <div class="w100">
   <table class="w100 b">
