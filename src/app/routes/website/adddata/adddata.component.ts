@@ -86,7 +86,7 @@ export class AdddataComponent implements OnInit {
       }else{
         return;
       }
-    } else if (this.linkType == 'updateSortVal') {//修改数据字典key
+    } else if (this.linkType == 'updateSort') {//修改数据字典key
       let url: string = '/datadict/updateDatadictType', data: any;
       if (!isNullOrUndefined(obj.name)) {
         data = { //参数
