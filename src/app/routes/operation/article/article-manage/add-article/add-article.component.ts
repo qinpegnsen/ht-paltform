@@ -546,7 +546,7 @@ export class AddArticleComponent implements OnInit {
         break;
     }
     let result = this.operationService.addNewArticle(url, data);
-    if (result == '文章内容不能为空' || result == '请选择文章分类' || '输入项中不能包含非法字符。,fieldName:articleContent') {
+    if (result == '文章内容不能为空' || result == '请选择文章分类' ||result == '输入项中不能包含非法字符。,fieldName:articleContent') {
       return;
     } else {
       this.router.navigate(['/main/operation/article/manage']);
