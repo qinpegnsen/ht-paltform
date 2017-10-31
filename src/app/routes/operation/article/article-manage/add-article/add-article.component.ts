@@ -157,6 +157,18 @@ export class AddArticleComponent implements OnInit {
           dialogsInBody: true,
           lang: 'zh-CN',
           fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+          toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['style']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
+            ['Insert', ['picture','link','video','table',]],
+            ['height', ['height']],
+            ['Misc', ['fullscreen', 'codeview', 'help','undo','redo']],
+          ],
           callbacks: {
             onChange: (contents, $editable) => {
               me.contents = contents;
@@ -185,6 +197,19 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
+          fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+          toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['style']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
+            ['Insert', ['picture','link','video','table',]],
+            ['height', ['height']],
+            ['Misc', ['fullscreen', 'codeview', 'help','undo','redo']],
+          ],
           callbacks: {
             onChange: (contents) => {
               me.contents = contents;
