@@ -86,17 +86,17 @@
         </fieldset>
 
         <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label" *ngIf="!isName"><i class="main-red">*</i>类型名（val）</label>
+          <div class="form-group" *ngIf="!isName">
+            <label class="col-sm-3 control-label" ><i class="main-red">*</i>类型名（val）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" required name="info" *ngIf="!isName" [(ngModel)]="updataData.info" #info="ngModel"
+              <input class="form-control" type="text" required name="info"  [(ngModel)]="updataData.info" #info="ngModel"
                      placeholder="请填写名称"/>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label" *ngIf="isName"><i class="main-red">*</i>类型名（name）</label>
+          <div class="form-group" *ngIf="isName">
+            <label class="col-sm-3 control-label" ><i class="main-red">*</i>类型名（name）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text" *ngIf="isName" required name="name" [(ngModel)]="updataData.name" #name="ngModel"
+              <input class="form-control" type="text" required name="name" [(ngModel)]="updataData.name" #name="ngModel"
                      placeholder="请填写名称"/>
             </div>
           </div>

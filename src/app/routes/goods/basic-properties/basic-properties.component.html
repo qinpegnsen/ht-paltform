@@ -25,6 +25,9 @@
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
       <thead>
       <tr>
+        <!--<th class="text-center w5">-->
+          <!--<rzhDefaultSorter by="order">排序</rzhDefaultSorter>-->
+        <!--</th>-->
         <th class="text-center w25">
           <rzhDefaultSorter by="order">属性名称</rzhDefaultSorter>
         </th>
@@ -38,6 +41,7 @@
       </thead>
       <tbody dnd-sortable-container [sortableData]="data.baseTypeList">
       <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i" >
+      <!--<td>{{i+1}}</td>-->
       <td >{{count.name}}</td>
       <td >
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>

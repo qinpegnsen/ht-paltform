@@ -42,14 +42,14 @@
         <th class="w6 text-center">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w15 text-left">
           <rzhDefaultSorter by="code">类型码（code）</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center">
+        <th class="w22 text-left">
           <rzhDefaultSorter by="name" *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
           <rzhDefaultSorter by="val" *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center ">
+        <th class="w23 text-left ">
           <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>
         </th>
         <th class="w7 text-center">
@@ -58,7 +58,7 @@
         <th class="w7 text-center">
           <rzhDefaultSorter by="value" *ngIf="childMenuTitList.length < 1">唯一值</rzhDefaultSorter>
         </th>
-        <th class="w25 text-center">
+        <th class="w20 text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -66,10 +66,10 @@
       <tbody>
       <tr *ngFor="let elder of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
-        <td>{{elder.code}}</td>
-        <td *ngIf="elder.name !='' && elder.name!=null && elder.name!=undefined">{{elder.name}}</td>
-        <td *ngIf="elder.info !='' && elder.info!=null && elder.info!=undefined">{{elder.info}}</td>
-        <td>{{elder.remark}}</td>
+        <td class="text-left">{{elder.code}}</td>
+        <td class="text-left" *ngIf="elder.name !='' && elder.name!=null && elder.name!=undefined">{{elder.name}}</td>
+        <td class="text-left" *ngIf="elder.info !='' && elder.info!=null && elder.info!=undefined">{{elder.info}}</td>
+        <td class="text-left">{{elder.remark}}</td>
         <td>
           <!--是否启用-->
           <label class="switch">

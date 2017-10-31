@@ -39,6 +39,19 @@ export class HelpUpdateComponent implements OnInit {
       $('#summernote').summernote({ //初始化编辑器
         height: 500,
         dialogsInBody: true,
+        lang: 'zh-CN',
+        fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+        toolbar: [
+          ['edit',['undo','redo']],
+          ['headline', ['style']],
+          ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+          ['fontface', ['fontname','color','fontsize']],
+          ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+          ['height', ['height']],
+          ['table', ['table']],
+          ['insert', ['link','picture','hr']],
+          ['view', ['fullscreen', 'codeview']]
+        ],
         callbacks: {
           onChange: (contents, $editable) => {
             this.contents = contents;
