@@ -48,11 +48,13 @@ export class AuditPageComponent implements OnInit {
       $('#summernote').summernote({
         height: 280,
         dialogsInBody: true,
+        lang: 'zh-CN',
         callbacks: {
           onChange: (contents, $editable) => {}
         }
       });
       $('#summernote').summernote('code', this.queryArticleData.articleBody.articleContent);
+      $('#summernote').summernote('disable');
     }, 0);
 
     /**

@@ -29,6 +29,7 @@
         "../node_modules/bootstrap/js/dropdown.js",
         "../node_modules/bootstrap/js/tooltip.js",
         "../node_modules/summernote/dist/summernote.js",
+        "../node_modules/summernote/lang/summernote-zh-CN.js",
         "../node_modules/echarts/dist/echarts.min.js",
         "assets/datatables/js/jquery.dataTables.min.js",
         "assets/map/china.js",

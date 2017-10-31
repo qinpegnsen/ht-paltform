@@ -156,6 +156,7 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote({
           height: 280,
           dialogsInBody: true,
+          lang: 'zh-CN',
           callbacks: {
             onChange: (contents, $editable) => {
               me.contents = contents;
@@ -185,6 +186,7 @@ export class AddArticleComponent implements OnInit {
         $('#summernote').summernote({
           height: 280,
           dialogsInBody: true,
+          lang: 'zh-CN',
           callbacks: {
             onChange: (contents) => {
               me.contents = contents;
