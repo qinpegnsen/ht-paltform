@@ -42,15 +42,15 @@ export class HelpUpdateComponent implements OnInit {
         lang: 'zh-CN',
         fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
         toolbar: [
-          ['edit',['undo','redo']],
-          ['headline', ['style']],
-          ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-          ['fontface', ['fontname','color','fontsize']],
-          ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-          ['height', ['height']],
-          ['table', ['table']],
-          ['insert', ['link','picture','hr']],
-          ['view', ['fullscreen', 'codeview']]
+          ['edit',['undo','redo']],//编辑
+          ['headline', ['style']],//大字标题
+          ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],//样式
+          ['fontface', ['fontname','color','fontsize']],//字体
+          ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],//对齐方式
+          ['height', ['height']],//高
+          ['table', ['table']],//表单
+          ['insert', ['link','picture','hr']],//插入链接，图片，下划线
+          ['view', ['fullscreen', 'codeview']]//全屏，代码视图
         ],
         callbacks: {
           onChange: (contents, $editable) => {
