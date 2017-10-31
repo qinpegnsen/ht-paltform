@@ -156,6 +156,7 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
+          fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
           callbacks: {
             onChange: (contents, $editable) => {
               me.contents = contents;

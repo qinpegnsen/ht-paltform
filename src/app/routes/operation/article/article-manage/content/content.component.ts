@@ -209,10 +209,7 @@ export class ContentComponent implements OnInit,OnChanges  {
       commendState:article.articleCommend
     }
     let url= "/article/updateArticleIsCommend";
-    let result=this.ContentService.isRecom(url,data)
-    // if(result){  //这里暂时不需要刷新页面
-    //   this.queryArticManleList('N',curPage)
-    // }
+    this.ContentService.isRecom(url,data)
   }
 
   /**
@@ -231,9 +228,6 @@ export class ContentComponent implements OnInit,OnChanges  {
       isTopState:article.isTop
     }
     let url= "/article/pubArticle";
-    let result=that.ContentService.isTop(url,data)
-    if(result){
-      this.queryArticManleList('N',curPage)//调用文章的列表
-    }
+    that.ContentService.isTop(url,data)
   }
 }
