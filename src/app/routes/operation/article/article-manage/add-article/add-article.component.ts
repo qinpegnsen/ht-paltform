@@ -197,7 +197,7 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
-          fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+          fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','Helvetica', 'Arial'],
           toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['style', ['style']],
