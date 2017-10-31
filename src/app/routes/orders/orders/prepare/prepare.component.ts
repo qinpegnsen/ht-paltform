@@ -91,7 +91,6 @@ export class PrepareComponent implements OnInit {
       ordno: _this.ordno
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**
