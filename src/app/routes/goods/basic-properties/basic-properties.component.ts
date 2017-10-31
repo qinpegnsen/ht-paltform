@@ -125,5 +125,4 @@ export class BasicPropertiesComponent implements OnInit {
     if(data == 'success') this.queryBaseEnumList()
   }
 
-
 }

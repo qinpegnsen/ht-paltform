@@ -35,7 +35,7 @@ export class DataDictionaryComponentService {
   }
 
   //删除key
-   delCode(url,data) {
+  delCode(url,data) {
     this.ajax.del({
       url:url,
       data: data,
@@ -55,10 +55,10 @@ export class DataDictionaryComponentService {
   }
 
   /**
-  * @param data
-  * @param url
-  * @returns {Page}
-  */
+   * @param data
+   * @param url
+   * @returns {Page}
+   */
   public queryData(url,data) {
     var result;
     this.ajax.get({

@@ -5,6 +5,8 @@ import {isNull, isNullOrUndefined} from "util";
 import {AjaxService} from "../../../core/services/ajax.service";
 import {DataDictionaryComponentService} from "./data-dictionary-component.service";
 import {AppComponent} from "../../../app.component";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {getDate} from "ngx-bootstrap/bs-moment/utils/date-getters";
 const swal = require('sweetalert');
 
 @Component({
@@ -25,8 +27,9 @@ export class DataDictionaryComponent implements OnInit {
   private searchkey: string = '';
   private childMenuTitList: Array<any> = []; //菜单级别面包屑
   private data: Page = new Page();
+  private backPage: number = 1;
 
-  private codeVal=this.code;
+  private codeVal='';
   constructor(private ajax: AjaxService, private dataDictionaryService: DataDictionaryComponentService) {
 
   }
@@ -60,13 +63,59 @@ export class DataDictionaryComponent implements OnInit {
     this.queryDatas(1)
   }
 
-//   queryAll(){
-//     if(isNull(this.codeVal)){
-//       this.queryDatas(1);
-//     }else if(!isNull(this.codeVal)){
-//       this.queryChildSortList();
-//     }
-// }
+  /**
+   * 查询val
+   * @param code
+   * @param name
+   * @param isTit
+   */
+  getChild(code, name, isTit){
+    let me = this, num = 0;
+    let activePage = 1;
+    me.backPage = me.data.curPage;
+    me.childMenuCode = code, me.childMenuName = name, me.childMenuTitList = []; //清空子集查询
+    me.childMenuTitList.push({name: name, code: code})
+    me.getData(1)
+  }
+
+  getData(page, event?: PageEvent) {
+    let me = this, activePage = 1;
+    event ? activePage = event.activePage : activePage = page;
+    if(me.childMenuCode){
+      me.queryChild(activePage);
+    }else {
+      me.queryParent(activePage);
+    }
+  }
+
+  /**
+   * 查询val
+   * @param page
+   */
+  queryChild(page) {
+    let me = this;
+    let data = {
+      curPage: page,
+      pageSize: 10,
+      code: me.childMenuCode
+    }
+    let url = "/datadict/querryDatadictList";
+    let res = me.dataDictionaryService.queryData(url, data);
+    me.data = new Page(res);
+  }
+
+  queryParent(page) {
+    let me = this;
+    me.childMenuCode = null, me.childMenuName = null, me.childMenuTitList = [];
+    let requestData = {
+      curPage: page,
+      pageSize: 10,
+      name: this.searchkey
+    }
+    let res = this.dataDictionaryService.getdataservice(requestData)
+    me.data = new Page(res);
+  }
+
 
   //查询数据字典信息列表
   public queryDatas(curPage,event?: PageEvent) {
@@ -171,7 +220,8 @@ export class DataDictionaryComponent implements OnInit {
 
   // 返回上一级菜单列表
   goBackMenu() {
-    this.queryChildSortList();
+    let me = this;
+    me.queryParent(me.backPage)
   }
 
 }

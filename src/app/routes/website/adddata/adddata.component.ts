@@ -8,19 +8,17 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {MeasureComponent} from "../measure/measure.component";
 import {cli} from "webdriver-manager/built/lib/webdriver";
 import {PatternService} from "../../../core/forms/pattern.service";
-import {DataValComponent} from "../data-val/data-val.component";
 
 @Component({
   selector: 'app-adddata',
   templateUrl: './adddata.component.html',
   styleUrls: ['./adddata.component.scss'],
-  providers: [AdddataService,DataValComponent]
+  providers: [AdddataService]
 })
 export class AdddataComponent implements OnInit {
   private adddata = {name: '', remark: '', code: '', isUniqueVal: ''};
   public updataData: any;
   public updataDataa: any;
-  private updataDataVal:any;
   private isName: boolean;
   public linkType: string;
   public id: number;
@@ -37,7 +35,7 @@ export class AdddataComponent implements OnInit {
   constructor(public settings: SettingsService, private router: Router, private adddataService: AdddataService,
               private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent,
               private sub: SubmitService, private submitt: SubmitService, private measureComponent: MeasureComponent,
-              private patterns:PatternService,private dataVal:DataValComponent) {
+              private patterns:PatternService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -60,11 +58,8 @@ export class AdddataComponent implements OnInit {
     ;
     if (_this.linkType == "updateCount") {//计量单位--若为修改操作,获取信息
       _this.updataDataa = _this.sub.getData("/goodsUnit/loadById", {id: _this.id}); //获取数据字典key
-    };
-    if (_this.linkType == "updateValSort") {//数据字典val--若为修改操作,获取信息
-      _this.updataDataVal = _this.sub.getData("/datadict/loadDatadictByCode", {code: _this.code}); //获取数据字典val
-    };
 
+    }
   }
 
   /**
@@ -91,7 +86,7 @@ export class AdddataComponent implements OnInit {
       }else{
         return;
       }
-    } else if (this.linkType == 'updateSort') {//修改数据字典key
+    } else if (this.linkType == 'updateSortVal') {//修改数据字典key
       let url: string = '/datadict/updateDatadictType', data: any;
       if (!isNullOrUndefined(obj.name)) {
         data = { //参数
@@ -149,23 +144,6 @@ export class AdddataComponent implements OnInit {
       }
       this.submitt.putRequest(url, data,true);
       this.measureComponent.qeuryAllService(this.curPage);
-    }
-  }
-
-  /**
-   * 数据字典val-提交
-   */
-  submitVal(res) {
-     if (this.linkType == 'updateValSort') {
-      let url = '/datadict/updateDatadict';//数据字典val修改
-      let data = {
-        typeCode: this.typeCode,
-        code: this.code,
-        info: res.info,
-        remark: res.remark,
-      }
-      this.submitt.putRequest(url, data,true);
-      this.router.navigate(["/main/website/dataDictionary/data-val"],{queryParams:{code: this.typeCode}});
     }
   }
 }

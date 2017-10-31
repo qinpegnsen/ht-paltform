@@ -87,10 +87,17 @@
 
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-3 control-label" ><i class="main-red">*</i>类型名（name）</label>
+            <label class="col-sm-3 control-label" *ngIf="!isName"><i class="main-red">*</i>类型名（val）</label>
             <div class="col-sm-8">
-              <input class="form-control" type="text"  required name="name" [(ngModel)]="updataData.name" #name="ngModel"
-              placeholder="请填写名称"/>
+              <input class="form-control" type="text" required name="info" *ngIf="!isName" [(ngModel)]="updataData.info" #info="ngModel"
+                     placeholder="请填写名称"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label" *ngIf="isName"><i class="main-red">*</i>类型名（name）</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" *ngIf="isName" required name="name" [(ngModel)]="updataData.name" #name="ngModel"
+                     placeholder="请填写名称"/>
             </div>
           </div>
         </fieldset>
@@ -104,8 +111,8 @@
             </div>
           </div>
           <div [hidden]="remark.valid || remark.pristine"
-          class="col-sm-9 pull-right text-danger">
-          请填写备注
+               class="col-sm-9 pull-right text-danger">
+            请填写备注
           </div>
         </fieldset>
 
@@ -168,118 +175,6 @@
   </form>
 </div>
 
-<!--修改val的值-->
-<div class="rightpage"  *ngIf="linkType=='updateValSort'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
-    <!-- START panel-->
-    <div class="panel-default">
-      <div class="panel-body">
-        <fieldset class="b0">
-          <legend class="thc font">修改数据字典 <i><b>{{keys}}</b></i>值</legend>
-        </fieldset>
-
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label" ><i class="main-red">*</i>类型名（val）</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" required name="info"  [(ngModel)]="updataDataVal.info" #info="ngModel"
-                     placeholder="请填写名称"/>
-            </div>
-          </div>
-          <div [hidden]="info.valid || info.pristine"
-               class="col-sm-9 pull-right text-danger">
-            请填写名称
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>备注</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" required name="remark" [(ngModel)]="updataDataVal.remark" #remark="ngModel"
-                     placeholder="请填写备注"/>
-            </div>
-          </div>
-          <div [hidden]="remark.valid || remark.pristine"
-               class="col-sm-9 pull-right text-danger">
-            请填写备注
-          </div>
-        </fieldset>
-
-      </div>
-      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submitVal(addForm.value)" [disabled]="!addForm.form.valid">提交信息</button>
-      </div>
-    </div>
-    <!-- END panel-->
-  </form>
-</div>
-
-<!--添加val 的值-->
-<div class="rightpage"  *ngIf="linkType=='addValSort'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
-    <!-- START panel-->
-    <div class="panel-default">
-      <div class="panel-body">
-        <fieldset class="b0">
-          <legend class="thc font">数据字典信息</legend>
-        </fieldset>
-
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>类型码（code）</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" required name="code" ngModel #code="ngModel"
-                     placeholder="请填写类型码"/>
-            </div>
-            <a></a>
-          </div>
-          <div [hidden]="code.valid || code.pristine"
-               class="col-sm-9 pull-right text-danger">
-            请填写类型码
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>名称（name）</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" required name="name" ngModel #name="ngModel"
-                     placeholder="请填写名称"/>
-            </div>
-          </div>
-          <div [hidden]="name.valid || name.pristine"
-               class="col-sm-9 pull-right text-danger">
-            请输入名称
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div class="form-group">
-            <label class="col-sm-3 control-label"><i class="main-red">*</i>备注</label>
-            <div class="col-sm-8">
-              <input class="form-control" type="text" required name="remark" ngModel #remark="ngModel"
-                     placeholder="请填写备注"/>
-            </div>
-          </div>
-          <div [hidden]="remark.valid || remark.pristine"
-               class="col-sm-9 pull-right text-danger">
-            请填写备注
-          </div>
-        </fieldset>
-
-      </div>
-      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-        <button class="ml btn btn-info pull-left" type="submit" (click)="submitVal(addForm.value)" [disabled]="!addForm.form.valid" >提交信息</button>
-      </div>
-    </div>
-    <!-- END panel-->
-  </form>
-</div>
-
-
 <!--计量单位--修改-->
 <div class="rightpage" *ngIf="linkType=='updateCount'">
   <form class="form-validate form-horizontal" style="height: 100%"   #res="ngForm">
@@ -317,8 +212,6 @@
             请填写整数
           </div>
         </fieldset>
-
-
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
@@ -348,7 +241,7 @@
             </div>
           </div>
           <div [hidden]="unitName.valid || unitName.pristine"
-          class="col-sm-9 pull-right text-danger alert alert-danger">
+               class="col-sm-9 pull-right text-danger alert alert-danger">
             请填写单位名称
           </div>
         </fieldset>
