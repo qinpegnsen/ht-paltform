@@ -23,15 +23,13 @@ export class InspectGoodsComponent implements OnInit {
     curPage: null,
     pageSize: 10,
     returnType: 'RETURN',
+    state: 'DELIVERY',
     isReceive: '',
     afterNo: null,
-    state: '',
     phone: null,
     ordno: null,
     goodsBaseCode: null,
-    agentCode: null,
-    stateDelivery: 'DELIVERY',
-    stateAgree: 'AGREE',
+    agentCode: null
   };
 
   constructor(private submit: SubmitService, private router: Router,
@@ -74,7 +72,7 @@ export class InspectGoodsComponent implements OnInit {
   queryAllService(event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
-    let url = "/after/queryAfterGoodsReqCheckPages";
+    let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
     if (isNullOrUndefined(result)) return;
@@ -94,9 +92,11 @@ export class InspectGoodsComponent implements OnInit {
     };
     let selectCon=$.trim($(".order-guide .bb").text());//获取文本之后再把多余的空格去掉，要不然html大代码一整理就出错了
     if(selectCon=='待验货'){
-      this.selectText='DELIVERY'
+      this.search.state='DELIVERY';
+      this.queryAllService();
     }else{
-      this.selectText='AGREE'
+      this.search.state='AGREE'
+      this.queryAllService();
     };
   }
 

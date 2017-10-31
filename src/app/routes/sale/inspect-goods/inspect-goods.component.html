@@ -107,7 +107,7 @@
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
-              <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
+              <button *ngIf="item.state=='DELIVERY'" class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
               </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
