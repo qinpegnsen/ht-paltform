@@ -281,7 +281,7 @@
             </span>
               <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
               <input class="text price num form-control pull-left" name="fixedFreight" type="number"
-                     [required]="publishData.goodsExpressInfo.freightType=='FIXED'" [readonly]="myReadOnly"
+                     [required]="publishData.goodsExpressInfo.freightType=='FIXED'" readonly
                      [(ngModel)]="publishData.goodsExpressInfo.fixedFreight">
               <em class="add-on">元</em>
             </span>
@@ -322,14 +322,16 @@
             <div class="clearfix mb">
               <span class="pull-left mr"><i class="main-red">*</i>重量：</span>
               <span class="pull-left">
-              {{publishData.goodsExpressInfo.weight}}
+                <input class="text price num form-control pull-left" name="weight" type="number" readonly
+                       [(ngModel)]="publishData.goodsExpressInfo.weight">
               <em class="add-on">kg</em>
             </span>
             </div>
             <div class="clearfix">
               <span class="pull-left mr"><i class="main-red">*</i>体积：</span>
               <span class="pull-left">
-              {{publishData.goodsExpressInfo.volume}}
+                <input class="text price num form-control pull-left" name="volume" type="number" readonly
+                       [(ngModel)]="publishData.goodsExpressInfo.volume">
               <em class="add-on">m³</em>
             </span>
             </div>

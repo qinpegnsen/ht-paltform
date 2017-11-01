@@ -283,12 +283,16 @@ export class EditDetailComponent implements OnInit {
     let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
     let result = me.getTplVal(tplId);
     if (!isNullOrUndefined(result)) me.tplVals = result;
-    if (me.tplVals.valuationType == 'VOLUME') {
-      me.unit = 'm³'
-    } else if (me.tplVals.valuationType == 'WEIGHT') {
-      me.unit = 'kg'
-    } else {
-      me.unit = '件'
+    if (!isNullOrUndefined(me.tplVals)){
+      if(me.tplVals.valuationType == 'VOLUME') {
+        me.unit = 'm³'
+      } else if (me.tplVals.valuationType == 'WEIGHT') {
+        me.unit = 'kg'
+      } else {
+        me.unit = '件'
+      }
+    }else{
+      me.publishData.isFreight = 'N'
     }
   }
 
