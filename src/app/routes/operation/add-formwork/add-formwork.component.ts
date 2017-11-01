@@ -31,7 +31,6 @@ export class AddFormworkComponent implements OnInit {
   public three: boolean = false;
   private staff: any = {};
   private id;
-  // public area: Array<any> = [];
   private cru: number = 0;
 
   china_area = CHINA_AREA;
@@ -40,7 +39,6 @@ export class AddFormworkComponent implements OnInit {
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  // public area: string = '';
   constructor(private routeInfo: ActivatedRoute, private router: Router, private ajax: AjaxService, private session: SessionService, private FreightTemplateComponent: FreightTemplateComponent,private patterns: PatternService) {
   }
 
@@ -210,13 +208,16 @@ export class AddFormworkComponent implements OnInit {
       _this.data[i]['provices'].forEach(item => {
         if (item.checked && !item.disabled) {
           temp.push(item.value);
-          tempe.push(item.areaCode);
+          _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+            if (value.checked && !value.disabled) {
+              tempe.push(value.areaCode);
+            }
+          });
         } else {
           _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
             if (value.checked && !value.disabled) {
               temp.push(value.value);
               tempe.push(value.areaCode);
-              console.log(value.tempAreaCode);
             }
           });
         }
@@ -463,13 +464,14 @@ export class AddFormworkComponent implements OnInit {
    * @param value
    */
   addFormwork(formData) {
+
     // area
     let _this = this;
-    if (_this.moduleList[_this.cru]['area_cn']) {
-      delete _this.moduleList[_this.cru]['area_cn']
-      console.log(_this.moduleList['area_cn']);
-    }
-    //添加区域信息
+    // if (_this.moduleList[_this.cru]['area_cn']) {
+    //   delete _this.moduleList[_this.cru]['area_cn']
+    //   console.log(_this.moduleList['area_cn']);
+    // }
+    //添加信息
     if (_this.linkType == 'addArticle') {
       let json = {
         tplName: formData.value.tplName,
@@ -495,24 +497,37 @@ export class AddFormworkComponent implements OnInit {
           }
         },
         error: (data) => {
+          console.log("█ 2 ►►►",  2);
+
           swal('添加运费模板提交失败！', '', 'error');
         }
       })
     }
+    //修改信息
     else if (_this.linkType == 'updataArticle') {
-      if (_this.staff.storeExpressTplValList[_this.cru]['area_cn']) {
-        delete _this.staff.storeExpressTplValList[_this.cru]['area_cn']
-        console.log(_this.staff.storeExpressTplValList['area_cn']);
-      }
+      // if (_this.staff.storeExpressTplValList[_this.cru]['area_cn']) {
+      //   delete _this.staff.storeExpressTplValList[_this.cru]['area_cn']
+      //   console.log(_this.staff.storeExpressTplValList['area_cn']);
+      // }
+      _this.staff.storeExpressTplValList.forEach(ele => {
+        delete ele.createTimeBegin
+        delete ele.createTimeEnd
+        delete ele.updateTimeBegin
+        delete ele.updateTimeEnd
+      })
       let json = {
         tplName: formData.value.tplName,
         isFree: 'N',
         valuationType: formData.value.valuationType,
         sellerCode: 'SZH_PLAT_SELF_STORE',
         storeCode: 'SZH_PLAT_SELF_STORE',
-        id:this.id,
-        storeExpressTplValList: this.staff.storeExpressTplValList
+        id:_this.id,
+        storeExpressTplValList: _this.staff.storeExpressTplValList
       }
+
+      console.log("█ json ►►►",  json);
+
+
       _this.ajax.put({
         url: '/expressTpl/updateStoreExpressTpl',
         data: {

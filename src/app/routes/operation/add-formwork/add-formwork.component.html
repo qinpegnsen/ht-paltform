@@ -106,36 +106,66 @@
                     <tbody>
                     <tr *ngFor="let item of moduleList;let i = index">
                       <td>{{item.area_cn}}</td>
+                      <!--首件begin-->
                       <td class="text-center" *ngIf="one">
-                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.integer"/>
+                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.integer" #firstNum="ngModel"/>
+                        <div [hidden]="firstNum.valid || firstNum.pristine">
+                          填写正整数
+                        </div>
                       </td>
                       <td class="text-center" *ngIf="twe">
-                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.threedecimal"/>
+                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.threedecimal" #firstNum="ngModel"/>
+                        <div [hidden]="firstNum.valid || firstNum.pristine">
+                          填写正整数，可保留三位小数
+                        </div>
                       </td>
                       <td class="text-center" *ngIf="three">
-                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.threedecimal"/>
+                        <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.threedecimal" #firstNum="ngModel"/>
+                        <div [hidden]="firstNum.valid || firstNum.pristine">
+                          填写正整数，可保留三位小数
+                        </div>
                       </td>
+                      <!--首件end-->
+
+                      <!--首费begin-->
                       <td class="text-center">
                         <div class="input-group">
                           <input class="form-control" type="text" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" [pattern]="patterns.twodecimal" required>
                           <span class="input-group-addon money">￥</span>
                         </div>
                       </td>
+                      <!--首费end-->
+
+                      <!--续件begin-->
                       <td class="text-center" *ngIf="one">
-                      <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.integer">
+                      <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.integer" #addAttach="ngModel">
+                        <div [hidden]="addAttach.valid || addAttach.pristine">
+                          填写正整数
+                        </div>
                     </td>
                       <td class="text-center" *ngIf="twe">
-                        <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.threedecimal">
+                        <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.threedecimal" #addAttach="ngModel">
+                        <div [hidden]="addAttach.valid || addAttach.pristine">
+                          填写正整数，可保留三位小数
+                        </div>
                       </td>
                       <td class="text-center" *ngIf="three">
-                        <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.threedecimal">
+                        <input class="text _price num form-control" name="addAttach{{i}}" [(ngModel)]="item.addAttach" type="number" required value="1" [pattern]="patterns.threedecimal" #addAttach="ngModel">
+                        <div [hidden]="addAttach.valid || addAttach.pristine">
+                          填写正整数，可保留三位小数
+                        </div>
                       </td>
+                      <!--续件end-->
+
+                      <!--续费begin-->
                       <td class="text-center">
                         <div class="input-group">
                           <input class="form-control" type="text" [(ngModel)]="item.addPrice" name="addPrice{{i}}" [pattern]="patterns.integer" required>
                           <span class="input-group-addon">￥</span>
                         </div>
                       </td>
+                      <!--续费end-->
+
                       <td class="text-center">
                         <!--修改运费模板值按钮-->
                         <app-buttons [config]="updatebutton" (click)="edit(i);area_model = !area_model"></app-buttons>
@@ -275,7 +305,10 @@
                   <tr *ngFor="let item of staff.storeExpressTplValList;let i = index">
                     <td>{{item.area | level2AreaName}}</td>
                     <td class="text-center">
-                      <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.integer"/>
+                      <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.integer" #firstNum="ngModel"/>
+                      <div [hidden]="firstNum.valid || firstNum.pristine">
+                        填写正整数
+                      </div>
                     </td>
                     <td class="text-center">
                       <div class="input-group">
