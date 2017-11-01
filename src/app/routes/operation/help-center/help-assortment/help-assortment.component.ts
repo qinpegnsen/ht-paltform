@@ -45,7 +45,7 @@ export class HelpAssortmentComponent implements OnInit {
           ['height', ['height']],//高
           ['table', ['table']],//表单
           ['insert', ['link','picture','hr']],//插入链接，图片，下划线
-          ['view', ['fullscreen', 'codeview']]//全屏，代码视图
+          ['view', ['fullscreen', 'codeview', 'help']]//全屏，代码视图,帮助
         ],
         callbacks: {
           onChange: (contents, $editable) => {
