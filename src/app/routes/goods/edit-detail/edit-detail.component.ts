@@ -33,7 +33,6 @@ export class EditDetailComponent implements OnInit {
   private mblItemList = [];         //手机端上传后的图片集合
   private goodsEditData: any;     // 修改商品时商品的原有数据
   private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private myReadOnly: boolean = false;     // 商品详情或审核商品时是只读状态
   private goodsBody: any;          //商品详情
   public storeCode: string;          //店铺编码
   public logistics: any;             // 物流规则列表
@@ -233,6 +232,7 @@ export class EditDetailComponent implements OnInit {
     } else {
       pageData = me.submit.getData('/goodsQuery/pageDataAdd', {kindId: me.kindId});
     }
+    me.getExpressTpl(); //获取物流模板
     if (!isNullOrUndefined(pageData)) {
       me.allotPageData(pageData);  //分配获取的页面数据
     }
@@ -258,7 +258,9 @@ export class EditDetailComponent implements OnInit {
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-      if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
+      if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
+        me.getTplValById();
+      }    //根据物流模板ID获取模板值
     }
   }
 
@@ -267,7 +269,6 @@ export class EditDetailComponent implements OnInit {
    */
   getExpressTpl(target?) {
     let me = this, expressTpl;
-    console.log("█ target ►►►",  target);
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
     if(isNullOrUndefined(target) || target == 'FIXED') {
       expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板

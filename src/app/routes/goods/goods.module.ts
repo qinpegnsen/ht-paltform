@@ -28,7 +28,6 @@ const routes: Routes = [
   {
     path: 'unAudit', children: [
     {path: '', component: UnAuditComponent},
-    {path: 'edit', component: EditDetailComponent},
     {path: 'detail', component: AuditGoodsComponent},
     {path: 'audit', component: AuditGoodsComponent}]
   },
