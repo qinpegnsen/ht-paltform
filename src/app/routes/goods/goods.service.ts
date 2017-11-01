@@ -156,7 +156,7 @@ export class GoodsService {
   getExpressTplByStoreCode(){
     let me = this, storeCode;
     let loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
-    console.log("█ loginInfo ►►►",  loginInfo);
+    // console.log("█ loginInfo ►►►",  loginInfo);
     if(isNullOrUndefined(loginInfo)){
       AppComponent.rzhAlt('warning','未获取到店铺信息，请登录后重试');
       return null;

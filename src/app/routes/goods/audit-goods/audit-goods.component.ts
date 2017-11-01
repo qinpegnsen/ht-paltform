@@ -73,7 +73,6 @@ export class AuditGoodsComponent implements OnInit {
 
     me.route.url.subscribe(paths => {
       me.path = paths[0].path;
-      console.log("█ me.path2 ►►►",  me.path);
     })
     me.getPageData();// 获取当前页面需要的数据
     me.publishComponent.step = 0;

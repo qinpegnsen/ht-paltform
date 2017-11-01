@@ -67,7 +67,7 @@ export class InspectGoodsComponent implements OnInit {
   }
 
   /**
-   * 查询买家评价分页
+   * 查询待验货列表
    */
   queryAllService(event?: PageEvent) {
     let me = this, activePage = 1;

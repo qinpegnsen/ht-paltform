@@ -56,8 +56,9 @@ const PROXY_CONFIG = [
       "/ord",
       "/phone",
       "/finaceDraw",
+      "/commentGoods"
     ],
-    target: csj  + "8084",   //拦截 context配置路径，经过此地址
+    target: gh  + "8085",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -66,7 +67,7 @@ const PROXY_CONFIG = [
       "/upload",
       "/res"
     ],
-    target: csj  + "8082",   //拦截 context配置路径，经过此地址
+    target: gh  + "8082",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];
