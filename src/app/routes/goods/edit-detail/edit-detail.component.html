@@ -472,8 +472,8 @@
                 </p>
                 <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
                   <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
-                    <p class="col-xs-7 m0 one-row omg p-sm">{{item.area | level2AreaName}}</p>
-                    <p class="col-xs-5 m0 one-row omg p-sm text-right" >
+                    <p class="col-xs-7 one-row omg">{{item.area | level2AreaName}}</p>
+                    <p class="col-xs-5 one-row omg text-right" >
                       {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
                       .addPrice}}元</p>
                   </li>
