@@ -298,7 +298,8 @@ export class AddFormworkComponent implements OnInit {
     })
   }
 
-  edit(index: number) {
+  edit(index: number, area?: any) {
+    console.log(area);
     let _this = this;
     _this.cru = index;
     _this.close();
@@ -350,27 +351,40 @@ export class AddFormworkComponent implements OnInit {
         break;
       case 'updataArticle':
         if (_this.staff.storeExpressTplValList[this.cru].area) {
-          const temp = _this.session.getDatas(_this.staff.storeExpressTplValList.length - 1);
-          const temp1 = _this.session.getDatas(_this.cru);
-          const check = _this.session.getCheck(_this.staff.storeExpressTplValList.length - 1);
-          const check1 = _this.session.getCheck(_this.cru);
-          const len = isArray(temp) ? temp.length : 0;
+          const len = isArray(_this.data) ? _this.data.length : 0;
+          let tempResult = _this.staff.storeExpressTplValList[this.cru].area.split(',');
           for (let i = 0; i < len; i++) {
-            temp[i]['provices'].forEach((item, key) => {
-              if (item.checked && !temp1[i]['provices'][key]['checked']) {
-                temp1[i]['provices'][key]['checked'] = true;
-                temp1[i]['provices'][key]['disabled'] = true;
-              }
-              check[item.areaCode][0].forEach((value, j) => {
-                if (value.checked && !check1[item.areaCode][0][j]['checked']) {
-                  check1[item.areaCode][0][j]['checked'] = true;
-                  check1[item.areaCode][0][j]['disabled'] = true;
-                }
+            _this.data[i]['provices'].forEach((item, index) => {
+              _this.checkOptionsOnes[item.areaCode][0].forEach(value => {
+                tempResult.forEach(valueS => {
+                  if (value.areaCode === valueS) {
+                    value.checked = true;
+                  }
+                })
               });
+              _this.data[i]['provices'][index]['checked'] =
+                _this.checkOptionsOnes[item.areaCode][0].every(value => value.checked);
+              if (item.checked) {
+              } else {
+              }
             });
           }
-          _this.data = temp1;
-          _this.checkOptionsOnes = check1;
+         /* for (let i = 0; i < len; i++) {
+            _this.data[i]['provices'].forEach(item => {
+              _this.allCheckeds[index]['allChecked'] =
+                _this.data[index]['provices'].every(item => item.checked === true);
+              // 添加运费模板时选择区域的  全选全不选
+              if (_this.data[index]['provices'][j]['checked']) {
+                _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = true);
+              } else {
+                _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = false);
+              }
+              if (item.checked) {
+              } else {
+              }
+            });
+          }*/
+
         } else {
           _this.allCheckeds.forEach((item) => {
             if (item.allChecked) {

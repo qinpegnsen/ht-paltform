@@ -327,7 +327,7 @@
                     </td>
                     <td class="text-center">
                       <!--修改运费模板值按钮-->
-                      <app-buttons [config]="updatebutton" (click)="edit(i);area_model = !area_model"></app-buttons>
+                      <app-buttons [config]="updatebutton" (click)="edit(i, item.area);area_model = !area_model"></app-buttons>
                       <!--删除运费模板值按钮-->
                       <app-buttons [config]="deletebutton" (click)="delete(organ,i)"></app-buttons>
                     </td>
