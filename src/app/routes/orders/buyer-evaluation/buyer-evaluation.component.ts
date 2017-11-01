@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-buyer-evaluation',
@@ -27,20 +28,27 @@ export class BuyerEvaluationComponent implements OnInit {
   }
 
   /**
-   * 查询买家评价分页
+   * 买家查询分页
+   * @param curPage
+   * @param event
    */
-  qeuryAllService(curPage,event?: PageEvent,){
+  qeuryAllService(curPage,event?: PageEvent){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
-    let url = "/goodsQuery/querySku";
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
+    let url = "/commentGoods/queryCommnetGoodsAdmin";
     let data={
       curPage: activePage,
       pageSize:10,
-      goodsName:me.goodsName,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
+    console.log("█  me.data ►►►",   me.data);
   }
+
 
   /**
    * 根据买家名搜索评价
@@ -54,7 +62,7 @@ export class BuyerEvaluationComponent implements OnInit {
    */
   deleteCount(curPage,delid) {
     let me=this;
-    let url = "";
+    let url = "/commentGoods/deleteCommentGoods";
     let data={
       id:delid
     }
@@ -87,7 +95,7 @@ export class BuyerEvaluationComponent implements OnInit {
   showImg(event, i){
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
-    i.style.left = (event.clientX - 150) + 'px';
+    i.style.left = (event.clientX + 30) + 'px';
     // console.log("█ i.style.top = 100 ►►►",  i.style.top);
   }
 

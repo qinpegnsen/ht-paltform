@@ -55,7 +55,6 @@ export class DataDictionaryComponent implements OnInit {
       type: "add"
     };
     this.queryDatas(1);
-    // this.queryAll();
   }
 
    //查询key列表
@@ -78,6 +77,11 @@ export class DataDictionaryComponent implements OnInit {
     me.getData(1)
   }
 
+  /**
+   * 根据有无code判读查询key还是val
+   * @param page
+   * @param event
+   */
   getData(page, event?: PageEvent) {
     let me = this, activePage = 1;
     event ? activePage = event.activePage : activePage = page;
@@ -104,6 +108,10 @@ export class DataDictionaryComponent implements OnInit {
     me.data = new Page(res);
   }
 
+  /**
+   * 查询key
+   * @param page
+   */
   queryParent(page) {
     let me = this;
     me.childMenuCode = null, me.childMenuName = null, me.childMenuTitList = [];
@@ -116,8 +124,9 @@ export class DataDictionaryComponent implements OnInit {
     me.data = new Page(res);
   }
 
-
-  //查询数据字典信息列表
+  /**
+   *   查询数据字典信息列表
+   */
   public queryDatas(curPage,event?: PageEvent) {
     let me = this, activePage = 1;
     if(typeof event !== "undefined") {
@@ -134,7 +143,9 @@ export class DataDictionaryComponent implements OnInit {
     me.data = new Page(res);
   }
 
-  //删除
+  /**
+   *   删除
+   */
   delete(delCodeId) {
     let _this = this, url: string = "/datadict/deleteDatadictType", data: any,length:number = _this.childMenuTitList.length;
     swal({
@@ -164,7 +175,9 @@ export class DataDictionaryComponent implements OnInit {
     );
   }
 
-  //停启用
+  /**
+   *   停启用
+   */
   startState(data) {
     if (data.enable == "Y") data.enable = "N"; else data.enable = "Y";
     let url = "/datadict/updateEnable", _this = this;
@@ -185,7 +198,9 @@ export class DataDictionaryComponent implements OnInit {
     });
   }
 
-  //根据分类的父id查询子分类
+  /**
+   * 根据分类的父id查询子分类
+   */
   queryChildSortList(childCode ?, menuName ?, isTit ?: boolean,event?: PageEvent) {
     let me = this, num = 0;
     let activePage = 1;
@@ -218,7 +233,9 @@ export class DataDictionaryComponent implements OnInit {
     me.data = new Page(res);
   }
 
-  // 返回上一级菜单列表
+  /**
+   * 返回上一级菜单列表
+   */
   goBackMenu() {
     let me = this;
     me.queryParent(me.backPage)
