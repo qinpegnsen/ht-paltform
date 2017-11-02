@@ -35,14 +35,26 @@
                 <th class="col-md-2 unselectable text-center">
                   <rzhDefaultSorter by="createTime">创建时间</rzhDefaultSorter>
                 </th>
-                <th class="col-md-1 unselectable text-center">
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'NUM'">
                   <rzhDefaultSorter by="agentName">首件(件)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'WEIGHT'">
+                  <rzhDefaultSorter by="agentName">首重(Kg)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'VOLUME'">
+                  <rzhDefaultSorter by="agentName">首体积(m³)</rzhDefaultSorter>
                 </th>
                 <th class="col-md-1 unselectable text-center">
                   <rzhDefaultSorter by="firstPrice">运费(元)</rzhDefaultSorter>
                 </th>
-                <th class="col-md-1 unselectable text-center">
-                  <rzhDefaultSorter by="addAttach">续件(件)</rzhDefaultSorter>
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'NUM'">
+                  <rzhDefaultSorter by="agentName">续件(件)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'WEIGHT'">
+                  <rzhDefaultSorter by="agentName">续重(Kg)</rzhDefaultSorter>
+                </th>
+                <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'VOLUME'">
+                  <rzhDefaultSorter by="agentName">续体积(m³)</rzhDefaultSorter>
                 </th>
                 <th class="col-md-1 unselectable text-center">
                   <rzhDefaultSorter by="addPrice">运费(元)</rzhDefaultSorter>

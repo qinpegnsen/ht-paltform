@@ -18,6 +18,7 @@ const uploadUrl = "upload/basic/upload";  //图片上传路径(调取上传的�
 })
 export class AddAgentComponent implements OnInit {
   public flag:boolean=false;//修改经纬度按钮的显示
+  public maps:string='';//修改经纬度按钮的显示
   private organ={}
   public uploader:FileUploader = new FileUploader({
     url: uploadUrl,
@@ -25,10 +26,9 @@ export class AddAgentComponent implements OnInit {
     queueLimit: 1
   }); //初始化上传方法
   public linkType:string;
-  private uid;//声明保存获取到的暗码
   public agentCode:string;//获取代理商编码
   private staff:any = {};
-  private aa = false;
+  private showUp = false;
   private placeSearch: any;
   private selectArea;
 
@@ -81,6 +81,8 @@ export class AddAgentComponent implements OnInit {
       var clickEventListener = map.on('click', function (e) {
         me.staff.coordinateLng = e.lnglat.getLng();//经度
         me.staff.coordinateLat = e.lnglat.getLat();//纬度
+        //this.maps=me.staff.coordinateLng+','+me.staff.coordinateLat;
+        console.log("█ this.maps ►►►",  this.maps);
       });
 
       var marker = new AMap.Marker({
@@ -137,8 +139,6 @@ export class AddAgentComponent implements OnInit {
         async: false, //同步请求
         data: {agentCode: this.agentCode},
         success: (res) => {
-          console.log("█ res ►►►",  res);
-
           this.staff = res.data;
           if(isNullOrUndefined(this.staff)) this.staff = {}
         },
@@ -155,10 +155,10 @@ export class AddAgentComponent implements OnInit {
    */
   isShowMap(data?:any) {
     data.isShowMap = !data.isShowMap;
-    this.aa=!this.aa;
+    this.showUp=!this.showUp;
   }
   isShowMap1(){
-    this.aa=!this.aa;
+    this.showUp=!this.showUp;
   }
   /**
    * 显示/隐藏 修改经纬度的按钮

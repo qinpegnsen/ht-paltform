@@ -251,11 +251,11 @@
 
 
 
-<div class="model" [class.hide]="!aa">
+<div class="model" [class.hide]="!showUp">
   <div class="model-main">
     <div class="header">
-      <span>选择区域</span><!--<span class="icon" (click)="isShowMap1()"  [class.hide]="!aa">关闭</span>-->
-      <i style="padding-right: 15px; cursor: pointer" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!aa" class="fa fa-remove"> </i>
+      <span>选择区域</span>
+      <i style="padding-right: 15px; cursor: pointer" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!showUp" class="fa fa-remove"> </i>
     </div>
     <div class="clearfix latitude">
       <div class="pull-left">
@@ -268,7 +268,7 @@
     <div class="form-group" [hidden]="!staff.isShowMap">
       <div class="pl0 pr0 isShowMap">
         <input type="text" id="keyword" class="form-control w30 search" name="keyword" value="请输入关键字：(选定后搜索)" onfocus='this.value=""'/>
-        <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!aa">确定</button>
+        <button class="btn btn-info btn-determine" type="button" (click)="buttonShow(staff)" (click)="isShowMap1()" [class.hide]="!showUp">确定</button>
         <div id="container">
         </div>
       </div>

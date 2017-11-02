@@ -10,6 +10,7 @@ import {SessionService} from "../session.service";
 import {FreightTemplateComponent} from '../freight-template/freight-template.component';
 import {isNullOrUndefined} from 'util';
 import {PatternService} from '../../../core/forms/pattern.service';
+import {RzhtoolsService} from '../../../core/services/rzhtools.service';
 const swal = require('sweetalert');
 
 
@@ -39,7 +40,7 @@ export class AddFormworkComponent implements OnInit {
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  constructor(private routeInfo: ActivatedRoute, private router: Router, private ajax: AjaxService, private session: SessionService, private FreightTemplateComponent: FreightTemplateComponent,private patterns: PatternService) {
+  constructor(private routeInfo: ActivatedRoute, private router: Router, private ajax: AjaxService, private session: SessionService, private FreightTemplateComponent: FreightTemplateComponent,private patterns: PatternService,private rzhtools:RzhtoolsService) {
   }
 
   ngOnInit() {
@@ -561,5 +562,23 @@ export class AddFormworkComponent implements OnInit {
         }
       })
     }
+  }
+
+  /**
+   * 输入两位小数
+   * @param target
+   * @param type
+   */
+  twoNum(target,type?){
+    this.rzhtools.auditInputValueForNum(target,type);
+  }
+
+  /**
+   * 输入两位小数
+   * @param target
+   * @param type
+   */
+  threeNum(target,type?){
+    this.rzhtools.formworkInputValueForNum(target,type);
   }
 }

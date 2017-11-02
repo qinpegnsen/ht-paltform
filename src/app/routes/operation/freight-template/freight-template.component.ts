@@ -107,7 +107,7 @@ export class FreightTemplateComponent implements OnInit {
   delete(delCodeId) {
     let _this = this, url: string = "/expressTpl/delteStoreExpressTpl", data: any;
     swal({
-        title: '确认删除此信息？(如果有商品正在使用此模板，商品默认无运费！)',
+        title: '确认删除此信息？(如果有商品正在使用此模板，商品默认固定运费！)',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮
