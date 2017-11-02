@@ -14,6 +14,7 @@ import {isNullOrUndefined} from "util";
 export class AfterDetailsComponent implements OnInit {
 
   private type: string;             //类型,处理/查看详情
+  private parentPath: string;             //类型,处理/查看详情
   private afterNo: string;          //售后编码
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据
@@ -35,6 +36,7 @@ export class AfterDetailsComponent implements OnInit {
     let me = this;
     me.type = me.submit.getParams('type');
     me.afterNo = me.submit.getParams('afterNo');
+    me.parentPath = me.submit.getParams('parentPath');
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
 
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
@@ -103,6 +105,10 @@ export class AfterDetailsComponent implements OnInit {
   hideImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'none';
+  }
+
+  back(){
+    this.router.navigate(['/main/sale/'+this.parentPath], { replaceUrl: true ,preserveQueryParams: true });
   }
 
 }

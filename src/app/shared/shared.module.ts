@@ -54,6 +54,7 @@ import {PopoverModule} from "ngx-bootstrap";
 import { StrJsonPipe } from './pipe/str-json.pipe';
 import { GetWeekPipe } from './pipe/get-week.pipe';
 import { StrToNumberPipe } from './pipe/str-to-number.pipe';
+import { ToStringPipe } from './pipe/to-string.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -116,6 +117,7 @@ import { StrToNumberPipe } from './pipe/str-to-number.pipe';
     StrJsonPipe,
     GetWeekPipe,
     StrToNumberPipe,
+    ToStringPipe,
   ],
   exports: [
     CommonModule,
@@ -168,7 +170,8 @@ import { StrToNumberPipe } from './pipe/str-to-number.pipe';
     PopoverModule,
     StrJsonPipe,
     GetWeekPipe,
-    StrToNumberPipe
+    StrToNumberPipe,
+    ToStringPipe
   ]
 })
 

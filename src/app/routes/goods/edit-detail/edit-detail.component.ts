@@ -255,6 +255,13 @@ export class EditDetailComponent implements OnInit {
     if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;
       me.publishData = me.goodsEditData;                  // 商品发布数据
+      if(isNullOrUndefined(me.publishData.goodsExpressInfo)){
+        me.publishData.goodsExpressInfo = {
+          freightType: null,
+          fixedFreight: null,
+          expressTplId: null
+        };
+      }
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
       me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
@@ -293,7 +300,12 @@ export class EditDetailComponent implements OnInit {
         me.unit = '件'
       }
     }else{
-      me.publishData.isFreight = 'N'
+      me.publishData.isFreight = 'N';
+      me.publishData.goodsExpressInfo = {
+        freightType: null,
+        fixedFreight: null,
+        expressTplId: null
+      };
     }
   }
 

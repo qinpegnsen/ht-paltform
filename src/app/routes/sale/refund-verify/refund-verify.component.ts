@@ -26,6 +26,7 @@ export class RefundVerifyComponent implements OnInit {
     phone: null,
     ordno: null,
     goodsBaseCode: null,
+    searchType: 'afterNo',
     agentCode: null
   };
 
@@ -36,8 +37,11 @@ export class RefundVerifyComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-
-    this.queryAllService();
+    let search = me.submit.getParams('search');
+    if(!isNullOrUndefined(search)){
+      me.search = JSON.parse(search);
+    }
+    this.queryAllService(me.search);
   }
   /**
    * 切换搜索条件时
@@ -65,9 +69,10 @@ export class RefundVerifyComponent implements OnInit {
   /**
    * 查询买家评价分页
    */
-  queryAllService(event?: PageEvent) {
+  queryAllService(search:any,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
+    if(isNullOrUndefined(search)) me.search = search;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);

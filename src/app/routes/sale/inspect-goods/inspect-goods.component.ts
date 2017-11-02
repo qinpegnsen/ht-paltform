@@ -29,6 +29,7 @@ export class InspectGoodsComponent implements OnInit {
     phone: null,
     ordno: null,
     goodsBaseCode: null,
+    searchType: 'afterNo',
     agentCode: null
   };
 
@@ -39,8 +40,12 @@ export class InspectGoodsComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
+    let search = me.submit.getParams('search');
+    if(!isNullOrUndefined(search)){
+      me.search = JSON.parse(search);
+    }
 
-    this.queryAllService();
+    this.queryAllService(me.search);
   }
 
   /**
@@ -69,9 +74,10 @@ export class InspectGoodsComponent implements OnInit {
   /**
    * 查询待验货列表
    */
-  queryAllService(event?: PageEvent) {
+  queryAllService(search: any,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
+    if(isNullOrUndefined(search)) me.search = search;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
@@ -93,10 +99,10 @@ export class InspectGoodsComponent implements OnInit {
     let selectCon=$.trim($(".order-guide .bb").text());//获取文本之后再把多余的空格去掉，要不然html大代码一整理就出错了
     if(selectCon=='待验货'){
       this.search.state='DELIVERY';
-      this.queryAllService();
+      this.queryAllService(this.search);
     }else{
       this.search.state='AGREE'
-      this.queryAllService();
+      this.queryAllService(this.search);
     };
   }
 
