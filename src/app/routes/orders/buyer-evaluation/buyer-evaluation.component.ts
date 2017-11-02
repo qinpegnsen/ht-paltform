@@ -13,7 +13,7 @@ export class BuyerEvaluationComponent implements OnInit {
 
   private data: Page = new Page();
   private deletebutton:object;//删除按钮
-  private goodsName:any;
+  private custName:any;
   constructor(private submit:SubmitService) {
 
   }
@@ -43,10 +43,10 @@ export class BuyerEvaluationComponent implements OnInit {
     let data={
       curPage: activePage,
       pageSize:10,
+      custName:this.custName,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
-    console.log("█  me.data ►►►",   me.data);
   }
 
 
