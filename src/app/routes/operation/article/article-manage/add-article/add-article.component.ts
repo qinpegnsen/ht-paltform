@@ -184,7 +184,8 @@ export class AddArticleComponent implements OnInit {
           callbacks: {
             onChange: (contents, $editable) => {
               me.contents = contents;
-              // console.log(contents);
+              $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
             },
             onImageUpload: function (files) {
               for (let file of files) me.sendFile(file);
@@ -223,6 +224,8 @@ export class AddArticleComponent implements OnInit {
           callbacks: {
             onChange: (contents) => {
               me.contents = contents;
+              $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
             },
             onImageUpload: function (files) {
               for (let file of files) me.sendFile(file);
