@@ -30,7 +30,7 @@
     </div>
     <div class="search-term mb">
       <div class="w30 pr0 pull-left">
-        <select class="form-control pl-sm pr-sm" name="sss" #sType (change)="changeCondition(sType.value)">
+        <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType (change)="changeCondition(sType.value)">
           <option value="wono">工单编号</option>
           <option value="ordno">订单编号</option>
         </select>
@@ -38,10 +38,10 @@
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group pr0 mb0">
           <div class="w80 pl0 pr0 pull-left">
-            <input *ngIf="sType.value == 'ordno'" type="text" class="form-control" placeholder="订单编号"
-                   [(ngModel)]="search.ordno">
-            <input *ngIf="sType.value == 'wono'" type="text" class="form-control" placeholder="工单编号"
-                   [(ngModel)]="search.wono">
+            <input *ngIf="search.searchType == 'ordno'" type="text" class="form-control" placeholder="订单编号"
+                   [(ngModel)]="search.ordno" (change)="queryDatas(1)">
+            <input *ngIf="search.searchType == 'wono'" type="text" class="form-control" placeholder="工单编号"
+                   [(ngModel)]="search.wono" (change)="queryDatas(1)">
           </div>
           <button type="submit" title="搜索" (click)="queryDatas(1)"
                   class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
@@ -59,7 +59,7 @@
       <th class="w5 text-center thc font" *ngIf="search.stateEnum!='NO'">更多</th>
       <th class="w10 text-center thc font">工单编号</th>
       <th class="w8 text-center thc font">工单类型</th>
-      <th class="w10 text-center thc font">订单编号</th>
+      <th class="w10 text-center thc font">订单/售后单号</th>
       <th class="w10 text-center thc font">联系人</th>
       <th class="w10 text-center thc font">电话</th>
       <th class="w12 text-left thc font">地址</th>
@@ -98,9 +98,9 @@
           <!--</button>-->
 
           <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
+                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno,parentPath: path,search: search | toString}"></button>
           <button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                  routerLink="../after-detail" [queryParams]="{wono:order.wono}"></button>
+                  routerLink="../after-detail" [queryParams]="{wono:order.wono,parentPath: path,search: search | toString}"></button>
         </td>
       </tr>
       <tr *ngIf="search.stateEnum!='NO' && detail[i]">

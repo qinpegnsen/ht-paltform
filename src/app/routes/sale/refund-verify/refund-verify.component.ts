@@ -41,7 +41,7 @@ export class RefundVerifyComponent implements OnInit {
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }
-    this.queryAllService(me.search);
+    this.queryAllService();
   }
   /**
    * 切换搜索条件时
@@ -69,10 +69,9 @@ export class RefundVerifyComponent implements OnInit {
   /**
    * 查询买家评价分页
    */
-  queryAllService(search:any,event?: PageEvent) {
+  queryAllService(event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
-    if(isNullOrUndefined(search)) me.search = search;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);

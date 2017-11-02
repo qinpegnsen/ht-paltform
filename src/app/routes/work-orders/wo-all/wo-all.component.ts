@@ -32,8 +32,10 @@ export class WoAllComponent implements OnInit {
     ordno: null,
     ordType: '',
     stateEnum: '',
+    curPage: 1,
     pageSize: 10,
-    sortColumns: null
+    sortColumns: null,
+    searchType: 'wono'
   }
 
   constructor(private parentComp: WoManageComponent,
@@ -93,6 +95,10 @@ export class WoAllComponent implements OnInit {
           break;
       }
     });
+    let search = me.submit.getParams('search');
+    if(!isNullOrUndefined(search)){
+      me.search = JSON.parse(search);
+    }
     me.queryDatas(1)
   }
 
@@ -146,7 +152,7 @@ export class WoAllComponent implements OnInit {
       activePage = curPage;
     }
     let requestUrl = '/wo/query';
-    me.search['curPage'] = activePage;
+    me.search.curPage = activePage;
     me.woList = new Page(me.submit.getData(requestUrl, me.search));
     me.detail = [];//每次切换新页面，详情都关闭
   }

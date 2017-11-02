@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {CancelComponent} from "../cancel/cancel.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
@@ -28,6 +28,14 @@ export class PrepareComponent implements OnInit {
   public ordno: string;
   public LogisticsData: any;//物流信息
   public bsConfig: Partial<BsDatepickerConfig>;
+  public search = {
+    curPage: 1,
+    pageSize: 5,
+    custPhone: null,
+    ordno: null,
+    ordState: null,
+    searchType: 'ordno'
+  };
 
   constructor(private parentComp: OrdersComponent,
               private route: ActivatedRoute,
@@ -42,6 +50,13 @@ export class PrepareComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
+    me.route.url.subscribe(urls => {
+      me.path = urls[0].path;
+    })
+    let search = me.submit.getParams('search');
+    if(!isNullOrUndefined(search)){
+      me.search = JSON.parse(search);
+    }
     me.queryDatas(1)
   }
 
@@ -67,8 +82,8 @@ export class PrepareComponent implements OnInit {
    * 切换搜索条件时
    */
   changeSearchType(val){
-    if(val=='custPhone') this.ordno = null;
-    else this.custPhone = null;
+    if(val=='custPhone') this.search.ordno = null;
+    else this.search.custPhone = null;
   }
 
   /**
@@ -84,13 +99,8 @@ export class PrepareComponent implements OnInit {
       activePage = curPage;
     }
     let requestUrl = '/ord/plantQueryOrd';
-    let requestData = {
-      curPage: activePage,
-      pageSize: 5,
-      custPhone: _this.custPhone,
-      ordno: _this.ordno
-    };
-    _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+    _this.search.curPage = activePage;
+    _this.goodsList = new Page(_this.submit.getData(requestUrl, _this.search));
   }
 
   /**

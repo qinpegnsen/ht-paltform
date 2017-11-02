@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {isNullOrUndefined, isUndefined} from "util";
 import {OrdersService} from "../orders.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
+import {PatternService} from "../../../../core/forms/pattern.service";
 declare var $: any;
 
 @Component({
@@ -32,7 +33,7 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private ordersServe: OrdersService, public submit: SubmitService) {
+  constructor(private ordersServe: OrdersService, public submit: SubmitService, private pattern: PatternService) {
   }
 
   ngOnInit() {

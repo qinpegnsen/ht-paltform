@@ -1,7 +1,6 @@
-
 <div class="deliver-order fadeIn" *ngIf="showDeliverWindow">
   <div class="mask"></div>
-  <form class="_popup animated fadeIn"  #deliverytpl="ngForm">
+  <form class="_popup animated fadeIn" #deliverytpl="ngForm">
     <div class="pop popup-hd">
       <span class="f-bold">发货</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
@@ -53,19 +52,20 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">快递单号：</dt>
         <dd class="col-xs-5 font14">
-          <input type="text" name="expressNo" class="form-control required input-sm" required #expressNoTem="ngModel" [(ngModel)]="expressNo" pattern="{{pattern.express}}">
-          <div [hidden]="deliverytpl.valid||deliverytpl.untouched"
-               class="alert alert-danger">
+          <input type="text" name="expressNo" class="form-control required input-sm" required #expressNoTem="ngModel"
+                 [(ngModel)]="expressNo" pattern="{{pattern.express}}">
+          <div [hidden]="expressNoTem.valid || expressNoTem.pristine"
+               class="text-danger">
             请输入合法的快递单号
           </div>
         </dd>
       </dl>
       <!--<dl class="bb m0 clearfix">-->
-        <!--<dt class="col-xs-3">发货备注：</dt>-->
-        <!--<dd class="col-xs-6 font14">-->
-          <!--<textarea name="aa" class="form-control p remark font12" id="12" cols="30" rows="3"-->
-                    <!--placeholder="您可以输入一些发货备忘信息（仅卖家自己可见）"></textarea>-->
-        <!--</dd>-->
+      <!--<dt class="col-xs-3">发货备注：</dt>-->
+      <!--<dd class="col-xs-6 font14">-->
+      <!--<textarea name="aa" class="form-control p remark font12" id="12" cols="30" rows="3"-->
+      <!--placeholder="您可以输入一些发货备忘信息（仅卖家自己可见）"></textarea>-->
+      <!--</dd>-->
       <!--</dl>-->
     </div>
     <div class="panel-footer text-right">

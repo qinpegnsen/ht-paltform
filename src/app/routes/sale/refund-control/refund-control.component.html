@@ -21,7 +21,7 @@
         <span class="search-title font12">售后单状态：</span>
         <div class="search-main">
           <select class="form-control pl-sm pr-sm" name="woState" [(ngModel)]="search.state"
-                  (change)="queryAllService(search)">
+                  (change)="queryAllService()">
             <option value="">全部</option>
             <option [value]="state.key" *ngFor="let state of afterStateList">{{state.val}}</option>
           </select>
@@ -31,7 +31,7 @@
         <span class="search-title font12">是否收到货：</span>
         <div class="search-main">
           <select class="form-control pl-sm pr-sm" name="isReceive" [(ngModel)]="search.isReceive"
-                  (change)="queryAllService(search)">
+                  (change)="queryAllService()">
             <option value="">全部</option>
             <option [value]="state.key" *ngFor="let state of isReceiveList">{{state.val}}</option>
           </select>
@@ -41,7 +41,7 @@
         <span class="search-title font12">代理商编码：</span>
         <div class="search-main">
           <input class="form-control num" type="number" name="agentCode" placeholder="代理商编码"
-                 [(ngModel)]="search.agentCode" (change)="queryAllService(search)">
+                 [(ngModel)]="search.agentCode" (change)="queryAllService()">
         </div>
       </div>
       <div class="search-term clearfix ml-xl mb">
@@ -59,18 +59,18 @@
             <div class="w78 pl0 pr0 pull-left mr-sm">
               <input *ngIf="search.searchType == 'ordno'" type="text" placeholder="订单编号" name="ordno"
                      class="form-control border-b-grey num" [(ngModel)]="search.ordno"
-                     (change)="queryAllService(search)">
+                     (change)="queryAllService()">
               <input *ngIf="search.searchType == 'afterNo'" type="text" placeholder="退单单号" name="afterNo"
                      class="form-control border-b-grey num" [(ngModel)]="search.afterNo"
-                     (change)="queryAllService(search)">
+                     (change)="queryAllService()">
               <input *ngIf="search.searchType == 'phone'" type="text" placeholder="用户手机号" name="phone"
                      class="form-control border-b-grey num" [(ngModel)]="search.phone"
-                     (change)="queryAllService(search)">
+                     (change)="queryAllService()">
               <input *ngIf="search.searchType == 'baseCode'" type="text" placeholder="商品基本编码" name="goodsBaseCode"
                      class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode"
-                     (change)="queryAllService(search)">
+                     (change)="queryAllService()">
             </div>
-            <button type="button" title="搜索" (click)="queryAllService(search)"
+            <button type="button" title="搜索" (click)="queryAllService()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
               <em class="icon-magnifier fa-fw"></em>
             </button>
@@ -81,7 +81,7 @@
     <!--搜索 end-->
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="refundList"
-             (pageChange)="queryAllService(search,$event)">
+             (pageChange)="queryAllService($event)">
         <thead>
         <tr>
           <th class="w5 text-center">

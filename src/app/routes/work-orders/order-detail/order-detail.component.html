@@ -129,6 +129,21 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
+        <li class="mb0" *ngIf="orderDetailData.state=='CLOSE'">
+          <div class="timeline-badge gray-bg thc bg"></div>
+          <div class="timeline-panel">
+            <div class="right">
+              <div>
+                <p class="every-line">
+                  <span class="mr logis-time text-left">
+                      <b class="mr-lg">{{orderDetailData.closeTime}}</b>
+                  </span>
+                  <span class="every-info thc font">订单已关闭</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
         <li class="mb0" *ngFor="let item of orderStates;let s = index">
           <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
           <div class="timeline-panel">
@@ -149,21 +164,6 @@
                     </span>
                   </ng-container>
                   <span class="every-info">{{item.acceptStation}}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li *ngIf="orderDetailData.state=='CLOSE'">
-          <div class="timeline-badge gray-bg thc bg"></div>
-          <div class="timeline-panel">
-            <div class="right">
-              <div>
-                <p class="every-line">
-                  <span class="mr logis-time text-left">
-                      <b class="mr-lg">{{orderDetailData.closeTime}}</b>
-                  </span>
-                  <span class="every-info thc font">订单已关闭</span>
                 </p>
               </div>
             </div>
