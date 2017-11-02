@@ -985,6 +985,22 @@ input[type=number].num::-webkit-outer-spin-button {
   border-bottom: 1px solid #f5f5f5;
 }
 
+.hover-native-img{
+  max-width: 800px;
+  max-height: 500px;
+  position: fixed;
+  top: 50%;
+  z-index: 100;
+  display: none;
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px 1px  rgba(0, 0, 0, 0.5);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 .hover-biger-img{
   width: 240px !important;
   max-width: 280px;
