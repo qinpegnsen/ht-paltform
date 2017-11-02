@@ -3,8 +3,10 @@
     退货管理
   </div>
   <ul class="order-guide list-unstyled clearfix bb">
-    <li class="pull-left thc bb selectState" [class.bb]="search.state='DELIVERY'" (click)="selectState($event.target)">待验货</li>
-    <li class="pull-left thc selectState" [class.bb]="search.state='AGREE'" (click)="selectState($event.target)">待用户发货</li>
+    <li class="pull-left thc bb selectState" [class.bb]="search.state=='DELIVERY'"
+        (click)="selectState($event.target)">待验货</li>
+    <li class="pull-left thc selectState" [class.bb]="search.state=='AGREE'" (click)="selectState($event.target)">
+      待用户发货</li>
   </ul>
   <div class="panel panel-default">
     <!--操作提示-->

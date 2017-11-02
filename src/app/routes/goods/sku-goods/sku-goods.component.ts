@@ -18,7 +18,6 @@ export class SkuGoodsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['curCode'] && !isNullOrUndefined(this.curCode)) {
-      console.log("█ curId ►►►", this.skuData);
       $('.wrapper > section').css('z-index', 200);
       this.getSkuDataByCode();
       this.showWindow = true;
