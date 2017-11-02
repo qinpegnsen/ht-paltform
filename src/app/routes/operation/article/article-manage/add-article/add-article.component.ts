@@ -156,18 +156,16 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
-          fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+          fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
           toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['style', ['style']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
             ['Insert', ['picture','link','video','table',]],
-            ['height', ['height']],
-            ['Misc', ['fullscreen', 'codeview', 'help','undo','redo']],
+            ['Misc', ['fullscreen', 'help','undo','redo']],
           ],
           callbacks: {
             onChange: (contents, $editable) => {
@@ -197,7 +195,7 @@ export class AddArticleComponent implements OnInit {
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
-          fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','Helvetica', 'Arial'],
+          fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
           toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
