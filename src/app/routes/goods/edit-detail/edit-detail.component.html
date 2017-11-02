@@ -1,4 +1,3 @@
-
 <form class="step-two panel panel-default" (keydown.Enter)="false" #publishForm="ngForm">
   <!--商品基本信息-->
   <fieldset class="m0 p0">
@@ -134,7 +133,8 @@
                 <div class="text-center">
                   <input class="form-control num input-sm" name="__marketPrice" type="number"
                          (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('marketPrice',$event.target)">设置</button>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('marketPrice',$event.target)">设置
+                  </button>
                 </div>
               </div>
             </th>
@@ -158,7 +158,8 @@
                 <div class="text-center">
                   <input class="form-control num input-sm" name="__memberPrice" type="number"
                          (keyup)="auditInputValueForNum($event.target)" placeholder="0.00"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('memberPrice',$event.target)">设置</button>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('memberPrice',$event.target)">设置
+                  </button>
                 </div>
               </div>
             </th>
@@ -170,7 +171,8 @@
                 <div class="text-center">
                   <input class="form-control num input-sm" name="__storageNum" type="number" [pattern]="'^[1-9]{1}\d+'"
                          (keyup)="auditInputValueForNum($event.target,'int')" placeholder=">10"/>
-                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('storageNum',$event.target)">设置</button>
+                  <button class="btn btn-green btn-sm set" (click)="setBatchSize('storageNum',$event.target)">设置
+                  </button>
                 </div>
               </div>
             </th>
@@ -435,7 +437,7 @@
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用固定运费</label>
             </span>
-              <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
+            <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
               <input class="text price num form-control pull-left" name="fixedFreight" type="number"
                      (keyup)="auditInputValueForNum($event.target)"
                      [required]="publishData.goodsExpressInfo.freightType=='FIXED'"
@@ -466,13 +468,14 @@
                    *ngIf="publishData.goodsExpressInfo.freightType=='TPL' && publishData.goodsExpressInfo.expressTplId">
                 <p class="m0">
                   <strong>指定物流配送区域及运费</strong>
-                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
+                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank"
+                     (click)="lookLogisticsModule()">
                     查看详情</a>
                 </p>
                 <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
                   <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">
                     <p class="col-xs-7 one-row omg">{{item.area | level2AreaName}}</p>
-                    <p class="col-xs-5 one-row omg text-right" >
+                    <p class="col-xs-5 one-row omg text-right">
                       {{item.firstNum}}{{unit}}内{{item.firstPrice}}元，每增加{{item.addAttach}}{{unit}}，增加{{item
                       .addPrice}}元</p>
                   </li>

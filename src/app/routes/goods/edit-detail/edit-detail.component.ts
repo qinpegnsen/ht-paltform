@@ -328,6 +328,9 @@ export class EditDetailComponent implements OnInit {
    */
   auditInputValueForNum(target, type?) {
     this.tools.auditInputValueForNum(target, type);
+    if(Number(target.value) > 10000){
+      target.value = 9999.99
+    }
   }
 
   /**
@@ -1004,7 +1007,6 @@ export class EditDetailComponent implements OnInit {
     me.genGoodsBaseAttrList();                                          // 商品基本属性
     me.publishData['goodsBody'] = $('.summernote').summernote('code');  // 商品详情 PC
     me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
-    console.log("█ me.publishData ►►►", me.publishData);
     me.goods.publishGoods('/goodsEdit/save', me.publishData, me.path);
   }
 
