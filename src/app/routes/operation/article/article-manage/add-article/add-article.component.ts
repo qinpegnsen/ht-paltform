@@ -200,15 +200,13 @@ export class AddArticleComponent implements OnInit {
           fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','Helvetica', 'Arial'],
           toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['style', ['style']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
             ['Insert', ['picture','link','video','table',]],
-            ['height', ['height']],
-            ['Misc', ['fullscreen', 'codeview', 'help','undo','redo']],
+            ['Misc', ['fullscreen', 'help','undo','redo']],
           ],
           callbacks: {
             onChange: (contents) => {
