@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {SettingsService} from "../../../../../core/settings/settings.service";
 import {GetUidService} from "../../../../../core/services/get-uid.service";
 import {FileUploader} from "ng2-file-upload";
@@ -92,6 +92,16 @@ export class AddArticleComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
+
+    let that=this;
+    that.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) { // 当导航成功结束时执行
+          if(event.url.indexOf('=addArticle')>0){
+            that.ngOnInit();
+          }
+        }
+      });
 
     /**
      * 文章的封面三种类型
