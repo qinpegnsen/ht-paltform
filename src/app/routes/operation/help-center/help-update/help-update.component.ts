@@ -40,7 +40,7 @@ export class HelpUpdateComponent implements OnInit {
         height: 500,
         dialogsInBody: true,
         lang: 'zh-CN',
-        fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+        fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
         toolbar: [
           ['edit',['undo','redo']],//编辑
           ['headline', ['style']],//大字标题
@@ -55,6 +55,7 @@ export class HelpUpdateComponent implements OnInit {
         callbacks: {
           onChange: (contents, $editable) => {
             this.contents = contents;
+
           },
           onImageUpload: function (files) {
             for (let file of files) me.sendFile(file);

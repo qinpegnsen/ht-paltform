@@ -35,7 +35,7 @@ export class HelpAssortmentComponent implements OnInit {
         height: 280,
         dialogsInBody: true,
         lang: 'zh-CN',
-        fontNames: ['Helvetica', 'Arial', '微软雅黑', '黑体','宋体 ','华文楷体'],
+        fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
         toolbar: [
           ['edit',['undo','redo']],//编辑
           ['headline', ['style']],//大字标题
@@ -50,6 +50,8 @@ export class HelpAssortmentComponent implements OnInit {
         callbacks: {
           onChange: (contents, $editable) => {
             me.contents = contents;
+            $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+            $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
           },
           onImageUpload: function (files) {
             for (let file of files) me.sendFile(file);
