@@ -212,7 +212,7 @@ const orders = {
     },
     {
       text: '待发货',
-      icon: 'fa fa-file-text-o',
+      icon: 'fa fa-truck',
       link: '/main/orders/prepare'
     },
     {
