@@ -93,6 +93,10 @@ export class AddArticleComponent implements OnInit {
       type: "delete"
     };
 
+    /**
+     * 实现修改的时候可以点击添加
+     * @type {AddArticleComponent}
+     */
     let that=this;
     that.router.events
       .subscribe((event) => {
