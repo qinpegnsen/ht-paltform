@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {MaskService} from "../../../core/services/mask.service";
 import {isNullOrUndefined} from "util";
+import {Location} from "@angular/common";
 import {AfterService} from "../../sale/after.service";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
 
@@ -24,6 +24,7 @@ export class AfterDetailsComponent implements OnInit {
   constructor(private router: Router,
               private parentComp: WoManageComponent,
               private submit: SubmitService,
+              private location: Location,
               private after: AfterService,
               private tools: RzhtoolsService) {
   }
@@ -33,7 +34,6 @@ export class AfterDetailsComponent implements OnInit {
     me.parentComp.detail = true;
     me.parentComp.detailType = 'wo';
     me.wono = me.submit.getParams('wono');
-
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
     let data;
     if (!isNullOrUndefined(me.wono)) data = {wono: me.wono};
@@ -41,7 +41,6 @@ export class AfterDetailsComponent implements OnInit {
     if(isNullOrUndefined(me.afterData)) me.afterData = null;
     me.afterNo = me.afterData.afterNo;
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
-    console.log("█ me.LogisticsData ►►►",  me.LogisticsData);
 
   }
 
@@ -61,6 +60,10 @@ export class AfterDetailsComponent implements OnInit {
   hideImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'none';
+  }
+
+  back(){
+    this.location.back();
   }
 
 }

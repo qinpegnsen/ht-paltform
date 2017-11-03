@@ -3,6 +3,7 @@ import {isNullOrUndefined} from "util";
 import {OrdersService} from "../../orders/orders/orders.service";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
+import {Location} from "@angular/common";
 declare var $:any;
 
 @Component({
@@ -13,6 +14,7 @@ declare var $:any;
 export class OrderDetailComponent implements OnInit {
   constructor(private parentComp: WoManageComponent,
               public ordersService: OrdersService,
+              private location: Location,
               private submit: SubmitService) {
   }
 
@@ -33,6 +35,10 @@ export class OrderDetailComponent implements OnInit {
     me.curOrdno = me.submit.getParams('ordno');
     me.getOrderDetailInfo();//获取订单的物流详情及订单进度
     me.getOrderDetail(); //获取订单详情
+  }
+
+  back(){
+    this.location.back()
   }
 
   /**

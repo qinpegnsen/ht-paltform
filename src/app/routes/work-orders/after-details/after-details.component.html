@@ -6,7 +6,9 @@
     <div class="panel-body">
       <div>
         <div class="">
-          <legend class="m0" style="height: 51px;line-height: 51px;">{{afterData.returnType=='RETURN'?'买家退货申请':'买家退款申请'}}</legend>
+          <legend class="m0" style="height: 51px;line-height: 51px;">
+            {{afterData.returnType=='RETURN'?'买家退货申请':'买家退款申请'}}
+          </legend>
         </div>
         <table class="t-items p w100">
           <tr class="t-item clearfix">
@@ -20,15 +22,26 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">订单编号：</td>
             <td class="item-bd col-sm-10 mb0">
-              <a routerLink="../../orders/cust/order-detail" [queryParams]="{ordno: afterData.ordno}">{{afterData.ordno}}</a>
+              <a routerLink="/main/orders/cust/order-detail" [queryParams]="{ordno: afterData.ordno}">{{afterData
+                .ordno}}</a>
             </td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">商品名称：</td>
             <td class="item-bd col-sm-10 mb0">
               {{afterData.goodsName}}
-              <a routerLink="../../goods/publish/edit" [queryParams]="{baseCode: afterData.goodsBaseCode}">(查看)</a>
+              <a routerLink="/main/goods/manage/detail" [queryParams]="{baseCode: afterData.goodsBaseCode}">(查看)</a>
             </td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">商品数量：</td>
+            <td class="item-bd col-sm-10 mb0">
+              {{afterData.num}}
+            </td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">售后类型：</td>
+            <td class="item-bd col-sm-10 mb0">{{afterData.returnType | rzhState:'1601'}}</td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">退款金额：</td>
@@ -39,11 +52,11 @@
             <td class="item-bd col-sm-10 mb0">{{afterData.isReceive | rzhState:'1001'}}</td>
           </tr>
           <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">退款原因：</td>
+            <td class="item-hd col-sm-2">{{afterData.returnType=='RETURN'?'退货原因':'退款原因'}}：</td>
             <td class="item-bd col-sm-10 mb0">{{afterData.reason}}</td>
           </tr>
           <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">退款说明：</td>
+            <td class="item-hd col-sm-2">{{afterData.returnType=='RETURN'?'退货说明':'退款说明'}}：</td>
             <td class="item-bd col-sm-10 mb0">{{afterData.reasonRmk}}</td>
           </tr>
           <tr class="t-item clearfix">
@@ -54,13 +67,13 @@
                      (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
                      alt="">
                 <img [src]="item.vpic" class="hover-native-img" alt=""
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
             </td>
           </tr>
         </table>
 
-        <!--平台同意申请并退款-->
+        <!--平台同意申请-->
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
@@ -69,15 +82,21 @@
             <table class="t-items p w100">
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">处理时间：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.updateTime}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].updateTime}}</td>
               </tr>
               <tr class="t-item clearfix">
-                <td class="item-hd col-sm-2">处理备注：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
+                <td class="item-hd col-sm-2">审核人：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].optName}}</td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">审核结果：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterData.returnType=='RETURN'?'同意退货':'同意退款'}}</td>
+                <td class="item-bd col-sm-10 mb0">
+                  {{afterTailList[1].state | rzhState:'1701'}}
+                </td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">处理意见：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].description}}</td>
               </tr>
             </table>
           </div>
@@ -127,30 +146,81 @@
               <td class="item-hd col-sm-2">退货发货状态：</td>
               <td class="item-bd col-sm-10 mb0">{{afterData.state | rzhState:'1701'}}</td>
             </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">物流公司：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressName}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">物流单号：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressNo}}</td>
+            </tr>
           </table>
         </div>
 
         <!--平台验收货物之后-->
-        <div *ngIf="afterData.state=='DONE'">
+        <div *ngIf="afterData.returnType=='RETURN' && afterData.state=='DONE'">
           <div class="">
             <legend class="m0" style="height: 51px;line-height: 51px;">退货验收处理</legend>
           </div>
           <table class="t-items p w100">
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">处理时间：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.updateTime}}</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].updateTime}}</td>
             </tr>
             <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">处理备注：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.opinion}}</td>
+              <td class="item-hd col-sm-2">操作人：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].optName}}</td>
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">审核结果：</td>
-              <td class="item-bd col-sm-10 mb0">已验收</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state  | rzhState:'1701'}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">处理备注：</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].description}}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
+  <form class="goods-audit panel panel-danger w96 m-auto mb-xl" (keydown.Enter)="false" *ngIf="type=='deal'">
+    <fieldset class="p0 panel-body">
+      <legend class="m0 goods-audit-title">{{afterData.state=='DELIVERY'?'退还商品审核':'退款/退货申请处理'}}</legend>
+      <table class="w100">
+        <tr>
+          <td class="item-hd col-sm-2">处理意见：</td>
+          <td class="item-bd col-sm-2">
+            <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
+              <label>
+                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"/>
+                <span class="fa fa-circle"></span>{{item.val}}</label>
+            </div>
+          </td>
+          <td class="col-sm-8 mb0">
+            <textarea class="form-control w66 tag-dib align-middle" name="opinion" required
+                      [(ngModel)]="opinion" placeholder="请填写处理意见"
+                      cols="10" rows="3"></textarea>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <fieldset class="pt-xl m0 text-center">
+      <button class="btn btn-green" type="button" *ngIf="afterData.returnType=='REFUND'" (click)="auditRefund()"
+              [disabled]="!opinion">
+        <em class="fa fa-upload mr"></em>提交处理结果
+      </button>
+      <ng-container *ngIf="afterData.returnType=='RETURN'">
+        <button class="btn btn-green" type="button" *ngIf="afterData.state=='WAIT'" (click)="auditReturn()"
+                [disabled]="!opinion">
+          <em class="fa fa-upload mr"></em>提交处理结果
+        </button>
+        <button class="btn btn-green" type="button" *ngIf="afterData.state=='DELIVERY'" (click)="auditReturnGoods()"
+                [disabled]="!opinion">
+          <em class="fa fa-upload mr"></em>提交审核结果
+        </button>
+      </ng-container>
+    </fieldset>
+  </form>
 </div>
+<div class="btn btn-primary" (click)="back()">返回</div>

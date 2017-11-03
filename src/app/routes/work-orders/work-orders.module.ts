@@ -10,11 +10,12 @@ import {OrdersService} from "../orders/orders/orders.service";
 import {DeliverComponent} from "./deliver/deliver.component";
 import {AfterDetailsComponent} from "./after-details/after-details.component";
 import {AfterService} from "../sale/after.service";
+import { AssignComponent } from './assign/assign.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'assign'},
-  {path: 'assign', component: WoAllComponent},
+  {path: 'assign', component: AssignComponent},
   {
     path: 'manage', component: WoManageComponent, children: [
     {path: '', redirectTo: 'wo-all'},
@@ -42,7 +43,8 @@ const routes: Routes = [
     AssignToAgentComponent,
     OrderDetailComponent,
     DeliverComponent,
-    AfterDetailsComponent
+    AfterDetailsComponent,
+    AssignComponent
   ],
   providers: [WoManageComponent, WoService, OrdersService, AfterService]
 })
