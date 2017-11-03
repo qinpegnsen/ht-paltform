@@ -19,6 +19,7 @@ export class AfterDetailsComponent implements OnInit {
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据
   private goodsAudits: any;         //商品审核是否通过枚举
+  private afterTailList: any;       //查看售后单跟踪信息
 
 
   constructor(private router: Router,
@@ -41,6 +42,8 @@ export class AfterDetailsComponent implements OnInit {
     if(isNullOrUndefined(me.afterData)) me.afterData = null;
     me.afterNo = me.afterData.afterNo;
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
+    me.afterTailList = this.after.loadAfterTailList({afterNo: me.afterNo});
+    if (isNullOrUndefined(me.afterData)) me.afterData = null;
 
   }
 
