@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {NavigationEnd, Router} from "@angular/router";
@@ -12,8 +12,10 @@ const swal = require('sweetalert');
   templateUrl: './return-control.component.html',
   styleUrls: ['./return-control.component.scss']
 })
-export class ReturnControlComponent implements OnInit {
-
+export class ReturnControlComponent implements OnInit ,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('returnControlSearch',JSON.stringify(this.search))
+  }
   private returnList: Page = new Page();
   private LogisticsData: object;  //物流信息
   private detail = [];             //是否显示详情的list
@@ -42,7 +44,7 @@ export class ReturnControlComponent implements OnInit {
     let me = this;
     me.afterStateList = me.tools.getEnumDataList(1602);
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('returnControlSearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }

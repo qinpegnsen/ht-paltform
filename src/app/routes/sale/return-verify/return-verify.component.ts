@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {NavigationEnd, Router} from "@angular/router";
@@ -11,8 +11,10 @@ const swal = require('sweetalert');
   templateUrl: './return-verify.component.html',
   styleUrls: ['./return-verify.component.scss']
 })
-export class ReturnVerifyComponent implements OnInit {
-
+export class ReturnVerifyComponent implements OnInit ,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('returnVeritySearch',JSON.stringify(this.search))
+  }
   private returnList: Page = new Page();
   private seebutton: object;//查看按钮
   private detail = [];
@@ -38,7 +40,7 @@ export class ReturnVerifyComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('returnVeritySearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {NavigationEnd, Router} from "@angular/router";
@@ -12,7 +12,10 @@ const swal = require('sweetalert');
   templateUrl: './inspect-goods.component.html',
   styleUrls: ['./inspect-goods.component.scss']
 })
-export class InspectGoodsComponent implements OnInit {
+export class InspectGoodsComponent implements OnInit,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('inspectGoodsSearch',JSON.stringify(this.search))
+  }
 
   private returnList: Page = new Page();
   private seebutton: object;//查看按钮
@@ -40,7 +43,7 @@ export class InspectGoodsComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('inspectGoodsSearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
@@ -17,7 +17,10 @@ defineLocale('cn', zhCn);
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.scss']
 })
-export class AllOrdersComponent implements OnInit {
+export class AllOrdersComponent implements OnInit ,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('orderAllSearch',JSON.stringify(this.search))
+  }
   public path: string;       //路由
   public ordState: string;    //订单类型
   public curCancelOrderId: string;
@@ -79,7 +82,7 @@ export class AllOrdersComponent implements OnInit {
       }
     });
 
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('orderAllSearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }

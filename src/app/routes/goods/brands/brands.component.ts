@@ -15,12 +15,19 @@ export class BrandsComponent implements OnInit {
   public brands: Page = new Page();
   private addButton;
   private buttons;
-  private brandName: string = '';// 品牌名称
-  private brandInitial: string = '';// 首字母
-  private brandRecommend: string = '';// 是否推荐
   private kindList;// 分类列表
   private selectKindName: string = '根据分类查询';
   private brandKind;// 品牌分类
+  private query = {
+    curPage: 1,
+    pageSize: 10,
+    sortColumns: '',
+    kindId: null,
+    brandName: null,
+    brandInitial: null,
+    brandRecommend: null
+  };
+
   constructor(private router: Router, private submitService: SubmitService, private goods: GoodsService) {
   }
 
@@ -88,7 +95,7 @@ export class BrandsComponent implements OnInit {
    * @param name
    */
   selected(id, name) {
-    this.brandKind = id;
+    this.query.kindId = id;
     this.selectKindName = name;
     this.queryDatas(1)
   }
@@ -163,16 +170,7 @@ export class BrandsComponent implements OnInit {
     }
     ;
     let requestUrl = '/goodsBrand/queryBrandPagesByNA';
-    let requestData = {
-      curPage: activePage,
-      pageSize: 10,
-      sortColumns: '',
-      kindId: _this.brandKind,
-      brandName: _this.brandName,
-      brandInitial: _this.brandInitial,
-      brandRecommend: _this.brandRecommend
-    };
-    _this.brands = new Page(_this.submitService.getData(requestUrl, requestData));
+    _this.brands = new Page(_this.submitService.getData(requestUrl, _this.query));
   }
 
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Router} from "@angular/router";
 import {Page} from "../../../core/page/page";
@@ -11,8 +11,10 @@ const swal = require('sweetalert');
   templateUrl: './refund-verify.component.html',
   styleUrls: ['./refund-verify.component.scss']
 })
-export class RefundVerifyComponent implements OnInit {
-
+export class RefundVerifyComponent implements OnInit,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('refundVeritySearch',JSON.stringify(this.search))
+  }
   private refundList: Page = new Page();
   private detail = [];
   private isReceiveList: object; //售后单状态枚举列
@@ -37,7 +39,7 @@ export class RefundVerifyComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('refundVeritySearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }

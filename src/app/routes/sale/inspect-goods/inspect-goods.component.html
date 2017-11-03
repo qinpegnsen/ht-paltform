@@ -110,10 +110,10 @@
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
               <button *ngIf="item.state=='DELIVERY'" class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
-                      [queryParams]="{afterNo:item.afterNo,type:'deal',parentPath:'inspect-goods',search:search | toString}"> 验收
+                      [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
               </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
-                      [queryParams]="{afterNo:item.afterNo,type:'detail',parentPath:'inspect-goods',search:search | toString}">
+                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>
             </td>
           </tr>

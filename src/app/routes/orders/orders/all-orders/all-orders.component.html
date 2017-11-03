@@ -109,7 +109,7 @@
                 <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
                   <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
                   <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
-                     [queryParams]="{ordno:order.ordno,parentPath: path,search: search | toString}">
+                     [queryParams]="{ordno:order.ordno}">
                     查看详情</p>
                   <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
                 <span class="pl pr" myHoverColor [myHover]="'orange'"

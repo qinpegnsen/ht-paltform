@@ -36,14 +36,7 @@ export class WoManageComponent implements OnInit {
   }
 
   routeBack(){
-    let me = this, backRouter;
-    let parentPath = me.submit.getParams('parentPath');
-    if(!isNullOrUndefined(parentPath)) me.parentPath = parentPath;
-    backRouter = '/main/WO/manage/' + this.parentPath;
-    if(me.parentPath == 'assign'){
-      backRouter = '/main/WO/assign';
-    };
-    this.router.navigate([backRouter], {replaceUrl: true, preserveQueryParams: true});
+    this.location.back()
   }
 
 }

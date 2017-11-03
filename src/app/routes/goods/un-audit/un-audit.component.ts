@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
@@ -13,7 +13,10 @@ declare var $: any;
   templateUrl: './un-audit.component.html',
   styleUrls: ['./un-audit.component.scss']
 })
-export class UnAuditComponent implements OnInit {
+export class UnAuditComponent implements OnInit ,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('unAuditGoodsSearch',JSON.stringify(this.query))
+  }
   public goodsList: Page = new Page();
   private query = {
     kindId: '',
@@ -35,6 +38,10 @@ export class UnAuditComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
+    let query = sessionStorage.getItem('unAuditGoodsSearch');
+    if(!isNullOrUndefined(query)){
+      me.query = JSON.parse(query);
+    }
     me.queryDatas(1); //查询商品列表
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表

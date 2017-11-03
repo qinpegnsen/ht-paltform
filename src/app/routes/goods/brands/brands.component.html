@@ -13,28 +13,9 @@
     </ul>
   </div>
   <div class="panel mb p clearfix">
-    <div class="form-group col-md-4 mb0">
-      <div class="col-md-8 col-xs-6 pl0">
-        <input type="text" [(ngModel)]="brandName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryDatas(1)" placeholder="品牌名称">
-      </div>
-      <button type="button" title="搜索"
-              class="btn thc btn-thc bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
-      </button>
-    </div>
-    <div class="form-group col-md-4 mb0">
-      <div class="col-md-8 col-xs-6 pl0">
-        <input type="text" [(ngModel)]="brandInitial" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryDatas(1)" placeholder="首字母">
-      </div>
-      <button type="button" title="搜索"
-              class="btn thc btn-thc bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
-      </button>
-    </div>
-    <div class="form-group col-md-4 mb0">
-      <div class="col-md-8 col-xs-6 pl0">
+    <div class="search-group pl0">
+      <div class="search-title">分类：</div>
+      <div class="search-main">
         <div class="btn-group w100" dropdown>
           <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b
             class="caret pull-right"></b>
@@ -50,6 +31,25 @@
         </div>
       </div>
     </div>
+    <div class="search-group ml-lg mb align-top">
+      <span class="search-title">首字母：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.brandInitial"
+               class="form-control border-b-grey"
+               (change)="queryDatas(1)" placeholder="首字母">
+      </div>
+    </div>
+    <div class="search-group mb align-top">
+      <span class="search-title">品牌：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.brandName"
+               class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+      </div>
+    </div>
+    <button type="button" title="搜索" (click)="queryDatas(1)"
+            class="btn thc btn-thc align-top ml">
+      <em class="icon-magnifier fa-fw"></em>
+    </button>
   </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="brands" (pageChange)="queryDatas(1,$event)">

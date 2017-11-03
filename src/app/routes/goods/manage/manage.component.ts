@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
@@ -14,7 +14,10 @@ declare var $: any;
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit ,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('goodsQuerySearch',JSON.stringify(this.query))
+  }
   private addButton;
   private buttons;
   public goodsList: Page = new Page();
@@ -41,6 +44,10 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
+    let query = sessionStorage.getItem('goodsQuerySearch');
+    if(!isNullOrUndefined(query)){
+      me.query = JSON.parse(query);
+    }
     me.queryDatas(1); //查询商品列表
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表

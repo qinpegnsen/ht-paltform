@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
@@ -12,7 +12,10 @@ const swal = require('sweetalert');
   templateUrl: './refund-control.component.html',
   styleUrls: ['./refund-control.component.scss']
 })
-export class RefundControlComponent implements OnInit {
+export class RefundControlComponent implements OnInit,DoCheck {
+  ngDoCheck(): void {
+    sessionStorage.setItem('refundControlSearch',JSON.stringify(this.search))
+  }
 
   private refundList: Page = new Page();
   private detail = [];
@@ -42,7 +45,7 @@ export class RefundControlComponent implements OnInit {
     let me = this;
     me.afterStateList = me.tools.getEnumDataList(1602);
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = me.submit.getParams('search');
+    let search = sessionStorage.getItem('refundControlSearch');
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }
