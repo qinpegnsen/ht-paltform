@@ -292,7 +292,7 @@
                 <label class="pull-left mr mt-sm">使用的物流规则</label>
                 <select class="rules-list text form-control pull-left" name="tplFreight" disabled
                         [(ngModel)]="publishData.goodsExpressInfo.expressTplId">
-                  <option *ngFor="let item of logistics" [value]="item.id">{{item.id}}{{item.tplName}}</option>
+                  <option *ngFor="let item of logistics" [value]="item.id">{{item.tplName}}</option>
                 </select>
               </div>
               <div class="tpl-box w100 p mt"
