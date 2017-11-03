@@ -46,13 +46,14 @@ export class IntegrationChangeComponent implements OnInit {
    * 提交
    */
   submit() {
+    let me=this;
     let url = '/custCoin/addCustCoin';
     let res = this.submitt.postRequest(url, this.data);
     if (isNullOrUndefined(res)) {
-      this.data.phone = '';
-      this.data.custCoin = '';
-      this.sum.coin='';
-      this.sum.recharge=''
+      me.data.phone = '';
+      me.data.custCoin = '';
+      me.sum.coin='';
+      me.sum.recharge=''
     }
   }
 }

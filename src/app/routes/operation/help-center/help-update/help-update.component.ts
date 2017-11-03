@@ -37,6 +37,9 @@ export class HelpUpdateComponent implements OnInit {
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
       $('#summernote').summernote({ //初始化编辑器
+        popover: {
+          air: []
+        },
         height: 500,
         dialogsInBody: true,
         lang: 'zh-CN',

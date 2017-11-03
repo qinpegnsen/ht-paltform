@@ -50,13 +50,14 @@ export class CertificationComponent implements OnInit {
    * 认证通过
    */
   access(id,curPage){
+    let me=this;
     let url = '/custAuthInfo/updateState';
     let data = {
       id:id,
       state: 'PASS',
     }
-    this.submit.putRequest(url, data);
-    this.aqeuryAll(this.state,curPage);
+    me.submit.putRequest(url, data);
+    me.aqeuryAll(this.state,curPage);
   }
 
   /**
@@ -80,9 +81,10 @@ export class CertificationComponent implements OnInit {
    * 添加弹窗
    * */
   addNewData(orderId,curPage) {
-    this.orderId1=orderId;
-    this.showReasonWindow = true;
-    this.curPage1=curPage;
+    let me=this;
+    me.orderId1=orderId;
+    me.showReasonWindow = true;
+    me.curPage1=curPage;
   }
 
   getReason(data) {

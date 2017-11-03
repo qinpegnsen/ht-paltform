@@ -32,6 +32,9 @@ export class HelpAssortmentComponent implements OnInit {
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
       $('#summernote').summernote({
+        popover: {
+          air: []
+        },
         height: 280,
         dialogsInBody: true,
         lang: 'zh-CN',
@@ -105,13 +108,13 @@ export class HelpAssortmentComponent implements OnInit {
         answer:sHTML,
         sort: res.sort,
       }
-      let answer=this.operationService.addproblem(url,data);
+      let answer=me.operationService.addproblem(url,data);
       if(answer=='帮助问题名称已存在' || answer=='排序不能为空' ||answer=='帮助问题答案不能为空' || answer=='问题不能为空' ||answer=='答案不能为空'){
         return;
       }else{
         AppComponent.rzhAlt("success", "添加问题成功");
-        this.qeuryAllService();
-        this.router.navigate(['/main/operation/help-center/help-answer']);
+        me.qeuryAllService();
+        me.router.navigate(['/main/operation/help-center/help-answer']);
       }
     }
 }

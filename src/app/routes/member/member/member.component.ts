@@ -53,6 +53,7 @@ export class MemberComponent implements OnInit {
    * 查询会员的列表
    */
   queryMemberList(curPage,event?:PageEvent){
+    let me=this;
     let activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -70,7 +71,7 @@ export class MemberComponent implements OnInit {
       state:this.state,
     }
     let url='/cust/queryAllCust';
-    this.memberListdata=new Page(this.service.getData(url,data))
+    me.memberListdata=new Page(me.service.getData(url,data))
   }
 
   /**
@@ -86,13 +87,14 @@ export class MemberComponent implements OnInit {
    * @param orgCode
    */
   changeState(state,custCode,curPage){
+    let me=this;
     let url = '/cust/updateState';
     let data = {
       custCode:custCode,
       state:state
     }
-    this.service.putRequest(url,data);
-    this.queryMemberList(curPage);
+    me.service.putRequest(url,data);
+    me.queryMemberList(curPage);
   }
 
   /**
