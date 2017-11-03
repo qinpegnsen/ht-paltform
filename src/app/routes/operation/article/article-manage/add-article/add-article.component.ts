@@ -167,7 +167,7 @@ export class AddArticleComponent implements OnInit {
       setTimeout(() => {//初始化编辑器和给编辑器赋值
         let me = this;
         $('#summernote').summernote({
-          popover: {
+          popover: {  //防止点击图片产生的弹框
             air: []
           },
           height: 280,
@@ -211,7 +211,7 @@ export class AddArticleComponent implements OnInit {
       setTimeout(() => {//新增的时候初始化编辑器的值
         let me = this;
         $('#summernote').summernote({
-          popover: {
+          popover: {  //防止点击图片产生的弹框
             air: []
           },
           placeholder:'请输入文章内容',
