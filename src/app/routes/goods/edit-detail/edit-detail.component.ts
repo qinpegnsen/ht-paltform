@@ -79,6 +79,9 @@ export class EditDetailComponent implements OnInit {
               private tools: RzhtoolsService) {
   }
 
+  back(){
+    this.location.back()
+  }
 
   ngOnInit() {
 

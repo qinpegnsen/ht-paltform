@@ -4,6 +4,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {AfterService} from "../after.service";
+import { Location }from '@angular/common';
 import {isNullOrUndefined} from "util";
 
 @Component({
@@ -29,6 +30,7 @@ export class AfterDetailsComponent implements OnInit {
   constructor(private router: Router,
               private submit: SubmitService,
               private after: AfterService,
+              private location: Location,
               private tools: RzhtoolsService) {
   }
 
@@ -106,5 +108,7 @@ export class AfterDetailsComponent implements OnInit {
     target.style.display = 'none';
   }
 
-
+  back(){
+    this.location.back();
+  }
 }

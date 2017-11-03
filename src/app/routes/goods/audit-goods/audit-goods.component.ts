@@ -7,6 +7,7 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ManageComponent} from "../manage/manage.component";
+import { Location }from '@angular/common';
 declare var $: any;
 
 @Component({
@@ -60,12 +61,15 @@ export class AuditGoodsComponent implements OnInit {
   constructor(private publishComponent: PublishComponent,
               private manageComponent: ManageComponent,
               private route: ActivatedRoute,
+              private location: Location,
               private submit: SubmitService,
               private goods: GoodsService,
               private router: Router,
               private tools: RzhtoolsService) {
   }
-
+  back(){
+      this.location.back()
+  }
 
   ngOnInit() {
     let me = this;
