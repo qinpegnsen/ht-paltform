@@ -252,64 +252,44 @@
               <div class="panel-body">
                 <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="areas">
                   <thead>
-                  <tr *ngIf="one">
+                  <tr >
                     <th class="col-md-5 unselectable">
                       <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
                     </th>
-                    <th class="col-md-1 unselectable text-center">
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='NUM'">
                       <rzhDefaultSorter by="agentName">首件(件)</rzhDefaultSorter>
                     </th>
-                    <th class="col-md-2 unselectable text-center">
-                      <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">
-                      <rzhDefaultSorter by="addAttach">续件(件)	</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-2 unselectable text-center">
-                      <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">操作</th>
-                  </tr>
-                  <tr *ngIf="twe">
-                    <th class="col-md-5 unselectable">
-                      <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='WEIGHT'">
                       <rzhDefaultSorter by="agentName">首重(Kg)</rzhDefaultSorter>
                     </th>
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='VOLUME'">
+                      <rzhDefaultSorter by="agentName">首体积(m³)</rzhDefaultSorter>
+                    </th>
                     <th class="col-md-2 unselectable text-center">
                       <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
                     </th>
-                    <th class="col-md-1 unselectable text-center">
-                      <rzhDefaultSorter by="addAttach">续重(Kg)	</rzhDefaultSorter>
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='NUM'">
+                      <rzhDefaultSorter by="agentName">续件(件)</rzhDefaultSorter>
+                    </th>
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='WEIGHT'">
+                      <rzhDefaultSorter by="agentName">续重(Kg)</rzhDefaultSorter>
+                    </th>
+                    <th class="col-md-1 unselectable text-center" *ngIf="staff.valuationType=='VOLUME'">
+                      <rzhDefaultSorter by="agentName">续体积(m³)</rzhDefaultSorter>
                     </th>
                     <th class="col-md-2 unselectable text-center">
                       <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
                     </th>
                     <th class="col-md-1 unselectable text-center">操作</th>
                   </tr>
-                  <tr *ngIf="three">
-                    <th class="col-md-5 unselectable">
-                      <rzhDefaultSorter by="area">运送到</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">
-                      <rzhDefaultSorter by="agentName">首体积(㎡)</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-2 unselectable text-center">
-                      <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">
-                      <rzhDefaultSorter by="addAttach">续体积(㎡)	</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-2 unselectable text-center">
-                      <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
-                    </th>
-                    <th class="col-md-1 unselectable text-center">操作</th>
-                  </tr>
+
                   </thead>
                   <tbody>
                   <tr *ngFor="let item of staff.storeExpressTplValList;let i = index">
-                    <td>{{item.area | level2AreaName}}</td>
+                    <td>
+                      <div class="hides">{{item.area | level2AreaName}}</div>
+
+                    </td>
                     <!--首件begin-->
                     <td class="text-center" *ngIf="one">
                       <input class="text _price num form-control" [(ngModel)]="item.firstNum" name="firstNum{{i}}" type="number" value="1" required [pattern]="patterns.integer" #firstNum="ngModel"/>

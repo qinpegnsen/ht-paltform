@@ -81,8 +81,9 @@ export class AddAgentComponent implements OnInit {
       var clickEventListener = map.on('click', function (e) {
         me.staff.coordinateLng = e.lnglat.getLng();//经度
         me.staff.coordinateLat = e.lnglat.getLat();//纬度
-        //this.maps=me.staff.coordinateLng+','+me.staff.coordinateLat;
-        console.log("█ this.maps ►►►",  this.maps);
+        me.maps=me.staff.coordinateLng+','+me.staff.coordinateLat;
+        console.log("█ this.maps ►►►",  me.maps);
+        console.log("█ e ►►►",  e);
       });
 
       var marker = new AMap.Marker({
@@ -201,12 +202,9 @@ export class AddAgentComponent implements OnInit {
           'leader': value.leader,
           'moblie': value.moblie,
           'idcard': value.idcard,
-          /*'idcardImage1uuid': value.idcardImage1uuid,
-          'idcardImage2uuid': value.idcardImage2uuid,*/
           'areaCode': value.areaCode,
           'address': value.address,
-          'coordinateLng': value.coordinateLng,
-          'coordinateLat': value.coordinateLat,
+          'coordinateLngStr': this.maps,
           'description': value.description,
           'telephone':value.telephone
         },
@@ -311,12 +309,9 @@ export class AddAgentComponent implements OnInit {
           'moblie': value.moblie,
           'idcard': value.idcard,
           'telephone':value.telephone,
-         /* 'idcardImage1uuid': value.idcardImage1uuid,
-          'idcardImage2uuid': value.idcardImage2uuid,*/
           'areaCode': value.areaCode,
           'address': value.address,
-          'coordinateLng': value.coordinateLng,
-          'coordinateLat': value.coordinateLat,
+          'coordinateLngStr': this.maps,
           'description': value.description,
         },
         success: (res) => {

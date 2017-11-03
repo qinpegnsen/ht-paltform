@@ -91,14 +91,14 @@
           <div class="form-group">
             <label class="col-sm-2 control-label"> <i class="main-red">*</i>坐标_经纬度</label>
             <div class="col-sm-2">
-              <input class="form-control col-sm-1" type="text" name="coordinateLng" readonly required ngModel [(ngModel)]="staff.coordinateLng"/>
+              <input style="width: 287px" class="form-control col-sm-1" type="text" name="coordinateLngStr" readonly required ngModel [(ngModel)]="maps"/>
             </div>
-            <div class="col-sm-2">
-              <input class="form-control col-sm-1 position-relative" type="text" readonly required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
-            </div>
+            <!--<div class="col-sm-2">-->
+            <!--<input class="form-control col-sm-1 position-relative" type="text" readonly required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>-->
+            <!--</div>-->
           </div>
-          <button class="btn btn-info position-absolute  left50 icon-location-pin" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)"> 标注经纬度</button>
-          <button class="btn btn-info position-absolute  left50 icon-location-pin" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)"> 修改经纬度</button>
+          <button class="btn btn-info position-absolute  icon-location-pin" style="top:39%;left: 40.5%" *ngIf="!flag" type="button" (click)="isShowMap(staff)"> 标注经纬度</button>
+          <button class="btn btn-info position-absolute icon-location-pin" style="top:39%;left: 40.5%" *ngIf="flag" type="button" (click)="isShowMap(staff)"> 修改经纬度</button>
         </fieldset>
         <fieldset>
           <div class="form-group">
@@ -217,14 +217,14 @@
             <div class="form-group">
               <label class="col-sm-2 control-label"> <i class="main-red">*</i>坐标_经纬度</label>
               <div class="col-sm-2">
-                <input class="form-control col-sm-1" readonly type="text" name="coordinateLng" required ngModel [(ngModel)]="staff.coordinateLng"/>
+                <input style="width: 287px" class="form-control col-sm-1" type="text" name="coordinateLngStr" readonly required ngModel [(ngModel)]="maps"/>
               </div>
-              <div class="col-sm-2">
-                <input class="form-control col-sm-1 position-relative" readonly type="text" required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>
-              </div>
+              <!--<div class="col-sm-2">-->
+              <!--<input class="form-control col-sm-1 position-relative" type="text" readonly required name="coordinateLat" ngModel [(ngModel)]="staff.coordinateLat"/>-->
+              <!--</div>-->
             </div>
-            <button class="btn btn-info position-absolute left50 icon-location-pin" style="top:39%" *ngIf="!flag" type="button" (click)="isShowMap(staff)"> 标注经纬度</button>
-            <button class="btn btn-info position-absolute left50 icon-location-pin" style="top:39%" *ngIf="flag" type="button" (click)="isShowMap(staff)"> 修改经纬度</button>
+            <button class="btn btn-info position-absolute  icon-location-pin" style="top:39%;left: 40.5%" *ngIf="!flag" type="button" (click)="isShowMap(staff)"> 标注经纬度</button>
+            <button class="btn btn-info position-absolute icon-location-pin" style="top:39%;left: 40.5%" *ngIf="flag" type="button" (click)="isShowMap(staff)"> 修改经纬度</button>
           </fieldset>
           <fieldset>
             <div class="form-group">
