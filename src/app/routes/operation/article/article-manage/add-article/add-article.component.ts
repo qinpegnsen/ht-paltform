@@ -172,14 +172,15 @@ export class AddArticleComponent implements OnInit {
           lang: 'zh-CN',
           fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
           toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['Misc', ['undo','redo']],
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
             ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
             ['Insert', ['picture','link','video','table',]],
-            ['Misc', ['fullscreen', 'help','undo','redo']],
+            ['Misc', ['fullscreen', 'help']],
           ],
           callbacks: {
             onChange: (contents, $editable) => {
@@ -212,14 +213,15 @@ export class AddArticleComponent implements OnInit {
           lang: 'zh-CN',
           fontNames: [ '微软雅黑', '黑体','宋体 ','华文楷体','仿宋','方正舒体','方正姚体','楷体','隶书','Helvetica', 'Arial'],
           toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['Misc', ['undo','redo']],
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
             ['para', ['ul', 'ol', 'paragraph','style','height','hr']],
             ['Insert', ['picture','link','video','table',]],
-            ['Misc', ['fullscreen', 'help','undo','redo']],
+            ['Misc', ['fullscreen', 'help']],
           ],
           callbacks: {
             onChange: (contents) => {
