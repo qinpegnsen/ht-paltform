@@ -167,6 +167,9 @@ export class AddArticleComponent implements OnInit {
       setTimeout(() => {//初始化编辑器和给编辑器赋值
         let me = this;
         $('#summernote').summernote({
+          popover: {
+            air: []
+          },
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
@@ -185,8 +188,8 @@ export class AddArticleComponent implements OnInit {
           callbacks: {
             onChange: (contents, $editable) => {
               me.contents = contents;
-              $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
-              $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable *").css({'width':'100%',',margin':'0px'});//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable img").removeAttr('width');//解决复制过来的p和图片太宽出现横向滚动条
             },
             onImageUpload: function (files) {
               for (let file of files) me.sendFile(file);
@@ -208,6 +211,10 @@ export class AddArticleComponent implements OnInit {
       setTimeout(() => {//新增的时候初始化编辑器的值
         let me = this;
         $('#summernote').summernote({
+          popover: {
+            air: []
+          },
+          placeholder:'请输入文章内容',
           height: 280,
           dialogsInBody: true,
           lang: 'zh-CN',
@@ -226,8 +233,8 @@ export class AddArticleComponent implements OnInit {
           callbacks: {
             onChange: (contents) => {
               me.contents = contents;
-              $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
-              $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable *").css({'width':'100%',',margin':'0px'});//解决复制过来的p和图片太宽出现横向滚动条
+              $(".note-editable img").removeAttr('width');//解决复制过来的p和图片太宽出现横向滚动条
             },
             onImageUpload: function (files) {
               for (let file of files) me.sendFile(file);
