@@ -53,12 +53,14 @@ export class EditDetailComponent implements OnInit {
 
   private defaultUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsImage',
-    itemAlias: "limitFile"
+    itemAlias: "limitFile",
+    allowedFileType: ["image"]
   })
   private mobileUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsBodyImage',
     itemAlias: "limitFile",
-    autoUpload: true
+    autoUpload: true,
+    allowedFileType: ["image"]
   })
 
   constructor(private publishComponent: PublishComponent,
@@ -431,7 +433,8 @@ export class EditDetailComponent implements OnInit {
           idx: $val.attr('name'),
           uploader: new FileUploader({
             url: '/goodsEdit/uploadGoodsImage',
-            itemAlias: "limitFile"
+            itemAlias: "limitFile",
+            allowedFileType: ["image"]
           })
         };
         me.skuImg.vals.push(obj);

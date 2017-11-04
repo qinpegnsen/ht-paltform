@@ -67,7 +67,7 @@
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>{{kindInfo.kindIcon? '修改图片':'上传图片'}}
                 <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
-                       (change)="fileChangeListener()"/>
+                       accept="image/*" (change)="fileChangeListener()"/>
               </label>
             </div>
           </div>
