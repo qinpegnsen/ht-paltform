@@ -33,13 +33,6 @@
           </select>
         </div>
       </div>
-      <div class="search-group ml-xl mb">
-        <span class="search-title font12">代理商编码：</span>
-        <div class="search-main">
-          <input class="form-control num" type="number" name="agentCode" placeholder="代理商编码"
-                 [(ngModel)]="search.agentCode">
-        </div>
-      </div>
       <div class="search-term clearfix ml-xl mb">
         <div class="w30 pr0 pull-left">
           <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType (change)="changeSearchType(sType.value)">

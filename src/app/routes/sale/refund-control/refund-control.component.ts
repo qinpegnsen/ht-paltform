@@ -30,8 +30,6 @@ export class RefundControlComponent implements OnInit,DoCheck {
     afterNo: null,
     phone: null,
     ordno: null,
-    goodsBaseCode: null,
-    agentCode: null,
     searchType: 'afterNo',
   };
 
@@ -68,10 +66,6 @@ export class RefundControlComponent implements OnInit,DoCheck {
       this.search.afterNo = null;
       this.search.phone = null;
       this.search.baseCode = null;
-    } else if (val == 'baseCode') {
-      this.search.ordno = null;
-      this.search.afterNo = null;
-      this.search.phone = null;
     }
   }
 

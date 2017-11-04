@@ -295,7 +295,7 @@
     </tfoot>
   </table>
 </div>
-<ng-container *ngIf="orderDetailData.state=='PREPARE'">
+<ng-container *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE'">
   <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 </ng-container>
 <div class="btn btn-primary mt" (click)="back()">返回</div>

@@ -188,7 +188,7 @@
         <!--当选择了第一规格时-->
         <div class="goodspics" *ngFor="let val of skuImg.vals;let idx = index;" [id]="val.valCode">
           <div class="color-value">
-            <h4>{{skuImg.attrName}}：<span data-spec-value-name="23">{{val.valName}}</span></h4>
+            <h4>{{skuImg.attrName}}：<span>{{val.valName}}</span></h4>
             <p class="tip" myHoverColor [class.hide]="myReadOnly">第一张图片为主图</p>
           </div>
           <ul class="goods-pic-list ml">

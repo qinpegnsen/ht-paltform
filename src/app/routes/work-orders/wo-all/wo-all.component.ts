@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
@@ -17,10 +17,7 @@ defineLocale('cn', zhCn);
   templateUrl: './wo-all.component.html',
   styleUrls: ['./wo-all.component.scss']
 })
-export class WoAllComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('woAllSearch',JSON.stringify(this.search))
-  }
+export class WoAllComponent implements OnInit{
   bsConfig: Partial<BsDatepickerConfig>;
   public path: string;//当前路由
   private woList: Page = new Page();
@@ -98,10 +95,6 @@ export class WoAllComponent implements OnInit ,DoCheck {
           break;
       }
     });
-    let search = sessionStorage.getItem('woAllSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     me.queryDatas(1)
   }
 

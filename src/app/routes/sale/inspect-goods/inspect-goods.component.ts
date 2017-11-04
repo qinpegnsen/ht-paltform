@@ -1,7 +1,7 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {isNullOrUndefined} from "util";
@@ -12,16 +12,10 @@ const swal = require('sweetalert');
   templateUrl: './inspect-goods.component.html',
   styleUrls: ['./inspect-goods.component.scss']
 })
-export class InspectGoodsComponent implements OnInit,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('inspectGoodsSearch',JSON.stringify(this.search))
-  }
-
+export class InspectGoodsComponent implements OnInit {
   private returnList: Page = new Page();
-  private seebutton: object;//查看按钮
   private detail = [];
   private isReceiveList: object; //售后单状态枚举列
-  private selectText: string; //选择查询的状态
   private search: any = {
     curPage: null,
     pageSize: 10,
@@ -31,9 +25,7 @@ export class InspectGoodsComponent implements OnInit,DoCheck {
     afterNo: null,
     phone: null,
     ordno: null,
-    goodsBaseCode: null,
     searchType: 'afterNo',
-    agentCode: null
   };
 
   constructor(private submit: SubmitService, private router: Router,
@@ -43,10 +35,6 @@ export class InspectGoodsComponent implements OnInit,DoCheck {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = sessionStorage.getItem('inspectGoodsSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     this.queryAllService();
   }
 
@@ -66,10 +54,6 @@ export class InspectGoodsComponent implements OnInit,DoCheck {
       this.search.afterNo = null;
       this.search.phone = null;
       this.search.baseCode = null;
-    } else if (val == 'baseCode') {
-      this.search.ordno = null;
-      this.search.afterNo = null;
-      this.search.phone = null;
     }
   }
 
@@ -91,6 +75,17 @@ export class InspectGoodsComponent implements OnInit,DoCheck {
    * 改变收货的状态
    */
   selectState(obj){
+    this.search = {
+      curPage: null,
+      pageSize: 10,
+      returnType: 'RETURN',
+      state: 'DELIVERY',
+      isReceive: '',
+      afterNo: null,
+      phone: null,
+      ordno: null,
+      searchType: 'afterNo',
+    };
     if( $(obj)[0].className.indexOf('bb')>1){
       return;
     }else{

@@ -1,10 +1,9 @@
-import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {CancelComponent} from "../cancel/cancel.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
@@ -17,12 +16,8 @@ defineLocale('cn', zhCn);
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.scss']
 })
-export class AllOrdersComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('orderAllSearch',JSON.stringify(this.search))
-  }
+export class AllOrdersComponent implements OnInit {
   public path: string;       //路由
-  public ordState: string;    //订单类型
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
@@ -57,35 +52,30 @@ export class AllOrdersComponent implements OnInit ,DoCheck {
       switch (me.path) {
         case "all-orders":
           me.parentComp.orderType = '';
-          me.ordState = '';
+          me.search.ordState = '';
           break;
         case "wait-for-send":
           me.parentComp.orderType = 'PREPARE';
-          me.ordState = 'PREPARE';
+          me.search.ordState = 'PREPARE';
           break;
         case "prepare":
           me.parentComp.orderType = 'PREPARE';
-          me.ordState = 'PREPARE';
+          me.search.ordState = 'PREPARE';
           break;
         case "delivery":
           me.parentComp.orderType = 'DELIVERY';
-          me.ordState = 'DELIVERY';
+          me.search.ordState = 'DELIVERY';
           break;
         case "finished":
           me.parentComp.orderType = 'SUCCESS';
-          me.ordState = 'SUCCESS';
+          me.search.ordState = 'SUCCESS';
           break;
         case "canceled":
           me.parentComp.orderType = 'CLOSE';
-          me.ordState = 'CLOSE';
+          me.search.ordState = 'CLOSE';
           break;
       }
     });
-
-    let search = sessionStorage.getItem('orderAllSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     me.queryDatas(1)
   }
 

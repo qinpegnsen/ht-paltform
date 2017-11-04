@@ -30,9 +30,7 @@ export class ReturnControlComponent implements OnInit ,DoCheck {
     afterNo: null,
     phone: null,
     ordno: null,
-    goodsBaseCode: null,
     searchType: 'afterNo',
-    agentCode: null
   };
   constructor(private submit: SubmitService,
               private router: Router,
@@ -67,10 +65,6 @@ export class ReturnControlComponent implements OnInit ,DoCheck {
       this.search.afterNo = null;
       this.search.phone = null;
       this.search.baseCode = null;
-    } else if (val == 'baseCode') {
-      this.search.ordno = null;
-      this.search.afterNo = null;
-      this.search.phone = null;
     }
   }
 
