@@ -23,7 +23,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
     if(!isUndefined(this.val) && this.val.length > 0){
       for(let i = 0; i < this.val.length; i ++){
         this.valStr += this.val[i].enumValue +',';
-        this.valStr = this.valStr.substring(0,this.valStr.length-1)
+        this.valStr = this.valStr.substring(0,this.valStr.length-1) + ",";
       }
     }
     if (changes['showUpdateWindow']) {

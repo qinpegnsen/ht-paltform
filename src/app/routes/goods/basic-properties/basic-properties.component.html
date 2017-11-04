@@ -44,7 +44,7 @@
       <!--<td>{{i+1}}</td>-->
       <td >{{count.name}}</td>
       <td >
-        <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}}、</span>
+        <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}},</span>
       </td>
       <td >
         <app-buttons [config]="updatebuttons"  (click)="updateNewData(count.name,count.goodsEnumValList)" ></app-buttons>
