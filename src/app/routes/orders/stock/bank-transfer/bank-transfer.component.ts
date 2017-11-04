@@ -46,6 +46,7 @@ export class BankTransferComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
+    allowedFileType: ["image"],
     queueLimit: 1
   });
   @Input('orderId') orderId: string;

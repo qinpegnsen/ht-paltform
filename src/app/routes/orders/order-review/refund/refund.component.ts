@@ -44,6 +44,7 @@ export class RefundComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
+    allowedFileType: ["image"],
     queueLimit: 1
   });
 
