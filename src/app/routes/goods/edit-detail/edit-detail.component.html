@@ -92,7 +92,7 @@
         <div class="clearfix enumType" *ngFor="let saleAttr of saleAttrList;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
             <span class="_attrName">{{saleAttr.name}}</span>
-            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1"
+            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1" maxlength="6"
                                            [value]="saleAttr.name" (change)="changeSpec($event.target)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
@@ -104,14 +104,16 @@
               </label>
               <span class="_value">{{val.enumValue}}</span>
               <label class="w66 hide">
-                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue"
+                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue" maxlength="16"
                        (change)="changeSpec($event.target)"/><a class="hide" [id]="val.id"></a>
               </label>
             </li>
           </ul>
         </div>
         <p class="tip" myHoverColor>
-          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
+          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；<br>
+          自定义规格不得大于6个字符，自定义规格值不得大于16个字符；<br>
+          当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
         </p>
       </dd>
     </dl>
