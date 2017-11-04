@@ -32,7 +32,8 @@ export class AddArticleComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: uploadUrl,
     itemAlias: "limitFile",
-    queueLimit: 1
+    queueLimit: 1,
+    allowedFileType:["image"]
   });
   private uuid = [];                                 //存储暗码的数组
   public linkType: string;
@@ -254,7 +255,8 @@ export class AddArticleComponent implements OnInit {
     this.uploader = new FileUploader({
       url: uploadUrl,
       itemAlias: "limitFile",
-      queueLimit: delLength
+      queueLimit: delLength,
+      allowedFileType:["image"]
     });
     $(obj).css("display", 'none');
     this.removeCover = true;
@@ -344,13 +346,15 @@ export class AddArticleComponent implements OnInit {
         this.uploader = new FileUploader({
           url: uploadUrl,
           itemAlias: "limitFile",
-          queueLimit: 3
+          queueLimit: 3,
+          allowedFileType:["image"]
         });
       } else if (code == 'ONE') {//这里重新写的原因是为了让下次点击的时候没有图片
         this.uploader = new FileUploader({
           url: uploadUrl,
           itemAlias: "limitFile",
-          queueLimit: 1
+          queueLimit: 1,
+          allowedFileType:["image"]
         });
       }
     } else {

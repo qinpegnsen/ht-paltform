@@ -53,8 +53,8 @@ export class HelpAssortmentComponent implements OnInit {
         callbacks: {
           onChange: (contents, $editable) => {
             me.contents = contents;
-            $(".note-editable p").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
-            $(".note-editable img").css('width','100%');//解决复制过来的p和图片太宽出现横向滚动条
+            $(".note-editable *").css({'width':'100%',',margin':'0px'});//解决复制过来的p和图片太宽出现横向滚动条
+            $(".note-editable img").removeAttr('width');//解决复制过来的p和图片太宽出现横向滚动条
           },
           onImageUpload: function (files) {
             for (let file of files) me.sendFile(file);
