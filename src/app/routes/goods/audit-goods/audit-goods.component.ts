@@ -47,16 +47,7 @@ export class AuditGoodsComponent implements OnInit {
     },
     goodsImagesList: [],
     goodsBaseAttrList: [],
-    goodsSkuList: [
-      {
-        attrsList: [],
-        marketPrice: null,
-        memberPrice: null,
-        price: null,
-        saGroupCode: '',
-        storageNum: null
-      }
-    ]
+    goodsSkuList: []
   };// 商品发布数据，所有数据
   constructor(private publishComponent: PublishComponent,
               private manageComponent: ManageComponent,
@@ -293,7 +284,7 @@ export class AuditGoodsComponent implements OnInit {
         me.skuAttr.push(obj);
       });
     } else {
-      me.publishData.goodsSkuList[0].attrsList = [];
+      me.publishData.goodsSkuList = [];
     }
   }
 

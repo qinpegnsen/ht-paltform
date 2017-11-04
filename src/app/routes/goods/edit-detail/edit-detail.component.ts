@@ -48,16 +48,7 @@ export class EditDetailComponent implements OnInit {
     isFreight: null,
     goodsImagesList: [],
     goodsBaseAttrList: [],
-    goodsSkuList: [
-      {
-        attrsList: [],
-        marketPrice: null,
-        memberPrice: null,
-        price: null,
-        saGroupCode: '',
-        storageNum: null
-      }
-    ]
+    goodsSkuList: []
   };// 商品发布数据，所有数据
 
   private defaultUploader: FileUploader = new FileUploader({
@@ -515,10 +506,10 @@ export class EditDetailComponent implements OnInit {
       type: spec.attr('id'),
       goodsBaseCode: me.goodsBaseCode,
     };
-    console.log("█ me.enum ►►►", me.enum);
+    // console.log("█ me.enum ►►►", me.enum);
     if (me.judgeSkuListHasInputVal()) me.enum.skuList = me.publishData.goodsSkuList;    // 当表格中已经输入了价格则将带价格的skuList传过去保存
     let skuData = me.goods.getSkuData('/goodsEdit/genesku', me.enum);
-    console.log("█ skuData ►►►", skuData);
+    // console.log("█ skuData ►►►", skuData);
     if (!isNullOrUndefined(skuData)) {
       me.genClearArray(skuData.data);   // 将数据生成易解析的新数组
     }
@@ -559,7 +550,7 @@ export class EditDetailComponent implements OnInit {
         me.skuAttr.push(obj);
       });
     } else {
-      me.publishData.goodsSkuList[0].attrsList = [];
+      me.publishData.goodsSkuList = [];
     }
   }
 
