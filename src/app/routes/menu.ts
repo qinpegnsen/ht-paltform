@@ -244,7 +244,12 @@ const orders = {
           link: '/main/orders/buyer'
         } ,
       ]
-    }
+    },
+    {
+      text: '结算明细',
+      icon: 'fa fa-file-text-o',
+      link: '/main/orders/settle'
+    },
   ]
 };
 const workOrders = {

@@ -1,0 +1,107 @@
+<div class="content-heading mb-lg thc font">
+  结算明细
+</div>
+<div class="panel panel-danger">
+  <div class="panel mb p ts-bg thc">
+    <p class="font18">说明</p>
+    <ul>
+      <li>入账 =（订单总额 - 订单退款）× 抽成比例</li>
+      <li>结算 =（订单总额 - 订单退款）×（1-抽成比例）= 订单总额 - 订单退款 - 入账</li>
+    </ul>
+  </div>
+  <div class="panel-body">
+    <!--查询 start-->
+    <div class="place-time clearfix mb">
+      <span class="_title">下单时间：</span>
+      <div class="_picker">
+        <div class="input-group">
+          <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker"
+                 [(ngModel)]="query.time" (ngModelChange)="time()">
+          <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+        </div>
+      </div>
+    </div>
+    <div class="search-group ml-xl mb">
+      <span class="search-title">结算对象：</span>
+      <div class="search-main">
+        <select class="form-control" name="isOwnPlat" [(ngModel)]="query.settleObj" (change)="queryDatas(1)">
+          <option value="">全部</option>
+          <!--<option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>-->
+        </select>
+      </div>
+    </div>
+    <div class="search-group ml-xl mb align-top">
+      <span class="search-title">订单号：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.ordno"
+               class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+      </div>
+    </div>
+    <!--查询 end-->
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
+           (pageChange)="queryDatas(1,$event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-left">
+          <rzhDefaultSorter by="settle-obj">结算对象</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="ordno">订单号</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="total">订单总额</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="refund">订单退款</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="rake">抽成比例</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="account">入账</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="settle">结算</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="time">结算时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of dataTable.data;let i = index">
+        <tr class="text-center">
+          <td>{{i+1}}</td>
+          <td class="text-left">{{item.agentName}}</td>
+          <td>{{item.agentCode}}</td>
+          <td><span>¥{{item.drawMoney}}</span></td>
+          <td><span>¥{{item.drawMoney}}</span></td>
+          <td><span>¥{{item.drawMoney}}</span></td>
+          <td><span>¥{{item.drawMoney}}</span></td>
+          <td><span>¥{{item.drawMoney}}</span></td>
+          <td>{{item.doneTime}}</td>
+        </tr>
+      </ng-container>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{deposits.genStartRow()}} 至 {{deposits.genEndRow()}} 条，共
+              {{deposits.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

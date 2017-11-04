@@ -38,6 +38,7 @@ import {OrderReviewService} from './order-review/order-review.service';
 import { EptDetailComponent } from './ept-detail/ept-detail.component';
 import { RefundDetailComponent } from './order-review/refund-detail/refund-detail.component';
 import { PrepareComponent } from './orders/prepare/prepare.component';
+import { SettleComponent } from './settle/settle.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
   {path: 'buyer', component: BuyerEvaluationComponent},
   {path: 'prepare', component: PrepareComponent},
   {path: 'store', component: StoreEvaluationComponent},
+  {path: 'settle', component: SettleComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'ept-detail', component: EptDetailComponent},
   {path: 'order-review',component:OrderReviewComponent,children:[
@@ -119,6 +121,7 @@ const routes: Routes = [
     EptDetailComponent,
     RefundDetailComponent,
     PrepareComponent,
+    SettleComponent,
   ],
   providers: [
     OrdersComponent,
