@@ -5,7 +5,7 @@ import {OrdersService} from "../orders.service";
 import {isNullOrUndefined} from "util";
 import {Location} from "@angular/common";
 import {AppComponent} from "../../../../app.component";
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-order-detail',
@@ -21,6 +21,7 @@ export class OrderDetailComponent implements OnInit {
 
   public orderStep = 1;
   public curOrdno: string;
+  public single: boolean; //是否是单独的查看详情
   public orderStates: any;
   public orderDetailData: any;
   public curDeliverOrderId: string;
@@ -32,15 +33,17 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
+    me.single = false;
     me.parentComp.orderType = 'detail';
     me.curOrdno = me.submit.getParams('ordno');
     me.getOrderDetailInfo();//获取订单的物流详情及订单进度
     me.getOrderDetail(); //获取订单详情
   }
 
-  back(){
+  back() {
     this.location.back()
   }
+
   /**
    * 获取订单详情
    */
@@ -59,19 +62,19 @@ export class OrderDetailComponent implements OnInit {
    * @param index
    * @returns {boolean}
    */
-  ifCurrent(index:number){
+  ifCurrent(index: number) {
     let me = this;
-    switch (index){
+    switch (index) {
       case 1:
         return true;
       case 2:
-        if(me.orderStep==2 || me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 2 || me.orderStep == 3 || me.orderStep == 4 || me.orderStep == 5) return true;
       case 3:
-        if(me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 3 || me.orderStep == 4 || me.orderStep == 5) return true;
       case 4:
-        if(me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 4 || me.orderStep == 5) return true;
       case 5:
-        if(me.orderStep==5) return true;
+        if (me.orderStep == 5) return true;
       default:
         return false;
     }
@@ -92,10 +95,11 @@ export class OrderDetailComponent implements OnInit {
   /**
    * 显示重消币抵扣数量
    */
-  showCoinNum(obj){
+  showCoinNum(obj) {
     $(obj).removeClass('hide')
   }
-  hideCoinNum(obj){
+
+  hideCoinNum(obj) {
     $(obj).addClass('hide')
   }
 
@@ -103,7 +107,7 @@ export class OrderDetailComponent implements OnInit {
    * 显示备注编辑框
    * @param target
    */
-  dropdownToggle(target){
+  dropdownToggle(target) {
     $(target).show()
   }
 
@@ -117,6 +121,7 @@ export class OrderDetailComponent implements OnInit {
     obj.parents('.mea-text').find('.counter').html(leaveLength);
     return hadLength;
   }
+
   /**
    * 隐藏移动端文本编辑框
    * @param target
@@ -129,7 +134,7 @@ export class OrderDetailComponent implements OnInit {
    * 更新备注
    * @param target
    */
-  editPrimary(target){
+  editPrimary(target) {
     let data = {
       ordno: this.curOrdno,
       remark: this.remark
@@ -161,7 +166,7 @@ export class OrderDetailComponent implements OnInit {
         me.atime[1] = item.acceptTime;
       }
     }
-    if(me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
+    if (me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
   }
 
   /**

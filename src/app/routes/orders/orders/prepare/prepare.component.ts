@@ -70,6 +70,8 @@ export class PrepareComponent implements OnInit ,DoCheck {
    */
   activate(event) {
     this.showList = false;
+    event.single = true;
+    console.log("█ event ►►►",  event);
   }
 
   /**

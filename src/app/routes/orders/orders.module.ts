@@ -64,7 +64,9 @@ const routes: Routes = [
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
-  {path: 'prepare', component: PrepareComponent},
+  {path: 'prepare', component: PrepareComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},
   {path: 'store', component: StoreEvaluationComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'ept-detail', component: EptDetailComponent},
