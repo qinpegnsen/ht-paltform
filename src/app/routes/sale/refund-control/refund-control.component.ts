@@ -55,6 +55,7 @@ export class RefundControlComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
+    if(event.refresh) this.queryAllService(this.search.curPage)
   }
 
   /**
@@ -76,9 +77,10 @@ export class RefundControlComponent implements OnInit {
   /**
    * 查询买家评价分页
    */
-  queryAllService(event?: PageEvent) {
+  queryAllService(page?,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
+    else if (!isNullOrUndefined(page)) activePage = page;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);

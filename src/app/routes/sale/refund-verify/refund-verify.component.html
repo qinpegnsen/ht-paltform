@@ -55,7 +55,7 @@
     <!--搜索 end-->
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="refundList"
-             (pageChange)="queryAllService($event)">
+             (pageChange)="queryAllService(1,$event)">
         <thead>
         <tr>
           <th class="w5 text-center">
