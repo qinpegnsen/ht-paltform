@@ -18,7 +18,6 @@ export class IntegrationDetailsComponent implements OnInit {
     this.qeuryAllService();
   }
 
-
   //重消币明细--查询分页
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
