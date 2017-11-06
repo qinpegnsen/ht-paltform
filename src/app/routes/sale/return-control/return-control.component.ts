@@ -21,6 +21,7 @@ export class ReturnControlComponent implements OnInit ,DoCheck {
   private detail = [];             //是否显示详情的list
   private isReceiveList: object;  //是否收到货枚举列
   private afterStateList: object; //售后单状态枚举列
+  private showList: boolean = true; //是否显示列表组件
   private search: any = {
     curPage: null,
     pageSize: 10,
@@ -50,21 +51,34 @@ export class ReturnControlComponent implements OnInit ,DoCheck {
   }
 
   /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+  }
+
+  /**
    * 切换搜索条件时
    */
   changeSearchType(val) {
     if (val == 'afterNo') {
       this.search.phone = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'phone') {
       this.search.afterNo = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'ordno') {
       this.search.afterNo = null;
       this.search.phone = null;
-      this.search.baseCode = null;
     }
   }
 

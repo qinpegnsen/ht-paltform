@@ -1,15 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {StockComponent} from '../stock.component';
-import {Page} from '../../../../core/page/page';
-import {PageEvent} from '../../../../shared/directives/ng2-datatable/DataTable';
-import {SubmitService} from '../../../../core/forms/submit.service';
-import {CancelComponent} from '../../../orders/orders/cancel/cancel.component';
-import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
-import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
-import {defineLocale} from 'ngx-bootstrap/bs-moment';
-import {zhCn} from 'ngx-bootstrap/locale';
-import {RzhtoolsService} from '../../../../core/services/rzhtools.service';
-import {StockService} from '../stock.service';
+import {Component, OnInit} from "@angular/core";
+import {StockComponent} from "../stock.component";
+import {Page} from "../../../../core/page/page";
+import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
+import {SubmitService} from "../../../../core/forms/submit.service";
+import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {defineLocale} from "ngx-bootstrap/bs-moment";
+import {zhCn} from "ngx-bootstrap/locale";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {StockService} from "../stock.service";
 defineLocale('cn', zhCn);
 @Component({
   selector: 'app-complete',
@@ -31,7 +30,6 @@ export class CompleteComponent implements OnInit {
   private beginTime: string;
   private endTime: string;
   public goodsList: Page = new Page();
-  @ViewChild('cancelBox') cancelBox: CancelComponent;
   private LogisticsData;//查看物流
 
   constructor(private StockComponent:StockComponent,private submit: SubmitService,private StockService:StockService) {

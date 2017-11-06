@@ -76,6 +76,7 @@ export class AllOrdersComponent implements OnInit {
           break;
       }
     });
+    me.orderServe.searchData = me.search;
     me.queryDatas(1)
   }
 

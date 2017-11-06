@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showList">
   <div class="content-heading mb-lg thc font">
     退货管理
   </div>
@@ -162,5 +162,5 @@
 </div>
 
 <!--路由嵌套 begin-->
-<router-outlet></router-outlet>
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->

@@ -15,7 +15,7 @@ import {isNullOrUndefined} from "util";
 export class AfterDetailsComponent implements OnInit {
 
   private type: string;             //类型,处理/查看详情
-  private parentPath: string;             //类型,处理/查看详情
+  private parentPath: string;       //类型,处理/查看详情
   private afterNo: string;          //售后编码
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据

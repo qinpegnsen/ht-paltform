@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showList">
   <div class="content-heading mb-lg thc font">
     退货管理
   </div>
@@ -183,14 +183,14 @@
                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
               </div>
-              <ng-container *ngIf="item.state!='WAIT'">
+              <!--<ng-container *ngIf="item.state!='WAIT'">
                 <div class="bg-table special text-left">
                   <span class="">审核人：</span> <span>{{item.optMan}}</span>
                 </div>
                 <div class="bg-table special text-left">
                   <span class="">审核说明：</span> <span>{{item.opinion}}</span>
                 </div>
-              </ng-container>
+              </ng-container>-->
             </td>
           </tr>
         </ng-container>
@@ -216,5 +216,5 @@
 </div>
 
 <!--路由嵌套 begin-->
-<router-outlet></router-outlet>
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->
