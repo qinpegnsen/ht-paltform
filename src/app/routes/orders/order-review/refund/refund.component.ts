@@ -55,12 +55,12 @@ export class RefundComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showRefundWindow']) {
-      if (this.showRefundWindow) $('.wrapper > section' && '.wrapper > footer ').css('z-index', 100);
-      else $('.wrapper > section' && '.wrapper > footer ').css('z-index', 0);
+      if (this.showRefundWindow) $('.wrapper > section').css('z-index', 200);
+      else $('.wrapper > section').css('z-index', 114);
     }
   }
   ngOnDestroy(): void {
-    $('.wrapper > section' && '.wrapper > footer ').css('z-index', 0);
+    $('.wrapper > section').css('z-index', 114);
   }
   constructor(private submit: SubmitService, public GetUidService: GetUidService,private refundService:RefundService,
               private toRefundComponent:ToRefundComponent,private patterns:PatternService) {
@@ -116,14 +116,12 @@ export class RefundComponent implements OnInit {
   }
 
 
-
-
   /**
    *关闭弹窗
    */
   hideWindow(type?: string){
-    $('.wrapper > section').css('z-index', 140);
-    this.showCancelWindow = false;
+    $('.wrapper > section').css('z-index', 114);
+    this.showRefundWindow = false;
     if (isUndefined(type)) type = 'cancel';
     this.refundDate.emit('type')// 向外传值
     this.code=null;
