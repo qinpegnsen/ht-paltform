@@ -26,7 +26,7 @@ export class IntegrationDetailsComponent implements OnInit {
     let url = "/custCoin/query";
     let data={
       curPage: activePage,
-      pageSize:10,
+      pageSize:20,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
