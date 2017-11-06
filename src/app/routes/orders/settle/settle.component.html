@@ -12,15 +12,16 @@
   <div class="panel-body">
     <!--查询 start-->
     <div class="place-time clearfix mb">
-      <span class="_title">下单时间：</span>
+      <span class="_title">结算时间：</span>
       <div class="_picker">
         <div class="input-group">
-          <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker"
-                 [(ngModel)]="time" (ngModelChange)="getTime()">
+          <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" readonly
+                 [(ngModel)]="time" (ngModelChange)="queryDatas()">
           <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
         </div>
       </div>
     </div>
+    <button class="btn btn-green fa fa-refresh btn-sm align-middle" (click)="clearDate()"></button>
     <div class="search-group ml-xl mb">
       <span class="search-title font12">结算类型：</span>
       <div class="search-main">
@@ -44,7 +45,7 @@
                class="form-control border-b-grey" placeholder="订单号">
       </div>
     </div>
-    <button type="button" title="搜索" (click)="queryDatas(1)"
+    <button type="button" title="搜索" (click)="queryDatas()"
             class="btn thc btn-thc align-top ml">
       <em class="icon-magnifier fa-fw"></em>
     </button>

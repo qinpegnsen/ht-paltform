@@ -46,11 +46,10 @@ export class SettleComponent implements OnInit {
   }
 
   /**
-   * 获取时间，查询数据
+   * 清空时间
    */
-  getTime(){
-    this.query.startTime = RzhtoolsService.dataFormat(new Date(this.time[0]), "yyyy-MM-dd");
-    this.query.endTime = RzhtoolsService.dataFormat(new Date(this.time[1]), "yyyy-MM-dd");
+  clearDate(){
+    this.time = null;
     this.queryDatas();// 获取数据
   }
 
@@ -65,6 +64,13 @@ export class SettleComponent implements OnInit {
       activePage = event.activePage;
     }
     let requestUrl = '/ord/queryPlantSettle';
+    if(!isNullOrUndefined(_this.time)){
+      _this.query.startTime = RzhtoolsService.dataFormat(new Date(_this.time[0]), "yyyy-MM-dd");
+      _this.query.endTime = RzhtoolsService.dataFormat(new Date(_this.time[1]), "yyyy-MM-dd");
+    }else{
+      _this.query.startTime = null;
+      _this.query.endTime = null;
+    }
     _this.query.curPage = activePage;
     _this.deposits = new Page(_this.submitService.getData(requestUrl, _this.query));
   }
