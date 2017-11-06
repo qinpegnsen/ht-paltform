@@ -1,4 +1,4 @@
-<div class="order panel">
+<div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
     <div class="row clearfix p text-right">
@@ -16,18 +16,17 @@
           <select class="form-control pl-sm pr-sm" name="sss" #sType (change)="changeSearchType(sType.value)">
             <option value="ordno">订单编号</option>
             <option value="custPhone">买家手机号</option>
-            <!--<option value="22">商品名称</option>-->
           </select>
         </div>
         <div class="w70 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
             <div class="w80 pl0 pr0 pull-left">
               <input *ngIf="sType.value=='ordno'" type="text" placeholder="订单编号" class="form-control border-b-grey"
-                     [(ngModel)]="search.ordno" (change)="queryDatas(1)">
+                     [(ngModel)]="search.ordno" (change)="queryDatas()">
               <input *ngIf="sType.value=='custPhone'" type="text" placeholder="买家手机号" class="form-control border-b-grey"
-                     [(ngModel)]="search.custPhone" (change)="queryDatas(1)">
+                     [(ngModel)]="search.custPhone" (change)="queryDatas()">
             </div>
-            <button type="button" title="搜索" (click)="queryDatas(1)"
+            <button type="button" title="搜索" (click)="queryDatas()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
               <em class="icon-magnifier fa-fw"></em>
             </button>
@@ -46,7 +45,7 @@
       <li class="w10 pull-left text-center">操作</li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
-           (pageChange)="queryDatas(1,$event)">
+           (pageChange)="queryDatas($event)">
       <tbody>
       <tr class="mt" *ngFor="let order of dataTable.data;let i = index">
         <td class="w100 p0 font12 bt0">
@@ -108,7 +107,7 @@
                 </td>
                 <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
                   <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
-                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
+                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="order-detail"
                      [queryParams]="{ordno:order.ordno}">
                     查看详情</p>
                   <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
@@ -204,3 +203,7 @@
     <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
   </div>
 </div>
+
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

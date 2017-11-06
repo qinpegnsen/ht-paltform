@@ -45,12 +45,22 @@ const routes: Routes = [
   {
     path: 'cust', component: OrdersComponent, children: [
     {path: '', redirectTo: 'all-orders'},
-    {path: 'all-orders', component: AllOrdersComponent},
-    {path: 'wait-for-send', component: AllOrdersComponent},
-    {path: 'delivery', component: AllOrdersComponent},
-    {path: 'finished', component: AllOrdersComponent},
-    {path: 'canceled', component: AllOrdersComponent},
-    {path: 'order-detail', component: OrderDetailComponent}
+    {path: 'all-orders', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'wait-for-send', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'delivery', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'finished', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'canceled', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},

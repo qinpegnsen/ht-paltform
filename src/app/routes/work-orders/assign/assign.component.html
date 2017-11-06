@@ -1,11 +1,11 @@
-<div class="panel">
+<div class="panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
     <div class="p text-right clearfix">
       <div class="search-group mr-xl mb">
         <span class="search-title">工单类型：</span>
         <div class="search-main">
-          <select class="form-control pl-sm pr-sm" name="woType" [(ngModel)]="search.ordType" (change)="queryDatas(1)">
+          <select class="form-control pl-sm pr-sm" name="woType" [(ngModel)]="search.ordType" (change)="queryDatas()">
             <option value="">全部</option>
             <option [value]="type.key" *ngFor="let type of woTypeList">{{type.val}}</option>
           </select>
@@ -23,11 +23,11 @@
           <div class="form-group pr0 mb0">
             <div class="w80 pl0 pr0 pull-left">
               <input *ngIf="search.searchType == 'ordno'" type="text" class="form-control" placeholder="订单编号"
-                     [(ngModel)]="search.ordno" (change)="queryDatas(1)">
+                     [(ngModel)]="search.ordno" (change)="queryDatas()">
               <input *ngIf="search.searchType == 'wono'" type="text" class="form-control" placeholder="工单编号"
-                     [(ngModel)]="search.wono" (change)="queryDatas(1)">
+                     [(ngModel)]="search.wono" (change)="queryDatas()">
             </div>
-            <button type="submit" title="搜索" (click)="queryDatas(1)"
+            <button type="submit" title="搜索" (click)="queryDatas()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
               <em class="icon-magnifier fa-fw"></em>
             </button>
@@ -138,10 +138,11 @@
       </tr>
       </tfoot>
     </table>
-
   </div>
 </div>
 <app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"
                      (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
 
-
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

@@ -27,9 +27,13 @@ const routes: Routes = [
   {path: '', redirectTo: 'unAudit'},
   {
     path: 'unAudit', children: [
-    {path: '', component: UnAuditComponent},
-    {path: 'detail', component: AuditGoodsComponent},
-    {path: 'audit', component: AuditGoodsComponent}]
+    {
+      path: '', component: UnAuditComponent, children: [
+      {path: 'detail', component: AuditGoodsComponent},
+      {path: 'audit', component: AuditGoodsComponent}
+    ]
+    },
+  ]
   },
   {
     path: 'publish', component: PublishComponent, children: [
@@ -41,10 +45,13 @@ const routes: Routes = [
   },
   {
     path: 'manage', children: [
-    {path: '', component: ManageComponent},
-    {path: 'edit', component: EditDetailComponent},
-    {path: 'detail', component: AuditGoodsComponent},
-    {path: 'audit', component: AuditGoodsComponent}
+    {
+      path: '', component: ManageComponent, children: [
+      {path: 'edit', component: EditDetailComponent},
+      {path: 'detail', component: AuditGoodsComponent},
+      {path: 'audit', component: AuditGoodsComponent}
+    ]
+    },
   ]
   },
   {path: 'wholesale', component: WholesaleComponent},

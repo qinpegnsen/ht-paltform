@@ -25,9 +25,10 @@ export class WoAllComponent implements OnInit{
   private woStateList: any; // 工单状态枚举列表
   private woTypeList: any;  // 工单类型枚举列表
   public assign:boolean;
+  private showList: boolean = true;     //是否显示列表页
   public curAssignWono:string;
   public curDeliverOrderId: string;
-  private search = {
+  private woSearch = {
     wono: null,
     ordno: null,
     ordType: '',
@@ -54,7 +55,6 @@ export class WoAllComponent implements OnInit{
     let me = this;
     me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
-    me.parentComp.detail = false;
 
     //获取当前路由
     me.route.url.subscribe(urls => {
@@ -62,40 +62,59 @@ export class WoAllComponent implements OnInit{
       switch (me.path) {
         case "wo-all":
           me.parentComp.woType = '';
-          me.search.stateEnum = '';
+          me.woSearch.stateEnum = '';
           break;
         case "assign":
           me.parentComp.woType = 'NO,MANUAL';
-          me.search.stateEnum = 'NO,MANUAL';
+          me.woSearch.stateEnum = 'NO,MANUAL';
           me.assign = true;
           break;
         case "wo-assign":
           me.parentComp.woType = 'NO';
-          me.search.stateEnum = 'NO,MANUAL';
+          me.woSearch.stateEnum = 'NO,MANUAL';
           break;
         case "wo-assigned":
           me.parentComp.woType = 'ASSIGN';
-          me.search.stateEnum = 'ASSIGN';
+          me.woSearch.stateEnum = 'ASSIGN';
           break;
         case "wo-my":
           me.parentComp.woType = 'NA';
-          me.search.stateEnum = 'NA';
+          me.woSearch.stateEnum = 'NA';
           break;
         case "wo-deal":
           me.parentComp.woType = 'DEAL';
-          me.search.stateEnum = 'DEAL';
+          me.woSearch.stateEnum = 'DEAL';
           break;
         case "wo-finished":
           me.parentComp.woType = 'DONE';
-          me.search.stateEnum = 'DONE';
+          me.woSearch.stateEnum = 'DONE';
           break;
         case "wo-abnormal":
           me.parentComp.woType = 'END';
-          me.search.stateEnum = 'END';
+          me.woSearch.stateEnum = 'END';
           break;
       }
     });
-    me.queryDatas(1)
+    me.queryDatas()
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+    this.parentComp.detail = true;
+    this.parentComp.detailType = event.detailType;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    this.parentComp.detail = false;
   }
 
   /**
@@ -121,8 +140,8 @@ export class WoAllComponent implements OnInit{
    * @param condition
    */
   changeCondition(condition) {
-    if (condition == 'wono') this.search.ordno = null;
-    else this.search.wono = null;
+    if (condition == 'wono') this.woSearch.ordno = null;
+    else this.woSearch.wono = null;
   }
 
   /**
@@ -140,16 +159,16 @@ export class WoAllComponent implements OnInit{
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(page?:number,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
+    }else if(!isNullOrUndefined(page)){
+      activePage = page;
     }
     let requestUrl = '/wo/query';
-    me.search.curPage = activePage;
-    me.woList = new Page(me.submit.getData(requestUrl, me.search));
+    me.woSearch.curPage = activePage;
+    me.woList = new Page(me.submit.getData(requestUrl, me.woSearch));
     me.detail = [];//每次切换新页面，详情都关闭
   }
 

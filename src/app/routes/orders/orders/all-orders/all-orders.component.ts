@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
@@ -23,6 +23,7 @@ export class AllOrdersComponent implements OnInit {
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
   public LogisticsData: any;//物流信息
+  private showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
   public search = {
     curPage: 1,
@@ -77,7 +78,23 @@ export class AllOrdersComponent implements OnInit {
       }
     });
     me.orderServe.searchData = me.search;
-    me.queryDatas(1)
+    me.queryDatas()
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
   }
 
   /**
@@ -111,13 +128,13 @@ export class AllOrdersComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(page?:number, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
-    }
+    }else if(!isNullOrUndefined(page)){
+      activePage = page
+    };
     let requestUrl = '/ord/queryOrd';
     _this.search.curPage = activePage;
     _this.goodsList = new Page(_this.submit.getData(requestUrl, _this.search));

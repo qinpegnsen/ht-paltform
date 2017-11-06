@@ -1,8 +1,8 @@
-import {Component, DoCheck, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
@@ -14,12 +14,10 @@ declare var $: any;
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
-export class ManageComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('goodsQuerySearch',JSON.stringify(this.query))
-  }
+export class ManageComponent implements OnInit {
   private addButton;
   private buttons;
+  private showList: boolean = true;     //是否显示列表页
   public goodsList: Page = new Page();
   private query = {
     kindId: '',
@@ -27,6 +25,9 @@ export class ManageComponent implements OnInit ,DoCheck {
     brandName: '',
     state: '',
     isOwnPlat: '',
+    curPage: 1,
+    pageSize: 10,
+    sortColumns: '',
     goodsAudit: '',
   }; // 查询条件
   private kindList;// 分类列表
@@ -44,11 +45,7 @@ export class ManageComponent implements OnInit ,DoCheck {
 
   ngOnInit() {
     let me = this;
-    let query = sessionStorage.getItem('goodsQuerySearch');
-    if(!isNullOrUndefined(query)){
-      me.query = JSON.parse(query);
-    }
-    me.queryDatas(1); //查询商品列表
+    me.queryDatas(); //查询商品列表
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表
@@ -71,12 +68,29 @@ export class ManageComponent implements OnInit ,DoCheck {
   }
 
   /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    if(event.refresh) this.queryDatas(this.query.curPage)
+  }
+
+  /**
    * 选择分类
    * @param data  选择分类组件输出数据
    */
   getKind(data) {
     this.query.kindId = data.kindId;
-    this.queryDatas(1)
+    this.queryDatas()
   }
 
   /**
@@ -178,27 +192,16 @@ export class ManageComponent implements OnInit ,DoCheck {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(curPage?, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    ;
     let requestUrl = '/goodsQuery/query';
-    let requestData = {
-      curPage: activePage,
-      pageSize: 10,
-      sortColumns: '',
-      kindId: _this.query.kindId,
-      goodsName: _this.query.goodsName,
-      brandName: _this.query.brandName,
-      state: _this.query.state,
-      isOwnPlat: _this.query.isOwnPlat,
-      goodsAudit: _this.query.goodsAudit,
-    };
-    _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+    _this.query.curPage = activePage;
+    _this.goodsList = new Page(_this.submit.getData(requestUrl, _this.query));
   }
 
   /**

@@ -15,19 +15,42 @@ import { AssignComponent } from './assign/assign.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'assign'},
-  {path: 'assign', component: AssignComponent},
+  {path: 'assign', component: AssignComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent},
+    {path: 'after-detail', component: AfterDetailsComponent}
+  ]},
   {
     path: 'manage', component: WoManageComponent, children: [
     {path: '', redirectTo: 'wo-all'},
-    {path: 'wo-all', component: WoAllComponent},
-    {path: 'wo-assign', component: WoAllComponent},
-    {path: 'wo-assigned', component: WoAllComponent},
-    {path: 'wo-my', component: WoAllComponent},
-    {path: 'wo-deal', component: WoAllComponent},
-    {path: 'wo-finished', component: WoAllComponent},
-    {path: 'wo-abnormal', component: WoAllComponent},
-    {path: 'order-detail', component: OrderDetailComponent},
-    {path: 'after-detail', component: AfterDetailsComponent},
+    {path: 'wo-all', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-assign', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-assigned', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-my', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-deal', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-finished', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+    {path: 'wo-abnormal', component: WoAllComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent},
+      {path: 'after-detail', component: AfterDetailsComponent}
+    ]},
+
   ]
   }
 ]
