@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ContentService} from "./content.service";
 import {PageEvent} from "../../../../../shared/directives/ng2-datatable/DataTable";
@@ -15,7 +15,7 @@ const swal = require('sweetalert');
   styleUrls: ['./content.component.scss']
 })
 
-export class ContentComponent implements OnInit,OnChanges  {
+export class ContentComponent implements OnInit,OnChanges,OnDestroy  {
 
   @Input()                                //导航栏传过来的文章的状态，从而获取不同的文章列表
   public state;
@@ -33,6 +33,7 @@ export class ContentComponent implements OnInit,OnChanges  {
   private detailsbutton:Object;            //查看详情按钮
   private publishbutton:Object;            //草稿文章发布按钮
   private auditbutton:Object;              //待审核文章审核按钮
+  private urlChange;                       //地址栏的变化，用来取消订阅
 
   constructor(
     private router:Router,
@@ -77,7 +78,7 @@ export class ContentComponent implements OnInit,OnChanges  {
      * 2.路由变化的时候，刷新页面
      */
     let that=this;
-    that.router.events
+    that.urlChange=that.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           if(event.url.indexOf('linkType')>0){
@@ -93,6 +94,13 @@ export class ContentComponent implements OnInit,OnChanges  {
           }
         }
       });
+  }
+
+  /**
+   * 取消订阅，要不然一直执行
+   */
+  ngOnDestroy(){
+    this.urlChange.unsubscribe()
   }
 
   /**
