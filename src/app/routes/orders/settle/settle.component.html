@@ -5,8 +5,8 @@
   <div class="panel mb p ts-bg thc">
     <p class="font18">说明</p>
     <ul>
-      <li>入账 =（订单总额 - 订单退款）× 抽成比例</li>
-      <li>结算 =（订单总额 - 订单退款）×（1-抽成比例）= 订单总额 - 订单退款 - 入账</li>
+      <li>入账 =（订单总额 - 订单退款）× {{rate}}%</li>
+      <li>结算 =（订单总额 - 订单退款）×（1-{{rate}}%）= 订单总额 - 订单退款 - 入账</li>
     </ul>
   </div>
   <div class="panel-body">
@@ -16,30 +16,41 @@
       <div class="_picker">
         <div class="input-group">
           <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker"
-                 [(ngModel)]="query.time" (ngModelChange)="time()">
+                 [(ngModel)]="time" (ngModelChange)="getTime()">
           <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
         </div>
       </div>
     </div>
     <div class="search-group ml-xl mb">
-      <span class="search-title">结算对象：</span>
+      <span class="search-title font12">结算类型：</span>
       <div class="search-main">
-        <select class="form-control" name="isOwnPlat" [(ngModel)]="query.settleObj" (change)="queryDatas(1)">
+        <select class="form-control" name="isOwnPlat" [(ngModel)]="query.toType" (change)="queryDatas()">
           <option value="">全部</option>
-          <!--<option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>-->
+          <option *ngFor="let item of toTypes" [value]="item.key">{{item.val}}</option>
         </select>
+      </div>
+    </div>
+    <div class="search-group ml-xl mb align-top">
+      <span class="search-title font12">结算对象：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.to_name" (change)="queryDatas()"
+               class="form-control border-b-grey" placeholder="结算对象">
       </div>
     </div>
     <div class="search-group ml-xl mb align-top">
       <span class="search-title">订单号：</span>
       <div class="search-main">
-        <input type="text" [(ngModel)]="query.ordno"
-               class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+        <input type="text" [(ngModel)]="query.ordno" (change)="queryDatas()"
+               class="form-control border-b-grey" placeholder="订单号">
       </div>
     </div>
+    <button type="button" title="搜索" (click)="queryDatas(1)"
+            class="btn thc btn-thc align-top ml">
+      <em class="icon-magnifier fa-fw"></em>
+    </button>
     <!--查询 end-->
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
-           (pageChange)="queryDatas(1,$event)">
+           (pageChange)="queryDatas($event)">
       <thead>
       <tr>
         <th class="unselectable text-center w5">
@@ -75,14 +86,18 @@
       <ng-container *ngFor="let item of dataTable.data;let i = index">
         <tr class="text-center">
           <td>{{i+1}}</td>
-          <td class="text-left">{{item.agentName}}</td>
-          <td>{{item.agentCode}}</td>
-          <td><span>¥{{item.drawMoney}}</span></td>
-          <td><span>¥{{item.drawMoney}}</span></td>
-          <td><span>¥{{item.drawMoney}}</span></td>
-          <td><span>¥{{item.drawMoney}}</span></td>
-          <td><span>¥{{item.drawMoney}}</span></td>
-          <td>{{item.doneTime}}</td>
+          <td class="text-left">
+            <span class="type-mark bg-green font12 fa fa-user" *ngIf="item.toType=='AGENT'"></span>
+            <span class="type-mark bg-warning font12 icon-home" *ngIf="item.toType=='STORE'"></span>
+            {{item.toName}}
+          </td>
+          <td>{{item.ordno}}</td>
+          <td><span>¥{{item.ordPay}}</span></td>
+          <td><span>¥{{item.ordRefundPay}}</span></td>
+          <td><span>{{item.extraction_rate}}%</span></td>
+          <td><span>¥{{item.ordIncome}}</span></td>
+          <td><span>¥{{item.extraction}}</span></td>
+          <td>{{item.createTime}}</td>
         </tr>
       </ng-container>
       </tbody>

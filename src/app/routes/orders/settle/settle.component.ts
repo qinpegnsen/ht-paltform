@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {PageEvent} from "angular2-datatable";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
@@ -17,29 +17,70 @@ defineLocale('cn', zhCn);
 export class SettleComponent implements OnInit {
   public deposits: Page = new Page();
   public bsConfig: Partial<BsDatepickerConfig>;
+  private rate:any;     //抽成比例
+  private time:any;     //时间
+  private toTypes:any; //结算对象类型
   private query = {
-    settleObj: '',
+    toType: '',
+    to_name: '',
     ordno: '',
-    time: null
+    startTime: null,
+    endTime: null,
+    pageSize: 20,
+    curPage: 1,
   };
   private detail = [];
-  constructor(private submitService: SubmitService) {
+  constructor(private submitService: SubmitService, private tools: RzhtoolsService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',
       rangeInputFormat: 'YYYY-MM-DD'
     });
   }
-  time(){
-    console.log("█ this.query.time ►►►",  RzhtoolsService.dataFormat(new Date(this.query.time[0]), "yyyy-MM-dd"));
-    console.log("█ this.query.time ►►►",  RzhtoolsService.dataFormat(new Date(this.query.time[1]), "yyyy-MM-dd"));
-  }
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1);// 获取品牌数据
+    me.toTypes = this.tools.getEnumDataList('1901');  // 结算对象类型
+    me.queryRate();    //查询抽成比例
+    me.queryDatas();// 获取数据
   }
 
+  /**
+   * 获取时间，查询数据
+   */
+  getTime(){
+    this.query.startTime = RzhtoolsService.dataFormat(new Date(this.time[0]), "yyyy-MM-dd");
+    this.query.endTime = RzhtoolsService.dataFormat(new Date(this.time[1]), "yyyy-MM-dd");
+    this.queryDatas();// 获取数据
+  }
+
+  /**
+   * 查询列表
+   * @param event
+   * @param curPage
+   */
+  public queryDatas(event?: PageEvent) {
+    let _this = this, activePage = 1;
+    if (typeof event !== 'undefined') {
+      activePage = event.activePage;
+    }
+    let requestUrl = '/ord/queryPlantSettle';
+    _this.query.curPage = activePage;
+    _this.deposits = new Page(_this.submitService.getData(requestUrl, _this.query));
+  }
+
+  /**
+   * 查询抽成比例
+   */
+  queryRate(){
+    let _this = this;
+    let requestUrl = '/datadict/loadInfoByCode';
+    let requestData = {
+      code:'settle_order_commision_scale'
+    };
+    let res = _this.submitService.getData(requestUrl, requestData);
+    if(!isNullOrUndefined(res)) _this.rate = res;
+  }
   /**
    * 鼠标放在图片上时大图随之移动
    */
@@ -64,28 +105,6 @@ export class SettleComponent implements OnInit {
   showDetail(index) {
     if (this.detail[index]) this.detail[index] = false;
     else this.detail[index] = true;
-  }
-
-  /**
-   * 查询列表
-   * @param event
-   * @param curPage
-   */
-  public queryDatas(curPage, event?: PageEvent) {
-    let _this = this, activePage = 1;
-    if (typeof event !== 'undefined') {
-      activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
-    }
-    let requestUrl = '/finaceDraw/query';
-    let requestData = {
-      curPage: activePage,
-      pageSize: 10,
-      drawState: 'DONE'
-    };
-    _this.deposits = new Page(_this.submitService.getData(requestUrl, requestData));
-    this.detail = []
   }
 
 
