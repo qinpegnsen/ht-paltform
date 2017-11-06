@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {SettingsService} from "../../../../../core/settings/settings.service";
 import {GetUidService} from "../../../../../core/services/get-uid.service";
@@ -20,7 +20,7 @@ const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的�
   styleUrls: ['./add-article.component.scss']
 })
 
-export class AddArticleComponent implements OnInit {
+export class AddArticleComponent implements OnInit ,OnDestroy{
 
   /**
    * 图片上传
@@ -65,6 +65,7 @@ export class AddArticleComponent implements OnInit {
   public coverChange: boolean = false;                  //修改的时候是否点击修改封面了，点击执行图片上传
   public coverID = [];                                  //存储删除封面图片的id的数组
   public removeCover: boolean = false;                  //上传图片的按钮
+  private urlChange;                       //地址栏的变化，用来取消订阅
 
   constructor(public settings: SettingsService,
               private routeInfo: ActivatedRoute,
@@ -99,7 +100,7 @@ export class AddArticleComponent implements OnInit {
      * @type {AddArticleComponent}
      */
     let that=this;
-    that.router.events
+    that.urlChange=that.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           if(event.url.indexOf('=addArticle')>0){
@@ -135,6 +136,13 @@ export class AddArticleComponent implements OnInit {
     }, 0)
 
     this.getDataById()
+  }
+
+  /**
+   * 取消订阅，要不然一直执行
+   */
+  ngOnDestroy(){
+    this.urlChange.unsubscribe()
   }
 
   /**
