@@ -101,12 +101,12 @@ export class InspectGoodsComponent implements OnInit {
     this.search = {
       curPage: null,
       pageSize: 10,
-      returnType: 'RETURN',
-      state: 'DELIVERY',
-      isReceive: '',
       afterNo: null,
       phone: null,
       ordno: null,
+      goodsBaseCode:null,
+      state: '',
+      isReceive: '',
       searchType: 'afterNo',
     };
     if( $(obj)[0].className.indexOf('bb')>1){
