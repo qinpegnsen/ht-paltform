@@ -20,12 +20,12 @@ export class InspectGoodsComponent implements OnInit {
   private search: any = {
     curPage: null,
     pageSize: 10,
-    returnType: 'RETURN',
-    state: 'DELIVERY',
-    isReceive: '',
     afterNo: null,
     phone: null,
     ordno: null,
+    goodsBaseCode:null,
+    state: 'DELIVERY',
+    isReceive: '',
     searchType: 'afterNo',
   };
 
@@ -63,12 +63,19 @@ export class InspectGoodsComponent implements OnInit {
     if (val == 'afterNo') {
       this.search.phone = null;
       this.search.ordno = null;
+      this.search.goodsBaseCode = null;
     } else if (val == 'phone') {
       this.search.afterNo = null;
       this.search.ordno = null;
+      this.search.goodsBaseCode = null;
     } else if (val == 'ordno') {
       this.search.afterNo = null;
       this.search.phone = null;
+      this.search.goodsBaseCode = null;
+    }else if (val == 'baseCode') {
+      this.search.afterNo = null;
+      this.search.phone = null;
+      this.search.goodsBaseCode = null;
     }
   }
 
@@ -79,7 +86,7 @@ export class InspectGoodsComponent implements OnInit {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
     else if (!isNullOrUndefined(page)) activePage = page;
-    let url = "/after/queryAfterGoodsReqPages";
+    let url = "/after/queryAfterGoodsReqCheckPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
     if (isNullOrUndefined(result)) return;
