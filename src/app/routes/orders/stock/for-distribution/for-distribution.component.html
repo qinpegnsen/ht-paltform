@@ -1,4 +1,4 @@
-
+<div *ngIf="showList">
 <!--查询 start-->
 <div class="row clearfix p text-right">
   <div class="place-time clearfix mb">
@@ -101,9 +101,7 @@
           </td>
           <td class="w10 bl  position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
             <p class="font-gray mb-sm cursor-p">{{goods.state | rzhState :'1019'}}</p>
-            <!--<p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../order-detail"
-               [queryParams]="{ordno:goods.ordno}">查看详情</p>-->
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../stock-detail"
+            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="stock-detail"
                [queryParams]="{ordno:goods.ordno}">查看详情</p>
           </td>
           <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
@@ -133,8 +131,8 @@
   </tr>
   </tfoot>
 </table>
+</div>
 <app-cancels [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancels>
-<!--
-<app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>
--->
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

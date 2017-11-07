@@ -17,16 +17,14 @@ defineLocale('cn', zhCn);
   templateUrl: './assign.component.html',
   styleUrls: ['./assign.component.scss']
 })
-export class AssignComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('woAssignSearch',JSON.stringify(this.search))
-  }
+export class AssignComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   public path: string;//当前路由
   private woList: Page = new Page();
   private detail = [];
   private woStateList: any; // 工单状态枚举列表
   private woTypeList: any;  // 工单类型枚举列表
+  private showList: boolean = true;     //是否显示列表页
   public assign:boolean;
   public curAssignWono:string;
   public curDeliverOrderId: string;
@@ -58,11 +56,26 @@ export class AssignComponent implements OnInit ,DoCheck {
     me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
     me.parentComp.detail = false;
-    let search = sessionStorage.getItem('woAssignSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     me.queryDatas(1)
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+    this.parentComp.detail = true;
+    this.parentComp.detailType = event.detailType;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    this.parentComp.detail = false;
   }
 
   /**
@@ -106,7 +119,7 @@ export class AssignComponent implements OnInit ,DoCheck {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(curPage?, event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;

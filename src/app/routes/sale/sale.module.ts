@@ -16,27 +16,21 @@ const problemcomplem: Routes = [
 ]
 const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
-  {path: 'refund-control', children: [
-    {path: '', component: RefundControlComponent},
+  {path: 'refund-control', component: RefundControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
-  {path: 'refund-verify', children: [
-    {path: '', component: RefundVerifyComponent},
+  {path: 'refund-verify', component: RefundVerifyComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
-  {path: 'return-control', children: [
-    {path: '', component: ReturnControlComponent},
+  {path: 'return-control', component: ReturnControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
-  {path: 'return-verify', children: [
-    {path: '', component: ReturnVerifyComponent},
+  {path: 'return-verify', component: ReturnVerifyComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
-  {path: 'inspect-goods', children: [
-    {path: '', component: InspectGoodsComponent},
+  {path: 'inspect-goods', component: InspectGoodsComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
   ]},
-  // {path: 'after-details', component: AfterDetailsComponent},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 
 ];

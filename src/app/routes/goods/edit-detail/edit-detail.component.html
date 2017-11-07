@@ -92,7 +92,7 @@
         <div class="clearfix enumType" *ngFor="let saleAttr of saleAttrList;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
             <span class="_attrName">{{saleAttr.name}}</span>
-            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1"
+            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1" maxlength="6"
                                            [value]="saleAttr.name" (change)="changeSpec($event.target)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
@@ -104,14 +104,16 @@
               </label>
               <span class="_value">{{val.enumValue}}</span>
               <label class="w66 hide">
-                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue"
+                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue" maxlength="16"
                        (change)="changeSpec($event.target)"/><a class="hide" [id]="val.id"></a>
               </label>
             </li>
           </ul>
         </div>
         <p class="tip" myHoverColor>
-          可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
+          1.可勾选商品对应的规格及规格值，规格及规格值名称都可以自定义；<br>
+          2.自定义规格不得大于6个字符，自定义规格值不得大于16个字符；<br>
+          3.当勾选两种不同规格的规格值后将组合成一种商品SKU，可从下方表格中进行具体设定。
         </p>
       </dd>
     </dl>
@@ -243,27 +245,12 @@
             </label>
             <p class="tip" myHoverColor>默认第一张图片为主图</p>
           </div>
-          <ul class="goods-pic-list">
-            <li class="ui-state-disabled" *ngIf="defaultUploader.queue.length == 0">
-              <div class="upload-thumb">
-                <img src="../../../assets/img/dummy.png">
-              </div>
-            </li>
-            <li class="ui-state-disabled img-box" *ngFor="let item of defaultUploader.queue">
-              <div class="close" *ngIf="!item.isSuccess" (click)="item.remove()">×</div>
-              <div class="upload-thumb">
-                <div class="up-success" *ngIf="item.isSuccess"><em class="fa fa-check"></em></div>
-                <img *ngIf="item" [src]="item._file | imgUrl"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name">
-              </div>
-            </li>
-          </ul>
         </div>
 
         <!--当选择了第一规格时-->
         <div class="goodspics" *ngFor="let val of skuImg.vals;let idx = index;" [id]="val.valCode">
           <div class="color-value">
-            <h4>{{skuImg.attrName}}：<span data-spec-value-name="23">{{val.valName}}</span></h4>
+            <h4>{{skuImg.attrName}}：<span>{{val.valName}}</span></h4>
             <label class="btn btn-sm btn-info file-upload">
               <em class="fa fa-picture-o"></em>
               打开相册图片
@@ -274,12 +261,6 @@
             <p class="tip" myHoverColor>默认第一张图片为主图</p>
           </div>
           <ul class="goods-pic-list ml">
-            <li class="ui-state-disabled"
-                *ngIf="val.uploader.queue.length == 0 && !oldImgs[val.valCode]">
-              <div class="upload-thumb">
-                <img src="../../../assets/img/dummy.png">
-              </div>
-            </li>
             <li class="ui-state-disabled img-box" *ngFor="let src of oldImgs[val.valCode];let i = index">
               <div class="close" (click)="removeImgSrc(val.valCode,i)">×</div>
               <div class="upload-thumb">
@@ -485,7 +466,7 @@
           </div>
         </dd>
       </dl>
-      <dl class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'">
+      <dl class="clearfix" *ngIf="publishData.goodsExpressInfo.freightType=='TPL'"><!-- && unit != '件'-->
         <dt class="col-xs-2"><i class="main-red">*</i>物流参数：</dt>
         <dd class="col-xs-10">
           <div class="w50">

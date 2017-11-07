@@ -15,7 +15,7 @@ import {isNullOrUndefined} from "util";
 export class AfterDetailsComponent implements OnInit {
 
   private type: string;             //类型,处理/查看详情
-  private parentPath: string;             //类型,处理/查看详情
+  private parentPath: string;       //类型,处理/查看详情
   private afterNo: string;          //售后编码
   private LogisticsData: any;       //退货物流信息
   private afterData: any;           //售后详情数据
@@ -25,6 +25,7 @@ export class AfterDetailsComponent implements OnInit {
   private isPass: string = 'Y';     //是否同意退货
   private isAgree: string = 'Y';    //是否同意退货
   public expressData: any;          //获取快递的公司和单号
+  public refresh: boolean;          //父组件是否需要刷新
 
 
   constructor(private router: Router,
@@ -60,6 +61,7 @@ export class AfterDetailsComponent implements OnInit {
       isAgree: me.isAgree
     }
     me.submit.postRequest('/after/agreeRefundMoney', data, true);
+    me.refresh = true;
   }
 
   /**
@@ -74,6 +76,7 @@ export class AfterDetailsComponent implements OnInit {
       isAgree: me.isAgree
     }
     me.submit.postRequest('/after/dealReturnGoods', data, true);
+    me.refresh = true;
   }
 
   /**
@@ -88,6 +91,7 @@ export class AfterDetailsComponent implements OnInit {
       isPass: me.isPass
     }
     me.submit.postRequest('/after/checkRefundGoods', data, true);
+    me.refresh = true;
   }
 
   /**

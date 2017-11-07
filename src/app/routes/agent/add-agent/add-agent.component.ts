@@ -82,8 +82,7 @@ export class AddAgentComponent implements OnInit {
         me.staff.coordinateLng = e.lnglat.getLng();//经度
         me.staff.coordinateLat = e.lnglat.getLat();//纬度
         me.maps=me.staff.coordinateLng+','+me.staff.coordinateLat;
-        console.log("█ this.maps ►►►",  me.maps);
-        console.log("█ e ►►►",  e);
+        // console.log("█ this.maps ►►►",  me.maps);
       });
 
       var marker = new AMap.Marker({
@@ -141,6 +140,9 @@ export class AddAgentComponent implements OnInit {
         data: {agentCode: this.agentCode},
         success: (res) => {
           this.staff = res.data;
+          this.maps=this.staff.coordinateLat + ',' + this.staff.coordinateLng;
+          // console.log("█ this.maps ►►►",  this.maps);
+
           if(isNullOrUndefined(this.staff)) this.staff = {}
         },
         error: (res) => {

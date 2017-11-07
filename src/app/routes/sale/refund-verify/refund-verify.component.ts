@@ -11,12 +11,14 @@ const swal = require('sweetalert');
   templateUrl: './refund-verify.component.html',
   styleUrls: ['./refund-verify.component.scss']
 })
-export class RefundVerifyComponent implements OnInit,DoCheck {
+export class RefundVerifyComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
-    sessionStorage.setItem('refundVeritySearch',JSON.stringify(this.search))
+    sessionStorage.setItem('refundVeritySearch', JSON.stringify(this.search))
   }
+
   private refundList: Page = new Page();
   private detail = [];
+  private showList: boolean = true; //是否显示列表组件
   private isReceiveList: object; //售后单状态枚举列
   private search: any = {
     curPage: null,
@@ -27,9 +29,7 @@ export class RefundVerifyComponent implements OnInit,DoCheck {
     afterNo: null,
     phone: null,
     ordno: null,
-    goodsBaseCode: null,
     searchType: 'afterNo',
-    agentCode: null
   };
 
   constructor(private submit: SubmitService, private router: Router,
@@ -40,11 +40,29 @@ export class RefundVerifyComponent implements OnInit,DoCheck {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
     let search = sessionStorage.getItem('refundVeritySearch');
-    if(!isNullOrUndefined(search)){
+    if (!isNullOrUndefined(search)) {
       me.search = JSON.parse(search);
     }
     this.queryAllService();
   }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    if(event.refresh) this.queryAllService(this.search.curPage)
+  }
+
   /**
    * 切换搜索条件时
    */
@@ -52,17 +70,10 @@ export class RefundVerifyComponent implements OnInit,DoCheck {
     if (val == 'afterNo') {
       this.search.phone = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'phone') {
       this.search.afterNo = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'ordno') {
-      this.search.afterNo = null;
-      this.search.phone = null;
-      this.search.baseCode = null;
-    } else if (val == 'baseCode') {
-      this.search.ordno = null;
       this.search.afterNo = null;
       this.search.phone = null;
     }
@@ -71,9 +82,10 @@ export class RefundVerifyComponent implements OnInit,DoCheck {
   /**
    * 查询买家评价分页
    */
-  queryAllService(event?: PageEvent) {
+  queryAllService(page?,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
+    else if (!isNullOrUndefined(page)) activePage = page;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);

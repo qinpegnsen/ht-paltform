@@ -29,7 +29,8 @@ export class AddBrandComponent implements OnInit {
   }
   public uploader:FileUploader = new FileUploader({
     url: 'upload/basic/upload',
-    itemAlias:"limitFile"
+    itemAlias:"limitFile",
+    allowedFileType: ["image"]
   }); //初始化上传方法
   private myImg: boolean = false;
   private upBrandImg:boolean = false;

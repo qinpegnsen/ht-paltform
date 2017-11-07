@@ -1,24 +1,20 @@
-import {Component, DoCheck, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {Router} from "@angular/router";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {AfterService} from "../after.service";
 import {isNullOrUndefined} from "util";
-const swal = require('sweetalert');
+
 @Component({
   selector: 'app-refund-control',
   templateUrl: './refund-control.component.html',
   styleUrls: ['./refund-control.component.scss']
 })
-export class RefundControlComponent implements OnInit,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('refundControlSearch',JSON.stringify(this.search))
-  }
-
+export class RefundControlComponent implements OnInit {
   private refundList: Page = new Page();
   private detail = [];
+  private showList: boolean = true;
   private isReceiveList: object;  //是否收到货枚举列
   private afterStateList: object; //售后单状态枚举列
   private search: any = {
@@ -30,13 +26,10 @@ export class RefundControlComponent implements OnInit,DoCheck {
     afterNo: null,
     phone: null,
     ordno: null,
-    goodsBaseCode: null,
-    agentCode: null,
     searchType: 'afterNo',
   };
 
   constructor(private submit: SubmitService,
-              private router: Router,
               private tools: RzhtoolsService,
               private after: AfterService) {
   }
@@ -45,11 +38,24 @@ export class RefundControlComponent implements OnInit,DoCheck {
     let me = this;
     me.afterStateList = me.tools.getEnumDataList(1602);
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = sessionStorage.getItem('refundControlSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     this.queryAllService();
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    if(event.refresh) this.queryAllService(this.search.curPage)
   }
 
   /**
@@ -59,17 +65,10 @@ export class RefundControlComponent implements OnInit,DoCheck {
     if (val == 'afterNo') {
       this.search.phone = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'phone') {
       this.search.afterNo = null;
       this.search.ordno = null;
-      this.search.baseCode = null;
     } else if (val == 'ordno') {
-      this.search.afterNo = null;
-      this.search.phone = null;
-      this.search.baseCode = null;
-    } else if (val == 'baseCode') {
-      this.search.ordno = null;
       this.search.afterNo = null;
       this.search.phone = null;
     }
@@ -78,9 +77,10 @@ export class RefundControlComponent implements OnInit,DoCheck {
   /**
    * 查询买家评价分页
    */
-  queryAllService(event?: PageEvent) {
+  queryAllService(page?,event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== "undefined") activePage = event.activePage;
+    else if (!isNullOrUndefined(page)) activePage = page;
     let url = "/after/queryAfterGoodsReqPages";
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);

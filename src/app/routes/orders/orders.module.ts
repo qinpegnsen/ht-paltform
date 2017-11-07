@@ -46,16 +46,28 @@ const routes: Routes = [
   {
     path: 'cust', component: OrdersComponent, children: [
     {path: '', redirectTo: 'all-orders'},
-    {path: 'all-orders', component: AllOrdersComponent},
-    {path: 'wait-for-send', component: AllOrdersComponent},
-    {path: 'delivery', component: AllOrdersComponent},
-    {path: 'finished', component: AllOrdersComponent},
-    {path: 'canceled', component: AllOrdersComponent},
-    {path: 'order-detail', component: OrderDetailComponent}
+    {path: 'all-orders', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'wait-for-send', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'delivery', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'finished', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+    {path: 'canceled', component: AllOrdersComponent,children: [
+      {path: 'order-detail', component: OrderDetailComponent}
+    ]},
+
   ]
   },
   {path: 'buyer', component: BuyerEvaluationComponent},
-  {path: 'prepare', component: PrepareComponent},
+  {path: 'prepare', component: PrepareComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},
   {path: 'store', component: StoreEvaluationComponent},
   {path: 'settle', component: SettleComponent},
   {path: 'agent-ept', component: AgentEptComponent},
@@ -69,16 +81,30 @@ const routes: Routes = [
     {path: 'to-audit', component: ToAuditComponent},
     {path: 'to-refund', component: ToRefundComponent}
   ]},
-  {path: 'ord', component:StockComponent,children:[
+  {
+    path: 'ord', component:StockComponent,children:[
     {path: '', redirectTo: 'all-stock'},
-    {path: 'all-stock', component: AllStockComponent},
-    {path: 'pending-payment', component: PendingPaymentComponent},
-    {path: 'for-distribution', component: ForDistributionComponent},
-    {path: 'awaiting-delivery', component: AwaitingDeliveryComponent},
-    {path: 'complete', component: CompleteComponent},
-    {path: 'success', component: CuccessComponent},
+    {path: 'all-stock', component: AllStockComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
+    {path: 'pending-payment', component: PendingPaymentComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
+    {path: 'for-distribution', component: ForDistributionComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
+    {path: 'awaiting-delivery', component: AwaitingDeliveryComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
+    {path: 'complete', component: CompleteComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
+    {path: 'success', component: CuccessComponent,children: [
+      {path: 'stock-detail', component: StockDetailComponent}
+    ]},
     {path: 'stock-detail', component: StockDetailComponent}
-  ]}
+  ]
+  }
 ]
 
 @NgModule({

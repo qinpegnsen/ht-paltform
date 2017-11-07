@@ -15,7 +15,8 @@ declare var $: any;
 export class IntegrationImportComponent implements OnInit {
   public uploader:FileUploader = new FileUploader({//初始化上传方法
     url: '/upload/local/file',
-    itemAlias:"file"
+    itemAlias:"file",
+    allowedFileType: ["xls"]
   });
   progress: number;//进度条
   private errorFile: string;

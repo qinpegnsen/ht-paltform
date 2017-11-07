@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showList">
   <div class="content-heading mb-lg thc font">
     退款管理
   </div>
@@ -26,20 +26,12 @@
           </select>
         </div>
       </div>
-      <div class="search-group ml-xl mb">
-        <span class="search-title font12">代理商编码：</span>
-        <div class="search-main">
-          <input class="form-control num" type="number" name="agentCode" placeholder="代理商编码"
-                 [(ngModel)]="search.agentCode">
-        </div>
-      </div>
       <div class="search-term clearfix ml-xl mb">
         <div class="w30 pr0 pull-left">
           <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType (change)="changeSearchType(sType.value)">
             <option value="afterNo">退单单号</option>
             <option value="phone">用户手机号</option>
             <option value="ordno">订单号</option>
-            <option value="baseCode">商品基本编码</option>
           </select>
         </div>
         <div class="w70 pl-sm pr0 pull-left">
@@ -51,8 +43,6 @@
                      class="form-control border-b-grey num" [(ngModel)]="search.afterNo" (change)="queryAllService()">
               <input *ngIf="search.searchType=='phone'" type="text" placeholder="用户手机号" name="phone"
                      class="form-control border-b-grey num" [(ngModel)]="search.phone" (change)="queryAllService()">
-              <input *ngIf="search.searchType=='baseCode'" type="text" placeholder="商品基本编码" name="goodsBaseCode"
-                     class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode" (change)="queryAllService()">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
@@ -65,7 +55,7 @@
     <!--搜索 end-->
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="refundList"
-             (pageChange)="queryAllService($event)">
+             (pageChange)="queryAllService(1,$event)">
         <thead>
         <tr>
           <th class="w5 text-center">
@@ -99,7 +89,7 @@
             <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
             <td>{{item.afterNo}}</td>
             <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
-            <td>{{item.custCode}}</td>
+            <td>{{item.custPhone}}</td>
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}} </td>
             <td>
@@ -159,5 +149,5 @@
 </div>
 
 <!--路由嵌套 begin-->
-<router-outlet></router-outlet>
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->

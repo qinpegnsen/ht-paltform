@@ -39,6 +39,7 @@ export class AuditGoodsComponent implements OnInit {
   public logistics: any;             // 物流规则列表
   public tplVals: any;               // 运费模板内容
   private unit: string = '件';       // 运费价格
+  private refresh: boolean;         // 是否刷新父组件数据
   private publishData: any = {
     goodsExpressInfo: {
       freightType: null,
@@ -331,6 +332,7 @@ export class AuditGoodsComponent implements OnInit {
     let me = this;
     MaskService.showMask();//显示遮罩层
     me.goods.putRequest('/goodsEdit/auditGoods', me.audit, true)
+    me.refresh = true;
   }
 
 }

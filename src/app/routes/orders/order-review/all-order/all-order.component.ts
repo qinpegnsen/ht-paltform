@@ -28,7 +28,6 @@ export class AllOrderComponent implements OnInit {
   private endTime: string;
   private LogisticsData;//物流信息
   public goodsList: Page = new Page();
-  @ViewChild('cancelBox') cancelBox: CancelComponent;
 
 
   constructor(private OrderReviewComponent:OrderReviewComponent, private submit: SubmitService,private OrderReviewService:OrderReviewService) {

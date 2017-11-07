@@ -130,7 +130,7 @@
                       <!--首费begin-->
                       <td class="text-center">
                         <div class="input-group">
-                          <input class="form-control" type="number" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" [pattern]="patterns.twodecimal" required #firstPrice="ngModel" (keyup)="twoNum($event.target)">
+                          <input class="form-control num" type="number" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" [pattern]="patterns.twodecimal" required #firstPrice="ngModel" (keyup)="twoNum($event.target)">
                           <div [hidden]="firstPrice.valid || firstPrice.pristine">
                             填写正整数，可保留两位小数
                           </div>
@@ -163,7 +163,7 @@
                       <!--续费begin-->
                       <td class="text-center">
                         <div class="input-group">
-                          <input class="form-control" type="number" [(ngModel)]="item.addPrice" name="addPrice{{i}}" [pattern]="patterns.twodecimal" required #addPrice="ngModel" (keyup)="twoNum($event.target)">
+                          <input class="form-control num" type="number" [(ngModel)]="item.addPrice" name="addPrice{{i}}" [pattern]="patterns.twodecimal" required #addPrice="ngModel" (keyup)="twoNum($event.target)">
                           <div [hidden]="addPrice.valid || addPrice.pristine">
                             填写正整数，可保留两位小数
                           </div>
@@ -314,11 +314,11 @@
                     <!--首费begin-->
                     <td class="text-center">
                       <div class="input-group">
-                        <input class="form-control" type="number" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" [pattern]="patterns.twodecimal" required #firstPrice="ngModel" (keyup)="twoNum($event.target)">
+                        <input class="form-control num" type="number" [(ngModel)]="item.firstPrice" name="firstPrice{{i}}" [pattern]="patterns.twodecimal" required #firstPrice="ngModel" (keyup)="twoNum($event.target)">
                         <div [hidden]="firstPrice.valid || firstPrice.pristine">
                           填写正整数，可保留两位小数
                         </div>
-                        <span class="input-group-addon money">￥</span>
+                        <span class="input-group-addon money ">￥</span>
                       </div>
                     </td>
                     <!--首费end-->
@@ -347,7 +347,7 @@
                     <!--续费begin-->
                     <td class="text-center">
                       <div class="input-group">
-                        <input class="form-control" type="number" [(ngModel)]="item.addPrice" name="addPrice{{i}}" [pattern]="patterns.twodecimal" required #addPrice="ngModel" (keyup)="twoNum($event.target)">
+                        <input class="form-control num" type="number" [(ngModel)]="item.addPrice" name="addPrice{{i}}" [pattern]="patterns.twodecimal" required #addPrice="ngModel" (keyup)="twoNum($event.target)">
                         <div [hidden]="addPrice.valid || addPrice.pristine">
                           填写正整数，可保留两位小数
                         </div>

@@ -1,4 +1,4 @@
-<div [class.panel]="assign" [class.panel-danger]="assign" [class.panel-body]="assign">
+<div [class.panel]="assign" [class.panel-danger]="assign" [class.panel-body]="assign" [hidden]="!showList">
   <!--查询 start-->
   <div class="p text-right clearfix">
     <!--<div class="search-group pull-right ml-xl mb">
@@ -22,7 +22,7 @@
     <div class="search-group mr-xl mb">
       <span class="search-title">工单类型：</span>
       <div class="search-main">
-        <select class="form-control pl-sm pr-sm" name="woType" [(ngModel)]="search.ordType" (change)="queryDatas(1)">
+        <select class="form-control pl-sm pr-sm" name="woType" [(ngModel)]="woSearch.ordType" (change)="queryDatas()">
           <option value="">全部</option>
           <option [value]="type.key" *ngFor="let type of woTypeList">{{type.val}}</option>
         </select>
@@ -30,7 +30,7 @@
     </div>
     <div class="search-term mb">
       <div class="w30 pr0 pull-left">
-        <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType (change)="changeCondition(sType.value)">
+        <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="woSearch.searchType" #sType (change)="changeCondition(sType.value)">
           <option value="wono">工单编号</option>
           <option value="ordno">订单编号</option>
         </select>
@@ -38,12 +38,12 @@
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group pr0 mb0">
           <div class="w80 pl0 pr0 pull-left">
-            <input *ngIf="search.searchType == 'ordno'" type="text" class="form-control" placeholder="订单编号"
-                   [(ngModel)]="search.ordno" (change)="queryDatas(1)">
-            <input *ngIf="search.searchType == 'wono'" type="text" class="form-control" placeholder="工单编号"
-                   [(ngModel)]="search.wono" (change)="queryDatas(1)">
+            <input *ngIf="woSearch.searchType == 'ordno'" type="text" class="form-control" placeholder="订单编号"
+                   [(ngModel)]="woSearch.ordno" (change)="queryDatas()">
+            <input *ngIf="woSearch.searchType == 'wono'" type="text" class="form-control" placeholder="工单编号"
+                   [(ngModel)]="woSearch.wono" (change)="queryDatas()">
           </div>
-          <button type="submit" title="搜索" (click)="queryDatas(1)"
+          <button type="submit" title="搜索" (click)="queryDatas()"
                   class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
             <em class="icon-magnifier fa-fw"></em>
           </button>
@@ -56,7 +56,7 @@
          (pageChange)="queryDatas(1,$event)">
     <thead>
     <tr>
-      <th class="w5 text-center thc font" *ngIf="search.stateEnum!='NO'">更多</th>
+      <th class="w5 text-center thc font" *ngIf="woSearch.stateEnum!='NO'">更多</th>
       <th class="w10 text-center thc font">工单编号</th>
       <th class="w8 text-center thc font">工单类型</th>
       <th class="w10 text-center thc font">订单/售后单号</th>
@@ -71,7 +71,7 @@
     <tbody>
     <ng-container *ngFor="let order of dataTable.data; let i = index">
       <tr class="text-center">
-        <td *ngIf="search.stateEnum!='NO'"><i *ngIf="order.state!='NO'" class="icon icon-arrow-down cursor-p thc"
+        <td *ngIf="woSearch.stateEnum!='NO'"><i *ngIf="order.state!='NO'" class="icon icon-arrow-down cursor-p thc"
                                               [class.font]="detail[i]"
                                               (click)="showDetail(i)"></i></td>
         <td>{{order.wono}}</td>
@@ -98,12 +98,12 @@
           <!--</button>-->
 
           <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                  routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
+                  routerLink="order-detail" [queryParams]="{ordno:order.ordno}"></button>
           <button *ngIf="order.ordType == 'SELL_AFTER'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                  routerLink="../after-detail" [queryParams]="{wono:order.wono}"></button>
+                  routerLink="after-detail" [queryParams]="{wono:order.wono}"></button>
         </td>
       </tr>
-      <tr *ngIf="search.stateEnum!='NO' && detail[i]">
+      <tr *ngIf="woSearch.stateEnum!='NO' && detail[i]">
         <td *ngIf="!order.woAgentList || order.woAgentList.length==0" colspan="20" class="record-detail">暂无指派记录……</td>
         <td *ngIf="order.woAgentList.length > 0" colspan="20" class="p0 record-detail">
           <table class="w100">
@@ -160,4 +160,6 @@
                        (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
 </ng-container>
 
-
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

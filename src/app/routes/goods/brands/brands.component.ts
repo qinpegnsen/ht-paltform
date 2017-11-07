@@ -168,7 +168,7 @@ export class BrandsComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    ;
+    _this.query.curPage = activePage;
     let requestUrl = '/goodsBrand/queryBrandPagesByNA';
     _this.brands = new Page(_this.submitService.getData(requestUrl, _this.query));
   }

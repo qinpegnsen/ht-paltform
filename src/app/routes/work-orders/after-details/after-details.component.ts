@@ -5,7 +5,6 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {isNullOrUndefined} from "util";
 import {Location} from "@angular/common";
 import {AfterService} from "../../sale/after.service";
-import {WoManageComponent} from "../wo-manage/wo-manage.component";
 
 @Component({
   selector: 'app-refund-details',
@@ -14,6 +13,7 @@ import {WoManageComponent} from "../wo-manage/wo-manage.component";
 })
 export class AfterDetailsComponent implements OnInit {
 
+  public detailType:string;         //详情类型
   private afterNo: string;          //售后编码
   private wono: string;             //工单编码
   private LogisticsData: any;       //退货物流信息
@@ -23,7 +23,6 @@ export class AfterDetailsComponent implements OnInit {
 
 
   constructor(private router: Router,
-              private parentComp: WoManageComponent,
               private submit: SubmitService,
               private location: Location,
               private after: AfterService,
@@ -32,8 +31,7 @@ export class AfterDetailsComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.parentComp.detail = true;
-    me.parentComp.detailType = 'wo';
+    me.detailType = 'after';
     me.wono = me.submit.getParams('wono');
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过
     let data;

@@ -8,8 +8,7 @@
           待支付</li>
         <li class="pull-left thc" [class.font]="orderType==3" [class.bb]="orderType==3" routerLink="for-distribution">
           待配货</li>
-        <li class="pull-left thc" [class.font]="orderType==4" [class.bb]="orderType==4"
-            routerLink="awaiting-delivery">待发货</li>
+        <li class="pull-left thc" [class.font]="orderType==4" [class.bb]="orderType==4" routerLink="awaiting-delivery">待发货</li>
         <li class="pull-left thc" [class.font]="orderType==5" [class.bb]="orderType==5" routerLink="complete">已发货</li>
         <li class="pull-left thc" [class.font]="orderType==6" [class.bb]="orderType==6" routerLink="success">已完成</li>
       </ul>
@@ -49,7 +48,7 @@
     </div>
 
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
-      <li class="pull-left" routerLink="all-stock">订单列表</li>
+      <li class="pull-left" (click)="routeBack()">订单列表</li>
       <li class="pull-left thc bb">商品详情</li>
     </ul>
     <!--路由嵌套 begin-->

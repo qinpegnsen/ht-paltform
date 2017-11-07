@@ -30,6 +30,7 @@ export class PrepareComponent implements OnInit ,DoCheck {
   public custPhone: string;
   public ordno: string;
   public LogisticsData: any;//物流信息
+  private showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
   public search = {
     curPage: 1,
@@ -60,7 +61,25 @@ export class PrepareComponent implements OnInit ,DoCheck {
     if(!isNullOrUndefined(search)){
       me.search = JSON.parse(search);
     }
-    me.queryDatas(1)
+    me.queryDatas()
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+    event.single = true;
+    console.log("█ event ►►►",  event);
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
   }
 
   /**
@@ -94,12 +113,10 @@ export class PrepareComponent implements OnInit ,DoCheck {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
     }
     let requestUrl = '/ord/plantQueryOrd';
     _this.search.curPage = activePage;

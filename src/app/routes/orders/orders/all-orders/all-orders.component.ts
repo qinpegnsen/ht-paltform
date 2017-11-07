@@ -1,10 +1,9 @@
-import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {CancelComponent} from "../cancel/cancel.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
@@ -17,17 +16,14 @@ defineLocale('cn', zhCn);
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.scss']
 })
-export class AllOrdersComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('orderAllSearch',JSON.stringify(this.search))
-  }
+export class AllOrdersComponent implements OnInit {
   public path: string;       //路由
-  public ordState: string;    //订单类型
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
   public LogisticsData: any;//物流信息
+  private showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
   public search = {
     curPage: 1,
@@ -57,36 +53,48 @@ export class AllOrdersComponent implements OnInit ,DoCheck {
       switch (me.path) {
         case "all-orders":
           me.parentComp.orderType = '';
-          me.ordState = '';
+          me.search.ordState = '';
           break;
         case "wait-for-send":
           me.parentComp.orderType = 'PREPARE';
-          me.ordState = 'PREPARE';
+          me.search.ordState = 'PREPARE';
           break;
         case "prepare":
           me.parentComp.orderType = 'PREPARE';
-          me.ordState = 'PREPARE';
+          me.search.ordState = 'PREPARE';
           break;
         case "delivery":
           me.parentComp.orderType = 'DELIVERY';
-          me.ordState = 'DELIVERY';
+          me.search.ordState = 'DELIVERY';
           break;
         case "finished":
           me.parentComp.orderType = 'SUCCESS';
-          me.ordState = 'SUCCESS';
+          me.search.ordState = 'SUCCESS';
           break;
         case "canceled":
           me.parentComp.orderType = 'CLOSE';
-          me.ordState = 'CLOSE';
+          me.search.ordState = 'CLOSE';
           break;
       }
     });
+    me.orderServe.searchData = me.search;
+    me.queryDatas()
+  }
 
-    let search = sessionStorage.getItem('orderAllSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
-    me.queryDatas(1)
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
   }
 
   /**
@@ -120,13 +128,13 @@ export class AllOrdersComponent implements OnInit ,DoCheck {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(page?:number, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
-    }
+    }else if(!isNullOrUndefined(page)){
+      activePage = page
+    };
     let requestUrl = '/ord/queryOrd';
     _this.search.curPage = activePage;
     _this.goodsList = new Page(_this.submit.getData(requestUrl, _this.search));

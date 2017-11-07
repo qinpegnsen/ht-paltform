@@ -18,7 +18,6 @@ export class IntegrationDetailsComponent implements OnInit {
     this.qeuryAllService();
   }
 
-
   //重消币明细--查询分页
   qeuryAllService(event?: PageEvent){
     let me = this, activePage = 1;
@@ -26,7 +25,7 @@ export class IntegrationDetailsComponent implements OnInit {
     let url = "/custCoin/query";
     let data={
       curPage: activePage,
-      pageSize:10,
+      pageSize:20,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);

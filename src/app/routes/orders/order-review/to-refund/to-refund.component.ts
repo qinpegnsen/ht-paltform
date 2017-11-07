@@ -1,13 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {OrderReviewComponent} from "../order-review.component";
 import {Page} from "../../../../core/page/page";
-import {CancelComponent} from "../../orders/cancel/cancel.component";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {PageEvent} from "angular2-datatable";
 import {isUndefined} from "util";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
-import {FileUploader} from "ng2-file-upload";
 import {OrderReviewService} from "../order-review.service";
 
 @Component({
@@ -33,7 +31,6 @@ export class ToRefundComponent implements OnInit {
   public goodsList: Page = new Page();
   private showRefundWindow:boolean = false;
 
-  @ViewChild('cancelBox') cancelBox: CancelComponent;
   constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService,private orderReviewService:OrderReviewService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',

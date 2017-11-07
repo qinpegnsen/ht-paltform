@@ -46,6 +46,7 @@ export class BankTransferComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
+    allowedFileType: ["image"],
     queueLimit: 1
   });
   @Input('orderId') orderId: string;
@@ -55,14 +56,14 @@ export class BankTransferComponent implements OnInit {
   @Output() bankDate = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['showAddWindow']) {
-      if (this.showBankWindow) $('.wrapper > section' && '.wrapper > footer ').css('z-index', 100);
-      else $('.wrapper > section' && '.wrapper > footer ').css('z-index', 10);
+    if (changes['showBankWindow']) {
+      if (this.showBankWindow) $('.wrapper > section').css('z-index', 200);
+      else $('.wrapper > section').css('z-index', 114);
     }
   }
 
   ngOnDestroy(): void {
-    $('.wrapper > section' && '.wrapper > footer ').css('z-index', 10);
+    $('.wrapper > section').css('z-index', 114);
   }
 
   constructor(private submit: SubmitService, public GetUidService: GetUidService, private tools: RzhtoolsService,
