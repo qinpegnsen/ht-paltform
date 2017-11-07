@@ -520,7 +520,6 @@ export class AddArticleComponent implements OnInit ,OnDestroy{
       }
     };
 
-
     /**
      * 上传失败处理
      * @param item 上传列表
@@ -531,7 +530,6 @@ export class AddArticleComponent implements OnInit ,OnDestroy{
     me.uploader.onErrorItem = function (item, response, status, headers) {
       AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
     };
-
 
     /**
      * 所有图片都上传成功后执行添加文章
