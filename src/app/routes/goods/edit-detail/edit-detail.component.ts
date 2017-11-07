@@ -43,7 +43,9 @@ export class EditDetailComponent implements OnInit {
     goodsExpressInfo: {
       freightType: null,
       fixedFreight: null,
-      expressTplId: null
+      expressTplId: null,
+      weight: 1.00,
+      volume: 1.00,
     },
     isFreight: null,
     goodsImagesList: [],
