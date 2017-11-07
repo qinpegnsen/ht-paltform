@@ -71,7 +71,7 @@
                      (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
                      alt="">
                 <img [src]="item.vpic" class="hover-native-img" alt=""
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
             </td>
           </tr>
@@ -81,7 +81,9 @@
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
-              <legend class="m0" style="height: 51px;line-height: 51px;">{{afterData.returnType=='RETURN'?'退货申请处理':'退款申请处理'}}</legend>
+              <legend class="m0" style="height: 51px;line-height: 51px;">
+                {{afterData.returnType=='RETURN'?'退货申请处理':'退款申请处理'}}
+              </legend>
             </div>
             <table class="t-items p w100">
               <tr class="t-item clearfix">
@@ -129,7 +131,8 @@
                                   {{item.time}}
                               </span>
                               <ng-container *ngIf="s>0">
-                                <span class="mr logis-time" *ngIf="item.day==LogisticsData[s-1].day">{{item.time}}</span>
+                                <span class="mr logis-time"
+                                      *ngIf="item.day==LogisticsData[s-1].day">{{item.time}}</span>
                                 <span class="mr logis-time" *ngIf="item.day!=LogisticsData[s-1].day">
                                 <b class="mr-lg pull-left">{{item.day}}</b>
                                 <b class="mr-lg">{{item.day | getWeek}}</b>
@@ -177,31 +180,38 @@
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">审核结果：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state  | rzhState:'1701'}}</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state | rzhState:'1701'}}</td>
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">处理备注：</td>
               <td class="item-bd col-sm-10 mb0">{{afterTailList[3].description}}</td>
             </tr>
           </table>
-      </div>
+        </div>
       </div>
     </div>
   </div>
   <form class="goods-audit panel panel-danger w96 m-auto mb-xl" (keydown.Enter)="false" *ngIf="type=='deal'">
     <fieldset class="p0 panel-body">
       <legend class="m0 goods-audit-title">{{afterData.state=='DELIVERY'?'退还商品审核':'退款/退货申请处理'}}</legend>
+      <!--未发货商品只能同意退款-->
       <table class="w100">
         <tr>
           <td class="item-hd col-sm-2">处理意见：</td>
           <td class="item-bd col-sm-2">
-            <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
-              <label>
-                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"/>
-                <span class="fa fa-circle"></span>{{item.val}}</label>
-            </div>
+            <ng-container
+              *ngIf="afterData.ordState != 'ASSIGNED' && afterData.ordState != 'PAID' && afterData.ordState != 'PREPARE'">
+              <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of goodsAudits">
+                <label>
+                  <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"/>
+                  <span class="fa fa-circle"></span>{{item.val}}</label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="afterData.ordState == 'ASSIGNED' || afterData.ordState == 'PAID' || afterData.ordState == 'PREPARE'">
+              <div class="text-danger">该商品暂未发货，默认同意退款</div>
+            </ng-container>
           </td>
-          <td class="col-sm-8 mb0">
+          <td class="col-sm-8 mb0 p">
             <textarea class="form-control w66 tag-dib align-middle" name="opinion" required
                       [(ngModel)]="opinion" placeholder="请填写处理意见"
                       cols="10" rows="3"></textarea>
