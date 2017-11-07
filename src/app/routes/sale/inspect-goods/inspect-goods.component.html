@@ -4,9 +4,11 @@
   </div>
   <ul class="order-guide list-unstyled clearfix bb">
     <li class="pull-left thc bb selectState" [class.bb]="search.state=='DELIVERY'"
-        (click)="selectState($event.target)">待验货</li>
+        (click)="selectState($event.target)">待验货
+    </li>
     <li class="pull-left thc selectState" [class.bb]="search.state=='AGREE'" (click)="selectState($event.target)">
-      待用户发货</li>
+      待用户发货
+    </li>
   </ul>
   <div class="panel panel-default">
     <!--操作提示-->
@@ -35,7 +37,8 @@
       </div>
       <div class="search-term clearfix ml-xl mb">
         <div class="w30 pr0 pull-left">
-          <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType (change)="changeSearchType(sType.value)">
+          <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType
+                  (change)="changeSearchType(sType.value)">
             <option value="afterNo">退单单号</option>
             <option value="phone">用户手机号</option>
             <option value="ordno">订单号</option>
@@ -52,7 +55,8 @@
               <input *ngIf="search.searchType=='phone'" type="text" placeholder="用户手机号" name="phone"
                      class="form-control border-b-grey num" [(ngModel)]="search.phone" (change)="queryAllService()">
               <input *ngIf="search.searchType=='baseCode'" type="text" placeholder="商品基本编码" name="goodsBaseCode"
-                     class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode" (change)="queryAllService()">
+                     class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode"
+                     (change)="queryAllService()">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
@@ -92,17 +96,18 @@
         </tr>
         </thead>
         <tbody>
-
         <ng-container *ngFor="let item of dataTable.data; let i = index">
           <tr class="text-center">
-            <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
+            <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i>
+            </td>
             <td>{{item.afterNo}}</td>
             <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
             <td>{{item.custPhone}}</td>
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
-              <button *ngIf="item.state=='DELIVERY'" class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details"
+              <button *ngIf="item.state=='DELIVERY'" class="btn btn-success btn-sm fa fa-check-square-o"
+                      routerLink="after-details"
                       [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
               </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"

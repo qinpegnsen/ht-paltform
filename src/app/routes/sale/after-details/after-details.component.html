@@ -86,21 +86,21 @@
             <table class="t-items p w100">
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">处理时间：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].updateTime}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1]?.updateTime}}</td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">审核人：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].optName}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1]?.optName}}</td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">审核结果：</td>
                 <td class="item-bd col-sm-10 mb0">
-                  {{afterTailList[1].state | rzhState:'1701'}}
+                  {{afterTailList[1]?.state | rzhState:'1701'}}
                 </td>
               </tr>
               <tr class="t-item clearfix">
                 <td class="item-hd col-sm-2">处理意见：</td>
-                <td class="item-bd col-sm-10 mb0">{{afterTailList[1].description}}</td>
+                <td class="item-bd col-sm-10 mb0">{{afterTailList[1]?.description}}</td>
               </tr>
             </table>
           </div>
