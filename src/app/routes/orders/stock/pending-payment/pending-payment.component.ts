@@ -27,12 +27,11 @@ export class PendingPaymentComponent implements OnInit {
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private beginTime: string;
-  private endTime: string;
   public goodsList: Page = new Page();
   private orderId1:any;
   private goodspay1:any;
   private curPage1:any;
+  private showList: boolean = true;
 
   private showBankWindow:boolean = false;
 
@@ -48,6 +47,23 @@ export class PendingPaymentComponent implements OnInit {
     let _this = this;
     _this.StockComponent.orderType = 2;
     _this.queryDatas(1)
+  }
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    this.StockComponent.orderType = 2;
   }
 
   /**

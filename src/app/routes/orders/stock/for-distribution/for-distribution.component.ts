@@ -30,9 +30,8 @@ export class ForDistributionComponent implements OnInit {
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private beginTime: string;
-  private endTime: string;
   public goodsList: Page = new Page();
+  private showList: boolean = true;
 
   constructor(private StockComponent:StockComponent,private submit: SubmitService,private ForFistributonService:ForFistributonService) {
     this.bsConfig = Object.assign({}, {
@@ -48,6 +47,22 @@ export class ForDistributionComponent implements OnInit {
     _this.queryDatas(1)
   }
 
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate(event) {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate(event) {
+    this.showList = true;
+    this.StockComponent.orderType = 3;
+  }
 
   /**
    * 查询列表
