@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-green fa fa-refresh btn-sm align-middle" (click)="clearDate()"></button>
+    <button class="btn btn-green fa fa-refresh btn-sm align-middle" title="重置时间" (click)="clearDate()"></button>
     <div class="search-group ml-xl mb">
       <span class="search-title font12">结算类型：</span>
       <div class="search-main">
@@ -63,19 +63,19 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="ordno">订单号</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-right">
           <rzhDefaultSorter by="total">订单总额</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-right">
           <rzhDefaultSorter by="refund">订单退款</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-right">
           <rzhDefaultSorter by="rake">抽成比例</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
-          <rzhDefaultSorter by="account">入账</rzhDefaultSorter>
+        <th class="col-md-1 unselectable text-right">
+          <rzhDefaultSorter by="account">平台入账</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-right">
           <rzhDefaultSorter by="settle">结算</rzhDefaultSorter>
         </th>
         <th class="col-md-2 unselectable text-center">
@@ -93,11 +93,11 @@
             {{item.toName}}
           </td>
           <td>{{item.ordno}}</td>
-          <td><span>¥{{item.ordPay}}</span></td>
-          <td><span>¥{{item.ordRefundPay}}</span></td>
-          <td><span>{{item.extraction_rate}}%</span></td>
-          <td><span>¥{{item.ordIncome}}</span></td>
-          <td><span>¥{{item.extraction}}</span></td>
+          <td class="text-right"><span>¥{{item.ordPay | number:'1.2-2'}}</span></td>
+          <td class="text-right"><span>¥{{item.ordRefundPay | number:'1.2-2'}}</span></td>
+          <td class="text-right"><span>{{item.extraction_rate}}%</span></td>
+          <td class="text-right"><span>¥{{item.extraction | number:'1.2-2'}}</span></td>
+          <td class="text-right"><span>¥{{item.settle | number:'1.2-2'}}</span></td>
           <td>{{item.createTime}}</td>
         </tr>
       </ng-container>
