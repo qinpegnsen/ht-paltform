@@ -38,23 +38,7 @@
           </dl>
           <dl class="line pt-lg">
             <dt>订单编号：</dt>
-            <dd>{{orderDetailData.ordno}}
-              <!-- <span class="pull-right" (mouseenter)="showTimeList(times)"
-                     (mouseleave)="hideTimesList(times)"
-                     myHoverColor
-                     [myHover]="'#CC1635'">更多<i
-                 class="fa fa-angle-down time-list"></i>
-               </span>
-               <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
-                 class="arrow"></span>
-                 <ul class="list-unstyled font12 mb0">
-                   <li *ngIf="!orderStates"><span>{{orderDetailData.createTime}}</span> 创建订单</li>
-                   <li *ngFor="let item of orderStates"><span>{{item.createTime}}</span>{{item.state=='DELIVERY'?'已发货':item
-                     .description}}
-                   </li>
-                 </ul>
-               </div>-->
-            </dd>
+            <dd>{{orderDetailData.ordno}}</dd>
           </dl>
         </div>
       </div>
@@ -197,7 +181,7 @@
     </div>
 
 
-    <div class="w100">
+    <div class="w100 mt">
       <table class="w100 b">
         <thead class="w100">
         <tr class="w100 order-head">
@@ -229,13 +213,13 @@
           <ng-container *ngIf="i == 0">
             <td class="bl" [attr.rowspan]="goodsData.length">
               <span class="main-red font14">¥{{orderDetailData.total | number: '1.2-2'}}</span><br>
-              <span class="font-gray" *ngIf="orderDetailData.freight == 0">(免运费)</span>
+              <span class="font-gray font12" *ngIf="orderDetailData.freight == 0">(免运费)</span>
               <span class="font-gray"
                     *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight | number: '1.2-2'}}</span><br>
-              <span class="font-gray">{{goodsData.payWay | rzhState:'1017'}}</span>
+              <span class="font-gray font12">{{goodsData.payWay | rzhState:'1017'}}</span>
             </td>
-            <td class="bl" [attr.rowspan]="goodsData.length">
-              <p class="font-gray mb-sm cursor-p">{{orderDetailData.state | rzhState:'1019'}}</p>
+            <td class="bl br" [attr.rowspan]="goodsData.length">
+              <p class="font-gray mb-sm cursor-p font12">{{orderDetailData.state | rzhState:'1019'}}</p>
               <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>-->
               <button class="m-sm btn btn-xs btn-green fa fa-truck" *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE'"
                       (click)="deliverOrder()"> 发货
@@ -250,7 +234,7 @@
             <dl class="text-right mb0">
               <dt class="font14 w10">商品总额：</dt>
               <dd class="w10 text-left">
-                <span class="ml-sm font18 mr main-red  price-wid">¥ {{orderDetailData.total | number:'1.2-2'}}</span>
+                <span class="ml-sm font18 mr main-red price-wid">¥ {{orderDetailData.total | number:'1.2-2'}}</span>
               </dd>
             </dl>
             <dl class="text-right mb0">
@@ -277,8 +261,8 @@
                 重消币抵扣金额：
               </dt>
               <dd class="w10 text-left">
-                <span *ngIf="!orderDetailData.coinPay" class="font18 main-red  ml-sm mr price-wid">¥ 0.00</span>
-                <span *ngIf="orderDetailData.coinPay" class="font18 main-red  ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
+                <span *ngIf="!orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ 0.00</span>
+                <span *ngIf="orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
               </dd>
             </dl>
             <dl class="text-right mb0">

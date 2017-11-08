@@ -130,23 +130,8 @@
     <!--订单跟踪-->
     <div class="order-track">
       <ul class="timeline-alt pb0 mb0">
-        <li class="mb0" *ngIf="orderDetailData.state=='CLOSE'">
-          <div class="timeline-badge gray-bg thc bg"></div>
-          <div class="timeline-panel">
-            <div class="right">
-              <div>
-                <p class="every-line">
-                  <span class="mr logis-time text-left">
-                      <b class="mr-lg">{{orderDetailData.closeTime}}</b>
-                  </span>
-                  <span class="every-info thc font">订单已关闭</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </li>
         <li class="mb0" *ngFor="let item of orderStates;let s = index">
-          <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
+          <div class="timeline-badge gray-bg thc" [class.bg]="s==0&&orderDetailData.state!='CLOSE'"></div>
           <div class="timeline-panel">
             <div class="right">
               <div>
@@ -256,20 +241,21 @@
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
           <dt class="font14">商品总额：</dt>
-          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total | number: '1.2-2'}}</span></dd>
+          <dd><span class="main-red ml-sm font18 mr price-wid">¥{{orderDetailData.total | number: '1.2-2'}}</span></dd>
         </dl>
         <dl class="text-right mb0">
           <dt>运费：</dt>
           <dd>
-            <span class="font12 ml mr price-wid" *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+            <span class="main-red font12 ml mr price-wid"
+                  *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
-              <span class="font18 ml-sm mr price-wid">¥{{orderDetailData.freight | number: '1.2-2'}}</span>
+              <span class="main-red font18 ml-sm mr price-wid">¥{{orderDetailData.freight | number: '1.2-2'}}</span>
             </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">应付金额：</dt>
-          <dd><span class="ml-sm font18 mr price-wid">¥{{orderDetailData.total+orderDetailData.freight |
+          <dd><span class="main-red ml-sm font18 mr price-wid">¥{{orderDetailData.total+orderDetailData.freight |
             number: '1.2-2'}}</span></dd>
         </dl>
         <dl class="text-right mb0">
@@ -279,8 +265,9 @@
             重消币抵扣金额：
           </dt>
           <dd>
-            <span *ngIf="!orderDetailData.coinPay" class="font18 main-red  ml-sm mr price-wid">¥ 0.00</span>
-            <span *ngIf="orderDetailData.coinPay" class="font18 main-red  ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
+            <span *ngIf="!orderDetailData.coinPay" class="main-red font18 ml-sm mr price-wid">¥0.00</span>
+            <span *ngIf="orderDetailData.coinPay"
+                  class="main-red font18 ml-sm mr price-wid">¥{{orderDetailData.coinPay | number:'1.2-2'}}</span>
           </dd>
         </dl>
         <dl class="text-right mb0">

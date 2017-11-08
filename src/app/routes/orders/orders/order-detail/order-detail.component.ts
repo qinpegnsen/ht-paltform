@@ -83,29 +83,6 @@ export class OrderDetailComponent implements OnInit {
   }
 
   /**
-   * 显示订单状态的时间列表
-   * @param target
-   */
-  showTimeList(target) {
-    target.style.display = 'block';
-  }
-
-  hideTimesList(target) {
-    target.style.display = 'none';
-  }
-
-  /**
-   * 显示重消币抵扣数量
-   */
-  showCoinNum(obj) {
-    $(obj).removeClass('hide')
-  }
-
-  hideCoinNum(obj) {
-    $(obj).addClass('hide')
-  }
-
-  /**
    * 显示备注编辑框
    * @param target
    */
