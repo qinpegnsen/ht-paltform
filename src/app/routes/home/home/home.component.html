@@ -13,7 +13,7 @@
             <div class="col-xs-9">
               <div class=" font14 f-bold">下单金额（元）</div>
               <div class="font14">今天新增订单金额</div>
-              <p class="text-md m0" *ngIf="data.ordSum!=null">{{data.ordSum | decimalTwo}}</p>
+              <p class="text-md m0" *ngIf="data.ordSum!=null">{{data.ordSum | number: '1.2-2'}}</p>
               <p class="text-md m0" *ngIf="data.ordSum==null">0.00</p>
             </div>
             <div class="col-xs-3 text-right">

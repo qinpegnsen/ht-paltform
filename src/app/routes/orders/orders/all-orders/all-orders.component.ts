@@ -95,6 +95,7 @@ export class AllOrdersComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
+    if(event.refresh) this.queryDatas(this.search.curPage)//在详情页面发货返回需要刷新页面数据
   }
 
   /**
@@ -157,25 +158,8 @@ export class AllOrdersComponent implements OnInit {
     i.style.display = 'none';
   }
 
-  cancelOrder(orderId) {
-    this.curCancelOrderId = orderId;
-    console.log("█ orderId ►►►", orderId);
-  }
-
   deliverOrder(orderId) {
     this.curDeliverOrderId = orderId;
-  }
-
-  lookLogistics(orderId) {
-    this.lookLogisticsOrderId = orderId;
-  }
-
-  /**
-   * 取消订单回调函数
-   * @param data
-   */
-  getCancelOrderData(data) {
-    this.curCancelOrderId = null;
   }
 
   /**
@@ -184,14 +168,6 @@ export class AllOrdersComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if(data.type) this.queryDatas(data.page)
-  }
-
-  /**
-   * 查询物流回调函数
-   * @param data
-   */
-  getLogisticsData(data) {
-    this.lookLogisticsOrderId = null;
+    if(data.type) this.queryDatas(data.page)//在当前页面发货之后需要刷新页面数据
   }
 }
