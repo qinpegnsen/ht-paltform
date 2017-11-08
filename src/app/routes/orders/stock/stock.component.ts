@@ -16,7 +16,7 @@ export class StockComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private location: Location,) {
+  constructor(private location: Location) {
   }
 
   ngOnInit() {

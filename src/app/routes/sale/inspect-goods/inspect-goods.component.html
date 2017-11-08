@@ -42,7 +42,6 @@
             <option value="afterNo">退单单号</option>
             <option value="phone">用户手机号</option>
             <option value="ordno">订单号</option>
-            <option value="baseCode">商品基本编码</option>
           </select>
         </div>
         <div class="w70 pl-sm pr0 pull-left">
@@ -54,9 +53,6 @@
                      class="form-control border-b-grey num" [(ngModel)]="search.afterNo" (change)="queryAllService()">
               <input *ngIf="search.searchType=='phone'" type="text" placeholder="用户手机号" name="phone"
                      class="form-control border-b-grey num" [(ngModel)]="search.phone" (change)="queryAllService()">
-              <input *ngIf="search.searchType=='baseCode'" type="text" placeholder="商品基本编码" name="goodsBaseCode"
-                     class="form-control border-b-grey num" [(ngModel)]="search.goodsBaseCode"
-                     (change)="queryAllService()">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope">

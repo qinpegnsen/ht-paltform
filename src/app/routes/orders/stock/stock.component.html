@@ -12,39 +12,6 @@
         <li class="pull-left thc" [class.font]="orderType==5" [class.bb]="orderType==5" routerLink="complete">已发货</li>
         <li class="pull-left thc" [class.font]="orderType==6" [class.bb]="orderType==6" routerLink="success">已完成</li>
       </ul>
-      <!--查询 start-->
-      <!--<div class="row clearfix p text-right">
-        <div class="place-time clearfix mb">
-          <span class="_title">下单时间：</span>
-          <div class="_picker">
-            <div class="input-group">
-              <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker">
-              <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
-            </div>
-          </div>
-        </div>
-        <div class="search-term clearfix ml mb">
-          <div class="w30 pr0 pull-left">
-            <select class="form-control pl-sm pr-sm" name="sss" id="0">
-              <option value="11">代理商账号</option>
-              <option value="22">商品名称</option>
-              <option value="33">订单编号</option>
-            </select>
-          </div>
-          <div class="w70 pl-sm pr0 pull-left">
-            <div class="form-group mb0 pr0">
-              <div class="w80 pl0 pr0 pull-left">
-                <input type="text" class="form-control border-b-grey"/>
-              </div>
-              <button type="button" title="搜索"
-                      class="btn btn-primary bar-h3-btn mr0 ng-scope">
-                <em class="icon-magnifier fa-fw"></em>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>-->
-      <!--查询 end-->
     </div>
 
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
