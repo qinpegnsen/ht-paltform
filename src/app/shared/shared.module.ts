@@ -46,7 +46,6 @@ import {NzModalModule, NzCheckboxModule} from 'ng-zorro-antd';
 import {GetKindComponent} from './directives/get-kind/get-kind.component';
 import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
 import {Level2AreaNamePipe} from './pipe/level-2-area-name.pipe';
-import {DecimalTwoPipe} from './pipe/decimal-two.pipe';
 import {StarsPipe} from './pipe/stars.pipe';
 import {DndModule} from "ng2-dnd";
 import {HoverShowLgPicDirective} from "./directives/hover/hover-show-lg-pic.directive";
@@ -111,7 +110,6 @@ import { ToStringPipe } from './pipe/to-string.pipe';
     HoverDirective,
     GetKindComponent,
     Level2AreaNamePipe,
-    DecimalTwoPipe,
     StarsPipe,
     HoverShowLgPicDirective,
     StrJsonPipe,
@@ -161,7 +159,6 @@ import { ToStringPipe } from './pipe/to-string.pipe';
     GetKindComponent,
     FoueAreasModule,
     Level2AreaNamePipe,
-    DecimalTwoPipe,
     StarsPipe,
     BsDatepickerModule,
     DatepickerModule,

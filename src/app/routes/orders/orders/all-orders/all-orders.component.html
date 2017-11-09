@@ -76,7 +76,7 @@
               </div>
             </td>
             <td class="w10"
-                [class.bb]="s != order.ordItemList.length-1"><span>¥{{goods.price | decimalTwo}}</span></td>
+                [class.bb]="s != order.ordItemList.length-1"><span>¥{{goods.price | number: '1.2-2'}}</span></td>
             <td class="w10" [class.bb]="s != order.ordItemList.length-1">{{goods.num}}</td>
             <ng-container *ngIf="s==0">
               <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
@@ -102,9 +102,9 @@
                 </div>
               </td>
               <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
-                <span class="main-red font14">¥{{order.total | decimalTwo}}</span><br>
+                <span class="main-red font14">¥{{order.total | number: '1.2-2'}}</span><br>
                 <span class="font-gray" *ngIf="order.freight == 0">免运费</span>
-                <span class="font-gray" *ngIf="order.freight > 0">运费：{{order.freight | decimalTwo}}</span><br>
+                <span class="font-gray" *ngIf="order.freight > 0">运费：{{order.freight | number: '1.2-2'}}</span><br>
                 <span class="font-gray">{{order.payWay | rzhState:'1017'}}</span>
               </td>
               <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">

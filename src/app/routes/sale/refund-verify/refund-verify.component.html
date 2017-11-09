@@ -88,7 +88,7 @@
           <tr class="text-center">
             <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
             <td>{{item.afterNo}}</td>
-            <td class="main-red">¥{{item.reqMoney | decimalTwo}}</td>
+            <td class="main-red">¥{{item.reqMoney | number: '1.2-2'}}</td>
             <td>{{item.custPhone}}</td>
             <td>{{item.createTime}}</td>
             <td>{{item.state | rzhState:'1602'}} </td>

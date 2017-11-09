@@ -96,10 +96,10 @@
           </div>
         </td>
         <td><span class="font12">￥</span>&nbsp;
-          {{goods.goodsPrice.memberPrice | decimalTwo}}
+          {{goods.goodsPrice.memberPrice | number: '1.2-2'}}
         </td>
         <td><span class="font12">￥</span>&nbsp;
-          {{goods.goodsPrice.batchPrice | decimalTwo}}
+          {{goods.goodsPrice.batchPrice | number: '1.2-2'}}
         </td>
         <td>{{goods.createTime}}</td>
         <td>

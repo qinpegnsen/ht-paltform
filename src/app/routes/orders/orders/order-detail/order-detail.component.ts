@@ -22,6 +22,7 @@ export class OrderDetailComponent implements OnInit {
   public orderStep = 1;
   public curOrdno: string;
   public single: boolean; //是否是单独的查看详情
+  public refresh: boolean; //是否需要刷新父页面数据
   public orderStates: any;
   public orderDetailData: any;
   public curDeliverOrderId: string;
@@ -34,6 +35,7 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.single = false;
+    me.refresh = false;
     me.parentComp.orderType = 'detail';
     me.curOrdno = me.submit.getParams('ordno');
     me.getOrderDetailInfo();//获取订单的物流详情及订单进度
@@ -78,29 +80,6 @@ export class OrderDetailComponent implements OnInit {
       default:
         return false;
     }
-  }
-
-  /**
-   * 显示订单状态的时间列表
-   * @param target
-   */
-  showTimeList(target) {
-    target.style.display = 'block';
-  }
-
-  hideTimesList(target) {
-    target.style.display = 'none';
-  }
-
-  /**
-   * 显示重消币抵扣数量
-   */
-  showCoinNum(obj) {
-    $(obj).removeClass('hide')
-  }
-
-  hideCoinNum(obj) {
-    $(obj).addClass('hide')
   }
 
   /**
@@ -203,6 +182,7 @@ export class OrderDetailComponent implements OnInit {
     this.curDeliverOrderId = null;
     if (data.type) {
       AppComponent.rzhAlt('success', '操作成功');
+      this.refresh = true;
       this.getOrderDetailInfo();//获取订单的物流详情及订单进度
       this.getOrderDetail(); //获取订单详情
     }

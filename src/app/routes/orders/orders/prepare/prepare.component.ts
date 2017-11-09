@@ -1,10 +1,9 @@
-import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {OrdersComponent} from "../orders.component";
 import {Page} from "../../../../core/page/page";
 import {PageEvent} from "angular2-datatable";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {CancelComponent} from "../cancel/cancel.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from "ngx-bootstrap/locale";
@@ -57,10 +56,6 @@ export class PrepareComponent implements OnInit ,DoCheck {
     me.route.url.subscribe(urls => {
       me.path = urls[0].path;
     })
-    let search = sessionStorage.getItem('orderPrepareSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     me.queryDatas()
   }
 
@@ -71,7 +66,6 @@ export class PrepareComponent implements OnInit ,DoCheck {
   activate(event) {
     this.showList = false;
     event.single = true;
-    console.log("█ event ►►►",  event);
   }
 
   /**
@@ -80,6 +74,7 @@ export class PrepareComponent implements OnInit ,DoCheck {
    */
   onDeactivate(event) {
     this.showList = true;
+    if(event.refresh) this.queryDatas();//在详情页面发货返回需要刷新页面数据
   }
 
   /**
@@ -117,9 +112,9 @@ export class PrepareComponent implements OnInit ,DoCheck {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
+      _this.search.curPage = activePage;
     }
     let requestUrl = '/ord/plantQueryOrd';
-    _this.search.curPage = activePage;
     _this.goodsList = new Page(_this.submit.getData(requestUrl, _this.search));
   }
 
@@ -140,25 +135,8 @@ export class PrepareComponent implements OnInit ,DoCheck {
     i.style.display = 'none';
   }
 
-  cancelOrder(orderId) {
-    this.curCancelOrderId = orderId;
-    console.log("█ orderId ►►►", orderId);
-  }
-
   deliverOrder(orderId) {
     this.curDeliverOrderId = orderId;
-  }
-
-  lookLogistics(orderId) {
-    this.lookLogisticsOrderId = orderId;
-  }
-
-  /**
-   * 取消订单回调函数
-   * @param data
-   */
-  getCancelOrderData(data) {
-    this.curCancelOrderId = null;
   }
 
   /**
@@ -167,14 +145,7 @@ export class PrepareComponent implements OnInit ,DoCheck {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if(data.type) this.queryDatas(data.page)
+    if(data.type) this.queryDatas()//在当前页面发货之后需要刷新页面数据
   }
 
-  /**
-   * 查询物流回调函数
-   * @param data
-   */
-  getLogisticsData(data) {
-    this.lookLogisticsOrderId = null;
-  }
 }
