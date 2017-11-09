@@ -167,7 +167,7 @@
               <label class="col-sm-2 control-label"> <i class="main-red">*</i> 身份证号</label>
               <div class="col-sm-4">
                 <input class="form-control" required name="idcard" [(ngModel)]="staff.idcard"
-                       #idcard="ngModel" type="text" style="position: relative" [pattern]="patterns.idcard"/>
+                       #idcard="ngModel" type="text" style="position: relative" [pattern]="patterns.idcard" readonly/>
                 <div [hidden]="idcard.valid || idcard.pristine"
                      class="alert alert-danger">
                   身份证号是必填项，请填写正确身份证号
