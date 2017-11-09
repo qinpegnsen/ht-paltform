@@ -31,7 +31,7 @@ export class BankTransferComponent implements OnInit {
   private time;
   private uuid;
   public selectBank: any;
-  private code;
+  private code:string='';
   public imgs = {
     pic: "",
     summary: ""

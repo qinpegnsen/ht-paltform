@@ -23,7 +23,7 @@ export class RefundComponent implements OnInit {
   public goodsList: Page = new Page();
   public ordno:string;//获取区域编码
   public selectBank: any;
-  private code:any;
+  private code:string='';
 
   @Input('showRefundWindow') showRefundWindow: boolean;
   bsConfig: Partial<BsDatepickerConfig>;
