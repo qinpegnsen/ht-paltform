@@ -26,10 +26,14 @@
   align-content: center;
   z-index: 4;
   .model-main{
-    min-height: 450px;
-    min-width: 740px;
+    width: 875px;
     background: #ffffff;
     border: 1px solid #CCCCCC;
+    z-index: 189;
+    position: fixed;
+    top: 12%;
+    left: 50%;
+    margin-left: -437.5px;
     .model-body{
       margin-left: 20px;
       td{
@@ -96,4 +100,14 @@
 }
 .input-group-addon{
   padding: 1px!important;
+}
+.mask{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  margin:auto;
+  background: rgba(0,0,0,0.7);
+  z-index:173;
 }
