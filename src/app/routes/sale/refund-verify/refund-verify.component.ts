@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Router} from "@angular/router";
 import {Page} from "../../../core/page/page";
@@ -11,11 +11,7 @@ const swal = require('sweetalert');
   templateUrl: './refund-verify.component.html',
   styleUrls: ['./refund-verify.component.scss']
 })
-export class RefundVerifyComponent implements OnInit, DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('refundVeritySearch', JSON.stringify(this.search))
-  }
-
+export class RefundVerifyComponent implements OnInit {
   private refundList: Page = new Page();
   private detail = [];
   private showList: boolean = true; //是否显示列表组件
@@ -39,10 +35,6 @@ export class RefundVerifyComponent implements OnInit, DoCheck {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = sessionStorage.getItem('refundVeritySearch');
-    if (!isNullOrUndefined(search)) {
-      me.search = JSON.parse(search);
-    }
     this.queryAllService();
   }
 

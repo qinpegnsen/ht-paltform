@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
 import {UserblockService} from "../sidebar/userblock/userblock.service";
 import {SettingsService} from "../../core/settings/settings.service";
 import {MenuService} from "../../core/menu/menu.service";

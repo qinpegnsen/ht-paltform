@@ -1,21 +1,18 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {AfterService} from "../after.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {isUndefined, isNullOrUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-return-control',
   templateUrl: './return-control.component.html',
   styleUrls: ['./return-control.component.scss']
 })
-export class ReturnControlComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('returnControlSearch',JSON.stringify(this.search))
-  }
+export class ReturnControlComponent implements OnInit {
   private returnList: Page = new Page();
   private LogisticsData: object;  //物流信息
   private detail = [];             //是否显示详情的list
@@ -43,10 +40,6 @@ export class ReturnControlComponent implements OnInit ,DoCheck {
     let me = this;
     me.afterStateList = me.tools.getEnumDataList(1602);
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = sessionStorage.getItem('returnControlSearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     this.queryAllService();
   }
 

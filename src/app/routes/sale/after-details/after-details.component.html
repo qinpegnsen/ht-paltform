@@ -109,7 +109,7 @@
         </ng-container>
 
         <!--退货订单已发货-->
-        <div *ngIf="afterData.state=='DELIVERY'">
+        <div *ngIf="afterData.state=='DELIVERY' || afterData.state=='CHECK_FAILS' || afterData.state=='DONE'">
           <div class="">
             <legend class="m0" style="height: 51px;line-height: 51px;">退货发货信息</legend>
           </div>
