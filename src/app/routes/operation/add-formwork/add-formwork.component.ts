@@ -574,7 +574,7 @@ export class AddFormworkComponent implements OnInit {
   }
 
   /**
-   * 输入两位小数
+   * 输入三位小数
    * @param target
    * @param type
    */

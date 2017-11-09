@@ -564,9 +564,7 @@ export class RzhtoolsService {
   }
 
   /**
-   * 审核input框的value合不合要求，只能输入整数或两位小数的限制方法
-   * @param target 在HTML里的($event.targets)
-   * @param type ('int':整数，其他默认两位小数)
+   * 添加修改运费模板时，input框的检验只能输入整数或三位小数的限制方法
    */
   formworkInputValueForNum(target,type?:string){
     let val = target.value, reg;
