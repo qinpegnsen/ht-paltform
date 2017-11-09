@@ -136,7 +136,6 @@ export class BankTransferComponent implements OnInit {
     }
   }
 
-
   /*
    * 选择银行
    * */
