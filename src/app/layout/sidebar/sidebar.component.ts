@@ -1,11 +1,10 @@
-import {Component, OnInit, Injector, Input, SimpleChanges} from '@angular/core';
+import {Component, OnInit,OnChanges, Injector, Input, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 declare var $: any;
 
 import {MenuService} from '../../core/menu/menu.service';
 import {SettingsService} from '../../core/settings/settings.service';
 import {isNullOrUndefined} from "util";
-import {OnChanges} from "_@angular_core@4.0.2@@angular/core/src/metadata";
 
 @Component({
   selector: 'app-sidebar',
