@@ -63,19 +63,12 @@ export class InspectGoodsComponent implements OnInit {
     if (val == 'afterNo') {
       this.search.phone = null;
       this.search.ordno = null;
-      this.search.goodsBaseCode = null;
     } else if (val == 'phone') {
       this.search.afterNo = null;
       this.search.ordno = null;
-      this.search.goodsBaseCode = null;
     } else if (val == 'ordno') {
       this.search.afterNo = null;
       this.search.phone = null;
-      this.search.goodsBaseCode = null;
-    }else if (val == 'baseCode') {
-      this.search.afterNo = null;
-      this.search.phone = null;
-      this.search.goodsBaseCode = null;
     }
   }
 

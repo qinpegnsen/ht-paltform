@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {WoManageComponent} from "../wo-manage/wo-manage.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {defineLocale} from "ngx-bootstrap/bs-moment";

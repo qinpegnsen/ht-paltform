@@ -1,7 +1,7 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {isNullOrUndefined} from "util";
@@ -11,12 +11,8 @@ const swal = require('sweetalert');
   templateUrl: './return-verify.component.html',
   styleUrls: ['./return-verify.component.scss']
 })
-export class ReturnVerifyComponent implements OnInit ,DoCheck {
-  ngDoCheck(): void {
-    sessionStorage.setItem('returnVeritySearch',JSON.stringify(this.search))
-  }
+export class ReturnVerifyComponent implements OnInit {
   private returnList: Page = new Page();
-  private seebutton: object;//查看按钮
   private detail = [];
   private showList: boolean = true; //是否显示列表组件
   private isReceiveList: object; //售后单状态枚举列
@@ -39,10 +35,6 @@ export class ReturnVerifyComponent implements OnInit ,DoCheck {
   ngOnInit() {
     let me = this;
     me.isReceiveList = me.tools.getEnumDataList(1001);
-    let search = sessionStorage.getItem('returnVeritySearch');
-    if(!isNullOrUndefined(search)){
-      me.search = JSON.parse(search);
-    }
     this.queryAllService();
   }
 

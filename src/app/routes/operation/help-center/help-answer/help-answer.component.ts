@@ -18,8 +18,8 @@ export class HelpAnswerComponent implements OnInit {
   private addButton;//添加按钮
   private updatebutton: Object;//修改按钮
   private deletebutton: Object;//删除按钮
-   private kinds:any;
-  private kindId: string;
+  private kinds: string = '';
+  private kindId: string='';
   private searchkey: string = '';
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
   constructor(private submit: SubmitService,private ajax: AjaxService,private router:Router,public settings: SettingsService,) { }

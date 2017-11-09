@@ -35,6 +35,7 @@ export class HelpAssortmentComponent implements OnInit {
         popover: {
           air: []
         },
+        placeholder: '请在这里填写问题答案...',
         height: 280,
         dialogsInBody: true,
         lang: 'zh-CN',
