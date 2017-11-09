@@ -9,12 +9,14 @@
 
 .deliver-order ._popup {
   background-color: #fff;
-  position: relative;
-  width:650px;
-  top: 18%;
-  margin: auto;
   z-index: 300;
+  width:650px;
   height: 700px;
+  position: fixed;
+  top: 16%;
+  left: 50%;
+  margin-left: -325px;
+  transform: translate(0%, 0%);
 }
 
 .deliver-order dt {

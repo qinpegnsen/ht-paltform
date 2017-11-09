@@ -1,6 +1,10 @@
 .cancel-order .popup {
   width: 550px;
   z-index: 300;
+  top: 20%;
+  left: 50%;
+  margin-left: -275px;
+  transform: translate(0%, 0%);
 }
 
 .cancel-con dt {
