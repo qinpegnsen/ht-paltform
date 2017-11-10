@@ -6,7 +6,7 @@ import {RzhtoolsService} from "../../core/services/rzhtools.service";
 })
 export class StatePipe implements PipeTransform {
 
-  constructor(private tools: RzhtoolsService) {  }
+  constructor(public tools: RzhtoolsService) {  }
 
   transform(value: string, args?: any): any {
     let me = this, val;

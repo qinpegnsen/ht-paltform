@@ -13,10 +13,10 @@ declare var $: any;
   styleUrls: ['./order-detail.component.scss']
 })
 export class OrderDetailComponent implements OnInit {
-  constructor(private parentComp: OrdersComponent,
+  constructor(public parentComp: OrdersComponent,
               public ordersService: OrdersService,
-              private location: Location,
-              private submit: SubmitService) {
+              public location: Location,
+              public submit: SubmitService) {
   }
 
   public orderStep = 1;
@@ -30,7 +30,7 @@ export class OrderDetailComponent implements OnInit {
   public remark: string;
   public expressData: any;
   public hasDeliverData: boolean = false;
-  private atime: Array<string> = new Array();
+  public atime: Array<string> = new Array();
 
   ngOnInit() {
     let me = this;
@@ -126,7 +126,7 @@ export class OrderDetailComponent implements OnInit {
   /**
    * 获取订单进度
    */
-  private getOrderDetailInfo() {
+  public getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
     if (!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
@@ -151,7 +151,7 @@ export class OrderDetailComponent implements OnInit {
   /**
    * 获取订单当前进度
    */
-  private getOrderStep() {
+  public getOrderStep() {
     let me = this;
     if (me.orderDetailData.state == 'SUCCESS') {
       me.orderStep = 5;

@@ -8,7 +8,7 @@ import {SubmitService} from '../../core/forms/submit.service';
 @Injectable()
 export class OrderService {
 
-  constructor(private ajax: AjaxService,private submit: SubmitService) { }
+  constructor(public ajax: AjaxService,public submit: SubmitService) { }
 
   /**
    * 获取商品列表的数据get  独有的，因为做了特殊处理

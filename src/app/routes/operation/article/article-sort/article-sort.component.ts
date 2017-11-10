@@ -14,14 +14,14 @@ const swal = require('sweetalert');
 })
 
 export class ArticleSortComponent implements OnInit {
-  private articleSortAddbutton:Object;        //新增分类按钮
-  private childbutton:Object;                 //新增子分类按钮
-  private deletebutton:Object;                //删除按钮
-  private updatebutton:Object;                //修改按钮
-  private articleSortListdata;                //用来存储服务取回来的数据
-  private searchKey:string='';                //默认查询的分类的名称
-  private childMenuCode;                       //菜单编码，查询子集用
-  private childMenuTitList:Array<any> = [];   //菜单级别面包屑
+  public articleSortAddbutton:Object;        //新增分类按钮
+  public childbutton:Object;                 //新增子分类按钮
+  public deletebutton:Object;                //删除按钮
+  public updatebutton:Object;                //修改按钮
+  public articleSortListdata;                //用来存储服务取回来的数据
+  public searchKey:string='';                //默认查询的分类的名称
+  public childMenuCode;                       //菜单编码，查询子集用
+  public childMenuTitList:Array<any> = [];   //菜单级别面包屑
 
   constructor(
     public service:SubmitService,

@@ -14,15 +14,15 @@ const swal = require('sweetalert');
   styleUrls: ['./help-answer.component.scss']
 })
 export class HelpAnswerComponent implements OnInit {
-  private data: Page = new Page();
-  private addButton;//添加按钮
-  private updatebutton: Object;//修改按钮
-  private deletebutton: Object;//删除按钮
-  private kinds: string = '';
-  private kindId: string='';
-  private searchkey: string = '';
+  public data: Page = new Page();
+  public addButton;//添加按钮
+  public updatebutton: Object;//修改按钮
+  public deletebutton: Object;//删除按钮
+  public kinds: string = '';
+  public kindId: string='';
+  public searchkey: string = '';
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-  constructor(private submit: SubmitService,private ajax: AjaxService,private router:Router,public settings: SettingsService,) { }
+  constructor(public submit: SubmitService,public ajax: AjaxService,public router:Router,public settings: SettingsService,) { }
 
   ngOnInit() {
     let me = this;

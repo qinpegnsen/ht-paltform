@@ -18,15 +18,15 @@ declare var $: any;
 })
 export class HelpUpdateComponent implements OnInit {
   public contents: string;
-  private linkType:string;
-  private kinds:any;
-  private b:any;
-  private operation:any;
+  public linkType:string;
+  public kinds:any;
+  public b:any;
+  public operation:any;
   public kindid: number;
-  private curPage:any;
-  constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private submitt: SubmitService, private tools: RzhtoolsService,private location: Location,private operationService:OperationService,public patterns:PatternService, private route: ActivatedRoute,
-              private helpAnswerComponent:HelpAnswerComponent) { }
+  public curPage:any;
+  constructor(public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,
+              public submitt: SubmitService, public tools: RzhtoolsService,public location: Location,public operationService:OperationService,public patterns:PatternService, public route: ActivatedRoute,
+              public helpAnswerComponent:HelpAnswerComponent) { }
 
   ngOnInit() {
     let me = this;

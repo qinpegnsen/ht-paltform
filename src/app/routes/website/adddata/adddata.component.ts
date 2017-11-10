@@ -16,10 +16,10 @@ import {PatternService} from "../../../core/forms/pattern.service";
   providers: [AdddataService]
 })
 export class AdddataComponent implements OnInit {
-  private adddata = {name: '', remark: '', code: '', isUniqueVal: ''};
+  public adddata = {name: '', remark: '', code: '', isUniqueVal: ''};
   public updataData: any;
   public updataDataa: any;
-  private isName: boolean;
+  public isName: boolean;
   public linkType: string;
   public id: number;
   public isUniqueVal = 'N';
@@ -27,15 +27,15 @@ export class AdddataComponent implements OnInit {
   public info: string;
   public code: number;
   public typeCode: string; //key编码
-  private remark: string;
-  private keyName: string;
-  private keys: string;
-  private curPage:any;
+  public remark: string;
+  public keyName: string;
+  public keys: string;
+  public curPage:any;
 
-  constructor(public settings: SettingsService, private router: Router, private adddataService: AdddataService,
-              private routeInfo: ActivatedRoute, private dataDictionaryComponent: DataDictionaryComponent,
-              private sub: SubmitService, private submitt: SubmitService, private measureComponent: MeasureComponent,
-              private patterns:PatternService) {
+  constructor(public settings: SettingsService, public router: Router, public adddataService: AdddataService,
+              public routeInfo: ActivatedRoute, public dataDictionaryComponent: DataDictionaryComponent,
+              public sub: SubmitService, public submitt: SubmitService, public measureComponent: MeasureComponent,
+              public patterns:PatternService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 

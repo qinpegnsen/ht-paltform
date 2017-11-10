@@ -19,11 +19,11 @@ declare var $: any;
 })
 export class HelpAssortmentComponent implements OnInit {
   public contents: string;
-  private linkType:string;
-  private kinds:any;
-  private kindId: string;
-  private curPage:any;
-  constructor(private ajax: AjaxService,public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,private submitt: SubmitService, private tools: RzhtoolsService,private operationService: OperationService,public patterns:PatternService) { }
+  public linkType:string;
+  public kinds:any;
+  public kindId: string;
+  public curPage:any;
+  constructor(public ajax: AjaxService,public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,public submitt: SubmitService, public tools: RzhtoolsService,public operationService: OperationService,public patterns:PatternService) { }
 
   ngOnInit() {
     let me=this;

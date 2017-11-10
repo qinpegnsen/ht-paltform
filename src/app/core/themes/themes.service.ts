@@ -21,7 +21,7 @@ export class ThemesService {
     this.setTheme(this.defaultTheme);
   }
 
-  private createStyle() {
+  public createStyle() {
     const head = document.head || document.getElementsByTagName('head')[0];
     this.styleTag = document.createElement('style');
     this.styleTag.type = 'text/css';

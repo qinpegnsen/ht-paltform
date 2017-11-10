@@ -9,10 +9,10 @@ import {Page} from "../page/page";
 @Injectable()
 export class SubmitService {
   public platformInfoData;//存储消息的的数据
-  constructor(private ajax: AjaxService,
-              private mask: MaskService,
-              private settings: SettingsService,
-              private route: ActivatedRoute) {
+  constructor(public ajax: AjaxService,
+              public mask: MaskService,
+              public settings: SettingsService,
+              public route: ActivatedRoute) {
   }
 
   /**

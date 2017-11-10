@@ -26,13 +26,13 @@ export class UsersNewComponent implements OnInit {
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
   select: any = {}; //选择的年份和月份信息
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
-  private queryType: any = 'DAY';//日期选择
+  public queryType: any = 'DAY';//日期选择
   contrastTime: any = new Date().getSeconds();
-  private queryTypes: any;//日期选择
+  public queryTypes: any;//日期选择
   queryTime: any = new Date();
   info: any = new Date();
 
-  private data: any;
+  public data: any;
   now: string;
   prev: string;
   prevData: any;
@@ -43,7 +43,7 @@ export class UsersNewComponent implements OnInit {
    */
   public optionPrev = {};
 
-  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService, private routeInfo: ActivatedRoute) {
+  constructor(public router: Router, public tools: RzhtoolsService, public submit: SubmitService, public routeInfo: ActivatedRoute) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -115,7 +115,7 @@ export class UsersNewComponent implements OnInit {
   /**
    * 绘制图表（私有）
    */
-  private optionPrevInfo() {
+  public optionPrevInfo() {
     let _this = this;
     _this.optionPrev = {
       title: {

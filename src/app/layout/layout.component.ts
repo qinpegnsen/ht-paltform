@@ -7,10 +7,10 @@ import {NavigationStart, Router} from "@angular/router";
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  private menuItems:any;
-  private path;
+  public menuItems:any;
+  public path;
 
-    constructor(private router: Router) {
+    constructor(public router: Router) {
       this.router.events
         .filter(event => event instanceof NavigationStart)
         .subscribe((event) => {

@@ -5,7 +5,7 @@ import {DomSanitizer} from "@angular/platform-browser";
   name: 'imgUrl'
 })
 export class ImgUrlPipe implements PipeTransform {
-  constructor(private sanitizer : DomSanitizer){
+  constructor(public sanitizer : DomSanitizer){
 
   }
 

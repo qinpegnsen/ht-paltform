@@ -15,23 +15,23 @@ import {NavigationEnd} from "@angular/router";
   providers:[AgentpersonService]
 })
 export class AgentpersonComponent implements OnInit {
-  private addButton;//新增代理商按钮配置
-  private updatebutton;//修改代理商信息按钮
-  private deletebutton;//删除代理商信息按钮
-  private updatebuttono;//修改密码按钮
-  private details;//查看代理商详情
-  private updatebuttonio;//上传图片按钮
-  private queryId:number;//获取添加，修改的ID
-  private organ={}
-  private controlData:Page = new Page();
-  private id;//获取删除时需要的id
+  public addButton;//新增代理商按钮配置
+  public updatebutton;//修改代理商信息按钮
+  public deletebutton;//删除代理商信息按钮
+  public updatebuttono;//修改密码按钮
+  public details;//查看代理商详情
+  public updatebuttonio;//上传图片按钮
+  public queryId:number;//获取添加，修改的ID
+  public organ={}
+  public controlData:Page = new Page();
+  public id;//获取删除时需要的id
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-  private areaCode: string = '';// 代理商区域编码
-  private agentName: string = '';// 代理商名称
+  public areaCode: string = '';// 代理商区域编码
+  public agentName: string = '';// 代理商名称
   public agentCode:string;//获取代理商编码
 
 
-  constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router,private AgentpersonService:AgentpersonService) {
+  constructor(public ajax:AjaxService,public routeInfo:ActivatedRoute,public router:Router,public AgentpersonService:AgentpersonService) {
 
   }
 
@@ -97,7 +97,7 @@ export class AgentpersonComponent implements OnInit {
   }
 
   //获取区域数据
-  private getAreaData(area){
+  public getAreaData(area){
     let me = this;
     me.organ['areaCode'] = area.areaCode;
     me.getAgentList();

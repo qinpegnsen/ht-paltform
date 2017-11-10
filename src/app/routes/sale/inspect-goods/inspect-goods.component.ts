@@ -13,11 +13,11 @@ const swal = require('sweetalert');
   styleUrls: ['./inspect-goods.component.scss']
 })
 export class InspectGoodsComponent implements OnInit {
-  private returnList: Page = new Page();
-  private detail = [];
-  private showList: boolean = true; //是否显示列表组件
-  private isReceiveList: object; //售后单状态枚举列
-  private search: any = {
+  public returnList: Page = new Page();
+  public detail = [];
+  public showList: boolean = true; //是否显示列表组件
+  public isReceiveList: object; //售后单状态枚举列
+  public search: any = {
     curPage: null,
     pageSize: 10,
     afterNo: null,
@@ -29,8 +29,8 @@ export class InspectGoodsComponent implements OnInit {
     searchType: 'afterNo',
   };
 
-  constructor(private submit: SubmitService, private router: Router,
-              private tools: RzhtoolsService,) {
+  constructor(public submit: SubmitService, public router: Router,
+              public tools: RzhtoolsService,) {
   }
 
   ngOnInit() {

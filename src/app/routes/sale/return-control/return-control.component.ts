@@ -13,13 +13,13 @@ const swal = require('sweetalert');
   styleUrls: ['./return-control.component.scss']
 })
 export class ReturnControlComponent implements OnInit {
-  private returnList: Page = new Page();
-  private LogisticsData: object;  //物流信息
-  private detail = [];             //是否显示详情的list
-  private isReceiveList: object;  //是否收到货枚举列
-  private afterStateList: object; //售后单状态枚举列
-  private showList: boolean = true; //是否显示列表组件
-  private search: any = {
+  public returnList: Page = new Page();
+  public LogisticsData: object;  //物流信息
+  public detail = [];             //是否显示详情的list
+  public isReceiveList: object;  //是否收到货枚举列
+  public afterStateList: object; //售后单状态枚举列
+  public showList: boolean = true; //是否显示列表组件
+  public search: any = {
     curPage: null,
     pageSize: 10,
     returnType: 'RETURN',
@@ -30,10 +30,10 @@ export class ReturnControlComponent implements OnInit {
     ordno: null,
     searchType: 'afterNo',
   };
-  constructor(private submit: SubmitService,
-              private router: Router,
-              private tools: RzhtoolsService,
-              private after: AfterService) {
+  constructor(public submit: SubmitService,
+              public router: Router,
+              public tools: RzhtoolsService,
+              public after: AfterService) {
   }
 
   ngOnInit() {

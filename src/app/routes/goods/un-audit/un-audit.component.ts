@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class UnAuditComponent implements OnInit {
   public goodsList: Page = new Page();
-  private auditQuery = {
+  public auditQuery = {
     kindId: '',
     goodsName: '',
     brandName: '',
@@ -26,16 +26,16 @@ export class UnAuditComponent implements OnInit {
     sortColumns: '',
     goodsAudit: 'AUDIT',
   }; // 查询条件
-  private kindList;// 分类列表
-  private goodsState: any;  // 商品状态列表
-  private isOwnPlats: any;  //是否自营列表
-  private curBaseCode: string;  // 当前商品基本编号
-  private curName: string;    // 当前商品名称
-  private showList: boolean = true;     //是否显示列表页
+  public kindList;// 分类列表
+  public goodsState: any;  // 商品状态列表
+  public isOwnPlats: any;  //是否自营列表
+  public curBaseCode: string;  // 当前商品基本编号
+  public curName: string;    // 当前商品名称
+  public showList: boolean = true;     //是否显示列表页
 
-  constructor(private tools: RzhtoolsService,
-              private submit: SubmitService,
-              private goodsService: GoodsService) {
+  constructor(public tools: RzhtoolsService,
+              public submit: SubmitService,
+              public goodsService: GoodsService) {
   }
 
   ngOnInit() {

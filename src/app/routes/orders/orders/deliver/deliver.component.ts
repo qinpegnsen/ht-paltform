@@ -33,7 +33,7 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private ordersServe: OrdersService, public submit: SubmitService, private pattern: PatternService) {
+  constructor(public ordersServe: OrdersService, public submit: SubmitService, public pattern: PatternService) {
   }
 
   ngOnInit() {

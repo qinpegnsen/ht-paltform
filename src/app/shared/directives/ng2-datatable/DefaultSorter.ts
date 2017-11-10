@@ -16,7 +16,7 @@ export class DefaultSorter implements OnInit {
     isSortedByMeAsc: boolean = false;
     isSortedByMeDesc: boolean = false;
 
-    public constructor(private mfTable: DataTable) {
+    public constructor(public mfTable: DataTable) {
     }
 
     public ngOnInit(): void {

@@ -6,7 +6,7 @@ import {AjaxService} from '../../../../core/services/ajax.service';
 @Injectable()
 export class AllOrderService {
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   /**
    * 获取代理商列表

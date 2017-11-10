@@ -17,7 +17,7 @@ export class MsgComponent implements OnInit {
   });
   componentRef: ComponentRef<PopupComponent>;
 
-  constructor(public toasterService: ToasterService,private router: Router,  private app: AppComponent, private resolver: ComponentFactoryResolver) {
+  constructor(public toasterService: ToasterService,public router: Router,  public app: AppComponent, public resolver: ComponentFactoryResolver) {
   }
 
   /**

@@ -35,7 +35,7 @@ export class AddArticleComponent implements OnInit ,OnDestroy{
     queueLimit: 1,
     allowedFileType:["image"]
   });
-  private uuid = [];                                 //存储暗码的数组
+  public uuid = [];                                 //存储暗码的数组
   public linkType: string;
   public contents: string;
   public reason: string;
@@ -49,33 +49,33 @@ export class AddArticleComponent implements OnInit ,OnDestroy{
   public autionOptions;                             //审核状态的列表
   public goodShow: boolean = false;                 //关联商品的弹框
   public linkGoods: any;                             //关联商品的数据
-  private kindId: any = '';                          //品牌名
+  public kindId: any = '';                          //品牌名
   public brandList: any;                             //品牌列表
   public linkGoodsList: Array<any>;                  //可以选择的商品
   public listTeamOne: Array<any> = [];               //已经选择的商品
   public copylistTeamOne: Array<any> = [];           //已经赋值选择的商品
-  private brandName: any = '';                       //品牌名
-  private goodsName: any = '';                       //商品名
-  private linkGoodStr: any = '';                     //关联商品id的拼接
-  private deletebutton: Object;                       //删除按钮
-  private articleClasssId: number;                    //存储子组件发射过来的id
-  private emitClasssId: number;                       //修改审核的时候把当前的id发送到子组件
+  public brandName: any = '';                       //品牌名
+  public goodsName: any = '';                       //商品名
+  public linkGoodStr: any = '';                     //关联商品id的拼接
+  public deletebutton: Object;                       //删除按钮
+  public articleClasssId: number;                    //存储子组件发射过来的id
+  public emitClasssId: number;                       //修改审核的时候把当前的id发送到子组件
   public linkGoodsLength: number = 0;                   //获取到选择的商品的长度 从而决定关联商品html的高度
   public coverCode = 'AUTO';                            //封面的编码，用来判断是否执行图片上传的类型
   public coverChange: boolean = false;                  //修改的时候是否点击修改封面了，点击执行图片上传
   public coverID = [];                                  //存储删除封面图片的id的数组
   public removeCover: boolean = false;                  //上传图片的按钮
-  private urlChange;                       //地址栏的变化，用来取消订阅
+  public urlChange;                       //地址栏的变化，用来取消订阅
 
   constructor(public settings: SettingsService,
-              private routeInfo: ActivatedRoute,
+              public routeInfo: ActivatedRoute,
               public router: Router,
               public GetUidService: GetUidService,
               public ContentService: ContentService,
               public service: SubmitService,
-              private tools: RzhtoolsService,
-              private goods: GoodsService,
-              private operationService: OperationService) {
+              public tools: RzhtoolsService,
+              public goods: GoodsService,
+              public operationService: OperationService) {
     this.settings.showRightPage("30%");
   }
 

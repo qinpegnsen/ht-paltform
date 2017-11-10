@@ -12,12 +12,12 @@ import {isNullOrUndefined} from "util";
   styleUrls: ['./refund-control.component.scss']
 })
 export class RefundControlComponent implements OnInit {
-  private refundList: Page = new Page();
-  private detail = [];
-  private showList: boolean = true;
-  private isReceiveList: object;  //是否收到货枚举列
-  private afterStateList: object; //售后单状态枚举列
-  private search: any = {
+  public refundList: Page = new Page();
+  public detail = [];
+  public showList: boolean = true;
+  public isReceiveList: object;  //是否收到货枚举列
+  public afterStateList: object; //售后单状态枚举列
+  public search: any = {
     curPage: null,
     pageSize: 10,
     returnType: 'REFUND',
@@ -29,9 +29,9 @@ export class RefundControlComponent implements OnInit {
     searchType: 'afterNo',
   };
 
-  constructor(private submit: SubmitService,
-              private tools: RzhtoolsService,
-              private after: AfterService) {
+  constructor(public submit: SubmitService,
+              public tools: RzhtoolsService,
+              public after: AfterService) {
   }
 
   ngOnInit() {

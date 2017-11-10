@@ -5,7 +5,7 @@ import {AjaxService} from '../../../../core/services/ajax.service';
 @Injectable()
 export class ForFistributonService {
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   /**
    * 改变订单状态（设置配货）

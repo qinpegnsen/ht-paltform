@@ -11,7 +11,7 @@ export class PopupComponent implements OnInit {
   @Input() val: any;// 输入值
   @Output() output = new EventEmitter();// 输出值
 
-  constructor(private app: AppComponent) {
+  constructor(public app: AppComponent) {
   }
 
   ngOnInit() {

@@ -19,10 +19,10 @@ export class IntegrationImportComponent implements OnInit {
     allowedFileType: ["xls"]
   });
   progress: number;//进度条
-  private errorFile: string;
-  private templateFile: string ="http://ovaetuonu.bkt.clouddn.com/templateCoin.xlsx";
-  private onOff: boolean = false;
-  constructor(private submitt:SubmitService) { }
+  public errorFile: string;
+  public templateFile: string ="http://ovaetuonu.bkt.clouddn.com/templateCoin.xlsx";
+  public onOff: boolean = false;
+  constructor(public submitt:SubmitService) { }
 
   ngOnInit() {
     // console.log("█ this.uploader ►►►",  this.uploader);
@@ -35,7 +35,7 @@ export class IntegrationImportComponent implements OnInit {
   }
 
   //上传
-  private upLoadExcel(submitUrl,submitData,method){
+  public upLoadExcel(submitUrl,submitData,method){
     let me = this;
   if(this.onOff){
     this.onOff = false;
@@ -62,7 +62,7 @@ export class IntegrationImportComponent implements OnInit {
   }
   }
   //导入
-  private iimport(uid){
+  public iimport(uid){
     let url = '/custCoin/importCoin';
     let data = {
       uid:uid

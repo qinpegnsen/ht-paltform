@@ -13,12 +13,12 @@ const swal = require('sweetalert');
 })
 export class BrandsComponent implements OnInit {
   public brands: Page = new Page();
-  private addButton;
-  private buttons;
-  private kindList;// 分类列表
-  private selectKindName: string = '根据分类查询';
-  private brandKind;// 品牌分类
-  private query = {
+  public addButton;
+  public buttons;
+  public kindList;// 分类列表
+  public selectKindName: string = '根据分类查询';
+  public brandKind;// 品牌分类
+  public query = {
     curPage: 1,
     pageSize: 10,
     sortColumns: '',
@@ -28,7 +28,7 @@ export class BrandsComponent implements OnInit {
     brandRecommend: null
   };
 
-  constructor(private router: Router, private submitService: SubmitService, private goods: GoodsService) {
+  constructor(public router: Router, public submitService: SubmitService, public goods: GoodsService) {
   }
 
   ngOnInit() {

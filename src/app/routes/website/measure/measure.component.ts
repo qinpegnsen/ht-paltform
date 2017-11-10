@@ -14,12 +14,12 @@ const swal = require('sweetalert');
 })
 export class MeasureComponent implements OnInit {
 
-  private addbuttons;//添加按钮
-  private updatebuttons: Object;//修改按钮
-  private deletebuttons: Object;//删除按钮
-  private data: Page = new Page();
+  public addbuttons;//添加按钮
+  public updatebuttons: Object;//修改按钮
+  public deletebuttons: Object;//删除按钮
+  public data: Page = new Page();
 
-  constructor(private ajax: AjaxService,private measureService: MeasureService,private submit: SubmitService) { }
+  constructor(public ajax: AjaxService,public measureService: MeasureService,public submit: SubmitService) { }
 
   ngOnInit() {
     let me = this;

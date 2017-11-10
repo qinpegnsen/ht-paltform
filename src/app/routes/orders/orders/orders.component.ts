@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class OrdersComponent implements OnInit {
   public orderType: string = '';
 
-  constructor(private location: Location, private router: Router) {
+  constructor(public location: Location, public router: Router) {
   }
 
   ngOnInit() {

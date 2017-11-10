@@ -10,14 +10,14 @@ export class Paginator implements OnInit {
 
   @Input("mfTable") inputMfTable: DataTable;
 
-    private mfTable: DataTable;
+    public mfTable: DataTable;
 
     public activePage: number;
     public rowsOnPage: number;
     public dataLength: number = 0;
     public lastPage: number;
 
-    public constructor(@Optional() private injectMfTable: DataTable) {
+    public constructor(@Optional() public injectMfTable: DataTable) {
     }
     ngOnInit(): void {
         window.setTimeout(()=>{
@@ -35,7 +35,7 @@ export class Paginator implements OnInit {
         this.mfTable.setPage(this.activePage, rowsOnPage);
     }
 
-    private onSubscriber = (event: PageEvent)=> {
+    public onSubscriber = (event: PageEvent)=> {
         this.activePage = event.activePage;
         this.rowsOnPage = event.rowsOnPage;
         this.dataLength = event.dataLength;

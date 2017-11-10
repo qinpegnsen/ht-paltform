@@ -17,9 +17,9 @@ declare var $: any;
 })
 export class MessageListComponent implements OnInit {
   public orderType: string = '';
-  private platformInfoData:any;                           //平台消息的数据
-  private deletebutton:Object;                            //删除按钮
-  private idArr=[]                                        //存放id的数组
+  public platformInfoData:any;                           //平台消息的数据
+  public deletebutton:Object;                            //删除按钮
+  public idArr=[]                                        //存放id的数组
   constructor(public operationService:OperationService,public headerComponent:HeaderComponent,public submitService: SubmitService,public router:Router) { }
 
   /**

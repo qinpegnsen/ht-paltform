@@ -10,7 +10,7 @@ import {AjaxService} from "../../core/services/ajax.service";
 export class FooterComponent implements OnInit {
 
     constructor(public settings: SettingsService,
-                private ajax: AjaxService
+                public ajax: AjaxService
     ) { }
 
     ngOnInit() {

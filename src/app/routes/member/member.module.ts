@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MemberComponent } from './member/member.component';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {MemberComponent} from "./member/member.component";
 import {RouterModule, Routes} from "@angular/router";
 import {RzhButtonsModule} from "../buttons/rzh-buttons.module";
 import {SharedModule} from "../../shared/shared.module";
-import {IntegrationManagementComponent} from "./integration-management/integration-management.component";
 import {IntegrationChangeComponent} from "./integration-management/integration-change/integration-change.component";
 import {IntegrationDetailsComponent} from "./integration-management/integration-details/integration-details.component";
 import {CertificationComponent} from "./certification/certification.component";
 import {IntegrationImportComponent} from "./integration-management/integration-import/integration-import.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
-import { ReasonRejecComponent } from './reason-rejec/reason-rejec.component';
+import {ReasonRejecComponent} from "./reason-rejec/reason-rejec.component";
 
 const userChildRoutes: Routes = [
+  {path: '', component: IntegrationDetailsComponent},
   {path: 'details', component: IntegrationDetailsComponent},
   {path: 'change', component: IntegrationChangeComponent},
   {path: 'import', component: IntegrationImportComponent},
@@ -21,10 +21,10 @@ const userChildRoutes: Routes = [
 ]
 
 const routes: Routes = [
-  {path: '',redirectTo:'users'},
+  {path: '', redirectTo: 'users'},
   {path: 'users', component: MemberComponent},
   {path: 'certification', component: CertificationComponent},
-  {path: 'inte-manage', component: IntegrationManagementComponent,children: userChildRoutes},
+  {path: 'inte-manage', children: userChildRoutes},
 ];
 @NgModule({
   imports: [
@@ -34,7 +34,15 @@ const routes: Routes = [
     FileUploadModule,
     RzhButtonsModule
   ],
-  declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent,
-    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent, ReasonRejecComponent]
+  declarations: [
+    MemberComponent,
+    CertificationComponent,
+    ReasonRejecComponent,
+    IntegrationDetailsComponent,
+    IntegrationChangeComponent,
+    IntegrationImportComponent,
+    ProgressmaskComponent
+  ]
 })
-export class MemberModule { }
+export class MemberModule {
+}

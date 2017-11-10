@@ -24,22 +24,22 @@ export class AllStockComponent implements OnInit {
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentAcct;
-  private agentOrdno;
-  private agentTime;
+  public agentAcct;
+  public agentOrdno;
+  public agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private showList: boolean = true;
-  private orderId1:any;
-  private goodspay1:any;
-  private curPage1:any;
-  private showBankWindow:boolean = false;
+  public showList: boolean = true;
+  public orderId1:any;
+  public goodspay1:any;
+  public curPage1:any;
+  public showBankWindow:boolean = false;
   public goodsList: Page = new Page();
   public LogisticsData: any;//物流信息
 
 
-  constructor(private StockComponent: StockComponent, private submit: SubmitService,private AllStockService:AllStockService,private StockService:StockService) {
+  constructor(public StockComponent: StockComponent, public submit: SubmitService,public AllStockService:AllStockService,public StockService:StockService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式

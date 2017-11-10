@@ -5,7 +5,7 @@ import {AppComponent} from '../../../app.component';
 @Injectable()
 export class AppSetService {
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   /**
    * 删除模板信息

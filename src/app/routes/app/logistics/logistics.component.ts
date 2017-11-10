@@ -28,7 +28,7 @@ export class LogisticsComponent implements OnInit {
   ngOnDestroy(): void {
     $('.wrapper > section'  && '.wrapper > footer').css('z-index', 10);
   }
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   ngOnInit() {
   }

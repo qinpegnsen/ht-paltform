@@ -8,12 +8,12 @@ import {cli} from "webdriver-manager/built/lib/webdriver";
   styleUrls: ['./commodity-price.component.scss']
 })
 export class CommodityPriceComponent implements OnInit {
-  private data:any;
+  public data:any;
   public code: any = '';
   public info: string;
   public updata: any;
-  private remark:any;
-  constructor(private submit: SubmitService) { }
+  public remark:any;
+  constructor(public submit: SubmitService) { }
 
   ngOnInit() {
    let _this=this;

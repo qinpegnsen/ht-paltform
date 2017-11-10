@@ -14,16 +14,16 @@ const swal = require('sweetalert');
 })
 export class DepositAuditComponent implements OnInit {
   public deposits: Page = new Page();
-  private currentId;
-  private detail = [];
-  private drawMoney;//提现金额
-  private query = {
+  public currentId;
+  public detail = [];
+  public drawMoney;//提现金额
+  public query = {
     state: ''
   };
-  private states: any;
-  constructor(private router: Router,
-              private tools: RzhtoolsService,
-              private submitService: SubmitService) {
+  public states: any;
+  constructor(public router: Router,
+              public tools: RzhtoolsService,
+              public submitService: SubmitService) {
   }
 
   ngOnInit() {

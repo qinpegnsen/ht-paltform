@@ -10,10 +10,10 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 })
 export class MsgComponent implements OnInit {
 
-  private addbuttons:object;//添加按钮
-  private updatebuttons:object;//修改按钮
-  constructor(private submit:SubmitService) { }
-  private data: Page=new Page();
+  public addbuttons:object;//添加按钮
+  public updatebuttons:object;//修改按钮
+  constructor(public submit:SubmitService) { }
+  public data: Page=new Page();
   ngOnInit() {
     let me=this;
     me.addbuttons = {

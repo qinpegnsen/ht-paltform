@@ -23,7 +23,7 @@ export class RefundComponent implements OnInit {
   public goodsList: Page = new Page();
   public ordno:string;//获取区域编码
   public selectBank: any;
-  private code:string='';
+  public code:string='';
 
   @Input('showRefundWindow') showRefundWindow: boolean;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -31,8 +31,8 @@ export class RefundComponent implements OnInit {
   datepickerModel: Date = new Date();
   myTime: Date = new Date();
   queryTime: any = new Date;
-  private time;
-  private uuid;
+  public time;
+  public uuid;
 
   /**
    * 图片上传
@@ -62,8 +62,8 @@ export class RefundComponent implements OnInit {
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
-  constructor(private submit: SubmitService, public GetUidService: GetUidService,private refundService:RefundService,
-              private toRefundComponent:ToRefundComponent,private patterns:PatternService) {
+  constructor(public submit: SubmitService, public GetUidService: GetUidService,public refundService:RefundService,
+              public toRefundComponent:ToRefundComponent,public patterns:PatternService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -82,7 +82,7 @@ export class RefundComponent implements OnInit {
   /**
    * 格式化所选日期及时间
    */
-  private  formatSelDate() {
+  public  formatSelDate() {
     let _this = this;
     _this.queryTime = RzhtoolsService.dataFormat(new Date(_this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
     _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间

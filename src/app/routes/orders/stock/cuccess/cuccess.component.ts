@@ -20,17 +20,17 @@ export class CuccessComponent implements OnInit {
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentAcct;
-  private agentName;
-  private agentOrdno;
-  private agentTime;
+  public agentAcct;
+  public agentName;
+  public agentOrdno;
+  public agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
-  private showList: boolean = true;
+  public showList: boolean = true;
 
-  constructor(private StockComponent:StockComponent,private submit: SubmitService) {
+  constructor(public StockComponent:StockComponent,public submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式

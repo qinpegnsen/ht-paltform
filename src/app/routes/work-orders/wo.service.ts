@@ -5,7 +5,7 @@ import {AjaxService} from "../../core/services/ajax.service";
 @Injectable()
 export class WoService {
 
-  constructor(private submit: SubmitService,private ajax: AjaxService) { }
+  constructor(public submit: SubmitService,public ajax: AjaxService) { }
 
   /**
    * 平台接单

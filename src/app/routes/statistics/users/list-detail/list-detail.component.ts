@@ -12,13 +12,13 @@ import {UsersNewComponent} from "../users-new/users-new.component";
   providers:[UsersNewComponent]
 })
 export class ListDetailComponent implements OnInit {
-  private linkType:string;
-  private memberListdata: Page = new Page();
-  private nowtime:any;
-  private prevtime:any;
-  private authState:string='';//默认查询的会员的是否认证
+  public linkType:string;
+  public memberListdata: Page = new Page();
+  public nowtime:any;
+  public prevtime:any;
+  public authState:string='';//默认查询的会员的是否认证
 
-  constructor( private routeInfo: ActivatedRoute,private submit: SubmitService,private location: Location,private usersNewComponent:UsersNewComponent) { }
+  constructor( public routeInfo: ActivatedRoute,public submit: SubmitService,public location: Location,public usersNewComponent:UsersNewComponent) { }
 
   ngOnInit() {
     let _this=this;

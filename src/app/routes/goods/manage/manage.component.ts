@@ -15,11 +15,11 @@ declare var $: any;
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnInit {
-  private addButton;
-  private buttons;
-  private showList: boolean = true;     //是否显示列表页
+  public addButton;
+  public buttons;
+  public showList: boolean = true;     //是否显示列表页
   public goodsList: Page = new Page();
-  private query = {
+  public query = {
     kindId: '',
     goodsName: '',
     brandName: '',
@@ -30,17 +30,17 @@ export class ManageComponent implements OnInit {
     sortColumns: '',
     goodsAudit: '',
   }; // 查询条件
-  private kindList;// 分类列表
-  private goodsAudits: any;  // 商品审核状态列表
-  private goodsState: any;  // 商品状态列表
-  private isOwnPlats: any;  //是否自营列表
-  private curBaseCode: string;  // 当前商品基本编号
-  private curName: string;    // 当前商品名称
+  public kindList;// 分类列表
+  public goodsAudits: any;  // 商品审核状态列表
+  public goodsState: any;  // 商品状态列表
+  public isOwnPlats: any;  //是否自营列表
+  public curBaseCode: string;  // 当前商品基本编号
+  public curName: string;    // 当前商品名称
 
-  constructor(private router: Router,
-              private tools: RzhtoolsService,
-              private submit: SubmitService,
-              private goodsService: GoodsService) {
+  constructor(public router: Router,
+              public tools: RzhtoolsService,
+              public submit: SubmitService,
+              public goodsService: GoodsService) {
   }
 
   ngOnInit() {

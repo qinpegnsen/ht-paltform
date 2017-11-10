@@ -17,19 +17,19 @@ const swal = require('sweetalert');
   styleUrls: ['./add-kind.component.scss']
 })
 export class AddKindComponent implements OnInit {
-  private kindInfo = {};
-  private path;// 当前路由
-  private pageTitle;// 右弹窗页面标题
-  private editKind: boolean = false;
-  private tip = {
+  public kindInfo = {};
+  public path;// 当前路由
+  public pageTitle;// 右弹窗页面标题
+  public editKind: boolean = false;
+  public tip = {
     commisRate: '请输入小数形式，0 <= 佣金比例 < 1',
     sort: '0-99，默认0',
     keywords: '多个关键词请用逗号隔开'
   }
-  private upKindImg: boolean = false;
-  private uuid: string;
-  private fileName: string = '选择图片';// 文件名
-  private myImg;// 我的图片，展示图片
+  public upKindImg: boolean = false;
+  public uuid: string;
+  public fileName: string = '选择图片';// 文件名
+  public myImg;// 我的图片，展示图片
   public uploader: FileUploader = new FileUploader({
     url: 'upload/basic/upload',
     itemAlias: "limitFile",
@@ -37,12 +37,12 @@ export class AddKindComponent implements OnInit {
   }); //初始化上传方法
 
   constructor(public settings: SettingsService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private parentComp: KindManageComponent,
-              private getUid: GetUidService,
+              public route: ActivatedRoute,
+              public router: Router,
+              public parentComp: KindManageComponent,
+              public getUid: GetUidService,
               public patterns: PatternService,
-              private submit: SubmitService) {
+              public submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -103,7 +103,7 @@ export class AddKindComponent implements OnInit {
    * 获取分类信息
    * @returns {any}
    */
-  private getKindInfo() {
+  public getKindInfo() {
     let url = '/goodsKind/loadGoodsKindById';
     let data = {id: this.submit.getParams('kindId')};
     return this.submit.getData(url, data);
@@ -136,7 +136,7 @@ export class AddKindComponent implements OnInit {
    * @param submitUrl
    * @param method : post/put
    */
-  private upLoadImg(submitData,submitUrl,method){
+  public upLoadImg(submitData,submitUrl,method){
     let me = this;
     MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
@@ -177,7 +177,7 @@ export class AddKindComponent implements OnInit {
    * @param submitUrl
    * @param submitData
    */
-  private submitFormDataAndRefresh(submitUrl, submitData,method){
+  public submitFormDataAndRefresh(submitUrl, submitData,method){
     console.log("█ submitData ►►►",  submitData);
     let me = this,pPage,kindPid;
     if(method == 'post'){
@@ -193,7 +193,7 @@ export class AddKindComponent implements OnInit {
   }
 
   // 取消
-  private cancel() {
+  public cancel() {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }
 

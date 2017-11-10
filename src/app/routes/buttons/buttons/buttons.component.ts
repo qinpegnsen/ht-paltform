@@ -21,16 +21,16 @@ interface ButtonConfig{
   styleUrls: ['./buttons.component.scss']
 })
 export class ButtonsComponent implements OnInit {
-  private id: any;
-  private text: string = ""; //按钮文字
-  private title: string = ""; //title文字
-  private type: any;   //按钮类型
-  private size: any;   //按钮大小
-  private iconsClass: string; //自定义按钮图标
-  private btnClass: string; //自定义按钮样式
-  // private labeled: boolean = true;  //是否开启label
-  private class: any; //按钮样式
-  private icon: string; //图标样式
+  public id: any;
+  public text: string = ""; //按钮文字
+  public title: string = ""; //title文字
+  public type: any;   //按钮类型
+  public size: any;   //按钮大小
+  public iconsClass: string; //自定义按钮图标
+  public btnClass: string; //自定义按钮样式
+  // public labeled: boolean = true;  //是否开启label
+  public class: any; //按钮样式
+  public icon: string; //图标样式
 
   @Input() config: ButtonConfig; //按钮配置
   @Output() callback = new EventEmitter<any>(); //点击事件回调
@@ -76,7 +76,7 @@ export class ButtonsComponent implements OnInit {
   }
 
 
-  private genClass() {
+  public genClass() {
     let buttonClass = this.genBtnClass();
 
     //设置按钮样式
@@ -95,7 +95,7 @@ export class ButtonsComponent implements OnInit {
     }
   }
 
-  private genBtnClass(): ButtonClass {
+  public genBtnClass(): ButtonClass {
     switch (this.type) {
       case "add":
         return {btnClass: ButtonsComponent.buttonStyles.info, iconClass: "fa fa-plus"};
@@ -136,7 +136,7 @@ export class ButtonsComponent implements OnInit {
     }
   }
 
-  private genSize() {
+  public genSize() {
     switch (this.size) {
       case "lg":
         return "btn-lg";

@@ -6,7 +6,7 @@ import {AppComponent} from "../../../../app.component";
 @Injectable()
 export class RefundService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   public refundTransfer(url,data) {
     let me = this, result;

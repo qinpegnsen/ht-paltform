@@ -8,7 +8,7 @@ import {AppComponent} from "../../../app.component";
 export class DataDictionaryComponentService {
 
 
-  constructor(private ajax: AjaxService) {
+  constructor(public ajax: AjaxService) {
   }
 
   ngOnInit() {

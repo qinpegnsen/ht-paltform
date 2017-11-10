@@ -8,8 +8,8 @@ import {SettingsService} from "../../../core/settings/settings.service";
   styleUrls: ['./addproblem.component.scss']
 })
 export class AddproblemComponent implements OnInit {
- private linkType:string;
-  constructor(public settings: SettingsService,private routeInfo: ActivatedRoute) {
+ public linkType:string;
+  constructor(public settings: SettingsService,public routeInfo: ActivatedRoute) {
     this.settings.showRightPage("30%");
   }
 

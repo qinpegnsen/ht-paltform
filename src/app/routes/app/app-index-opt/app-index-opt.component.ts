@@ -11,13 +11,13 @@ const swal = require('sweetalert');
   styleUrls: ['./app-index-opt.component.scss']
 })
 export class AppIndexOptComponent implements OnInit {
-  private addButton;//新增移动端首页操作类型按钮配置
-  private updatebutton;//修改移动端首页操作类型按钮配置
-  private deletebutton;//删除移动端首页操作类型按钮配置
-  private controlData;
-  private id;//获取删除时需要的id
+  public addButton;//新增移动端首页操作类型按钮配置
+  public updatebutton;//修改移动端首页操作类型按钮配置
+  public deletebutton;//删除移动端首页操作类型按钮配置
+  public controlData;
+  public id;//获取删除时需要的id
 
-  constructor(private AppIndexOptService:AppIndexOptService,private routeInfo:ActivatedRoute) {
+  constructor(public AppIndexOptService:AppIndexOptService,public routeInfo:ActivatedRoute) {
     let _this = this;
 
   }

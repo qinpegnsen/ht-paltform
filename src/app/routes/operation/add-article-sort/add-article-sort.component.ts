@@ -22,16 +22,16 @@ export class AddArticleSortComponent implements OnInit {
   public flag:boolean=false;
   public stateList:any;
   public curPage:any;
-  private tip = {
+  public tip = {
     commisRate: '请输入小数形式，0 <= 佣金比例 < 1',
     sort: '0-99，默认0',
     keywords: '多个关键词请用逗号隔开'
   }
   constructor(
     public settings: SettingsService,
-    private routeInfo: ActivatedRoute,
+    public routeInfo: ActivatedRoute,
     public ArticleSortComponent: ArticleSortComponent,
-    private router: Router,
+    public router: Router,
     public service:SubmitService,
     public operationService:OperationService,
     public patterns: PatternService

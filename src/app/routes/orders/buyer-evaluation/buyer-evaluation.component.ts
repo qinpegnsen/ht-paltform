@@ -11,10 +11,10 @@ const swal = require('sweetalert');
 })
 export class BuyerEvaluationComponent implements OnInit {
 
-  private data: Page = new Page();
-  private deletebutton:object;//删除按钮
-  private custName:any;
-  constructor(private submit:SubmitService) {
+  public data: Page = new Page();
+  public deletebutton:object;//删除按钮
+  public custName:any;
+  constructor(public submit:SubmitService) {
 
   }
     ngOnInit() {

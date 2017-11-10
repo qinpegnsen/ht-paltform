@@ -12,7 +12,7 @@ import {isNullOrUndefined} from "util";
 export class ArticleAuditComponent implements OnInit {
 
   public articleManListdata;               //存储文章列表的数据
-  private auditbutton:Object;              //待审核文章审核按钮
+  public auditbutton:Object;              //待审核文章审核按钮
 
   constructor(public service:SubmitService) { }
 

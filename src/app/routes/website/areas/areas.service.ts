@@ -5,8 +5,8 @@ import {AppComponent} from "../../../app.component";
 
 @Injectable()
 export class AreasService {
-  private areas:Page= new Page();
-  private table = {
+  public areas:Page= new Page();
+  public table = {
     curPage:1,
     lastPage:true,
     needCountQuery:false,
@@ -20,7 +20,7 @@ export class AreasService {
     voList:[]
   }
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * 查询地区列表信息

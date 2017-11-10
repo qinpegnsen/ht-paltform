@@ -17,20 +17,20 @@ const swal = require('sweetalert');
 })
 
 export class DataDictionaryComponent implements OnInit {
-  private addButton;//添加按钮
-  private addchildbutton: object//添加子按钮
-  private updatebutton: Object;//修改按钮
-  private deletebutton: Object;//删除按钮
+  public addButton;//添加按钮
+  public addchildbutton: object//添加子按钮
+  public updatebutton: Object;//修改按钮
+  public deletebutton: Object;//删除按钮
   public childMenuCode; //菜单编码，查询子集用
   public childMenuName; //菜单名称，查询子集用
-  private code: string = '';//默认查询key的子
-  private searchkey: string = '';
-  private childMenuTitList: Array<any> = []; //菜单级别面包屑
-  private data: Page = new Page();
-  private backPage: number = 1;
+  public code: string = '';//默认查询key的子
+  public searchkey: string = '';
+  public childMenuTitList: Array<any> = []; //菜单级别面包屑
+  public data: Page = new Page();
+  public backPage: number = 1;
 
-  private codeVal='';
-  constructor(private ajax: AjaxService, private dataDictionaryService: DataDictionaryComponentService) {
+  public codeVal='';
+  constructor(public ajax: AjaxService, public dataDictionaryService: DataDictionaryComponentService) {
 
   }
 

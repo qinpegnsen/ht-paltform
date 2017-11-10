@@ -10,8 +10,8 @@ import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
   styleUrls: ['./integration-details.component.scss']
 })
 export class IntegrationDetailsComponent implements OnInit {
-  private data: Page = new Page();
-  constructor(private ajax: AjaxService, private submit: SubmitService) {
+  public data: Page = new Page();
+  constructor(public ajax: AjaxService, public submit: SubmitService) {
   }
 
   ngOnInit() {

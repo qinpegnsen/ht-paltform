@@ -11,13 +11,13 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
   styleUrls: ['./certification.component.scss']
 })
 export class CertificationComponent implements OnInit {
-  private data: Page = new Page();
-  private state:any;//审核状态
-  private showReasonWindow:boolean = false;
-  private orderId1:any;
-  private curPage1:any;
+  public data: Page = new Page();
+  public state:any;//审核状态
+  public showReasonWindow:boolean = false;
+  public orderId1:any;
+  public curPage1:any;
 
-  constructor(private submit: SubmitService,private rzhtoolsService:RzhtoolsService) { }
+  constructor(public submit: SubmitService,public rzhtoolsService:RzhtoolsService) { }
 
   ngOnInit() {
     let me = this;

@@ -19,12 +19,12 @@ export class SettleComponent implements OnInit {
   queryTimeBegin: any = new Date();
   queryTimeEnd: any = new Date();
 
-  private data: any;
+  public data: any;
   nowData: any;
   dates: any;
   public bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private submit: SubmitService) {
+  constructor(public submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',

@@ -14,7 +14,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   @Input('name') name: string;
   @Input('val') val:any;
   @Input('id') id:string;
-  private valStr: string='';
+  public valStr: string='';
 
   @Input() selTypeData: any; //选中的商品分类
   @Output() upDate = new EventEmitter();
@@ -34,7 +34,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   ngOnDestroy(): void {
     $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 10);
   }
-  constructor(private submit:SubmitService,private basicPropertiesComponent:BasicPropertiesComponent ) { }
+  constructor(public submit:SubmitService,public basicPropertiesComponent:BasicPropertiesComponent ) { }
 
   ngOnInit() {
   }

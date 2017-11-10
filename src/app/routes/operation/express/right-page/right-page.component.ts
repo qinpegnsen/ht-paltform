@@ -23,11 +23,11 @@ export class RightPageComponent implements OnInit {
 
   constructor(
     public settings: SettingsService,
-    private routeInfo: ActivatedRoute,
+    public routeInfo: ActivatedRoute,
     public service:SubmitService,
     public parent:ExpressComponent,
     public patterns: PatternService,
-    private operationService: OperationService
+    public operationService: OperationService
   ) {
     this.settings.showRightPage("30%");
   }

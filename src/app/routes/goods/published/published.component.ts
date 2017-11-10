@@ -9,26 +9,26 @@ import {Router} from "@angular/router";
 })
 export class PublishedComponent implements OnInit {
 
-  constructor(private publishComponent: PublishComponent,private router: Router) { }
+  constructor(public publishComponent: PublishComponent,public router: Router) { }
 
   ngOnInit() {
     let me = this;
     me.publishComponent.step = 3
   }
 
-  private lookDetail(){
+  public lookDetail(){
     this.router.navigate(['/main/goods/manage/detail'],{ preserveQueryParams: true })
   }
 
-  private editGoods(){
+  public editGoods(){
     this.router.navigate(['/main/goods/manage/edit'],{ preserveQueryParams: true })
   }
 
-  private publishNew(){
+  public publishNew(){
     this.router.navigate(['/main/goods/publish/step_one'])
   }
 
-  private goodsList(){
+  public goodsList(){
     this.router.navigate(['/main/goods/manage'])
   }
 

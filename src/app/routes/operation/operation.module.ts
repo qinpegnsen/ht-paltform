@@ -18,14 +18,12 @@ import {NavService} from "./article/article-manage/content-nav/nav.service";
 import { RightPageComponent } from './express/right-page/right-page.component';
 import {FreightTemplateComponent} from "./freight-template/freight-template.component";
 import { AddFormworkComponent } from './add-formwork/add-formwork.component';
-import {HelpCenterComponent} from "./help-center/help-center.component";
 import {HelpAssortmentComponent} from "./help-center/help-assortment/help-assortment.component";
 import {HelpInterlocutionComponent} from "./help-center/help-interlocution/help-interlocution.component";
 import {AddrightpageComponent} from "./help-center/addrightpage/addrightpage.component";
 import {ProblemDetailsComponent} from "./help-center/problem-details/problem-details.component";
 import {HelpAnswerComponent} from "./help-center/help-answer/help-answer.component";
 import {HelpUpdateComponent} from "./help-center/help-update/help-update.component";
-import { NzModalModule, NzCheckboxModule } from 'ng-zorro-antd';
 import {OperationService} from "./operation.service";
 import {GoodsService} from "../goods/goods.service";
 import {MaskService} from "../../core/services/mask.service";
@@ -103,7 +101,7 @@ const routes: Routes = [
   {path: 'article', component: ArticleComponent,children:articleChildRoutes},
   {path: 'sys-message', component: SysMessageComponent,children:sysMessageChildRoutes},
   {path: 'message-inform', component: MessageInformComponent,children:messageChildRoutes},
-  {path: 'help-center', component: HelpCenterComponent,children:helpChildRoutes},
+  {path: 'help-center', children:helpChildRoutes},
   {path: 'ensure', component:EnsureComponent},
   {path: 'after-ensure', component: AfterEnsureComponent},
   {path: 'freight-template', component: FreightTemplateComponent,children: appChildRoutes},
@@ -113,12 +111,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NzCheckboxModule,
     SharedModule,
-    NzModalModule,
     FileUploadModule
   ],
-  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpCenterComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
+  declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
   providers:[ArticleSortComponent,ContentService,ContentComponent,NavService,ContentNavComponent,OperationService,GoodsService,MaskService,HeaderComponent,LayoutComponent,ArticleAuditComponent]
 })
 export class OperationModule { }

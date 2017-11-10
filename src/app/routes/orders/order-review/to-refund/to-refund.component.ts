@@ -18,20 +18,20 @@ export class ToRefundComponent implements OnInit {
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentAcct;
-  private agentTime;
+  public agentAcct;
+  public agentTime;
   public orderId1: string;
   public goodspay1: string;
   public curPage1: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private LogisticsData//物流信息
-  private beginTime: string;
-  private endTime: string;
+  public LogisticsData//物流信息
+  public beginTime: string;
+  public endTime: string;
   public goodsList: Page = new Page();
-  private showRefundWindow:boolean = false;
+  public showRefundWindow:boolean = false;
 
-  constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService,private orderReviewService:OrderReviewService) {
+  constructor(public orderReviewComponent:OrderReviewComponent,public submit: SubmitService,public orderReviewService:OrderReviewService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式

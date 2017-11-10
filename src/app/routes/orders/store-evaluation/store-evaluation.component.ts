@@ -9,10 +9,10 @@ const swal = require('sweetalert');
   styleUrls: ['./store-evaluation.component.scss']
 })
 export class StoreEvaluationComponent implements OnInit {
-  private data: Page = new Page();
-  private deletebutton:object;//删除按钮
-  private goodsName:any;
-  constructor(private submit:SubmitService) {
+  public data: Page = new Page();
+  public deletebutton:object;//删除按钮
+  public goodsName:any;
+  constructor(public submit:SubmitService) {
 
   }
 

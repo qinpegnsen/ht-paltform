@@ -6,9 +6,9 @@ import {Component,OnInit} from '@angular/core';
 })
 export class ArticleManageComponent implements OnInit{
 
-  private articleManAddbutton:Object;         //新增文章按钮
-  private state                               //文章的状态
-  private totalRow                            //文章各种状态的总条数
+  public articleManAddbutton:Object;         //新增文章按钮
+  public state                               //文章的状态
+  public totalRow                            //文章各种状态的总条数
   public flag:boolean;                        //定义boolean值用来控制内容组件是否显示
 
   constructor() {}

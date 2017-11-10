@@ -6,7 +6,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 @Injectable()
 export class MeasureService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
 
 }

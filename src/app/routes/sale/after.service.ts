@@ -4,7 +4,7 @@ import {SubmitService} from "../../core/forms/submit.service";
 @Injectable()
 export class AfterService {
 
-  constructor(private submit: SubmitService) {
+  constructor(public submit: SubmitService) {
   }
 
   /**

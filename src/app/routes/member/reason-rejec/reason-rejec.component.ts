@@ -25,7 +25,7 @@ export class ReasonRejecComponent implements OnInit {
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
-  constructor(private reasonRejecService:ReasonRejecService,private certificationComponent:CertificationComponent) { }
+  constructor(public reasonRejecService:ReasonRejecService,public certificationComponent:CertificationComponent) { }
 
   ngOnInit() {
   }

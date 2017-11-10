@@ -6,9 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./button-demo.component.scss']
 })
 export class ButtonDemoComponent implements OnInit {
-  private buttonConfig: object;  //单按钮配置
-  private textButtonConfig:object;  //带文字的按钮配置
-  private buttonListConfig: Array<object>;  //多按钮配置
+  public buttonConfig: object;  //单按钮配置
+  public textButtonConfig:object;  //带文字的按钮配置
+  public buttonListConfig: Array<object>;  //多按钮配置
 
   constructor() {
     var _this = this;
@@ -81,7 +81,7 @@ export class ButtonDemoComponent implements OnInit {
     })
   }
 
-  private showMsg(operation, id) {
+  public showMsg(operation, id) {
     alert("现在执行的是" + operation + "操作，按钮id为:" + id);
   }
 }

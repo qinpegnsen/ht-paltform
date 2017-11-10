@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   @ViewChild("altComponent", {read: ViewContainerRef}) container: ViewContainerRef;
 
 
-  constructor(public settings: SettingsService, private cookieService: CookieService, private location: Location, private router: Router,private toasterService:ToasterService) {
+  constructor(public settings: SettingsService, public cookieService: CookieService, public location: Location, public router: Router,public toasterService:ToasterService) {
     AppComponent.toasterService = toasterService;
   }
 

@@ -25,13 +25,13 @@ export class BankTransferComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
 
   public showSec: boolean = true;
-  private summary;
+  public summary;
   myTime: Date = new Date();
   queryTime: any = new Date;
-  private time;
-  private uuid;
+  public time;
+  public uuid;
   public selectBank: any;
-  private code:string='';
+  public code:string='';
   public imgs = {
     pic: "",
     summary: ""
@@ -66,9 +66,9 @@ export class BankTransferComponent implements OnInit {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private submit: SubmitService, public GetUidService: GetUidService, private tools: RzhtoolsService,
-              private pendingPaymentComponent: PendingPaymentComponent, public router: Router,
-              private bankTransferService: BankTransferService,private patterns:PatternService) {
+  constructor(public submit: SubmitService, public GetUidService: GetUidService, public tools: RzhtoolsService,
+              public pendingPaymentComponent: PendingPaymentComponent, public router: Router,
+              public bankTransferService: BankTransferService,public patterns:PatternService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -100,7 +100,7 @@ export class BankTransferComponent implements OnInit {
   /**
    * 格式化所选日期及时间
    */
-  private  formatSelDate() {
+  public  formatSelDate() {
     let _this = this;
     _this.queryTime = RzhtoolsService.dataFormat(new Date(_this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
     _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间

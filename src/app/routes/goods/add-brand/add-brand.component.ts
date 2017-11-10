@@ -16,15 +16,15 @@ const swal = require('sweetalert');
   styleUrls: ['./add-brand.component.scss']
 })
 export class AddBrandComponent implements OnInit {
-  private brandInfo = {};
-  private path: string;
-  private pageTitle: string;
-  private editBrand: boolean = false;
-  private brandDetail: boolean = false;
-  private kindsList;// 分类列表
-  private brandKind;// 品牌所属分类
-  private uuid: string;// 图片暗码
-  private tip = {
+  public brandInfo = {};
+  public path: string;
+  public pageTitle: string;
+  public editBrand: boolean = false;
+  public brandDetail: boolean = false;
+  public kindsList;// 分类列表
+  public brandKind;// 品牌所属分类
+  public uuid: string;// 图片暗码
+  public tip = {
     brandSort: '0-99，默认0 , 数字越小排序越靠前',
   }
   public uploader:FileUploader = new FileUploader({
@@ -32,14 +32,14 @@ export class AddBrandComponent implements OnInit {
     itemAlias:"limitFile",
     allowedFileType: ["image"]
   }); //初始化上传方法
-  private myImg: boolean = false;
-  private upBrandImg:boolean = false;
+  public myImg: boolean = false;
+  public upBrandImg:boolean = false;
 
 
-  constructor(public settings: SettingsService, private route: ActivatedRoute,
+  constructor(public settings: SettingsService, public route: ActivatedRoute,
               public patterns: PatternService,
-              private router: Router, private getUid: GetUidService,
-              public parentComp: BrandsComponent, private submit: SubmitService) {
+              public router: Router, public getUid: GetUidService,
+              public parentComp: BrandsComponent, public submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -106,7 +106,7 @@ export class AddBrandComponent implements OnInit {
    * @param list
    * @returns {string}
    */
-  private getBrandKinds(list) {
+  public getBrandKinds(list) {
     let str = '';
     if (list.length > 0) {
       list.forEach((item) => {
@@ -164,7 +164,7 @@ export class AddBrandComponent implements OnInit {
    * @param submitUrl
    * @param method : post/put
    */
-  private upLoadImg(submitUrl,submitData,method){
+  public upLoadImg(submitUrl,submitData,method){
     let me = this;
     MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
@@ -205,7 +205,7 @@ export class AddBrandComponent implements OnInit {
    * @param submitUrl
    * @param submitData
    */
-  private submitFormDataAndRefresh(submitUrl, submitData,method){
+  public submitFormDataAndRefresh(submitUrl, submitData,method){
     let me = this;
     if(method == 'post'){
       me.submit.postRequest(submitUrl, submitData, true);
@@ -226,7 +226,7 @@ export class AddBrandComponent implements OnInit {
   /**
    * 刷新父页面数据
    */
-  private refreshParentCompData(){
+  public refreshParentCompData(){
     let me = this;
     let parentCompPage = this.submit.getParams('page');// 获取修改的项目所在的页数
     if (isNullOrUndefined(parentCompPage)) parentCompPage = 1;

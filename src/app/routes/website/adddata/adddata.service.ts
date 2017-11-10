@@ -5,7 +5,7 @@ import {AppComponent} from "../../../app.component";
 @Injectable()
 export class AdddataService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    *  添加key

@@ -20,11 +20,11 @@ export class AuditComponent implements OnInit {
   public showCancelWindow:boolean = false;
   public goodsList: Page = new Page();
   public ordno:string;//获取区域编码
-  private staff:any = {};
-  private id;
-  private goodsAudits: any;
-  private code;
-  private result;
+  public staff:any = {};
+  public id;
+  public goodsAudits: any;
+  public code;
+  public result;
 
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -38,7 +38,7 @@ export class AuditComponent implements OnInit {
     }
   }
 
-  constructor(private routeInfo:ActivatedRoute,private ajax:AjaxService,private submit: SubmitService,private ToAuditComponent:ToAuditComponent,private AllOrderComponent:AllOrderComponent) { }
+  constructor(public routeInfo:ActivatedRoute,public ajax:AjaxService,public submit: SubmitService,public ToAuditComponent:ToAuditComponent,public AllOrderComponent:AllOrderComponent) { }
 
   ngOnInit() {
     let _this = this;

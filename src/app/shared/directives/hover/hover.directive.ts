@@ -5,10 +5,10 @@ import {isUndefined} from "util";
   selector: '[myHoverColor]'
 })
 export class HoverDirective {
-  private defaultColor: string = '#666';
+  public defaultColor: string = '#666';
   @Input('myHover') hoveredColor: string
 
-  constructor(private el: ElementRef) { }
+  constructor(public el: ElementRef) { }
 
   @HostListener('mouseenter') onMouseEnter() {
     let color = this.defaultColor;
@@ -20,7 +20,7 @@ export class HoverDirective {
     this.hoverColor(null);
   }
 
-  private hoverColor(color: string) {
+  public hoverColor(color: string) {
     this.el.nativeElement.style.color = color;
   }
 

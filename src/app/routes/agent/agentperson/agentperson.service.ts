@@ -8,7 +8,7 @@ import {AppComponent} from "../../../app.component";
 @Injectable()
 export class AgentpersonService {
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   /**
    * 获取代理商列表

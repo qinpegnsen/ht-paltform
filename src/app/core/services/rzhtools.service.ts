@@ -9,11 +9,11 @@ import {AREA_LEVEL_2_JSON} from "./area_level_2";
 
 @Injectable()
 export class RzhtoolsService {
-  private areaJson: any;
-  private enumData = {};
+  public areaJson: any;
+  public enumData = {};
 
   // Angular2框架负责注入对象
-  constructor(private ajax: AjaxService, private toaster: ToasterService, public submit: SubmitService) {
+  constructor(public ajax: AjaxService, public toaster: ToasterService, public submit: SubmitService) {
     this.areaJson = areaIdCardJSON;
   }
 
@@ -210,7 +210,7 @@ export class RzhtoolsService {
    * @param idCard
    * @returns {number}
    */
-  private getCheckCodeBy17(idCard) {
+  public getCheckCodeBy17(idCard) {
     let idCardNumAry: Array<string> = new Array();   // 把身份证号转化为字符串数组
     for (let i = 0; i < idCard.length; i++) {
       idCardNumAry.push(idCard[i]);
@@ -234,7 +234,7 @@ export class RzhtoolsService {
    * @param card15
    * @returns {string}
    */
-  private card15To17 = function (card15: string) {
+  public card15To17 = function (card15: string) {
     return card15.substring(0, 6) + '19' + card15.substring(6);
   };
 
@@ -243,7 +243,7 @@ export class RzhtoolsService {
    * @param areaCode
    * @returns {string} 6位全区域代码，不足补0
    */
-  private getAreaCodeOfSheng = function (areaCode) {
+  public getAreaCodeOfSheng = function (areaCode) {
     return areaCode.substr(0, 2) + '0000';
   };
 
@@ -262,7 +262,7 @@ export class RzhtoolsService {
    * @param areaCode
    * @returns {string} 6位全区域代码，不足补0
    */
-  private getAreaCodeOfShi = function (areaCode) {
+  public getAreaCodeOfShi = function (areaCode) {
     return areaCode.substr(0, 4) + '00';
   };
 
@@ -271,7 +271,7 @@ export class RzhtoolsService {
    * @param areaCode
    * @returns {number}
    */
-  private getAreaLevel = function (areaCode) {
+  public getAreaLevel = function (areaCode) {
     let level = 0;
     if (isNullOrUndefined(areaCode)) {
       return level;
@@ -319,7 +319,7 @@ export class RzhtoolsService {
    * @param areaCode
    * @returns {number}
    */
-  private getLevelByCode(areaCode) {
+  public getLevelByCode(areaCode) {
     let level = 0;
     if (isNullOrUndefined(areaCode)) {
       return level;

@@ -13,7 +13,7 @@ export class SettingsService {
   static yearInfo: Array<string> = new Array();
   static month: Array<string> = new Array();
 
-  constructor(private _cookieService: CookieService, private location: Location) {
+  constructor(public _cookieService: CookieService, public location: Location) {
     //设置年份和月份
     let nowYear: number = new Date().getFullYear();
     for (let i = 0; i < 10; i++) {

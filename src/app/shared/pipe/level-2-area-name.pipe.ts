@@ -6,7 +6,7 @@ import {RzhtoolsService} from "../../core/services/rzhtools.service";
   name: 'level2AreaName'
 })
 export class Level2AreaNamePipe implements PipeTransform {
-  constructor(private tools: RzhtoolsService) {  }
+  constructor(public tools: RzhtoolsService) {  }
 
   /**
    * 根据区域编码获取区域全称

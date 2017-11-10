@@ -10,14 +10,14 @@ declare var $: any;
   providers: [RzhtoolsService]
 })
 export class SelectAreaComponent implements OnInit {
-  private show: boolean = false;
-  private areas: any;
-  private areaCode: string = '';
-  private adr: string = '';
-  @Input() private selectedAreaName: string;
+  public show: boolean = false;
+  public areas: any;
+  public areaCode: string = '';
+  public adr: string = '';
+  @Input() public selectedAreaName: string;
   @Output() myData = new EventEmitter();
 
-  constructor(private tools: RzhtoolsService) {
+  constructor(public tools: RzhtoolsService) {
   };
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class SelectAreaComponent implements OnInit {
     /**
      * 点击区域选框外页面时，关闭选框
      * @type {SelectAreaComponent}
-     * @private
+     * @public
      */
     let _this = this;
     $('body').click(function (e) {

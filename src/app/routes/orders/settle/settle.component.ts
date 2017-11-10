@@ -17,10 +17,10 @@ defineLocale('cn', zhCn);
 export class SettleComponent implements OnInit {
   public deposits: Page = new Page();
   public bsConfig: Partial<BsDatepickerConfig>;
-  private rate:any;     //抽成比例
-  private time:any;     //时间
-  private toTypes:any; //结算对象类型
-  private query = {
+  public rate:any;     //抽成比例
+  public time:any;     //时间
+  public toTypes:any; //结算对象类型
+  public query = {
     toType: '',
     to_name: '',
     ordno: '',
@@ -29,8 +29,8 @@ export class SettleComponent implements OnInit {
     pageSize: 20,
     curPage: 1,
   };
-  private detail = [];
-  constructor(private submitService: SubmitService, private tools: RzhtoolsService) {
+  public detail = [];
+  constructor(public submitService: SubmitService, public tools: RzhtoolsService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',

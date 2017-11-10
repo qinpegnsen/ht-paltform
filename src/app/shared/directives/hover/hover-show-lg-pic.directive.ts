@@ -8,7 +8,7 @@ declare var $: any;
 export class HoverShowLgPicDirective {
   @Input('myConfig') config: any;
 
-  constructor(private el: ElementRef) {
+  constructor(public el: ElementRef) {
   }
 
   @HostListener('mouseenter') onMouseEnter() {

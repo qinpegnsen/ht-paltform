@@ -6,7 +6,7 @@ import {Page} from "../../../core/page/page";
 @Injectable()
 export class ReasonRejecService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
 
   /**

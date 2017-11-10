@@ -13,23 +13,23 @@ import {PatternService} from "../../../core/forms/pattern.service";
 })
 export class MemberComponent implements OnInit {
 
-  private memberListdata: Page = new Page();
+  public memberListdata: Page = new Page();
 
-  private custName:string='';//默认查询的会员的名称
+  public custName:string='';//默认查询的会员的名称
 
-  private custTruename:string='';//默认查询的会员的名称
+  public custTruename:string='';//默认查询的会员的名称
 
-  private custPhone:string='';//默认查询的会员的名称
+  public custPhone:string='';//默认查询的会员的名称
 
-  private authState:string='';//默认查询的会员的是否认证
-  private state:string='';//默认查询的会员的状态
+  public authState:string='';//默认查询的会员的是否认证
+  public state:string='';//默认查询的会员的状态
 
   public authStates:any;    //会员认证列表
   public states:any;    //会员状态列表
 
-  private detailsbutton:Object;//查看详情按钮
+  public detailsbutton:Object;//查看详情按钮
 
-  constructor(public service:SubmitService, private tools: RzhtoolsService,private patterns:PatternService) { }
+  constructor(public service:SubmitService, public tools: RzhtoolsService,public patterns:PatternService) { }
 
   ngOnInit() {
 

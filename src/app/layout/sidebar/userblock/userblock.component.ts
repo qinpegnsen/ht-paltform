@@ -10,7 +10,7 @@ import {SettingsService} from '../../../core/settings/settings.service';
 export class UserblockComponent implements OnInit {
   user: any;
 
-  constructor(public userblockService: UserblockService, private setting: SettingsService) {
+  constructor(public userblockService: UserblockService, public setting: SettingsService) {
     this.user = setting.user;
   }
 

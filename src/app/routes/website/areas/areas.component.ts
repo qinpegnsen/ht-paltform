@@ -15,19 +15,19 @@ const swal = require('sweetalert');
   providers:[AreasService]
 })
 export class AreasComponent implements OnInit {
-  private queryId:number;//获取添加，修改的ID
-  private addButton;//新增数据按钮配置
-  private updatebutton;//修改按钮配置
-  private deletebutton;//删除按钮配置
-  private option;//添加子集地区
-  private areas:Page= new Page();
-  private controlData:Page = new Page();
-  private childMenuCode; //菜单编码，查询子集用
-  private childMenuTitList:Array<any> = []; //菜单级别面包屑
-  private area_code;
-  private areaCode;
+  public queryId:number;//获取添加，修改的ID
+  public addButton;//新增数据按钮配置
+  public updatebutton;//修改按钮配置
+  public deletebutton;//删除按钮配置
+  public option;//添加子集地区
+  public areas:Page= new Page();
+  public controlData:Page = new Page();
+  public childMenuCode; //菜单编码，查询子集用
+  public childMenuTitList:Array<any> = []; //菜单级别面包屑
+  public area_code;
+  public areaCode;
 
-  private table = {
+  public table = {
     curPage:1,
     lastPage:true,
     needCountQuery:false,
@@ -41,7 +41,7 @@ export class AreasComponent implements OnInit {
     voList:[]
   }
 
-  constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private AreasService:AreasService) {
+  constructor(public ajax:AjaxService,public routeInfo:ActivatedRoute,public AreasService:AreasService) {
 
   }
 

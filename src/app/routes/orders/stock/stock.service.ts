@@ -7,7 +7,7 @@ import {AppComponent} from '../../../app.component';
 @Injectable()
 export class StockService {
 
-  constructor(private submit: SubmitService,private ajax: AjaxService) {
+  constructor(public submit: SubmitService,public ajax: AjaxService) {
 
   }
 

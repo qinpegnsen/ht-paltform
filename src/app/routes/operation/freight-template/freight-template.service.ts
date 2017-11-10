@@ -6,8 +6,8 @@ import {AppComponent} from "../../../app.component";
 @Injectable()
 export class FreightTemplateService {
 
-  private areas:Page= new Page();
-  private table = {
+  public areas:Page= new Page();
+  public table = {
     curPage:1,
     lastPage:true,
     needCountQuery:false,
@@ -21,7 +21,7 @@ export class FreightTemplateService {
     voList:[]
   }
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * 查询运费模板列表信息

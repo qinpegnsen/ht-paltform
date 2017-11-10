@@ -17,16 +17,16 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 })
 export class WholesaleComponent implements OnInit {
 
-  private data: Page = new Page();
-  private goodsName: any = ''; //商品名
-  private brandName: any = ''; //品牌名
-  private kindId: any = ''; //品牌名
+  public data: Page = new Page();
+  public goodsName: any = ''; //商品名
+  public brandName: any = ''; //品牌名
+  public kindId: any = ''; //品牌名
   public brandList: any;   //品牌列表
   public _goods = [];
   public value: any = {};
 
-  constructor(private ajax: AjaxService, private submit: SubmitService,private rzhtools:RzhtoolsService,
-              private goods: GoodsService, private router: Router, private patterns: PatternService) {
+  constructor(public ajax: AjaxService, public submit: SubmitService,public rzhtools:RzhtoolsService,
+              public goods: GoodsService, public router: Router, public patterns: PatternService) {
   }
 
   ngOnInit() {

@@ -26,7 +26,7 @@ export class PrepareComponent implements OnInit {
   public custPhone: string;
   public ordno: string;
   public LogisticsData: any;//物流信息
-  private showList: boolean = true;     //是否显示列表页
+  public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
   public search = {
     curPage: 1,
@@ -37,10 +37,10 @@ export class PrepareComponent implements OnInit {
     searchType: 'ordno'
   };
 
-  constructor(private parentComp: OrdersComponent,
-              private route: ActivatedRoute,
+  constructor(public parentComp: OrdersComponent,
+              public route: ActivatedRoute,
               public orderServe: OrdersService,
-              private submit: SubmitService,) {
+              public submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',

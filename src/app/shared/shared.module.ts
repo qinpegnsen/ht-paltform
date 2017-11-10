@@ -42,7 +42,6 @@ import {SubmitService} from "../core/forms/submit.service";
 import {ImgUrlPipe} from './pipe/img-url.pipe';
 import {AngularEchartsModule} from "ngx-echarts";
 import {HoverDirective} from './directives/hover/hover.directive';
-import {NzModalModule, NzCheckboxModule} from 'ng-zorro-antd';
 import {GetKindComponent} from './directives/get-kind/get-kind.component';
 import {FoueAreasModule} from "./directives/foue-areas/foue-areas.module";
 import {Level2AreaNamePipe} from './pipe/level-2-area-name.pipe';
@@ -60,8 +59,6 @@ import { ToStringPipe } from './pipe/to-string.pipe';
   imports: [
     CommonModule,
     FormsModule,
-    NzCheckboxModule,
-    NzModalModule,
     ReactiveFormsModule,
     TranslateModule,
     AccordionModule.forRoot(),

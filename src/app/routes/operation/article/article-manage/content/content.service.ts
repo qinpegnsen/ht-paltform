@@ -6,7 +6,7 @@ import {AppComponent} from "../../../../../app.component";
 @Injectable()
 export class ContentService {
   //不用公共的服务，因为返回的不一样,这里是boolean值
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * 当点击确认的时候真正执行的删除

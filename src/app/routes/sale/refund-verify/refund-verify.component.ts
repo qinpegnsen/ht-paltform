@@ -12,11 +12,11 @@ const swal = require('sweetalert');
   styleUrls: ['./refund-verify.component.scss']
 })
 export class RefundVerifyComponent implements OnInit {
-  private refundList: Page = new Page();
-  private detail = [];
-  private showList: boolean = true; //是否显示列表组件
-  private isReceiveList: object; //售后单状态枚举列
-  private search: any = {
+  public refundList: Page = new Page();
+  public detail = [];
+  public showList: boolean = true; //是否显示列表组件
+  public isReceiveList: object; //售后单状态枚举列
+  public search: any = {
     curPage: null,
     pageSize: 10,
     returnType: 'REFUND',
@@ -28,8 +28,8 @@ export class RefundVerifyComponent implements OnInit {
     searchType: 'afterNo',
   };
 
-  constructor(private submit: SubmitService, private router: Router,
-              private tools: RzhtoolsService,) {
+  constructor(public submit: SubmitService, public router: Router,
+              public tools: RzhtoolsService,) {
   }
 
   ngOnInit() {

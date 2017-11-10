@@ -12,14 +12,14 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
   styleUrls: ['./kind-manage.component.scss']
 })
 export class KindManageComponent implements OnInit {
-  private searchKey: string;// 搜索关键词
-  private kinds: Page = new Page();
-  private addButton;// 添加按钮的配置
-  private buttons;// 按钮组的配置
-  private childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
-  private childKindList: Array<any> = []; //菜单级别面包屑
+  public searchKey: string;// 搜索关键词
+  public kinds: Page = new Page();
+  public addButton;// 添加按钮的配置
+  public buttons;// 按钮组的配置
+  public childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
+  public childKindList: Array<any> = []; //菜单级别面包屑
 
-  constructor(private router: Router, private submitService: SubmitService, public tool: RzhtoolsService) {
+  constructor(public router: Router, public submitService: SubmitService, public tool: RzhtoolsService) {
   }
 
   ngOnInit() {

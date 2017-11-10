@@ -7,7 +7,7 @@ import {AppComponent} from "../../../../app.component";
 @Injectable()
 export class BankTransferService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
   /**
    * @param data
    * @param url

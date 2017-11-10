@@ -17,9 +17,9 @@ export class AgentEptComponent implements OnInit {
   public orderNumber;
   public curCancelOrderId:string;
   public isDisplay:boolean=true;//关闭申请的按钮
-  private LogisticsData;//物流信息
+  public LogisticsData;//物流信息
 
-  constructor(private submit: SubmitService,private patterns: PatternService,private OrderService:OrderService) { }
+  constructor(public submit: SubmitService,public patterns: PatternService,public OrderService:OrderService) { }
 
   ngOnInit() {
   }

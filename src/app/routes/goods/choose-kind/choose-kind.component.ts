@@ -9,13 +9,13 @@ declare var $: any;
   styleUrls: ['./choose-kind.component.scss']
 })
 export class ChooseKindComponent implements OnInit {
-  private firstList;// 一级分类列表
-  private secondList;// 二级分类列表
-  private thirdList;// 三级分类列表
-  private choosedKind: string;// 选择的分类ID
-  private choosedKindStr: string = '';// 已经选择的分类
+  public firstList;// 一级分类列表
+  public secondList;// 二级分类列表
+  public thirdList;// 三级分类列表
+  public choosedKind: string;// 选择的分类ID
+  public choosedKindStr: string = '';// 已经选择的分类
 
-  constructor(private submit: SubmitService,private publishComponent:PublishComponent) {
+  constructor(public submit: SubmitService,public publishComponent:PublishComponent) {
   }
 
   ngOnInit() {

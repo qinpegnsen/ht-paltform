@@ -9,12 +9,12 @@ import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
   styleUrls: ['./order-amount.component.scss']
 })
 export class OrderAmountComponent implements OnInit {
-  private data:any;
+  public data:any;
   public code: any = '';
   public info: string;
   public updata: any;
-  private remark:any;
-  constructor(private submit: SubmitService,private patterns:PatternService,private rzhtools:RzhtoolsService) { }
+  public remark:any;
+  constructor(public submit: SubmitService,public patterns:PatternService,public rzhtools:RzhtoolsService) { }
 
   ngOnInit() {
     this.qeuryAll();

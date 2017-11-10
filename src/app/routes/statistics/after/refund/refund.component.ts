@@ -21,12 +21,12 @@ export class RefundComponent implements OnInit {
   showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
   weekForMonth: Array<string> = new Array(); //指定年月下的日期
 
-  private queryType: any = 'DAY';//日期选择
-  private queryTypes: any;//日期选择
-  private queryContents;//内容选择
+  public queryType: any = 'DAY';//日期选择
+  public queryTypes: any;//日期选择
+  public queryContents;//内容选择
   queryTime: any = new Date();
 
-  private data: any;
+  public data: any;
   now: string;
   nowData: any;
   nowtime:any;
@@ -34,7 +34,7 @@ export class RefundComponent implements OnInit {
    * 图表1
    */
   public option = {};
-  constructor(private router: Router, private tools: RzhtoolsService, private submit: SubmitService) {
+  constructor(public router: Router, public tools: RzhtoolsService, public submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -108,7 +108,7 @@ export class RefundComponent implements OnInit {
   /**
    * 绘制图表（私有）
    */
-  private optionPrevInfo(){
+  public optionPrevInfo(){
     let _this = this;
     _this.option = {
       title: {

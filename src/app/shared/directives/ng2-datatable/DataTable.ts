@@ -38,14 +38,14 @@ export class DataTable implements OnChanges{
     @Output("sortOrderChange") public sortOrderChange = new EventEmitter<string>();
     @Output("pageChange") public pageChange = new EventEmitter<PageEvent>();
 
-    private mustRecalculateData = false;
+    public mustRecalculateData = false;
 
     public data: any[];
 
     public onSortChange = new ReplaySubject<SortEvent>(1);
     public pageInit = new EventEmitter<PageEvent>();
 
-    public constructor(private differs: IterableDiffers) {
+    public constructor(public differs: IterableDiffers) {
     }
 
     public getSort(): SortEvent {
@@ -89,14 +89,14 @@ export class DataTable implements OnChanges{
         this.data = this.inputData.voList;
     }
 
-    private calculateNewActivePage(previousRowsOnPage: number, currentRowsOnPage: number): number {
+    public calculateNewActivePage(previousRowsOnPage: number, currentRowsOnPage: number): number {
         let firstRowOnPage = (this.activePage - 1) * previousRowsOnPage + 1;
         let newActivePage = Math.ceil(firstRowOnPage / currentRowsOnPage);
         return isNaN(newActivePage)?1:newActivePage;
       // return newActivePage;
     }
 
-    private recalculatePage() {
+    public recalculatePage() {
         let lastPage = Math.ceil(this.totalRow / this.rowsOnPage);
         this.activePage = lastPage < this.activePage ? lastPage : this.activePage;
         this.activePage = this.activePage || 1;
@@ -109,7 +109,7 @@ export class DataTable implements OnChanges{
         });
         this.data = this.inputData.voList;
     }
-    private initParams(){
+    public initParams(){
       this.activePage = this.inputData.curPage;
       this.totalRow = this.inputData.totalRow;
       this.rowsOnPage = this.inputData.pageSize;
@@ -148,7 +148,7 @@ export class DataTable implements OnChanges{
         }
     }
 
-    // private fillData(): void {
+    // public fillData(): void {
     //     this.activePage = this.activePage;
     //     this.rowsOnPage = this.rowsOnPage;
 	//
@@ -164,7 +164,7 @@ export class DataTable implements OnChanges{
     //     this.data = data;
     // }
 
-    private caseInsensitiveIteratee(sortBy: string) {
+    public caseInsensitiveIteratee(sortBy: string) {
         return (row: any): any => {
             var value = row;
             for (let sortByProperty of sortBy.split('.')) {

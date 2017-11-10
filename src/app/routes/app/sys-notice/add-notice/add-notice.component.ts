@@ -17,7 +17,7 @@ export class AddNoticeComponent implements OnInit {
 
   bsConfig: Partial<BsDatepickerConfig>;
   myTime: Date = new Date();                     //待日期的时分秒
-  private time;                                  //不带日期的时分秒
+  public time;                                  //不带日期的时分秒
   date: any = new Date();                        //插件选择的日期
   minDate: any = new Date();                     //插件选择的日期下限
   myDate: any = new Date();                      //转换过后的日期
@@ -25,7 +25,7 @@ export class AddNoticeComponent implements OnInit {
   constructor(
     public settings: SettingsService,
     public parent:SysNoticeComponent,
-    private operationService: OperationService,
+    public operationService: OperationService,
     public patterns: PatternService,
   ) {
     this.settings.showRightPage("30%");

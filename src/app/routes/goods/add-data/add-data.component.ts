@@ -17,10 +17,10 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   @Input('showAddWindow') showAddWindow: boolean;
   @Input() selTypeData: any; //选中的商品分类
   @Output() addData = new EventEmitter();
-  private selData:any;
+  public selData:any;
 
-  private kindId: any;
-  private level:any
+  public kindId: any;
+  public level:any
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
@@ -33,8 +33,8 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
     $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 10);
   }
 
-  constructor(private submit: SubmitService, private basicPropertiesComponent: BasicPropertiesComponent,
-              private addDataService: AddDataService, private routeInfo: ActivatedRoute, private goods: GoodsService) {
+  constructor(public submit: SubmitService, public basicPropertiesComponent: BasicPropertiesComponent,
+              public addDataService: AddDataService, public routeInfo: ActivatedRoute, public goods: GoodsService) {
   }
 
   ngOnInit() {

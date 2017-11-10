@@ -14,19 +14,19 @@ import {AfterService} from "../../sale/after.service";
 export class AfterDetailsComponent implements OnInit {
 
   public detailType:string;         //详情类型
-  private afterNo: string;          //售后编码
-  private wono: string;             //工单编码
-  private LogisticsData: any;       //退货物流信息
-  private afterData: any;           //售后详情数据
-  private goodsAudits: any;         //商品审核是否通过枚举
-  private afterTailList: any;       //查看售后单跟踪信息
+  public afterNo: string;          //售后编码
+  public wono: string;             //工单编码
+  public LogisticsData: any;       //退货物流信息
+  public afterData: any;           //售后详情数据
+  public goodsAudits: any;         //商品审核是否通过枚举
+  public afterTailList: any;       //查看售后单跟踪信息
 
 
-  constructor(private router: Router,
-              private submit: SubmitService,
-              private location: Location,
-              private after: AfterService,
-              private tools: RzhtoolsService) {
+  constructor(public router: Router,
+              public submit: SubmitService,
+              public location: Location,
+              public after: AfterService,
+              public tools: RzhtoolsService) {
   }
 
   ngOnInit() {

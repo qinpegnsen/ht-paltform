@@ -12,12 +12,12 @@ const swal = require('sweetalert');
 @Injectable()
 export class GoodsService {
 
-  constructor(private ajax: AjaxService,
-              private mask: MaskService,
-              private router: Router,
+  constructor(public ajax: AjaxService,
+              public mask: MaskService,
+              public router: Router,
               public location: Location,
-              private settings: SettingsService,
-              private submit: SubmitService) { }
+              public settings: SettingsService,
+              public submit: SubmitService) { }
   /**
    * get 获取数据
    * @param requestUrl

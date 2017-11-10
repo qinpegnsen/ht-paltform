@@ -14,10 +14,10 @@ export class AddrightpageComponent implements OnInit {
   public id: number;
   public linkType: string;
   public updataDataa: any;
-  private curPage:any;
-  constructor(public settings: SettingsService, private router: Router, private routeInfo: ActivatedRoute,
-              private sub: SubmitService, private submitt: SubmitService,
-              private helpInterlocutionComponent:HelpInterlocutionComponent,public patterns:PatternService) {
+  public curPage:any;
+  constructor(public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,
+              public sub: SubmitService, public submitt: SubmitService,
+              public helpInterlocutionComponent:HelpInterlocutionComponent,public patterns:PatternService) {
                this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 

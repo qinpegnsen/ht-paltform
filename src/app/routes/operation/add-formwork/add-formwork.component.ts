@@ -21,18 +21,18 @@ const swal = require('sweetalert');
   providers:[AddFormworkService,SessionService]
 })
 export class AddFormworkComponent implements OnInit {
-  private deletebutton;//删除运费模板按钮配置
-  private updatebutton;//修改运费模板按钮配置
+  public deletebutton;//删除运费模板按钮配置
+  public updatebutton;//修改运费模板按钮配置
   public linkType: string;
-  private flag = true;//声明flag用于计算方式的显示隐藏
-  private moduleList = [];
+  public flag = true;//声明flag用于计算方式的显示隐藏
+  public moduleList = [];
   public area_model: boolean = false;
   public one: boolean = true;
   public twe: boolean = false;
   public three: boolean = false;
-  private staff: any = {};
-  private id;
-  private cru: number = 0;
+  public staff: any = {};
+  public id;
+  public cru: number = 0;
 
   china_area = CHINA_AREA;
   area_level1 = AREA_LEVEL_1_JSON;
@@ -40,7 +40,7 @@ export class AddFormworkComponent implements OnInit {
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  constructor(private routeInfo: ActivatedRoute, private router: Router, private ajax: AjaxService, private session: SessionService, private FreightTemplateComponent: FreightTemplateComponent,private patterns: PatternService,private rzhtools:RzhtoolsService) {
+  constructor(public routeInfo: ActivatedRoute, public router: Router, public ajax: AjaxService, public session: SessionService, public FreightTemplateComponent: FreightTemplateComponent,public patterns: PatternService,public rzhtools:RzhtoolsService) {
   }
 
   ngOnInit() {

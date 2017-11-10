@@ -5,7 +5,7 @@ import {AjaxService} from "../../../core/services/ajax.service";
 @Injectable()
 export class AddFormworkService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * 删除运费模板信息

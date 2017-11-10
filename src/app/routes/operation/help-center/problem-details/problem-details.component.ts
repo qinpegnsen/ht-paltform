@@ -14,15 +14,15 @@ const swal = require('sweetalert');
 })
 export class ProblemDetailsComponent implements OnInit {
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-  private addButton;//添加按钮
-  private updatebutton: Object;//修改按钮
-  private deletebutton: Object;//删除按钮
-  private data: Page = new Page();
-  private result:any;
-  private kind:any;
+  public addButton;//添加按钮
+  public updatebutton: Object;//修改按钮
+  public deletebutton: Object;//删除按钮
+  public data: Page = new Page();
+  public result:any;
+  public kind:any;
 
-  private id:number;
-  constructor(private ajax: AjaxService,private submit: SubmitService,private router:Router, private routeInfo: ActivatedRoute,) { }
+  public id:number;
+  constructor(public ajax: AjaxService,public submit: SubmitService,public router:Router, public routeInfo: ActivatedRoute,) { }
 
   ngOnInit() {
     let me=this;

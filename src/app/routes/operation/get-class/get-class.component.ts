@@ -13,7 +13,7 @@ export class GetClassComponent implements OnInit, OnChanges{
 
   @Input('articleClassId') articleClassId: string; //当前的文章类别的id
 
-  private show: boolean = false;//选择菜单得的下弹框默认是隐藏的，只有在聚焦的时候才会出现
+  public show: boolean = false;//选择菜单得的下弹框默认是隐藏的，只有在聚焦的时候才会出现
 
   public menuLists:string;//用来存储当前系统下面的所有的菜单
 
@@ -28,14 +28,14 @@ export class GetClassComponent implements OnInit, OnChanges{
   @Output()
   myData = new EventEmitter();
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   ngOnInit() {
 
     /**
      * 点击区域选框外页面时，关闭选框
      * @type {SelectAreaComponent}
-     * @private
+     * @public
      */
     let _this = this;
     $('body').click(function (e) {

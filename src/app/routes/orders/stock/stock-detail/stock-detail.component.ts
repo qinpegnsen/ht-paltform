@@ -22,11 +22,11 @@ export class StockDetailComponent implements OnInit {
   public atime:Array<string> = new Array();             //存储状态时间的数组
   public PayRecData;                                     //支付记录数据
   constructor(
-    private parentComp:StockComponent,
-    private routeInfo:ActivatedRoute,
+    public parentComp:StockComponent,
+    public routeInfo:ActivatedRoute,
     public orderService: OrderService,
-    private router: Router,
-    private submit: SubmitService
+    public router: Router,
+    public submit: SubmitService
   ) { }
 
   /**

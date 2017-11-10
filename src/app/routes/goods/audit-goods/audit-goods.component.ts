@@ -16,31 +16,31 @@ declare var $: any;
   styleUrls: ['./audit-goods.component.scss']
 })
 export class AuditGoodsComponent implements OnInit {
-  private path: string;           //当前路由
-  private kindId: string;         //商品分类id
-  private saleAttrList: any;       // 所有规格数据
-  private brandsList: any;        // 品牌列表
-  private unitList: any;           // 计量单位列表
-  private baseAttrList: any;      // 商品基本属性列表
-  private goodsBaseCode: string;  //商品基本编码
-  private enum: any;              // 所选规格，用于请求sku接口的数据
-  private skuAttr = [];           //属性列表
-  private skuImg: any;            // 图片属性
-  private goodsImgList = {};       // 商品上传图片列表
-  private oldImgs: any = {};        // 商品已经有的图片列表
-  private mblItemList = [];         //手机端上传后的图片集合
-  private goodsEditData: any;     // 修改商品时商品的原有数据
-  private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private myReadOnly: boolean = true;     // 商品详情或审核商品时是只读状态
-  private goodsBody: any;          //商品详情
-  private audit: any;              // 商品审核
-  private goodsAudits: any;        // 商品审核状态列表
+  public path: string;           //当前路由
+  public kindId: string;         //商品分类id
+  public saleAttrList: any;       // 所有规格数据
+  public brandsList: any;        // 品牌列表
+  public unitList: any;           // 计量单位列表
+  public baseAttrList: any;      // 商品基本属性列表
+  public goodsBaseCode: string;  //商品基本编码
+  public enum: any;              // 所选规格，用于请求sku接口的数据
+  public skuAttr = [];           //属性列表
+  public skuImg: any;            // 图片属性
+  public goodsImgList = {};       // 商品上传图片列表
+  public oldImgs: any = {};        // 商品已经有的图片列表
+  public mblItemList = [];         //手机端上传后的图片集合
+  public goodsEditData: any;     // 修改商品时商品的原有数据
+  public tempMblHtml: string;    // 修改商品时临时用的移动端详情
+  public myReadOnly: boolean = true;     // 商品详情或审核商品时是只读状态
+  public goodsBody: any;          //商品详情
+  public audit: any;              // 商品审核
+  public goodsAudits: any;        // 商品审核状态列表
   public storeCode: string;          //店铺编码
   public logistics: any;             // 物流规则列表
   public tplVals: any;               // 运费模板内容
-  private unit: string = '件';       // 运费价格
-  private refresh: boolean;         // 是否刷新父组件数据
-  private publishData: any = {
+  public unit: string = '件';       // 运费价格
+  public refresh: boolean;         // 是否刷新父组件数据
+  public publishData: any = {
     goodsExpressInfo: {
       freightType: null,
       fixedFreight: null,
@@ -50,14 +50,14 @@ export class AuditGoodsComponent implements OnInit {
     goodsBaseAttrList: [],
     goodsSkuList: []
   };// 商品发布数据，所有数据
-  constructor(private publishComponent: PublishComponent,
-              private manageComponent: ManageComponent,
-              private route: ActivatedRoute,
-              private location: Location,
-              private submit: SubmitService,
-              private goods: GoodsService,
-              private router: Router,
-              private tools: RzhtoolsService) {
+  constructor(public publishComponent: PublishComponent,
+              public manageComponent: ManageComponent,
+              public route: ActivatedRoute,
+              public location: Location,
+              public submit: SubmitService,
+              public goods: GoodsService,
+              public router: Router,
+              public tools: RzhtoolsService) {
   }
   back(){
       this.location.back()
@@ -121,7 +121,7 @@ export class AuditGoodsComponent implements OnInit {
   /**
    * 获取发布页面所需数据
    */
-  private getPageData() {
+  public getPageData() {
     let me = this, pageData;
     me.getExpressTpl(); //获取物流模板
     pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
@@ -134,7 +134,7 @@ export class AuditGoodsComponent implements OnInit {
    * 分配获取的页面数据
    * @param pageData
    */
-  private allotPageData(pageData) {
+  public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
@@ -184,7 +184,7 @@ export class AuditGoodsComponent implements OnInit {
    * @param tplId   运费模板ID
    * @returns {any}   运费模板值
    */
-  private getTplVal(tplId) {
+  public getTplVal(tplId) {
     let me = this;
     for (let tpl of me.logistics ) {
       if (tpl.id == tplId) {
@@ -197,7 +197,7 @@ export class AuditGoodsComponent implements OnInit {
    * edit将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
    * 同时生成一个老图片对象，用于显示与修改老图片
    */
-  private genTempGoodsImgsList() {
+  public genTempGoodsImgsList() {
     let me = this, list = me.goodsEditData.goodsImagesList;
     list.forEach((item) => {
       if (isUndefined(me.oldImgs[item.valCode])) me.oldImgs[item.valCode] = [];            // 检测对象中是否已经有了这个属性值对象，如果没有，给它一个空数组
@@ -209,7 +209,7 @@ export class AuditGoodsComponent implements OnInit {
    * 如果是第一个规格，则改变图片列表的选值数组
    * @param $obj
    */
-  private genImgSku($obj) {
+  public genImgSku($obj) {
     let me = this;
     let checkedAttr = $obj.parents('.enumType').find('._val:checked');  //选中的第一个规格的数量
     if (checkedAttr.length > 0) {     //选择的规格属大于0时，获取所选属性的名和值
@@ -240,7 +240,7 @@ export class AuditGoodsComponent implements OnInit {
    * @param compareVal 用来比较的值
    * @returns {{groupId: number, isHad: boolean}}
    */
-  private checkImgListIfHadGroup(compareVal) {
+  public checkImgListIfHadGroup(compareVal) {
     let me = this, groupId: number, isHad = false;
     me.skuImg.vals.forEach((item, i) => {
       if (item.valCode == compareVal) {
@@ -270,7 +270,7 @@ export class AuditGoodsComponent implements OnInit {
    * 将数据生成易解析的新数组
    * @param skuData
    */
-  private genClearArray(skuData) {
+  public genClearArray(skuData) {
     let me = this;
     me.skuAttr = [];
     if (skuData.length > 0) {
@@ -292,7 +292,7 @@ export class AuditGoodsComponent implements OnInit {
   /**
    * edit当修改商品时改变选中的规格的输入框和文本显示
    */
-  private specsCheckedWhenEdit() {
+  public specsCheckedWhenEdit() {
     for (let i = 0; i < $('.specs ._val').length; i++) {
       let $obj = $('.specs ._val').eq(i);
       if ($obj.prop('checked')) {
@@ -311,7 +311,7 @@ export class AuditGoodsComponent implements OnInit {
   /**
    * edit修改或审核商品时将移动端详情html字符串生成图片与文字组合
    */
-  private genMblItemList() {
+  public genMblItemList() {
     let me = this, doms = $('#mblHtml').children(), type, value;
     me.mblItemList = [];
     for (let i = 0; i < doms.length; i++) {

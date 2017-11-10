@@ -13,20 +13,20 @@ export class SessionService {
   public checkOptions = 'checkOptionsOnes';
 
 
-  private _preId = 'Y';  // 定义本地存储数据库前缀
-  private _timeSign = '-'; // 时间戳与存储数据之间的拼接符号
-  private status = {
+  public _preId = 'Y';  // 定义本地存储数据库前缀
+  public _timeSign = '-'; // 时间戳与存储数据之间的拼接符号
+  public status = {
     SUCCESS: 0, // 成功
     FAILURE: 1, // 失败
     OVERFLOW: 2, // 溢出
     TIMEOUT: 3 // 过期
   };
-  private _storage = sessionStorage || window.sessionStorage;
+  public _storage = sessionStorage || window.sessionStorage;
 
   constructor() {
   }
 
-  private getKey(key: string) {
+  public getKey(key: string) {
     return this._preId + key;
   }
 
@@ -36,7 +36,7 @@ export class SessionService {
    * @param value 数据值
    * @param time 添加时间
    */
-  private set(key: string, value, time?: any) {
+  public set(key: string, value, time?: any) {
     let status: number = this.status.SUCCESS;
     if (isObject(value)) {
       try {
@@ -77,7 +77,7 @@ export class SessionService {
    * @param async 是否使用Promise
    * @returns {any}
    */
-  private get(key: string, type?: string, async?: boolean) {
+  public get(key: string, type?: string, async?: boolean) {
     let status: number = this.status.FAILURE,
       value = null,
       index,
@@ -153,7 +153,7 @@ export class SessionService {
    * @param type
    * @returns {Promise<never>|Promise<T>|any}
    */
-  private asyncGet(key: string, type?: string): Promise<any> {
+  public asyncGet(key: string, type?: string): Promise<any> {
     return type === undefined || !type ? this.get(key, 'string') : this.get(key, type);
   }
 
@@ -171,7 +171,7 @@ export class SessionService {
    *
    * @param key 数据字段
    */
-  private remove(key: string, isAsync = true): any {
+  public remove(key: string, isAsync = true): any {
     let status: number = this.status.FAILURE,
       value = null;
     key = this.getKey(key);
@@ -200,7 +200,7 @@ export class SessionService {
     }
   }
 
-  private clear(): void {
+  public clear(): void {
     return this._storage.clear();
   }
 
@@ -262,7 +262,7 @@ export class SessionService {
   }
 
 
-  private getData(key, type = 'json') {
+  public getData(key, type = 'json') {
     if (this.hasKey(key)) {
       const data = this.disAsyncGet(key, type);
       if (!data.status) {
@@ -272,7 +272,7 @@ export class SessionService {
     return 'null';
   }
 
-  private deleteIsOk(key: string): boolean {
+  public deleteIsOk(key: string): boolean {
     return (this.hasKey(key) && !this.remove(key, false))
       || !this.hasKey(key);
   }

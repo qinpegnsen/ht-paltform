@@ -13,14 +13,14 @@ import {IntegrationChangeService} from "./integration-change.service";
   providers:[IntegrationChangeService]
 })
 export class IntegrationChangeComponent implements OnInit {
-  private sum:any;
-  private data: any = {
+  public sum:any;
+  public data: any = {
     phone: null,
     custCoin: null,
     logType: 'RECHARGE'
   };
-  constructor(private submitt: SubmitService, private patterns: PatternService,private route: ActivatedRoute,
-  private integrationChangeService:IntegrationChangeService) {
+  constructor(public submitt: SubmitService, public patterns: PatternService,public route: ActivatedRoute,
+  public integrationChangeService:IntegrationChangeService) {
   }
 
   ngOnInit() {

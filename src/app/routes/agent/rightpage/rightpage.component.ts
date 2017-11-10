@@ -12,17 +12,17 @@ const swal = require('sweetalert');
   styleUrls: ['./rightpage.component.scss']
 })
 export class RightpageComponent implements OnInit {
-  private queryId:number;//获取添加，修改的ID
+  public queryId:number;//获取添加，修改的ID
   public agentCode:string;//获取代理商编码
-  private organ={}
-  private limitForm = {
+  public organ={}
+  public limitForm = {
     agentCode: '',
     agentPwd:'',
     agentNewPwd:''
   }
-  private staff:any = {};
+  public staff:any = {};
   // 构造 初始化
-  constructor(public settings: SettingsService,private router:Router,private ajax:AjaxService,private routeInfo:ActivatedRoute,private RegionComponent:RegionComponent) {
+  constructor(public settings: SettingsService,public router:Router,public ajax:AjaxService,public routeInfo:ActivatedRoute,public RegionComponent:RegionComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
   ngOnInit() {
@@ -57,7 +57,7 @@ export class RightpageComponent implements OnInit {
   }
 
   //获取区域数据
-  private getAreaData(area){
+  public getAreaData(area){
     let me = this;
     me.organ['areaCode'] = area.areaCode;
   }

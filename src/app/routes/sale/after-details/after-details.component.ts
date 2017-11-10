@@ -14,25 +14,25 @@ import {isNullOrUndefined} from "util";
 })
 export class AfterDetailsComponent implements OnInit {
 
-  private type: string;             //类型,处理/查看详情
-  private parentPath: string;       //类型,处理/查看详情
-  private afterNo: string;          //售后编码
-  private LogisticsData: any;       //退货物流信息
-  private afterData: any;           //售后详情数据
-  private afterTailList: any;       //查看售后单跟踪信息
-  private opinion: string;          //审核意见
-  private goodsAudits: any;         //商品审核是否通过枚举
-  private isPass: string = 'Y';     //是否同意退货
-  private isAgree: string = 'Y';    //是否同意退货
+  public type: string;             //类型,处理/查看详情
+  public parentPath: string;       //类型,处理/查看详情
+  public afterNo: string;          //售后编码
+  public LogisticsData: any;       //退货物流信息
+  public afterData: any;           //售后详情数据
+  public afterTailList: any;       //查看售后单跟踪信息
+  public opinion: string;          //审核意见
+  public goodsAudits: any;         //商品审核是否通过枚举
+  public isPass: string = 'Y';     //是否同意退货
+  public isAgree: string = 'Y';    //是否同意退货
   public expressData: any;          //获取快递的公司和单号
   public refresh: boolean;          //父组件是否需要刷新
 
 
-  constructor(private router: Router,
-              private submit: SubmitService,
-              private after: AfterService,
-              private location: Location,
-              private tools: RzhtoolsService) {
+  constructor(public router: Router,
+              public submit: SubmitService,
+              public after: AfterService,
+              public location: Location,
+              public tools: RzhtoolsService) {
   }
 
   ngOnInit() {

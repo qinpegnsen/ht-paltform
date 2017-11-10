@@ -10,7 +10,7 @@ const swal = require('sweetalert');
 @Injectable()
 export class OperationService {
 
-  constructor(private ajax: AjaxService,private submit: SubmitService) { }
+  constructor(public ajax: AjaxService,public submit: SubmitService) { }
 
   /**
    * delete 请求  特殊的提示

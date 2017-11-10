@@ -17,42 +17,42 @@ declare var $;
 export class AppSetComponent implements OnInit {
   public items;//获取首页选中模板列表
   public indexTpls: Array<any> = new Array();//选中效果模板ID
-  private moduleList: Array<any> = new Array();//获取选中效果模板列表
-  private contentList = [];//获取选中模板的详细信息
-  private ord;//每个选中模板的下标
-  private phoneIndexId: Array<any> = new Array();//首页模板ID
-  private item;//获取首页模板列表
-  private curItem;//点击选中首页模板时相对应的详细信息
-  private flag = [];//判断选中首页模板信息的图片遮罩层是否显示
-  private flags = [];//判断选中模板的遮罩层是否显示
-  private isShowContent = false;//判断选中模板信息是否显示
+  public moduleList: Array<any> = new Array();//获取选中效果模板列表
+  public contentList = [];//获取选中模板的详细信息
+  public ord;//每个选中模板的下标
+  public phoneIndexId: Array<any> = new Array();//首页模板ID
+  public item;//获取首页模板列表
+  public curItem;//点击选中首页模板时相对应的详细信息
+  public flag = [];//判断选中首页模板信息的图片遮罩层是否显示
+  public flags = [];//判断选中模板的遮罩层是否显示
+  public isShowContent = false;//判断选中模板信息是否显示
   public optTypeIndex: Array<any> = new Array();//获取选中模板的下标
   public isEntered: Array<any> = new Array();//获取选中模板后，判断input框是否可以输入
   public typeDesc: Array<any> = new Array();//获取选中模板的操作类型
   public optTypeCode: Array<any> = new Array();//获取选中模板的操作类型编码
-  private optKey: Array<any> = new Array();//获取选中模板的input中的操作内容
-  private contents: Array<any> = new Array();//获取选中模板的图片暗码或者内容
-  private updateIds: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
-  private updateImgs: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
-  private ids: Array<any> = new Array();//提交后选中模板中的每个模板值的ID
+  public optKey: Array<any> = new Array();//获取选中模板的input中的操作内容
+  public contents: Array<any> = new Array();//获取选中模板的图片暗码或者内容
+  public updateIds: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
+  public updateImgs: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
+  public ids: Array<any> = new Array();//提交后选中模板中的每个模板值的ID
   public uploaders: Array<FileUploader> = new Array();//清空选中模板的图片
-  private optTypeList: any;//操作类型的列表
-  private myImg: any;//上传图片
-  private tplImgCount: any;//模板图片数量
-  private tplType: any;//模板类型
-  private isAdd: boolean = true;//是否是新增内容
-  private indexId: any;//没有发布的选中模板的ID
-  private indexData: any;//已经发布成功的选中模板ID
+  public optTypeList: any;//操作类型的列表
+  public myImg: any;//上传图片
+  public tplImgCount: any;//模板图片数量
+  public tplType: any;//模板类型
+  public isAdd: boolean = true;//是否是新增内容
+  public indexId: any;//没有发布的选中模板的ID
+  public indexData: any;//已经发布成功的选中模板ID
   public id: string;//删除选中模板的ID
   public curCancelOrderId: string;
-  private showAddWindow: boolean = false;//设置首页在某端显示的弹窗
+  public showAddWindow: boolean = false;//设置首页在某端显示的弹窗
 
-  private updateIndexContentIds: Array<any> = new Array();//获取修改时选中模板的ID
-  private updateContents: Array<any> = new Array();//获取修改时选中模板的图片暗码或者内容
-  private updateOptTypeCode: Array<any> = new Array();//获取修改时选中模板的操作类型编码
-  private updateOptKey: Array<any> = new Array();//获取修改时选中模板的操作内容
+  public updateIndexContentIds: Array<any> = new Array();//获取修改时选中模板的ID
+  public updateContents: Array<any> = new Array();//获取修改时选中模板的图片暗码或者内容
+  public updateOptTypeCode: Array<any> = new Array();//获取修改时选中模板的操作类型编码
+  public updateOptKey: Array<any> = new Array();//获取修改时选中模板的操作内容
 
-  constructor(private submit: SubmitService, private routeInfo: ActivatedRoute, private ajax: AjaxService, private router: Router, private GetUidService: GetUidService, private AppSetService: AppSetService) {
+  constructor(public submit: SubmitService, public routeInfo: ActivatedRoute, public ajax: AjaxService, public router: Router, public GetUidService: GetUidService, public AppSetService: AppSetService) {
   }
 
   ngOnInit() {

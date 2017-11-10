@@ -17,10 +17,10 @@ const swal = require('sweetalert');
 export class LogisticsComponent implements OnInit {
   public showCancelWindow:boolean = false;
   public goodsList: Page = new Page();
-  private goodsAudits: any;  // 商品审核状态列表
+  public goodsAudits: any;  // 商品审核状态列表
   public ordno:string;//获取区域编码
-  private expressNos;
-  private expressCode;
+  public expressNos;
+  public expressCode;
 
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -34,7 +34,7 @@ export class LogisticsComponent implements OnInit {
   }
 
 
-  constructor(private ajax:AjaxService, private submit: SubmitService,private routeInfo:ActivatedRoute,private AwaitingDeliveryComponent:AwaitingDeliveryComponent,private AllStockComponent:AllStockComponent) { }
+  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute,public AwaitingDeliveryComponent:AwaitingDeliveryComponent,public AllStockComponent:AllStockComponent) { }
 
   ngOnInit() {
     let _this = this;

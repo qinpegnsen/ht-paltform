@@ -9,10 +9,10 @@ import {AjaxService} from '../../../core/services/ajax.service';
   styleUrls: ['./ng2-datatable.component.scss']
 })
 export class Ng2DatatableComponent implements OnInit {
-  private data: Page = new Page();
-  private buttonConfig;
+  public data: Page = new Page();
+  public buttonConfig;
 
-  constructor(private ajax: AjaxService) {
+  constructor(public ajax: AjaxService) {
   }
 
   ngOnInit() {
@@ -49,10 +49,10 @@ export class Ng2DatatableComponent implements OnInit {
    * @param result  promise对象，回传id
    */
 
-  private delete(){
+  public delete(){
       alert("delete");
   }
-  private details(){
+  public details(){
       alert("details");
   }
 

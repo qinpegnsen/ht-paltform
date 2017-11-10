@@ -6,7 +6,7 @@ import {Page} from "../../../core/page/page";
 @Injectable()
 export class AddDataService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * @param data

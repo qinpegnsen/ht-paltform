@@ -33,7 +33,7 @@ class MenuItem {
 @Injectable()
 export class MenuService {
 
-  constructor(private cookieService:CookieService) {
+  constructor(public cookieService:CookieService) {
   }
   foreachPushMenu(items:Array<menuVO>) {
     let menuItems:Array<MenuItem> = [],menuItem:MenuItem;

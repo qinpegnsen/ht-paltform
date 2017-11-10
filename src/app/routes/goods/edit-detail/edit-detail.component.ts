@@ -18,28 +18,28 @@ const swal = require('sweetalert');
   styleUrls: ['./edit-detail.component.scss']
 })
 export class EditDetailComponent implements OnInit {
-  private path: string;           // 当前路径
-  private kindId: string;         //商品分类id
-  private saleAttrList: any;       // 所有规格数据
-  private brandsList: any;        // 品牌列表
-  private unitList: any;           // 计量单位列表
-  private baseAttrList: any;      // 商品基本属性列表
-  private goodsBaseCode: string;  //商品基本编码
-  private enum: any;              // 所选规格，用于请求sku接口的数据
-  private skuAttr = [];           //属性列表
-  private skuImg: any;            // 图片属性
-  private goodsImgList = {};       // 商品上传图片列表
-  private oldImgs: any = {};        // 商品已经有的图片列表
-  private mblItemList = [];         //手机端上传后的图片集合
-  private goodsEditData: any;     // 修改商品时商品的原有数据
-  private tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  private goodsBody: any;          //商品详情
+  public path: string;           // 当前路径
+  public kindId: string;         //商品分类id
+  public saleAttrList: any;       // 所有规格数据
+  public brandsList: any;        // 品牌列表
+  public unitList: any;           // 计量单位列表
+  public baseAttrList: any;      // 商品基本属性列表
+  public goodsBaseCode: string;  //商品基本编码
+  public enum: any;              // 所选规格，用于请求sku接口的数据
+  public skuAttr = [];           //属性列表
+  public skuImg: any;            // 图片属性
+  public goodsImgList = {};       // 商品上传图片列表
+  public oldImgs: any = {};        // 商品已经有的图片列表
+  public mblItemList = [];         //手机端上传后的图片集合
+  public goodsEditData: any;     // 修改商品时商品的原有数据
+  public tempMblHtml: string;    // 修改商品时临时用的移动端详情
+  public goodsBody: any;          //商品详情
   public storeCode: string;          //店铺编码
   public logistics: any;             // 物流规则列表
   public tplVals: any;               // 运费模板内容
-  private unit: string = '件';       // 运费价格
+  public unit: string = '件';       // 运费价格
 
-  private publishData: any = {
+  public publishData: any = {
     goodsExpressInfo: {
       freightType: null,
       fixedFreight: null,
@@ -53,25 +53,25 @@ export class EditDetailComponent implements OnInit {
     goodsSkuList: []
   };// 商品发布数据，所有数据
 
-  private defaultUploader: FileUploader = new FileUploader({
+  public defaultUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsImage',
     itemAlias: "limitFile",
     allowedFileType: ["image"]
   })
-  private mobileUploader: FileUploader = new FileUploader({
+  public mobileUploader: FileUploader = new FileUploader({
     url: '/goodsEdit/uploadGoodsBodyImage',
     itemAlias: "limitFile",
     autoUpload: true,
     allowedFileType: ["image"]
   })
 
-  constructor(private publishComponent: PublishComponent,
-              private route: ActivatedRoute,
-              private submit: SubmitService,
-              private goods: GoodsService,
-              private router: Router,
-              private location: Location,
-              private tools: RzhtoolsService) {
+  constructor(public publishComponent: PublishComponent,
+              public route: ActivatedRoute,
+              public submit: SubmitService,
+              public goods: GoodsService,
+              public router: Router,
+              public location: Location,
+              public tools: RzhtoolsService) {
   }
 
   back(){
@@ -223,7 +223,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 获取发布页面所需数据
    */
-  private getPageData() {
+  public getPageData() {
     let me = this, pageData;
     if (me.path != 'step_two') {
       pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
@@ -240,7 +240,7 @@ export class EditDetailComponent implements OnInit {
    * 分配获取的页面数据
    * @param pageData
    */
-  private allotPageData(pageData) {
+  public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
@@ -312,7 +312,7 @@ export class EditDetailComponent implements OnInit {
    * @param tplId   运费模板ID
    * @returns {any}   运费模板值
    */
-  private getTplVal(tplId) {
+  public getTplVal(tplId) {
     let me = this;
     for (let tpl of me.logistics ) {
       if (tpl.id == tplId) {
@@ -335,7 +335,7 @@ export class EditDetailComponent implements OnInit {
    * edit将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
    * 同时生成一个老图片对象，用于显示与修改老图片
    */
-  private genTempGoodsImgsList() {
+  public genTempGoodsImgsList() {
     let me = this, list = me.goodsEditData.goodsImagesList;
     list.forEach((item) => {
       if (isUndefined(me.oldImgs[item.valCode])) me.oldImgs[item.valCode] = [];            // 检测对象中是否已经有了这个属性值对象，如果没有，给它一个空数组
@@ -413,7 +413,7 @@ export class EditDetailComponent implements OnInit {
    * 如果是第一个规格，则改变图片列表的选值数组
    * @param $obj
    */
-  private genImgSku($obj) {
+  public genImgSku($obj) {
     let me = this;
     let checkedAttr = $obj.parents('.enumType').find('._val:checked');  //选中的第一个规格的数量
     if (checkedAttr.length > 0) {     //选择的规格属大于0时，获取所选属性的名和值
@@ -459,7 +459,7 @@ export class EditDetailComponent implements OnInit {
    * @param compareVal 用来比较的值
    * @returns {{groupId: number, isHad: boolean}}
    */
-  private checkImgListIfHadGroup(compareVal) {
+  public checkImgListIfHadGroup(compareVal) {
     let me = this, groupId: number, isHad = false;
     me.skuImg.vals.forEach((item, i) => {
       if (item.valCode == compareVal) {
@@ -478,7 +478,7 @@ export class EditDetailComponent implements OnInit {
    * @param property
    * @returns {(a:any, b:any)=>number}
    */
-  private compare(property) {
+  public compare(property) {
     return function (a, b) {
       var value1 = a[property];
       var value2 = b[property];
@@ -490,7 +490,7 @@ export class EditDetailComponent implements OnInit {
    * 将所选规格生成一个对象
    * @param spec
    */
-  private genObject(spec) {
+  public genObject(spec) {
     let me = this, attrsList = [];
     let checkedVal = spec.find('._val:checked');
     for (let i = 0; i < checkedVal.length; i++) {
@@ -524,7 +524,7 @@ export class EditDetailComponent implements OnInit {
    * 判断skuList中是否已经有了输入框中的值
    * @returns {boolean}
    */
-  private judgeSkuListHasInputVal() {
+  public judgeSkuListHasInputVal() {
     let me = this, hasVal: boolean = false;
     me.publishData.goodsSkuList.forEach((item) => {
       let noValObj: number = 0;
@@ -540,7 +540,7 @@ export class EditDetailComponent implements OnInit {
    * 将数据生成易解析的新数组
    * @param skuData
    */
-  private genClearArray(skuData) {
+  public genClearArray(skuData) {
     let me = this;
     me.skuAttr = [];
     if (skuData.length > 0) {
@@ -570,7 +570,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * edit当修改商品时改变选中的规格的输入框和文本显示
    */
-  private specsCheckedWhenEdit() {
+  public specsCheckedWhenEdit() {
     for (let i = 0; i < $('.specs ._val').length; i++) {
       let $obj = $('.specs ._val').eq(i);
       if ($obj.prop('checked')) {
@@ -589,7 +589,7 @@ export class EditDetailComponent implements OnInit {
    * 编辑移动端详情的图片或文本
    * @param target
    */
-  private editMblImg(target) {
+  public editMblImg(target) {
     if ($(target).find('.mobile-edit-area').length > 0 && !$(target).find('.mobile-edit-area').hasClass('hide')) return;// 当是修改文本的时候，点击当前板块不显示编辑工具
     let editState = !$(target).find('._edit').hasClass('hide');//编辑状态：true-编辑状态，false-普通状态
     if (editState) {
@@ -633,7 +633,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 输入框计数器
    */
-  private counter(target) {
+  public counter(target) {
     let obj = $(target);
     let hadLength = obj.val().length;
     let leaveLength = 500 - hadLength;
@@ -656,7 +656,7 @@ export class EditDetailComponent implements OnInit {
    * 隐藏移动端文本编辑框
    * @param target
    */
-  private hideEdit(target?) {
+  public hideEdit(target?) {
     if (!isUndefined(target)) {
       $(target).parents('.app-img-box').find('._edit').addClass('hide');
       $(target).parents('.app-img-box').find('.mobile-edit-area').addClass('hide');
@@ -667,7 +667,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 使移动端详情编辑滚动条一直保持在最底部
    */
-  private scrollBottom() {
+  public scrollBottom() {
     $('.app-control')[0].scrollTop = $('.app-control')[0].scrollHeight;// 使滚动条一直保持在最底部
   }
 
@@ -739,7 +739,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * edit修改商品时将移动端详情html字符串生成图片与文字组合
    */
-  private genMblItemList() {
+  public genMblItemList() {
     let me = this, doms = $('#mblHtml').children(), type, value;
     me.mblItemList = [];
     for (let i = 0; i < doms.length; i++) {
@@ -757,7 +757,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 上传图片,第一步，集成所有需要上传的uploader到一个集合里
    */
-  private togetherAllUploaders() {
+  public togetherAllUploaders() {
     let me = this, allUploaders = [];
     // 当选择了规格时,不上传默认的图片
     if (me.skuImg.vals.length > 0) {
@@ -779,7 +779,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 商品规格图片上传
    */
-  private uploadImgs() {
+  public uploadImgs() {
     let me = this, uploadedNum = 0;
     let allUploaders = me.togetherAllUploaders();
     allUploaders.forEach((uploader, i) => {
@@ -817,7 +817,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 生成商品基本属性列表
    */
-  private genGoodsBaseAttrList() {
+  public genGoodsBaseAttrList() {
     let me = this, baseAttr = $('.base-attr').find('select');
     me.publishData.goodsBaseAttrList = []; // 先置空
     for (let i = 0; i < baseAttr.length; i++) {
@@ -833,7 +833,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 生成商品图片列表，整合图片并排序
    */
-  private genGoodsImgList() {
+  public genGoodsImgList() {
     let me = this, goodsImgList: Array<any> = new Array(), item: any;
     //当选择了商品规格时
     if (me.skuImg.vals.length > 0) {
@@ -868,7 +868,7 @@ export class EditDetailComponent implements OnInit {
    * 移动端详情
    * @returns {string}
    */
-  private genMblDetailHtml() {
+  public genMblDetailHtml() {
     let me = this, mblHtml = '';
     me.mblItemList.forEach((item) => {
       if (item.type == 'img') {
@@ -994,7 +994,7 @@ export class EditDetailComponent implements OnInit {
   /**
    * 整理数据并且发布商品
    */
-  private genPublishDataAndPublish() {
+  public genPublishDataAndPublish() {
     let me = this;
     if (isNullOrUndefined(me.genGoodsImgList())) {
       MaskService.hideMask();//关闭遮罩层

@@ -11,17 +11,17 @@ const swal = require('sweetalert');
   styleUrls: ['./rightpage.component.scss']
 })
 export class RightpageComponent implements OnInit {
-  private queryId:number;//获取添加，修改的ID
+  public queryId:number;//获取添加，修改的ID
   public areaCode:string;//获取区域编码
-  private  staff= {}
-  private limitForm = {
+  public  staff= {}
+  public limitForm = {
     areaCode: '',
     level:'',
     areaName:''
   }
 
   // 构造 初始化
-  constructor(public settings: SettingsService,private router:Router,private ajax:AjaxService,private routeInfo:ActivatedRoute,private AreasComponent:AreasComponent) {
+  constructor(public settings: SettingsService,public router:Router,public ajax:AjaxService,public routeInfo:ActivatedRoute,public AreasComponent:AreasComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
   ngOnInit() {

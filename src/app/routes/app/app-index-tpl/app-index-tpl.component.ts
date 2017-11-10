@@ -9,12 +9,12 @@ const swal = require('sweetalert');
   styleUrls: ['./app-index-tpl.component.scss']
 })
 export class AppIndexTplComponent implements OnInit {
-  private addButton;//新增移动端首页操作类型按钮配置
-  private updatebutton;//修改移动端首页操作类型按钮配置
-  private deletebutton;//删除移动端首页操作类型按钮配置
-  private controlData;
+  public addButton;//新增移动端首页操作类型按钮配置
+  public updatebutton;//修改移动端首页操作类型按钮配置
+  public deletebutton;//删除移动端首页操作类型按钮配置
+  public controlData;
 
-  constructor(private AppIndexTplService:AppIndexTplService,private routeInfo:ActivatedRoute,private AppIndexTplServiceL:AppIndexTplService) { }
+  constructor(public AppIndexTplService:AppIndexTplService,public routeInfo:ActivatedRoute,public AppIndexTplServiceL:AppIndexTplService) { }
 
   ngOnInit() {
     let _this = this;

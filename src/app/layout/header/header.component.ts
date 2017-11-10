@@ -20,8 +20,8 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit, OnChanges {
 
-  private platformInfoData: any;                           //代理商系统消息的数据
-  @Input() private curPath;
+  public platformInfoData: any;                           //代理商系统消息的数据
+  @Input() public curPath;
 
   ngOnChanges(changes: SimpleChanges): void {
     let me = this;
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   @ViewChild('fsbutton') fsbutton;
 
   constructor(public menu: MenuService, public userblockService: UserblockService, public settings: SettingsService,
-              private ajax: AjaxService, private router: Router, private cookieService: CookieService, private layout: LayoutComponent, private submitService: SubmitService) {
+              public ajax: AjaxService, public router: Router, public cookieService: CookieService, public layout: LayoutComponent, public submitService: SubmitService) {
     // 只显示指定的
     if (typeof menu.getMenu() !== 'undefined') this.menuItems = menu.getMenu();
   }

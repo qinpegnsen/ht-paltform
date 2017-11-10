@@ -6,7 +6,7 @@ import {RzhtoolsService} from "../../core/services/rzhtools.service";
 })
 export class AreaNamePipe implements PipeTransform {
 
-  constructor(private tools: RzhtoolsService) {  }
+  constructor(public tools: RzhtoolsService) {  }
 
   transform(value: any, args?: any): any {
     // 适用于三级6位区域编码

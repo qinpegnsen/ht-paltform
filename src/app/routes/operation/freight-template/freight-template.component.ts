@@ -13,12 +13,12 @@ const swal = require('sweetalert');
   providers:[FreightTemplateService,SessionService]
 })
 export class FreightTemplateComponent implements OnInit {
-  private addButton;//新增运费模板按钮配置
-  private updatebutton;//修改运费模板按钮配置
-  private deletebutton;//删除运费模板按钮配置
+  public addButton;//新增运费模板按钮配置
+  public updatebutton;//修改运费模板按钮配置
+  public deletebutton;//删除运费模板按钮配置
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
-  private areas:Page= new Page();
-  private table = {
+  public areas:Page= new Page();
+  public table = {
     curPage:1,
     lastPage:true,
     needCountQuery:false,
@@ -32,7 +32,7 @@ export class FreightTemplateComponent implements OnInit {
     voList:[]
   }
 
-  constructor(private router:Router,private FreightTemplateService:FreightTemplateService) {
+  constructor(public router:Router,public FreightTemplateService:FreightTemplateService) {
 
   }
 

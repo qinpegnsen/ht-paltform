@@ -9,7 +9,7 @@ declare var $: any;
 })
 export class EditPwComponent implements OnInit {
 
-  constructor(public settings: SettingsService,private submitt: SubmitService) { }
+  constructor(public settings: SettingsService,public submitt: SubmitService) { }
 
   ngOnInit() {
   }

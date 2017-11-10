@@ -7,7 +7,7 @@ import {AjaxService} from '../../../core/services/ajax.service';
 @Injectable()
 export class OrderReviewService {
 
-  constructor(private submit: SubmitService,private ajax: AjaxService) { }
+  constructor(public submit: SubmitService,public ajax: AjaxService) { }
 
   public getOrderLogisticsData(ordno) {
     let url = '/ord/tail/queryDeliveryList';

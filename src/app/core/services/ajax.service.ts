@@ -5,7 +5,7 @@ declare var $: any;
 
 @Injectable()
 export class AjaxService {
-  constructor(private route: Router) {
+  constructor(public route: Router) {
   }
 
   //get方式提交，一般用于查询

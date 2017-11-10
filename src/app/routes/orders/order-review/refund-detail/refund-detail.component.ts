@@ -10,9 +10,9 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class RefundDetailComponent implements OnInit {
   public ordno;  //订单号
-  private refund;
-  constructor(private orderReviewComponent:OrderReviewComponent,private submit: SubmitService,
-              private routeInfo:ActivatedRoute,) { }
+  public refund;
+  constructor(public orderReviewComponent:OrderReviewComponent,public submit: SubmitService,
+              public routeInfo:ActivatedRoute,) { }
 
   ngOnInit() {
     let me=this;

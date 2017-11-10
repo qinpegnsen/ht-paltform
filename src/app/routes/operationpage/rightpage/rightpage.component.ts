@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class RightpageComponent implements OnInit {
 
   // 构造 初始化
-  constructor(public settings: SettingsService,private router:Router) {
+  constructor(public settings: SettingsService,public router:Router) {
       this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
   ngOnInit() {

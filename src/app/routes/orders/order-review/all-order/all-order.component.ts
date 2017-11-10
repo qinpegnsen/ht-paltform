@@ -19,18 +19,18 @@ export class AllOrderComponent implements OnInit {
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentAcct;
-  private agentTime;
+  public agentAcct;
+  public agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  private beginTime: string;
-  private endTime: string;
-  private LogisticsData;//物流信息
+  public beginTime: string;
+  public endTime: string;
+  public LogisticsData;//物流信息
   public goodsList: Page = new Page();
 
 
-  constructor(private OrderReviewComponent:OrderReviewComponent, private submit: SubmitService,private OrderReviewService:OrderReviewService) {
+  constructor(public OrderReviewComponent:OrderReviewComponent, public submit: SubmitService,public OrderReviewService:OrderReviewService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式

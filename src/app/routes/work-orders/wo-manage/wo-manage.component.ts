@@ -22,7 +22,7 @@ export class WoManageComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(public location: Location,private router: Router, private submit: SubmitService) {
+  constructor(public location: Location,public router: Router, public submit: SubmitService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       // minDate: this.minDate.getDate() - 1,

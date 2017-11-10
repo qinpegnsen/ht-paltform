@@ -28,18 +28,18 @@ export class ContentComponent implements OnInit,OnChanges,OnDestroy  {
   public TotalRow;                         //存储文章列表的数据
   public path;                              //当前路由
   public flag:boolean=true;               //定义boolean值用来控制内容组件是否显示
-  private updatebutton:Object;             //更新文章按钮
-  private deletebutton:Object;             //删除文章按钮
-  private detailsbutton:Object;            //查看详情按钮
-  private publishbutton:Object;            //草稿文章发布按钮
-  private auditbutton:Object;              //待审核文章审核按钮
-  private urlChange;                       //地址栏的变化，用来取消订阅
+  public updatebutton:Object;             //更新文章按钮
+  public deletebutton:Object;             //删除文章按钮
+  public detailsbutton:Object;            //查看详情按钮
+  public publishbutton:Object;            //草稿文章发布按钮
+  public auditbutton:Object;              //待审核文章审核按钮
+  public urlChange;                       //地址栏的变化，用来取消订阅
 
   constructor(
-    private router:Router,
+    public router:Router,
     public ContentService:ContentService,
     public NavService:NavService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     public service:SubmitService
   ) {
     this.articleState='DRAFT'

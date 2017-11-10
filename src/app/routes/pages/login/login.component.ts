@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   public password: string;
   public authMsg: string;
 
-  constructor(private ajax: AjaxService,
-              private localtion: Location, private router: Router, private _cookieService: CookieService,
-              private setting:SettingsService,private myMenu:MenuService) {
+  constructor(public ajax: AjaxService,
+              public localtion: Location, public router: Router, public _cookieService: CookieService,
+              public setting:SettingsService,public myMenu:MenuService) {
 
   }
 
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   // 登录页效果渲染
-  private initSupersized() {
+  public initSupersized() {
     $.supersized({
       // Functionality
       slide_interval: 4000,    // Length between transitions

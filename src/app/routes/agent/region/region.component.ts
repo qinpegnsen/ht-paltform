@@ -12,16 +12,16 @@ const swal = require('sweetalert');
   styleUrls: ['./region.component.scss']
 })
 export class RegionComponent implements OnInit {
-  private addButton;//新增数据按钮配置
-  private controlData:Page = new Page();
-  private areaCode;//声明保存上级的地区编码
-  private queryId:number;//获取添加，修改的ID
-  private area_code: string = '';// 代理区域编码
-  private limitForm = {
+  public addButton;//新增数据按钮配置
+  public controlData:Page = new Page();
+  public areaCode;//声明保存上级的地区编码
+  public queryId:number;//获取添加，修改的ID
+  public area_code: string = '';// 代理区域编码
+  public limitForm = {
     areaCode: ''
   }
 
-  constructor(private ajax:AjaxService,private routeInfo:ActivatedRoute,private router:Router) {
+  constructor(public ajax:AjaxService,public routeInfo:ActivatedRoute,public router:Router) {
 
   }
 

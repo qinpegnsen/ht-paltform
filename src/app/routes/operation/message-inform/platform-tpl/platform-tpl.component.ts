@@ -13,13 +13,13 @@ const swal = require('sweetalert');
 })
 export class PlatformTplComponent implements OnInit {
 
-  private addbutton:Object;                              //新增平台消息模板按钮
-  private platformTplData:any;                           //平台模板的数据
-  private updatebutton:Object;                           //修改按钮
-  private deletebutton:Object;                           //删除按钮
-  private curType:any;                                   //弹框的类型
-  private curTplCode:number;                             //当前的模板编码
-  private curPage:number;                                //当前的页面
+  public addbutton:Object;                              //新增平台消息模板按钮
+  public platformTplData:any;                           //平台模板的数据
+  public updatebutton:Object;                           //修改按钮
+  public deletebutton:Object;                           //删除按钮
+  public curType:any;                                   //弹框的类型
+  public curTplCode:number;                             //当前的模板编码
+  public curPage:number;                                //当前的页面
   constructor(public operationService:OperationService) { }
 
   /**

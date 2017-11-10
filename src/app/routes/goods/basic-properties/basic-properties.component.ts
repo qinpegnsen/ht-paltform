@@ -14,21 +14,21 @@ const swal = require('sweetalert');
 export class BasicPropertiesComponent implements OnInit {
 
   @Input() selType: any; //选中的商品分类
-  private addbuttons;//添加按钮
-  private updatebuttons: Object;//修改按钮
-  private deletebuttons: Object;//删除按钮
-  private selectGoodsType:any; //选择的分类信息
+  public addbuttons;//添加按钮
+  public updatebuttons: Object;//修改按钮
+  public deletebuttons: Object;//删除按钮
+  public selectGoodsType:any; //选择的分类信息
 
-  private kindList;// 分类列表
-  private kindId:string;
+  public kindList;// 分类列表
+  public kindId:string;
   public data: Page = new Page();
-  private showAddWindow:boolean = false;
-  private showUpdateWindow:boolean = false;
+  public showAddWindow:boolean = false;
+  public showUpdateWindow:boolean = false;
 
-  private name1:any;
-  private val1:any;
-  private id1:any;
-  constructor( private submit: SubmitService,private goods: GoodsService) { }
+  public name1:any;
+  public val1:any;
+  public id1:any;
+  constructor( public submit: SubmitService,public goods: GoodsService) { }
 
   ngOnInit() {
 

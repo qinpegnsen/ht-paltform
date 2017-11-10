@@ -20,15 +20,15 @@ defineLocale('cn', zhCn);
 export class AssignComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   public path: string;//当前路由
-  private woList: Page = new Page();
-  private detail = [];
-  private woStateList: any; // 工单状态枚举列表
-  private woTypeList: any;  // 工单类型枚举列表
-  private showList: boolean = true;     //是否显示列表页
+  public woList: Page = new Page();
+  public detail = [];
+  public woStateList: any; // 工单状态枚举列表
+  public woTypeList: any;  // 工单类型枚举列表
+  public showList: boolean = true;     //是否显示列表页
   public assign:boolean;
   public curAssignWono:string;
   public curDeliverOrderId: string;
-  private search = {
+  public search = {
     wono: '',
     ordno: '',
     ordType: '',
@@ -39,11 +39,11 @@ export class AssignComponent implements OnInit {
     searchType: 'wono'
   }
 
-  constructor(private parentComp: WoManageComponent,
-              private tools: RzhtoolsService,
-              private route: ActivatedRoute,
-              private wo: WoService,
-              private submit: SubmitService,) {
+  constructor(public parentComp: WoManageComponent,
+              public tools: RzhtoolsService,
+              public route: ActivatedRoute,
+              public wo: WoService,
+              public submit: SubmitService,) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       containerClass: 'theme-blue',

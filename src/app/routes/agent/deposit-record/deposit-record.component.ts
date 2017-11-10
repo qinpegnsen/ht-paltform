@@ -14,13 +14,13 @@ const swal = require('sweetalert');
 })
 export class DepositRecordComponent implements OnInit {
   public deposits: Page = new Page();
-  private query = {
+  public query = {
     state: ''
   };
-  private detail = [];
-  constructor(private router: Router,
-              private tools: RzhtoolsService,
-              private submitService: SubmitService) {
+  public detail = [];
+  constructor(public router: Router,
+              public tools: RzhtoolsService,
+              public submitService: SubmitService) {
   }
 
   ngOnInit() {

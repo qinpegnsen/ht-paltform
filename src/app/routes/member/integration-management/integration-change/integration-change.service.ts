@@ -7,7 +7,7 @@ import {Page} from "../../../../core/page/page";
 @Injectable()
 export class IntegrationChangeService {
 
-  constructor(private ajax: AjaxService) { }
+  constructor(public ajax: AjaxService) { }
 
   /**
    * 查询可充值重消币方法

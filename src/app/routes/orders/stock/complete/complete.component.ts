@@ -16,22 +16,22 @@ defineLocale('cn', zhCn);
   styleUrls: ['./complete.component.scss']
 })
 export class CompleteComponent implements OnInit {
-  private agentAcct;
-  private agentName;
-  private agentOrdno;
+  public agentAcct;
+  public agentName;
+  public agentOrdno;
   public orderType: number = 1;
   minDate: Date = new Date();
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
-  private agentTime;
+  public agentTime;
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
-  private LogisticsData;//查看物流
-  private showList: boolean = true;
+  public LogisticsData;//查看物流
+  public showList: boolean = true;
 
-  constructor(private StockComponent:StockComponent,private submit: SubmitService,private StockService:StockService) {
+  constructor(public StockComponent:StockComponent,public submit: SubmitService,public StockService:StockService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式

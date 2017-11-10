@@ -17,24 +17,24 @@ const swal = require('sweetalert');
   styleUrls: ['./rightpage.component.scss']
 })
 export class RightpageComponent implements OnInit {
-  private queryId:number;//获取添加，修改的ID
-  private  tplImgUUid;//获取模板效果图的图片暗码
-  private  uuid=[];//获取模板效果图的图片暗码数组
-  private  tplCheckedImgUUid;//获取模板选中效果图的图片暗码
-  private optForm = {
+  public queryId:number;//获取添加，修改的ID
+  public  tplImgUUid;//获取模板效果图的图片暗码
+  public  uuid=[];//获取模板效果图的图片暗码数组
+  public  tplCheckedImgUUid;//获取模板选中效果图的图片暗码
+  public optForm = {
     optTypeCode: '',
     typeDesc:'',
     isEntered:''
   }//首页模板类型
-  private tplForm = {
+  public tplForm = {
     optTypeCode: '',
     typeDesc:'',
     isEntered:''
   }//首页模板
   public id:string;//获取首页模板ID
-  private myImg: any;//上传首页模板效果图
-  private myImgs: any;//上传首页模板效果图
-  private tplImg:string;
+  public myImg: any;//上传首页模板效果图
+  public myImgs: any;//上传首页模板效果图
+  public tplImg:string;
   public uploader: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
@@ -49,7 +49,7 @@ export class RightpageComponent implements OnInit {
     itemAlias:"limitFile"
   }); //初始化上传方法
 
-  constructor(public settings: SettingsService,private routeInfo:ActivatedRoute,private ajax:AjaxService,private router:Router,private AppIndexOptComponent:AppIndexOptComponent,private patterns: PatternService,private mask: MaskService,private getUid:GetUidService,private GetUidService:GetUidService,private AppIndexTplComponent:AppIndexTplComponent) {
+  constructor(public settings: SettingsService,public routeInfo:ActivatedRoute,public ajax:AjaxService,public router:Router,public AppIndexOptComponent:AppIndexOptComponent,public patterns: PatternService,public mask: MaskService,public getUid:GetUidService,public GetUidService:GetUidService,public AppIndexTplComponent:AppIndexTplComponent) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -204,7 +204,7 @@ queryData(){
    * 修改首页模板
     * @param value
    */
-  private upTplDatas(value){
+  public upTplDatas(value){
     let _this = this;
     _this.ajax.post({
       url: '/phone/indexTpl/update',
@@ -241,7 +241,7 @@ queryData(){
    * 添加首页模板
    * @param value
    */
-  private submitDatas(value){
+  public submitDatas(value){
     let _this = this;
     _this.ajax.post({
       url: '/phone/indexTpl/insert',

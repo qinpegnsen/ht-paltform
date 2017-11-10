@@ -10,7 +10,7 @@ declare var $: any;
 export class PublishComponent implements OnInit {
   step: number = 1;// 当前步骤
 
-  constructor(private goods:GoodsService) {
+  constructor(public goods:GoodsService) {
   }
 
   ngOnInit() {

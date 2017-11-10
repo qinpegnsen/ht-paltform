@@ -52,9 +52,9 @@ export class AddRecordComponent implements OnInit {
   }
 
 
-  constructor(private submit: SubmitService,
-              private tools: RzhtoolsService,
-              private getUid: GetUidService) {
+  constructor(public submit: SubmitService,
+              public tools: RzhtoolsService,
+              public getUid: GetUidService) {
   }
 
   ngOnInit() {
@@ -121,7 +121,7 @@ export class AddRecordComponent implements OnInit {
    * @param submitUrl
    * @param method : post/put
    */
-  private upLoadImg(){
+  public upLoadImg(){
     let me = this;
     MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
@@ -162,7 +162,7 @@ export class AddRecordComponent implements OnInit {
    * @param submitUrl
    * @param submitData
    */
-  private submitFormDataAndRefresh(){
+  public submitFormDataAndRefresh(){
     let me = this;
     if(isNullOrUndefined(me.voncher.uuid)){
       AppComponent.rzhAlt('warning','请上传汇款凭证')

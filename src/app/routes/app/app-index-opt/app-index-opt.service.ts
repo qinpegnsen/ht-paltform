@@ -6,7 +6,7 @@ import {AppComponent} from '../../../app.component';
 @Injectable()
 export class AppIndexOptService {
 
-  constructor(private ajax:AjaxService) { }
+  constructor(public ajax:AjaxService) { }
 
   /**
    * 获取移动端首页操作类型列表

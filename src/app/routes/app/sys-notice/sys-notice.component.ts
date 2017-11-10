@@ -12,10 +12,10 @@ const swal = require('sweetalert');
 })
 export class SysNoticeComponent implements OnInit {
 
-  private noticeListdata;              //存储系统公告的信息
-  private noticeAddbutton:Object;      //新增公告按钮
-  private delEXpireAddbutton:Object;   //删除到期公告按钮
-  private deletebutton:Object;         //删除按钮
+  public noticeListdata;              //存储系统公告的信息
+  public noticeAddbutton:Object;      //新增公告按钮
+  public delEXpireAddbutton:Object;   //删除到期公告按钮
+  public deletebutton:Object;         //删除按钮
   constructor(public service:SubmitService) {}
 
   /**

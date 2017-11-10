@@ -12,10 +12,10 @@ const swal = require('sweetalert');
 
 export class DatatablesComponent implements OnInit {
   public test;
-  private table;    //datatable的对象信息
-  private tableId; //列表id
+  public table;    //datatable的对象信息
+  public tableId; //列表id
 
-  constructor(private ajax: AjaxService, private tableInfo: TableService,private router:Router) { //初始化
+  constructor(public ajax: AjaxService, public tableInfo: TableService,public router:Router) { //初始化
     this.tableId = 'elderGrid'; //定义列表id
   }
 

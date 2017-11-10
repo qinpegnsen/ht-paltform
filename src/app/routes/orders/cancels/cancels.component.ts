@@ -14,14 +14,14 @@ const swal = require('sweetalert');
 })
 export class CancelsComponent implements OnInit {
   public showCancelWindow:boolean = false;
-  private ordnoA;
-  private code;
+  public ordnoA;
+  public code;
   public goodsList: Page = new Page();
-  private goodsAudits: any;
-  private query;  // 商品审核状态列表
+  public goodsAudits: any;
+  public query;  // 商品审核状态列表
   public staff={};
   public ordno:string;//获取区域编码
-  private reqMoney;
+  public reqMoney;
 
   @Input('orderId') orderId: string;
   @Output() cancelOrder = new EventEmitter();
@@ -36,7 +36,7 @@ export class CancelsComponent implements OnInit {
     }
   }
 
-  constructor(private ajax:AjaxService, private submit: SubmitService,private routeInfo:ActivatedRoute) { }
+  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute) { }
 
   ngOnInit() {
     let _this = this;

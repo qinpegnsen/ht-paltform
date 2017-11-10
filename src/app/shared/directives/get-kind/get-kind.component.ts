@@ -10,24 +10,24 @@ declare var $: any;
   providers: [GoodsService]
 })
 export class GetKindComponent implements OnInit {
-  private myKindName: string = '';
-  private kindId: string;
-  private kindList: any;
-  private show: boolean;
-  private isLastLevel: boolean = false;
-  private level:any;
+  public myKindName: string = '';
+  public kindId: string;
+  public kindList: any;
+  public show: boolean;
+  public isLastLevel: boolean = false;
+  public level:any;
   @Output() myData = new EventEmitter();
   @Input() defaultData: any = {};
 
 
-  constructor(private goods: GoodsService) {
+  constructor(public goods: GoodsService) {
   };
 
   ngOnInit() {
     /**
      * 点击选框外页面时，关闭选框
      * @type {SelectAreaComponent}
-     * @private
+     * @public
      */
     let _this = this;
     if (!isNullOrUndefined(_this.defaultData) && _this.defaultData != "") _this.setValue();
@@ -94,7 +94,7 @@ export class GetKindComponent implements OnInit {
   /**
    * 动态赋值
    */
-  private setValue() {
+  public setValue() {
     let _this = this;
     _this.myKindName = this.defaultData.myKindName;
     _this.kindId = this.defaultData.kindId;
@@ -106,7 +106,7 @@ export class GetKindComponent implements OnInit {
   /**
    * 设置myData信息（对外提供数据）
    */
-  private setMyData() {
+  public setMyData() {
     this.myData.emit({
       kindId: this.kindId,
       myKindName: this.myKindName,

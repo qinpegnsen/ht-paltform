@@ -6,8 +6,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./states.component.scss']
 })
 export class StatesComponent implements OnInit {
-  private icon:string;
-  private btnClass:string;
+  public icon:string;
+  public btnClass:string;
 
   @Input() state:string;
   @Input() size:string;

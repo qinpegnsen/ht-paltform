@@ -19,7 +19,7 @@ const uploadUrl = "upload/basic/upload";  //图片上传路径(调取上传的�
 export class AddAgentComponent implements OnInit {
   public flag:boolean=false;//修改经纬度按钮的显示
   public maps:string='';//修改经纬度按钮的显示
-  private organ={}
+  public organ={}
   public uploader:FileUploader = new FileUploader({
     url: uploadUrl,
     itemAlias:"limitFile",
@@ -27,13 +27,13 @@ export class AddAgentComponent implements OnInit {
   }); //初始化上传方法
   public linkType:string;
   public agentCode:string;//获取代理商编码
-  private staff:any = {};
-  private showUp = false;
-  private placeSearch: any;
-  private selectArea;
+  public staff:any = {};
+  public showUp = false;
+  public placeSearch: any;
+  public selectArea;
 
 
-  constructor(public settings:SettingsService, private ajax:AjaxService, private router:Router, private routeInfo:ActivatedRoute,private patterns: PatternService) {
+  constructor(public settings:SettingsService, public ajax:AjaxService, public router:Router, public routeInfo:ActivatedRoute,public patterns: PatternService) {
     this.settings.showRightPage("30%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
 
@@ -181,7 +181,7 @@ export class AddAgentComponent implements OnInit {
   }
 
   //获取区域数据
-  private getAreaData(area){
+  public getAreaData(area){
     let me = this;
     me.staff['areaCode'] = area.areaCode;
     console.log("█ me.staff ►►►",  me.staff);

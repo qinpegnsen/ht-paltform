@@ -36,7 +36,7 @@ export class SkuGoodsComponent implements OnInit {
     if(!isNullOrUndefined(list)) this.skuData = list;
   }
 
-  constructor(private submit:SubmitService) { }
+  constructor(public submit:SubmitService) { }
 
   ngOnInit() {
   }

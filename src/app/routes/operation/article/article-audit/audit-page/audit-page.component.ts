@@ -22,7 +22,7 @@ export class AuditPageComponent implements OnInit {
   public curPage;                                   //当前的页面
 
   constructor(
-    private routeInfo: ActivatedRoute,
+    public routeInfo: ActivatedRoute,
     public ContentService: ContentService,
     public router: Router,
     public location: Location,
