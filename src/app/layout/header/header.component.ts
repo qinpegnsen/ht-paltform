@@ -19,7 +19,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit{
 
-  private platformInfoData: any;                           //代理商系统消息的数据
+  public platformInfoData: any;                           //代理商系统消息的数据
 
 
   navCollapsed = true;
