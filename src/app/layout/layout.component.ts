@@ -8,15 +8,8 @@ import {NavigationStart, Router} from "@angular/router";
 })
 export class LayoutComponent implements OnInit {
   private menuItems:any;
-  private path;
 
     constructor(private router: Router) {
-      this.router.events
-        .filter(event => event instanceof NavigationStart)
-        .subscribe((event) => {
-          this.path = event['url'];
-        });
-
     }
 
     ngOnInit() {

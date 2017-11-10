@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {UserblockService} from "../sidebar/userblock/userblock.service";
 import {SettingsService} from "../../core/settings/settings.service";
 import {MenuService} from "../../core/menu/menu.service";
@@ -6,7 +6,6 @@ import {Router} from "@angular/router";
 import {AjaxService} from "../../core/services/ajax.service";
 import {CookieService} from "angular2-cookie/core";
 import {LayoutComponent} from "../layout.component";
-import {isNullOrUndefined} from "util";
 import {Page} from "../../core/page/page";
 import {SubmitService} from "../../core/forms/submit.service";
 const screenfull = require('screenfull');
@@ -18,18 +17,9 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit{
 
   private platformInfoData: any;                           //代理商系统消息的数据
-  @Input() private curPath;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    let me = this;
-    if (changes['curPath'] && !isNullOrUndefined(me.curPath)) {
-      // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
-      me.getSubmenus(me.curPath);
-    }
-  }
 
 
   navCollapsed = true;
