@@ -66,13 +66,13 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">凭证：</td>
             <td class="item-bd col-sm-10 mb0">
-              <span *ngFor="let item of afterData.afterGoodsReqVouList">
-                <img class="goods-md-img mr" [src]="item.vpic" (mousemove)="showImg($event)"
+              <div class="tag-dib imgbox b text-center mr" *ngFor="let item of afterData.afterGoodsReqVouList">
+                <img class="img" [src]="item.vpic" (mousemove)="showImg($event)"
                      (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
                      alt="">
                 <img [src]="item.vpic" class="hover-native-img" alt=""
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </span>
+              </div>
             </td>
           </tr>
         </table>
