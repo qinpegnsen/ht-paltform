@@ -7,16 +7,9 @@ import {NavigationStart, Router} from "@angular/router";
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  public menuItems:any;
-  public path;
+  private menuItems:any;
 
-    constructor(public router: Router) {
-      this.router.events
-        .filter(event => event instanceof NavigationStart)
-        .subscribe((event) => {
-          this.path = event['url'];
-        });
-
+    constructor(private router: Router) {
     }
 
     ngOnInit() {

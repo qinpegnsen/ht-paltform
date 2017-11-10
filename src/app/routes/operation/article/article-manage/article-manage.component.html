@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="">
+<div>
   <app-content-nav (sendState)="getState($event)" [totalRow]="totalRow"></app-content-nav>
   <app-content [state]="state" #child [searchKey]="searchKey" (emitTotalRow)="getEmitTotalRow($event)" ></app-content>
 </div>

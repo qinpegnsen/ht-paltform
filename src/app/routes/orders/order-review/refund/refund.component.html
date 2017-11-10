@@ -42,11 +42,11 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>&nbsp;汇款人：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel">
+            <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel" [pattern]="patterns.chinese">
           </dd>
           <div [hidden]="payBacctName.valid || payBacctName.pristine"
                class="col-sm-9 pull-right text-danger">
-            请输入汇款人
+            请输入正确汇款人
           </div>
         </dl>
         <dl class="bb m0 clearfix">

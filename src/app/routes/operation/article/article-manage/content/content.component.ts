@@ -86,7 +86,7 @@ export class ContentComponent implements OnInit,OnChanges,OnDestroy  {
           }else if(event.url=='/main/operation/article/manage'){
             that.flag=true;
             let curPage =sessionStorage.getItem('curPage');
-            if(curPage=='undefined'){//新增的时候 isnullOrundefined不行
+            if(curPage=='undefined'){//调到当前编辑的页面 新增的时候 isnullOrundefined不行
               curPage='1';
             }
             that.queryArticManleList('N',curPage) //刷新内容页面

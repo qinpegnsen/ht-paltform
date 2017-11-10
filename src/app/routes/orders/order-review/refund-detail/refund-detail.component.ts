@@ -38,7 +38,7 @@ export class RefundDetailComponent implements OnInit {
   showImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'block';
-    target.style.top = (event.clientY -40) + 'px';
+    target.style.top = (event.clientY -150) + 'px';
     target.style.left = (event.clientX + 40) + 'px';
   }
 
