@@ -44,7 +44,8 @@ export class PatternService {
     this.tplCode = '^[A-Za-z0-9]+$'; //只能输入英文和数字的(用于添加APP首页模板的模板编码)
     this.integer = '^[0-9]*[1-9][0-9]*$'; //只能正整数
     this.threedecimal = '^[0-9]+(.[0-9]{1,3})?$'; //只能正整数
-    this.express = '^[A-Za-z0-9]+$'　　//由数字和26个英文字母组成的字符串
+    this.express = '^[A-Za-z0-9]+$';　　//由数字和26个英文字母组成的字符串
+
   }
 
 }
