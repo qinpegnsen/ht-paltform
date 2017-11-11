@@ -22,7 +22,7 @@
   </div>
 
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="queryDatas($event)">
+    <table class="table table-striped">
       <thead>
       <tr>
         <!--<th class="text-center w5">-->
@@ -39,7 +39,7 @@
         </th>
       </tr>
       </thead>
-      <tbody dnd-sortable-container [sortableData]="data.baseTypeList">
+      <tbody dnd-sortable-container [sortableData]="data.voList">
       <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i" >
       <!--<td>{{i+1}}</td>-->
       <td >{{count.name}}</td>

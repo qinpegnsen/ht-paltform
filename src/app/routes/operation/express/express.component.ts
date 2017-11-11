@@ -15,9 +15,9 @@ export class ExpressComponent implements OnInit {
 
   public expressListdata;            //用来存储快递公司的信息
   public searchKey:string='';        //默认查询的分类的名称
-  public expressAddbutton:Object;     //新增快递公司按钮
-  public updatebutton:Object;         //修改按钮
-  public deletebutton:Object;         //删除按钮
+  public expressAddbutton:any;     //新增快递公司按钮
+  public updatebutton:any;         //修改按钮
+  public deletebutton:any;         //删除按钮
 
   constructor(public service:SubmitService) {}
 

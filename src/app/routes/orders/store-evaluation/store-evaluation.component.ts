@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-store-evaluation',
@@ -31,7 +32,11 @@ export class StoreEvaluationComponent implements OnInit {
    */
   qeuryAll(curPage,event?: PageEvent,){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
+    };
     let url = "/goodsQuery/querySku";
     let data={
       curPage: activePage,
@@ -40,7 +45,6 @@ export class StoreEvaluationComponent implements OnInit {
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);
-    console.log("█ result ►►►",  result);
   }
 
   /**

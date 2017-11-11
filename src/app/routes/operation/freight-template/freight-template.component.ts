@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import {FreightTemplateService} from "./freight-template.service";
@@ -12,7 +12,8 @@ const swal = require('sweetalert');
   styleUrls: ['./freight-template.component.scss'],
   providers:[FreightTemplateService,SessionService]
 })
-export class FreightTemplateComponent implements OnInit {
+export class FreightTemplateComponent implements OnInit ,OnDestroy{
+  public urlChange;
   public addButton;//新增运费模板按钮配置
   public updatebutton;//修改运费模板按钮配置
   public deletebutton;//删除运费模板按钮配置
@@ -66,7 +67,7 @@ export class FreightTemplateComponent implements OnInit {
      * 1.当添加运费模板出现的时候，运费模板列表组件隐藏
      * 2.路由变化的时候，刷新页面
      */
-    _this.router.events
+   _this.urlChange =  _this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           console.log(event.url)
@@ -78,6 +79,13 @@ export class FreightTemplateComponent implements OnInit {
         }
       });
     _this.queryList()//获取费模板列表信息
+  }
+
+  /**
+   * 取消订阅，要不然一直执行
+   */
+  ngOnDestroy(){
+    this.urlChange.unsubscribe()
   }
 
 

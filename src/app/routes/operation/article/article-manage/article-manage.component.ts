@@ -10,7 +10,7 @@ export class ArticleManageComponent implements OnInit{
   public state                               //文章的状态
   public totalRow                            //文章各种状态的总条数
   public flag:boolean;                        //定义boolean值用来控制内容组件是否显示
-
+  public searchKey:string;                    //搜索名称
   constructor() {}
 
   /**linkType

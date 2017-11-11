@@ -64,7 +64,7 @@
 <div class="panel panel-default mt20">
   <div class="table-title thc ts statics-font">退款金额统计表</div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="queryDatas($event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="qeuryAll($event)">
       <thead>
       <tr>
         <th class="text-center w33">

@@ -35,7 +35,7 @@ export class IntegrationImportComponent implements OnInit {
   }
 
   //上传
-  public upLoadExcel(submitUrl,submitData,method){
+  public upLoadExcel(){
     let me = this;
   if(this.onOff){
     this.onOff = false;

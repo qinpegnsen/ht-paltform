@@ -16,7 +16,7 @@
         <div class="form-group clearfix">
           <span class="pull-left query-name lh">选择品牌：</span>
           <div class="col-md-8 col-xs-6 pl0">
-            <ng-select [allowClear]="true" [items]="brandList" [disabled]="disabled"  (data)="refreshValue($event)" placeholder="全部品牌">
+            <ng-select [allowClear]="true" [items]="brandList"   (data)="refreshValue($event)" placeholder="全部品牌">
             </ng-select>
           </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="col-md-8 col-xs-6 pl0">
           <input type="text" [(ngModel)]="goodsName"
                  class="form-control border-b-grey"
-                 (change)="search($event)" placeholder="商品名">
+                 (change)="search()" placeholder="商品名">
         </div>
         <button type="button" title="搜索"
                 class="btn thc btn-thc bar-h3-btn mr ng-scope">

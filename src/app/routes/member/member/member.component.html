@@ -7,18 +7,18 @@
         <div class="form-group col-md-3">
           <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
-                   (change)="queryMemberList()" maxlength="50" placeholder="请输入要查询的会员名称">
+                   (change)="queryMemberList(1)" maxlength="50" placeholder="请输入要查询的会员名称">
           </div>
         </div>
         <div class="form-group mb0 col-md-3">
           <div class="pl0">
             <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTruename"
-                   (change)="queryMemberList()"  maxlength="50" placeholder="请输入要查询的会员真实姓名">
+                   (change)="queryMemberList(1)"  maxlength="50" placeholder="请输入要查询的会员真实姓名">
           </div>
         </div>
         <div class="form-group col-md-3 clearfix">
           <div class="pl0">
-            <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList()" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
+            <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList(1)" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="search-group ml-xl mb">
           <span class="search-title">会员类别：</span>
           <div class="search-main">
-            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search($event)">
+            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search(1)">
               <option value="">全部</option>
               <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
             </select>
@@ -35,7 +35,7 @@
         <div class="search-group ml-xl mb">
           <span class="search-title">会员状态：</span>
           <div class="search-main">
-            <select class="form-control" name="state" [(ngModel)]="state" (change)="search($event)">
+            <select class="form-control" name="state" [(ngModel)]="state" (change)="search(1)">
               <option value="">全部</option>
               <option *ngFor="let item of states" [value]="item.key">{{item.val}}</option>
             </select>
