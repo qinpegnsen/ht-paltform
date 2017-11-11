@@ -1,9 +1,8 @@
-
-<div class="cancel-order fadeIn"  *ngIf="showRefundWindow">
+<div class="cancel-order fadeIn" *ngIf="showRefundWindow">
   <div class="mask"></div>
 
-    <div class="popup animated fadeIn">
-      <form class="_popup animated fadeIn" #addForm="ngForm">
+  <div class="popup animated fadeIn">
+    <form class="_popup animated fadeIn" #addForm="ngForm">
       <div class="pop popup-hd">
         <span class="">退款信息</span>
         <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
@@ -17,7 +16,7 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">退款金额：</dt>
           <dd class="orderId-color col-xs-9 font14">
-           {{goodspay}}
+            {{goodspay}}
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
@@ -32,7 +31,8 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3 refund-color"><i>*</i>&nbsp;<span>汇款账号：</span></dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required #payAcct="ngModel" [pattern]="patterns.backcard">
+            <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required
+                   #payAcct="ngModel" [pattern]="patterns.backcard">
           </dd>
           <div [hidden]="payAcct.valid || payAcct.pristine"
                class="col-sm-9 pull-right text-danger">
@@ -42,11 +42,12 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>&nbsp;汇款人：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required #payBacctName="ngModel" [pattern]="patterns.chinese">
+            <input type="text" class="form-control" placeholder="请输入汇款人" name="payBacctName" ngModel required
+                   #payBacctName="ngModel" [pattern]="patterns.chinese">
           </dd>
           <div [hidden]="payBacctName.valid || payBacctName.pristine"
                class="col-sm-9 pull-right text-danger">
-            请输入合法汇款人
+            请输入正确汇款人姓名
           </div>
         </dl>
         <dl class="bb m0 clearfix">
@@ -70,16 +71,19 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i>*</i>&nbsp;汇款时间：</dt>
           <dd class="orderId-color col-xs-9 font14">
-            <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+            <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker
+                   #dp="bsDatepicker" [bsConfig]="bsConfig">
             <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
           </dd>
         </dl>
       </div>
       <div class="panel-footer text-right">
         <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)" [disabled]="addForm.invalid||uploader.queue.length==0">确认提交</button>
+        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)"
+                [disabled]="addForm.invalid||uploader.queue.length==0">确认提交
+        </button>
       </div>
-
-  </form> </div>
+    </form>
+  </div>
 </div>
 

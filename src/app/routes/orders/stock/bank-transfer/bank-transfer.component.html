@@ -22,11 +22,11 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3 lh40"><i class="main-red">*</i>交易流水码：</dt>
         <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入交易流水码" name="tc3rd" ngModel required #tc3rd="ngModel">
+          <input type="text" class="form-control" placeholder="请输入交易流水码" name="tc3rd" ngModel required #tc3rd="ngModel"  [pattern]="patterns.num">
         </dd>
         <div [hidden]="tc3rd.valid || tc3rd.pristine"
              class="col-sm-9 pull-right text-danger">
-          请输入交易流水码
+          请输入正确交易流水码
         </div>
       </dl>
       <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>
@@ -47,7 +47,7 @@
         </dd>
         <div [hidden]="bacctName.valid || bacctName.pristine"
                   class="col-sm-9 pull-right text-danger">
-        请输入合法付款人
+          请输入正确汇款人姓名
         </div>
       </dl>
       <dl class="bb m0 clearfix">
