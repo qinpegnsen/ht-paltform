@@ -10,7 +10,7 @@ import {CoreModule} from "./core/core.module";
 import {LayoutModule} from "./layout/layout.module";
 import {SharedModule} from "./shared/shared.module";
 import {RoutesModule} from "./routes/routes.module";
-import {CookieService} from "angular2-cookie/core";
+import {CookieOptions, CookieService} from "angular2-cookie/core";
 import {PopupComponent} from "./routes/operationpage/popup/popup.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
@@ -38,6 +38,7 @@ export function createTranslateLoader(http: Http) {
   ],
   providers: [
     CookieService,
+    { provide: CookieOptions, useValue: {} },
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],

@@ -21,6 +21,7 @@ export class AddNoticeComponent implements OnInit {
   date: any = new Date();                        //插件选择的日期
   minDate: any = new Date();                     //插件选择的日期下限
   myDate: any = new Date();                      //转换过后的日期
+  public showSec: boolean = true;               //是否显示秒
 
   constructor(
     public settings: SettingsService,

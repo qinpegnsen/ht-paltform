@@ -45,7 +45,7 @@ export class MemberComponent implements OnInit {
     this.authStates = this.tools.getEnumDataList('1028');   //会员状态枚举列表
     this.states = this.tools.getEnumDataList('1018');   //会员状态枚举列表
   }
-  search(){
+  search(curPage){
     this.queryMemberList(1);
   }
   /**

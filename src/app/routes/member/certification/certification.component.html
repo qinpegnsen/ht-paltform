@@ -4,14 +4,14 @@
 </div>
 <div class="order panel mb">
   <div class="panel-body">
-    <div *ngIf="orderType!=100">
+    <div>
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="state=='AUDIT'" [class.bb]="state=='AUDIT'"
-            (click)="aqeuryAll('AUDIT')" >待审核</li>
-        <li class="pull-left thc" [class.font]="state=='PASS'" [class.bb]="state=='PASS'" (click)="aqeuryAll('PASS')"
+            (click)="aqeuryAll('AUDIT',1)" >待审核</li>
+        <li class="pull-left thc" [class.font]="state=='PASS'" [class.bb]="state=='PASS'" (click)="aqeuryAll('PASS',1)"
         >审核通过</li>
         <li class="pull-left thc" [class.font]="state=='UNPASS'" [class.bb]="state=='UNPASS'"
-            (click)="aqeuryAll('UNPASS')" >审核驳回</li>
+            (click)="aqeuryAll('UNPASS',1)" >审核驳回</li>
       </ul>
     </div>
     <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="aqeuryAll(state,1,$event)">

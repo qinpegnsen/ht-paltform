@@ -20,6 +20,7 @@ export class AuditPageComponent implements OnInit {
   public autionOptions;                             //审核状态的列表
   public articleCoverTypes;                         //文章封面的类型数据
   public curPage;                                   //当前的页面
+  public auditResult;
 
   constructor(
     public routeInfo: ActivatedRoute,
