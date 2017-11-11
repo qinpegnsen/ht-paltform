@@ -10,8 +10,6 @@ export class OrdersService {
   constructor(public submit: SubmitService,public ajax: AjaxService) {
   }
 
-  public searchData:any;
-
 
   public getOrderLogisticsData(ordno) {
     let url = '/ord/tail/queryDeliveryList';

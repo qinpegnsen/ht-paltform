@@ -36,9 +36,10 @@
     </div>
     <!--查询 end-->
     <ul class="clearfix order-table-head list-unstyled mb0 p b">
-      <li class="w40 pull-left text-center">商品</li>
+      <li class="w35 pull-left text-center">商品</li>
       <li class="w10 pull-left text-center">单价</li>
-      <li class="w10 pull-left text-center">数量</li>
+      <li class="w7 pull-left text-center">数量</li>
+      <li class="w8 pull-left text-center">异常状态</li>
       <li class="w10 pull-left text-center">买家</li>
       <li class="w10 pull-left text-center">订单金额(元)</li>
       <li class="w10 pull-left text-center">交易状态</li>
@@ -59,10 +60,13 @@
           </div>
           <table class="w100 b">
             <tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">
-              <td class="w40 p text-left position-relative bb">
-            <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
-                                                         onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                                                         alt=""></span>
+              <td class="w35 p text-left position-relative bb">
+                <ng-container *ngIf="order.state == 'PAID' || order.state == 'ASSIGNED' || order.state == 'PREPARE'">
+                  <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+                </ng-container>
+                <span class="goods-img goods-lg-img mr">
+                  <img [src]="goods.goodsImage" onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                       alt=""></span>
                 <div class="goods-lg-info">
                   <p class="mb0 font13 omg2 two-row mb-sm">
                     <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
@@ -73,15 +77,32 @@
                   </p>
                 </div>
               </td>
-              <td class="w10"
-                  [class.bb]="s != order.ordItemList.length-1"><span>¥{{goods.price | number: '1.2-2'}}</span></td>
-              <td class="w10" [class.bb]="s != order.ordItemList.length-1">{{goods.num}}</td>
+              <td class="w10 position-relative" [class.bb]="s != order.ordItemList.length-1">
+                <ng-container *ngIf="order.state == 'PAID' || order.state == 'ASSIGNED' || order.state == 'PREPARE'">
+                  <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+                </ng-container>
+                <span>¥{{goods.price | number: '1.2-2'}}</span>
+              </td>
+              <td class="w7 position-relative" [class.bb]="s != order.ordItemList.length-1">
+                <ng-container *ngIf="order.state == 'PAID' || order.state == 'ASSIGNED' || order.state == 'PREPARE'">
+                  <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+                </ng-container>
+                {{goods.num}}
+              </td>
+              <td class="w8" [class.bb]="s != order.ordItemList.length-1">
+                <ng-container *ngIf="order.state == 'PAID' || order.state == 'ASSIGNED' || order.state == 'PREPARE'">
+                  <span *ngIf="!goods.canDELIVERY">
+                    <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
+                  </span>
+                </ng-container>
+              </td>
               <ng-container *ngIf="s==0">
                 <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
-            <span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
-                  (mouseleave)="hideBuyerInfo(i)">{{order.linkman}}
-            </span>
-                  <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
+                  <span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+                        (mouseleave)="hideBuyerInfo(i)">{{order.linkman}}
+                  </span>
+                  <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)"
+                       (mouseleave)="hideBuyerInfo(i)">
                     <div class="info-con">
                       <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
                       <dl>

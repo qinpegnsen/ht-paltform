@@ -197,9 +197,10 @@
   <table class="w100 b">
     <thead class="w100">
     <tr class="w100 order-head">
-      <th class="w50 p text-center">商品</th>
+      <th class="w40 p text-center">商品</th>
       <th class="w10 p text-center">单价(元)</th>
       <th class="w10 p text-center">数量</th>
+      <th class="w10 p text-center">异常状态</th>
       <th class="w10 p text-center">订单金额(元)</th>
       <th class="w10 p text-center">交易操作</th>
     </tr>
@@ -207,9 +208,12 @@
     <tbody>
     <tr class="text-center" *ngFor="let goods of goodsData;let i = index">
       <td class="text-left p position-relative bb">
-          <span class="goods-img goods-lg-img mr"><img [src]="goods.goodsImage"
-                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                                                       alt=""></span>
+        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
+          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+        </ng-container>
+        <span class="goods-img goods-lg-img mr">
+              <img [src]="goods.goodsImage" onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+            </span>
         <div class="goods-lg-info">
           <p class="mb0 font13 omg2 two-row mb-sm">
             <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
@@ -220,18 +224,35 @@
           </p>
         </div>
       </td>
-      <td class="bb">{{goods.price | number: '1.2-2'}}</td>
-      <td class="bb bl">{{goods.num}}</td>
+      <td class="bb position-relative">
+        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
+          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+        </ng-container>
+        {{goods.price | number: '1.2-2'}}
+      </td>
+      <td class="bb position-relative">
+        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
+          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+        </ng-container>
+        {{goods.num}}
+      </td>
+      <td class="w10 bb">
+        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
+                  <span *ngIf="!goods.canDELIVERY">
+                    <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
+                  </span>
+        </ng-container>
+      </td>
       <ng-container *ngIf="i == 0">
         <td class="bl" [attr.rowspan]="goodsData.length">
           <span class="main-red font14">¥{{orderDetailData.total | number: '1.2-2'}}</span><br>
-          <span class="font-gray" *ngIf="orderDetailData.freight == 0">(免运费)</span>
-          <span class="font-gray" *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight |
-            number: '1.2-2'}}</span><br>
-          <span class="font-gray">{{goodsData.payWay | rzhState:'1017'}}</span>
+          <span class="font-gray font12" *ngIf="orderDetailData.freight == 0">(免运费)</span>
+          <span class="font-gray"
+                *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight | number: '1.2-2'}}</span><br>
+          <span class="font-gray font12">{{goodsData.payWay | rzhState:'1017'}}</span>
         </td>
-        <td class="bl" [attr.rowspan]="orderDetailData.length">
-          <p class="font-gray mb-sm cursor-p">{{orderDetailData.state | rzhState:'1019'}}</p>
+        <td class="bl br" [attr.rowspan]="goodsData.length">
+          <p class="font-gray mb-sm cursor-p font12">{{orderDetailData.state | rzhState:'1019'}}</p>
         </td>
       </ng-container>
     </tr>
@@ -240,23 +261,27 @@
     <tr>
       <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
         <dl class="text-right mb0">
-          <dt class="font14">商品总额：</dt>
-          <dd><span class="main-red ml-sm font18 mr price-wid">¥{{orderDetailData.total | number: '1.2-2'}}</span></dd>
+          <dt class="font14 w10">商品总额：</dt>
+          <dd class="w10 text-left">
+            <span class="ml-sm font18 mr main-red price-wid">¥ {{orderDetailData.total | number:'1.2-2'}}</span>
+          </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt>运费：</dt>
-          <dd>
-            <span class="main-red font12 ml mr price-wid"
-                  *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">(免运费)</span>
+          <dt class="w10">运费：</dt>
+          <dd class="w10 text-left">
+                <span class="ml-sm font14 mr main-red  price-wid"
+                      *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">免运费</span>
             <ng-container *ngIf="orderDetailData.freight != 0">
-              <span class="main-red font18 ml-sm mr price-wid">¥{{orderDetailData.freight | number: '1.2-2'}}</span>
+              <span class="font18 ml-sm main-red mr price-wid">¥ {{orderDetailData.freight | number:'1.2-2'}}</span>
             </ng-container>
           </dd>
         </dl>
         <dl class="text-right mb0">
-          <dt class="font14">应付金额：</dt>
-          <dd><span class="main-red ml-sm font18 mr price-wid">¥{{orderDetailData.total+orderDetailData.freight |
-            number: '1.2-2'}}</span></dd>
+          <dt class="font14 w10">应付金额：</dt>
+          <dd class="w10 text-left">
+            <span class="ml-sm font18 mr main-red  price-wid">¥ {{orderDetailData.total+orderDetailData.freight |
+            number:'1.2-2'}}</span>
+          </dd>
         </dl>
         <dl class="text-right mb0">
           <dt>
@@ -264,15 +289,16 @@
                triggers="mouseenter:mouseleave"></i>
             重消币抵扣金额：
           </dt>
-          <dd>
-            <span *ngIf="!orderDetailData.coinPay" class="main-red font18 ml-sm mr price-wid">¥0.00</span>
-            <span *ngIf="orderDetailData.coinPay"
-                  class="main-red font18 ml-sm mr price-wid">¥{{orderDetailData.coinPay | number:'1.2-2'}}</span>
+          <dd class="w10 text-left">
+            <span *ngIf="!orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ 0.00</span>
+            <span *ngIf="orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
           </dd>
         </dl>
         <dl class="text-right mb0">
           <dt class="font14">最终支付金额：</dt>
-          <dd><span class="main-red ml-sm font22 mr price-wid">¥{{orderDetailData.pay | number: '1.2-2'}}</span></dd>
+          <dd class="w10 text-left">
+            <span class="main-red ml-sm font22 mr price-wid">¥ {{orderDetailData.pay | number:'1.2-2'}}</span>
+          </dd>
         </dl>
       </td>
     </tr>
