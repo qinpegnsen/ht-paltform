@@ -17,7 +17,7 @@
       <dl *ngIf="orderDetailData.state!='CR'">
         <dt>平台备注：</dt>
         <dd class="position-relative">
-          <span>{{orderDetailData.remark}}</span>
+          <span class="tag-dib w100">{{orderDetailData.remark}}</span>
           <button class="btn btn-default btn-xs fa fa-pencil" (click)="dropdownToggle(edit)" title="修改备注"></button>
           <div class="w100 dropdown-menu animated fadeInDown" #edit>
             <div class="mea-text">

@@ -215,15 +215,9 @@
     </tr>
     </tfoot>
   </table>
-  <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-  <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
-  <app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
-                     (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-  <!--</ng-container>-->
-
-  <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
-
 </div>
+<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+                   (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
 <!--路由嵌套 begin-->
 <router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->
