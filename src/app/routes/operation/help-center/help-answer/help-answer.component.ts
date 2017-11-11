@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Page} from "../../../../core/page/page";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
@@ -13,7 +13,8 @@ const swal = require('sweetalert');
   templateUrl: './help-answer.component.html',
   styleUrls: ['./help-answer.component.scss']
 })
-export class HelpAnswerComponent implements OnInit {
+export class HelpAnswerComponent implements OnInit,OnDestroy {
+  public urlChange;
   public data: Page = new Page();
   public addButton;//添加按钮
   public updatebutton: Object;//修改按钮
@@ -48,7 +49,7 @@ export class HelpAnswerComponent implements OnInit {
      * 2.路由变化的时候，刷新页面
      */
     let that=this;
-    that.router.events
+    that.urlChange = that.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) { // 当导航成功结束时执行
           if(event.url.indexOf('linkType')>0){
@@ -65,6 +66,13 @@ export class HelpAnswerComponent implements OnInit {
       });
     // me.kindId = me.kinds[0].id;   //帮助问题默认分类
 
+  }
+
+  /**
+   * 取消订阅，要不然一直执行
+   */
+  ngOnDestroy(){
+    this.urlChange.unsubscribe()
   }
 
   /**

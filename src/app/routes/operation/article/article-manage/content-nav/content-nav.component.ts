@@ -16,7 +16,7 @@ export class ContentNavComponent implements OnInit,OnChanges{
   public totalRow;                           //获取各种状态的总条数,然后刷新页面
   public flag='DRAFT';                     //默认草稿是选中的状态,给点击的当前的状态添加样式
   public defaultState='DRAFT';            //组件之间传送的时候默认的是草稿的状态
-  public stateList={};                    //各种状态总数列表
+  public stateList:any;                    //各种状态总数列表
 
   constructor(public NavService:NavService,public service:SubmitService,public router:Router) { }
 

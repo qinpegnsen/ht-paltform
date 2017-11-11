@@ -6,9 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./button-demo.component.scss']
 })
 export class ButtonDemoComponent implements OnInit {
-  public buttonConfig: object;  //单按钮配置
-  public textButtonConfig:object;  //带文字的按钮配置
-  public buttonListConfig: Array<object>;  //多按钮配置
+  public buttonConfig: any;  //单按钮配置
+  public textButtonConfig:any;  //带文字的按钮配置
+  public buttonListConfig: Array<any>;  //多按钮配置
 
   constructor() {
     var _this = this;

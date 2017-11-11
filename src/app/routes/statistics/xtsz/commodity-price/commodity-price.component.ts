@@ -40,12 +40,10 @@ export class CommodityPriceComponent implements OnInit {
    }
    let result=this.submit.putRequest(url, data,false);
    this.qeuryAll();
-   console.log("█ result ►►►",  result);
  }
   showDetail(data:any,code){
     data.isShow = !data.isShow;
     this.updata = this.submit.getData("/datadict/loadDatadictByCode", {code:code});
-    console.log("█ this.updata  ►►►",  this.updata );
   }
   cancel(data2){
     data2.isShow = !data2.isShow;

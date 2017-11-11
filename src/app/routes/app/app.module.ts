@@ -24,7 +24,7 @@ const addNotice: Routes = [
   {path: 'addNotice', component: AddNoticeComponent}
 ];
 const routes: Routes = [
-  {path: '', component: AppIndexOptComponent},
+  {path: '', redirectTo:'app-index-opt'},
   {path: 'app-index-opt', component: AppIndexOptComponent,children: appChildRoutesfile},
   {path: 'app-index-tpl', component: AppIndexTplComponent,children: appChildRoutesfile},
   {path: 'app-set', component: AppSetComponent},

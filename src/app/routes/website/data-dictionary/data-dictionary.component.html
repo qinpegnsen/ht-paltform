@@ -47,7 +47,7 @@
         </th>
         <th class="w22 text-left">
           <rzhDefaultSorter by="name" *ngIf="childMenuTitList.length < 1">类型名（name）</rzhDefaultSorter>
-          <rzhDefaultSorter by="val" *ngIf="!childMenuTitList.length < 1">值名称（val）</rzhDefaultSorter>
+          <rzhDefaultSorter by="val" *ngIf="!(childMenuTitList.length < 1)">值名称（val）</rzhDefaultSorter>
         </th>
         <th class="w23 text-left ">
           <rzhDefaultSorter by="remark">备注</rzhDefaultSorter>

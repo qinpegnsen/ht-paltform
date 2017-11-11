@@ -21,7 +21,7 @@ export class BasicPropertiesComponent implements OnInit {
 
   public kindList;// 分类列表
   public kindId:string;
-  public data: Page = new Page();
+  public data:any;
   public showAddWindow:boolean = false;
   public showUpdateWindow:boolean = false;
 
