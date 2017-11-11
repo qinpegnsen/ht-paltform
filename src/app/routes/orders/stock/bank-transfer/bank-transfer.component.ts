@@ -204,8 +204,8 @@ export class BankTransferComponent implements OnInit {
    */
   showImg(event, i) {
     i.style.display = 'block';
-    i.style.top = (event.clientY + 15) + 'px';
-    i.style.left = (event.clientX + 20) + 'px';
+    i.style.top = (event.clientY-120) + 'px';
+    i.style.left = (event.clientX-400) + 'px';
   }
 
   /**

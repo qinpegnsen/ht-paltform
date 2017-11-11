@@ -189,8 +189,8 @@ export class RefundComponent implements OnInit {
    */
   showImg(event, i) {
     i.style.display = 'block';
-    i.style.top = event.clientY + 'px';
-    i.style.left = (event.clientX -650) + 'px';
+    i.style.top = (event.clientY-140)+ 'px';
+    i.style.left = (event.clientX -450) + 'px';
   }
 
   /**
