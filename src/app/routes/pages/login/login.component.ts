@@ -8,6 +8,7 @@ import {MaskService} from "app/core/services/mask.service";
 import {MenuService} from "../../../core/menu/menu.service";
 import {CookieService} from "angular2-cookie/core";
 import {AppComponent} from "../../../app.component";
+import {PatternService} from "../../../core/forms/pattern.service";
 
 declare var $: any;
 @Component({
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public ajax: AjaxService,
               public localtion: Location, public router: Router, public _cookieService: CookieService,
-              public setting:SettingsService,public myMenu:MenuService) {
+              public setting:SettingsService,public myMenu:MenuService,public patterns:PatternService) {
 
   }
 
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   // 用户登录
-  public login() {
+  public login(res) {
     let start = new Date().getTime(), end;
     let me = this;
     MaskService.showMask();

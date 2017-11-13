@@ -16,11 +16,11 @@
               <div class="popover-content">
                 <ul class="list-unstyled" style="height: 250px">
                   <li class="pb" *ngIf="refund.payWay=='REMIT'">
-                    <p class=" mr pull-left d-play w30"><span class="pull-right">退款账号开户行：</span></p>
+                    <p class=" mr pull-left d-play w30"><span class="pull-right">收款账号开户行：</span></p>
                     <p class="text-info pull-right w67 refund-height"><span class="text-left">{{refund.bank}}</span></p>
                   </li>
                   <li class="pb">
-                    <p class=" mr pull-left d-play w30"><span class="pull-right">退款账号：</span></p>
+                    <p class=" mr pull-left d-play w30"><span class="pull-right">收款账号：</span></p>
                     <p class="text-info pull-right w67 refund-height"><span class="text-left">{{refund.acct}}</span></p>
                   </li>
                   <li class="pb" *ngIf="refund.payWay=='REMIT'">

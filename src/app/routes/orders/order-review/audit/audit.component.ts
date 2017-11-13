@@ -19,7 +19,7 @@ export class AuditComponent implements OnInit {
 
   public showCancelWindow:boolean = false;
   public goodsList: Page = new Page();
-  public ordno:string;//获取区域编码
+  public ordno:string;
   public staff:any = {};
   public id;
   public goodsAudits: any;
