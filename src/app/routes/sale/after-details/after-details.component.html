@@ -111,6 +111,7 @@
         </ng-container>
 
         <!--退货订单已发货-->
+        <ng-container *ngIf="afterData.returnType=='RETURN'">
         <div *ngIf="afterData.state=='DELIVERY' || afterData.state=='CHECK_FAILS' || afterData.state=='DONE'">
           <div class="">
             <legend class="m0" style="height: 51px;line-height: 51px;">退货发货信息</legend>
@@ -165,6 +166,7 @@
             </tr>
           </table>
         </div>
+        </ng-container>
 
         <!--平台验收货物之后-->
         <div *ngIf="afterData.returnType=='RETURN' && afterData.state=='DONE'">
