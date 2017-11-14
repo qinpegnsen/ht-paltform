@@ -9,7 +9,7 @@
       <input type="text" class="input" name="user" [(ngModel)]="userName" autocomplete="off" required
              placeholder="请输入管理员账号" [pattern]="patterns.login"  #user="ngModel">
       <div [hidden]="user.valid || user.pristine" class="text-danger text-left pl">
-        请填写正确账号(手机号)
+        请填写正确账号
       </div>
       </div>
       <div class="form-group">
