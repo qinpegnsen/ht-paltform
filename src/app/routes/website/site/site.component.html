@@ -5,15 +5,15 @@
 <div class="order panel mb">
   <div class="panel-body">
     <ul class="order-guide list-unstyled clearfix bb">
-      <li class="pull-left thc" [class.font]="state=='AUDIT'" [class.bb]="state=='AUDIT'"
-          (click)="qeuryAll('AUDIT')">已生效
+      <li class="pull-left thc" [class.font]="isUse=='Y'" [class.bb]="isUse=='Y'"
+          (click)="qeuryAll('Y')">已生效
       </li>
-      <li class="pull-left thc" [class.font]="state=='UNPASS'" [class.bb]="state=='UNPASS'"
-          (click)="qeuryAll('UNPASS')">未生效
+      <li class="pull-left thc" [class.font]="isUse=='N'" [class.bb]="isUse=='N'"
+          (click)="qeuryAll('N')">未生效
       </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
-           (pageChange)="qeuryAll(state,1,$event)">
+           (pageChange)="qeuryAll(1,$event)">
       <thead>
       <tr>
         <th class="w5 text-center">
@@ -38,7 +38,7 @@
         <td>{{count.amount}}</td>
         <td>{{count.num}}</td>
         <td>{{count.level}}</td>
-        <td>{{count.isUsed }}</td>
+        <td>{{count.isUsed | rzhState:'1001' }}</td>
         <td>{{count.effectiveTime }}</td>
       </tr>
       </tbody>

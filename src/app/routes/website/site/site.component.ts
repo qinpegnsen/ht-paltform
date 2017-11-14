@@ -3,6 +3,7 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-site',
@@ -13,7 +14,7 @@ export class SiteComponent implements OnInit {
 
   public redPacketRules:any;            //新增红包规则的按钮
   public data:any;                      //红包规则列表的数据
-  public showWindow:boolean=false;     //是否显示新增红包规则的弹框
+  public isUse:string='Y';                  //红包是否启用
 
   constructor(private submit: SubmitService,) { }
 
@@ -23,26 +24,32 @@ export class SiteComponent implements OnInit {
       text:"新增规则",
       type: "add-thc"
     };
-    this.qeuryAll(1)
+    this.qeuryAll('Y',1)
   }
 
   /**
-   * 认证审核--查询分页
+   * 红包规则列表
    */
-  qeuryAll(curPage,event?: PageEvent){
+  qeuryAll(state,curPage,event?: PageEvent){
+    this.isUse=state;
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    }
+    };
     let url = "/rpSetting/queryRpSettingAdmin";
     let data={
       curPage: activePage,
       pageSize:10,
-    }
+      isUsed:'',
+    };
+    if(isNullOrUndefined(state)){//分页
+      data.isUsed=this.isUse;
+    }else{//导航
+      data.isUsed=state;
+    };
     let result = this.submit.getData(url,data);
-    console.log("█ result  ►►►",  result );
     me.data = new Page(result);
   }
 
