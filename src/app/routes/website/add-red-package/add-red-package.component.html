@@ -1,15 +1,68 @@
-<div class="deliver-order fadeIn">
-  <div class="mask"></div>
-  <form class="_popup animated fadeIn" #deliverytpl="ngForm">
-    <div class="pop popup-hd">
-      <span class="f-bold">添加红包规则</span>
-      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
-    </div>
-
-    <div class="panel-footer text-right">
-      <button class="btn btn-default" type="button" (click)="hideWindow()">取消</button>
-      <button class="btn btn-info" type="button" (click)="delivery()" [disabled]="deliverytpl.invalid">保存</button>
-    </div>
-  </form>
+<div class="content-heading mb-lg thc font">
+  <span>添加红包规则</span>
 </div>
+<div class="order panel mb">
+  <div class="panel-body">
+    <form class="form-validate form-horizontal" style="height: 100%" #redPackerForm="ngForm"
+          (ngSubmit)="addRedPackRules(addLimitForm)">
+      <fieldset>
+        <!--新增规则列表 start-->
+        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+               (pageChange)="qeuryAll(1,$event)">
+          <thead>
+          <tr>
+            <th class="w5 text-center">
+              <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+            </th>
+            <th class="w15 text-center">
+              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+            </th>
+            <th class="w10 text-center">
+              <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
+            </th>
+            <th class="w15 text-center">
+              <rzhDefaultSorter by="time">生效时间</rzhDefaultSorter>
+            </th>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="picture">操作</rzhDefaultSorter>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of moduleList;let i = index" class="text-center">
+            <td>
+              <input class="text _price num form-control" [(ngModel)]="item.amount" name="firstNum{{i}}"  required/>
+            </td>
+            <td>
+              <input class="text _price num form-control" [(ngModel)]="item.num" name="firstNum{{i}}" required/>
+            </td>
+            <td>
+              <input class="text _price num form-control" [(ngModel)]="item.level" name="firstNum{{i}}"  required/>
+            </td>
+            <td>
+              <input class="text _price num form-control" [(ngModel)]="item.effectiveTimeStr" name="firstNum{{i}}"
+                      required/>
+            </td>
+            <td>
+              <app-buttons [config]="deletebutton" (click)="delete(i)"></app-buttons>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <td colspan="5" class="text-center">
+            <span class="btn btn-default btn-sm mt14 text-center" (click)="add()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
+          </td>
+          </tfoot>
+        </table>
+        <!--新增规则列表 end-->
+      </fieldset>
+      <fieldset>
+        <div class="pull-right form-group special">
+          <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+          <button class="ml btn btn-info pull-left" type="submit" [disabled]="!redPackerForm.form.valid">提交信息</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 
+</div>
