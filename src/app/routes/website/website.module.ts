@@ -9,15 +9,23 @@ import {AdddataComponent} from "./adddata/adddata.component";
 import { RightpageComponent } from './rightpage/rightpage.component';
 import {DataDictionaryComponentService} from "./data-dictionary/data-dictionary-component.service";
 import {MeasureService} from "./measure/measure.service";
+import {SiteComponent} from "./site/site.component";
+import {StaticsComponent} from "./statics/statics.component";
+import {RecordComponent} from "./record/record.component";
 
+const redPacketRoutes: Routes = [
+  {path: 'site', component: SiteComponent},
+  {path: 'statics', component: StaticsComponent},
+  {path: 'record', component: RecordComponent}
+]
 const appChildRoutes: Routes = [
   {path: 'adddata', component: AdddataComponent},
   {path: 'rightpage', component: RightpageComponent}
 ]
 const routes: Routes = [
   {path:'',redirectTo:'areas'},
-  {path: 'adddata', component: AdddataComponent},
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
+  {path: 'redPacket',children:redPacketRoutes},
   {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},
   {path: 'measure', component: MeasureComponent,children:appChildRoutes}
 ];
@@ -28,7 +36,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent],
+  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, SiteComponent, StaticsComponent, RecordComponent],
   providers:[DataDictionaryComponent,DataDictionaryComponentService,MeasureService,MeasureComponent]
 })
 export class WebsiteModule { }

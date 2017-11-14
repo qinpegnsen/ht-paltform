@@ -23,7 +23,26 @@ const website = {
       text: '计量单位',
       icon: 'fa fa-calculator',
       link: '/main/website/measure'
-    }
+    },
+    {
+      text: '红包管理',
+      icon: 'fa fa-dollar',
+      alert: '▼',
+      submenu: [
+        {
+          text: '红包设置',
+          link: '/main/website/redPacket/site'
+        },
+        {
+          text: '红包统计',
+          link: '/main/website/redPacket/statics'
+        },
+        {
+          text: '红包中奖记录',
+          link: '/main/website/redPacket/record'
+        }
+      ]
+    },
   ]
 };
 const operation = {
