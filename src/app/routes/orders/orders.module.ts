@@ -27,7 +27,6 @@ import {ForFistributonService} from './stock/for-distribution/for-fistributon.se
 import {AllStockService} from './stock/all-stock/all-stock.service';
 import {OrderService} from "./order.service";
 import { BankTransferComponent } from './stock/bank-transfer/bank-transfer.component';
-import {FileUploadModule} from "_ng2-file-upload@1.2.1@ng2-file-upload";
 import {AllOrderService} from './order-review/all-order/all-order.service';
 import { AuditComponent } from './order-review/audit/audit.component';
 import { ToRefundComponent } from './order-review/to-refund/to-refund.component';
@@ -39,6 +38,7 @@ import { EptDetailComponent } from './ept-detail/ept-detail.component';
 import { RefundDetailComponent } from './order-review/refund-detail/refund-detail.component';
 import { PrepareComponent } from './orders/prepare/prepare.component';
 import { SettleComponent } from './settle/settle.component';
+import {FileUploadModule} from "ng2-file-upload";
 
 
 const routes: Routes = [
