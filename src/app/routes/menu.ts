@@ -30,7 +30,7 @@ const website = {
       alert: '▼',
       submenu: [
         {
-          text: '红包设置',
+          text: '红包规则',
           link: '/main/website/redPacket/site'
         },
         {

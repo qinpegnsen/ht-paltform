@@ -12,11 +12,15 @@ import {MeasureService} from "./measure/measure.service";
 import {SiteComponent} from "./site/site.component";
 import {StaticsComponent} from "./statics/statics.component";
 import {RecordComponent} from "./record/record.component";
+import {AddRedPackageComponent} from "./add-red-package/add-red-package.component";
 
+const appRedPackRoutes: Routes = [
+  {path: 'addRedPack', component: AddRedPackageComponent}
+]
 const redPacketRoutes: Routes = [
-  {path: 'site', component: SiteComponent},
+  {path: 'site', component: SiteComponent,children:appRedPackRoutes},
   {path: 'statics', component: StaticsComponent},
-  {path: 'record', component: RecordComponent}
+  {path: 'record', component: RecordComponent},
 ]
 const appChildRoutes: Routes = [
   {path: 'adddata', component: AdddataComponent},
@@ -36,7 +40,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, SiteComponent, StaticsComponent, RecordComponent],
+  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent],
   providers:[DataDictionaryComponent,DataDictionaryComponentService,MeasureService,MeasureComponent]
 })
 export class WebsiteModule { }

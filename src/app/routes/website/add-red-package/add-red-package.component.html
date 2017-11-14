@@ -1,0 +1,15 @@
+<div class="deliver-order fadeIn">
+  <div class="mask"></div>
+  <form class="_popup animated fadeIn" #deliverytpl="ngForm">
+    <div class="pop popup-hd">
+      <span class="f-bold">添加红包规则</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" type="button" (click)="hideWindow()">取消</button>
+      <button class="btn btn-info" type="button" (click)="delivery()" [disabled]="deliverytpl.invalid">保存</button>
+    </div>
+  </form>
+</div>
+
