@@ -24,7 +24,7 @@ export class PatternService {
   public integer:string;//正整数
   public threedecimal :string;//三位小数
   public express:string;//快递单号，有的是数字和字母的组合 如圆通快速
-  public login:any;
+  public login:any; //除特殊字符
 
   constructor() {
     this.num = '^[0-9]*$'; //数字正则
@@ -46,7 +46,7 @@ export class PatternService {
     this.integer = '^[0-9]*[1-9][0-9]*$'; //只能正整数
     this.threedecimal = '^[0-9]+(.[0-9]{1,3})?$'; //只能正整数
     this.express = '^[A-Za-z0-9]+$';　　//由数字和26个英文字母组成的字符串
-    this.login='^[\u4E00-\u9FA5A-Za-z0-9]+$'
+    this.login='^[\u4E00-\u9FA5A-Za-z0-9]+$' //除特殊字符
   }
 
 }

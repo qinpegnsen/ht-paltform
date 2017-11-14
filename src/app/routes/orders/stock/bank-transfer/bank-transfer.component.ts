@@ -20,7 +20,6 @@ declare var $: any;
   providers: [BankTransferService]
 })
 export class BankTransferComponent implements OnInit {
-
   datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
