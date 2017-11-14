@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   // 用户登录
-  public login(res) {
+  public login() {
     let start = new Date().getTime(), end;
     let me = this;
     MaskService.showMask();
