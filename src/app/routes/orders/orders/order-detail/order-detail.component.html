@@ -197,7 +197,7 @@
         <tr class="text-center" *ngFor="let goods of goodsData;let i = index">
           <td class="text-left p position-relative bb">
             <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
-              <div class="cover" *ngIf="!goods.canDELIVERY"></div>
+              <!--<div class="cover" *ngIf="!goods.canDELIVERY"></div>-->
             </ng-container>
             <span class="goods-img goods-lg-img mr">
               <img [src]="goods.goodsImage" onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">

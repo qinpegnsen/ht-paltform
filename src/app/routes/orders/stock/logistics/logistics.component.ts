@@ -6,6 +6,7 @@ import {AjaxService} from '../../../../core/services/ajax.service';
 import {Page} from '../../../../core/page/page';
 import {AwaitingDeliveryComponent} from '../awaiting-delivery/awaiting-delivery.component';
 import {AllStockComponent} from '../all-stock/all-stock.component';
+import {PatternService} from '../../../../core/forms/pattern.service';
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -34,7 +35,7 @@ export class LogisticsComponent implements OnInit {
   }
 
 
-  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute,public AwaitingDeliveryComponent:AwaitingDeliveryComponent,public AllStockComponent:AllStockComponent) { }
+  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute,public AwaitingDeliveryComponent:AwaitingDeliveryComponent,public AllStockComponent:AllStockComponent,public patterns: PatternService) { }
 
   ngOnInit() {
     let _this = this;

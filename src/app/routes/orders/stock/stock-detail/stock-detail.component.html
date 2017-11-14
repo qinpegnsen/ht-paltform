@@ -53,12 +53,6 @@
       <dl class="line">
         <dt>订单编号：</dt>
         <dd>{{orderData.ordno}}
-          <span class="pull-right" (mouseenter)="showTimeList(times)"
-                (mouseleave)="hideTimesList(times)"
-                myHoverColor
-                [myHover]="'#CC1635'">更多<i
-            class="fa fa-angle-down time-list"></i>
-          </span>
           <div class="more b w100" #times (mouseenter)="showTimeList(times)" (mouseleave)="hideTimesList(times)"><span
             class="arrow"></span>
             <ul class="list-unstyled font12 mb0">

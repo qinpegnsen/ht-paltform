@@ -1,6 +1,7 @@
 
 <div class="cancel-order fadeIn"  *ngIf="showCancelWindow">
   <div class="mask" (click)="hideWindow()"></div>
+  <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
   <div class="popup animated fadeIn">
     <div class="pop popup-hd">
       <span class="f-bold">设置发货</span>
@@ -21,15 +22,19 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">快递公司快递号：</dt>
         <dd class="col-xs-5">
-          <input class="form-control" required name="expressNo" [(ngModel)]="expressNos"
-                 #expressNo="ngModel" type="text"/>
+          <input class="form-control"  name="expressNo" [(ngModel)]="expressNos"
+                 #expressNo="ngModel" type="text" [pattern]="patterns.tplCode" required  maxlength="32"/>
+          <div [hidden]="expressNo.valid || expressNo.pristine" class="alert-danger">
+            请填写正确的快递单号
+          </div>
         </dd>
       </dl>
     </div>
     <div class="panel-footer text-right">
       <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" type="submit" (click)="canceslOrder()">确认提交</button>
+      <button class="btn btn-info" type="submit" [disabled]="!addLimitForm.form.valid" (click)="canceslOrder()">确认提交</button>
     </div>
   </div>
+  </form>
 </div>
 

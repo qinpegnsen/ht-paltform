@@ -67,6 +67,8 @@ export class AllStockComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
+    this.StockComponent.orderType = 1;
+
   }
 
   /**
