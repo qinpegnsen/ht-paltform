@@ -1,3 +1,93 @@
-<p>
-  statics works!
-</p>
+<div class="content-heading mb-lg thc font">
+  平台红包统计
+</div>
+<div class=" panel-default">
+  <!--红包统计 start-->
+  <div class="row r3">
+    <div class="col-md-3">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9">
+              <div class=" font14 f-bold">发放金额（元）</div>
+              <div class="font14">今日发放红包总金额</div>
+              <p class="text-md m0" *ngIf="redPackStatic?.ordSum!=null">{{redPackStatic?.ordSum | decimalTwo}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.ordSum==null">0.00</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-shopping-cart fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+        <!-- END panel-->
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">领取金额（元）</div>
+              <div class="font14">今日领取红包总金额</div>
+              <p class="text-md m0" *ngIf="redPackStatic?.ordCount!=null">{{redPackStatic?.ordCount}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.ordCount==null">0</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-calendar fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">发放数量</div>
+              <div class="font14">今日发放红包数量</div>
+              <p class="text-md m0" *ngIf="redPackStatic?.newAddCust!=null">{{redPackStatic?.newAddCust}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.newAddCust==null">0</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="icon icon-user-follow fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+
+            <div class="col-xs-9 ">
+              <div class="font14 f-bold">领取数量</div>
+              <div class="font14">今日领取红包数量</div>
+              <p class="text-md m0" *ngIf="redPackStatic?.allCust!=null">{{redPackStatic?.allCust}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.allCust==null">0</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-group fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+  </div>
+  <!--红包统计 end-->
+</div>
+
+<div class="a">
+  <!--红包统计图 start-->
+  <div class="panel m-auto">
+    <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+  </div>
+  <!--红包统计图 end-->
+</div>
