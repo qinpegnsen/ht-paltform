@@ -1,3 +1,64 @@
-<p>
-  record works!
-</p>
+<div class="content-heading mb-lg thc font">
+  <span>红包中奖记录</span>
+</div>
+<div class="order panel mb">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+           (pageChange)="qeuryAll(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="time">是否启用</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="picture">生效时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+        <td>{{count.amount}}</td>
+        <td>{{count.num}}</td>
+        <td>{{count.level}}</td>
+        <td>{{count.isUsed | rzhState:'1001' }}</td>
+        <td>{{count.effectiveTime }}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="7" *ngIf="state!='UNPASS'">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+        <td colspan="8" *ngIf="state=='UNPASS'">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

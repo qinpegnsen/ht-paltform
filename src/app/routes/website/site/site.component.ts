@@ -16,7 +16,7 @@ export class SiteComponent implements OnInit {
   public data:any;                      //红包规则列表的数据
   public isUse:string='Y';                  //红包是否启用
 
-  constructor(private submit: SubmitService,) { }
+  constructor(private submit: SubmitService) { }
 
   ngOnInit() {
     this.redPacketRules={
