@@ -6,7 +6,7 @@ const swal = require('sweetalert');
 @Component({
   selector: 'app-basic-properties',
   templateUrl: './basic-properties.component.html',
-  styleUrls: ['./basic-properties.component.scss']
+  styleUrls: ['./basic-properties.component.scss'],
 })
 export class BasicPropertiesComponent implements OnInit {
 

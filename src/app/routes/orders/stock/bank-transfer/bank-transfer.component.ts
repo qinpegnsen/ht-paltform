@@ -20,7 +20,6 @@ declare var $: any;
   providers: [BankTransferService]
 })
 export class BankTransferComponent implements OnInit {
-  isEnabled: boolean = false;
   datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
@@ -49,6 +48,7 @@ export class BankTransferComponent implements OnInit {
     allowedFileType: ["image"],
     queueLimit: 1
   });
+  public timeIsValid: boolean = true;
   @Input('orderId') orderId: string;
   @Input('goodspay') goodspay: string;
   @Input('curPage') curPage: string;
@@ -69,6 +69,7 @@ export class BankTransferComponent implements OnInit {
   constructor(public submit: SubmitService, public GetUidService: GetUidService, public tools: RzhtoolsService,
               public pendingPaymentComponent: PendingPaymentComponent, public router: Router,
               public bankTransferService: BankTransferService,public patterns:PatternService) {
+
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -152,6 +153,7 @@ export class BankTransferComponent implements OnInit {
    */
   uploadImg(obj) {
     let me = this;
+
     /**
      * 构建form时，传入自定义参数
      * @param item
@@ -214,4 +216,15 @@ export class BankTransferComponent implements OnInit {
   hideImg(i) {
     i.style.display = 'none';
   }
+
+  isValid(){
+    this.timeIsValid = true;
+
+  }
+
+  changed(){
+    this.timeIsValid = false;
+  }
+
 }
+
