@@ -1,9 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GoodsService} from "../goods.service";
-import {cli} from "webdriver-manager/built/lib/webdriver";
 import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 @Component({
