@@ -9,11 +9,11 @@
       </ul>
     </div>
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==100">
-      <li class="pull-left" routerLink="all-order">订单列表</li>
+      <li class="pull-left" (click)="routeBack()">订单列表</li>
       <li class="pull-left thc bb">商品详情</li>
     </ul>
     <ul class="order-guide list-unstyled clearfix bb" *ngIf="orderType==111">
-      <li class="pull-left" routerLink="to-refund">订单列表</li>
+      <li class="pull-left" (click)="routeBack()">订单列表</li>
       <li class="pull-left thc bb">退款详情</li>
     </ul>
     <!--路由嵌套 begin-->

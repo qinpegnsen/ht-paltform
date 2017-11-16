@@ -3,6 +3,7 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from "ngx-bootstrap/bs-moment";
 import {zhCn} from 'ngx-bootstrap/locale';
 defineLocale('cn', zhCn);
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-order-review',
@@ -15,9 +16,11 @@ export class OrderReviewComponent implements OnInit {
   maxDate: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor() { }
+  constructor(public location: Location) { }
 
   ngOnInit() {
   }
-
+  routeBack() {
+    this.location.back()
+  }
 }

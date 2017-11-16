@@ -20,7 +20,7 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">申请金额：</dt>
         <dd class="col-xs-9">
-          <input class="form-control" required name="reqMoney" [(ngModel)]="reqMoney" type="text"/>
+          <input class="form-control num" required name="reqMoney" [(ngModel)]="reqMoney" type="number" (keyup)="twoNum($event.target)"/>
         </dd>
       </dl>
       <input class="form-control" required [(ngModel)]="code" name="reasonCode" type="hidden"/>

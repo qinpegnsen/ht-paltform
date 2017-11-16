@@ -4,6 +4,7 @@ import {AjaxService} from '../../../core/services/ajax.service';
 import {Page} from '../../../core/page/page';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {ActivatedRoute} from '@angular/router';
+import {RzhtoolsService} from '../../../core/services/rzhtools.service';
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -36,11 +37,20 @@ export class CancelsComponent implements OnInit {
     }
   }
 
-  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute) { }
+  constructor(public ajax:AjaxService, public submit: SubmitService,public routeInfo:ActivatedRoute,public rzhtools:RzhtoolsService) { }
 
   ngOnInit() {
     let _this = this;
     _this.ordno = this.routeInfo.snapshot.queryParams['ordno'];
+  }
+
+  /**
+   * 输入两位小数
+   * @param target
+   * @param type
+   */
+  twoNum(target,type?){
+    this.rzhtools.auditInputValueForNum(target,type);
   }
 
   /**

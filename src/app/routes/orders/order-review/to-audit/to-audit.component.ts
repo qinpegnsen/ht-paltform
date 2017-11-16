@@ -23,8 +23,6 @@ export class ToAuditComponent implements OnInit {
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  public beginTime: string;
-  public endTime: string;
   public goodsList: Page = new Page();
   public LogisticsData//物流信息
 
