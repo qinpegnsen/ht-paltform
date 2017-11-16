@@ -3,7 +3,7 @@
 </div>
 <div class="order panel mb">
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="drawRecData"
            (pageChange)="qeuryAll(1,$event)">
       <thead>
       <tr>
@@ -11,44 +11,41 @@
           <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">用户编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
-          <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
+          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="name">企业编码</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="time">是否启用</rzhDefaultSorter>
+          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
-          <rzhDefaultSorter by="picture">生效时间</rzhDefaultSorter>
+          <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
         </th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{count.amount}}</td>
-        <td>{{count.num}}</td>
-        <td>{{count.level}}</td>
-        <td>{{count.isUsed | rzhState:'1001' }}</td>
-        <td>{{count.effectiveTime }}</td>
+        <td>{{count.custCode}}</td>
+        <td>{{count.storeCode}}</td>
+        <td>{{count.epCode}}</td>
+        <td>{{count.epSubname }}</td>
+        <td>{{count.remark }}</td>
+        <td>{{count.createTime }}</td>
       </tr>
       </tbody>
       <tfoot>
       <tr>
-        <td colspan="7" *ngIf="state!='UNPASS'">
+        <td colspan="7">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
-              条</strong></div>
-          </div>
-          <div class="col-sm-7">
-            <div style="float: right">
-              <rzhBootstrapPaginator></rzhBootstrapPaginator>
-            </div>
-          </div>
-        </td>
-        <td colspan="8" *ngIf="state=='UNPASS'">
-          <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+            <div class="text-muted"><strong>第 {{drawRecData.genStartRow()}} 至 {{drawRecData.genEndRow()}} 条，共 {{drawRecData.totalRow}}
               条</strong></div>
           </div>
           <div class="col-sm-7">

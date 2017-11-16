@@ -13,7 +13,7 @@ import {isNullOrUndefined} from "util";
 export class SiteComponent implements OnInit {
 
   public redPacketRules:any;            //新增红包规则的按钮
-  public data:any;                      //红包规则列表的数据
+  public redPackData:any;                      //红包规则列表的数据
   public isUse:string='Y';                  //红包是否启用
 
   constructor(private submit: SubmitService) { }
@@ -50,7 +50,7 @@ export class SiteComponent implements OnInit {
       data.isUsed=state;
     };
     let result = this.submit.getData(url,data);
-    me.data = new Page(result);
+    me.redPackData = new Page(result);
   }
 
 }

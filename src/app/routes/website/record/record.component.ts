@@ -12,7 +12,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 })
 export class RecordComponent implements OnInit {
 
-  public data:any;                      //红包规则列表的数据
+  public drawRecData:any;                      //红包中奖记录数据
 
   constructor(private submit: SubmitService) { }
 
@@ -21,7 +21,7 @@ export class RecordComponent implements OnInit {
   }
 
   /**
-   * 红包规则列表
+   * 红包中奖记录
    */
   qeuryAll(curPage,event?: PageEvent){
     let me = this, activePage = 1;
@@ -30,15 +30,13 @@ export class RecordComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     };
-    let url = "/rpSetting/queryRpSettingAdmin";
+    let url = "/rpCustAcctRec/queryRpCustAcctRecAdmin";
     let data={
       curPage: activePage,
       pageSize:10,
-      isUsed:'',
+      logType:'DRAW'
     };
     let result = this.submit.getData(url,data);
-    me.data = new Page(result);
+    me.drawRecData = new Page(result);
   }
-
-
 }

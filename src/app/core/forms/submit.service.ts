@@ -175,7 +175,7 @@ export class SubmitService {
    * @returns {any}
    */
   getData(requestUrl: string, requestData: any) {
-    let result: any,that=this;
+    let result: any
     this.ajax.get({
       url: requestUrl,
       data: requestData,
@@ -188,7 +188,7 @@ export class SubmitService {
         }
       },
       error: (res) => {
-        // AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;

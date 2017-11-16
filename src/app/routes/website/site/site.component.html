@@ -12,7 +12,7 @@
           (click)="qeuryAll('N')">未生效
       </li>
     </ul>
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
            (pageChange)="qeuryAll(1,$event)">
       <thead>
       <tr>
@@ -44,23 +44,12 @@
       </tbody>
       <tfoot>
       <tr>
-        <td colspan="7" *ngIf="state!='UNPASS'">
+        <td colspan="5">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+            <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共 {{redPackData.totalRow}}
               条</strong></div>
           </div>
-          <div class="col-sm-7">
-            <div style="float: right">
-              <rzhBootstrapPaginator></rzhBootstrapPaginator>
-            </div>
-          </div>
-        </td>
-        <td colspan="8" *ngIf="state=='UNPASS'">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
-              条</strong></div>
-          </div>
-          <div class="col-sm-7">
             <div style="float: right">
               <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
