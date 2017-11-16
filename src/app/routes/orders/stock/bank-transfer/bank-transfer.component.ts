@@ -23,6 +23,7 @@ export class BankTransferComponent implements OnInit {
   datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
+  public timeIsValid: boolean = true;
   public showSec: boolean = true;
   public summary;
   myTime: Date = new Date();
@@ -48,7 +49,6 @@ export class BankTransferComponent implements OnInit {
     allowedFileType: ["image"],
     queueLimit: 1
   });
-  public timeIsValid: boolean = true;
   @Input('orderId') orderId: string;
   @Input('goodspay') goodspay: string;
   @Input('curPage') curPage: string;
