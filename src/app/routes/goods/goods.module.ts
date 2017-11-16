@@ -20,6 +20,7 @@ import {AddDataComponent} from "./add-data/add-data.component";
 import {UpdateDataComponent} from "./update-data/update-data.component";
 import {UnAuditComponent} from "./un-audit/un-audit.component";
 import {SkuGoodsComponent} from "./sku-goods/sku-goods.component";
+import {DataTable} from "../../shared/directives/ng2-datatable/DataTable";
 
 
 // 父路由，用于页面嵌套显示
@@ -105,7 +106,8 @@ const routes: Routes = [
     KindManageComponent,
     ManageComponent,
     AddDataComponent,
-    UpdateDataComponent
+    UpdateDataComponent,
+    DataTable
   ]
 })
 export class GoodsModule {

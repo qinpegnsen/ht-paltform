@@ -39,8 +39,9 @@
         </th>
       </tr>
       </thead>
-      <tbody dnd-sortable-container [sortableData]="data.voList">
-      <tr *ngFor="let count of data.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable [sortableIndex]="i" >
+      <tbody dnd-sortable-container [sortableData]="data?.voList">
+      <tr *ngFor="let count of data?.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable
+          [sortableIndex]="i" >
       <!--<td>{{i+1}}</td>-->
       <td >{{count.name}}</td>
       <td >
