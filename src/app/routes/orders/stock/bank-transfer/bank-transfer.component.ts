@@ -106,7 +106,6 @@ export class BankTransferComponent implements OnInit {
     _this.queryTime = RzhtoolsService.dataFormat(new Date(_this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
     _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间
   }
-
   /*
    * 添加付款人信息
    * */

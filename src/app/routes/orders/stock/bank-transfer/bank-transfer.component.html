@@ -85,9 +85,9 @@
         <dt class="col-xs-3 lh40"><i class="main-red">*</i>付款时间：</dt>
         <dd class="orderId-color col-xs-9 font14">
           <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" required readonly>
-          <timepicker [(ngModel)]="myTime" id="data" [showSeconds]="showSec" name="time" (ngModelChange)='changed()' (isValid)="isValid()"></timepicker>
-          <div [hidden]="timeIsValid==true" class="text-danger">
-            请填写正确时间
+          <timepicker [(ngModel)]="myTime" id="name" [showSeconds]="showSec" name="time" (ngModelChange)='changed()' (isValid)="isValid()"></timepicker>
+          <div [hidden]="timeIsValid==true" id="name_msg" class="text-danger">
+            请填写正确时间(填写后点击空白区域)
           </div>
         </dd>
       </dl>
@@ -100,7 +100,7 @@
       </dl>
       <div class="panel-footer text-right">
         <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
-        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)" [disabled]="addForm.invalid||uploader.queue.length==0 || !timeIsValid">确认提交</button>
+        <button class="btn btn-info" type="submit" (click)="uploadImg(addForm.value)" [disabled]="addForm.invalid||uploader.queue.length==0 || timeIsValid==false">确认提交</button>
       </div>
     </div>
   </form>
