@@ -60,6 +60,26 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
+   * 根据数量生成概率
+   * @param item
+   * @param obj
+   */
+  getProbability(item,obj){
+   let  probability=(+item.num)/(+this.totalNum);
+    $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
+  }
+
+  /**
+   * 根据概率生成数量
+   * @param item
+   * @param obj
+   */
+  getNum(item,obj){
+    let  num=(+this.totalNum)*(+item.probability);
+    $(obj).parents('tr').find('.redPacketNumber').val(num);//根据数量，自动生成概率
+  }
+
+  /**
    * 关闭组件
    * @param type true:表示操作成功，false表示取消操作
    */
@@ -95,12 +115,19 @@ export class AddRedPackageComponent implements OnInit {
    * 添加红包规则
    */
   add() {
+
     this.moduleList.push({
       amount: '',
       num: '',
       level: '',
       effectiveTimeStr: '',
     });
+
+    /**
+     * 判断总的数量是否超过设定的红包数量
+     */
+    let numberArr=$("tr").find(".redPacketNumber");
+    console.log("█ numberArr ►►►",  numberArr);
   }
 
   /**

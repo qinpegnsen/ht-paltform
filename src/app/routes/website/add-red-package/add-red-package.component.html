@@ -41,7 +41,7 @@
           <thead>
           <tr>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+              <rzhDefaultSorter by="id">面额（元）</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
               <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
@@ -63,13 +63,13 @@
               <input class="text _price num form-control" [(ngModel)]="item.amount" name="firstNum{{i}}"  required/>
             </td>
             <td>
-              <input class="text _price num form-control" [(ngModel)]="item.num" name="firstNum{{i}}" required/>
+              <input class="text _price num form-control redPacketNumber" [(ngModel)]="item.num" (keyup)="getProbability(item,$event.target)" name="firstNum{{i}}" required/>
             </td>
             <td>
               <input class="text _price num form-control" [(ngModel)]="item.level" name="firstNum{{i}}"  required/>
             </td>
             <td>
-              <input class="text _price num form-control" [(ngModel)]="item.effectiveTimeStr" name="firstNum{{i}}"
+              <input class="text _price num form-control probability" (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="firstNum{{i}}"
                       required/>
             </td>
             <td>
