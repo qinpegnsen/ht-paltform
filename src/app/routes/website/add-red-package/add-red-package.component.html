@@ -1,6 +1,35 @@
 <div class="content-heading mb-lg thc font">
   <span>添加红包规则</span>
 </div>
+
+<div class="panel mb w100 search">
+  <div class="search-group ml-xl mb">
+    <span class="search-title font12">红包总数量：</span>
+    <div class="search-main">
+      <input type="text" [(ngModel)]="totalNum" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             maxlength="50" placeholder="请输入红包的总数量">
+    </div>
+  </div>
+  <div class="search-group ml-xl mb">
+    <span class="search-title font12">红包总金额：</span>
+    <div class="search-main">
+      <input type="text" [(ngModel)]="totalPrice" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             maxlength="50" placeholder="请输入红包的总金额">
+    </div>
+  </div>
+  <div class="search-group ml-xl mb _specialW">
+    <span class="search-title font12">红包生效时间：</span>
+    <div class="search-main w65">
+      <div class="col-lg-4">
+        <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"  [minDate]="minDate">
+      </div>
+      <div class="col-lg-5">
+        <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="order panel mb">
   <div class="panel-body">
     <form class="form-validate form-horizontal" style="height: 100%" #redPackerForm="ngForm"
@@ -11,17 +40,17 @@
                (pageChange)="qeuryAll(1,$event)">
           <thead>
           <tr>
-            <th class="w5 text-center">
+            <th class="w20 text-center">
               <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
             </th>
-            <th class="w15 text-center">
+            <th class="w20 text-center">
               <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
             </th>
-            <th class="w10 text-center">
+            <th class="w20 text-center">
               <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
             </th>
-            <th class="w15 text-center">
-              <rzhDefaultSorter by="time">生效时间</rzhDefaultSorter>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="time">概率</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
               <rzhDefaultSorter by="picture">操作</rzhDefaultSorter>

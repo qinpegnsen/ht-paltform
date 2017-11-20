@@ -62,3 +62,19 @@
   min-height: 60px;
   max-height: 80px;
 }
+._specialW{
+  width:600px !important;
+  .search-title{
+    width:15%!important;
+    line-height: 97px !important;
+  }
+  .search-main{
+    width:85%!important;
+    div:first-child{
+      line-height: 97px!important;
+    }
+    input,timepicker{
+      display: inline-block;
+    }
+  }
+}
