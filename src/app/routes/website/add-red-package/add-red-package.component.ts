@@ -81,7 +81,7 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getProbability(item, obj) {
-    let probability = (+item.num) / (+this.totalNum);
+    let probability = ((+item.num) / (+this.totalNum)).toFixed(2);
     $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
   }
 
@@ -91,7 +91,9 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getNum(item, obj) {
-    let num = (+this.totalNum) * (+item.probability);
+    let trueProbability=(+$(obj).val()).toFixed(2);
+    $(obj).val(trueProbability);//保留两位小数
+    let num = ((+this.totalNum) * (+item.probability)).toFixed(2);
     $(obj).parents('tr').find('.redPacketNumber').val(num);//根据数量，自动生成概率
   }
 
@@ -127,7 +129,7 @@ export class AddRedPackageComponent implements OnInit {
           amount: '1',
           num: '1',
           level: '1',
-          probability: 1 / Number(this.totalNum),
+          probability: (1 / Number(this.totalNum)).toFixed(2),
         });
       }
     }, 0)
@@ -263,7 +265,7 @@ export class AddRedPackageComponent implements OnInit {
         rpSettingBatchStr: JSON.stringify(json)
       };
       this.service.addRedPackRules(url, data);
-      // _this.location.back();
+      this.location.back();
     }
   }
 }
