@@ -86,7 +86,7 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
-   * 根据概率生成数量
+   * 根据概率生成数量  红包数量会有小数先取消掉
    * @param item
    * @param obj
    */
