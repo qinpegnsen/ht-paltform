@@ -96,7 +96,7 @@
               </div>
             </td>
             <td>
-              <input class="text _price num form-control probability" (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="probability{{i}}"
+              <input class="text _price num form-control probability" disabled (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="probability{{i}}"
                       required/>
             </td>
             <td>

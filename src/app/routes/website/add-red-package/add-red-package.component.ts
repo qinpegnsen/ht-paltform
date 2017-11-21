@@ -91,10 +91,10 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getNum(item, obj) {
-    let trueProbability=(+$(obj).val()).toFixed(2);
-    $(obj).val(trueProbability);//保留两位小数
-    let num = ((+this.totalNum) * (+item.probability)).toFixed(2);
-    $(obj).parents('tr').find('.redPacketNumber').val(num);//根据数量，自动生成概率
+    // let trueProbability=(+$(obj).val()).toFixed(2);
+    // $(obj).val(trueProbability);//保留两位小数
+    // let num = ((+this.totalNum) * (+item.probability)).toFixed(2);
+    // $(obj).parents('tr').find('.redPacketNumber').val(num);//根据数量，自动生成概率
   }
 
   /**
