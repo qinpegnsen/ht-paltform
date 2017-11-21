@@ -67,7 +67,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
         vals: obj.vals
       }
       let result = this.addDataService.addGoodsBaseEnum(url, data);
-      if (result == "请选择三级分类") {
+      if (result == "请选择三级分类" || result=="") {
         return;
       } else {
         this.hideWindow("success");
