@@ -7,7 +7,7 @@ export class WebstiteService {
 
   constructor(private ajax: AjaxService) { }
   /**
-   * val添加服务
+   * 新增红包规则 post
    */
   public addRedPackRules(url,data) {
     let result;
@@ -16,7 +16,7 @@ export class WebstiteService {
       data: data,
       async:false,
       success: (res) => {
-        result=res.success;
+        result=res.data;
         if(res.success){
           AppComponent.rzhAlt("success", res.info);
         }else{
@@ -24,8 +24,31 @@ export class WebstiteService {
         }
       },
       error: (res) => {
-        result='';
-        AppComponent.rzhAlt("error", res.info);
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+  /**
+   * 获取后台设置的红包的最小的数量 get
+   */
+  public getSettingNum(url,data) {
+    let result;
+    this.ajax.get({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        result=res.data;
+        if(res.success){
+          // AppComponent.rzhAlt("success", res.info);
+        }else{
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
       }
     });
     return result;

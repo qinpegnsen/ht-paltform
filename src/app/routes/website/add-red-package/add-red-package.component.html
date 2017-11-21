@@ -2,19 +2,36 @@
   <span>添加红包规则</span>
 </div>
 
+<!--操作提示 start-->
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>红包的总数量必须大于等于{{settingNumber}}</li>
+    <li>红包生效的时间默认是第二天的0时0分0秒</li>
+  </ul>
+</div>
+<!--操作提示 end-->
 <div class="panel mb w100 search">
   <div class="search-group ml-xl mb">
     <span class="search-title font12">红包总数量：</span>
     <div class="search-main">
-      <input type="text" [(ngModel)]="totalNum" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             maxlength="50" placeholder="请输入红包的总数量">
+      <input type="text" [(ngModel)]="totalNum" min="{{settingNumber}}" #number="ngModel"  class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer" (keyup)="changeNumber()"
+             maxlength="50">
+      <div [hidden]="number.valid || number.pristine"
+           class="alert alert-danger">
+        请填写大于等于{{settingNumber}}正整数
+      </div>
     </div>
   </div>
   <div class="search-group ml-xl mb">
     <span class="search-title font12">红包总金额：</span>
     <div class="search-main">
-      <input type="text" [(ngModel)]="totalPrice" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             maxlength="50" placeholder="请输入红包的总金额">
+      <input type="text" [(ngModel)]="totalAmount" #amount="ngModel" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             maxlength="50" placeholder="红包的总面额（元）" [pattern]="patternService.special">
+      <div [hidden]="amount.valid || amount.pristine"
+           class="alert alert-danger">
+        请填写最多带两位小数的数字
+      </div>
     </div>
   </div>
   <div class="search-group ml-xl _specialW">
@@ -23,9 +40,6 @@
       <div class="col-lg-4">
         <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"  [minDate]="minDate">
       </div>
-      <div class="col-lg-5">
-        <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
-      </div>
     </div>
   </div>
 </div>
@@ -33,7 +47,7 @@
 <div class="order panel mb">
   <div class="panel-body">
     <form class="form-validate form-horizontal" style="height: 100%" #redPackerForm="ngForm"
-          (ngSubmit)="addRedPackRules(addLimitForm)">
+          (ngSubmit)="addRedPackRules()">
       <fieldset>
         <!--新增规则列表 start-->
         <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
@@ -41,10 +55,10 @@
           <thead>
           <tr>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="id">面额（元）</rzhDefaultSorter>
+              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+              <rzhDefaultSorter by="id">面额（元）</rzhDefaultSorter>
             </th>
             <th class="w20 text-center">
               <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
@@ -60,16 +74,28 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
-              <input class="text _price num form-control" [(ngModel)]="item.amount" name="firstNum{{i}}"  required/>
+              <input class="text _price num form-control redPacketNumber"  #pieceNumber="ngModel" [(ngModel)]="item.num" (keyup)="getProbability(item,$event.target)" name="num{{i}}" required  [pattern]="patternService.integer"/>
+              <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
+                   class="alert alert-danger">
+                请填写正整数
+              </div>
             </td>
             <td>
-              <input class="text _price num form-control redPacketNumber" [(ngModel)]="item.num" (keyup)="getProbability(item,$event.target)" name="firstNum{{i}}" required/>
+              <input class="text _price num form-control amount"  [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
+              <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
+                   class="alert alert-danger">
+                请填写最多带两位小数的数字
+              </div>
             </td>
             <td>
-              <input class="text _price num form-control" [(ngModel)]="item.level" name="firstNum{{i}}"  required/>
+              <input class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}" #pieceLevel="ngModel" [pattern]="patternService.integer" required/>
+              <div [hidden]="pieceLevel.valid || pieceLevel.pristine"
+                   class="alert alert-danger">
+                请填写正整数
+              </div>
             </td>
             <td>
-              <input class="text _price num form-control probability" (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="firstNum{{i}}"
+              <input class="text _price num form-control probability" (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="probability{{i}}"
                       required/>
             </td>
             <td>
