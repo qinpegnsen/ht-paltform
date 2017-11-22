@@ -20,6 +20,7 @@ const swal = require('sweetalert');
 })
 export class RefundComponent implements OnInit {
   public showCancelWindow:boolean = false;
+  public timeIsValid: boolean = true;
   public goodsList: Page = new Page();
   public ordno:string;//获取区域编码
   public selectBank: any;
@@ -198,5 +199,13 @@ export class RefundComponent implements OnInit {
    */
   hideImg(i) {
     i.style.display = 'none';
+  }
+  isValid(){
+    this.timeIsValid = true;
+
+  }
+
+  changed(){
+    this.timeIsValid = false;
   }
 }

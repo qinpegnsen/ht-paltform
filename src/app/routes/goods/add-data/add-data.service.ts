@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../core/services/ajax.service";
 import {isNull} from "util";
 import {Page} from "../../../core/page/page";
+import {AppComponent} from "../../../app.component";
 
 @Injectable()
 export class AddDataService {
@@ -13,27 +14,54 @@ export class AddDataService {
    * @param url
    * @returns {Page}
    */
-  public addGoodsBaseEnum(url,data) {
-    var result;
+  addGoodsBaseEnum(url,data) {
+    let result;
     this.ajax.post({
       url: url,
       data: data,
-      async:false,
-      success: (data) => {
-        if (!isNull(data)) {
-          if(data.success==true){
-            result=new Page(data.data);
-          }else{
-            console.log('返回的success为假');
-          }
+      async: false,
+      success: (res) => {
+        result=res.success;
+        if (res.success) {
+          AppComponent.rzhAlt("success",res.info);
         }else{
-          console.log('返回的数据为空');
+          AppComponent.rzhAlt("error",res.info);
         }
       },
-      error: () => {
-        console.log('连接数据库失败');
+      error: (res) => {
+        result='';
+        AppComponent.rzhAlt("error",res.info);
       }
     });
     return result;
   }
+  // public addGoodsBaseEnum(url,data) {
+  //   var result;
+  //   this.ajax.post({
+  //     url: url,
+  //     data: data,
+  //     async:false,
+  //     success: (data) => {
+  //       if (!isNull(data)) {
+  //         if(data.success==true){
+  //           result=new Page(data.data);
+  //           if (data.success) {
+  //             AppComponent.rzhAlt("success",data.info);
+  //           }else{
+  //             AppComponent.rzhAlt("error",data.info);
+  //           }
+  //         }else{
+  //           AppComponent.rzhAlt("error", data.info);
+  //         }
+  //       }else{
+  //         AppComponent.rzhAlt("error", data.info);
+  //       }
+  //     },
+  //     error: () => {
+  //       result='';
+  //       AppComponent.rzhAlt("error", data.info);
+  //     }
+  //   });
+  //   return result;
+  // }
 }

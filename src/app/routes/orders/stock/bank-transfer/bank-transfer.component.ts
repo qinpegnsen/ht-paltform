@@ -23,6 +23,7 @@ export class BankTransferComponent implements OnInit {
   datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
+  public timeIsValid: boolean = true;
   public showSec: boolean = true;
   public summary;
   myTime: Date = new Date();
@@ -48,7 +49,6 @@ export class BankTransferComponent implements OnInit {
     allowedFileType: ["image"],
     queueLimit: 1
   });
-  public timeIsValid: boolean = true;
   @Input('orderId') orderId: string;
   @Input('goodspay') goodspay: string;
   @Input('curPage') curPage: string;
@@ -106,7 +106,6 @@ export class BankTransferComponent implements OnInit {
     _this.queryTime = RzhtoolsService.dataFormat(new Date(_this.datepickerModel), "yyyy-MM-dd");//获取日历选中时间
     _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间
   }
-
   /*
    * 添加付款人信息
    * */

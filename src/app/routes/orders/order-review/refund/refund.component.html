@@ -32,7 +32,7 @@
           <dt class="col-xs-3 refund-color"><i>*</i>&nbsp;<span>汇款账号：</span></dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" placeholder="请输入汇款账号" name="payAcct" ngModel required
-                   #payAcct="ngModel" [pattern]="patterns.backcard">
+                   #payAcct="ngModel" [pattern]="patterns.icCard" maxlength="32">
           </dd>
           <div [hidden]="payAcct.valid || payAcct.pristine"
                class="col-sm-9 pull-right text-danger">
@@ -72,8 +72,12 @@
           <dt class="col-xs-3"><i>*</i>&nbsp;汇款时间：</dt>
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker
-                   #dp="bsDatepicker" [bsConfig]="bsConfig">
-            <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
+                   #dp="bsDatepicker" [bsConfig]="bsConfig" required readonly>
+            <!--<timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>-->
+            <timepicker [(ngModel)]="myTime" id="name" [showSeconds]="showSec" name="time" (ngModelChange)='changed()' (isValid)="isValid()"></timepicker>
+            <div [hidden]="timeIsValid==true" id="name_msg" class="text-danger">
+              请填写正确时间(填写后点击空白区域)
+            </div>
           </dd>
         </dl>
       </div>
