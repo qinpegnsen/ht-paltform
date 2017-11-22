@@ -81,7 +81,7 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getProbability(item, obj) {
-    let probability = ((+item.num) / (+this.totalNum)).toFixed(2);
+    let probability = +(Number((+item.num) / (+this.totalNum)).toFixed(2))*100+"%";
     $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
   }
 
@@ -129,7 +129,7 @@ export class AddRedPackageComponent implements OnInit {
           amount: '1',
           num: '1',
           level: '1',
-          probability: (1 / Number(this.totalNum)).toFixed(2),
+          probability: Number((1 / Number(this.totalNum)).toFixed(2))*100+'%',
         });
       }
     }, 0)
@@ -195,7 +195,7 @@ export class AddRedPackageComponent implements OnInit {
   delete(i) {
     let _this = this;
     swal({
-        title: '确认删除此信息？',
+        title: '确认删除此条红包的数据？',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮
