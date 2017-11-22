@@ -106,16 +106,16 @@
           </tbody>
           <tfoot>
           <td colspan="5" class="text-center">
-            <span class="btn btn-default btn-sm mt14 text-center" (click)="add()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
+            <span class="btn btn-default btn-sm mt14 text-center " (click)="add()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
           </td>
           </tfoot>
         </table>
         <!--新增规则列表 end-->
       </fieldset>
       <fieldset>
-        <div class="pull-right form-group special">
-          <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
-          <button class="ml btn btn-info pull-left" type="submit" [disabled]="!redPackerForm.form.valid">提交信息</button>
+        <div class="pull-right form-group special mr0">
+          <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+          <button class="ml btn btn-info pull-left thc bg b" type="submit" [disabled]="!redPackerForm.form.valid">提交信息</button>
         </div>
       </fieldset>
     </form>
