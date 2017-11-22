@@ -83,8 +83,8 @@
       <div class="szh-order-details">
         <div class="order-head p bb text-info"><span class="thc font"><i class="fa fa-cube"></i> 收货信息</span></div>
         <div class="content take-info">
-          <!--当订单为刚创建或刚支付或已关闭时不显示是否平台配送，即指派工单后才显示-->
-          <dl *ngIf="orderDetailData.state!='CR' && orderDetailData.state!='PAID' && orderDetailData.state!='CLOSE'">
+          <!--当订单为刚创建或刚支付时不显示是否平台配送，即指派工单后才显示-->
+          <dl *ngIf="orderDetailData.state!='CR' && orderDetailData.state!='PAID'">
             <dt>是否平台配送：</dt>
             <dd>{{orderDetailData.isPlatCarry | rzhState:'1001'}}</dd>
           </dl>
