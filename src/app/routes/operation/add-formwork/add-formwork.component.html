@@ -387,52 +387,52 @@
 <!--修改运费模板值end-->
 
 
-<!--<div class="model" *ngIf="area_model">-->
-  <!--<div class="mask"></div>-->
-  <!--<div class="model-main">-->
-    <!--<div class="header">-->
-      <!--<span>选择区域</span><span class="icon" (click)="close();area_model = !area_model">关闭</span>-->
-    <!--</div>-->
-    <!--<div class="model-body">-->
-      <!--<table class="table table-striped">-->
-        <!--<tbody>-->
-        <!--<tr *ngFor="let v of data; let i = index">-->
-          <!--<td>-->
-            <!--<div>-->
-              <!--<label nz-checkbox [(ngModel)]="allCheckeds[i]['allChecked']"-->
-                     <!--[nzDisabled]="allCheckeds[i]['disabled']"-->
-                     <!--(ngModelChange)="updateAllChecked(i, null, v.provices)">-->
-                <!--<span>{{v?.label}}</span>-->
-              <!--</label>-->
-            <!--</div>-->
-          <!--</td>-->
-          <!--<td class="area-item">-->
-            <!--<div class="ncsc-province" *ngFor="let name of v.provices; let j = index">-->
-              <!--<ng-container>-->
-                <!--<label nz-checkbox [(ngModel)]="v.provices[j]['checked']"-->
-                       <!--[nzDisabled]="v.provices[j]['disabled']"-->
-                       <!--(ngModelChange)="updateAllchildChecked(i, j, name.areaCode)">-->
-                  <!--<span>{{name.label}}{{getCount(name.areaCode)}}</span>-->
-                <!--</label>-->
-                <!--<i class="icon-arrow-down mr" (click)="clear(); allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']"></i>-->
-                <!--<div class="ncsc-citys-sub"  [ngStyle]="{display: allCheckeds[i]['content'][j]['childChecked'] ? 'block': 'none'}">-->
-                  <!--<nz-checkbox-group [(ngModel)]="checkOptionsOnes[name.areaCode][0]"-->
-                                     <!--style=""-->
-                                     <!--(ngModelChange)="updateSingleChecked(i, j, name.areaCode)">-->
-                  <!--</nz-checkbox-group>-->
-                  <!--<button class="btn-info" style="position: absolute; right: 0; bottom: 0;" (click)="allCheckeds[i]['content'][j]['childChecked'] = false"> 关闭</button>-->
-                <!--</div>-->
-              <!--</ng-container>-->
-            <!--</div>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
-    <!--</div>-->
-    <!--<div class="model-bottom">-->
-      <!--<span class="btn btn-default ml lr" (click)="close(); area_model = !area_model">放弃操作</span>-->
-      <!--<button class="ml btn btn-info pull-left ml" type="button" (click)="getResult(); area_model = !area_model;" >提交信息</button>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div class="model" *ngIf="area_model">
+  <div class="mask"></div>
+  <div class="model-main">
+    <div class="header">
+      <span>选择区域</span><span class="icon" (click)="close();area_model = !area_model">关闭</span>
+    </div>
+    <div class="model-body">
+      <table class="table table-striped">
+        <tbody>
+        <tr *ngFor="let v of data; let i = index">
+          <td>
+            <div>
+              <label nz-checkbox [(ngModel)]="allCheckeds[i]['allChecked']"
+                     [nzDisabled]="allCheckeds[i]['disabled']"
+                     (ngModelChange)="updateAllChecked(i, null, v.provices)">
+                <span>{{v?.label}}</span>
+              </label>
+            </div>
+          </td>
+          <td class="area-item">
+            <div class="ncsc-province" *ngFor="let name of v.provices; let j = index">
+              <ng-container>
+                <label nz-checkbox [(ngModel)]="v.provices[j]['checked']"
+                       [nzDisabled]="v.provices[j]['disabled']"
+                       (ngModelChange)="updateAllchildChecked(i, j, name.areaCode)">
+                  <span>{{name.label}}{{getCount(name.areaCode)}}</span>
+                </label>
+                <i class="icon-arrow-down mr" (click)="clear(); allCheckeds[i]['content'][j]['childChecked'] = !allCheckeds[i]['content'][j]['childChecked']"></i>
+                <div class="ncsc-citys-sub"  [ngStyle]="{display: allCheckeds[i]['content'][j]['childChecked'] ? 'block': 'none'}">
+                  <nz-checkbox-group [(ngModel)]="checkOptionsOnes[name.areaCode][0]"
+                                     style=""
+                                     (ngModelChange)="updateSingleChecked(i, j, name.areaCode)">
+                  </nz-checkbox-group>
+                  <button class="btn-info" style="position: absolute; right: 0; bottom: 0;" (click)="allCheckeds[i]['content'][j]['childChecked'] = false"> 关闭</button>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="model-bottom">
+      <span class="btn btn-default ml lr" (click)="close(); area_model = !area_model">放弃操作</span>
+      <button class="ml btn btn-info pull-left ml" type="button" (click)="getResult(); area_model = !area_model;" >提交信息</button>
+    </div>
+  </div>
+</div>
 

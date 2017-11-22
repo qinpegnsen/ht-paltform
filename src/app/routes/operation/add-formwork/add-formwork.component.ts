@@ -75,7 +75,7 @@ export class AddFormworkComponent implements OnInit {
       async: false, //同步请求
       data: {id: this.id},
       success: (res) => {
-        console.log("█ res ►►►", res);
+        // console.log("█ res ►►►", res);
 
         this.staff = res.data;
         if (isNullOrUndefined(this.staff)) this.staff = {}
@@ -300,7 +300,7 @@ export class AddFormworkComponent implements OnInit {
   }
 
   edit(index: number, area?: any) {
-    console.log(area);
+    // console.log(area);
     let _this = this;
     _this.cru = index;
     _this.close();
@@ -512,7 +512,7 @@ export class AddFormworkComponent implements OnInit {
           }
         },
         error: (data) => {
-          console.log("█ 2 ►►►",  2);
+          // console.log("█ 2 ►►►",  2);
 
           swal('添加运费模板提交失败！', '', 'error');
         }
@@ -540,7 +540,7 @@ export class AddFormworkComponent implements OnInit {
         storeExpressTplValList: _this.staff.storeExpressTplValList
       }
 
-      console.log("█ json ►►►",  json);
+      // console.log("█ json ►►►",  json);
 
 
       _this.ajax.put({

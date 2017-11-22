@@ -39,6 +39,7 @@ import { PlatformEditComponent } from './message-inform/platform-edit/platform-e
 import { AgentEditComponent } from './message-inform/agent-edit/agent-edit.component';
 import {HeaderComponent} from "../../layout/header/header.component";
 import {LayoutComponent} from "../../layout/layout.component";
+import {NzCheckboxModule} from '../../checkbox/nz-checkbox.module';
 
 
 const addSort: Routes = [
@@ -112,6 +113,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
+    NzCheckboxModule,
     FileUploadModule
   ],
   declarations: [ExpressComponent, ArticleComponent, EnsureComponent,FreightTemplateComponent, AfterEnsureComponent, ArticleSortComponent, ArticleManageComponent, AddArticleSortComponent, ContentNavComponent, ContentComponent, AddArticleComponent, RightPageComponent, AddFormworkComponent,HelpInterlocutionComponent,HelpAssortmentComponent,AddrightpageComponent,ProblemDetailsComponent,HelpAnswerComponent,HelpUpdateComponent, GetClassComponent, MessageInformComponent, SysMessageComponent, AgentTplComponent, PlatformTplComponent, MessageListComponent, PlatformEditComponent, ArticleAuditComponent, AuditPageComponent, PlatformEditComponent, AgentEditComponent],
