@@ -24,17 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="search-group ml-xl mb">
-    <span class="search-title font12">红包总金额：</span>
-    <div class="search-main">
-      <input type="text" [(ngModel)]="totalAmount" #amount="ngModel" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             maxlength="50" placeholder="红包的总面额（元）" [pattern]="patternService.special">
-      <div [hidden]="amount.valid || amount.pristine"
-           class="alert alert-danger">
-        请填写最多带两位小数的数字
-      </div>
-    </div>
-  </div>
+
   <div class="search-group ml-xl _specialW">
     <span class="search-title font12">红包生效时间：</span>
     <div class="search-main w65">
@@ -56,11 +46,12 @@
           <thead>
           <tr>
             <th class="w20 text-center">
-              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
-            </th>
-            <th class="w20 text-center">
               <rzhDefaultSorter by="id">面额（元）</rzhDefaultSorter>
             </th>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+            </th>
+
             <th class="w20 text-center">
               <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
             </th>
@@ -75,17 +66,17 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
+              <input class="text _price num form-control amount" (keyup)="countAmount()" [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
+              <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
+                   class="alert alert-danger">
+                请填写最多带两位小数的数字
+              </div>
+            </td>
+            <td>
               <input class="text _price num form-control redPacketNumber"  #pieceNumber="ngModel" [(ngModel)]="item.num" (keyup)="getProbability(item,$event.target)" name="num{{i}}" required  [pattern]="patternService.integer"/>
               <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
                    class="alert alert-danger">
                 请填写正整数
-              </div>
-            </td>
-            <td>
-              <input class="text _price num form-control amount"  [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
-              <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
-                   class="alert alert-danger">
-                请填写最多带两位小数的数字
               </div>
             </td>
             <td>
@@ -113,9 +104,15 @@
         <!--新增规则列表 end-->
       </fieldset>
       <fieldset>
-        <div class="pull-right form-group special mr0">
+        <div class="pull-right form-group special mr0 ml">
           <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
           <button class="ml btn btn-info pull-left thc bg b" type="submit" [disabled]="!redPackerForm.form.valid">提交信息</button>
+        </div>
+        <div class="search-group ml-xl mb pull-right mr">
+          <span class="font14 lineHeight33">红包总金额 （元）：</span>
+          <span class="font18 lineHeight33 main-red ">
+            {{sumOfAmountArray}}
+          </span>
         </div>
       </fieldset>
     </form>

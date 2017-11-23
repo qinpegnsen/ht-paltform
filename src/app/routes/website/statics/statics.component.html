@@ -13,8 +13,8 @@
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
               <div class="font14">今日发放红包总金额</div>
-              <p class="text-md m0" *ngIf="redPackStatic?.ordSum!=null">{{redPackStatic?.ordSum | decimalTwo}}</p>
-              <p class="text-md m0" *ngIf="redPackStatic?.ordSum==null">0.00</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.totalAmountToday!=null">{{redPackStatic?.totalAmountToday | decimalTwo}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.totalAmountToday==null">0.00</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -32,8 +32,8 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
               <div class="font14">今日领取红包总金额</div>
-              <p class="text-md m0" *ngIf="redPackStatic?.ordCount!=null">{{redPackStatic?.ordCount}}</p>
-              <p class="text-md m0" *ngIf="redPackStatic?.ordCount==null">0</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.useAmountToday!=null">{{redPackStatic?.useAmountToday | decimalTwo}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.useAmountToday==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calendar fa-3x tp-em"></em>
@@ -51,8 +51,8 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">发放数量</div>-->
               <div class="font14">今日发放红包数量</div>
-              <p class="text-md m0" *ngIf="redPackStatic?.newAddCust!=null">{{redPackStatic?.newAddCust}}</p>
-              <p class="text-md m0" *ngIf="redPackStatic?.newAddCust==null">0</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.totalNumToday!=null">{{redPackStatic?.totalNumToday}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.totalNumToday==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="icon icon-user-follow fa-3x tp-em"></em>
@@ -70,8 +70,8 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取数量</div>-->
               <div class="font14">今日领取红包数量</div>
-              <p class="text-md m0" *ngIf="redPackStatic?.allCust!=null">{{redPackStatic?.allCust}}</p>
-              <p class="text-md m0" *ngIf="redPackStatic?.allCust==null">0</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.useNumToday!=null">{{redPackStatic?.useNumToday}}</p>
+              <p class="text-md m0" *ngIf="redPackStatic?.useNumToday==null">0</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-group fa-3x tp-em"></em>

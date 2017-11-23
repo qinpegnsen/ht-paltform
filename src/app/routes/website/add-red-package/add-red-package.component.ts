@@ -21,15 +21,15 @@ export class AddRedPackageComponent implements OnInit {
   public moduleListCopy = [];                 //复制新增的红包规则的数组
   public settingNumber: any;                  //后台设置的红包的数量
   public deletebutton;                        //删除的按钮
-  public datepickerModel:any;  //红包的日期
+  public datepickerModel:any;                 //红包的日期
   public setDate: string;                     //经过转换过后设置的日期
-  public setTime: string = '00:00:00';          //默认的时分秒
+  public setTime: string = '00:00:00';        //默认的时分秒
   public effectiveTimeStr: string;            //转换过后组合好的时间
   public minDate: Date = new Date();          //默认最小的日期
   public totalNum: string = '';               //红包的总数
   public totalAmount: string = '';            //红包的总额
   public sumOfNumArray: string;               //红包数量累计的总数
-  public sumOfAmountArray: string;            //红包面额累计的总数
+  public sumOfAmountArray: string='0';        //红包面额累计的总数
   bsConfig: Partial<BsDatepickerConfig>;
   locale: 'cn';
   locales = listLocales();
@@ -81,7 +81,7 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getProbability(item, obj) {
-    let probability = +(Number((+item.num) / (+this.totalNum)).toFixed(2))*100+"%";
+    let probability = +(((+item.num) / (+this.totalNum))*100).toFixed(2)+"%";
     $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
   }
 
@@ -109,10 +109,7 @@ export class AddRedPackageComponent implements OnInit {
      * 判断总的数量是否超过设定的红包数量
      */
     setTimeout(() => {
-
       this.getRedPacketNum()//获取添加规则前红包的累计数量
-      this.getRedPacketAmount()//获取添加规则前红包累计的面额
-
       /**
        * 进行判断是否追加，如果添加规则前已经超出总数量和总面额就不能添加
        */
@@ -120,17 +117,16 @@ export class AddRedPackageComponent implements OnInit {
         AppComponent.rzhAlt("info", '已超过红包设置的总数量');
       } else if (Number(this.sumOfNumArray) == Number(this.totalNum)) {//等于的话禁止追加
         AppComponent.rzhAlt("info", '红包总数量以分配完');
-      } else if (Number(this.sumOfAmountArray) > Number(this.totalAmount)) {//超出的话禁止追加
-        AppComponent.rzhAlt("info", '已超过红包设置的总面额');
-      } else if (Number(this.sumOfAmountArray) == Number(this.totalAmount)) {//等于的话禁止追加
-        AppComponent.rzhAlt("info", '红包总面额已分配完');
       } else {//如果红包的数量没有超出继续追加
         this.moduleList.push({
           amount: '1',
           num: '1',
           level: '1',
-          probability: Number((1 / Number(this.totalNum)).toFixed(2))*100+'%',
-        });
+          probability: Number((1 / Number(this.totalNum))*100).toFixed(2)+'%',
+      });
+        setTimeout(()=>{//等页面渲染完毕之后再去加载
+          this.getRedPacketAmount()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+        })
       }
     }, 0)
   }
@@ -145,8 +141,8 @@ export class AddRedPackageComponent implements OnInit {
     if (this.totalNum == '') {
       AppComponent.rzhAlt("info", '请先设置红包的总数量');
       return false;
-    } else if (this.totalAmount == '') {
-      AppComponent.rzhAlt("info", '请先设置红包的总面额');
+    }else if(this.totalNum<this.settingNumber){
+      AppComponent.rzhAlt("info", '红包的数量必须大于'+this.settingNumber);
       return false;
     }
     return true;
@@ -170,9 +166,15 @@ export class AddRedPackageComponent implements OnInit {
     let newNumArray = [];//新的数组，用老保存所有红包的数量
     for (var i = 0; i < numArray.length; i++) {
       newNumArray.push($(numArray[i]).val())
-    }
-    ;
+    };
     this.sumOfNumArray = newNumArray.reduce(this.sum, 0);
+  }
+
+  /**
+   * 面额改变的时候再次统计现在的总面额
+   */
+  countAmount(){
+    this.getRedPacketAmount();
   }
 
   /**
@@ -249,11 +251,7 @@ export class AddRedPackageComponent implements OnInit {
       AppComponent.rzhAlt("info", '已超过红包设置的总数量');
     } else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '未达到红包设置的总数量');
-    } else if (Number(this.sumOfAmountArray) > Number(this.totalAmount)) {
-      AppComponent.rzhAlt("info", '已超过红包设置的总面额');
-    } else if (Number(this.sumOfAmountArray) < Number(this.totalAmount)) {
-      AppComponent.rzhAlt("info", '未达到红包设置的总面额');
-    } else {
+    }else {
       this.formatSelDate()//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
       this.refactorData()//重构数据

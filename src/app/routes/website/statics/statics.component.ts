@@ -24,8 +24,8 @@ export class StaticsComponent implements OnInit {
   public queryType: any = 'DAY';               //统计时间的类型，默认是按天统计
   public queryTypes: any;                      //统计时间的类型
   public showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的统计时间的类型显示
-  public now: any;
-  public prev: any;
+  public total: any;
+  public use: any;
   public optionPrev:any;                       //统计图的配置
   public locale: 'cn';
   constructor(private submit: SubmitService,
@@ -79,8 +79,8 @@ export class StaticsComponent implements OnInit {
     let result = this.submit.getData(url, data);
     if(result){
       this.redPackStatic = result;
-      me.now = me.redPackStatic.todaySale;
-      me.prev = me.redPackStatic.yesterdaySale;
+      me.total = me.redPackStatic.totalAmount;
+      me.use = me.redPackStatic.useAmount;
       this.graphInfo();
     }
   }
@@ -125,67 +125,67 @@ export class StaticsComponent implements OnInit {
    */
   public graphInfo() {
     let _this = this;
-  //   _this.optionPrev = {
-  //     title: {
-  //       text: '一个月的红包金额',
-  //       left:'center'
-  //     },
-  //     legend: { //图例
-  //       data: ['领取红包金额','发放红包金额'],
-  //       align: 'left',
-  //       left:"center",
-  //       top:"8%",
-  //     },
-  //     color: ['#3398DB', '#42DBB1'],  //图例颜色列表，不设置会有默认的
-  //     tooltip: { //提示框组件
-  //       trigger: 'axis',         // 坐标轴指示器，坐标轴触发有效
-  //       axisPointer: {
-  //         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-  //       }
-  //     },
-  //     toolbox: {
-  //       show: true,
-  //       right:"3%",
-  //       feature: {
-  //         magicType: {show: true, type: ['line', 'bar']},
-  //         restore: {show: true},
-  //         saveAsImage: {show: true}
-  //       }
-  //     },
-  //     grid: {
-  //       left: '3%',
-  //       right: '4%',
-  //       bottom: '3%',
-  //       containLabel: true    //是否包含坐标轴的刻度标签。
-  //     },
-  //     xAxis: [
-  //       {
-  //         type: 'category',   //类目轴，还有'time' 时间轴，'value' 数值轴
-  //         data:  _this.prev.keys,
-  //         axisTick: {//坐标轴刻度相关设置
-  //           alignWithLabel: true
-  //         }
-  //       }
-  //     ],
-  //     yAxis: [
-  //       {
-  //         type: 'value'
-  //       }
-  //     ],
-  //     series: [
-  //       {
-  //         name: '领取红包金额',
-  //         type: 'bar',
-  //         barWidth: '30%',
-  //         data: _this.prev.yaxis
-  //       },
-  //       {
-  //         name:'发放红包金额',
-  //         type: 'bar',
-  //         barWidth: '30%',
-  //         data: _this.now.yaxis
-  //       }
-  //     ]
-  //   };
+    _this.optionPrev = {
+      title: {
+        text: '一个月的红包金额',
+        left:'center'
+      },
+      legend: { //图例
+        data: ['领取红包金额','发放红包金额'],
+        align: 'left',
+        left:"center",
+        top:"8%",
+      },
+      color: ['#3398DB', '#42DBB1'],  //图例颜色列表，不设置会有默认的
+      tooltip: { //提示框组件
+        trigger: 'axis',         // 坐标轴指示器，坐标轴触发有效
+        axisPointer: {
+          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      toolbox: {
+        show: true,
+        right:"3%",
+        feature: {
+          magicType: {show: true, type: ['line', 'bar']},
+          restore: {show: true},
+          saveAsImage: {show: true}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true    //是否包含坐标轴的刻度标签。
+      },
+      xAxis: [
+        {
+          type: 'category',   //类目轴，还有'time' 时间轴，'value' 数值轴
+          data:  _this.use.keys,
+          axisTick: {//坐标轴刻度相关设置
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: '领取红包金额',
+          type: 'bar',
+          barWidth: '30%',
+          data: _this.use.yaxis
+        },
+        {
+          name:'发放红包金额',
+          type: 'bar',
+          barWidth: '30%',
+          data: _this.total.yaxis
+        }
+      ]
+    };
   }
 }
