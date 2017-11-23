@@ -176,14 +176,15 @@ export class AddRedPackageComponent implements OnInit {
       if($(amounV[i]).val()==value){
         AppComponent.rzhAlt("info", '红包的面额不能相同');
         $(".addMask").addClass('myMask');//增加遮罩，这时候禁止点击新增规则按钮
-        console.log("█ $(\":submit\") ►►►",  $(":submit"));
         $(".mySubmit").attr('disabled','true');//禁止提交
+        $(".mySubmit").prop('disabled','true');//禁止提交
         return;
       }
     }
     $(".addMask").removeClass('myMask');//放开按钮
     $(obj).removeClass('selected');
     $(".mySubmit").removeAttr('disabled');//可以提交
+    $(".mySubmit").removeProp('disabled');//可以提交
     this.getRedPacketAmount();
   }
 
