@@ -7,6 +7,7 @@ import {AppComponent} from "../../../app.component";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {number} from "ng2-validation/dist/number";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -85,17 +86,6 @@ export class AddRedPackageComponent implements OnInit {
     $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
   }
 
-  /**
-   * 根据概率生成数量  红包数量会有小数先取消掉
-   * @param item
-   * @param obj
-   */
-  getNum(item, obj) {
-    // let trueProbability=(+$(obj).val()).toFixed(2);
-    // $(obj).val(trueProbability);//保留两位小数
-    // let num = ((+this.totalNum) * (+item.probability)).toFixed(2);
-    // $(obj).parents('tr').find('.redPacketNumber').val(num);//根据数量，自动生成概率
-  }
 
   /**
    * 添加红包规则
@@ -118,8 +108,14 @@ export class AddRedPackageComponent implements OnInit {
       } else if (Number(this.sumOfNumArray) == Number(this.totalNum)) {//等于的话禁止追加
         AppComponent.rzhAlt("info", '红包总数量以分配完');
       } else {//如果红包的数量没有超出继续追加
+        let amountV=$('tbody').find('.amount:last').val();
+        if(isNullOrUndefined(amountV)){
+          amountV=1;
+        }else{
+          ++amountV;
+        }
         this.moduleList.push({
-          amount: '1',
+          amount: amountV,
           num: '1',
           level: '1',
           probability: Number((1 / Number(this.totalNum))*100).toFixed(2)+'%',
@@ -173,7 +169,17 @@ export class AddRedPackageComponent implements OnInit {
   /**
    * 面额改变的时候再次统计现在的总面额
    */
-  countAmount(){
+  countAmount(value,obj){
+    $(obj).addClass('selected');
+    let amounV=$("tbody").find('.amount:not(.selected)');//找到除了当前以外的其他的对象
+    for(let i=0;i<amounV.length;i++){
+      if($(amounV[i]).val()==value){
+        AppComponent.rzhAlt("info", '红包的面额不能相同');
+        $(".addMask").addClass('myMask');
+        return;
+      }
+    }
+    $(".addMask").removeClass('myMask');
     this.getRedPacketAmount();
   }
 

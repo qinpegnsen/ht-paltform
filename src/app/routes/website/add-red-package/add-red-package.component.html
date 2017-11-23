@@ -66,7 +66,7 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
-              <input class="text _price num form-control amount" (keyup)="countAmount()" [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
+              <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)" #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
                    class="alert alert-danger">
                 请填写最多带两位小数的数字
@@ -87,7 +87,7 @@
               </div>
             </td>
             <td>
-              <input class="text _price num form-control probability" disabled (keyup)="getNum(item,$event.target)" [(ngModel)]="item.probability" name="probability{{i}}"
+              <input class="text _price num form-control probability" disabled [(ngModel)]="item.probability" name="probability{{i}}"
                       required/>
             </td>
             <td>
@@ -96,8 +96,10 @@
           </tr>
           </tbody>
           <tfoot>
-          <td colspan="5" class="text-center">
-            <span class="btn btn-default btn-sm mt14 text-center " (click)="add()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
+          <td colspan="5" class="text-center position-relative">
+            <span class="btn-sm mt14 text-center addMask"></span>
+            <span class="btn btn-default btn-sm mt14 text-center add"  (click)="add()">
+              <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
           </td>
           </tfoot>
         </table>
