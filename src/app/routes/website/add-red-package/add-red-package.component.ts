@@ -175,12 +175,14 @@ export class AddRedPackageComponent implements OnInit {
     for(let i=0;i<amounV.length;i++){
       if($(amounV[i]).val()==value){
         AppComponent.rzhAlt("info", '红包的面额不能相同');
-        $(".addMask").addClass('myMask');
+        $(".addMask").addClass('myMask');//增加遮罩，这时候禁止点击新增规则按钮
         return;
       }
     }
-    $(".addMask").removeClass('myMask');
+    $(".addMask").removeClass('myMask');//放开按钮
+    $(obj).removeClass('selected');
     this.getRedPacketAmount();
+
   }
 
   /**
