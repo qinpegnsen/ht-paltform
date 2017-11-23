@@ -58,7 +58,8 @@ const PROXY_CONFIG = [
       "/finaceDraw",
       "/commentGoods",
       "/rpStatistics",
-      "/rpSetting"
+      "/rpSetting",
+      "/rpCustAcctRec"
     ],
     target: gh  + "8084",   //拦截 context配置路径，经过此地址
     secure: false
