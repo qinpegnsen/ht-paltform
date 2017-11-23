@@ -125,6 +125,7 @@ export class BankTransferComponent implements OnInit {
       remark: obj.remark
     }
     let result = this.bankTransferService.bankTransfer(url, data);
+    // console.log("█ result ►►►",  result);
     if (result.success) {
       this.code = null;
       this.summary=null;

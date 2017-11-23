@@ -13,7 +13,7 @@ const swal = require('sweetalert');
   templateUrl: './help-answer.component.html',
   styleUrls: ['./help-answer.component.scss']
 })
-export class HelpAnswerComponent implements OnInit,OnDestroy {
+export class HelpAnswerComponent implements OnInit {
   public urlChange;
   public data: Page = new Page();
   public addButton;//添加按钮
@@ -71,9 +71,9 @@ export class HelpAnswerComponent implements OnInit,OnDestroy {
   /**
    * 取消订阅，要不然一直执行
    */
-  ngOnDestroy(){
-    this.urlChange.unsubscribe()
-  }
+  // ngOnDestroy(){
+  //   this.urlChange.unsubscribe()
+  // }
 
   /**
    * 查找
