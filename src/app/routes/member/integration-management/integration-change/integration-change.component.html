@@ -1,6 +1,5 @@
-
 <div class="content-heading mb-lg thc font">
- 重消币增减
+  重消币增减
 </div>
 <div class="panel panel-default">
   <!--操作提示-->
@@ -11,8 +10,8 @@
     </ul>
   </div>
   <div class="panel-body">
-    <div class="" >
-      <form class="form-validate form-horizontal"  #res="ngForm">
+    <div class="">
+      <form class="form-validate form-horizontal" #res="ngForm">
         <!-- START panel-->
         <div class="panel-default">
           <div class="panel-body">
@@ -20,13 +19,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i class="main-red">*</i> 会员手机号：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number" name="tel"  [(ngModel)]="data.phone" required #tel="ngModel" (blur)="queryCoin()" [pattern]="patterns.phone"/>
+                  <input class="form-control num" type="number" name="tel" [(ngModel)]="data.phone" required
+                         #tel="ngModel" (blur)="queryCoin()" [pattern]="patterns.phone"/>
                 </div>
               </div>
-              <div  class="col-sm-9 pull-right text-danger" *ngIf="testPhone(data.phone)" >
-                <span   class="font-color" >当前重消币值：</span>
+              <div class="col-sm-9 pull-right text-danger" *ngIf="testPhone(data.phone)">
+                <span class="font-color">当前重消币值：</span>
                 <span>{{sum?.coin}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span  class="font-color">可充入最大重消币值：</span>
+                <span class="font-color">可充入最大重消币值：</span>
                 <span>{{sum?.recharge}}</span>
               </div>
               <div [hidden]="tel.valid || tel.pristine || tel.value==''"
@@ -41,7 +41,7 @@
                 <div class="col-sm-8">
                   <label class="radio-inline c-radio">
                     <input type="radio" name="logType" value="RECHARGE"
-                          [(ngModel)]="data.logType"/>
+                           [(ngModel)]="data.logType"/>
                     <span class="fa fa-circle"></span>充值</label>
                   <label class="radio-inline c-radio">
                     <input type="radio" name="logType" value="DEDUCT" [(ngModel)]="data.logType"/>
@@ -54,8 +54,13 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><i class="main-red">*</i> 重消币：</label>
                 <div class="col-sm-8">
-                  <input class="form-control num" type="number" maxlength="8" name="custCoin" [(ngModel)]="data.custCoin" required  #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
+                  <input class="form-control num" type="number" maxlength="8" name="custCoin"
+                         [(ngModel)]="data.custCoin" required #custCoin="ngModel" [pattern]="patterns.twodecimal"/>
                 </div>
+              </div>
+              <div *ngIf="data.custCoin===0"
+                   class="col-sm-9 pull-right text-danger">
+                您确认要充值０元吗?
               </div>
               <div [hidden]="custCoin.valid || custCoin.pristine || custCoin.value==''"
                    class="col-sm-9 pull-right text-danger">
@@ -64,7 +69,7 @@
             </fieldset>
           </div>
           <div class="panel-footer">
-            <button class="btn btn-info sub" type="submit" (click)="submit()" [disabled]="!res.form.valid">提交信息  </button>
+            <button class="btn btn-info sub" type="submit" (click)="submit()" [disabled]="!res.form.valid">提交信息</button>
           </div>
         </div>
         <!-- END panel-->
