@@ -16,10 +16,12 @@ export class WebstiteService {
       data: data,
       async:false,
       success: (res) => {
-        result=res.data;
         if(res.success){
+          result=res.data;
+          sessionStorage.setItem('isUse','N');
           AppComponent.rzhAlt("success", res.info);
         }else{
+          result=res.info;
           AppComponent.rzhAlt("error", res.info);
         }
       },

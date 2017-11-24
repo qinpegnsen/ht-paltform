@@ -1,36 +1,62 @@
 <div class="content-heading mb-lg thc font">
-  <span>添加红包规则</span>
+  <span>设置红包规则</span>
+  <app-buttons class="pull-right" [config]="addTemplate" (click)="addUsedTem()"></app-buttons>
 </div>
-
 <!--操作提示 start-->
 <div class="panel mb p ts thc">
   <p class="font18">操作提示</p>
   <ul>
-    <li>红包的总数量必须大于等于{{settingNumber}}</li>
-    <li>请设置红包的总面额</li>
+    <li>红包总金额不能超过{{totalAmount}}</li>
     <li>红包生效的时间默认是第二天的0时0分0秒</li>
   </ul>
 </div>
 <!--操作提示 end-->
 <div class="panel mb w100 search">
-  <div class="search-group ml-xl mb">
-    <span class="search-title font12">红包总数量：</span>
+  <div class="search-group-own ml-xl m10">
+    <span class="search-title font12">红包总金额：</span>
     <div class="search-main">
-      <input type="text" [(ngModel)]="totalNum" min="{{settingNumber}}" #number="ngModel"  class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer" (keyup)="changeNumber()"
+      <input type="text" [(ngModel)]="totalAmount" disabled
+             min="{{settingNumber}}" #number="ngModel"
+             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
+             (keyup)="changeNumber()"
              maxlength="50">
-      <div [hidden]="number.valid || number.pristine"
-           class="alert alert-danger">
-        请填写大于等于{{settingNumber}}正整数
-      </div>
     </div>
   </div>
-
-  <div class="search-group ml-xl _specialW">
-    <span class="search-title font12">红包生效时间：</span>
-    <div class="search-main w65">
-      <div class="col-lg-4">
-        <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"  [minDate]="minDate">
-      </div>
+  <div class="search-group-own ml-xl m10" *ngIf="noUseAmount>=0">
+    <span class="search-title font12">可使用金额：</span>
+    <div class="search-main" >
+      <input type="text" [(ngModel)]="noUseAmount" disabled
+             min="{{settingNumber}}" #number="ngModel"
+             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
+             (keyup)="changeNumber()"
+             maxlength="50">
+    </div>
+  </div>
+  <div class="search-group-own ml-xl m10">
+    <span class="search-title font12">红包总数量：</span>
+    <div class="search-main">
+      <input type="text" [(ngModel)]="totalNum" disabled
+             min="{{settingNumber}}" #number="ngModel"
+             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
+             (keyup)="changeNumber()"
+             maxlength="50">
+    </div>
+  </div>
+  <div class="search-group-own ml-xl m10" *ngIf="NoSiteNum>=0">
+    <span class="search-title font12">未设置数量：</span>
+    <div class="search-main">
+      <input type="text" [(ngModel)]="NoSiteNum" disabled
+             min="{{settingNumber}}" #number="ngModel"
+             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
+             (keyup)="changeNumber()"
+             maxlength="50">
+    </div>
+  </div>
+  <div class="search-group ml-xl m10">
+    <span class="search-title font12">生效时间：</span>
+    <div class="search-main">
+      <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker"
+             [bsConfig]="bsConfig" [minDate]="minDate">
     </div>
   </div>
 </div>
@@ -66,29 +92,35 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
-              <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)" #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel"  required  [pattern]="patternService.special"/>
+              <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)"
+                     #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
+                     [pattern]="patternService.special"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
                    class="alert alert-danger">
                 请填写最多带两位小数的数字
               </div>
             </td>
             <td>
-              <input class="text _price num form-control redPacketNumber"  #pieceNumber="ngModel" [(ngModel)]="item.num" (keyup)="getProbability(item,$event.target)" name="num{{i}}" required  [pattern]="patternService.integer"/>
+              <input class="text _price num form-control redPacketNumber" #pieceNumber="ngModel" [(ngModel)]="item.num"
+                     (keyup)="getProbability(item,$event.target)" name="num{{i}}" required
+                     [pattern]="patternService.integer"/>
               <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
                    class="alert alert-danger">
                 请填写正整数
               </div>
             </td>
             <td>
-              <input class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}" #pieceLevel="ngModel" [pattern]="patternService.integer" required/>
+              <input class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}"
+                     #pieceLevel="ngModel" [pattern]="patternService.integer" required/>
               <div [hidden]="pieceLevel.valid || pieceLevel.pristine"
                    class="alert alert-danger">
                 请填写正整数
               </div>
             </td>
             <td>
-              <input class="text _price num form-control probability" disabled [(ngModel)]="item.probability" name="probability{{i}}"
-                      required/>
+              <input class="text _price num form-control probability" disabled
+                     [(ngModel)]="item.probability" name="probability{{i}}"
+                     required/>
             </td>
             <td>
               <app-buttons [config]="deletebutton" (click)="delete(i)"></app-buttons>
@@ -98,7 +130,7 @@
           <tfoot>
           <td colspan="5" class="text-center position-relative">
             <span class="btn-sm mt14 text-center addMask"></span>
-            <span class="btn btn-default btn-sm mt14 text-center add"  (click)="add()">
+            <span class="btn btn-default btn-sm mt14 text-center add" (click)="add()">
               <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;新增红包规则</span>
           </td>
           </tfoot>
@@ -108,7 +140,9 @@
       <fieldset>
         <div class="pull-right form-group special mr0 ml">
           <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
-          <button class="ml btn btn-info pull-left thc bg b mySubmit" type="submit" [disabled]="!redPackerForm.form.valid">提交信息</button>
+          <button class="ml btn btn-info pull-left thc bg b mySubmit" type="submit"
+                  [disabled]="!redPackerForm.form.valid">提交信息
+          </button>
         </div>
         <div class="search-group ml-xl mb pull-right mr">
           <span class="font14 lineHeight33">红包总金额 （元）：</span>

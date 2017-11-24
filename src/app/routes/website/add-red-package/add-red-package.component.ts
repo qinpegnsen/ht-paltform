@@ -8,6 +8,10 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {number} from "ng2-validation/dist/number";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
+import {SiteComponent} from "../site/site.component";
+import {Router} from "@angular/router";
+import {Page} from "../../../core/page/page";
+import {SubmitService} from "../../../core/forms/submit.service";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -22,21 +26,29 @@ export class AddRedPackageComponent implements OnInit {
   public moduleListCopy = [];                 //复制新增的红包规则的数组
   public settingNumber: any;                  //后台设置的红包的数量
   public deletebutton;                        //删除的按钮
-  public datepickerModel:any;                 //红包的日期
+  public addTemplate;                         //增加已生效的红包为模板
+  public datepickerModel: any;                 //红包的日期
   public setDate: string;                     //经过转换过后设置的日期
   public setTime: string = '00:00:00';        //默认的时分秒
   public effectiveTimeStr: string;            //转换过后组合好的时间
   public minDate: Date = new Date();          //默认最小的日期
   public totalNum: string = '';               //红包的总数
-  public totalAmount: string = '';            //红包的总额
+  public siteNum: string = '';                //已经设置的红包总数
+  public NoSiteNum: string = '';              //未经设置的红包总数
+  public totalAmount: string = '11111';          //红包的总额
+  public siteAmount: string = '';              //已经设置的红包总额
+  public noUseAmount: string = '';            //未使用的红包总额
   public sumOfNumArray: string;               //红包数量累计的总数
-  public sumOfAmountArray: string='0';        //红包面额累计的总数
+  public sumOfAmountArray: string = '0';          //红包面额累计的总数
+  public redPackData: any;                       //是否显示未生效的红包数据
   bsConfig: Partial<BsDatepickerConfig>;
   locale: 'cn';
   locales = listLocales();
 
   constructor(public location: Location,
               public patternService: PatternService,
+              public router: Router,
+              private submit: SubmitService,
               public service: WebstiteService) {
     this.bsConfig = Object.assign({}, {
       locale: this.locale,
@@ -47,13 +59,68 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.datepickerModel=this.minDate=RzhtoolsService.getAroundDateByDate(new Date(),+1);
+    this.datepickerModel = this.minDate = RzhtoolsService.getAroundDateByDate(new Date(), +1);
     this.formatSelDate();
     this.getSettingNum();
+    this.qeuryAll('N');
     this.deletebutton = {
       type: "delete",
       title: '删除红包规则',
     };
+    this.addTemplate = {
+      title: "导入模板",
+      text: "导入模板",
+      type: "add-thc",
+    };
+  }
+
+  addUsedTem() {
+    let _this = this;
+    swal({
+        title: '新增模板会覆盖已设置好的数据，是否还要继续？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        _this.qeuryAll('Y');
+      });
+  }
+
+  /**
+   * 是否导入未生效规则列表
+   */
+  qeuryAll(isUsed) {
+    let url = "/rpSetting/queryRpSettingAdmin";
+    let data = {
+      curPage: 1,
+      isUsed: isUsed,
+    };
+    let result = this.submit.getData(url, data);
+    if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
+      this.moduleList = result.voList;
+      setTimeout(() => {
+        this.changeNumber();//获取红包的概率
+        this.isTip();
+      }, 0)
+    }
+  }
+
+  /**
+   * 提示总数量和总金额是否超过后台返回的
+   */
+  isTip() {
+    if (this.getRedPacketNum() > this.totalNum) {
+      AppComponent.rzhAlt("info", '已超过红包设置的总数量,请进行适当修改');
+    }
+    ;
+    if (this.getRedPacketAmount() > this.totalAmount) {
+      AppComponent.rzhAlt("info", '已超过红包设置的总金额,请进行适当修改');
+    }
+    ;
   }
 
   /**
@@ -71,9 +138,10 @@ export class AddRedPackageComponent implements OnInit {
   changeNumber() {
     let probabilityArray = $("tr");
     for (var i = 0; i < probabilityArray.length; i++) {
-      let value=Number($(probabilityArray[i]).find(".redPacketNumber").val())/Number(this.totalNum)
+      let value = Number((Number($(probabilityArray[i]).find(".redPacketNumber").val()) / Number(this.totalNum)) * 100).toFixed(2) + '%';
       $(probabilityArray[i]).find(".probability").val(value)
-    };
+    }
+    ;
   }
 
   /**
@@ -82,8 +150,11 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getProbability(item, obj) {
-    let probability = +(((+item.num) / (+this.totalNum))*100).toFixed(2)+"%";
+    let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
     $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
+    this.siteNum = this.getRedPacketNum();
+    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
+    this.isTip();
   }
 
 
@@ -91,10 +162,6 @@ export class AddRedPackageComponent implements OnInit {
    * 添加红包规则
    */
   add() {
-    let bol = this.siteStep()//看红包的数量和总面额都设置好没
-    if (!bol) {//如果返回false就说明没有设置好，中断下面的步骤
-      return;
-    }
     /**
      * 判断总的数量是否超过设定的红包数量
      */
@@ -107,41 +174,31 @@ export class AddRedPackageComponent implements OnInit {
         AppComponent.rzhAlt("info", '已超过红包设置的总数量');
       } else if (Number(this.sumOfNumArray) == Number(this.totalNum)) {//等于的话禁止追加
         AppComponent.rzhAlt("info", '红包总数量以分配完');
+      } else if (Number(this.sumOfAmountArray) > Number(this.totalAmount)) {//超出的话禁止追加
+        AppComponent.rzhAlt("info", '已超过红包设置的总金额');
+      } else if (Number(this.sumOfAmountArray) == Number(this.totalNum)) {//等于的话禁止追加
+        AppComponent.rzhAlt("info", '红包总金额以分配完');
       } else {//如果红包的数量没有超出继续追加
-        let amountV=$('tbody').find('.amount:last').val();
-        if(isNullOrUndefined(amountV)){
-          amountV=1;
-        }else{
+        let amountV = $('tbody').find('.amount:last').val();
+        if (isNullOrUndefined(amountV)) {
+          amountV = 1;
+        } else {
           ++amountV;
         }
         this.moduleList.push({
           amount: amountV,
           num: '1',
           level: '1',
-          probability: Number((1 / Number(this.totalNum))*100).toFixed(2)+'%',
-      });
-        setTimeout(()=>{//等页面渲染完毕之后再去加载
-          this.getRedPacketAmount()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+          probability: Number((1 / Number(this.totalNum)) * 100).toFixed(2) + '%',
+        });
+        setTimeout(() => {//等页面渲染完毕之后再去加载
+          this.siteAmount = this.getRedPacketAmount()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+          this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+          this.siteNum = this.getRedPacketNum()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+          this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
         })
       }
     }, 0)
-  }
-
-  /**
-   * 设置红包的步骤
-   * 1.设置红包数量
-   * 2.设置红包总金额
-   *
-   */
-  siteStep() {
-    if (this.totalNum == '') {
-      AppComponent.rzhAlt("info", '请先设置红包的总数量');
-      return false;
-    }else if(this.totalNum<this.settingNumber){
-      AppComponent.rzhAlt("info", '红包的数量必须大于'+this.settingNumber);
-      return false;
-    }
-    return true;
   }
 
   /**
@@ -162,22 +219,24 @@ export class AddRedPackageComponent implements OnInit {
     let newNumArray = [];//新的数组，用老保存所有红包的数量
     for (var i = 0; i < numArray.length; i++) {
       newNumArray.push($(numArray[i]).val())
-    };
+    }
+    ;
     this.sumOfNumArray = newNumArray.reduce(this.sum, 0);
+    return this.sumOfNumArray;
   }
 
   /**
    * 面额改变的时候再次统计现在的总面额
    */
-  countAmount(value,obj){
+  countAmount(value, obj) {
     $(obj).addClass('selected');
-    let amounV=$("tbody").find('.amount:not(.selected)');//找到除了当前以外的其他的对象
-    for(let i=0;i<amounV.length;i++){
-      if($(amounV[i]).val()==value){
+    let amounV = $("tbody").find('.amount:not(.selected)');//找到除了当前以外的其他的对象
+    for (let i = 0; i < amounV.length; i++) {
+      if ($(amounV[i]).val() == value) {
         AppComponent.rzhAlt("info", '红包的面额不能相同');
         $(".addMask").addClass('myMask');//增加遮罩，这时候禁止点击新增规则按钮
-        $(".mySubmit").attr('disabled','true');//禁止提交
-        $(".mySubmit").prop('disabled','true');//禁止提交
+        $(".mySubmit").attr('disabled', 'true');//禁止提交
+        $(".mySubmit").prop('disabled', 'true');//禁止提交
         return;
       }
     }
@@ -185,20 +244,23 @@ export class AddRedPackageComponent implements OnInit {
     $(obj).removeClass('selected');
     $(".mySubmit").removeAttr('disabled');//可以提交
     $(".mySubmit").removeProp('disabled');//可以提交
-    this.getRedPacketAmount();
+    this.siteAmount = this.getRedPacketAmount();
+    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+    this.isTip();
   }
 
   /**
    * 获取红包的累计的面额
    */
   getRedPacketAmount() {
-    let amountArray = $("tr").find(".amount");
+    let amountArray = $("tbody tr");
     let newAmountArray = [];//新的数组，用老保存所有红包的面额
     for (var i = 0; i < amountArray.length; i++) {
-      newAmountArray.push($(amountArray[i]).val())
+      newAmountArray.push($(amountArray[i]).find('.amount').val() * $(amountArray[i]).find('.redPacketNumber').val())
     }
     ;
     this.sumOfAmountArray = newAmountArray.reduce(this.sum, 0);
+    return this.sumOfAmountArray;
   }
 
   /**
@@ -217,9 +279,11 @@ export class AddRedPackageComponent implements OnInit {
       },
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
-        _this.moduleList.splice(i, 1)
-      }
-    );
+        _this.moduleList.splice(i, 1);
+        setTimeout(()=>{
+          _this.isTip();
+        },0)
+      });
   }
 
   /**
@@ -262,7 +326,7 @@ export class AddRedPackageComponent implements OnInit {
       AppComponent.rzhAlt("info", '已超过红包设置的总数量');
     } else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '未达到红包设置的总数量');
-    }else {
+    } else {
       this.formatSelDate()//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
       this.refactorData()//重构数据
@@ -273,8 +337,11 @@ export class AddRedPackageComponent implements OnInit {
       let data = {
         rpSettingBatchStr: JSON.stringify(json)
       };
-      this.service.addRedPackRules(url, data);
-      this.location.back();
+      let result = this.service.addRedPackRules(url, data);
+      if (result == '账户余额不足') {
+        return;
+      }
+      this.router.navigate(['/main/website/redPacket/site']);
     }
   }
 }
