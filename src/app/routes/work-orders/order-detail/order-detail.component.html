@@ -84,7 +84,8 @@
         <dt>
           <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
              triggers="mouseenter:mouseleave"></i>
-          重消币抵扣金额：</dt>
+          重消币抵扣金额：
+        </dt>
         <dd>{{!orderDetailData.coinPay?'0.00':orderDetailData.coinPay | number: '1.2-2'}}</dd>
       </dl>
       <dl>
@@ -208,9 +209,7 @@
     <tbody>
     <tr class="text-center" *ngFor="let goods of goodsData;let i = index">
       <td class="text-left p position-relative bb">
-        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
-          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
-        </ng-container>
+        <div class="cover" *ngIf="goods.returnNum > 0"></div>
         <span class="goods-img goods-lg-img mr">
               <img [src]="goods.goodsImage" onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
             </span>
@@ -225,22 +224,17 @@
         </div>
       </td>
       <td class="bb position-relative">
-        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
-          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
-        </ng-container>
+        <div class="cover" *ngIf="goods.returnNum > 0"></div>
         {{goods.price | number: '1.2-2'}}
       </td>
       <td class="bb position-relative">
-        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
-          <div class="cover" *ngIf="!goods.canDELIVERY"></div>
-        </ng-container>
+        <div class="cover" *ngIf="goods.returnNum > 0"></div>
         {{goods.num}}
       </td>
       <td class="w10 bb">
-        <ng-container *ngIf="orderDetailData.state == 'PAID' || orderDetailData.state == 'ASSIGNED' || orderDetailData.state == 'PREPARE'">
-                  <span *ngIf="!goods.canDELIVERY">
-                    <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
-                  </span>
+        <ng-container *ngIf="goods.returnNum>0">
+          <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
+          <p class="text-danger mb0 mt-sm"><a>查看退款进度</a></p>
         </ng-container>
       </td>
       <ng-container *ngIf="i == 0">
