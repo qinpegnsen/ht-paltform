@@ -14,42 +14,24 @@
 <div class="panel mb w100 search">
   <div class="search-group-own ml-xl m10">
     <span class="search-title font12">红包总金额：</span>
-    <div class="search-main">
-      <input type="text" [(ngModel)]="totalAmount" disabled
-             min="{{settingNumber}}" #number="ngModel"
-             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
-             (keyup)="changeNumber()"
-             maxlength="50">
-    </div>
+    <div class="search-main lineHeight36">{{totalAmount}}</div>
   </div>
   <div class="search-group-own ml-xl m10" *ngIf="noUseAmount>=0">
     <span class="search-title font12">可使用金额：</span>
-    <div class="search-main" >
-      <input type="text" [(ngModel)]="noUseAmount" disabled
-             min="{{settingNumber}}" #number="ngModel"
-             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
-             (keyup)="changeNumber()"
-             maxlength="50">
+    <div class="search-main lineHeight36">
+      {{noUseAmount}}
     </div>
   </div>
   <div class="search-group-own ml-xl m10">
     <span class="search-title font12">红包总数量：</span>
-    <div class="search-main">
-      <input type="text" [(ngModel)]="totalNum" disabled
-             min="{{settingNumber}}" #number="ngModel"
-             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
-             (keyup)="changeNumber()"
-             maxlength="50">
+    <div class="search-main lineHeight36">
+      {{totalNum}}
     </div>
   </div>
   <div class="search-group-own ml-xl m10" *ngIf="NoSiteNum>=0">
     <span class="search-title font12">未设置数量：</span>
-    <div class="search-main">
-      <input type="text" [(ngModel)]="NoSiteNum" disabled
-             min="{{settingNumber}}" #number="ngModel"
-             class="form-control border-b-grey ng-pristine ng-valid ng-touched" [pattern]="patternService.integer"
-             (keyup)="changeNumber()"
-             maxlength="50">
+    <div class="search-main lineHeight36">
+      {{NoSiteNum}}
     </div>
   </div>
   <div class="search-group ml-xl m10">
@@ -118,9 +100,7 @@
               </div>
             </td>
             <td>
-              <input class="text _price num form-control probability" disabled
-                     [(ngModel)]="item.probability" name="probability{{i}}"
-                     required/>
+              <div class="probability">{{item.probability}}</div>
             </td>
             <td>
               <app-buttons [config]="deletebutton" (click)="delete(i)"></app-buttons>

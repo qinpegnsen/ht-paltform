@@ -139,7 +139,7 @@ export class AddRedPackageComponent implements OnInit {
     let probabilityArray = $("tr");
     for (var i = 0; i < probabilityArray.length; i++) {
       let value = Number((Number($(probabilityArray[i]).find(".redPacketNumber").val()) / Number(this.totalNum)) * 100).toFixed(2) + '%';
-      $(probabilityArray[i]).find(".probability").val(value)
+      $(probabilityArray[i]).find(".probability").text(value)
     }
     ;
   }
@@ -151,7 +151,7 @@ export class AddRedPackageComponent implements OnInit {
    */
   getProbability(item, obj) {
     let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
-    $(obj).parents('tr').find('.probability').val(probability);//根据数量，自动生成概率
+    $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
     this.siteNum = this.getRedPacketNum();
     this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
     this.isTip();
