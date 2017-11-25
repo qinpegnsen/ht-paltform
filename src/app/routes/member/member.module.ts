@@ -12,19 +12,22 @@ import {IntegrationImportComponent} from "./integration-management/integration-i
 import {FileUploadModule} from "ng2-file-upload";
 import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
 import { ReasonRejecComponent } from './reason-rejec/reason-rejec.component';
+import { RpDetailComponent } from './rp-detail/rp-detail.component';
+import {MemberService} from "./member.service";
 
 const userChildRoutes: Routes = [
   {path: 'details', component: IntegrationDetailsComponent},
   {path: 'change', component: IntegrationChangeComponent},
   {path: 'import', component: IntegrationImportComponent},
-  {path: 'progressmask', component: ProgressmaskComponent},
+  {path: 'progressmask', component: ProgressmaskComponent}
 ]
 
 const routes: Routes = [
   {path: '',redirectTo:'users'},
   {path: 'users', component: MemberComponent},
+  {path: 'rpDetail', component: RpDetailComponent},
   {path: 'certification', component: CertificationComponent},
-  {path: 'inte-manage', component: IntegrationManagementComponent,children: userChildRoutes},
+  {path: 'inte-manage', component: IntegrationManagementComponent,children: userChildRoutes}
 ];
 @NgModule({
   imports: [
@@ -35,6 +38,7 @@ const routes: Routes = [
     RzhButtonsModule
   ],
   declarations: [MemberComponent,IntegrationManagementComponent, IntegrationDetailsComponent,
-    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent, ReasonRejecComponent]
+    IntegrationChangeComponent,CertificationComponent,IntegrationImportComponent,ProgressmaskComponent, ReasonRejecComponent, RpDetailComponent],
+  providers:[MemberService]
 })
 export class MemberModule { }

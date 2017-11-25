@@ -194,6 +194,11 @@ const member = {
       link: '/main/member/users'
     },
     {
+      text: '红包明细',
+      icon: 'fa fa-user',
+      link: '/main/member/rpDetail'
+    },
+    {
       text: '认证审核',
       icon: 'fa fa-user',
       link: '/main/member/certification'
