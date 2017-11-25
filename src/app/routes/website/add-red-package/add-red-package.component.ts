@@ -62,7 +62,7 @@ export class AddRedPackageComponent implements OnInit {
     this.datepickerModel = this.minDate = RzhtoolsService.getAroundDateByDate(new Date(), +1);
     this.formatSelDate();
     this.getSettingNum();
-    this.qeuryAll('N');
+    this.qeuryNoUse('N');
     this.loadRpAccount();
     this.deletebutton = {
       type: "delete",
@@ -90,7 +90,7 @@ export class AddRedPackageComponent implements OnInit {
       },
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
-        _this.qeuryAll('Y');
+        _this.qeuryNoUse('Y');
       });
   }
 
@@ -108,7 +108,7 @@ export class AddRedPackageComponent implements OnInit {
   /**
    * 是否导入未生效规则列表
    */
-  qeuryAll(isUsed) {
+  qeuryNoUse(isUsed) {
     let url = "/rpSetting/queryRpSettingAdmin";
     let data = {
       curPage: 1,
@@ -116,7 +116,8 @@ export class AddRedPackageComponent implements OnInit {
     };
     let result = this.submit.getData(url, data);
     if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
-      this.moduleList = result.voList;
+      this.moduleList = this.reSiteTem(result.voList);
+      console.log("█ this.moduleList  ►►►",  this.moduleList );
       setTimeout(() => {
         this.changeNumber();//获取红包的概率
         this.isTip();
@@ -136,6 +137,27 @@ export class AddRedPackageComponent implements OnInit {
       AppComponent.rzhAlt("info", '已超过红包设置的总金额,请进行适当修改');
     }
     ;
+  }
+
+  /**
+   * 重新设置模板的数据，否则报非法字符
+   */
+  reSiteTem(data){
+    let reSiteTemArr=[];
+    for(let i=0;i<data.length;i++){
+      let obj={
+        amount:'',
+        level:'',
+        num:'',
+        probability:'',
+      };
+      obj.amount=data[i].amount;
+      obj.level=data[i].level;
+      obj.num=data[i].num;
+      obj.probability='1';//随便写的，只要为true就可以，之后重组数据，会删掉，这个这个概率之后也会重新计算
+      reSiteTemArr.push(obj);
+    }
+    return reSiteTemArr;
   }
 
   /**
