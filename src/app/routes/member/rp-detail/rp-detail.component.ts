@@ -4,6 +4,8 @@ import {isNullOrUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {MemberService} from "../member.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {listLocales} from "ngx-bootstrap/bs-moment";
 
 @Component({
   selector: 'app-rp-detail',
@@ -12,17 +14,26 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 })
 export class RpDetailComponent implements OnInit {
 
-  public logType:any;                 //红包流水类型
+  public logType:any;                 //选择的红包流水类型
   public phone:string='';             //会员手机号
   public custName:string='';          //会员名称
-  public dateStr:string='';           //传查询的时间范围
+  public dateStr;                      //传查询的时间范围
   public rpDeTailData:any;            //红包流水的数据
-
+  public logTypes:any;                //红包流水类型
+  public bsConfig: Partial<BsDatepickerConfig>;
+  locale: 'cn';
+  locales = listLocales();
   constructor(private memberService: MemberService,
-              private tools: RzhtoolsService) { }
+              private tools: RzhtoolsService) {
+    this.bsConfig = Object.assign({}, {
+      locale: this.locale,
+      rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
-    this.logType = this.tools.getEnumDataList('1028');   //会员状态枚举列表
+    this.logTypes = this.tools.getEnumDataList('2100');   //会员状态枚举列表
     this.queryRpCustAcctRecAdmin(1);
   }
 
@@ -32,6 +43,7 @@ export class RpDetailComponent implements OnInit {
    * @param event
    */
   queryRpCustAcctRecAdmin(curPage,event?:PageEvent){
+    console.log("█ this.dateStr ►►►",  this.dateStr);
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
@@ -44,7 +56,7 @@ export class RpDetailComponent implements OnInit {
       logType:this.logType,
       phone:this.phone,
       custName:this.custName,
-      dateStr:this.dateStr,
+      dateStr: this.dateStr?RzhtoolsService.dataFormat(this.dateStr[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.dateStr[1], 'yyyy/MM/dd'):'',
     }
     let url='/rpCustAcctRec/queryRpCustAcctRecAdmin';
     this.rpDeTailData=new Page(this.memberService.queryRpCustAcctRecAdmin(url,data))
