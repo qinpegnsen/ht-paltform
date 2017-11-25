@@ -35,7 +35,7 @@ export class AddRedPackageComponent implements OnInit {
   public totalNum: string = '';               //红包的总数
   public siteNum: string = '';                //已经设置的红包总数
   public NoSiteNum: string = '';              //未经设置的红包总数
-  public totalAmount: string = '11111';          //红包的总额
+  public totalAmount: string = '';            //红包的总额
   public siteAmount: string = '';              //已经设置的红包总额
   public noUseAmount: string = '';            //未使用的红包总额
   public sumOfNumArray: string;               //红包数量累计的总数
@@ -63,6 +63,7 @@ export class AddRedPackageComponent implements OnInit {
     this.formatSelDate();
     this.getSettingNum();
     this.qeuryAll('N');
+    this.loadRpAccount();
     this.deletebutton = {
       type: "delete",
       title: '删除红包规则',
@@ -74,6 +75,9 @@ export class AddRedPackageComponent implements OnInit {
     };
   }
 
+  /**
+   * 添加生效的规则作为模板
+   */
   addUsedTem() {
     let _this = this;
     swal({
@@ -88,6 +92,17 @@ export class AddRedPackageComponent implements OnInit {
         swal.close(); //关闭弹框
         _this.qeuryAll('Y');
       });
+  }
+
+  /**
+   * 获取红包账户的余额
+   */
+  loadRpAccount() {
+    let url = "/rpAccount/loadRpAccount";
+    let data = {};
+    let result = this.submit.getData(url, data);
+    this.totalAmount=result.balance;
+    this.noUseAmount=this.totalAmount;
   }
 
   /**
@@ -130,6 +145,7 @@ export class AddRedPackageComponent implements OnInit {
     let url = '/rpSetting/countRpSettingNum';
     let data = {};
     this.totalNum = this.settingNumber = this.service.getSettingNum(url, data);
+    this.NoSiteNum=this.totalNum;
   }
 
   /**
