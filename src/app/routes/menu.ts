@@ -38,6 +38,10 @@ const website = {
           link: '/main/website/redPacket/statics'
         },
         {
+          text: '红包奖池',
+          link: '/main/website/redPacket/pond'
+        },
+        {
           text: '红包中奖记录',
           link: '/main/website/redPacket/record'
         }

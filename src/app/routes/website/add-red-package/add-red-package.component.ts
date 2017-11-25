@@ -95,7 +95,7 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
-   * 获取红包账户的余额
+   * 获取红包奖池的余额信息
    */
   loadRpAccount() {
     let url = "/rpAccount/loadRpAccount";
