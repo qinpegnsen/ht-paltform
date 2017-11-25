@@ -43,7 +43,6 @@ export class RpDetailComponent implements OnInit {
    * @param event
    */
   queryRpCustAcctRecAdmin(curPage,event?:PageEvent){
-    console.log("█ this.dateStr ►►►",  this.dateStr);
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
