@@ -4,8 +4,10 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {SettingsService} from "../../../core/settings/settings.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {AppComponent} from "../../../app.component";
+import {zhCn} from "ngx-bootstrap/locale";
 import {isNullOrUndefined} from "util";
-
+import {defineLocale} from "ngx-bootstrap";
+defineLocale('cn', zhCn);
 @Component({
   selector: 'app-statics',
   templateUrl: './statics.component.html',
@@ -27,11 +29,11 @@ export class StaticsComponent implements OnInit {
   public total: any;
   public use: any;
   public optionPrev:any;                       //统计图的配置
-  public locale: 'cn';
+
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
     this.bsConfig = Object.assign({}, {
-      locale: this.locale,
+      locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
       containerClass: 'theme-blue'
     });
@@ -127,7 +129,7 @@ export class StaticsComponent implements OnInit {
     let _this = this;
     _this.optionPrev = {
       title: {
-        text: '一个月的红包金额',
+        text: '红包金额',
         left:'center'
       },
       legend: { //图例

@@ -5,7 +5,9 @@ import {Page} from "../../../core/page/page";
 import {MemberService} from "../member.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
-import {listLocales} from "ngx-bootstrap/bs-moment";
+import {zhCn} from "ngx-bootstrap/locale";
+import {defineLocale} from "ngx-bootstrap";
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-rp-detail',
@@ -21,12 +23,12 @@ export class RpDetailComponent implements OnInit {
   public rpDeTailData:any;            //红包流水的数据
   public logTypes:any;                //红包流水类型
   public bsConfig: Partial<BsDatepickerConfig>;
-  locale: 'cn';
-  locales = listLocales();
+
+
   constructor(private memberService: MemberService,
               private tools: RzhtoolsService) {
     this.bsConfig = Object.assign({}, {
-      locale: this.locale,
+      locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
       containerClass: 'theme-blue'
     });
