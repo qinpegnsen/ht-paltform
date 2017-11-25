@@ -784,7 +784,7 @@ export class EditDetailComponent implements OnInit {
     let allUploaders = me.togetherAllUploaders();
     allUploaders.forEach((uploader, i) => {
       uploader.uploadAll();//全部上传
-      if (!uploader.isUploading) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
+      if(uploader.getNotUploadedItems().length == 0) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
       uploader.queue.forEach((item, index) => {
         item.onSuccess = function (response, status, headers) {
           if (!isNullOrUndefined(response)) {
