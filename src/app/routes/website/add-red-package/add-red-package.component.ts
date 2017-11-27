@@ -72,8 +72,8 @@ export class AddRedPackageComponent implements OnInit {
       title: '删除红包规则',
     };
     this.addTemplate = {
-      title: "导入模板",
-      text: "导入模板",
+      title: "导入已生效规则",
+      text: "导入已生效规则",
       type: "add-thc",
     };
   }
@@ -195,6 +195,8 @@ export class AddRedPackageComponent implements OnInit {
     $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
     this.siteNum = this.getRedPacketNum();
     this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
+    this.siteAmount = this.getRedPacketAmount();
+    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
     this.isTip();
   }
 
@@ -287,6 +289,8 @@ export class AddRedPackageComponent implements OnInit {
     $(".mySubmit").removeProp('disabled');//可以提交
     this.siteAmount = this.getRedPacketAmount();
     this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+    this.siteNum = this.getRedPacketNum();
+    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
     this.isTip();
   }
 
