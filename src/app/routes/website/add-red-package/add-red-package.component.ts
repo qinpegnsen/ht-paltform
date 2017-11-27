@@ -12,6 +12,9 @@ import {SiteComponent} from "../site/site.component";
 import {Router} from "@angular/router";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
+import {defineLocale} from "ngx-bootstrap";
+import {zhCn} from "ngx-bootstrap/locale";
+defineLocale('cn', zhCn);
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -51,7 +54,7 @@ export class AddRedPackageComponent implements OnInit {
               private submit: SubmitService,
               public service: WebstiteService) {
     this.bsConfig = Object.assign({}, {
-      locale: this.locale,
+      locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
       containerClass: 'theme-blue',
       rangeInputFormat: 'YYYY-MM-DD'

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {isNullOrUndefined, isUndefined} from "util";
@@ -18,11 +18,11 @@ defineLocale('cn', zhCn);
 })
 export class RpPondComponent implements OnInit {
 
-  public balance:string;                      //奖池的余额
-  public income:string;                       //奖池的历史总额
-  public redPackData:any                      //红包投放记录的数据
-  public optionScale:any;                       //红包占比的统计图数据
-  public optionClick:any;                       //红包点击率的统计图数据
+  public balance: string;                      //奖池的余额
+  public income: string;                       //奖池的历史总额
+  public redPackData: any                      //红包投放记录的数据
+  public optionScale: any;                       //红包占比的统计图数据
+  public optionClick: any;                       //红包点击率的统计图数据
   public showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的统计时间的类型显示
   public select: any = {}; //选择的年份和月份信息
   public yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
@@ -35,9 +35,9 @@ export class RpPondComponent implements OnInit {
   public queryTypes: any;                      //统计时间的类型
   public redPackStaticScale: any;              //企业占比统计
   public redPackStaticClick: any;              //企业点击统计
-  public legendData: any;                      //图例数据
+  public legendData: any;                      //企业占比图例数据
   public legendDataClick: any;                 //企业点击图例数据
-  public seriesData: any;                      //系列数据
+  public seriesData: any;                      //企业占比系列数据
   public seriesDataClick: any;                 //企业点击系列数据
 
   constructor(private submit: SubmitService,
@@ -88,24 +88,25 @@ export class RpPondComponent implements OnInit {
     let url = "/rpAccount/loadRpAccount";
     let data = {};
     let result = this.submit.getData(url, data);
-    this.balance=result.balance;
-    this.income=result.income;
+    this.balance = result.balance;
+    this.income = result.income;
   }
 
   /**
    * 红包投放记录
    */
-  qeuryPushOrder(curPage,event?: PageEvent){
+  qeuryPushOrder(curPage, event?: PageEvent) {
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    };
+    }
+    ;
     let url = "/rpAccountRec/queryRpAccountRecAdmin";
-    let data={
+    let data = {
       curPage: activePage,
-      pageSize:10,
+      pageSize: 10,
     };
     let result = this.submit.getData(url, data);
     me.redPackData = new Page(result);
@@ -122,11 +123,11 @@ export class RpPondComponent implements OnInit {
       queryTime: me.queryTime,
     }
     let result = this.submit.getData(url, data);
-    if(result){
+    if (result) {
       this.redPackStaticScale = result;
-      this.legendData=this.redPackStaticScale.names;
-      this.seriesData=this.redPackStaticScale.voList;
-      this.graphInfo();
+      this.legendData = this.redPackStaticScale.names;
+      this.seriesData = this.redPackStaticScale.voList;
+      this.graphInfoScale();
     }
   }
 
@@ -141,11 +142,11 @@ export class RpPondComponent implements OnInit {
       queryTime: me.queryTime,
     }
     let result = this.submit.getData(url, data);
-    if(result){
+    if (result) {
       this.redPackStaticClick = result;
-      this.legendDataClick=this.redPackStaticClick.names;
-      this.seriesDataClick=this.redPackStaticClick.voList;
-      this.graphInfo();
+      this.legendDataClick = this.redPackStaticClick.names;
+      this.seriesDataClick = this.redPackStaticClick.voList;
+      this.graphInfoClick();
     }
   }
 
@@ -154,7 +155,7 @@ export class RpPondComponent implements OnInit {
    * @param type 查询状态，如：日、周、月（DAY、WEEK、MONTH）
    */
   selectInfos() {
-    let  type = this.queryType;
+    let type = this.queryType;
     switch (type) {
       case 'DAY':
         this.queryTime = RzhtoolsService.dataFormat(new Date(this.datepickerModel), "yyyy-MM-dd");
@@ -165,7 +166,8 @@ export class RpPondComponent implements OnInit {
       case 'WEEK':
         this.queryTime = this.select.week;
         break;
-    };
+    }
+    ;
     if (!this.queryTime || isNullOrUndefined(this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {
@@ -186,31 +188,38 @@ export class RpPondComponent implements OnInit {
   }
 
   /**
-   * 绘制图表
+   * 绘制企业占比图
    */
-  public graphInfo() {
+  public graphInfoScale() {
     let _this = this;
+    if (isNullOrUndefined(_this.legendData) || _this.legendData.length ==0) _this.legendData = ["无数据"];
+    if (isNullOrUndefined(_this.seriesData) || _this.seriesData.length ==0) _this.seriesData = [{
+      name: "无数据",
+      value: "0"
+    }];
     _this.optionScale = {
-      title : {
-        text: '企业红包投资占比饼状图',
-        x:'center'
+      title: {
+        text: '企业红包投资占比统计',
+        x: 'center'
       },
-      tooltip : {
+      tooltip: {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
       },
       legend: {
         orient: 'vertical',
         left: 'left',
-        data: _this.legendData
+        data: _this.legendData,
+        type: 'scroll',
       },
-      series : [
+      series: [
         {
           name: '访问来源',
           type: 'pie',
-          radius : '55%',
+          radius: '55%',
           center: ['50%', '60%'],
-          data:_this.seriesData,
+          data: _this.seriesData,
+          // stillShowZeroSum:false,//数据为0的时候也显示饼图
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -220,121 +229,51 @@ export class RpPondComponent implements OnInit {
           }
         }
       ]
-
-      //
-      // title : {
-      //   text: '某站点用户访问来源',
-      //   subtext: '纯属虚构',
-      //   x:'center'
-      // },
-      // tooltip : {
-      //   trigger: 'item',
-      //   formatter: "{a} <br/>{b} : {c} ({d}%)"
-      // },
-      // legend: {
-      //   orient: 'vertical',
-      //   left: 'left',
-      //   data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-      // },
-      // series : [
-      //   {
-      //     name: '访问来源',
-      //     type: 'pie',
-      //     radius : '55%',
-      //     center: ['50%', '60%'],
-      //     data:[
-      //       {value:335, name:'直接访问'},
-      //       {value:310, name:'邮件营销'},
-      //       {value:234, name:'联盟广告'},
-      //       {value:135, name:'视频广告'},
-      //       {value:1548, name:'搜索引擎'}
-      //     ],
-      //     itemStyle: {
-      //       emphasis: {
-      //         shadowBlur: 10,
-      //         shadowOffsetX: 0,
-      //         shadowColor: 'rgba(0, 0, 0, 0.5)'
-      //       }
-      //     }
-      //   }
-      // ]
-
-
     };
-
-    _this.optionClick = {
-      title : {
-        text: '红包企业点击数占比饼状图',
-        x:'center'
-      },
-      tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: _this.legendData
-      },
-      series : [
-        {
-          name: '访问来源',
-          type: 'pie',
-          radius : '55%',
-          center: ['50%', '60%'],
-          data:_this.seriesData,
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-
-      //
-      // title : {
-      //   text: '某站点用户访问来源',
-      //   subtext: '纯属虚构',
-      //   x:'center'
-      // },
-      // tooltip : {
-      //   trigger: 'item',
-      //   formatter: "{a} <br/>{b} : {c} ({d}%)"
-      // },
-      // legend: {
-      //   orient: 'vertical',
-      //   left: 'left',
-      //   data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-      // },
-      // series : [
-      //   {
-      //     name: '访问来源',
-      //     type: 'pie',
-      //     radius : '55%',
-      //     center: ['50%', '60%'],
-      //     data:[
-      //       {value:335, name:'直接访问'},
-      //       {value:310, name:'邮件营销'},
-      //       {value:234, name:'联盟广告'},
-      //       {value:135, name:'视频广告'},
-      //       {value:1548, name:'搜索引擎'}
-      //     ],
-      //     itemStyle: {
-      //       emphasis: {
-      //         shadowBlur: 10,
-      //         shadowOffsetX: 0,
-      //         shadowColor: 'rgba(0, 0, 0, 0.5)'
-      //       }
-      //     }
-      //   }
-      // ]
-
-
-    };
-
-
   }
 
+  /**
+   * 绘制企业点击率饼图
+   */
+  public graphInfoClick() {
+    let _this = this;
+    if (isNullOrUndefined(_this.legendDataClick) || _this.legendDataClick.length ==0) _this.legendDataClick = ["无数据"];
+    if (isNullOrUndefined(_this.seriesDataClick) || _this.seriesDataClick.length ==0) _this.seriesDataClick = [{
+      name: "无数据",
+      value: "0"
+    }];
+    _this.optionClick = {
+      title: {
+        text: '红包企业点击数占比统计',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: _this.legendDataClick,
+        type: 'scroll',
+      },
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          data: _this.seriesDataClick,
+          // stillShowZeroSum:false,//数据为0的时候也显示饼图
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+  }
 }

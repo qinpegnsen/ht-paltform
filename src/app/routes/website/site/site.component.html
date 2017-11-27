@@ -2,6 +2,13 @@
   <span>红包规则</span>
   <app-buttons class="pull-right" [config]="redPacketRules" routerLink="../addRedPack"></app-buttons>
 </div>
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>未生效规则页面只会显示一批次设置的规则，如果多次设置将会进行覆盖</li>
+    <li>已生效规则页面只会显示最近生效的那一批次规则</li>
+  </ul>
+</div>
 <div class="order panel mb">
   <div class="panel-body">
     <ul class="order-guide list-unstyled clearfix bb">
@@ -46,7 +53,8 @@
       <tr>
         <td colspan="5">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共 {{redPackData.totalRow}}
+            <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共
+              {{redPackData.totalRow}}
               条</strong></div>
           </div>
           <div class="col-sm-5">

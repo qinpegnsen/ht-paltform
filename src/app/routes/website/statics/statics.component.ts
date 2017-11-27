@@ -81,8 +81,8 @@ export class StaticsComponent implements OnInit {
     let result = this.submit.getData(url, data);
     if(result){
       this.redPackStatic = result;
-      me.total = me.redPackStatic.totalAmount;
-      me.use = me.redPackStatic.useAmount;
+      me.total = me.redPackStatic.totalRp;
+      me.use = me.redPackStatic.useRp;
       this.graphInfo();
     }
   }
@@ -111,6 +111,34 @@ export class StaticsComponent implements OnInit {
     }
   }
 
+
+  onChartClick(event){
+    if(this.showType.MONTH){
+      this.queryType='DAY'
+      this.queryTime=this.select.year+'-'+event.name;//当前查询的日期（）
+      this.qeuryRpDetail();
+    }
+  }
+
+  /**
+   * 查询每种面额的发放和领取的情况
+   */
+  qeuryRpDetail() {
+    let me = this;
+    let url = "/rpStatistics/queryRpDrawDetails";
+    let data = {
+      queryType: me.queryType,
+      queryTime: me.queryTime,
+    }
+    let result = this.submit.getData(url, data);
+    if(result){
+      this.redPackStatic = result;
+      me.total = me.redPackStatic.totalRp;
+      me.use = me.redPackStatic.useRp;
+      this.graphInfo();
+    }
+  }
+
   /**
    * 获取年份和月份信息
    */
@@ -129,7 +157,7 @@ export class StaticsComponent implements OnInit {
     let _this = this;
     _this.optionPrev = {
       title: {
-        text: '红包金额',
+        text: '红包金额统计',
         left:'center'
       },
       legend: { //图例

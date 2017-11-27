@@ -135,7 +135,7 @@
 <!--红包统计图 start-->
 <div>
   <div class="panel m-auto">
-    <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+    <div echarts [options]="optionPrev" (chartClick)="onChartClick($event)" class="demo-chart w100"></div>
   </div>
 </div>
 <!--红包统计图 end-->
