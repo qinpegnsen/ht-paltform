@@ -44,17 +44,6 @@ export class StaticsComponent implements OnInit {
     this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     this.select.year = new Date().getFullYear();//获取默认年
     this.select.month = new Date().getMonth() + 1;//获取默认月
-    this.weekForMonth = this.tools.getWeekListByMonth(this.select.year, this.select.month,);//获取当前年份当前月份下面周的集合
-    this.weekForMonth.forEach(ele => {//为了默认显示当前日期所在的周
-      let start = new Date(ele.split('~')[0]).getDate();
-      let end = new Date(ele.split('~')[1]).getDate();
-      let now = new Date().getDate();
-      if (now > start && now < end) {
-        this.select.week = ele;
-      } else if (now == start || now == end) {
-        this.select.week = ele;//获取默认周
-      }
-    });
     this.qeuryAll();
   }
 
@@ -66,6 +55,25 @@ export class StaticsComponent implements OnInit {
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
+  }
+
+  /**
+   * 根据指定年月获取周列表
+   */
+  getWeekListByMonth() {
+    let _this = this, time = _this.getMonth();
+    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]);
+    //获取周列表
+    _this.weekForMonth.forEach(ele => {//为了默认显示当前日期所在的周
+      let start = new Date(ele.split('~')[0]).getDate();
+      let end = new Date(ele.split('~')[1]).getDate();
+      let now = new Date().getDate();
+      if (now > start && now < end) {
+        _this.select.week = ele;
+      } else if (now == start || now == end) {
+        _this.select.week = ele;//获取默认周
+      }
+    });
   }
 
   /**
