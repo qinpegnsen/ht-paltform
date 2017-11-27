@@ -42,8 +42,6 @@ export class StaticsComponent implements OnInit {
   ngOnInit() {
     this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
-    this.select.year = new Date().getFullYear();//获取默认年
-    this.select.month = new Date().getMonth() + 1;//获取默认月
     this.qeuryAll();
   }
 
@@ -52,6 +50,8 @@ export class StaticsComponent implements OnInit {
    */
   search() {
     let _this = this;
+    _this.select.year = new Date().getFullYear();//获取默认年
+    _this.select.month = new Date().getMonth() + 1;//获取默认月
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
