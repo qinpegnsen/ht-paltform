@@ -169,7 +169,8 @@ export class StaticsComponent implements OnInit {
     _this.optionPrev = {
       title: {
         text: '红包金额统计',
-        left:'center'
+        left:'center',
+        top:'1%',
       },
       legend: { //图例
         data: ['领取红包金额','发放红包金额'],
