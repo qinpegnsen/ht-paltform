@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
@@ -12,19 +12,21 @@ const swal = require('sweetalert');
 export class BuyerEvaluationComponent implements OnInit {
 
   public data: Page = new Page();
-  public deletebutton:object;//删除按钮
-  public custName:any;
-  constructor(public submit:SubmitService) {
+  public deletebutton: object;//删除按钮
+  public custName: any;
+
+  constructor(public submit: SubmitService) {
 
   }
-    ngOnInit() {
-    let me=this;
+
+  ngOnInit() {
+    let me = this;
     me.deletebutton = {
       title: "删除",
       type: "delete",
-      text:'删除'
+      text: '删除'
     };
-      this.qeuryAllService(1);
+    this.qeuryAllService(1);
   }
 
   /**
@@ -32,20 +34,21 @@ export class BuyerEvaluationComponent implements OnInit {
    * @param curPage
    * @param event
    */
-  qeuryAllService(curPage,event?: PageEvent){
+  qeuryAllService(curPage, event?: PageEvent) {
     let me = this, activePage = 1;
-    if(typeof event !== "undefined") {
-      activePage =event.activePage
-    }else if(!isNullOrUndefined(curPage)){
-      activePage =curPage
-    };
-    let url = "/commentGoods/queryCommnetGoodsAdmin";
-    let data={
-      curPage: activePage,
-      pageSize:10,
-      custName:this.custName,
+    if (typeof event !== "undefined") {
+      activePage = event.activePage
+    } else if (!isNullOrUndefined(curPage)) {
+      activePage = curPage
     }
-    let result = this.submit.getData(url,data);
+    ;
+    let url = "/commentGoods/queryCommnetGoodsAdmin";
+    let data = {
+      curPage: activePage,
+      pageSize: 10,
+      custName: 'szh18898775039',
+    }
+    let result = this.submit.getData(url, data);
     me.data = new Page(result);
   }
 
@@ -53,18 +56,18 @@ export class BuyerEvaluationComponent implements OnInit {
   /**
    * 根据买家名搜索评价
    */
-  search(){
+  search() {
     this.qeuryAllService(1);
   }
 
   /**
    * 删除买家评价
    */
-  deleteCount(curPage,delid) {
-    let me=this;
+  deleteCount(curPage, delid) {
+    let me = this;
     let url = "/commentGoods/deleteCommentGoods";
-    let data={
-      id:delid
+    let data = {
+      id: delid
     }
     swal({
         title: '确认删除此信息？',
@@ -85,14 +88,14 @@ export class BuyerEvaluationComponent implements OnInit {
   /**
    * 当点击tr的时候，让隐藏的tr出来
    */
-  showDetail(data:any){
+  showDetail(data: any) {
     data.isShow = !data.isShow;
   }
 
   /**
    * 鼠标放在图片上时大图随之移动
    */
-  showImg(event, i){
+  showImg(event, i) {
     i.style.display = 'block';
     i.style.top = event.clientY + 'px';
     i.style.left = (event.clientX + 30) + 'px';

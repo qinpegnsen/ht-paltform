@@ -13,19 +13,22 @@
         <th class="w15 text-left">
           <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="name">真实姓名</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
           <rzhDefaultSorter by="tel">手机号</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="descript">操作类型</rzhDefaultSorter>
         </th>
         <th class="w15 text-left">
           <rzhDefaultSorter by="descript">操作描述</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center">
+        <th class="w15 text-center">
           <rzhDefaultSorter by="createtime">创建时间</rzhDefaultSorter>
         </th>
       </tr>
@@ -42,6 +45,7 @@
         <td *ngIf="count.coin>=0" style="color:green">
           {{count.coin}}
         </td>
+        <td class="text-left">{{count.logType | rzhState: '1802'}}</td>
         <td class="text-left">{{count.description}}</td>
         <td>{{count.createTime}}</td>
       </tr>
