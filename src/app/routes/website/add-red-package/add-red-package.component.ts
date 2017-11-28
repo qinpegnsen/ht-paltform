@@ -104,8 +104,11 @@ export class AddRedPackageComponent implements OnInit {
     let url = "/rpAccount/loadRpAccount";
     let data = {};
     let result = this.submit.getData(url, data);
-    this.totalAmount=result.balance;
-    this.noUseAmount=this.totalAmount;
+    if(result){
+      this.totalAmount=result.balance;
+      this.noUseAmount=this.totalAmount;
+    }
+
   }
 
   /**
@@ -118,14 +121,18 @@ export class AddRedPackageComponent implements OnInit {
       isUsed: isUsed,
     };
     let result = this.submit.getData(url, data);
-    if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
-      this.moduleList = this.reSiteTem(result.voList);
-      console.log("█ this.moduleList  ►►►",  this.moduleList );
-      setTimeout(() => {
-        this.changeNumber();//获取红包的概率
-        this.isTip();
-      }, 0)
+    if(result){
+      if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
+        this.moduleList = this.reSiteTem(result.voList);
+        setTimeout(() => {
+          this.changeNumber();//获取红包的概率
+          this.isTip();
+        }, 0)
+      }
+    }else{
+      this.moduleList=[];
     }
+
   }
 
   /**

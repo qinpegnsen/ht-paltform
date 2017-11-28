@@ -100,8 +100,10 @@ export class RpPondComponent implements OnInit {
     let url = "/rpAccount/loadRpAccount";
     let data = {};
     let result = this.submit.getData(url, data);
-    this.balance = result.balance;
-    this.income = result.income;
+    if(result){
+      this.balance = result.balance;
+      this.income = result.income;
+    }
   }
 
   /**

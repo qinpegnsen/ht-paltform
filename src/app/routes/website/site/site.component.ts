@@ -13,8 +13,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class SiteComponent implements OnInit,OnDestroy {
 
-  public redPacketRules:any;            //新增红包规则的按钮
-  public redPackData:any;                      //红包规则列表的数据
+  public redPacketRules:any;                //新增红包规则的按钮
+  public redPackData:any;                   //红包规则列表的数据
   public isUse:string='Y';                  //红包是否启用
   public type:string='';                    //列表的在状态是生效还是未生效
 

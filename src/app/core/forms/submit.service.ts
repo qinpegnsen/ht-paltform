@@ -175,7 +175,7 @@ export class SubmitService {
    * @returns {any}
    */
   getData(requestUrl: string, requestData: any) {
-    let result: any
+    let result: any;
     this.ajax.get({
       url: requestUrl,
       data: requestData,
