@@ -52,6 +52,7 @@ export class StaticsComponent implements OnInit {
     let _this = this;
     _this.select.year = new Date().getFullYear();//获取默认年
     _this.select.month = new Date().getMonth() + 1;//获取默认月
+    _this.getWeekListByMonth();
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
@@ -71,6 +72,8 @@ export class StaticsComponent implements OnInit {
       if (now > start && now < end) {
         _this.select.week = ele;
       } else if (now == start || now == end) {
+        _this.select.week = ele;//获取默认周
+      }else if (now > start || now > end) {//两个月的交界处
         _this.select.week = ele;//获取默认周
       }
     });
