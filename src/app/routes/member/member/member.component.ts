@@ -19,7 +19,7 @@ export class MemberComponent implements OnInit {
 
   public custTruename:string='';//默认查询的会员的名称
 
-  public custPhone:string='';//默认查询的会员的名称
+  public custPhone:string='';//默认查询的会员的手机
 
   public authState:string='';//默认查询的会员的是否认证
   public state:string='';//默认查询的会员的状态

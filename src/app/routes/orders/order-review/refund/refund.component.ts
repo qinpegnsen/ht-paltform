@@ -10,22 +10,22 @@ import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {RefundService} from "./refund.service";
 import {ToRefundComponent} from "../to-refund/to-refund.component";
 import {PatternService} from "../../../../core/forms/pattern.service";
+import {ActivatedRoute} from "@angular/router";
 declare var $: any;
 const swal = require('sweetalert');
 @Component({
   selector: 'app-refund',
   templateUrl: './refund.component.html',
   styleUrls: ['./refund.component.scss'],
-  providers:[RefundService]
+  providers: [RefundService]
 })
 export class RefundComponent implements OnInit {
-  public showCancelWindow:boolean = false;
   public timeIsValid: boolean = true;
   public goodsList: Page = new Page();
-  public ordno:string;//获取区域编码
+  public ordno: string;//获取区域编码
   public selectBank: any;
-  public code:string='';
-
+  public code: string = '';
+public realPay:any;//退款金额
   @Input('showRefundWindow') showRefundWindow: boolean;
   bsConfig: Partial<BsDatepickerConfig>;
   public showSec: boolean = true;
@@ -33,7 +33,8 @@ export class RefundComponent implements OnInit {
   myTime: Date = new Date();
   queryTime: any = new Date;
   public time;
-  public uuid;
+  public uuid;//图片暗码
+  public order:number;//订单编号
 
   /**
    * 图片上传
@@ -56,15 +57,20 @@ export class RefundComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showRefundWindow']) {
-      if (this.showRefundWindow) $('.wrapper > section').css('z-index', 200);
+      if (this.showRefundWindow) {
+        $('.wrapper > section').css('z-index', 200);
+        this.queryRealPay();// 查询退款金额
+      }
       else $('.wrapper > section').css('z-index', 114);
     }
   }
+
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
-  constructor(public submit: SubmitService, public GetUidService: GetUidService,public refundService:RefundService,
-              public toRefundComponent:ToRefundComponent,public patterns:PatternService) {
+
+  constructor(public submit: SubmitService, public GetUidService: GetUidService, public refundService: RefundService,
+              public toRefundComponent: ToRefundComponent, public patterns: PatternService,public routeInfo: ActivatedRoute) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -74,11 +80,10 @@ export class RefundComponent implements OnInit {
   }
 
   ngOnInit() {
-    let _this=this;
+    let _this = this;
     _this.seletAllByTypeCode();
     this.formatSelDate(); //格式化所选日期及时间
   }
-
 
   /**
    * 格式化所选日期及时间
@@ -89,12 +94,23 @@ export class RefundComponent implements OnInit {
     _this.time = RzhtoolsService.dataFormat(new Date(_this.myTime), "HH:mm:ss");//获取日历选中时间
   }
 
+  /*
+   查询退款金额
+   */
+  queryRealPay() {
+    let _this = this;
+    let url = "/agentOrd/loadAgentOrdReturn";
+    let data={
+      ordno: _this.orderId,
+    }
+    _this.realPay = _this.submit.getData(url,data);
+  }
 
   /*
    * 添加汇款人信息
    * */
   addRemitCallBack(obj) {
-    let _this=this;
+    let _this = this;
     this.formatSelDate();
     let url = "/agentOrd/confirmRefundRemit";
     let data = {
@@ -102,17 +118,17 @@ export class RefundComponent implements OnInit {
       payBankCode: _this.code,
       payAcct: obj.payAcct,
       payBacctName: obj.payBacctName,
-      voucherUrlUUID:_this.uuid,
-      tradeTimeStr:this.queryTime + " " + this.time,
+      voucherUrlUUID: _this.uuid,
+      tradeTimeStr: this.queryTime + " " + this.time,
     }
     let result = this.refundService.refundTransfer(url, data);
     if (isNullOrUndefined(result)) {
-      this.code=null;
+      this.code = null;
       this.uploader.queue = [];
       this.hideWindow("success");
       this.toRefundComponent.queryDatas(this.curPage)
     } else {
-      AppComponent.rzhAlt("error",'数据存在问题');
+      AppComponent.rzhAlt("error", '数据存在问题');
     }
   }
 
@@ -120,12 +136,12 @@ export class RefundComponent implements OnInit {
   /**
    *关闭弹窗
    */
-  hideWindow(type?: string){
+  hideWindow(type?: string) {
     $('.wrapper > section').css('z-index', 114);
     this.showRefundWindow = false;
     if (isUndefined(type)) type = 'cancel';
     this.refundDate.emit('type')// 向外传值
-    this.code=null;
+    this.code = null;
     this.uploader.queue = [];
   }
 
@@ -190,8 +206,8 @@ export class RefundComponent implements OnInit {
    */
   showImg(event, i) {
     i.style.display = 'block';
-    i.style.top = (event.clientY-140)+ 'px';
-    i.style.left = (event.clientX -450) + 'px';
+    i.style.top = (event.clientY - 140) + 'px';
+    i.style.left = (event.clientX - 450) + 'px';
   }
 
   /**
@@ -200,12 +216,13 @@ export class RefundComponent implements OnInit {
   hideImg(i) {
     i.style.display = 'none';
   }
-  isValid(){
+
+  isValid() {
     this.timeIsValid = true;
 
   }
 
-  changed(){
+  changed() {
     this.timeIsValid = false;
   }
 }

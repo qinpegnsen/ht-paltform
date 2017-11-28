@@ -1,68 +1,117 @@
-
 <div class="content-heading mb-lg thc font">
   重消币明细
 </div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService($event)">
-      <thead>
-      <tr>
-        <th class="w5 text-center">
-          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-left">
-          <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="name">真实姓名</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="tel">手机号</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-left">
-          <rzhDefaultSorter by="descript">操作类型</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-left">
-          <rzhDefaultSorter by="descript">操作描述</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="createtime">创建时间</rzhDefaultSorter>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let count of dataTable.data;let x=index"  class="text-center">
-        <td>{{x+1}}</td>
-        <td class="text-left">{{count.custName}}</td>
-        <td>{{count.name}}</td>
-        <td>{{count.phone}}</td>
-        <td *ngIf="count.coin<0" style="color:red">
-          {{count.coin}}
-        </td>
-        <td *ngIf="count.coin>=0" style="color:green">
-          {{count.coin}}
-        </td>
-        <td class="text-left">{{count.logType | rzhState: '1802'}}</td>
-        <td class="text-left">{{count.description}}</td>
-        <td>{{count.createTime}}</td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="7">
-          <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+<div class="panel mb">
+  <div class="panel-body p ng-scope">
+    <div class="col-md-12">
+      <div class="form-group col-md-2">
+        <div class="pl0">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
+                 (change)="qeuryAllService(1)" maxlength="50" placeholder="请输入要查询的会员名称">
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <div class="pl0">
+          <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 [(ngModel)]="phone" (change)="qeuryAllService(1)" placeholder="请输入要查询的会员的手机号">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="search-group-time ml-xl mb">
+          <span class="coin-search-title pull-left">时间范围：</span>
+          <div class="pull-left w75">
+            <input placeholder="" type="text" class="form-control" bsDaterangepicker #dpr="bsDaterangepicker" [bsConfig]="bsConfig" readonly>
           </div>
-          <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="search-group ml-xl mb">
+          <span class="search-title">消费类型：</span>
+          <div class="search-main">
+            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="qeuryAllService(1)">
+              <option value="">全部</option>
+              <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
+            </select>
           </div>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+        </div>
+        <button type="button" title="搜索" class="btn thc btn-thc ml align-top">
+        <i class="icon-magnifier fa-fw"></i>
+      </button>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+             (pageChange)="qeuryAllService($event)">
+        <thead>
+        <tr>
+          <th class="w5 text-center">
+            <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-left">
+            <rzhDefaultSorter by="member">会员名称</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="name">真实姓名</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="tel">手机号</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center">
+            <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="descript">操作类型</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-left">
+            <rzhDefaultSorter by="descript">操作描述</rzhDefaultSorter>
+          </th>
+          <th class="w15 text-center">
+            <rzhDefaultSorter by="createtime">创建时间</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+          <td>{{x+1}}</td>
+          <td class="text-left">{{count.custName}}</td>
+          <td>{{count.name}}</td>
+          <td>{{count.phone}}</td>
+          <td *ngIf="count.coin<0" class="red">
+            {{count.coin}}
+          </td>
+          <td *ngIf="count.coin>=0" class="green">
+            {{count.coin}}
+          </td>
+          <td class="text-center">{{count.logType | rzhState: '1027'}}</td>
+          <td class="text-left">
+            <!--支付订单{{count.phone}}，支付{{count.coin}} 重消币-->
+            <!--支付订单{{count.phone}}，扣除{{count.coin}} 重消币-->
+            {{count.description}}
+          </td>
+          <td>{{count.createTime}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+                条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div style="float: right">
+                <rzhBootstrapPaginator></rzhBootstrapPaginator>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

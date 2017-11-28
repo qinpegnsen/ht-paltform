@@ -46,7 +46,7 @@ export class BuyerEvaluationComponent implements OnInit {
     let data = {
       curPage: activePage,
       pageSize: 10,
-      custName: 'szh18898775039',
+      custName: this.custName,
     }
     let result = this.submit.getData(url, data);
     me.data = new Page(result);
