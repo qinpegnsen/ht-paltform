@@ -7,6 +7,7 @@ import {PageEvent} from "../../../../shared/directives/ng2-datatable/DataTable";
   import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
   import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
   import {listLocales} from "ngx-bootstrap/bs-moment";
+  import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
 
 @Component({
   selector: 'app-integration-details',
@@ -39,15 +40,19 @@ export class IntegrationDetailsComponent implements OnInit {
 
   ngOnInit() {
     let _this=this;
-    _this.qeuryAllService();
+    _this.qeuryAllService(1);
     _this.authStates = this.tools.getEnumDataList('1027');   //操作类型枚举列表
 
   }
 
   //重消币明细--查询分页
-  qeuryAllService(event?: PageEvent){
+  qeuryAllService(curPage,event?:PageEvent){
     let me = this, activePage = 1;
-    if (typeof event !== "undefined") activePage = event.activePage;
+    if (typeof event !== 'undefined') {
+      activePage = event.activePage;
+    } else if (!isUndefined(curPage)) {
+      activePage = curPage;
+    };
     let url = "/custCoin/query";
     let data={
       curPage: activePage,
