@@ -60,7 +60,7 @@
               </div>
               <div *ngIf="data.custCoin===0"
                    class="col-sm-9 pull-right text-danger">
-                您确认要充值０元吗?
+               重消币值必须大于0
               </div>
               <div [hidden]="custCoin.valid || custCoin.pristine || custCoin.value==''"
                    class="col-sm-9 pull-right text-danger">
@@ -69,7 +69,7 @@
             </fieldset>
           </div>
           <div class="panel-footer">
-            <button class="btn btn-info sub" type="submit" (click)="submit()" [disabled]="!res.form.valid">提交信息</button>
+            <button class="btn btn-info sub" type="submit" (click)="submit()" [disabled]="!res.form.valid || data.custCoin===0" >提交信息</button>
           </div>
         </div>
         <!-- END panel-->

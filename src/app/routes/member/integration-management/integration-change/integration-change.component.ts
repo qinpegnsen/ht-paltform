@@ -4,6 +4,7 @@ import {PatternService} from "../../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
 import {ActivatedRoute} from "@angular/router";
 import {IntegrationChangeService} from "./integration-change.service";
+import {AppComponent} from "../../../../app.component";
 
 
 @Component({
