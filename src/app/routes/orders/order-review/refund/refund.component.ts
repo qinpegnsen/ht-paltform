@@ -207,7 +207,7 @@ public realPay:any;//退款金额
   showImg(event, i) {
     i.style.display = 'block';
     i.style.top = (event.clientY - 140) + 'px';
-    i.style.left = (event.clientX - 450) + 'px';
+    i.style.left = (event.clientX - 350) + 'px';
   }
 
   /**
