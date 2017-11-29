@@ -16,12 +16,12 @@
 <div class="panel mb w100 search">
   <div class="search-group-own ml-xl m10">
     <span class="search-title font12">红包总金额 （元）：</span>
-    <div class="search-main lineHeight36">{{totalAmount}}</div>
+    <div class="search-main lineHeight36">{{totalAmount |number :'1.2-2'}}</div>
   </div>
   <div class="search-group-own ml-xl m10" *ngIf="noUseAmount>=0">
     <span class="search-title font12">可设置金额（元）：</span>
     <div class="search-main lineHeight36">
-      {{noUseAmount}}
+      {{noUseAmount |number :'1.2-2'}}
     </div>
   </div>
   <div class="search-group-own ml-xl m10">
@@ -129,7 +129,7 @@
         <div class="search-group ml-xl mb pull-right mr">
           <span class="font14 lineHeight33">红包总金额 （元）：</span>
           <span class="font18 lineHeight33 main-red ">
-            {{sumOfAmountArray}}
+            {{sumOfAmountArray |number :'1.2-2'}}
           </span>
         </div>
       </fieldset>
