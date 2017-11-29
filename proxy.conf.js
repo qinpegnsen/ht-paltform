@@ -62,7 +62,7 @@ const PROXY_CONFIG = [
       "/rpCustAcctRec",
       "/rpAccount"
     ],
-    target: zyg  + "8084",   //拦截 context配置路径，经过此地址
+    target: gh  + "8084",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -71,7 +71,7 @@ const PROXY_CONFIG = [
       "/upload",
       "/res"
     ],
-    target: zyg    + "8082",   //拦截 context配置路径，经过此地址
+    target: gh  + "8082",   //拦截 context配置路径，经过此地址
     secure: false
   }
 ];
