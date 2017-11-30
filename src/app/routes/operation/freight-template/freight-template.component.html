@@ -20,14 +20,10 @@
             <div class="table-thead-header">
               <span>{{organ.tplName}}</span>
               <span>
-                <!--修改运费模板值按钮-->
-            <button nz-button title="修改"  class="btn-green">
-              <i class="anticon anticon-edit"></i>
-            </button>
+                <!--修改运费模板按钮-->
+              <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle',id:organ.id}"></app-buttons>
                 <!--删除运费模板值按钮-->
-            <button  nz-button class="btn-warning"  title="删除">
-              <i class="anticon anticon-delete"></i>
-            </button>
+              <app-buttons [config]="deletebutton"  (click)="delete(organ.id)"></app-buttons>
             </span>
             </div>
             <table class="table table-striped w100">
@@ -82,6 +78,7 @@
         </td>
       </tr>
     </ng-container>
+
     </tbody>
   </table>
 </div>
