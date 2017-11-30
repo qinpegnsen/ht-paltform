@@ -29,3 +29,4 @@ export class Level2AreaNamePipe implements PipeTransform {
   }
 
 }
+
