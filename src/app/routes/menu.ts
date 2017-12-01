@@ -42,6 +42,10 @@ const website = {
           link: '/main/website/redPacket/pond'
         },
         {
+          text: '红包企业',
+          link: '/main/website/redPacket/store'
+        },
+        {
           text: '红包中奖记录',
           link: '/main/website/redPacket/record'
         }

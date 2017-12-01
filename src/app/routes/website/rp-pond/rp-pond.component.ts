@@ -35,6 +35,7 @@ export class RpPondComponent implements OnInit {
   public queryTypes: any;                      //统计时间的类型
   public redPackStaticScale: any;              //企业占比统计
   public redPackStaticClick: any;              //企业点击统计
+  public storeInvest: any;                      //企业投资
   public legendData: any;                      //企业占比图例数据
   public legendDataClick: any;                 //企业点击图例数据
   public seriesData: any;                      //企业占比系列数据
@@ -50,6 +51,11 @@ export class RpPondComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.storeInvest={
+      title:"企业投资",
+      text:"企业投资",
+      type: "add-thc"
+    };
     this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     this.loadRpAccount();

@@ -1,0 +1,96 @@
+<div class="content-heading mb-lg thc font">
+  <span>红包企业列表</span>
+  <app-buttons class="pull-right" [config]="addRpStore" routerLink="storePage"
+               [queryParams]="{type:'add'}"></app-buttons>
+</div>
+<!--<div class="panel mb">-->
+  <!--<div class="panel-body p ng-scope" ng-if="search">-->
+    <!--<div class="form-group mb0">-->
+      <!--<div class="col-xs-5">-->
+        <!--<input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
+               <!--(change)="queryExpressList()" maxlength="50" placeholder="请输入要查询的快递公司名称或者公司编号">-->
+      <!--</div>-->
+      <!--<div class="col-sm-1 pull-left text-center">-->
+        <!--<span class="ng-scope">-->
+           <!--<button type="button" title="搜索" id="toSearch" (click)="queryExpressList()"-->
+                   <!--class="btn thc btn-thc bar-h3-btn mr ng-scope ">-->
+             <!--<em class="icon-magnifier fa-fw"></em>搜索-->
+           <!--</button>-->
+          <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<div class="panel mb panel-default">
+  <div class="panel-body">
+    <table class="table table-striped" #data="rzhDataTable" [rzhData]="RpStoreData"
+           (pageChange)="queryExpressList(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 thc font text-center">
+          序号
+        </th>
+        <th class="w15 thc font">
+          简称
+        </th>
+        <th class="10 thc font text-center">
+          logo
+        </th>
+        <th class="w20 thc font text-left">
+          宣传语
+        </th>
+        <th class="w10 thc font text-center">
+          宣传图
+        </th>
+        <th class="w10 thc font text-center">
+          状态
+        </th>
+        <th class="w10 thc font text-center">
+          点击数
+        </th>
+        <th class="w20 thc font text-center">创建时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of data.data;let i = index">
+        <td class="text-center">{{i+1}}</td>
+        <td>{{item.epSubname}}</td>
+        <td class="text-center">
+          <img [src]="item.logo" class="logoImg"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
+          >
+        </td>
+        <td class="text-left">{{item.slogan}}</td>
+        <td class="text-center">
+          <img [src]="item.sloganPic" class="logoImg"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
+          >
+        </td>
+        <td class="text-center">{{item.state | rzhState :'2101'}}</td>
+        <td class="text-center">{{item.click}}</td>
+        <td class="text-center">{{item.updateTime}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{RpStoreData.genStartRow()}} 至
+              {{RpStoreData.genEndRow()}} 条，共 {{RpStoreData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-md-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<!--路由嵌套 begin-->
+<router-outlet></router-outlet>
+<!--路由嵌套 end-->
+
