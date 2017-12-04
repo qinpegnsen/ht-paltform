@@ -23,34 +23,7 @@ const website = {
       text: '计量单位',
       icon: 'fa fa-calculator',
       link: '/main/website/measure'
-    },
-    {
-      text: '红包管理',
-      icon: 'fa fa-dollar',
-      alert: '▼',
-      submenu: [
-        {
-          text: '红包规则',
-          link: '/main/website/redPacket/site'
-        },
-        {
-          text: '红包统计',
-          link: '/main/website/redPacket/statics'
-        },
-        {
-          text: '红包奖池',
-          link: '/main/website/redPacket/pond'
-        },
-        {
-          text: '红包企业',
-          link: '/main/website/redPacket/store'
-        },
-        {
-          text: '红包中奖记录',
-          link: '/main/website/redPacket/record'
-        }
-      ]
-    },
+    }
   ]
 };
 const operation = {
@@ -500,6 +473,44 @@ const app = {
     }
   ]
 };
+const activities = {
+  text: '活动管理',
+  icon: 'fa fa-trophy',
+  link: '/main/activities',
+  submenu: [
+    {
+      text: '红包管理',
+      icon: 'fa fa-dollar',
+      alert: '▼',
+      submenu: [
+        {
+          text: '红包规则',
+          link: '/main/activities/redPacket/site'
+        },
+        {
+          text: '红包统计',
+          link: '/main/activities/redPacket/statics'
+        },
+        {
+          text: '红包中奖记录',
+          link: '/main/activities/redPacket/record'
+        },
+        {
+          text: '红包奖池',
+          link: '/main/activities/redPacket/pond'
+        },
+        {
+          text: '红包企业',
+          link: '/main/activities/redPacket/store'
+        },
+        {
+          text: '提现审核',
+          link: '/main/activities/redPacket/audit'
+        }
+      ]
+    },
+  ]
+};
 const editPw = {
   text: '密码修改',
   link: '/main/edit-pw',
@@ -518,5 +529,6 @@ export let menu = [
   sale,
   statistics,
   agent,
-  app
+  app,
+  activities
 ];

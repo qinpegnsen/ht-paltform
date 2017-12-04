@@ -5,8 +5,9 @@ import {PatternService} from "../../../core/forms/pattern.service";
 import {FileUploader} from "ng2-file-upload";
 import {GetUidService} from "../../../core/services/get-uid.service";
 import {AppComponent} from "../../../app.component";
-import {WebstiteService} from "../webstite.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {ActivitiesService} from "../activities.service";
+declare var $;
 
 @Component({
   selector: 'app-store-right-page',
@@ -27,17 +28,19 @@ export class StoreRightPageComponent implements OnInit {
   public uploaderLogo: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
-    queueLimit: 1
+    queueLimit: 1,
+    allowedFileType:["image"]
   });
   public uploaderSloganPic: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
-    itemAlias: "limitFile"
+    itemAlias: "limitFile",
+    allowedFileType:["image"]
   });
 
   constructor(public settings: SettingsService,
               public routeInfo: ActivatedRoute,
               public GetUidService: GetUidService,
-              public webstiteService: WebstiteService,
+              public service: ActivitiesService,
               public rzhtoolsService: RzhtoolsService,
               public patterns: PatternService) {
     this.settings.showRightPage("30%");
@@ -62,7 +65,7 @@ export class StoreRightPageComponent implements OnInit {
       let data = {
         id: this.qieryId
       };
-      this.loadData = this.webstiteService.loadRpStoreData(url, data);
+      this.loadData = this.service.loadRpStoreData(url, data);
     }
     this.storeSstateList = this.rzhtoolsService.getEnumDataList('2101');
   }
@@ -96,8 +99,11 @@ export class StoreRightPageComponent implements OnInit {
         slogan: obj.slogan,
         logoUUID: this.logoUUID,
         sloganPicUUID: this.sloganPicUUID
-      }
-      this.webstiteService.addRedPackRules(url, data);
+      };
+      let result=this.service.addRedPackRules(url, data);
+      if(result=='请上传logo'||result=='请上传宣传图'||result=='该企业简称已存在'){
+        return;
+      };
     } else if (this.type == "edit") {
       let url = '/rpStore/updateRpStoreSlogan';
       let data = {
@@ -108,7 +114,10 @@ export class StoreRightPageComponent implements OnInit {
         sloganPicUUID: this.sloganPicUUID,
         state: obj.state
       };
-      this.webstiteService.updateRpStore(url, data);
+      let result=this.service.updateRpStore(url, data);
+      if(result=='请上传logo'||result=='请上传宣传图'||result=='该企业简称已存在'){
+        return;
+      };
     }
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
   }

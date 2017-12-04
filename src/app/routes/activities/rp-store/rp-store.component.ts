@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
-import {WebstiteService} from "../webstite.service";
+import {ActivitiesService} from "../activities.service";
 
 const swal = require('sweetalert');
 
@@ -22,7 +21,7 @@ export class RpStoreComponent implements OnInit {
   public epCode:any;                   //企业的编码
   public storeCode:any;                //店铺的编码
 
-  constructor(public webstiteService:WebstiteService) {}
+  constructor(public service:ActivitiesService) {}
 
   /**
    * 1.获取红包列表的数据
@@ -60,7 +59,7 @@ export class RpStoreComponent implements OnInit {
       storeCode:this.storeCode
     };
     let url='/rpStore/queryRpStoreAdmin';
-    this.RpStoreData=new Page(this.webstiteService.queryRpStoreAdmin(url,data))
+    this.RpStoreData=new Page(this.service.queryRpStoreAdmin(url,data))
   }
 
   /**
@@ -77,7 +76,7 @@ export class RpStoreComponent implements OnInit {
       state:item.state
     };
     let url= "/rpStore/updateRpStoreState";
-    this.webstiteService.updateRpStoreState(url,data);
+    this.service.updateRpStoreState(url,data);
   }
 
   /**

@@ -9,20 +9,20 @@
       <div class="form-group col-md-2">
         <div class="pl0">
           <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
-                 (change)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员名称">
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员名称">
         </div>
       </div>
       <div class="form-group mb0 col-md-2">
         <div class="pl0">
           <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                  [(ngModel)]="phone"
-                 (change)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
         </div>
       </div>
       <div class="search-group ml-xl mb">
         <span class="search-title">流水类型：</span>
         <div class="search-main">
-          <select class="form-control" name="authState" [(ngModel)]="logType" (change)="queryRpCustAcctRecAdmin(1)">
+          <select class="form-control" name="authState" [(ngModel)]="logType" (ngModelChange)="queryRpCustAcctRecAdmin(1)">
             <option value="">全部</option>
             <option *ngFor="let item of logTypes" [value]="item.key">{{item.val}}</option>
           </select>

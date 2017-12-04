@@ -4,7 +4,6 @@ import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {isNullOrUndefined} from "util";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-site',

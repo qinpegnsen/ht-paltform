@@ -3,7 +3,7 @@ import {RouterModule} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
 import {routes} from './routes';
 import {PagesModule} from './pages/pages.module';
-import {SiteComponent} from "./website/site/site.component";
+import {SiteComponent} from "./activities/site/site.component";
 @NgModule({
   imports: [
     SharedModule,

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {WebstiteService} from "../webstite.service";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {ActivitiesService} from "../activities.service";
 declare var $: any;
 
 @Component({
@@ -32,7 +32,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
       }
       let url='/rpStore/queryAll';
       let data={};
-      this.rpStoreList = this.webstiteService.queryAllRpStore(url,data);   //红包企业列表
+      this.rpStoreList = this.service.queryAllRpStore(url,data);   //红包企业列表
       this.amount = null;      //每次出来把上次填的订单号清除，快递公司就算了，留着吧
     }
   }
@@ -41,7 +41,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(private webstiteService: WebstiteService,
+  constructor(private service: ActivitiesService,
               public patterns: PatternService,
               public submit: SubmitService) {
   }
@@ -72,7 +72,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
       epCode: this.item.epCode,
       amount: this.amount,
     };
-    let result = this.webstiteService.addRpAccountRec(url, data);
+    let result = this.service.addRpAccountRec(url, data);
     if (isNullOrUndefined(result)) this.hideWindow();
   }
 }

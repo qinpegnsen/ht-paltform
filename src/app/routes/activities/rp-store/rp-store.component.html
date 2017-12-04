@@ -3,21 +3,28 @@
   <app-buttons class="pull-right" [config]="addRpStore" routerLink="storePage"
                [queryParams]="{type:'add'}"></app-buttons>
 </div>
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>当前列表所做的修改到第二天的0点生效</li>
+  </ul>
+</div>
 <div class="panel mb">
   <div class="panel-body p ng-scope" ng-if="search">
     <div class="form-group mb0">
-      <div class="col-xs-2">
+      <div class="col-xs-4">
         <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                (change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业简称">
       </div>
-      <div class="col-xs-2">
-        <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业编码">
-      </div>
-      <div class="col-xs-2">
-        <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
-      </div>
+      <!--to do-->
+      <!--<div class="col-xs-2">-->
+        <!--<input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
+               <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业编码">-->
+      <!--</div>-->
+      <!--<div class="col-xs-2">-->
+        <!--<input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
+               <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的店铺编码">-->
+      <!--</div>-->
       <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
           <button type="button" title="搜索" id="toSearch" (click)="queryRpStoreList(1)"
@@ -56,7 +63,7 @@
         <th class="w10 thc font text-center">
           点击数
         </th>
-        <th class="w10 thc font text-center">创建时间</th>
+        <th class="w10 thc font text-center">修改时间</th>
         <th class="w10 thc font text-center">操作</th>
       </tr>
       </thead>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
-import {WebstiteService} from "../webstite.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {listLocales} from "ngx-bootstrap/bs-moment";
 import {AppComponent} from "../../../app.component";
@@ -8,12 +7,11 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {number} from "ng2-validation/dist/number";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
-import {SiteComponent} from "../site/site.component";
 import {Router} from "@angular/router";
-import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {defineLocale} from "ngx-bootstrap";
 import {zhCn} from "ngx-bootstrap/locale";
+import {ActivitiesService} from "../activities.service";
 defineLocale('cn', zhCn);
 const swal = require('sweetalert');
 declare var $: any;
@@ -52,7 +50,7 @@ export class AddRedPackageComponent implements OnInit {
               public patternService: PatternService,
               public router: Router,
               private submit: SubmitService,
-              public service: WebstiteService) {
+              public service: ActivitiesService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式

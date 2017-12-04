@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
-import {isNullOrUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {SubmitService} from "../../../core/forms/submit.service";
 
