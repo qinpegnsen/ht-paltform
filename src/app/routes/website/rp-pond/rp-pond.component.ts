@@ -40,6 +40,7 @@ export class RpPondComponent implements OnInit {
   public legendDataClick: any;                 //企业点击图例数据
   public seriesData: any;                      //企业占比系列数据
   public seriesDataClick: any;                 //企业点击系列数据
+  public showStroeInvest: boolean = false;      //企业点击系列数据
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -51,9 +52,9 @@ export class RpPondComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.storeInvest={
-      title:"企业投资",
-      text:"企业投资",
+    this.storeInvest = {
+      title: "企业投资",
+      text: "企业投资",
       type: "add-thc"
     };
     this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
@@ -93,7 +94,7 @@ export class RpPondComponent implements OnInit {
         _this.select.week = ele;
       } else if (now == start || now == end) {
         _this.select.week = ele;//获取默认周
-      }else if (now > start || now > end) {//两个月的交界处
+      } else if (now > start || now > end) {//两个月的交界处
         _this.select.week = ele;//获取默认周
       }
     });
@@ -106,7 +107,7 @@ export class RpPondComponent implements OnInit {
     let url = "/rpAccount/loadRpAccount";
     let data = {};
     let result = this.submit.getData(url, data);
-    if(result){
+    if (result) {
       this.balance = result.balance;
       this.income = result.income;
     }
@@ -149,6 +150,22 @@ export class RpPondComponent implements OnInit {
       this.seriesData = this.redPackStaticScale.voList;
       this.graphInfoScale();
     }
+  }
+
+  /**
+   *展示红包企业的弹窗
+   */
+  showAlert() {
+    this.showStroeInvest = true;
+    console.log("█ this.showStroeInvest ►►►",  this.showStroeInvest);
+  }
+
+  /**
+   * 发货回调函数
+   * @param data
+   */
+  getDeliverOrderData() {
+    this.showStroeInvest = false;
   }
 
   /**
@@ -212,8 +229,8 @@ export class RpPondComponent implements OnInit {
    */
   public graphInfoScale() {
     let _this = this;
-    if (isNullOrUndefined(_this.legendData) || _this.legendData.length ==0) _this.legendData = ["无数据"];
-    if (isNullOrUndefined(_this.seriesData) || _this.seriesData.length ==0) _this.seriesData = [{
+    if (isNullOrUndefined(_this.legendData) || _this.legendData.length == 0) _this.legendData = ["无数据"];
+    if (isNullOrUndefined(_this.seriesData) || _this.seriesData.length == 0) _this.seriesData = [{
       name: "无数据",
       value: "0"
     }];
@@ -257,8 +274,8 @@ export class RpPondComponent implements OnInit {
    */
   public graphInfoClick() {
     let _this = this;
-    if (isNullOrUndefined(_this.legendDataClick) || _this.legendDataClick.length ==0) _this.legendDataClick = ["无数据"];
-    if (isNullOrUndefined(_this.seriesDataClick) || _this.seriesDataClick.length ==0) _this.seriesDataClick = [{
+    if (isNullOrUndefined(_this.legendDataClick) || _this.legendDataClick.length == 0) _this.legendDataClick = ["无数据"];
+    if (isNullOrUndefined(_this.seriesDataClick) || _this.seriesDataClick.length == 0) _this.seriesDataClick = [{
       name: "无数据",
       value: "0"
     }];

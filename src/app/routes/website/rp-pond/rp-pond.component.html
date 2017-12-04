@@ -1,7 +1,7 @@
 <div class="content-heading mb-lg thc font">
   <span>红包奖池</span>
-  <app-buttons class="pull-right" [config]="storeInvest" routerLink="rightPage"
-               [queryParams]="{type:'add'}"></app-buttons>
+  <app-buttons class="pull-right" [config]="storeInvest"
+               (click)="showAlert()"></app-buttons>
 </div>
 <!--方块统计 start-->
 <div class=" panel-default">
@@ -161,7 +161,7 @@
   <div class="panel m-auto clearfix">
     <!--投资占比统计图 start-->
     <div class="col-lg-5 mt20">
-      <div echarts [options]="optionScale"  class="demo-chart w100"></div>
+      <div echarts [options]="optionScale" class="demo-chart w100"></div>
     </div>
     <!--投资占比统计图 end-->
     <!--点击率占比统计图 start-->
@@ -171,7 +171,8 @@
     <!--点击率占比统计图 end-->
   </div>
 </div>
-
+<app-store-invest [flag]="showStroeInvest"
+                  (deliverGoods)="getDeliverOrderData()"></app-store-invest>
 
 
 

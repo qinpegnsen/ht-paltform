@@ -18,6 +18,7 @@ import { RpPondComponent } from './rp-pond/rp-pond.component';
 import { RpStoreComponent } from './rp-store/rp-store.component';
 import { StoreRightPageComponent } from './store-right-page/store-right-page.component';
 import {FileUploadModule} from "ng2-file-upload";
+import { StoreInvestComponent } from './store-invest/store-invest.component';
 
 const storeRoutes: Routes = [
   {path: 'storePage', component: StoreRightPageComponent},
@@ -49,7 +50,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent],
+  declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent, SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent, StoreInvestComponent],
   providers:[DataDictionaryComponent,DataDictionaryComponentService,MeasureService,MeasureComponent,WebstiteService]
 })
 export class WebsiteModule { }

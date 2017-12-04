@@ -1,4 +1,4 @@
-<!--新增红包企业-->
+<!--新增红包企业 start-->
 <div class="rightpage" *ngIf="type=='add'">
   <form class="form-validate form-horizontal" style="height: 100%" #express="ngForm">
     <!-- START panel-->
@@ -37,12 +37,12 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i class='main-red'>*</i>logo</label>
             <div class="col-sm-8">
-              <img class="col-sm-5 p-sm" *ngIf="myImg" [src]="uploader.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="myLogoImg" [src]="uploaderLogo.queue[0]._file | imgUrl"
               >
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传logo
-                <input class="w100" type="file" name="tplImg" ng2FileSelect [uploader]="uploader"
-                       (change)="fileChangeListener($event)"/>
+                <input class="w100" type="file" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
+                       (change)="fileChangeListenerLogo($event)"/>
               </label>
             </div>
           </div>
@@ -51,26 +51,17 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><i class='main-red'>*</i>宣传图</label>
             <div class="col-sm-8">
-              <img class="col-sm-5 p-sm" *ngIf=" myImgs" [src]="uploaders.queue[0]._file | imgUrl"
+              <img class="col-sm-5 p-sm" *ngIf="mySloganImg" [src]="uploaderSloganPic.queue[0]._file | imgUrl"
               >
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传宣传图
-                <input class="w100" type="file" name="tplCheckedImg" ng2FileSelect [uploader]="uploaders"
-                       (change)="fileChangeListeners($event)"/>
+                <input class="w100" type="file" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
+                       (change)="fileChangeListenerSloganPic($event)"/>
               </label>
             </div>
           </div>
         </fieldset>
-        <!--<fieldset>-->
-        <!--<div class="form-group">-->
-        <!--<label class="col-sm-3 control-label">状态</label>-->
-        <!--<div class="col-sm-4">-->
-        <!--<select class="form-control" type="text" name="isUse" [(ngModel)]="bingID" required>-->
-        <!--<option [value]="item.id" *ngFor="let item of isUseList">{{item.name}}</option>-->
-        <!--</select>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</fieldset>-->
+
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
         <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
@@ -82,67 +73,95 @@
     <!-- END panel-->
   </form>
 </div>
-<!--修改红包企业-->
-<!--<div class="rightpage"  *ngIf="type=='edit'">-->
-<!--<form class="form-validate form-horizontal" style="height: 100%" #express="ngForm">-->
-<!--&lt;!&ndash; START panel&ndash;&gt;-->
-<!--<div class="panel-default">-->
-<!--<div class="panel-body">-->
-<!--<fieldset class="b0">-->
-<!--<legend>修改快递公司</legend>-->
-<!--</fieldset>-->
-<!--<fieldset>-->
-<!--<div class="form-group">-->
-<!--<label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司代码</label>-->
-<!--<div class="col-sm-8">-->
-<!--<input class="form-control" type="text" maxlength="50"  #expressCodeTem="ngModel" [(ngModel)]="editData.expressCode" name="expressCode" required placeholder='必填项' [pattern]="patterns.letter"/>-->
-<!--<div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"-->
-<!--class="alert alert-danger">-->
-<!--请输入合法的公司代码-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</fieldset>-->
-<!--<fieldset>-->
-<!--<div class="form-group">-->
-<!--<label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司名称</label>-->
-<!--<div class="col-sm-8">-->
-<!--<input class="form-control" type="text" maxlength="50"  #expressNameTem="ngModel"  [(ngModel)]="editData.expressName" name="expressName" required placeholder='必填项'/>-->
-<!--<div [hidden]="expressNameTem.valid||expressNameTem.untouched"-->
-<!--class="alert alert-danger">-->
-<!--公司名称是必填项-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</fieldset>-->
-<!--<fieldset>-->
-<!--<div class="form-group">-->
-<!--<label class="col-sm-3 control-label"><i class='main-red'>*</i> 公司网址</label>-->
-<!--<div class="col-sm-8">-->
-<!--<input class="form-control" type="text" maxlength="50" #expressUrlTem="ngModel"  [(ngModel)]="editData.expressUrl" name="expressUrl" required placeholder='必填项' [pattern]="patterns._URL"/>-->
-<!--<div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"-->
-<!--class="alert alert-danger">-->
-<!--请输入合法的公司网址-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</fieldset>-->
-<!--<fieldset>-->
-<!--<div class="form-group">-->
-<!--<label class="col-sm-3 control-label">是否启用</label>-->
-<!--<div class="col-sm-4">-->
-<!--<select class="form-control" type="text" name="isUse" [(ngModel)]="editData.isUse" required>-->
-<!--<option [value]="item.id" *ngFor="let item of isUseList">{{item.name}}</option>-->
-<!--</select>-->
-<!--</div>-->
-<!--</div>-->
-<!--</fieldset>-->
-<!--</div>-->
-<!--<div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">-->
-<!--<button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>-->
-<!--<button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(express.value)" [disabled]="express.invalid">提交信息</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash; END panel&ndash;&gt;-->
-<!--</form>-->
-<!--</div>-->
+<!--新增红包企业 end-->
+
+<!--修改红包企业 start-->
+<div class="rightpage" *ngIf="type=='edit'">
+  <form class="form-validate form-horizontal" style="height: 100%" #express="ngForm">
+    <!-- START panel-->
+    <div class="panel-default">
+      <div class="panel-body">
+        <fieldset class="b0">
+          <legend>修改红包企业</legend>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>企业简称</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="50" #expressCodeTem="ngModel" ngModel
+                     name="epSubname" required placeholder='必填项' [(ngModel)]="loadData.epSubname"/>
+              <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
+                   class="alert alert-danger">
+                企业简称是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>宣传语</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" maxlength="50" [(ngModel)]="loadData.slogan" #expressUrlTem="ngModel" ngModel name="slogan"
+                     required placeholder='必填项' require/>
+              <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
+                   class="alert alert-danger">
+                宣传语是必填项
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>logo</label>
+            <div class="col-sm-8">
+              <img class="col-sm-5 p-sm" *ngIf="myLogoImg" [src]="uploaderLogo.queue[0]._file | imgUrl"
+              >
+              <img class="col-sm-5 p-sm" *ngIf="loadData.logo && !myLogoImg" [src]="loadData.logo">
+              <label class="btn btn-default file-upload">
+                <i class="icon-cloud-upload mr"></i>上传logo
+                <input class="w100" type="file" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
+                       (change)="fileChangeListenerLogo()"/>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><i class='main-red'>*</i>宣传图</label>
+            <div class="col-sm-8">
+              <img class="col-sm-5 p-sm" *ngIf="mySloganImg" [src]="uploaderSloganPic.queue[0]._file | imgUrl"
+              >
+              <img class="col-sm-5 p-sm" *ngIf="loadData.sloganPic && !mySloganImg" [src]="loadData.sloganPic">
+              <label class="btn btn-default file-upload">
+                <i class="icon-cloud-upload mr"></i>上传宣传图
+                <input class="w100" type="file" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
+                       (change)="fileChangeListenerSloganPic()"/>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">状态</label>
+            <div class="col-sm-4">
+              <select class="form-control" type="text" name="state" [(ngModel)]="loadData.state" required>
+                <option [value]="item.key" *ngFor="let item of storeSstateList">{{item.val}}</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+
+      </div>
+      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(express.value)"
+                [disabled]="express.invalid">提交信息
+        </button>
+      </div>
+    </div>
+    <!-- END panel-->
+  </form>
+</div>
+<!--修改红包企业 end-->

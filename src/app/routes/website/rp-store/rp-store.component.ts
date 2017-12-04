@@ -3,6 +3,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
+import {WebstiteService} from "../webstite.service";
 
 const swal = require('sweetalert');
 
@@ -14,12 +15,14 @@ const swal = require('sweetalert');
 export class RpStoreComponent implements OnInit {
 
   private RpStoreData;                //红包企业的数据
-  private searchKey:string='';        //默认查询的分类的名称
   private addRpStore:any;             //新增红包企业
   private updatebutton:any;           //修改按钮
-  private deletebutton:any;           //删除按钮
+  private curPage:any;                 //当前的页码
+  private epSubname:any;               //企业的简称
+  private epCode:any;                   //企业的编码
+  private storeCode:any;                //店铺的编码
 
-  constructor(public service:SubmitService) {}
+  constructor(public webstiteService:WebstiteService) {}
 
   /**
    * 1.获取红包列表的数据
@@ -31,68 +34,56 @@ export class RpStoreComponent implements OnInit {
       text:"新增红包企业",
       type: "add-thc"
     };
-    this.queryExpressList(1)
+    this.updatebutton={
+      title:"编辑",
+      type: "update"
+    };
+    this.queryRpStoreList(1)
   }
 
   /**
-   * 查询快递公司的列表
+   * 红包列表的数据
    */
-  queryExpressList(curPage,event?:PageEvent){
+  queryRpStoreList(curPage,event?:PageEvent){
     let activePage = 1;
     if(typeof event !== "undefined") {
       activePage =event.activePage
     }else if(!isNullOrUndefined(curPage)){
       activePage =curPage
     };
+    this.curPage=activePage;
     let data={
       curPage:activePage,
-      pageSize:10
-    }
+      pageSize:10,
+      epSubname:this.epSubname,
+      epCode:this.epCode,
+      storeCode:this.storeCode
+    };
     let url='/rpStore/queryRpStoreAdmin';
-    this.RpStoreData=new Page(this.service.getData(url,data))
+    this.RpStoreData=new Page(this.webstiteService.queryRpStoreAdmin(url,data))
   }
 
   /**
-   * 删除分类 首先进行确认是否删除，删除后刷新页面
+   * 修改红包企业的状态（冻结还是正常）
    */
-  deleteSort(delSortId,curPage){
-    let that=this;
-    swal({
-      title: "您确定要删除吗？",
-      text: "您确定要删除这条数据？",
-      type: "warning",
-      showCancelButton: true,
-      cancelButtonText: '取消',
-      closeOnConfirm: false,
-      confirmButtonText: "确认",
-      confirmButtonColor: "#ec6c62"
-    },function(isConfirm){
-      if (isConfirm) {
-        swal.close(); //关闭弹框
-        let url='/basicExpress/deleteBasicExpressById';
-        let data={
-          id:delSortId
-        }
-        that.service.delRequest(url,data)
-        that.queryExpressList(curPage)
-      }
-    });
-  }
-
-  /**
-   * 物流公司是否启用
-   */
-  isUse(express){
-    if(express.isUse=="Y"){
-      express.isUse="N"
-    }else if(express.isUse=="N"){
-      express.isUse="Y"
+  changeState(item){
+    if(item.state=="NORMAL"){
+      item.state="FREEZE"
+    }else if(item.state=="FREEZE"){
+      item.state="NORMAL"
     }
     let data={
-      id:express.id,
-      isUse:express.isUse
-    }
-    let url= "/basicExpress/updateBasicExpress";
-    this.service.putRequest(url,data);
+      id:item.id,
+      state:item.state
+    };
+    let url= "/rpStore/updateRpStoreState";
+    this.webstiteService.updateRpStoreState(url,data);
+  }
+
+  /**
+   * 当子组件注销的时候
+   */
+  onDeactivate(){
+    this.queryRpStoreList(this.curPage);
   }
 }
