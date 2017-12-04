@@ -51,6 +51,29 @@
 <!--企业投资记录表 start-->
 <div class="order panel mb panel-default">
   <div class="table-title w100 h50 font18 thc ts statics-font">企业投资记录表</div>
+  <div class="form-group mb0 ">
+    <div class="col-xs-5"></div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业简称">
+    </div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
+    </div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
+    </div>
+    <div class="col-sm-1 pull-left text-center mt-lg">
+        <span class="ng-scope">
+          <button type="button" title="搜索" id="toSearch" (click)="qeuryPushOrder(1)"
+                  class="btn thc btn-thc bar-h3-btn mr ng-scope ">
+          <em class="icon-magnifier fa-fw"></em>
+          </button>
+        </span>
+    </div>
+  </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
            (pageChange)="qeuryPushOrder(1,$event)">
@@ -59,17 +82,17 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="id">充值金额</rzhDefaultSorter>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="time">店铺名称</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-left">
+          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
           <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
-          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="time">店铺名称</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">充值金额</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
@@ -79,10 +102,10 @@
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
+        <td class="text-left">{{count.epSubname}}</td>
+        <td class="text-left">{{count.epCode}}</td>
+        <td class="text-left">{{count.storeCode}}</td>
         <td>{{count.amount}}</td>
-        <td>{{count.epCode}}</td>
-        <td>{{count.storeCode}}</td>
-        <td>{{count.storeName}}</td>
         <td>{{count.createTime }}</td>
       </tr>
       </tbody>
@@ -115,7 +138,7 @@
   <div class="mt20">
     <div class="w98 m-auto h50 mt20">
       <!--搜索图标 start-->
-      <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
+      <span class="btn statistic-btn thc btn-thc btn-default m0" (click)="selectInfos()">
     <i class="icon icon-magnifier"></i>
   </span>
       <!--搜索图标 end-->

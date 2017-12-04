@@ -14,13 +14,13 @@ const swal = require('sweetalert');
 })
 export class RpStoreComponent implements OnInit {
 
-  private RpStoreData;                //红包企业的数据
-  private addRpStore:any;             //新增红包企业
-  private updatebutton:any;           //修改按钮
-  private curPage:any;                 //当前的页码
-  private epSubname:any;               //企业的简称
-  private epCode:any;                   //企业的编码
-  private storeCode:any;                //店铺的编码
+  public RpStoreData;                //红包企业的数据
+  public addRpStore:any;             //新增红包企业
+  public updatebutton:any;           //修改按钮
+  public curPage:any;                 //当前的页码
+  public epSubname:any;               //企业的简称
+  public epCode:any;                   //企业的编码
+  public storeCode:any;                //店铺的编码
 
   constructor(public webstiteService:WebstiteService) {}
 

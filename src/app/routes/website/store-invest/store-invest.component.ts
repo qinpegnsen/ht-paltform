@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {WebstiteService} from "../webstite.service";
+import {PatternService} from "../../../core/forms/pattern.service";
 declare var $: any;
 
 @Component({
@@ -41,6 +42,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   }
 
   constructor(private webstiteService: WebstiteService,
+              public patterns: PatternService,
               public submit: SubmitService) {
   }
 

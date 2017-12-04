@@ -41,6 +41,9 @@ export class RpPondComponent implements OnInit {
   public seriesData: any;                      //企业占比系列数据
   public seriesDataClick: any;                 //企业点击系列数据
   public showStroeInvest: boolean = false;      //企业点击系列数据
+  public epSubname:any;               //企业的简称
+  public epCode:any;                   //企业的编码
+  public storeCode:any;                //店铺的编码
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -128,6 +131,9 @@ export class RpPondComponent implements OnInit {
     let data = {
       curPage: activePage,
       pageSize: 10,
+      epCode: this.epCode,
+      epSubname: this.epSubname,
+      storeCode: this.storeCode,
     };
     let result = this.submit.getData(url, data);
     me.redPackData = new Page(result);
@@ -157,7 +163,6 @@ export class RpPondComponent implements OnInit {
    */
   showAlert() {
     this.showStroeInvest = true;
-    console.log("█ this.showStroeInvest ►►►",  this.showStroeInvest);
   }
 
   /**
@@ -166,6 +171,7 @@ export class RpPondComponent implements OnInit {
    */
   getDeliverOrderData() {
     this.showStroeInvest = false;
+    this.qeuryPushOrder(1);
   }
 
   /**
