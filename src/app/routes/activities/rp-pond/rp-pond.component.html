@@ -59,11 +59,11 @@
     </div>
     <div class="col-xs-2 mt-lg">
       <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
     </div>
     <div class="col-xs-2 mt-lg">
       <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
     </div>
     <div class="col-sm-1 pull-left text-center mt-lg">
         <span class="ng-scope">
@@ -83,13 +83,13 @@
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
         <th class="w15 text-left">
-          <rzhDefaultSorter by="time">店铺名称</rzhDefaultSorter>
-        </th>
-        <th class="w10 text-left">
-          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
+          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
         </th>
         <th class="w15 text-left">
           <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-left">
+          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="id">充值金额</rzhDefaultSorter>
