@@ -3,6 +3,7 @@ import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {ActivitiesService} from "../activities.service";
+import {AppComponent} from "../../../app.component";
 declare var $: any;
 
 @Component({
@@ -61,6 +62,21 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
     me.showDeliverWindow = false;
     me.deliverGoods.emit({
     })// 向外传值
+  }
+
+  /**
+   * 核查输入的金额的值
+   */
+  checkVal(val){
+    if(val==0){
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+    }else if(String(val).indexOf('.')>-1){
+      let index=String(val).indexOf('.');
+      let finalVal=String(val).slice(0,index+3);
+      setTimeout(()=>{
+        this.amount=finalVal;
+      },0)
+    }
   }
 
   /**
