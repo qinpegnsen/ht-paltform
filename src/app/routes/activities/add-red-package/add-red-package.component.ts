@@ -4,7 +4,6 @@ import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {listLocales} from "ngx-bootstrap/bs-moment";
 import {AppComponent} from "../../../app.component";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {number} from "ng2-validation/dist/number";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
 import {Router} from "@angular/router";
