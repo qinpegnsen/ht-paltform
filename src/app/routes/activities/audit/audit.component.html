@@ -13,7 +13,7 @@
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
               <div class="font14">未审核提现总额</div>
-              <p class="text-md m0">{{amountData.sumWithDraw | decimalTwo}}</p>
+              <p class="text-md m0">{{amountData.sumWithDraw | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -31,7 +31,7 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
               <div class="font14">昨日提现总额</div>
-              <p class="text-md m0">{{amountData.sumYestodayDraw | decimalTwo}}</p>
+              <p class="text-md m0">{{amountData.sumYestodayDraw | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calendar fa-3x tp-em"></em>

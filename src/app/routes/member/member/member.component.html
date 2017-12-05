@@ -116,12 +116,12 @@
           {{member.custSex | rzhState:'1002' }}
         </td>
         <td>
-          {{member.rpCustAcctBalance | decimalTwo }}
+          {{member.rpCustAcctBalance | number: '1.2-2' }}
         </td>
         <td>
-          {{member.rpCustAcctIncome | decimalTwo }}
+          {{member.rpCustAcctIncome | number: '1.2-2' }}
         </td>
-        <td>{{member.coin | decimalTwo}}</td>
+        <td>{{member.coin | number: '1.2-2'}}</td>
         <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>

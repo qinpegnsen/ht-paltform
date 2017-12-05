@@ -15,7 +15,7 @@
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
               <div class="font14">红包奖池余额</div>
-              <p class="text-md m0">{{balance | decimalTwo}}</p>
+              <p class="text-md m0">{{balance | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -33,7 +33,7 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
               <div class="font14">历史总额</div>
-              <p class="text-md m0">{{ income | decimalTwo}}</p>
+              <p class="text-md m0">{{ income | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calendar fa-3x tp-em"></em>

@@ -4,15 +4,14 @@ import {MemberComponent} from "./member/member.component";
 import {RouterModule, Routes} from "@angular/router";
 import {RzhButtonsModule} from "../buttons/rzh-buttons.module";
 import {SharedModule} from "../../shared/shared.module";
-import {IntegrationManagementComponent} from "./integration-management/integration-management.component";
 import {IntegrationChangeComponent} from "./integration-management/integration-change/integration-change.component";
 import {IntegrationDetailsComponent} from "./integration-management/integration-details/integration-details.component";
 import {CertificationComponent} from "./certification/certification.component";
 import {IntegrationImportComponent} from "./integration-management/integration-import/integration-import.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {ProgressmaskComponent} from "./integration-management/progressmask/progressmask.component";
-import { ReasonRejecComponent } from './reason-rejec/reason-rejec.component';
-import { RpDetailComponent } from './rp-detail/rp-detail.component';
+import { ReasonRejecComponent } from "./reason-rejec/reason-rejec.component";
+import { RpDetailComponent } from "./rp-detail/rp-detail.component";
 import {MemberService} from "./member.service";
 
 const userChildRoutes: Routes = [
