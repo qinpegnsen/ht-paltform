@@ -12,8 +12,8 @@
           <div class="row">
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
-              <div class="font14">未审核提现总额</div>
-              <p class="text-md m0">{{amountData.sumWithDraw | number: '1.2-2'}}</p>
+              <div class="font14">未审核提现总额（元）</div>
+              <p class="text-md m0">{{amountData?.sumWithDraw | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -30,8 +30,8 @@
           <div class="row">
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
-              <div class="font14">昨日提现总额</div>
-              <p class="text-md m0">{{amountData.sumYestodayDraw | number: '1.2-2'}}</p>
+              <div class="font14">昨日提现总额（元）</div>
+              <p class="text-md m0">{{amountData?.sumYestodayDraw | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calendar fa-3x tp-em"></em>
@@ -71,10 +71,10 @@
           <rzhDefaultSorter by="id">收款姓名</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="id">提现金额</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">提现金额（元）</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
-          <rzhDefaultSorter by="name">提现手续费</rzhDefaultSorter>
+          <rzhDefaultSorter by="name">提现手续费（元）</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
           <rzhDefaultSorter by="time">交易方式</rzhDefaultSorter>
@@ -94,8 +94,8 @@
       <tr *ngFor="let item of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
         <td>{{item.bacctName}}</td>
-        <td>￥ {{item.drawMoney | number:'1.2-2'}}</td>
-        <td>￥ {{item.brokerage | number:'1.2-2'}}</td>
+        <td>{{item.drawMoney | number:'1.2-2'}}</td>
+        <td>{{item.brokerage | number:'1.2-2'}}</td>
         <td>{{item.payWay | rzhState:'1017'}}</td>
         <td>{{item.state | rzhState:'2102'}}</td>
         <td>{{item.createTime }}</td>

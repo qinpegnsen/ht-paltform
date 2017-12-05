@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
-              <div class="font14">红包奖池余额</div>
+              <div class="font14">红包奖池余额（元）</div>
               <p class="text-md m0">{{balance | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
@@ -32,7 +32,7 @@
           <div class="row">
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
-              <div class="font14">历史总额</div>
+              <div class="font14">历史总额（元）</div>
               <p class="text-md m0">{{ income | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
@@ -52,26 +52,30 @@
 <div class="panel mb panel-default">
   <div class="table-title w100 h50 font18 thc ts statics-font">企业投资记录表</div>
   <div class="form-group mb0 ">
-    <div class="col-xs-5"></div>
-    <div class="col-xs-2 mt-lg">
-      <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业简称">
-    </div>
-    <div class="col-xs-2 mt-lg">
-      <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
-    </div>
-    <div class="col-xs-2 mt-lg">
-      <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
-    </div>
-    <div class="col-sm-1 pull-left text-center mt-lg">
+    <div class="pull-right text-center mt-lg mr6">
         <span class="ng-scope">
           <button type="button" title="搜索" id="toSearch" (click)="qeuryPushOrder(1)"
                   class="btn thc btn-thc bar-h3-btn mr ng-scope ">
           <em class="icon-magnifier fa-fw"></em>
           </button>
         </span>
+    </div>
+    <div class="col-xs-2 pull-right mt-lg mr60">
+      <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" (change)="test()"
+             [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+      <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+    </div>
+    <div class="col-xs-2 pull-right mt-lg">
+      <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
+    </div>
+    <div class="col-xs-2 pull-right mt-lg">
+      <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
+    </div>
+    <div class="col-xs-2 pull-right mt-lg">
+      <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业简称">
     </div>
   </div>
   <div class="panel-body">
@@ -92,7 +96,7 @@
           <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
-          <rzhDefaultSorter by="id">充值金额</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">充值金额（元）</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
@@ -105,7 +109,7 @@
         <td class="text-left">{{count.epSubname}}</td>
         <td class="text-left">{{count.epCode}}</td>
         <td class="text-left">{{count.storeCode}}</td>
-        <td>{{count.amount}}</td>
+        <td>{{count.amount |number:'1.2-2'}}</td>
         <td>{{count.createTime }}</td>
       </tr>
       </tbody>
@@ -139,8 +143,8 @@
     <div class="w98 m-auto h50 mt20">
       <!--搜索图标 start-->
       <span class="btn statistic-btn thc btn-thc btn-default m0" (click)="selectInfos()">
-    <i class="icon icon-magnifier"></i>
-  </span>
+        <i class="icon icon-magnifier"></i>
+      </span>
       <!--搜索图标 end-->
       <!--搜索条件 start-->
       <div class="pull-right">
@@ -164,7 +168,7 @@
               <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
             </select>
           </div>
-          <div *ngIf="showType.DAY" style="margin-right: 60px">
+          <div *ngIf="showType.DAY" class="mr60">
             <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" (change)="test()"
                    [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
             <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>

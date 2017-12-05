@@ -296,6 +296,16 @@ export class AddRedPackageComponent implements OnInit {
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
+    if(value==0){
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+    }
+    if(String(value).indexOf('.')>-1){
+      let index=String(value).indexOf('.');
+      let finalVal=String(value).slice(0,index+3);
+      setTimeout(()=>{
+        $(obj).val(finalVal);
+      },0)
+    };
     let amounV = $("tbody").find('.amount:not(.selected)');//找到除了当前以外的其他的对象
     for (let i = 0; i < amounV.length; i++) {
       if ($(amounV[i]).val() == value) {

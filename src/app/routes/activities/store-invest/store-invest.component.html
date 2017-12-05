@@ -22,7 +22,7 @@
           <input type="number" name="amout"  maxlength="50"  #expressCodeTem="ngModel" class="form-control input-sm num" required [(ngModel)]="amount" placeholder='请输入最多两位小数的数字类型' [pattern]="patterns.twodecimal"  (input)="checkVal(expressCodeTem.value)">
           <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
                      class="alert alert-danger">
-          请输入正确的金额
+            请填写最多带两位小数的数字
         </div>
         </dd>
       </dl>

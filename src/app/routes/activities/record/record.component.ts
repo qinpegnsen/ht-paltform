@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
+import {isNullOrUndefined} from "util";
 import {Page} from "../../../core/page/page";
-import {SubmitService} from "../../../core/forms/submit.service";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {zhCn} from "ngx-bootstrap/locale";
+import {defineLocale} from "ngx-bootstrap";
+import {ActivitiesService} from "../activities.service";
+defineLocale('cn', zhCn);
 
 @Component({
   selector: 'app-record',
@@ -11,31 +16,48 @@ import {SubmitService} from "../../../core/forms/submit.service";
 })
 export class RecordComponent implements OnInit {
 
-  public drawRecData:any;                      //红包中奖记录数据
+  public logType:any;                 //选择的红包流水类型
+  public phone:string='';             //会员手机号
+  public custName:string='';          //会员名称
+  public dateStr;                      //传查询的时间范围
+  public rpDeTailData:any;            //红包流水的数据
+  public bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private submit: SubmitService) { }
+
+  constructor(private activitiesService: ActivitiesService,
+              private tools: RzhtoolsService) {
+    this.bsConfig = Object.assign({}, {
+      locale: 'cn',
+      rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
+      containerClass: 'theme-blue'
+    });
+  }
 
   ngOnInit() {
-    this.qeuryAll(1)
+    this.queryRpCustAcctRecAdmin(1);
   }
 
   /**
-   * 红包中奖记录
+   * 查询红包明细（和后台一致）
+   * @param curPage
+   * @param event
    */
-  qeuryAll(curPage,event?: PageEvent){
-    let me = this, activePage = 1;
-    if (typeof event !== 'undefined') {
-      activePage = event.activePage;
-    } else if (!isUndefined(curPage)) {
-      activePage = curPage;
+  queryRpCustAcctRecAdmin(curPage,event?:PageEvent){
+    let activePage = 1;
+    if(typeof event !== "undefined") {
+      activePage =event.activePage
+    }else if(!isNullOrUndefined(curPage)){
+      activePage =curPage
     };
-    let url = "/rpCustAcctRec/queryRpCustAcctRecAdmin";
     let data={
-      curPage: activePage,
+      curPage:activePage,
       pageSize:10,
-      logType:'DRAW'
-    };
-    let result = this.submit.getData(url,data);
-    me.drawRecData = new Page(result);
+      logType:'DRAW',//抽奖、中奖记录
+      phone:this.phone,
+      custName:this.custName,
+      dateStr: this.dateStr?RzhtoolsService.dataFormat(this.dateStr[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.dateStr[1], 'yyyy/MM/dd'):'',
+    }
+    let url='/rpCustAcctRec/queryRpCustAcctRecAdmin';
+    this.rpDeTailData=new Page(this.activitiesService.queryRpCustAcctRecAdmin(url,data))
   }
 }

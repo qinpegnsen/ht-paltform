@@ -173,7 +173,7 @@ export class StaticsComponent implements OnInit {
         top:'1%',
       },
       legend: { //图例
-        data: ['领取红包金额','发放红包金额'],
+        data: ['发放红包金额','领取红包金额'],
         align: 'left',
         left:"center",
         top:"8%",
@@ -216,16 +216,16 @@ export class StaticsComponent implements OnInit {
       ],
       series: [
         {
-          name: '领取红包金额',
-          type: 'bar',
-          barWidth: '30%',
-          data: _this.use.yaxis
-        },
-        {
           name:'发放红包金额',
           type: 'bar',
           barWidth: '30%',
           data: _this.total.yaxis
+        },
+        {
+          name: '领取红包金额',
+          type: 'bar',
+          barWidth: '30%',
+          data: _this.use.yaxis
         }
       ]
     };

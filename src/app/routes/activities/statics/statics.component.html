@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
-              <div class="font14">今日发放红包总金额</div>
+              <div class="font14">今日发放红包总金额（元）</div>
               <p class="text-md m0" *ngIf="redPackStatic?.totalAmountToday!=null">{{redPackStatic?.totalAmountToday | number: '1.2-2'}}</p>
               <p class="text-md m0" *ngIf="redPackStatic?.totalAmountToday==null">0.00</p>
             </div>
@@ -38,7 +38,7 @@
           <div class="row">
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
-              <div class="font14">今日领取红包总金额</div>
+              <div class="font14">今日领取红包总金额（元）</div>
               <p class="text-md m0" *ngIf="redPackStatic?.useAmountToday!=null">{{redPackStatic?.useAmountToday | number: '1.2-2'}}</p>
               <p class="text-md m0" *ngIf="redPackStatic?.useAmountToday==null">0</p>
             </div>

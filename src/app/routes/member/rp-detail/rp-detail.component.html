@@ -68,7 +68,7 @@
           红包流水类型
         </th>
         <th class="w10 thc font text-center">
-          交易额
+          交易额（元）
         </th>
         <th class="w20 thc font text-center">
           创建时间
@@ -82,7 +82,7 @@
         <td class="text-center">{{item.custPhone}}</td>
         <td>{{item.epSubname}}</td>
         <td class="text-center">{{item.logType | rzhState :'2100'}}</td>
-        <td class="text-center">{{item.amount}}</td>
+        <td class="text-center">{{item.amount |number:'1.2-2'}}</td>
         <td class="text-center">{{item.createTime}}</td>
       </tr>
       </tbody>

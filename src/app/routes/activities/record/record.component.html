@@ -1,47 +1,91 @@
 <div class="content-heading mb-lg thc font">
   <span>红包中奖记录</span>
 </div>
+<!--搜索栏 start-->
 <div class="panel mb">
+  <div class="panel-body p ng-scope" ng-if="search">
+    <div class="col-md-12">
+      <div class="form-group col-md-2">
+        <div class="pl0">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员名称">
+        </div>
+      </div>
+      <div class="form-group mb0 col-md-2">
+        <div class="pl0">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 [(ngModel)]="phone"
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
+        </div>
+      </div>
+      <div class="place-time ml-xl clearfix mb">
+        <span class="_title">时间段：</span>
+        <div class="_picker">
+          <div class="input-group">
+            <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="dateStr" readonly>
+            <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" title="搜索" class="btn thc btn-thc ml align-top" (click)="queryRpCustAcctRecAdmin(1)">
+        <i class="icon-magnifier fa-fw"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<!--搜索栏 end-->
+
+<!--红包中奖记录 start-->
+<div class="panel mb panel-default">
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="drawRecData"
-           (pageChange)="qeuryAll(1,$event)">
+    <table class="table table-striped" #data="rzhDataTable" [rzhData]="rpDeTailData"
+           (pageChange)="queryRpCustAcctRecAdmin(1,$event)">
       <thead>
       <tr>
-        <th class="w5 text-center">
-          <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
+        <th class="w5 thc font">
+          序号
         </th>
-        <th class="w20 text-center">
-          <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+        <th class="w15 thc font">
+          会员名称
         </th>
-        <th class="w25 text-left">
-          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
+        <th class="w15 thc font text-center">
+          会员手机号
         </th>
-        <th class="w25 text-left">
-          <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
+        <th class="w25 thc font">
+          企业简称
         </th>
-        <th class="w25 text-center">
-          <rzhDefaultSorter by="picture">中奖时间</rzhDefaultSorter>
+        <th class="w10 thc font text-center">
+          红包流水类型
+        </th>
+        <th class="w10 thc font text-center">
+          交易额（元）
+        </th>
+        <th class="w20 thc font text-center">
+          创建时间
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
-        <td>{{x}}</td>
-        <td>{{count.amount}}</td>
-        <td class="text-left">{{count.epSubname }}</td>
-        <td class="text-left">{{count.remark }}</td>
-        <td>{{count.createTime }}</td>
+      <tr *ngFor="let item of data.data;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{item.custName}}</td>
+        <td class="text-center">{{item.custPhone}}</td>
+        <td>{{item.epSubname}}</td>
+        <td class="text-center">{{item.logType | rzhState :'2100'}}</td>
+        <td class="text-center">{{item.amount |number:'1.2-2'}}</td>
+        <td class="text-center">{{item.createTime}}</td>
       </tr>
       </tbody>
       <tfoot>
-      <tr>
-        <td colspan="7">
-          <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{drawRecData.genStartRow()}} 至 {{drawRecData.genEndRow()}} 条，共 {{drawRecData.totalRow}}
+      <tr class="text-center">
+        <td colspan="12">
+          <div class="col-md-5">
+            <div class="text-muted pull-left"><strong>第 {{rpDeTailData.genStartRow()}} 至
+              {{rpDeTailData.genEndRow()}} 条，共 {{rpDeTailData.totalRow}}
               条</strong></div>
           </div>
-          <div class="col-sm-7">
-            <div style="float: right">
+          <div class="col-md-7">
+            <div class="pull-right">
               <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
           </div>
@@ -51,3 +95,5 @@
     </table>
   </div>
 </div>
+<!--红包中奖记录 end-->
+

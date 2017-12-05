@@ -78,7 +78,7 @@
             <td>
               <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)"
                      #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
-                     [pattern]="patternService.special"/>
+                     [pattern]="patternService.threedecimal"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
                    class="alert alert-danger">
                 请填写最多带两位小数的数字
