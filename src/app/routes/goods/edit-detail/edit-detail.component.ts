@@ -210,14 +210,12 @@ export class EditDetailComponent implements OnInit {
 
 //添加物流模板
   addLogisticsModule() {
-    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-    window.open(preUrl + '/main/operation/freight-template/add-formoek?linkType=addArticle')
+    window.open('/main/operation/freight-template/add-formoek?linkType=addArticle')
   }
 
 //查看物流模板
   lookLogisticsModule() {
-    let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-    window.open(preUrl + '/main/operation/freight-template')
+    window.open('/main/operation/freight-template')
   }
 
   /**

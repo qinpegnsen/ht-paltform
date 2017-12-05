@@ -73,6 +73,24 @@ export class UnAuditComponent implements OnInit {
   }
 
   /**
+   *更改商品是否可用重消币
+   * @param type
+   * @param baseCode
+   * @param curPage
+   */
+  changeIsUseCoin(type, baseCode, curPage) {
+    let isUseCoin, requestData, requestUrl;
+    isUseCoin = type ? 'N' : 'Y';
+    requestUrl = '/goodsEdit/updateIsUseCoin';
+    requestData = {
+      goodsBaseCode: baseCode,
+      isUseCoin: isUseCoin
+    };
+    this.submit.putRequest(requestUrl, requestData);
+    this.queryDatas(curPage);
+  }
+
+  /**
    * 鼠标放在图片上时大图随之移动
    */
   showImg(event) {

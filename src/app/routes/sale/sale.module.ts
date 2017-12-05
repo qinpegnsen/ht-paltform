@@ -11,6 +11,8 @@ import {AfterDetailsComponent} from './after-details/after-details.component';
 import {AddproblemComponent} from './addproblem/addproblem.component';
 import {AfterService} from "./after.service";
 import { InspectGoodsComponent } from './inspect-goods/inspect-goods.component';
+import {OrderDetailComponent} from "./order-detail/order-detail.component";
+import {OrdersService} from "../orders/orders/orders.service";
 const problemcomplem: Routes = [
   {path: 'addproblem', component: AddproblemComponent},
 ]
@@ -18,18 +20,23 @@ const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
   {path: 'refund-control', component: RefundControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
+    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'refund-verify', component: RefundVerifyComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
+    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'return-control', component: ReturnControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
+    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'return-verify', component: ReturnVerifyComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
+    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'inspect-goods', component: InspectGoodsComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
+    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 
@@ -47,6 +54,7 @@ const routes: Routes = [
     ReturnVerifyComponent,
     MsgComponent,
     AfterDetailsComponent,
+    OrderDetailComponent,
     AddproblemComponent,
     InspectGoodsComponent],
   providers: [
@@ -56,7 +64,8 @@ const routes: Routes = [
     ReturnVerifyComponent,
     MsgComponent,
     AddproblemComponent,
-    AfterService
+    AfterService,
+    OrdersService
   ]
 })
 export class SaleModule {

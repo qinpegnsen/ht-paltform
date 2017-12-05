@@ -27,14 +27,9 @@ import {DataTable} from "../../shared/directives/ng2-datatable/DataTable";
 const routes: Routes = [
   {path: '', redirectTo: 'unAudit'},
   {
-    path: 'unAudit', children: [
-    {
-      path: '', component: UnAuditComponent, children: [
-      {path: 'detail', component: AuditGoodsComponent},
-      {path: 'audit', component: AuditGoodsComponent}
-    ]
-    },
-  ]
+    path: 'unAudit', component: UnAuditComponent, children: [
+    {path: 'detail', component: AuditGoodsComponent},
+    {path: 'audit', component: AuditGoodsComponent}]
   },
   {
     path: 'publish', component: PublishComponent, children: [
@@ -45,14 +40,10 @@ const routes: Routes = [
   ]
   },
   {
-    path: 'manage', children: [
-    {
-      path: '', component: ManageComponent, children: [
-      {path: 'edit', component: EditDetailComponent},
-      {path: 'detail', component: AuditGoodsComponent},
-      {path: 'audit', component: AuditGoodsComponent}
-    ]
-    },
+    path: 'manage', component: ManageComponent, children: [
+    {path: 'edit', component: EditDetailComponent},
+    {path: 'detail', component: AuditGoodsComponent},
+    {path: 'audit', component: AuditGoodsComponent}
   ]
   },
   {path: 'wholesale', component: WholesaleComponent},

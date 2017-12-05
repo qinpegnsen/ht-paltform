@@ -1,10 +1,11 @@
-.szh-order-info{
+.szh-order-info {
   font-size: 0;
-  .user-note{
+  .user-note {
     max-height: 100px;
     overflow-y: auto;
   }
 }
+
 .szh-order-details {
   width: 260px;
   padding-left: 0;
@@ -17,15 +18,16 @@
   font-size: 14px;
   background-color: #f5f5f5;
 }
-.szh-order-details .content{
+
+.szh-order-details .content {
   padding: 15px 10px;
-  .text-tip{
-    line-height:20px;
+  .text-tip {
+    line-height: 20px;
     margin: 0;
     padding: 5px 10px;
     color: #333;
   }
-  .text-area{
+  .text-area {
     max-width: 98%;
     min-width: 96%;
     margin: auto;
@@ -59,13 +61,23 @@
   word-spacing: normal;
   font-size: 13px;
 }
-.szh-order-details .pay-info{
-  dt{ width: 46%;}
-  dd{ width: 52%;}
+
+.szh-order-details .pay-info {
+  dt {
+    width: 46%;
+  }
+  dd {
+    width: 52%;
+  }
 }
-.szh-order-details .take-info{
-  dt{ width: 35%;}
-  dd{ width: 63%;}
+
+.szh-order-details .take-info {
+  dt {
+    width: 35%;
+  }
+  dd {
+    width: 63%;
+  }
 }
 
 .szh-order-details .content dl.line {
@@ -117,7 +129,7 @@
   }
 }
 
-@media screen and (max-width: 1500px){
+@media screen and (max-width: 1500px) {
   .szh-order-details {
     width: 33.333%;
     padding-left: 0;
@@ -125,18 +137,19 @@
     display: inline-block;
     vertical-align: top;
   }
-  .szh-order-condition{
+  .szh-order-condition {
     position: initial;
     width: 100%;
     min-height: 100px;
     max-height: 300px;
     background-color: #fff;
-    .order-track{
+    .order-track {
       position: initial;
       max-height: 258px;
     }
   }
 }
+
 .rate-of-progress {
   min-width: 880px;
   max-width: 1400px;
@@ -219,7 +232,7 @@
   line-height: 20px;
 }
 
-.order-track{
+.order-track {
   .timeline > li > .timeline-panel, .timeline-alt > li > .timeline-panel {
     margin-left: 45px;
   }
@@ -237,22 +250,27 @@
     text-align: center;
     background-color: #d8d8d8;
   }
-  .logis-time{
+  .logis-time {
     display: inline-block;
     text-align: right;
     min-width: 170px;
     position: absolute;
     left: 0;
   }
-  .every-line{
+  .every-line {
     position: relative;
     padding-left: 180px;
   }
 }
 
-.coin-number{
+.coin-number {
   position: absolute;
   right: 100%;
   width: 120px;
   background-color: #fff;
+}
+
+.remark {
+  max-width: 100%;
+  word-wrap: break-word;
 }
