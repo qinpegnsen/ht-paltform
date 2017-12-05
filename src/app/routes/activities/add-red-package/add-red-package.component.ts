@@ -34,10 +34,10 @@ export class AddRedPackageComponent implements OnInit {
   public minDate: Date = new Date();          //默认最小的日期
   public totalNum: string = '';               //红包的总数
   public siteNum: string = '';                //已经设置的红包总数
-  public NoSiteNum: string = '';              //未经设置的红包总数
+  public NoSiteNum: any;              //未经设置的红包总数
   public totalAmount: string = '';            //红包的总额
   public siteAmount: string = '';              //已经设置的红包总额
-  public noUseAmount: string = '';            //未使用的红包总额
+  public noUseAmount: any;            //未使用的红包总额
   public sumOfNumArray: string;               //红包数量累计的总数
   public sumOfAmountArray: string = '0';          //红包面额累计的总数
   public redPackData: any;                       //是否显示未生效的红包数据
@@ -103,7 +103,7 @@ export class AddRedPackageComponent implements OnInit {
     let result = this.submit.getData(url, data);
     if (result) {
       this.totalAmount = result.balance;
-      this.noUseAmount = this.totalAmount;
+      this.noUseAmount = Number(this.totalAmount);
     }
 
   }
@@ -175,7 +175,7 @@ export class AddRedPackageComponent implements OnInit {
     let url = '/rpSetting/countRpSettingNum';
     let data = {};
     this.totalNum = this.settingNumber = this.service.getSettingNum(url, data);
-    this.NoSiteNum = this.totalNum;
+    this.NoSiteNum = Number(this.totalNum);
   }
 
   /**
@@ -248,9 +248,9 @@ export class AddRedPackageComponent implements OnInit {
    */
   countNumAndAmout() {
     this.siteAmount = this.getRedPacketAmount();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
-    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+    this.noUseAmount = Number(Number(this.totalAmount) - Number(this.siteAmount) + '');
     this.siteNum = this.getRedPacketNum();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
-    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
+    this.NoSiteNum = Number(Number(this.totalNum) - Number(this.siteNum) + '');
   }
 
   /**

@@ -51,13 +51,13 @@
   <div class="panel-body">
     <ul class="order-guide list-unstyled clearfix bb">
       <li class="pull-left thc" [class.font]="curState=='CR'" [class.bb]="curState=='CR'"
-          (click)="qeuryAll('CR')">待审核
+          (click)="qeuryAll('CR',1)">待审核
       </li>
       <li class="pull-left thc" [class.font]="curState=='DEAL'" [class.bb]="curState=='DEAL'"
-          (click)="qeuryAll('DEAL')">审核中
+          (click)="qeuryAll('DEAL',1)">审核中
       </li>
       <li class="pull-left thc" [class.font]="curState=='DONE'" [class.bb]="curState=='DONE'"
-          (click)="qeuryAll('DONE')">审核通过
+          (click)="qeuryAll('DONE',1)">审核通过
       </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="auditListData"

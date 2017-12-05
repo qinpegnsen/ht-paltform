@@ -15,10 +15,10 @@
   <div class="panel-body">
     <ul class="order-guide list-unstyled clearfix bb">
       <li class="pull-left thc" [class.font]="isUse=='Y'" [class.bb]="isUse=='Y'"
-          (click)="qeuryAll('Y')">已生效
+          (click)="qeuryAll('Y',1)">已生效
       </li>
       <li class="pull-left thc" [class.font]="isUse=='N'" [class.bb]="isUse=='N'"
-          (click)="qeuryAll('N')">未生效
+          (click)="qeuryAll('N',1)">未生效
       </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
