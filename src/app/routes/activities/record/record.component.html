@@ -1,7 +1,7 @@
 <div class="content-heading mb-lg thc font">
   <span>红包中奖记录</span>
 </div>
-<div class="order panel mb">
+<div class="panel mb">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="drawRecData"
            (pageChange)="qeuryAll(1,$event)">

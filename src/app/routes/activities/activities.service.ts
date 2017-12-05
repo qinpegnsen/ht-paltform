@@ -81,6 +81,56 @@ export class ActivitiesService {
   }
 
   /**
+   *查询提现审核
+   */
+  public queryWithDrawAmount(url,data) {
+    let result;
+    this.ajax.get({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        if(res.success){
+          result=res.data;
+        }else{
+          result=res.info;
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+  /**
+   *提现状态更改为处理中
+   */
+  public updateStateTODeal(url,data) {
+    let result;
+    this.ajax.post({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        if(res.success){
+          result=res.data;
+          AppComponent.rzhAlt("success", res.info);
+        }else{
+          result=res.info;
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+
+  /**
    * load 当前企业的信息
    */
   public loadRpStoreData(url,data) {

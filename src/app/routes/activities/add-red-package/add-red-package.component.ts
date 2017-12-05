@@ -102,9 +102,9 @@ export class AddRedPackageComponent implements OnInit {
     let url = "/rpAccount/loadRpAccount";
     let data = {};
     let result = this.submit.getData(url, data);
-    if(result){
-      this.totalAmount=result.balance;
-      this.noUseAmount=this.totalAmount;
+    if (result) {
+      this.totalAmount = result.balance;
+      this.noUseAmount = this.totalAmount;
     }
 
   }
@@ -119,16 +119,17 @@ export class AddRedPackageComponent implements OnInit {
       isUsed: isUsed,
     };
     let result = this.submit.getData(url, data);
-    if(result){
+    if (result) {
       if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
         this.moduleList = this.reSiteTem(result.voList);
         setTimeout(() => {
           this.changeNumber();//获取红包的概率
+          this.countNumAndAmout();//统计剩余的数量和金额
           this.isTip();
         }, 0)
       }
-    }else{
-      this.moduleList=[];
+    } else {
+      this.moduleList = [];
     }
 
   }
@@ -150,19 +151,19 @@ export class AddRedPackageComponent implements OnInit {
   /**
    * 重新设置模板的数据，否则报非法字符
    */
-  reSiteTem(data){
-    let reSiteTemArr=[];
-    for(let i=0;i<data.length;i++){
-      let obj={
-        amount:'',
-        level:'',
-        num:'',
-        probability:'',
+  reSiteTem(data) {
+    let reSiteTemArr = [];
+    for (let i = 0; i < data.length; i++) {
+      let obj = {
+        amount: '',
+        level: '',
+        num: '',
+        probability: '',
       };
-      obj.amount=data[i].amount;
-      obj.level=data[i].level;
-      obj.num=data[i].num;
-      obj.probability='1';//随便写的，只要为true就可以，之后重组数据，会删掉，这个这个概率之后也会重新计算
+      obj.amount = data[i].amount;
+      obj.level = data[i].level;
+      obj.num = data[i].num;
+      obj.probability = '1';//随便写的，只要为true就可以，之后重组数据，会删掉，这个这个概率之后也会重新计算
       reSiteTemArr.push(obj);
     }
     return reSiteTemArr;
@@ -175,7 +176,7 @@ export class AddRedPackageComponent implements OnInit {
     let url = '/rpSetting/countRpSettingNum';
     let data = {};
     this.totalNum = this.settingNumber = this.service.getSettingNum(url, data);
-    this.NoSiteNum=this.totalNum;
+    this.NoSiteNum = this.totalNum;
   }
 
   /**
@@ -198,10 +199,7 @@ export class AddRedPackageComponent implements OnInit {
   getProbability(item, obj) {
     let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
     $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
-    this.siteNum = this.getRedPacketNum();
-    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
-    this.siteAmount = this.getRedPacketAmount();
-    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+    this.countNumAndAmout();
     this.isTip();
   }
 
@@ -214,7 +212,7 @@ export class AddRedPackageComponent implements OnInit {
      * 判断总的数量是否超过设定的红包数量
      */
     setTimeout(() => {
-      this.getRedPacketNum()//获取添加规则前红包的累计数量
+      this.getRedPacketNum();//获取添加规则前红包的累计数量
       /**
        * 进行判断是否追加，如果添加规则前已经超出总数量和总面额就不能添加
        */
@@ -240,13 +238,20 @@ export class AddRedPackageComponent implements OnInit {
           probability: Number((1 / Number(this.totalNum)) * 100).toFixed(2) + '%',
         });
         setTimeout(() => {//等页面渲染完毕之后再去加载
-          this.siteAmount = this.getRedPacketAmount()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
-          this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
-          this.siteNum = this.getRedPacketNum()//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
-          this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
+          this.countNumAndAmout();
         })
       }
     }, 0)
+  }
+
+  /**
+   * 统计剩余的数量和金额
+   */
+  countNumAndAmout() {
+    this.siteAmount = this.getRedPacketAmount();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
+    this.siteNum = this.getRedPacketNum();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
   }
 
   /**
@@ -274,7 +279,21 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
-   * 面额改变的时候再次统计现在的总面额
+   * 获取红包的累计的面额
+   */
+  getRedPacketAmount() {
+    let amountArray = $("tbody tr");
+    let newAmountArray = [];//新的数组，用老保存所有红包的面额
+    for (var i = 0; i < amountArray.length; i++) {
+      newAmountArray.push($(amountArray[i]).find('.amount').val() * $(amountArray[i]).find('.redPacketNumber').val())
+    }
+    ;
+    this.sumOfAmountArray = newAmountArray.reduce(this.sum, 0);
+    return this.sumOfAmountArray;
+  }
+
+  /**
+   * 面额改变的时候再次统计现在的总面额,而且面额不能相同
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
@@ -292,25 +311,8 @@ export class AddRedPackageComponent implements OnInit {
     $(obj).removeClass('selected');
     $(".mySubmit").removeAttr('disabled');//可以提交
     $(".mySubmit").removeProp('disabled');//可以提交
-    this.siteAmount = this.getRedPacketAmount();
-    this.noUseAmount = Number(this.totalAmount) - Number(this.siteAmount) + '';
-    this.siteNum = this.getRedPacketNum();
-    this.NoSiteNum = Number(this.totalNum) - Number(this.siteNum) + '';
+    this.countNumAndAmout();
     this.isTip();
-  }
-
-  /**
-   * 获取红包的累计的面额
-   */
-  getRedPacketAmount() {
-    let amountArray = $("tbody tr");
-    let newAmountArray = [];//新的数组，用老保存所有红包的面额
-    for (var i = 0; i < amountArray.length; i++) {
-      newAmountArray.push($(amountArray[i]).find('.amount').val() * $(amountArray[i]).find('.redPacketNumber').val())
-    }
-    ;
-    this.sumOfAmountArray = newAmountArray.reduce(this.sum, 0);
-    return this.sumOfAmountArray;
   }
 
   /**
@@ -330,9 +332,10 @@ export class AddRedPackageComponent implements OnInit {
       function () {  //点击‘确认’时执行
         swal.close(); //关闭弹框
         _this.moduleList.splice(i, 1);
-        setTimeout(()=>{
+        setTimeout(() => {
           _this.isTip();
-        },0)
+          _this.countNumAndAmout();
+        }, 0)
       });
   }
 
@@ -340,7 +343,7 @@ export class AddRedPackageComponent implements OnInit {
    * 关闭右侧滑动页面
    */
   cancel() {
-    let _this = this
+    let _this = this;
     _this.location.back();
   }
 
@@ -370,16 +373,16 @@ export class AddRedPackageComponent implements OnInit {
    * 增加红包规则
    */
   addRedPackRules() {
-    this.getRedPacketAmount()//获取添加规则后的总面额
-    this.getRedPacketNum()//获取添加规则后的总数量
+    this.getRedPacketAmount();//获取添加规则后的总面额
+    this.getRedPacketNum();//获取添加规则后的总数量
     if (Number(this.sumOfNumArray) > Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '已超过红包设置的总数量');
     } else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '未达到红包设置的总数量');
     } else {
-      this.formatSelDate()//获取红包设置的时间
+      this.formatSelDate();//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
-      this.refactorData()//重构数据
+      this.refactorData();//重构数据
       let url = '/rpSetting/addRpSettingBatch';
       let json = {
         rpSettingStrVOList: this.moduleListCopy

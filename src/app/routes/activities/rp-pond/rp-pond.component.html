@@ -4,7 +4,7 @@
                (click)="showAlert()"></app-buttons>
 </div>
 <!--方块统计 start-->
-<div class=" panel-default">
+<div class="panel-default">
   <!--红包统计 start-->
   <div class="row r3">
     <div class="col-md-3">
@@ -49,7 +49,7 @@
 <!--方块统计 end-->
 
 <!--企业投资记录表 start-->
-<div class="order panel mb panel-default">
+<div class="panel mb panel-default">
   <div class="table-title w100 h50 font18 thc ts statics-font">企业投资记录表</div>
   <div class="form-group mb0 ">
     <div class="col-xs-5"></div>
@@ -194,8 +194,10 @@
     <!--点击率占比统计图 end-->
   </div>
 </div>
+<!--企业投资弹窗 start-->
 <app-store-invest [flag]="showStroeInvest"
                   (deliverGoods)="getDeliverOrderData()"></app-store-invest>
+<!--企业投资弹窗 end-->
 
 
 

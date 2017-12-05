@@ -40,7 +40,7 @@ export class RpPondComponent implements OnInit {
   public legendDataClick: any;                 //企业点击图例数据
   public seriesData: any;                      //企业占比系列数据
   public seriesDataClick: any;                 //企业点击系列数据
-  public showStroeInvest: boolean = false;      //企业点击系列数据
+  public showStroeInvest: boolean = false;     //企业投资的弹窗
   public epSubname:any;               //企业的简称
   public epCode:any;                   //企业的编码
   public storeCode:any;                //店铺的编码
@@ -166,7 +166,7 @@ export class RpPondComponent implements OnInit {
   }
 
   /**
-   * 发货回调函数
+   * 弹窗企业投资回调函数
    * @param data
    */
   getDeliverOrderData() {

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined} from "util";
-import {SubmitService} from "../../../core/forms/submit.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {ActivitiesService} from "../activities.service";
 import {AppComponent} from "../../../app.component";
@@ -34,7 +33,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
       let url='/rpStore/queryAll';
       let data={};
       this.rpStoreList = this.service.queryAllRpStore(url,data);   //红包企业列表
-      this.amount = null;      //每次出来把上次填的订单号清除，快递公司就算了，留着吧
+      this.amount = null;      //每次出来把上次填的金额清除
     }
   }
 
@@ -43,8 +42,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   }
 
   constructor(private service: ActivitiesService,
-              public patterns: PatternService,
-              public submit: SubmitService) {
+              public patterns: PatternService) {
   }
 
   ngOnInit() {

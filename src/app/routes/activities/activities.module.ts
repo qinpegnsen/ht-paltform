@@ -13,6 +13,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {ActivitiesService} from "./activities.service";
 import {StoreInvestComponent} from "./store-invest/store-invest.component";
 import { AuditComponent } from './audit/audit.component';
+import { AuditAlertComponent } from './audit-alert/audit-alert.component';
 
 const storeRoutes: Routes = [
   {path: 'storePage', component: StoreRightPageComponent},
@@ -38,7 +39,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent,StoreInvestComponent, AuditComponent],
+  declarations: [SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent,StoreInvestComponent, AuditComponent, AuditAlertComponent],
   providers:[ActivitiesService]
 })
 export class ActivitiesModule { }
