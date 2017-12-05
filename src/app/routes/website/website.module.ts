@@ -9,6 +9,7 @@ import {AdddataComponent} from "./adddata/adddata.component";
 import { RightpageComponent } from './rightpage/rightpage.component';
 import {DataDictionaryComponentService} from "./data-dictionary/data-dictionary-component.service";
 import {MeasureService} from "./measure/measure.service";
+import {FileUploadModule} from "ng2-file-upload";
 
 const appChildRoutes: Routes = [
   {path: 'adddata', component: AdddataComponent},
@@ -16,7 +17,6 @@ const appChildRoutes: Routes = [
 ]
 const routes: Routes = [
   {path:'',redirectTo:'areas'},
-  {path: 'adddata', component: AdddataComponent},
   {path: 'areas', component: AreasComponent,children:appChildRoutes},
   {path: 'dataDictionary', component:DataDictionaryComponent,children:appChildRoutes},
   {path: 'measure', component: MeasureComponent,children:appChildRoutes}
@@ -26,7 +26,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    FileUploadModule
   ],
   declarations: [AreasComponent, DataDictionaryComponent, MeasureComponent, AdddataComponent, RightpageComponent],
   providers:[DataDictionaryComponent,DataDictionaryComponentService,MeasureService,MeasureComponent]

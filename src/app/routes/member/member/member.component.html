@@ -59,11 +59,17 @@
       <th class="w10 thc font text-left">
         <span class="ml19">会员名称</span>
       </th>
-      <th class="w10 thc font">
+      <th class="w5 thc font">
         真实姓名
       </th>
       <th class="w5 thc font">
         性别
+      </th>
+      <th class="w5 thc font">
+        红包余额
+      </th>
+      <th class="w5 thc font">
+        红包总额
       </th>
       <th class="w5 thc font">
         重消币
@@ -74,7 +80,7 @@
       <th class="w10 thc font">
         生日
       </th>
-      <th class="w10 thc font">
+      <th class="w5 thc font">
         手机号
       </th>
       <th class="w5 thc font">
@@ -109,7 +115,13 @@
         <td>
           {{member.custSex | rzhState:'1002' }}
         </td>
-        <td>{{member.coin | number: '1.2-2'}}</td>
+        <td>
+          {{member.rpCustAcctBalance | decimalTwo }}
+        </td>
+        <td>
+          {{member.rpCustAcctIncome | decimalTwo }}
+        </td>
+        <td>{{member.coin | decimalTwo}}</td>
         <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>

@@ -1,0 +1,53 @@
+<div class="content-heading mb-lg thc font">
+  <span>红包中奖记录</span>
+</div>
+<div class="panel mb">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="drawRecData"
+           (pageChange)="qeuryAll(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+        </th>
+        <th class="w25 text-left">
+          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
+        </th>
+        <th class="w25 text-left">
+          <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
+        </th>
+        <th class="w25 text-center">
+          <rzhDefaultSorter by="picture">中奖时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+        <td>{{x}}</td>
+        <td>{{count.amount}}</td>
+        <td class="text-left">{{count.epSubname }}</td>
+        <td class="text-left">{{count.remark }}</td>
+        <td>{{count.createTime }}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="7">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{drawRecData.genStartRow()}} 至 {{drawRecData.genEndRow()}} 条，共 {{drawRecData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

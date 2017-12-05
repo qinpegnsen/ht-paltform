@@ -1,0 +1,72 @@
+<div class="content-heading mb-lg thc font">
+  <span>红包规则</span>
+  <app-buttons class="pull-right" [config]="redPacketRules" routerLink="../addRedPack"></app-buttons>
+</div>
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>已生效规则为当前系统正在使用的红包规则</li>
+    <li>已生效规则页面只会显示最近生效的那一批次规则</li>
+    <li>未生效规则页面只会显示一批次设置的规则，如果多次设置将会进行覆盖</li>
+    <li>未生效规则在指定时间生效后，会自动转换为已生效规则</li>
+  </ul>
+</div>
+<div class="panel mb">
+  <div class="panel-body">
+    <ul class="order-guide list-unstyled clearfix bb">
+      <li class="pull-left thc" [class.font]="isUse=='Y'" [class.bb]="isUse=='Y'"
+          (click)="qeuryAll('Y')">已生效
+      </li>
+      <li class="pull-left thc" [class.font]="isUse=='N'" [class.bb]="isUse=='N'"
+          (click)="qeuryAll('N')">未生效
+      </li>
+    </ul>
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
+           (pageChange)="qeuryAll(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="id">面额</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="time">是否启用</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="picture">生效时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+        <td>{{count.amount}}</td>
+        <td>{{count.num}}</td>
+        <td>{{count.level}}</td>
+        <td>{{count.isUsed | rzhState:'1001' }}</td>
+        <td>{{count.effectiveTime }}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共
+              {{redPackData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-5">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

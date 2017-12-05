@@ -1,4 +1,4 @@
-import {Component, OnInit,OnChanges, Injector, Input, SimpleChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, Injector, Input, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 declare var $: any;
 

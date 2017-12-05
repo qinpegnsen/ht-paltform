@@ -1,0 +1,138 @@
+<div class="content-heading mb-lg thc font">
+  <span>设置红包规则</span>
+  <app-buttons class="pull-right" [config]="addTemplate" (click)="addUsedTem()"></app-buttons>
+</div>
+<!--操作提示 start-->
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>红包总金额不能超过{{totalAmount}}元</li>
+    <li>红包生效的时间默认是第二天的0时0分0秒</li>
+    <li>为简化操作，默认把当前未生效的规则作为模板导入使用</li>
+    <li>如果想导入已生效的数据作为模板，可以点击导入已生效规则</li>
+  </ul>
+</div>
+<!--操作提示 end-->
+<div class="panel mb w100 search">
+  <div class="search-group-own ml-xl m10">
+    <span class="search-title font12">红包总金额 （元）：</span>
+    <div class="search-main lineHeight36">{{totalAmount |number :'1.2-2'}}</div>
+  </div>
+  <div class="search-group-own ml-xl m10" *ngIf="noUseAmount>=0">
+    <span class="search-title font12">可设置金额（元）：</span>
+    <div class="search-main lineHeight36">
+      {{noUseAmount |number :'1.2-2'}}
+    </div>
+  </div>
+  <div class="search-group-own ml-xl m10">
+    <span class="search-title font12">红包总数量：</span>
+    <div class="search-main lineHeight36">
+      {{totalNum}}
+    </div>
+  </div>
+  <div class="search-group-own ml-xl m10" *ngIf="NoSiteNum>=0">
+    <span class="search-title font12">可设置数量：</span>
+    <div class="search-main lineHeight36">
+      {{NoSiteNum}}
+    </div>
+  </div>
+  <div class="search-group ml-xl m10">
+    <span class="search-title font12">生效时间：</span>
+    <div class="search-main">
+      <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker #dp="bsDatepicker"
+             [bsConfig]="bsConfig" [minDate]="minDate">
+    </div>
+  </div>
+</div>
+
+<div class="order panel mb">
+  <div class="panel-body">
+    <form class="form-validate form-horizontal" style="height: 100%" #redPackerForm="ngForm"
+          (ngSubmit)="addRedPackRules()">
+      <fieldset>
+        <!--新增规则列表 start-->
+        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+               (pageChange)="qeuryAll(1,$event)">
+          <thead>
+          <tr>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="id">面额（元）</rzhDefaultSorter>
+            </th>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="id">数量</rzhDefaultSorter>
+            </th>
+
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="name">等级</rzhDefaultSorter>
+            </th>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="time">概率</rzhDefaultSorter>
+            </th>
+            <th class="w20 text-center">
+              <rzhDefaultSorter by="picture">操作</rzhDefaultSorter>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of moduleList;let i = index" class="text-center">
+            <td>
+              <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)"
+                     #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
+                     [pattern]="patternService.special"/>
+              <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
+                   class="alert alert-danger">
+                请填写最多带两位小数的数字
+              </div>
+            </td>
+            <td>
+              <input class="text _price num form-control redPacketNumber" #pieceNumber="ngModel" [(ngModel)]="item.num"
+                     (keyup)="getProbability(item,$event.target)" name="num{{i}}" required
+                     [pattern]="patternService.integer"/>
+              <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
+                   class="alert alert-danger">
+                请填写正整数
+              </div>
+            </td>
+            <td>
+              <input class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}"
+                     #pieceLevel="ngModel" [pattern]="patternService.integer" required/>
+              <div [hidden]="pieceLevel.valid || pieceLevel.pristine"
+                   class="alert alert-danger">
+                请填写正整数
+              </div>
+            </td>
+            <td>
+              <div class="probability">{{item.probability}}</div>
+            </td>
+            <td>
+              <app-buttons [config]="deletebutton" (click)="delete(i)"></app-buttons>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <td colspan="5" class="text-center position-relative">
+            <span class="btn-sm mt14 text-center addMask"></span>
+            <span class="btn btn-default btn-sm mt14 text-center add" (click)="add()">
+              <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;设置红包规则</span>
+          </td>
+          </tfoot>
+        </table>
+        <!--新增规则列表 end-->
+      </fieldset>
+      <fieldset>
+        <div class="pull-right form-group special mr0 ml">
+          <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+          <button class="ml btn btn-info pull-left thc bg b mySubmit" type="submit"
+                  [disabled]="!redPackerForm.form.valid">提交信息
+          </button>
+        </div>
+        <div class="search-group ml-xl mb pull-right mr">
+          <span class="font14 lineHeight33">红包总金额 （元）：</span>
+          <span class="font18 lineHeight33 main-red ">
+            {{sumOfAmountArray |number :'1.2-2'}}
+          </span>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

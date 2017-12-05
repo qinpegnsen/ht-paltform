@@ -23,6 +23,7 @@ export class PatternService {
   public tplCode:string;//只能输入英文和数字的(用于添加APP首页模板的模板编码)
   public integer:string;//正整数
   public threedecimal :string;//三位小数
+  public special :string;//非零开头的最多带两位小数的数字
   public express:string;//快递单号，有的是数字和字母的组合 如圆通快速
   public login:any; //除特殊字符
   public icCard:any;
@@ -46,7 +47,8 @@ export class PatternService {
     this.integer = '^[0-9]*[1-9][0-9]*$'; //只能正整数
     this.threedecimal = '^[0-9]+(.[0-9]{1,3})?$'; //只能正整数
     this.express = '^[A-Za-z0-9]+$';　　//由数字和26个英文字母组成的字符串
-    this.login='^[\u4E00-\u9FA5A-Za-z0-9]+$' //除特殊字符
+    this.special = '^([1-9][0-9]*)+(.[0-9]{1,2})?$'; //非零开头的最多带两位小数的数字
+    this.login='^[\u4E00-\u9FA5A-Za-z0-9]+$';//除特殊字符
     this.icCard= '^[0-9]{15,32}$'; //银行卡正则（15~32位）
   }
 

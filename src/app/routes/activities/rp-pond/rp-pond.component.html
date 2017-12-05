@@ -1,0 +1,203 @@
+<div class="content-heading mb-lg thc font">
+  <span>红包奖池</span>
+  <app-buttons class="pull-right" [config]="storeInvest"
+               (click)="showAlert()"></app-buttons>
+</div>
+<!--方块统计 start-->
+<div class="panel-default">
+  <!--红包统计 start-->
+  <div class="row r3">
+    <div class="col-md-3">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9">
+              <!--<div class=" font14 f-bold">发放金额（元）</div>-->
+              <div class="font14">红包奖池余额</div>
+              <p class="text-md m0">{{balance | decimalTwo}}</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-shopping-cart fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+        <!-- END panel-->
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- START panel-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-9 ">
+              <!--<div class="font14 f-bold">领取金额（元）</div>-->
+              <div class="font14">历史总额</div>
+              <p class="text-md m0">{{ income | decimalTwo}}</p>
+            </div>
+            <div class="col-xs-3 text-right">
+              <em class="fa fa-calendar fa-3x tp-em"></em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+  </div>
+  <!--红包统计 end-->
+</div>
+<!--方块统计 end-->
+
+<!--企业投资记录表 start-->
+<div class="panel mb panel-default">
+  <div class="table-title w100 h50 font18 thc ts statics-font">企业投资记录表</div>
+  <div class="form-group mb0 ">
+    <div class="col-xs-5"></div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业简称">
+    </div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
+    </div>
+    <div class="col-xs-2 mt-lg">
+      <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
+    </div>
+    <div class="col-sm-1 pull-left text-center mt-lg">
+        <span class="ng-scope">
+          <button type="button" title="搜索" id="toSearch" (click)="qeuryPushOrder(1)"
+                  class="btn thc btn-thc bar-h3-btn mr ng-scope ">
+          <em class="icon-magnifier fa-fw"></em>
+          </button>
+        </span>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
+           (pageChange)="qeuryPushOrder(1,$event)">
+      <thead>
+      <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-left">
+          <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="id">充值金额</rzhDefaultSorter>
+        </th>
+        <th class="w20 text-center">
+          <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+        <td>{{x+1}}</td>
+        <td class="text-left">{{count.epSubname}}</td>
+        <td class="text-left">{{count.epCode}}</td>
+        <td class="text-left">{{count.storeCode}}</td>
+        <td>{{count.amount}}</td>
+        <td>{{count.createTime }}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="7">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共
+              {{redPackData.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<!--企业投资记录表 end-->
+
+<div class="order panel mb panel-default">
+  <div class="table-title w100 h50 font18 thc ts statics-font">
+    <div>投资和点击率占比统计图</div>
+  </div>
+  <!--搜索 start-->
+  <div class="mt20">
+    <div class="w98 m-auto h50 mt20">
+      <!--搜索图标 start-->
+      <span class="btn statistic-btn thc btn-thc btn-default m0" (click)="selectInfos()">
+    <i class="icon icon-magnifier"></i>
+  </span>
+      <!--搜索图标 end-->
+      <!--搜索条件 start-->
+      <div class="pull-right">
+        <div class="col-xs-3 form-group" style="width: 400px">
+          <div *ngIf="showType.MONTH">
+            <select [(ngModel)]="select.year" class="pull-left w43 form-control d-play" style="margin-right: 20px">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month" class="w43 form-control">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+          <div *ngIf="showType.WEEK">
+            <select [(ngModel)]="select.year" class="form-control w22 pull-left mr5">
+              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.month" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">
+              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+            </select>
+            <select [(ngModel)]="select.week" class="form-control w53">
+              <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
+            </select>
+          </div>
+          <div *ngIf="showType.DAY" style="margin-right: 60px">
+            <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" (change)="test()"
+                   [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+            <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+          </div>
+        </div>
+      </div>
+      <!--搜索条件 end-->
+      <!--统计时间类型 start-->
+      <select class="sel form-control pull-right" name="queryType"
+              [(ngModel)]="queryType" (change)="search()">
+        <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
+      </select>
+      <!--统计时间类型 end-->
+    </div>
+  </div>
+  <!--搜索 end-->
+  <div class="panel m-auto clearfix">
+    <!--投资占比统计图 start-->
+    <div class="col-lg-5 mt20">
+      <div echarts [options]="optionScale" class="demo-chart w100"></div>
+    </div>
+    <!--投资占比统计图 end-->
+    <!--点击率占比统计图 start-->
+    <div class="col-lg-7 mt20">
+      <div echarts [options]="optionClick" class="demo-chart w100"></div>
+    </div>
+    <!--点击率占比统计图 end-->
+  </div>
+</div>
+<!--企业投资弹窗 start-->
+<app-store-invest [flag]="showStroeInvest"
+                  (deliverGoods)="getDeliverOrderData()"></app-store-invest>
+<!--企业投资弹窗 end-->
+
+
+
