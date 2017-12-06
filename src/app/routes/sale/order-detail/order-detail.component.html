@@ -69,13 +69,17 @@
               <dt>应付金额：</dt>
               <dd>{{orderDetailData.total+orderDetailData.freight | number: '1.2-2'}}</dd>
             </dl>
-            <dl>
+            <dl *ngIf="orderDetailData.coinPay && orderDetailData.coinPay > 0">
               <dt>
                 <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
                    triggers="mouseenter:mouseleave"></i>
                 重消币抵扣金额：
               </dt>
-              <dd>{{!orderDetailData.coinPay?'0.00':orderDetailData.coinPay | number: '1.2-2'}}</dd>
+              <dd>{{orderDetailData.coinPay | number: '1.2-2'}}</dd>
+            </dl>
+            <dl *ngIf="orderDetailData.rpPay">
+              <dt>红包抵扣：</dt>
+              <dd>{{orderDetailData.rpPay | number: '1.2-2'}}</dd>
             </dl>
             <dl>
               <dt>最终支付：</dt>
@@ -251,43 +255,47 @@
             <td colspan="10" class="gray-bg order-footer p-sm pr-xl font12">
               <dl class="text-right mb0">
                 <dt class="font14 w10">商品总额：</dt>
-                <dd class="w10 text-left">
-                  <span class="ml-sm font18 mr main-red price-wid">¥ {{orderDetailData.total | number:'1.2-2'}}</span>
+                <dd class="w10">
+                <span class="font16 price-wid"><em>+</em>
+                   ¥ {{orderDetailData.total | number:'1.2-2'}}</span>
                 </dd>
               </dl>
-              <dl class="text-right mb0">
+              <dl class="text-right mb0" *ngIf="orderDetailData.freight && orderDetailData.freight != 0">
                 <dt class="w10">运费：</dt>
-                <dd class="w10 text-left">
-                <span class="ml-sm font14 mr main-red  price-wid"
-                      *ngIf="!orderDetailData.freight || orderDetailData.freight == 0">免运费</span>
-                  <ng-container *ngIf="orderDetailData.freight != 0">
-                    <span
-                      class="font18 ml-sm main-red mr price-wid">¥ {{orderDetailData.freight | number:'1.2-2'}}</span>
-                  </ng-container>
+                <dd class="w10">
+                  <span class="font16 price-wid"><em>+</em> ¥ {{orderDetailData.freight | number:'1.2-2'}}</span>
                 </dd>
               </dl>
               <dl class="text-right mb0">
                 <dt class="font14 w10">应付金额：</dt>
-                <dd class="w10 text-left">
-            <span class="ml-sm font18 mr main-red  price-wid">¥ {{orderDetailData.total+orderDetailData.freight |
-            number:'1.2-2'}}</span>
+                <dd class="w10">
+                <span class="font16 price-wid">
+                  ¥ {{orderDetailData.total+orderDetailData.freight | number:'1.2-2'}}</span>
                 </dd>
               </dl>
-              <dl class="text-right mb0">
+              <dl class="text-right mb0" *ngIf="orderDetailData.coinPay">
                 <dt>
                   <i class="icon-info" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
                      triggers="mouseenter:mouseleave"></i>
                   重消币抵扣金额：
                 </dt>
-                <dd class="w10 text-left">
-                  <span *ngIf="!orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ 0.00</span>
-                  <span *ngIf="orderDetailData.coinPay" class="font18 main-red ml-sm mr price-wid">¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
+                <dd class="w10">
+                <span class="font16 price-wid">
+                  <em>-</em> ¥ {{orderDetailData.coinPay | number:'1.2-2'}}</span>
+                </dd>
+              </dl>
+              <dl class="text-right mb0" *ngIf="orderDetailData.rpPay">
+                <dt class="font14 w10">红包抵扣：</dt>
+                <dd class="w10">
+                <span class="font16 price-wid">
+                  <em>-</em> ¥ {{orderDetailData.rpPay | number:'1.2-2'}}
+                </span>
                 </dd>
               </dl>
               <dl class="text-right mb0">
                 <dt class="font14">最终支付金额：</dt>
-                <dd class="w10 text-left">
-                  <span class="main-red ml-sm font22 mr price-wid">¥ {{orderDetailData.pay | number:'1.2-2'}}</span>
+                <dd class="w10">
+                  <span class="main-red font24 price-wid">¥ {{orderDetailData.pay | number:'1.2-2'}}</span>
                 </dd>
               </dl>
             </td>
