@@ -250,7 +250,8 @@ export class EditDetailComponent implements OnInit {
     }
     if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;
-      me.publishData = me.goodsEditData;                  // 商品发布数据
+      me.publishData = me.goodsEditData;         // 商品发布数据
+      me.checkedBaseAttr();                         //已选中的基本属性
       if(isNullOrUndefined(me.publishData.goodsExpressInfo)){
         me.publishData.goodsExpressInfo = {
           freightType: null,
@@ -265,6 +266,20 @@ export class EditDetailComponent implements OnInit {
         me.getTplValById();
       }    //根据物流模板ID获取模板值
     }
+  }
+
+  /**
+   * update 已选中的基本属性
+   */
+  checkedBaseAttr(){
+    let me = this;
+    me.goodsEditData.goodsBaseAttrList.forEach(val => {
+      me.baseAttrList.forEach(item => {
+        item.goodsEnumValList.forEach(attr => {
+          if(attr.id == val.value) item.checkedId = attr.id;
+        })
+      })
+    })
   }
 
   /**
@@ -816,16 +831,22 @@ export class EditDetailComponent implements OnInit {
    * 生成商品基本属性列表
    */
   public genGoodsBaseAttrList() {
-    let me = this, baseAttr = $('.base-attr').find('select');
+    let me = this;
     me.publishData.goodsBaseAttrList = []; // 先置空
-    for (let i = 0; i < baseAttr.length; i++) {
-      let obj = {
-        name: baseAttr.eq(i).find("option:selected").text(),
-        value: baseAttr.eq(i).val(),
-        idx: baseAttr.eq(i).find("option:selected").attr('class')
+    me.baseAttrList.forEach(val => {
+      if (!isNullOrUndefined(val.checkedId)) {
+        val.goodsEnumValList.forEach(attr => {
+          if (attr.id == val.checkedId) {
+            let obj = {
+              name: attr.enumValue,
+              value: attr.id,
+              idx: attr.idx
+            }
+            me.publishData.goodsBaseAttrList.push(obj)
+          }
+        })
       }
-      me.publishData.goodsBaseAttrList.push(obj)
-    }
+    })
   }
 
   /**
@@ -998,10 +1019,10 @@ export class EditDetailComponent implements OnInit {
       MaskService.hideMask();//关闭遮罩层
       return;
     }                //当某个规格没有图片时直接结束发布
-    me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
     if (me.path == 'step_two') me.publishData['kindId'] = me.kindId;
     me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码
     me.genGoodsBaseAttrList();                                          // 商品基本属性
+    me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
     me.publishData['goodsBody'] = $('.summernote').summernote('code');  // 商品详情 PC
     me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
     me.goods.publishGoods('/goodsEdit/save', me.publishData, me.path);
