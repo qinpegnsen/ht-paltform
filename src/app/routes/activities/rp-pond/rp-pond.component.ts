@@ -44,6 +44,7 @@ export class RpPondComponent implements OnInit {
   public epSubname:any;               //企业的简称
   public epCode:any;                   //企业的编码
   public storeCode:any;                //店铺的编码
+  public queryDateTime:any;                //查询的时间
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -127,6 +128,11 @@ export class RpPondComponent implements OnInit {
       activePage = curPage;
     }
     ;
+    //格式化时间格式
+    let dateStr = '';
+    if (this.queryDateTime) {
+      dateStr = RzhtoolsService.dataFormat(this.queryDateTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.queryDateTime[1], 'yyyy/MM/dd');
+    }
     let url = "/rpAccountRec/queryRpAccountRecAdmin";
     let data = {
       curPage: activePage,
@@ -134,9 +140,18 @@ export class RpPondComponent implements OnInit {
       epCode: this.epCode,
       epSubname: this.epSubname,
       storeCode: this.storeCode,
+      dateStr:dateStr
     };
     let result = this.submit.getData(url, data);
     me.redPackData = new Page(result);
+  }
+
+  /**
+   * 清空时间
+   */
+  clearTime(){
+    this.queryDateTime = null;
+    this.qeuryPushOrder(1);// 获取数据
   }
 
   /**
@@ -152,8 +167,8 @@ export class RpPondComponent implements OnInit {
     let result = this.submit.getData(url, data);
     if (result) {
       this.redPackStaticScale = result;
-      this.legendData = this.redPackStaticScale.names;
-      this.seriesData = this.redPackStaticScale.voList;
+      this.legendData = this.redPackStaticScale.name;
+      this.seriesData = this.redPackStaticScale.value;
       this.graphInfoScale();
     }
   }
@@ -187,8 +202,8 @@ export class RpPondComponent implements OnInit {
     let result = this.submit.getData(url, data);
     if (result) {
       this.redPackStaticClick = result;
-      this.legendDataClick = this.redPackStaticClick.names;
-      this.seriesDataClick = this.redPackStaticClick.voList;
+      this.legendDataClick = this.redPackStaticClick.name;
+      this.seriesDataClick = this.redPackStaticClick.value;
       this.graphInfoClick();
     }
   }

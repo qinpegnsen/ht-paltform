@@ -45,7 +45,7 @@
                      alt="">
                 <label class="btn btn-default file-upload">
                   <i class="icon-cloud-upload mr"></i>{{myImg? uploader.queue[0]._file.name:'上传图片'}}
-                  <input class="w100" type="file" name="brandPic" ng2FileSelect [uploader]="uploader"
+                  <input class="w100" type="file" accept="image/*" name="brandPic" ng2FileSelect [uploader]="uploader"
                          (change)="fileChangeListener()"/>
                 </label>
                 <!--<div class="text-danger" [hidden]="myImg">请上传凭证</div>-->

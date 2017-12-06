@@ -1,6 +1,7 @@
 <div class="content-heading mb-lg thc font">
   <span>提现审核列表</span>
 </div>
+
 <!--方块统计 start-->
 <div class=" panel-default">
   <!--红包统计 start-->
@@ -46,6 +47,14 @@
 </div>
 <!--方块统计 end-->
 
+<div class="panel mb p ts-bg thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>如果用户选择的是支付宝或者微信提现，处理申请后，状态变为审核中，则内部调用接口直接打款。</li>
+    <li>如果用户选择的是银行卡提现，处理申请后，状态变为审核中，需要线下打款后，再填写上传汇款信息及凭证，状态变为审核通过。</li>
+  </ul>
+</div>
+
 <!--审核列表 start-->
 <div class="panel mb">
   <div class="panel-body">
@@ -85,7 +94,7 @@
         <th class="w15 text-center">
           <rzhDefaultSorter by="picture">申请时间</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center">
+        <th class="w20 text-center" *ngIf="this.curState!='DONE'">
           <rzhDefaultSorter by="picture">操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -101,7 +110,7 @@
         <td>{{item.createTime }}</td>
         <td>
           <!--目前只做银行转账 微信和支付宝走不通-->
-          <button class="btn btn-sm btn-green fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='CR'"> 同意提现
+          <button class="btn btn-sm btn-green fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.state=='CR'"> 同意提现
           </button>
           <button class="btn btn-sm btn-green fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'">上传凭证
           </button>
@@ -128,7 +137,7 @@
   </div>
 </div>
 <!--审核列表 end-->
-<!--企业投资弹窗 start-->
+<!--审核弹窗 start-->
 <app-audit-alert [curId]="currentId" [page]="auditListData.curPage" (addRecord)="getAddRecordData($event)"
                  ></app-audit-alert>
-<!--企业投资弹窗 end-->
+<!--审核弹窗 end-->

@@ -124,7 +124,7 @@
       </div>
       <div *ngIf="showType.DAY" style="margin-right: 60px">
         <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel" (change)="test()"
-               [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+               [bsConfig]="bsConfig" #dpr="bsDatepicker" readonly/>
         <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
       </div>
     </div>

@@ -5,6 +5,18 @@
 <div class="panel mb">
   <div class="panel-body p ng-scope" ng-if="search">
     <div class="col-md-12">
+      <div class="place-time ml-xl col-md-2 clearfix mb">
+        <div class="_picker">
+          <div class="input-group">
+            <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="dateStr" readonly>
+            <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" title="重置时间" (click)="clearTime()"
+              class="btn thc btn-thc pull-left bar-h3-btn mr ng-scope mr20">
+        <em class="fa fa-refresh"></em>
+      </button>
       <div class="form-group col-md-2">
         <div class="pl0">
           <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
@@ -18,15 +30,7 @@
                  (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
         </div>
       </div>
-      <div class="place-time ml-xl clearfix mb">
-        <span class="_title">时间段：</span>
-        <div class="_picker">
-          <div class="input-group">
-            <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="dateStr" readonly>
-            <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
-          </div>
-        </div>
-      </div>
+
       <button type="button" title="搜索" class="btn thc btn-thc ml align-top" (click)="queryRpCustAcctRecAdmin(1)">
         <i class="icon-magnifier fa-fw"></i>
       </button>

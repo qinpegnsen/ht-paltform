@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
-import {cli} from "webdriver-manager/built/lib/webdriver";
 import {SubmitService} from '../../core/forms/submit.service';
-import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 import {isNullOrUndefined} from "util";
 const swal = require('sweetalert');
 

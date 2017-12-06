@@ -35,7 +35,6 @@ export class AuditAlertComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['curId'] && !isNullOrUndefined(this.curId)) {
-      console.log("█ curId ►►►", this.curId);
       this.voncher.id = this.curId;
       $('.wrapper > section').css('z-index', 200);
       this.showWindow = true;
@@ -71,7 +70,7 @@ export class AuditAlertComponent implements OnInit {
    */
   addFinished(){
     let me = this;
-    this.voncher.uuid = null;
+    this.voncher.voucherUrl = null;
     me.upLoadImg(); //上传图片及提交数据
   }
 
@@ -158,7 +157,7 @@ export class AuditAlertComponent implements OnInit {
    */
   private submitFormDataAndRefresh(){
     let me = this;
-    if(isNullOrUndefined(me.voncher.uuid)){
+    if(isNullOrUndefined(me.voncher.voucherUrl)){
       AppComponent.rzhAlt('warning','请上传汇款凭证');
       return;
     }

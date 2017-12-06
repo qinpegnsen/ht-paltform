@@ -125,7 +125,8 @@ export class StaticsComponent implements OnInit {
 
   onChartClick(event){
     if(this.showType.MONTH){
-      this.queryType='DAY'
+      this.showType= {DAY: true, WEEK: false, MONTH: false};//搜索条件变化
+      this.queryType='DAY';
       this.queryTime=this.select.year+'-'+event.name;//当前查询的日期（）
       this.qeuryRpDetail();
     }

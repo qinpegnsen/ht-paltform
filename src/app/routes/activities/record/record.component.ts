@@ -38,6 +38,14 @@ export class RecordComponent implements OnInit {
   }
 
   /**
+   * 清空时间
+   */
+  clearTime(){
+    this.dateStr = null;
+    this.queryRpCustAcctRecAdmin(1);// 获取数据
+  }
+
+  /**
    * 查询红包明细（和后台一致）
    * @param curPage
    * @param event
