@@ -17,6 +17,8 @@
       <div class="form-group mb0">
         <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
         <div class="col-xs-5">
+          <input type="text" [(ngModel)]="custName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 (change)="search()" placeholder="请输入评价人关键字进行搜索">
             <input type="text" [(ngModel)]="custName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                    (change)="search()" placeholder="请输入评价人关键字进行搜索">
         </div>

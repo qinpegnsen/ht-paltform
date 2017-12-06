@@ -20,6 +20,8 @@ declare var $: any;
   providers: [BankTransferService]
 })
 export class BankTransferComponent implements OnInit {
+  select: any = {}; //选择的年份和月份信息
+  nowTime:any = {};//当前时间（年月日）
   datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
 
@@ -76,11 +78,17 @@ export class BankTransferComponent implements OnInit {
       containerClass: 'theme-blue',
       rangeInputFormat: 'YYYY-MM-DD'
     });
+
   }
 
   ngOnInit() {
-    this.formatSelDate(); //格式化所选日期及时间
-    this.seletAllByTypeCode();//银行选择
+    let _this=this;
+    _this.select.year = new Date().getFullYear();//获取默认年
+    _this.select.month = new Date().getMonth()+1;//获取默认月
+    _this.select.day = new Date().getDate();//获取默认日
+    _this.nowTime= new Date(_this.select.year+"-"+_this.select.month+"-"+_this.select.day);
+    _this.formatSelDate(); //格式化所选日期及时间
+    _this.seletAllByTypeCode();//银行选择
   }
 
   /**
@@ -125,7 +133,6 @@ export class BankTransferComponent implements OnInit {
       remark: obj.remark
     }
     let result = this.bankTransferService.bankTransfer(url, data);
-    // console.log("█ result ►►►",  result);
     if (result.success) {
       this.code = null;
       this.summary=null;
