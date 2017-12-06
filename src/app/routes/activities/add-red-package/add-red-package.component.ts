@@ -196,7 +196,7 @@ export class AddRedPackageComponent implements OnInit {
    * @param obj
    */
   getProbability(item, obj,value) {
-    if(value==0||isNullOrUndefined(value)){
+    if(value==0||isNullOrUndefined(value)||value<0){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
     };
@@ -221,7 +221,7 @@ export class AddRedPackageComponent implements OnInit {
    * 设置规则的等级
    */
   setLeveal(obj,value){
-    if(value==0||isNullOrUndefined(value)){
+    if(value==0||isNullOrUndefined(value)||value<0){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
     };
@@ -328,7 +328,7 @@ export class AddRedPackageComponent implements OnInit {
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
-    if(value==0||isNullOrUndefined(value)){
+    if(value==0||isNullOrUndefined(value)||value<0){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
     };

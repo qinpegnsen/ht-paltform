@@ -36,7 +36,7 @@
               <p class="text-md m0">{{ income | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
-              <em class="fa fa-calendar fa-3x tp-em"></em>
+              <em class="fa fa-money fa-3x tp-em"></em>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
       <em class="fa fa-refresh"></em>
     </button>
     <div class="col-xs-2 pull-right mt-lg mr40">
-      <input type="text" class="form-control" bsDaterangepicker [(ngModel)]="queryDateTime" placeholder=""
+      <input type="text" class="form-control" bsDaterangepicker [(ngModel)]="queryDateTime" placeholder="选择查询时间"
              [bsConfig]="bsConfig" #dpr="bsDaterangepicker" readonly/>
       <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
     </div>

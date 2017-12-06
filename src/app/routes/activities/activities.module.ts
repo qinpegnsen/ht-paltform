@@ -17,14 +17,16 @@ import { AuditAlertComponent } from './audit-alert/audit-alert.component';
 
 const storeRoutes: Routes = [
   {path: 'storePage', component: StoreRightPageComponent},
-]
+];
+const addRedPackage: Routes = [
+  {path: 'addRedPack', component: AddRedPackageComponent}
+];
 const redPacketRoutes: Routes = [
   {path: '', redirectTo: 'site',pathMatch:'full'},
-  {path: 'site', component: SiteComponent},
+  {path: 'site', component: SiteComponent,children:addRedPackage},
   {path: 'statics', component: StaticsComponent},
   {path: 'pond', component: RpPondComponent},
   {path: 'record', component: RecordComponent},
-  {path: 'addRedPack', component: AddRedPackageComponent},
   {path: 'audit', component: AuditComponent},
   {path: 'store', component: RpStoreComponent,children:storeRoutes}
 ]

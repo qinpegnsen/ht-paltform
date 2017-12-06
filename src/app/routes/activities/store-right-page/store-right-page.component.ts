@@ -116,7 +116,8 @@ export class StoreRightPageComponent implements OnInit {
         state: obj.state
       };
       let result=this.service.updateRpStore(url, data);
-      if(result=='请上传logo'||result=='请上传宣传图'||result=='该企业简称已存在'){
+      console.log("█ result ►►►",  result);
+      if(result=='请上传logo'||result=='请上传宣传图'||result=='企业简称已存在'){
         return;
       };
     }
