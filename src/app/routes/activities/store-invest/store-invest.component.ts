@@ -13,7 +13,7 @@ declare var $: any;
 export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   public showDeliverWindow: boolean = false;
   public rpStoreList: any;   //红包企业列表
-  public amount: any;        //投资金额
+  public amount: string;        //投资金额
   public item: any={
     storeName:'',
     storeCode:'',
@@ -33,7 +33,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
       let url='/rpStore/queryAll';
       let data={};
       this.rpStoreList = this.service.queryAllRpStore(url,data);   //红包企业列表
-      this.amount = null;      //每次出来把上次填的金额清除
+      this.amount = '';      //每次出来把上次填的金额清除
     }
   }
 
@@ -66,7 +66,12 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
    * 核查输入的金额的值
    */
   checkVal(val){
-    if(val==0){
+    if(val==0||isNullOrUndefined(val)){//输入-号，或者是0,因为是input type是number,所以返回null
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+      setTimeout(()=>{
+        this.amount='';
+      })
+    }else if(val=='-'){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
     }else if(String(val).indexOf('.')>-1){
       let index=String(val).indexOf('.');

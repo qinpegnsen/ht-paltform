@@ -48,7 +48,7 @@ export class AddRedPackageComponent implements OnInit {
   constructor(public location: Location,
               public patternService: PatternService,
               public router: Router,
-              private submit: SubmitService,
+              public submit: SubmitService,
               public service: ActivitiesService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
@@ -195,11 +195,43 @@ export class AddRedPackageComponent implements OnInit {
    * @param item
    * @param obj
    */
-  getProbability(item, obj) {
+  getProbability(item, obj,value) {
+    if(value==0||isNullOrUndefined(value)){
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+      $(obj).val('');
+    };
+    if(String(value).indexOf('.')>-1){
+      let index=String(value).indexOf('.');
+      let finalVal=String(value).slice(0,index);
+      setTimeout(()=>{
+        $(obj).val(finalVal);
+        let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
+        $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
+        this.countNumAndAmout();
+        this.isTip();
+      },0)
+    };
     let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
     $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
     this.countNumAndAmout();
     this.isTip();
+  }
+
+  /**
+   * 设置规则的等级
+   */
+  setLeveal(obj,value){
+    if(value==0||isNullOrUndefined(value)){
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+      $(obj).val('');
+    };
+    if(String(value).indexOf('.')>-1){
+      let index=String(value).indexOf('.');
+      let finalVal=String(value).slice(0,index);
+      setTimeout(()=>{
+        $(obj).val(finalVal);
+      },0)
+    };
   }
 
 
@@ -296,9 +328,10 @@ export class AddRedPackageComponent implements OnInit {
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
-    if(value==0){
+    if(value==0||isNullOrUndefined(value)){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
-    }
+      $(obj).val('');
+    };
     if(String(value).indexOf('.')>-1){
       let index=String(value).indexOf('.');
       let finalVal=String(value).slice(0,index+3);
@@ -403,7 +436,7 @@ export class AddRedPackageComponent implements OnInit {
       if (result == '账户余额不足') {
         return;
       }
-      this.router.navigate(['/main/website/redPacket/site']);
+      this.router.navigate(['/main/activities/redPacket/site']);
     }
   }
 }

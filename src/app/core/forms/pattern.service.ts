@@ -18,6 +18,8 @@ export class PatternService {
   public doubleDigit: string; // 两位为整数（0-99）
   public _URL: string; //网址
   public twodecimal:string;//两位小数
+  public onedecimal:string;//两位小数
+  public twodecimalUp:string;//两位小数
   public positive:string;
   public str:string;//除了文字
   public tplCode:string;//只能输入英文和数字的(用于添加APP首页模板的模板编码)
@@ -41,6 +43,8 @@ export class PatternService {
     this.decimals = '^(0\.[0-9]*[1-9]$)|^0$';　　//0-1小数，包含0,不包含1
     this.doubleDigit = '^[0-9]{1,2}$'; // 两位为整数（0-99）
     this.twodecimal='^[0-9]+(.[0-9]{1,2})?$';//两位小数
+    this.onedecimal='^[0-9]+(.[0-9]{1})?$';//一位小数
+    this.twodecimalUp='^[1-9]+(.[1-9]{1,2})?$';//大于0的两位小数
     this.positive = '^[0-9]+$'; // 整数
     this.str = '[^\u4e00-\u9fa5]+'; //除中文的任何数字包括字符
     this.tplCode = '^[A-Za-z0-9]+$'; //只能输入英文和数字的(用于添加APP首页模板的模板编码)

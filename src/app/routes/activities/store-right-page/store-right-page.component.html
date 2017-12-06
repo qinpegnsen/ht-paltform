@@ -42,7 +42,7 @@
               </ng-container>
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传logo
-                <input class="w100" type="file" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
+                <input class="w100" type="file" name="tplImg"  accept="image/*" ng2FileSelect [uploader]="uploaderLogo"
                        (change)="fileChangeListenerLogo($event)"/>
               </label>
               <div class="mt-lg fontColor">建议上传（宽：50px,高：50px）的图片</div>
@@ -58,7 +58,7 @@
               </ng-container>
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传宣传图
-                <input class="w100" type="file" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
+                <input class="w100" type="file" accept="image/*" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
                        (change)="fileChangeListenerSloganPic($event)"/>
               </label>
               <div class="mt-lg fontColor">建议上传（宽：326px,高：100px）的图片</div>
@@ -126,7 +126,7 @@
               <img class="col-sm-5 p-sm" *ngIf="loadData.logo && !myLogoImg" [src]="loadData.logo">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传logo
-                <input class="w100" type="file" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
+                <input class="w100" type="file" accept="image/*" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
                        (change)="fileChangeListenerLogo()"/>
               </label>
               <div class="mt-lg fontColor">建议上传（宽：50px,高：50px）的图片</div>
@@ -143,7 +143,7 @@
               <img class="col-sm-5 p-sm" *ngIf="loadData.sloganPic && !mySloganImg" [src]="loadData.sloganPic">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传宣传图
-                <input class="w100" type="file" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
+                <input class="w100" type="file" accept="image/*" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"
                        (change)="fileChangeListenerSloganPic()"/>
               </label>
               <div class="mt-lg fontColor">建议上传（宽：326px,高：100px）的图片</div>

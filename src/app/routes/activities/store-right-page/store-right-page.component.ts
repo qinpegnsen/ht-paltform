@@ -34,6 +34,7 @@ export class StoreRightPageComponent implements OnInit {
   public uploaderSloganPic: FileUploader = new FileUploader({
     url: '/upload/basic/upload',
     itemAlias: "limitFile",
+    autoUpload: true,
     allowedFileType:["image"]
   });
 

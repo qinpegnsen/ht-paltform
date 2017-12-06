@@ -76,7 +76,7 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
-              <input class="text _price num form-control amount" (keyup)="countAmount(amount.value,$event.target)"
+              <input type="number" class="text _price num form-control amount" (keyup)="countAmount(pieceAmount.value,$event.target)"
                      #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
                      [pattern]="patternService.threedecimal"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
@@ -85,17 +85,17 @@
               </div>
             </td>
             <td>
-              <input class="text _price num form-control redPacketNumber" #pieceNumber="ngModel" [(ngModel)]="item.num"
-                     (keyup)="getProbability(item,$event.target)" name="num{{i}}" required
-                     [pattern]="patternService.integer"/>
+              <input type="number" class="text _price num form-control redPacketNumber" #pieceNumber="ngModel" [(ngModel)]="item.num"
+                     (keyup)="getProbability(item,$event.target,pieceNumber.value)" name="num{{i}}" required
+                     [pattern]="patternService.onedecimal"/>
               <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
                    class="alert alert-danger">
                 请填写正整数
               </div>
             </td>
             <td>
-              <input class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}"
-                     #pieceLevel="ngModel" [pattern]="patternService.integer" required/>
+              <input type="number" class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}"
+                     #pieceLevel="ngModel" [pattern]="patternService.integer" required (keyup)="setLeveal($event.target,pieceLevel.value)"/>
               <div [hidden]="pieceLevel.valid || pieceLevel.pristine"
                    class="alert alert-danger">
                 请填写正整数
