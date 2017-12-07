@@ -103,10 +103,10 @@
             <td>{{item.state | rzhState:'1602'}}</td>
             <td>
               <button *ngIf="item.state=='DELIVERY'" class="btn btn-success btn-sm fa fa-check-square-o"
-                      routerLink="after-details"
+                      routerLink="after-details" title="验收"
                       [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
               </button>
-              <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details"
+              <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details" title="详情"
                       [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>
             </td>
