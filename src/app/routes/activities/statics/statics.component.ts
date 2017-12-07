@@ -42,7 +42,7 @@ export class StaticsComponent implements OnInit {
   ngOnInit() {
     this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
     this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
-    this.qeuryAll();
+    this.qeuryRpDetail();
   }
 
   /**
@@ -117,17 +117,42 @@ export class StaticsComponent implements OnInit {
     };
     if (!this.queryTime || isNullOrUndefined(this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
+    }if(this.queryType=='DAY'){
+      this.qeuryRpDetail();
     } else {
       this.qeuryAll();
     }
   }
 
 
+  /**
+   * 点击的时候查看各个面额的发放和领取的情况
+   * @param event
+   */
   onChartClick(event){
     if(this.showType.MONTH){
       this.showType= {DAY: true, WEEK: false, MONTH: false};//搜索条件变化
-      this.queryType='DAY';
       this.queryTime=this.select.year+'-'+event.name;//当前查询的日期（）
+      this.qeuryRpDetail();
+    }else if(this.showType.WEEK){
+      let index=this.select.week.indexOf('~');
+      let date=this.select.week.slice(0,index);
+      let number:number;
+      switch (event.name){
+        case '周一':number=1; break;
+        case '周二':number=2; break;
+        case '周三':number=3; break;
+        case '周四':number=4; break;
+        case '周五':number=5; break;
+        case '周六':number=6; break;
+        case '周日':number=7; break;
+      };
+      let transTime=RzhtoolsService.getAroundDateByDate(new Date(date),number);//需要转换的日期
+      let finalTime=RzhtoolsService.dataFormat(transTime,'yyyy-MM-dd');//格式化日期
+      this.queryTime=finalTime;//当前查询的日期（）
+      this.qeuryRpDetail();
+    }else{
+      this.queryTime=this.queryTime;//当前查询的日期（）
       this.qeuryRpDetail();
     }
   }
@@ -139,7 +164,7 @@ export class StaticsComponent implements OnInit {
     let me = this;
     let url = "/rpStatistics/queryRpDrawDetails";
     let data = {
-      queryType: me.queryType,
+      queryType: 'DAY',
       queryTime: me.queryTime,
     }
     let result = this.submit.getData(url, data);
@@ -169,12 +194,12 @@ export class StaticsComponent implements OnInit {
     let _this = this;
     _this.optionPrev = {
       title: {
-        text: '红包金额统计',
+        text:_this.redPackStatic.title,
         left:'center',
         top:'1%',
       },
       legend: { //图例
-        data: ['发放红包金额','领取红包金额'],
+        data:[_this.redPackStatic.totalRpName,_this.redPackStatic.useRpName],
         align: 'left',
         left:"center",
         top:"8%",
@@ -217,13 +242,13 @@ export class StaticsComponent implements OnInit {
       ],
       series: [
         {
-          name:'发放红包金额',
+          name:_this.redPackStatic.totalRpName,
           type: 'bar',
           barWidth: '30%',
           data: _this.total.yaxis
         },
         {
-          name: '领取红包金额',
+          name:_this.redPackStatic.useRpName,
           type: 'bar',
           barWidth: '30%',
           data: _this.use.yaxis
