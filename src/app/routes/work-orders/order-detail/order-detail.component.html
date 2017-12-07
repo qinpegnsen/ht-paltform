@@ -249,9 +249,6 @@
                 *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight | number: '1.2-2'}}</span><br>
           <span class="font-gray font12">{{goodsData.payWay | rzhState:'1017'}}</span>
         </td>
-        <td class="bl br" [attr.rowspan]="goodsData.length">
-          <p class="font-gray mb-sm cursor-p font12">{{orderDetailData.state | rzhState:'1019'}}</p>
-        </td>
       </ng-container>
     </tr>
     </tbody>

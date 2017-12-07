@@ -239,14 +239,6 @@
                       *ngIf="orderDetailData.freight > 0">运费：{{orderDetailData.freight | number: '1.2-2'}}</span><br>
                 <span class="font-gray font12">{{goodsData.payWay | rzhState:'1017'}}</span>
               </td>
-              <td class="bl br" [attr.rowspan]="goodsData.length">
-                <p class="font-gray mb-sm cursor-p font12">{{orderDetailData.state | rzhState:'1019'}}</p>
-                <!--<button class="m-sm btn btn-xs btn-warning fa fa-ban"> 取消订单</button>-->
-                <button class="m-sm btn btn-xs btn-green fa fa-truck"
-                        *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE' && orderDetailData.canDelivery"
-                        (click)="deliverOrder()"> 发货
-                </button>
-              </td>
             </ng-container>
           </tr>
           </tbody>
