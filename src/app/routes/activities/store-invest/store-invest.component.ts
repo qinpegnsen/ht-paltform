@@ -66,7 +66,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
    * 核查输入的金额的值
    */
   checkVal(val){
-    if(val==0||isNullOrUndefined(val)){//输入-号，或者是0,因为是input type是number,所以返回null
+    if(val==0||isNullOrUndefined(val)||val<0){//输入-号，或者是0,因为是input type是number,所以返回null
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       setTimeout(()=>{
         this.amount='';
