@@ -29,6 +29,7 @@ export class StaticsComponent implements OnInit {
   public total: any;
   public use: any;
   public optionPrev:any;                       //统计图的配置
+  public maxDate:Date=new Date;                //最大的日期
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -229,7 +230,7 @@ export class StaticsComponent implements OnInit {
       xAxis: [
         {
           type: 'category',   //类目轴，还有'time' 时间轴，'value' 数值轴
-          data:  _this.use.keys,
+          data: _this.use.keys.length>0?_this.use.keys:[''],
           axisTick: {//坐标轴刻度相关设置
             alignWithLabel: true
           }
@@ -245,13 +246,13 @@ export class StaticsComponent implements OnInit {
           name:_this.redPackStatic.totalRpName,
           type: 'bar',
           barWidth: '30%',
-          data: _this.total.yaxis
+          data: _this.total.yaxis.length>0?_this.total.yaxis:[''],
         },
         {
           name:_this.redPackStatic.useRpName,
           type: 'bar',
           barWidth: '30%',
-          data: _this.use.yaxis
+          data: _this.use.yaxis.length>0?_this.use.yaxis:[''],
         }
       ]
     };
