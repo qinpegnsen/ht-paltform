@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
-import {Page} from '../../../core/page/page';
 import {AppIndexOptService} from './app-index-opt.service';
 import {ActivatedRoute} from '@angular/router';
 const swal = require('sweetalert');

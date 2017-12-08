@@ -212,7 +212,7 @@ export class AppSetComponent implements OnInit {
           }
           this.contentList.push(i);//选中模板的详细信息
           let uploader: FileUploader = new FileUploader({
-            url: '/upload/basic/upload',
+            url: 'upload/basic/phoneIndexUpload',
             itemAlias: 'limitFile'
           }); //初始化上传方法
           this.uploaders.push(uploader);
@@ -259,7 +259,7 @@ export class AppSetComponent implements OnInit {
       for (let i = 0; i < _this.tplImgCount; i++) {
         this.contentList.push(i);
         let uploader: FileUploader = new FileUploader({
-          url: '/upload/basic/upload',
+          url: 'upload/basic/phoneIndexUpload',
           itemAlias: 'limitFile',
         }); //初始化上传方法
         this.uploaders.push(uploader);

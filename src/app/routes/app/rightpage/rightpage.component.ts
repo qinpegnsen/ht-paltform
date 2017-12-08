@@ -36,7 +36,7 @@ export class RightpageComponent implements OnInit {
   public myImgs: any;//上传首页模板效果图
   public tplImg:string;
   public uploader: FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url: 'upload/basic/phoneIndexUpload',
     itemAlias: "limitFile",
     queueLimit: 1
   });
@@ -45,7 +45,7 @@ export class RightpageComponent implements OnInit {
   //   itemAlias:"limitFile",
   // }); //初始化上传方法
   public uploaders:FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url: 'upload/basic/phoneIndexUpload',
     itemAlias:"limitFile"
   }); //初始化上传方法
 

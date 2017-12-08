@@ -1,4 +1,4 @@
-<!--新增代理商-->
+<!--新增代理商 begin-->
 <div class="col-lg-10" *ngIf="linkType=='addArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
@@ -119,9 +119,10 @@
     <!-- END panel-->
   </form>
 </div>
+<!--新增代理商 end-->
 
 
-<!--修改代理商-->
+<!--修改代理商表单 begin-->
 <div class="col-lg-10" *ngIf="linkType=='updataArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
@@ -247,10 +248,10 @@
     <!-- END panel-->
   </form>
 </div>
+<!--修改代理商表单 end-->
 
 
-
-
+<!--地图插件 begin-->
 <div class="model" [class.hide]="!showUp">
   <div class="mask"></div>
   <div class="model-main">
@@ -276,6 +277,7 @@
     </div>
   </div>
 </div>
+<!--地图插件 end-->
 
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
