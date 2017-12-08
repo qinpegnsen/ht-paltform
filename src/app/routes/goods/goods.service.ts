@@ -12,6 +12,10 @@ const swal = require('sweetalert');
 @Injectable()
 export class GoodsService {
 
+  static goodsUploader: string = "upload/basic/goodsUpload";//商品上传，需要uuid, 返回URL，带HTTP
+  static goodsUploadRetHttpURL: string = "upload/basic/goodsUploadRetHttpURL";//商品 返回URL，带HTTP
+  static goodsUploadRetUrl: string = "upload/basic/goodsUploadRetUrl";//商品 返回URL，不带HTTP
+
   constructor(public ajax: AjaxService,
               public mask: MaskService,
               public router: Router,

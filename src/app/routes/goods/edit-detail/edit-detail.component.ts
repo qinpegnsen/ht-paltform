@@ -54,12 +54,12 @@ export class EditDetailComponent implements OnInit {
   };// 商品发布数据，所有数据
 
   public defaultUploader: FileUploader = new FileUploader({
-    url: '/goodsEdit/uploadGoodsImage',
+    url: GoodsService.goodsUploadRetUrl,
     itemAlias: "limitFile",
     allowedFileType: ["image"]
   })
   public mobileUploader: FileUploader = new FileUploader({
-    url: '/goodsEdit/uploadGoodsBodyImage',
+    url: GoodsService.goodsUploadRetHttpURL,
     itemAlias: "limitFile",
     autoUpload: true,
     allowedFileType: ["image"]
@@ -447,7 +447,7 @@ export class EditDetailComponent implements OnInit {
           valName: $val.val(),
           idx: $val.attr('name'),
           uploader: new FileUploader({
-            url: '/goodsEdit/uploadGoodsImage',
+            url: GoodsService.goodsUploadRetUrl,
             itemAlias: "limitFile",
             allowedFileType: ["image"]
           })

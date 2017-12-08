@@ -9,6 +9,7 @@ import {FileUploader} from "ng2-file-upload";
 import {AppComponent} from "../../../app.component";
 import {MaskService} from "../../../core/services/mask.service";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {GoodsService} from "../goods.service";
 const swal = require('sweetalert');
 @Component({
   selector: 'app-add-brand',
@@ -28,7 +29,7 @@ export class AddBrandComponent implements OnInit {
     brandSort: '0-99，默认0 , 数字越小排序越靠前',
   }
   public uploader:FileUploader = new FileUploader({
-    url: 'upload/basic/upload',
+    url: GoodsService.goodsUploader,
     itemAlias:"limitFile",
     allowedFileType: ["image"]
   }); //初始化上传方法

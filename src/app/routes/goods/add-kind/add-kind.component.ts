@@ -9,6 +9,7 @@ import {FileUploader} from "ng2-file-upload";
 import {GetUidService} from "../../../core/services/get-uid.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {PatternService} from "../../../core/forms/pattern.service";
+import {GoodsService} from "../goods.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -31,7 +32,7 @@ export class AddKindComponent implements OnInit {
   public fileName: string = '选择图片';// 文件名
   public myImg;// 我的图片，展示图片
   public uploader: FileUploader = new FileUploader({
-    url: 'upload/basic/upload',
+    url: GoodsService.goodsUploader,
     itemAlias: "limitFile",
     allowedFileType: ["image"]
   }); //初始化上传方法
