@@ -29,7 +29,7 @@ export class StaticsComponent implements OnInit {
   public total: any;
   public use: any;
   public optionPrev:any;                       //统计图的配置
-  public maxDate:Date=new Date;                //最大的日期
+  public maxDate:Date=new Date();                //最大的日期
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -132,9 +132,7 @@ export class StaticsComponent implements OnInit {
    */
   onChartClick(event){
     if(this.showType.MONTH){
-      this.showType= {DAY: true, WEEK: false, MONTH: false};//搜索条件变化
       this.queryTime=this.select.year+'-'+event.name;//当前查询的日期（）
-      this.qeuryRpDetail();
     }else if(this.showType.WEEK){
       let index=this.select.week.indexOf('~');
       let date=this.select.week.slice(0,index);
@@ -151,11 +149,13 @@ export class StaticsComponent implements OnInit {
       let transTime=RzhtoolsService.getAroundDateByDate(new Date(date),number);//需要转换的日期
       let finalTime=RzhtoolsService.dataFormat(transTime,'yyyy-MM-dd');//格式化日期
       this.queryTime=finalTime;//当前查询的日期（）
-      this.qeuryRpDetail();
     }else{
       this.queryTime=this.queryTime;//当前查询的日期（）
-      this.qeuryRpDetail();
-    }
+    };
+    this.queryType='DAY';//搜索条件改为天
+    this.showType= {DAY: true, WEEK: false, MONTH: false};//搜索条件改为天
+    this.datepickerModel=new Date(this.queryTime);
+    this.qeuryRpDetail();
   }
 
   /**
