@@ -142,13 +142,13 @@ export class StaticsComponent implements OnInit {
       let date=this.select.week.slice(0,index);
       let number:number;
       switch (event.name){
-        case '周一':number=1; break;
-        case '周二':number=2; break;
-        case '周三':number=3; break;
-        case '周四':number=4; break;
-        case '周五':number=5; break;
-        case '周六':number=6; break;
-        case '周日':number=7; break;
+        case '周一':number=0; break;
+        case '周二':number=1; break;
+        case '周三':number=2; break;
+        case '周四':number=3; break;
+        case '周五':number=4; break;
+        case '周六':number=5; break;
+        case '周日':number=6; break;
       };
       let transTime=RzhtoolsService.getAroundDateByDate(new Date(date),number);//需要转换的日期
       let finalTime=RzhtoolsService.dataFormat(transTime,'yyyy-MM-dd');//格式化日期
