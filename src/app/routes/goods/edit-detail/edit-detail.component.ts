@@ -619,7 +619,7 @@ export class EditDetailComponent implements OnInit {
    * @param i 需要替换掉的图片的索引值
    */
   mblReplaceImg(e, i) {
-    let _this = this, file = e.target.files[0], img = _this.tools.uploadImg(file);
+    let _this = this, file = e.target.files[0], img = _this.goods.uploadImg(file);
     let obj = {
       type: 'img',
       value: img

@@ -172,4 +172,33 @@ export class GoodsService {
     }
   }
 
+
+  /**
+   * 上传编辑器图片
+   * @param file
+   */
+  uploadImg = function (file: any) {
+    let _this = this, ret: string, data: any = new FormData();
+    data.append("limitFile", file);
+    _this.ajax.post({
+      url: GoodsService.goodsUploadRetHttpURL,
+      data: data,
+      async: false,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (response) => {
+        if (!isNullOrUndefined(response) && response.success) {
+          ret = response.data;
+        }
+        if (!response.success) AppComponent.rzhAlt('error', response.info, file.name + '上传失败')
+      },
+      error: (response) => {
+        AppComponent.rzhAlt('error', file.name + '上传失败', '')
+      }
+    });
+    return ret;
+  }
+
+
 }
