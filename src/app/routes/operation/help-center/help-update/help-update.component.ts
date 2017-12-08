@@ -77,7 +77,7 @@ export class HelpUpdateComponent implements OnInit {
    * @param file
    */
   sendFile(file) {
-    let _this = this, img = _this.tools.uploadImg(file);
+    let _this = this, img = _this.operationService.uploadImgHelp(file);
     if(!isNullOrUndefined(img)){
       $("#summernote").summernote('insertImage', img,function($image){
         $image.css({//设置图片的大小

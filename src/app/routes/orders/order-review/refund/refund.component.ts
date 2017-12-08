@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from "@angular/core";
 import {isNullOrUndefined, isUndefined} from "util";
 import {Page} from "../../../../core/page/page";
 import {SubmitService} from "../../../../core/forms/submit.service";
@@ -11,6 +11,7 @@ import {RefundService} from "./refund.service";
 import {ToRefundComponent} from "../to-refund/to-refund.component";
 import {PatternService} from "../../../../core/forms/pattern.service";
 import {ActivatedRoute} from "@angular/router";
+import {OrderReviewService} from "../order-review.service";
 declare var $: any;
 const swal = require('sweetalert');
 @Component({
@@ -46,7 +47,7 @@ public realPay:any;//退款金额
    * queueLimit 上传文件控制
    */
   public uploader: FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url: OrderReviewService.fincneUpload,
     itemAlias: "limitFile",
     allowedFileType: ["image"],
     queueLimit: 1

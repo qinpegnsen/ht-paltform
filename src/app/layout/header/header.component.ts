@@ -79,12 +79,15 @@ export class HeaderComponent implements OnInit{
       curPage: 1,
     };
     this.platformInfoDataTotal = new Page(this.submitService.getData(url, data));
-    for(var i=0;i<this.platformInfoDataTotal.voList.length;i++){
-      if(this.platformInfoDataTotal.voList[i].isRead=='N'){
-        noReadArr.push(this.platformInfoDataTotal.voList[i]);
+    if(this.platformInfoDataTotal.voList){
+      for(var i=0;i<this.platformInfoDataTotal.voList.length;i++){
+        if(this.platformInfoDataTotal.voList[i].isRead=='N'){
+          noReadArr.push(this.platformInfoDataTotal.voList[i]);
+        };
       };
-    };
-    this.noReadLength=noReadArr.length;
+      this.noReadLength=noReadArr.length;
+    }
+
   }
 
   /**

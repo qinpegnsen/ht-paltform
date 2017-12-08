@@ -6,7 +6,7 @@ import {AjaxService} from '../../../core/services/ajax.service';
 
 @Injectable()
 export class OrderReviewService {
-
+  static fincneUpload: string = "upload/basic/fincneUpload";//财务凭证上传，需要uuid, 返回URL，带HTTP
   constructor(public submit: SubmitService,public ajax: AjaxService) { }
 
   public getOrderLogisticsData(ordno) {
