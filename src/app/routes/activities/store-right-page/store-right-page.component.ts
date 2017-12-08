@@ -8,7 +8,7 @@ import {AppComponent} from "../../../app.component";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {ActivitiesService} from "../activities.service";
 declare var $;
-
+const uploadUrl = "/upload/basic/activityUpload";  //图片上传路径(调取上传的接口)
 @Component({
   selector: 'app-store-right-page',
   templateUrl: './store-right-page.component.html',
@@ -26,18 +26,16 @@ export class StoreRightPageComponent implements OnInit {
   public myLogoImg: any;        //logo图片
   public mySloganImg: any;      //宣传图片
   public uploaderLogo: FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url: uploadUrl,
     itemAlias: "limitFile",
     queueLimit: 1,
     allowedFileType:["image"]
   });
   public uploaderSloganPic: FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url: uploadUrl,
     itemAlias: "limitFile",
-    autoUpload: true,
     allowedFileType:["image"]
   });
-
   constructor(public settings: SettingsService,
               public routeInfo: ActivatedRoute,
               public GetUidService: GetUidService,
@@ -116,7 +114,6 @@ export class StoreRightPageComponent implements OnInit {
         state: obj.state
       };
       let result=this.service.updateRpStore(url, data);
-      console.log("█ result ►►►",  result);
       if(result=='请上传logo'||result=='请上传宣传图'||result=='企业简称已存在'){
         return;
       };
@@ -227,7 +224,6 @@ export class StoreRightPageComponent implements OnInit {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
     };
-
 
     /**
      * 上传失败处理

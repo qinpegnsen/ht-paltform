@@ -12,7 +12,7 @@ import {OperationService} from "../../../operation.service";
 import {GoodsService} from "../../../../goods/goods.service";
 
 declare var $: any;
-const uploadUrl = "/upload/basic/upload";  //图片上传路径(调取上传的接口)
+const uploadUrl = "/upload/basic/articleUpload";  //图片上传路径(调取上传的接口)
 
 @Component({
   selector: 'app-add-article',
@@ -375,7 +375,7 @@ export class AddArticleComponent implements OnInit ,OnDestroy{
    * @param file
    */
   sendFile(file) {
-    let _this = this, img = _this.tools.uploadImg(file);
+    let _this = this, img = _this.operationService.uploadImg(file);
     if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img, function ($image) {
         $image.css({//设置图片的大小
