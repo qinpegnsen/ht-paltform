@@ -46,7 +46,7 @@ export class BankTransferComponent implements OnInit {
    * queueLimit 上传文件控制
    */
   public uploader: FileUploader = new FileUploader({
-    url: '/upload/basic/upload',
+    url:"upload/basic/fincneUpload",
     itemAlias: "limitFile",
     allowedFileType: ["image"],
     queueLimit: 1
