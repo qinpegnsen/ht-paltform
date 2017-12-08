@@ -632,7 +632,7 @@ export class EditDetailComponent implements OnInit {
    * @param file
    */
   sendFile(file) {
-    let _this = this, img = _this.tools.uploadImg(file);
+    let _this = this, img = _this.goods.uploadImg(file);
     if (!isNullOrUndefined(img)) {
       $("#summernote").summernote('insertImage', img, '');
       let obj = {
