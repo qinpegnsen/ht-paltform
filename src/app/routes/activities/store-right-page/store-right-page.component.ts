@@ -100,7 +100,7 @@ export class StoreRightPageComponent implements OnInit {
         sloganPicUUID: this.sloganPicUUID
       };
       let result=this.service.addRedPackRules(url, data);
-      if(result=='请上传logo'||result=='请上传宣传图'||result=='该企业简称已存在'){
+      if(result=='请上传logo'||result=='请上传宣传图'||result=='企业简称已存在'){
         return;
       };
     } else if (this.type == "edit") {
