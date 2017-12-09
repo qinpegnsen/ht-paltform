@@ -21,14 +21,14 @@ const swal = require('sweetalert');
   providers: [RefundService]
 })
 export class RefundComponent implements OnInit {
-  select: any = {}; //选择的年份和月份信息
-  nowTime:any = {};//当前时间（年月日）
+  public select: any = {}; //选择的年份和月份信息
+  public nowTime:any = {};//当前时间（年月日）
   public timeIsValid: boolean = true;
   public goodsList: Page = new Page();
   public ordno: string;//获取区域编码
   public selectBank: any;
   public code: string = '';
-public realPay:any;//退款金额
+  public realPay:any;//退款金额
   @Input('showRefundWindow') showRefundWindow: boolean;
   bsConfig: Partial<BsDatepickerConfig>;
   public showSec: boolean = true;
@@ -74,6 +74,7 @@ public realPay:any;//退款金额
 
   constructor(public submit: SubmitService, public GetUidService: GetUidService, public refundService: RefundService,
               public toRefundComponent: ToRefundComponent, public patterns: PatternService,public routeInfo: ActivatedRoute) {
+
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       dateInputFormat: 'YYYY-MM-DD',//将时间格式转化成年月日的格式
@@ -225,11 +226,12 @@ public realPay:any;//退款金额
   }
 
   isValid() {
-    this.timeIsValid = true;
-
+    let _this=this;
+    _this.timeIsValid = true;
   }
 
   changed() {
-    this.timeIsValid = false;
+    let _this=this;
+    _this.timeIsValid = false;
   }
 }

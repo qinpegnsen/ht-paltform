@@ -73,8 +73,8 @@
           <dd class="orderId-color col-xs-9 font14">
             <input type="text" class="form-control" [(ngModel)]="datepickerModel" name="time1" bsDatepicker
                    #dp="bsDatepicker" [bsConfig]="bsConfig" required readonly [maxDate]="nowTime">
-            <!--<timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>-->
-            <timepicker [(ngModel)]="myTime" id="name" [showSeconds]="showSec" name="time" (ngModelChange)='changed()' (isValid)="isValid()"></timepicker>
+            <timepicker [(ngModel)]="myTime" id="name" [showSeconds]="showSec" name="time" (ngModelChange)='changed()'
+                        (isValid)="isValid()"></timepicker>
             <div [hidden]="timeIsValid==true" id="name_msg" class="text-danger">
               请填写正确时间(填写后点击空白区域)
             </div>

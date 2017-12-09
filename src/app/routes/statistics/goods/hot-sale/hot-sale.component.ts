@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
@@ -15,7 +15,7 @@ import {AppComponent} from "../../../../app.component";
 export class HotSaleComponent implements OnInit {
 
   public flag: boolean = true;//定义boolean值用来控制内容组件是否显示
-  datepickerModel: Date= new Date();
+  datepickerModel: Date = new Date();
   bsConfig: Partial<BsDatepickerConfig>;
   yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
   month: Array<string> = SettingsService.month; //获取月份信息
@@ -25,8 +25,8 @@ export class HotSaleComponent implements OnInit {
 
   public queryType: any = 'DAY';//日期选择
   public queryTypes: any;//日期选择
-  public queryContent: any="ORDSUM";//内容选择
-  public queryContentText: any="下单金额(元)";//内容选择
+  public queryContent: any = "ORDSUM";//内容选择
+  public queryContentText: any = "下单金额(元)";//内容选择
   public queryContents;//内容选择
 
   queryTime: any = new Date();
@@ -54,21 +54,9 @@ export class HotSaleComponent implements OnInit {
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryContents = this.tools.getEnumDataList('1402');   //内容状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
-    _this.select.year = new Date().getFullYear();//获取默认年
-    _this.select.month = new Date().getMonth()+1;//获取默认月
-    _this.weekForMonth = _this.tools.getWeekListByMonth( _this.select.year, _this.select.month);
-    _this.weekForMonth.forEach(ele => {
-      let start =  new Date(ele.split('~')[0]).getDate();
-      let end =  new Date(ele.split('~')[1]).getDate();
-      let now = new Date().getDate();
-      if(now > start && now <end){
-        _this.select.week = ele;
-      }else if(now==start||now==end){
-        _this.select.week = ele;//获取默认周
-      } ;
-    });
     _this.qeuryAll();
   }
+
   /**
    * 获取年份和月份信息
    */
@@ -85,6 +73,9 @@ export class HotSaleComponent implements OnInit {
    */
   search() {
     let _this = this;
+    _this.select.year = new Date().getFullYear();//获取默认年
+    _this.select.month = new Date().getMonth() + 1;//获取默认月
+    _this.getWeekListByMonth();
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
@@ -93,10 +84,10 @@ export class HotSaleComponent implements OnInit {
   /**
    * 查询
    */
-  qeuryAll(type?:string,obj?) {
+  qeuryAll(type?: string, obj?) {
     let me = this;
-    if(!isNullOrUndefined(type)) me.queryContent = type;
-    me.queryContentText = me.queryContent=='ORDSUM'?'下单金额(元)':'下单商品数';
+    if (!isNullOrUndefined(type)) me.queryContent = type;
+    me.queryContentText = me.queryContent == 'ORDSUM' ? '下单金额(元)' : '下单商品数';
     let url = "/statistical/hotsGoods";
     let data = {
       queryType: me.queryType,
@@ -105,7 +96,7 @@ export class HotSaleComponent implements OnInit {
     }
     let result = this.submit.getData(url, data);
     me.data = result;
-    me.nowData =me.data;
+    me.nowData = me.data;
     me.optionPrevInfo();
     // console.log("█ result ►►►",  result);
   }
@@ -113,11 +104,11 @@ export class HotSaleComponent implements OnInit {
   /**
    * 绘制图表（私有）
    */
-  public optionPrevInfo(){
+  public optionPrevInfo() {
     let _this = this;
     _this.optionPrev = {
       title: {
-        left:"center",
+        left: "center",
         text: '热卖商品50强'
       },
       color: ['#3398DB'],
@@ -128,12 +119,12 @@ export class HotSaleComponent implements OnInit {
         }
       },
       toolbox: {
-        show : true,
-        right:"3%",
-        feature : {
-          magicType : {show: true, type: ['line', 'bar']},
-          restore : {show: true},
-          saveAsImage : {show: true}
+        show: true,
+        right: "3%",
+        feature: {
+          magicType: {show: true, type: ['line', 'bar']},
+          restore: {show: true},
+          saveAsImage: {show: true}
         }
       },
       grid: {
@@ -158,7 +149,7 @@ export class HotSaleComponent implements OnInit {
       ],
       series: [
         {
-          name:_this.queryContentText ,
+          name: _this.queryContentText,
           type: 'bar',
           barWidth: '30%',
           data: _this.nowData.yaxis
@@ -172,7 +163,20 @@ export class HotSaleComponent implements OnInit {
    */
   getWeekListByMonth() {
     let _this = this, time = _this.getMonth();
-    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]); //获取周列表
+    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]);
+    //获取周列表
+    _this.weekForMonth.forEach(ele => {//为了默认显示当前日期所在的周
+      let start = new Date(ele.split('~')[0]).getDate();
+      let end = new Date(ele.split('~')[1]).getDate();
+      let now = new Date().getDate();
+      if (now > start && now < end) {
+        _this.select.week = ele;
+      } else if (now == start || now == end) {
+        _this.select.week = ele;//获取默认周
+      } else if (now > start || now > end) {//两个月的交界处
+        _this.select.week = ele;//获取默认周
+      }
+    });
   }
 
 
@@ -182,7 +186,7 @@ export class HotSaleComponent implements OnInit {
    */
   selectInfos() {
     let _this = this, type = _this.queryType;
-    switch (type){
+    switch (type) {
       case 'DAY':
         _this.queryTime = RzhtoolsService.dataFormat(new Date(this.datepickerModel), "yyyy-MM-dd");
         break;
@@ -192,7 +196,8 @@ export class HotSaleComponent implements OnInit {
       case 'WEEK':
         _this.queryTime = _this.select.week;
         break;
-    };
+    }
+    ;
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {

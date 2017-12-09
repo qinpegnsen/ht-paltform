@@ -19,24 +19,24 @@ defineLocale('cn', zhCn);
 export class UsersNewComponent implements OnInit {
 
   public flag: boolean = true;//定义boolean值用来控制内容组件是否显示
-  datepickerModel: Date = new Date();
-  bsConfig: Partial<BsDatepickerConfig>;
-  yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
-  month: Array<string> = SettingsService.month; //获取月份信息
-  weekForMonth: Array<string> = new Array(); //指定年月下的日期
-  select: any = {}; //选择的年份和月份信息
-  showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
+  public datepickerModel: Date = new Date();
+  public bsConfig: Partial<BsDatepickerConfig>;
+  public yearInfo: Array<string> = SettingsService.yearInfo; //获取年份信息
+  public month: Array<string> = SettingsService.month; //获取月份信息
+  public weekForMonth: Array<string> = new Array(); //指定年月下的日期
+  public select: any = {}; //选择的年份和月份信息
+  public showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
   public queryType: any = 'DAY';//日期选择
-  contrastTime: any = new Date().getSeconds();
+  public contrastTime: any = new Date().getSeconds();
   public queryTypes: any;//日期选择
-  queryTime: any = new Date();
-  info: any = new Date();
+  public queryTime: any = new Date();
+  public info: any = new Date();
 
   public data: any;
-  now: string;
-  prev: string;
-  prevData: any;
-  nowData: any;
+  public now: string;
+  public prev: string;
+  public prevData: any;
+  public nowData: any;
 
   /**
    * 图表1
@@ -55,20 +55,6 @@ export class UsersNewComponent implements OnInit {
     let _this = this;
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryTime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(this.queryTime), 0), 'yyyy-MM-dd');
-    _this.select.year = new Date().getFullYear();//获取默认年
-    _this.select.month = new Date().getMonth() + 1;//获取默认月
-    _this.weekForMonth = _this.tools.getWeekListByMonth(_this.select.year, _this.select.month,);
-    _this.weekForMonth.forEach(ele => {
-      let start = new Date(ele.split('~')[0]).getDate();
-      let end = new Date(ele.split('~')[1]).getDate();
-      let now = new Date().getDate();
-      if (now > start && now < end) {
-        _this.select.week = ele;
-      } else if (now == start || now == end) {
-        _this.select.week = ele;//获取默认周
-      }
-      ;
-    });
     _this.qeuryAll();
   }
 
@@ -88,9 +74,33 @@ export class UsersNewComponent implements OnInit {
    */
   search() {
     let _this = this;
+    _this.select.year = new Date().getFullYear();//获取默认年
+    _this.select.month = new Date().getMonth() + 1;//获取默认月
+    _this.getWeekListByMonth();
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
+  }
+
+  /**
+   * 根据指定年月获取周列表
+   */
+  getWeekListByMonth() {
+    let _this = this, time = _this.getMonth();
+    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]);
+    //获取周列表
+    _this.weekForMonth.forEach(ele => {//为了默认显示当前日期所在的周
+      let start = new Date(ele.split('~')[0]).getDate();
+      let end = new Date(ele.split('~')[1]).getDate();
+      let now = new Date().getDate();
+      if (now > start && now < end) {
+        _this.select.week = ele;
+      } else if (now == start || now == end) {
+        _this.select.week = ele;//获取默认周
+      } else if (now > start || now > end) {//两个月的交界处
+        _this.select.week = ele;//获取默认周
+      }
+    });
   }
 
   /**
@@ -182,14 +192,6 @@ export class UsersNewComponent implements OnInit {
     };
   }
 
-  /**
-   * 根据指定年月获取周列表
-   */
-  getWeekListByMonth() {
-    let _this = this, time = _this.getMonth();
-    if (time != null) _this.weekForMonth = _this.tools.getWeekListByMonth(time.split("-")[0], time.split("-")[1]);
-    //获取周列表
-  }
 
   /**
    * 查询对应的数据信息（新增会员数）
@@ -207,7 +209,8 @@ export class UsersNewComponent implements OnInit {
       case 'WEEK':
         _this.queryTime = _this.select.week;
         break;
-    };
+    }
+    ;
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {
@@ -217,8 +220,8 @@ export class UsersNewComponent implements OnInit {
 
   /**
    * 详情查看
-  */
-  details(val,i) {
+   */
+  details(val, i) {
     let _this = this;
     if (_this.showType.DAY) { //按天查询时，详情信息
       let prevtime: string, nowtime: string, date: string;
@@ -226,22 +229,22 @@ export class UsersNewComponent implements OnInit {
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     } else if (_this.showType.MONTH) {//按月查询
       let prevtime: string, nowtime: string, date: string;
       date = this.select.year + "-" + this.nowData.keys[i];
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 0), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 1), "yyyy-MM-dd HH:mm:ss");
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     }
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
       date = this.data.queryTimeList[i];
       prevtime = date;
-      nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date),1), "yyyy-MM-dd HH:mm:ss") ;
+      nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 1), "yyyy-MM-dd HH:mm:ss");
       let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime='+prevtime+'&nowtime='+nowtime)
+      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     }
 
 
