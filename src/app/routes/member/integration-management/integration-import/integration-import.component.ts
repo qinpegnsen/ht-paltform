@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {FileUploader} from "ng2-file-upload";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {AppComponent} from "../../../../app.component";
 import {MaskService} from "../../../../core/services/mask.service";
-import {isNullOrUndefined} from "util";
-import {cli} from "webdriver-manager/built/lib/webdriver";
 const swal = require('sweetalert');
 declare var $: any;
 @Component({
@@ -25,12 +23,10 @@ export class IntegrationImportComponent implements OnInit {
   constructor(public submitt:SubmitService) { }
 
   ngOnInit() {
-    // console.log("█ this.uploader ►►►",  this.uploader);
   }
  //清空选中的表格
   changeFiles(){
     this.onOff = true;
-    // $("button").css({backgroundColor:"#37bc9b",border:"2px solid #37bc9b"});
     if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
   }
 
