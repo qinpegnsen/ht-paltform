@@ -14,7 +14,7 @@
             <div class="col-xs-9">
               <!--<div class=" font14 f-bold">发放金额（元）</div>-->
               <div class="font14">未审核提现总额（元）</div>
-              <p class="text-md m0">{{amountData?.sumWithDraw | number: '1.2-2'}}</p>
+              <p class="text-md m0">{{amountData?.sumWithDraw || '0' | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -32,7 +32,7 @@
             <div class="col-xs-9 ">
               <!--<div class="font14 f-bold">领取金额（元）</div>-->
               <div class="font14">昨日提现总额（元）</div>
-              <p class="text-md m0">{{amountData?.sumYestodayDraw | number: '1.2-2'}}</p>
+              <p class="text-md m0">{{amountData?.sumYestodayDraw || '0' | number: '1.2-2'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-money fa-3x tp-em"></em>
@@ -109,7 +109,6 @@
         <td>{{item.state | rzhState:'2102'}}</td>
         <td>{{item.createTime }}</td>
         <td>
-          <!--目前只做银行转账 微信和支付宝走不通-->
           <button class="btn btn-sm btn-green fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.state=='CR'"> 同意提现
           </button>
           <button class="btn btn-sm btn-green fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'">上传凭证
