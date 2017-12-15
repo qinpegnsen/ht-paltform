@@ -21,6 +21,13 @@
         <li class="pull-left thc" [class.font]="isUse=='N'" [class.bb]="isUse=='N'"
             (click)="qeuryAll('N',1)">未生效
         </li>
+        <li class="pull-right _width200">
+          <span class="mr-sm myposition">红包开关按钮</span>
+          <label class="switch rpSwitchlabel">
+            <input type="checkbox" class="rpSwitch" [(ngModel)]="switch" (change)="isOpen(rpSwitchStare)"/>
+            <span></span>
+          </label>
+        </li>
       </ul>
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="redPackData"
              (pageChange)="qeuryAll(1,$event)">

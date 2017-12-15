@@ -156,7 +156,6 @@ export class ActivitiesService {
     return result;
   }
 
-
   /**
    * load 当前企业的信息
    */
@@ -289,14 +288,70 @@ export class ActivitiesService {
   }
 
   /**
-   * 追加企业投资记录
+ * 追加企业投资记录
+ * @param url
+ * @param data
+ * @returns {any}
+ */
+public addRpAccountRec(url,data) {
+  let result;
+  this.ajax.post({
+    url: url,
+    data: data,
+    async:false,
+    success: (res) => {
+      if(res.success){
+        result=res.data;
+        AppComponent.rzhAlt("success", res.info);
+      }else{
+        result=res.info;
+        AppComponent.rzhAlt("error", res.info);
+      }
+    },
+    error: (res) => {
+      AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+    }
+  });
+  return result;
+}
+
+  /**
+   * 当前红包开关的状态
    * @param url
    * @param data
    * @returns {any}
    */
-  public addRpAccountRec(url,data) {
+  public RpSwitchState(url,data) {
     let result;
-    this.ajax.post({
+    this.ajax.put({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        if(res.success){
+          result=res.data;
+        }else{
+          result=res.info;
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+
+  /**
+   * 当前红包开关的状态
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  public updateRpSwitchState(url,data) {
+    let result;
+    this.ajax.put({
       url: url,
       data: data,
       async:false,
@@ -304,6 +359,34 @@ export class ActivitiesService {
         if(res.success){
           result=res.data;
           AppComponent.rzhAlt("success", res.info);
+        }else{
+          result=res.info;
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+
+  /**
+   * 红包奖池导航剩余的余额和使用天数
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  public restBalanceAnddays(url,data) {
+    let result;
+    this.ajax.put({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        if(res.success){
+          result=res.data;
         }else{
           result=res.info;
           AppComponent.rzhAlt("error", res.info);

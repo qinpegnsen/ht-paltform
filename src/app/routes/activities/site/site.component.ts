@@ -4,6 +4,11 @@ import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {isNullOrUndefined} from "util";
+import {ActivitiesService} from "../activities.service";
+import {Router} from "@angular/router";
+import {Location} from "@angular/common";
+const swal = require('sweetalert');
+declare var $: any;
 
 @Component({
   selector: 'app-site',
@@ -11,22 +16,30 @@ import {isNullOrUndefined} from "util";
   styleUrls: ['./site.component.scss']
 })
 export class SiteComponent implements OnInit {
-
-  public redPacketRules:any;                //新增红包规则的按钮
-  public redPackData:any;                   //红包规则列表的数据
-  public isUse:string='Y';                  //红包是否启用
-  public type:string='';                    //列表的在状态是生效还是未生效
+  public switch: boolean = false;
+  public redPacketRules: any;                //新增红包规则的按钮
+  public redPackData: any;                   //红包规则列表的数据
+  public isUse: string = 'Y';                  //红包是否启用
+  public type: string = '';                    //列表的在状态是生效还是未生效
   public showList: boolean = true;          //是否显示列表页
+  public rpSwitchStare: string;               //红包开关当前的状态
+  public rpPondReset: any;                    //红包奖池余额和剩余天数的信息
 
-  constructor(private submit: SubmitService) { }
+  constructor(private submit: SubmitService,
+              public activitiesService: ActivitiesService,
+              public router: Router,
+              public location: Location,) {
+  }
 
   ngOnInit() {
-    this.redPacketRules={
-      title:"设置规则",
-      text:"设置规则",
+    this.redPacketRules = {
+      title: "设置规则",
+      text: "设置规则",
       type: "add-thc"
     };
-    this.qeuryAll(this.isUse,1)
+    this.qeuryAll(this.isUse, 1);
+    this.queryRpSwitchState();//查询红包开关的状态
+    this.quryRestBalanceAnddays();//查询红包奖池剩余的余额和使用天数
   }
 
   /**
@@ -43,33 +56,128 @@ export class SiteComponent implements OnInit {
    */
   onDeactivate() {
     this.showList = true;
-    this.qeuryAll('N',1);
+    this.qeuryAll('N', 1);
+  }
+
+  /**
+   * 红包开关是否开启
+   */
+  isOpen(rpSwitchStare) {
+    let that = this;
+    swal({
+      title: rpSwitchStare == 'Y' ? '您确认要关闭红包开关吗？' : '您确认要开启红包开关吗？',
+      text: rpSwitchStare == 'Y' ? '关闭红包开关' : '奖池余额：' + that.rpPondReset.balance + ' 元' + '\n' + '可使用剩余天数：' + that.rpPondReset.in + ' 天',
+      type: rpSwitchStare == 'N' ? 'success' : 'info',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      closeOnConfirm: false,
+      confirmButtonText: "确认",
+      confirmButtonColor: "#ec6c62"
+    }, function (isConfirm) {
+      if (isConfirm) {
+        that.switch = true;
+        if (that.rpSwitchStare == 'N') {
+          let url = '/redSchedulingAudit/updateRpDrawState';
+          let data = {
+            state: 'Y'
+          };
+          that.activitiesService.updateRpSwitchState(url, data);
+          swal.close(); //关闭弹框
+          that.queryRpSwitchState();
+        } else {
+          that.closeRpSwitch()
+        }
+      } else {
+        that.switch = false;
+        that.ngOnInit();
+        // let yesNode='<input type="checkbox" class="rpSwitch" [checked]="rpSwitchStare==Y" (change)="isOpen(rpSwitchStare)">';
+        // let noNode='<input type="checkbox" class="rpSwitch">';
+        // if(rpSwitchStare == 'Y'){
+        //   $('.rpSwitchlabel').prepend('<b>你好</b>');
+        // }else{
+        //   $('.rpSwitchlabel').prepend('<input type="checkbox" (change)="isOpen(rpSwitchStare)">');
+        // }
+        // $('.rpSwitch').remove();
+      }
+    });
+  }
+
+  /**
+   * 关闭红包开关
+   * @param rpSwitchStare
+   */
+  closeRpSwitch() {
+    let that = this;
+    swal({
+      title: '请再次进行确认？',
+      text: '关闭红包开关后将无法正常使用红包功能！',
+      type: "info",
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      closeOnConfirm: false,
+      confirmButtonText: "确认",
+      confirmButtonColor: "#ec6c62"
+    }, function (isConfirm) {
+      if (isConfirm) {
+        let url = '/redSchedulingAudit/updateRpDrawState';
+        let data = {
+          state: 'N'
+        };
+        that.activitiesService.updateRpSwitchState(url, data);
+        swal.close(); //关闭弹框
+        that.queryRpSwitchState();
+      }
+    });
   }
 
   /**
    * 红包规则列表
    */
-  qeuryAll(state,curPage,event?: PageEvent){
-    this.isUse=state;
+  qeuryAll(state, curPage, event?: PageEvent) {
+    this.isUse = state;
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
-    };
+    }
+    ;
     let url = "/rpSetting/queryRpSettingAdmin";
-    let data={
+    let data = {
       curPage: activePage,
-      pageSize:10,
-      isUsed:'',
+      pageSize: 10,
+      isUsed: '',
     };
-    if(isNullOrUndefined(state)){//分页
-      data.isUsed=this.isUse;
-    }else{//导航
-      data.isUsed=state;
-    };
-    let result = this.submit.getData(url,data);
+    if (isNullOrUndefined(state)) {//分页
+      data.isUsed = this.isUse;
+    } else {//导航
+      data.isUsed = state;
+    }
+    ;
+    let result = this.submit.getData(url, data);
     me.redPackData = new Page(result);
   }
 
+  /**
+   * 查询红包按钮当前的状态
+   */
+  queryRpSwitchState() {
+    let url = '/redSchedulingAudit/loadRpDrawState';
+    let data = {};
+    this.rpSwitchStare = this.activitiesService.RpSwitchState(url, data);
+    if(this.rpSwitchStare=='N'){
+      this.switch=false;
+    }else{
+      this.switch=true;
+    }
+  }
+
+  /**
+   * 查询红包奖池余额和剩余天数的信息
+   */
+  quryRestBalanceAnddays() {
+    let url = '/redSchedulingAudit/residueBalanceUseDays';
+    let data = {};
+    this.rpPondReset = this.activitiesService.restBalanceAnddays(url, data);
+  }
 }
