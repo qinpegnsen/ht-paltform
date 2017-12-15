@@ -138,7 +138,17 @@ const goods = {
     {
       text: '品牌管理',
       icon: 'fa fa-cubes',
-      link: '/main/goods/brands'
+      alert: '▼',
+      submenu: [
+        {
+          text: '管理品牌',
+          link: '/main/goods/brands'
+        },
+        {
+          text: '品牌审核',
+          link: '/main/goods/auditBrand'
+        }
+      ]
     },
     {
       text: '批发商品管理',

@@ -21,6 +21,10 @@ import {UpdateDataComponent} from "./update-data/update-data.component";
 import {UnAuditComponent} from "./un-audit/un-audit.component";
 import {SkuGoodsComponent} from "./sku-goods/sku-goods.component";
 import {DataTable} from "../../shared/directives/ng2-datatable/DataTable";
+import {AuditBrandComponent} from "./audit-brand/audit-brand.component";
+import {AuditListComponent} from "./audit-brand/audit-list/audit-list.component";
+import {AuditWindowComponent} from "./audit-brand/audit-window/audit-window.component";
+import {AuditDetailComponent} from "./audit-brand/audit-detail/audit-detail.component";
 
 
 // 父路由，用于页面嵌套显示
@@ -62,6 +66,17 @@ const routes: Routes = [
     {path: 'upBrandImg', component: AddBrandComponent},
     {path: 'brandDetail', component: AddBrandComponent}
   ]
+  },
+  {
+    path: 'auditBrand', component: AuditBrandComponent, children: [
+    {path: '', redirectTo: 'unAudit'},
+    {path: 'unAudit', component: AuditListComponent,children: [
+      {path: 'audit', component: AuditWindowComponent},
+      {path: 'detail', component: AuditDetailComponent},
+    ]},
+    {path: 'audited', component: AuditListComponent},
+    {path: 'reject', component: AuditListComponent}
+  ]
   }
 ];
 
@@ -87,7 +102,11 @@ const routes: Routes = [
     AddDataComponent,
     UpdateDataComponent,
     UnAuditComponent,
-    SkuGoodsComponent
+    SkuGoodsComponent,
+    AuditBrandComponent,
+    AuditListComponent,
+    AuditWindowComponent,
+    AuditDetailComponent
   ],
   providers: [
     GoodsService,

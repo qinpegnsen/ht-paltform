@@ -1,0 +1,125 @@
+<div *ngIf="showList">
+  {{content}}
+
+  <!--搜索 start-->
+  <div class="panel mb p clearfix">
+    <div class="search-group pl0">
+      <div class="search-title">分类：</div>
+      <div class="search-main">
+        <div class="btn-group w100" dropdown>
+          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b
+            class="caret pull-right"></b>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu">
+            <li (click)="selected('', '请选择分类')">
+              <a href="#">请选择分类</a>
+            </li>
+            <li *ngFor="let kind of kindList" (click)="selected(kind.id, kind.kindName)">
+              <a href="#">{{kind.kindName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="search-group ml-lg mb align-top">
+      <span class="search-title">首字母：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.brandInitial"
+               class="form-control border-b-grey"
+               (change)="queryDatas(1)" placeholder="首字母">
+      </div>
+    </div>
+    <div class="search-group mb align-top">
+      <span class="search-title">品牌：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.brandName"
+               class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+      </div>
+    </div>
+    <button type="button" title="搜索" (click)="queryDatas(1)"
+            class="btn thc btn-thc align-top ml">
+      <em class="icon-magnifier fa-fw"></em>
+    </button>
+  </div>
+  <!--搜索 end-->
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="brands" (pageChange)="queryDatas(1,$event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="brandName">品牌名称</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="brandEnName">英文名称</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="brandOwner">品牌所有人</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="logo">品牌图片</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="brandRegCards">品牌注册证</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let brand of dataTable.data;let i = index" class="text-center">
+        <td>{{i+1}}</td>
+        <td class="hidden-sm">{{brand.brandInitial}}</td>
+        <td>{{brand.brandName}}</td>
+        <td>{{brand.brandName}}</td>
+        <td>
+          <img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                 alt="">
+          <img class="hover-big-img" [src]="brand.brandPic"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
+               alt=""></td>
+        <td>
+          <img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                 alt="">
+          <img class="hover-big-img" [src]="brand.brandPic"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
+               alt=""></td>
+        <td>
+          <!--<ng-container *ngIf="brand.brandApply == 'APPLY'">-->
+          <ng-container *ngIf="path == 'unAudit'">
+            <button class="btn btn-purple btn-xs fa fa-check-square-o" routerLink="audit" title="审核"></button>
+            <button class="btn btn-danger btn-xs fa fa-trash" title="删除"
+                    (click)="deleteBrand(brands.curPage, brand.brandId)"></button>
+          </ng-container>
+          <button class="btn btn-green btn-xs icon-magnifier-add" routerLink="detail" title="详情"
+                  [queryParams]="{page: brands.curPage, brandId: brand.brandId}"></button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{brands.genStartRow()}} 至 {{brands.genEndRow()}} 条，共 {{brands.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

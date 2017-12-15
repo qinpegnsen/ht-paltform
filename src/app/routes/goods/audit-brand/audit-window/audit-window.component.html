@@ -1,0 +1,69 @@
+<div class="audit fadeIn">
+  <div class="mask" (click)="hideWindow()"></div>
+  <div class="popup animated fadeIn">
+    <div class="pop popup-hd">
+      <span class="f-bold">审核</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="pop font12 w100">
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌名称：</dt>
+        <dd class="col-xs-9 font14">华为</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌英文名称：</dt>
+        <dd class="col-xs-9 font14">huawei</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌所有人：</dt>
+        <dd class="col-xs-9 font14">戴夫</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌注册号：</dt>
+        <dd class="col-xs-9 font14">41208528552</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌图片：</dt>
+        <dd class="col-xs-9 font14">
+          <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img class="hover-big-img" [src]="'..'" alt=""
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌注册证：</dt>
+        <dd class="col-xs-9 font14">
+          <div class="tag-dib mr" *ngFor="let item of [0,1]">
+            <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'">
+            <img class="hover-big-img" [src]="'..'" alt=""
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          </div>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">排序：</dt>
+        <dd class="col-xs-9">
+          <div class="w60">
+            <input class="form-control num" type="number" name="brandSort" tooltip="0-99，默认0 , 数字越小排序越靠前"
+                   [(ngModel)]="brandInfo.brandSort" #brandSort="ngModel" [pattern]="patterns.doubleDigit"
+                   placeholder="排序"/>
+          </div>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌英文名称：</dt>
+        <dd class="col-xs-9 font14">huawei</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">品牌所有人：</dt>
+        <dd class="col-xs-9 font14">戴夫</dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-green" type="submit">确认提交</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="order panel mb">
+  <div class="panel-body">
+    <div>
+      <ul class="menu-guide list-unstyled clearfix bb">
+        <li class="pull-left thc" [ngClass]="{font: auditType=='APPLY',bb:auditType=='APPLY'}"
+            routerLink="unAudit">未审核
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: auditType=='PASS',bb:auditType=='PASS'}"
+            routerLink="audited">审核通过
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: auditType=='UNPASS',bb:auditType=='UNPASS'}"
+            routerLink="reject">审核驳回
+        </li>
+      </ul>
+    </div>
+    <!--路由嵌套 begin-->
+    <router-outlet></router-outlet>
+    <!--路由嵌套 end-->
+  </div>
+</div>
+
