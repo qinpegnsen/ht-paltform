@@ -53,12 +53,38 @@
         </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌英文名称：</dt>
-        <dd class="col-xs-9 font14">huawei</dd>
+        <dt class="col-xs-3">是否推荐：</dt>
+        <dd class="col-xs-9 font14">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="brandRecommend" value="Y" checked="checked"
+                   [(ngModel)]="brandInfo.brandRecommend"/>
+            <span class="fa fa-circle"></span>是</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="brandRecommend" value="N" [(ngModel)]="brandInfo.brandRecommend"/>
+            <span class="fa fa-circle"></span>否</label>
+        </dd>
       </dl>
       <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌所有人：</dt>
-        <dd class="col-xs-9 font14">戴夫</dd>
+        <dt class="col-xs-3">品牌展示类型：</dt>
+        <dd class="col-xs-9 font14">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="showType" value="IMG" checked="checked" [(ngModel)]="brandInfo.showType"/>
+            <span class="fa fa-circle"></span>图片</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="showType" value="TXT" [(ngModel)]="brandInfo.showType"/>
+            <span class="fa fa-circle"></span>文本</label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">状态：</dt>
+        <dd class="col-xs-9 font14">
+          <label class="radio-inline c-radio">
+            <input type="radio" name="state" value="SHOW" checked="checked" [(ngModel)]="brandInfo.state"/>
+            <span class="fa fa-circle"></span>显示</label>
+          <label class="radio-inline c-radio">
+            <input type="radio" name="state" value="HIDE" [(ngModel)]="brandInfo.state"/>
+            <span class="fa fa-circle"></span>隐藏</label>
+        </dd>
       </dl>
     </div>
     <div class="panel-footer text-right">
