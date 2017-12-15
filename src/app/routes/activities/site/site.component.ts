@@ -16,7 +16,7 @@ declare var $: any;
   styleUrls: ['./site.component.scss']
 })
 export class SiteComponent implements OnInit {
-  public switch: boolean = false;
+  public switch: boolean = false;           //红包开关
   public redPacketRules: any;                //新增红包规则的按钮
   public redPackData: any;                   //红包规则列表的数据
   public isUse: string = 'Y';                  //红包是否启用
@@ -89,15 +89,6 @@ export class SiteComponent implements OnInit {
         }
       } else {
         that.switch = false;
-        that.ngOnInit();
-        // let yesNode='<input type="checkbox" class="rpSwitch" [checked]="rpSwitchStare==Y" (change)="isOpen(rpSwitchStare)">';
-        // let noNode='<input type="checkbox" class="rpSwitch">';
-        // if(rpSwitchStare == 'Y'){
-        //   $('.rpSwitchlabel').prepend('<b>你好</b>');
-        // }else{
-        //   $('.rpSwitchlabel').prepend('<input type="checkbox" (change)="isOpen(rpSwitchStare)">');
-        // }
-        // $('.rpSwitch').remove();
       }
     });
   }
@@ -165,10 +156,10 @@ export class SiteComponent implements OnInit {
     let url = '/redSchedulingAudit/loadRpDrawState';
     let data = {};
     this.rpSwitchStare = this.activitiesService.RpSwitchState(url, data);
-    if(this.rpSwitchStare=='N'){
-      this.switch=false;
-    }else{
-      this.switch=true;
+    if (this.rpSwitchStare == 'N') {
+      this.switch = false;
+    } else {
+      this.switch = true;
     }
   }
 

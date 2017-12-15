@@ -10,6 +10,8 @@
       <li>已生效规则页面只会显示最近生效的那一批次规则</li>
       <li>未生效规则页面只会显示一批次设置的规则，如果多次设置将会进行覆盖</li>
       <li>未生效规则在指定时间生效后，会自动转换为已生效规则</li>
+      <li>红包开关开启后，红包活动正常使用</li>
+      <li>红包开关关闭后，红包活动暂停使用</li>
     </ul>
   </div>
   <div class="panel mb">
@@ -22,9 +24,9 @@
             (click)="qeuryAll('N',1)">未生效
         </li>
         <li class="pull-right _width200">
-          <span class="mr-sm myposition">红包开关按钮</span>
-          <label class="switch rpSwitchlabel">
-            <input type="checkbox" class="rpSwitch" [(ngModel)]="switch" (change)="isOpen(rpSwitchStare)"/>
+          <span class="mr-sm myposition thc font">红包开关按钮</span>
+          <label class="switch">
+            <input type="checkbox"  [(ngModel)]="switch" (change)="isOpen(rpSwitchStare)"/>
             <span></span>
           </label>
         </li>
