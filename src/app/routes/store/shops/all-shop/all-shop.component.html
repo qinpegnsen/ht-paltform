@@ -1,0 +1,147 @@
+<ng-container *ngIf="showList">
+  <div [ngClass]="{panel:path =='shopAudit'}">
+    <!--查询start-->
+    <div class="panel mb">
+      <div class="panel-body p ng-scope mt">
+        <div class="tag-dib align-top">
+          <div class="search-group ml-xl mb align-top">
+            <span class="search-title">店铺名称：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="query.storeName"
+                     class="form-control border-b-grey"
+                     (change)="queryDatas()" placeholder="店铺名称">
+            </div>
+          </div>
+          <div class="search-group ml-xl mb align-top">
+            <span class="search-title">店铺编码：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="query.storeCode"
+                     class="form-control border-b-grey" placeholder="店铺编码">
+            </div>
+          </div>
+          <div class="search-group ml-xl mb align-top">
+            <span class="search-title">商家编码：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="query.sellerCode"
+                     class="form-control border-b-grey" placeholder="商家编码">
+            </div>
+          </div>
+          <div class="tag-dib">
+            <div class="place-time clearfix mb ml-xl">
+              <span class="_title">创建时间：</span>
+              <div class="_picker">
+                <div class="input-group">
+                  <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" [(ngModel)]="dataPickerTime"
+                         (bsValueChange)="getTimes($event)" #dpr="bsDaterangepicker" readonly>
+                  <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+                </div>
+              </div>
+            </div>
+            <button type="button" title="搜索" (click)="queryDatas()"
+                    class="btn thc btn-thc icon-magnifier align-top ml">
+            </button>
+            <button type="button" title="重置查询" (click)="resetQuery()"
+                    class="btn btn-green fa fa-refresh align-top ml">
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--查询end-->
+
+    <!--列表-->
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="shopList"
+             (pageChange)="queryDatas(1,$event)">
+        <thead>
+        <tr>
+          <th class="unselectable text-center w5">
+            <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-left">
+            <rzhDefaultSorter by="agent">店铺名称</rzhDefaultSorter>
+          </th>
+          <th class="col-md-2 unselectable text-left">
+            <rzhDefaultSorter by="address">地址</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="storeAvatar">头像</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="storeLabel">logo</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="phone">电话</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center" *ngIf="shopState == 'NORMAL'">
+            <rzhDefaultSorter by="sale">销量</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="time">创建时间</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="action">操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let item of dataTable.data;let i = index">
+          <tr class="text-center">
+            <td>{{i+1}}</td>
+            <td class="text-left">
+              <span *ngIf="item.platShop == 'Y'" class="tag bg-green">自营</span>
+              {{item.storeName}}
+            </td>
+            <td class="text-left">{{item.areaFullName+item.address}}</td>
+            <td>
+              <img height="50" [src]="item.storeAvatar" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+              <img class="hover-big-img" [src]="item.storeAvatar"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的头像'">
+            </td>
+            <td>
+              <img height="50" [src]="item.storeLabel" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+              <img class="hover-big-img" [src]="item.storeLabel"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的logo'">
+            </td>
+            <td>{{item.storePhone}}</td>
+            <td *ngIf="shopState == 'NORMAL'">{{item.storeSales}}</td>
+            <td>{{item.createTime}}</td>
+            <td>
+              <ng-container *ngIf="path == 'shopAudit'">
+                <button class="btn btn-purple btn-xs fa fa-check-square-o"
+                        (click)="setData(item.storeCode)"
+                        routerLink="audit" title="审核"></button>
+              </ng-container>
+              <button class="btn btn-green btn-xs icon-magnifier-add"
+                      (click)="setData(item.storeCode)"
+                      routerLink="detail" title="详情"></button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="10">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{shopList.genStartRow()}} 至 {{shopList.genEndRow()}} 条，共
+                {{shopList.totalRow}}
+                条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div class="pull-right">
+                <rzhBootstrapPaginator></rzhBootstrapPaginator>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</ng-container>
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->

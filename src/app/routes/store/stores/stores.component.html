@@ -1,0 +1,27 @@
+<div class="order panel mb">
+  <div class="panel-body">
+    <div>
+      <ul class="menu-guide list-unstyled clearfix bb">
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='',bb:enterPriseState==''}"
+            routerLink="allStore">全部
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='NORMAL',bb:enterPriseState=='NORMAL'}"
+            routerLink="noraml">审核通过
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='AUDIT',bb:enterPriseState=='AUDIT'}"
+            routerLink="audit">待审核
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='REJECT',bb:enterPriseState=='REJECT'}"
+            routerLink="reject">已驳回
+        </li>
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='BLACK',bb:enterPriseState=='BLACK'}"
+            routerLink="black">黑名单
+        </li>
+      </ul>
+    </div>
+    <!--路由嵌套 begin-->
+    <router-outlet></router-outlet>
+    <!--路由嵌套 end-->
+  </div>
+</div>
+

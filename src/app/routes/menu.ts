@@ -542,6 +542,38 @@ const store = {
         }
       ]
     },
+    {
+      text: '企业管理',
+      icon: 'fa fa-users',
+      link: '/main/store/storeAudit',
+      alert: '▼',
+      submenu: [
+        {
+          text: '入驻审核',
+          link: '/main/store/storeAudit'
+        },
+        {
+          text: '管理企业',
+          link: '/main/store/stores'
+        }
+      ]
+    },
+    {
+      text: '店铺管理',
+      icon: 'fa fa-users',
+      link: '/main/store/deposit',
+      alert: '▼',
+      submenu: [
+        {
+          text: '店铺审核',
+          link: '/main/store/shopAudit'
+        },
+        {
+          text: '管理店铺',
+          link: '/main/store/shops'
+        }
+      ]
+    }
   ]
 };
 const editPw = {

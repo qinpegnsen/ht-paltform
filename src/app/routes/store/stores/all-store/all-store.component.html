@@ -1,0 +1,131 @@
+<ng-container *ngIf="showList">
+  <div [ngClass]="{panel:path =='storeAudit'}">
+    <!--查询start-->
+    <div class="panel mb">
+      <div class="panel-body p ng-scope mt">
+        <div class="tag-dib align-top">
+          <div class="search-group ml-xl mb align-top">
+            <span class="search-title">企业名称：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="query.epName"
+                     class="form-control border-b-grey"
+                     (change)="queryDatas()" placeholder="企业名称">
+            </div>
+          </div>
+          <div class="search-group ml-xl mb align-top">
+            <span class="search-title">法人姓名：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="query.legalPersonName"
+                     class="form-control border-b-grey" placeholder="法人姓名">
+            </div>
+          </div>
+          <div class="place-time clearfix mb ml-xl">
+            <span class="_title">创建时间：</span>
+            <div class="_picker">
+              <div class="input-group">
+                <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" [(ngModel)]="dataPickerTime"
+                       (bsValueChange)="getTimes($event)" #dpr="bsDaterangepicker" readonly>
+                <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+              </div>
+            </div>
+          </div>
+          <button type="button" title="搜索" (click)="queryDatas()"
+                  class="btn thc btn-thc icon-magnifier align-top ml">
+          </button>
+          <button type="button" title="重置查询" (click)="resetQuery()"
+                  class="btn btn-green fa fa-refresh align-top ml">
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <!--查询end-->
+
+    <!--列表-->
+    <div class="panel-body">
+      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="storeList"
+             (pageChange)="queryDatas(1,$event)">
+        <thead>
+        <tr>
+          <th class="unselectable text-center w5">
+            <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-left">
+            <rzhDefaultSorter by="agent">企业名称</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="legalPersonName">企业法人</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="contactsName">负责人</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="contactsPhone">负责人电话</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="idType">营业执照类型</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="businessSphere">经营范围</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="address">企业地址</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="time">更新时间</rzhDefaultSorter>
+          </th>
+          <th class="col-md-1 unselectable text-center">
+            <rzhDefaultSorter by="action">操作</rzhDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let item of dataTable.data;let i = index">
+          <tr class="text-center">
+            <td>{{i+1}}</td>
+            <td class="text-left">{{item.epName}}</td>
+            <td>{{item.legalPersonName}}</td>
+            <td>{{item.contactsName}}</td>
+            <td>{{item.contactsPhone}}</td>
+            <td>{{item.idType | rzhState: '2002'}}</td>
+            <td>{{item.businessSphere}}</td>
+            <td>{{item.businessLicenceAreaName}}</td>
+            <td>{{item.updateTime}}</td>
+            <td>
+              <ng-container *ngIf="path == 'storeAudit'">
+                <button class="btn btn-purple btn-xs fa fa-check-square-o"
+                        (click)="setEpCode(item.epCode)"
+                        routerLink="audit"
+                        title="审核"></button>
+              </ng-container>
+              <button class="btn btn-green btn-xs icon-magnifier-add"
+                      (click)="setEpCode(item.epCode)"
+                      routerLink="detail"
+                      title="详情"></button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="10">
+            <div class="col-sm-5">
+              <div class="text-muted"><strong>第 {{storeList.genStartRow()}} 至 {{storeList.genEndRow()}} 条，共
+                {{storeList.totalRow}}
+                条</strong></div>
+            </div>
+            <div class="col-sm-7">
+              <div class="pull-right">
+                <rzhBootstrapPaginator></rzhBootstrapPaginator>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</ng-container>
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->
