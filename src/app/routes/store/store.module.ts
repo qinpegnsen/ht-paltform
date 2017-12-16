@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CashCheckComponent} from "./cash-check/cash-check.component";
 import {CashRecordComponent} from "./cash-record/cash-record.component";
-import {Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import {SharedModule} from "../../shared/shared.module";
+import {FileUploadModule} from "ng2-file-upload";
 
 
 const routes: Routes = [
@@ -13,7 +15,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    FileUploadModule
   ],
   declarations: [CashCheckComponent, CashRecordComponent]
 })

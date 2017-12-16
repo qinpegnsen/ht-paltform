@@ -1,3 +1,111 @@
-<p>
-  cash-record works!
-</p>
+<div class="content-heading mb-lg thc font">
+  提现记录
+</div>
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
+           (pageChange)="queryDatas(1,$event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          <rzhDefaultSorter by="sort"></rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-left">
+          <rzhDefaultSorter by="agent">代理商</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="bacctName">收款人姓名</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="acct">收款人账户</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="bank">收款账户开户行</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="drawMoney">提现金额</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="way">平台汇款方式</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="voncer">汇款凭证</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="remark">汇款备注</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="time">时间</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of dataTable.data;let i = index">
+        <tr class="text-center">
+          <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
+          <td class="text-left">{{item.agentName}}</td>
+          <td class="text-left">{{item.bacctName}}</td>
+          <td class="text-left">{{item.acct}}</td>
+          <td class="text-left">{{item.bank}}</td>
+          <td><span class="main-red">¥{{item.drawMoney}}</span></td>
+          <td>{{item.payWay | rzhState: '1803'}}</td>
+          <td>
+            <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"
+                 (mouseleave)="hideImg($event)"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+            <img [src]="item.voucherUrl" class="hover-biger-img"
+                 onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+          </td>
+          <td class="text-left font12">{{item.remark}}</td>
+          <td>{{item.doneTime}}</td>
+        </tr>
+
+        <tr *ngIf="detail[i]">
+          <td class="p0" colspan="11">
+            <ng-container *ngIf="item.createTime">
+              <div class="bg-table special text-left pl">
+                <span class="">申请时间：</span> <span>{{item.createTime}}</span>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="item.dealTime">
+              <div class="bg-table special text-left pl">
+                <span class="">处理时间：</span> <span>{{item.dealTime}}</span>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="item.doneTime">
+              <div class="bg-table special text-left pl">
+                <span class="">完成时间：</span> <span>{{item.doneTime}}</span>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="item.payWay=='REMIT'">
+              <div class="bg-table special text-left pl">
+                <span class="">汇款银行：</span> <span>{{item.payBank}}</span>
+              </div>
+              <div class="bg-table special text-left pl">
+                <span class="">汇款账户：</span> <span>{{item.payAcct}}</span>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+
+      </ng-container>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{deposits.genStartRow()}} 至 {{deposits.genEndRow()}} 条，共
+              {{deposits.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
