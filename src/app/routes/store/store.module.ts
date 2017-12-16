@@ -5,6 +5,8 @@ import {CashRecordComponent} from "./cash-record/cash-record.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {FileUploadModule} from "ng2-file-upload";
+import {AddStoreRecordComponent} from "./add-store-record/add-store-record.component";
+import {AgreeCashComponent} from "./agree-cash/agree-cash.component";
 
 
 const routes: Routes = [
@@ -20,6 +22,6 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [CashCheckComponent, CashRecordComponent]
+  declarations: [CashCheckComponent, CashRecordComponent, AddStoreRecordComponent, AgreeCashComponent]
 })
 export class StoreModule { }

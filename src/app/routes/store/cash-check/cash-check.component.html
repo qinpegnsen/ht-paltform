@@ -1,3 +1,135 @@
-<p>
-  cash-check works!
-</p>
+<div class="content-heading mb-lg thc font">
+  提现审核
+</div>
+<div class="panel panel-danger">
+  <div class="panel mb p ts-bg thc">
+    <p class="font18">操作提示</p>
+    <ul>
+      <li>平台同意企业提交的提现申请之后，申请变为退款中</li>
+      <li>平台给企业申请的账户中打款。</li>
+      <li>平台将打款记录和打款凭证添加到记录中。</li>
+    </ul>
+  </div>
+  <div class="panel mb">
+    <div class="panel-body p ng-scope">
+      <div class="search-group ml-xl mb">
+        <span class="search-title">提现状态：</span>
+        <div class="search-main">
+          <select class="form-control" name="goodsAudit" [(ngModel)]="query.state" (change)="queryDatas(1)">
+            <option value="">全部</option>
+            <ng-container *ngFor="let item of states">
+              <option *ngIf="item.key!='DONE'" [value]="item.key">{{item.val}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
+           (pageChange)="queryDatas(1,$event)">
+      <thead>
+      <tr>
+        <th class="unselectable text-center w5">
+          <rzhDefaultSorter by="sort"></rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="bacctName">收款人姓名</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="acct">收款人账户</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-left">
+          <rzhDefaultSorter by="bank">收款账户开户行</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="drawMoney">提现金额</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="state">提现状态</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="time">时间</rzhDefaultSorter>
+        </th>
+        <th class="col-md-2 unselectable text-center">
+          <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of dataTable.data;let i = index">
+        <tr class="text-center">
+          <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
+          <td class="text-left">{{item.bacctName}}</td>
+          <td class="text-left">{{item.acct}}</td>
+          <td class="text-left">{{item.bank}}</td>
+          <td><span class="main-red">¥{{item.drawMoney}}</span></td>
+          <td>{{item.state | rzhState: '1802'}}</td>
+          <td>
+            <span *ngIf="item.state=='CR'">{{item.createTime}}</span>
+            <span *ngIf="item.state=='DEAL'">{{item.dealTime}}</span>
+          </td>
+          <td>
+            <ng-container *ngIf="item.state=='CR'">
+              <button class="btn btn-sm btn-green fa fa-check" (click)="aggreeDraw(item.id,item.bacctName,item.acct,item.drawMoney,item.bank)"> 同意提现
+              </button>
+            </ng-container>
+            <ng-container *ngIf="item.state=='DEAL'">
+              <button class="btn btn-sm btn-success fa fa-upload" (click)="addRecord(item.id,item.drawMoney)">
+                上传凭证
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr *ngIf="detail[i]">
+          <td class="p0" colspan="11">
+            <ng-container *ngIf="item.createTime">
+              <div class="bg-table special text-left pl">
+                <span class="">申请时间：</span> <span>{{item.createTime}}</span>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="item.dealTime">
+              <div class="bg-table special text-left pl">
+                <span class="">处理时间：</span> <span>{{item.dealTime}}</span>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="item.doneTime">
+              <div class="bg-table special text-left pl">
+                <span class="">完成时间：</span> <span>{{item.doneTime}}</span>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+
+      </ng-container>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{deposits.genStartRow()}} 至 {{deposits.genEndRow()}} 条，共
+              {{deposits.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<app-add-store-record [curId]="currentId1" [drawMoney]="drawMoney" [page]="deposits.curPage"
+                      (addRecord)="getAddRecordData($event)">
+</app-add-store-record>
+
+
+<app-agree-cash [curId]="currentId2" [drawMoney]="drawMoney" [name]="name" [acct]="acct"
+                [page]="deposits.curPage" [bank]="bank"  (addRe)="getAdd($event)">
+</app-agree-cash>
+

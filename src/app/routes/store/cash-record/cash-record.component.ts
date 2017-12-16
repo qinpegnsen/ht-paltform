@@ -67,7 +67,7 @@ export class CashRecordComponent implements OnInit {
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
-    let requestUrl = '/finaceDraw/query';
+    let requestUrl = '/finaceStoreDraw/query';
     let requestData = {
       curPage: activePage,
       pageSize: 10,

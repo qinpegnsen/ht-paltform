@@ -1,0 +1,49 @@
+.add-voncher {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.add-voncher ._popup {
+  background-color: #fff;
+  position: relative;
+  width: 600px;
+  top: 25%;
+  margin: auto;
+  z-index: 300;
+}
+
+.add-voncher dt {
+  padding: 12px;
+  text-align: right;
+  font-weight: normal;
+  color: #888;
+}
+
+.add-voncher dd {
+  color: #666;
+  padding: 12px;
+  vertical-align: top;
+  border-left: 1px solid #F0F0F0;
+}
+
+.add-voncher dt, .add-voncher dd {
+  display: inline-block;
+}
+
+.add-voncher .orderId-color {
+  color: #6ec0ff;
+}
+
+.add-voncher .mask {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.add-voncher .remark {
+  min-width: 300px;
+  max-width: 420px;
+  min-height: 60px;
+  max-height: 80px;
+}

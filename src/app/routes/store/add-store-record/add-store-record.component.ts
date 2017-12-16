@@ -1,20 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import {isNullOrUndefined, isUndefined} from "util";
-import {FileUploader} from "ng2-file-upload";
 import {MaskService} from "../../../core/services/mask.service";
+import {isNullOrUndefined, isUndefined} from "util";
 import {AppComponent} from "../../../app.component";
+import {FileUploader} from "ng2-file-upload";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {GetUidService} from "../../../core/services/get-uid.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 declare var $: any;
-
 @Component({
-  selector: 'app-add-record',
-  templateUrl: './add-record.component.html',
-  styleUrls: ['./add-record.component.scss']
+  selector: 'app-add-store-record',
+  templateUrl: './add-store-record.component.html',
+  styleUrls: ['./add-store-record.component.scss']
 })
-export class AddRecordComponent implements OnInit {
+export class AddStoreRecordComponent implements OnInit {
+
   public showWindow: boolean = false;
+  public payWay: string = '';
+  public opinion:any=''//失败原因
   public uploader: FileUploader = new FileUploader({
     url: 'upload/basic/upload',
     itemAlias: "limitFile"
@@ -167,8 +169,20 @@ export class AddRecordComponent implements OnInit {
       AppComponent.rzhAlt('warning','请上传汇款凭证')
       return;
     }
-    me.submit.postRequest('/finaceDraw/uploadVoucher', me.voncher);
+    me.submit.postRequest('/finaceStoreDraw/uploadVoucher', me.voncher);
     me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
   }
 
+  /**
+   * 失败原因
+   */
+  // fail(){
+  //   let me=this;
+  //   let url = "/finaceStoreDraw/updateStateFail";
+  //   let data={
+  //     id:me.curId,
+  //     failReason:me.opinion
+  //   }
+  //   let result = this.submit.postRequest(url,data);
+  // }
 }
