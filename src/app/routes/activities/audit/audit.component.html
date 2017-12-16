@@ -60,13 +60,13 @@
   <div class="panel-body">
     <ul class="order-guide list-unstyled clearfix bb">
       <li class="pull-left thc" [class.font]="curState=='CR'" [class.bb]="curState=='CR'"
-          (click)="qeuryAll('CR',1)">待审核
+          (click)="qeuryAll('CR',1)">待处理
       </li>
       <li class="pull-left thc" [class.font]="curState=='DEAL'" [class.bb]="curState=='DEAL'"
-          (click)="qeuryAll('DEAL',1)">审核中
+          (click)="qeuryAll('DEAL',1)">处理中
       </li>
       <li class="pull-left thc" [class.font]="curState=='DONE'" [class.bb]="curState=='DONE'"
-          (click)="qeuryAll('DONE',1)">审核通过
+          (click)="qeuryAll('DONE',1)">处理完成
       </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="auditListData"
@@ -111,7 +111,7 @@
         <td>
           <button class="btn btn-sm btn-green fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.state=='CR'"> 同意提现
           </button>
-          <button class="btn btn-sm btn-green fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'">上传凭证
+          <button class="btn btn-sm btn-green fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'"> 上传汇款记录
           </button>
         </td>
       </tr>
@@ -124,7 +124,7 @@
               {{auditListData.totalRow}}
               条</strong></div>
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-7">
             <div style="float: right">
               <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>

@@ -175,7 +175,6 @@ export class SiteComponent implements OnInit {
     } else {
       this.switch = true;
     }
-    console.log("█ this.switch  ►►►",  this.switch );
   }
 
   /**
