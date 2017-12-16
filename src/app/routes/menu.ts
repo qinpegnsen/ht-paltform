@@ -521,6 +521,29 @@ const activities = {
     },
   ]
 };
+const store = {
+  text: '企业管理',
+  icon: 'fa fa-users',
+  link: '/main/store',
+  submenu: [
+    {
+      text: '提现管理',
+      icon: 'fa fa-users',
+      link: '/main/store/deposit',
+      alert: '▼',
+      submenu: [
+        {
+          text: '提现审核',
+          link: '/main/store/check'
+        },
+        {
+          text: '提现记录',
+          link: '/main/store/record'
+        }
+      ]
+    },
+  ]
+};
 const editPw = {
   text: '密码修改',
   link: '/main/edit-pw',
@@ -540,5 +563,6 @@ export let menu = [
   statistics,
   agent,
   app,
+  store,
   activities
 ];
