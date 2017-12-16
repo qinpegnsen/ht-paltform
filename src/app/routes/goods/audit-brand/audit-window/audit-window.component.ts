@@ -10,6 +10,7 @@ declare var $: any;
 })
 export class AuditWindowComponent implements OnInit, OnDestroy {
   public isAudit: boolean = true;//是否是审核，父组件监听用
+  public brandId: string;//品牌id
   public brandInfo: any = {};
 
   ngOnDestroy(): void {

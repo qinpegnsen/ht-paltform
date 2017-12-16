@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./audit-detail.component.scss']
 })
 export class AuditDetailComponent implements OnInit {
+  public brandId: string;//品牌id
 
   constructor() { }
 

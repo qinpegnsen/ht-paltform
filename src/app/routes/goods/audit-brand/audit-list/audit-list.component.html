@@ -92,12 +92,14 @@
         <td>
           <!--<ng-container *ngIf="brand.brandApply == 'APPLY'">-->
           <ng-container *ngIf="path == 'unAudit'">
-            <button class="btn btn-purple btn-xs fa fa-check-square-o" routerLink="audit" title="审核"></button>
+            <button class="btn btn-purple btn-xs fa fa-check-square-o"
+                    (click)="setBrandId(brand.id)"
+                    routerLink="audit" title="审核"></button>
             <button class="btn btn-danger btn-xs fa fa-trash" title="删除"
-                    (click)="deleteBrand(brands.curPage, brand.brandId)"></button>
+                    (click)="deleteBrand(brands.curPage, brand.id)"></button>
           </ng-container>
           <button class="btn btn-green btn-xs icon-magnifier-add" routerLink="detail" title="详情"
-                  [queryParams]="{page: brands.curPage, brandId: brand.brandId}"></button>
+                  (click)="setBrandId(brand.id)"></button>
         </td>
       </tr>
       </tbody>

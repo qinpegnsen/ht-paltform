@@ -23,6 +23,7 @@ export class AuditListComponent implements OnInit {
   public buttons;
   public kindList;// 分类列表
   public selectKindName: string = '根据分类查询';
+  public curBrandId: string;//当前点击的品牌id
   public query = {
     curPage: 1,
     pageSize: 10,
@@ -185,11 +186,20 @@ export class AuditListComponent implements OnInit {
   }
 
   /**
+   * 当前品牌id
+   * @param curId
+   */
+  setBrandId(curId){
+    this.curBrandId = curId;
+  }
+
+  /**
    * 子组件加载时
    * @param event
    */
   activate(event) {
-    if(!event.isAudit) this.showList = false;
+    if (!event.isAudit) this.showList = false;
+    event.brandId = this.curBrandId;
   }
 
   /**
@@ -198,6 +208,6 @@ export class AuditListComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if(event.refresh) this.queryDatas(this.query.curPage)
+    if (event.refresh) this.queryDatas(this.query.curPage)
   }
 }
