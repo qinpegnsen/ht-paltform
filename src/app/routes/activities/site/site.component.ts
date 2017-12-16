@@ -16,7 +16,7 @@ declare var $: any;
   styleUrls: ['./site.component.scss']
 })
 export class SiteComponent implements OnInit {
-  public switch: boolean = false;           //红包开关
+  public switch: boolean ;                  //红包开关
   public redPacketRules: any;                //新增红包规则的按钮
   public redPackData: any;                   //红包规则列表的数据
   public isUse: string = 'Y';                  //红包是否启用
@@ -64,9 +64,12 @@ export class SiteComponent implements OnInit {
    */
   isOpen(rpSwitchStare) {
     let that = this;
+    setTimeout(()=>{
+      that.switchControll(rpSwitchStare);
+    });//事件触发的时候不让他它动，只有在确认后才动
     swal({
-      title: rpSwitchStare == 'Y' ? '您确认要关闭红包开关吗？' : '您确认要开启红包开关吗？',
-      text: rpSwitchStare == 'Y' ? '关闭红包开关' : '奖池余额：' + that.rpPondReset.balance + ' 元' + '\n' + '可使用剩余天数：' + that.rpPondReset.in + ' 天',
+      title: rpSwitchStare == 'Y' ? '您确认要关闭红包活动开关吗？' : '您确认要开启红包活动开关吗？',
+      text: rpSwitchStare == 'Y' ? '关闭红包活动开关' : '奖池余额：' + that.rpPondReset.balance + ' 元' + '\n' + '可使用剩余天数：' + that.rpPondReset.in + ' 天',
       type: rpSwitchStare == 'N' ? 'success' : 'info',
       showCancelButton: true,
       cancelButtonText: '取消',
@@ -75,7 +78,6 @@ export class SiteComponent implements OnInit {
       confirmButtonColor: "#ec6c62"
     }, function (isConfirm) {
       if (isConfirm) {
-        that.switch = true;
         if (that.rpSwitchStare == 'N') {
           let url = '/redSchedulingAudit/updateRpDrawState';
           let data = {
@@ -88,20 +90,32 @@ export class SiteComponent implements OnInit {
           that.closeRpSwitch()
         }
       } else {
-        that.switch = false;
+        that.switchControll(rpSwitchStare);
       }
     });
   }
 
   /**
-   * 关闭红包开关
+   * 根据状态控制红包按钮的开关
+   * @param rpSwitchStare
+   */
+  switchControll(rpSwitchStare){
+    if(rpSwitchStare == 'N') {
+      this.switch = false;
+    } else {
+      this.switch = true;
+    }
+  }
+
+  /**
+   * 关闭红包活动开关
    * @param rpSwitchStare
    */
   closeRpSwitch() {
     let that = this;
     swal({
       title: '请再次进行确认？',
-      text: '关闭红包开关后将无法正常使用红包功能！',
+      text: '关闭红包活动开关后将无法正常使用红包功能！',
       type: "info",
       showCancelButton: true,
       cancelButtonText: '取消',
@@ -156,11 +170,12 @@ export class SiteComponent implements OnInit {
     let url = '/redSchedulingAudit/loadRpDrawState';
     let data = {};
     this.rpSwitchStare = this.activitiesService.RpSwitchState(url, data);
-    if (this.rpSwitchStare == 'N') {
+    if(this.rpSwitchStare == 'N') {
       this.switch = false;
     } else {
       this.switch = true;
     }
+    console.log("█ this.switch  ►►►",  this.switch );
   }
 
   /**
