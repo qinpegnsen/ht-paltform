@@ -70,7 +70,7 @@
       </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="auditListData"
-           (pageChange)="qeuryAll(1,$event)">
+           (pageChange)="qeuryAll('',1,$event)">
       <thead>
       <tr>
         <th class="w5 text-center">

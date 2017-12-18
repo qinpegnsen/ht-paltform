@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import {isNullOrUndefined, isUndefined} from "util";
+import {isNull, isNullOrUndefined, isUndefined} from "util";
 import {FileUploader} from "ng2-file-upload";
 import {MaskService} from "../../../core/services/mask.service";
 import {AppComponent} from "../../../app.component";
@@ -96,8 +96,7 @@ export class AuditAlertComponent implements OnInit {
       me.upLoadImg(); //上传图片及提交数据
     } else {
       let result=me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
-      console.log("█ result ►►►",  result);
-      if(result){
+      if(isNull(result)){
         me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
       }
     }
@@ -190,7 +189,9 @@ export class AuditAlertComponent implements OnInit {
       AppComponent.rzhAlt('warning', '请上传汇款凭证');
       return;
     }
-    me.submit.postRequest('/rpCustWithdraw/updateStateToDone', me.voncher);
-    me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
+    let result=me.submit.postRequest('/rpCustWithdraw/updateStateToDone', me.voncher);
+    if(isNull(result)){
+      me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
+    }
   }
 }

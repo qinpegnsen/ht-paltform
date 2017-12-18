@@ -12,7 +12,7 @@ import {ActivitiesService} from "../activities.service";
 export class AuditComponent implements OnInit {
 
   public auditListData:any;                           //审核列表的数据
-  public curState:string='CR';                        //当前的状态
+  public curState:string='';                           //当前的状态
   public dealButton:any;                               //处理申请的按钮
   public showStroeInvest: boolean = false;            //企业投资的弹窗
   public currentId: any;                               //当前的id
@@ -73,7 +73,13 @@ export class AuditComponent implements OnInit {
    * 提现申请的列表
    */
   qeuryAll(state,curPage,event?: PageEvent){
-    this.curState=state;
+    if(state){
+      this.curState=state;
+    }else{
+      if(!this.curState){
+        this.curState='CR';
+      }
+    }//解决分页切换标签后分页刷新的问题
     let me = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -84,12 +90,7 @@ export class AuditComponent implements OnInit {
     let data={
       curPage: activePage,
       pageSize:10,
-      state:'',
-    };
-    if(isNullOrUndefined(state)){//分页
-      data.state=this.curState;
-    }else{//导航
-      data.state=state;
+      state:this.curState,
     };
     let result = this.activitiesService.queryWithDrawData(url,data);
     me.auditListData = new Page(result);
