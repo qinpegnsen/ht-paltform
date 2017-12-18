@@ -28,10 +28,10 @@
               <div class="col-xs-8">
                 <input class="form-control" [required]="voncher.payWay=='REMIT'" type="text" name="payBacctName"
                        [(ngModel)]="voncher.payAcct" required #expressCodeTem="ngModel" [pattern]="patterns.backcard">
-              </div>
-              <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
-                   class="alert alert-danger">
-                请输入合法的汇款账号
+                <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
+                     class="alert alert-danger">
+                  请输入合法的汇款账号
+                </div>
               </div>
             </dd>
           </dl>
@@ -52,10 +52,10 @@
               <div class="col-xs-8">
                 <input class="form-control" type="text" name="payBacctName" [required]="voncher.payWay=='REMIT'"
                        [(ngModel)]="voncher.payBacctName" required #payBacctNameTem="ngModel">
-              </div>
-              <div [hidden]="payBacctNameTem.valid||payBacctNameTem.untouched"
-                   class="alert alert-danger">
-                汇款人是必填项
+                <div [hidden]="payBacctNameTem.valid||payBacctNameTem.untouched"
+                     class="alert alert-danger">
+                  汇款人是必填项
+                </div>
               </div>
             </dd>
           </dl>
@@ -91,10 +91,10 @@
             <dd class="col-xs-9">
               <div class="col-md-8">
                 <textarea class="form-control" name="failReason" required [(ngModel)]="failReason" cols="30" rows="2" required #failReasonTem="ngModel"></textarea>
-              </div>
-              <div [hidden]="failReasonTem.valid||failReasonTem.untouched"
-                   class="alert alert-danger">
-                汇款失败原因是必填项
+                <div [hidden]="failReasonTem.valid||failReasonTem.untouched"
+                     class="alert alert-danger">
+                  汇款失败原因是必填项
+                </div>
               </div>
             </dd>
           </dl>
