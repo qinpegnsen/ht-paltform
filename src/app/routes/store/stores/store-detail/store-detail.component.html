@@ -1,4 +1,249 @@
-<p>
-  store-detail works!
-  企业编码：{{epCode}}
-</p>
+<div class="page-back btn btn-thc btn-circle fa fa-mail-reply" title="返回" (click)="back()"></div>
+<div class="audit fadeIn">
+  <div class="content-heading mb-lg thc font">
+    企业详情
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="body-title thc bg p">
+        <span>企业编码：{{epCode}}</span>
+      </div>
+      <!--企业基本信息 start-->
+      <legend class="legend mb0">企业基本信息</legend>
+      <table class="t-items p w100">
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">申请时间：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.createTime}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">企业名称：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.epName}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">邮箱：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.contactsEmail}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">负责人：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !epInfo?.contactsName}">
+            {{epInfo?.contactsName || '【未填写】'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">负责人电话：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !epInfo?.contactsPhone}">
+            {{epInfo?.contactsPhone || '【未填写】'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">营业执照类型：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.idType | rzhState: '2002'}}</td>
+        </tr>
+        <!--多证合一营业执照-->
+        <ng-container *ngIf="epInfo?.idType == 'UNITY'">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">社会信用代码：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.creditCode}}</td>
+          </tr>
+        </ng-container>
+
+        <!--普通营业执照-->
+        <ng-container *ngIf="epInfo?.idType == 'NORMAL'">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">税务登记证号：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.taxRegistrationCertificate}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">税务登记证：</td>
+            <td class="item-bd col-sm-10">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
+                  <img height="50" [src]="epInfo?.taxRegistrationCertificateElectronic" class="img"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">组织机构代码：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.organizationCode}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">组织机构代码证：</td>
+            <td class="item-bd col-sm-10">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
+                  <img height="50" [src]="epInfo?.organizationCodeElectronic" class="img"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+
+      <!--企业法人信息 start-->
+      <legend class="legend mb0">企业法人信息</legend>
+      <table class="t-items p w100">
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">法人姓名：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.legalPersonName}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">法人身份证号：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.legalPersonIdcard}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">身份证有效期：</td>
+          <td class="item-bd col-sm-10">
+            {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{epInfo?.isForever?'永久':epInfo?.idcardEndTime | date:
+            'yyyy/MM/dd'}}
+          </td>
+        </tr>
+      </table>
+
+      <!--营业执照信息 start-->
+      <legend class="legend mb0">营业执照信息</legend>
+      <table class="t-items p w100">
+        <ng-container *ngIf="epInfo?.idType == 'NORMAL'">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">营业执照注册号：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.businessLicence}}</td>
+          </tr>
+        </ng-container>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">注册资本：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.businessRegisteredCapital}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">经营范围：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.businessSphere}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">营业执照所在地：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.businessLicenceAreaFullName}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">详细地址：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.businessLicenceAddress}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">营业执照有效期：</td>
+          <td class="item-bd col-sm-10">
+            {{epInfo?.businessLicenceStart | date: 'yyyy/MM/dd'}} ~ {{epInfo?.businessLicenceEnd | date: 'yyyy/MM/dd'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">营业执照电子版：</td>
+          <td class="item-bd col-sm-10">
+            <div class="tag-dib imgbox text-center mr">
+              <a [href]="epInfo?.businessLicenceNumberElectronic" target="_blank" title="点击看大图">
+                <img height="50" [src]="epInfo?.businessLicenceNumberElectronic" class="img"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </a>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!--开户行信息 start-->
+      <ng-container *ngIf="epInfo.state != 'HALF'">
+        <legend class="legend mb0">开户行信息</legend>
+        <table class="t-items p w100">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">银行开户名：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.bankAccountName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">公司银行账号：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.bankAccountNumber}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">开户行支行名称：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.bankName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">开户支行联行号：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.bankCode}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">开户银行地址：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.bankAddress}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">开户银行许可证：</td>
+            <td class="item-bd col-sm-10">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="epInfo?.bankLicenceElectronic" target="_blank" title="点击看大图">
+                  <img height="50" [src]="epInfo?.bankLicenceElectronic" class="img"
+                       [alt]="epInfo?.bankLicenceElectronic"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">是否为结算账户：</td>
+            <td class="item-bd col-sm-10"
+                [ngClass]="{'font-success': epInfo?.isSettlementAccount=='Y','main-red': epInfo?.isSettlementAccount=='N'}">
+              {{epInfo?.isSettlementAccount | rzhState: '1001'}}
+            </td>
+          </tr>
+        </table>
+
+        <!--结算账户信息 start-->
+        <ng-container *ngIf="epInfo?.isSettlementAccount == 'N'">
+          <legend class="legend mb0">结算账户信息</legend>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">银行开户名：</td>
+              <td class="item-bd col-sm-10">{{epInfo?.settlementBankAccountName}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">银行账号：</td>
+              <td class="item-bd col-sm-10">{{epInfo?.settlementBankAccountNumber}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">开户行支行名称：</td>
+              <td class="item-bd col-sm-10">{{epInfo?.settlementBankName}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">开户行支行联行号：</td>
+              <td class="item-bd col-sm-10">{{epInfo?.settlementBankCode}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">开户行所在地：</td>
+              <td class="item-bd col-sm-10">{{epInfo?.settlementBankAddress}}</td>
+            </tr>
+          </table>
+        </ng-container>
+      </ng-container>
+
+      <!--审核结果 start-->
+      <ng-container *ngIf="epInfo.state == 'NORMAL' || epInfo.state == 'REJECT'">
+        <legend class="legend mb0">审核结果</legend>
+        <table class="t-items p w100">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核人：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.legalPersonName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核时间：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.updateTime}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核结果：</td>
+            <td class="item-bd col-sm-10">{{epInfo?.legalPersonIdcard}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核意见：</td>
+            <td class="item-bd col-sm-10">
+              {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{epInfo?.isForever?'永久':epInfo?.idcardEndTime | date:
+              'yyyy/MM/dd'}}
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+</div>

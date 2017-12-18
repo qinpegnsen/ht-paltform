@@ -9,13 +9,13 @@
             <div class="search-main">
               <input type="text" [(ngModel)]="query.epName"
                      class="form-control border-b-grey"
-                     (change)="queryDatas()" placeholder="企业名称">
+                     (change)="queryDatas(1)" placeholder="企业名称">
             </div>
           </div>
           <div class="search-group ml-xl mb align-top">
             <span class="search-title">法人姓名：</span>
             <div class="search-main">
-              <input type="text" [(ngModel)]="query.legalPersonName"
+              <input type="text" [(ngModel)]="query.legalPersonName" (change)="queryDatas(1)"
                      class="form-control border-b-grey" placeholder="法人姓名">
             </div>
           </div>
@@ -89,18 +89,16 @@
             <td>{{item.contactsPhone}}</td>
             <td>{{item.idType | rzhState: '2002'}}</td>
             <td>{{item.businessSphere}}</td>
-            <td>{{item.businessLicenceAreaName}}</td>
+            <td>{{item.businessLicenceAreaFullName}}</td>
             <td>{{item.updateTime}}</td>
             <td>
               <ng-container *ngIf="path == 'storeAudit'">
-                <button class="btn btn-purple btn-xs fa fa-check-square-o"
-                        (click)="setEpCode(item.epCode)"
-                        routerLink="audit"
+                <button class="btn btn-purple btn-sm fa fa-check-square-o"
+                        routerLink="audit" [queryParams]="{epCode: item.epCode}"
                         title="审核"></button>
               </ng-container>
-              <button class="btn btn-green btn-xs icon-magnifier-add"
-                      (click)="setEpCode(item.epCode)"
-                      routerLink="detail"
+              <button class="btn btn-green btn-sm icon-magnifier-add ml-sm"
+                      routerLink="detail" [queryParams]="{epCode: item.epCode}"
                       title="详情"></button>
             </td>
           </tr>

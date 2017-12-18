@@ -1,51 +1,115 @@
+<div class="page-back btn btn-thc btn-circle fa fa-mail-reply" title="返回" (click)="back()"></div>
 <div class="audit fadeIn">
-  <div class="mask" (click)="hideWindow()"></div>
-  <div class="popup animated fadeIn">
-    <div class="pop popup-hd">
-      <span class="f-bold">审核（临时）</span>
-      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+  <div class="content-heading mb-lg thc font">
+    店铺审核
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="body-title thc bg p">
+        <span>店铺编码：{{epCode}}</span>
+      </div>
+      <!--店铺基本信息 start-->
+      <table class="t-items p w100">
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">申请时间：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.createTime}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺名称：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.storeName}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">是否自营：</td>
+          <td class="item-bd col-sm-10"
+              [ngClass]="{'font-success': shopInfo?.platShop=='Y','main-red': shopInfo?.platShop=='N'}">
+            {{shopInfo?.platShop | rzhState: '1001'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺地址：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.areaFullName || '【未填写】'}}{{shopInfo?.address}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺邮编：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.storeZip || '【未填写】'}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺电话：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.storePhone || '【未填写】'}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺头像：</td>
+          <td class="item-bd col-sm-10">
+            <div class="tag-dib imgbox text-center mr">
+              <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
+                <img height="100%" [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
+                     (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </a>
+            </div>
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺LOGO：</td>
+          <td class="item-bd col-sm-10">
+            <div class="tag-dib imgbox text-center mr">
+              <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
+                <img height="100%" [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
+                     (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img class="hover-big-img" [src]="shopInfo?.storeLabel"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </a>
+            </div>
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">QQ号：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storeQq || '【未填写】'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">旺旺号：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storeWw || '【未填写】'}}
+          </td>
+        </tr>
+      </table>
     </div>
-    <div class="pop font12 w100">
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">店铺编码：</dt>
-        <dd class="col-xs-9 font14">{{storeCode}}</dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌英文名称：</dt>
-        <dd class="col-xs-9 font14">huawei</dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌所有人：</dt>
-        <dd class="col-xs-9 font14">戴夫</dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌注册号：</dt>
-        <dd class="col-xs-9 font14">41208528552</dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌图片：</dt>
-        <dd class="col-xs-9 font14">
-          <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          <img class="hover-big-img" [src]="'..'" alt=""
-               onerror="javascript:this.src='../../../assets/img/dummy.png'">
-        </dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">品牌注册证：</dt>
-        <dd class="col-xs-9 font14">
-          <div class="tag-dib mr" *ngFor="let item of [0,1]">
-            <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                 onerror="javascript:this.src='../../../assets/img/dummy.png'">
-            <img class="hover-big-img" [src]="'..'" alt=""
-                 onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          </div>
-        </dd>
-      </dl>
-    </div>
-    <div class="panel-footer text-right">
-      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-green" type="submit">确认提交</button>
-    </div>
+
+    <!--审核-->
+    <form class="goods-audit panel panel-danger w96 m-auto mb-xl">
+      <fieldset class="p0 panel-body">
+        <legend class="m0 goods-audit-title">企业入驻审核</legend>
+        <table class="w100">
+          <tr>
+            <td class="item-hd col-sm-2">审核结果：</td>
+            <td class="item-bd col-sm-2">
+              <div class="radio c-radio c-radio-nofont p-sm" *ngFor="let item of shopAudits">
+                <label>
+                  <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="audit.auditResult"/>
+                  <span class="fa fa-circle"></span>{{item.val}}</label>
+              </div>
+            </td>
+            <td class="col-sm-8 mb0 p">
+                <textarea class="form-control w66 tag-dib align-middle" name="opinion"
+                          [required]="audit.auditResult == 'UNPASS'"
+                          [(ngModel)]="audit.opinion" placeholder="请填写审核意见"
+                          cols="10" rows="3">
+                </textarea>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset class="pt-xl m0 text-center">
+        <button class="btn btn-green" type="button" (click)="auditShop()"
+                [disabled]="audit.auditResult == 'UNPASS' && !audit.opinion">
+          <em class="fa fa-upload mr"></em>{{audit.auditResult == 'PASS'?'通过':'不通过'}}
+        </button>
+      </fieldset>
+    </form>
   </div>
 </div>

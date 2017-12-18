@@ -1,8 +1,8 @@
-<div class="order panel mb">
-  <div class="panel-body">
-    <div>
+<div class="order mb" [ngClass]="{'panel':storeState != 'detail'}">
+  <div [ngClass]="{'panel-body':storeState != 'detail'}">
+    <ng-container *ngIf="storeState != 'detail'">
       <ul class="menu-guide list-unstyled clearfix bb">
-        <li class="pull-left thc" [ngClass]="{font: storeState=='',bb:storeState==''}"
+        <li class="pull-left thc" [ngClass]="{font: storeState=='all',bb:storeState==''}"
             routerLink="allShop">全部
         </li>
         <li class="pull-left thc" [ngClass]="{font: storeState=='NORMAL',bb:storeState=='NORMAL'}"
@@ -18,7 +18,7 @@
             routerLink="close">已关闭
         </li>
       </ul>
-    </div>
+    </ng-container>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
     <!--路由嵌套 end-->

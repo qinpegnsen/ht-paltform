@@ -1,0 +1,43 @@
+.body-title {
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.legend {
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  padding: 0 15px;
+}
+
+.t-item {
+  width: 100%;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.item-hd {
+  padding: 15px 15px 15px 0;
+  text-align: right;
+}
+
+.item-bd {
+  margin: 0;
+  padding: 15px 0 15px 15px;
+  word-wrap: break-word;
+  border-left: 1px solid #e1e1e1;
+}
+
+.imgbox {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 0;
+  .img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

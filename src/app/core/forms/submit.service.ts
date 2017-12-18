@@ -32,13 +32,6 @@ export class SubmitService {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           if (back) this.settings.closeRightPageAndRouteBack()//关闭右侧页面并返回上级路由
           AppComponent.rzhAlt("success", res.info);
-          /* swal({
-           title: '成功',
-           text: res.info,
-           type: 'success',
-           timer: 3000, //关闭时间，单位：毫秒
-           showConfirmButton: false  //不显示按钮
-           });*/
           result = res.data;
         } else {
           result = res.info;

@@ -1,31 +1,55 @@
-.audit .popup{
-  width: 550px;
-  z-index: 300;
-  transform: none;
-  margin-left: -275px;
-  top: 20%;
+.body-title {
+  color: #ffffff;
+  border-radius: 4px;
 }
-.audit dt{
-  padding: 10px;
+
+.legend {
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  padding: 0 15px;
+}
+
+.t-item {
+  width: 100%;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.item-hd {
+  padding: 15px 15px 15px 0;
   text-align: right;
-  font-weight: normal;
-  color: #888;
 }
-.audit dd{
-  color: #666;
-  padding: 10px;
-  vertical-align: top;
-  border-left: 1px solid #F0F0F0;
+
+.item-bd {
+  margin: 0;
+  padding: 15px 0 15px 15px;
+  word-wrap: break-word;
+  border-left: 1px solid #e1e1e1;
 }
-.audit dt,.cancel-con dd{
-  display: inline-block;
+
+.goods-audit {
+  border-color: #37bc9b;
 }
-.audit .mask{
-  background-color: rgba(0, 0, 0, 0.6);
+
+.goods-audit .goods-audit-title {
+  background-color: #37bc9b;
+  color: #fff;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 5px 0 5px 15px;
 }
-.audit .orderId-color{
-  color: #6ec0ff;
-}
-.audit li label{
-  font-weight: normal;
+
+.imgbox {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 0;
+  .img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

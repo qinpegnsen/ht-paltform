@@ -14,6 +14,7 @@ import {AddStoreRecordComponent} from "./add-store-record/add-store-record.compo
 import {AgreeCashComponent} from "./agree-cash/agree-cash.component";
 import {StoresComponent} from "./stores/stores.component";
 import {ShopsComponent} from "./shops/shops.component";
+import {StoreService} from "./store.service";
 
 
 const routes: Routes = [
@@ -29,7 +30,10 @@ const routes: Routes = [
     {path: 'allStore', component: AllStoreComponent, children: [
       {path: 'detail', component: StoreDetailComponent},
     ]},
-    {path: 'noraml', component: AllStoreComponent, children: [
+    {path: 'normal', component: AllStoreComponent, children: [
+      {path: 'detail', component: StoreDetailComponent}
+    ]},
+    {path: 'half', component: AllStoreComponent, children: [
       {path: 'detail', component: StoreDetailComponent}
     ]},
     {path: 'audit', component: AllStoreComponent, children: [
@@ -102,6 +106,7 @@ const routes: Routes = [
   providers: [
     StoresComponent,
     ShopsComponent,
+    StoreService
   ]
 })
 export class StoreModule { }

@@ -110,6 +110,7 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 
 // 扩展主要颜色，山楂红色
 .main-red{ color: #CC1635;}
+.font-success{color: #27c24c}
 .font-gray{ color: #999}
 .gold-star{color: gold;}
 .gold-star{color: gold;}
@@ -920,6 +921,25 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
 .left99{left: 99%}
 .left50{left: 50%}
 .left40{left: 40%}
+
+/*返回页面*/
+.page-back {
+  position: fixed;
+  top: 85px;
+  right: 35px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  z-index: 101;
+  color: #cc1635;
+  border: 1px solid #ccc;
+  translate: 0.2s;
+  background-color: #f8f8f8;
+}
+.page-back:hover,.page-back:active{
+  color: #ffffff;
+  background-color: #cc1635;
+}
 
 .d-play{
   display: inline-block;

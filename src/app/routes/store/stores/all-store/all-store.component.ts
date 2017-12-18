@@ -25,7 +25,6 @@ export class AllStoreComponent implements OnInit {
   public enterPriseState: string;//企业状态
   public dataPickerTime:any = null;//时间查询
   public time: any = {};//查询时间
-  public curEpCode:string;//当前惦记的企业的epCode；
 
   constructor(public router: Router,
               public route: ActivatedRoute,
@@ -56,9 +55,13 @@ export class AllStoreComponent implements OnInit {
           me.parentComp.enterPriseState = 'AUDIT';
           me.enterPriseState = 'AUDIT';
           break;
-        case "noraml":
+        case "normal":
           me.parentComp.enterPriseState = 'NORMAL';
           me.enterPriseState = 'NORMAL';
+          break;
+        case "half":
+          me.parentComp.enterPriseState = 'HALF';
+          me.enterPriseState = 'HALF';
           break;
         case "reject":
           me.parentComp.enterPriseState = 'REJECT';
@@ -84,6 +87,7 @@ export class AllStoreComponent implements OnInit {
     if (event && event.length > 0) {
       this.time.createTimeBegin = RzhtoolsService.dataFormat(event[0], 'yyyy-MM-dd');
       this.time.createTimeEnd = RzhtoolsService.dataFormat(event[1], 'yyyy-MM-dd');
+      this.queryDatas(1);
     }
   }
 
@@ -123,19 +127,11 @@ export class AllStoreComponent implements OnInit {
   }
 
   /**
-   * 点击的当前企业的epCode
-   */
-  setEpCode(code){
-    this.curEpCode = code;
-  }
-
-  /**
    * 子组件加载时
    * @param event
    */
   activate(event) {
-    if(!event.isAudit) this.showList = false;
-    event.epCode = this.curEpCode;
+    this.showList = false;
   }
 
   /**

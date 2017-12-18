@@ -22,7 +22,6 @@ export class AllShopComponent implements OnInit {
   public storeState: string;//企业状态
   public dataPickerTime: any = null;//时间查询
   public time: any = {};//查询时间
-  public curShopCode: string;
 
   constructor(public router: Router,
               public route: ActivatedRoute,
@@ -71,7 +70,7 @@ export class AllShopComponent implements OnInit {
           break;
       }
     })
-    me.queryDatas(1);//初始化查询数据
+    me.queryShops(1);//初始化查询数据
   }
 
   /**
@@ -81,6 +80,7 @@ export class AllShopComponent implements OnInit {
     if (event && event.length > 0) {
       this.time.createTimeBegin = RzhtoolsService.dataFormat(event[0], 'yyyy-MM-dd');
       this.time.createTimeEnd = RzhtoolsService.dataFormat(event[1], 'yyyy-MM-dd');
+      this.queryShops(1);
     }
   }
 
@@ -89,7 +89,7 @@ export class AllShopComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryDatas(curPage, event?: PageEvent) {
+  queryShops(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -117,11 +117,7 @@ export class AllShopComponent implements OnInit {
     this.query = {};
     this.dataPickerTime = null;
     this.time = {};
-    this.queryDatas(1);
-  }
-
-  setData(code) {
-    this.curShopCode = code;
+    this.queryShops(1);
   }
 
   /**
@@ -129,8 +125,7 @@ export class AllShopComponent implements OnInit {
    * @param event
    */
   activate(event) {
-    if (!event.isAudit) this.showList = false;
-    event.storeCode = this.curShopCode;
+    this.showList = false;
   }
 
   /**
@@ -139,7 +134,7 @@ export class AllShopComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if (event.refresh) this.queryDatas(this.query.curPage)
+    if (event.refresh) this.queryShops(this.query.curPage)
   }
 
   /**

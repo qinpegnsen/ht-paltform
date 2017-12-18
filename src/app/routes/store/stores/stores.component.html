@@ -1,12 +1,15 @@
-<div class="order panel mb">
-  <div class="panel-body">
-    <div>
+<div class="order mb" [ngClass]="{'panel':enterPriseState != 'detail'}">
+  <div [ngClass]="{'panel-body':enterPriseState != 'detail'}">
+    <ng-container *ngIf="enterPriseState != 'detail'">
       <ul class="menu-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [ngClass]="{font: enterPriseState=='',bb:enterPriseState==''}"
             routerLink="allStore">全部
         </li>
+        <li class="pull-left thc" [ngClass]="{font: enterPriseState=='HALF',bb:enterPriseState=='HALF'}"
+            routerLink="half">待完善
+        </li>
         <li class="pull-left thc" [ngClass]="{font: enterPriseState=='NORMAL',bb:enterPriseState=='NORMAL'}"
-            routerLink="noraml">审核通过
+            routerLink="normal">审核通过
         </li>
         <li class="pull-left thc" [ngClass]="{font: enterPriseState=='AUDIT',bb:enterPriseState=='AUDIT'}"
             routerLink="audit">待审核
@@ -18,7 +21,7 @@
             routerLink="black">黑名单
         </li>
       </ul>
-    </div>
+    </ng-container>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
     <!--路由嵌套 end-->

@@ -1,4 +1,114 @@
-<p>
-  shop-detail works!
-  店铺编码：{{storeCode}}
-</p>
+<div class="page-back btn btn-thc btn-circle fa fa-mail-reply" title="返回" (click)="back()"></div>
+<div class="audit fadeIn">
+  <div class="content-heading mb-lg thc font">
+    店铺详情
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="body-title thc bg p">
+        <span>店铺编码：{{storeCode}}</span>
+      </div>
+      <!--店铺基本信息 start-->
+      <legend class="legend mb0">店铺基本信息</legend>
+      <table class="t-items p w100">
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">申请时间：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.createTime}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺名称：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.storeName}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">是否自营：</td>
+          <td class="item-bd col-sm-10"
+              [ngClass]="{'font-success': shopInfo?.platShop=='Y','main-red': shopInfo?.platShop=='N'}">
+            {{shopInfo?.platShop | rzhState: '1001'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺地址：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.areaFullName || '【未填写】'}}{{shopInfo?.address}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺邮编：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storeZip || '【未填写】'}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺电话：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storePhone || '【未填写】'}}</td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺头像：</td>
+          <td class="item-bd col-sm-10">
+            <div class="tag-dib imgbox text-center mr">
+              <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
+                <img height="100%" [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
+                     (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </a>
+            </div>
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">店铺LOGO：</td>
+          <td class="item-bd col-sm-10">
+            <div class="tag-dib imgbox text-center mr">
+              <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
+                <img height="100%" [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
+                     (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img class="hover-big-img" [src]="shopInfo?.storeLabel"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </a>
+            </div>
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">QQ号：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storeQq || '【未填写】'}}
+          </td>
+        </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">旺旺号：</td>
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+            {{shopInfo?.storeWw || '【未填写】'}}
+          </td>
+        </tr>
+      </table>
+
+      <!--审核结果 start-->
+      <ng-container *ngIf="shopInfo.state != 'PENDING' && shopInfo?.platShop=='N'">
+        <legend class="legend mb0">审核结果</legend>
+        <table class="t-items p w100">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核人：</td>
+            <td class="item-bd col-sm-10">{{shopInfo?.legalPersonName}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核时间：</td>
+            <td class="item-bd col-sm-10">{{shopInfo?.updateTime}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核结果：</td>
+            <td class="item-bd col-sm-10">{{shopInfo?.legalPersonIdcard}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">审核意见：</td>
+            <td class="item-bd col-sm-10">
+              {{shopInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{shopInfo?.isForever?'永久':shopInfo?.idcardEndTime |
+              date:
+              'yyyy/MM/dd'}}
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+</div>

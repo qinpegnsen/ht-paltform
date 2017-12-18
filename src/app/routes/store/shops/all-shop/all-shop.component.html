@@ -9,20 +9,20 @@
             <div class="search-main">
               <input type="text" [(ngModel)]="query.storeName"
                      class="form-control border-b-grey"
-                     (change)="queryDatas()" placeholder="店铺名称">
+                     (change)="queryShops(1)" placeholder="店铺名称">
             </div>
           </div>
           <div class="search-group ml-xl mb align-top">
             <span class="search-title">店铺编码：</span>
             <div class="search-main">
-              <input type="text" [(ngModel)]="query.storeCode"
+              <input type="text" [(ngModel)]="query.storeCode" (change)="queryShops(1)"
                      class="form-control border-b-grey" placeholder="店铺编码">
             </div>
           </div>
           <div class="search-group ml-xl mb align-top">
             <span class="search-title">商家编码：</span>
             <div class="search-main">
-              <input type="text" [(ngModel)]="query.sellerCode"
+              <input type="text" [(ngModel)]="query.sellerCode" (change)="queryShops(1)"
                      class="form-control border-b-grey" placeholder="商家编码">
             </div>
           </div>
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <button type="button" title="搜索" (click)="queryDatas()"
+            <button type="button" title="搜索" (click)="queryShops(1)"
                     class="btn thc btn-thc icon-magnifier align-top ml">
             </button>
             <button type="button" title="重置查询" (click)="resetQuery()"
@@ -53,7 +53,7 @@
     <!--列表-->
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="shopList"
-             (pageChange)="queryDatas(1,$event)">
+             (pageChange)="queryShops(1,$event)">
         <thead>
         <tr>
           <th class="unselectable text-center w5">
@@ -111,12 +111,12 @@
             <td>{{item.createTime}}</td>
             <td>
               <ng-container *ngIf="path == 'shopAudit'">
-                <button class="btn btn-purple btn-xs fa fa-check-square-o"
-                        (click)="setData(item.storeCode)"
+                <button class="btn btn-purple btn-sm fa fa-check-square-o"
+                        [queryParams]="{storeCode:item.storeCode}"
                         routerLink="audit" title="审核"></button>
               </ng-container>
-              <button class="btn btn-green btn-xs icon-magnifier-add"
-                      (click)="setData(item.storeCode)"
+              <button class="btn btn-green btn-sm icon-magnifier-add ml-sm"
+                      [queryParams]="{storeCode:item.storeCode}"
                       routerLink="detail" title="详情"></button>
             </td>
           </tr>
