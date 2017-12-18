@@ -41,14 +41,11 @@ export class AuditAlertComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['curId'] && !isNullOrUndefined(this.curId)) {
-      console.log("█ 1 ►►►",  1);
       this.voncher.id = this.curId;
       $('.wrapper > section').css('z-index', 200);
       this.showWindow = true;
       this.getCommonBankList();
       this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
-      this.failReason='';
-      this.changeIsAgree('N');
     }
   }
 
@@ -136,7 +133,9 @@ export class AuditAlertComponent implements OnInit {
       payBacctName: '',
       remark: '',
       voucherUrl: ''
-    };
+    };//清空数据
+    this.failReason='';//清空数据
+    this.changeIsAgree('N');//清空数据
   }
 
   /**
