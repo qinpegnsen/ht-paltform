@@ -91,7 +91,8 @@
           <!--<ng-container *ngIf="brand.brandApply == 'APPLY'">-->
           <ng-container *ngIf="path == 'unAudit'">
             <button class="btn btn-purple btn-sm fa fa-check-square-o"
-                    (click)="setBrandId(brand.applyCode,brand.brandName,brand.englishName,brand.brandHolder,brand.applyNumber)"
+                    [queryParams]="{applyCode:brand.applyCode,brandName:brand.brandName,englishName:brand.englishName,
+                    brandHolder:brand.brandHolder,applyNumber:brand.applyNumber}"
                     routerLink="audit" title="审核"></button>
             <button class="btn btn-danger btn-sm fa fa-trash" title="删除"
                     (click)="deleteBrand(brands.curPage, brand.applyCode)"></button>

@@ -23,11 +23,6 @@ export class AuditListComponent implements OnInit {
   public buttons;
   public kindList;// 分类列表
   public selectKindName: string = '根据分类查询';
-  public curBrandId: string;//当前点击的品牌id
-  public curBrandName: string;//当前点击的品牌名称
-  public englishName: string;//当前点击的品牌英文名称
-  public brandHolder: string;//当前点击的品牌所有者
-  public applyNumber: string;//当前点击的品牌申请号
 
   public query = {
     curPage: 1,
@@ -35,8 +30,8 @@ export class AuditListComponent implements OnInit {
     sortColumns: '',
     kindId: null,
     brandName: null,
-    brandInitial: null,
-    brandRecommend: null
+    state:'',
+
   };
 
   constructor(public router: Router,
@@ -178,7 +173,7 @@ export class AuditListComponent implements OnInit {
    * @param event
    * @param curPage
    */
-   queryDatas(curPage, event?: PageEvent) {
+  queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -190,17 +185,6 @@ export class AuditListComponent implements OnInit {
     _this.brands = new Page(_this.submitService.getData(requestUrl, _this.query));
   }
 
-  /**
-   * 当前品牌id
-   * @param curId
-   */
-  setBrandId(curId,brandName,englishName,brandHolder,applyNumber){
-    this.curBrandId = curId;
-    this.curBrandName = brandName;
-    this.englishName = englishName;
-    this.brandHolder = brandHolder;
-    this.applyNumber = applyNumber;
-  }
 
   /**
    * 子组件加载时
@@ -208,11 +192,6 @@ export class AuditListComponent implements OnInit {
    */
   activate(event) {
     if (!event.isAudit) this.showList = false;
-    event.brandId = this.curBrandId;
-    event.brandName = this.curBrandName;
-    event.englishName = this.englishName;
-    event.brandHolder = this.brandHolder;
-    event.applyNumber = this.applyNumber;
   }
 
   /**

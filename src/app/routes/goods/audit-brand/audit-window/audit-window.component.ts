@@ -4,6 +4,7 @@ import {PatternService} from "../../../../core/forms/pattern.service";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {AuditListComponent} from "../audit-list/audit-list.component";
+import {ActivatedRoute} from "@angular/router";
 declare var $: any;
 
 @Component({
@@ -19,6 +20,12 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
   public brandId: string;//品牌id
   public brandInfo: any = {};
 
+  public applyCode:any;//品牌编码
+  public brandName:any;//品牌名称
+  public englishName:any;//品牌英文名称
+  public brandHolder:any;//品牌拥有着
+  public applyNumber:any;//品牌注册号
+
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
     $('body').css("overflow-y", 'scroll');
@@ -27,6 +34,7 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
   constructor(public submit: SubmitService,
               public location: Location,
               public tools: RzhtoolsService,
+              public routeInfo: ActivatedRoute,
               public patterns: PatternService,
 ) {
     $('.wrapper > section').css('z-index', 200);
@@ -34,6 +42,12 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let me=this;
+    me.applyCode = this.routeInfo.snapshot.queryParams['applyCode'];
+    me.brandName = this.routeInfo.snapshot.queryParams['brandName'];
+    me.englishName = this.routeInfo.snapshot.queryParams['englishName'];
+    me.brandHolder = this.routeInfo.snapshot.queryParams['brandHolder'];
+    me.applyNumber = this.routeInfo.snapshot.queryParams['applyNumber'];
     this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
   }
 
@@ -83,7 +97,7 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
     let me = this;
     let url = "/goodsBrandApply/auditPass";
     let data = {
-      applyCode:me.brandId,
+      applyCode:me.applyCode,
       brandSort:res.brandSort,
       brandRecommend:res.brandRecommend,
       showType:res.showType,
@@ -100,7 +114,7 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
     let me = this;
     let url = "/goodsBrandApply/auditReject";
     let data = {
-      applyCode:me.brandId,
+      applyCode:me.applyCode,
       reason:res.failReason
     }
     let result = this.submit.putRequest(url, data);
