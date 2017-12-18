@@ -95,8 +95,11 @@ export class AuditAlertComponent implements OnInit {
       this.voncher.voucherUrl = null;
       me.upLoadImg(); //上传图片及提交数据
     } else {
-      me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
-      me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
+      let result=me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
+      console.log("█ result ►►►",  result);
+      if(result){
+        me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
+      }
     }
   }
 
@@ -125,12 +128,12 @@ export class AuditAlertComponent implements OnInit {
       page: me.page
     })// 向外传值
     this.voncher = {
-      id: null,
-      payBank: null,
-      payAcct: null,
-      payBacctName: null,
-      remark: null,
-      voucherUrl: null
+      id: '',
+      payBank: '',
+      payAcct: '',
+      payBacctName: '',
+      remark: '',
+      voucherUrl: ''
     };
   }
 
