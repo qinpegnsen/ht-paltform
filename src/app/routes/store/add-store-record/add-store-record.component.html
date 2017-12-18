@@ -6,6 +6,7 @@
       <span class="f-bold">汇款记录</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
+
     <div class="pop add-con font12 w100">
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3"><i class="main-red font16">*</i> 是否到账：</dt>
@@ -102,10 +103,8 @@
           <dl class="bb m0 clearfix">
             <dt class="col-xs-3">汇款失败原因：</dt>
             <dd class="col-xs-9">
-              <div class="col-md-8">
-                <textarea class="form-control" name="failReasonTem" required [(ngModel)]="failReasonTem" cols="30" rows="2"
-                          required  #failReasonTem="ngModel"></textarea>
-              </div>
+              <textarea class="form-control" name="failReason" required [(ngModel)]="failReason" cols="30" rows="2"
+                        required #failReasonTem="ngModel"></textarea>
               <div [hidden]="failReasonTem.valid||failReasonTem.untouched"
                    class="alert alert-danger">
                 汇款失败原因是必填项
@@ -115,6 +114,7 @@
         </ng-container>
       </form>
     </div>
+
     <div class="panel-footer text-right">
       <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
       <button class="btn btn-info" *ngIf="showRecord" [disabled]="!addVoncher.form.valid || !myImg"
