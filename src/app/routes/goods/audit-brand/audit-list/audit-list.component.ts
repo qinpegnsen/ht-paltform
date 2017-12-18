@@ -24,6 +24,11 @@ export class AuditListComponent implements OnInit {
   public kindList;// 分类列表
   public selectKindName: string = '根据分类查询';
   public curBrandId: string;//当前点击的品牌id
+  public curBrandName: string;//当前点击的品牌名称
+  public englishName: string;//当前点击的品牌英文名称
+  public brandHolder: string;//当前点击的品牌所有者
+  public applyNumber: string;//当前点击的品牌申请号
+
   public query = {
     curPage: 1,
     pageSize: 10,
@@ -78,7 +83,7 @@ export class AuditListComponent implements OnInit {
   }
 
   /**
-   *
+   *删除未审核品牌
    */
   deleteBrand(curPage, brandId) {
     let me = this;
@@ -93,8 +98,8 @@ export class AuditListComponent implements OnInit {
       closeOnConfirm: false,
       closeOnCancel: true
     }, () => {
-      let url = '/goodsBrand/deleteBrand';
-      let data = {id: brandId};
+      let url = '/goodsBrandApply/deleteBrandApply';
+      let data = {applyCode: brandId};
       swal.close();
       me.submitService.delRequest(url, data);
       me.queryDatas(curPage);
@@ -173,7 +178,7 @@ export class AuditListComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+   queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -181,7 +186,7 @@ export class AuditListComponent implements OnInit {
       activePage = curPage;
     }
     _this.query.curPage = activePage;
-    let requestUrl = '/goodsBrand/queryBrandPagesByNA';
+    let requestUrl = '/goodsBrandApply/queryPage';
     _this.brands = new Page(_this.submitService.getData(requestUrl, _this.query));
   }
 
@@ -189,8 +194,12 @@ export class AuditListComponent implements OnInit {
    * 当前品牌id
    * @param curId
    */
-  setBrandId(curId){
+  setBrandId(curId,brandName,englishName,brandHolder,applyNumber){
     this.curBrandId = curId;
+    this.curBrandName = brandName;
+    this.englishName = englishName;
+    this.brandHolder = brandHolder;
+    this.applyNumber = applyNumber;
   }
 
   /**
@@ -200,6 +209,10 @@ export class AuditListComponent implements OnInit {
   activate(event) {
     if (!event.isAudit) this.showList = false;
     event.brandId = this.curBrandId;
+    event.brandName = this.curBrandName;
+    event.englishName = this.englishName;
+    event.brandHolder = this.brandHolder;
+    event.applyNumber = this.applyNumber;
   }
 
   /**

@@ -1,4 +1,62 @@
-<p>
-  audit-detail works!
-  当前品牌id:{{brandId}}
-</p>
+
+  <div class="">
+
+    <div class="font22 info">申请信息</div>
+    <table class="p w100">
+      <tr class="t-item clearfix">
+      <td class="item-hd col-sm-1 br bt bb">品牌名称：</td>
+      <td class="item-bd col-sm-9 mb0 bt bb">{{result.brandName}}</td>
+    </tr>
+      <tr class="t-item clearfix">
+        <td class="item-hd col-sm-2 br bt bb">英文名称：</td>
+        <td class="item-bd col-sm-10 mb0 mb0 bt bb">{{result.englishName}}</td>
+      </tr>
+      <tr class="t-item clearfix">
+      <td class="item-hd col-sm-1 br bt bb">品牌所有人:</td>
+      <td class="item-bd col-sm-9 mb0 bt bb">{{result.brandHolder}}</td>
+      </tr>
+      <tr class="t-item clearfix">
+        <td class="item-hd col-sm-1 br bt bb">品牌注册号:</td>
+        <td class="item-bd col-sm-9 mb0 bt bb">{{result.applyNumber}}</td>
+      </tr>
+      <tr class="t-item clearfix">
+        <td class="item-hd col-sm-2 br bt bb">品牌图片：</td>
+        <td class="item-bd col-sm-10 mb0 mb0 bt bb">
+          <img [src]="result.brandLogo" alt=" " (mousemove)="showImg($event)"
+               (mouseout)="hideImg($event)"
+               onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+
+          <img [src]="result.brandLogo" class="bigImg" alt=""
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+        </td>
+      </tr>
+      <tr class="t-item clearfix">
+        <td class="item-hd col-sm-1 br bt bb">品牌注册证：</td>
+        <td class="item-bd col-sm-9 mb0 bt bb">
+          <img [src]="result.registration1" alt=" " (mousemove)="showImg($event)"
+               (mouseout)="hideImg($event)"
+               onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+          <img [src]="result.registration1" class="bigImg" alt=""
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+          <img [src]="result.registration1" alt=" " (mousemove)="showImg($event)"
+               (mouseout)="hideImg($event)"
+               onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+
+          <img [src]="result.registration1" class="bigImg" alt=""
+               onerror="javascript:this.src='../../../assets/img/dummy.png'">
+        </td>
+      </tr>
+    </table>
+
+    <div *ngIf="result.reason">
+      <div class="font22 info">驳回原因</div>
+      <table class="p w100">
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2 br bt bb">原因：</td>
+          <td class="item-bd col-sm-10 mb0 bt bb">{{result.reason}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <button class="btn btn-primary btn-sm m20" (click)="back()" title="返回">返回</button>
+</div>

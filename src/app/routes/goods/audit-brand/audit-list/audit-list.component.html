@@ -1,6 +1,4 @@
 <div *ngIf="showList">
-  {{content}}
-
   <!--搜索 start-->
   <div class="panel mb p clearfix">
     <div class="search-group pl0">
@@ -72,9 +70,9 @@
       <tbody>
       <tr *ngFor="let brand of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
-        <td class="hidden-sm">{{brand.brandInitial}}</td>
-        <td>{{brand.brandName}}</td>
-        <td>{{brand.brandName}}</td>
+        <td class="hidden-sm">{{brand.brandName}}</td>
+        <td>{{brand.englishName}}</td>
+        <td>{{brand.brandHolder}}</td>
         <td>
           <img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
@@ -92,14 +90,13 @@
         <td>
           <!--<ng-container *ngIf="brand.brandApply == 'APPLY'">-->
           <ng-container *ngIf="path == 'unAudit'">
-            <button class="btn btn-purple btn-xs fa fa-check-square-o"
-                    (click)="setBrandId(brand.id)"
+            <button class="btn btn-purple btn-sm fa fa-check-square-o"
+                    (click)="setBrandId(brand.applyCode,brand.brandName,brand.englishName,brand.brandHolder,brand.applyNumber)"
                     routerLink="audit" title="审核"></button>
-            <button class="btn btn-danger btn-xs fa fa-trash" title="删除"
-                    (click)="deleteBrand(brands.curPage, brand.id)"></button>
+            <button class="btn btn-danger btn-sm fa fa-trash" title="删除"
+                    (click)="deleteBrand(brands.curPage, brand.applyCode)"></button>
           </ng-container>
-          <button class="btn btn-green btn-xs icon-magnifier-add" routerLink="detail" title="详情"
-                  (click)="setBrandId(brand.id)"></button>
+          <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="detail" title="详情"     [queryParams]="{applyCode:brand.applyCode}"></button>
         </td>
       </tr>
       </tbody>

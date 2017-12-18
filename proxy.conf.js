@@ -65,9 +65,13 @@ const PROXY_CONFIG = [
       "/rpStore",
       "/rpCustWithdraw",
       "/enterprise",//企业入驻
-      "/store"//店铺
+      "/store",//店铺
+      "/rpStore",
+      "/rpCustWithdraw",
+      "/goodsBrandApply",
+      "/finaceStoreDraw"
     ],
-    target: ly + "8084",   //拦截 context配置路径，经过此地址
+    target: ly  + "8084",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -76,9 +80,9 @@ const PROXY_CONFIG = [
       "/upload",
       "/res"
     ],
-    target: csj + "8082",   //拦截 context配置路径，经过此地址
+    target: csj   + "8082",   //拦截 context配置路径，经过此地址
     secure: false
-  }
+  },
 ];
 
 module.exports = PROXY_CONFIG;

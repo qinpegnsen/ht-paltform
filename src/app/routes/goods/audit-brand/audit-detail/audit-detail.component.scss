@@ -1,0 +1,22 @@
+.item-hd{
+  padding: 15px 15px 15px 0;
+  text-align: right;
+}
+.info{
+  height: 52px;
+  line-height: 52px;
+}
+img{
+  margin: 10px 10px 10px 0;
+  width:70px;
+  height:70px;
+}
+.bigImg{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 440px;
+  height:340px;
+  display: none;
+  z-index: 1000;
+}

@@ -103,8 +103,8 @@
             <dt class="col-xs-3">汇款失败原因：</dt>
             <dd class="col-xs-9">
               <div class="col-md-8">
-                <textarea class="form-control" name="failReason" required [(ngModel)]="failReason" cols="30" rows="2"
-                          required #failReasonTem="ngModel"></textarea>
+                <textarea class="form-control" name="failReasonTem" required [(ngModel)]="failReasonTem" cols="30" rows="2"
+                          required  #failReasonTem="ngModel"></textarea>
               </div>
               <div [hidden]="failReasonTem.valid||failReasonTem.untouched"
                    class="alert alert-danger">
@@ -122,8 +122,6 @@
       </button>
       <button class="btn btn-info" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="addFinished()">确认提交
       </button>
-      <!--<button class="btn btn-info" [disabled]="!addVoncher.form.valid || !myImg" (click)="addFinished()">确认提交-->
-      <!--</button>-->
     </div>
   </div>
 </div>
