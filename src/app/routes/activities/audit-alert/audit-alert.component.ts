@@ -27,12 +27,12 @@ export class AuditAlertComponent implements OnInit {
   myImg: boolean = false;
   uuid: string;
   voncher: any = {
-    id: null,
-    payBank: null,
-    payAcct: null,
-    payBacctName: null,
-    remark: null,
-    voucherUrl: null
+    id: '',
+    payBank: '',
+    payAcct: '',
+    payBacctName: '',
+    remark: '',
+    voucherUrl: ''
   };
   commomBanks: any;
   @Input('curId') curId: string;
