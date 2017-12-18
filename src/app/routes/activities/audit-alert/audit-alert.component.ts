@@ -18,7 +18,7 @@ export class AuditAlertComponent implements OnInit {
   public yesOrNo: any;         //商品审核是否通过枚举
   public isAgree: string = 'Y';         //默认是到账
   public showRecord: boolean = true;         //默认是到账
-  public failReason: string;          //汇款失败的原因
+  public failReason: string='';          //汇款失败的原因
 
   public uploader: FileUploader = new FileUploader({
     url: 'upload/basic/upload',
@@ -41,11 +41,14 @@ export class AuditAlertComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['curId'] && !isNullOrUndefined(this.curId)) {
+      console.log("█ 1 ►►►",  1);
       this.voncher.id = this.curId;
       $('.wrapper > section').css('z-index', 200);
       this.showWindow = true;
       this.getCommonBankList();
       this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
+      this.failReason='';
+      this.changeIsAgree('N');
     }
   }
 
