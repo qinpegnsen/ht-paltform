@@ -23,7 +23,6 @@ export class WoAllComponent implements OnInit{
   public woList: Page = new Page();
   public detail = [];
   public woStateList: any; // 工单状态枚举列表
-  public woTypeList: any;  // 工单类型枚举列表
   public assign:boolean;
   public showList: boolean = true;     //是否显示列表页
   public curAssignWono:string;
@@ -31,7 +30,7 @@ export class WoAllComponent implements OnInit{
   public woSearch = {
     wono: null,
     ordno: null,
-    ordType: '',
+    ordType: 'ORD',
     stateEnum: '',
     curPage: 1,
     pageSize: 10,
@@ -53,7 +52,6 @@ export class WoAllComponent implements OnInit{
 
   ngOnInit() {
     let me = this;
-    me.woTypeList = me.tools.getEnumDataList(1301);
     me.woStateList = me.tools.getEnumDataList(1303);
 
     //获取当前路由
@@ -123,7 +121,6 @@ export class WoAllComponent implements OnInit{
    */
   assignWoToAgent(wono){
     this.curAssignWono = wono;
-    console.log("█ wono ►►►",  wono);
   }
 
   /**
