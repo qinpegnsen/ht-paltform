@@ -30,4 +30,26 @@ export class StoreService {
       return this.submitService.getData(url, data)
     }
   }
+
+  /**
+   * 获取企业入驻审核记录
+   */
+  public getEpAuditRecord(epCode: string) {
+    if (!isUndefined(epCode)) {
+      let url = '/enterpriseAuditRec/queryAuditRecListByEpCode', data = {epCode: epCode};
+      let recordInfo = this.submitService.getData(url, data);
+      return recordInfo;
+    }
+  }
+
+  /**
+   * 获取店铺审核记录
+   */
+  public getShopAuditRecord(storeCode: string) {
+    if (!isUndefined(storeCode)) {
+      let url = '/storeAuditRec/queryAuditRecListByStoreCode', data = {storeCode: storeCode};
+      let recordInfo = this.submitService.getData(url, data);
+      return recordInfo;
+    }
+  }
 }

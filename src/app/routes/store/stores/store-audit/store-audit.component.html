@@ -8,13 +8,19 @@
       <div class="body-title thc bg p">
         <span>企业编码：{{epCode}}</span>
       </div>
-      <!--企业基本信息 start-->
-      <legend class="legend mb0">企业基本信息</legend>
       <table class="t-items p w100">
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">申请时间：</td>
           <td class="item-bd col-sm-10">{{epInfo?.createTime}}</td>
         </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">当前状态：</td>
+          <td class="item-bd col-sm-10">{{epInfo?.state | rzhState: '2001'}}</td>
+        </tr>
+      </table>
+      <!--企业基本信息 start-->
+      <legend class="legend mb0">企业基本信息</legend>
+      <table class="t-items p w100">
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">企业名称：</td>
           <td class="item-bd col-sm-10">{{epInfo?.epName}}</td>
@@ -234,7 +240,8 @@
             <td class="col-sm-8 mb0 p">
                 <textarea class="form-control w66 tag-dib align-middle" name="opinion"
                           [required]="audit.auditResult == 'UNPASS'"
-                          [(ngModel)]="audit.opinion" placeholder="请填写审核意见"
+                          [(ngModel)]="audit.opinion"
+                          [placeholder]="audit.auditResult == 'UNPASS'? '请填写驳回原因' :'填写审核意见'"
                           cols="10" rows="3">
                 </textarea>
             </td>

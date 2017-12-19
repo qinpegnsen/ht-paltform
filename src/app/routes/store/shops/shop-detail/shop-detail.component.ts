@@ -16,6 +16,7 @@ export class ShopDetailComponent implements OnInit {
   public storeCode: string;//店铺编码
   public shopInfo: any;//店铺信息
   public audit: any = {};//审核结果
+  public auditRecords: any = {};//审核记录
 
   constructor(public location: Location,
               public storeService: StoreService,
@@ -25,10 +26,11 @@ export class ShopDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let me = this, shopInfo;
+    let me = this, shopInfo, auditRecords;
     me.storeCode = me.submitService.getParams('storeCode');
-    if (me.storeCode) shopInfo = me.storeService.getShopInfo(me.storeCode);
+    if (me.storeCode) shopInfo = me.storeService.getShopInfo(me.storeCode), auditRecords = me.storeService.getShopAuditRecord(me.storeCode);
     if (!isNullOrUndefined(shopInfo)) me.shopInfo = shopInfo;
+    if (!isNullOrUndefined(auditRecords)) me.auditRecords = auditRecords;
   }
 
 

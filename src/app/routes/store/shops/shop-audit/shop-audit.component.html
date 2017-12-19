@@ -15,6 +15,13 @@
           <td class="item-bd col-sm-10">{{shopInfo?.createTime}}</td>
         </tr>
         <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">当前状态：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.state | rzhState: '2004'}}</td>
+        </tr>
+      </table>
+      <legend class="legend mb0">店铺基本信息</legend>
+      <table class="t-items p w100">
+        <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺名称：</td>
           <td class="item-bd col-sm-10">{{shopInfo?.storeName}}</td>
         </tr>

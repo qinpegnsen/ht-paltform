@@ -15,7 +15,8 @@ export class StoreDetailComponent implements OnInit {
   public isAudit: boolean = true;//是否是审核，父组件监听用
   public refresh: boolean = false;//是否审核，以此判断父页面是否需要刷新
   public epCode: string = '';//企业编码
-  public epInfo: any;//企业信息
+  public epInfo: any;     //企业信息
+  public epRecords: Array<any> = new Array();//企业入驻审核记录
 
   constructor(public location: Location,
               public storeService: StoreService,
@@ -25,11 +26,14 @@ export class StoreDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let me = this, epInfo;
+    let me = this, epInfo, epRecords;
     me.epCode = me.submitService.getParams('epCode');
-    if (me.epCode) epInfo = me.storeService.getEpInfo(me.epCode);
+    if (me.epCode) epInfo = me.storeService.getEpInfo(me.epCode),epRecords = me.storeService.getEpAuditRecord(me.epCode);
     if (!isNullOrUndefined(epInfo)) me.epInfo = epInfo;
+    if (!isNullOrUndefined(epRecords)) me.epRecords = epRecords;
   }
+
+
 
   //返回
   back() {

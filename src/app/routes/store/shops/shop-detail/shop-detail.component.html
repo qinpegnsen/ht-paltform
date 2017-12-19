@@ -9,12 +9,18 @@
         <span>店铺编码：{{storeCode}}</span>
       </div>
       <!--店铺基本信息 start-->
-      <legend class="legend mb0">店铺基本信息</legend>
       <table class="t-items p w100">
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">申请时间：</td>
           <td class="item-bd col-sm-10">{{shopInfo?.createTime}}</td>
         </tr>
+        <tr class="t-item clearfix">
+          <td class="item-hd col-sm-2">当前状态：</td>
+          <td class="item-bd col-sm-10">{{shopInfo?.state | rzhState: '2004'}}</td>
+        </tr>
+      </table>
+      <legend class="legend mb0">店铺基本信息</legend>
+      <table class="t-items p w100">
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺名称：</td>
           <td class="item-bd col-sm-10">{{shopInfo?.storeName}}</td>
@@ -28,17 +34,17 @@
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺地址：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.areaFullName}">
             {{shopInfo?.areaFullName || '【未填写】'}}{{shopInfo?.address}}</td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺邮编：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeZip}">
             {{shopInfo?.storeZip || '【未填写】'}}</td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺电话：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storePhone}">
             {{shopInfo?.storePhone || '【未填写】'}}</td>
         </tr>
         <tr class="t-item clearfix">
@@ -86,27 +92,23 @@
       <!--审核结果 start-->
       <ng-container *ngIf="shopInfo.state != 'PENDING' && shopInfo?.platShop=='N'">
         <legend class="legend mb0">审核结果</legend>
-        <table class="t-items p w100">
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">审核人：</td>
-            <td class="item-bd col-sm-10">{{shopInfo?.legalPersonName}}</td>
+        <table class="table table-striped b bt0">
+          <thead>
+          <tr>
+            <th class="text-center">时间</th>
+            <th class="text-center">审核人</th>
+            <th class="text-center">审核结果</th>
+            <th class="text-center">审核意见</th>
           </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">审核时间：</td>
-            <td class="item-bd col-sm-10">{{shopInfo?.updateTime}}</td>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of auditRecords" class="text-center">
+            <td class="w25">{{item.createTime}}</td>
+            <td class="w25">{{item.optMan}}</td>
+            <td class="w20">{{item.result == 'PASS'? '通过': '不通过'}}</td>
+            <td class="w30">{{item.opinion}}</td>
           </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">审核结果：</td>
-            <td class="item-bd col-sm-10">{{shopInfo?.legalPersonIdcard}}</td>
-          </tr>
-          <tr class="t-item clearfix">
-            <td class="item-hd col-sm-2">审核意见：</td>
-            <td class="item-bd col-sm-10">
-              {{shopInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{shopInfo?.isForever?'永久':shopInfo?.idcardEndTime |
-              date:
-              'yyyy/MM/dd'}}
-            </td>
-          </tr>
+          </tbody>
         </table>
       </ng-container>
     </div>
