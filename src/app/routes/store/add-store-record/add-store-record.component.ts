@@ -105,6 +105,7 @@ export class AddStoreRecordComponent implements OnInit {
       me.upLoadImg(); //上传图片及提交数据
     } else {
       me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
+      this.uploader.queue = [];
       me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
     }
   }
@@ -134,14 +135,16 @@ export class AddStoreRecordComponent implements OnInit {
       page: me.page
     })// 向外传值
     this.voncher = {
-      id: null,
-      payBank: null,
-      payAcct: null,
-      payBacctName: null,
-      payWay: 'REMIT',
-      remark: null,
+      id: '',
+      payBank: '',
+      payAcct: '',
+      payBacctName: '',
+      remark: '',
+      voucherUrl: '',
       uuid: null
-    };
+    };//清空数据
+    this.failReason='';//清空数据
+    this.changeIsAgree('N');//清空数据
   }
 
   /**
@@ -204,13 +207,14 @@ export class AddStoreRecordComponent implements OnInit {
   /**
    * 失败原因
    */
-  // fail(){
-  //   let me=this;
-  //   let url = "/finaceStoreDraw/updateStateFail";
-  //   let data={
-  //     id:me.curId,
-  //     failReason:me.failReason
-  //   }
-  //   let result = this.submit.postRequest(url,data);
-  // }
+  fail(){
+    let me=this;
+    let url = "/finaceStoreDraw/updateStateFail";
+    let data={
+      id:me.curId,
+      failReason:me.failReason
+    }
+    let result = this.submit.postRequest(url,data);
+    me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
+  }
 }

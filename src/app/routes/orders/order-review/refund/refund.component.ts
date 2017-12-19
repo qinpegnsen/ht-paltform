@@ -145,12 +145,13 @@ export class RefundComponent implements OnInit {
    *关闭弹窗
    */
   hideWindow(type?: string) {
+    let me=this;
     $('.wrapper > section').css('z-index', 114);
-    this.showRefundWindow = false;
+    me.showRefundWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.refundDate.emit('type')// 向外传值
-    this.code = null;
-    this.uploader.queue = [];
+    me.refundDate.emit('type')// 向外传值
+    me.code = null;
+    me.uploader.queue = [];
   }
 
   /*

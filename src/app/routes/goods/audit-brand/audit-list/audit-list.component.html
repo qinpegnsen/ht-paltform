@@ -1,37 +1,12 @@
 <div *ngIf="showList">
   <!--搜索 start-->
   <div class="panel mb p clearfix">
-    <div class="search-group pl0">
-      <div class="search-title">分类：</div>
-      <div class="search-main">
-        <div class="btn-group w100" dropdown>
-          <button class="btn btn-default w100 text-left dropdownToggle" dropdownToggle>{{selectKindName}}<b
-            class="caret pull-right"></b>
-          </button>
-          <ul *dropdownMenu class="dropdown-menu animated fadeInDown special" role="menu">
-            <li (click)="selected('', '请选择分类')">
-              <a href="#">请选择分类</a>
-            </li>
-            <li *ngFor="let kind of kindList" (click)="selected(kind.id, kind.kindName)">
-              <a href="#">{{kind.kindName}}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <div class="search-group ml-lg mb align-top">
-      <span class="search-title">首字母：</span>
+      <span class="search-title">品牌名称：</span>
       <div class="search-main">
-        <input type="text" [(ngModel)]="query.brandInitial"
+        <input type="text" [(ngModel)]="brandName"
                class="form-control border-b-grey"
-               (change)="queryDatas(1)" placeholder="首字母">
-      </div>
-    </div>
-    <div class="search-group mb align-top">
-      <span class="search-title">品牌：</span>
-      <div class="search-main">
-        <input type="text" [(ngModel)]="query.brandName"
-               class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+               (change)="queryDatas(1)" placeholder="请输入品牌名称">
       </div>
     </div>
     <button type="button" title="搜索" (click)="queryDatas(1)"

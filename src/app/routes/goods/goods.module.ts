@@ -74,12 +74,14 @@ const routes: Routes = [
       {path: 'audit', component: AuditWindowComponent},
       {path: 'detail', component: AuditDetailComponent},
     ]},
-    {path: 'audited', component: AuditListComponent},
-    {path: 'reject', component: AuditListComponent}
-  ]
-  }
+    {path: 'audited', component: AuditListComponent,children: [
+      {path: 'detail', component: AuditDetailComponent},
+    ]},
+    {path: 'reject', component: AuditListComponent,children: [
+      {path: 'detail', component: AuditDetailComponent},
+    ]}
+  ]},
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes),

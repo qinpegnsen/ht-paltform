@@ -2,13 +2,13 @@
   <div class="panel-body">
     <div>
       <ul class="menu-guide list-unstyled clearfix bb">
-        <li class="pull-left thc" [ngClass]="{font: auditType=='APPLY',bb:auditType=='APPLY'}"
+        <li class="pull-left thc" [ngClass]="{font: auditType=='CR',bb:auditType=='CR'}"
             routerLink="unAudit">未审核
         </li>
         <li class="pull-left thc" [ngClass]="{font: auditType=='PASS',bb:auditType=='PASS'}"
             routerLink="audited">审核通过
         </li>
-        <li class="pull-left thc" [ngClass]="{font: auditType=='UNPASS',bb:auditType=='UNPASS'}"
+        <li class="pull-left thc" [ngClass]="{font: auditType=='REJECT',bb:auditType=='REJECT'}"
             routerLink="reject">审核驳回
         </li>
       </ul>

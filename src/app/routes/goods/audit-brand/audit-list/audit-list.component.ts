@@ -22,16 +22,12 @@ export class AuditListComponent implements OnInit {
   public addButton;
   public buttons;
   public kindList;// 分类列表
+  public brandName:any;
   public selectKindName: string = '根据分类查询';
 
   public query = {
     curPage: 1,
     pageSize: 10,
-    sortColumns: '',
-    kindId: null,
-    brandName: null,
-    state:'',
-
   };
 
   constructor(public router: Router,
@@ -48,8 +44,8 @@ export class AuditListComponent implements OnInit {
       me.path = urls[0].path;
       switch (me.path) {
         case "unAudit":
-          me.parentComp.auditType = 'APPLY';
-          me.search.ordState = 'APPLY';
+          me.parentComp.auditType = 'CR';
+          me.search.ordState = 'CR';
           me.content = '“待审核”品牌列表';
           break;
         case "audited":
@@ -58,13 +54,13 @@ export class AuditListComponent implements OnInit {
           me.content = '“已审核”品牌列表';
           break;
         case "reject":
-          me.parentComp.auditType = 'UNPASS';
-          me.search.ordState = 'UNPASS';
+          me.parentComp.auditType = 'REJECT';
+          me.search.ordState = 'REJECT';
           me.content = '“已驳回”品牌列表';
           break;
         default:
-          me.parentComp.auditType = 'APPLY';
-          me.search.ordState = 'APPLY';
+          me.parentComp.auditType = 'CR';
+          me.search.ordState = 'CR';
           me.content = '待审核品牌列表';
           break;
       }
@@ -101,16 +97,6 @@ export class AuditListComponent implements OnInit {
     });
   }
 
-  /**
-   * 选择分类
-   * @param id
-   * @param name
-   */
-  selected(id, name) {
-    this.query.kindId = id;
-    this.selectKindName = name;
-    this.queryDatas(1)
-  }
 
 
   /**
@@ -182,7 +168,13 @@ export class AuditListComponent implements OnInit {
     }
     _this.query.curPage = activePage;
     let requestUrl = '/goodsBrandApply/queryPage';
-    _this.brands = new Page(_this.submitService.getData(requestUrl, _this.query));
+    let params = {
+      curPage: activePage,
+      pageSize: 10,
+      brandName:_this.brandName,
+      state:_this.search.ordState,
+    }
+    _this.brands = new Page(_this.submitService.getData(requestUrl,params));
   }
 
 

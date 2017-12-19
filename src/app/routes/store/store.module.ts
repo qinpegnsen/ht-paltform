@@ -19,9 +19,9 @@ import {StoreService} from "./store.service";
 
 const routes: Routes = [
   /*提现管理*/
-  {path: '', redirectTo: 'record'},
-  {path: 'record', component: CashRecordComponent},
+  {path: '', redirectTo: 'check'},
   {path: 'check', component: CashCheckComponent},
+  {path: 'record', component: CashRecordComponent},
 
   /*企业管理*/
   {
