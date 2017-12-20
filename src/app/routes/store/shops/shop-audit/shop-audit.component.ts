@@ -4,6 +4,7 @@ import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {StoreService} from "../../store.service";
 import {MaskService} from "../../../../core/services/mask.service";
+import {PatternService} from "../../../../core/forms/pattern.service";
 declare var $: any;
 
 @Component({
@@ -17,10 +18,13 @@ export class ShopAuditComponent implements OnInit {
   public shopInfo: any;//店铺信息
   public shopAudits: any;//审核结果枚举
   public audit: any = {};//审核结果
+  public patterns: any;//正则
 
   constructor(public location: Location,
               public storeService: StoreService,
+              public pattern: PatternService,
               public submitService: SubmitService) {
+    this.patterns = this.pattern;
   }
 
   ngOnInit() {
@@ -33,17 +37,31 @@ export class ShopAuditComponent implements OnInit {
   }
 
   /**
-   * 审核
+   * 审核通过
    */
-  auditShop(){
+  auditPass(){
     let me = this;
     MaskService.showMask();//显示遮罩层
     let data = {
       storeCode: me.storeCode,
-      auditResult: me.audit.auditResult,
+      buildGoldRate: me.audit.buildGoldRate,
+      adRate: me.audit.adRate
+    }
+    me.submitService.putRequest('/stores/auditPass', data, true);
+    me.refresh = true;
+  }
+
+  /**
+   * 审核驳回
+   */
+  auditReject(){
+    let me = this;
+    MaskService.showMask();//显示遮罩层
+    let data = {
+      storeCode: me.storeCode,
       opinion: me.audit.opinion
     }
-    me.submitService.putRequest('/stores/auditStore', data, true);
+    me.submitService.putRequest('/stores/auditReject', data, true);
     me.refresh = true;
   }
 

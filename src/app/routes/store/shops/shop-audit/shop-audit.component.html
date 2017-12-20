@@ -74,13 +74,13 @@
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">QQ号：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeQq}">
             {{shopInfo?.storeQq || '【未填写】'}}
           </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">旺旺号：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeWw}">
             {{shopInfo?.storeWw || '【未填写】'}}
           </td>
         </tr>
@@ -88,7 +88,7 @@
     </div>
 
     <!--审核-->
-    <form class="goods-audit panel panel-danger w96 m-auto mb-xl">
+    <form class="goods-audit panel panel-danger w96 m-auto mb-xl" #auditForm="ngForm">
       <fieldset class="p0 panel-body">
         <legend class="m0 goods-audit-title">企业入驻审核</legend>
         <table class="w100">
@@ -102,20 +102,47 @@
               </div>
             </td>
             <td class="col-sm-8 mb0 p">
-                <textarea class="form-control w66 tag-dib align-middle" name="opinion"
-                          [required]="audit.auditResult == 'UNPASS'"
+              <ng-container *ngIf="audit.auditResult == 'PASS'">
+                <div class="mb clearfix">
+                  <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取建设金的比例：</label>
+                  <div class="tag-dib w50 align-middle font0">
+                    <input class="form-control width-auto tag-dib num" type="number" required name="buildGoldRate"
+                           [(ngModel)]="audit.buildGoldRate" [pattern]="patterns.twodecimal" placeholder="抽取建设金的比例"/>
+                    <em class="add-on">‱</em>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取广告费的比例：</label>
+                  <div class="tag-dib w50 align-middle font0">
+                    <input class="form-control width-auto tag-dib num" type="number" required name="adRate"
+                           [(ngModel)]="audit.adRate" [pattern]="patterns.twodecimal" placeholder="抽取广告费的比例"/>
+                    <em class="add-on">‱</em>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="audit.auditResult == 'UNPASS'">
+                <textarea class="form-control w66 tag-dib align-middle" name="opinion" required
                           [(ngModel)]="audit.opinion" placeholder="请填写审核意见"
                           cols="10" rows="3">
                 </textarea>
+              </ng-container>
             </td>
           </tr>
         </table>
       </fieldset>
       <fieldset class="pt-xl m0 text-center">
-        <button class="btn btn-green" type="button" (click)="auditShop()"
-                [disabled]="audit.auditResult == 'UNPASS' && !audit.opinion">
-          <em class="fa fa-upload mr"></em>{{audit.auditResult == 'PASS'?'通过':'不通过'}}
-        </button>
+        <ng-container *ngIf="audit.auditResult == 'PASS'">
+          <button class="btn btn-green" type="button" (click)="auditPass()"
+                  [disabled]="!auditForm.form.valid">
+            <em class="fa fa-upload mr"></em>通过
+          </button>
+        </ng-container>
+        <ng-container *ngIf="audit.auditResult == 'UNPASS'">
+          <button class="btn btn-green" type="button" (click)="auditReject()"
+                  [disabled]="!auditForm.form.valid">
+            <em class="fa fa-upload mr"></em>不通过
+          </button>
+        </ng-container>
       </fieldset>
     </form>
   </div>

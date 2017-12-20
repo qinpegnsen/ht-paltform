@@ -18,6 +18,16 @@
           <td class="item-hd col-sm-2">当前状态：</td>
           <td class="item-bd col-sm-10">{{shopInfo?.state | rzhState: '2004'}}</td>
         </tr>
+        <ng-container *ngIf="shopInfo?.state == 'NORMAL'">
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">抽取建设金的比例：</td>
+            <td class="item-bd col-sm-10">{{shopInfo?.buildGoldRate}}%</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-2">抽取广告费的比例：</td>
+            <td class="item-bd col-sm-10">{{shopInfo?.adRate}}%</td>
+          </tr>
+        </ng-container>
       </table>
       <legend class="legend mb0">店铺基本信息</legend>
       <table class="t-items p w100">
@@ -77,21 +87,21 @@
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">QQ号：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeQq}">
             {{shopInfo?.storeQq || '【未填写】'}}
           </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">旺旺号：</td>
-          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.contactsPhone}">
+          <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeWw}">
             {{shopInfo?.storeWw || '【未填写】'}}
           </td>
         </tr>
       </table>
 
       <!--审核结果 start-->
-      <ng-container *ngIf="shopInfo.state != 'PENDING' && shopInfo?.platShop=='N'">
-        <legend class="legend mb0">审核结果</legend>
+      <ng-container *ngIf="auditRecords.length > 0 && shopInfo?.platShop=='N'">
+        <legend class="legend mb0">审核记录</legend>
         <table class="table table-striped b bt0">
           <thead>
           <tr>

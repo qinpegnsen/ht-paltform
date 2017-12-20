@@ -53,3 +53,37 @@
     max-height: 100%;
   }
 }
+
+.lable-width {
+  width: 140px;
+  line-height: 35px;
+}
+
+.font0 {
+  font-size: 0;
+}
+
+.width-auto {
+  width: auto;
+  color: #777;
+  background-color: #FFF;
+  vertical-align: top;
+  display: inline-block;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  outline: 0 none;
+}
+
+.add-on {
+  font-size: 14px;
+  font-style: normal;
+  line-height: 33px;
+  background-color: #F6F7Fb;
+  vertical-align: top;
+  text-align: center;
+  display: inline-block;
+  width: 30px;
+  height: 35px;
+  border: solid #E6E9EE;
+  border-width: 1px 1px 1px 0;
+}
