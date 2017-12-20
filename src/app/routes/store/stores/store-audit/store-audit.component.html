@@ -221,10 +221,33 @@
           </tr>
         </table>
       </ng-container>
+
+      <!--审核记录 start-->
+      <ng-container *ngIf="epRecords.length > 0">
+        <legend class="legend mb0">审核记录</legend>
+        <table class="table table-striped bt0">
+          <thead>
+          <tr>
+            <th class="text-center">时间</th>
+            <th class="text-center">审核人</th>
+            <th class="text-center">审核结果</th>
+            <th class="text-center">审核意见</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of epRecords" class="text-center">
+            <td class="w25">{{item.createTime}}</td>
+            <td class="w25">{{item.optMan}}</td>
+            <td class="w20">{{item.result == 'PASS'? '通过': '不通过'}}</td>
+            <td class="w30">{{item.opinion}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-container>
     </div>
 
     <!--审核-->
-    <form class="goods-audit panel panel-danger w96 m-auto mb-xl">
+    <form class="goods-audit panel panel-danger w96 m-auto mt mb-xl">
       <fieldset class="p0 panel-body">
         <legend class="m0 goods-audit-title">企业入驻审核</legend>
         <table class="w100">

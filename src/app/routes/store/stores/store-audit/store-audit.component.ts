@@ -17,6 +17,7 @@ export class StoreAuditComponent implements OnInit {
   public epCode: string = '';//企业编码
   public epInfo: any;//企业信息
   public epAudits: any;//审核结果枚举
+  public epRecords: any;//审核记录
   public audit: any = {};//审核结果
 
   constructor(public location: Location,
@@ -25,10 +26,14 @@ export class StoreAuditComponent implements OnInit {
   }
 
   ngOnInit() {
-    let me = this, epInfo;
+    let me = this, epInfo, epRecords;
     me.epCode = me.submitService.getParams('epCode');
-    if (me.epCode) epInfo = me.storeService.getEpInfo(me.epCode);
+    if (me.epCode) {
+      epInfo = me.storeService.getEpInfo(me.epCode);
+      epRecords = me.storeService.getEpAuditRecord(me.epCode);
+    }
     if (!isNullOrUndefined(epInfo)) me.epInfo = epInfo;
+    if (!isNullOrUndefined(epRecords)) me.epRecords = epRecords;
     me.epAudits = [{key: 'PASS', val: '通过'}, {key: 'UNPASS', val: '不通过'}];
     me.audit.auditResult = 'UNPASS';//默认不通过
   }

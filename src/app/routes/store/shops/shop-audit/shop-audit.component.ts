@@ -17,6 +17,7 @@ export class ShopAuditComponent implements OnInit {
   public storeCode: string;//店铺编码
   public shopInfo: any;//店铺信息
   public shopAudits: any;//审核结果枚举
+  public auditRecords: any;//审核记录
   public audit: any = {};//审核结果
   public patterns: any;//正则
 
@@ -28,10 +29,14 @@ export class ShopAuditComponent implements OnInit {
   }
 
   ngOnInit() {
-    let me = this, shopInfo;
+    let me = this, shopInfo, auditRecords;
     me.storeCode = me.submitService.getParams('storeCode');
-    if (me.storeCode) shopInfo = me.storeService.getShopInfo(me.storeCode);
+    if (me.storeCode) {
+      shopInfo = me.storeService.getShopInfo(me.storeCode);
+      auditRecords = me.storeService.getShopAuditRecord(me.storeCode);
+    }
     if (!isNullOrUndefined(shopInfo)) me.shopInfo = shopInfo;
+    if (!isNullOrUndefined(auditRecords)) me.auditRecords = auditRecords;
     me.shopAudits = [{key: 'PASS', val: '通过'}, {key: 'UNPASS', val: '不通过'}];  // 审核是否通过
     me.audit.auditResult = 'UNPASS';//默认不通过
   }

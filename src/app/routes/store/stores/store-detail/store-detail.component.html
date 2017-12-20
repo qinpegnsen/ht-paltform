@@ -225,8 +225,8 @@
         </ng-container>
       </ng-container>
 
-      <!--审核结果 start-->
-      <ng-container *ngIf="epInfo.state == 'NORMAL' || epInfo.state == 'REJECT'">
+      <!--审核记录 start-->
+      <ng-container *ngIf="epRecords.length > 0">
         <legend class="legend mb0">审核记录</legend>
         <table class="table table-striped b bt0">
           <thead>

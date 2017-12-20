@@ -28,7 +28,10 @@ export class ShopDetailComponent implements OnInit {
   ngOnInit() {
     let me = this, shopInfo, auditRecords;
     me.storeCode = me.submitService.getParams('storeCode');
-    if (me.storeCode) shopInfo = me.storeService.getShopInfo(me.storeCode), auditRecords = me.storeService.getShopAuditRecord(me.storeCode);
+    if (me.storeCode) {
+      shopInfo = me.storeService.getShopInfo(me.storeCode);
+      auditRecords = me.storeService.getShopAuditRecord(me.storeCode);
+    }
     if (!isNullOrUndefined(shopInfo)) me.shopInfo = shopInfo;
     if (!isNullOrUndefined(auditRecords)) me.auditRecords = auditRecords;
   }
