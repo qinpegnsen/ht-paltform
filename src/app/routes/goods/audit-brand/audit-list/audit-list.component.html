@@ -49,25 +49,34 @@
         <td>{{brand.englishName}}</td>
         <td>{{brand.brandHolder}}</td>
         <td>
-          <img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+          <img height="50px" [src]="brand.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">
-          <img class="hover-big-img" [src]="brand.brandPic"
+          <img class="hover-big-img" [src]="brand.brandLogo"
                onerror="javascript:this.src='../../../assets/img/dummy.png'"
                alt=""></td>
         <td>
-          <img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt="">
-          <img class="hover-big-img" [src]="brand.brandPic"
+          <span *ngIf="brand.registration1">
+            <img height="50px" [src]="brand.registration1" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                     alt="">
+          <img class="hover-big-img" [src]="brand.registration1"
                onerror="javascript:this.src='../../../assets/img/dummy.png'"
-               alt=""></td>
+               alt=""></span>
+          <span *ngIf="brand.registration2">
+             <img height="50px" [src]="brand.registration2" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                  alt="">
+          <img class="hover-big-img" [src]="brand.registration2"
+               onerror="javascript:this.src='../../../assets/img/dummy.png'"
+               alt="">
+          </span>
+          </td>
         <td>
-          <!--<ng-container *ngIf="brand.brandApply == 'APPLY'">-->
           <ng-container *ngIf="path == 'unAudit'">
             <button class="btn btn-purple btn-sm fa fa-check-square-o"
                     [queryParams]="{applyCode:brand.applyCode,brandName:brand.brandName,englishName:brand.englishName,
-                    brandHolder:brand.brandHolder,applyNumber:brand.applyNumber}"
+                    brandHolder:brand.brandHolder,applyNumber:brand.applyNumber,applyCurPage:brands.curPage}"
                     routerLink="audit" title="审核"></button>
             <button class="btn btn-danger btn-sm fa fa-trash" title="删除"
                     (click)="deleteBrand(brands.curPage, brand.applyCode)"></button>

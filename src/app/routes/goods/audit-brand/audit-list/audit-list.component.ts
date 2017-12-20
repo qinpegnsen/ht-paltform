@@ -159,7 +159,7 @@ export class AuditListComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  queryDatas(curPage, event?: PageEvent) {
+   queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;

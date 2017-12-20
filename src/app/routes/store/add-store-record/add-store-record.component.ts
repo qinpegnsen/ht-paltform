@@ -36,7 +36,7 @@ export class AddStoreRecordComponent implements OnInit {
     payBank: null,
     payAcct: null,
     payBacctName: null,
-    payWay: 'REMIT',
+    payWay: '',
     remark: null,
     uuid: null
   };
@@ -101,11 +101,12 @@ export class AddStoreRecordComponent implements OnInit {
   addFinished() {
     let me = this;
     if (me.isAgree == 'Y') {
-      this.voncher.voucherUrl = null;
+      me.voncher.voucherUrl = null;
+      // me.uploader.queue = [];
       me.upLoadImg(); //上传图片及提交数据
     } else {
       me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
-      this.uploader.queue = [];
+      // this.uploader.queue = [];
       me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
     }
   }

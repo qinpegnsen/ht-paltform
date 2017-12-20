@@ -18,14 +18,14 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
   public yesOrNo: any;         //商品审核是否通过枚举
   public isAudit: boolean = true;//是否是审核，父组件监听用
   public brandId: string;//品牌id
-  public brandInfo: any = {};
+  public brandInfo: any = {};//
 
-  public applyCode:any;//品牌编码
-  public brandName:any;//品牌名称
-  public englishName:any;//品牌英文名称
-  public brandHolder:any;//品牌拥有着
-  public applyNumber:any;//品牌注册号
-
+  public applyCode: any;//品牌编码
+  public brandName: any;//品牌名称
+  public englishName: any;//品牌英文名称
+  public brandHolder: any;//品牌拥有着
+  public applyNumber: any;//品牌注册号
+  public applyCurPage: any;//品牌页码
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
     $('body').css("overflow-y", 'scroll');
@@ -36,23 +36,28 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
               public tools: RzhtoolsService,
               public routeInfo: ActivatedRoute,
               public patterns: PatternService,
-) {
+              public auditList: AuditListComponent) {
     $('.wrapper > section').css('z-index', 200);
     $('body').css("overflow-y", 'hidden');
   }
 
   ngOnInit() {
-    let me=this;
-    me.applyCode = this.routeInfo.snapshot.queryParams['applyCode'];
-    me.brandName = this.routeInfo.snapshot.queryParams['brandName'];
-    me.englishName = this.routeInfo.snapshot.queryParams['englishName'];
-    me.brandHolder = this.routeInfo.snapshot.queryParams['brandHolder'];
-    me.applyNumber = this.routeInfo.snapshot.queryParams['applyNumber'];
-    this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
+    let me = this;
+    me.applyCode = me.routeInfo.snapshot.queryParams['applyCode'];//品牌编码
+    me.brandName = me.routeInfo.snapshot.queryParams['brandName'];//品牌名称
+    me.englishName = me.routeInfo.snapshot.queryParams['englishName'];//品牌英文名称
+    me.brandHolder = me.routeInfo.snapshot.queryParams['brandHolder'];//品牌拥有着
+    me.applyNumber = me.routeInfo.snapshot.queryParams['applyNumber'];//品牌注册号
+    me.applyCurPage = me.routeInfo.snapshot.queryParams['applyCurPage'];//当前页码
+    me.yesOrNo = me.tools.getEnumDataList('1001');  // 商品审核是否通过
   }
 
+  /**
+   * 关闭弹窗
+   */
   hideWindow() {
-    this.location.back();
+    let me = this;
+    me.location.back();
   }
 
 
@@ -97,14 +102,15 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
     let me = this;
     let url = "/goodsBrandApply/auditPass";
     let data = {
-      applyCode:me.applyCode,
-      brandSort:res.brandSort,
-      brandRecommend:res.brandRecommend,
-      showType:res.showType,
-      goodsBrandState:res.state
+      applyCode: me.applyCode,
+      brandSort: res.brandSort,
+      brandRecommend: res.brandRecommend,
+      showType: res.showType,
+      goodsBrandState: res.state
     }
-    let result = this.submit.putRequest(url, data);
-    this.location.back();
+    let result = me.submit.putRequest(url, data);
+    me.location.back();//返回上个页面
+    me.auditList.queryDatas(this.applyCurPage);//返回刷新当前页
   }
 
   /**
@@ -114,11 +120,11 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
     let me = this;
     let url = "/goodsBrandApply/auditReject";
     let data = {
-      applyCode:me.applyCode,
-      reason:res.failReason
+      applyCode: me.applyCode,
+      reason: res.failReason
     }
     let result = this.submit.putRequest(url, data);
-    this.location.back();
-    // me.auditList.queryDatas()
+    me.location.back();//返回上个页面
+    me.auditList.queryDatas(this.applyCurPage);//返回刷新当前页
   }
 }

@@ -25,9 +25,7 @@ export class ToRefundComponent implements OnInit {
   public curPage1: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
-  public LogisticsData//物流信息
-  public beginTime: string;
-  public endTime: string;
+  public LogisticsData//物流信
   public goodsList: Page = new Page();
   public showRefundWindow:boolean = false;
 

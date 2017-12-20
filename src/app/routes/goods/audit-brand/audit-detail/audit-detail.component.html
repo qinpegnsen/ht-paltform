@@ -31,17 +31,21 @@
     <tr class="t-item clearfix">
       <td class="item-hd col-sm-1 br bt bb">品牌注册证：</td>
       <td class="item-bd col-sm-9 mb0 bt bb">
-        <img [src]="result.registration1" alt=" " (mousemove)="showImg($event)"
-             (mouseout)="hideImg($event)"
-             onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+        <span *ngIf="result.registration1">
+           <img [src]="result.registration1" alt=" " (mousemove)="showImg($event)"
+                (mouseout)="hideImg($event)"
+                onerror="javascript:this.src='../../../../assets/img/dummy.png'">
         <img [src]="result.registration1" class="bigImg" alt=""
              onerror="javascript:this.src='../../../assets/img/dummy.png'">
-        <img [src]="result.registration1" alt=" " (mousemove)="showImg($event)"
-             (mouseout)="hideImg($event)"
-             onerror="javascript:this.src='../../../../assets/img/dummy.png'">
+        </span>
+        <span *ngIf="result.registration2">
+          <img [src]="result.registration2" alt=" " (mousemove)="showImg($event)"
+               (mouseout)="hideImg($event)"
+               onerror="javascript:this.src='../../../../assets/img/dummy.png'">
 
-        <img [src]="result.registration1" class="bigImg" alt=""
+        <img [src]="result.registration2" class="bigImg" alt=""
              onerror="javascript:this.src='../../../assets/img/dummy.png'">
+        </span>
       </td>
     </tr>
   </table>

@@ -137,7 +137,7 @@ const goods = {
     },
     {
       text: '品牌管理',
-      icon: 'fa fa-cubes',
+      icon: 'icon icon-people',
       alert: '▼',
       submenu: [
         {
@@ -523,12 +523,12 @@ const activities = {
 };
 const store = {
   text: '企业管理',
-  icon: 'fa fa-users',
+  icon: 'fa fa-institution',
   link: '/main/store',
   submenu: [
     {
       text: '提现管理',
-      icon: 'fa fa-users',
+      icon: 'fa fa-money',
       link: '/main/store/deposit',
       alert: '▼',
       submenu: [
