@@ -17,6 +17,9 @@
         <span class="btn btn-default btn-xs"><i class="fa fa-level-up"></i> 上一级 </span>
         按钮可后退到上级分类列表。
       </li>
+      <li>
+        绑定品牌以及添加分类属性、自定义属性等设置应在分类的最末级中进行设置，商城发布商品以及分类索引商品都是依据此原则设定。例如：商城设定有三级商品分类，则应该在第三级分类中进行品牌绑定、属性设置等操作；而一级及二级分类只做为结构类目存在。
+      </li>
       <li><span class="text-danger">特别注意：如果您的商城正在运营中，因商铺、商品、分润结算等重要数据都与商品分类相关，因此尽量使用
         <button type="button" class="btn btn-primary btn-xs" title="修改"><i class="fa fa-pencil"></i></button>
         而避免
@@ -43,7 +46,7 @@
       <thead>
       <tr>
         <th class="unselectable text-center w5 thc font">
-          序号
+
         </th>
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="kindName">分类名称</rzhDefaultSorter>
@@ -70,46 +73,65 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let kind of dataTable.data;let i = index" class="text-center">
-        <td>{{i+1}}</td>
-        <td>{{kind.kindName}}</td>
-        <td><img class="cursor-p" height="50px"  (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                 [src]="kind.kindIcon"
+      <ng-container *ngFor="let kind of dataTable.data;let i = index">
+        <tr class="text-center">
+          <td (click)="showDetail(kind)">
+            <i class="icon icon-arrow-down"></i>
+          </td>
+          <td>{{kind.kindName}}</td>
+          <td><img class="cursor-p" height="50px" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                   [src]="kind.kindIcon"
+                   onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                   alt="">
+            <img class="hover-big-img" [src]="kind.kindIcon"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt="">
-          <img class="hover-big-img" [src]="kind.kindIcon"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'"
-               alt=""></td>
-        <td *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
-        <td>{{kind.sort}}</td>
-        <td>{{kind.keywords}}</td>
-        <td>{{kind.description}}</td>
-        <td>
-          <label class="switch switch-md" title="显示/隐藏">
-            <input [checked]="kind.state=='SHOW'" type="checkbox"
-                   (change)="changeKindState(kind.state=='SHOW',kind.id,kind.kindParentId, kinds.curPage)">
-            <span></span>
-          </label>
-        </td>
-        <td>
-          <p *ngIf="kind.state!='DEL'">
-            <app-buttons [config]="option" (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
-                         *ngFor="let option of buttons"></app-buttons>
-            <span *ngIf="kind.level != 3">
+                 alt=""></td>
+          <td *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
+          <td>{{kind.sort}}</td>
+          <td>{{kind.keywords}}</td>
+          <td>{{kind.description}}</td>
+          <td>
+            <label class="switch switch-md" title="显示/隐藏">
+              <input [checked]="kind.state=='SHOW'" type="checkbox"
+                     (change)="changeKindState(kind.state=='SHOW',kind.id,kind.kindParentId, kinds.curPage)">
+              <span></span>
+            </label>
+          </td>
+          <td>
+            <p *ngIf="kind.state!='DEL'">
+              <app-buttons [config]="option"
+                           (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
+                           *ngFor="let option of buttons"></app-buttons>
+              <span *ngIf="kind.level != 3">
               <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
                  [queryParams]="{kindPid: kind.kindParentId,pid: kind.id, pname: kind.kindName,level:kind.level+1,page: kinds.curPage}"
                  title="添加下级分类"></a>
             </span>
-            <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
-                  (click)="queryChildKindList(kind.id, kind.kindName,false)">
+              <span *ngIf="kind.level == 3">
+              <a class="btn btn-info btn-xs fa fa-tags" (click)="bindKind(kind.id)"
+                 title="关联品牌"></a>
+            </span>
+              <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
+                    (click)="queryChildKindList(kind.id, kind.kindName,false)">
               <i class="fa fa-level-down"></i> 下一级
             </span>
-          </p>
-          <p *ngIf="kind.state=='DEL'">
-            <button class="btn btn-outline btn-danger btn-xs">已删除</button>
-          </p>
-        </td>
-      </tr>
+            </p>
+            <p *ngIf="kind.state=='DEL'">
+              <button class="btn btn-outline btn-danger btn-xs">已删除</button>
+            </p>
+          </td>
+        </tr>
+        <tr *ngIf="kind.isShow">
+          <td colspan="9">
+            <div *ngIf="kind.level != 3">
+              该分类级别无法绑定品牌
+            </div>
+            <div *ngIf="kind.level == 3">
+              绑定的品牌：<span *ngFor="let item of sortLinkKind" class="mr">{{item}}</span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
       </tbody>
       <tfoot>
       <tr>
@@ -129,7 +151,8 @@
     </table>
   </div>
 </div>
-
+<app-sort-bind-kind [orderId]="curSortId" [page]="kinds.curPage"
+                    (deliverGoods)="getDeliverOrderData($event)"></app-sort-bind-kind>
 <!--路由嵌套 begin-->
 <router-outlet></router-outlet>
 <!--路由嵌套 end-->

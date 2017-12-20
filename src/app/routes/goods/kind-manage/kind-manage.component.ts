@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {GoodsService} from "../goods.service";
 
 @Component({
   selector: 'app-kind-manage',
@@ -18,13 +19,19 @@ export class KindManageComponent implements OnInit {
   public buttons;// 按钮组的配置
   public childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
   public childKindList: Array<any> = []; //菜单级别面包屑
+  public curSortId: any; //当前三级分类的id
+  public sortLinkKind: any; //当前三级分类关联的品牌
 
-  constructor(public router: Router, public submitService: SubmitService, public tool: RzhtoolsService) {
+  constructor(public router: Router,
+              public submitService: SubmitService,
+              public GoodsService: GoodsService,
+              public tool: RzhtoolsService) {
   }
 
   ngOnInit() {
     let me = this;
     me.queryDatas(1, 0);
+    me.getDeliverOrderData(true)
     me.addButton = {
       type: 'add-thc',
       text: '新增分类',
@@ -147,5 +154,50 @@ export class KindManageComponent implements OnInit {
     me.kinds = new Page(res);
   }
 
+  /**
+   * 当点击tr的时候，让隐藏的tr出来
+   */
+  showDetail(data:any){
+    data.isShow = !data.isShow;
+  }
+
+  /**
+   * 绑定品牌
+   * @param id
+   */
+  bindKind(id){
+    this.curSortId = id;
+    console.log("█ this.curSortId ►►►",  this.curSortId);
+  }
+
+  /**
+   * 发货回调函数
+   * @param data
+   */
+  getDeliverOrderData(data) {
+    if(data.type) {
+      this.curSortKinds();
+      this.curSortId = null;
+    }//在当前页面发货之后需要刷新页面数据
+  }
+
+  /**
+   * 当前分类下的所有品牌
+   */
+  curSortKinds(){
+    let url='/goodsKind/queryBrandByKindId';
+    let data={
+      goodsKindId:this.curSortId
+    };
+    let result=this.GoodsService.queryKindBySortId(url,data),array=new Array();
+    console.log("█ result ►►►",  result);
+    if(result){
+      for(var i=0;i<result.length;i++){
+        array.push(result[i].brandName);
+      }
+      this.sortLinkKind=array;
+      return result;
+    }
+  }
 
 }

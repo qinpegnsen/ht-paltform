@@ -1,0 +1,43 @@
+<div class="deliver-order fadeIn" *ngIf="showDeliverWindow">
+  <div class="mask"></div>
+  <form class="_popup animated fadeIn" #deliverytpl="ngForm">
+    <div class="pop popup-hd">
+      <span class="f-bold thc font">关联品牌</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <div class="panel mb p ts-bg thc">
+      <p class="font18">操作提示</p>
+      <ul>
+        <li>编辑分类绑定品牌，可从输入框点击添加新的品牌绑定，也可从下方添加新的品牌绑定。</li>
+        <li>如品牌过多时，可在输入框通过品牌名进行搜索，快速定位</li>
+        <li>编辑分类取消绑定品牌，可从已选品牌中点击取消品牌绑定。</li>
+      </ul>
+    </div>
+    <!--选择品牌 start-->
+    <div class="pop deliver-box font12 w100">
+      <div class="mr20 ml20 _myLineHeight">
+        选择品牌：
+      </div>
+    </div>
+    <div class="pop deliver-box font12 w100">
+      <div class="mr20 ml20">
+        <ng-select (data)="value" [active]="curValue" [multiple]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)" #putValue placeholder="点击选择品牌"></ng-select>
+      </div>
+    </div>
+    <div class="pop deliver-box font12 w100 myLinkKind mb15  mt15">
+      <div class="mr20 ml20">
+        <div *ngFor="let item of items;let i = index" class="myDisplay mr-sm" (click)="linkKind(item)">
+          {{item.text}}
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
+    </div>
+    <!--选择品牌 end-->
+    <div class="panel-footer text-right">
+      <button class="btn btn-default" type="button" (click)="hideWindow()">放弃操作</button>
+      <button class="btn btn-info" type="button" (click)="delivery()" [disabled]="deliverytpl.invalid">确认提交</button>
+    </div>
+  </form>
+</div>
+
+
