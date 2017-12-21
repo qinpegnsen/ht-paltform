@@ -32,7 +32,6 @@ export class KindManageComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.queryDatas(1, 0);
-    me.curSortKinds();
     me.addButton = {
       type: 'add-thc',
       text: '新增分类',
@@ -120,7 +119,6 @@ export class KindManageComponent implements OnInit {
       }
     }
     this.queryDatas(1, me.childKindId);
-    this.curSortKinds();//当前分类下的所有品牌
     // me.data = new Page(me.limitService.queryMenuList(1, 4, me.sysCode, me.childKindId));
   }
 
@@ -178,28 +176,8 @@ export class KindManageComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     if(data.type) {
-      this.curSortKinds();
-      this.queryChildKindList(this.parentId);
+      this.queryChildKindList(this.parentId,'',true);
     }
     this.curSortId = null;
   }
-
-  /**
-   * 当前分类下的所有品牌
-   */
-  curSortKinds(){
-    let url='/goodsKind/queryBrandByKindId';
-    let data={
-      goodsKindId:this.curSortId
-    };
-    let result=this.GoodsService.queryKindBySortId(url,data),array=new Array();
-    if(result){
-      for(var i=0;i<result.length;i++){
-        array.push(result[i].brandName);
-      };
-      this.sortLinkKind=array;
-      return result;
-    }
-  }
-
 }
