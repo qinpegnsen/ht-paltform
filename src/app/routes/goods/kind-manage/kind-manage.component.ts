@@ -118,7 +118,8 @@ export class KindManageComponent implements OnInit {
         me.childKindList.splice(num + 1); //剔除下标后面的路径
       }
     }
-    this.queryDatas(1, me.childKindId)
+    this.queryDatas(1, me.childKindId);
+    this.curSortKinds();//当前分类下的所有品牌
     // me.data = new Page(me.limitService.queryMenuList(1, 4, me.sysCode, me.childKindId));
   }
 
@@ -194,6 +195,7 @@ export class KindManageComponent implements OnInit {
         array.push(result[i].brandName);
       };
       this.sortLinkKind=array;
+      console.log("█ this.sortLinkKind ►►►",  this.sortLinkKind);
       return result;
     }
   }

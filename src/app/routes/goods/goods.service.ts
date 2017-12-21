@@ -132,9 +132,12 @@ export class GoodsService {
   /**
    * 获取品牌列表
    */
-  getBrandList(){
-    let url = '/goodsBrand/queryAll';
-    return this.submit.getData(url,'')
+  getBrandList(orderId){
+    let url = '/goodsBrand/queryAll',data;
+    data={
+      goodsKindId:orderId
+    };
+    return this.submit.getData(url,data)
   }
 
   /**

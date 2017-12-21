@@ -127,7 +127,13 @@
               该分类级别无法绑定品牌
             </div>
             <div *ngIf="kind.level == 3">
-              绑定的品牌：<span *ngFor="let item of sortLinkKind" class="mr">{{item}}</span>
+              绑定的品牌：
+              <ng-container *ngIf="kind.goodsBrandList">
+                <span *ngFor="let item of kind.goodsBrandList" class="mr">{{item.brandName}}</span>
+              </ng-container>
+              <ng-container *ngIf="!sortLinkKind">
+                暂无品牌
+              </ng-container>
             </div>
           </td>
         </tr>

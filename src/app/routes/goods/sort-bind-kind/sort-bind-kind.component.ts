@@ -30,7 +30,7 @@ export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
     if (changes['orderId'] && !isNullOrUndefined(this.orderId)) {
       $('.wrapper > section').css('z-index', 200);
       this.showDeliverWindow = true;
-      this.dealKindsData();//出来当前分类下所有的品牌，对 已经绑定的没有绑定的进行分类
+      this.dealKindsData(this.orderId);//出来当前分类下所有的品牌，对 已经绑定的没有绑定的进行分类
     }
   }
 
@@ -48,14 +48,14 @@ export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
   /**
    * 出来当前分类下品牌的数据
    */
-  dealKindsData(){
-    let data=this.GoodsService.getBrandList(),obj,tempY=new Array(),tempN=new Array();
+  dealKindsData(orderId){
+    let data=this.GoodsService.getBrandList(orderId),obj,tempY=new Array(),tempN=new Array();
     for(let i=0;i<data.length;i++){
       obj={
         id:data[i].id,
         text:data[i].brandName
       };
-      if(data[i].isHas=="Y"){
+      if(data[i].binded){
         tempY.push(obj);
       }else{
         tempN.push(obj);
