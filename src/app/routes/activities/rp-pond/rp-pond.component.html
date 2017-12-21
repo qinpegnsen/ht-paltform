@@ -50,7 +50,7 @@
 
 <!--企业投资记录表 start-->
 <div class="panel mb panel-default">
-  <div class="table-title w100 h50 font18 thc ts statics-font">企业投资记录表</div>
+  <div class="table-title w100 h50 font18 thc ts statics-font">奖池金额记录表</div>
   <div class="form-group mb0 ">
     <div class="pull-right text-center mt-lg mr6">
         <span class="ng-scope">
@@ -90,19 +90,22 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
-        <th class="w15 text-left">
-          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-left">
+        <th class="w10 text-left">
           <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-left">
           <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
-          <rzhDefaultSorter by="id">充值金额（元）</rzhDefaultSorter>
+        <th class="w10 text-left">
+          <rzhDefaultSorter by="id">会计科目</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center">
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="id">投资金额（元）</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
           <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
         </th>
       </tr>
@@ -110,10 +113,16 @@
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
-        <td class="text-left">{{count.epSubname}}</td>
         <td class="text-left">{{count.epCode}}</td>
         <td class="text-left">{{count.storeCode}}</td>
-        <td>{{count.amount |number:'1.2-2'}}</td>
+        <td class="text-left">{{count.subjectName}}</td>
+        <ng-container *ngIf="count.toType=='CUST'">
+          <td class="thc font">支出 ￥ {{count.expenditrue?count.income:0 |number:'1.2-2'}}</td>
+        </ng-container>
+        <ng-container *ngIf="count.toType=='STORE'||count.toType=='PLAT'">
+          <td class="thc font">收入 ￥ {{count.income?count.income:0 |number:'1.2-2'}}</td>
+        </ng-container>
+        <td class="text-left">{{count.remark}}</td>
         <td>{{count.createTime }}</td>
       </tr>
       </tbody>

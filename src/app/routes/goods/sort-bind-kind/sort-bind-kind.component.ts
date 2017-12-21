@@ -13,7 +13,7 @@ declare var $: any;
   templateUrl: './sort-bind-kind.component.html',
   styleUrls: ['./sort-bind-kind.component.scss']
 })
-export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
+export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
   public showDeliverWindow: boolean = false;
   @Input('orderId') orderId: string;
   @Input('page') page: string;
@@ -23,7 +23,7 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
 
   // ng2Select
   public items: any = new Array();//所有的数据
-  public ids: any;//选择的品牌的id集合
+  public ids :any;//选择的品牌的id集合
   public disabled: boolean = false;//输入选择框是否禁用
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,7 +38,7 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor(public GoodsService: GoodsService, public KindManageComponent: KindManageComponent) {
+  constructor(public GoodsService:GoodsService,public KindManageComponent:KindManageComponent) {
   }
 
   ngOnInit() {
@@ -48,25 +48,24 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * 出来当前分类下品牌的数据
    */
-  dealKindsData(orderId) {
-    let data = this.GoodsService.getBrandList(orderId), obj, tempY = new Array(), tempN = new Array();
-    if(data){
-      for (let i = 0; i < data.length; i++) {
-        obj = {
-          id: data[i].id,
-          text: data[i].brandName
-        };
-        if (data[i].binded) {
-          tempY.push(obj);
-        } else {
-          tempN.push(obj);
-        }
-        setTimeout(() => {
-          this.putValue.active = tempY;
-        });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
-        this.items = tempN;
+  dealKindsData(orderId){
+    let data=this.GoodsService.getBrandList(orderId),obj,tempY=new Array(),tempN=new Array();
+    for(let i=0;i<data.length;i++){
+      obj={
+        id:data[i].id,
+        text:data[i].brandName
+      };
+      if(data[i].binded){
+        tempY.push(obj);
+      }else{
+        tempN.push(obj);
       }
+      setTimeout(()=>{
+        this.putValue.active=tempY;
+      });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
+      this.items=tempN;
     }
+
   }
 
   /**
@@ -90,9 +89,9 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
    * @param value
    * @returns {string}
    */
-  public itemsToString(value: Array<any> = []): string {
+  public itemsToString(value:Array<any> = []):string {
     return value
-      .map((item: any) => {
+      .map((item:any) => {
         return item.id;
       }).join(',');
   }
@@ -108,8 +107,8 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * +号增加品牌
    */
-  linkKind(value) {
-    let SelectIte = {text: value.text, id: value.id};
+  linkKind(value){
+    let SelectIte={text:value.text,id:value.id};
     this.putValue.active.push(SelectIte);//添加到已经选择的输入框里面
     this.ids = this.itemsToString(this.putValue.active);//已经选择的品牌的id集合
     this.addDate(value.text);
@@ -119,9 +118,9 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
    * 增加数据 要从原数组里面减少
    * @param value
    */
-  addDate(text) {
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].text == text) {
+  addDate(text){
+    for(let i=0;i<this.items.length;i++){
+      if(this.items[i].text==text){
         this.items.splice(i, 1);
         break;
       }
@@ -152,9 +151,10 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
       goodsKindId: this.orderId,
       goodsBrandIdStrings: this.ids,
     };
-    let result = this.GoodsService.sortLinkKind(url, data);
-    if (result.success) {
+    let result=this.GoodsService.sortLinkKind(url,data);
+    if(result.success){
       this.hideWindow(true);
     }
   }
+
 }
