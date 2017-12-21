@@ -1,4 +1,4 @@
-<div [class.panel]="assign" [class.panel-danger]="assign" [class.panel-body]="assign" [hidden]="!showList">
+<div [ngClass]="{panel:assign,'panel-body':assign}" *ngIf="showList">
   <!--查询 start-->
   <div class="p text-right clearfix">
     <!--<div class="search-group pull-right ml-xl mb">

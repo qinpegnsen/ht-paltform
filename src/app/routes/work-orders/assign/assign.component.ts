@@ -63,7 +63,8 @@ export class AssignComponent implements OnInit {
    * 子组件加载时
    * @param event
    */
-  activate(event) {
+  onActivated(event) {
+    console.log("█ 123 ►►►",  123);
     this.showList = false;
     this.parentComp.detail = true;
     this.parentComp.detailType = event.detailType;
@@ -73,7 +74,7 @@ export class AssignComponent implements OnInit {
    * 子组件注销时
    * @param event
    */
-  onDeactivate(event) {
+  onDeactivated(event) {
     this.showList = true;
     this.parentComp.detail = false;
   }
