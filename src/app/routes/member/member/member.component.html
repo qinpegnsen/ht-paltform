@@ -116,12 +116,12 @@
           {{member.custSex | rzhState:'1002' }}
         </td>
         <td>
-          {{member.rpCustAcctBalance | number: '1.2-2' }}
+          {{member.rpCustAcctBalance?member.rpCustAcctBalance:0 | number: '1.2-2' }}
         </td>
-        <td>
-          {{member.rpCustAcctIncome | number: '1.2-2' }}
+        <td class="thc font">￥
+          {{member.rpCustAcctIncome?member.rpCustAcctIncome:0 | number: '1.2-2' }}
         </td>
-        <td>{{member.coin | number: '1.2-2'}}</td>
+        <td>{{member.coin?member.coin:0 | number: '1.2-2'}}</td>
         <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>

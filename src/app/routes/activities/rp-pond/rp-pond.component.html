@@ -112,7 +112,7 @@
         <td>{{x+1}}</td>
         <td class="text-left">{{count.epCode}}</td>
         <td class="text-left">{{count.storeCode}}</td>
-        <td>{{count.amount |number:'1.2-2'}}</td>
+        <td class="thc font">￥ {{count.amount?count.amount:0 |number:'1.2-2'}}</td>
         <td class="text-left">{{count.remark}}</td>
         <td>{{count.createTime }}</td>
       </tr>

@@ -61,14 +61,14 @@
         <th class="w15 thc font text-center">
           会员手机号
         </th>
-        <th class="w25 thc font">
-          企业简称
-        </th>
         <th class="w10 thc font text-center">
           红包流水类型
         </th>
         <th class="w10 thc font text-center">
           面额（元）
+        </th>
+        <th class="w25 thc font">
+          备注
         </th>
         <th class="w20 thc font text-center">
           创建时间
@@ -80,9 +80,9 @@
         <td>{{i+1}}</td>
         <td>{{item.custName}}</td>
         <td class="text-center">{{item.custPhone}}</td>
-        <td>{{item.epSubname}}</td>
         <td class="text-center">{{item.logType | rzhState :'2100'}}</td>
-        <td class="text-center">{{item.amount |number:'1.2-2'}}</td>
+        <td class="text-center thc font">￥ {{item.amount |number:'1.2-2'}}</td>
+        <td>{{item.remark}}</td>
         <td class="text-center">{{item.createTime}}</td>
       </tr>
       </tbody>
