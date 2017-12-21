@@ -114,7 +114,7 @@ export class SiteComponent implements OnInit {
   closeRpSwitch() {
     let that = this;
     swal({
-      title: '请再次进行确认？',
+      title: '请再次进行确认！',
       text: '关闭红包活动开关后将无法正常使用红包功能！',
       type: "info",
       showCancelButton: true,

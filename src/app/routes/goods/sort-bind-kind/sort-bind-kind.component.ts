@@ -13,12 +13,8 @@ declare var $: any;
   templateUrl: './sort-bind-kind.component.html',
   styleUrls: ['./sort-bind-kind.component.scss']
 })
-export class SortBindKindComponent implements OnInit {
+export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
   public showDeliverWindow: boolean = false;
-  public expressList: any;   //物流公司列表
-  public expressNo: any;     //快递公司快递号
-  public expressCode: any;   //快递公司唯一代码
-  public curValue: any=new Array();   //快递公司唯一代码
   @Input('orderId') orderId: string;
   @Input('page') page: string;
   @Output() deliverGoods = new EventEmitter();
@@ -27,36 +23,14 @@ export class SortBindKindComponent implements OnInit {
 
   // ng2Select
   public items: any = new Array();//所有的数据
-  public value: any=new Array() ;
-  public ids :any;
-  public disabled: boolean = false;
-
+  public ids :any;//选择的品牌的id集合
+  public disabled: boolean = false;//输入选择框是否禁用
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['orderId'] && !isNullOrUndefined(this.orderId)) {
       $('.wrapper > section').css('z-index', 200);
       this.showDeliverWindow = true;
-      let data=this.GoodsService.getBrandList(),obj;
-      for(let i=0;i<data.length;i++){
-          obj={
-          id:data[i].id,
-          text:data[i].brandName
-        };
-        this.items.push(obj);
-      }
-      let curData=this.KindManageComponent.curSortKinds(),curObj;
-      console.log("█ curData ►►►",  curData);
-      if(curData){
-        for(let i=0;i<curData.length;i++){
-          curObj={
-            id:curData[i].id,
-            text:curData[i].brandName
-          };
-          setTimeout(()=>{
-            this.putValue.active.push(curObj);
-          })
-        }
-      }
+      this.dealKindsData();//出来当前分类下所有的品牌，对 已经绑定的没有绑定的进行分类
     }
   }
 
@@ -72,19 +46,60 @@ export class SortBindKindComponent implements OnInit {
   }
 
   /**
+   * 出来当前分类下品牌的数据
+   */
+  dealKindsData(){
+    let data=this.GoodsService.getBrandList(),obj,tempY=new Array(),tempN=new Array();
+    for(let i=0;i<data.length;i++){
+      obj={
+        id:data[i].id,
+        text:data[i].brandName
+      };
+      if(data[i].isHas=="Y"){
+        tempY.push(obj);
+      }else{
+        tempN.push(obj);
+      }
+      setTimeout(()=>{
+        this.putValue.active=tempY;
+      });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
+      this.items=tempN;
+    }
+    // let curData=this.KindManageComponent.curSortKinds(),curObj;
+    // if(curData){
+    //   for(let i=0;i<curData.length;i++){
+    //     curObj={
+    //       id:curData[i].id,
+    //       text:curData[i].brandName
+    //     };
+    //     setTimeout(()=>{
+    //       this.putValue.active.push(curObj);
+    //     })
+    //   }
+    // }
+  }
+
+  /**
    * 选择框增加品牌
    * @param value
    */
   public selected(value: any): void {
-    console.log('Selected value is: ', value);
     this.addDate(value.text);
   }
 
+  /**
+   * 删除
+   * @param value
+   */
   public removed(value: any): void {
     this.items.push(value);
-    console.log('Removed value is: ', value);
   }
 
+  /**
+   * 转化为字符串的id集合
+   * @param value
+   * @returns {string}
+   */
   public itemsToString(value:Array<any> = []):string {
     return value
       .map((item:any) => {
@@ -92,32 +107,31 @@ export class SortBindKindComponent implements OnInit {
       }).join(',');
   }
 
+  /**
+   * 输入框更新触发事件
+   * @param value
+   */
   public refreshValue(value: any): void {
-    console.log("█ value ►►►",  value);
     this.ids = this.itemsToString(value);
-    console.log("█ this.ids ►►►",  this.ids);
-    this.value = value;
   }
 
   /**
    * +号增加品牌
    */
   linkKind(value){
-    console.log("█ value ►►►",  value);
-    let SelectIte={text:value,id:value};
-    this.putValue.active.push(SelectIte.text);
-    console.log("█ this.putValue.active ►►►",  this.putValue.active);
-    // this.curValue.push(SelectIte);
-    this.addDate(value);
+    let SelectIte={text:value.text,id:value.id};
+    this.putValue.active.push(SelectIte);//添加到已经选择的输入框里面
+    this.ids = this.itemsToString(this.putValue.active);//已经选择的品牌的id集合
+    this.addDate(value.text);
   }
 
   /**
    * 增加数据 要从原数组里面减少
    * @param value
    */
-  addDate(value){
+  addDate(text){
     for(let i=0;i<this.items.length;i++){
-      if(this.items[i]==value){
+      if(this.items[i].text==text){
         this.items.splice(i, 1);
         break;
       }
@@ -140,30 +154,6 @@ export class SortBindKindComponent implements OnInit {
   }
 
   /**
-   * 已选区域
-   * @param data
-   */
-  getSelectArea(data) {
-    console.log("█ data ►►►", data);
-  }
-
-  /**
-   * 显示编辑框
-   * @param target
-   */
-  showEditBox(target) {
-    $(target).removeClass('hide')
-  }
-
-  /**
-   * 显示编辑框
-   * @param target
-   */
-  hideEditBox(target) {
-    $(target).addClass('hide')
-  }
-
-  /**
    * 确认发货
    */
   delivery() {
@@ -171,12 +161,11 @@ export class SortBindKindComponent implements OnInit {
     let data = {
       goodsKindId: this.orderId,
       goodsBrandIdStrings: this.ids,
-    }
+    };
     let result=this.GoodsService.sortLinkKind(url,data);
     if(result.success){
       this.hideWindow(true);
     }
-    console.log("█ result ►►►",  result);
   }
 
 }
