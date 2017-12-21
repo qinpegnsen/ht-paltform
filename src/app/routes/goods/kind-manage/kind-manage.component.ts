@@ -21,6 +21,7 @@ export class KindManageComponent implements OnInit {
   public childKindList: Array<any> = []; //菜单级别面包屑
   public curSortId: any; //当前三级分类的id
   public sortLinkKind: any; //当前三级分类关联的品牌
+  public parentId: any; //当前三级分类的父id
 
   constructor(public router: Router,
               public submitService: SubmitService,
@@ -166,10 +167,9 @@ export class KindManageComponent implements OnInit {
    * 绑定品牌
    * @param id
    */
-  bindKind(id){
-    console.log("█ this.curSortId ►►►",this.curSortId  );
+  bindKind(id,parentId){
     this.curSortId = id;
-    console.log("█ this.curSortId ►►►",this.curSortId  );
+    this.parentId = parentId;
   }
 
   /**
@@ -179,6 +179,7 @@ export class KindManageComponent implements OnInit {
   getDeliverOrderData(data) {
     if(data.type) {
       this.curSortKinds();
+      this.queryChildKindList(this.parentId);
     }
     this.curSortId = null;
   }
@@ -197,7 +198,6 @@ export class KindManageComponent implements OnInit {
         array.push(result[i].brandName);
       };
       this.sortLinkKind=array;
-      console.log("█ this.sortLinkKind ►►►",  this.sortLinkKind);
       return result;
     }
   }

@@ -108,7 +108,7 @@
                  title="添加下级分类"></a>
             </span>
               <span *ngIf="kind.level == 3">
-              <a class="btn btn-info btn-xs fa fa-link" (click)="bindKind(kind.id)"
+              <a class="btn btn-info btn-xs fa fa-link" (click)="bindKind(kind.id,kind.kindParentId)"
                  title="关联品牌"></a>
             </span>
               <span class="btn btn-default btn-xs" *ngIf="kind.haveChildren"
