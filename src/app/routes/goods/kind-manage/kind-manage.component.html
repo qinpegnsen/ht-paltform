@@ -131,7 +131,7 @@
               <ng-container *ngIf="kind.goodsBrandList">
                 <span *ngFor="let item of kind.goodsBrandList" class="mr">{{item.brandName}}</span>
               </ng-container>
-              <ng-container *ngIf="!sortLinkKind">
+              <ng-container *ngIf="!kind.goodsBrandList">
                 暂无品牌
               </ng-container>
             </div>
