@@ -50,20 +50,22 @@ export class SortBindKindComponent implements OnInit, OnChanges, OnDestroy {
    */
   dealKindsData(orderId) {
     let data = this.GoodsService.getBrandList(orderId), obj, tempY = new Array(), tempN = new Array();
-    for (let i = 0; i < data.length; i++) {
-      obj = {
-        id: data[i].id,
-        text: data[i].brandName
-      };
-      if (data[i].binded) {
-        tempY.push(obj);
-      } else {
-        tempN.push(obj);
+    if(data){
+      for (let i = 0; i < data.length; i++) {
+        obj = {
+          id: data[i].id,
+          text: data[i].brandName
+        };
+        if (data[i].binded) {
+          tempY.push(obj);
+        } else {
+          tempN.push(obj);
+        }
+        setTimeout(() => {
+          this.putValue.active = tempY;
+        });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
+        this.items = tempN;
       }
-      setTimeout(() => {
-        this.putValue.active = tempY;
-      });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
-      this.items = tempN;
     }
   }
 
