@@ -65,27 +65,6 @@ export class GoodsService {
   }
 
   /**
-   * 根据分类id获取品牌信息
-   * @param url
-   * @param data
-   */
-  queryKindBySortId(url,data){
-    let result: any;
-    this.ajax.get({
-      url: url,
-      data: data ,
-      async: false,
-      success: (res) => {
-        if (!isNullOrUndefined(res) && res.success) result = res.data;
-      },
-      error: (res) => {
-        AppComponent.rzhAlt("error", res.info);
-      }
-    });
-    return result;
-  }
-
-  /**
    * 发布商品
    * @param requestUrl
    * @param requestData
