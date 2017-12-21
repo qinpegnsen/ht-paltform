@@ -65,18 +65,6 @@ export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
       });//这个是父组件获取子组件，只有在子组件完成后才会有父组件的加载
       this.items=tempN;
     }
-    // let curData=this.KindManageComponent.curSortKinds(),curObj;
-    // if(curData){
-    //   for(let i=0;i<curData.length;i++){
-    //     curObj={
-    //       id:curData[i].id,
-    //       text:curData[i].brandName
-    //     };
-    //     setTimeout(()=>{
-    //       this.putValue.active.push(curObj);
-    //     })
-    //   }
-    // }
   }
 
   /**
@@ -167,5 +155,4 @@ export class SortBindKindComponent implements OnInit,OnChanges ,OnDestroy{
       this.hideWindow(true);
     }
   }
-
-}
+    }

@@ -167,7 +167,9 @@ export class KindManageComponent implements OnInit {
    * @param id
    */
   bindKind(id){
+    console.log("█ this.curSortId ►►►",this.curSortId  );
     this.curSortId = id;
+    console.log("█ this.curSortId ►►►",this.curSortId  );
   }
 
   /**
@@ -177,8 +179,8 @@ export class KindManageComponent implements OnInit {
   getDeliverOrderData(data) {
     if(data.type) {
       this.curSortKinds();
-      this.curSortId = null;
     }
+    this.curSortId = null;
   }
 
   /**
