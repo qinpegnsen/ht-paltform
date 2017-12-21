@@ -167,7 +167,6 @@ export class KindManageComponent implements OnInit {
    */
   bindKind(id){
     this.curSortId = id;
-    console.log("█ this.curSortId ►►►",  this.curSortId);
   }
 
   /**
