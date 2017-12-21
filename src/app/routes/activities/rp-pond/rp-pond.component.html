@@ -91,16 +91,16 @@
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
         <th class="w15 text-left">
-          <rzhDefaultSorter by="time">企业简称</rzhDefaultSorter>
-        </th>
-        <th class="w15 text-left">
           <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-left">
           <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
-          <rzhDefaultSorter by="id">充值金额（元）</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">投资金额（元）</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
         </th>
         <th class="w20 text-center">
           <rzhDefaultSorter by="picture">创建时间</rzhDefaultSorter>
@@ -110,10 +110,10 @@
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
-        <td class="text-left">{{count.epSubname}}</td>
         <td class="text-left">{{count.epCode}}</td>
         <td class="text-left">{{count.storeCode}}</td>
         <td>{{count.amount |number:'1.2-2'}}</td>
+        <td class="text-left">{{count.remark}}</td>
         <td>{{count.createTime }}</td>
       </tr>
       </tbody>
