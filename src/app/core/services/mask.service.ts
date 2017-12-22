@@ -30,11 +30,11 @@ export class MaskService {
    * 显示遮罩层
    * @param id 遮罩层id
    */
-   static showMask(id?: string,type?:boolean) {
+  static showMask(id?: string, type?: boolean) {
     if (!id) id = "loading";
     if ($("#" + id).length == 0) {
-     if(!type) $(document).find("body").append(this.template);
-     else $(document).find("body").append(this.templateSimple);
+      if (!type) $(document).find("body").append(this.template);
+      else $(document).find("body").append(this.templateSimple);
     } else {
       $("#" + id).show();
     }
@@ -53,7 +53,7 @@ export class MaskService {
    * 显示简易遮罩层
    */
   static simpleShowMask() {
-    MaskService.showMask("simple_loading",true);
+    MaskService.showMask("simple_loading", true);
   }
 
   /**
