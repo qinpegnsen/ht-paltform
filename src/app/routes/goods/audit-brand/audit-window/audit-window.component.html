@@ -21,6 +21,9 @@
         </dd>
       </dl>
       <form class="form-validate form-horizontal" #addVoncher="ngForm">
+        <dl class="bb m0 clearfix item-head">
+         品牌信息：
+        </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌名称：</dt>
           <dd class="col-xs-9 font14">{{brandName}}</dd>
@@ -59,7 +62,9 @@
         </dl>
         <ng-container *ngIf="showRecord">
           <div>
-
+            <dl class="bb m0 clearfix item-head">
+              审核信息：
+            </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">排序：</dt>
         <dd class="col-xs-9">
