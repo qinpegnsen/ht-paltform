@@ -116,12 +116,12 @@
           {{member.custSex | rzhState:'1002' }}
         </td>
         <td>
-          {{member.rpCustAcctBalance | number: '1.2-2' }}
+          {{member.rpCustAcctBalance?member.rpCustAcctBalance:0 | number: '1.2-2' }}
         </td>
-        <td>
-          {{member.rpCustAcctIncome | number: '1.2-2' }}
+        <td class="thc font">￥
+          {{member.rpCustAcctIncome?member.rpCustAcctIncome:0 | number: '1.2-2' }}
         </td>
-        <td>{{member.coin | number: '1.2-2'}}</td>
+        <td>{{member.coin?member.coin:0 | number: '1.2-2'}}</td>
         <td>{{member.areaFullName}}</td>
         <td>{{member.custBirthday}}</td>
         <td>{{member.custPhone}}</td>
@@ -141,7 +141,7 @@
                   (click)="changeState('NORMAL',member.custCode,memberListdata.curPage)"></button>
       </tr>
       <tr *ngIf="member.isShow">
-        <td class="p0" colspan="12">
+        <td class="p0" colspan="14">
           <div class="bg-table special text-left h55">
             <span class="m10 pull-left _myLineHeight mr">头像:</span>
             <span class="">

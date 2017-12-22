@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {GoodsService} from "../goods.service";
 
 @Component({
   selector: 'app-kind-manage',
@@ -18,8 +19,14 @@ export class KindManageComponent implements OnInit {
   public buttons;// 按钮组的配置
   public childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
   public childKindList: Array<any> = []; //菜单级别面包屑
+  public curSortId: any; //当前三级分类的id
+  public sortLinkKind: any; //当前三级分类关联的品牌
+  public parentId: any; //当前三级分类的父id
 
-  constructor(public router: Router, public submitService: SubmitService, public tool: RzhtoolsService) {
+  constructor(public router: Router,
+              public submitService: SubmitService,
+              public GoodsService: GoodsService,
+              public tool: RzhtoolsService) {
   }
 
   ngOnInit() {
@@ -111,7 +118,7 @@ export class KindManageComponent implements OnInit {
         me.childKindList.splice(num + 1); //剔除下标后面的路径
       }
     }
-    this.queryDatas(1, me.childKindId)
+    this.queryDatas(1, me.childKindId);
     // me.data = new Page(me.limitService.queryMenuList(1, 4, me.sysCode, me.childKindId));
   }
 
@@ -147,5 +154,30 @@ export class KindManageComponent implements OnInit {
     me.kinds = new Page(res);
   }
 
+  /**
+   * 当点击tr的时候，让隐藏的tr出来
+   */
+  showDetail(data:any){
+    data.isShow = !data.isShow;
+  }
 
+  /**
+   * 绑定品牌
+   * @param id
+   */
+  bindKind(id,parentId){
+    this.curSortId = id;
+    this.parentId = parentId;
+  }
+
+  /**
+   * 分类关联品牌回调函数
+   * @param data
+   */
+  getDeliverOrderData(data) {
+    if(data.type) {
+      this.queryChildKindList(this.parentId,'',true);
+    }
+    this.curSortId = null;
+  }
 }

@@ -1,5 +1,5 @@
-<div class="panel mb">
-  <div class="panel-body">
+<div class="mb"[ngClass]="{'panel':!detail}">
+  <div [ngClass]="{'panel-body':!detail}">
     <div *ngIf="!detail">
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="woType==''" [class.bb]="woType==''" routerLink="wo-all">所有</li>
@@ -15,12 +15,6 @@
           异常终结</li>
       </ul>
     </div>
-
-    <ul class="order-guide list-unstyled clearfix bb" *ngIf="detail">
-      <li class="pull-left" (click)="routeBack()">工单列表</li>
-      <li class="pull-left thc bb" *ngIf="detailType =='wo'">订单详情</li>
-      <li class="pull-left thc font bb" *ngIf="detailType=='after'">售后详情</li>
-    </ul>
     <!--路由嵌套 begin-->
     <router-outlet></router-outlet>
     <!--路由嵌套 end-->

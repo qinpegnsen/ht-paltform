@@ -46,6 +46,25 @@ export class GoodsService {
   }
 
   /**
+   * 分类关联品牌
+   */
+  sortLinkKind(requestUrl: string, requestData: any){
+    let result: any;
+    this.ajax.post({
+      url: requestUrl,
+      data: requestData ,
+      async: false,
+      success: (res) => {
+        if (!isNullOrUndefined(res) && res.success) result = res;
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.info);
+      }
+    });
+    return result;
+  }
+
+  /**
    * 发布商品
    * @param requestUrl
    * @param requestData
@@ -92,9 +111,12 @@ export class GoodsService {
   /**
    * 获取品牌列表
    */
-  getBrandList(){
-    let url = '/goodsBrand/queryAll';
-    return this.submit.getData(url,'')
+  getBrandList(orderId){
+    let url = '/goodsBrand/queryAll',data;
+    data={
+      goodsKindId:orderId
+    };
+    return this.submit.getData(url,data)
   }
 
   /**

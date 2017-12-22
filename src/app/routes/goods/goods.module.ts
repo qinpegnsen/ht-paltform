@@ -25,6 +25,7 @@ import {AuditBrandComponent} from "./audit-brand/audit-brand.component";
 import {AuditListComponent} from "./audit-brand/audit-list/audit-list.component";
 import {AuditWindowComponent} from "./audit-brand/audit-window/audit-window.component";
 import {AuditDetailComponent} from "./audit-brand/audit-detail/audit-detail.component";
+import {SortBindKindComponent} from "./sort-bind-kind/sort-bind-kind.component";
 
 
 // 父路由，用于页面嵌套显示
@@ -108,7 +109,8 @@ const routes: Routes = [
     AuditBrandComponent,
     AuditListComponent,
     AuditWindowComponent,
-    AuditDetailComponent
+    AuditDetailComponent,
+    SortBindKindComponent
   ],
   providers: [
     GoodsService,

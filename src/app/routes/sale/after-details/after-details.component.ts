@@ -15,15 +15,13 @@ import {isNullOrUndefined} from "util";
 export class AfterDetailsComponent implements OnInit {
 
   public type: string;             //类型,处理/查看详情
-  public parentPath: string;       //类型,处理/查看详情
   public afterNo: string;          //售后编码
   public LogisticsData: any;       //退货物流信息
   public afterData: any;           //售后详情数据
   public afterTailList: any;       //查看售后单跟踪信息
   public opinion: string;          //审核意见
   public goodsAudits: any;         //商品审核是否通过枚举
-  public isPass: string = 'Y';     //是否同意退货
-  public isAgree: string = 'Y';    //是否同意退货
+  public isAgree: string = 'Y';    //是否同意退货/验货是否通过
   public expressData: any;          //获取快递的公司和单号
   public refresh: boolean;          //父组件是否需要刷新
 
@@ -88,7 +86,7 @@ export class AfterDetailsComponent implements OnInit {
     let data = {
       afterNo: me.afterData.afterNo,
       opinion: me.opinion,
-      isPass: me.isPass
+      isPass: me.isAgree
     }
     me.submit.postRequest('/after/checkRefundGoods', data, true);
     me.refresh = true;

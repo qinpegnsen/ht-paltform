@@ -1,4 +1,4 @@
-<div class="panel" [hidden]="!showList">
+<div class="panel" *ngIf="showList">
   <div class="panel-body">
     <!--查询 start-->
     <div class="p text-right clearfix">
@@ -68,7 +68,7 @@
             <!--</button>-->
 
             <button *ngIf="order.ordType == 'ORD'" class="btn btn-green btn-sm icon-magnifier-add" title="查看详情"
-                    routerLink="/main/WO/manage/order-detail" [queryParams]="{ordno:order.ordno}"></button>
+                    routerLink="order-detail" [queryParams]="{ordno:order.ordno}"></button>
           </td>
         </tr>
         <tr *ngIf="search.stateEnum!='NO' && detail[i]">
@@ -130,5 +130,5 @@
                      (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
 
 <!--路由嵌套 begin-->
-<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<router-outlet (activate)="onActivated($event)" (deactivate)='onDeactivated($event)'></router-outlet>
 <!--路由嵌套 end-->

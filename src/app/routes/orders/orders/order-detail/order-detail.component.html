@@ -1,5 +1,6 @@
 <div class="panel order">
   <div [class.panel-body]="single">
+    <!--订单基本信息-->
     <div class="szh-order-info b clearfix position-relative">
       <div class="szh-order-details">
         <div class="order-head p bb text-info"><span class="thc font"><i class="fa fa-file-text"></i> 订单信息</span></div>
@@ -150,6 +151,8 @@
         </div>
       </div>
     </div>
+
+    <!--订单进度-->
     <div class="rate-of-progress mt-xl mb-xl w100" *ngIf="orderDetailData.state!='CLOSE'">
       <div class="szh-progress-bar w90">
         <div class="already-progress thc bg" [class.w0]="orderStep==1" [class.w25]="orderStep==2"
@@ -184,7 +187,7 @@
       </dl>
     </div>
 
-
+    <!--订单商品表-->
     <div class="w100 mt">
       <table class="w100 b">
         <thead class="w100">
@@ -300,6 +303,7 @@
         </tfoot>
       </table>
     </div>
+
     <template #popTemplate>
       重消币抵扣数量：
       <span *ngIf="orderDetailData.coin">{{orderDetailData.coin | number:'1.2-2'}}</span>
@@ -308,7 +312,6 @@
     <ng-container *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE'">
       <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
     </ng-container>
-    <div class="btn btn-primary mt" (click)="back()">返回</div>
   </div>
 </div>
-
+<div class="page-back btn btn-thc btn-circle fa fa-mail-reply" title="返回" (click)="back()"></div>

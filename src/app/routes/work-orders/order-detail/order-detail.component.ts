@@ -3,7 +3,7 @@ import {isNullOrUndefined} from "util";
 import {OrdersService} from "../../orders/orders/orders.service";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Location} from "@angular/common";
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-order-detail',
@@ -16,7 +16,7 @@ export class OrderDetailComponent implements OnInit {
               public submit: SubmitService) {
   }
 
-  public detailType:string;
+  public detailType: string;
   public orderStep = 1;
   public curOrdno: string;
   public orderStates: any;
@@ -24,9 +24,9 @@ export class OrderDetailComponent implements OnInit {
   public curDeliverOrderId: string;
   public goodsData: any;
   public remark: string;
-  public hasDeliverData:boolean = false;
-  public expressData:any;
-  public atime:Array<string> = new Array();
+  public hasDeliverData: boolean = false;
+  public expressData: any;
+  public atime: Array<string> = new Array();
 
   ngOnInit() {
     let me = this;
@@ -36,7 +36,7 @@ export class OrderDetailComponent implements OnInit {
     me.getOrderDetail(); //获取订单详情
   }
 
-  back(){
+  back() {
     this.location.back()
   }
 
@@ -69,7 +69,7 @@ export class OrderDetailComponent implements OnInit {
    * 显示备注编辑框
    * @param target
    */
-  dropdownToggle(target){
+  dropdownToggle(target) {
     $(target).show()
   }
 
@@ -83,6 +83,7 @@ export class OrderDetailComponent implements OnInit {
     obj.parents('.mea-text').find('.counter').html(leaveLength);
     return hadLength;
   }
+
   /**
    * 隐藏移动端文本编辑框
    * @param target
@@ -95,7 +96,7 @@ export class OrderDetailComponent implements OnInit {
    * 更新备注
    * @param target
    */
-  editPrimary(target){
+  editPrimary(target) {
     let data = {
       ordno: this.curOrdno,
       remark: this.remark
@@ -111,19 +112,19 @@ export class OrderDetailComponent implements OnInit {
    * @param index
    * @returns {boolean}
    */
-  ifCurrent(index:number){
+  ifCurrent(index: number) {
     let me = this;
-    switch (index){
+    switch (index) {
       case 1:
         return true;
       case 2:
-        if(me.orderStep==2 || me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 2 || me.orderStep == 3 || me.orderStep == 4 || me.orderStep == 5) return true;
       case 3:
-        if(me.orderStep==3 || me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 3 || me.orderStep == 4 || me.orderStep == 5) return true;
       case 4:
-        if(me.orderStep==4 || me.orderStep==5) return true;
+        if (me.orderStep == 4 || me.orderStep == 5) return true;
       case 5:
-        if(me.orderStep==5) return true;
+        if (me.orderStep == 5) return true;
       default:
         return false;
     }
@@ -135,23 +136,25 @@ export class OrderDetailComponent implements OnInit {
   public getOrderDetailInfo() {
     let me = this, ordno = me.submit.getParams('ordno');
     let orderStatesDetail = me.ordersService.getOrderState(ordno);
-    if (!isNullOrUndefined(orderStatesDetail)) me.orderStates = orderStatesDetail;
-    for (let item of me.orderStates) {
-      if (item.state == 'SUCCESS') {
-        me.atime[5] = item.acceptTime;
-        me.hasDeliverData = true;
-      } else if (item.state == 'DELIVERY') {
-        me.hasDeliverData = true;
-        me.atime[4] = item.acceptTime;
-      } else if (item.state == 'PREPARE') {
-        me.atime[3] = item.acceptTime;
-      } else if (item.state == 'PAID' || item.state == 'ASSIGNED') {
-        me.atime[2] = item.acceptTime;
-      } else if (item.state == 'CR') {
-        me.atime[1] = item.acceptTime;
+    if (!isNullOrUndefined(orderStatesDetail)) {
+      me.orderStates = orderStatesDetail;
+      for (let item of me.orderStates) {
+        if (item.state == 'SUCCESS') {
+          me.atime[5] = item.acceptTime;
+          me.hasDeliverData = true;
+        } else if (item.state == 'DELIVERY') {
+          me.hasDeliverData = true;
+          me.atime[4] = item.acceptTime;
+        } else if (item.state == 'PREPARE') {
+          me.atime[3] = item.acceptTime;
+        } else if (item.state == 'PAID' || item.state == 'ASSIGNED') {
+          me.atime[2] = item.acceptTime;
+        } else if (item.state == 'CR') {
+          me.atime[1] = item.acceptTime;
+        }
       }
     }
-    if(me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
+    if (me.hasDeliverData) me.expressData = me.ordersService.getExpressInfo(me.curOrdno);
   }
 
   /**
@@ -159,6 +162,7 @@ export class OrderDetailComponent implements OnInit {
    */
   public getOrderStep() {
     let me = this;
+    if(!me.orderDetailData) return;
     if (me.orderDetailData.state == 'SUCCESS') {
       me.orderStep = 5;
     } else if (me.orderDetailData.state == 'DELIVERY') {
