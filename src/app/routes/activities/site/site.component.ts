@@ -68,8 +68,8 @@ export class SiteComponent implements OnInit {
       that.switchControll(rpSwitchStare);
     });//事件触发的时候不让他它动，只有在确认后才动
     swal({
-      title: rpSwitchStare == 'Y' ? '您确认要关闭红包活动开关吗？' : '您确认要开启红包活动开关吗？',
-      text: rpSwitchStare == 'Y' ? '关闭红包活动开关' : '奖池余额：' + that.rpPondReset.balance + ' 元' + '\n' + '可使用剩余天数：' + that.rpPondReset.in + ' 天',
+      title: rpSwitchStare == 'Y' ? '您确认要关闭红包抽奖开关吗？' : '您确认要开启红包抽奖开关吗？',
+      text: rpSwitchStare == 'Y' ? '关闭红包抽奖开关后将无法正常使用红包抽奖功能！' : '奖池余额：' + that.rpPondReset.balance + ' 元' + '\n' + '可使用剩余天数：' + that.rpPondReset.in + ' 天',
       type: rpSwitchStare == 'N' ? 'success' : 'info',
       showCancelButton: true,
       cancelButtonText: '取消',
@@ -108,14 +108,14 @@ export class SiteComponent implements OnInit {
   }
 
   /**
-   * 关闭红包活动开关
+   * 关闭红包抽奖开关
    * @param rpSwitchStare
    */
   closeRpSwitch() {
     let that = this;
     swal({
       title: '请再次进行确认！',
-      text: '关闭红包活动开关后将无法正常使用红包功能！',
+      text: '关闭红包抽奖开关后将无法正常使用红包抽奖功能！',
       type: "info",
       showCancelButton: true,
       cancelButtonText: '取消',
