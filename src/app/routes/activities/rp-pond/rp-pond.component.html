@@ -117,7 +117,7 @@
         <td class="text-left">{{count.storeCode}}</td>
         <td class="text-left">{{count.subjectName}}</td>
         <ng-container *ngIf="count.toType=='CUST'">
-          <td class="thc font">支出 ￥ {{count.expenditrue?count.income:0 |number:'1.2-2'}}</td>
+          <td class="thc font">支出 ￥ {{count.expenditrue?count.expenditrue:0 |number:'1.2-2'}}</td>
         </ng-container>
         <ng-container *ngIf="count.toType=='STORE'||count.toType=='PLAT'">
           <td class="thc font">收入 ￥ {{count.income?count.income:0 |number:'1.2-2'}}</td>
