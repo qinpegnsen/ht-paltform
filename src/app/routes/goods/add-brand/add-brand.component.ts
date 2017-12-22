@@ -18,23 +18,23 @@ const swal = require('sweetalert');
 })
 export class AddBrandComponent implements OnInit {
   public brandInfo = {};
-  public path: string;
-  public pageTitle: string;
-  public editBrand: boolean = false;
-  public brandDetail: boolean = false;
+  public path: string;//判断路径
+  public pageTitle: string;//品牌标题
+  public editBrand: boolean = false;//品牌修改是否显示
+  public brandDetail: boolean = false;//品牌添加是否显示
   public kindsList;// 分类列表
   public brandKind;// 品牌所属分类
   public uuid: string;// 图片暗码
   public tip = {
     brandSort: '0-99，默认0 , 数字越小排序越靠前',
   }
-  public uploader:FileUploader = new FileUploader({
+  public uploader: FileUploader = new FileUploader({
     url: GoodsService.goodsUploader,
-    itemAlias:"limitFile",
+    itemAlias: "limitFile",
     allowedFileType: ["image"]
   }); //初始化上传方法
   public myImg: boolean = false;
-  public upBrandImg:boolean = false;
+  public upBrandImg: boolean = false;
 
 
   constructor(public settings: SettingsService, public route: ActivatedRoute,
@@ -98,7 +98,7 @@ export class AddBrandComponent implements OnInit {
    */
   fileChangeListener() {
     // 当选择了新的图片的时候，把老图片从待上传列表中移除
-    if(this.uploader.queue.length > 1) this.uploader.queue[0].remove();
+    if (this.uploader.queue.length > 1) this.uploader.queue[0].remove();
     this.myImg = true;  //表示已经选了图片
   }
 
@@ -124,7 +124,7 @@ export class AddBrandComponent implements OnInit {
    * @returns {any}
    */
   getBrandInfo(_type) {
-    let _this = this,url = '/goodsBrand/loadBrandById',bid = _this.submit.getParams('brandId');
+    let _this = this, url = '/goodsBrand/loadBrandById', bid = _this.submit.getParams('brandId');
     let data = {id: bid, type: _type};
     return this.submit.getData(url, data);
   }
@@ -135,7 +135,7 @@ export class AddBrandComponent implements OnInit {
   toUpdateBrand() {
     let me = this, brandId = me.submit.getParams('brandId');
     me.settings.closeRightPage(); //关闭右侧滑动页面
-    me.router.navigate(['/main/goods/brands/upBrand'], {replaceUrl: true, preserveQueryParams: true });
+    me.router.navigate(['/main/goods/brands/upBrand'], {replaceUrl: true, preserveQueryParams: true});
   }
 
   //提交表单
@@ -147,29 +147,30 @@ export class AddBrandComponent implements OnInit {
       //新增品牌
       case "addBrand":
         submitUrl = '/goodsBrand/addBrand';
-        me.upLoadImg(submitUrl,submitData,'post'); //上传图片及提交数据
+        me.upLoadImg(submitUrl, submitData, 'post'); //上传图片及提交数据
         break;
       //修改分类
       case "upBrand":
         submitUrl = '/goodsBrand/updateBrand';
         submitData.brandImageuuid = null;
-        me.upLoadImg(submitUrl,submitData,'put'); //上传图片及提交数据
+        me.upLoadImg(submitUrl, submitData, 'put'); //上传图片及提交数据
         break;
     }
 
 
   }
+
   /**
    * 上传图片及提交数据
    * @param submitData
    * @param submitUrl
    * @param method : post/put
    */
-  public upLoadImg(submitUrl,submitData,method){
+  public upLoadImg(submitUrl, submitData, method) {
     let me = this;
     MaskService.showMask();//上传图片比较慢，显示遮罩层
     //上传之前
-    me.uploader.onBuildItemForm = function(fileItem, form){
+    me.uploader.onBuildItemForm = function (fileItem, form) {
       me.uuid = me.getUid.getUid();
       form.append('uuid', me.uuid);
     };
@@ -181,22 +182,22 @@ export class AddBrandComponent implements OnInit {
       if (res.success) {
         if (!isNullOrUndefined(me.uuid)) submitData.brandImageuuid = me.uuid;
       } else {
-        AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+        AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
     }
     // 上传失败
     me.uploader.onErrorItem = function (item, response, status, headers) {
-      AppComponent.rzhAlt('error','上传失败', '图片上传失败！');
+      AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
     };
     //上传完成，不管成功还是失败
-    me.uploader.onCompleteAll = function(){
-      me.submitFormDataAndRefresh(submitUrl,submitData,method)
+    me.uploader.onCompleteAll = function () {
+      me.submitFormDataAndRefresh(submitUrl, submitData, method)
     }
 
     //如果没有选择图片则直接提交
-    if(!me.uploader.isUploading){   // 图片已经传过了，但是数据提交失败了，改过之后可以直接提交
+    if (!me.uploader.isUploading) {   // 图片已经传过了，但是数据提交失败了，改过之后可以直接提交
       if (!isNullOrUndefined(me.uuid)) submitData.brandImageuuid = me.uuid;
-      me.submitFormDataAndRefresh(submitUrl,submitData,method);
+      me.submitFormDataAndRefresh(submitUrl, submitData, method);
     }
   }
 
@@ -206,11 +207,11 @@ export class AddBrandComponent implements OnInit {
    * @param submitUrl
    * @param submitData
    */
-  public submitFormDataAndRefresh(submitUrl, submitData,method){
+  public submitFormDataAndRefresh(submitUrl, submitData, method) {
     let me = this;
-    if(method == 'post'){
+    if (method == 'post') {
       me.submit.postRequest(submitUrl, submitData, true);
-    }else if(method == 'put'){
+    } else if (method == 'put') {
       me.submit.putRequest(submitUrl, submitData, true);
     }
     me.refreshParentCompData()// 刷新父页面数据
@@ -224,10 +225,11 @@ export class AddBrandComponent implements OnInit {
   public getParams(name) {
     return this.route.snapshot.queryParams[name];
   }
+
   /**
    * 刷新父页面数据
    */
-  public refreshParentCompData(){
+  public refreshParentCompData() {
     let me = this;
     let parentCompPage = this.submit.getParams('page');// 获取修改的项目所在的页数
     if (isNullOrUndefined(parentCompPage)) parentCompPage = 1;
