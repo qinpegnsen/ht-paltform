@@ -128,18 +128,28 @@
               <ng-container *ngIf="audit.auditResult == 'PASS'">
                 <div class="mb clearfix">
                   <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取建设金的比例：</label>
-                  <div class="tag-dib w50 align-middle font0">
+                  <div class="tag-dib align-middle font0">
                     <input class="form-control width-auto tag-dib num" type="number" required name="buildGoldRate"
-                           [(ngModel)]="audit.buildGoldRate" [pattern]="patterns.twodecimal" placeholder="抽取建设金的比例"/>
-                    <em class="add-on">‱</em>
+                           [(ngModel)]="audit.buildGoldRate" #ngBuildGoldRate="ngModel"
+                           [pattern]="patterns.oneDigit" placeholder="抽取建设金的比例"/>
+                    <em class="add-on">‱{{ngBuildGoldRate.valid}}</em>
+                  </div>
+                  <div class="tag-dib ml align-middle text-danger"
+                       *ngIf="!ngBuildGoldRate.valid && !ngBuildGoldRate.pristine">
+                    请输入0-9的整数
                   </div>
                 </div>
                 <div class="clearfix">
                   <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取广告费的比例：</label>
-                  <div class="tag-dib w50 align-middle font0">
+                  <div class="tag-dib align-middle font0">
                     <input class="form-control width-auto tag-dib num" type="number" required name="adRate"
-                           [(ngModel)]="audit.adRate" [pattern]="patterns.twodecimal" placeholder="抽取广告费的比例"/>
+                           [(ngModel)]="audit.adRate" #ngAdRate="ngModel"
+                           [pattern]="patterns.oneDigit" placeholder="抽取广告费的比例"/>
                     <em class="add-on">‱</em>
+                  </div>
+                  <div class="tag-dib ml align-middle text-danger"
+                       *ngIf="!ngAdRate.valid && !ngAdRate.pristine">
+                    请输入0-9的整数
                   </div>
                 </div>
               </ng-container>

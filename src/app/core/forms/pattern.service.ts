@@ -15,6 +15,7 @@ export class PatternService {
   public chinese: string; //中文
   public tel:string;//手机号和固话
   public decimals: string;  // 0-1小数
+  public oneDigit: string; // 一位整数（0-9）
   public doubleDigit: string; // 两位为整数（0-99）
   public _URL: string; //网址
   public twodecimal:string;//两位小数
@@ -40,14 +41,15 @@ export class PatternService {
     this.tel = '(^1[0-9]{10}$)|(^((^[0-9]{3,4}-[0-9]{7,8}$)|(^[0-9]{7,8}$))$)';//手机号和固话同时验证
     this._URL = '^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$'; //网址
     this.decimals = '^(0\.[0-9]*[1-9]$)|^0$';　　//0-1小数，包含0,不包含1
+    this.oneDigit = '^[0-9]{1}$'; // 一位为整数（0-9）
     this.doubleDigit = '^[0-9]{1,2}$'; // 两位为整数（0-99）
-    this.twodecimal='^[0-9]+(.[0-9]{1,2})?$';//两位小数
     this.onedecimal='^[0-9]+(.[0-9]{1})?$';//一位小数
+    this.twodecimal='^[0-9]+(.[0-9]{1,2})?$';//两位小数
+    this.threedecimal = '^[0-9]+(.[0-9]{1,3})?$'; //只能三位小数
     this.positive = '^[0-9]+$'; // 整数
     this.str = '[^\u4e00-\u9fa5]+'; //除中文的任何数字包括字符
     this.tplCode = '^[A-Za-z0-9]+$'; //只能输入英文和数字的(用于添加APP首页模板的模板编码)
-    this.integer = '^[0-9]*[1-9][0-9]*$'; //只能正整数
-    this.threedecimal = '^[0-9]+(.[0-9]{1,3})?$'; //只能正整数
+    this.integer = '^[0-9]*[1-9][0-9]*$'; //只能整数
     this.express = '^[A-Za-z0-9]+$';　　//由数字和26个英文字母组成的字符串
     this.special = '^([1-9][0-9]*)+(.[0-9]{1,2})?$'; //非零开头的最多带两位小数的数字
     this.login='^[\u4E00-\u9FA5A-Za-z0-9]+$';//除特殊字符
