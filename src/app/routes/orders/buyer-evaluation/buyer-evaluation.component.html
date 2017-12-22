@@ -1,6 +1,5 @@
-
 <div class="content-heading mb-lg thc font">
- 买家评价
+  买家评价
 </div>
 
 <div class="panel panel-default">
@@ -19,8 +18,6 @@
         <div class="col-xs-5">
           <input type="text" [(ngModel)]="custName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
                  (change)="search()" placeholder="请输入评价人关键字进行搜索">
-            <input type="text" [(ngModel)]="custName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                   (change)="search()" placeholder="请输入评价人关键字进行搜索">
         </div>
         <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
@@ -34,7 +31,8 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAllService(1,$event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+           (pageChange)="qeuryAllService(1,$event)">
       <thead>
       <tr>
         <th class="w5 text-center">
@@ -64,27 +62,28 @@
 
       <ng-container *ngFor="let count of dataTable.data; let i = index">
 
-      <tr class="text-center">
-        <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
-        <td class="text-left">{{count.custName}}</td>
-        <td>{{count.createTime}}</td>
-        <td><span [innerHtml]="count.commentStar | stars"></span></td>
-        <td class="text-left">{{count.commentText}}</td>
-        <td >
+        <tr class="text-center">
+          <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
+          <td class="text-left">{{count.custName}}</td>
+          <td>{{count.createTime}}</td>
+          <td><span [innerHtml]="count.commentStar | stars"></span></td>
+          <td class="text-left">{{count.commentText}}</td>
+          <td>
         <span *ngFor="let comment of count.commentGoodsPicList">
-           <img [src]="comment.pic" alt="" class="buyimg pull-left"   *ngIf="comment.isAfter=='N'"
-                (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+           <img [src]="comment.pic" alt="" class="buyimg pull-left" *ngIf="comment.isAfter=='N'"
+                (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)"
+                onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="comment.pic" #i class="bigImg" alt=""
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
         </span>
-        </td>
+          </td>
 
-        <td>
-          <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
-        </td>
-      </tr>
+          <td>
+            <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
+          </td>
+        </tr>
 
-      <tr *ngIf="count.isShow">
+        <tr *ngIf="count.isShow">
           <td class="p0" colspan="11">
             <div class="bg-table special text-left">
               <span class="m20">订单编号:</span> <span>{{count.ordno}}</span>
@@ -101,8 +100,9 @@
             <div class="bg-table special text-left">
               <span class="m20 pull-left">追评晒单:</span>
               <span *ngFor="let comment of count.commentGoodsPicList">
-                <img [src]="comment.pic" alt="" class="buyimg pull-left"   *ngIf="comment.isAfter=='Y'"
-                     (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                <img [src]="comment.pic" alt="" class="buyimg pull-left" *ngIf="comment.isAfter=='Y'"
+                     (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="comment.pic" #i class="bigImg" alt=""
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </span>
@@ -115,10 +115,13 @@
       <tr>
         <td colspan="7">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
           </div>
           <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            <div style="float: right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
           </div>
         </td>
       </tr>
