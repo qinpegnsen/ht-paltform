@@ -46,10 +46,6 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
     let me = this;
     me.applyCode = me.routeInfo.snapshot.queryParams['applyCode'];//品牌编码
     me.qeuryDand();//查询品牌信息
-    // me.brandName = me.routeInfo.snapshot.queryParams['brandName'];//品牌名称
-    // me.englishName = me.routeInfo.snapshot.queryParams['englishName'];//品牌英文名称
-    // me.brandHolder = me.routeInfo.snapshot.queryParams['brandHolder'];//品牌拥有着
-    // me.applyNumber = me.routeInfo.snapshot.queryParams['applyNumber'];//品牌注册号
     me.applyCurPage = me.routeInfo.snapshot.queryParams['applyCurPage'];//当前页码
     me.yesOrNo = me.tools.getEnumDataList('1001');  // 商品审核是否通过
   }
@@ -64,7 +60,6 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
       applyCode: me.applyCode
     }
     me.result = this.submit.getData(url, data);
-    console.log("█  me.result ►►►",   me.result);
   }
 
   /**
