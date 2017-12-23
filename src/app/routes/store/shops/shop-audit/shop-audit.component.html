@@ -132,7 +132,7 @@
                     <input class="form-control width-auto tag-dib num" type="number" required name="buildGoldRate"
                            [(ngModel)]="audit.buildGoldRate" #ngBuildGoldRate="ngModel"
                            [pattern]="patterns.oneDigit" placeholder="抽取建设金的比例"/>
-                    <em class="add-on">‱{{ngBuildGoldRate.valid}}</em>
+                    <em class="add-on">‱</em>
                   </div>
                   <div class="tag-dib ml align-middle text-danger"
                        *ngIf="!ngBuildGoldRate.valid && !ngBuildGoldRate.pristine">

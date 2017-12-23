@@ -75,11 +75,8 @@
         <td>
           <ng-container *ngIf="path == 'unAudit'">
             <button class="btn btn-purple btn-sm fa fa-check-square-o"
-                    [queryParams]="{applyCode:brand.applyCode,brandName:brand.brandName,englishName:brand.englishName,
-                    brandHolder:brand.brandHolder,applyNumber:brand.applyNumber,applyCurPage:brands.curPage}"
+                    [queryParams]="{applyCode:brand.applyCode,applyCurPage:brands.curPage}"
                     routerLink="audit" title="审核"></button>
-            <button class="btn btn-danger btn-sm fa fa-trash" title="删除"
-                    (click)="deleteBrand(brands.curPage, brand.applyCode)"></button>
           </ng-container>
           <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="detail" title="详情"     [queryParams]="{applyCode:brand.applyCode}"></button>
         </td>

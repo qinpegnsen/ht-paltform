@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg thc font" >
+<div class="content-heading mb-lg thc font">
   品牌管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="addBrand"></app-buttons>
 </div>
@@ -65,13 +65,13 @@
           <rzhDefaultSorter by="brandName">品牌名称</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="englishName">品牌英文名</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="logo">品牌LOGO</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="brandRecommend">是否推荐</rzhDefaultSorter>
-        </th>
-        <th class="col-md-1 unselectable text-center">
-          <rzhDefaultSorter by="brandApply">审核状态</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="type">展示类型</rzhDefaultSorter>
@@ -92,6 +92,9 @@
         <td>{{i+1}}</td>
         <td class="hidden-sm">{{brand.brandInitial}}</td>
         <td>{{brand.brandName}}</td>
+        <td>
+          <span [ngClass]="{'font-gray':!brand.englishName}">{{brand.englishName || '【未填写】'}}</span>
+        </td>
         <td><img height="50px" [src]="brand.brandPic" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">
@@ -105,7 +108,6 @@
             <span></span>
           </label>
         </td>
-        <td>{{brand.brandApply | rzhState: '1023'}}</td>
         <td>{{brand.showType | rzhState: '1024'}}</td>
         <td class="hidden-sm">{{brand.brandSort}}</td>
         <td>

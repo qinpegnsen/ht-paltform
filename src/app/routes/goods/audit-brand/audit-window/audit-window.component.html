@@ -6,57 +6,52 @@
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop font12 w100">
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3"><i class="main-red font16">*</i> 是否通过：</dt>
-        <dd class="orderId-color col-xs-9">
-          <div class="col-xs-8 radio-brand">
-            <span class="radio c-radio c-radio-nofont p-sm _myInline m0" *ngFor="let item of yesOrNo">
-              <label>
-                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
-                       (click)="changeIsAgree(isAgree)"/>
-                <span class="fa fa-circle"></span>{{item.val}}
-              </label>
-            </span>
-          </div>
-        </dd>
-      </dl>
       <form class="form-validate form-horizontal" #addVoncher="ngForm">
         <dl class="bb m0 clearfix item-head">
          品牌信息：
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌名称：</dt>
-          <dd class="col-xs-9 font14">{{brandName}}</dd>
+          <dd class="col-xs-9 font14">{{result.brandName}}</dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌英文名称：</dt>
-          <dd class="col-xs-9 font14">{{englishName}}</dd>
+          <dd class="col-xs-9 font14">{{result.englishName}}</dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌所有人：</dt>
-          <dd class="col-xs-9 font14">{{brandHolder}}</dd>
+          <dd class="col-xs-9 font14">{{result.brandHolder}}</dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌注册号：</dt>
-          <dd class="col-xs-9 font14">{{applyNumber}}</dd>
+          <dd class="col-xs-9 font14">{{result.applyNumber}}</dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌图片：</dt>
           <dd class="col-xs-9 font14">
-            <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+            <img height="50" [src]="result.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'">
-            <img class="hover-big-img" [src]="'..'" alt=""
+            <img class="hover-big-img" [src]="result.brandLogo" alt=""
                  onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌注册证：</dt>
           <dd class="col-xs-9 font14">
-            <div class="tag-dib mr" *ngFor="let item of [0,1]">
-              <img height="50" [src]="'..'" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+            <div class="tag-dib mr">
+              <span *ngIf="result.registration1">
+                <img height="50" [src]="result.registration1" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              <img class="hover-big-img" [src]="result.registration1" alt=""
                    onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              <img class="hover-big-img" [src]="'..'" alt=""
+              </span>
+              <span *ngIf="result.registration2">
+                <img height="50" [src]="result.registration2" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              <img class="hover-big-img" [src]="result.registration2" alt=""
                    onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              </span>
+
             </div>
           </dd>
         </dl>
@@ -64,6 +59,20 @@
           <div>
             <dl class="bb m0 clearfix item-head">
               审核信息：
+            </dl>
+            <dl class="bb m0 clearfix">
+              <dt class="col-xs-3"><i class="main-red font16">*</i> 是否通过：</dt>
+              <dd class="orderId-color col-xs-9">
+                <div class="col-xs-8 radio-brand">
+            <span class="radio c-radio c-radio-nofont p-sm _myInline m0" *ngFor="let item of yesOrNo">
+              <label>
+                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
+                       (click)="changeIsAgree(isAgree)"/>
+                <span class="fa fa-circle"></span>{{item.val}}
+              </label>
+            </span>
+                </div>
+              </dd>
             </dl>
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">排序：</dt>
@@ -114,6 +123,20 @@
         <ng-container *ngIf="!showRecord">
           <dl class="bb m0 clearfix item-head">
             失败原因：
+          </dl>
+          <dl class="bb m0 clearfix">
+            <dt class="col-xs-3"><i class="main-red font16">*</i> 是否通过：</dt>
+            <dd class="orderId-color col-xs-9">
+              <div class="col-xs-8 radio-brand">
+            <span class="radio c-radio c-radio-nofont p-sm _myInline m0" *ngFor="let item of yesOrNo">
+              <label>
+                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
+                       (click)="changeIsAgree(isAgree)"/>
+                <span class="fa fa-circle"></span>{{item.val}}
+              </label>
+            </span>
+              </div>
+            </dd>
           </dl>
           <dl class="bb m0 clearfix">
             <dt class="col-xs-3">审核失败原因：</dt>
