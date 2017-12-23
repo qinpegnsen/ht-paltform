@@ -79,7 +79,7 @@ export class SiteComponent implements OnInit {
     }, function (isConfirm) {
       if (isConfirm) {
         if (that.rpSwitchStare == 'N') {
-          let url = '/redSchedulingAudit/updateRpDrawState';
+          let url = '/redSchedulingAudit/updateRpDrawOpen';
           let data = {
             state: 'Y'
           };
@@ -124,7 +124,7 @@ export class SiteComponent implements OnInit {
       confirmButtonColor: "#ec6c62"
     }, function (isConfirm) {
       if (isConfirm) {
-        let url = '/redSchedulingAudit/updateRpDrawState';
+        let url = '/redSchedulingAudit/updateRpDrawClose';
         let data = {
           state: 'N'
         };
