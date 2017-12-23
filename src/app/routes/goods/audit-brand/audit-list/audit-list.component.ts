@@ -23,7 +23,6 @@ export class AuditListComponent implements OnInit {
   public buttons;
   public kindList;// 分类列表
   public brandName:any;
-  public selectKindName: string = '根据分类查询';
 
   public query = {
     curPage: 1,
@@ -72,31 +71,6 @@ export class AuditListComponent implements OnInit {
       text: '新增品牌',
     };
   }
-
-  /**
-   *删除未审核品牌
-   */
-  deleteBrand(curPage, brandId) {
-    let me = this;
-    swal({
-      title: '确定要删除吗？',
-      text: '删除后将不能找回',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#DD6B55',
-      confirmButtonText: '删除',
-      cancelButtonText: '取消',
-      closeOnConfirm: false,
-      closeOnCancel: true
-    }, () => {
-      let url = '/goodsBrandApply/deleteBrandApply';
-      let data = {applyCode: brandId};
-      swal.close();
-      me.submitService.delRequest(url, data);
-      me.queryDatas(curPage);
-    });
-  }
-
 
 
   /**
