@@ -377,14 +377,31 @@
   padding: 1px;
   position: relative;
 }
-.explain{
+
+.summernote img {
+  max-width: 100%;
+}
+
+.explain {
   position: absolute;
+  top: 10px;
   left: 50%;
   right: 20px;
   bottom: 10px;
   margin-left: 170px;
 }
-.explain dt{
+
+.explain button {
+  position: absolute;
+  top: 0;
+}
+
+.explain .explain-body {
+  position: absolute;
+  bottom: 0;
+}
+
+.explain dt {
   font-weight: bold;
 }
 .explain dl, .explain dt, .explain dd{

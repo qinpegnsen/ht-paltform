@@ -289,7 +289,7 @@
       <dt class="col-xs-2">商品描述：</dt>
       <dd class="col-xs-10">
         <div class="w100">
-          <div id="summernote" class="summernote"></div>
+          <div id="goodsBody" class="summernote"></div>
         </div>
       </dd>
     </dl>
@@ -298,7 +298,8 @@
       <dd class="col-xs-10">
         <div class="w100 app-box">
           <div class="app-wrap">
-            <div class="app-control">
+            <div id="mobileBody" class="summernote"></div>
+            <!--<div class="app-control">
               <div class="app-content">
                 <div class="app-img-box" *ngFor="let item of mblItemList;let i=index;">
                   <div class="_edit hide">
@@ -359,26 +360,29 @@
               <li class="col-xs-6" (click)="showEdit($event.target)">
                 <em class="fa fa-font font24"></em><br>文字
               </li>
-            </ul>
+            </ul>-->
           </div>
           <div class="explain">
-            <dl class="mb">
-              <dt>1、基本要求：</dt>
-              <dd>建议：所有图片都是本宝贝相关的图片。</dd>
-            </dl>
-            <dl class="mb">
-              <dt>2、图片大小要求：</dt>
-              <dd>（1）建议使用宽度超过480像素、高度超过960像素的图片；</dd>
-              <dd>（2）格式为：jpg\gif\png；</dd>
-              <dd>举例：可以上传一张宽度为480，高度为960像素，格式为jpg的图片。</dd>
-            </dl>
-            <dl class="mb">
-              <dt>3、文字要求：</dt>
-              <dd>（1）每次插入文字不能超过500个字，标点、特殊字符按照一个字计算；</dd>
-              <dd>（2）请手动输入文字，不要复制粘贴网页上的文字，防止出现乱码；</dd>
-              <dd>（3）请注意特殊字符将会被转译。</dd>
-              <dd>建议：不要添加太多的文字，这样看起来更清晰。</dd>
-            </dl>
+            <button class="btn btn-green btn-sm">同步PC端详情</button>
+            <div class="explain-body">
+              <dl class="mb">
+                <dt>1、基本要求：</dt>
+                <dd>建议：所有图片都是本宝贝相关的图片。</dd>
+              </dl>
+              <dl class="mb">
+                <dt>2、图片大小要求：</dt>
+                <dd>（1）建议使用宽度超过480像素、高度超过960像素的图片；</dd>
+                <dd>（2）格式为：jpg\gif\png；</dd>
+                <dd>举例：可以上传一张宽度为480，高度为960像素，格式为jpg的图片。</dd>
+              </dl>
+              <dl class="mb">
+                <dt>3、文字要求：</dt>
+                <dd>（1）每次插入文字不能超过500个字，标点、特殊字符按照一个字计算；</dd>
+                <dd>（2）请手动输入文字，不要复制粘贴网页上的文字，防止出现乱码；</dd>
+                <dd>（3）请注意特殊字符将会被转译。</dd>
+                <dd>建议：不要添加太多的文字，这样看起来更清晰。</dd>
+              </dl>
+            </div>
           </div>
         </div>
       </dd>

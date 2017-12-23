@@ -33,7 +33,8 @@ export class EditDetailComponent implements OnInit {
   public mblItemList = [];         //手机端上传后的图片集合
   public goodsEditData: any;     // 修改商品时商品的原有数据
   public tempMblHtml: string;    // 修改商品时临时用的移动端详情
-  public goodsBody: any;          //商品详情
+  public goodsBody: any;          //PC端商品详情
+  public mobileBody: any;          //移动端商品详情
   public storeCode: string;          //店铺编码
   public logistics: any;             // 物流规则列表
   public tplVals: any;               // 运费模板内容
@@ -106,8 +107,8 @@ export class EditDetailComponent implements OnInit {
        */
       $(function () {
         //调用富文本编辑器，初始化编辑器
-        $('#summernote').summernote({
-          height: 280,
+        $('#goodsBody').summernote({
+          height: 300,
           dialogsInBody: true,
           placeholder: 'write here...',
           callbacks: {
@@ -115,7 +116,30 @@ export class EditDetailComponent implements OnInit {
               this.contents = contents;
             },
             onImageUpload: function (files) {
-              for (let file of files) me.sendFile(file);
+              for (let file of files) me.sendFile(file, 'goodsBody');
+            }
+          }
+        });
+        $('#mobileBody').summernote({
+          toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            // ['para', ['ul', 'ol', 'paragraph']],
+            // ['height', ['height']],
+            ['table', ['table']],//表单
+            ['insert', ['link', 'picture', 'hr']],//插入链接，图片，下划线
+            ['view', ['fullscreen', 'codeview']]//全屏，代码视图,帮助
+          ],
+          height: 420,
+          dialogsInBody: true,
+          placeholder: 'write here...',
+          callbacks: {
+            onChange: (contents) => {
+              this.contents = contents;
+            },
+            onImageUpload: function (files) {
+              for (let file of files) me.sendFile(file, 'mobileBody');
             }
           }
         });
@@ -152,7 +176,8 @@ export class EditDetailComponent implements OnInit {
           me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
           me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
           me.genMblItemList();        //将html字符串生成移动端图片文字组合
-          if (!isNullOrUndefined(me.goodsBody)) $('#summernote').summernote('code', me.goodsBody);   //PC端详情
+          if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
+          if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
         }
       })
     }
@@ -171,19 +196,19 @@ export class EditDetailComponent implements OnInit {
      * @param status 状态码
      * @param headers 头信息
      */
-    me.mobileUploader.onSuccessItem = function (item, response: any, status, headers) {
-      if (!isNullOrUndefined(response)) {
-        response = JSON.parse(response);
-        if (response.success) {
-          let img = response.data;
-          let obj = {
-            type: 'img',
-            value: img
-          };
-          me.mblItemList.push(obj);
-        }
-      }
-    }
+    /*me.mobileUploader.onSuccessItem = function (item, response: any, status, headers) {
+     if (!isNullOrUndefined(response)) {
+     response = JSON.parse(response);
+     if (response.success) {
+     let img = response.data;
+     let obj = {
+     type: 'img',
+     value: img
+     };
+     me.mblItemList.push(obj);
+     }
+     }
+     }*/
   }
 
   /**
@@ -261,7 +286,8 @@ export class EditDetailComponent implements OnInit {
       }
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-      me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
+      me.mobileBody = me.goodsEditData.mobileBody.replace(/\\/, '');
+      // me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
       if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
         me.getTplValById();
       }    //根据物流模板ID获取模板值
@@ -628,18 +654,28 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 移动端详情同步PC端详情
+   */
+  syncGoodsBody() {
+    let me = this;
+    me.publishData.goodsBody = $('.goodsBody').summernote('code');
+    $('#mobileBody').summernote('code', me.publishData.goodsBody);
+  }
+
+  /**
    * 编辑器上传图片并显示
    * @param file
+   * editorId: 编辑器id
    */
-  sendFile(file) {
+  sendFile(file, editorId: string) {
     let _this = this, img = _this.goods.uploadImg(file);
     if (!isNullOrUndefined(img)) {
-      $("#summernote").summernote('insertImage', img, '');
+      $("#" + editorId).summernote('insertImage', img, '');
       let obj = {
         type: 'img',
         value: img
       };
-      _this.mblItemList.push(obj);
+      // _this.mblItemList.push(obj);
     }
   }
 
@@ -1023,8 +1059,9 @@ export class EditDetailComponent implements OnInit {
     me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码
     me.genGoodsBaseAttrList();                                          // 商品基本属性
     me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
-    me.publishData['goodsBody'] = $('.summernote').summernote('code');  // 商品详情 PC
-    me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
+    me.publishData['goodsBody'] = $('#goodsBody').summernote('code');  // 商品详情 PC
+    me.publishData['mobileBody'] = $('#mobileBody').summernote('code');  // 移动端详情
+    // me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
     me.goods.publishGoods('/goodsEdit/save', me.publishData, me.path);
   }
 

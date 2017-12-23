@@ -6,8 +6,7 @@ import {GoodsService} from "../goods.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ManageComponent} from "../manage/manage.component";
-import { Location }from '@angular/common';
+import {Location} from "@angular/common";
 declare var $: any;
 
 @Component({
@@ -26,13 +25,13 @@ export class AuditGoodsComponent implements OnInit {
   public enum: any;              // 所选规格，用于请求sku接口的数据
   public skuAttr = [];           //属性列表
   public skuImg: any;            // 图片属性
-  public goodsImgList = {};       // 商品上传图片列表
   public oldImgs: any = {};        // 商品已经有的图片列表
   public mblItemList = [];         //手机端上传后的图片集合
   public goodsEditData: any;     // 修改商品时商品的原有数据
   public tempMblHtml: string;    // 修改商品时临时用的移动端详情
   public myReadOnly: boolean = true;     // 商品详情或审核商品时是只读状态
   public goodsBody: any;          //商品详情
+  public mobileBody: any;          //移动端商品详情
   public audit: any;              // 商品审核
   public goodsAudits: any;        // 商品审核状态列表
   public storeCode: string;          //店铺编码
@@ -51,7 +50,6 @@ export class AuditGoodsComponent implements OnInit {
     goodsSkuList: []
   };// 商品发布数据，所有数据
   constructor(public publishComponent: PublishComponent,
-              public manageComponent: ManageComponent,
               public route: ActivatedRoute,
               public location: Location,
               public submit: SubmitService,
@@ -90,9 +88,20 @@ export class AuditGoodsComponent implements OnInit {
      * JQuery初始化后执行事件
      */
     $(function () {
-      me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
-      me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
-      me.genMblItemList();        //将html字符串生成移动端图片文字组合
+      //调用富文本编辑器，初始化编辑器
+      $('#goodsBody').summernote({
+        toolbar: [],
+        height: 600
+      });
+      $('#mobileBody').summernote({
+        toolbar: [],
+        height: 420
+      });
+      // me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
+      // me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
+      // me.genMblItemList();        //将html字符串生成移动端图片文字组合
+      if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
+      if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
     })
 
     //初始化图片上传属性对象,后续需要往vals里添加对象，做此初始配置可保HTML与后续添加时不报错
@@ -145,7 +154,8 @@ export class AuditGoodsComponent implements OnInit {
     me.publishData = me.goodsEditData;                  // 商品发布数据
     me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
     me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-    me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
+    me.mobileBody = me.goodsEditData.mobileBody.replace(/\\/, '');
+    // me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
     if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
   }
 

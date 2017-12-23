@@ -211,7 +211,7 @@
       <dt class="col-xs-2">商品描述：</dt>
       <dd class="col-xs-10">
         <div class="w100">
-          <div class="detailBody" [class.hide]="!myReadOnly" [innerHtml]="goodsBody"></div>
+          <div id="goodsBody" class="summernote"></div>
         </div>
       </dd>
     </dl>
@@ -220,7 +220,8 @@
       <dd class="col-xs-10">
         <div class="w100 app-box">
           <div class="app-wrap">
-            <div class="app-control">
+            <div id="mobileBody" class="summernote"></div>
+            <!--<div class="app-control">
               <div class="app-content">
                 <div class="app-img-box" *ngFor="let item of mblItemList;let i=index;">
                   <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
@@ -228,7 +229,7 @@
                   <p class="text mb0" style="line-height: 1.6" *ngIf="item.type== 'text'">{{item.value}}</p>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
           <div class="explain">
             <dl class="mb">
