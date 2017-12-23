@@ -26,7 +26,7 @@ export class AuditWindowComponent implements OnInit, OnDestroy {
   public brandHolder: any;//品牌拥有着
   public applyNumber: any;//品牌注册号
   public applyCurPage: any;//品牌页码
-  private result:any;//品牌信息
+  public result:any;//品牌信息
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
     $('body').css("overflow-y", 'scroll');
