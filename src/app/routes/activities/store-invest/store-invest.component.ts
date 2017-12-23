@@ -3,6 +3,7 @@ import {isNullOrUndefined} from "util";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {ActivitiesService} from "../activities.service";
 import {AppComponent} from "../../../app.component";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 declare var $: any;
 
 @Component({
@@ -18,10 +19,11 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
     storeName:'',
     storeCode:'',
     epCode:'',
+    payWay:'',
   };         //企业编码
   public storeCode: any;      //店铺编码
   public storeName: any;     //企业名字
-  public expressCode: any;   //快递公司唯一代码
+  public payWayList: any;   //支付方式的枚举列表
   @Input() flag: string;
   @Output() deliverGoods = new EventEmitter();
 
@@ -42,11 +44,13 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   }
 
   constructor(private service: ActivitiesService,
-              public patterns: PatternService) {
+              public patterns: PatternService,
+              public tools: RzhtoolsService) {
   }
 
   ngOnInit() {
-
+    this.payWayList=this.tools.getEnumDataList('1017');
+    console.log("█ this.payWayList ►►►",  this.payWayList);
   }
 
 
@@ -83,13 +87,14 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   }
 
   /**
-   * 确认发货
+   * 确认投资
    */
   delivery() {
-    let url = '/rpAccountRec/addRpAccountRec';
+    let url = '/rpAccountRec/addRpAccountRecAdmin';
     let data = {
-      epCode: this.item.epCode,
+      storeCode: this.item.storeCode,
       amount: this.amount,
+      payWay: this.item.payWay,
     };
     let result = this.service.addRpAccountRec(url, data);
     if (isNullOrUndefined(result)) this.hideWindow();

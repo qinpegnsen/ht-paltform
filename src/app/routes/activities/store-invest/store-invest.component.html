@@ -10,8 +10,16 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">红包企业：</dt>
         <dd class="col-xs-5 font14">
-          <select name="epCode" class="form-control input-sm" required [(ngModel)]="item.epCode">
-            <option [value]="item.epCode" *ngFor="let item of rpStoreList">{{item.epSubname}}</option>
+          <select name="epCode" class="form-control input-sm" required [(ngModel)]="item.storeCode">
+            <option [value]="item.storeCode" *ngFor="let item of rpStoreList">{{item.epSubname}}</option>
+          </select>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">支付方式：</dt>
+        <dd class="col-xs-5 font14">
+          <select name="payWay" class="form-control input-sm" required [(ngModel)]="item.payWay">
+            <option [value]="item.key" *ngFor="let item of payWayList">{{item.val}}</option>
           </select>
         </dd>
       </dl>
