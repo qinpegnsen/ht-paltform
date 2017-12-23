@@ -3,6 +3,8 @@
     商品管理
     <app-buttons class="pull-right" [config]="addButton" routerLink="/main/goods/publish/step_one"></app-buttons>
   </div>
+
+  <!--查询 start-->
   <div class="panel mb">
     <div class="panel-body p ng-scope">
       <div class="search-group ml-xl mb">
@@ -59,9 +61,11 @@
           <em class="icon-magnifier fa-fw"></em>
         </button>
       </div>
-
     </div>
   </div>
+  <!--查询end-->
+
+  <!--列表-->
   <div class="panel panel-danger">
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
@@ -159,10 +163,10 @@
                     routerLink="audit"
                     [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
             </button>
-            <span *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL'">
-            <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
-                         *ngFor="let option of buttons"></app-buttons>
-          </span>
+            <ng-container *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL' && goods.isOwnPlat == 'Y'">
+              <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
+                           *ngFor="let option of buttons"></app-buttons>
+            </ng-container>
             <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
                     routerLink="detail"
                     [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">
