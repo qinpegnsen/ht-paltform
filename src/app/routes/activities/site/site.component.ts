@@ -124,6 +124,7 @@ export class SiteComponent implements OnInit {
       confirmButtonColor: "#ec6c62"
     }, function (isConfirm) {
       if (isConfirm) {
+
         let url = '/redSchedulingAudit/updateRpDrawClose';
         let data = {
           state: 'N'
@@ -147,6 +148,7 @@ export class SiteComponent implements OnInit {
       activePage = curPage;
     }
     ;
+
     let url = "/rpSetting/queryRpSettingAdmin";
     let data = {
       curPage: activePage,
