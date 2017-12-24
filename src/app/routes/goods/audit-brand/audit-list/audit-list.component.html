@@ -22,22 +22,22 @@
         <th class="unselectable text-center w5">
           <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="brandName">品牌名称</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="brandEnName">英文名称</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="brandOwner">品牌所有人</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="logo">品牌图片</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w20 unselectable text-center">
           <rzhDefaultSorter by="brandRegCards">品牌注册证</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -49,7 +49,7 @@
         <td>{{brand.englishName}}</td>
         <td>{{brand.brandHolder}}</td>
         <td>
-          <img height="50px" [src]="brand.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+          <img width="50px" [src]="brand.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
                  alt="">
           <img class="hover-big-img" [src]="brand.brandLogo"
