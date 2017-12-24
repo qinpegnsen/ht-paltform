@@ -22,15 +22,20 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label"><i class="main-red">*</i>品牌首字母</label>
+            <label class="col-sm-4 control-label">品牌英文名</label>
             <div class="col-sm-7">
-              <input class="form-control" type="text" required name="brandInitial" [(ngModel)]="brandInfo.brandInitial"
-                     #brandInitial="ngModel" placeholder="品牌首字母"/>
+              <input class="form-control" type="text" name="englishName" [(ngModel)]="brandInfo.englishName"
+                     placeholder="品牌英文名"/>
             </div>
           </div>
-          <div [hidden]="brandInitial.valid || brandInitial.pristine"
-               class="col-sm-8 pull-right text-danger">
-            请输入品牌名称
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">品牌首字母</label>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" name="brandInitial" [(ngModel)]="brandInfo.brandInitial"
+                     placeholder="品牌首字母"/>
+            </div>
           </div>
         </fieldset>
         <fieldset>
@@ -62,15 +67,6 @@
           <div [hidden]="brandSort.valid || brandSort.pristine"
                class="col-sm-8 pull-right text-danger">
             请填写0-99的整数
-          </div>
-        </fieldset>
-        <fieldset [hidden]="path=='addBrand'">
-          <div class="form-group">
-            <label class="col-sm-4 control-label">店铺编码</label>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" name="storeCode" [(ngModel)]="brandInfo.storeCode"
-                     placeholder="店铺编码"/>
-            </div>
           </div>
         </fieldset>
         <fieldset>
@@ -150,6 +146,10 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">所属分类：</td>
             <td class="item-bd col-sm-7 mb0">{{brandKind}}</td>
+          </tr>
+          <tr class="t-item clearfix">
+            <td class="item-hd col-sm-4">品牌英文名：</td>
+            <td class="item-bd col-sm-7 mb0">{{brandInfo.englishName}}</td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-4">品牌首字母：</td>

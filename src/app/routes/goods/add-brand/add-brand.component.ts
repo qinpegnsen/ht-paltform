@@ -156,8 +156,6 @@ export class AddBrandComponent implements OnInit {
         me.upLoadImg(submitUrl, submitData, 'put'); //上传图片及提交数据
         break;
     }
-
-
   }
 
   /**

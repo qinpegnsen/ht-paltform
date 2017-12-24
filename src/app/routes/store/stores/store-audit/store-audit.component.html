@@ -102,8 +102,12 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">身份证有效期：</td>
           <td class="item-bd col-sm-10">
-            {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{epInfo?.isForever?'永久':epInfo?.idcardEndTime | date:
-            'yyyy/MM/dd'}}
+            <ng-container *ngIf="epInfo?.isForever == 'N'">
+              {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{epInfo?.idcardEndTime | date: 'yyyy/MM/dd'}}
+            </ng-container>
+            <ng-container *ngIf="epInfo?.isForever == 'Y'|| !epInfo?.idcardEndTime">
+              {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ 永久
+            </ng-container>
           </td>
         </tr>
       </table>
