@@ -57,6 +57,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
    * @param obj
    */
   confirm(obj){
+    let me=this;
     let url = '/goodsEnum/updateBaseEnum';
     let data = {
       id: this.val[0].enumTypeId,
@@ -64,8 +65,13 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
       name: obj.name,
       vals: obj.valStr
     }
-    let result=this.submit.postRequest(url, data);
-    this.hideWindow("success");
-    this.basicPropertiesComponent.queryBaseEnumList();
+    let result=me.submit.postRequest(url, data);
+    if(result=="商品分类基本属性已存在"){
+     return;
+    }else{
+      me.hideWindow("success");
+      me.basicPropertiesComponent.queryBaseEnumList();
+    }
+
   }
 }

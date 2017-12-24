@@ -11,7 +11,7 @@
           <rzhDefaultSorter by="sort"></rzhDefaultSorter>
         </th>
         <th class="col-md-2 unselectable text-left">
-          <rzhDefaultSorter by="agent">代理商</rzhDefaultSorter>
+          <rzhDefaultSorter by="agent">企业名称</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="bacctName">收款人姓名</rzhDefaultSorter>
@@ -43,7 +43,7 @@
       <ng-container *ngFor="let item of dataTable.data;let i = index">
         <tr class="text-center">
           <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
-          <td class="text-left">{{item.agentName}}</td>
+          <td class="text-left">{{item.storeName}}</td>
           <td class="text-left">{{item.bacctName}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
@@ -87,7 +87,6 @@
             </ng-container>
           </td>
         </tr>
-
       </ng-container>
       </tbody>
       <tfoot>
