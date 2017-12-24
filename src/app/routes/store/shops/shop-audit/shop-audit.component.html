@@ -129,28 +129,29 @@
                 <div class="mb clearfix">
                   <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取建设金的比例：</label>
                   <div class="tag-dib align-middle font0">
-                    <input class="form-control width-auto tag-dib num" type="number" required name="buildGoldRate"
-                           [(ngModel)]="audit.buildGoldRate" #ngBuildGoldRate="ngModel"
-                           [pattern]="patterns.oneDigit" placeholder="抽取建设金的比例"/>
+                    <input class="form-control width-auto tag-dib num"
+                           type="number" required name="buildGoldRate"
+                           [(ngModel)]="audit.buildGoldRate"  (keyup)="listenBuildGoldRate(ngBuildGoldRate.value)"
+                           #ngBuildGoldRate="ngModel" [tooltip]="buildGoldRateTip"
+                           [pattern]="patterns.num" placeholder="抽取建设金的比例"/>
                     <em class="add-on">‱</em>
                   </div>
                   <div class="tag-dib ml align-middle text-danger"
-                       *ngIf="!ngBuildGoldRate.valid && !ngBuildGoldRate.pristine">
-                    请输入0-9的整数
-                  </div>
+                       *ngIf="(!ngBuildGoldRate.valid && !ngBuildGoldRate.pristine) || buildGoldRateError">
+                    {{buildGoldRateTip}}</div>
                 </div>
                 <div class="clearfix">
                   <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取广告费的比例：</label>
                   <div class="tag-dib align-middle font0">
-                    <input class="form-control width-auto tag-dib num" type="number" required name="adRate"
-                           [(ngModel)]="audit.adRate" #ngAdRate="ngModel"
-                           [pattern]="patterns.oneDigit" placeholder="抽取广告费的比例"/>
+                    <input class="form-control width-auto tag-dib num"
+                           type="number" required name="adRate"
+                           [(ngModel)]="audit.adRate" (keyup)="listenAdRate(ngAdRate.value)"
+                           #ngAdRate="ngModel" [tooltip]="adRateTip"
+                           [pattern]="patterns.num" placeholder="抽取广告费的比例"/>
                     <em class="add-on">‱</em>
                   </div>
                   <div class="tag-dib ml align-middle text-danger"
-                       *ngIf="!ngAdRate.valid && !ngAdRate.pristine">
-                    请输入0-9的整数
-                  </div>
+                       *ngIf="(!ngAdRate.valid && !ngAdRate.pristine) || adRateError">{{adRateTip}}</div>
                 </div>
               </ng-container>
               <ng-container *ngIf="audit.auditResult == 'UNPASS'">
@@ -166,7 +167,7 @@
       <fieldset class="pt-xl m0 text-center">
         <ng-container *ngIf="audit.auditResult == 'PASS'">
           <button class="btn btn-green" type="button" (click)="auditPass()"
-                  [disabled]="!auditForm.form.valid">
+                  [disabled]="buildGoldRateError || adRateError">
             <em class="fa fa-upload mr"></em>通过
           </button>
         </ng-container>
