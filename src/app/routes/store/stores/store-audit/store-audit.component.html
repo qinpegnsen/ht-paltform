@@ -62,12 +62,17 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">税务登记证：</td>
             <td class="item-bd col-sm-10">
-              <div class="tag-dib imgbox text-center mr">
-                <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
-                  <img [src]="epInfo?.taxRegistrationCertificateElectronic" class="img"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                </a>
-              </div>
+              <ng-container *ngIf="epInfo?.taxRegistrationCertificateElectronic">
+                <div class="tag-dib imgbox text-center mr">
+                  <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
+                    <img [src]="epInfo?.taxRegistrationCertificateElectronic" class="img"
+                         onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  </a>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!epInfo?.taxRegistrationCertificateElectronic">
+                <span class="font-gray">【未上传】</span>
+              </ng-container>
             </td>
           </tr>
           <tr class="t-item clearfix">
@@ -77,12 +82,17 @@
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">组织机构代码证：</td>
             <td class="item-bd col-sm-10">
-              <div class="tag-dib imgbox text-center mr">
-                <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
-                  <img [src]="epInfo?.organizationCodeElectronic" class="img"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                </a>
-              </div>
+              <ng-container *ngIf="epInfo?.taxRegistrationCertificateElectronic">
+                <div class="tag-dib imgbox text-center mr">
+                  <a [href]="epInfo?.taxRegistrationCertificateElectronic" target="_blank" title="点击看大图">
+                    <img [src]="epInfo?.organizationCodeElectronic" class="img"
+                         onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  </a>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!epInfo?.taxRegistrationCertificateElectronic">
+                <span class="font-gray">【未上传】</span>
+              </ng-container>
             </td>
           </tr>
         </ng-container>
@@ -146,12 +156,17 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">营业执照电子版：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="epInfo?.businessLicenceNumberElectronic" target="_blank" title="点击看大图">
-                <img height="100%" [src]="epInfo?.businessLicenceNumberElectronic" class="img"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="epInfo?.businessLicenceNumberElectronic">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="epInfo?.businessLicenceNumberElectronic" target="_blank" title="点击看大图">
+                  <img height="100%" [src]="epInfo?.businessLicenceNumberElectronic" class="img"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!epInfo?.businessLicenceNumberElectronic">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
       </table>
@@ -182,12 +197,17 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">开户银行许可证：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="epInfo?.bankLicenceElectronic" target="_blank" title="点击看大图">
-                <img height="100%" [src]="epInfo?.bankLicenceElectronic" class="img" [alt]="epInfo?.bankLicenceElectronic"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="epInfo?.bankLicenceElectronic">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="epInfo?.bankLicenceElectronic" target="_blank" title="点击看大图">
+                  <img height="100%" [src]="epInfo?.bankLicenceElectronic" class="img" [alt]="epInfo?.bankLicenceElectronic"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!epInfo?.bankLicenceElectronic">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">

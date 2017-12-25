@@ -47,29 +47,39 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺头像：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
-                <img [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
-                     (mouseleave)="hideImg($event)"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="shopInfo?.storeAvatar">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
+                  <img [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
+                       (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!shopInfo?.storeAvatar">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺LOGO：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
-                <img [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
-                     (mouseleave)="hideImg($event)"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <img class="hover-big-img" [src]="shopInfo?.storeLabel"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="shopInfo?.storeLabel">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
+                  <img [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
+                       (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img class="hover-big-img" [src]="shopInfo?.storeLabel"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!shopInfo?.storeLabel">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">
@@ -131,14 +141,15 @@
                   <div class="tag-dib align-middle font0">
                     <input class="form-control width-auto tag-dib num"
                            type="number" required name="buildGoldRate"
-                           [(ngModel)]="audit.buildGoldRate"  (keyup)="listenBuildGoldRate(ngBuildGoldRate.value)"
+                           [(ngModel)]="audit.buildGoldRate" (keyup)="listenBuildGoldRate(ngBuildGoldRate.value)"
                            #ngBuildGoldRate="ngModel" [tooltip]="buildGoldRateTip"
                            [pattern]="patterns.num" placeholder="抽取建设金的比例"/>
                     <em class="add-on">‱</em>
                   </div>
                   <div class="tag-dib ml align-middle text-danger"
                        *ngIf="(!ngBuildGoldRate.valid && !ngBuildGoldRate.pristine) || buildGoldRateError">
-                    {{buildGoldRateTip}}</div>
+                    {{buildGoldRateTip}}
+                  </div>
                 </div>
                 <div class="clearfix">
                   <label class="lable-width control-label pull-left mb0"><i class="main-red">*</i>抽取广告费的比例：</label>
@@ -151,7 +162,8 @@
                     <em class="add-on">‱</em>
                   </div>
                   <div class="tag-dib ml align-middle text-danger"
-                       *ngIf="(!ngAdRate.valid && !ngAdRate.pristine) || adRateError">{{adRateTip}}</div>
+                       *ngIf="(!ngAdRate.valid && !ngAdRate.pristine) || adRateError">{{adRateTip}}
+                  </div>
                 </div>
               </ng-container>
               <ng-container *ngIf="audit.auditResult == 'UNPASS'">

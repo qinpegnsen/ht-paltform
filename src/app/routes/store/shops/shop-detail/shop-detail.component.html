@@ -45,44 +45,57 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺地址：</td>
           <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.areaFullName}">
-            {{shopInfo?.areaFullName || '【未填写】'}}{{shopInfo?.address}}</td>
+            {{shopInfo?.areaFullName || '【未填写】'}}{{shopInfo?.address}}
+          </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺邮编：</td>
           <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storeZip}">
-            {{shopInfo?.storeZip || '【未填写】'}}</td>
+            {{shopInfo?.storeZip || '【未填写】'}}
+          </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺电话：</td>
           <td class="item-bd col-sm-10" [ngClass]="{'font-gray': !shopInfo?.storePhone}">
-            {{shopInfo?.storePhone || '【未填写】'}}</td>
+            {{shopInfo?.storePhone || '【未填写】'}}
+          </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺头像：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
-                <img [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
-                     (mouseleave)="hideImg($event)"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="shopInfo?.storeAvatar">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
+                  <img [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
+                       (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!shopInfo?.storeAvatar">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">店铺LOGO：</td>
           <td class="item-bd col-sm-10">
-            <div class="tag-dib imgbox text-center mr">
-              <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
-                <img [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
-                     (mouseleave)="hideImg($event)"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                <img class="hover-big-img" [src]="shopInfo?.storeLabel"
-                     onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </a>
-            </div>
+            <ng-container *ngIf="shopInfo?.storeLabel">
+              <div class="tag-dib imgbox text-center mr">
+                <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
+                  <img [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
+                       (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  <img class="hover-big-img" [src]="shopInfo?.storeLabel"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                </a>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!shopInfo?.storeLabel">
+              <span class="font-gray">【未上传】</span>
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">
