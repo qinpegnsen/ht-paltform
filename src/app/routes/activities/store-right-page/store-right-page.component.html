@@ -123,7 +123,9 @@
               <ng-container *ngIf="uploaderLogo.queue.length>0">
                 <img class="col-sm-5 p-sm" *ngIf="myLogoImg" [src]="uploaderLogo.queue[0]?._file | imgUrl">
               </ng-container>
-              <img class="col-sm-5 p-sm" *ngIf="loadData.logo && !myLogoImg" [src]="loadData.logo">
+              <img class="col-sm-5 p-sm" *ngIf="loadData.logo && !myLogoImg" [src]="loadData.logo" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              <!--解决企业审核通过自动生成的红包企业，没有logo修改时候默认图片-->
+              <img class="col-sm-5 p-sm" *ngIf="!loadData.logo && !myLogoImg" [src]="loadData.logo" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传logo
                 <input class="w100" type="file" accept="image/*" name="tplImg" ng2FileSelect [uploader]="uploaderLogo"
@@ -140,7 +142,9 @@
               <ng-container *ngIf="uploaderSloganPic.queue.length>0">
                 <img class="col-sm-5 p-sm" *ngIf="mySloganImg" [src]="uploaderSloganPic.queue[0]?._file | imgUrl">
               </ng-container>
-              <img class="col-sm-5 p-sm" *ngIf="loadData.sloganPic && !mySloganImg" [src]="loadData.sloganPic">
+              <img class="col-sm-5 p-sm" *ngIf="loadData.sloganPic && !mySloganImg" [src]="loadData.sloganPic" onerror="javascript:this.src='../../../assets/img/dummy.png'">
+              <!--解决企业审核通过自动生成的红包企业，没有宣传图修改时候默认图片-->
+              <img class="col-sm-5 p-sm" *ngIf="!loadData.sloganPic&& !mySloganImg" [src]="loadData.sloganPic" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               <label class="btn btn-default file-upload">
                 <i class="icon-cloud-upload mr"></i>上传宣传图
                 <input class="w100" type="file" accept="image/*" name="tplCheckedImg" ng2FileSelect [uploader]="uploaderSloganPic"

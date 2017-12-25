@@ -169,7 +169,6 @@ export class StoreRightPageComponent implements OnInit {
     me.uploaderLogo.onSuccessItem = function (item, response, status, headers) {
       let res = JSON.parse(response);
       if (res.success) {
-        console.log("█ expr ►►►", 'logo图片上传成功');
       } else {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }
@@ -219,7 +218,6 @@ export class StoreRightPageComponent implements OnInit {
     me.uploaderSloganPic.onSuccessItem = function (item, response, status, headers) {
       let res = JSON.parse(response);
       if (res.success) {
-        console.log("█ expr ►►►", '宣传图图上传成功');
       } else {
         AppComponent.rzhAlt('error', '上传失败', '图片上传失败！');
       }

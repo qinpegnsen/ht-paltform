@@ -83,6 +83,8 @@ export class RpStoreComponent implements OnInit {
    * 当子组件注销的时候
    */
   onDeactivate(){
-    this.queryRpStoreList(this.curPage);
+    setTimeout(()=>{
+      this.queryRpStoreList(this.curPage);
+    },100);
   }
 }
