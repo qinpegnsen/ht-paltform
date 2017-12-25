@@ -20,12 +20,12 @@ export class ShopAuditComponent implements OnInit {
   public auditRecords: any;//审核记录
   public audit: any = {};//审核结果
   public patterns: any;//正则
-  public minBuildGoldRate: number;//最小抽取建设金的比例
-  public maxBuildGoldRate: number;//最大抽取建设金的比例
+  public minBuildGoldRate: number = 0;//最小抽取建设金的比例，默认值0
+  public maxBuildGoldRate: number = 10;//最大抽取建设金的比例，默认值10
   public buildGoldRateTip: string;//抽取建设金的比例提示
   public buildGoldRateError: boolean = false;//满足抽取建设金的比例限制
-  public minAdRate: number;//最小抽取广告费的比例
-  public maxAdRate: number;//最大抽取广告费的比例
+  public minAdRate: number = 0;//最小抽取广告费的比例，默认值0
+  public maxAdRate: number = 10;//最大抽取广告费的比例，默认值10
   public adRateTip: string;//抽取广告费的比例提示
   public adRateError: boolean = false;//满足抽取广告费的比例限制
 

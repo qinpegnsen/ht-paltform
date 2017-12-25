@@ -288,7 +288,7 @@
     <dl class="clearfix">
       <dt class="col-xs-2">商品描述：</dt>
       <dd class="col-xs-10">
-        <div class="w100">
+        <div class="w100 summernoteImg">
           <div id="goodsBody" class="summernote"></div>
         </div>
       </dd>
@@ -297,7 +297,7 @@
       <dt class="col-xs-2">移动端描述：</dt>
       <dd class="col-xs-10">
         <div class="w100 app-box">
-          <div class="app-wrap">
+          <div class="app-wrap summernoteImg">
             <div id="mobileBody" class="summernote"></div>
             <!--<div class="app-control">
               <div class="app-content">
@@ -363,7 +363,7 @@
             </ul>-->
           </div>
           <div class="explain">
-            <button class="btn btn-green btn-sm">同步PC端详情</button>
+            <button class="btn btn-green btn-sm" (click)="syncGoodsBody()">同步PC端详情</button>
             <div class="explain-body">
               <dl class="mb">
                 <dt>1、基本要求：</dt>

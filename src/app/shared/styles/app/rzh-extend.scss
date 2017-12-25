@@ -1058,11 +1058,7 @@ input[type=number].num::-webkit-outer-spin-button {
 .m-auto{  margin: auto}
 
 
-/*商品详情中图片过款问题，写在组件内的样式不起作用，于是写在公共样式里*/
-.detailBody{
-  max-height: 1000px;
-  overflow: auto;
-  img{
-    width: 100%;
-  }
+/*商品详情中图片过宽问题，写在组件内的样式不起作用，于是写在公共样式里*/
+.summernoteImg img {
+  max-width: 100%;
 }

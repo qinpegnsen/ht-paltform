@@ -658,7 +658,7 @@ export class EditDetailComponent implements OnInit {
    */
   syncGoodsBody() {
     let me = this;
-    me.publishData.goodsBody = $('.goodsBody').summernote('code');
+    me.publishData.goodsBody = $('#goodsBody').summernote('code');
     $('#mobileBody').summernote('code', me.publishData.goodsBody);
   }
 
@@ -670,7 +670,9 @@ export class EditDetailComponent implements OnInit {
   sendFile(file, editorId: string) {
     let _this = this, img = _this.goods.uploadImg(file);
     if (!isNullOrUndefined(img)) {
-      $("#" + editorId).summernote('insertImage', img, '');
+      $("#" + editorId).summernote('insertImage', img, function ($image) {
+        $image.css({width: ''});//设置图片的大小
+      });
       let obj = {
         type: 'img',
         value: img

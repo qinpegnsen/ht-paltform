@@ -96,10 +96,13 @@
             <td class="text-left">{{item.areaFullName+item.address}}</td>
             <td>
               <ng-container *ngIf="item.storeAvatar">
-              <img height="50" [src]="item.storeAvatar" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
-              <img class="hover-big-img" [src]="item.storeAvatar"
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的头像'">
+                <div class="imgbox">
+                  <img class="img" [src]="item.storeAvatar" (mousemove)="showImg($event)"
+                       (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+                  <img class="hover-big-img" [src]="item.storeAvatar"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的头像'">
+                </div>
               </ng-container>
               <ng-container *ngIf="!item.storeAvatar">
                 <span class="font-gray">【未上传】</span>
@@ -107,10 +110,12 @@
             </td>
             <td>
               <ng-container *ngIf="item.storeLabel">
-              <img height="50" [src]="item.storeLabel" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
-              <img class="hover-big-img" [src]="item.storeLabel"
-                   onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的logo'">
+                <div class="imgbox">
+                  <img class="img" [src]="item.storeLabel" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
+                  <img class="hover-big-img" [src]="item.storeLabel"
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item.storeName+'的logo'">
+                </div>
               </ng-container>
               <ng-container *ngIf="!item.storeLabel">
                 <span class="font-gray">【未上传】</span>

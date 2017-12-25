@@ -62,7 +62,7 @@
           <td class="item-bd col-sm-10">
             <div class="tag-dib imgbox text-center mr">
               <a [href]="shopInfo?.storeAvatar" target="_blank" title="点击看大图">
-                <img height="100%" [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
+                <img [src]="shopInfo?.storeAvatar" class="img" (mousemove)="showImg($event)"
                      (mouseleave)="hideImg($event)"
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img class="hover-big-img" [src]="shopInfo?.storeAvatar"
@@ -76,7 +76,7 @@
           <td class="item-bd col-sm-10">
             <div class="tag-dib imgbox text-center mr">
               <a [href]="shopInfo?.storeLabel" target="_blank" title="点击看大图">
-                <img height="100%" [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
+                <img [src]="shopInfo?.storeLabel" class="img" (mousemove)="showImg($event)"
                      (mouseleave)="hideImg($event)"
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img class="hover-big-img" [src]="shopInfo?.storeLabel"
