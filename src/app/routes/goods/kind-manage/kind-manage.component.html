@@ -2,32 +2,33 @@
   分类管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="addKind"></app-buttons>
 </div>
-<div class="panel panel-default">
-  <div class="panel mb p ts-bg thc">
-    <p class="font18">操作提示</p>
-    <ul>
-      <li>商品分类用于商家发布商品以及用户在商城导航索引商品时使用，请事先合理规划您的商品分类及层级关系后再进行操作。</li>
-      <li>
-        点击“新增分类”可增加一级分类，点击
-        <button type="button" class="btn btn-info btn-xs" title="新增"><i class="fa fa-plus"></i></button>
-        则增加该分类的下级分类。
-      </li>
-      <li>分类建立后可通过点击
-        <span class="btn btn-default btn-xs"><i class="fa fa-level-down"></i> 下一级 </span>进入其下级分类并进行相关操作。通过
-        <span class="btn btn-default btn-xs"><i class="fa fa-level-up"></i> 上一级 </span>
-        按钮可后退到上级分类列表。
-      </li>
-      <li>
-        绑定品牌以应在分类的三级中进行设置，商城发布商品以及分类索引商品都是依据此原则设定。例如：商城设定有三级商品分类，则应该在第三级分类中进行品牌绑定操作；而一级及二级分类只做为结构类目存在。
-      </li>
-      <li><span class="text-danger">特别注意：如果您的商城正在运营中，因商铺、商品、分润结算等重要数据都与商品分类相关，因此尽量使用
+<div class="panel mb p ts-bg thc w100">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>商品分类用于商家发布商品以及用户在商城导航索引商品时使用，请事先合理规划您的商品分类及层级关系后再进行操作</li>
+    <li>
+      点击“新增分类”可增加一级分类，点击
+      <button type="button" class="btn btn-info btn-xs" title="新增"><i class="fa fa-plus"></i></button>
+      则增加该分类的下级分类
+    </li>
+    <li>分类建立后可通过点击
+      <span class="btn btn-default btn-xs"><i class="fa fa-level-down"></i> 下一级 </span>进入其下级分类并进行相关操作。通过
+      <span class="btn btn-default btn-xs"><i class="fa fa-level-up"></i> 上一级 </span>
+      按钮可后退到上级分类列表
+    </li>
+    <li>
+      绑定品牌以应在分类的三级中进行设置，商城发布商品以及分类索引商品都是依据此原则设定。例如：商城设定有三级商品分类，则应该在第三级分类中进行品牌绑定操作；而一级及二级分类只做为结构类目存在
+    </li>
+    <li><span class="text-danger">特别注意：如果您的商城正在运营中，因商铺、商品、分润结算等重要数据都与商品分类相关，因此尽量使用
         <button type="button" class="btn btn-primary btn-xs" title="修改"><i class="fa fa-pencil"></i></button>
         而避免
         <button type="button" class="btn btn-danger btn-xs" title="删除"><i class="fa fa-trash"></i></button>
-        操作，这有可能引起商品、店铺以及结算等数据的严重错误！</span>
-      </li>
-    </ul>
-  </div>
+        操作，这有可能引起商品、店铺以及结算等数据的严重错误</span>
+    </li>
+  </ul>
+</div>
+<div class="panel panel-default">
+
   <div class="font15 mt-lg pl-lg text-primary">
     <!--<i class="icon-layers mr"></i>-->
     <span class="cursor-p" (click)="queryChildKindList()">商品分类</span>

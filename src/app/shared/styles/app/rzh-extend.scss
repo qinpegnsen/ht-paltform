@@ -36,9 +36,9 @@ $largeImg: 80px;      // 商品列表图片的宽，较大的图
   position: relative
 }
 //操作提示背景色
-.ts-bg{
+.ts{
   background: #C9E7F2;
-  width: 98%;
+  width: 100%;
   margin: auto;
   margin-top: 15px;
 }
@@ -1061,4 +1061,11 @@ input[type=number].num::-webkit-outer-spin-button {
 /*商品详情中图片过宽问题，写在组件内的样式不起作用，于是写在公共样式里*/
 .summernoteImg img {
   max-width: 100%;
+}
+
+.ts{
+  background: #C9E7F2;
+  width: 100%;
+  margin: auto;
+  margin-top: 15px;
 }

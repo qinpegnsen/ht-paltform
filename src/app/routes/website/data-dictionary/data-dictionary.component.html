@@ -2,28 +2,29 @@
   数据字典列表
   <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
 </div>
-<div class="panel mb" *ngIf="childMenuTitList.length < 1">
-  <div class="panel-body p ng-scope" ng-if="search">
-    <div class="form-group mb0">
-      <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
-      <div class="col-xs-5">
-        <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryParent(1)" placeholder="请输入类型名">
-      </div>
-      <div class="col-sm-1 pull-left text-center">
+
+
+<div class="panel panel-default">
+  <div class="mb" *ngIf="childMenuTitList.length < 1">
+    <div class="panel-body p ng-scope" ng-if="search">
+      <div class="form-group mb0">
+        <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
+        <div class="col-xs-5 p0">
+          <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey  ng-pristine ng-valid ng-touched"
+                 (change)="queryParent(1)" placeholder="请输入类型名">
+        </div>
+        <div class="col-sm-1 pull-left text-center p0">
         <span class="ng-scope">
            <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
                    class="btn thc btn-thc bar-h3-btn mr ng-scope">
              <em class="icon-magnifier fa-fw"></em>搜索
            </button>
           </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="col-md-10 font15 mt mb pl text-primary">
+  <div class="col-md-10 font15 mb pl text-primary">
     <i class="icon-layers mr"></i>
     <span class="cursor-p" (click)="queryParent(backPage)">类型列表（key）</span>
     <span *ngFor="let menuTit of childMenuTitList">

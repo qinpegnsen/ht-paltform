@@ -1,44 +1,42 @@
 <div class="content-heading mb-lg thc font">
   批发商品管理
 </div>
-<div class="panel mb">
-  <div class="panel-body p ng-scope">
-     <div class="col-md-4">
-      <div class="form-group clearfix">
-        <span class="pull-left query-name lh">选择分类：</span>
-        <div class="col-md-8 col-xs-6 pl0">
-          <app-get-kind (myData)="getKind($event)"></app-get-kind>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
+<div class="panel panel-danger">
+  <div class="p ng-scope">
+      <div class="col-md-4">
         <div class="form-group clearfix">
-          <span class="pull-left query-name lh">选择品牌：</span>
+          <span class="pull-left query-name lh">选择分类：</span>
           <div class="col-md-8 col-xs-6 pl0">
-            <ng-select [allowClear]="true" [items]="brandList"   (data)="refreshValue($event)" placeholder="全部品牌">
-            </ng-select>
+            <app-get-kind (myData)="getKind($event)"></app-get-kind>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group mb0">
-        <div class="col-md-8 col-xs-6 pl0">
-          <input type="text" [(ngModel)]="goodsName"
-                 class="form-control border-b-grey"
-                 (change)="search()" placeholder="商品名">
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="form-group clearfix">
+            <span class="pull-left query-name lh">选择品牌：</span>
+            <div class="col-md-8 col-xs-6 pl0">
+              <ng-select [allowClear]="true" [items]="brandList"   (data)="refreshValue($event)" placeholder="全部品牌">
+              </ng-select>
+            </div>
+          </div>
         </div>
-        <button type="button" title="搜索"
-                class="btn thc btn-thc bar-h3-btn mr ng-scope">
-          <em class="icon-magnifier fa-fw"></em>
-        </button>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mb0">
+          <div class="col-md-8 col-xs-6 pl0">
+            <input type="text" [(ngModel)]="goodsName"
+                   class="form-control border-b-grey"
+                   (change)="search()" placeholder="商品名">
+          </div>
+          <button type="button" title="搜索"
+                  class="btn thc btn-thc bar-h3-btn mr ng-scope">
+            <em class="icon-magnifier fa-fw"></em>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="panel panel-danger">
-  <div class="panel-body">
+  <div>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
            (pageChange)="qeuryAllService(1,$event)">
       <thead>

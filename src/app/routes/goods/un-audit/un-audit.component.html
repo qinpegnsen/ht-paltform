@@ -2,56 +2,57 @@
   <div class="content-heading mb-lg thc font">
     商品审核
   </div>
-  <div class="panel mb">
-    <div class="panel-body p ng-scope">
-      <div class="search-group ml-xl mb">
-        <span class="search-title">商品状态：</span>
-        <div class="search-main">
-          <select class="form-control" name="goodsAudit" [(ngModel)]="auditQuery.state" (change)="queryDatas()">
-            <option value="">全部</option>
-            <option *ngFor="let item of goodsState" [value]="item.key">{{item.val}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="search-group ml-xl mb clearfix">
-        <span class="search-title">分类：</span>
-        <div class="search-main">
-          <app-get-kind (myData)="getKind($event)"></app-get-kind>
-        </div>
-      </div>
-      <div class="search-group ml-xl mb">
-        <span class="search-title">自营：</span>
-        <div class="search-main">
-          <select class="form-control" name="isOwnPlat" [(ngModel)]="auditQuery.isOwnPlat" (change)="queryDatas()">
-            <option value="">全部</option>
-            <option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="tag-dib align-top">
-        <div class="search-group ml-xl mb align-top">
-          <span class="search-title">商品名：</span>
+
+  <div class="panel panel-danger">
+    <div>
+      <div class="p ng-scope">
+        <div class="search-group ml-lg">
+          <span class="search-title">商品状态：</span>
           <div class="search-main">
-            <input type="text" [(ngModel)]="auditQuery.goodsName"
-                   class="form-control border-b-grey"
-                   (change)="queryDatas()" placeholder="商品名">
+            <select class="form-control" name="goodsAudit" [(ngModel)]="auditQuery.state" (change)="queryDatas()">
+              <option value="">全部</option>
+              <option *ngFor="let item of goodsState" [value]="item.key">{{item.val}}</option>
+            </select>
           </div>
         </div>
-        <div class="search-group ml-xl mb align-top">
-          <span class="search-title">品牌：</span>
+        <div class="search-group ml-lg clearfix">
+          <span class="search-title">分类：</span>
           <div class="search-main">
-            <input type="text" [(ngModel)]="auditQuery.brandName"
-                   class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+            <app-get-kind (myData)="getKind($event)"></app-get-kind>
           </div>
         </div>
-        <button type="button" title="搜索" (click)="queryDatas()"
-                class="btn thc btn-thc align-top ml">
-          <em class="icon-magnifier fa-fw"></em>
-        </button>
+        <div class="search-group ml-lg">
+          <span class="search-title">自营：</span>
+          <div class="search-main">
+            <select class="form-control" name="isOwnPlat" [(ngModel)]="auditQuery.isOwnPlat" (change)="queryDatas()">
+              <option value="">全部</option>
+              <option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="tag-dib align-top">
+          <div class="search-group ml-lg align-top">
+            <span class="search-title">商品名：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="auditQuery.goodsName"
+                     class="form-control border-b-grey"
+                     (change)="queryDatas()" placeholder="商品名">
+            </div>
+          </div>
+          <div class="search-group ml-lg align-top">
+            <span class="search-title">品牌：</span>
+            <div class="search-main">
+              <input type="text" [(ngModel)]="auditQuery.brandName"
+                     class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
+            </div>
+          </div>
+          <button type="button" title="搜索" (click)="queryDatas()"
+                  class="btn thc btn-thc align-top ml">
+            <em class="icon-magnifier fa-fw"></em>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-danger">
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
              (pageChange)="queryDatas(1,$event)">

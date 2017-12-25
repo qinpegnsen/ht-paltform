@@ -1,18 +1,22 @@
 <div class="content-heading mb-lg thc font">
   运费模板管理
   <!--添加运费模板按钮-->
-  <app-buttons class="pull-right" [config]="addButton" routerLink="add-formoek" [queryParams]="{linkType:'addArticle'}"></app-buttons>
+  <app-buttons class="pull-right" [config]="addButton" routerLink="add-formoek"
+               [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
-<div class="panel h80 prompting">
+<div class="panel mb p w100 m-auto ts thc user-top">
+  <p class="font18">操作提示</p>
   <ul>
-    <li>操作提示：</li>
     <li>1.如果商品选择使用了配送规则，则该商品只售卖配送规则中指定的地区，运费为指定地区的运费</li>
     <li>2.正在被商品使用的配送规则不允许删除</li>
   </ul>
 </div>
+
+
 <div *ngIf="this.flag">
   <table #dataTable="rzhDataTable" [rzhData]="areas" class="w100">
-    orderData<tbody>
+    orderData
+    <tbody>
     <ng-container *ngFor="let organ of dataTable.data;let i = index">
       <tr>
         <td>
@@ -21,9 +25,10 @@
               <span>{{organ.tplName}}</span>
               <span>
                 <!--修改运费模板按钮-->
-              <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle',id:organ.id}"></app-buttons>
+              <app-buttons [config]="updatebutton" routerLink="add-formoek"
+                           [queryParams]="{linkType:'updataArticle',id:organ.id}"></app-buttons>
                 <!--删除运费模板值按钮-->
-              <app-buttons [config]="deletebutton"  (click)="delete(organ.id)"></app-buttons>
+              <app-buttons [config]="deletebutton" (click)="delete(organ.id)"></app-buttons>
             </span>
             </div>
             <table class="table table-striped w100">
@@ -64,7 +69,7 @@
               <tbody>
               <tr *ngFor="let storeExpressTplValList of organ.storeExpressTplValList;let i = index">
                 <td class="pl18">
-                <div class="hides">{{storeExpressTplValList.area | level2AreaName}}</div>
+                  <div class="hides">{{storeExpressTplValList.area | level2AreaName}}</div>
                 </td>
                 <td class="text-center">{{storeExpressTplValList.createTime}}</td>
                 <td class="text-center">{{storeExpressTplValList.firstNum}}</td>
