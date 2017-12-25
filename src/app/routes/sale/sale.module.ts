@@ -13,11 +13,17 @@ import {AfterService} from "./after.service";
 import { InspectGoodsComponent } from './inspect-goods/inspect-goods.component';
 import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrdersService} from "../orders/orders/orders.service";
+import {StoreRefundComponent} from "./store-refund/store-refund.component";
+import {StoreReturnComponent} from "./store-return/store-return.component";
 const problemcomplem: Routes = [
   {path: 'addproblem', component: AddproblemComponent},
 ]
 const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
+  {path: 'enterprise', redirectTo: 'storeRefund', children: [
+    {path: 'storeRefundMan', component: StoreRefundComponent},
+    {path: 'storeReturnMan', component: StoreReturnComponent}
+  ]},
   {path: 'refund-control', component: RefundControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
     {path: 'order-details', component: OrderDetailComponent}
@@ -56,7 +62,9 @@ const routes: Routes = [
     AfterDetailsComponent,
     OrderDetailComponent,
     AddproblemComponent,
-    InspectGoodsComponent],
+    InspectGoodsComponent,
+    StoreRefundComponent,
+    StoreReturnComponent],
   providers: [
     RefundControlComponent,
     RefundVerifyComponent,

@@ -77,7 +77,7 @@ export class ReturnControlComponent implements OnInit {
   }
 
   /**
-   * 查询买家评价分页
+   * 查询退款退货列表信息
    */
   queryAllService(page?,event?: PageEvent) {
     let me = this, activePage = 1;
@@ -89,6 +89,25 @@ export class ReturnControlComponent implements OnInit {
     if (isNullOrUndefined(result)) return;
     me.returnList = new Page(result);
     me.detail = [];
+  }
+
+  /**
+   * 重置搜索条件
+   *
+   */
+  resetSearch() {
+    this.search = {};
+    this.search.searchType='afterNo';
+    this.search.returnType='RETURN';
+    this.queryAllService();
+  }
+
+  /**
+   * 点击待审核退款直接更改售后单的状态，查询待审核退款列表
+   */
+  changeSaleAfterState(state) {
+    this.search.state = state;
+    this.queryAllService();
   }
 
   /**

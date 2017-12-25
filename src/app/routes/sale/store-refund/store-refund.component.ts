@@ -7,11 +7,11 @@ import {AfterService} from "../after.service";
 import {isNullOrUndefined} from "util";
 
 @Component({
-  selector: 'app-refund-control',
-  templateUrl: './refund-control.component.html',
-  styleUrls: ['./refund-control.component.scss']
+  selector: 'app-store-refund',
+  templateUrl: './store-refund.component.html',
+  styleUrls: ['./store-refund.component.scss']
 })
-export class RefundControlComponent implements OnInit {
+export class StoreRefundComponent implements OnInit {
   public refundList: Page = new Page();
   public detail = [];
   public showList: boolean = true;

@@ -50,7 +50,7 @@
 
 <!--企业投资记录表 start-->
 <div class="panel mb panel-default">
-  <div class="table-title w100 h50 font18 thc ts statics-font">奖池金额记录表</div>
+  <div class="table-title w100 h50 font18 thc ts statics-font">奖池流水表</div>
   <div class="form-group mb0 ">
     <div class="pull-right text-center mt-lg mr6">
         <span class="ng-scope">
@@ -67,10 +67,6 @@
     <div class="col-xs-2 pull-right mt-lg">
       <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
              (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
-    </div>
-    <div class="col-xs-2 pull-right mt-lg">
-      <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (ngModelChange)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业简称">
     </div>
     <button type="button" title="重置时间" (click)="clearTime()"
             class="btn thc btn-thc pull-right bar-h3-btn mr ng-scope mt-lg mr20">
@@ -100,7 +96,7 @@
           <rzhDefaultSorter by="id">会计科目</rzhDefaultSorter>
         </th>
         <th class="w10 text-left">
-          <rzhDefaultSorter by="id">投资金额（元）</rzhDefaultSorter>
+          <rzhDefaultSorter by="id">金额（元）</rzhDefaultSorter>
         </th>
         <th class="w15 text-left">
           <rzhDefaultSorter by="time">备注</rzhDefaultSorter>

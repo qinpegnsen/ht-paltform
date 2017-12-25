@@ -1,26 +1,28 @@
 import {Component, OnInit} from "@angular/core";
-import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {Page} from "../../../core/page/page";
+import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
+import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {AfterService} from "../after.service";
-import {isNullOrUndefined} from "util";
-
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {isNullOrUndefined, isUndefined} from "util";
+const swal = require('sweetalert');
 @Component({
-  selector: 'app-refund-control',
-  templateUrl: './refund-control.component.html',
-  styleUrls: ['./refund-control.component.scss']
+  selector: 'app-store-return',
+  templateUrl: './store-return.component.html',
+  styleUrls: ['./store-return.component.scss']
 })
-export class RefundControlComponent implements OnInit {
-  public refundList: Page = new Page();
-  public detail = [];
-  public showList: boolean = true;
+export class StoreReturnComponent implements OnInit {
+  public returnList: Page = new Page();
+  public LogisticsData: object;  //物流信息
+  public detail = [];             //是否显示详情的list
   public isReceiveList: object;  //是否收到货枚举列
   public afterStateList: object; //售后单状态枚举列
+  public showList: boolean = true; //是否显示列表组件
   public search: any = {
     curPage: null,
     pageSize: 10,
-    returnType: 'REFUND',
+    returnType: 'RETURN',
     state: '',
     isReceive: '',
     afterNo: null,
@@ -28,8 +30,8 @@ export class RefundControlComponent implements OnInit {
     ordno: null,
     searchType: 'afterNo',
   };
-
   constructor(public submit: SubmitService,
+              public router: Router,
               public tools: RzhtoolsService,
               public after: AfterService) {
   }
@@ -75,7 +77,7 @@ export class RefundControlComponent implements OnInit {
   }
 
   /**
-   * 查询退款列表信息
+   * 查询退款退货列表信息
    */
   queryAllService(page?,event?: PageEvent) {
     let me = this, activePage = 1;
@@ -85,7 +87,7 @@ export class RefundControlComponent implements OnInit {
     me.search.curPage = activePage;
     let result = this.submit.getData(url, me.search);
     if (isNullOrUndefined(result)) return;
-    me.refundList = new Page(result);
+    me.returnList = new Page(result);
     me.detail = [];
   }
 
@@ -96,15 +98,15 @@ export class RefundControlComponent implements OnInit {
   resetSearch() {
     this.search = {};
     this.search.searchType='afterNo';
-    this.search.returnType='REFUND';
+    this.search.returnType='RETURN';
     this.queryAllService();
   }
 
   /**
    * 点击待审核退款直接更改售后单的状态，查询待审核退款列表
    */
-  changeSaleAfterState() {
-    this.search.state = 'WAIT';
+  changeSaleAfterState(state) {
+    this.search.state = state;
     this.queryAllService();
   }
 
@@ -132,5 +134,24 @@ export class RefundControlComponent implements OnInit {
   hideImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'none';
+  }
+
+  /**
+   *显示物流信息
+   * @param orderId
+   */
+  showLogistics(Logistics, afterNo) {
+    Logistics.style.display = 'block';
+    if (!isUndefined(afterNo)) afterNo = afterNo;
+    else return;
+    this.LogisticsData = this.after.getOrderLogisticsData(afterNo);
+  }
+
+  /**
+   *隐藏物流信息
+   * @param orderId
+   */
+  hideLogistics(Logistics) {
+    Logistics.style.display = 'none';
   }
 }

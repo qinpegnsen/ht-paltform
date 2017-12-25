@@ -290,7 +290,7 @@ const sale = {
   link: '/main/sale',
   submenu: [
     {
-      text: '退款',
+      text: '平台',
       icon: 'fa fa-money',
       alert: '▼',
       link: '/main/sale/refund-control',
@@ -300,30 +300,27 @@ const sale = {
           link: '/main/sale/refund-control'
         },
         {
-          text: '退款审核',
-          link: '/main/sale/refund-verify'
+          text: '退货管理',
+          link: '/main/sale/return-control'
         }
       ]
     },
-    {
-      text: '退货',
-      icon: 'fa fa-retweet',
-      alert: '▼',
-      submenu: [
-        {
-          text: '退货管理',
-          link: '/main/sale/return-control'
-        },
-        {
-          text: '退货审核',
-          link: '/main/sale/return-verify'
-        },
-        {
-          text: '平台验货',
-          link: '/main/sale/inspect-goods'
-        }
-      ]
-    }
+    // {
+    //   text: '企业',
+    //   icon: 'fa fa-retweet',
+    //   alert: '▼',
+    //   link: '/main/sale/enterprise',
+    //   submenu: [
+    //     {
+    //       text: '退款管理',
+    //       link: '/main/sale/enterprise/storeRefundMan'
+    //     },
+    //     {
+    //       text: '退款管理',
+    //       link: '/main/sale/enterprise/storeReturnMan'
+    //     }
+    //   ]
+    // }
   ]
 };
 const statistics = {

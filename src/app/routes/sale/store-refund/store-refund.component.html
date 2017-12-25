@@ -1,14 +1,13 @@
 <div *ngIf="showList">
   <div class="content-heading mb-lg thc font">
-    退货管理
+    退款管理
   </div>
+
   <div class="panel panel-default">
     <!--操作提示-->
     <div class="panel mb p ts thc">
       <p class="font18">操作提示</p>
       <ul>
-        <li>买家提交退货申请，平台审核通过后买家可退货给配货方</li>
-        <li>买家将货物寄出后，平台将验收货物，验收通过则会退款给买家</li>
         <li>支付宝和微信支付的，原路返回</li>
         <li>红包返回到红包账户</li>
         <li>支付宝或微信+红包支付的，支付宝和微信部分原路返回，红包退还到红包账户</li>
@@ -22,7 +21,9 @@
           <select class="form-control pl-sm pr-sm" name="woState" [(ngModel)]="search.state"
                   (change)="queryAllService()">
             <option value="">全部</option>
-            <option [value]="state.key" *ngFor="let state of afterStateList">{{state.val}}</option>
+            <ng-container *ngFor="let state of afterStateList">
+              <option *ngIf="state.key!='CHECK_FAILS' && state.key!='DELIVERY'" [value]="state.key">{{state.val}}</option>
+            </ng-container>
           </select>
         </div>
       </div>
@@ -36,7 +37,7 @@
           </select>
         </div>
       </div>
-      <div class="search-term clearfix ml-xl mb _maxLength">
+      <div class="search-term clearfix _maxLength ml-xl mb">
         <div class="w20 pr0 pull-left">
           <select class="form-control pl-sm pr-sm" name="sss" [(ngModel)]="search.searchType" #sType
                   (change)="changeSearchType(sType.value)">
@@ -47,13 +48,16 @@
         </div>
         <div class="w80 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
-            <div class="w30 pl0 pr0 pull-left mr-sm">
-              <input *ngIf="search.searchType=='ordno'" type="text" placeholder="订单编号" name="ordno"
-                     class="form-control border-b-grey num" [(ngModel)]="search.ordno" (change)="queryAllService()">
-              <input *ngIf="search.searchType=='afterNo'" type="text" placeholder="退单单号" name="afterNo"
-                     class="form-control border-b-grey num" [(ngModel)]="search.afterNo" (change)="queryAllService()">
-              <input *ngIf="search.searchType=='phone'" type="text" placeholder="用户手机号" name="phone"
-                     class="form-control border-b-grey num" [(ngModel)]="search.phone" (change)="queryAllService()">
+            <div class="w40 pl0 pr0 pull-left mr-sm">
+              <input *ngIf="search.searchType == 'ordno'" type="text" placeholder="订单编号" name="ordno"
+                     class="form-control border-b-grey num" [(ngModel)]="search.ordno"
+                     (change)="queryAllService()">
+              <input *ngIf="search.searchType == 'afterNo'" type="text" placeholder="退单单号" name="afterNo"
+                     class="form-control border-b-grey num" [(ngModel)]="search.afterNo"
+                     (change)="queryAllService()">
+              <input *ngIf="search.searchType == 'phone'" type="text" placeholder="用户手机号" name="phone"
+                     class="form-control border-b-grey num" [(ngModel)]="search.phone"
+                     (change)="queryAllService()">
             </div>
             <button type="button" title="搜索" (click)="queryAllService()"
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope ml-lg mr-sm">
@@ -63,13 +67,9 @@
                     class="btn thc btn-thc bar-h3-btn mr0 ng-scope mr-sm">
               <em class="fa fa-refresh"></em> 重置
             </button>
-            <button type="button" title="待审核" (click)="changeSaleAfterState('WAIT')"
-                    class="btn thc btn-thc bar-h3-btn mr0 ng-scope mr-sm"  >
+            <button type="button" title="待审核" (click)="changeSaleAfterState()"
+                    class="btn thc btn-thc bar-h3-btn mr0 ng-scope"  >
               <em class="icon-magnifier fa-fw"></em> 待审核
-            </button>
-            <button type="button" title="待验货" (click)="changeSaleAfterState('DELIVERY')"
-                    class="btn thc btn-thc bar-h3-btn mr0 ng-scope mr-sm"  >
-              <em class="icon-magnifier fa-fw"></em> 待验货
             </button>
           </div>
         </div>
@@ -77,7 +77,7 @@
     </div>
     <!--搜索 end-->
     <div class="panel-body">
-      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="returnList"
+      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="refundList"
              (pageChange)="queryAllService(1,$event)">
         <thead>
         <tr>
@@ -114,57 +114,12 @@
             <td class="main-red">¥{{item.reqMoney | number: '1.2-2'}}</td>
             <td>{{item.custPhone}}</td>
             <td>{{item.createTime}}</td>
-            <td class="position-relative font13">
-              <p class="mb-sm">{{item.state | rzhState:'1602'}}</p>
-              <p class="cursor-p mb0 text-gray-dark tag-dib pl pr" *ngIf="item.state=='DELIVERY'" myHoverColor
-                 [myHover]="'orange'"
-                 (mouseenter)="showLogistics(Logistics,item.afterNo)"
-                 (mouseleave)="hideLogistics(Logistics)">退货跟踪 </p>
-              <div class="szh-buyer-info text-left logistics-pop" #Logistics
-                   (mouseenter)="showLogistics(Logistics,item.afterNo)"
-                   (mouseleave)="hideLogistics(Logistics)">
-                <div class="logistics-pop-body">
-                  <p class="pl mb-sm clearfix logistics-pop-head">
-                    <span class="fa fa-truck pull-left _icon"></span>
-                    <span class="pull-left">退货跟踪</span>
-                    <!--<a class="pull-right" routerLink="../order-detail"
-                       [queryParams]="{ordno:item.ordno}">查看更多</a>-->
-                  </p>
-                  <div class="logistics-pop-main font12">
-                    <ul class="timeline-alt pt pb0 m0">
-                      <ng-container *ngFor="let one of LogisticsData;let a=index;">
-                        <li class="mb0">
-                          <div class="timeline-badge primary">
-                            <em class="fa fa-truck"></em>
-                          </div>
-                          <div class="timeline-panel ml-xl pl">
-                            <div class="right">
-                              <div>
-                                <p>
-                                  <span class="mr">{{one.acceptTime}}</span><br>
-                                  <span>{{one.acceptStation}}</span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ng-container>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </td>
+            <td>{{item.state | rzhState:'1602'}}</td>
             <td>
-              <ng-container *ngIf="item.state=='WAIT'">
-                <button class="btn btn-purple btn-sm fa fa-check" routerLink="after-details" title="处理"
-                        [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 处理
-                </button>
-              </ng-container>
-              <ng-container *ngIf="item.state=='DELIVERY' && item.agentCode == null">
-                <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details" title="验收"
-                        [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
-                </button>
-              </ng-container>
+              <button *ngIf="item.state=='WAIT'" class="btn btn-purple btn-sm fa fa-check"
+                      routerLink="after-details" title="处理"
+                      [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理
+              </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details" title="详情"
                       [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>
@@ -189,7 +144,7 @@
                 <span class="">商品数量：</span> <span>{{item.num}}</span>
               </div>
               <div class="bg-table special text-left h35">
-                <span class=" shopimg pull-left">商品图片：</span>
+                <span class="shopimg pull-left">商品图片：</span>
                 <span class="">
                  <img [src]="item.goodsImage" alt="" class="buyimg" (mousemove)="showImg($event)"
                       (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../assets/img/dummy.png'">
@@ -197,14 +152,15 @@
                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 </span>
               </div>
-              <!--<ng-container *ngIf="item.state!='WAIT'">
-                <div class="bg-table special text-left">
-                  <span class="">审核人：</span> <span>{{item.optMan}}</span>
-                </div>
-                <div class="bg-table special text-left">
-                  <span class="">审核说明：</span> <span>{{item.opinion}}</span>
-                </div>
-              </ng-container>-->
+
+              <!-- <ng-container *ngIf="item.state!='WAIT'">
+                 <div class="bg-table special text-left">
+                   <span class="">审核人：</span> <span>{{item.optMan}}</span>
+                 </div>
+                 <div class="bg-table special text-left">
+                   <span class="">审核说明：</span> <span>{{item.opinion}}</span>
+                 </div>
+               </ng-container>-->
             </td>
           </tr>
         </ng-container>
@@ -213,8 +169,8 @@
         <tr>
           <td colspan="9">
             <div class="col-sm-5">
-              <div class="text-muted"><strong>第 {{returnList.genStartRow()}} 至 {{returnList.genEndRow()}} 条，共
-                {{returnList.totalRow}} 条</strong></div>
+              <div class="text-muted"><strong>第 {{refundList.genStartRow()}} 至 {{refundList.genEndRow()}} 条，共
+                {{refundList.totalRow}} 条</strong></div>
             </div>
             <div class="col-sm-7">
               <div style="float: right">
