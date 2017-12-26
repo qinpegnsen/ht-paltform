@@ -15,9 +15,10 @@
   <!--图表-->
   <div class="panel w100 m-auto ">
     <div class="w98 m-auto h50 pt-lg">
-      <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
-        <i class="icon icon-magnifier"></i>
-      </span>
+      <button type="button" title="搜索" (click)="selectInfos()"
+              class="btn thc btn-thc bar-h3-btn ng-scope pull-right">
+        <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+      </button>
       <div class="pull-right">
         <div class="col-xs-3 form-group" style="width: 400px">
           <div *ngIf="showType.MONTH">

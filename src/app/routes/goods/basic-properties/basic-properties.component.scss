@@ -1,14 +1,28 @@
 
-.special{
-  height:250px;
+.special {
+  height: 250px;
   overflow-y: auto;
 }
-.dropdownToggle.btn{
+
+.dropdownToggle.btn {
   text-align: left;
 }
-.dropdownToggle .caret{
+
+.dropdownToggle .caret {
   margin-top: 7px;
 }
-.tr-border{
- border: 1px solid #eee
+
+.tr-border {
+  border: 1px solid #eee
+}
+
+.goods-h {
+  width:405px;
+  height: 35px;
+  line-height: 35px;
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+.get-kind{
+  width: 305px;
 }
