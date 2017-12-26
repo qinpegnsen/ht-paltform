@@ -24,6 +24,7 @@ export const routes = [
       {path: 'orders', loadChildren: './orders/orders.module#OrdersModule'},
       {path: 'WO', loadChildren: './work-orders/work-orders.module#WorkOrdersModule'},
       {path: 'store-order', loadChildren: './store-order/store-order.module#StoreOrderModule'},
+      {path: 'platform-order', loadChildren: './platform-order/platform-order.module#PlatformOrderModule'},
     ]
   },
   {

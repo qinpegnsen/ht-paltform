@@ -249,6 +249,29 @@ const orders = {
       ]
     },
     {
+      text: '平台订单',
+      icon: 'fa fa-file-text-o',
+      alert: '▼',
+      submenu: [
+        {
+          text: '待发货',
+          link: '/main/platform-order/platform-pending'
+        },
+        {
+          text: '已发货',
+          link: '/main/platform-order/platform-received'
+        },
+        {
+          text: '已完成',
+          link: '/main/platform-order/platform-complete'
+        },
+        {
+          text: '已取消',
+          link: '/main/platform-order/platform-cancel'
+        }
+      ]
+    },
+    {
       text: '待发货',
       icon: 'fa fa-truck',
       link: '/main/orders/prepare'
