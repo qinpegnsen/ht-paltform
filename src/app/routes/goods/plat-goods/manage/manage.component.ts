@@ -16,7 +16,6 @@ declare var $: any;
 })
 export class ManageComponent implements OnInit {
   public addButton;
-  public buttons;
   public showList: boolean = true;     //是否显示列表页
   public goodsList: Page = new Page();
   public query = {
@@ -53,16 +52,6 @@ export class ManageComponent implements OnInit {
       type: 'add-thc',
       text: '发布商品',
     };
-    me.buttons = [
-      {
-        title: "修改/编辑",
-        type: "update",
-        size: "xs",
-        callback: function (baseCode, curPage) {
-          me.router.navigate(['/main/goods/manage/edit'], {queryParams: {page: curPage, baseCode: baseCode}});
-        }
-      }
-    ];
   }
 
   /**

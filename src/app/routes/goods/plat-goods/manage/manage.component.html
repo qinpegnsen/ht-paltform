@@ -153,12 +153,12 @@
                     [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
             </button>
             <ng-container *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL' && goods.isOwnPlat == 'Y'">
-              <app-buttons [config]="option" (callback)="option.callback(goods.goodsBaseCode, goodsList.curPage)"
-                           *ngFor="let option of buttons"></app-buttons>
+              <button class="btn btn-primary btn-xs fa fa-pencil" title="修改"
+                      routerLink="edit" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}">
+              </button>
             </ng-container>
             <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
-                    routerLink="detail"
-                    [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">
+                    routerLink="detail" [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}">
             </button>
           </td>
         </tr>
