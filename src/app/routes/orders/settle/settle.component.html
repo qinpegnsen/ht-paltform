@@ -2,17 +2,17 @@
   结算明细
 </div>
 <div class="panel mb p ts thc">
-  <p class="font18">平台订单</p>
+  <p class="font18">平台/代理商订单结算规则</p>
   <ul>
-    <li>平台入账 =（订单总额 - 订单退款）× {{rate}}%</li>
-    <li>代理商结算 =（订单总额 - 订单退款）×（1-{{rate}}%）= 订单总额 - 订单退款 - 平台入账</li>
+    <li>　平台入账 = ( 订单总额 - 订单退款 ) × {{rate}} %</li>
+    <li>代理商结算 = ( 订单总额 - 订单退款 ) × (1-{{rate}} %)= 订单总额 - 订单退款 - 平台入账</li>
   </ul>
   <p class="font18">店铺订单结算规则</p>
   <ul>
     <li>订单净营收 = 订单总额 - 订单总退款 - 运费</li>
     <li>抽取建设金 = 订单净营收 * 建设金抽取比例</li>
     <li>抽取广告费 = 订单净营收 * 广告费抽取比例</li>
-    <li>店铺结算 = 订单净营收 * （1 - 建设金抽取比例 - 广告费抽取比例）+ 运费</li>
+    <li>　店铺结算 = 订单净营收 * ( 1 - 建设金抽取比例 - 广告费抽取比例 ) + 运费</li>
   </ul>
 </div>
 <div class="panel panel-danger">
@@ -72,34 +72,34 @@
           <rzhDefaultSorter by="ordno">订单号</rzhDefaultSorter>
         </th>
         <th class="w8 unselectable text-right">
-          <rzhDefaultSorter by="total">订单总额(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="total">订单总额 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-          <rzhDefaultSorter by="refund">订单退款(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="refund">订单退款 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-          <rzhDefaultSorter by="rake">抽成比例</rzhDefaultSorter>
+          <rzhDefaultSorter by="rake">平台抽成比例</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
           <rzhDefaultSorter by="rake">广告费抽取比例</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-          <rzhDefaultSorter by="rake">抽取广告费(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="rake">抽取广告费 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
           <rzhDefaultSorter by="rake">建设金抽取比例</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-          <rzhDefaultSorter by="rake">抽取建设金(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="rake">抽取建设金 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-          <rzhDefaultSorter by="rake">运费(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="rake">运费 (元)</rzhDefaultSorter>
         </th>
         <th class="w7 unselectable text-right">
-          <rzhDefaultSorter by="account">平台入账</rzhDefaultSorter>
+          <rzhDefaultSorter by="account">平台入账 (元)</rzhDefaultSorter>
         </th>
         <th class="w8 unselectable text-right">
-          <rzhDefaultSorter by="settle">结算(元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="settle">结算 (元)</rzhDefaultSorter>
         </th>
         <th class="w15 unselectable text-center">
           <rzhDefaultSorter by="time">结算时间</rzhDefaultSorter>
@@ -111,8 +111,8 @@
         <tr class="text-center">
           <td>{{i+1}}</td>
           <td class="text-left">
-            <span class="type-mark bg-green font12 fa fa-user" *ngIf="item.toType=='AGENT'"></span>
-            <span class="type-mark bg-warning font12 icon-home" *ngIf="item.toType=='STORE'"></span>
+            <span class="type-mark bg-green font12 fa fa-users" *ngIf="item.toType=='AGENT'"></span>
+            <span class="type-mark bg-warning font12 fa fa-institution" *ngIf="item.toType=='STORE'"></span>
             {{item.toName}}
           </td>
           <td class="text-center">{{item.ordno}}</td>
@@ -121,13 +121,13 @@
             <span *ngIf="item.ordRefundPay">¥ {{item.ordRefundPay | number:'1.2-2'}}</span>
             <span *ngIf="!item.ordRefundPay">-</span>
           </td>
-          <td class="text-right"><span>{{item.extraction_rate}}%</span></td>
-          <td class="text-right"><span>{{item.adRate}}%</span></td>
+          <td class="text-right"><span>{{item.extraction_rate}} %</span></td>
+          <td class="text-right"><span>{{item.adRate}} %</span></td>
           <td class="text-right">
             <span *ngIf="item.ad">¥ {{item.ad | number:'1.2-2'}}</span>
             <span *ngIf="!item.ad">-</span>
           </td>
-          <td class="text-right"><span>{{item.buildGoldRate}}%</span></td>
+          <td class="text-right"><span>{{item.buildGoldRate}} %</span></td>
           <td class="text-right">
             <span *ngIf="item.buildGold">¥ {{item.buildGold | number:'1.2-2'}}</span>
             <span *ngIf="!item.buildGold">-</span>
