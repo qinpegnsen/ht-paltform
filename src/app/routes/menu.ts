@@ -517,6 +517,7 @@ const activities = {
       text: '红包管理',
       icon: 'fa fa-dollar',
       alert: '▼',
+      link: '/main/activities/redPacket',
       submenu: [
         {
           text: '红包规则',
