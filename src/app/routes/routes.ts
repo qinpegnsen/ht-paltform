@@ -7,7 +7,7 @@ export const routes = [
   {
     path: 'main',
     component: LayoutComponent,
-    // canActivate: [RouterGuardService], //路由守卫：只有有权限时，才能访问
+    canActivate: [RouterGuardService], //路由守卫：只有有权限时，才能访问
     children: [
       {path: '', redirectTo: '/main/home', pathMatch: 'full'},
       {path: 'home', loadChildren: './home/home.module#HomeModule'},

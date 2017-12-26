@@ -76,7 +76,7 @@ export class MenuService {
   getMenu() {
     let menus = JSON.parse(localStorage.getItem("userMenu"));
     if(isNullOrUndefined(menus)) menus = new Array(), this.router.navigate([this.urlLogin]);
-    return menus; //从登录信息在本地缓存中取出
+    return menus; //TODO
   }
 
   /**
