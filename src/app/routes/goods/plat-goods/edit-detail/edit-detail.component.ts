@@ -265,7 +265,6 @@ export class EditDetailComponent implements OnInit {
   public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
-    me.storeCode = pageData.storeCode //获取店铺编码
     me.getExpressTpl();
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
     me.unitList = pageData.unitList;              // 计量单位
@@ -318,7 +317,7 @@ export class EditDetailComponent implements OnInit {
     let me = this, expressTpl;
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
     if(isNullOrUndefined(target) || target == 'FIXED') {
-      expressTpl = me.goods.getExpressTplByStoreCode(me.storeCode);// 获取运费模板
+      expressTpl = me.goods.getExpressTplByStoreCode('SZH_PLAT_SELF_STORE');// 获取运费模板
     }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
