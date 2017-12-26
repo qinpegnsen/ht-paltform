@@ -265,7 +265,8 @@ export class EditDetailComponent implements OnInit {
   public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
-    me.getExpressTpl(pageData.storeCode); //获取物流模板
+    me.storeCode = pageData.storeCode //获取店铺编码
+    me.getExpressTpl();
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
     me.unitList = pageData.unitList;              // 计量单位
     me.brandsList = pageData.brandList;           // 品牌列表
