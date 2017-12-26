@@ -2,11 +2,9 @@
   数据字典列表
   <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
 </div>
-
-
 <div class="panel">
   <div class="mb" *ngIf="childMenuTitList.length < 1">
-    <div class="panel-body p ng-scope" ng-if="search">
+    <div class="panel-body ng-scope" ng-if="search">
       <div class="form-group mb0">
         <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
         <div class="col-xs-5 p0">
@@ -17,7 +15,7 @@
         <span class="ng-scope">
            <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
                    class="btn thc btn-thc bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
+             <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
            </button>
           </span>
         </div>

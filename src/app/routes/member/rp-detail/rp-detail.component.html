@@ -8,42 +8,43 @@
   <!--搜索栏 start-->
   <div>
     <div class="p ng-scope" ng-if="search">
-      <div class="col-md-12">
-        <div class="form-group col-md-2">
-          <div class="pl0">
-            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
-                   (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员名称">
-          </div>
+      <div class="search-group">
+        <span class="search-title font12">会员真实姓名：</span>
+        <div class="search-main">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员名称">
         </div>
-        <div class="form-group mb0 col-md-2">
-          <div class="pl0">
-            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                   [(ngModel)]="phone"
-                   (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
-          </div>
-        </div>
-        <div class="search-group ml-xl mb">
-          <span class="search-title">流水类型：</span>
-          <div class="search-main">
-            <select class="form-control" name="authState" [(ngModel)]="logType" (ngModelChange)="queryRpCustAcctRecAdmin(1)">
-              <option value="">全部</option>
-              <option *ngFor="let item of logTypes" [value]="item.key">{{item.val}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="place-time ml-xl clearfix mb">
-          <span class="_title">时间段：</span>
-          <div class="_picker">
-            <div class="input-group">
-              <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="dateStr" readonly>
-              <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
-            </div>
-          </div>
-        </div>
-        <button type="button" title="搜索" class="btn thc btn-thc ml align-top" (click)="queryRpCustAcctRecAdmin(1)">
-          <i class="icon-magnifier fa-fw"></i>
-        </button>
       </div>
+      <div class="search-group">
+        <span class="search-title font12">会员手机号：</span>
+        <div class="search-main">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 [(ngModel)]="phone"
+                 (ngModelChange)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
+        </div>
+      </div>
+
+      <div class="search-group">
+        <span class="search-title font12">流水类型：</span>
+        <div class="search-main">
+          <select class="form-control" name="authState" [(ngModel)]="logType"
+                  (ngModelChange)="queryRpCustAcctRecAdmin(1)">
+            <option value="">全部</option>
+            <option *ngFor="let item of logTypes" [value]="item.key">{{item.val}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-group">
+        <span class="search-title font12">时间范围：</span>
+        <div class="search-main">
+          <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker"
+                 [(ngModel)]="dateStr" readonly>
+          <!--<span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>-->
+        </div>
+      </div>
+      <button type="button" title="搜索" class="btn thc btn-thc ml align-top" (click)="queryRpCustAcctRecAdmin(1)">
+        <i class="icon-magnifier"></i><span>&nbsp;&nbsp;搜索</span>
+      </button>
     </div>
   </div>
   <!--搜索栏 end-->
