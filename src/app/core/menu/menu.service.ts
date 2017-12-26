@@ -3,6 +3,7 @@ import {CookieService} from "angular2-cookie/core";
 import {any} from "codelyzer/util/function";
 import {isNullOrUndefined} from "util";
 import {menu} from "../../routes/menu";
+import {Router} from "@angular/router";
 
 //后台菜单返回格式
 interface menuVO{
@@ -32,8 +33,9 @@ class MenuItem {
 
 @Injectable()
 export class MenuService {
+  private urlLogin: string = "/pages/login";//没去到菜单时去登陆页面
 
-  constructor(public cookieService:CookieService) {
+  constructor(public cookieService:CookieService,private router: Router) {
   }
   foreachPushMenu(items:Array<menuVO>) {
     let menuItems:Array<MenuItem> = [],menuItem:MenuItem;
@@ -73,6 +75,7 @@ export class MenuService {
    */
   getMenu() {
     let menus = JSON.parse(localStorage.getItem("userMenu"));
+    if(isNullOrUndefined(menus)) menus = new Array(), this.router.navigate([this.urlLogin]);
     return menus; //从登录信息在本地缓存中取出
   }
 

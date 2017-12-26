@@ -7,11 +7,11 @@ const swal = require('sweetalert');
 export class RouterGuardService implements CanActivate {
 
   private urlHome: string = "/main/home";//路由不匹配时重定向
+  private urlLogin: string = "/pages/login";//没去到菜单时去登陆页面
   private menus;//有权限的路由组合
   public path;//当前路由
 
   constructor(private router: Router) {
-    this.menus = this.getAllRouterLink();//取到所有菜单的link；
 
     //监听路由，该事件一旦执行(除非刷新)停不下来呀，所以可以用来着接着监听后面的子路由是否有权限
     //该事件需写在构造器里，因为写在别的地方，该服务被调用几次，他就会重复执行几次，越来越多
@@ -28,6 +28,7 @@ export class RouterGuardService implements CanActivate {
   }
 
   canActivate() {
+    this.menus = this.getAllRouterLink();//取到所有菜单的link；
     let rulHref = window.location.href, host = window.location.host;
     //如果有刷新页面，router监听一般获取到undefined，通过JQuery获取全路径之后截取到path，防止刷新后重定向到home
     if (isNullOrUndefined(this.path)) this.path = rulHref.substring(rulHref.indexOf(host)).substring(host.length);
@@ -44,6 +45,7 @@ export class RouterGuardService implements CanActivate {
    */
   private getAllRouterLink() {
     let allMenus = JSON.parse(localStorage.getItem('userMenu'));
+    if(isNullOrUndefined(allMenus)) allMenus = new Array(), this.router.navigate([this.urlLogin]);
     let menuUrls = [];
     allMenus.forEach((menu) => {
       if (menu.submenu) {
