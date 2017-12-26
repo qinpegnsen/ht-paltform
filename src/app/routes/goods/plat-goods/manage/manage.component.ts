@@ -26,8 +26,8 @@ export class ManageComponent implements OnInit {
     isOwnPlat: 'Y',
     curPage: 1,
     pageSize: 10,
-    sortColumns: '',
     goodsAudit: '',
+    sortColumns: 'create_time DESC'//倒序排列
   }; // 查询条件
   public kindList;// 分类列表
   public goodsAudits: any;  // 商品审核状态列表

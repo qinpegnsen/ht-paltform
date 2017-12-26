@@ -25,7 +25,7 @@ export class StoresGoodsComponent implements OnInit {
     isOwnPlat: 'N',
     curPage: 1,
     pageSize: 10,
-    sortColumns: '',
+    sortColumns: 'create_time DESC',//倒序排列
     goodsAudit: '',
   }; // 查询条件
   public kindList;// 分类列表
