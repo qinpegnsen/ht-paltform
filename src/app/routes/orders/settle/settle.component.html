@@ -121,13 +121,22 @@
             <span *ngIf="item.ordRefundPay">¥ {{item.ordRefundPay | number:'1.2-2'}}</span>
             <span *ngIf="!item.ordRefundPay">-</span>
           </td>
-          <td class="text-right"><span>{{item.extraction_rate}} %</span></td>
-          <td class="text-right"><span>{{item.adRate}} %</span></td>
+          <td class="text-right">
+            <span *ngIf="item.extraction_rate">{{item.extraction_rate}} %</span>
+            <span *ngIf="!item.extraction_rate">-</span>
+          </td>
+          <td class="text-right">
+            <span *ngIf="item.adRate">{{item.adRate}} %</span>
+            <span *ngIf="!item.adRate">-</span>
+          </td>
           <td class="text-right">
             <span *ngIf="item.ad">¥ {{item.ad | number:'1.2-2'}}</span>
             <span *ngIf="!item.ad">-</span>
           </td>
-          <td class="text-right"><span>{{item.buildGoldRate}} %</span></td>
+          <td class="text-right">
+            <span  *ngIf="item.buildGoldRate">{{item.buildGoldRate}} %</span>
+            <span *ngIf="!item.buildGoldRate">-</span>
+          </td>
           <td class="text-right">
             <span *ngIf="item.buildGold">¥ {{item.buildGold | number:'1.2-2'}}</span>
             <span *ngIf="!item.buildGold">-</span>
