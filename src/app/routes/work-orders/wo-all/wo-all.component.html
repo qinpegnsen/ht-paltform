@@ -29,14 +29,14 @@
       </div>
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group pr0 mb0">
-          <div class="w80 pl0 pr0 pull-left">
+          <div class="w70 pl0 pr0 pull-left">
             <input *ngIf="woSearch.searchType == 'ordno'" type="text" class="form-control" placeholder="订单编号"
                    [(ngModel)]="woSearch.ordno" (change)="queryDatas()">
             <input *ngIf="woSearch.searchType == 'wono'" type="text" class="form-control" placeholder="工单编号"
                    [(ngModel)]="woSearch.wono" (change)="queryDatas()">
           </div>
           <button type="submit" title="搜索" (click)="queryDatas()"
-                  class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
+                  class="btn thc btn-thc bar-h3-btn ng-scope">
             <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
           </button>
         </div>

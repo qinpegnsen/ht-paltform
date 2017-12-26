@@ -147,15 +147,15 @@
 
       <!--btns-->
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
 
         <!--添加分类 -->
-        <button *ngIf="editKind" class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
+        <button *ngIf="editKind" class="ml btn btn-info pull-left thc bg b" type="submit" (click)="addKindForm()"
                 [disabled]="!EditKind.form.valid">提交
         </button>
 
         <!--修改分类图标 -->
-        <button *ngIf="upKindImg" class="ml btn btn-info pull-left" type="submit" (click)="addKindForm()"
+        <button *ngIf="upKindImg" class="ml btn btn-info pull-left thc bg b" type="submit" (click)="addKindForm()"
                 [disabled]="!myImg">上传
         </button>
       </div>

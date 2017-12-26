@@ -31,10 +31,10 @@
 
   <div class="font15 mt-lg pl-lg text-primary">
     <!--<i class="icon-layers mr"></i>-->
-    <span class="cursor-p" (click)="queryChildKindList()">商品分类</span>
+    <span class="cursor-p thc font" (click)="queryChildKindList()">商品分类</span>
     <span *ngFor="let kindTit of childKindList">
-      <i class="fa fa-arrow-right mr ml"></i>
-      <font class="cursor-p" (click)="queryChildKindList(kindTit.id,kindTit.name,true)">{{kindTit.name}}</font>
+      <i class="fa fa-arrow-right mr ml thc font"></i>
+      <font class="cursor-p thc font" (click)="queryChildKindList(kindTit.id,kindTit.name,true)">{{kindTit.name}}</font>
     </span>
     <span *ngIf="childKindList.length>0" (click)="goBackMenu()" class="btn btn-default btn-xs ml">
         <i class="fa fa-level-up mr5"></i>
