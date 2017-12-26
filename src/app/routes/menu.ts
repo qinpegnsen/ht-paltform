@@ -226,6 +226,29 @@ const orders = {
       link: '/main/orders/cust'
     },
     {
+      text: '企业订单',
+      icon: 'fa fa-file-text-o',
+      alert: '▼',
+      submenu: [
+        {
+          text: '待发货',
+          link: '/main/store-order/store-pending'
+        },
+        {
+          text: '已发货',
+          link: '/main/store-order/store-received'
+        },
+        {
+          text: '已完成',
+          link: '/main/store-order/store-complete'
+        },
+        {
+          text: '已取消',
+          link: '/main/store-order/store-cancel'
+        }
+      ]
+    },
+    {
       text: '待发货',
       icon: 'fa fa-truck',
       link: '/main/orders/prepare'
