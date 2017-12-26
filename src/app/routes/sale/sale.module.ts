@@ -20,7 +20,8 @@ const problemcomplem: Routes = [
 ]
 const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
-  {path: 'enterprise', redirectTo: 'storeRefund', children: [
+  {path: 'enterprise', children: [
+    {path: '',redirectTo: 'storeRefund'},
     {path: 'storeRefundMan', component: StoreRefundComponent},
     {path: 'storeReturnMan', component: StoreReturnComponent}
   ]},
@@ -28,22 +29,22 @@ const routes: Routes = [
     {path: 'after-details', component: AfterDetailsComponent},
     {path: 'order-details', component: OrderDetailComponent}
   ]},
-  {path: 'refund-verify', component: RefundVerifyComponent, children: [
-    {path: 'after-details', component: AfterDetailsComponent},
-    {path: 'order-details', component: OrderDetailComponent}
-  ]},
+  // {path: 'refund-verify', component: RefundVerifyComponent, children: [
+  //   {path: 'after-details', component: AfterDetailsComponent},
+  //   {path: 'order-details', component: OrderDetailComponent}
+  // ]},
   {path: 'return-control', component: ReturnControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
     {path: 'order-details', component: OrderDetailComponent}
   ]},
-  {path: 'return-verify', component: ReturnVerifyComponent, children: [
-    {path: 'after-details', component: AfterDetailsComponent},
-    {path: 'order-details', component: OrderDetailComponent}
-  ]},
-  {path: 'inspect-goods', component: InspectGoodsComponent, children: [
-    {path: 'after-details', component: AfterDetailsComponent},
-    {path: 'order-details', component: OrderDetailComponent}
-  ]},
+  // {path: 'return-verify', component: ReturnVerifyComponent, children: [
+  //   {path: 'after-details', component: AfterDetailsComponent},
+  //   {path: 'order-details', component: OrderDetailComponent}
+  // ]},
+  // {path: 'inspect-goods', component: InspectGoodsComponent, children: [
+  //   {path: 'after-details', component: AfterDetailsComponent},
+  //   {path: 'order-details', component: OrderDetailComponent}
+  // ]},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 
 ];

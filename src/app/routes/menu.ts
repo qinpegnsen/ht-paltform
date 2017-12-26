@@ -328,22 +328,27 @@ const sale = {
         }
       ]
     },
-    // {
-    //   text: '企业',
-    //   icon: 'fa fa-retweet',
-    //   alert: '▼',
-    //   link: '/main/sale/enterprise',
-    //   submenu: [
-    //     {
-    //       text: '退款管理',
-    //       link: '/main/sale/enterprise/storeRefundMan'
-    //     },
-    //     {
-    //       text: '退款管理',
-    //       link: '/main/sale/enterprise/storeReturnMan'
-    //     }
-    //   ]
-    // }
+    {
+      text: '企业',
+      icon: 'fa fa-retweet',
+      alert: '▼',
+      link: '/main/sale/enterprise',
+      submenu: [
+        {
+          text: '退款管理',
+          link: '/main/sale/enterprise/storeRefundMan'
+        },
+        {
+          text: '退款管理',
+          link: '/main/sale/enterprise/storeReturnMan'
+        }
+      ]
+    },
+    /*{
+      text: '退货退款原因',
+      icon: 'icon-question',
+      link: '/main/sale/msg'
+    }*/
   ]
 };
 const statistics = {
