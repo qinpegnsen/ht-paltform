@@ -21,9 +21,15 @@ const problemcomplem: Routes = [
 const routes: Routes = [
   {path: '', redirectTo: 'refund-control'},
   {path: 'enterprise', children: [
-    {path: '',redirectTo: 'storeRefund'},
-    {path: 'storeRefundMan', component: StoreRefundComponent},
-    {path: 'storeReturnMan', component: StoreReturnComponent}
+    {path: '',redirectTo: 'storeRefundMan'},
+    {path: 'storeRefundMan', component: StoreRefundComponent, children: [
+      {path: 'after-details', component: AfterDetailsComponent},
+      {path: 'order-details', component: OrderDetailComponent}
+    ]},
+    {path: 'storeReturnMan', component: StoreReturnComponent, children: [
+      {path: 'after-details', component: AfterDetailsComponent},
+      {path: 'order-details', component: OrderDetailComponent}
+    ]}
   ]},
   {path: 'refund-control', component: RefundControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
