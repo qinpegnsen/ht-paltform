@@ -53,6 +53,7 @@ import { StrJsonPipe } from './pipe/str-json.pipe';
 import { GetWeekPipe } from './pipe/get-week.pipe';
 import { StrToNumberPipe } from './pipe/str-to-number.pipe';
 import { ToStringPipe } from './pipe/to-string.pipe';
+import {RouterGuardService} from "../core/routerGuard/router-guard.service";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -90,7 +91,8 @@ import { ToStringPipe } from './pipe/to-string.pipe';
   providers: [
     ColorsService,
     RzhtoolsService,
-    SubmitService
+    SubmitService,
+    RouterGuardService
   ],
   declarations: [
     FlotDirective,
