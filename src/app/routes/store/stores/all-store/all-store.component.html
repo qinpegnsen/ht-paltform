@@ -1,50 +1,49 @@
 <ng-container *ngIf="showList">
   <div [ngClass]="{panel:path =='storeAudit'}">
-    <!--查询start-->
-    <div class="panel mb">
-      <div class="panel-body p ng-scope mt">
-        <div class="tag-dib align-top">
-          <div class="search-group ml-xl mb align-top">
-            <span class="search-title">企业名称：</span>
-            <div class="search-main">
-              <input type="text" [(ngModel)]="query.epName"
-                     class="form-control border-b-grey"
-                     (change)="queryDatas(1)" placeholder="企业名称">
-            </div>
-          </div>
-          <div class="search-group ml-xl mb align-top">
-            <span class="search-title">法人姓名：</span>
-            <div class="search-main">
-              <input type="text" [(ngModel)]="query.legalPersonName" (change)="queryDatas(1)"
-                     class="form-control border-b-grey" placeholder="法人姓名">
-            </div>
-          </div>
-          <div class="tag-dib">
-            <div class="place-time clearfix mb ml-xl">
-              <span class="_title">创建时间：</span>
-              <div class="_picker">
-                <div class="input-group">
-                  <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" [(ngModel)]="dataPickerTime"
-                         (bsValueChange)="getTimes($event)" #dpr="bsDaterangepicker" readonly>
-                  <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
-                </div>
-              </div>
-            </div>
-            <button type="button" title="搜索" (click)="queryDatas()"
-                    class="btn thc btn-thc icon-magnifier align-top ml">
-            </button>
-            <button type="button" title="重置查询" (click)="resetQuery()"
-                    class="btn btn-green fa fa-refresh align-top ml">
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!--查询end-->
 
     <!--列表-->
     <div class="panel-body">
+      <!--查询start-->
+        <div class="ng-scope ">
+          <div class="tag-dib align-top">
+            <div class="search-group ml-xl mb align-top">
+              <span class="search-title">企业名称：</span>
+              <div class="search-main">
+                <input type="text" [(ngModel)]="query.epName"
+                       class="form-control border-b-grey"
+                       (change)="queryDatas(1)" placeholder="企业名称">
+              </div>
+            </div>
+            <div class="search-group ml-xl mb align-top">
+              <span class="search-title">法人姓名：</span>
+              <div class="search-main">
+                <input type="text" [(ngModel)]="query.legalPersonName" (change)="queryDatas(1)"
+                       class="form-control border-b-grey" placeholder="法人姓名">
+              </div>
+            </div>
+            <div class="tag-dib">
+              <div class="place-time clearfix mb ml-xl">
+                <span class="_title">创建时间：</span>
+                <div class="_picker">
+                  <div class="input-group">
+                    <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" [(ngModel)]="dataPickerTime"
+                           (bsValueChange)="getTimes($event)" #dpr="bsDaterangepicker" readonly>
+                    <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+                  </div>
+                </div>
+              </div>
+              <button type="button" title="搜索" (click)="queryDatas()"
+                      class="btn thc btn-thc icon-magnifier align-top ml">
+              </button>
+              <button type="button" title="重置查询" (click)="resetQuery()"
+                      class="btn btn-green fa fa-refresh align-top ml">
+              </button>
+            </div>
+          </div>
+
+        </div>
+      <!--查询end-->
+
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="storeList"
              (pageChange)="queryDatas(1,$event)">
         <thead>

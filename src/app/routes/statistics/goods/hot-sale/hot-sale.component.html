@@ -8,8 +8,9 @@
     <li>图表展示了符合搜索条件订单的下单总金额和下单量排名前50位的商品</li>
   </ul>
 </div>
-<div class="panel panel-default">
-  <div class="w98 m-auto h50">
+<!--图表-->
+<div class="panel">
+  <div class="w98 m-auto h50 pt-lg mb-lg">
         <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
           <i class="icon icon-magnifier"></i>
         </span>
@@ -50,10 +51,6 @@
       <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
     </select>
   </div>
-
-</div>
-<!--图表-->
-<div class="panel">
   <!--图表切换-->
   <div class=" panel w100 m0">
     <ul class="clearfix p0">

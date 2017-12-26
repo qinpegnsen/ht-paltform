@@ -1,8 +1,10 @@
 <div class="content-heading mb-lg">
   <span class="thc font">会员管理</span>
 </div>
-<div class="panel mb">
-  <div class="panel-body p ng-scope" ng-if="search">
+
+<div class="panel">
+  <div>
+    <div class="p ng-scope" ng-if="search">
       <div class="col-md-12">
         <div class="form-group col-md-3">
           <div class="pl0">
@@ -45,9 +47,8 @@
           <i class="icon-magnifier fa-fw"></i>
         </button>
       </div>
+    </div>
   </div>
-</div>
-<div class="panel panel-default">
   <div class="panel-body">
   <table class="table table-striped" #memberList="rzhDataTable" [rzhData]="memberListdata"
          (pageChange)="queryMemberList(1,$event)">

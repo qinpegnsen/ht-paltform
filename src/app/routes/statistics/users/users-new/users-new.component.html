@@ -10,58 +10,56 @@
       <li>统计表展示了时间段内新增会员数值和与前一时间段的同比数值，点击每条记录后的“查看”，了解新增会员的详细信息</li>
     </ul>
   </div>
-  <div class="panel panel-default">
 
+  <!--图表切换-->
+  <div class="panel m-auto">
 
-
-    <div class="w98 m-auto h50">
+    <div class="">
+      <div class="w98 m-auto h50 pt-lg">
       <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
         <i class="icon icon-magnifier"></i>
       </span>
-      <div class="pull-right">
-        <div class="col-xs-3 form-group" style="width: 400px">
+        <div class="pull-right">
+          <div class="col-xs-3 form-group" style="width: 400px">
+            <div *ngIf="showType.MONTH">
+              <select [(ngModel)]="select.year" class="pull-left w43 form-control d-play" style="margin-right: 20px">
+                <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+              </select>
+              <select [(ngModel)]="select.month" class="w43 form-control" >
+                <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+              </select>
+            </div>
 
-          <div *ngIf="showType.MONTH">
-            <select [(ngModel)]="select.year" class="pull-left w43 form-control d-play" style="margin-right: 20px">
-              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
-            </select>
-            <select [(ngModel)]="select.month" class="w43 form-control" >
-              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
-            </select>
-          </div>
+            <div *ngIf="showType.WEEK" >
+              <select [(ngModel)]="select.year" class="form-control w22 pull-left mr5" >
+                <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
+              </select>
+              <select [(ngModel)]="select.month" (change)="getWeekListByMonth()"  class="form-control w21 pull-left mr5">
+                <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
+              </select>
+              <select [(ngModel)]="select.week" class="form-control w53">
+                <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
+              </select>
+            </div>
 
-          <div *ngIf="showType.WEEK" >
-            <select [(ngModel)]="select.year" class="form-control w22 pull-left mr5" >
-              <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
-            </select>
-            <select [(ngModel)]="select.month" (change)="getWeekListByMonth()"  class="form-control w21 pull-left mr5">
-              <option *ngFor="let info of month" value="{{info}}">{{info}}</option>
-            </select>
-            <select [(ngModel)]="select.week" class="form-control w53">
-              <option *ngFor="let info of weekForMonth" value="{{info}}">{{info}}</option>
-            </select>
-          </div>
-
-          <div *ngIf="showType.DAY" style="margin-right: 60px">
-            <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel"  (change)="test()"
-                   [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
-            <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35"  (click)="dpr.show()"></span>
+            <div *ngIf="showType.DAY" style="margin-right: 60px">
+              <input type="text" class="form-control" bsDatepicker [(ngModel)]="datepickerModel"  (change)="test()"
+                     [bsConfig]="bsConfig" #dpr="bsDatepicker"/>
+              <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35"  (click)="dpr.show()"></span>
+            </div>
           </div>
         </div>
+        <select class="sel form-control pull-right"  name="queryType"
+                [(ngModel)]="queryType" (change)="search()">
+          <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
+        </select>
       </div>
-      <select class="sel form-control pull-right"  name="queryType"
-              [(ngModel)]="queryType" (change)="search()">
-        <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
-      </select>
+
     </div>
-
-  </div>
-  <!--图表切换-->
-  <div class="panel m-auto">
-    <div echarts [options]="optionPrev" class="demo-chart w100"></div>
+    <div echarts [options]="optionPrev" class="demo-chart w100 mt-lg"></div>
   </div>
 
-  <div class="panel panel-default mt20">
+  <div class="panel mt20">
   <div class="table-title w100 h50 font18 thc ts statics-font">新增会员统计表</div>
   <div class="panel-body">
     <table class="table table-striped">

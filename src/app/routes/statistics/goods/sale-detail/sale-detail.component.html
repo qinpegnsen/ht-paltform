@@ -8,8 +8,9 @@
     <li>列表展示了符合搜索条件的订单中所有商品数据，及其时间段内的下单总金额、下单量、商品销量</li>
   </ul>
 </div>
-<div class="panel panel-default">
-  <div class="w98 m-auto h50">
+<!--统计表-->
+<div class="panel panel-default mt20">
+  <div class="w98 m-auto h50 pt-lg mb-lg">
       <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
         <i class="icon icon-magnifier"></i>
       </span>
@@ -49,12 +50,6 @@
       <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
     </select>
   </div>
-
-</div>
-
-
-<!--统计表-->
-<div class="panel panel-default mt20">
     <div class="table-title thc ts statics-font">商品销售统计表</div>
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAll($event)">

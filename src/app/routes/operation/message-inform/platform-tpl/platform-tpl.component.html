@@ -2,7 +2,7 @@
   <span class="thc font">平台消息模板</span>
   <app-buttons class="pull-right" [config]="addbutton" (click)="addTpl()"></app-buttons>
 </div>
-<div class="panel mb panel-default">
+<div class="panel mb">
   <div class="panel-body">
     <table class="table table-striped" #platformTplList="rzhDataTable" [rzhData]="platformTplData"
            (pageChange)="queryPlatformTpl(1,$event)">

@@ -3,7 +3,7 @@
   <app-buttons class="pull-right" [config]="addbuttons" routerLink="adddata"
                [queryParams]="{linkType:'addCount',curPage:data.curPage}"></app-buttons>
 </div>
-<div class="panel panel-default">
+<div class="panel">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
            (pageChange)="qeuryAllService(1,$event)">

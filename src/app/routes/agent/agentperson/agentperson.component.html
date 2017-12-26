@@ -2,8 +2,10 @@
   代理商管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="appAgent" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
-<div class="panel mb" *ngIf="this.flag">
-  <div class="panel-body p ng-scope">
+
+<div class="panel" *ngIf="this.flag">
+  <div *ngIf="this.flag">
+  <div class="p ng-scope">
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
         <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="agentName"
@@ -35,7 +37,6 @@
 
   </div>
 </div>
-<div class="panel panel-default" *ngIf="this.flag">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
       <thead>

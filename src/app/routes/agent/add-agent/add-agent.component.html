@@ -2,7 +2,7 @@
 <div class="col-lg-10" *ngIf="linkType=='addArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
-    <div class="panel-default">
+    <div class="">
       <div class="panel-body">
         <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden"/>
         <fieldset>
@@ -126,8 +126,8 @@
 <div class="col-lg-10" *ngIf="linkType=='updataArticle'">
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
     <!-- START panel-->
-    <div class="panel-default">
-      <div class="panel-default">
+    <div class="">
+      <div class="">
         <div class="panel-body">
           <input class="form-control" required [(ngModel)]="agentCode" name="agentCode" type="hidden">
           <input class="form-control" required [(ngModel)]="staff.areaCode" name="areaCode" type="hidden">

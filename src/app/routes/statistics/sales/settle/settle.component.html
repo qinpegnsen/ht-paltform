@@ -2,28 +2,13 @@
   结算统计
 </div>
 <!--操作提示-->
-<div class="panel mb p w98 m-auto ts thc user-top">
+<div class="panel mb p m-auto ts thc user-top">
   <p class="font18">操作提示</p>
   <ul>
     <li>统计数据色块展示了时间段内结算总数据</li>
     <li>统计表展示了时间段内店铺结算的销售和费用相关数据</li>
   </ul>
 </div>
-<div class="panel panel-default">
-
-  <div class="w98 m-auto h50">
-    <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
-        <i class="icon icon-magnifier"></i>
-      </span>
-    <div class="w90" >
-      <div class="col-xs-3 form-group pull-right" >
-         <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" type="daterange" [(ngModel)]="dates" >
-         <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!--图文结合-->
   <div class="row r3">
     <div class="col-md-4">
@@ -123,7 +108,18 @@
   </div>
 
 <!--统计表-->
-<div class="panel panel-default">
+<div class="panel">
+  <div class="w98 m-auto h50 pt-lg mb-lg">
+    <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
+        <i class="icon icon-magnifier"></i>
+      </span>
+  <div class="w90" >
+    <div class="col-xs-3 form-group pull-right" >
+      <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" type="daterange" [(ngModel)]="dates" >
+      <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+    </div>
+  </div>
+</div>
   <div class="table-title thc ts statics-font">销售收入统计表</div>
   <div class="panel-body">
     <table class="table table-striped">
