@@ -115,9 +115,9 @@
                     (click)="showSkuList(goods.goodsBaseCode,goods.goodsName)">查看所有规格
             </button>
           </td>
-          <td class="font14 main-red">{{goods.minPrice == goods.maxPrice? '¥ '+goods.maxPrice:'¥ '+goods.minPrice+'∽¥ '+
-            goods.maxPrice
-            }}
+          <td class="font14 main-red">
+            {{goods.minPrice == goods.maxPrice? '¥ '+(goods.maxPrice | number:'1.2-2'):
+            '¥ '+(goods.minPrice | number:'1.2-2')+' ∽ ¥ '+(goods.maxPrice | number:'1.2-2')}}
           </td>
           <td>{{goods.createTime}}</td>
           <td>
