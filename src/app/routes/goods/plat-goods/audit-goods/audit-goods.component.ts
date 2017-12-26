@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {PublishComponent} from "../publish/publish.component";
 import {isNullOrUndefined, isUndefined} from "util";
-import {SubmitService} from "../../../core/forms/submit.service";
-import {GoodsService} from "../goods.service";
-import {RzhtoolsService} from "../../../core/services/rzhtools.service";
-import {MaskService} from "../../../core/services/mask.service";
+import {SubmitService} from "../../../../core/forms/submit.service";
+import {GoodsService} from "../../goods.service";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {MaskService} from "../../../../core/services/mask.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
 declare var $: any;

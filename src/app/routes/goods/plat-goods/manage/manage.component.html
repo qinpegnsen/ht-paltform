@@ -26,15 +26,6 @@
             </select>
           </div>
         </div>
-        <div class="search-group ml-xl mb">
-          <span class="search-title">自营：</span>
-          <div class="search-main">
-            <select class="form-control" name="isOwnPlat" [(ngModel)]="query.isOwnPlat" (change)="queryDatas()">
-              <option value="">全部</option>
-              <option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>
-            </select>
-          </div>
-        </div>
         <div class="search-group ml-xl mb clearfix">
           <span class="search-title">分类：</span>
           <div class="search-main">

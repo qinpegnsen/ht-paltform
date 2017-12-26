@@ -57,24 +57,23 @@
   color: #bbb;
 }
 
-.base-attr{
+.base-attr {
   font-size: 12px;
   display: table;
-  .base-attr-list{
+  .base-attr-list {
     display: table-cell;
     padding-bottom: 8px;
   }
-  .pro-name{
+  .pro-name {
     display: table-cell;
     text-align: right;
     font-weight: normal;
     line-height: 16px;
   }
-  .form-control{
+  .form-control {
     font-size: 12px;
   }
 }
-
 
 .specs h5 {
   line-height: 24px;
@@ -119,7 +118,6 @@
   font-size: 12px;
 }
 
-
 .specs input {
   font-size: 12px;
   padding: 0 10px;
@@ -138,12 +136,9 @@
   border-bottom-right-radius: 0;
   outline: 0 none;
 }
-.sku-table .dropdown-menu .set{
-  vertical-align: top;
-}
-.sku-table .dropdown-menu .form-control{
+
+.sku-table .dropdown-menu .form-control {
   width: 60px;
-  display: inline-block;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
@@ -158,9 +153,11 @@
   border: solid 1px #BCE8F1;
   box-shadow: 3px 3px 0 rgba(153, 153, 153, 0.15);
 }
-.sku-table .s-menu{
+
+.sku-table .s-menu {
   font-weight: bold;
 }
+
 .add-on {
   font-size: 12px;
   font-style: normal;
@@ -186,10 +183,12 @@
   position: relative;
   text-align: center;
 }
-.sku-table .dropdown-menu{
+
+.sku-table .dropdown-menu {
   min-width: 120px;
   left: 20%;
 }
+
 .sku-table td {
   white-space: nowrap;
   height: 30px;
@@ -198,7 +197,8 @@
   text-align: center;
   font-size: 0; // 解决行内块之间间隙的问题
 }
-.sku-table td p{
+
+.sku-table td p {
   font-size: 12px;
   margin-bottom: 0;
 }
@@ -263,18 +263,20 @@
 .goodspics .close {
   font-size: 24px;
 }
-.up-success{
+
+.up-success {
   position: absolute;
   left: 0;
   top: 0;
-  right:0;
+  right: 0;
   bottom: 0;
-  background-color: rgba(255,255,255,.5);
+  background-color: rgba(255, 255, 255, .5);
   color: #37bc9b;
   font-size: 30px;
   z-index: 8;
   text-align: center;
 }
+
 .goodspics .color-value {
   float: left;
   width: 120px;
@@ -368,11 +370,15 @@
 
 .logistics .rules-list {
   height: 30px;
-  width: 200px;
+  width: 160px;
+}
+
+.summernote img {
+  max-width: 100%;
 }
 
 //移动端描述
-.app-box{
+.app-box {
   background-color: #777;
   padding: 1px;
   position: relative;
@@ -385,70 +391,67 @@
   right: 20px;
   bottom: 10px;
   margin-left: 170px;
-}
-
-.explain button {
-  position: absolute;
-  top: 0;
-}
-
-.explain .explain-body {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .explain dt {
   font-weight: bold;
 }
-.explain dl, .explain dt, .explain dd{
+
+.explain dl, .explain dt, .explain dd {
   border: 0;
   color: #fff;
   background-color: transparent;
   text-align: left;
   padding: 0;
-  line-height:24px;
+  line-height: 24px;
 }
-.app-wrap{
+
+.app-wrap {
   width: 320px;
   background-color: #fff;
   margin: auto;
 }
-.app-control{
+
+.app-control {
   width: 100%;
   height: 460px;
   overflow: auto;
 }
-.app-control .mobile-edit-area{
+
+.app-control .mobile-edit-area {
   background-color: #f5f5f5;
 }
-.app-control .text-tip{
-  line-height:20px;
+
+.app-control .text-tip {
+  line-height: 20px;
   margin: 0;
   padding: 5px 10px;
   color: #333;
 }
-.app-control .textarea{
+
+.app-control .textarea {
   width: 98%;
   margin: auto;
   resize: none;
 }
-.app-control .button{
+
+.app-control .button {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: center;
 }
-.app-control .app-img-box{
+
+.app-control .app-img-box {
   position: relative;
 }
-.app-control .app-img-box .text{
+
+.app-control .app-img-box .text {
   font-size: 14px;
   padding: 0 5px;
 }
-.app-control .app-img-box ._edit{
+
+.app-control .app-img-box ._edit {
   position: absolute;
   top: 0;
   left: 0;
@@ -456,21 +459,24 @@
   bottom: 0;
   z-index: 2;
   border: 1px dashed #f5f5f5;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, .5);
 }
-.app-control .app-img-box .tools{
+
+.app-control .app-img-box .tools {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.app-control .app-img-box .tools li{
+
+.app-control .app-img-box .tools li {
   width: 40px;
   height: 24px;
   text-align: center;
   line-height: 24px;
   display: inline-block;
 }
-.app-add{
+
+.app-add {
   width: 100%;
   list-style: none;
   text-align: center;
@@ -479,37 +485,44 @@
   padding: 0;
   margin: 0;
 }
-.app-add li{
+
+.app-add li {
   padding: 5px;
   margin: 0;
 }
-.app-add li:active{
+
+.app-add li:active {
   background-color: #f5f5f5;
 }
-.app-box .file-upload{
-  font-weight:normal;
+
+.app-box .file-upload {
+  font-weight: normal;
 }
 
-.tpl-box{
+.tpl-box {
   border: 1px solid #FBEED5;
   background-color: #FCF8E3;
 }
 
-.one-row{
+.one-row {
   height: 20px;
   margin: 5px 0;
-  line-height:20px;
+  line-height: 20px;
   overflow: hidden;
 }
-.tpl-box .tpl-list li{
-  border-bottom:1px dashed #ccc;
+
+.tpl-box .tpl-list li {
+  border-bottom: 1px dashed #ccc;
 }
-.tpl-box .tpl-list li:last-child{
+
+.tpl-box .tpl-list li:last-child {
   border: none;
 }
 
 // 重置input框的placeholder文本颜色
-input::-webkit-input-placeholder{color: #b3b3b3;}
+input::-webkit-input-placeholder {
+  color: #b3b3b3;
+}
 
 .c-checkbox input[type=checkbox]:disabled + span,
 .c-checkbox input[type=radio]:disabled + span,
@@ -519,45 +532,52 @@ input::-webkit-input-placeholder{color: #b3b3b3;}
   background-color: #fff !important;
   opacity: 0.8;
 }
+
 .c-checkbox input[type=checkbox]:checked:disabled + span,
-.c-checkbox input[type=radio]:checked:disabled + span{
+.c-checkbox input[type=radio]:checked:disabled + span {
   border-color: #5d9cec !important;
   background-color: #5d9cec !important;
   opacity: 0.8;
 }
+
 .c-radio input[type=checkbox]:checked:disabled + span,
 .c-radio input[type=radio]:checked:disabled + span {
   border-color: #5d9cec !important;
   background-color: #fff !important;
   opacity: 0.8;
 }
+
 .c-checkbox input[type=radio]:checked:disabled + span:before,
 .c-radio input[type=radio]:checked:disabled + span:before {
   color: #5d9cec;
   opacity: 0.8;
- }
-.c-radio.c-radio-nofont input[type=radio]:disabled + span:before{
+}
+
+.c-radio.c-radio-nofont input[type=radio]:disabled + span:before {
   background-color: #5d9cec
 }
+
 .form-control[disabled], fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
+
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   background-color: #fff;
   opacity: 1;
 }
 
-.goods-audit{
+.goods-audit {
   border-color: #37bc9b;
 }
-.goods-audit .goods-audit-title{
+
+.goods-audit .goods-audit-title {
   background-color: #37bc9b;
   color: #fff;
   font-size: 18px;
   line-height: 30px;
   padding: 5px 0 5px 15px;
 }
-.goods-audit .bdr{
+
+.goods-audit .bdr {
   border-right: 1px dashed #eee;
 }
-

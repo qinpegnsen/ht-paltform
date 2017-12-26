@@ -1,57 +1,50 @@
-<div [hidden]="!showList">
-  <div class="content-heading mb-lg thc font">
-    商品审核
-  </div>
+<div *ngIf="showList">
+  <!--标题-->
+  <div class="content-heading mb-lg thc font">商品审核</div>
+
   <div class="panel panel-danger">
-    <div>
-      <div class="p ng-scope">
-        <div class="search-group ml-lg">
-          <span class="search-title">商品状态：</span>
-          <div class="search-main">
-            <select class="form-control" name="goodsAudit" [(ngModel)]="auditQuery.state" (change)="queryDatas()">
-              <option value="">全部</option>
-              <option *ngFor="let item of goodsState" [value]="item.key">{{item.val}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="search-group ml-lg clearfix">
-          <span class="search-title">分类：</span>
-          <div class="search-main">
-            <app-get-kind (myData)="getKind($event)"></app-get-kind>
-          </div>
-        </div>
-        <div class="search-group ml-lg">
-          <span class="search-title">自营：</span>
-          <div class="search-main">
-            <select class="form-control" name="isOwnPlat" [(ngModel)]="auditQuery.isOwnPlat" (change)="queryDatas()">
-              <option value="">全部</option>
-              <option *ngFor="let item of isOwnPlats" [value]="item.key">{{item.val}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="tag-dib align-top">
-          <div class="search-group ml-lg align-top">
-            <span class="search-title">商品名：</span>
-            <div class="search-main">
-              <input type="text" [(ngModel)]="auditQuery.goodsName"
-                     class="form-control border-b-grey"
-                     (change)="queryDatas()" placeholder="商品名">
-            </div>
-          </div>
-          <div class="search-group ml-lg align-top">
-            <span class="search-title">品牌：</span>
-            <div class="search-main">
-              <input type="text" [(ngModel)]="auditQuery.brandName"
-                     class="form-control border-b-grey ng-pristine ng-valid ng-touched" placeholder="品牌名称">
-            </div>
-          </div>
-          <button type="button" title="搜索" (click)="queryDatas()"
-                  class="btn thc btn-thc align-top ml">
-            <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
-          </button>
+    <!--查询 start-->
+    <div class="p">
+      <div class="search-group ml-lg mb">
+        <span class="search-title">商品状态：</span>
+        <div class="search-main">
+          <select class="form-control" name="goodsAudit" [(ngModel)]="auditQuery.state" (change)="queryDatas()">
+            <option value="">全部</option>
+            <option *ngFor="let item of goodsState" [value]="item.key">{{item.val}}</option>
+          </select>
         </div>
       </div>
+      <div class="search-group ml-lg mb">
+        <span class="search-title">分类：</span>
+        <div class="search-main">
+          <app-get-kind (myData)="getKind($event)"></app-get-kind>
+        </div>
+      </div>
+      <div class="tag-dib align-top">
+        <div class="search-group ml-lg align-top">
+          <span class="search-title">商品名：</span>
+          <div class="search-main">
+            <input type="text" [(ngModel)]="auditQuery.goodsName"
+                   class="form-control"
+                   (change)="queryDatas()" placeholder="商品名">
+          </div>
+        </div>
+        <div class="search-group ml-lg align-top">
+          <span class="search-title">品牌：</span>
+          <div class="search-main">
+            <input type="text" [(ngModel)]="auditQuery.brandName"
+                   class="form-control" placeholder="品牌名称">
+          </div>
+        </div>
+        <button type="button" title="搜索" (click)="queryDatas()"
+                class="btn thc btn-thc align-top ml">
+          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+        </button>
+      </div>
     </div>
+    <!--查询 end-->
+
+    <!--列表 start-->
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
              (pageChange)="queryDatas(1,$event)">
@@ -151,12 +144,14 @@
         </tfoot>
       </table>
     </div>
+    <!--列表 end-->
   </div>
+
+  <!--查看商品所有规格子组件-->
+  <app-sku-goods [curCode]="curBaseCode" [curName]="curName" [page]="goodsList.curPage"
+                 (looked)="getSkuData($event)"></app-sku-goods>
 </div>
 
 <!--路由嵌套 begin-->
 <router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->
-
-<app-sku-goods [curCode]="curBaseCode" [curName]="curName" [page]="goodsList.curPage"
-               (looked)="getSkuData($event)"></app-sku-goods>

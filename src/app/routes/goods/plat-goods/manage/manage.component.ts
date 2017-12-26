@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {SubmitService} from "../../../core/forms/submit.service";
+import {SubmitService} from "../../../../core/forms/submit.service";
 import {Page} from "app/core/page/page";
 import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
-import {GoodsService} from "../goods.service";
-import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {GoodsService} from "../../goods.service";
+import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -24,7 +24,7 @@ export class ManageComponent implements OnInit {
     goodsName: '',
     brandName: '',
     state: '',
-    isOwnPlat: '',
+    isOwnPlat: 'Y',
     curPage: 1,
     pageSize: 10,
     sortColumns: '',
@@ -33,7 +33,6 @@ export class ManageComponent implements OnInit {
   public kindList;// 分类列表
   public goodsAudits: any;  // 商品审核状态列表
   public goodsState: any;  // 商品状态列表
-  public isOwnPlats: any;  //是否自营列表
   public curBaseCode: string;  // 当前商品基本编号
   public curName: string;    // 当前商品名称
 
@@ -49,7 +48,6 @@ export class ManageComponent implements OnInit {
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表
-    me.isOwnPlats = this.tools.getEnumDataList('1001');  // 店铺是否自营
 
     me.addButton = {
       type: 'add-thc',
