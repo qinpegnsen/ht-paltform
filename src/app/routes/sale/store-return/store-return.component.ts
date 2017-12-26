@@ -29,6 +29,7 @@ export class StoreReturnComponent implements OnInit {
     phone: null,
     ordno: null,
     searchType: 'afterNo',
+    isPlatShop:'N'
   };
   constructor(public submit: SubmitService,
               public router: Router,
@@ -99,6 +100,7 @@ export class StoreReturnComponent implements OnInit {
     this.search = {};
     this.search.searchType='afterNo';
     this.search.returnType='RETURN';
+    this.search.isPlatShop='N';
     this.queryAllService();
   }
 

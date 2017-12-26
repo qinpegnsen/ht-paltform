@@ -29,6 +29,7 @@ export class ReturnControlComponent implements OnInit {
     phone: null,
     ordno: null,
     searchType: 'afterNo',
+    isPlatShop:'Y'
   };
   constructor(public submit: SubmitService,
               public router: Router,
@@ -99,6 +100,7 @@ export class ReturnControlComponent implements OnInit {
     this.search = {};
     this.search.searchType='afterNo';
     this.search.returnType='RETURN';
+    this.search.isPlatShop='Y';
     this.queryAllService();
   }
 

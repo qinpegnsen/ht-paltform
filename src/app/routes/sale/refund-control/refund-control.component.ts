@@ -27,6 +27,7 @@ export class RefundControlComponent implements OnInit {
     phone: null,
     ordno: null,
     searchType: 'afterNo',
+    isPlatShop:'Y'
   };
 
   constructor(public submit: SubmitService,
@@ -97,6 +98,7 @@ export class RefundControlComponent implements OnInit {
     this.search = {};
     this.search.searchType='afterNo';
     this.search.returnType='REFUND';
+    this.search.isPlatShop='Y';
     this.queryAllService();
   }
 

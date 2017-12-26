@@ -362,7 +362,7 @@ const sale = {
           link: '/main/sale/enterprise/storeRefundMan'
         },
         {
-          text: '退款管理',
+          text: '退货管理',
           link: '/main/sale/enterprise/storeReturnMan'
         }
       ]
