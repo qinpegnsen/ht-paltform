@@ -49,33 +49,48 @@
 <!--方块统计 end-->
 
 <!--企业投资记录表 start-->
-<div class="panel mb panel-default">
+<div class="panel mb">
   <div class="table-title w100 h50 font18 thc ts statics-font">奖池流水表</div>
   <div class="form-group mb0 ">
     <div class="pull-right text-center mt-lg mr6">
         <span class="ng-scope">
           <button type="button" title="搜索" id="toSearch" (click)="qeuryPushOrder(1)"
                   class="btn thc btn-thc bar-h3-btn mr ng-scope">
-          <em class="icon-magnifier fa-fw"></em>
+          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
           </button>
         </span>
     </div>
-    <div class="col-xs-2 pull-right mt-lg">
-      <input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的店铺编码">
+    <!--to do-->
+    <!--<button type="button" title="重置时间" (click)="clearTime()"-->
+            <!--class="btn thc btn-thc pull-right bar-h3-btn mr ng-scope mt-lg mr20">-->
+      <!--<em class="fa fa-refresh"></em>-->
+    <!--</button>-->
+    <!--<div class="col-xs-2 pull-right mt-lg mr40">-->
+      <!--<input type="text" class="form-control" bsDaterangepicker [(ngModel)]="queryDateTime" placeholder="选择查询时间"-->
+             <!--[bsConfig]="bsConfig" #dpr="bsDaterangepicker" readonly/>-->
+      <!--<span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>-->
+    <!--</div>-->
+
+    <select class="sel form-control pull-right mt-lg mr-sm" name="queryType"
+            [(ngModel)]="subject">
+      <option value="">全部</option>
+      <option *ngFor="let item of querySubjects" [value]="item.key">{{item.val}}</option>
+    </select>
+    <div class="pull-right mt-lg mr-sm myHeight">
+      会计科目：
     </div>
-    <div class="col-xs-2 pull-right mt-lg">
-      <input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-             (change)="qeuryPushOrder(1)" maxlength="50" placeholder="请输入要查询的企业编码">
-    </div>
-    <button type="button" title="重置时间" (click)="clearTime()"
-            class="btn thc btn-thc pull-right bar-h3-btn mr ng-scope mt-lg mr20">
-      <em class="fa fa-refresh"></em>
-    </button>
-    <div class="col-xs-2 pull-right mt-lg mr40">
-      <input type="text" class="form-control" bsDaterangepicker [(ngModel)]="queryDateTime" placeholder="选择查询时间"
-             [bsConfig]="bsConfig" #dpr="bsDaterangepicker" readonly/>
-      <span class="statistic-btn input-group-addon fa fa-calendar spanbtn h35" (click)="dpr.show()"></span>
+    <ng-select [allowClear]="true"
+               [items]="items"
+               [disabled]="disabled"
+               (data)="refreshValue($event)"
+               (selected)="selected($event)"
+               (removed)="removed($event)"
+               (typed)="typed($event)"
+               class="col-xs-2 pull-right mt-lg mt-lg mr-lg p0"
+               placeholder="根据企业名称查询">
+    </ng-select>
+    <div class="pull-right mt-lg myHeight">
+      企业名称：
     </div>
   </div>
   <div class="panel-body">
@@ -86,19 +101,22 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
+        <th class="w15 text-left">
+          <rzhDefaultSorter by="id">企业名称</rzhDefaultSorter>
+        </th>
         <th class="w10 text-left">
           <rzhDefaultSorter by="id">企业编码</rzhDefaultSorter>
         </th>
         <th class="w10 text-left">
           <rzhDefaultSorter by="name">店铺编码</rzhDefaultSorter>
         </th>
-        <th class="w10 text-left">
+        <th class="w15 text-left">
           <rzhDefaultSorter by="id">会计科目</rzhDefaultSorter>
         </th>
         <th class="w10 text-left">
           <rzhDefaultSorter by="id">金额（元）</rzhDefaultSorter>
         </th>
-        <th class="w15 text-left">
+        <th class="w20 text-left">
           <rzhDefaultSorter by="time">备注</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
@@ -109,6 +127,7 @@
       <tbody>
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
+        <td class="text-left">{{count.epName}}</td>
         <td class="text-left">{{count.epCode}}</td>
         <td class="text-left">{{count.storeCode}}</td>
         <td class="text-left">{{count.subjectName}}</td>
@@ -124,7 +143,7 @@
       </tbody>
       <tfoot>
       <tr>
-        <td colspan="7">
+        <td colspan="8">
           <div class="col-sm-5">
             <div class="text-muted"><strong>第 {{redPackData.genStartRow()}} 至 {{redPackData.genEndRow()}} 条，共
               {{redPackData.totalRow}}
@@ -143,7 +162,7 @@
 </div>
 <!--企业投资记录表 end-->
 
-<div class="order panel mb panel-default">
+<div class="order panel mb">
   <div class="table-title w100 h50 font18 thc ts statics-font">
     <div>投资和点击率占比统计图</div>
   </div>

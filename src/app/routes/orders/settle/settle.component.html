@@ -1,14 +1,15 @@
 <div class="content-heading mb-lg thc font">
   结算明细
 </div>
+<div class="panel mb p ts thc">
+  <p class="font18">说明</p>
+  <ul>
+    <li>入账 =（订单总额 - 订单退款）× {{rate}}%</li>
+    <li>结算 =（订单总额 - 订单退款）×（1-{{rate}}%）= 订单总额 - 订单退款 - 入账</li>
+  </ul>
+</div>
 <div class="panel panel-danger">
-  <div class="panel mb p ts-bg thc">
-    <p class="font18">说明</p>
-    <ul>
-      <li>入账 =（订单总额 - 订单退款）× {{rate}}%</li>
-      <li>结算 =（订单总额 - 订单退款）×（1-{{rate}}%）= 订单总额 - 订单退款 - 入账</li>
-    </ul>
-  </div>
+
   <div class="panel-body">
     <!--查询 start-->
     <div class="place-time clearfix mb">
@@ -47,7 +48,7 @@
     </div>
     <button type="button" title="搜索" (click)="queryDatas()"
             class="btn thc btn-thc align-top ml">
-      <em class="icon-magnifier fa-fw"></em>
+      <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
     </button>
     <!--查询 end-->
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"

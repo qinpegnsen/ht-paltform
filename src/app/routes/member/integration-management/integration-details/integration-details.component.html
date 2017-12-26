@@ -2,48 +2,40 @@
   重消币明细
 </div>
 <div class="panel mb">
-  <div class="panel-body p ng-scope">
-    <div class="col-md-12">
-      <div class="form-group col-md-2">
-        <div class="pl0">
-          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTrueName"
-                 (change)="qeuryAllService(1)" maxlength="50" placeholder="请输入要查询的会员真实姓名">
-        </div>
-      </div>
-      <div class="form-group col-md-2">
-        <div class="pl0">
-          <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                 [(ngModel)]="phone" (change)="qeuryAllService(1)" placeholder="请输入要查询的会员的手机号">
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="search-group-time ml-xl mb">
-          <span class="coin-search-title pull-left">时间范围：</span>
-          <div class="pull-left w75">
-            <input placeholder="" type="text" class="form-control" bsDaterangepicker #dpr="bsDaterangepicker"
-                   [bsConfig]="bsConfig" [(ngModel)]="myTime" readonly >
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="search-group ml-xl mb">
-          <span class="search-title">消费类型：</span>
+    <div class="ng-scope pt-lg">
+        <div class="search-group">
+          <span class="search-title font12">会员真实姓名：</span>
           <div class="search-main">
-            <select class="form-control" name="authState" [(ngModel)]="authState" (change)="qeuryAllService(1)">
-              <option value="">全部</option>
-              <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
-            </select>
+            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTrueName" (change)="qeuryAllService(1)" maxlength="50" placeholder="请输入要查询的会员真实姓名">
           </div>
         </div>
+        <div class="search-group">
+          <span class="search-title font12">会员手机号：</span>
+          <div class="search-main">
+            <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                   [(ngModel)]="phone" (change)="qeuryAllService(1)" placeholder="请输入要查询的会员的手机号">
+          </div>
+        </div>
+        <div class="search-group">
+            <span class="search-title">时间范围：</span>
+            <div class="search-main">
+              <input placeholder="" type="text" class="form-control" bsDaterangepicker #dpr="bsDaterangepicker"
+              [bsConfig]="bsConfig" [(ngModel)]="myTime" readonly >
+            </div>
+          </div>
+        <div class="search-group">
+            <span class="search-title">消费类型：</span>
+            <div class="search-main">
+              <select class="form-control" name="authState" [(ngModel)]="authState" (change)="qeuryAllService(1)">
+                <option value="">全部</option>
+                <option *ngFor="let item of authStates" [value]="item.key">{{item.val}}</option>
+              </select>
+            </div>
+          </div>
         <button type="button" title="搜索" class="btn thc btn-thc ml align-top" (click)="qeuryAllService(1)">
-          <i class="icon-magnifier fa-fw"></i>
+            <i class="icon-magnifier"></i><span>&nbsp;&nbsp;搜索</span>
         </button>
-      </div>
-
     </div>
-
-  </div>
-  <div class="panel panel-default">
     <div class="panel-body">
       <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
              (pageChange)="qeuryAllService($event)">
@@ -113,7 +105,6 @@
         </tfoot>
       </table>
     </div>
-  </div>
 </div>
 <router-outlet></router-outlet>
 

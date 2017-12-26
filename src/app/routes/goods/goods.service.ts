@@ -55,10 +55,15 @@ export class GoodsService {
       data: requestData ,
       async: false,
       success: (res) => {
-        if (!isNullOrUndefined(res) && res.success) result = res;
+        result = res;
+        if (!isNullOrUndefined(res) && res.success){
+          AppComponent.rzhAlt("success", res.info);
+        } else{
+          AppComponent.rzhAlt("error", res.info);
+        }
       },
       error: (res) => {
-        AppComponent.rzhAlt("error", res.info);
+
       }
     });
     return result;

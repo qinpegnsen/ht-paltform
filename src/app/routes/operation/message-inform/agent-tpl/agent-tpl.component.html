@@ -2,7 +2,7 @@
   <span class="thc font">代理商消息模板</span>
   <app-buttons class="pull-right" [config]="addbutton" (click)="addTpl()"></app-buttons>
 </div>
-<div class="panel mb panel-default">
+<div class="panel mb">
   <div class="panel-body">
     <table class="table table-striped" #agentTplList="rzhDataTable" [rzhData]="agentTplData"
            (pageChange)="queryAgentTpl(1,$event)">

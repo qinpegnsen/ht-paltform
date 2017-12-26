@@ -21,7 +21,7 @@
       </div>
       <div class="w70 pl-sm pr0 pull-left">
         <div class="form-group mb0 pr0">
-          <div class="w80 pl0 pr0 pull-left">
+          <div class="w70 pl0 pr0 pull-left">
             <input *ngIf="search.searchType=='ordno'" type="text" placeholder="订单编号" class="form-control border-b-grey"
                    [(ngModel)]="search.ordno" (change)="queryDatas()">
             <input *ngIf="search.searchType=='custPhone'" type="text" placeholder="买家手机号"
@@ -29,8 +29,8 @@
                    [(ngModel)]="search.custPhone" (change)="queryDatas()">
           </div>
           <button type="button" title="搜索" (click)="queryDatas()"
-                  class="btn thc btn-thc bar-h3-btn mr0 ng-scope">
-            <em class="icon-magnifier fa-fw"></em>
+                  class="btn thc btn-thc bar-h3-btn mr0 ng-scope ml-lg">
+            <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
           </button>
         </div>
       </div>

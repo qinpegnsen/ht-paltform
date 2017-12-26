@@ -1,11 +1,13 @@
 import {LayoutComponent} from "../layout/layout.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {PagesComponent} from "./pages/pages/pages.component";
+import {RouterGuardService} from "../core/routerGuard/router-guard.service";
 // 设置路由指向
 export const routes = [
   {
     path: 'main',
     component: LayoutComponent,
+    canActivate: [RouterGuardService], //路由守卫：只有有权限时，才能访问
     children: [
       {path: '', redirectTo: '/main/home', pathMatch: 'full'},
       {path: 'home', loadChildren: './home/home.module#HomeModule'},

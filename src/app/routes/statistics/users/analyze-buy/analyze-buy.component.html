@@ -9,17 +9,17 @@
       <li>购买时段分布图展示时间段内订单在各个时间段的分布情况，为工作时间的合理安排提供依据</li>
     </ul>
   </div>
-  <div class="panel panel-default">
 
+  <div class="page-body">
 
-
-    <div class="w98 m-auto h50">
+  <!--图表-->
+  <div class="panel w100 m-auto ">
+    <div class="w98 m-auto h50 pt-lg">
       <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
         <i class="icon icon-magnifier"></i>
       </span>
       <div class="pull-right">
         <div class="col-xs-3 form-group" style="width: 400px">
-
           <div *ngIf="showType.MONTH">
             <select [(ngModel)]="select.year" class="pull-left w40 form-control d-play" style="margin-right: 20px">
               <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
@@ -52,12 +52,6 @@
         <option *ngFor="let item of queryTypes" [value]="item.key">{{item.val}}</option>
       </select>
     </div>
-  </div>
-
-  <div class="page-body">
-  <!--图表-->
-  <div class="panel w100 m-auto ">
-
     <div echarts [options]="optionPrev" class="demo-chart w100"></div>
   </div>
   <div class="panel w100 m-auto" style="margin-top: 20px">

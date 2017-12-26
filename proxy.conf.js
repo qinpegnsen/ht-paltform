@@ -42,11 +42,13 @@ const PROXY_CONFIG = [
       "/agentLogin",
       "/custLogin",
       "/seller",
+      "/store",
       "/storeExpressTpl",
       "/expressTpl",
       "/helpKind",
       "/helpQuestions",
       "/wo",
+      "/ord",
       "/statistical",
       "/notifyAdminTpl",
       "/notifyAgentTpl",
@@ -68,9 +70,11 @@ const PROXY_CONFIG = [
       "/storeAuditRec",//店铺审核记录
       "/rpCustWithdraw",
       "/goodsBrandApply",
-      "/finaceStoreDraw"
+      "/finaceStoreDraw",
+      "/rpAccountRec",
+      "/redSchedulingAudit",
     ],
-    target: ly  + "8084",   //拦截 context配置路径，经过此地址
+    target: csj + "8084",   //拦截 context配置路径，经过此地址
     secure: false
   },
   {
@@ -79,9 +83,9 @@ const PROXY_CONFIG = [
       "/upload",
       "/res"
     ],
-    target: ly   + "8082",   //拦截 context配置路径，经过此地址
+    target: csj + "8082",   //拦截 context配置路径，经过此地址
     secure: false
-  },
+  }
 ];
 
 module.exports = PROXY_CONFIG;

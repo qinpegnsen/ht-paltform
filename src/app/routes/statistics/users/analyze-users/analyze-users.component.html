@@ -9,11 +9,11 @@
       <li>统计表展示了时间段内新增会员数值和与前一时间段的同比数值，点击每条记录后的“查看”，了解新增会员的详细信息</li>
     </ul>
   </div>
-  <div class="panel panel-default">
 
 
-
-    <div class="w98 m-auto h50">
+  <div class="panel">
+    <div>
+    <div class="w98 m-auto h50 pt-lg">
       <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
         <i class="icon icon-magnifier"></i>
       </span>
@@ -54,11 +54,9 @@
       </select>
     </div>
   </div>
-
-  <div class="panel">
     <!--图表切换-->
     <div  class=" panel w100 m0">
-      <ul class="clearfix p0">
+      <ul class="clearfix p0 mb0 mt-lg">
         <li class="w50 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
         <li class="w50 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
       </ul>
@@ -68,7 +66,7 @@
     </div>
   </div>
 
-  <div class="mt20 panel panel-default">
+  <div class="mt20 panel">
     <div class="table-title thc ts statics-font">会员统计表</div>
     <div class="panel-body">
     <table class="table table-striped">

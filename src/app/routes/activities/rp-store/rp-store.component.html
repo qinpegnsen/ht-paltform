@@ -10,34 +10,35 @@
     <li>企业店铺审核通过的时候会自动生成一条红包企业的数据，请先修改完善当前红包企业的信息，否则无法修改其状态</li>
   </ul>
 </div>
+
 <div class="panel mb">
-  <div class="panel-body p ng-scope" ng-if="search">
-    <div class="form-group mb0">
-      <div class="col-xs-4">
-        <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               (change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业简称或者名称">
-      </div>
-      <!--to do-->
-      <!--<div class="col-xs-2">-->
+  <div>
+    <div class="p ng-scope" ng-if="search">
+      <div class="form-group mb0">
+        <div class="col-xs-4">
+          <input type="text" [(ngModel)]="epSubname" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+                 (change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业简称或者名称">
+        </div>
+        <!--to do-->
+        <!--<div class="col-xs-2">-->
         <!--<input type="text" [(ngModel)]="epCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
-               <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业编码">-->
-      <!--</div>-->
-      <!--<div class="col-xs-2">-->
+        <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的企业编码">-->
+        <!--</div>-->
+        <!--<div class="col-xs-2">-->
         <!--<input type="text" [(ngModel)]="storeCode" class="form-control border-b-grey ng-pristine ng-valid ng-touched"-->
-               <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的店铺编码">-->
-      <!--</div>-->
-      <div class="col-sm-1 pull-left text-center">
+        <!--(change)="queryRpStoreList(1)" maxlength="50" placeholder="请输入要查询的店铺编码">-->
+        <!--</div>-->
+        <div class="col-sm-1 pull-left text-center">
         <span class="ng-scope">
           <button type="button" title="搜索" id="toSearch" (click)="queryRpStoreList(1)"
                   class="btn thc btn-thc bar-h3-btn mr ng-scope ">
-          <em class="icon-magnifier fa-fw"></em>
+          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
           </button>
         </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="panel mb panel-default">
   <div class="panel-body">
     <table class="table table-striped" #data="rzhDataTable" [rzhData]="RpStoreData"
            (pageChange)="queryRpStoreList(1,$event)">

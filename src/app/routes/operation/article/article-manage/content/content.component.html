@@ -1,4 +1,4 @@
-<div class="col-md-10 panel panel-default" *ngIf="flag">
+<div class="col-md-10 panel" *ngIf="flag">
   <div class="panel-body">
     <table class="table table-striped" #articleList="rzhDataTable" [rzhData]="articleManListdata"
            (pageChange)="queryArticManleList('N',1,$event)">

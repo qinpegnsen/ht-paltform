@@ -2,8 +2,10 @@
   代理商管理
   <app-buttons class="pull-right" [config]="addButton" routerLink="appAgent" [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
-<div class="panel mb" *ngIf="this.flag">
-  <div class="panel-body p ng-scope">
+
+<div class="panel" *ngIf="this.flag">
+  <div *ngIf="this.flag">
+  <div class="p ng-scope">
     <div class="form-group col-md-4 mb0">
       <div class="col-md-8 col-xs-6 pl0">
         <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="agentName"
@@ -11,7 +13,7 @@
       </div>
       <button type="button" title="搜索"
               class="btn thc btn-thc bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
+        <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
       </button>
     </div>
     <div class="form-group col-md-4 mb0">
@@ -21,7 +23,7 @@
       </div>
       <button type="button" title="搜索"
               class="btn thc btn-thc bar-h3-btn mr ng-scope">
-        <em class="icon-magnifier fa-fw"></em>
+        <em class="icon-magnifier fa-fw"></em><span>&nbsp;&nbsp;搜索</span>
       </button>
     </div>
     <!--<div class="form-group mt-sm mb0">
@@ -35,7 +37,6 @@
 
   </div>
 </div>
-<div class="panel panel-default" *ngIf="this.flag">
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="controlData" (pageChange)="controlDatas($event)">
       <thead>

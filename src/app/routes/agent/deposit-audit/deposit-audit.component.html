@@ -10,9 +10,7 @@
   </ul>
 </div>
 <div class="panel panel-danger">
-
-  <div class="panel mb">
-    <div class="panel-body p ng-scope">
+  <div class="ng-scope pt-lg">
       <div class="search-group ml-xl mb">
         <span class="search-title">提现状态：</span>
         <div class="search-main">
@@ -25,7 +23,6 @@
         </div>
       </div>
     </div>
-  </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
            (pageChange)="queryDatas(1,$event)">
