@@ -93,6 +93,8 @@ export class AuditStoreGoodsComponent implements OnInit {
         toolbar: [],
         height: 420
       });
+      me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
+      me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
       if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
       if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
     })
@@ -182,6 +184,24 @@ export class AuditStoreGoodsComponent implements OnInit {
   }
 
   /**
+   * edit当修改商品时改变选中的规格的输入框和文本显示
+   */
+  public specsCheckedWhenEdit() {
+    for (let i = 0; i < $('.specs ._val').length; i++) {
+      let $obj = $('.specs ._val').eq(i);
+      if ($obj.prop('checked')) {
+        $obj.parents('.enumType').find('._attrName').addClass('hide').next().removeClass('hide');
+        $obj.parents('._attr').find('._value').addClass('hide').next().removeClass('hide');
+      } else {
+        $obj.parents('._attr').find('._value').removeClass('hide').next().addClass('hide');
+      }
+      ;
+      // 如果是第一个规格，则改变图片列表的选值数组
+      if ($obj.parents('.enumType').attr('id') == '1') this.genImgSku($obj);
+    }
+  }
+
+  /**
    * 如果是第一个规格，则改变图片列表的选值数组
    * @param $obj
    */
@@ -230,6 +250,17 @@ export class AuditStoreGoodsComponent implements OnInit {
     };
   }
 
+  /**
+   * edit将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
+   * 同时生成一个老图片对象，用于显示与修改老图片
+   */
+  public genTempGoodsImgsList() {
+    let me = this, list = me.goodsEditData.goodsImagesList;
+    list.forEach((item) => {
+      if (isUndefined(me.oldImgs[item.valCode])) me.oldImgs[item.valCode] = [];            // 检测对象中是否已经有了这个属性值对象，如果没有，给它一个空数组
+      me.oldImgs[item.valCode].push(item.goodsImage);       // 往老图片组中添加这个图片
+    });
+  }
 
   /**
    * 比较两个数字的大小

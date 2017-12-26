@@ -97,8 +97,8 @@ export class AuditGoodsComponent implements OnInit {
         toolbar: [],
         height: 420
       });
-      // me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
-      // me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
+      me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
+      me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
       // me.genMblItemList();        //将html字符串生成移动端图片文字组合
       if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
       if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
