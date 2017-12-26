@@ -50,12 +50,8 @@ export class RpPondComponent implements OnInit {
   public selectEnterCode:string;              //获取选择的企业的编码
   public subject:string='';                   //获取选择的企业的编码
   public querySubjects:any;                   //获取会计科目的类型列表
-
-
   public items:Array<string> = new Array();
-
   private value:any = {};
-
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -113,10 +109,6 @@ export class RpPondComponent implements OnInit {
     this.value = value;
   }
 
-
-
-
-
   /**
    * 统计时间的类型
    */
@@ -129,7 +121,6 @@ export class RpPondComponent implements OnInit {
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};
     else if (_this.queryType == "DAY") _this.showType = {DAY: true, WEEK: false, MONTH: false};
   }
-
 
   /**
    * 根据指定年月获取周列表
