@@ -9,6 +9,7 @@ import {AppComponent} from "../../../app.component";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {zhCn} from "ngx-bootstrap/locale";
 import {defineLocale} from "ngx-bootstrap";
+import {ng2WalkerFactoryUtils} from "codelyzer/angular/ng2WalkerFactoryUtils";
 defineLocale('cn', zhCn);
 
 @Component({
@@ -20,7 +21,7 @@ export class RpPondComponent implements OnInit {
 
   public balance: string;                      //奖池的余额
   public income: string;                       //奖池的历史总额
-  public redPackData: any                      //红包投放记录的数据
+  public redPackData: any;                      //红包投放记录的数据
   public optionScale: any;                       //红包占比的统计图数据
   public optionClick: any;                       //红包点击率的统计图数据
   public showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的统计时间的类型显示
@@ -41,10 +42,20 @@ export class RpPondComponent implements OnInit {
   public seriesData: any;                      //企业占比系列数据
   public seriesDataClick: any;                 //企业点击系列数据
   public showStroeInvest: boolean = false;     //企业投资的弹窗
-  public epSubname:any;               //企业的简称
-  public epCode:any;                   //企业的编码
-  public storeCode:any;                //店铺的编码
-  public queryDateTime:any;                //查询的时间
+  public epSubname:any;                         //企业的简称
+  public epCode:any;                          //企业的编码
+  public storeCode:any;                       //店铺的编码
+  public queryDateTime:any;                   //查询的时间
+  public enterpriseList:any=new Array;        //获取正常状态企业列表
+  public selectEnterCode:string;              //获取选择的企业的编码
+  public subject:string='';                   //获取选择的企业的编码
+  public querySubjects:any;                   //获取会计科目的类型列表
+
+
+  public items:Array<string> = new Array();
+
+  private value:any = {};
+
 
   constructor(private submit: SubmitService,
               private tools: RzhtoolsService) {
@@ -67,7 +78,44 @@ export class RpPondComponent implements OnInit {
     this.qeuryPushOrder(1);
     this.qeuryScale();
     this.qeuryClick();
+    this.getEnterpriseList();//获取正常企业的列表
+    this.querySubjects = this.tools.getEnumDataList('3106');   //时间状态枚举列表
   }
+
+  /**
+   * 获取选择的企业的信息
+   * @param value
+   */
+  public selected(value:any):void {
+    this.selectEnterCode=value.id;
+  }
+
+  /**
+   * 输入框的值
+   * @param value
+   */
+  public typed(value:any):void {
+  }
+
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.selectEnterCode='';
+  }
+
+  /**
+   * 刷新的值
+   * @param value
+   */
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
+
+
+
+
 
   /**
    * 统计时间的类型
@@ -118,7 +166,27 @@ export class RpPondComponent implements OnInit {
   }
 
   /**
-   * 红包投放记录
+   * 获取正常企业的列表
+   */
+  getEnterpriseList(){
+    let url = "/enterprise/list";
+    let data = {};
+    let result = this.submit.getData(url, data);
+    if (result) {
+      for(let i=0;i<result.length;i++){
+        let obj;
+        obj={
+          id:result[i].epCode,
+          text:result[i].epName
+        };
+        this.enterpriseList.push(obj);
+      };
+      this.items=this.enterpriseList
+    }
+  }
+
+  /**
+   * 奖池流水记录
    */
   qeuryPushOrder(curPage, event?: PageEvent) {
     let me = this, activePage = 1;
@@ -137,10 +205,11 @@ export class RpPondComponent implements OnInit {
     let data = {
       curPage: activePage,
       pageSize: 10,
-      epCode: this.epCode,
+      epCode: this.selectEnterCode,
       epSubname: this.epSubname,
       storeCode: this.storeCode,
-      dateStr:dateStr
+      dateStr:dateStr,
+      subject:this.subject,
     };
     let result = this.submit.getData(url, data);
     me.redPackData = new Page(result);
