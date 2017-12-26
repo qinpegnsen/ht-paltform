@@ -282,7 +282,9 @@ export class EditDetailComponent implements OnInit {
         me.publishData.goodsExpressInfo = {
           freightType: null,
           fixedFreight: null,
-          expressTplId: null
+          expressTplId: null,
+          weight: 1.00,
+          volume: 1.00
         };
       }
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
@@ -342,7 +344,9 @@ export class EditDetailComponent implements OnInit {
       me.publishData.goodsExpressInfo = {
         freightType: null,
         fixedFreight: null,
-        expressTplId: null
+        expressTplId: null,
+        weight: 1.00,
+        volume: 1.00
       };
     }
   }
