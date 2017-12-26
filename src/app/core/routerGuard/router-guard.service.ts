@@ -49,8 +49,14 @@ export class RouterGuardService implements CanActivate {
     let menuUrls = [];
     allMenus.forEach((menu) => {
       if (menu.submenu) {
-        menu.submenu.forEach((submenu) => {
-          menuUrls.push(submenu.link)
+        menu.submenu.forEach((submenuTwo) => {
+          if(submenuTwo.submenu){
+            let submenu2 = submenuTwo.submenu;
+            submenu2.forEach((submenuThree) => {
+              menuUrls.push(submenuThree.link)
+            })
+          }
+          menuUrls.push(submenuTwo.link)
         })
       } else {
         menuUrls.push(menu.link);
@@ -67,6 +73,7 @@ export class RouterGuardService implements CanActivate {
    * @returns {boolean}
    */
   private static isPermission(paths, path) {
+    console.log("█ path ►►►",  path);
     //┭┮﹏┭┮，当前路由可能比菜单中配置的路径少一级（比如模块中的空路由重定向），也可能比菜单路径多几级（比如子菜单们），所以可能是反向包含关系
     for (let i = 0; i < paths.length; i++) {
       if (paths[i].indexOf(path) != -1 || path.indexOf(paths[i]) != -1) return true;
