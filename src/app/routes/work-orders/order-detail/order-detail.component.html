@@ -72,16 +72,16 @@
         </dl>
         <dl>
           <dt>商品总额：</dt>
-          <dd>￥{{orderDetailData?.total | number: '1.2-2'}}</dd>
+          <dd>￥&nbsp;{{orderDetailData?.total | number: '1.2-2'}}</dd>
         </dl>
         <dl>
           <dt>运费：</dt>
-          <dd *ngIf="orderDetailData?.freight>0">￥{{orderDetailData?.freight | number: '1.2-2'}}</dd>
+          <dd *ngIf="orderDetailData?.freight>0">￥&nbsp;{{orderDetailData?.freight | number: '1.2-2'}}</dd>
           <dd *ngIf="orderDetailData?.freight==0"><span class="font12">免运费</span></dd>
         </dl>
         <dl>
           <dt>应付金额：</dt>
-          <dd>￥{{orderDetailData?.total+orderDetailData?.freight | number: '1.2-2'}}</dd>
+          <dd>￥&nbsp;{{orderDetailData?.total+orderDetailData?.freight | number: '1.2-2'}}</dd>
         </dl>
         <dl *ngIf="orderDetailData?.coinPay && orderDetailData?.coinPay > 0">
           <dt>
@@ -89,15 +89,15 @@
                triggers="mouseenter:mouseleave"></i>
             重消币抵扣金额：
           </dt>
-          <dd>￥{{orderDetailData?.coinPay | number: '1.2-2'}}</dd>
+          <dd>￥&nbsp;{{orderDetailData?.coinPay | number: '1.2-2'}}</dd>
         </dl>
         <dl *ngIf="orderDetailData?.rpPay">
           <dt>红包抵扣：</dt>
-          <dd>￥{{orderDetailData?.rpPay | number: '1.2-2'}}</dd>
+          <dd>￥&nbsp;{{orderDetailData?.rpPay | number: '1.2-2'}}</dd>
         </dl>
         <dl>
           <dt>最终支付：</dt>
-          <dd>￥{{orderDetailData?.pay | number: '1.2-2'}}</dd>
+          <dd>￥&nbsp;{{orderDetailData?.pay | number: '1.2-2'}}</dd>
         </dl>
       </div>
     </div>
@@ -235,7 +235,7 @@
         </td>
         <td class="bb position-relative">
           <div class="cover" *ngIf="goods.returnNum > 0"></div>
-          ￥{{goods.price | number: '1.2-2'}}
+          ￥&nbsp;{{goods.price | number: '1.2-2'}}
         </td>
         <td class="bb position-relative">
           <div class="cover" *ngIf="goods.returnNum > 0"></div>
@@ -249,7 +249,7 @@
         </td>
         <ng-container *ngIf="i == 0">
           <td class="bl" [attr.rowspan]="goodsData.length">
-            <span class="main-red font14">¥{{orderDetailData?.total | number: '1.2-2'}}</span><br>
+            <span class="main-red font14">¥&nbsp;{{orderDetailData?.total | number: '1.2-2'}}</span><br>
             <span class="font-gray font12" *ngIf="orderDetailData?.freight == 0">(免运费)</span>
             <span class="font-gray"
                   *ngIf="orderDetailData?.freight > 0">运费：{{orderDetailData?.freight | number: '1.2-2'}}</span><br>

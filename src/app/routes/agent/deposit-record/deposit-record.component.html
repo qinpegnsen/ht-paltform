@@ -47,7 +47,7 @@
           <td class="text-left">{{item.bacctName}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
-          <td><span class="main-red">¥{{item.drawMoney}}</span></td>
+          <td><span class="main-red">¥&nbsp;{{item.drawMoney}}</span></td>
           <td>{{item.payWay | rzhState: '1803'}}</td>
           <td>
             <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"

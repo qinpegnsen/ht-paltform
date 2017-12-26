@@ -79,7 +79,7 @@
               </p>
             </div>
           </td>
-          <td class="w10 bb">￥ {{name.batchPrice| number:'1.2-2'}}</td>
+          <td class="w10 bb">￥&nbsp;{{name.batchPrice| number:'1.2-2'}}</td>
           <td class="w10 bb">{{name.batchNum}}</td>
           <td class="w10 bl position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
           <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
@@ -95,8 +95,8 @@
             </div>
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-            <span class="main-red font14">￥ {{goods.pay | number:'1.2-2'}}</span><br>
-            <span class="font-gray">运费 ￥{{goods.freightPrice | number:'1.2-2'}}</span><br>
+            <span class="main-red font14">￥&nbsp;{{goods.pay | number:'1.2-2'}}</span><br>
+            <span class="font-gray">运费 ￥&nbsp;{{goods.freightPrice | number:'1.2-2'}}</span><br>
             <span class="font-gray">{{goods.payWay | rzhState :'1017'}}</span>
           </td>
           <td class="w10 bl  position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">

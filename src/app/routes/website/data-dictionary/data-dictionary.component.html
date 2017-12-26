@@ -23,11 +23,11 @@
     </div>
   </div>
   <div class="col-md-10 font15 mb pl text-primary">
-    <i class="icon-layers mr"></i>
-    <span class="cursor-p" (click)="queryParent(backPage)">类型列表（key）</span>
+    <i class="icon-layers mr thc font"></i>
+    <span class="cursor-p thc font" (click)="queryParent(backPage)">类型列表（key）</span>
     <span *ngFor="let menuTit of childMenuTitList">
-      <i class="fa fa-arrow-right mr ml"></i>
-      <font class="cursor-p">{{menuTit.name}}</font>
+      <i class="fa fa-arrow-right mr ml thc font"></i>
+      <font class="cursor-p thc font">{{menuTit.name}}</font>
     </span>
     <span *ngIf="childMenuTitList.length>0" (click)="queryParent(backPage)" class="btn btn-default btn-xs ml">
     <i class="fa fa-level-up mr5"></i>

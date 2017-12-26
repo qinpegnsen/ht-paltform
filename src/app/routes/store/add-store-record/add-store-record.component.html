@@ -123,11 +123,11 @@
     </div>
 
     <div class="panel-footer text-right">
-      <button class="btn btn-default" (click)="hideWindow()">放弃操作</button>
-      <button class="btn btn-info" *ngIf="showRecord" [disabled]="!addVoncher.form.valid || !myImg"
+      <button class="ml btn btn-default mr  thc font b" (click)="hideWindow()">放弃操作</button>
+      <button class="ml btn btn-info thc bg b" *ngIf="showRecord" [disabled]="!addVoncher.form.valid || !myImg"
               (click)="addFinished()">确认提交
       </button>
-      <button class="btn btn-info" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="fail()">确认提交
+      <button class="ml btn btn-info pull-left thc bg b" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="fail()">确认提交
       </button>
     </div>
   </div>

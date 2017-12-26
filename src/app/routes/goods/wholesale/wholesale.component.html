@@ -93,11 +93,11 @@
             </p>
           </div>
         </td>
-        <td><span class="font12">￥</span>&nbsp;
-          {{goods.goodsPrice.memberPrice | number: '1.2-2'}}
+        <td><span class="font12">￥&nbsp;  {{goods.goodsPrice.memberPrice | number: '1.2-2'}}</span>
         </td>
-        <td><span class="font12">￥</span>&nbsp;
-          {{goods.goodsPrice.batchPrice | number: '1.2-2'}}
+        <td>
+          <span class="font12 thc font">￥&nbsp;{{goods.goodsPrice.batchPrice | number: '1.2-2'}}</span>&nbsp;
+
         </td>
         <td>{{goods.createTime}}</td>
         <td>
