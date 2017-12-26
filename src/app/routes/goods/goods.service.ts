@@ -91,7 +91,7 @@ export class GoodsService {
             AppComponent.rzhAlt("success", '操作成功');
             me.location.back();
           } else {
-            me.router.navigate(['/main/goods/publish/step_three'], {queryParams: {baseCode: res.data}})
+            me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: res.data}})
           }
         } else {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
