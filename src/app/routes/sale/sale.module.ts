@@ -10,7 +10,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {AfterDetailsComponent} from './after-details/after-details.component';
 import {AddproblemComponent} from './addproblem/addproblem.component';
 import {AfterService} from "./after.service";
-import { InspectGoodsComponent } from './inspect-goods/inspect-goods.component';
+import {InspectGoodsComponent} from './inspect-goods/inspect-goods.component';
 import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrdersService} from "../orders/orders/orders.service";
 import {StoreRefundComponent} from "./store-refund/store-refund.component";
