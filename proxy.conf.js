@@ -73,7 +73,6 @@ const PROXY_CONFIG = [
       "/finaceStoreDraw",
       "/rpAccountRec",
       "/redSchedulingAudit",
-
     ],
     target: csj + "8084",   //拦截 context配置路径，经过此地址
     secure: false

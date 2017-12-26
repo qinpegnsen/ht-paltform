@@ -57,7 +57,7 @@ export class GoodsService {
       success: (res) => {
         result = res;
         if (!isNullOrUndefined(res) && res.success){
-
+          AppComponent.rzhAlt("success", res.info);
         } else{
           AppComponent.rzhAlt("error", res.info);
         }
