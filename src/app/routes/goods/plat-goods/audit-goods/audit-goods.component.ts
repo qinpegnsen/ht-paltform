@@ -132,7 +132,6 @@ export class AuditGoodsComponent implements OnInit {
    */
   public getPageData() {
     let me = this, pageData;
-    me.getExpressTpl(); //获取物流模板
     pageData = me.submit.getData('/goodsQuery/pageDataEdit', {goodsBaseCode: me.goodsBaseCode});
     if (!isNullOrUndefined(pageData)) {
       me.allotPageData(pageData);  //分配获取的页面数据
@@ -156,15 +155,18 @@ export class AuditGoodsComponent implements OnInit {
     me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
     me.mobileBody = me.goodsEditData.mobileBody.replace(/\\/, '');
     // me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-    if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) me.getTplValById();    //根据物流模板ID获取模板值
+    if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
+      me.getExpressTpl(pageData.storeCode); //获取物流模板
+      me.getTplValById();
+    }    //根据物流模板ID获取模板值
   }
 
   /**
    * 获取运费模板
    */
-  getExpressTpl() {
+  getExpressTpl(storeCode) {
     let me = this;
-    let expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
+    let expressTpl = me.goods.getExpressTplByStoreCode(storeCode);// 获取运费模板
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 

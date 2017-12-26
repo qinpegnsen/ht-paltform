@@ -253,7 +253,6 @@ export class EditDetailComponent implements OnInit {
     } else {
       pageData = me.submit.getData('/goodsQuery/pageDataAdd', {kindId: me.kindId});
     }
-    me.getExpressTpl(); //获取物流模板
     if (!isNullOrUndefined(pageData)) {
       me.allotPageData(pageData);  //分配获取的页面数据
     }
@@ -266,6 +265,7 @@ export class EditDetailComponent implements OnInit {
   public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
+    me.getExpressTpl(pageData.storeCode); //获取物流模板
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
     me.unitList = pageData.unitList;              // 计量单位
     me.brandsList = pageData.brandList;           // 品牌列表
@@ -315,7 +315,7 @@ export class EditDetailComponent implements OnInit {
     let me = this, expressTpl;
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
     if(isNullOrUndefined(target) || target == 'FIXED') {
-      expressTpl = me.goods.getExpressTplByStoreCode();// 获取运费模板
+      expressTpl = me.goods.getExpressTplByStoreCode(me.storeCode);// 获取运费模板
     }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
