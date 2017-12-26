@@ -19,7 +19,7 @@ export class RouterGuardService implements CanActivate {
       .filter(event => event instanceof NavigationStart)
       .subscribe((event) => {
         this.path = event['url'];
-        if (this.path != this.urlHome && !isNullOrUndefined(this.menus)) {
+        if (this.path.indexOf(this.urlHome) < 0 && this.path.indexOf('pages') < 0 && !isNullOrUndefined(this.menus)) {
           // 当路由为home时，不拦截,当menus为空时不拦截（当退出登录时，清空了所有cookie，但是路由监听还在执行，由此取到Menu为undefined）
           let hasPermission: boolean = RouterGuardService.isPermission(this.menus, this.path);
           if (!hasPermission) this.router.navigate([this.urlHome]), swal('您的权限不足','','warning');
@@ -31,7 +31,7 @@ export class RouterGuardService implements CanActivate {
     let rulHref = window.location.href, host = window.location.host;
     //如果有刷新页面，router监听一般获取到undefined，通过JQuery获取全路径之后截取到path，防止刷新后重定向到home
     if (isNullOrUndefined(this.path)) this.path = rulHref.substring(rulHref.indexOf(host)).substring(host.length);
-    if (this.path != this.urlHome && !isNullOrUndefined(this.menus)) {//当路由为home时，不拦截
+    if (this.path.indexOf(this.urlHome) < 0 && this.path.indexOf('pages') < 0 && !isNullOrUndefined(this.menus)) {//当路由为home时，不拦截
       let hasPermission: boolean = RouterGuardService.isPermission(this.menus, this.path);
       if (!hasPermission) this.router.navigate([this.urlHome]);
     }
@@ -65,7 +65,7 @@ export class RouterGuardService implements CanActivate {
    */
   private static isPermission(paths, path) {
     for (let i = 0; i < paths.length; i++) {
-      if (path.indexOf(paths[i]) == 0) return true;
+      if (paths[i].indexOf(path) == 0) return true;
     }
     return false;
   }
