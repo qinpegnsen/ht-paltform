@@ -73,7 +73,7 @@ export class MenuService {
    */
   getMenu() {
     let menus = JSON.parse(localStorage.getItem("userMenu"));
-    return menu; //cookie中取出
+    return menus; //从登录信息在本地缓存中取出
   }
 
   /**
