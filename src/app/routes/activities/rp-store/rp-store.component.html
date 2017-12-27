@@ -53,11 +53,14 @@
         <th class="w10 thc font">
           简称
         </th>
+        <th class="w15 thc font text-left">
+          宣传语
+        </th>
+        <th class="w5 thc font text-left">
+          权重
+        </th>
         <th class="10 thc font text-center">
           logo
-        </th>
-        <th class="w20 thc font text-left">
-          宣传语
         </th>
         <th class="w10 thc font text-center">
           宣传图
@@ -77,16 +80,17 @@
         <td class="text-center">{{i+1}}</td>
         <td>{{item.epName}}</td>
         <td>{{item.epSubname}}</td>
+        <td class="text-left">{{item.slogan}}</td>
+        <td>{{item.weight}}</td>
         <td class="text-center">
           <img [src]="item.logo" class="logoImg"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'"
-          >
+               onerror="javascript:this.src='../../../assets/img/dummy.png'" (mousemove)="showImg($event,logo)"  (mouseout)="hideImg(logo)">
+          <img [src]="item.logo" #logo class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
         </td>
-        <td class="text-left">{{item.slogan}}</td>
         <td class="text-center">
           <img [src]="item.sloganPic" class="logoImg"
-               onerror="javascript:this.src='../../../assets/img/dummy.png'"
-          >
+               onerror="javascript:this.src='../../../assets/img/dummy.png'" (mousemove)="showImg($event,sloganPic)"  (mouseout)="hideImg(sloganPic)">
+          <img [src]="item.sloganPic" #sloganPic class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
         </td>
         <td class="text-center">
           <label class="switch">
