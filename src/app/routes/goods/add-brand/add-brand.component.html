@@ -115,7 +115,7 @@
       <!--修改图片 start-->
       <div class="panel-body pb-xl" *ngIf="upBrandImg">
         <fieldset class="b0">
-          <legend>{{pageTitle}}</legend>
+          <legend class="thc font">{{pageTitle}}</legend>
         </fieldset>
         <fieldset *ngIf="path=='upBrandImg'">
           <div class="form-group">
@@ -136,7 +136,7 @@
       <!--展示详情 start-->
       <div class="panel-body pb-xl" *ngIf="brandDetail">
         <fieldset class="b0">
-          <legend>{{pageTitle}}</legend>
+          <legend class="thc font">{{pageTitle}}</legend>
         </fieldset>
         <table class="t-items p w100">
           <tr class="t-item clearfix">
@@ -208,7 +208,7 @@
         </button>
 
         <!--从详情转修改-->
-        <button class="ml btn btn-info pull-left" type="button" (click)="toUpdateBrand()" *ngIf="brandDetail"
+        <button class="ml btn btn-info pull-left thc bg b" type="button" (click)="toUpdateBrand()" *ngIf="brandDetail"
                 [disabled]="!addBrand.form.valid">修改品牌信息
         </button>
 

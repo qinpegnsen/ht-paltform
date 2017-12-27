@@ -4,7 +4,7 @@
   <form class="form-validate form-horizontal" style="height: 100%" #addLimitForm="ngForm">
   <div class="popup animated fadeIn">
     <div class="pop popup-hd">
-      <span class="f-bold">设置发货</span>
+      <span class="f-bold thc font">设置发货</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <div class="pop cancel-con font12 w100">
@@ -24,7 +24,7 @@
         <dd class="col-xs-5">
           <input class="form-control"  name="expressNo" [(ngModel)]="expressNos"
                  #expressNo="ngModel" type="text" [pattern]="patterns.tplCode" required  maxlength="32"/>
-          <div [hidden]="expressNo.valid || expressNo.pristine" class="alert-danger">
+          <div [hidden]="expressNo.valid || expressNo.pristine" class="text-danger">
             请填写正确的快递单号
           </div>
         </dd>

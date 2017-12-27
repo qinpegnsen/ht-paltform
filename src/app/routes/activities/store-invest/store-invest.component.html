@@ -2,7 +2,7 @@
   <div class="mask"></div>
   <form class="_popup animated fadeIn" #deliverytpl="ngForm">
     <div class="pop popup-hd">
-      <span class="f-bold">企业投资</span>
+      <span class="f-bold thc font">企业投资</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
     <!--表单-->
@@ -30,7 +30,7 @@
                  required [(ngModel)]="amount" placeholder='请输入最多两位小数的数字类型' [pattern]="patterns.twodecimal"
                  (input)="checkVal(expressCodeTem.value)">
           <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
-               class="alert alert-danger">
+               class="text-danger">
             请填写最多带两位小数的数字
           </div>
         </dd>

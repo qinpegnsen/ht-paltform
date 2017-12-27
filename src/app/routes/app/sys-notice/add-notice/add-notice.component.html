@@ -14,7 +14,7 @@
               <input class="form-control" type="text" maxlength="50" #titleTem="ngModel" ngModel name="title" required
                      placeholder='必填项'/>
               <div [hidden]="titleTem.valid||titleTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 标题是必填项
               </div>
             </div>
@@ -27,7 +27,7 @@
               <input class="form-control" type="text" maxlength="50" #contentTem="ngModel" ngModel name="content"
                      required placeholder='必填项'/>
               <div [hidden]="contentTem.valid||contentTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 内容是必填项
               </div>
             </div>
@@ -40,7 +40,7 @@
               <input class="form-control" type="text" maxlength="128" #urlTem="ngModel" ngModel name="url" required
                      placeholder='必填项'>
               <div [hidden]="urlTem.valid||urlTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 跳转链接是必填项
               </div>
             </div>
@@ -53,7 +53,7 @@
               <input type="text" class="form-control" maxlength="128" #endTimeTem="ngModel" [(ngModel)]="date"  name="endTime" placeholder="请选择日期" bsDatepicker #dp="bsDatepicker" [minDate]="minDate"[bsConfig]="bsConfig" required>
               <timepicker [(ngModel)]="myTime" [showSeconds]="showSec" name="time"></timepicker>
               <div [hidden]="endTimeTem.valid||endTimeTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 结束时间是必填项
               </div>
             </div>

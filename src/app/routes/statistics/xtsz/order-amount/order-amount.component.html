@@ -38,7 +38,7 @@
             </td>
             <td *ngIf="data[i].isShow && i!=0">
               <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submitt(order.code,order,updata.info,updata.remark)" [disabled]="!res.form.valid">提交</button>
-              <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel(order)" >取消</button>
+              <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel(order)" >放弃操作</button>
             </td>
           </tr>
 

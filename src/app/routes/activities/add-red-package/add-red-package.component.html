@@ -79,7 +79,7 @@
                      #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
                      [pattern]="patternService.threedecimal"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 请填写最多带两位小数的数字
               </div>
             </td>
@@ -88,7 +88,7 @@
                      (keyup)="getProbability(item,$event.target,pieceNumber.value)" name="num{{i}}" required
                      [pattern]="patternService.onedecimal"/>
               <div [hidden]="pieceNumber.valid || pieceNumber.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 请填写正整数
               </div>
             </td>
@@ -96,7 +96,7 @@
               <input type="number" class="text _price num form-control level" [(ngModel)]="item.level" name="level{{i}}"
                      #pieceLevel="ngModel" [pattern]="patternService.integer" required (keyup)="setLeveal($event.target,pieceLevel.value)"/>
               <div [hidden]="pieceLevel.valid || pieceLevel.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 请填写正整数
               </div>
             </td>

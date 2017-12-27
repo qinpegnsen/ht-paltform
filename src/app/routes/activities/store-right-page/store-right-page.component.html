@@ -14,7 +14,7 @@
               <input class="form-control" type="text" maxlength="6" #expressCodeTem="ngModel" ngModel
                      name="epSubname" required placeholder='最多是输入6个字'/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 企业简称是必填项
               </div>
             </div>
@@ -27,7 +27,7 @@
               <input class="form-control" type="text" maxlength="18" #expressUrlTem="ngModel" ngModel name="slogan"
                      required placeholder='最多是输入18个字' require/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 宣传语是必填项
               </div>
             </div>
@@ -68,7 +68,7 @@
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b _mySubmit" type="submit" (click)="submit(express.value)"
                 [disabled]="express.invalid">提交信息
         </button>
@@ -86,7 +86,7 @@
     <div class="panel-default">
       <div class="panel-body">
         <fieldset class="b0">
-          <legend>修改红包企业</legend>
+          <legend class="thc font">修改红包企业</legend>
         </fieldset>
 
         <fieldset>
@@ -96,7 +96,7 @@
               <input class="form-control" type="text" maxlength="50" #expressCodeTem="ngModel" ngModel
                      name="epSubname" required placeholder='必填项' [(ngModel)]="loadData.epSubname"/>
               <div [hidden]="expressCodeTem.valid||expressCodeTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 企业简称是必填项
               </div>
             </div>
@@ -110,7 +110,7 @@
                      #expressUrlTem="ngModel" ngModel name="slogan"
                      required placeholder='必填项' require/>
               <div [hidden]="expressUrlTem.valid||expressUrlTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 宣传语是必填项
               </div>
             </div>
@@ -168,7 +168,7 @@
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(express.value)"
                 [disabled]="express.invalid">提交信息
         </button>

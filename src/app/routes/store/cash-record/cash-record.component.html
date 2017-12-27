@@ -23,7 +23,7 @@
           <rzhDefaultSorter by="bank">收款账户开户行</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
-          <rzhDefaultSorter by="drawMoney">提现金额</rzhDefaultSorter>
+          <rzhDefaultSorter by="drawMoney">提现金额（元）</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="way">平台汇款方式</rzhDefaultSorter>
@@ -47,7 +47,7 @@
           <td class="text-left">{{item.bacctName}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
-          <td><span class="main-red">¥{{item.drawMoney}}</span></td>
+          <td><span class="main-red pull-right">¥{{item.drawMoney}}</span></td>
           <td>{{item.payWay | rzhState: '1803'}}</td>
           <td>
             <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"
@@ -56,7 +56,7 @@
             <img [src]="item.voucherUrl" class="hover-biger-img"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
           </td>
-          <td class="text-left font12">{{item.remark}}</td>
+          <td class="text-left font12">{{item.remark || '【未填写】'}}</td>
           <td>{{item.doneTime}}</td>
         </tr>
 

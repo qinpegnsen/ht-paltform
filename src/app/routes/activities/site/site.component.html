@@ -54,7 +54,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
-          <td>{{count.amount | number:'1.2-2'}}</td>
+          <td class="thc font">￥&nbsp;{{count.amount | number:'1.2-2'}}</td>
           <td>{{count.num}}</td>
           <td>{{count.level}}</td>
           <td>{{count.isUsed | rzhState:'1001' }}</td>

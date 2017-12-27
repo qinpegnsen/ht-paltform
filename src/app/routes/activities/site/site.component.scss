@@ -1,23 +1,33 @@
-.order-guide li{
+.order-guide {
+  height: 35px;
+}
+
+.order-guide li {
   width: 100px;
   line-height: 2.5;
   text-align: center;
   border-bottom: 1px solid #f5f5f5;
   cursor: pointer;
 }
-.order-guide li:hover{
+
+.order-guide li:hover {
   border-bottom: 1px solid #9dd3ff;
 }
-.order-guide .cur-order{
+
+.order-guide .cur-order {
   color: #23b7e5;
   border-bottom: 1px solid #23b7e5;
 }
-._width200{
-  width:200px!important;
+
+._width200 {
+  width: 200px !important;
 }
-.myposition{
-  position: relative;top:2px;
+
+.myposition {
+  position: relative;
+  top: 2px;
 }
-.rpSwitchNO,.rpSwitchYES{
+
+.rpSwitchNO, .rpSwitchYES {
   display: none;
 }

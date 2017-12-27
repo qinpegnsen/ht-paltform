@@ -162,7 +162,7 @@
               <input class="form-control" type="text" name="reason" #reasonTem="ngModel" [(ngModel)]="reason" required
                      placeholder='请输入未审核通过的原因'/>
               <div [hidden]="reasonTem.valid||reasonTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 未审核通过的原因是必填项
               </div>
             </div>

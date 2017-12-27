@@ -14,7 +14,7 @@
               <input class="form-control" required name="optTypeCode" [(ngModel)]="optForm.optTypeCode"
                      #optTypeCode="ngModel" type="text"/>
               <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 操作类型是必填项，请填写操作类型
               </div>
             </div>
@@ -27,7 +27,7 @@
               <input class="form-control" required name="optTypeName" [(ngModel)]="optForm.optTypeName"
                      #optTypeName="ngModel" type="text"/>
               <div [hidden]="optTypeName.valid || optTypeName.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 类型名称是必填项，请填写类型名称
               </div>
             </div>
@@ -40,7 +40,7 @@
               <input class="form-control" required name="typeDesc" [(ngModel)]="optForm.typeDesc"
                      #typeDesc="ngModel" type="text"/>
               <div [hidden]="typeDesc.valid || typeDesc.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 操作类型说明是必填项，请填写操作类型说明
               </div>
             </div>
@@ -62,7 +62,7 @@
         </fieldset>
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
       </div>
     </div>
@@ -87,7 +87,7 @@
               <input class="form-control" required name="optTypeCode" [(ngModel)]="optForm.optTypeCode"
                      #optTypeCode="ngModel" type="text"/>
               <div [hidden]="optTypeCode.valid || optTypeCode.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 操作类型是必填项，请填写操作类型
               </div>
             </div>
@@ -100,7 +100,7 @@
               <input class="form-control" required name="optTypeName" [(ngModel)]="optForm.optTypeName"
                      #optTypeName="ngModel" type="text"/>
               <div [hidden]="optTypeName.valid || optTypeName.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 类型名称是必填项，请填写类型名称
               </div>
             </div>
@@ -113,7 +113,7 @@
               <input class="form-control" required name="typeDesc" [(ngModel)]="optForm.typeDesc"
                      #typeDesc="ngModel" type="text"/>
               <div [hidden]="typeDesc.valid || typeDesc.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 操作类型说明是必填项，请填写操作类型说明
               </div>
             </div>
@@ -135,7 +135,7 @@
         </fieldset>
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="button" [disabled]="!addLimitForm.form.valid" (click)="addLimitList(addLimitForm.value)">提交信息</button>
       </div>
     </div>
@@ -160,7 +160,7 @@
               <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
                      #tplCode="ngModel" type="text" placeholder="请添加数字或英文字符" [pattern]="patterns.tplCode"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板编码是必填项，请填写模板编码
               </div>
             </div>
@@ -173,7 +173,7 @@
               <input class="form-control" required name="tplName" [(ngModel)]="tplForm.tplName"
                      #tplName="ngModel" type="text"/>
               <div [hidden]="tplName.valid || tplName.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板名称是必填项，请填写模板名称
               </div>
             </div>
@@ -186,7 +186,7 @@
               <input class="form-control" required name="tplUrl" [(ngModel)]="tplForm.tplUrl"
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板路径是必填项，请填写正确路径格式
               </div>
             </div>
@@ -229,7 +229,7 @@
               <input class="form-control" required name="tplDesc" [(ngModel)]="tplForm.tplDesc"
                      #tplDesc="ngModel" type="text" placeholder="例如：图片格式,文字大小"/>
               <div [hidden]="tplDesc.valid || tplDesc.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板说明是必填项，请填写模板说明
               </div>
             </div>
@@ -242,7 +242,7 @@
               <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
               <div [hidden]="tplImgCount.valid || tplImgCount.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板数量是必填项，请填写模板数量
               </div>
             </div>
@@ -255,7 +255,7 @@
               <input class="form-control" required  name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 首页作者是必填项，请填写首页作者
               </div>
             </div>
@@ -269,7 +269,7 @@
               <input class="form-control" required name="tplWidth" [(ngModel)]="tplForm.tplWidth"
                      #tplWidth="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplWidth.valid || tplWidth.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板宽度是必填项，请填写模板宽度
               </div>
             </div>
@@ -283,7 +283,7 @@
               <input class="form-control" required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
                      #tplHeight="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplHeight.valid || tplHeight.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板高度是必填项，请填写模板高度
               </div>
             </div>
@@ -331,7 +331,7 @@
               <input class="form-control" required name="tplCode" [(ngModel)]="tplForm.tplCode"
                      #tplCode="ngModel" type="text" placeholder="请添加数字或英文字符" [pattern]="patterns.tplCode"/>
               <div [hidden]="tplCode.valid || tplCode.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板编码是必填项，请填写模板编码
               </div>
             </div>
@@ -344,7 +344,7 @@
               <input class="form-control" required name="tplName" [(ngModel)]="tplForm.tplName"
                      #tplName="ngModel" type="text"/>
               <div [hidden]="tplName.valid || tplName.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板名称是必填项，请填写模板名称
               </div>
             </div>
@@ -357,7 +357,7 @@
               <input class="form-control" required name="tplUrl" [(ngModel)]="tplForm.tplUrl"
                      #tplUrl="ngModel" type="text" [pattern]="patterns.str"/>
               <div [hidden]="tplUrl.valid || tplUrl.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板路径是必填项，请填写正确路径格式
               </div>
             </div>
@@ -400,7 +400,7 @@
               <input class="form-control" required name="tplDesc" [(ngModel)]="tplForm.tplDesc"
                      #tplDesc="ngModel" type="text"/>
               <div [hidden]="tplDesc.valid || tplDesc.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板说明是必填项，请填写模板说明
               </div>
             </div>
@@ -413,7 +413,7 @@
               <input class="form-control" required name="tplImgCount" [(ngModel)]="tplForm.tplImgCount"
                      #tplImgCount="ngModel" type="number"/>
               <div [hidden]="tplImgCount.valid || tplImgCount.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板数量是必填项，请填写模板数量
               </div>
             </div>
@@ -426,7 +426,7 @@
               <input class="form-control" required name="tplAuthor" [(ngModel)]="tplForm.tplAuthor"
                      #tplAuthor="ngModel" type="text"/>
               <div [hidden]="tplAuthor.valid || tplAuthor.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 首页作者是必填项，请填写首页作者
               </div>
             </div>
@@ -440,7 +440,7 @@
               <input class="form-control"  required  name="tplWidth" [(ngModel)]="tplForm.tplWidth"
                      #tplWidth="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplWidth.valid || tplWidth.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板宽度是必填项，请填写模板宽度
               </div>
             </div>
@@ -454,7 +454,7 @@
               <input class="form-control"  required name="tplHeight" [(ngModel)]="tplForm.tplHeight"
                      #tplHeight="ngModel" type="text" placeholder="格式要求例：100px或者100%"/>
               <div [hidden]="tplHeight.valid || tplHeight.pristine"
-                   class="alert alert-danger">
+                   class="text-danger">
                 模板高度是必填项，请填写模板高度
               </div>
             </div>

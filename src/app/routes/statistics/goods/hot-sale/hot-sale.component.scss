@@ -1,25 +1,33 @@
-.panel .clearfix li{
+.panel .clearfix li {
   list-style: none;
   height: 50px;
   line-height: 50px;
 }
 
-li.qh{
+li.qh {
   border-radius: 6px;
   height: 50px;
   line-height: 50px;
-  background:#ffd9d9;
+  background: #ddd;
   color: #ffffff;
 }
-.form-control{
+
+.form-control {
   padding: 6px 10px;
 }
-.ts{
+
+.ts {
   margin-top: 0;
 }
-.user-top{
+
+.user-top {
   margin-top: 15px;
 }
-.statics-font{
-  color:#595b5f;
+
+.statics-font {
+  color: #595b5f;
+}
+
+.table-title {
+  background-color: #f9f9f9;
 }

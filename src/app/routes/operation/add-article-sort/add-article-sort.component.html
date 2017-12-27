@@ -14,7 +14,7 @@
               <input class="form-control" type="text" [(ngModel)]="acName" #nameTem="ngModel" name="acName" required
                      placeholder='必填项'  maxlength="50"/>
               <div [hidden]="nameTem.valid||nameTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 分类名称是必填项
               </div>
             </div>
@@ -27,7 +27,7 @@
               <input class="form-control" type="text" [(ngModel)]="acSort" #sortTem="ngModel" name="acSort" required
                      placeholder='必填项,请填写数字类型' [tooltip]="tip.sort" [pattern]="patterns.doubleDigit"/>
               <div [hidden]="sortTem.valid||sortTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 请填写0-99的整数
               </div>
             </div>
@@ -44,7 +44,7 @@
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(addClass.value)"
                 [disabled]="addClass.invalid">提交信息
         </button>
@@ -124,7 +124,7 @@
               <input class="form-control" type="text" [(ngModel)]="updataData.acName" #nameTem="ngModel" name="acName"
                      required placeholder='必填项'  maxlength="50"/>
               <div [hidden]="nameTem.valid||nameTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 分类名称是必填项
               </div>
             </div>
@@ -136,7 +136,7 @@
             <div class="col-sm-8">
               <input class="form-control" type="text" [(ngModel)]="updataData.acSort" #sortTem="ngModel" name="acSort" [pattern]="patterns.doubleDigit" [tooltip]="tip.sort" required/>
               <div [hidden]="sortTem.valid||sortTem.untouched"
-                   class="alert alert-danger">
+                   class="text-danger">
                 请填写0-99的整数
               </div>
             </div>
@@ -154,7 +154,7 @@
 
       </div>
       <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
-        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">取消</button>
+        <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(updateClass.value)"
                 [disabled]="updateClass.invalid">提交信息
         </button>

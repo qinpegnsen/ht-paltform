@@ -3,7 +3,7 @@
 
   <div class="_popup animated fadeIn">
     <div class="pop popup-hd">
-      <span class="f-bold">汇款记录</span>
+      <span class="f-bold thc font">汇款记录</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
 
@@ -27,7 +27,7 @@
           <div>
             <dl class="bb m0 clearfix">
               <dt class="col-xs-3"><i class="main-red font16">*</i> 提现金额：</dt>
-              <dd class="col-xs-9"><span class="main-red font18 ml20">¥{{drawMoney}}</span></dd>
+              <dd class="col-xs-9"><span class="main-red font18 ml20">¥&nbsp;{{drawMoney}}</span></dd>
             </dl>
             <dl class="bb m0 clearfix">
               <dt class="col-xs-3"><i class="main-red font16">*</i> 转账方式：</dt>
@@ -127,7 +127,7 @@
       <button class="ml btn btn-info thc bg b" *ngIf="showRecord" [disabled]="!addVoncher.form.valid || !myImg"
               (click)="addFinished()">确认提交
       </button>
-      <button class="ml btn btn-info pull-left thc bg b" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="fail()">确认提交
+      <button class="ml btn btn-info thc bg b" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="fail()">确认提交
       </button>
     </div>
   </div>
