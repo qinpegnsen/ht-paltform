@@ -143,7 +143,7 @@ const goods = {
     },
     {
       text: '分类管理',
-      icon: 'fa fa-cubes',
+      icon: 'fa fa-list',
       alert: '▼',
       submenu: [
         {
@@ -158,7 +158,7 @@ const goods = {
     },
     {
       text: '品牌管理',
-      icon: 'icon icon-people',
+      icon: 'icon icon-diamond',
       alert: '▼',
       submenu: [
         {
@@ -231,7 +231,7 @@ const member = {
     },
     {
       text: '红包明细',
-      icon: 'fa fa-user',
+      icon: 'fa fa-money',
       link: '/main/member/rpDetail'
     }
   ]
