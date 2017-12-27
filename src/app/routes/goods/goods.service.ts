@@ -8,6 +8,7 @@ import {SubmitService} from "../../core/forms/submit.service";
 import {SettingsService} from "../../core/settings/settings.service";
 import {Location}from '@angular/common';
 const swal = require('sweetalert');
+declare var $:any;
 
 @Injectable()
 export class GoodsService {
@@ -77,8 +78,9 @@ export class GoodsService {
    * @param requestData
    * @returns {any}
    */
-  publishGoods(requestUrl: string, requestData: any, type?: string) {
+  publishGoods(requestUrl: string, requestData: any) {
     let me = this;
+    var defer = $.Deferred(); //封装异步请求结果
     me.ajax.post({
       url: requestUrl,
       data: JSON.stringify(requestData),
@@ -87,22 +89,20 @@ export class GoodsService {
       success: (res) => {
         if (res.success) {
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
-          if (type == 'edit') {
-            AppComponent.rzhAlt("success", '操作成功');
-            me.location.back();
-          } else {
-            me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: res.data}})
-          }
+          defer.resolve(res.data);
         } else {
+          defer.resolve(false);
           MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
           swal(res.info, '', 'error');
         }
       },
       error: (res) => {
+        defer.resolve(false);
         MaskService.hideMask();//当上传图片之后才提交数据的话，遮罩层开启是在图片上传之前，所以需要手动关闭
         AppComponent.rzhAlt("error", '网络错误');
       }
     })
+    return defer.promise(); //返回异步请求休息
   }
 
   /**

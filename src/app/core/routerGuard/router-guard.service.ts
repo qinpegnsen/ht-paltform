@@ -22,8 +22,7 @@ export class RouterGuardService implements CanActivate {
         this.path = event['url'];
         if (this.path.indexOf(this.urlHome) < 0 && this.path.indexOf('pages') < 0 && !isNullOrUndefined(this.menus)) {
           // 当路由为home时，不拦截,当menus为空时不拦截（当退出登录时，清空了所有cookie，但是路由监听还在执行，由此取到Menu为undefined）
-          let hasPermission: boolean = me.isPermission(this.path);
-          if (!hasPermission) this.router.navigate([this.urlHome]), swal('您的权限不足', '', 'warning');
+          if (!me.isPermission(this.path)) this.router.navigate([this.urlHome]), swal('您的权限不足', '', 'warning');
         }
       });
   }
@@ -32,8 +31,13 @@ export class RouterGuardService implements CanActivate {
     let me = this;
     this.menus = this.getAllRouterLink();//取到所有菜单的link；
     if (state.url.indexOf(this.urlHome) < 0 && state.url.indexOf('pages') < 0 && !isNullOrUndefined(this.menus)) {//当路由为home时，不拦截
-      let hasPermission: boolean = me.isPermission(state.url);
-      if (!hasPermission) this.router.navigate([this.urlHome]);
+      if (!me.isPermission(state.url)) {
+        this.router.navigate([this.urlHome]);
+        swal('您的权限不足', '', 'warning');
+        return false;
+      }else {
+        return true
+      };
     }
     return true;
   }

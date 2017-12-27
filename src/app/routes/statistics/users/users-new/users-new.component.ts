@@ -228,23 +228,20 @@ export class UsersNewComponent implements OnInit {
       date = RzhtoolsService.dataFormat(_this.datepickerModel, "yyyy-MM-dd");
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val)), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByHour(new Date(date + " 00:00:00"), Number.parseInt(val) + 1), "yyyy-MM-dd HH:mm:ss");
-      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
+      window.open('/#/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     } else if (_this.showType.MONTH) {//按月查询
       let prevtime: string, nowtime: string, date: string;
       date = this.select.year + "-" + this.nowData.keys[i];
       prevtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 0), "yyyy-MM-dd HH:mm:ss");
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 1), "yyyy-MM-dd HH:mm:ss");
-      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
+      window.open('/#/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     }
     else if (_this.showType.WEEK) {//按周查询
       let prevtime: string, nowtime: string, date: string;
       date = this.data.queryTimeList[i];
       prevtime = date;
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 1), "yyyy-MM-dd HH:mm:ss");
-      let preUrl = window.location.href.substring(0, window.location.href.indexOf('/main'));
-      window.open(preUrl + '/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
+      window.open('/#/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     }
 
 

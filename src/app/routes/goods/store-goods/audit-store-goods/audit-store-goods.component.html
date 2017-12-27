@@ -1,3 +1,4 @@
+<div class="content-heading mb-lg thc font">{{path=='detail'?'商品详情':'商品审核'}}</div>
 <form class="step-two panel" (keydown.Enter)="false" #publishForm="ngForm">
   <!--商品基本信息-->
   <fieldset class="m0 p0">
@@ -300,7 +301,8 @@
                    [hidden]="publishData.goodsExpressInfo.freightType!='TPL' || publishData.goodsExpressInfo.expressTplId == ''">
                 <p class="m0">
                   <strong>指定物流配送区域及运费</strong>
-                  <a class="btn btn-xs btn-default fa fa-eye pull-right" >查看详情</a>
+                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
+                    查看详情</a>
                 </p>
                 <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">
                   <li class="clearfix" *ngFor="let item of tplVals.storeExpressTplValList">

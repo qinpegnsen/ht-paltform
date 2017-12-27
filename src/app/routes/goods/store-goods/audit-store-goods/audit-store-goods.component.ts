@@ -140,6 +140,13 @@ export class AuditStoreGoodsComponent implements OnInit {
   }
 
   /**
+   * 查看物流模板
+   */
+  lookLogisticsModule() {
+    window.open('/#/main/operation/freight-template')
+  }
+
+  /**
    * 获取运费模板
    */
   getExpressTpl(storeCode) {

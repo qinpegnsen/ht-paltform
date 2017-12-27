@@ -1,3 +1,7 @@
+<div class="content-heading mb-lg thc font">
+  {{storeState == 'detail'?'店铺详情':'店铺管理'}}
+</div>
+
 <div class="order mb" [ngClass]="{'panel':storeState != 'detail'}">
   <div [ngClass]="{'panel-body':storeState != 'detail'}">
     <ng-container *ngIf="storeState != 'detail'">

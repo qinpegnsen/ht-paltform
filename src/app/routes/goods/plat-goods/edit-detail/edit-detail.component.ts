@@ -39,14 +39,15 @@ export class EditDetailComponent implements OnInit {
   public logistics: any;             // 物流规则列表
   public tplVals: any;               // 运费模板内容
   public unit: string = '件';       // 运费价格
+  public refresh: boolean = false;    //是否刷新列表页
 
   public publishData: any = {
     goodsExpressInfo: {
       freightType: null,
       fixedFreight: null,
       expressTplId: null,
-      weight: 1.00,
-      volume: 1.00,
+      weight: null,
+      volume: null,
     },
     isFreight: null,
     goodsImagesList: [],
@@ -75,7 +76,7 @@ export class EditDetailComponent implements OnInit {
               public tools: RzhtoolsService) {
   }
 
-  back(){
+  back() {
     this.location.back()
   }
 
@@ -91,7 +92,7 @@ export class EditDetailComponent implements OnInit {
     if (me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
     me.getPageData();// 获取当前页面需要的数据
     if (me.path == 'step_two' && isNullOrUndefined(me.kindId)) {
-      me.router.navigate(['/main/goods/publish/step_one'], {replaceUrl: true});
+      me.router.navigate(['/main/goods/plat/publish/step_one'], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
         me.publishData['kindSelectName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
@@ -235,12 +236,12 @@ export class EditDetailComponent implements OnInit {
 
 //添加物流模板
   addLogisticsModule() {
-    window.open('/main/operation/freight-template/add-formoek?linkType=addArticle')
+    window.open('/#/main/operation/freight-template/add-formoek?linkType=addArticle')
   }
 
 //查看物流模板
   lookLogisticsModule() {
-    window.open('/main/operation/freight-template')
+    window.open('/#/main/operation/freight-template')
   }
 
   /**
@@ -277,13 +278,11 @@ export class EditDetailComponent implements OnInit {
       me.goodsEditData = pageData.goodsSave;
       me.publishData = me.goodsEditData;         // 商品发布数据
       me.checkedBaseAttr();                         //已选中的基本属性
-      if(isNullOrUndefined(me.publishData.goodsExpressInfo)){
+      if (isNullOrUndefined(me.publishData.goodsExpressInfo)) {
         me.publishData.goodsExpressInfo = {
           freightType: null,
           fixedFreight: null,
           expressTplId: null,
-          weight: 1.00,
-          volume: 1.00
         };
       }
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
@@ -299,12 +298,12 @@ export class EditDetailComponent implements OnInit {
   /**
    * update 已选中的基本属性
    */
-  checkedBaseAttr(){
+  checkedBaseAttr() {
     let me = this;
     me.goodsEditData.goodsBaseAttrList.forEach(val => {
       me.baseAttrList.forEach(item => {
         item.goodsEnumValList.forEach(attr => {
-          if(attr.id == val.value) item.checkedId = attr.id;
+          if (attr.id == val.value) item.checkedId = attr.id;
         })
       })
     })
@@ -316,7 +315,7 @@ export class EditDetailComponent implements OnInit {
   getExpressTpl(target?) {
     let me = this, expressTpl;
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
-    if(isNullOrUndefined(target) || target == 'FIXED') {
+    if (isNullOrUndefined(target) || target == 'FIXED') {
       expressTpl = me.goods.getExpressTplByStoreCode('SZH_PLAT_SELF_STORE');// 获取运费模板
     }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
@@ -330,23 +329,17 @@ export class EditDetailComponent implements OnInit {
     let me = this, tplId = me.publishData.goodsExpressInfo.expressTplId;
     let result = me.getTplVal(tplId);
     if (!isNullOrUndefined(result)) me.tplVals = result;
-    if (!isNullOrUndefined(me.tplVals)){
-      if(me.tplVals.valuationType == 'VOLUME') {
+    if (!isNullOrUndefined(me.tplVals)) {
+      if (me.tplVals.valuationType == 'VOLUME') {
         me.unit = 'm³'
       } else if (me.tplVals.valuationType == 'WEIGHT') {
         me.unit = 'kg'
       } else {
         me.unit = '件'
       }
-    }else{
+    } else {
       me.publishData.isFreight = 'N';
-      me.publishData.goodsExpressInfo = {
-        freightType: null,
-        fixedFreight: null,
-        expressTplId: null,
-        weight: 1.00,
-        volume: 1.00
-      };
+      me.publishData.goodsExpressInfo = null;
     }
   }
 
@@ -357,7 +350,7 @@ export class EditDetailComponent implements OnInit {
    */
   public getTplVal(tplId) {
     let me = this;
-    for (let tpl of me.logistics ) {
+    for (let tpl of me.logistics) {
       if (tpl.id == tplId) {
         return tpl;
       }
@@ -369,7 +362,7 @@ export class EditDetailComponent implements OnInit {
    */
   auditInputValueForNum(target, type?) {
     this.tools.auditInputValueForNum(target, type);
-    if(Number(target.value) > 10000){
+    if (Number(target.value) > 10000) {
       target.value = 9999.99
     }
   }
@@ -839,7 +832,7 @@ export class EditDetailComponent implements OnInit {
     let allUploaders = me.togetherAllUploaders();
     allUploaders.forEach((uploader, i) => {
       uploader.uploadAll();//全部上传
-      if(uploader.getNotUploadedItems().length == 0) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
+      if (uploader.getNotUploadedItems().length == 0) uploadedNum += 1;  //如果该组不需要上传图片则uploadedNum+1
       uploader.queue.forEach((item, index) => {
         item.onSuccess = function (response, status, headers) {
           if (!isNullOrUndefined(response)) {
@@ -1068,7 +1061,16 @@ export class EditDetailComponent implements OnInit {
     me.publishData['goodsBody'] = $('#goodsBody').summernote('code');  // 商品详情 PC
     me.publishData['mobileBody'] = $('#mobileBody').summernote('code');  // 移动端详情
     // me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
-    me.goods.publishGoods('/goodsEdit/save', me.publishData, me.path);
+    $.when(me.goods.publishGoods('/goodsEdit/save', me.publishData)).done(data => {
+      if (me.path == 'edit') {
+        AppComponent.rzhAlt("success", '操作成功');
+        me.location.back();
+        me.refresh = true;
+      } else {
+        me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: data}})
+      }
+    })
+
   }
 
 }

@@ -1,4 +1,7 @@
 <ng-container *ngIf="showList">
+  <ng-container *ngIf="path =='storeAudit'">
+    <div class="content-heading mb-lg thc font">待审核企业</div>
+  </ng-container>
   <div [ngClass]="{panel:path =='storeAudit'}">
 
     <!--列表-->
