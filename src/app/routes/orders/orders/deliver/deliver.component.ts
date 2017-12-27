@@ -61,7 +61,7 @@ export class DeliverComponent implements OnInit, OnDestroy, OnChanges {
    * @param data
    */
   getSelectArea(data) {
-    console.log("█ data ►►►", data);
+    //console.log("█ data ►►►", data);
   }
 
   /**

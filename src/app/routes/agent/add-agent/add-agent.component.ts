@@ -170,7 +170,7 @@ export class AddAgentComponent implements OnInit {
   buttonShow(data:any) {
     data.isShowMap = !data.isShowMap;
     this.flag=true;
-    console.log(this.flag)
+    //console.log(this.flag)
   }
 
   /**
@@ -184,7 +184,7 @@ export class AddAgentComponent implements OnInit {
   public getAreaData(area){
     let me = this;
     me.staff['areaCode'] = area.areaCode;
-    console.log("█ me.staff ►►►",  me.staff);
+    //console.log("█ me.staff ►►►",  me.staff);
 
     me.selectArea = area.adr;
     me.refreshMap()
@@ -317,7 +317,7 @@ export class AddAgentComponent implements OnInit {
           'description': value.description,
         },
         success: (res) => {
-          console.log(res)
+          //console.log(res)
           if (res.success) {
             _this.router.navigate(['/main/agent/agentperson'], {replaceUrl: true});   //路由跳转
             swal('修改区域信息成功！', '', 'success');

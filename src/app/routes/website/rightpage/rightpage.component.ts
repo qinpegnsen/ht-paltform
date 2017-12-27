@@ -92,7 +92,7 @@ export class RightpageComponent implements OnInit {
           'areaName': value.areaName
         },
         success: (res) => {
-          console.log(res)
+         // console.log(res)
           if (res.success) {
             _this.router.navigate(['/main/website/areas'], {replaceUrl: true});   //路由跳转
             swal('修改区域信息成功！', '','success');

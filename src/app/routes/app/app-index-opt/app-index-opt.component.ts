@@ -76,7 +76,7 @@ export class AppIndexOptComponent implements OnInit {
         data = {
           id:delCodeId
         }
-        console.log(data)
+        //console.log(data)
         _this.AppIndexOptService.delCode(url, data); //删除数据
         _this.getAgentList()//实现刷新
       }

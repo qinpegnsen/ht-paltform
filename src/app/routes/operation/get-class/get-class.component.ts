@@ -77,7 +77,7 @@ export class GetClassComponent implements OnInit, OnChanges{
         this.menuNameText=data.data.acName;
         this.selsectMenuCode=data.data.id;
         this.cityConfirm()
-       console.log(data)
+      // console.log(data)
       },
       error: (res) => {
         AppComponent.rzhAlt("error", res.status + '**' + res.statusText);

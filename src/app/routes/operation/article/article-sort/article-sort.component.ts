@@ -139,7 +139,7 @@ export class ArticleSortComponent implements OnInit {
         me.childMenuTitList.push(item);
       }else { //点击面包屑路径时或者是返回上一级的时候，提出点击地址后的面包屑路径
 
-        console.log(childCode,menuName)
+        //console.log(childCode,menuName)
 
         for (var i = 0; i < me.childMenuTitList.length; i++) {  //获取点击面包屑的路径地址下标
           if (item.code == me.childMenuTitList[i].code) num = i;

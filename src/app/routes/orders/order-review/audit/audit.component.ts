@@ -30,7 +30,7 @@ export class AuditComponent implements OnInit {
   @Output() cancelOrder = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['orderId'] && !isNullOrUndefined(this.orderId)){
-      console.log("█ orderId ►►►",  this.orderId);
+      //console.log("█ orderId ►►►",  this.orderId);
       this.loadAgent();
       $('.wrapper > section').css('z-index', 200);
       this.showCancelWindow = true;
@@ -65,7 +65,7 @@ export class AuditComponent implements OnInit {
         data: {ordno: this.orderId},
         success: (res) => {
           this.staff = res.data;
-          console.log("█ this.staff ►►►",  this.staff);
+          //console.log("█ this.staff ►►►",  this.staff);
 
         },
         error: (res) => {
@@ -113,7 +113,7 @@ export class AuditComponent implements OnInit {
       typeCode:'refund_reason_plat'
     };
     _this.goodsAudits = _this.submit.getData(requestUrl, requestData);
-    console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
+    //console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
 

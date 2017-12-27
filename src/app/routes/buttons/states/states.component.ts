@@ -33,7 +33,7 @@ export class StatesComponent implements OnInit {
 
   ngOnInit() {
     this.btnClass = this.getInput().classes;
-    console.log(this.btnClass)
+    //console.log(this.btnClass)
   }
 
   getInput(){

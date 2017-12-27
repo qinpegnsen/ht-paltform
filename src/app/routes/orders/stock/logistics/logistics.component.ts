@@ -27,7 +27,7 @@ export class LogisticsComponent implements OnInit {
   @Output() cancelOrder = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['orderId'] && !isNullOrUndefined(this.orderId)){
-      console.log("█ orderId ►►►",  this.orderId);
+      //console.log("█ orderId ►►►",  this.orderId);
       $('.wrapper > section').css('z-index', 200);
       this.showCancelWindow = true;
       this.queryDatas();

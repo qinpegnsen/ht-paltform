@@ -46,7 +46,7 @@ export class ChooseKindComponent implements OnInit {
         break;
       case 3:
         me.choosedKind = id;
-        console.log("█ id ►►►", id);
+       // console.log("█ id ►►►", id);
         break;
     }
   }

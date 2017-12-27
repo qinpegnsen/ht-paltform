@@ -50,7 +50,6 @@ export class AppIndexTplComponent implements OnInit {
     let data={
     }
     let url= '/phone/indexTpl/list';
-    console.log('█ 1 ►►►',  1);
 
     this.controlData=this.AppIndexTplService.controlDatas(url,data);
   }

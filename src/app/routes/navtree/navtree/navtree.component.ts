@@ -48,11 +48,11 @@ export class NavtreeComponent implements OnInit {
   };
 
   onEvent(msg) {
-    console.log(msg);
+    //console.log(msg);
   }
 
   constructor() {
-    console.log("customTemplateStringOptions", this.customTemplateStringOptions);
+    //console.log("customTemplateStringOptions", this.customTemplateStringOptions);
     setTimeout(() => {
       this.nodes = [
         {

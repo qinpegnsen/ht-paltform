@@ -28,7 +28,7 @@ export class CancelsComponent implements OnInit {
   @Output() cancelOrder = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['orderId'] && !isNullOrUndefined(this.orderId)){
-      console.log("█ orderId ►►►",  this.orderId);
+      //console.log("█ orderId ►►►",  this.orderId);
 
       $('.wrapper > section').css('z-index', 200);
       this.showCancelWindow = true;
@@ -63,7 +63,7 @@ export class CancelsComponent implements OnInit {
         async: false, //同步请求
         data: {ordno: this.orderId},
         success: (res) => {
-          console.log("█ res ►►►",  res);
+          //console.log("█ res ►►►",  res);
           if(!isNullOrUndefined(res.data)){
             this.staff = res.data;
           }
@@ -86,7 +86,7 @@ export class CancelsComponent implements OnInit {
       code:'refund_reason_cust'
     };
     _this.goodsAudits = _this.submit.getData(requestUrl, requestData);
-    console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
+   // console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
   hideWindow(bol){

@@ -54,7 +54,7 @@ export class AgentEditComponent implements OnInit {
       tplCode:this.tplCode,
     };
     this.tplData=this.operationService.linkGoods(url,data);
-    console.log("█ this.tplData ►►►",  this.tplData);
+    //console.log("█ this.tplData ►►►",  this.tplData);
   }
 
   /**

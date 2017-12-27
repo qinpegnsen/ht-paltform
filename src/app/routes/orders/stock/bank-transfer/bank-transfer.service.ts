@@ -20,10 +20,10 @@ export class BankTransferService {
       data: data,
       async:false,
       success: (res) => {
-        console.log("█ res ►►►",  res);
+        //console.log("█ res ►►►",  res);
         if (!isNull(data)) {
           if(res.success){
-            console.log("█ res.info ►►►",  res.info);
+            //console.log("█ res.info ►►►",  res.info);
             result=res;
             AppComponent.rzhAlt("success",res.info);
           }else{

@@ -64,7 +64,7 @@ export class AssignComponent implements OnInit {
    * @param event
    */
   onActivated(event) {
-    console.log("█ 123 ►►►",  123);
+    //console.log("█ 123 ►►►",  123);
     this.showList = false;
     this.parentComp.detail = true;
     this.parentComp.detailType = event.detailType;

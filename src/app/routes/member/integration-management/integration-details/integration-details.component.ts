@@ -65,8 +65,8 @@ export class IntegrationDetailsComponent implements OnInit {
       createTime:this.myTime?RzhtoolsService.dataFormat(this.myTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.myTime[1], 'yyyy/MM/dd'):'',
     }
     let result = this.submit.getData(url,data);
-    console.log("█ expr ►►►",  result.createTimeBegin);
+
     me.data = new Page(result);
-    console.log("█ me.data ►►►",  me.data);
+
   }
 }

@@ -68,7 +68,7 @@ export class ReviewDetailComponent implements OnInit {
       ordno:this.ordno
     }
     this.PayRecData=this.submit.getData(url, data);
-    console.log("█ this.PayRecData ►►►",  this.PayRecData);
+    //console.log("█ this.PayRecData ►►►",  this.PayRecData);
   }
 
   /**
@@ -96,7 +96,7 @@ export class ReviewDetailComponent implements OnInit {
       ordno:this.ordno
     }
     this.deliveryData=this.orderService.getShopList(url,data);
-    console.log("█ this.deliveryData ►►►",  this.deliveryData);
+    //console.log("█ this.deliveryData ►►►",  this.deliveryData);
   }
 
   /**
