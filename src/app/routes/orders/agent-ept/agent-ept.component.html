@@ -2,19 +2,18 @@
 <div class="panel mb">
   <div class="panel-body p ng-scope" ng-if="search">
     <div class="form-group mb0">
-      <label class="label-width  pull-left text-right lh35 mb0">查找：</label>
-      <div class="col-xs-5">
-        <input type="text"  class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-               placeholder="代理商订单编号" onkeyup="value=value.replace(/[^\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" [(ngModel)]="orderNumber">
+      <label class="label-width  pull-left text-right lh35 mb0">订单编号：</label>
+      <div class="agent-width">
+        <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
+               placeholder="请输入代理商订单编号" onkeyup="value=value.replace(/[^\d]/g,'') "
+               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+               [(ngModel)]="orderNumber">
       </div>
-      <div class="col-sm-1 pull-left text-center">
-<span class="ng-scope">
-<button type="button" title="搜索" id="toSearch"
-        class="btn thc btn-thc bar-h3-btn mr  ng-scope" (click)="queryDatas()">
-<em class="icon-magnifier pr" ></em><span>&nbsp;&nbsp;搜索</span>
-  </button>
-  </span>
-      </div>
+
+      <button type="button" title="搜索" id="toSearch"
+              class="btn thc btn-thc bar-h3-btn mr ml-lg ng-scope" (click)="queryDatas()">
+        <em class="icon-magnifier pr"></em><span>&nbsp;&nbsp;搜索</span>
+      </button>
     </div>
   </div>
 </div>
@@ -43,7 +42,8 @@
         <tr class="text-center" *ngFor="let name of goodsList.agentOrdItemList;let j = index">
           <td class="w40 p text-left position-relative bb">
           <span class="goods-img goods-lg-img mr"><img [src]="name.goodsImage"
-                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
+                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                                                       alt=""></span>
             <div class="goods-lg-info">
               <p class="mb0 font13 omg2 two-row mb-sm">
                 <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
@@ -63,9 +63,18 @@
             <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
               <div class="info-con">
                 <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
-                <dl><dt>姓名：</dt><dd>{{goodsList.linkman}}</dd></dl>
-                <dl><dt>电话：</dt><dd>{{goodsList.mobile}}</dd></dl>
-                <dl><dt>地址：</dt><dd>{{goodsList.addr}}</dd></dl>
+                <dl>
+                  <dt>姓名：</dt>
+                  <dd>{{goodsList.linkman}}</dd>
+                </dl>
+                <dl>
+                  <dt>电话：</dt>
+                  <dd>{{goodsList.mobile}}</dd>
+                </dl>
+                <dl>
+                  <dt>地址：</dt>
+                  <dd>{{goodsList.addr}}</dd>
+                </dl>
               </div>
             </div>
           </td>
@@ -77,7 +86,8 @@
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goodsList.agentOrdItemList.length">
             <p class="font-gray mb-sm cursor-p">{{goodsList.state | rzhState :'1019'}}</p>
-            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../ept-detail" [queryParams]="{ordno:goodsList.ordno}">查看详情</p>
+            <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="../ept-detail"
+               [queryParams]="{ordno:goodsList.ordno}">查看详情</p>
             <p class="cursor-p mb-sm text-gray-dark" *ngIf="goodsList.state=='DELIVERY'|| goodsList.state=='SUCCESS'">
                 <span myHoverColor [myHover]="'orange'" (mouseenter)="showLogistics(Logistics,goodsList.ordno)"
                       (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
@@ -117,7 +127,10 @@
           </td>
           <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goodsList.agentOrdItemList.length">
             <ng-container *ngIf="isDisplay">
-              <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.ordno)"> 关闭申请</button><br>
+              <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban" (click)="cancelOrder(name.ordno)">
+                关闭申请
+              </button>
+              <br>
             </ng-container>
           </td>
         </tr>

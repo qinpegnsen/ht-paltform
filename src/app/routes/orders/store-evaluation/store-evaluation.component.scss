@@ -1,9 +1,4 @@
-.ts{
-  background: #C9E7F2;
-  width: 98%;
-  margin: auto;
-  margin-top: 15px;
-}
+
 .search{
   margin: auto;
 }
@@ -31,4 +26,14 @@
 .buyimg{
   cursor: pointer;
   width: 40px;height: 40px;
+}
+.store-width{
+  width: 430px;
+}
+.store-name{
+  width: 260px;
+  display: inline-block;
+}
+.panel-body {
+  padding:0  15px 15px 15px;
 }

@@ -7,7 +7,7 @@
   <div class="panel">
     <div class="panel-body p ng-scope" ng-if="search">
       <div class="" >
-        <label class="pull-left lh">问题分类：</label>
+        <span class="pull-left lh ml-lg">问题分类：</span>
           <span class="col-sm-2">
              <select class="form-control" [(ngModel)]="kindId"  name="kindId"  (change)="searchdata($event)">
                 <option value="">全部</option>
@@ -17,19 +17,17 @@
       </div>
 
     <div class="form-group mb0" >
-      <label class="label-width pull-left text-right mb0 lh">查找：</label>
-        <div class="col-xs-5">
+      <span class="label-width pull-left text-right mb0 lh">查找：</span>
+        <div  class="search-help">
         <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-        (change)="searchdata($event)" placeholder="关键字">
+        (change)="searchdata($event)" placeholder="请输入问题">
     </div>
-    <div class="col-sm-1 pull-left text-center">
-      <span class="ng-scope">
+    <!--<div class="  text-center">-->
         <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
-        class="btn thc btn-thc bar-h3-btn mr ng-scope">
+        class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
         <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
         </button>
-      </span>
-    </div>
+    <!--</div>-->
     </div>
     </div>
 

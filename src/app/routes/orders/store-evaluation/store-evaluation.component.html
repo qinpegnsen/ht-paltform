@@ -2,33 +2,26 @@
 <div class="content-heading mb-lg thc font">
   店家评价
 </div>
-
-<div class="panel panel-default">
-  <!--操作提示-->
-  <div class="panel mb p ts thc">
-    <p class="font18">操作提示</p>
-    <ul>
-      <li>买家可在订单完成后对店铺进行动态评价操作</li>
-      <li>统计信息将显示在对应的店铺页面</li>
-    </ul>
-  </div>
-
-  <div class="panel mb w98 search">
-    <div class="panel-body p ng-scope" ng-if="search">
-      <div class="form-group mb0">
-        <label class="label-width pull-left text-right mb0" style="line-height: 2.5;">查找：</label>
-        <div class="col-xs-5">
-          <input type="text" [(ngModel)]="goodsName" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                 (change)="search()" placeholder="请输入评价人关键字进行搜索">
-        </div>
-        <div class="col-sm-1 pull-left text-center">
-        <span class="ng-scope">
+<!--操作提示-->
+<div class="panel mb p ts thc">
+  <p class="font18">操作提示</p>
+  <ul>
+    <li>买家可在订单完成后对店铺进行动态评价操作</li>
+    <li>统计信息将显示在对应的店铺页面</li>
+  </ul>
+</div>
+<div class="panel">
+  <div class=" mb w98 search">
+    <div class=" p ng-scope">
+      <div class="form-group mb0 store-width">
+        <!--<label class="label-width pull-left text-right mb0" style="line-height: 2.5;"></label>-->
+        <span>查找：</span>
+          <input type="text" [(ngModel)]="goodsName" class="form-control store-name border-b-grey ng-pristine ng-valid ng-touched"
+                 (change)="search()" placeholder="请输入商家名称进行搜索">
            <button type="button" title="搜索" id="toSearch" (click)="search()"
-                   class="btn thc btn-thc bar-h3-btn mr ng-scope">
-             <em class="icon-magnifier fa-fw"></em>搜索
+                   class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
+             <em class="icon-magnifier fa-fw"></em><span>&nbsp;&nbsp;搜索</span>
            </button>
-          </span>
-        </div>
       </div>
     </div>
   </div>
@@ -37,12 +30,10 @@
       <thead>
       <tr>
 
-        <th class="w10 text-center">
+        <th class="w20 text-center">
           <rzhDefaultSorter by="storeown">被评商家</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="person">评价人</rzhDefaultSorter>
-        </th>
+
         <th class="w10 text-center">
           <rzhDefaultSorter by="descript">描述相符</rzhDefaultSorter>
         </th>
@@ -58,7 +49,7 @@
         <th class="w20 text-center">
           <rzhDefaultSorter by="ordernumber">订单编号</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
+        <th class="w15 text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -68,8 +59,7 @@
       <!--<ng-container >-->
 
         <tr class="text-center" *ngFor="let count of dataTable.data; let i = index">
-          <td>{{count.goodsName}}</td>
-          <td>{{count.createTime}}</td>
+          <td>{{count.storeName}}</td>
           <td><span [innerHtml]="5 | stars"></span></td>
           <td><span [innerHtml]="5 | stars"></span></td>
           <td><span [innerHtml]="5 | stars"></span></td>
