@@ -88,7 +88,7 @@
       <tr class="text-center" *ngFor="let count of nowData.resultList;let i=index">
         <td>{{i+1}}</td>
         <td>{{count.custName}}</td>
-        <td>{{ queryContent=='ORDSUM'?count.ordSum:count.ordCount }}</td>
+        <td class="thc font">{{ queryContent=='ORDSUM'?count.ordSum:count.ordCount }}</td>
       </tr>
     </table>
     </div>

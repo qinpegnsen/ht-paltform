@@ -23,26 +23,24 @@ import { ListDetailComponent } from './users/list-detail/list-detail.component';
 import { OrderAmountComponent } from './xtsz/order-amount/order-amount.component';
 import { CommodityPriceComponent } from './xtsz/commodity-price/commodity-price.component';
 
-const listRoutes: Routes = [
-  {path: 'list-detail', component:ListDetailComponent},
+const afterChildRoutes:Routes = [
+  {path: 'refund', component:RefundComponent},
 ]
 const routes: Routes = [
   {path: '',redirectTo:'order-amount'},
   {path: 'order-amount', component:OrderAmountComponent},
-  // {path: 'commodity-price', component:CommodityPriceComponent},
   {path: 'analyze-area', component:AnalyzeAreaComponent},
   {path: 'analyze-buy', component:AnalyzeBuyComponent},
   {path: 'analyze-users', component:AnalyzeUsersComponent},
   {path: 'users-new', children:[
     {path: '',component:UsersNewComponent},
     {path: 'list-detail', component:ListDetailComponent},
-  ]
-  },
+  ]},
   {path: 'settle', component:SettleComponent},
   {path: 'orders', component:OrdersComponent},
   {path: 'hot-sale', component:HotSaleComponent},
   {path: 'sale-detail', component:SaleDetailComponent},
-  {path: 'refund', component:RefundComponent},
+  {path: 'after', component: AfterComponent,children:afterChildRoutes},
 ];
 
 @NgModule({
