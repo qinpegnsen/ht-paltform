@@ -12,18 +12,15 @@
   </ul>
 </div>
 <div class="panel ">
-  <div class="col-sm-3" style="margin-bottom: 20px">
-    <label class="pull-left lh">商品分类：</label>
-    <app-get-kind (myData)="getKind($event)" [defaultData]="selType"></app-get-kind>
+  <div class="pull-left pt-lg goods-h" >
+    <span  class="">商品分类：</span>
+    <app-get-kind (myData)="getKind($event)" [defaultData]="selType"  class="pull-right get-kind"></app-get-kind>
   </div>
 
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
       <tr>
-        <!--<th class="text-center w5">-->
-          <!--<rzhDefaultSorter by="order">排序</rzhDefaultSorter>-->
-        <!--</th>-->
         <th class="text-center w25">
           <rzhDefaultSorter by="order">属性名称</rzhDefaultSorter>
         </th>
@@ -38,7 +35,6 @@
       <tbody dnd-sortable-container [sortableData]="data?.voList">
       <tr *ngFor="let count of data?.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable
           [sortableIndex]="i" >
-      <!--<td>{{i+1}}</td>-->
       <td >{{count.name}}</td>
       <td >
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}},</span>

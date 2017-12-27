@@ -14,9 +14,10 @@
   <div class="panel">
     <!--<div >-->
       <div class="w98 m-auto h50 pt-lg">
-      <span class="btn statistic-btn btn-default m0" (click)="selectInfos()">
-        <i class="icon icon-magnifier"></i>
-      </span>
+        <button type="button" title="搜索" (click)="selectInfos()"
+                class="btn thc btn-thc bar-h3-btn ng-scope pull-right">
+          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+        </button>
         <div class="pull-right">
           <div class="col-xs-3 form-group" style="width: 400px">
             <div *ngIf="showType.MONTH">
@@ -92,7 +93,7 @@
       <tbody>
       <tr class="text-center" *ngFor="let area of nowData.resultList">
         <td>{{area.areaName}}</td>
-        <td *ngIf="queryContent=='ORDSUM'">{{area.ordSum}}</td>
+        <td *ngIf="queryContent=='ORDSUM'" class="thc font">{{area.ordSum}}</td>
         <td *ngIf="queryContent=='ORDCOUNT'">{{area.ordCount}}</td>
         <td *ngIf="queryContent=='ORDCUSTCOUNT'">{{area.custCount}}</td>
     </table>

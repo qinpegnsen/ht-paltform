@@ -106,19 +106,40 @@ const goods = {
   link: '/main/goods',
   submenu: [
     {
-      text: '商品审核',
+      text: '自营商品管理',
       icon: 'fa fa-cube',
-      link: '/main/goods/unAudit'
+      link: '/main/goods/plat',
+      alert: '▼',
+      submenu: [
+        {
+          text: '商品审核',
+          link: '/main/goods/plat/unAudit'
+        },
+        {
+          text: '管理商品',
+          link: '/main/goods/plat/manage'
+        },
+        {
+          text: '商品发布',
+          link: '/main/goods/plat/publish'
+        }
+      ]
     },
     {
-      text: '管理商品',
-      icon: 'fa fa-cubes',
-      link: '/main/goods/manage'
-    },
-    {
-      text: '商品发布',
+      text: '企业商品管理',
       icon: 'fa fa-cube',
-      link: '/main/goods/publish'
+      link: '/main/goods/store',
+      alert: '▼',
+      submenu: [
+        {
+          text: '商品审核',
+          link: '/main/goods/store/unAudit'
+        },
+        {
+          text: '管理商品',
+          link: '/main/goods/store/manage'
+        }
+      ]
     },
     {
       text: '分类管理',

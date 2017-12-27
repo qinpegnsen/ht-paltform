@@ -1,0 +1,59 @@
+$img-width: 60px;
+
+.panel-body{
+  padding: 0 15px 15px 15px;
+}
+
+.special {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.dropdownToggle.btn {
+  text-align: left;
+}
+
+.dropdownToggle .caret {
+  margin-top: 7px;
+  margin-right: -8px;
+}
+
+.img-box {
+  display: inline-block;
+  width: $img-width;
+  height: $img-width;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.goods-info{
+  position: absolute;
+  left: $img-width + 20;
+  top: 10px;
+  bottom: 10px;
+  right: 0;
+}
+
+.goods-name {
+  line-height: 1.36;
+  display: block;
+  overflow: hidden;
+}
+
+.tag{
+  display: inline-block;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.query-name{
+  line-height: 35px;
+}
+.one-row{
+  height: 18px;
+  line-height:18px;
+  overflow: hidden;
+}
