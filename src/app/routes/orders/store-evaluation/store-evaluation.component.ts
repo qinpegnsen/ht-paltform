@@ -12,7 +12,7 @@ const swal = require('sweetalert');
 export class StoreEvaluationComponent implements OnInit {
   public data: Page = new Page();
   public deletebutton:object;//删除按钮
-  public goodsName:any;
+  public storeName:any;
   constructor(public submit:SubmitService) {
 
   }
@@ -41,7 +41,7 @@ export class StoreEvaluationComponent implements OnInit {
     let data={
       curPage: activePage,
       pageSize:10,
-      goodsName:me.goodsName,
+      storeName:me.storeName,
     }
     let result = this.submit.getData(url,data);
     me.data = new Page(result);

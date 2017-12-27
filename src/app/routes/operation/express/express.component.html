@@ -6,20 +6,13 @@
 <div class="panel mb">
   <div class="express-height">
     <div class="ng-scope pt-lg" ng-if="search">
-      <div class="form-group mb0">
-        <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
-        <div class="col-xs-5 p0">
-          <input type="text" [(ngModel)]="searchKey" class="form-control border-b-grey ng-pristine ng-valid ng-touched"
-                 (change)="queryExpressList(1)" maxlength="50" placeholder="请输入要查询的快递公司名称或者公司编号">
-        </div>
-        <div class="col-sm-1 pull-left text-center p0" >
-        <span class="ng-scope">
+      <div class="form-group mb0 express-width ml-lg">
+        <span>查找：</span>
+          <input type="text" [(ngModel)]="searchKey" class="express-name form-control border-b-grey ng-pristine ng-valid ng-touched"(change)="queryExpressList(1)" maxlength="50" placeholder="请输入要查询的名称或者编号">
            <button type="button" title="搜索" id="toSearch" (click)="queryExpressList(1)"
-                   class="btn thc btn-thc bar-h3-btn mr ng-scope ">
+                   class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
              <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
            </button>
-          </span>
-        </div>
       </div>
     </div>
   </div>

@@ -5,20 +5,13 @@
 <div class="panel">
   <div class="mb" *ngIf="childMenuTitList.length < 1">
     <div class="panel-body ng-scope" ng-if="search">
-      <div class="form-group mb0">
-        <label class="label-width pull-left text-right lh35 mb0" style="line-height: 2.5;">查找：</label>
-        <div class="col-xs-5 p0">
-          <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey  ng-pristine ng-valid ng-touched"
-                 (change)="queryParent(1)" placeholder="请输入类型名">
-        </div>
-        <div class="col-sm-1 pull-left text-center p0">
-        <span class="ng-scope">
+      <div class="form-group mb0 data-width pt-lg">
+       <span>类型名：</span>
+          <input type="text" [(ngModel)]="searchkey" class="data-name form-control border-b-grey  ng-pristine ng-valid ng-touched"(change)="queryParent(1)" placeholder="请输入类型名">
            <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
-                   class="btn thc btn-thc bar-h3-btn mr ng-scope">
+                   class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
              <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
            </button>
-          </span>
-        </div>
       </div>
     </div>
   </div>
