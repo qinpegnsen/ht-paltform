@@ -93,7 +93,7 @@
       <tbody>
       <tr class="text-center" *ngFor="let area of nowData.resultList">
         <td>{{area.areaName}}</td>
-        <td *ngIf="queryContent=='ORDSUM'">{{area.ordSum}}</td>
+        <td *ngIf="queryContent=='ORDSUM'" class="thc font">{{area.ordSum}}</td>
         <td *ngIf="queryContent=='ORDCOUNT'">{{area.ordCount}}</td>
         <td *ngIf="queryContent=='ORDCUSTCOUNT'">{{area.custCount}}</td>
     </table>

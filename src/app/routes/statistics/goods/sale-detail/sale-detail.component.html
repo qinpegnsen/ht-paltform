@@ -75,11 +75,11 @@
         </thead>
         <tbody>
         <tr class="text-center" *ngFor="let saledetail of data">
-          <td class="">{{saledetail.goodsName}}</td>
-          <td class="">{{saledetail.storeName}}</td>
-          <td class="">{{saledetail.goodsSum}}</td>
-          <td class="">{{saledetail.ordCount}}</td>
-          <td class="">{{saledetail.goodsCount}}</td>
+          <td >{{saledetail.goodsName}}</td>
+          <td>{{saledetail.storeName}}</td>
+          <td class=" thc font">￥&nbsp;{{saledetail.goodsSum}}</td>
+          <td>{{saledetail.ordCount}}</td>
+          <td>{{saledetail.goodsCount}}</td>
         </tr>
       </table>
     </div>
