@@ -126,8 +126,8 @@
           ￥&nbsp;{{member.rpCustAcctIncome?member.rpCustAcctIncome:0 | number: '1.2-2' }}
         </td>
         <td>{{member.coin?member.coin:0 | number: '1.2-2'}}</td>
-        <td class="font-gray">{{member.areaFullName || '【未填写】'}}</td>
-        <td class="font-gray">{{member.custBirthday || '【未填写】'}}</td>
+        <td [ngClass]="{'font-gray':!member.areaFullName}">{{member.areaFullName || '【未填写】'}}</td>
+        <td [ngClass]="{'font-gray':!member.custBirthday}">{{member.custBirthday || '【未填写】'}}</td>
         <td>{{member.custPhone}}</td>
         <td>
           {{member.isMember | rzhState:'1004'}}
