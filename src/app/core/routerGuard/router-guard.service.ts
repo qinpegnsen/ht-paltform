@@ -65,6 +65,7 @@ export class RouterGuardService implements CanActivate {
         menuUrls.push(menu.link);
       }
     });
+    menuUrls.push('/main/edit-pw');//修改密码的路由
     return menuUrls;
   }
 
