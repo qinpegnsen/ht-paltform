@@ -46,16 +46,21 @@
       <tr *ngFor="let brand of dataTable.data;let i = index" class="text-center">
         <td>{{i+1}}</td>
         <td class="hidden-sm">{{brand.brandName}}</td>
-        <td>{{brand.englishName}}</td>
+        <td  [ngClass]="{'font-gray':!brand.englishName}">{{brand.englishName  || '【未填写】'}}</td>
         <td>{{brand.brandHolder}}</td>
         <td>
-          <img width="50px" [src]="brand.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                 onerror="javascript:this.src='../../../assets/img/dummy.png'"
-                 alt="">
+          <span  *ngIf="!brand.brandLogo" class="font-gray">【未上传】</span>
+          <span *ngIf="brand.brandLogo">
+             <img width="50px" [src]="brand.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                  onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                  alt="">
           <img class="hover-big-img" [src]="brand.brandLogo"
                onerror="javascript:this.src='../../../assets/img/dummy.png'"
-               alt=""></td>
+               alt="">
+          </span>
+         </td>
         <td>
+          <span *ngIf="!brand.registration1 && !brand.registration2" class="font-gray">【未上传】</span>
           <span *ngIf="brand.registration1">
             <img height="50px" [src]="brand.registration1" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                      onerror="javascript:this.src='../../../assets/img/dummy.png'"

@@ -16,7 +16,9 @@
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌英文名称：</dt>
-          <dd class="col-xs-9 font14">{{result.englishName}}</dd>
+          <dd class="col-xs-9 font14" [ngClass]="{'font-gray':!result.englishName}">{{result.englishName ||
+            '【未填写】'}}
+          </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌所有人：</dt>
@@ -29,16 +31,21 @@
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌图片：</dt>
           <dd class="col-xs-9 font14">
-            <img height="50" [src]="result.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
-                 onerror="javascript:this.src='../../../assets/img/dummy.png'">
+            <span *ngIf="!result.brandLogo" class="font-gray"> 【未填写】</span>
+            <span *ngIf="result.brandLogo">
+               <img height="50" [src]="result.brandLogo" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
+                    onerror="javascript:this.src='../../../assets/img/dummy.png'">
             <img class="hover-big-img" [src]="result.brandLogo" alt=""
                  onerror="javascript:this.src='../../../assets/img/dummy.png'">
+            </span>
+
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3">品牌注册证：</dt>
           <dd class="col-xs-9 font14">
             <div class="tag-dib mr">
+              <span *ngIf="!result.registration1 && !result.registration2" class="font-gray"> 【未填写】</span>
               <span *ngIf="result.registration1">
                 <img height="50" [src]="result.registration1" (mousemove)="showImg($event)" (mouseleave)="hideImg($event)"
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
