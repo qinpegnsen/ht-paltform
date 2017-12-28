@@ -12,12 +12,14 @@
   <div class="mb w98 search">
     <div class="p ng-scope" ng-if="search">
       <div class="form-group mb0 store-width">
-       <span>评价人：</span>
-          <input type="text" [(ngModel)]="custName" class="form-control store-name border-b-grey ng-pristine ng-valid ng-touched"(change)="search()" placeholder="请输入评价人关键字进行搜索">
-           <button type="button" title="搜索" id="toSearch" (click)="search()"
-                   class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
-             <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
-           </button>
+        <span>评价人：</span>
+        <input type="text" [(ngModel)]="custName"
+               class="form-control store-name border-b-grey ng-pristine ng-valid ng-touched" (change)="search()"
+               placeholder="请输入评价人关键字进行搜索">
+        <button type="button" title="搜索" id="toSearch" (click)="search()"
+                class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
+          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+        </button>
       </div>
     </div>
   </div>
@@ -52,7 +54,6 @@
       <tbody>
 
       <ng-container *ngFor="let count of dataTable.data; let i = index">
-
         <tr class="text-center">
           <td (click)="showDetail(count)"><i class="icon icon-arrow-down"></i></td>
           <td class="text-left">{{count.custName}}</td>
@@ -110,7 +111,7 @@
               条</strong></div>
           </div>
           <div class="col-sm-7">
-            <div style="float: right">
+            <div class="pull-right">
               <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
           </div>

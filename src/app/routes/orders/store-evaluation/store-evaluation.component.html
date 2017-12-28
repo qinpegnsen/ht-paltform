@@ -1,4 +1,3 @@
-
 <div class="content-heading mb-lg thc font">
   店家评价
 </div>
@@ -16,17 +15,18 @@
       <div class="form-group mb0 store-width">
         <!--<label class="label-width pull-left text-right mb0" style="line-height: 2.5;"></label>-->
         <span>商家名称：</span>
-          <input type="text" [(ngModel)]="storeName" class="form-control store-name border-b-grey ng-pristine ng-valid ng-touched"
-                 (change)="search()" placeholder="请输入商家名称进行搜索">
-           <button type="button" title="搜索" id="toSearch" (click)="search()"
-                   class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
-             <em class="icon-magnifier fa-fw"></em><span>&nbsp;&nbsp;搜索</span>
-           </button>
+        <input type="text" [(ngModel)]="storeName"
+               class="form-control store-name border-b-grey ng-pristine ng-valid ng-touched"
+               (change)="search()" placeholder="请输入商家名称进行搜索">
+        <button type="button" title="搜索" id="toSearch" (click)="search()"
+                class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
+          <em class="icon-magnifier fa-fw"></em><span>&nbsp;&nbsp;搜索</span>
+        </button>
       </div>
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="qeuryAll(1,$event)">
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data" (pageChange)="qeuryAll(1,$event)">
       <thead>
       <tr>
 
@@ -55,26 +55,29 @@
       </tr>
       </thead>
       <tbody>
-        <tr class="text-center" *ngFor="let count of dataTable.data; let i = index">
-          <td>{{count.storeName}}</td>
-          <td><span [innerHtml]="5 | stars"></span></td>
-          <td><span [innerHtml]="5 | stars"></span></td>
-          <td><span [innerHtml]="5 | stars"></span></td>
-          <td> {{count.createTime}}</td>
-          <td>{{count.goodsCode}}</td>
-          <td>
-            <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
-          </td>
-        </tr>
+      <tr class="text-center" *ngFor="let count of dataTable.data; let i = index">
+        <td>{{count.storeName}}</td>
+        <td><span [innerHtml]="5 | stars"></span></td>
+        <td><span [innerHtml]="5 | stars"></span></td>
+        <td><span [innerHtml]="5 | stars"></span></td>
+        <td> {{count.createTime}}</td>
+        <td>{{count.goodsCode}}</td>
+        <td>
+          <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
+        </td>
+      </tr>
       </tbody>
       <tfoot>
       <tr>
         <td colspan="8">
           <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
           </div>
           <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
+            </div>
           </div>
         </td>
       </tr>
