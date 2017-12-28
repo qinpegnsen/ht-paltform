@@ -12,8 +12,8 @@ const routes: Routes = [
   {path: '', redirectTo: 'store-pending'},
   {path: 'store-pending', component: StorePendingComponent},//待发货
   {path: 'store-received', component: StoreReceivedComponent},//待收货
-  {path: 'store-complete', component: StoreCompleteComponent},//已取消
-  {path: 'store-cancel', component: StoreCancelComponent},//已完成
+  {path: 'store-complete', component: StoreCompleteComponent},//已完成
+  {path: 'store-cancel', component: StoreCancelComponent},//已取消
 ]
 
 
