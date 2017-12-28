@@ -213,7 +213,6 @@
         <th class="w10 p text-center">数量</th>
         <th class="w10 p text-center">异常状态</th>
         <th class="w10 p text-center">订单金额(元)</th>
-        <th class="w10 p text-center">交易操作</th>
       </tr>
       </thead>
       <tbody>
@@ -235,7 +234,7 @@
         </td>
         <td class="bb position-relative">
           <div class="cover" *ngIf="goods.returnNum > 0"></div>
-          ￥&nbsp;{{goods.price | number: '1.2-2'}}
+          ￥ {{goods.price | number: '1.2-2'}}
         </td>
         <td class="bb position-relative">
           <div class="cover" *ngIf="goods.returnNum > 0"></div>
