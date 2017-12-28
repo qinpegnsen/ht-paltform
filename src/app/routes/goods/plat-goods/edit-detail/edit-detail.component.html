@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg thc font" *ngIf="path=='update'">修改商品</div>
+<div class="content-heading mb-lg thc font" *ngIf="path=='edit'">修改商品</div>
 <form class="step-two panel panel-default" (keydown.Enter)="false" #publishForm="ngForm">
   <!--商品基本信息-->
   <fieldset class="m0 p0">
@@ -91,21 +91,23 @@
         </h5>
         <div class="clearfix enumType" *ngFor="let saleAttr of saleAttrList;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
-            <span class="_attrName">{{saleAttr.name}}</span>
-            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1" maxlength="6"
-                                           [value]="saleAttr.name" (change)="changeSpec($event.target)"></label>
+            <span class="_attrName" *ngIf="!saleAttr.used">{{saleAttr.name}}</span>
+            <label class="w80" *ngIf="saleAttr.used"><input class="form-control" type="text"
+                                           [ngModelOptions]="{standalone: true}" maxlength="6"
+                                           [(ngModel)]="saleAttr.name" (ngModelChange)="changeSpec(i)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
             <li class="col-xs-4 col-md-3 _attr" *ngFor="let val of saleAttr.goodsEnumValList;let k = index;">
               <label class="checkbox-inline c-checkbox">
-                <input class="_val" type="checkbox" [checked]="val.checked" [name]="saleAttr.name" [id]="(i+1)+''+(k+1)"
-                       [value]="val.enumValue" (change)="checkSpecVal($event.target)"/>
+                <input class="_val" type="checkbox" [(ngModel)]="val.checked" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="changeSpec(i)"/>
                 <span class="fa fa-check"></span>
               </label>
-              <span class="_value">{{val.enumValue}}</span>
-              <label class="w66 hide">
-                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue" maxlength="16"
-                       (change)="changeSpec($event.target)"/><a class="hide" [id]="val.id"></a>
+              <span class="_value" *ngIf="!val.checked">{{val.enumValue}}</span>
+              <label class="w66" *ngIf="val.checked">
+                <input class="form-control" type="text" [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="val.enumValue" maxlength="16"
+                       (ngModelChange)="changeSpec(i)"/>
               </label>
             </li>
           </ul>
@@ -182,8 +184,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
-            <td [hidden]="true"><input type="text" name="saGroupCode" [(ngModel)]="sku.saGroupCode"></td>
-            <td *ngFor="let val of sku.attrsList" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
+            <td *ngFor="let val of sku.attrsList"><p>{{val.value}}</p></td>
             <td>
               <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"
@@ -285,7 +286,7 @@
 
   <!--商品详情描述-->
   <fieldset class="m0 p0">
-    <legend class="m0">商品详情描述</legend>
+    <legend class="m0"><i class="main-red">*</i>商品详情描述</legend>
     <dl class="clearfix">
       <dt class="col-xs-2">商品描述：</dt>
       <dd class="col-xs-10">
@@ -295,7 +296,7 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2">移动端描述：</dt>
+      <dt class="col-xs-2"><i class="main-red">*</i>移动端描述：</dt>
       <dd class="col-xs-10">
         <div class="w100 app-box">
           <div class="app-wrap summernoteImg">

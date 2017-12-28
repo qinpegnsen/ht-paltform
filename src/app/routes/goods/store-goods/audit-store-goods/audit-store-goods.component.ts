@@ -23,14 +23,13 @@ export class AuditStoreGoodsComponent implements OnInit {
   public goodsBaseCode: string;  //商品基本编码
   public enum: any;              // 所选规格，用于请求sku接口的数据
   public skuAttr = [];           //属性列表
-  public skuImg: any;            // 图片属性
+  public skuImg: any = {           // 图片属性
+    vals: []
+  };
   public oldImgs: any = {};        // 商品已经有的图片列表
   public goodsEditData: any;     // 修改商品时商品的原有数据
-  public tempMblHtml: string;    // 修改商品时临时用的移动端详情
   public myReadOnly: boolean = true;     // 商品详情或审核商品时是只读状态
-  public goodsBody: any;          //商品详情
-  public mobileBody: any;          //移动端商品详情
-  public audit: any;              // 商品审核
+  public audit: any = {};              // 商品审核
   public goodsAudits: any;        // 商品审核状态列表
   public storeCode: string;          //店铺编码
   public logistics: any;             // 物流规则列表
@@ -42,10 +41,7 @@ export class AuditStoreGoodsComponent implements OnInit {
       freightType: null,
       fixedFreight: null,
       expressTplId: null
-    },
-    goodsImagesList: [],
-    goodsBaseAttrList: [],
-    goodsSkuList: []
+    }
   };// 商品发布数据，所有数据
   constructor(public route: ActivatedRoute,
               public location: Location,
@@ -93,17 +89,9 @@ export class AuditStoreGoodsComponent implements OnInit {
         toolbar: [],
         height: 420
       });
-      me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
-      me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
-      if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
-      if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
+      if (!isNullOrUndefined(me.goodsEditData.goodsBody)) $('#goodsBody').summernote('code', me.goodsEditData.goodsBody);   //PC端详情
+      if (!isNullOrUndefined(me.goodsEditData.mobileBody)) $('#mobileBody').summernote('code', me.goodsEditData.mobileBody);   //移动端详情
     })
-
-    //初始化图片上传属性对象,后续需要往vals里添加对象，做此初始配置可保HTML与后续添加时不报错
-    me.skuImg = {
-      attrName: '',
-      vals: []
-    };
   }
 
   /**
@@ -130,9 +118,9 @@ export class AuditStoreGoodsComponent implements OnInit {
     me.saleAttrList = pageData.saleAttrList;      // 规格
     me.goodsEditData = pageData.goodsSave;
     me.publishData = me.goodsEditData;                  // 商品发布数据
+    me.genImgSku();                                        //已选中属性的图片组
     me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
-    me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-    me.mobileBody = me.goodsEditData.mobileBody.replace(/\\/, '');
+    me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
     if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
       me.getExpressTpl(pageData.storeCode); //获取物流模板
       me.getTplValById();  //根据物流模板ID获取模板值
@@ -191,51 +179,42 @@ export class AuditStoreGoodsComponent implements OnInit {
   }
 
   /**
-   * edit当修改商品时改变选中的规格的输入框和文本显示
-   */
-  public specsCheckedWhenEdit() {
-    for (let i = 0; i < $('.specs ._val').length; i++) {
-      let $obj = $('.specs ._val').eq(i);
-      if ($obj.prop('checked')) {
-        $obj.parents('.enumType').find('._attrName').addClass('hide').next().removeClass('hide');
-        $obj.parents('._attr').find('._value').addClass('hide').next().removeClass('hide');
-      } else {
-        $obj.parents('._attr').find('._value').removeClass('hide').next().addClass('hide');
-      }
-      ;
-      // 如果是第一个规格，则改变图片列表的选值数组
-      if ($obj.parents('.enumType').attr('id') == '1') this.genImgSku($obj);
-    }
-  }
-
-  /**
    * 如果是第一个规格，则改变图片列表的选值数组
    * @param $obj
    */
-  public genImgSku($obj) {
-    let me = this;
-    let checkedAttr = $obj.parents('.enumType').find('._val:checked');  //选中的第一个规格的数量
-    if (checkedAttr.length > 0) {     //选择的规格属大于0时，获取所选属性的名和值
-      me.skuImg.attrName = $obj.parents('.enumType').find('._attrName').next().find('input').val();
-      me.skuImg.attrCode = $obj.parents('.enumType').find('._attrName').next().find('input').attr('id');
-    }
-    let $val = $obj.parents('._attr').find('._value').next().find('input'); // 取到所选中的多选框对应的输入框，以便从中取值
-    let targetCheckBoxObj = $obj.parents('._attr').find('._val');           // 当前选择或修改的属性的checkBox的jQ对象
-    // 当前元素被选中，判断属性组中这是否已经有了这个分组
-    if (targetCheckBoxObj.prop('checked')) {
-      if (me.checkImgListIfHadGroup($val.attr('id')).isHad) {
-        let groupId = me.checkImgListIfHadGroup($val.attr('id')).groupId;
-        me.skuImg.vals[groupId].valName = $val.val();
-      } else {
-        let obj = {
-          attrCode: me.skuImg.attrCode,
-          valCode: $val.attr('id'),
-          valName: $val.val(),
-          idx: $val.attr('name')
-        };
-        me.skuImg.vals.push(obj);
+  public genImgSku() {
+    let me = this, checkedAttrNum: number = 0;
+    let curCheckedAttr = me.saleAttrList[0];
+    for (let i = 0; i < curCheckedAttr.goodsEnumValList.length; i++) {
+      let checkedEnumItem = curCheckedAttr.goodsEnumValList[i];
+      if (checkedEnumItem.checked) {
+        checkedAttrNum += 1;
+        if (me.checkImgListIfHadGroup(1 + '' + (i + 1)).isHad) {
+          let groupId = me.checkImgListIfHadGroup(1 + '' + (i + 1)).groupId;
+          me.skuImg.vals[groupId].valName = checkedEnumItem.enumValue;
+        } else {
+          let obj = {
+            attrCode: 1,
+            valCode: 1 + '' + (i + 1),
+            valName: checkedEnumItem.enumValue,
+            idx: checkedEnumItem.idx
+          };
+          me.skuImg.vals.push(obj);
+        }
+      } else {      // 取消选中
+        let skuImgAry = me.skuImg.vals;
+        for (let k = 0; k < skuImgAry.length; k++) {
+          if (skuImgAry[k].valCode === 1 + '' + (i + 1)) {
+            me.skuImg.vals.splice(k, 1);
+            if (!isUndefined(me.oldImgs[1 + '' + (i + 1)])) delete me.oldImgs[1 + '' + (i + 1)];            //在老图片组中将该图片组删除
+          }
+        }
       }
     }
+    if (checkedAttrNum > 0) {     //选择的规格属大于0时，获取所选属性的名和值
+      me.skuImg.attrName = curCheckedAttr.name;
+      curCheckedAttr.used = true;
+    } else curCheckedAttr.used = false;
   }
 
   /**

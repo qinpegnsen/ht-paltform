@@ -31,21 +31,21 @@ export class GoodsService {
    * @param requestData
    * @returns {any}
    */
-  getSkuData(requestUrl: string, requestData: any) {
-    let result: any;
+  getSkuData(requestData: any) {
+    let defer = $.Deferred(); //封装异步请求结果;
     this.ajax.post({
-      url: requestUrl,
+      url: '/goodsEdit/genesku',
       data: JSON.stringify(requestData),
       async: false,
       contentType: "application/json",
       success: (res) => {
-        if (!isNullOrUndefined(res) && res.success) result = res;
+        if (res.success) defer.resolve(res.data);
       },
       error: (res) => {
-        console.log('get data error', res);
+        console.log('错误', res);
       }
     });
-    return result;
+    return defer.promise(); //返回异步请求信息
   }
 
   /**
@@ -79,12 +79,10 @@ export class GoodsService {
    * @returns {any}
    */
   publishGoods(requestUrl: string, requestData: any) {
-    let me = this;
-    var defer = $.Deferred(); //封装异步请求结果
+    let me = this, defer = $.Deferred(); //封装异步请求结果
     me.ajax.post({
       url: requestUrl,
       data: JSON.stringify(requestData),
-      async: false,
       contentType: "application/json",
       success: (res) => {
         if (res.success) {

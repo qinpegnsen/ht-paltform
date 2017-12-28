@@ -27,10 +27,11 @@ export class EditDetailComponent implements OnInit {
   public goodsBaseCode: string;  //商品基本编码
   public enum: any;              // 所选规格，用于请求sku接口的数据
   public skuAttr = [];           //属性列表
-  public skuImg: any;            // 图片属性
-  public goodsImgList = {};       // 商品上传图片列表
+  public skuImg: any = {           // 图片属性
+    vals: []
+  };
+  public goodsImgList:any = {};       // 商品上传图片列表
   public oldImgs: any = {};        // 商品已经有的图片列表
-  public mblItemList = [];         //手机端上传后的图片集合
   public goodsEditData: any;     // 修改商品时商品的原有数据
   public tempMblHtml: string;    // 修改商品时临时用的移动端详情
   public goodsBody: any;          //PC端商品详情
@@ -48,22 +49,12 @@ export class EditDetailComponent implements OnInit {
       expressTplId: null,
       weight: null,
       volume: null,
-    },
-    isFreight: null,
-    goodsImagesList: [],
-    goodsBaseAttrList: [],
-    goodsSkuList: []
+    }
   };// 商品发布数据，所有数据
 
   public defaultUploader: FileUploader = new FileUploader({
     url: GoodsService.goodsUploadRetUrl,
     itemAlias: "limitFile",
-    allowedFileType: ["image"]
-  })
-  public mobileUploader: FileUploader = new FileUploader({
-    url: GoodsService.goodsUploadRetHttpURL,
-    itemAlias: "limitFile",
-    autoUpload: true,
     allowedFileType: ["image"]
   })
 
@@ -155,18 +146,6 @@ export class EditDetailComponent implements OnInit {
           $(this).parents('.dropdown-menu').slideUp(200);
         });
 
-        //当点击移动端编辑图片的时候
-        $('.app-control').on('click', '.app-img-box', function () {
-          let target = this;
-          me.editMblImg(target);
-        })
-
-        $('body').click(function (e) {
-          if (!$(e.target).parents().hasClass('app-img-box')) {
-            $('.app-img-box ._edit').addClass('hide');
-          } //关闭选框
-        });
-
         //当点击批量设置按钮的时候
         $('.sku-table').on('click', '.set', function () {
           let target = this;
@@ -174,42 +153,11 @@ export class EditDetailComponent implements OnInit {
         })
 
         if (me.path == 'edit') {
-          me.specsCheckedWhenEdit();  //当修改商品时改变选中的规格的输入框和文本显示
-          me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
-          me.genMblItemList();        //将html字符串生成移动端图片文字组合
-          if (!isNullOrUndefined(me.goodsBody)) $('#goodsBody').summernote('code', me.goodsBody);   //PC端详情
-          if (!isNullOrUndefined(me.mobileBody)) $('#mobileBody').summernote('code', me.mobileBody);   //移动端详情
+          if (!isNullOrUndefined(me.goodsEditData.goodsBody)) $('#goodsBody').summernote('code', me.goodsEditData.goodsBody);   //PC端详情
+          if (!isNullOrUndefined(me.goodsEditData.mobileBody)) $('#mobileBody').summernote('code', me.goodsEditData.mobileBody);   //移动端详情
         }
       })
     }
-
-    //初始化图片上传属性对象,后续需要往vals里添加对象，做此初始配置可保HTML与后续添加时不报错
-    me.skuImg = {
-      attrName: '',
-      vals: []
-    };
-
-
-    /**
-     * 手机端上传图片成功处理
-     * @param item 信息集合
-     * @param response 返回结果
-     * @param status 状态码
-     * @param headers 头信息
-     */
-    /*me.mobileUploader.onSuccessItem = function (item, response: any, status, headers) {
-     if (!isNullOrUndefined(response)) {
-     response = JSON.parse(response);
-     if (response.success) {
-     let img = response.data;
-     let obj = {
-     type: 'img',
-     value: img
-     };
-     me.mblItemList.push(obj);
-     }
-     }
-     }*/
   }
 
   /**
@@ -278,25 +226,23 @@ export class EditDetailComponent implements OnInit {
       me.goodsEditData = pageData.goodsSave;
       me.publishData = me.goodsEditData;         // 商品发布数据
       me.checkedBaseAttr();                         //已选中的基本属性
+      me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
+      me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
+      me.genImgSku();       //已选中属性的图片组
       if (isNullOrUndefined(me.publishData.goodsExpressInfo)) {
         me.publishData.goodsExpressInfo = {
           freightType: null,
           fixedFreight: null,
           expressTplId: null,
         };
+      }else if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)){
+        me.getTplValById();  //根据物流模板ID获取模板值
       }
-      me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
-      me.goodsBody = me.goodsEditData.goodsBody.replace(/\\/, '');
-      me.mobileBody = me.goodsEditData.mobileBody.replace(/\\/, '');
-      // me.tempMblHtml = me.goodsEditData.mobileBody.replace(/\\/, '');        //为了容易生成移动端详情图片文字组合，将html字符串先放入html再取
-      if (!isNullOrUndefined(me.publishData.goodsExpressInfo) && !isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
-        me.getTplValById();
-      }    //根据物流模板ID获取模板值
     }
   }
 
   /**
-   * update 已选中的基本属性
+   * 修改时 选中已选中的基本属性
    */
   checkedBaseAttr() {
     let me = this;
@@ -316,7 +262,7 @@ export class EditDetailComponent implements OnInit {
     let me = this, expressTpl;
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
     if (isNullOrUndefined(target) || target == 'FIXED') {
-      expressTpl = me.goods.getExpressTplByStoreCode('SZH_PLAT_SELF_STORE');// 获取运费模板
+      expressTpl = me.goods.getExpressTplByStoreCode('SZH_PLAT_SELF_STORE');// TODO获取运费模板
     }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
@@ -408,85 +354,99 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 选择规格值的方法
-   * @param obj
-   */
-  checkSpecVal(obj) {
-    let me = this, $obj = $(obj) || obj;
-    //某个值选择或取消选择时，切换值和输入框的显示
-    if ($obj.parents('._attr').find('._val').is(':checked')) {
-      $obj.parents('.enumType').find('._attrName').addClass('hide').next().removeClass('hide');
-      $obj.parents('._attr').find('._value').addClass('hide').next().removeClass('hide');
-    } else {
-      $obj.parents('._attr').find('._value').removeClass('hide').next().addClass('hide');
-    }
-    ;
-    //如果某种规则没有选值的时候，切换值和输入框的显示
-    if ($obj.parents('.enumType').find('._val:checked').length < 1) {
-      $obj.parents('.enumType').find('._attrName').removeClass('hide').next().addClass('hide');
-    }
-    ;
-    let spec = $obj.parents('.enumType');
-    me.genObject(spec);//生成选中的数据对象
-
-    // 如果是第一个规格，则改变图片列表的选值数组
-    if ($obj.parents('.enumType').attr('id') == '1') me.genImgSku($obj)
-  }
-
-  /**
    * 改变规格属性与值时生成新的sku
    * @param obj DOM节点
    */
-  changeSpec(obj) {
-    let me = this, $obj = $(obj);
-    let spec = $obj.parents('.enumType');
-    me.genObject(spec);           //生成选中的数据对象
-    if (spec.attr('id') == '1') me.genImgSku($obj);  // 如果是第一个规格，则改变图片列表的选值数组
+  changeSpec(index) {
+    let me = this;
+    me.genObject(index);           //生成选中的数据对象
+    if (index == 0) me.genImgSku();  // 如果是第一个规格，则改变图片列表的选值数组
   }
 
+  /**
+   * 将所选规格生成一个对象
+   * @param spec
+   */
+  public genObject(index) {
+    let me = this, enums: any = {}, attrsList: Array<any> = new Array(), checkedNum: number = 0;
+    let curCheckedAttr = this.saleAttrList[index];
+    for (let i = 0; i < curCheckedAttr.goodsEnumValList.length; i++) {
+      let checkedEnumItem = curCheckedAttr.goodsEnumValList[i];
+      if (checkedEnumItem.checked) {
+        let attrTemp = {
+          attrName: curCheckedAttr.name,
+          attrCode: index + 1,
+          valCode: (index + 1) + '' + (i + 1),
+          value: checkedEnumItem.enumValue,
+          idx: checkedEnumItem.idx,
+          enumValId: checkedEnumItem.id,
+        };
+        attrsList.push(attrTemp);
+        checkedNum += 1;
+      }
+    }
+    if (checkedNum > 0) curCheckedAttr.used = true;
+    else curCheckedAttr.used = false;
+    enums = {
+      attrsList: attrsList,
+      type: index + 1,
+      goodsBaseCode: me.goodsBaseCode,
+    };
+    if (!isNullOrUndefined(me.publishData.goodsSkuList) && me.judgeSkuListHasInputVal()) enums.skuList = me.publishData.goodsSkuList;    // 当表格中已经输入了价格则将带价格的skuList传过去保存
+
+    $.when(me.goods.getSkuData(enums)).done(data => {
+      if (data && data.length > 0) {
+        me.publishData.goodsSkuList = data;
+        me.skuAttr = data[0].attrsList;
+      } else {
+        me.publishData.goodsSkuList = new Array()
+      }   // 将数据生成易解析的新数组
+    })
+  }
 
   /**
    * 如果是第一个规格，则改变图片列表的选值数组
    * @param $obj
    */
-  public genImgSku($obj) {
-    let me = this;
-    let checkedAttr = $obj.parents('.enumType').find('._val:checked');  //选中的第一个规格的数量
-    if (checkedAttr.length > 0) {     //选择的规格属大于0时，获取所选属性的名和值
-      me.skuImg.attrName = $obj.parents('.enumType').find('._attrName').next().find('input').val();
-      me.skuImg.attrCode = $obj.parents('.enumType').find('._attrName').next().find('input').attr('id');
-    }
-    let $val = $obj.parents('._attr').find('._value').next().find('input'); // 取到所选中的多选框对应的输入框，以便从中取值
-    let targetCheckBoxObj = $obj.parents('._attr').find('._val');           // 当前选择或修改的属性的checkBox的jQ对象
-    // 当前元素被选中，判断属性组中这是否已经有了这个分组
-    if (targetCheckBoxObj.prop('checked')) {
-      if (me.checkImgListIfHadGroup($val.attr('id')).isHad) {
-        let groupId = me.checkImgListIfHadGroup($val.attr('id')).groupId;
-        me.skuImg.vals[groupId].valName = $val.val();
-      } else {
-        let obj = {
-          attrCode: me.skuImg.attrCode,
-          valCode: $val.attr('id'),
-          valName: $val.val(),
-          idx: $val.attr('name'),
-          uploader: new FileUploader({
-            url: GoodsService.goodsUploadRetUrl,
-            itemAlias: "limitFile",
-            allowedFileType: ["image"]
-          })
-        };
-        me.skuImg.vals.push(obj);
-      }
-    } else {      // 取消选中
-      let skuImgAry = me.skuImg.vals;
-      for (let i = 0; i < skuImgAry.length; i++) {
-        if (skuImgAry[i].valCode === $val.attr('id')) {
-          me.skuImg.vals.splice(i, 1);
-          if (!isUndefined(me.oldImgs[$val.attr('id')])) delete me.oldImgs[$val.attr('id')];            //在老图片组中将该图片组删除
-          if (!isUndefined(me.goodsImgList[$val.attr('id')])) delete me.goodsImgList[$val.attr('id')];  //在总图片组中将该图片组删除
+  public genImgSku() {
+    let me = this, checkedAttrNum: number = 0;
+    let curCheckedAttr = me.saleAttrList[0];
+    for (let i = 0; i < curCheckedAttr.goodsEnumValList.length; i++) {
+      let checkedEnumItem = curCheckedAttr.goodsEnumValList[i];
+      if (checkedEnumItem.checked) {
+        checkedAttrNum += 1;
+        if (me.checkImgListIfHadGroup(1 + '' + (i + 1)).isHad) {
+          let groupId = me.checkImgListIfHadGroup(1 + '' + (i + 1)).groupId;
+          me.skuImg.vals[groupId].valName = checkedEnumItem.enumValue;
+        } else {
+          let obj = {
+            attrCode: 1,
+            valCode: 1 + '' + (i + 1),
+            valName: checkedEnumItem.enumValue,
+            idx: checkedEnumItem.idx,
+            uploader: new FileUploader({
+              url: GoodsService.goodsUploadRetUrl,
+              itemAlias: "limitFile",
+              allowedFileType: ["image"]
+            })
+          };
+          me.skuImg.vals.push(obj);
+        }
+      } else {      // 取消选中
+        let skuImgAry = me.skuImg.vals;
+        for (let k = 0; k < skuImgAry.length; k++) {
+          if (skuImgAry[k].valCode === 1 + '' + (i + 1)) {
+            me.skuImg.vals.splice(k, 1);
+            if (!isUndefined(me.oldImgs[1 + '' + (i + 1)])) delete me.oldImgs[1 + '' + (i + 1)];            //在老图片组中将该图片组删除
+            if (!isUndefined(me.goodsImgList[1 + '' + (i + 1)])) delete me.goodsImgList[1 + '' + (i + 1)];  //在总图片组中将该图片组删除
+          }
         }
       }
     }
+    if (checkedAttrNum > 0) {     //选择的规格属大于0时，获取所选属性的名和值
+      me.skuImg.attrName = curCheckedAttr.name;
+      curCheckedAttr.used = true;
+    } else curCheckedAttr.used = false;
     me.skuImg.vals.sort(me.compare('valCode'));   //根据某个属性值（valCode）排序
   }
 
@@ -519,40 +479,6 @@ export class EditDetailComponent implements OnInit {
       var value1 = a[property];
       var value2 = b[property];
       return value1 - value2;
-    }
-  }
-
-  /**
-   * 将所选规格生成一个对象
-   * @param spec
-   */
-  public genObject(spec) {
-    let me = this, attrsList = [];
-    let checkedVal = spec.find('._val:checked');
-    for (let i = 0; i < checkedVal.length; i++) {
-      let getAttrObj = spec.find('[name="enumName"]');
-      let getValObj = checkedVal.eq(i).parents('._attr').find('._value').next().find('input');
-      let attrTemp = {
-        attrName: getAttrObj.val(),
-        attrCode: getAttrObj.attr('id'),
-        valCode: getValObj.attr('id'),
-        value: getValObj.val(),
-        idx: getValObj.attr('name'),
-        enumValId: getValObj.next().attr('id'),
-      };
-      attrsList.push(attrTemp);
-    }
-    me.enum = {
-      attrsList: attrsList,
-      type: spec.attr('id'),
-      goodsBaseCode: me.goodsBaseCode,
-    };
-    // console.log("█ me.enum ►►►", me.enum);
-    if (me.judgeSkuListHasInputVal()) me.enum.skuList = me.publishData.goodsSkuList;    // 当表格中已经输入了价格则将带价格的skuList传过去保存
-    let skuData = me.goods.getSkuData('/goodsEdit/genesku', me.enum);
-    // console.log("█ skuData ►►►", skuData);
-    if (!isNullOrUndefined(skuData)) {
-      me.genClearArray(skuData.data);   // 将数据生成易解析的新数组
     }
   }
 
@@ -604,53 +530,6 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * edit当修改商品时改变选中的规格的输入框和文本显示
-   */
-  public specsCheckedWhenEdit() {
-    for (let i = 0; i < $('.specs ._val').length; i++) {
-      let $obj = $('.specs ._val').eq(i);
-      if ($obj.prop('checked')) {
-        $obj.parents('.enumType').find('._attrName').addClass('hide').next().removeClass('hide');
-        $obj.parents('._attr').find('._value').addClass('hide').next().removeClass('hide');
-      } else {
-        $obj.parents('._attr').find('._value').removeClass('hide').next().addClass('hide');
-      }
-      ;
-      // 如果是第一个规格，则改变图片列表的选值数组
-      if ($obj.parents('.enumType').attr('id') == '1') this.genImgSku($obj);
-    }
-  }
-
-  /**
-   * 编辑移动端详情的图片或文本
-   * @param target
-   */
-  public editMblImg(target) {
-    if ($(target).find('.mobile-edit-area').length > 0 && !$(target).find('.mobile-edit-area').hasClass('hide')) return;// 当是修改文本的时候，点击当前板块不显示编辑工具
-    let editState = !$(target).find('._edit').hasClass('hide');//编辑状态：true-编辑状态，false-普通状态
-    if (editState) {
-      $(target).find('._edit').addClass('hide');
-    } else {
-      $(target).find('._edit').removeClass('hide');
-      $(target).siblings().find('._edit').addClass('hide');
-    }
-  }
-
-  /**
-   * 替换图片
-   * @param e 选择图片事件
-   * @param i 需要替换掉的图片的索引值
-   */
-  mblReplaceImg(e, i) {
-    let _this = this, file = e.target.files[0], img = _this.goods.uploadImg(file);
-    let obj = {
-      type: 'img',
-      value: img
-    };
-    _this.mblItemList[i] = obj;
-  }
-
-  /**
    * 移动端详情同步PC端详情
    */
   syncGoodsBody() {
@@ -674,130 +553,6 @@ export class EditDetailComponent implements OnInit {
         type: 'img',
         value: img
       };
-      // _this.mblItemList.push(obj);
-    }
-  }
-
-  /**
-   * 输入框计数器
-   */
-  public counter(target) {
-    let obj = $(target);
-    let hadLength = obj.val().length;
-    let leaveLength = 500 - hadLength;
-    obj.parents('.mea-text').find('.counter').html(leaveLength);
-    return hadLength;
-  }
-
-  /**
-   * 显示移动端文本编辑框
-   * @param target
-   */
-  showEdit(target) {
-    $('.app-img-box ._edit').addClass('hide');
-    $('.app-box .mobile-edit-area.new-text').removeClass('hide');
-    this.counter(target);
-    this.scrollBottom();//使移动端详情编辑滚动条一直保持在最底部
-  }
-
-  /**
-   * 隐藏移动端文本编辑框
-   * @param target
-   */
-  public hideEdit(target?) {
-    if (!isUndefined(target)) {
-      $(target).parents('.app-img-box').find('._edit').addClass('hide');
-      $(target).parents('.app-img-box').find('.mobile-edit-area').addClass('hide');
-    }
-    $('.mobile-edit-area').addClass('hide');
-  }
-
-  /**
-   * 使移动端详情编辑滚动条一直保持在最底部
-   */
-  public scrollBottom() {
-    $('.app-control')[0].scrollTop = $('.app-control')[0].scrollHeight;// 使滚动条一直保持在最底部
-  }
-
-  /**
-   * 插入文本
-   * @param target
-   * @param index
-   */
-  insertMblText(target?, index?) {
-    let me = this, textArea;
-    if (!isUndefined(target)) {
-      $(target).parents('.app-img-box').find('._edit').addClass('hide');
-      textArea = $(target).parents('.mobile-edit-area').find('.textarea');
-    } else {
-      $('.new-text').addClass('hide');
-      textArea = $('.new-text').find('.textarea');
-    }
-    if (textArea.val().length > 0) {
-      let obj = {
-        type: 'text',
-        value: textArea.val()
-      };
-      if (!isUndefined(index)) me.mblItemList[index] = obj;
-      else me.mblItemList.push(obj);
-      textArea.val('');// 清除文本区域内容
-      me.hideEdit();// 隐藏文本编辑区域
-    }
-  }
-
-  /**
-   * 手机端详情编辑编辑文本
-   * @param target
-   * @param quondamText
-   */
-  mblReplaceText(target, quondamText) {
-    $('.mobile-edit-area .textarea').html(quondamText);
-    $(target).parents('.app-img-box').find('.text').remove();
-    $(target).parents('.app-img-box').find('.mobile-edit-area').removeClass('hide');
-    $(target).parents('.app-img-box').find('._edit').addClass('hide');
-  }
-
-  /**
-   * 移动端详情编辑向上移动图片
-   * @param index
-   * @param type
-   * @param item
-   */
-  moveImg(index, type, item) {
-    let me = this, prevItem = me.mblItemList[index - 1], nextItem = me.mblItemList[index + 1];
-    if (type == 'up') {
-      me.mblItemList[index - 1] = item;
-      me.mblItemList[index] = prevItem;
-    } else if (type == 'down') {
-      me.mblItemList[index] = nextItem;
-      me.mblItemList[index + 1] = item;
-    }
-    $('.app-content').find('._edit').addClass('hide');
-  }
-
-  /**
-   * 移动端详情移除图片
-   * @param index
-   */
-  removeItem(index) {
-    let me = this;
-    me.mblItemList.splice(index, 1);
-  }
-
-  /**
-   * edit修改商品时将移动端详情html字符串生成图片与文字组合
-   */
-  public genMblItemList() {
-    let me = this, doms = $('#mblHtml').children(), type, value;
-    me.mblItemList = [];
-    for (let i = 0; i < doms.length; i++) {
-      type = doms.eq(i)[0].localName == 'p' ? 'text' : doms.eq(i)[0].localName;
-      value = type == 'text' ? doms.eq(i).html() : doms.eq(i).attr('src');
-      let obj = {
-        type: type,
-        value: value
-      };
-      me.mblItemList.push(obj);
     }
   }
 
@@ -819,7 +574,6 @@ export class EditDetailComponent implements OnInit {
         allUploaders.push(me.defaultUploader);// 加入默认的uploader
       }
     }
-    ;
     return allUploaders;
   }
 
@@ -896,9 +650,9 @@ export class EditDetailComponent implements OnInit {
         let itemImgSrcs = me.goodsImgList[item.valCode];
         if (isNullOrUndefined(itemImgSrcs)) {
           AppComponent.rzhAlt('warning', '请上传规格为' + item.valName + '的商品的图片');
+          MaskService.hideMask();//关闭遮罩层
           return null;// 当某个规格没有图片时，提示必须上传
         }
-        ;
         if (!isNullOrUndefined(itemImgSrcs)) {
           for (let k = 0; k < itemImgSrcs.length; k++) {
             const temp: any = {attrCode: '', valCode: '', valName: '', idx: '', goodsImage: ''};
@@ -913,25 +667,10 @@ export class EditDetailComponent implements OnInit {
       //当没有选择商品规格时
     } else if (me.defaultUploader.queue.length > 0) {
       AppComponent.rzhAlt('warning', '数据缺失', "请选择商品规格");
+      MaskService.hideMask();//关闭遮罩层
+      return null;
     }
-    // console.log("█ goodsImgList ►►►", goodsImgList);
     return goodsImgList;
-  }
-
-  /**
-   * 移动端详情
-   * @returns {string}
-   */
-  public genMblDetailHtml() {
-    let me = this, mblHtml = '';
-    me.mblItemList.forEach((item) => {
-      if (item.type == 'img') {
-        mblHtml += '<img width="100%" src="' + item.value + '">';
-      } else if (item.type == 'text') {
-        mblHtml += '<p class="text mb0" style="line-height: 1.6">' + item.value + '</p>';
-      }
-    });
-    return mblHtml;
   }
 
   /**
@@ -939,7 +678,7 @@ export class EditDetailComponent implements OnInit {
    */
   publishGoods() {
     let me = this;
-    if (me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeLogistics()) {
+    if (me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeDetailInfo() && me.judgeLogistics()) {
       MaskService.showMask();//显示遮罩层
       me.uploadImgs();// 先上传图片
     }
@@ -951,7 +690,6 @@ export class EditDetailComponent implements OnInit {
    */
   judgeGoodsImgs() {
     let me = this, targets = me.skuImg.vals;
-    console.log("█ me.skuImg.vals ►►►", me.skuImg.vals);
     // 当商品发布时，如果选了规格，但没有选择图片
     if (me.path == 'step_two') {
       if (targets.length > 0) {
@@ -1046,28 +784,40 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 判断商品详情是否编辑
+   */
+  judgeDetailInfo() {
+    let me = this;
+    if ($('#goodsBody').summernote('isEmpty')) {
+      AppComponent.rzhAlt('warning', '请编辑PC端商品详情');
+      return false
+    } else if($('#mobileBody').summernote('isEmpty')) {
+      AppComponent.rzhAlt('warning', '请编辑移动端商品详情');
+      return false
+    }
+    return true
+  }
+
+  /**
    * 整理数据并且发布商品
    */
   public genPublishDataAndPublish() {
     let me = this;
-    if (isNullOrUndefined(me.genGoodsImgList())) {
-      MaskService.hideMask();//关闭遮罩层
-      return;
-    }                //当某个规格没有图片时直接结束发布
+    me.publishData.goodsImagesList = me.genGoodsImgList();           // 商品图片列表
     if (me.path == 'step_two') me.publishData['kindId'] = me.kindId;
-    me.publishData['goodsBaseCode'] = me.goodsBaseCode;                 // 商品基本编码
+    me.publishData.goodsBaseCode = me.goodsBaseCode;                 // 商品基本编码
     me.genGoodsBaseAttrList();                                          // 商品基本属性
-    me.publishData['goodsImagesList'] = me.genGoodsImgList();           // 商品图片列表
-    me.publishData['goodsBody'] = $('#goodsBody').summernote('code');  // 商品详情 PC
-    me.publishData['mobileBody'] = $('#mobileBody').summernote('code');  // 移动端详情
-    // me.publishData['mobileBody'] = me.genMblDetailHtml();               // 商品详情 App
+    me.publishData.goodsBody = $('#goodsBody').summernote('code');  // 商品详情 PC
+    me.publishData.mobileBody = $('#mobileBody').summernote('code');  // 移动端详情
     $.when(me.goods.publishGoods('/goodsEdit/save', me.publishData)).done(data => {
-      if (me.path == 'edit') {
-        AppComponent.rzhAlt("success", '操作成功');
-        me.location.back();
-        me.refresh = true;
-      } else {
-        me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: data}})
+      if(data){
+        if (me.path == 'edit') {
+          AppComponent.rzhAlt("success", '操作成功');
+          me.location.back();
+          me.refresh = true;
+        } else {
+          me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: data}})
+        }
       }
     })
 

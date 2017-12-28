@@ -83,24 +83,21 @@
         </h5>
         <div class="clearfix enumType" *ngFor="let saleAttr of saleAttrList;let i = index;" [id]="i+1">
           <h6 class="col-sm-2 col-xs-3 text-right">
-            <span class="_attrName">{{saleAttr.name}}</span>
-            <label class="w80 hide"><input class="form-control" name="enumName" type="text" [id]="i+1"
-                                           [readonly]="myReadOnly"
-                                           [value]="saleAttr.name" (change)="changeSpec($event.target)"></label>
+            <span class="_attrName" *ngIf="!saleAttr.used">{{saleAttr.name}}</span>
+            <label class="w80" *ngIf="saleAttr.used">
+              <input class="form-control" [ngModelOptions]="{standalone: true}" type="text"
+                                           readonly [(ngModel)]="saleAttr.name"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
             <li class="col-xs-4 col-md-3 _attr" *ngFor="let val of saleAttr.goodsEnumValList;let k = index;">
               <label class="checkbox-inline c-checkbox">
-                <input class="_val" type="checkbox" [checked]="val.checked" [name]="saleAttr.name"
-                       [id]="(i+1)+''+(k+1)" [disabled]="myReadOnly"
-                       [value]="val.enumValue" (change)="checkSpecVal($event.target)"/>
+                <input class="_val" type="checkbox" [(ngModel)]="val.checked"  [ngModelOptions]="{standalone: true}" disabled/>
                 <span class="fa fa-check"></span>
               </label>
-              <span class="_value">{{val.enumValue}}</span>
-              <label class="w66 hide">
-                <input class="form-control" type="text" [name]="val.idx" [id]="(i+1)+''+(k+1)" [value]="val.enumValue"
-                       [readonly]="myReadOnly"
-                       (change)="changeSpec($event.target)"/><a class="hide" [id]="val.id"></a>
+              <span class="_value" *ngIf="!val.checked">{{val.enumValue}}</span>
+              <label class="w66" *ngIf="val.checked">
+                <input class="form-control" type="text"  [ngModelOptions]="{standalone: true}"
+                       readonly [(ngModel)]="val.enumValue"/>
               </label>
             </li>
           </ul>
@@ -136,19 +133,16 @@
 
           <!--当选择了规格时-->
           <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
-            <td [hidden]="true"><input type="text" name="saGroupCode" [(ngModel)]="sku.saGroupCode"></td>
-            <td *ngFor="let val of sku.attrsList" [id]="val.valCode" [class]="val.idx"><p>{{val.value}}</p></td>
+            <td *ngFor="let val of sku.attrsList"><p>{{val.value}}</p></td>
             <td>
               <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
-                     [readonly]="myReadOnly"
-                     [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
+                     [readonly]="myReadOnly" [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
               <em class="add-on">元</em>
               <span [hidden]="marketPrice.value != 0" class="text-danger font12"> 市场价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'price'+i" type="number" required
-                     [readonly]="myReadOnly"
-                     [(ngModel)]="sku.price" #price="ngModel"/>
+                     [readonly]="myReadOnly" [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="marketPrice.value > 0 && price.value>0">
                 <span [hidden]="compareNumber(price.value,marketPrice.value)"
@@ -159,8 +153,7 @@
             </td>
             <td>
               <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
-                     [readonly]="myReadOnly"
-                     [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
+                     [readonly]="myReadOnly" [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
                 <span [hidden]="compareNumber(memberPrice.value,price.value)"
@@ -171,8 +164,7 @@
             </td>
             <td>
               <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
-                     [readonly]="myReadOnly"
-                     [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
+                     [readonly]="myReadOnly" [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
               <span [hidden]="storageNum.value > 9"
                     class="text-danger font12"> 库存>=10
               </span>
@@ -190,11 +182,10 @@
         <div class="goodspics" *ngFor="let val of skuImg.vals;let idx = index;" [id]="val.valCode">
           <div class="color-value">
             <h4>{{skuImg.attrName}}：<span>{{val.valName}}</span></h4>
-            <p class="tip" myHoverColor [class.hide]="myReadOnly">第一张图片为主图</p>
+            <p class="tip" myHoverColor>第一张图片为主图</p>
           </div>
           <ul class="goods-pic-list ml">
             <li class="ui-state-disabled img-box" *ngFor="let src of oldImgs[val.valCode];let i = index">
-              <div class="close" [class.hide]="myReadOnly" (click)="removeImgSrc(val.valCode,i)">×</div>
               <div class="upload-thumb">
                 <img [src]="src" onerror="javascript:this.src='../../../assets/img/dummy.png'">
               </div>
@@ -209,7 +200,7 @@
   <fieldset class="m0 p0">
     <legend class="m0">商品详情描述</legend>
     <dl class="clearfix">
-      <dt class="col-xs-2">商品描述：</dt>
+      <dt class="col-xs-2"><i class="main-red">*</i>商品描述：</dt>
       <dd class="col-xs-10">
         <div class="w100 summernoteImg">
           <div id="goodsBody" class="summernote"></div>
@@ -217,20 +208,11 @@
       </dd>
     </dl>
     <dl class="clearfix">
-      <dt class="col-xs-2">移动端描述：</dt>
+      <dt class="col-xs-2"><i class="main-red">*</i>移动端描述：</dt>
       <dd class="col-xs-10">
         <div class="w100 app-box">
           <div class="app-wrap summernoteImg">
             <div id="mobileBody" class="summernote"></div>
-            <!--<div class="app-control">
-              <div class="app-content">
-                <div class="app-img-box" *ngFor="let item of mblItemList;let i=index;">
-                  <img width="100%" *ngIf="item.type== 'img'" [src]="item.value"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'">
-                  <p class="text mb0" style="line-height: 1.6" *ngIf="item.type== 'text'">{{item.value}}</p>
-                </div>
-              </div>
-            </div>-->
           </div>
           <div class="explain">
             <dl class="mb">
@@ -255,9 +237,6 @@
       </dd>
     </dl>
   </fieldset>
-
-  <!--临时节点，修改商品时用来存储移动端详情的图片和文本，通过节点的取值，方便处理成详情展示和修改需要的数据-->
-  <div class="hide" id="mblHtml" [innerHtml]="tempMblHtml"></div>
 
   <!--商品物流信息-->
   <fieldset class="m0 p0 logistics">
