@@ -419,9 +419,9 @@ export class AddRedPackageComponent implements OnInit {
     this.getRedPacketNum();//获取添加规则后的总数量
     if (Number(this.sumOfNumArray) > Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '已超过红包设置的总数量');
-    } else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
+    }/* else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '未达到红包设置的总数量');
-    } else {
+    }*/ else {
       this.formatSelDate();//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
       this.refactorData();//重构数据
