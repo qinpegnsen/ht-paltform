@@ -114,7 +114,7 @@
               {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ {{epInfo?.idcardEndTime | date: 'yyyy/MM/dd'}}
             </ng-container>
             <ng-container *ngIf="epInfo?.isForever == 'Y'|| !epInfo?.idcardEndTime">
-              {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ 永久
+              {{epInfo?.idcardStartTime | date: 'yyyy/MM/dd'}} ~ 长期
             </ng-container>
           </td>
         </tr>
@@ -148,7 +148,12 @@
         <tr class="t-item clearfix">
           <td class="item-hd col-sm-2">营业执照有效期：</td>
           <td class="item-bd col-sm-10">
-            {{epInfo?.businessLicenceStart | date: 'yyyy/MM/dd'}} ~ {{epInfo?.businessLicenceEnd | date: 'yyyy/MM/dd'}}
+            <ng-container *ngIf="epInfo?.businessLicenceEnd">
+              {{epInfo?.businessLicenceStart | date: 'yyyy/MM/dd'}} ~ {{epInfo?.businessLicenceEnd | date: 'yyyy/MM/dd'}}
+            </ng-container>
+            <ng-container *ngIf="!epInfo?.businessLicenceEnd">
+              {{epInfo?.businessLicenceStart | date: 'yyyy/MM/dd'}} ~ 长期
+            </ng-container>
           </td>
         </tr>
         <tr class="t-item clearfix">
