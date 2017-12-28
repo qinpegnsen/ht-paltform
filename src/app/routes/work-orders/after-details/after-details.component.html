@@ -57,18 +57,22 @@
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">{{afterData.returnType=='RETURN'?'退货说明':'退款说明'}}：</td>
-            <td class="item-bd col-sm-10 mb0">{{afterData.reasonRmk}}</td>
+            <td class="item-bd col-sm-10 mb0" [ngClass]="{'font-gray':!afterData.reasonRmk}">{{afterData.reasonRmk ||
+              '【未填写】'}}
+            </td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">凭证：</td>
             <td class="item-bd col-sm-10 mb0">
+
               <span *ngFor="let item of afterData.afterGoodsReqVouList">
-                <img class="goods-md-img mr" [src]="item.vpic" (mousemove)="showImg($event)"
-                     (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
-                     alt="">
+                   <img class="goods-md-img mr" [src]="item.vpic" (mousemove)="showImg($event)"
+                        (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
+                        alt="">
                 <img [src]="item.vpic" class="hover-native-img" alt=""
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
-              </span>
+                </span>
+
             </td>
           </tr>
         </table>
@@ -77,7 +81,9 @@
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
-              <legend class="m0" style="height: 51px;line-height: 51px;">{{afterData.returnType=='RETURN'?'退货申请处理':'退款申请处理'}}</legend>
+              <legend class="m0" style="height: 51px;line-height: 51px;">
+                {{afterData.returnType=='RETURN'?'退货申请处理':'退款申请处理'}}
+              </legend>
             </div>
             <table class="t-items p w100">
               <tr class="t-item clearfix">
@@ -125,7 +131,8 @@
                                   {{item.time}}
                               </span>
                               <ng-container *ngIf="s>0">
-                                <span class="mr logis-time" *ngIf="item.day==LogisticsData[s-1].day">{{item.time}}</span>
+                                <span class="mr logis-time"
+                                      *ngIf="item.day==LogisticsData[s-1].day">{{item.time}}</span>
                                 <span class="mr logis-time" *ngIf="item.day!=LogisticsData[s-1].day">
                                 <b class="mr-lg pull-left">{{item.day}}</b>
                                 <b class="mr-lg">{{item.day | getWeek}}</b>
@@ -173,7 +180,7 @@
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">审核结果：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state  | rzhState:'1701'}}</td>
+              <td class="item-bd col-sm-10 mb0">{{afterTailList[3].state | rzhState:'1701'}}</td>
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">处理备注：</td>

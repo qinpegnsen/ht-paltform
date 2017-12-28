@@ -154,16 +154,16 @@
               </span>
           </div>
           <div class="bg-table special text-left">
-            <span class="m10">邮箱:</span> <span>{{member.custEmail}}</span>
+            <span class="m10">邮箱:</span> <span  [ngClass]="{'font-gray':!member.custEmail}">{{member.custEmail || '【未填写】'}}</span>
           </div>
           <div class="bg-table special text-left">
             <span class="m10">最后登陆时间:</span> <span>{{member.custOldLoginTime}}</span>
           </div>
           <div class="bg-table special text-left">
-            <span class="m10">新浪微博登陆id:</span> <span> {{member.custSinaopenid}}</span>
+            <span class="m10">新浪微博登陆id:</span> <span  [ngClass]="{'font-gray':!member.custSinaopenid}"> {{member.custSinaopenid || '【未填写】'}}</span>
           </div>
           <div class="bg-table special text-left">
-            <span class="m10">qq:</span> <span>{{member.custQq}}</span>
+            <span class="m10" >qq:</span> <span [ngClass]="{'font-gray':!member.custQq}">{{member.custQq  || '【未填写】'}}</span>
           </div>
         </td>
       </tr>

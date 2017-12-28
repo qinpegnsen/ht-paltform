@@ -61,11 +61,14 @@
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">{{afterData.returnType=='RETURN'?'退货说明':'退款说明'}}：</td>
-            <td class="item-bd col-sm-10 mb0">{{afterData.reasonRmk}}</td>
+            <td class="item-bd col-sm-10 mb0" [ngClass]="{'font-gray':!afterData.reasonRmk}">{{afterData.reasonRmk ||
+              '【未填写】'}}
+            </td>
           </tr>
           <tr class="t-item clearfix">
             <td class="item-hd col-sm-2">凭证：</td>
             <td class="item-bd col-sm-10 mb0">
+
               <ng-container *ngIf="afterData.afterGoodsReqVouList?.length > 0">
                 <div class="tag-dib imgbox text-center mr" *ngFor="let item of afterData.afterGoodsReqVouList">
                   <img class="img" [src]="item.vpic" (mousemove)="showImg($event)"
@@ -112,60 +115,60 @@
 
         <!--退货订单已发货-->
         <ng-container *ngIf="afterData.returnType=='RETURN'">
-        <div *ngIf="afterData.state=='DELIVERY' || afterData.state=='CHECK_FAILS' || afterData.state=='DONE'">
-          <div class="">
-            <legend class="m0" style="height: 51px;line-height: 51px;">退货发货信息</legend>
-          </div>
-          <table class="t-items p w100">
-            <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">退货跟踪：</td>
-              <td class="item-bd col-sm-10 mb0">
-                <div class="order-track">
-                  <ul class="timeline-alt pb0 mb0">
-                    <li class="mb0" *ngFor="let item of LogisticsData;let s = index">
-                      <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
-                      <div class="timeline-panel">
-                        <div class="right">
-                          <div>
-                            <p class="every-line">
+          <div *ngIf="afterData.state=='DELIVERY' || afterData.state=='CHECK_FAILS' || afterData.state=='DONE'">
+            <div class="">
+              <legend class="m0" style="height: 51px;line-height: 51px;">退货发货信息</legend>
+            </div>
+            <table class="t-items p w100">
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">退货跟踪：</td>
+                <td class="item-bd col-sm-10 mb0">
+                  <div class="order-track">
+                    <ul class="timeline-alt pb0 mb0">
+                      <li class="mb0" *ngFor="let item of LogisticsData;let s = index">
+                        <div class="timeline-badge gray-bg thc" [class.bg]="s==0"></div>
+                        <div class="timeline-panel">
+                          <div class="right">
+                            <div>
+                              <p class="every-line">
                               <span class="mr logis-time" *ngIf="s==0">
                                   <b class="mr-lg pull-left">{{item.day}}</b>
                                   <b class="mr-lg">{{item.day | getWeek}}</b>
                                   {{item.time}}
                               </span>
-                              <ng-container *ngIf="s>0">
+                                <ng-container *ngIf="s>0">
                                 <span class="mr logis-time"
                                       *ngIf="item.day==LogisticsData[s-1].day">{{item.time}}</span>
-                                <span class="mr logis-time" *ngIf="item.day!=LogisticsData[s-1].day">
+                                  <span class="mr logis-time" *ngIf="item.day!=LogisticsData[s-1].day">
                                 <b class="mr-lg pull-left">{{item.day}}</b>
                                 <b class="mr-lg">{{item.day | getWeek}}</b>
                                 {{item.time}}
                               </span>
-                              </ng-container>
-                              <span class="every-info">{{item.acceptStation}}</span>
-                            </p>
+                                </ng-container>
+                                <span class="every-info">{{item.acceptStation}}</span>
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">退货发货状态：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.state | rzhState:'1701'}}</td>
-            </tr>
-            <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">物流公司：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressName}}</td>
-            </tr>
-            <tr class="t-item clearfix">
-              <td class="item-hd col-sm-2">物流单号：</td>
-              <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressNo}}</td>
-            </tr>
-          </table>
-        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">退货发货状态：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterData.state | rzhState:'1701'}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">物流公司：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressName}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">物流单号：</td>
+                <td class="item-bd col-sm-10 mb0">{{afterData.afterGoodsTail?.expressNo}}</td>
+              </tr>
+            </table>
+          </div>
         </ng-container>
 
         <!--平台验收货物之后-->
@@ -211,7 +214,8 @@
                   <span class="fa fa-circle"></span>{{item.val}}</label>
               </div>
             </ng-container>
-            <ng-container *ngIf="afterData.ordState == 'ASSIGNED' || afterData.ordState == 'PAID' || afterData.ordState == 'PREPARE'">
+            <ng-container
+              *ngIf="afterData.ordState == 'ASSIGNED' || afterData.ordState == 'PAID' || afterData.ordState == 'PREPARE'">
               <div class="text-danger">该商品暂未发货，默认同意退款</div>
             </ng-container>
           </td>
