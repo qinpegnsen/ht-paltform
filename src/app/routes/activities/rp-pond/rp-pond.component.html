@@ -131,10 +131,10 @@
         <td class="text-left">{{count.storeCode}}</td>
         <td class="text-left">{{count.subjectName}}</td>
         <ng-container *ngIf="count.toType=='CUST'">
-          <td class="thc font text-left">支出 ￥&nbsp;{{count.expenditrue?count.expenditrue:0 |number:'1.2-2'}}</td>
+          <td class="thc font text-left">支出 ￥&nbsp;{{count.expenditrue || 0 |number:'1.2-2'}}</td>
         </ng-container>
         <ng-container *ngIf="count.toType=='STORE'||count.toType=='PLAT'">
-          <td class="thc font text-left">收入 ￥&nbsp;{{count.income?count.income:0 |number:'1.2-2'}}</td>
+          <td class="thc font text-left">收入 ￥&nbsp;{{count.income|| 0 |number:'1.2-2'}}</td>
         </ng-container>
         <td class="text-left">{{count.remark}}</td>
         <td>{{count.createTime }}</td>

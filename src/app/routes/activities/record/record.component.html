@@ -76,7 +76,7 @@
         <td class="text-center">{{item.custPhone}}</td>
         <td>{{item.epSubname}}</td>
         <td class="text-center">{{item.logType | rzhState :'2100'}}</td>
-        <td class="text-center thc font">￥&nbsp;{{item.amount?item.amount:0 |number:'1.2-2'}}</td>
+        <td class="text-center thc font">￥&nbsp;{{item.amount ||0 |number:'1.2-2'}}</td>
         <td class="text-center">{{item.createTime}}</td>
       </tr>
       </tbody>

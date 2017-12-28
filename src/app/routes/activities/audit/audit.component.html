@@ -103,7 +103,7 @@
       <tr *ngFor="let item of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
         <td>{{item.bacctName}}</td>
-        <td class="thc font">￥&nbsp;{{item.drawMoney?item.drawMoney:0 | number:'1.2-2'}}</td>
+        <td class="thc font">￥&nbsp;{{item.drawMoney | number:'1.2-2'}}</td>
         <td>￥&nbsp;{{item.brokerage | number:'1.2-2'}}</td>
         <td>{{item.payWay | rzhState:'1017'}}</td>
         <td>{{item.state | rzhState:'2102'}}</td>
