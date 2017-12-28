@@ -68,7 +68,7 @@ const routes: Routes = [
   {path: 'prepare', component: PrepareComponent,children: [
     {path: 'order-detail', component: OrderDetailComponent}
   ]},
-  {path: 'store', component: StoreEvaluationComponent},
+  // {path: 'store', component: StoreEvaluationComponent},
   {path: 'settle', component: SettleComponent},
   {path: 'agent-ept', component: AgentEptComponent},
   {path: 'ept-detail', component: EptDetailComponent},
