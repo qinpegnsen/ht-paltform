@@ -7,7 +7,7 @@
     </div>
     <div class="pop cancel-con font12 w100">
       <input class="form-control" required [(ngModel)]="indexId" name="indexId" type="hidden"/>
-      <dl class="bb m0 clearfix">
+     <!-- <dl class="bb m0 clearfix">
         <dt class="col-xs-3">
           网页：
         </dt>
@@ -26,18 +26,7 @@
             <span></span>
           </label>
         </dd>
-      </dl>
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3">
-          微信：
-        </dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <label class="switch">
-            <input type="checkbox"  [checked]="indexData.wx=='Y'" (change)="changeIndexData('wx')" title="是否启动"/>
-            <span></span>
-          </label>
-        </dd>
-      </dl>
+      </dl>-->
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">
           安卓：
@@ -56,6 +45,17 @@
         <dd class="orderId-color col-xs-9 font14">
           <label class="switch">
             <input type="checkbox" [checked]="indexData.ios=='Y'"  (change)="changeIndexData('ios')" title="是否启动"/>
+            <span></span>
+          </label>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">
+          微信：
+        </dt>
+        <dd class="orderId-color col-xs-9 font14">
+          <label class="switch">
+            <input type="checkbox"  [checked]="indexData.wx=='Y'" (change)="changeIndexData('wx')" title="是否启动"/>
             <span></span>
           </label>
         </dd>

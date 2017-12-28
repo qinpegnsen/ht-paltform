@@ -7,14 +7,24 @@ import {PlatformReceivedComponent} from './platform-received/platform-received.c
 import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../shared/shared.module';
 import {FileUploadModule} from 'ng2-file-upload';
+import {PlatformOrderService} from './platform-order.service';
+import {OrderDetailComponent} from './order-detail/order-detail.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'platform-pending'},
-  {path: 'platform-pending', component: PlatformPendingComponent},//待发货
-  {path: 'platform-received', component: PlatformReceivedComponent},//待收货
-  {path: 'platform-complete', component: PlatformCompleteComponent},//已取消
-  {path: 'platform-cancel', component: PlatformCancelComponent},//已完成
+  {path: 'platform-pending', component: PlatformPendingComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//待发货
+  {path: 'platform-received', component: PlatformReceivedComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//待收货
+  {path: 'platform-complete', component: PlatformCompleteComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//已取消
+  {path: 'platform-cancel', component: PlatformCancelComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//已完成
 ]
 
 @NgModule({
@@ -24,6 +34,9 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent]
+  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent],
+  providers: [
+    PlatformOrderService
+  ]
 })
 export class PlatformOrderModule { }

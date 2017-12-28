@@ -12,7 +12,23 @@
   color: #23b7e5;
   border-bottom-color: #23b7e5;
 }
-.place-time{
+.place-time{._mrl{
+  margin-left:42px !important;
+  overflow: hidden;
+}
+
+  ._logistics{
+    padding-top:15px;margin-bottom: 10px;background: #F3F3F3;
+  }
+  ._line-height{
+    line-height: 18px;
+  }
+  .logistics{
+    padding-left: 85px;
+    position: absolute;
+    left:-29px;
+  }
+
   width: 310px;
   display: inline-block;
 }

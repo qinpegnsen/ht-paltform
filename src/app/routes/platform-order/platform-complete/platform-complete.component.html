@@ -1,136 +1,208 @@
 <div class="content-heading mb-lg thc font">平台已完成订单</div>
-<div class="order panel mb">
+<div class="order panel" [hidden]="!showList">
   <div class="panel-body">
-    <div *ngIf="showList">
-      <!--查询 start-->
-      <div class="row clearfix p text-right">
-        <div class="place-time clearfix mb">
-          <span class="_title">下单时间：</span>
-          <div class="_picker">
-            <div class="input-group">
-              <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="agentTime" readonly>
-              <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+    <!--查询 start-->
+    <div class="row clearfix p text-right">
+      <div class="search-term clearfix ml mb">
+        <div class="w100 pl-sm pr0 pull-left">
+          <div class="form-group mb0 pr0">
+            <div class="w100 pl0 pr0 pull-left">
+              <input type="text" class="form-control border-b-grey" [(ngModel)]="phone" placeholder="请填写手机号"/>
             </div>
           </div>
         </div>
-        <div class="search-term clearfix ml mb">
-          <div class="w100 pl-sm pr0 pull-left">
-            <div class="form-group mb0 pr0">
-              <div class="w100 pl0 pr0 pull-left">
-                <input type="text" class="form-control border-b-grey" [(ngModel)]="agentAcct" placeholder="请填写代理商账号"/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="search-term clearfix ml mb">
-          <div class="w100 pl-sm pr0 pull-left">
-            <div class="form-group mb0 pr0">
-              <div class="w100 pl0 pr0 pull-left">
-                <input type="text" class="form-control border-b-grey" [(ngModel)]="agentName" placeholder="请填写商品名称"/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="search-term clearfix ml mb">
-          <div class="w100 pl-sm pr0 pull-left">
-            <div class="form-group mb0 pr0">
-              <div class="w90 pl0 pr0 pull-left">
-                <input type="text" class="form-control border-b-grey" [(ngModel)]="agentOrdno" placeholder="请填写订单编号"/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button type="button" title="搜索"
-                class="btn thc btn-thc"  (click)="queryDatas()">
-          <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
-        </button>
       </div>
-      <!--查询 end-->
-      <ul class="clearfix order-table-head list-unstyled mb0 p b">
-        <li class="w40 pull-left text-center">商品</li>
-        <li class="w10 pull-left text-center">单价</li>
-        <li class="w10 pull-left text-center">数量</li>
-        <li class="w10 pull-left text-center">收货人</li>
-        <li class="w10 pull-left text-center">订单金额（元）</li>
-        <li class="w10 pull-left text-center">交易状态</li>
-        <li class="w10 pull-left text-center">交易操作</li>
-      </ul>
-      <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
-             (pageChange)="queryDatas(1,$event)">
-        <tbody>
-        <tr class="mt" *ngFor="let goods of dataTable.data;let i = index">
-          <td class="w100 p0 font12 bt0">
-            <div class="order-space"></div>
-            <div class="order-head p b bb0">
-              <span class="mr-xl" style="float: left!important;">订单编号：{{goods.ordno}}</span>
-              <span class="mr-xl" style="float: left!important;">下单时间：{{goods.createTime}}</span>
-              <!--<span class="icon-screen-smartphone">来源：移动端</span>-->
-              <span class="fa fa-desktop"> 来源：PC</span>
+      <div class="search-term clearfix ml mb">
+        <div class="w100 pl-sm pr0 pull-left">
+          <div class="form-group mb0 pr0">
+            <div class="w90 pl0 pr0 pull-left">
+              <input type="text" class="form-control border-b-grey" [(ngModel)]="ordno" placeholder="请填写订单编号"/>
             </div>
-            <table class="w100 b">
-              <tr class="text-center" *ngFor="let name of goods.agentOrdItemList;let j = index">
-                <td class="w40 p text-left position-relative bb">
-          <span class="goods-img goods-lg-img mr"><img [src]="name.goodsImage"
-                                                       onerror="javascript:this.src='../../../assets/img/dummy.png'" alt=""></span>
-                  <div class="goods-lg-info">
-                    <p class="mb0 font13 omg2 two-row mb-sm">
-                      <a class="goods-name" href="javascript:;">{{name.goodsName}}</a>
-                    </p>
-                    <p class="mb0 one-row omg" *ngFor="let attr of name.goodsSavSet | strToJson">
-                      <span class="inline">{{attr.attrName}}：</span>
-                      <span class="inline">{{attr.value}}</span>
-                    </p>
-                  </div>
-                </td>
-                <td class="w10 bb">￥ {{name.batchPrice| number:'1.2-2'}}</td>
-                <td class="w10 bb">{{name.batchNum}}</td>
-                <td class="w10 bl position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-          <span class="mb0 cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
-                (mouseleave)="hideBuyerInfo(i)">{{name.agentName}}
-          </span>
-                  <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)" (mouseleave)="hideBuyerInfo(i)">
+          </div>
+        </div>
+      </div>
+      <button type="button" title="搜索"
+              class="btn thc btn-thc"  (click)="queryDatas()">
+        <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+      </button>
+    </div>
+    <!--查询 end-->
+    <ul class="clearfix order-table-head list-unstyled mb0 p b">
+      <li class="w35 pull-left text-center">商品</li>
+      <li class="w10 pull-left text-center">单价</li>
+      <li class="w7 pull-left text-center">数量</li>
+      <li class="w8 pull-left text-center">异常状态</li>
+      <li class="w10 pull-left text-center">买家</li>
+      <li class="w10 pull-left text-center">订单金额(元)</li>
+      <li class="w10 pull-left text-center">交易状态</li>
+      <li class="w10 pull-left text-center">操作</li>
+    </ul>
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
+           (pageChange)="queryDatas(1,$event)">
+      <tbody>
+      <tr class="mt" *ngFor="let order of dataTable.data;let i = index">
+        <td class="w100 p0 font12 bt0">
+          <div class="order-space"></div>
+          <div class="order-head p b bb0">
+            <span class="mr-xl">订单编号：{{order.ordno}}</span>
+            <!--<span class="mr-xl">店铺：{{goods.storeName}}</span>-->
+            <span class="mr-xl">下单时间：{{order.createTime}}</span>
+            <span>来源：{{order.payPlat | rzhState:'1015'}}</span>
+            <!--<span class="fa fa-desktop"> 来源：PC</span>-->
+          </div>
+          <table class="w100 b">
+            <tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">
+              <td class="w35 p text-left position-relative bb">
+                <div class="cover" *ngIf="goods.returnNum > 0"></div>
+                <span class="goods-img goods-lg-img mr">
+                  <img [src]="goods.goodsImage" onerror="javascript:this.src='../../../assets/img/dummy.png'"
+                       alt=""></span>
+                <div class="goods-lg-info">
+                  <p class="mb0 font13 omg2 two-row mb-sm">
+                    <a class="goods-name" href="javascript:;">{{goods.goodsName}}</a>
+                  </p>
+                  <p class="mb0 one-row omg" *ngFor="let attr of goods.goodsSavSet | strToJson">
+                    <span class="inline">{{attr.attrName}}：</span>
+                    <span class="inline">{{attr.value}}</span>
+                  </p>
+                </div>
+              </td>
+              <td class="w10 position-relative" [class.bb]="s != order.ordItemList.length-1">
+                <div class="cover" *ngIf="goods.returnNum > 0"></div>
+                <span>¥{{goods.price | number: '1.2-2'}}</span>
+              </td>
+              <td class="w7 position-relative" [class.bb]="s != order.ordItemList.length-1">
+                <div class="cover" *ngIf="goods.returnNum > 0"></div>
+                {{goods.num}}
+              </td>
+              <td class="w8" [class.bb]="s != order.ordItemList.length-1">
+                <ng-container *ngIf="goods.returnNum>0">
+                  <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
+                  <p class="text-danger mb0 mt-sm"><a>查看退款进度</a></p>
+                </ng-container>
+              </td>
+              <ng-container *ngIf="s==0">
+                <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
+                  <span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
+                        (mouseleave)="hideBuyerInfo(i)">{{order.linkman}}
+                  </span>
+                  <div class="szh-buyer-info text-left" #i (mouseenter)="showUserInfo(i)"
+                       (mouseleave)="hideBuyerInfo(i)">
                     <div class="info-con">
-                      <p class="pl mb-sm"><i class="fa fa-user"></i> 收货人信息</p>
-                      <dl><dt>姓名：</dt><dd>{{goods.linkman}}</dd></dl>
-                      <dl><dt>电话：</dt><dd>{{goods.mobile}}</dd></dl>
-                      <dl><dt>地址：</dt><dd>{{goods.addr}}</dd></dl>
+                      <p class="pl mb-sm"><i class="fa fa-user"></i> 用户信息</p>
+                      <dl>
+                        <dt>姓名：</dt>
+                        <dd>{{order.linkman}}</dd>
+                      </dl>
+                      <dl>
+                        <dt>电话：</dt>
+                        <dd>{{order.phone}}</dd>
+                      </dl>
+                      <dl>
+                        <dt>地址：</dt>
+                        <dd>{{order.areaFullName + order.address}}</dd>
+                      </dl>
                     </div>
                   </div>
                 </td>
-                <td class="w10 bl" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-                  <span class="main-red font14">￥ {{goods.pay | number:'1.2-2'}}</span><br>
-                  <span class="font-gray">运费 ￥{{goods.freightPrice | number:'1.2-2'}}</span><br>
-                  <span class="font-gray">{{goods.payWay | rzhState :'1017'}}</span>
+                <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
+                  <span class="main-red font14">¥{{order.total | number: '1.2-2'}}</span><br>
+                  <span class="font-gray" *ngIf="order.freight == 0">免运费</span>
+                  <span class="font-gray" *ngIf="order.freight > 0">运费：{{order.freight | number: '1.2-2'}}</span><br>
+                  <span class="font-gray">{{order.payWay | rzhState:'1017'}}</span>
                 </td>
-                <td class="w10 bl  position-relative" *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
-                  <p class="font-gray mb-sm cursor-p">{{goods.state | rzhState :'1019'}}</p>
-                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="stock-detail"
-                     [queryParams]="{ordno:goods.ordno}">查看详情</p>
+                <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
+                  <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
+                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="order-detail"
+                     [queryParams]="{ordno:order.ordno}">
+                    查看详情</p>
+                  <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
+                <span class="pl pr" myHoverColor [myHover]="'orange'"
+                      (mouseenter)="showLogistics(Logistics,order.ordno)"
+                      (mouseleave)="hideLogistics(Logistics)">查看物流</span></p>
+                  <div class="szh-buyer-info text-left logistics-pop" #Logistics
+                       (mouseenter)="showLogistics(Logistics,order.ordno)"
+                       (mouseleave)="hideLogistics(Logistics)">
+                    <div class="logistics-pop-body">
+                      <p class="pl mb-sm clearfix logistics-pop-head">
+                        <span class="fa fa-truck pull-left _icon"></span>
+                        <span class="pull-left">物流信息</span>
+                        <a class="pull-right" *ngIf="LogisticsData" routerLink="../order-detail"
+                           [queryParams]="{ordno:order.ordno}">查看更多 </a>
+                      </p>
+                      <div class="logistics-pop-main">
+                        <ng-container *ngIf="LogisticsData">
+                          <ul class="timeline-alt pt pb0 m0">
+                            <ng-container *ngFor="let item of LogisticsData;let a=index;">
+                              <li class="mb0" *ngIf="a<4">
+                                <div class="timeline-badge primary">
+                                  <em class="fa fa-truck"></em>
+                                </div>
+                                <div class="timeline-panel _mrl">
+                                  <div class="right">
+                                    <div>
+                                      <p>
+                                        <span class="mr">{{item.acceptTime}}</span><br>
+                                        <span>{{item.acceptStation}}</span>
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </ng-container>
+                          </ul>
+                        </ng-container>
+                        <ng-container *ngIf="!LogisticsData">
+                          <p class="mb0 p-sm">暂无物流信息</p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
                 </td>
-                <td class="w10 bl"  *ngIf="j==0" [attr.rowspan]="goods.agentOrdItemList.length">
+                <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
+                  <!-- <div class="hide">
+                     <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
+                             (click)="cancelOrder(order.ordno)"> 取消订单
+                     </button>
+                   </div>-->
+                  <!--<div *ngIf="order.state == 'CLOSE'">
+                    <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
+                    </button>
+                  </div>-->
                 </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td colspan="10" class="bt0">
-            <div class="col-sm-5">
-              <div class="text-muted"><strong>第 {{goodsList.genStartRow()}} 至 {{goodsList.genEndRow()}} 条，共
-                {{goodsList.totalRow}}
-                条</strong></div>
+              </ng-container>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10" class="bt0">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{goodsList.genStartRow()}} 至 {{goodsList.genEndRow()}} 条，共
+              {{goodsList.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
-            <div class="col-sm-7">
-              <div class="pull-right">
-                <rzhBootstrapPaginator></rzhBootstrapPaginator>
-              </div>
-            </div>
-          </td>
-        </tr>
-        </tfoot>
-      </table>
-    </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+    <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
+    <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
+    <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+                       (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
+    <!--</ng-container>-->
+
+    <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
   </div>
 </div>
+
+<!--路由嵌套 begin-->
+<router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
+<!--路由嵌套 end-->
