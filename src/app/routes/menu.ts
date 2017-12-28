@@ -614,7 +614,7 @@ const store = {
     },
     {
       text: '企业管理',
-      icon: 'fa fa-users',
+      icon: 'fa fa-university',
       link: '/main/store/storeAudit',
       alert: '▼',
       submenu: [
@@ -630,7 +630,7 @@ const store = {
     },
     {
       text: '店铺管理',
-      icon: 'fa fa-users',
+      icon: 'icon icon-home',
       link: '/main/store/deposit',
       alert: '▼',
       submenu: [
