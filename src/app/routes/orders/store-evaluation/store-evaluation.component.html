@@ -55,9 +55,6 @@
       </tr>
       </thead>
       <tbody>
-
-      <!--<ng-container >-->
-
         <tr class="text-center" *ngFor="let count of dataTable.data; let i = index">
           <td>{{count.storeName}}</td>
           <td><span [innerHtml]="5 | stars"></span></td>
@@ -69,7 +66,6 @@
             <app-buttons [config]="deletebutton" (click)="deleteCount(data.curPage,count.id)"></app-buttons>
           </td>
         </tr>
-      <!--</ng-container>-->
       </tbody>
       <tfoot>
       <tr>

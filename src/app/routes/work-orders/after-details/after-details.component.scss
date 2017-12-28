@@ -1,15 +1,17 @@
-.ordernum{
-  background:#242a30;
+.ordernum {
+  background: #242a30;
   height: 40px;
   color: white;
   line-height: 40px;
   padding-left: 20px;
   border-radius: 3px;
 }
-.bordera{
+
+.bordera {
   border-bottom: 1px solid #c0c0c0;
 }
-.trr{
+
+.trr {
   border-right: 1px solid #ccc;
   line-height: 50px;
 }
@@ -21,35 +23,40 @@
   line-height: 20px;
   border-bottom: 1px solid #e1e1e1;
 }
-.item-hd{
+
+.item-hd {
   padding: 15px 15px 15px 0;
   text-align: right;
 }
-.item-bd{
+
+.item-bd {
   margin: 0;
   padding: 15px 0 15px 15px;
   word-wrap: break-word;
   border-left: 1px solid #e1e1e1;
 }
 
-.goods-audit{
+.goods-audit {
   border-color: #37bc9b;
 }
-.goods-audit .goods-audit-title{
+
+.goods-audit .goods-audit-title {
   background-color: #37bc9b;
   color: #fff;
   font-size: 18px;
   line-height: 30px;
   padding: 5px 0 5px 15px;
 }
-.goods-audit .bdr{
+
+.goods-audit .bdr {
   border-right: 1px dashed #eee;
 }
-.detailset{
+
+.detailset {
   min-width: 1360px;
 }
 
-.order-track{
+.order-track {
   .timeline > li > .timeline-panel, .timeline-alt > li > .timeline-panel {
     margin-left: 45px;
   }
@@ -67,15 +74,22 @@
     text-align: center;
     background-color: #d8d8d8;
   }
-  .logis-time{
+  .logis-time {
     display: inline-block;
     text-align: right;
     min-width: 180px;
     position: absolute;
     left: 0;
   }
-  .every-line{
+  .every-line {
     position: relative;
     padding-left: 190px;
   }
+}
+
+.bg-detail {
+  height: 51px;
+  line-height: 51px;
+  background: #f5f5f5;
+  font-size: 16px;
 }

@@ -5,8 +5,8 @@
     </div>
     <div class="panel-body">
       <div>
-        <div class="">
-          <legend class="m0" style="height: 51px;line-height: 51px;">
+        <div>
+          <legend class="m0"  class="bg-detail pl-lg">
             {{afterData.returnType=='RETURN'?'买家退货申请':'买家退款申请'}}
           </legend>
         </div>
@@ -81,7 +81,7 @@
         <ng-container *ngIf="afterData.state!='WAIT'">
           <div>
             <div class="">
-              <legend class="m0" style="height: 51px;line-height: 51px;">
+              <legend class="m0" class="bg-detail pl-lg">
                 {{afterData.returnType=='RETURN'?'退货申请处理':'退款申请处理'}}
               </legend>
             </div>
@@ -111,7 +111,7 @@
         <!--退货订单已发货-->
         <div *ngIf="afterData.state=='DELIVERY'">
           <div class="">
-            <legend class="m0" style="height: 51px;line-height: 51px;">退货发货信息</legend>
+            <legend class="m0" class="bg-detail pl-lg">退货发货信息</legend>
           </div>
           <table class="t-items p w100">
             <tr class="t-item clearfix">
@@ -167,7 +167,7 @@
         <!--平台验收货物之后-->
         <div *ngIf="afterData.returnType=='RETURN' && afterData.state=='DONE'">
           <div class="">
-            <legend class="m0" style="height: 51px;line-height: 51px;">退货验收处理</legend>
+            <legend class="m0" class="bg-detail pl-lg">退货验收处理</legend>
           </div>
           <table class="t-items p w100">
             <tr class="t-item clearfix">
