@@ -32,13 +32,13 @@ export class AddRedPackageComponent implements OnInit {
   public setTime: string = '00:00:00';        //默认的时分秒
   public effectiveTimeStr: string;            //转换过后组合好的时间
   public minDate: Date = new Date();          //默认最小的日期
-  public totalNum: string = '';               //红包的总数
-  public siteNum: string = '';                //已经设置的红包总数
-  public NoSiteNum: any;              //未经设置的红包总数
-  public totalAmount: string = '';            //红包的总额
+  public totalNum: number = 0;               //红包的总数
+  public siteNum: number = 0;                //已经设置的红包总数
+  public NoSiteNum: any;                        //未经设置的红包总数
+  public totalAmount: string = '';              //红包的总额
   public siteAmount: string = '';              //已经设置的红包总额
-  public noUseAmount: any;            //未使用的红包总额
-  public sumOfNumArray: string;               //红包数量累计的总数
+  public noUseAmount: any;                       //未使用的红包总额
+  public sumOfNumArray: number;                   //红包数量累计的总数
   public sumOfAmountArray: string = '0';          //红包面额累计的总数
   public redPackData: any;                       //是否显示未生效的红包数据
   bsConfig: Partial<BsDatepickerConfig>;
@@ -205,15 +205,17 @@ export class AddRedPackageComponent implements OnInit {
       let finalVal=String(value).slice(0,index);
       setTimeout(()=>{
         $(obj).val(finalVal);
-        let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
-        $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
         this.countNumAndAmout();
+        this.genProbability();//计算概率
+        // let probability = +(((+item.num) / (+this.siteNum)) * 100).toFixed(2) + "%";
+        // $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
         this.isTip();
       },0)
     };
-    let probability = +(((+item.num) / (+this.totalNum)) * 100).toFixed(2) + "%";
-    $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
     this.countNumAndAmout();
+    this.genProbability();//计算概率
+    // let probability = +(((+item.num) / (+this.siteNum)) * 100).toFixed(2) + "%";
+    // $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
     this.isTip();
   }
 
@@ -234,6 +236,15 @@ export class AddRedPackageComponent implements OnInit {
     };
   }
 
+  /**
+   * 计算概率
+   */
+  genProbability(){
+    let me = this;
+    me.moduleList.forEach((item)=> {
+      item.probability = ((item.num/me.siteNum) * 100).toFixed(2) + '%';//给每一组新红包算概率值
+    })
+  }
 
   /**
    * 添加红包规则
@@ -264,12 +275,13 @@ export class AddRedPackageComponent implements OnInit {
         }
         this.moduleList.push({
           amount: amountV,
-          num: '1',
-          level: '1',
-          probability: Number((1 / Number(this.totalNum)) * 100).toFixed(2) + '%',
+          num: 1,
+          level: 1,
+          probability: '0%',
         });
         setTimeout(() => {//等页面渲染完毕之后再去加载
           this.countNumAndAmout();
+          this.genProbability();//计算概率
         })
       }
     }, 0)
@@ -324,11 +336,22 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
+   * 失去焦点的时候判断值>0
+   * @param value
+   * @param obj
+   */
+  countAmountBlur(value, obj){
+    if(value==0||isNullOrUndefined(value)||value<0){
+      AppComponent.rzhAlt("info", '请输入大于0的金额');
+      $(obj).val('');
+    };
+  }
+  /**
    * 面额改变的时候再次统计现在的总面额,而且面额不能相同
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
-    if(value==0||isNullOrUndefined(value)||value<0){
+    if(isNullOrUndefined(value)||value<0){
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
     };

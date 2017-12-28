@@ -19,7 +19,7 @@ export class PatternService {
   public doubleDigit: string; // 两位为整数（0-99）
   public _URL: string; //网址
   public twodecimal:string;//两位小数
-  public onedecimal:string;//两位小数
+  public onedecimal:string;//一位小数
   public positive:string;
   public str:string;//除了文字
   public tplCode:string;//只能输入英文和数字的(用于添加APP首页模板的模板编码)

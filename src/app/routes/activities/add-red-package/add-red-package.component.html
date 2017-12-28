@@ -51,8 +51,7 @@
           (ngSubmit)="addRedPackRules()">
       <fieldset>
         <!--新增规则列表 start-->
-        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]=""
-               >
+        <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="">
           <thead>
           <tr>
             <th class="w20 text-center">
@@ -75,9 +74,10 @@
           <tbody>
           <tr *ngFor="let item of moduleList;let i = index" class="text-center">
             <td>
-              <input type="number" class="text _price num form-control amount" (keyup)="countAmount(pieceAmount.value,$event.target)"
+              <input type="number" class="text _price num form-control amount"
+                     (keyup)="countAmount(pieceAmount.value,$event.target)"
                      #amount [(ngModel)]="item.amount" name="amount{{i}}" #pieceAmount="ngModel" required
-                     [pattern]="patternService.threedecimal"/>
+                     [pattern]="patternService.threedecimal" (blur)="countAmountBlur(pieceAmount.value,$event.target)"/>
               <div [hidden]="pieceAmount.valid || pieceAmount.pristine"
                    class="text-danger">
                 请填写最多带两位小数的数字
