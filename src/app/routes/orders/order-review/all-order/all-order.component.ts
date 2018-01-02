@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrderReviewComponent} from '../order-review.component';
 import {PageEvent} from '../../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../../core/forms/submit.service';
-import {CancelComponent} from '../../orders/cancel/cancel.component';
 import {Page} from '../../../../core/page/page';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';

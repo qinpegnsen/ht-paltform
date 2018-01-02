@@ -1,19 +1,13 @@
 import {NgModule} from "@angular/core";
-import {OrdersComponent} from "./orders/orders.component";
-import {AllOrdersComponent} from "./orders/all-orders/all-orders.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import { BuyerEvaluationComponent } from './buyer-evaluation/buyer-evaluation.component';
-import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
-import {DeliverComponent} from './orders/deliver/deliver.component';
-import { CancelComponent } from './orders/cancel/cancel.component';
 import { AgentEptComponent } from './agent-ept/agent-ept.component';
 import { CancelsComponent } from './cancels/cancels.component';
 import { OrderReviewComponent } from './order-review/order-review.component';
 import { ToAuditComponent } from './order-review/to-audit/to-audit.component';
 import { AllOrderComponent } from './order-review/all-order/all-order.component';
 import { StoreEvaluationComponent } from './store-evaluation/store-evaluation.component';
-import {OrdersService} from "./orders/orders.service";
 import {StockComponent} from './stock/stock.component';
 import {AllStockComponent} from './stock/all-stock/all-stock.component';
 import {PendingPaymentComponent} from './stock/pending-payment/pending-payment.component';
@@ -36,38 +30,13 @@ import {StockService} from './stock/stock.service';
 import {OrderReviewService} from './order-review/order-review.service';
 import { EptDetailComponent } from './ept-detail/ept-detail.component';
 import { RefundDetailComponent } from './order-review/refund-detail/refund-detail.component';
-import { PrepareComponent } from './orders/prepare/prepare.component';
 import { SettleComponent } from './settle/settle.component';
 import {FileUploadModule} from "ng2-file-upload";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'cust'},
-  {
-    path: 'cust', component: OrdersComponent, children: [
-    {path: '', redirectTo: 'all-orders'},
-    {path: 'all-orders', component: AllOrdersComponent,children: [
-      {path: 'order-detail', component: OrderDetailComponent}
-    ]},
-    {path: 'wait-for-send', component: AllOrdersComponent,children: [
-      {path: 'order-detail', component: OrderDetailComponent}
-    ]},
-    {path: 'delivery', component: AllOrdersComponent,children: [
-      {path: 'order-detail', component: OrderDetailComponent}
-    ]},
-    {path: 'finished', component: AllOrdersComponent,children: [
-      {path: 'order-detail', component: OrderDetailComponent}
-    ]},
-    {path: 'canceled', component: AllOrdersComponent,children: [
-      {path: 'order-detail', component: OrderDetailComponent}
-    ]},
-
-  ]
-  },
+  {path: '', redirectTo: 'buyer'},
   {path: 'buyer', component: BuyerEvaluationComponent},
-  {path: 'prepare', component: PrepareComponent,children: [
-    {path: 'order-detail', component: OrderDetailComponent}
-  ]},
   // {path: 'store', component: StoreEvaluationComponent},
   {path: 'settle', component: SettleComponent},
   {path: 'agent-ept', component: AgentEptComponent},
@@ -115,13 +84,7 @@ const routes: Routes = [
 
   ],
   declarations: [
-    PrepareComponent,
-    OrdersComponent,
-    AllOrdersComponent,
     BuyerEvaluationComponent,
-    OrderDetailComponent,
-    CancelComponent,
-    DeliverComponent,
     AgentEptComponent,
     CancelsComponent,
     OrderReviewComponent,
@@ -134,7 +97,6 @@ const routes: Routes = [
     ForDistributionComponent,
     AwaitingDeliveryComponent,
     CompleteComponent,
-    CancelComponent,
     StockDetailComponent,
     CancelsComponent,
     CuccessComponent,
@@ -146,15 +108,12 @@ const routes: Routes = [
     ReviewDetailComponent,
     EptDetailComponent,
     RefundDetailComponent,
-    PrepareComponent,
     SettleComponent,
   ],
   providers: [
-    OrdersComponent,
     BuyerEvaluationComponent,
     AgentEptComponent,
     StoreEvaluationComponent,
-    OrdersService,
     ForFistributonService,
     AllStockService,
     AwaitingDeliveryComponent,
