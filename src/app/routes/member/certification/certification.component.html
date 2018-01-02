@@ -64,7 +64,7 @@
           onerror="javascript:this.src='../../../assets/img/dummy.png'">
             <img [src]="count.idcardPic3" #k class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
           </td>
-          <td>{{count.createTime}}</td>
+          <td>{{count.updateTime}}</td>
           <td *ngIf="state!='AUDIT'">{{count.verifyTime}}</td>
           <td *ngIf="state=='UNPASS'">{{count.verifyReason}}</td>
           <td *ngIf="state=='AUDIT'">
