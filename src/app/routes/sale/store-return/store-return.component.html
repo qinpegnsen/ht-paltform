@@ -156,16 +156,16 @@
               </div>
             </td>
             <td>
-              <ng-container *ngIf="item.state=='WAIT'">
-                <button class="btn btn-purple btn-sm fa fa-check" routerLink="after-details" title="处理"
-                        [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 处理
-                </button>
-              </ng-container>
-              <ng-container *ngIf="item.state=='DELIVERY' && item.agentCode == null">
-                <button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details" title="验收"
-                        [queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收
-                </button>
-              </ng-container>
+              <!--<ng-container *ngIf="item.state=='WAIT'">-->
+                <!--<button class="btn btn-purple btn-sm fa fa-check" routerLink="after-details" title="处理"-->
+                        <!--[queryParams]="{afterNo:item.afterNo,type:'deal'}"> 处理-->
+                <!--</button>-->
+              <!--</ng-container>-->
+              <!--<ng-container *ngIf="item.state=='DELIVERY' && item.agentCode == null">-->
+                <!--<button class="btn btn-success btn-sm fa fa-check-square-o" routerLink="after-details" title="验收"-->
+                        <!--[queryParams]="{afterNo:item.afterNo,type:'deal'}"> 验收-->
+                <!--</button>-->
+              <!--</ng-container>-->
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details" title="详情"
                       [queryParams]="{afterNo:item.afterNo,type:'detail'}">
               </button>
