@@ -18,8 +18,7 @@
           <div class="row">
             <div class="col-xs-9">
               <div class="">订单金额（元）</div>
-              <p class="text-md m0" *ngIf="data.ordPay!=null">{{data.ordPay | number: '1.2-2'}}</p>
-              <p class="text-md m0" *ngIf="data.ordPay==null">0.00</p>
+              <p class="text-md m0">{{(data.ordPay | number: '1.2-2') || '0.00'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-shopping-cart fa-3x tp-em"></em>
@@ -36,8 +35,7 @@
           <div class="row">
             <div class="col-xs-9 ">
               <div class="">退款金额（元）</div>
-              <p class="text-md m0" *ngIf="data.refundPay!=null">{{data.refundPay | number: '1.2-2'}}</p>
-              <p class="text-md m0" *ngIf="data.refundPay==null">0.00</p>
+              <p class="text-md m0">{{(data.refundPay | number: '1.2-2')  || '0.00'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-gavel fa-3x tp-em"></em>
@@ -55,8 +53,7 @@
 
             <div class="col-xs-9 ">
               <div class="">实收金额（元）</div>
-              <p class="text-md m0" *ngIf="data.realPay!=null">{{data.realPay  | number: '1.2-2'}}</p>
-              <p class="text-md m0" *ngIf="data.realPay==null">0.00</p>
+              <p class="text-md m0">{{(data.realPay | number: '1.2-2') || '0.00'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-tags fa-3x tp-em"></em>
@@ -76,8 +73,7 @@
 
             <div class="col-xs-9">
               <div class="">实收佣金（元）</div>
-              <p class="text-md m0" *ngIf="data.extraction!=null">{{data.extraction | number: '1.2-2'}}</p>
-              <p class="text-md m0" *ngIf="data.extraction==null">0.00</p>
+              <p class="text-md m0">{{(data.extraction | number: '1.2-2') || '0.00'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-pie-chart fa-3x tp-em"></em>
@@ -94,8 +90,7 @@
           <div class="row">
             <div class="col-xs-9 ">
               <div class="">总收入（元）</div>
-              <p class="text-md m0" *ngIf="data.balance!=null">{{data.balance | number: '1.2-2'}}</p>
-              <p class="text-md m0" *ngIf="data.balance==null">0.00</p>
+              <p class="text-md m0">{{(data.balance | number: '1.2-2') || '0.00'}}</p>
             </div>
             <div class="col-xs-3 text-right">
               <em class="fa fa-calculator fa-3x tp-em"></em>
