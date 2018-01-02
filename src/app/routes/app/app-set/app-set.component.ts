@@ -472,9 +472,9 @@ export class AppSetComponent implements OnInit {
       data: {
         tplCode: _this.curItem.tplCode,
         ord: _this.ord,
-        contents: _this.contents.join(','),
-        optTypeCodes: _this.optTypeCode.join(','),
-        optKeys: _this.optKey.join(',')
+        contents: _this.contents.join('$szh$'),
+        optTypeCodes: _this.optTypeCode.join('$szh$'),
+        optKeys: _this.optKey.join('$szh$')
       },
       success: (res) => {
         if (res.success) {
@@ -539,11 +539,11 @@ export class AppSetComponent implements OnInit {
         url: '/phone/index/updateContent',
         data: {
           phoneIndexId: _this.indexId,
-          phoneIndexContentId: _this.updateIndexContentIds.join(','),
+          phoneIndexContentId: _this.updateIndexContentIds.join('$szh$'),
           tplType: _this.curItem.tplType,
-          contents: _this.updateContents.join(','),
-          optTypeCodes: _this.updateOptTypeCode.join(','),
-          optKeys: _this.updateOptKey.join(',')
+          contents: _this.updateContents.join('$szh$'),
+          optTypeCodes: _this.updateOptTypeCode.join('$szh$'),
+          optKeys: _this.updateOptKey.join('$szh$')
         },
         success: (res) => {
           if (res.success) {
