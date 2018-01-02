@@ -60,4 +60,15 @@ public getOrderState(ordno) {
     if (!isNullOrUndefined(expressData)) return expressData;
   }
 
+  /**
+   * 查询物流公司列表
+   */
+  public getBasicExpressList() {
+    let url = '/basicExpress/queryBasicExpressIsUseList';
+    let list = this.submit.getData(url, '');
+    if (!isNullOrUndefined(list))
+      return list;
+  }
+
+
 }

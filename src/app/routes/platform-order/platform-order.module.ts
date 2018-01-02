@@ -9,6 +9,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {FileUploadModule} from 'ng2-file-upload';
 import {PlatformOrderService} from './platform-order.service';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
+import {DeliverComponent} from './deliver/deliver.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent],
+  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent],
   providers: [
     PlatformOrderService
   ]

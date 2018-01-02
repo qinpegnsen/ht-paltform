@@ -78,7 +78,6 @@
               <td class="w8" [class.bb]="s != order.ordItemList.length-1">
                 <ng-container *ngIf="goods.returnNum>0">
                   <img width="66%" src="../../../../../assets/img/order/refund.png" alt="">
-                  <p class="text-danger mb0 mt-sm"><a>查看退款进度</a></p>
                 </ng-container>
               </td>
               <ng-container *ngIf="s==0">
@@ -160,18 +159,9 @@
                   </div>
                 </td>
                 <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
-                  <div *ngIf="order.state == 'PREPARE' && order.isPlatCarry=='Y' && order.canDelivery">
+                  <div *ngIf="order.canDelivery">
                     <button  class="m-sm btn btn-xs btn-outline fa fa-truck _myWhiteBg thc font b" title="设置发货" (click)="deliverOrder(order.ordno)"> 设置发货</button>
                   </div>
-                  <!-- <div class="hide">
-                     <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
-                             (click)="cancelOrder(order.ordno)"> 取消订单
-                     </button>
-                   </div>-->
-                  <!--<div *ngIf="order.state == 'CLOSE'">
-                    <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
-                    </button>
-                  </div>-->
                 </td>
               </ng-container>
             </tr>
@@ -196,16 +186,10 @@
       </tr>
       </tfoot>
     </table>
-    <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-    <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
-    <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
-                       (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
-    <!--</ng-container>-->
-
-    <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
   </div>
 </div>
-
+<app-deliver [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+                   (deliverGoods)="getDeliverOrderData($event)"></app-deliver>
 <!--路由嵌套 begin-->
 <router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->

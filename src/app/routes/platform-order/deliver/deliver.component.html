@@ -1,0 +1,40 @@
+<div class="deliver-order fadeIn" *ngIf="showDeliverWindow">
+  <div class="mask"></div>
+  <form class="_popup animated fadeIn" #deliverytpl="ngForm">
+    <div class="pop popup-hd">
+      <span class="f-bold">发货</span>
+      <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
+    </div>
+    <!--表单-->
+    <div class="pop deliver-box font12 w100">
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">订单编号：</dt>
+        <dd class="orderId-color col-xs-9 font14">{{orderId}}</dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">快递公司：</dt>
+        <dd class="col-xs-5 font14">
+          <select name="expressCode" class="form-control input-sm" required [(ngModel)]="expressCode">
+            <option [value]="item.expressCode" *ngFor="let item of expressList">{{item.expressName}}</option>
+          </select>
+        </dd>
+      </dl>
+      <dl class="bb m0 clearfix">
+        <dt class="col-xs-3">快递单号：</dt>
+        <dd class="col-xs-5 font14">
+          <input type="text" name="expressNo" class="form-control required input-sm" required #expressNoTem="ngModel"
+                 [(ngModel)]="expressNo" pattern="{{pattern.express}}">
+          <div [hidden]="expressNoTem.valid || expressNoTem.pristine"
+               class="text-danger">
+            请输入合法的快递单号
+          </div>
+        </dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-right">
+      <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
+      <button class="ml btn btn-info thc bg b" type="button" (click)="delivery()" [disabled]="deliverytpl.invalid">确认提交</button>
+    </div>
+  </form>
+</div>
+
