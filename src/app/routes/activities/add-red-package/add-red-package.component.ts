@@ -39,7 +39,7 @@ export class AddRedPackageComponent implements OnInit {
   public siteAmount: string = '';              //已经设置的红包总额
   public noUseAmount: any;                       //未使用的红包总额
   public sumOfNumArray: number;                   //红包数量累计的总数
-  public sumOfAmountArray: string = '0';          //红包面额累计的总数
+  public sumOfAmountArray: string = '0';          //红包金额累计的总数
   public redPackData: any;                       //是否显示未生效的红包数据
   bsConfig: Partial<BsDatepickerConfig>;
   locale: 'cn';
@@ -109,7 +109,7 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
-   * 是否导入未生效规则列表
+   * 是否导入未生效或者生效的规则列表
    */
   qeuryNoUse(isUsed) {
     let url = "/rpSetting/queryRpSettingAdmin";
@@ -119,11 +119,11 @@ export class AddRedPackageComponent implements OnInit {
     };
     let result = this.submit.getData(url, data);
     if (result) {
-      if (result.voList.length > 0) {//如果未生效的存在就导入作为模板
+      if (result.voList.length > 0) {//如果未生效或者生效的存在就导入作为模板
         this.moduleList = this.reSiteTem(result.voList);
         setTimeout(() => {
-          this.changeNumber();//获取红包的概率
           this.countNumAndAmout();//统计剩余的数量和金额
+          this.genProbability();//获取红包的概率
           this.isTip();
         }, 0)
       }
@@ -155,8 +155,8 @@ export class AddRedPackageComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       let obj = {
         amount: '',
-        level: '',
         num: '',
+        level: '',
         probability: '',
       };
       obj.amount = data[i].amount;
@@ -179,71 +179,63 @@ export class AddRedPackageComponent implements OnInit {
   }
 
   /**
-   * 当红包数量再次改变的时候该表已经添加的红包规则的概率
-   */
-  changeNumber() {
-    let probabilityArray = $("tr");
-    for (var i = 0; i < probabilityArray.length; i++) {
-      let value = Number((Number($(probabilityArray[i]).find(".redPacketNumber").val()) / Number(this.totalNum)) * 100).toFixed(2) + '%';
-      $(probabilityArray[i]).find(".probability").text(value)
-    }
-    ;
-  }
-
-  /**
    * 根据数量生成概率
    * @param item
    * @param obj
    */
-  getProbability(item, obj,value) {
-    if(value==0||isNullOrUndefined(value)||value<0){
+  getProbability(item, obj, value) {
+    if (value == 0 || isNullOrUndefined(value) || value < 0) {
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
-    };
-    if(String(value).indexOf('.')>-1){
-      let index=String(value).indexOf('.');
-      let finalVal=String(value).slice(0,index);
-      setTimeout(()=>{
+    }
+    ;
+    if (String(value).indexOf('.') > -1) {//如果是小数
+      let index = String(value).indexOf('.');
+      let finalVal = String(value).slice(0, index);
+      setTimeout(() => {
         $(obj).val(finalVal);
         this.countNumAndAmout();
         this.genProbability();//计算概率
         // let probability = +(((+item.num) / (+this.siteNum)) * 100).toFixed(2) + "%";
         // $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
         this.isTip();
-      },0)
-    };
-    this.countNumAndAmout();
-    this.genProbability();//计算概率
-    // let probability = +(((+item.num) / (+this.siteNum)) * 100).toFixed(2) + "%";
-    // $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
-    this.isTip();
+      }, 0)
+    }else{
+      this.countNumAndAmout();
+      this.genProbability();//计算概率
+      // let probability = +(((+item.num) / (+this.siteNum)) * 100).toFixed(2) + "%";
+      // $(obj).parents('tr').find('.probability').text(probability);//根据数量，自动生成概率
+      this.isTip();
+    }
   }
 
   /**
    * 设置规则的等级
    */
-  setLeveal(obj,value){
-    if(value==0||isNullOrUndefined(value)||value<0){
+  setLeveal(obj, value) {
+    if (value == 0 || isNullOrUndefined(value) || value < 0) {
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
-    };
-    if(String(value).indexOf('.')>-1){
-      let index=String(value).indexOf('.');
-      let finalVal=String(value).slice(0,index);
-      setTimeout(()=>{
+    }
+    ;
+    if (String(value).indexOf('.') > -1) {
+      let index = String(value).indexOf('.');
+      let finalVal = String(value).slice(0, index);
+      setTimeout(() => {
         $(obj).val(finalVal);
-      },0)
-    };
+      }, 0)
+    }
+    ;
   }
 
   /**
    * 计算概率
    */
-  genProbability(){
+  genProbability() {
     let me = this;
-    me.moduleList.forEach((item)=> {
-      item.probability = ((item.num/me.siteNum) * 100).toFixed(2) + '%';//给每一组新红包算概率值
-    })
+    me.moduleList.forEach((item) => {
+      item.probability = ((item.num / me.siteNum) * 100).toFixed(2) + '%';//给每一组新红包算概率值
+    });
   }
 
   /**
@@ -256,7 +248,7 @@ export class AddRedPackageComponent implements OnInit {
     setTimeout(() => {
       this.getRedPacketNum();//获取添加规则前红包的累计数量
       /**
-       * 进行判断是否追加，如果添加规则前已经超出总数量和总面额就不能添加
+       * 进行判断是否追加，如果添加规则前已经超出总数量和总金额就不能添加
        */
       if (Number(this.sumOfNumArray) > Number(this.totalNum)) {//超出的话禁止追加
         AppComponent.rzhAlt("info", '已超过红包设置的总数量');
@@ -293,7 +285,7 @@ export class AddRedPackageComponent implements OnInit {
   countNumAndAmout() {
     this.siteAmount = this.getRedPacketAmount();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
     this.noUseAmount = Number(Number(this.totalAmount) - Number(this.siteAmount) + '');
-    this.siteNum = this.getRedPacketNum();//获取添加规则后红包累计的面额，因为面额不做限制，只是展示使用
+    this.siteNum = this.getRedPacketNum();//获取添加规则后红包累计的数量，因为数量不做限制，只是展示使用
     this.NoSiteNum = Number(Number(this.totalNum) - Number(this.siteNum) + '');
   }
 
@@ -340,28 +332,32 @@ export class AddRedPackageComponent implements OnInit {
    * @param value
    * @param obj
    */
-  countAmountBlur(value, obj){
-    if(value==0||isNullOrUndefined(value)||value<0){
+  countAmountBlur(value, obj) {
+    if (value == 0 || isNullOrUndefined(value) || value < 0) {
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
-    };
+    }
+    ;
   }
+
   /**
    * 面额改变的时候再次统计现在的总面额,而且面额不能相同
    */
   countAmount(value, obj) {
     $(obj).addClass('selected');
-    if(isNullOrUndefined(value)||value<0){
+    if (isNullOrUndefined(value) || value < 0) {
       AppComponent.rzhAlt("info", '请输入大于0的金额');
       $(obj).val('');
-    };
-    if(String(value).indexOf('.')>-1){
-      let index=String(value).indexOf('.');
-      let finalVal=String(value).slice(0,index+3);
-      setTimeout(()=>{
+    }
+    ;
+    if (String(value).indexOf('.') > -1) {
+      let index = String(value).indexOf('.');
+      let finalVal = String(value).slice(0, index + 3);
+      setTimeout(() => {
         $(obj).val(finalVal);
-      },0)
-    };
+      }, 0)
+    }
+    ;
     let amounV = $("tbody").find('.amount:not(.selected)');//找到除了当前以外的其他的对象
     for (let i = 0; i < amounV.length; i++) {
       if ($(amounV[i]).val() == value) {
@@ -442,9 +438,11 @@ export class AddRedPackageComponent implements OnInit {
     this.getRedPacketNum();//获取添加规则后的总数量
     if (Number(this.sumOfNumArray) > Number(this.totalNum)) {
       AppComponent.rzhAlt("info", '已超过红包设置的总数量');
+    }else if(Number(this.sumOfAmountArray) > Number(this.totalAmount)){
+      AppComponent.rzhAlt("info", '已超过红包设置的总金额');
     }/* else if (Number(this.sumOfNumArray) < Number(this.totalNum)) {
-      AppComponent.rzhAlt("info", '未达到红包设置的总数量');
-    }*/ else {
+     AppComponent.rzhAlt("info", '未达到红包设置的总数量');
+     }*/ else {
       this.formatSelDate();//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
       this.refactorData();//重构数据

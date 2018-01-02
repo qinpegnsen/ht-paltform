@@ -48,7 +48,7 @@
 <div class="order panel mb">
   <div class="panel-body">
     <form class="form-validate form-horizontal" style="height: 100%" #redPackerForm="ngForm"
-          (ngSubmit)="addRedPackRules()">
+          (ngSubmit)="addRedPackRules()" (keydown.Enter)="false">
       <fieldset>
         <!--新增规则列表 start-->
         <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="">
