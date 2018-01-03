@@ -35,7 +35,7 @@ import {FileUploadModule} from "ng2-file-upload";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: ''},
+  {path: '', redirectTo: 'ord'},
   {path: 'buyer', component: BuyerEvaluationComponent},
   // {path: 'store', component: StoreEvaluationComponent},
   {path: 'settle', component: SettleComponent},
