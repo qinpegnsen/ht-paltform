@@ -111,7 +111,7 @@ export class ReasonRejecComponent implements OnInit {
 
 
   imageViewerReady($event: any) {
-    console.log($event);
+    // console.log($event);
   }
 
 }

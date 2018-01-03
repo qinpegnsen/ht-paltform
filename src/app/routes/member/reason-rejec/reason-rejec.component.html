@@ -13,10 +13,12 @@
         用户信息：
       </dl>
       <div class="font12 p">
-        <span>身份证号：{{count.idcard}}</span>
+        <span>身份证号：<span class="font14">{{count.idcard}}</span></span>
         <span class="pl-xl">姓名：{{count.name}}</span>
-        <span *ngIf="count.endTime!=null" class="pl-xl">有效期：{{count.startTime | date:"yyyy-MM-dd"}} &nbsp;&nbsp;至 &nbsp;&nbsp;{{count.endTime | date:"yyyy-MM-dd"}}</span>
-        <span *ngIf="count.endTime==null" class="pl-xl">有效期：{{count.startTime | date:"yyyy-MM-dd"}}&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span *ngIf="count.endTime!=null" class="pl-xl">有效期：<span
+          class="font14">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span class="font14">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
+        <span *ngIf="count.endTime==null" class="pl-xl">有效期：<span
+          class="font14">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
       <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="600"
                     [height]="300"></e-ngx-viewer>
