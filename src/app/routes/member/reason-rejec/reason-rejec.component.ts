@@ -76,6 +76,7 @@ export class ReasonRejecComponent implements OnInit {
       state: 'PASS',
     }
     me.submit.putRequest(url, data);
+    me.hideWindow("success");
     me.certificationComponent.aqeuryAll('AUDIT', me.curPage);
   }
 
