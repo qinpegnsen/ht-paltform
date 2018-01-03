@@ -82,11 +82,14 @@ export class AuditStoreGoodsComponent implements OnInit {
     $(function () {
       //调用富文本编辑器，初始化编辑器
       $('#goodsBody').summernote({
-        toolbar: [],
-        height: 600
+        toolbar: [],//去掉工具栏
+        popover: {},//去掉弹出工具栏
+        minHeight: 200,
+        maxHeight: 800
       });
       $('#mobileBody').summernote({
         toolbar: [],
+        popover: {},//去掉弹出工具栏
         height: 420
       });
       if (!isNullOrUndefined(me.goodsEditData.goodsBody)) $('#goodsBody').summernote('code', me.goodsEditData.goodsBody);   //PC端详情
