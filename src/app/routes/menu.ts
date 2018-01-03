@@ -242,11 +242,6 @@ const orders = {
   link: '/main/orders',
   submenu: [
     {
-      text: '用户订单',
-      icon: 'fa fa-file-text-o',
-      link: '/main/orders/cust'
-    },
-    {
       text: '企业订单',
       icon: 'fa fa-file-text-o',
       alert: '▼',
