@@ -11,7 +11,7 @@
   background-color: #fff;
   position: relative;
   width: 600px;
-  top: 25%;
+  top: 10%;
   margin: auto;
   z-index: 300;
 }
@@ -63,10 +63,22 @@
   min-height: 60px;
   max-height: 80px;
 }
-.lh40{
+
+.lh40 {
   line-height: 40px
 }
-.reason{
+
+.reason {
   margin-top: -6px;
   margin-bottom: 6px;
+}
+
+.item-head {
+  padding: 10px;
+  background: #f5f5f5;;
+  text-align: left;
+}
+
+.c-radio.c-radio-nofont {
+  width: 55px;
 }

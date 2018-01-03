@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
@@ -12,83 +12,57 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 })
 export class CertificationComponent implements OnInit {
   public data: Page = new Page();
-  public state:any;//审核状态
-  public showReasonWindow:boolean = false;
-  public orderId1:any;
-  public curPage1:any;
-
-  constructor(public submit: SubmitService,public rzhtoolsService:RzhtoolsService) { }
+  public state: any;//审核状态
+  public showReasonWindow: boolean = false;
+  public orderId1: any;//用户id
+  public curPage1: any;//页数
+  public name: any;//用户名
+  public count1: any;//用户名
+  constructor(public submit: SubmitService, public rzhtoolsService: RzhtoolsService) {
+  }
 
   ngOnInit() {
     let me = this;
-    this.aqeuryAll('AUDIT',1);
+    this.aqeuryAll('AUDIT', 1);
   }
 
   /**
    * 认证审核--查询分页
    */
-  aqeuryAll(state,curPage,event?: PageEvent){
+  aqeuryAll(state, curPage, event?: PageEvent) {
     let me = this, activePage = 1;
-    if(isNullOrUndefined(state)) state = 'AUDIT';
-      me.state = state;
+    if (isNullOrUndefined(state)) state = 'AUDIT';
+    me.state = state;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
     } else if (!isUndefined(curPage)) {
       activePage = curPage;
     }
     let url = "/custAuthInfo/query";
-    let data={
+    let data = {
       curPage: activePage,
-      pageSize:10,
+      pageSize: 10,
+      name: me.name,
       state: me.state,
     }
-    let result = this.submit.getData(url,data);
+    let result = this.submit.getData(url, data);
     me.data = new Page(result);
   }
 
-  /**
-   * 认证通过
-   */
-  access(id,curPage){
-    let me=this;
-    let url = '/custAuthInfo/updateState';
-    let data = {
-      id:id,
-      state: 'PASS',
-    }
-    me.submit.putRequest(url, data);
-    me.aqeuryAll(this.state,curPage);
-  }
-
-  /**
-   * 鼠标放在图片上时大图随之移动
-   */
-  showImg(event,i){
-    i.style.display = 'block';
-    i.style.top = (event.clientY-150) + 'px';
-    i.style.left = (event.clientX-500) + 'px';
-
-  }
-
-  /**
-   * 鼠标离开时大图随之隐藏
-   */
-  hideImg(i) {
-    i.style.display = 'none';
-  }
 
   /*
    * 添加弹窗
    * */
-  addNewData(orderId,curPage) {
-    let me=this;
-    me.orderId1=orderId;
+  addNewData(orderId, curPage, count) {
+    let me = this;
     me.showReasonWindow = true;
-    me.curPage1=curPage;
+    me.orderId1 = orderId;
+    me.curPage1 = curPage;
+    me.count1 = count;
   }
 
   getReason(data) {
     this.showReasonWindow = false;
-    if(data == 'success') this.aqeuryAll('AUDIT',1);
+    if (data == 'success') this.aqeuryAll('AUDIT', 1);
   }
 }

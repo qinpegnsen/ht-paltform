@@ -1,101 +1,122 @@
-
 <div class="content-heading mb-lg thc font">
   认证审核
 </div>
 <div class="order panel mb">
+
   <div class="panel-body">
     <div>
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="state=='AUDIT'" [class.bb]="state=='AUDIT'"
-            (click)="aqeuryAll('AUDIT',1)" >待审核</li>
+            (click)="aqeuryAll('AUDIT',1)">待审核
+        </li>
         <li class="pull-left thc" [class.font]="state=='PASS'" [class.bb]="state=='PASS'" (click)="aqeuryAll('PASS',1)"
-        >审核通过</li>
+        >审核通过
+        </li>
         <li class="pull-left thc" [class.font]="state=='UNPASS'" [class.bb]="state=='UNPASS'"
-            (click)="aqeuryAll('UNPASS',1)" >审核驳回</li>
+            (click)="aqeuryAll('UNPASS',1)">审核驳回
+        </li>
       </ul>
     </div>
-    <table class="table table-striped" #dataTable="rzhDataTable"  [rzhData]="data"  (pageChange)="aqeuryAll(state,1,$event)">
+    <div class="col-md-12 ml-50 pt">
+      <div class="search-group  mb">
+        <span class="search-title">姓名：</span>
+        <div class="search-main">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+                 *ngIf="state=='AUDIT'" (change)="aqeuryAll('AUDIT',1)" maxlength="50" placeholder="请输入要查询的姓名">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+                 *ngIf="state=='PASS'" (change)="aqeuryAll('PASS',1)" maxlength="50" placeholder="请输入要查询的姓名">
+          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+                 *ngIf="state=='UNPASS'" (change)="aqeuryAll('UNPASS',1)" maxlength="50" placeholder="请输入要查询的姓名">
+        </div>
+      </div>
+      <button type="button" title="搜索" class="btn thc btn-thc ml align-top">
+        <i class="icon-magnifier "></i><span>&nbsp;&nbsp;搜索</span>
+      </button>
+    </div>
+    <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="data"
+           (pageChange)="aqeuryAll(state,1,$event)">
       <thead>
-        <tr>
-          <th class="w5 text-center">
-            <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
-          </th>
-          <th class="w15 text-center">
-            <rzhDefaultSorter by="id">身份证号</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter by="name">姓名</rzhDefaultSorter>
-          </th>
-          <th class="w15 text-center">
-           <rzhDefaultSorter by="time">有效期</rzhDefaultSorter>
-          </th>
-          <th class="w20 text-center" >
-           <rzhDefaultSorter by="picture">认证照片</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center">
-            <rzhDefaultSorter by="createtime">申请时间</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center"*ngIf="state!='AUDIT'">
-            <rzhDefaultSorter by="time">审核时间</rzhDefaultSorter>
-          </th>
-          <th class="w30 text-center"*ngIf="state=='UNPASS'">
-            <rzhDefaultSorter by="reason"  >驳回原因</rzhDefaultSorter>
-          </th>
-          <th class="w10 text-center"  *ngIf="state=='AUDIT'">
-            <rzhDefaultSorter by="examine">审核</rzhDefaultSorter>
-          </th>
-        </tr>
+      <tr>
+        <th class="w5 text-center">
+          <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="id">身份证号</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="name">姓名</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="time">有效期</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center">
+          <rzhDefaultSorter by="createtime">申请时间</rzhDefaultSorter>
+        </th>
+        <th class="w15 text-center" *ngIf="state!='AUDIT'">
+          <rzhDefaultSorter by="time">审核时间</rzhDefaultSorter>
+        </th>
+        <th class="w30 text-center" *ngIf="state=='UNPASS'">
+          <rzhDefaultSorter by="reason">驳回原因</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center" *ngIf="state=='AUDIT'">
+          <rzhDefaultSorter by="examine">审核</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center" *ngIf="state!='AUDIT'">
+          <rzhDefaultSorter by="examine">查看</rzhDefaultSorter>
+        </th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let count of dataTable.data;let x=index"  class="text-center">
-          <td>{{x+1}}</td>
-          <td>{{count.idcard}}</td>
-          <td>{{count.name}}</td>
-          <td *ngIf="count.endTime!=null">{{count.startTime | date:"yyyy-MM-dd"}} &nbsp;&nbsp;至 &nbsp;&nbsp;{{count.endTime | date:"yyyy-MM-dd"}}</td>
-          <td *ngIf="count.endTime==null">{{count.startTime | date:"yyyy-MM-dd"}}&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td >
-          <img  [src]="count.idcardPic1"  class="idimg" (mousemove)="showImg($event,i)"  (mouseout)="hideImg(i)"
-          onerror="javascript:this.src='../../../assets/img/dummy.png'">
-            <img [src]="count.idcardPic1" #i class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          <img  [src]="count.idcardPic2"  class="idimg"(mousemove)="showImg($event,j)"  (mouseout)="hideImg(j)"
-          onerror="javascript:this.src='../../../assets/img/dummy.png'">
-            <img [src]="count.idcardPic2" #j class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          <img  [src]="count.idcardPic3" class="idimg"(mousemove)="showImg($event,k)"  (mouseout)="hideImg(k)"
-          onerror="javascript:this.src='../../../assets/img/dummy.png'">
-            <img [src]="count.idcardPic3" #k class="bigImg" alt="" onerror="javascript:this.src='../../../assets/img/dummy.png'">
-          </td>
-          <td>{{count.updateTime}}</td>
-          <td *ngIf="state!='AUDIT'">{{count.verifyTime}}</td>
-          <td *ngIf="state=='UNPASS'">{{count.verifyReason}}</td>
-          <td *ngIf="state=='AUDIT'">
-          <button class="btn btn-green" (click)="access(count.id,data.curPage)" ><i class="fa fa-check"></i></button>
-          <button class="btn btn-danger" (click)="addNewData(count.id,data.curPage)"><i class="fa fa-close"></i></button>
-          </td>
-        </tr>
+      <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
+        <td>{{x+1}}</td>
+        <td>{{count.idcard}}</td>
+        <td>{{count.name}}</td>
+        <td *ngIf="count.endTime!=null">{{count.startTime | date:"yyyy-MM-dd"}} &nbsp;&nbsp;至 &nbsp;&nbsp;{{count.endTime
+          | date:"yyyy-MM-dd"}}
+        </td>
+        <td *ngIf="count.endTime==null">{{count.startTime | date:"yyyy-MM-dd"}}&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>{{count.updateTime}}</td>
+        <td *ngIf="state!='AUDIT'">{{count.verifyTime}}</td>
+        <td *ngIf="state=='UNPASS'">{{count.verifyReason}}</td>
+        <td>
+          <button class="btn btn-purple" *ngIf="state=='AUDIT'" (click)="addNewData(count.id,data.curPage,count)">
+            <i class="fa fa-check-square-o"></i> 审核
+          </button>
+          <button class="btn btn-green" *ngIf="state!='AUDIT'" title="查看认证信息"
+                  (click)="addNewData(count.id,data.curPage,count)">
+            <i class="icon icon-magnifier-add"></i></button>
+        </td>
+      </tr>
       </tbody>
       <tfoot>
-         <tr>
-            <td colspan="7" *ngIf="state!='UNPASS'">
-            <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
+      <tr>
+        <td colspan="7" *ngIf="state=='AUDIT'">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
-            <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+          </div>
+        </td>
+        <td colspan="8" *ngIf="state!='AUDIT'">
+          <div class="col-sm-5">
+            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}}
+              条</strong></div>
+          </div>
+          <div class="col-sm-7">
+            <div class="pull-right">
+              <rzhBootstrapPaginator></rzhBootstrapPaginator>
             </div>
-            </td>
-            <td colspan="8" *ngIf="state=='UNPASS'">
-            <div class="col-sm-5">
-            <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
-            </div>
-            <div class="col-sm-7">
-            <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
-            </div>
-            </td>
-          </tr>
+          </div>
+        </td>
+      </tr>
       </tfoot>
     </table>
   </div>
 </div>
 <router-outlet></router-outlet>
 <app-reason-rejec [showReasonWindow]="showReasonWindow" [curPage]="curPage1"
-           [orderId]="orderId1" (upDate)="getReason($event)" ></app-reason-rejec>
+                  [orderId]="orderId1" [count]="count1" (upDate)="getReason($event)"></app-reason-rejec>

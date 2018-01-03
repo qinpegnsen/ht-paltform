@@ -1,30 +1,65 @@
-
 <div class="deliver-order fadeIn" *ngIf="showReasonWindow">
   <div class="mask"></div>
   <form class="_popup animated fadeIn" #updata="ngForm">
     <div class="pop popup-hd">
-      <span class="f-bold thc font">编辑审核驳回原因</span>
+      <span class="f-bold thc font" *ngIf="count.state=='AUDIT'">审核用户信息</span>
+      <span class="f-bold thc font" *ngIf="count.state!='AUDIT'">用户信息</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
 
     <!--表单-->
     <div class="pop deliver-box font12 w100">
-
-      <dl class="bb m0 clearfix">
-        <dt class="col-xs-3 lh40">驳回原因:</dt>
-        <dd class="orderId-color col-xs-9 font14">
-          <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel required #verifyReason="ngModel">
-        </dd>
-        <div [hidden]="verifyReason.valid || verifyReason.pristine"
-             class="col-sm-9 pull-right text-danger reason">
-          请输入驳回原因
-        </div>
+      <dl class="bb m0 clearfix item-head">
+        用户信息：
       </dl>
+      <div class="font12 p">
+        <span>身份证号：{{count.idcard}}</span>
+        <span class="pl-xl">姓名：{{count.name}}</span>
+        <span *ngIf="count.endTime!=null" class="pl-xl">有效期：{{count.startTime | date:"yyyy-MM-dd"}} &nbsp;&nbsp;至 &nbsp;&nbsp;{{count.endTime | date:"yyyy-MM-dd"}}</span>
+        <span *ngIf="count.endTime==null" class="pl-xl">有效期：{{count.startTime | date:"yyyy-MM-dd"}}&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </div>
+      <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="600"
+                    [height]="300"></e-ngx-viewer>
+      <ng-container *ngIf="count.state=='AUDIT'">
+        <dl class="bb m0 clearfix item-head">
+          审核结果：
+        </dl>
+        <dl class="bb m0 clearfix">
+          <dt class="col-xs-3">是否通过：</dt>
+          <dd class="orderId-color col-xs-9">
+            <div class="col-xs-8 radio-brand">
+            <span class="radio c-radio c-radio-nofont _myInline m0 pull-left" *ngFor="let item of yesOrNo">
+              <label>
+                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
+                       (click)="changeIsAgree(isAgree)"/>
+                <span class="fa fa-circle"></span>{{item.val}}
+              </label>
+            </span>
+            </div>
+          </dd>
+        </dl>
+        <dl class="bb m0 clearfix" *ngIf="!showRecord">
+          <dt class="col-xs-3 lh40"><i class="main-red font16">*</i> 驳回原因:</dt>
+          <dd class="orderId-color col-xs-9 font14">
+            <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel required
+                   #verifyReason="ngModel">
+          </dd>
+          <div [hidden]="verifyReason.valid || verifyReason.pristine"
+               class="col-sm-9 pull-right text-danger reason">
+            请输入驳回原因
+          </div>
+        </dl>
+        <div class="panel-footer text-right">
+          <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
+          <button class="ml btn btn-info thc bg b" *ngIf="showRecord" (click)="access(count.id)">确认提交</button>
+          <button class="ml btn btn-info thc bg b" *ngIf="!showRecord" type="button" (click)="delivery(updata.value)"
+                  [disabled]="!updata.form.valid">确认提交
+          </button>
+        </div>
+      </ng-container>
+
     </div>
-    <div class="panel-footer text-right">
-      <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
-      <button class="ml btn btn-info thc bg b" type="button" (click)="delivery(updata.value)" [disabled]="!updata.form.valid">确认提交</button>
-    </div>
+
   </form>
 </div>
 

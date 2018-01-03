@@ -54,6 +54,7 @@ import { GetWeekPipe } from './pipe/get-week.pipe';
 import { StrToNumberPipe } from './pipe/str-to-number.pipe';
 import { ToStringPipe } from './pipe/to-string.pipe';
 import {RouterGuardService} from "../core/routerGuard/router-guard.service";
+import {ENgxViewerModule} from "e-ngx-viewer";
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -87,6 +88,7 @@ import {RouterGuardService} from "../core/routerGuard/router-guard.service";
     SelectModule,
     AngularEchartsModule,
     FoueAreasModule,
+    ENgxViewerModule,
   ],
   providers: [
     ColorsService,
@@ -167,6 +169,7 @@ import {RouterGuardService} from "../core/routerGuard/router-guard.service";
     StrJsonPipe,
     GetWeekPipe,
     StrToNumberPipe,
+    ENgxViewerModule,
     ToStringPipe
   ]
 })
