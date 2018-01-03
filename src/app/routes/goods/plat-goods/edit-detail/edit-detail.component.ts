@@ -100,7 +100,8 @@ export class EditDetailComponent implements OnInit {
       $(function () {
         //调用富文本编辑器，初始化编辑器
         $('#goodsBody').summernote({
-          height: 300,
+          minHeight: 200,
+          maxHeight: 800,
           dialogsInBody: true,
           placeholder: 'write here...',
           callbacks: {
@@ -117,8 +118,6 @@ export class EditDetailComponent implements OnInit {
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
-            // ['para', ['ul', 'ol', 'paragraph']],
-            // ['height', ['height']],
             ['table', ['table']],//表单
             ['insert', ['link', 'picture', 'hr']],//插入链接，图片，下划线
             ['view', ['fullscreen', 'codeview']]//全屏，代码视图,帮助

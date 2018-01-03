@@ -85,12 +85,15 @@ export class AuditGoodsComponent implements OnInit {
     $(function () {
       //调用富文本编辑器，初始化编辑器
       $('#goodsBody').summernote({
-        toolbar: [],
-        height: 600
+        toolbar: [],//去掉工具栏
+        popover: {},//去掉弹出工具栏
+        minHeight: 200,
+        maxHeight: 800,
       });
       $('#mobileBody').summernote({
-        toolbar: [],
-        height: 420
+        toolbar: [],//去掉工具栏
+        popover: {},//去掉弹出工具栏
+        height: 420//设置高度
       });
       if (!isNullOrUndefined(me.goodsEditData.goodsBody)) $('#goodsBody').summernote('code', me.goodsEditData.goodsBody);   //PC端详情
       if (!isNullOrUndefined(me.goodsEditData.mobileBody)) $('#mobileBody').summernote('code', me.goodsEditData.mobileBody);   //移动端详情
