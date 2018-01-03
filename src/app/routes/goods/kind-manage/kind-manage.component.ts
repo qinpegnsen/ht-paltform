@@ -13,14 +13,12 @@ import {GoodsService} from "../goods.service";
   styleUrls: ['./kind-manage.component.scss']
 })
 export class KindManageComponent implements OnInit {
-  public searchKey: string;// 搜索关键词
   public kinds: Page = new Page();
   public addButton;// 添加按钮的配置
   public buttons;// 按钮组的配置
   public childKindId = 0; //分类编码，查询子集用,初始值0，代表第一级
   public childKindList: Array<any> = []; //菜单级别面包屑
   public curSortId: any; //当前三级分类的id
-  public sortLinkKind: any; //当前三级分类关联的品牌
   public parentId: any; //当前三级分类的父id
 
   constructor(public router: Router,
@@ -41,7 +39,7 @@ export class KindManageComponent implements OnInit {
         title: "修改",
         type: "update",
         size: "xs",
-        callback: function (result, kindId,curPage, kindPid) {
+        callback: function (kindId,curPage, kindPid) {
           me.router.navigate(['/main/goods/kind-manage/upKind'],{queryParams: {kindId: kindId,page:curPage,kindPid:kindPid}});
         }
       },
@@ -49,10 +47,9 @@ export class KindManageComponent implements OnInit {
         title: "删除",
         type: "delete",
         size: "xs",
-        callback: function (result, kindId,curPage, kindPid) {
-          let url = '/goodsKind/updateStateById';
-          let data = {id: kindId, state: 'DEL'};
-          me.submitService.delRequest(url, data);
+        callback: function (kindId,curPage, kindPid) {
+          let url = '/goodsKind/deleteGoodsKind';
+          me.submitService.delRequest(url, {id: kindId});
           me.queryDatas(curPage, kindPid);
         }
       }
@@ -96,7 +93,7 @@ export class KindManageComponent implements OnInit {
       id: kindId,
       state: state
     }
-    this.submitService.delRequest(requestUrl, requestData);
+    this.submitService.putRequest(requestUrl, requestData);
     this.queryDatas(curPage, kindPid);
   }
 

@@ -101,7 +101,7 @@
           <td>
             <p *ngIf="kind.state!='DEL'">
               <app-buttons [config]="option"
-                           (callback)="option.callback($event,kind.id,kinds.curPage,kind.kindParentId)"
+                           (callback)="option.callback(kind.id,kinds.curPage,kind.kindParentId)"
                            *ngFor="let option of buttons"></app-buttons>
               <span *ngIf="kind.level != 3">
               <a class="btn btn-info btn-xs fa fa-plus" routerLink="addKind"
