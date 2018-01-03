@@ -1,8 +1,17 @@
-<div class="content-heading mb-lg thc font">平台店铺已完成订单</div>
+<div class="content-heading mb-lg thc font">企业待付款订单</div>
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
     <div class="row clearfix p text-right">
+      <div class="search-term clearfix ml mb">
+        <div class="w100 pl-sm pr0 pull-left">
+          <div class="form-group mb0 pr0">
+            <div class="w90 pl0 pr0 pull-left">
+              <input type="text" class="form-control border-b-grey" [(ngModel)]="storeName" placeholder="请填写店铺名称"/>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="search-term clearfix ml mb">
         <div class="w100 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
@@ -32,10 +41,10 @@
       <li class="w10 pull-left text-center">单价</li>
       <li class="w7 pull-left text-center">数量</li>
       <li class="w8 pull-left text-center">异常状态</li>
+      <li class="w10 pull-left text-center">店铺名</li>
       <li class="w10 pull-left text-center">买家</li>
       <li class="w10 pull-left text-center">订单金额(元)</li>
       <li class="w10 pull-left text-center">交易状态</li>
-      <li class="w10 pull-left text-center">操作</li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="goodsList"
            (pageChange)="queryDatas(1,$event)">
@@ -81,6 +90,9 @@
                 </ng-container>
               </td>
               <ng-container *ngIf="s==0">
+                <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
+                  <span class="mr-xl font16">{{goods.storeName}}</span>
+                </td>
                 <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
                   <span class="mb0 p cursor-p" myHoverColor [myHover]="'#CC1635'" (mouseenter)="showUserInfo(i)"
                         (mouseleave)="hideBuyerInfo(i)">{{order.linkman}}
@@ -158,17 +170,7 @@
                     </div>
                   </div>
                 </td>
-                <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
-                  <!-- <div class="hide">
-                     <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
-                             (click)="cancelOrder(order.ordno)"> 取消订单
-                     </button>
-                   </div>-->
-                  <!--<div *ngIf="order.state == 'CLOSE'">
-                    <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
-                    </button>
-                  </div>-->
-                </td>
+
               </ng-container>
             </tr>
           </table>

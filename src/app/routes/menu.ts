@@ -247,6 +247,10 @@ const orders = {
       alert: '▼',
       submenu: [
         {
+          text: '待付款',
+          link: '/main/store-order/store-payment'
+        },
+        {
           text: '待发货',
           link: '/main/store-order/store-pending'
         },
@@ -270,6 +274,9 @@ const orders = {
       alert: '▼',
       submenu: [
         {
+          text: '待付款',
+          link: '/main/platform-order/platform-payment'
+        }, {
           text: '待发货',
           link: '/main/platform-order/platform-pending'
         },

@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Page} from '../../../core/page/page';
+import { Component, OnInit } from '@angular/core';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
-import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
-import {SubmitService} from '../../../core/forms/submit.service';
+import {Page} from '../../../core/page/page';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
-import {StoreOrderService} from '../store-order.service';
+import {PlatformOrderService} from '../platform-order.service';
+import {SubmitService} from '../../../core/forms/submit.service';
+import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 
 @Component({
-  selector: 'app-store-complete',
-  templateUrl: './store-complete.component.html',
-  styleUrls: ['./store-complete.component.scss']
+  selector: 'app-platform-payment',
+  templateUrl: './platform-payment.component.html',
+  styleUrls: ['./platform-payment.component.scss']
 })
-export class StoreCompleteComponent implements OnInit {
+export class PlatformPaymentComponent implements OnInit {
+
   public path: string;       //路由
   public ordState: string;    //订单类型
   public curCancelOrderId: string;
@@ -20,12 +21,11 @@ export class StoreCompleteComponent implements OnInit {
   public goodsList: Page = new Page();
   public phone: string;
   public ordno: string;
-  public storeName: string;
   public LogisticsData: any;//物流信息
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService) {
+  constructor(public platformOrderService: PlatformOrderService, public submit: SubmitService) {
 
   }
 
@@ -49,17 +49,17 @@ export class StoreCompleteComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if (event.refresh) this.queryDatas(1);//在详情页面发货返回需要刷新页面数据
+    if(event.refresh) this.queryDatas(1);//在详情页面发货返回需要刷新页面数据
   }
 
   /**
    *显示物流信息
    * @param orderId
    */
-  showLogistics(Logistics, ordno) {
+  showLogistics(Logistics,ordno) {
     Logistics.style.display = 'block';
-    if (isUndefined(ordno)) ordno = ordno;
-    this.LogisticsData = this.storeOrderService.getOrderLogisticsData(ordno);
+    if(isUndefined(ordno)) ordno = ordno;
+    this.LogisticsData = this.platformOrderService.getOrderLogisticsData(ordno);
   }
 
   /**
@@ -76,7 +76,7 @@ export class StoreCompleteComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage, event?: PageEvent) {
+  public queryDatas(curPage,event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -89,10 +89,9 @@ export class StoreCompleteComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      storeName: _this.storeName,
-      ordState: 'SUCCESS'
+      ordState:'CR'
     };
-    let requestUrl = '/ord/queryStoreOrd';
+    let requestUrl = '/ord/queryPlantOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
 
@@ -123,7 +122,6 @@ export class StoreCompleteComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if (data.type) this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
+    if(data.type) this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
   }
-
 }

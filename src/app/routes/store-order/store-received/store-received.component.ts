@@ -20,6 +20,7 @@ export class StoreReceivedComponent implements OnInit {
   public goodsList: Page = new Page();
   public phone: string;
   public ordno: string;
+  public storeName: string;
   public LogisticsData: any;//物流信息
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
@@ -88,6 +89,7 @@ export class StoreReceivedComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
+      storeName: _this.storeName,
       ordState: 'DELIVERY'
     };
     let requestUrl = '/ord/queryStoreOrd';

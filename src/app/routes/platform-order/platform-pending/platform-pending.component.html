@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg thc font">平台待发货订单</div>
+<div class="content-heading mb-lg thc font">平台店铺待发货订单</div>
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
@@ -159,7 +159,7 @@
                   </div>
                 </td>
                 <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
-                  <div *ngIf="order.canDelivery">
+                  <div *ngIf="order.state == 'PREPARE' && order.canDelivery">
                     <button  class="m-sm btn btn-xs btn-outline fa fa-truck _myWhiteBg thc font b" title="设置发货" (click)="deliverOrder(order.ordno)"> 设置发货</button>
                   </div>
                 </td>

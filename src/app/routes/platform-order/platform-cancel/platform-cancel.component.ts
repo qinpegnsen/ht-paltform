@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {Page} from '../../../core/page/page';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
-import {RzhtoolsService} from '../../../core/services/rzhtools.service';
 import {PlatformOrderService} from '../platform-order.service';
 
 @Component({
@@ -49,16 +48,16 @@ export class PlatformCancelComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if(event.refresh) this.queryDatas(1);//在详情页面发货返回需要刷新页面数据
+    if (event.refresh) this.queryDatas(1);//在详情页面发货返回需要刷新页面数据
   }
 
   /**
    *显示物流信息
    * @param orderId
    */
-  showLogistics(Logistics,ordno) {
+  showLogistics(Logistics, ordno) {
     Logistics.style.display = 'block';
-    if(isUndefined(ordno)) ordno = ordno;
+    if (isUndefined(ordno)) ordno = ordno;
     this.LogisticsData = this.platformOrderService.getOrderLogisticsData(ordno);
   }
 
@@ -76,7 +75,7 @@ export class PlatformCancelComponent implements OnInit {
    * @param event
    * @param curPage
    */
-  public queryDatas(curPage,event?: PageEvent) {
+  public queryDatas(curPage, event?: PageEvent) {
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
       activePage = event.activePage;
@@ -89,7 +88,7 @@ export class PlatformCancelComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      ordState:'CLOSE'
+      ordState: 'CLOSE'
     };
     let requestUrl = '/ord/queryPlantOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
@@ -122,7 +121,7 @@ export class PlatformCancelComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if(data.type) this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
+    if (data.type) this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
   }
 
 }

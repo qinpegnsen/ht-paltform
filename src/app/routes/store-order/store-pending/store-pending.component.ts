@@ -4,7 +4,6 @@ import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
-import {PlatformOrderService} from '../../platform-order/platform-order.service';
 import {StoreOrderService} from '../store-order.service';
 
 @Component({
@@ -21,6 +20,7 @@ export class StorePendingComponent implements OnInit {
   public goodsList: Page = new Page();
   public phone: string;
   public ordno: string;
+  public storeName: string;
   public LogisticsData: any;//物流信息
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
@@ -89,6 +89,7 @@ export class StorePendingComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
+      storeName: _this.storeName,
       ordState: 'PAID'
     };
     let requestUrl = '/ord/queryStoreOrd';

@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Page} from '../../../core/page/page';
+import {PageEvent} from 'angular2-datatable';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
-import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
-import {SubmitService} from '../../../core/forms/submit.service';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {StoreOrderService} from '../store-order.service';
+import {SubmitService} from '../../../core/forms/submit.service';
 
 @Component({
-  selector: 'app-store-complete',
-  templateUrl: './store-complete.component.html',
-  styleUrls: ['./store-complete.component.scss']
+  selector: 'app-store-payment',
+  templateUrl: './store-payment.component.html',
+  styleUrls: ['./store-payment.component.scss']
 })
-export class StoreCompleteComponent implements OnInit {
+export class StorePaymentComponent implements OnInit {
   public path: string;       //路由
   public ordState: string;    //订单类型
   public curCancelOrderId: string;
@@ -90,7 +90,7 @@ export class StoreCompleteComponent implements OnInit {
       phone: _this.phone,
       ordno: _this.ordno,
       storeName: _this.storeName,
-      ordState: 'SUCCESS'
+      ordState: 'CR'
     };
     let requestUrl = '/ord/queryStoreOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));

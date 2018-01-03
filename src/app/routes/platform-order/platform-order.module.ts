@@ -10,10 +10,15 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {PlatformOrderService} from './platform-order.service';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {DeliverComponent} from './deliver/deliver.component';
+import {PlatformPaymentComponent} from './platform-payment/platform-payment.component';
+
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'platform-pending'},
+  {path: 'platform-payment', component: PlatformPaymentComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//待付款
   {path: 'platform-pending', component: PlatformPendingComponent,children: [
     {path: 'order-detail', component: OrderDetailComponent}
   ]},//待发货
@@ -35,7 +40,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent],
+  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent, PlatformPaymentComponent],
   providers: [
     PlatformOrderService
   ]
