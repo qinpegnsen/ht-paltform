@@ -48,6 +48,7 @@ export class ActivitiesService {
       success: (res) => {
         if(res.success){
           result=true;
+          AppComponent.rzhAlt("success", res.info);
         }else{
           AppComponent.rzhAlt("error", res.info);
         }
