@@ -68,7 +68,7 @@ export class AllStoreComponent implements OnInit {
           me.enterPriseState = 'REJECT';
           break;
         case 'black':
-          me.enterPriseState = 'BLACK';
+          me.parentComp.enterPriseState = 'BLACK';
           me.enterPriseState = 'BLACK';
           break;
         default:

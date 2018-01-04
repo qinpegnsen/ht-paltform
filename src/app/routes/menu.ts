@@ -239,7 +239,7 @@ const member = {
 const orders = {
   text: '订单管理',
   icon: 'fa fa-file-text',
-  link: '/main/orders',
+  link: '/main/platform-order',
   submenu: [
     {
       text: '企业订单',
