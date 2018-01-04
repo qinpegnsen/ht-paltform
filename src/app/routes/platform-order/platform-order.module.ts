@@ -15,7 +15,7 @@ import {PlatformPaymentComponent} from './platform-payment/platform-payment.comp
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'platform-pending'},
+  {path: '', redirectTo: 'platform-payment'},
   {path: 'platform-payment', component: PlatformPaymentComponent,children: [
     {path: 'order-detail', component: OrderDetailComponent}
   ]},//待付款
