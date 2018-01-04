@@ -7,7 +7,7 @@
     <div class="content p-lg bl bt bb bt0">
       <dl>
         <dt>买家留言：</dt>
-        <dd class="qpsP">{{orderData.note}}</dd>
+        <dd class="qpsP">{{orderData.note || '[未填写]'}}</dd>
       </dl>
       <dl class="line">
         <dt>支付方式：</dt>
@@ -26,7 +26,7 @@
               <li>付款人：<span>{{PayRecData?.bacctName}}</span></li>
               <li>凭证备注：<span>{{PayRecData?.summary}}</span></li>
               <li>付款时间：<span>{{PayRecData?.tradeTime}}</span></li>
-              <li>付款备注：<span>{{PayRecData?.remark}}</span></li>
+              <li>付款备注：<span>{{PayRecData.remark || '[未填写]'}}</span></li>
             </ul>
           </div>
         </dd>
