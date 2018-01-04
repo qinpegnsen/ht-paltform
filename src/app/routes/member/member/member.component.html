@@ -115,7 +115,7 @@
            </span>
           {{member.custName}}
         </td>
-        <td>{{member.custTruename}}</td>
+        <td [ngClass]="{'font-gray':!member.custTruename}">{{member.custTruename || '【未填写】'}}</td>
         <td>
           {{member.custSex | rzhState:'1002' }}
         </td>

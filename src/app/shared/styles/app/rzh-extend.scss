@@ -3618,3 +3618,14 @@ input[type=number].num::-webkit-outer-spin-button {
   max-width: 100%;
 }
 
+/*会员认证审核图片位置，写在组件内的样式不起作用，于是写在公共样式里*/
+
+.imageViewerContainer[_ngcontent-c12]   .imageViewer[_ngcontent-c12]{
+  height: 350px!important;
+}
+.imageViewerContainer[_ngcontent-c12]   .smallImageViewer[_ngcontent-c12]{
+  height: 70px!important;
+}
+.imageViewerContainer[_ngcontent-c12]   .smallImageViewer[_ngcontent-c12]   .moreImg[_ngcontent-c12]{
+  left:40px!important;
+}
