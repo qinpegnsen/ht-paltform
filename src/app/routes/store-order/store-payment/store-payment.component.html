@@ -2,12 +2,16 @@
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
+    <input class="form-control" required [(ngModel)]="storeCode" name="storeCode" type="hidden"/>
     <div class="row clearfix p text-right">
       <div class="search-term clearfix ml mb">
         <div class="w100 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
             <div class="w90 pl0 pr0 pull-left">
-              <input type="text" class="form-control border-b-grey" [(ngModel)]="storeName" placeholder="请填写店铺名称"/>
+              <select class="form-control" name="voList" [(ngModel)]="storeCode" >
+                <option value="">请选择店铺名称查询</option>
+                <option *ngFor="let item of voList" [value]="item.storeCode">{{item.storeName}}</option>
+              </select>
             </div>
           </div>
         </div>

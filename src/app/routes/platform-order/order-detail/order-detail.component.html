@@ -94,6 +94,15 @@
             <dd>{{orderDetailData.isPlatCarry | rzhState:'1001'}}</dd>
           </dl>
           <dl>
+            <dt>运送方：</dt>
+            <dd>
+              <span *ngIf="orderDetailData.isPlatCarry == 'Y'">平台</span>
+              <span *ngIf="orderDetailData.isPlatCarry == 'N'">
+              <span *ngIf="orderDetailData.agentName != '' && orderDetailData.agentName != null">{{orderDetailData.agentName}}</span>
+            </span>
+            </dd>
+          </dl>
+          <dl>
             <dt>收货人：</dt>
             <dd>{{orderDetailData.linkman}}</dd>
           </dl>
@@ -308,9 +317,9 @@
       <span *ngIf="orderDetailData.coin">{{orderDetailData.coin | number:'1.2-2'}}</span>
       <span *ngIf="!orderDetailData.coin">0</span>
     </template>
-   <!-- <ng-container *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE'">
-      <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
-    </ng-container>-->
+    <!-- <ng-container *ngIf="orderDetailData.isPlatCarry == 'Y' && orderDetailData.state=='PREPARE'">
+       <app-deliver-goods [orderId]="curDeliverOrderId" (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>
+     </ng-container>-->
   </div>
 </div>
 <div class="page-back btn btn-thc btn-circle fa fa-mail-reply" title="返回" (click)="back()"></div>

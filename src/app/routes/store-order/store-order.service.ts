@@ -60,5 +60,4 @@ public getOrderState(ordno) {
     if (!isNullOrUndefined(expressData)) return expressData;
   }
 
-
 }

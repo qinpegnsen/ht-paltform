@@ -20,6 +20,9 @@ export class PlatformCancelComponent implements OnInit {
   public goodsList: Page = new Page();
   public phone: string;
   public ordno: string;
+  public isPlatCarry: string='';//查询店铺编码
+  public agentList: string='';//查询店铺编码
+  public agentCode: string='';//查询店铺编码
   public LogisticsData: any;//物流信息
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
@@ -30,7 +33,8 @@ export class PlatformCancelComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1)
+    me.queryDatas(1);
+    me.querySoterLists();
   }
 
   /**
@@ -88,10 +92,19 @@ export class PlatformCancelComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      ordState: 'CLOSE'
+      ordState: 'CLOSE',
+      agentCode: _this.agentCode,
+      isPlatCarry:_this.isPlatCarry
     };
     let requestUrl = '/ord/queryPlantOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+  }
+
+  querySoterLists(){
+    let _this = this, activePage = 1;
+    let requestUrl = '/agent/queryAll';
+    let requestData = {};
+    _this.agentList = _this.submit.getData(requestUrl, requestData);
   }
 
   /**

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {Page} from '../../../core/page/page';
-import {PageEvent} from 'angular2-datatable';
-import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {StoreOrderService} from '../store-order.service';
 import {SubmitService} from '../../../core/forms/submit.service';
+import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 
 @Component({
-  selector: 'app-store-payment',
-  templateUrl: './store-payment.component.html',
-  styleUrls: ['./store-payment.component.scss']
+  selector: 'app-store-all',
+  templateUrl: './store-all.component.html',
+  styleUrls: ['./store-all.component.scss']
 })
-export class StorePaymentComponent implements OnInit {
+export class StoreAllComponent implements OnInit {
   public path: string;       //路由
   public ordState: string;    //订单类型
   public curCancelOrderId: string;
@@ -32,7 +32,7 @@ export class StorePaymentComponent implements OnInit {
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1);
+    me.queryDatas(1)
     me.querySoterLists();
   }
 
@@ -91,21 +91,10 @@ export class StorePaymentComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      storeCode: _this.storeCode,
-      ordState: 'CR'
+      storeCode: _this.storeCode
     };
     let requestUrl = '/ord/queryStoreOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-  }
-
-  querySoterLists(){
-    let _this = this, activePage = 1;
-    let requestUrl = '/stores/query';
-    let requestData = {
-      isPlatShop:'N'
-    };
-    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
-    console.log("█ _this.voList  ►►►",  _this.voList );
   }
 
   /**
@@ -117,6 +106,20 @@ export class StorePaymentComponent implements OnInit {
     i.style.display = 'block';
   }
 
+  /**
+   * 查询店铺列表
+   */
+  querySoterLists(){
+    console.log("█ 1111 ►►►",  1111);
+
+    let _this = this, activePage = 1;
+    let requestUrl = '/stores/query';
+    let requestData = {
+      isPlatShop:'N'
+    };
+    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
+    console.log("█ _this.voList  ►►►",  _this.voList );
+  }
   /**
    * 隐藏买家信息
    * @param i

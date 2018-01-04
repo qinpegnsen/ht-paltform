@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg thc font">平台店铺待付款订单</div>
+<div class="content-heading mb-lg thc font">平台店铺所有订单</div>
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
@@ -72,10 +72,12 @@
           <div class="order-space"></div>
           <div class="order-head p b bb0">
             <span class="mr-xl">订单编号：{{order.ordno}}</span>
-            <!--<span class="mr-xl">店铺：{{goods.storeName}}</span>-->
             <span class="mr-xl">下单时间：{{order.createTime}}</span>
-            <span>来源：{{order.payPlat | rzhState:'1015'}}</span>
-            <!--<span class="fa fa-desktop"> 来源：PC</span>-->
+            <span class="mr-xl">来源：{{order.payPlat | rzhState:'1015'}}</span>
+            <span *ngIf="order.isPlatCarry == 'Y'">配送方：平台</span>
+            <span *ngIf="order.isPlatCarry == 'N'">
+              <span *ngIf="order.agentName != '' && order.agentName != null">配送方：{{order.agentName}}</span>
+            </span>
           </div>
           <table class="w100 b">
             <tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">
@@ -219,13 +221,6 @@
       </tr>
       </tfoot>
     </table>
-    <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-    <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
-    <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
-                       (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
-    <!--</ng-container>-->
-
-    <!-- <app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
   </div>
 </div>
 

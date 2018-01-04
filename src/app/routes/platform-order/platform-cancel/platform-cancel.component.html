@@ -2,7 +2,34 @@
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
+    <input class="form-control" required [(ngModel)]="isPlatCarry" name="isPlatCarry" type="hidden"/>
+    <input class="form-control" required [(ngModel)]="agentCode" name="agentCode" type="hidden"/>
     <div class="row clearfix p text-right">
+      <div class="search-term clearfix ml mb">
+        <div class="w100 pl-sm pr0 pull-left">
+          <div class="form-group mb0 pr0">
+            <div class="w100 pl0 pr0 pull-left">
+              <select class="form-control" name="voList" [(ngModel)]="isPlatCarry" >
+                <option value="">全部</option>
+                <option value="Y">平台</option>
+                <option value="N">代理商</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="search-term clearfix ml mb" *ngIf="isPlatCarry=='N'">
+        <div class="w100 pl-sm pr0 pull-left">
+          <div class="form-group mb0 pr0">
+            <div class="w100 pl0 pr0 pull-left">
+              <select class="form-control" name="agentList" [(ngModel)]="agentCode">
+                <option value="">请选择代理商名称查询</option>
+                <option *ngFor="let item of agentList" [value]="item.agentCode">{{item.agentName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="search-term clearfix ml mb">
         <div class="w100 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
@@ -45,10 +72,12 @@
           <div class="order-space"></div>
           <div class="order-head p b bb0">
             <span class="mr-xl">订单编号：{{order.ordno}}</span>
-            <!--<span class="mr-xl">店铺：{{goods.storeName}}</span>-->
             <span class="mr-xl">下单时间：{{order.createTime}}</span>
-            <span>来源：{{order.payPlat | rzhState:'1015'}}</span>
-            <!--<span class="fa fa-desktop"> 来源：PC</span>-->
+            <span class="mr-xl">来源：{{order.payPlat | rzhState:'1015'}}</span>
+            <span *ngIf="order.isPlatCarry == 'Y'">配送方：平台</span>
+            <span *ngIf="order.isPlatCarry == 'N'">
+              <span *ngIf="order.agentName != '' && order.agentName != null">配送方：{{order.agentName}}</span>
+            </span>
           </div>
           <table class="w100 b">
             <tr class="text-center" *ngFor="let goods of order.ordItemList;let s = index">

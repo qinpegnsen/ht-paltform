@@ -247,6 +247,10 @@ const orders = {
       alert: '▼',
       submenu: [
         {
+          text: '全部订单',
+          link: '/main/store-order/store-all'
+        },
+        {
           text: '待付款',
           link: '/main/store-order/store-payment'
         },
@@ -273,6 +277,10 @@ const orders = {
       icon: 'fa fa-file-text-o',
       alert: '▼',
       submenu: [
+        {
+          text: '全部订单',
+          link: '/main/platform-order/platform-all'
+        },
         {
           text: '待付款',
           link: '/main/platform-order/platform-payment'

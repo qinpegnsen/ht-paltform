@@ -11,11 +11,16 @@ import {PlatformOrderService} from './platform-order.service';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {DeliverComponent} from './deliver/deliver.component';
 import {PlatformPaymentComponent} from './platform-payment/platform-payment.component';
+import {PlatformAllComponent} from './platform-all/platform-all.component';
+
 
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'platform-payment'},
+  {path: '', redirectTo: 'platform-all'},
+  {path: 'platform-all', component: PlatformAllComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//全部订单
   {path: 'platform-payment', component: PlatformPaymentComponent,children: [
     {path: 'order-detail', component: OrderDetailComponent}
   ]},//待付款
@@ -40,7 +45,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent, PlatformPaymentComponent],
+  declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent, PlatformPaymentComponent, PlatformAllComponent],
   providers: [
     PlatformOrderService
   ]

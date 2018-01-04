@@ -18,10 +18,11 @@ export class StoreCancelComponent implements OnInit {
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
-  public phone: string;
-  public ordno: string;
-  public storeName: string;
+  public phone: string;//查询条件手机号
+  public ordno: string;//查询条件订单号
+  public storeCode: string='';//查询店铺编码
   public LogisticsData: any;//物流信息
+  public voList: any;   //店铺列表列表
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
 
@@ -32,6 +33,7 @@ export class StoreCancelComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.queryDatas(1)
+    me.querySoterLists();
   }
 
   /**
@@ -89,11 +91,23 @@ export class StoreCancelComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      storeName: _this.storeName,
+      storeCode: _this.storeCode,
       ordState: 'CLOSE'
     };
     let requestUrl = '/ord/queryStoreOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
+  }
+
+  querySoterLists(){
+    console.log("█ 1111 ►►►",  1111);
+
+    let _this = this, activePage = 1;
+    let requestUrl = '/stores/query';
+    let requestData = {
+      isPlatShop:'N'
+    };
+    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
+    console.log("█ _this.voList  ►►►",  _this.voList );
   }
 
   /**

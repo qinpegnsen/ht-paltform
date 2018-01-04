@@ -1,32 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from '../../../core/page/page';
-import {PageEvent} from 'angular2-datatable';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
+import {PageEvent} from 'angular2-datatable';
+import {Page} from '../../../core/page/page';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
-import {StoreOrderService} from '../store-order.service';
+import {PlatformOrderService} from '../platform-order.service';
 import {SubmitService} from '../../../core/forms/submit.service';
 
 @Component({
-  selector: 'app-store-payment',
-  templateUrl: './store-payment.component.html',
-  styleUrls: ['./store-payment.component.scss']
+  selector: 'app-platform-all',
+  templateUrl: './platform-all.component.html',
+  styleUrls: ['./platform-all.component.scss']
 })
-export class StorePaymentComponent implements OnInit {
+export class PlatformAllComponent implements OnInit {
   public path: string;       //路由
   public ordState: string;    //订单类型
   public curCancelOrderId: string;
   public curDeliverOrderId: string;
   public lookLogisticsOrderId: string;
   public goodsList: Page = new Page();
-  public phone: string;//查询条件手机号
-  public ordno: string;//查询条件订单号
-  public storeCode: string='';//查询店铺编码
+  public phone: string;
+  public ordno: string;
   public LogisticsData: any;//物流信息
-  public voList: any;   //店铺列表列表
+  public isPlatCarry: string='';//查询店铺编码
+  public agentList: string='';//查询店铺编码
+  public agentCode: string='';//查询店铺编码
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService) {
+  constructor(public platformOrderService: PlatformOrderService, public submit: SubmitService) {
 
   }
 
@@ -61,7 +62,7 @@ export class StorePaymentComponent implements OnInit {
   showLogistics(Logistics, ordno) {
     Logistics.style.display = 'block';
     if (isUndefined(ordno)) ordno = ordno;
-    this.LogisticsData = this.storeOrderService.getOrderLogisticsData(ordno);
+    this.LogisticsData = this.platformOrderService.getOrderLogisticsData(ordno);
   }
 
   /**
@@ -91,21 +92,18 @@ export class StorePaymentComponent implements OnInit {
       sortColumns: '',
       phone: _this.phone,
       ordno: _this.ordno,
-      storeCode: _this.storeCode,
-      ordState: 'CR'
+      agentCode: _this.agentCode,
+      isPlatCarry:_this.isPlatCarry
     };
-    let requestUrl = '/ord/queryStoreOrd';
+    let requestUrl = '/ord/queryPlantOrd';
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
 
   querySoterLists(){
     let _this = this, activePage = 1;
-    let requestUrl = '/stores/query';
-    let requestData = {
-      isPlatShop:'N'
-    };
-    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
-    console.log("█ _this.voList  ►►►",  _this.voList );
+    let requestUrl = '/agent/queryAll';
+    let requestData = {};
+    _this.agentList = _this.submit.getData(requestUrl, requestData);
   }
 
   /**

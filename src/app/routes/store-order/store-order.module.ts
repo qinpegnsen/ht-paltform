@@ -10,9 +10,13 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {StoreOrderService} from './store-order.service';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {StorePaymentComponent} from './store-payment/store-payment.component';
+import {StoreAllComponent} from './store-all/store-all.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'store-pending'},
+  {path: '', redirectTo: 'store-all'},
+  {path: 'store-all', component: StoreAllComponent,children: [
+    {path: 'order-detail', component: OrderDetailComponent}
+  ]},//全部订单
   {path: 'store-payment', component: StorePaymentComponent,children: [
     {path: 'order-detail', component: OrderDetailComponent}
   ]},//待付款
@@ -38,7 +42,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [StorePendingComponent, StoreCancelComponent, StoreReceivedComponent, StoreCompleteComponent,OrderDetailComponent, StorePaymentComponent],
+  declarations: [StorePendingComponent, StoreCancelComponent, StoreReceivedComponent, StoreCompleteComponent,OrderDetailComponent, StorePaymentComponent, StoreAllComponent],
   providers: [
     StoreOrderService
   ]
