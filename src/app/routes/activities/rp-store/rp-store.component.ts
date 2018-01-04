@@ -20,6 +20,8 @@ export class RpStoreComponent implements OnInit {
   public epSubname:any;               //企业的简称
   public epCode:any;                   //企业的编码
   public storeCode:any;                //店铺的编码
+  public currentId: any;               //当前的id
+  public weight: any;                  //当前的企业的权重
 
   constructor(public service:ActivitiesService) {}
 
@@ -41,7 +43,7 @@ export class RpStoreComponent implements OnInit {
   }
 
   /**
-   * 红包列表的数据
+   * 红包企业列表的数据
    */
   queryRpStoreList(curPage,event?:PageEvent){
     let activePage = 1;
@@ -102,5 +104,22 @@ export class RpStoreComponent implements OnInit {
    */
   hideImg(i) {
     i.style.display = 'none';
+  }
+
+  /**
+   *展示弹窗
+   */
+  showAlert(curId,weight) {
+    this.currentId = curId;
+    this.weight = weight;
+  }
+
+  /**
+   * 设置权重的回调函数
+   * @param data
+   */
+  getDeliverOrderData(data) {
+    this.currentId = null;
+    if(data.type) this.queryRpStoreList(data.page)//在当前页面发货之后需要刷新页面数据
   }
 }
