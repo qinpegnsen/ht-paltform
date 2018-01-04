@@ -3,6 +3,8 @@ import {isNullOrUndefined, isUndefined} from 'util';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {PatternService} from '../../../core/forms/pattern.service';
 import {AjaxService} from '../../../core/services/ajax.service';
+import {AppComponent} from "../../../app.component";
+import {ActivitiesService} from "../activities.service";
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -31,7 +33,7 @@ export class WeightAlertComponent implements OnInit {
     $('.wrapper > section').css('z-index', 114);
   }
 
-  constructor( public submit: SubmitService, public pattern: PatternService, public ajax: AjaxService) {
+  constructor( public submit: SubmitService, public pattern: PatternService, public ajax: AjaxService,public activitiesService:ActivitiesService) {
   }
 
   ngOnInit() {
@@ -74,24 +76,14 @@ export class WeightAlertComponent implements OnInit {
    * 设置权重
    */
   delivery() {
-    let _this = this;
-    _this.ajax.put({
-      url: '/rpStore/updateRpStoreWeight',
-      data: {
-        id: this.orderId,
-        weight: this.curWeight,
-      },
-      success: (res) => {
-        if (res.success) {
-          swal(res.info, '', 'success');
-          _this.hideWindow(true);
-        } else {
-          swal(res.info);
-        }
-      },
-      error: (data) => {
-        swal('设置权重失败！', 'error');
-      }
-    })
+    let url='/rpStore/updateRpStoreWeight';
+    let data={
+      id: this.orderId,
+      weight: this.curWeight,
+    }
+    let result=this.activitiesService.updateRpStoreWeight(url,data);
+    if(result){
+      this.hideWindow(true);
+    }
   }
 }
