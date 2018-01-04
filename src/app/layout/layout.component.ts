@@ -1,23 +1,34 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {NavigationStart, Router} from "@angular/router";
 
 @Component({
-    selector: 'app-layout',
-    templateUrl: './layout.component.html',
-    styleUrls: ['./layout.component.scss']
+  selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
-  public menuItems:any;
+export class LayoutComponent implements OnInit, OnDestroy {
 
-    constructor(public router: Router) {
-    }
+  public menuItems: any;
+  public path;
+  public routeChangeListener: any;
 
-    ngOnInit() {
-    }
+  constructor(private router: Router) {
+    this.routeChangeListener = this.router.events
+      .filter(event => event instanceof NavigationStart)
+      .subscribe((event) => {
+        this.path = event['url'];
+      });
+  }
 
-    submenus(menus){
-      this.menuItems = menus;
-    }
+  ngOnInit() {
+  }
+  ngOnDestroy(): void {
+    this.routeChangeListener.unsubscribe();//当组件销毁时清除路由监听，否则会多次触发
+  }
+
+  submenus(menus) {
+    this.menuItems = menus;
+  }
 
 
 }

@@ -8,6 +8,7 @@ import {CookieService} from "angular2-cookie/core";
 import {LayoutComponent} from "../layout.component";
 import {Page} from "../../core/page/page";
 import {SubmitService} from "../../core/forms/submit.service";
+import {isNullOrUndefined} from "util";
 const screenfull = require('screenfull');
 const browser = require('jquery.browser');
 declare var $: any;
@@ -17,7 +18,16 @@ declare var $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnChanges {
+
+  @Input() private curPath;
+  ngOnChanges(changes: SimpleChanges): void {
+    let me = this;
+    if(changes['curPath'] && !isNullOrUndefined(me.curPath)){
+      // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
+      me.getSubmenus(me.curPath)
+    }
+  }
 
   public platformInfoData: any;                           //系统消息分页的数据
   public platformInfoDataTotal: any;                      //系统消息总的数据
@@ -52,7 +62,6 @@ export class HeaderComponent implements OnInit{
     setInterval(() => {//每5秒钟请求一次，如果用docheck钩子的话，文章关联商品的时候卡顿
       this.queryAdminNotify();
     }, 5000);
-
   }
 
   /**
