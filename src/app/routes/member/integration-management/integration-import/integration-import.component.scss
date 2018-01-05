@@ -1,65 +1,84 @@
-.ts{
+.ts {
   background: #C9E7F2;
   width: 100%;
   margin: auto;
   margin-top: 15px;
 }
-li{
+
+li {
   list-style: none;
 }
-.b-radius{
+
+.b-radius {
   border-radius: 50%;
 }
-.sc{
+
+.sc {
   margin-left: -3px;
   margin-top: -4px;
   height: 36px;
 }
-.file{
+
+.file {
   display: inline-block;
   float: left;
   padding-left: 0;
   min-width: 600px;
 }
-.file-lable{
+
+.file-lable {
   display: block;
 }
-.upload{
+
+.upload {
   height: 35px;
   line-height: 35px;
   padding: 8px 10px;
   margin-right: 10px;
   border-radius: 3px;
 }
-.progressa{
+
+.progressa {
   margin-right: 15px;
   padding: 0
 }
-.progressb{
+
+.progressb {
   height: 12px;
   margin-top: 4px;
   min-width: 500px;
 }
-.percentage{
+
+.percentage {
   margin-left: 15px;
 }
-.allprogress{
- min-width: 600px;
+
+.allprogress {
+  min-width: 600px;
 }
-.a{
+
+.a {
   background: red;
 }
-.btn{
-  padding:0 3px ;
+
+.btn {
+  padding: 0 3px;
 }
-a{
+
+a {
   text-decoration: none;
   color: #fff;
 }
-.upload-input{
+
+.upload-input {
   height: 35px;
   line-height: 35px;
 }
-.up{
+
+.up {
   padding: 0 10px;
+}
+
+.z-index {
+  z-index: 999
 }

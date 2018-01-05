@@ -2,7 +2,7 @@
 <div class="rightpage">
   <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
     <!-- START panel-->
-    <div class="">
+    <div>
       <div class="panel-body">
         <fieldset class="b0">
           <legend class="thc font">数据字典信息</legend>
@@ -66,7 +66,7 @@
           </div>
         </fieldset>
       </div>
-      <div class="panel-footer text-center" style="position: fixed;width: 100%;bottom:0;">
+      <div class="panel-footer text-center update-button">
         <button class="ml btn btn-default mr pull-left thc font b" (click)="cancel()" type="button">放弃操作</button>
         <button class="ml btn btn-info pull-left thc bg b" type="submit" (click)="submit(addForm.value)" [disabled]="!addForm.form.valid" >提交信息</button>
       </div>
