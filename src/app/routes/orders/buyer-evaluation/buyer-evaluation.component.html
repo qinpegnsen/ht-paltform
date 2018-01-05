@@ -92,7 +92,7 @@
             <div class="bg-table special text-left">
               <span class="m20 pull-left">追评晒单:</span>
               <span *ngFor="let comment of count.commentGoodsPicList">
-                <img [src]="comment.pic" alt="" class="buyimg pull-left" *ngIf="comment.isAfter=='Y'"
+                <img [src]="comment.pic" alt="" class="buyimg pull-left mr-sm" *ngIf="comment.isAfter=='Y'"
                      (mousemove)="showImg($event,i)" (mouseout)="hideImg(i)"
                      onerror="javascript:this.src='../../../assets/img/dummy.png'">
                 <img [src]="comment.pic" #i class="bigImg" alt=""
