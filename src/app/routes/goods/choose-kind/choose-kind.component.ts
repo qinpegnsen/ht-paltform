@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {SubmitService} from "../../../../core/forms/submit.service";
 import {PublishComponent} from "../publish/publish.component";
+import {SubmitService} from "../../../core/forms/submit.service";
 declare var $: any;
 
 @Component({

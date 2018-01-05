@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {PublishComponent} from "../publish/publish.component";
+import {PublishComponent} from "../../publish/publish.component";
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../../core/forms/submit.service";
 import {GoodsService} from "../../goods.service";

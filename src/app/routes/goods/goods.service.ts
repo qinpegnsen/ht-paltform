@@ -8,7 +8,7 @@ import {SubmitService} from "../../core/forms/submit.service";
 import {SettingsService} from "../../core/settings/settings.service";
 import {Location}from '@angular/common';
 const swal = require('sweetalert');
-declare var $:any;
+declare var $: any;
 
 @Injectable()
 export class GoodsService {
@@ -24,6 +24,43 @@ export class GoodsService {
               public settings: SettingsService,
               public submit: SubmitService) {
   }
+
+  /**
+   * 获取店铺是否改变的算法编码
+   * @returns {any}
+   */
+  getStoresMd5() {
+    return this.submit.getData("/stores/loadStoreMD5", '');
+  }
+
+  /**
+   * 获取店铺列表
+   */
+  getAllStores() {
+    let allStores: Array<any> = new Array(), //所有店铺，格式是选择组件的格式
+      storesData: any,//接口请求到的店铺数据
+      localMd5 = localStorage.getItem('storeMd5'),//本地缓存的店铺信息编码
+      localStores = localStorage.getItem('allStores');//本地缓存的店铺数据
+    if (localMd5 && localMd5 == this.getStoresMd5() && localStores) {
+      allStores = JSON.parse(localStores);
+    } else {
+      storesData = this.submit.getData("/stores/queryAllNormal", '');
+      if (storesData && storesData.storeList && storesData.md5) {
+        let result = storesData.storeList, obj: any = {};
+        result.forEach(item => {
+          obj = {
+            id: item.storeCode,
+            text: item.storeName
+          };
+          allStores.push(obj);
+        })
+        localStorage.setItem('allStores', JSON.stringify(allStores));
+        localStorage.setItem('storeMd5', storesData.md5);
+      }
+    }
+    return allStores;
+  }
+
 
   /**
    * get 获取数据

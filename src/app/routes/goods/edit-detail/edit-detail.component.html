@@ -12,6 +12,18 @@
       </dd>
     </dl>
     <dl class="clearfix">
+      <dt class="col-xs-2"><i class="main-red">*</i>所属店铺：</dt>
+      <dd class="col-xs-10 col-md-8">
+        <div class="w50">
+          <ng-select [items]="stores" class="p0" #allStores required
+                     (selected)="selectedStore($event)" [hidden]="path=='edit'"
+                     placeholder="根据店铺名称查询">
+          </ng-select>
+          <span [hidden]="path!='edit'">{{publishData.storeName}}</span>
+        </div>
+      </dd>
+    </dl>
+    <dl class="clearfix">
       <dt class="col-xs-2"><i class="main-red">*</i>商品名称：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
@@ -93,14 +105,14 @@
           <h6 class="col-sm-2 col-xs-3 text-right">
             <span class="_attrName" *ngIf="!saleAttr.used">{{saleAttr.name}}</span>
             <label class="w80" *ngIf="saleAttr.used"><input class="form-control" type="text"
-                                           [ngModelOptions]="{standalone: true}" maxlength="6"
-                                           [(ngModel)]="saleAttr.name" (ngModelChange)="changeSpec(i)"></label>
+                                                            [ngModelOptions]="{standalone: true}" maxlength="6"
+                                                            [(ngModel)]="saleAttr.name" (ngModelChange)="changeSpec(i)"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
             <li class="col-xs-4 col-md-3 _attr" *ngFor="let val of saleAttr.goodsEnumValList;let k = index;">
               <label class="checkbox-inline c-checkbox">
                 <input class="_val" type="checkbox" [(ngModel)]="val.checked" [ngModelOptions]="{standalone: true}"
-                      (ngModelChange)="changeSpec(i)"/>
+                       (ngModelChange)="changeSpec(i)"/>
                 <span class="fa fa-check"></span>
               </label>
               <span class="_value" *ngIf="!val.checked">{{val.enumValue}}</span>
@@ -391,9 +403,6 @@
     </dl>
   </fieldset>
 
-  <!--临时节点，修改商品时用来存储移动端详情的图片和文本，通过节点的取值，方便处理成详情展示和修改需要的数据-->
-  <div class="hide" id="mblHtml" [innerHtml]="tempMblHtml"></div>
-
   <!--商品物流信息-->
   <fieldset class="m0 p0 logistics">
     <legend class="m0">商品物流信息</legend>
@@ -423,7 +432,7 @@
                      [(ngModel)]="publishData.goodsExpressInfo.freightType"/>
               <span class="fa fa-circle"></span>使用固定运费</label>
             </span>
-            <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
+              <span class="clearfix" [class.hide]="publishData.goodsExpressInfo.freightType!='FIXED'">
               <input class="text price num form-control pull-left" name="fixedFreight" type="number"
                      (keyup)="auditInputValueForNum($event.target)"
                      [required]="publishData.goodsExpressInfo.freightType=='FIXED'"

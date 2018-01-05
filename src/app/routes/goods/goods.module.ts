@@ -4,14 +4,14 @@ import {SharedModule} from "../../shared/shared.module";
 import {FileUploadModule} from "ng2-file-upload";
 import {GoodsService} from "./goods.service";
 import {SubmitService} from "../../core/forms/submit.service";
-import {PublishComponent} from "./plat-goods/publish/publish.component";
+import {PublishComponent} from "./publish/publish.component";
 import {ManageComponent} from "./plat-goods/manage/manage.component";
 import {BrandsComponent} from "./brands/brands.component";
 import {KindManageComponent} from "./kind-manage/kind-manage.component";
 import {AddKindComponent} from "./add-kind/add-kind.component";
 import {AddBrandComponent} from "./add-brand/add-brand.component";
-import {ChooseKindComponent} from "./plat-goods/choose-kind/choose-kind.component";
-import {PublishedComponent} from "./plat-goods/published/published.component";
+import {ChooseKindComponent} from "./choose-kind/choose-kind.component";
+import {PublishedComponent} from "./published/published.component";
 import {AuditGoodsComponent} from "./plat-goods/audit-goods/audit-goods.component";
 import {WholesaleComponent} from "./wholesale/wholesale.component";
 import {BasicPropertiesComponent} from "./basic-properties/basic-properties.component";
@@ -19,7 +19,7 @@ import {AddDataComponent} from "./add-data/add-data.component";
 import {UpdateDataComponent} from "./update-data/update-data.component";
 import {UnAuditComponent} from "./plat-goods/un-audit/un-audit.component";
 import {SkuGoodsComponent} from "./sku-goods/sku-goods.component";
-import {EditDetailComponent} from "./plat-goods/edit-detail/edit-detail.component";
+import {EditDetailComponent} from "./edit-detail/edit-detail.component";
 import {DataTable} from "../../shared/directives/ng2-datatable/DataTable";
 import {AuditBrandComponent} from "./audit-brand/audit-brand.component";
 import {AuditListComponent} from "./audit-brand/audit-list/audit-list.component";
@@ -32,6 +32,12 @@ import {AuditStoreGoodsComponent} from "./store-goods/audit-store-goods/audit-st
 
 // 父路由，用于页面嵌套显示
 const routes: Routes = [
+  {path: 'publish', component: PublishComponent, children: [
+    {path: '', redirectTo: 'step_one'},
+    {path: 'step_one', component: ChooseKindComponent},
+    {path: 'step_two', component: EditDetailComponent},
+    {path: 'step_three', component: PublishedComponent},
+  ]},
   {path: '', redirectTo: 'plat'},
   {path: 'plat', children: [
     {path: '', redirectTo: 'manage'},
@@ -55,6 +61,7 @@ const routes: Routes = [
     {path: '', redirectTo: 'manage'},
     {path: 'manage', component: StoresGoodsComponent, children: [
       {path: 'detail', component: AuditStoreGoodsComponent},
+      {path: 'edit', component: EditDetailComponent},
       {path: 'audit', component: AuditStoreGoodsComponent}
     ]},
     {path: 'unAudit', component: StoreUnAuditComponent, children: [
@@ -62,7 +69,6 @@ const routes: Routes = [
       {path: 'audit', component: AuditStoreGoodsComponent}]
     }
   ]},
-
   {
     path: 'kind-manage', component: KindManageComponent, children: [
     {path: 'addKind', component: AddKindComponent},

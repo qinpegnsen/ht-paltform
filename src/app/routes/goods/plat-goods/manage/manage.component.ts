@@ -6,6 +6,7 @@ import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../../goods.service";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {Setting} from "../../../../core/settings/setting";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -18,7 +19,7 @@ export class ManageComponent implements OnInit {
   public addButton;
   public showList: boolean = true;     //是否显示列表页
   public goodsList: Page = new Page();
-  public query = {
+  public query: any = {
     kindId: '',
     goodsName: '',
     brandName: '',
@@ -34,6 +35,7 @@ export class ManageComponent implements OnInit {
   public goodsState: any;  // 商品状态列表
   public curBaseCode: string;  // 当前商品基本编号
   public curName: string;    // 当前商品名称
+  public goodsUrls: any = Setting.URLS.goods;
 
   constructor(public router: Router,
               public tools: RzhtoolsService,
@@ -68,7 +70,7 @@ export class ManageComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if(event.refresh) this.queryDatas(this.query.curPage)
+    if (event.refresh) this.queryDatas(this.query.curPage)
   }
 
   /**
@@ -169,7 +171,7 @@ export class ManageComponent implements OnInit {
    * 隐藏大图
    * @param event
    */
-  hideImg(event){
+  hideImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'none';
   }
@@ -205,6 +207,6 @@ export class ManageComponent implements OnInit {
    */
   getSkuData(data) {
     this.curBaseCode = null;
-    if(data.type) this.queryDatas(data.page)
+    if (data.type) this.queryDatas(data.page)
   }
 }

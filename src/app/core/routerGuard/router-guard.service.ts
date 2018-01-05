@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, CanActivate, NavigationStart, Router, RouterStateSnapshot} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import {Observable} from "rxjs/Observable";
+import {MenuService} from "../menu/menu.service";
 const swal = require('sweetalert');
 
 @Injectable()
@@ -12,7 +13,7 @@ export class RouterGuardService implements CanActivate {
   private menus;//有权限的路由组合
   public path;//当前路由
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public menu: MenuService) {
     let me = this;
     //监听路由，该事件一旦执行(除非刷新)停不下来呀，所以可以用来着接着监听后面的子路由是否有权限
     //该事件需写在构造器里，因为写在别的地方，该服务被调用几次，他就会重复执行几次，越来越多
@@ -27,7 +28,7 @@ export class RouterGuardService implements CanActivate {
       });
   }
 
-  canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     let me = this;
     this.menus = this.getAllRouterLink();//取到所有菜单的link；
     if (state.url.indexOf(this.urlHome) < 0 && state.url.indexOf('pages') < 0 && !isNullOrUndefined(this.menus)) {//当路由为home时，不拦截
@@ -47,15 +48,13 @@ export class RouterGuardService implements CanActivate {
    * @returns {Array}
    */
   public getAllRouterLink() {
-    let allMenus = JSON.parse(localStorage.getItem('userMenu'));
-    if (isNullOrUndefined(allMenus)) allMenus = new Array(), this.router.navigate([this.urlLogin]);
-    let menuUrls = [];
+    let allMenus = this.menu.getMenu(), menuUrls = [];
     allMenus.forEach((menu) => {
       if (menu.submenu) {
-        menu.submenu.forEach((submenuTwo) => {
+        menu.submenu.forEach((submenuTwo:any = {}) => {
           if (submenuTwo.submenu) {
             let submenu2 = submenuTwo.submenu;
-            submenu2.forEach((submenuThree) => {
+            submenu2.forEach((submenuThree:any = {}) => {
               menuUrls.push(submenuThree.link)
             })
           }
@@ -73,7 +72,7 @@ export class RouterGuardService implements CanActivate {
    * 权限匹配，当前路由与权限菜单中路由匹配（相等或包含当前路由，或当前路由包含权限菜单中的某一菜单）则有权限
    */
   public isPermission(path) {
-    if(!this.menus) this.menus = this.getAllRouterLink();//取到所有菜单的link；
+    if (!this.menus) this.menus = this.getAllRouterLink();//取到所有菜单的link；
     //┭┮﹏┭┮，当前路由可能比菜单中配置的路径少一级（比如模块中的空路由重定向），也可能比菜单路径多几级（比如子菜单们），所以可能是反向包含关系
     for (let i = 0; i < this.menus.length; i++) {
       if (this.menus[i].indexOf(path) != -1 || path.indexOf(this.menus[i]) != -1) return true;
