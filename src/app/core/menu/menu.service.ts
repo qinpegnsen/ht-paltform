@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import {CookieService} from "angular2-cookie/core";
-import {any} from "codelyzer/util/function";
-import {isNullOrUndefined} from "util";
-import {MENU} from "../../routes/menu";
-import {Router} from "@angular/router";
+import {Injectable} from '@angular/core';
+import {CookieService} from 'angular2-cookie/core';
+import {any} from 'codelyzer/util/function';
+import {isNullOrUndefined} from 'util';
+import {Router} from '@angular/router';
 
 //后台菜单返回格式
 interface menuVO{

@@ -1,16 +1,20 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AddFormworkService} from "./add-formwork.service";
-import {AREA_LEVEL_3_JSON} from "../../../core/services/area_level_3";
-import {AREA_LEVEL_1_JSON} from "../../../core/services/area_level_1";
-import {CHINA_AREA} from "../../../core/services/china_area";
-import {isArray} from "rxjs/util/isArray";
-import {AjaxService} from "../../../core/services/ajax.service";
-import {SessionService} from "../session.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AddFormworkService} from './add-formwork.service';
+import {AREA_LEVEL_3_JSON} from '../../../core/services/area_level_3';
+import {AREA_LEVEL_1_JSON} from '../../../core/services/area_level_1';
+import {CHINA_AREA} from '../../../core/services/china_area';
+import {isArray} from 'rxjs/util/isArray';
+import {AjaxService} from '../../../core/services/ajax.service';
+import {SessionService} from '../session.service';
 import {FreightTemplateComponent} from '../freight-template/freight-template.component';
 import {isNullOrUndefined} from 'util';
 import {PatternService} from '../../../core/forms/pattern.service';
 import {RzhtoolsService} from '../../../core/services/rzhtools.service';
+import {SubmitService} from '../../../core/forms/submit.service';
+import {Setting} from '../../../core/settings/setting';
+import {GoodsService} from 'app/routes/goods/goods.service';
+import {SelectComponent} from 'ng2-select';
 const swal = require('sweetalert');
 
 
@@ -33,6 +37,11 @@ export class AddFormworkComponent implements OnInit {
   public staff: any = {};
   public id;
   public cru: number = 0;
+  public storeCode: string='';//查询店铺编码
+  public voList: any;   //店铺列表列表
+  public sellerCode:any;
+  public stores: Array<any> = new Array();//店铺列表
+  @ViewChild('allStore') public allStore: SelectComponent;
 
   china_area = CHINA_AREA;
   area_level1 = AREA_LEVEL_1_JSON;
@@ -40,7 +49,7 @@ export class AddFormworkComponent implements OnInit {
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  constructor(public routeInfo: ActivatedRoute, public router: Router, public ajax: AjaxService, public session: SessionService, public FreightTemplateComponent: FreightTemplateComponent,public patterns: PatternService,public rzhtools:RzhtoolsService) {
+  constructor(public routeInfo: ActivatedRoute, public router: Router, public ajax: AjaxService, public session: SessionService, public FreightTemplateComponent: FreightTemplateComponent,public patterns: PatternService,public rzhtools:RzhtoolsService,public submit: SubmitService,public goods:GoodsService) {
   }
 
   ngOnInit() {
@@ -55,15 +64,16 @@ export class AddFormworkComponent implements OnInit {
      * @type {{type: string, text: string, title: string}}
      */
     _this.updatebutton = {
-      type: "update",
+      type: 'update',
       title: '修改运费模板值',
     };
     _this.deletebutton = {
-      type: "delete",
+      type: 'delete',
       title: '删除运费模板值',
     };
     _this.queryFormwork();//请求模板详细数据并显示
-
+    _this.stores = _this.goods.getAllStores();
+    _this.allStore.active = [{id: Setting.SELF_STORE, text: '三楂红平台自营店'}];
   }
 
   /**
@@ -81,7 +91,7 @@ export class AddFormworkComponent implements OnInit {
         if (isNullOrUndefined(this.staff)) this.staff = {}
       },
       error: (res) => {
-        console.log("post limit error");
+        console.log('post limit error');
       }
     });
   }
@@ -492,8 +502,7 @@ export class AddFormworkComponent implements OnInit {
         tplName: formData.value.tplName,
         isFree: 'N',
         valuationType: formData.value.valuationType,
-        sellerCode: 'SZH_PLAT_SELF_STORE',
-        storeCode: 'SZH_PLAT_SELF_STORE',
+        storeCode: this.storeCode,
         id:this.id,
         storeExpressTplValList: this.moduleList
       }
@@ -529,16 +538,15 @@ export class AddFormworkComponent implements OnInit {
         delete ele.createTimeEnd
         delete ele.updateTimeBegin
         delete ele.updateTimeEnd
-      })
+      });
       let json = {
         tplName: formData.value.tplName,
         isFree: 'N',
         valuationType: formData.value.valuationType,
-        sellerCode: 'SZH_PLAT_SELF_STORE',
-        storeCode: 'SZH_PLAT_SELF_STORE',
+        storeCode: this.staff.storeCode,
         id:_this.id,
         storeExpressTplValList: _this.staff.storeExpressTplValList
-      }
+      };
 
       // console.log("█ json ►►►",  json);
 
@@ -580,5 +588,14 @@ export class AddFormworkComponent implements OnInit {
    */
   threeNum(target,type?){
     this.rzhtools.formworkInputValueForNum(target,type);
+  }
+
+
+  /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.storeCode = value.id;
   }
 }

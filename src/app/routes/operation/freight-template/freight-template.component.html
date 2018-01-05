@@ -1,7 +1,7 @@
 <div class="content-heading mb-lg thc font">
   运费模板管理
   <!--添加运费模板按钮-->
-  <app-buttons class="pull-right" [config]="addButton" routerLink="add-formoek"
+  <app-buttons [hidden]="!flag" class="pull-right" [config]="addButton" routerLink="add-formoek"
                [queryParams]="{linkType:'addArticle'}"></app-buttons>
 </div>
 <div class="panel mb p w100 m-auto ts thc user-top">
@@ -11,7 +11,26 @@
     <li>2.正在被商品使用的配送规则不允许删除</li>
   </ul>
 </div>
-
+<!--查询 start-->
+<div class="row clearfix p text-right" [hidden]="!flag">
+  <div class="search-term clearfix ml mb">
+    <div class="w100 pl-sm pr0 pull-left">
+      <div class="form-group mb0 pr0">
+        <div class="w90 pl0 pr0 pull-left">
+          <ng-select [items]="stores" class="p0" #allStores required
+                     (selected)="selectedStore($event)"
+                     placeholder="根据店铺名称查询">
+          </ng-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" title="搜索"
+          class="btn thc btn-thc mr-xl"  (click)="queryList()">
+    <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+  </button>
+</div>
+<!--查询 end-->
 
 <div *ngIf="this.flag">
   <table #dataTable="rzhDataTable" [rzhData]="areas" class="w100">
@@ -22,6 +41,7 @@
           <div class="table-thead">
             <div class="table-thead-header">
               <span>{{organ.tplName}}</span>
+              <span class="pl">所属店铺：{{organ.storeName}}</span>
               <span>
                 <!--修改运费模板按钮-->
               <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle',id:organ.id}"></app-buttons>
