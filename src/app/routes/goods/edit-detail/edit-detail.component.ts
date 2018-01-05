@@ -22,7 +22,7 @@ const swal = require('sweetalert');
 export class EditDetailComponent implements OnInit {
   public path: string;           // 当前路径
   public kindId: string;         //商品分类id
-  public stores: Array<string> = new Array();//店铺列表
+  public stores: Array<any> = new Array();//店铺列表
   public saleAttrList: any;       // 所有规格数据
   public brandsList: any;        // 品牌列表
   public unitList: any;           // 计量单位列表

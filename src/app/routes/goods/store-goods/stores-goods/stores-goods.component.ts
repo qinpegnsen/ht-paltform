@@ -35,7 +35,7 @@ export class StoresGoodsComponent implements OnInit {
   public goodsState: any;  // 商品状态列表
   public curBaseCode: string;  // 当前商品基本编号
   public curName: string;    // 当前商品名称
-  public stores: Array<any> = new Array();
+  public stores: Array<any> = new Array();//店铺列表
 
   constructor(public router: Router,
               public tools: RzhtoolsService,
