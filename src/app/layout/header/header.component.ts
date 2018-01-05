@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     let me = this;
     if(changes['curPath'] && !isNullOrUndefined(me.curPath)){
       // 每次路由变化时检测其与一级导航路由是否匹配，匹配则为一级导航添加激活状态
-      me.getSubmenus(me.curPath)
+      // me.getSubmenus(me.curPath)
     }
   }
 
