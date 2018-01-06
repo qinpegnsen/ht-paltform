@@ -24,6 +24,7 @@ export class AfterDetailsComponent implements OnInit {
   public isAgree: string = 'Y';    //是否同意退货/验货是否通过
   public expressData: any;          //获取快递的公司和单号
   public refresh: boolean;          //父组件是否需要刷新
+  public sta: string;                //当前站点是平台还是企业
 
 
   constructor(public router: Router,
@@ -37,6 +38,7 @@ export class AfterDetailsComponent implements OnInit {
     let me = this;
     me.type = me.submit.getParams('type');
     me.afterNo = me.submit.getParams('afterNo');
+    me.sta = me.submit.getParams('sta');
     me.LogisticsData = this.after.getOrderLogisticsData(me.afterNo);
 
     me.goodsAudits = this.tools.getEnumDataList('1001');  // 商品审核是否通过

@@ -53,8 +53,6 @@
 </div>
 <!--方块统计 end-->
 
-
-
 <!--审核列表 start-->
 <div class="panel mb">
   <div class="panel-body">
@@ -68,6 +66,9 @@
       <li class="pull-left thc" [class.font]="curState=='DONE'" [class.bb]="curState=='DONE'"
           (click)="qeuryAll('DONE',1)">处理完成
       </li>
+      <li class="pull-left thc" [class.font]="curState=='DONE'" [class.bb]="curState=='DONE'"
+          (click)="qeuryAll('FAIL',1)">处理失败
+      </li>
     </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="auditListData"
            (pageChange)="qeuryAll('',1,$event)">
@@ -76,13 +77,19 @@
         <th class="w5 text-center">
           <rzhDefaultSorter by="id">序号</rzhDefaultSorter>
         </th>
-        <th class="w10 text-center">
+        <th class="w5 text-center">
           <rzhDefaultSorter by="id">收款姓名</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
-          <rzhDefaultSorter by="id">提现金额（元）</rzhDefaultSorter>
+        <th class="w10 text-center">
+          <rzhDefaultSorter by="id">收款开户行</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
+          <rzhDefaultSorter by="id">收款账号</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
+        <rzhDefaultSorter by="id">提现金额（元）</rzhDefaultSorter>
+        </th>
+        <th class="w10 text-center">
           <rzhDefaultSorter by="name">提现手续费（元）</rzhDefaultSorter>
         </th>
         <th class="w10 text-center">
@@ -91,10 +98,10 @@
         <th class="w10 text-center">
           <rzhDefaultSorter by="time">状态</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w10 text-center">
           <rzhDefaultSorter by="picture">申请时间</rzhDefaultSorter>
         </th>
-        <th class="w20 text-center" *ngIf="this.curState!='DONE'">
+        <th class="w15 text-center">
           <rzhDefaultSorter by="picture">操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -103,15 +110,20 @@
       <tr *ngFor="let item of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
         <td>{{item.bacctName}}</td>
+        <td>{{item.bank}}</td>
+        <td>{{item.acct}}</td>
         <td class="thc font">￥&nbsp;{{item.drawMoney | number:'1.2-2'}}</td>
         <td>￥&nbsp;{{item.brokerage | number:'1.2-2'}}</td>
         <td>{{item.payWay | rzhState:'1017'}}</td>
         <td>{{item.state | rzhState:'2102'}}</td>
         <td>{{item.createTime }}</td>
         <td>
-          <button class="btn btn-sm btn-green fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.state=='CR'"> 同意提现
+          <button class="btn btn-sm btn-purple fa fa-check" (click)="auditPass(item.id)"  *ngIf="item.state=='CR'"> 同意提现
           </button>
-          <button class="btn btn-sm btn-green fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'"> 上传汇款记录
+          <button class="btn btn-sm btn-purple fa fa-check" (click)="showAlert(item.id)"  *ngIf="item.payWay=='REMIT'&&item.state=='DEAL'"> 上传汇款记录
+          </button>
+          <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="auditDetail" title="详情"
+                  [queryParams]="{afterNo:item.afterNo,type:'detail'}">
           </button>
         </td>
       </tr>

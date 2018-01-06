@@ -117,10 +117,10 @@
             <td>
               <button *ngIf="item.state=='WAIT'" class="btn btn-purple btn-sm fa fa-check"
                       routerLink="after-details" title="处理"
-                      [queryParams]="{afterNo:item.afterNo,type:'deal'}">处理
+                      [queryParams]="{afterNo:item.afterNo,type:'deal',sta:'plat'}">处理
               </button>
               <button class="btn btn-green btn-sm icon-magnifier-add" routerLink="after-details" title="详情"
-                      [queryParams]="{afterNo:item.afterNo,type:'detail'}">
+                      [queryParams]="{afterNo:item.afterNo,type:'detail',sta:'plat'}">
               </button>
             </td>
           </tr>
