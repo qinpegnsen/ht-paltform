@@ -1,0 +1,130 @@
+<ng-container>
+  <div class="content-heading mb-lg thc font">
+    审核详情
+  </div>
+
+  <div class="panel" *ngIf="loadWDData">
+    <div class="panel-body">
+      <div class="ordernum thc bg">
+        <span>会员编码：{{loadWDData.rpCustWithdraw.custCode}}</span>
+      </div>
+      <div class="panel-body">
+        <div>
+          <div class="">
+            <legend class="m0" class="bg-detail pl-lg">
+              申请提现信息
+            </legend>
+          </div>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-1">申请时间：</td>
+              <td class="item-bd col-sm-9 mb0">{{loadWDData.rpCustWithdraw.createTime}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">会员昵称：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.custName}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">会员手机号：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.custPhone}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">收款姓名：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.bacctName}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">交易方式：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.payWay | rzhState:'1017'}}</td>
+            </tr>
+            <tr class="t-item clearfix" *ngIf="loadWDData.rpCustWithdraw.payWay=='REMIT'">
+              <td class="item-hd col-sm-2">收款账号开户行：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.bank}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">收款账号：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.acct}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">提现金额：</td>
+              <td class="item-bd col-sm-10 mb0">￥ {{loadWDData.rpCustWithdraw.drawMoney | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">提现手续费：</td>
+              <td class="item-bd col-sm-10 mb0">￥ {{loadWDData.rpCustWithdraw.brokerage | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">交易码：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.tc }}</td>
+            </tr>
+          </table>
+        </div>
+        <div
+          *ngIf="loadWDData.rpCustWithdraw.state=='DONE'||loadWDData.rpCustWithdraw.state=='DEAL'||loadWDData.rpCustWithdraw.state=='FAIL'">
+          <div class="">
+            <legend class="m0" class="bg-detail pl-lg">
+              审核信息
+            </legend>
+          </div>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">同意提现时间：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.dealTime}}</td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <div class="">
+            <legend class="m0" class="bg-detail pl-lg">
+              汇款记录信息
+            </legend>
+          </div>
+          <table class="t-items p w100">
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">处理结果：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.state | rzhState:'2102'}}</td>
+            </tr>
+            <tr class="t-item clearfix" *ngIf="loadWDData.rpCustWithdraw.state=='FAIL'">
+              <td class="item-hd col-sm-2">提现失败原因：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.failReason}}</td>
+            </tr>
+            <tr class="t-item clearfix">
+              <td class="item-hd col-sm-2">上传汇款记录时间：</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.doneTime}}</td>
+            </tr>
+            <ng-container *ngIf="loadWDData.rpCustWithdraw.payWay=='REMIT'&&loadWDData.rpCustWithdraw.state=='DONE'">
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">平台汇款账号开户行：</td>
+                <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.payBank}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">平台汇款账号：</td>
+                <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.payAcct}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">平台汇款人：</td>
+                <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.payBacctName}}</td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">平台汇款凭证：</td>
+                <td class="item-bd col-sm-10 mb0">
+                  <div class="tag-dib imgbox text-center mr">
+                    <img class="img" [src]="loadWDData.rpCustWithdraw.voucherUrl" (mousemove)="showImg($event)"
+                         (mouseout)="hideImg($event)" onerror="javascript:this.src='../../../../assets/img/dummy.png'"
+                         alt="">
+                    <img [src]="loadWDData.rpCustWithdraw.voucherUrl" class="hover-native-img" alt=""
+                         onerror="javascript:this.src='../../../assets/img/dummy.png'">
+                  </div>
+                </td>
+              </tr>
+              <tr class="t-item clearfix">
+                <td class="item-hd col-sm-2">平台汇款备注：</td>
+                <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.remark}}</td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-back btn btn-thc btn-circle fa fa-mail-reply" (click)="back()"></div>
+</ng-container>

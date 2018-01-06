@@ -321,7 +321,7 @@ export class ActivitiesService {
  * @param data
  * @returns {any}
  */
-public addRpAccountRec(url,data) {
+  public addRpAccountRec(url,data) {
   let result;
   this.ajax.post({
     url: url,
@@ -409,6 +409,33 @@ public addRpAccountRec(url,data) {
   public restBalanceAnddays(url,data) {
     let result;
     this.ajax.put({
+      url: url,
+      data: data,
+      async:false,
+      success: (res) => {
+        if(res.success){
+          result=res.data;
+        }else{
+          result=res.info;
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    });
+    return result;
+  }
+
+  /**
+   * 查询单条的提现记录数据
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  public loadeWidthDraw(url,data){
+    let result;
+    this.ajax.get({
       url: url,
       data: data,
       async:false,

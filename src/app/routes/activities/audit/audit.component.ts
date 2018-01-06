@@ -17,6 +17,8 @@ export class AuditComponent implements OnInit {
   public showStroeInvest: boolean = false;            //企业投资的弹窗
   public currentId: any;                               //当前的id
   public amountData: any;                              //获取提现总额和未提现总额
+  public showList: boolean=true;                      //是否显示组件
+
   constructor(public activitiesService:ActivitiesService) { }
 
   ngOnInit() {
@@ -95,4 +97,20 @@ export class AuditComponent implements OnInit {
     let result = this.activitiesService.queryWithDrawData(url,data);
     me.auditListData = new Page(result);
   };
+
+  /**
+   * 子组件加载时
+   * @param event
+   */
+  activate() {
+    this.showList = false;
+  }
+
+  /**
+   * 子组件注销时
+   * @param event
+   */
+  onDeactivate() {
+    this.showList = true;
+  }
 }
