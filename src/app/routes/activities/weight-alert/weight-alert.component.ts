@@ -80,6 +80,10 @@ export class WeightAlertComponent implements OnInit {
     let data={
       id: this.orderId,
       weight: this.curWeight,
+    };
+    if(this.curWeight>2147483647){
+      AppComponent.rzhAlt("info", '请输入小于2147483647数字');
+      return;
     }
     let result=this.activitiesService.updateRpStoreWeight(url,data);
     if(result){
