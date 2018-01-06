@@ -87,7 +87,7 @@
               <td class="item-hd col-sm-2">提现失败原因：</td>
               <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.failReason}}</td>
             </tr>
-            <tr class="t-item clearfix">
+            <tr class="t-item clearfix" *ngIf="loadWDData.rpCustWithdraw.state=='DONE'">
               <td class="item-hd col-sm-2">上传汇款记录时间：</td>
               <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.doneTime}}</td>
             </tr>
