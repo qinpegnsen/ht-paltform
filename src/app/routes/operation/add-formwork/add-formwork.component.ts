@@ -15,6 +15,7 @@ import {SubmitService} from '../../../core/forms/submit.service';
 import {Setting} from '../../../core/settings/setting';
 import {SelectComponent} from 'ng2-select';
 import {OperationService} from '../operation.service';
+import {Page} from 'app/core/page/page';
 const swal = require('sweetalert');
 
 
@@ -41,6 +42,7 @@ export class AddFormworkComponent implements OnInit {
   public voList: any;   //店铺列表列表
   public sellerCode: any;
   public stores: Array<any> = new Array();//店铺列表
+  public areas:Page= new Page();
   @ViewChild('allStore') public allStore: SelectComponent;
 
   china_area = CHINA_AREA;
@@ -57,7 +59,7 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     // 初始化地区数据
     _this.getallCheckeds();
-    console.log("█  _this.operationService.selectedStore ►►►",   _this.operationService.selectedStore);
+    console.log('█  _this.operationService.selectedStore ►►►',   _this.operationService.selectedStore);
 
     _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     _this.id = this.routeInfo.snapshot.queryParams['id'];
