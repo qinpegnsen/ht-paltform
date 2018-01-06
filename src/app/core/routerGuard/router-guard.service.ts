@@ -79,7 +79,9 @@ export class RouterGuardService implements CanActivate, OnDestroy {
     if (!this.menus) this.menus = this.getAllRouterLink();//取到所有菜单的link；
     //┭┮﹏┭┮，当前路由可能比菜单中配置的路径少一级（比如模块中的空路由重定向），也可能比菜单路径多几级（比如子菜单们），所以可能是反向包含关系
     for (let i = 0; i < this.menus.length; i++) {
-      if (this.menus[i].indexOf(path) != -1 || path.indexOf(this.menus[i]) != -1) return true;
+      if(this.menus[i]){
+        if (this.menus[i].indexOf(path) != -1 || path.indexOf(this.menus[i]) != -1) return true;
+      }
     }
     return false;
   }

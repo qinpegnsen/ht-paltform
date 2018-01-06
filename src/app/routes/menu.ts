@@ -181,23 +181,7 @@ const goods = {
     }
   ]
 };
-/*const shop = {
- text: '店铺管理',
- icon: 'fa fa-institution',
- link: '/main/shop',
- submenu: [
- {
- text: '店铺管理',
- icon: 'fa fa-institution',
- link: '/main/shop/manage'
- },
- {
- text: '店铺账号管理',
- icon: 'fa fa-institution',
- link: '/main/shop/account'
- }
- ]
- };*/
+
 const member = {
   text: '会员管理',
   icon: 'fa fa-users',
@@ -242,36 +226,37 @@ const member = {
 const orders = {
   text: '订单管理',
   icon: 'fa fa-file-text',
-  link: '/main/platform-order',
+  link: '/main/orders',
   submenu: [
     {
       text: '企业订单',
       icon: 'fa fa-file-text-o',
       alert: '▼',
+      link: '/main/orders/store-all',
       submenu: [
         {
           text: '全部订单',
-          link: '/main/store-order/store-all'
+          link: '/main/orders/store-all'
         },
         {
           text: '待付款',
-          link: '/main/store-order/store-payment'
+          link: '/main/orders/store-payment'
         },
         {
           text: '待发货',
-          link: '/main/store-order/store-pending'
+          link: '/main/orders/store-pending'
         },
         {
           text: '已发货',
-          link: '/main/store-order/store-received'
+          link: '/main/orders/store-received'
         },
         {
           text: '已完成',
-          link: '/main/store-order/store-complete'
+          link: '/main/orders/store-complete'
         },
         {
           text: '已取消',
-          link: '/main/store-order/store-cancel'
+          link: '/main/orders/store-cancel'
         }
       ]
     },
@@ -279,36 +264,32 @@ const orders = {
       text: '平台订单',
       icon: 'fa fa-file-text-o',
       alert: '▼',
+      link: '/main/orders/platform-all',
       submenu: [
         {
           text: '全部订单',
-          link: '/main/platform-order/platform-all'
+          link: '/main/orders/platform-all'
         },
         {
           text: '待付款',
-          link: '/main/platform-order/platform-payment'
+          link: '/main/orders/platform-payment'
         }, {
           text: '待发货',
-          link: '/main/platform-order/platform-pending'
+          link: '/main/orders/platform-pending'
         },
         {
           text: '已发货',
-          link: '/main/platform-order/platform-received'
+          link: '/main/orders/platform-received'
         },
         {
           text: '已完成',
-          link: '/main/platform-order/platform-complete'
+          link: '/main/orders/platform-complete'
         },
         {
           text: '已取消',
-          link: '/main/platform-order/platform-cancel'
+          link: '/main/orders/platform-cancel'
         }
       ]
-    },
-    {
-      text: '待发货',
-      icon: 'fa fa-truck',
-      link: '/main/orders/prepare'
     },
     {
       text: '代理商订单',

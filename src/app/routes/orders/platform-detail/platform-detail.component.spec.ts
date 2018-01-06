@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {PlatformDetailComponent} from './platform-detail.component';
 
-import { OrderDetailComponent } from './order-detail.component';
-
-describe('OrderDetailComponent', () => {
-  let component: OrderDetailComponent;
-  let fixture: ComponentFixture<OrderDetailComponent>;
+describe('PlatformDetailComponent', () => {
+  let component: PlatformDetailComponent;
+  let fixture: ComponentFixture<PlatformDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderDetailComponent ]
+      declarations: [ PlatformDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderDetailComponent);
+    fixture = TestBed.createComponent(PlatformDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

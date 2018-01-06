@@ -1,17 +1,16 @@
-import {Component, OnInit} from "@angular/core";
-import {isNullOrUndefined} from "util";
-import {Location} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {isNullOrUndefined} from 'util';
+import {Location} from '@angular/common';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {PlatformOrderService} from '../platform-order.service';
-import {AppComponent} from '../../../app.component';
 declare var $: any;
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss']
+  selector: 'app-platform-detail',
+  templateUrl: './platform-detail.component.html',
+  styleUrls: ['./platform-detail.component.scss']
 })
-export class OrderDetailComponent implements OnInit {
+export class PlatformDetailComponent implements OnInit {
   constructor(
               public platformOrderService: PlatformOrderService,
               public location: Location,

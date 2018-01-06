@@ -1,4 +1,4 @@
-<div class="content-heading mb-lg thc font">平台店铺已完成订单</div>
+<div class="content-heading mb-lg thc font">平台店铺所有订单</div>
 <div class="order panel" [hidden]="!showList">
   <div class="panel-body">
     <!--查询 start-->
@@ -141,7 +141,7 @@
                 </td>
                 <td class="w10 bl position-relative" [attr.rowspan]="order.ordItemList.length">
                   <p class="font-gray mb-sm cursor-p">{{order.state | rzhState:'1019'}}</p>
-                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="order-detail"
+                  <p class="cursor-p mb-sm" myHoverColor [myHover]="'#CC1635'" routerLink="platform-detail"
                      [queryParams]="{ordno:order.ordno}">
                     查看详情</p>
                   <p class="cursor-p mb-sm text-gray-dark" *ngIf="order.state=='DELIVERY'|| order.state=='SUCCESS'">
@@ -155,7 +155,7 @@
                       <p class="pl mb-sm clearfix logistics-pop-head">
                         <span class="fa fa-truck pull-left _icon"></span>
                         <span class="pull-left">物流信息</span>
-                        <a class="pull-right" *ngIf="LogisticsData" routerLink="../order-detail"
+                        <a class="pull-right" *ngIf="LogisticsData" routerLink="../platform-detail"
                            [queryParams]="{ordno:order.ordno}">查看更多 </a>
                       </p>
                       <div class="logistics-pop-main">
@@ -188,15 +188,9 @@
                   </div>
                 </td>
                 <td class="w10 bl" [attr.rowspan]="order.ordItemList.length">
-                  <!-- <div class="hide">
-                     <button class="m-sm btn btn-xs btn-outline btn-warning fa fa-ban"
-                             (click)="cancelOrder(order.ordno)"> 取消订单
-                     </button>
-                   </div>-->
-                  <!--<div *ngIf="order.state == 'CLOSE'">
-                    <button class="m-sm btn btn-xs btn-outline btn-danger fa fa-retweet"> 订单退款
-                    </button>
-                  </div>-->
+                  <div *ngIf="order.state == 'PREPARE' && order.canDelivery">
+                    <button  class="m-sm btn btn-xs btn-outline fa fa-truck _myWhiteBg thc font b" title="设置发货" (click)="deliverOrder(order.ordno)"> 设置发货</button>
+                  </div>
                 </td>
               </ng-container>
             </tr>
@@ -221,16 +215,10 @@
       </tr>
       </tfoot>
     </table>
-    <!--<app-cancel [orderId]="curCancelOrderId" (cancelOrder)="getCancelOrderData($event)"></app-cancel>-->
-    <!--<ng-container *ngIf="ordState == 'DELIVERY' || ordState == ''">-->
-    <!--<app-deliver-goods [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
-                       (deliverGoods)="getDeliverOrderData($event)"></app-deliver-goods>-->
-    <!--</ng-container>-->
-
-    <!--<app-look-logistics [orderId]="lookLogisticsOrderId" (lookOver)="getLogisticsData($event)"></app-look-logistics>-->
   </div>
 </div>
-
+<app-deliver [orderId]="curDeliverOrderId" [page]="goodsList.curPage"
+             (deliverGoods)="getDeliverOrderData($event)"></app-deliver>
 <!--路由嵌套 begin-->
 <router-outlet (activate)="activate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
 <!--路由嵌套 end-->
