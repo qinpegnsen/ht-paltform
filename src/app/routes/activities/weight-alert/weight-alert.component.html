@@ -14,7 +14,7 @@
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3">重置权重：</dt>
         <dd class="col-xs-5 font14">
-          <input type="text" name="expressNo" class="form-control required input-sm" maxlength="10" required #expressNoTem="ngModel"
+          <input type="text" name="expressNo" class="form-control required input-sm" maxlength="9" required #expressNoTem="ngModel"
                  [(ngModel)]="curWeight" pattern="{{pattern.num}}">
           <div [hidden]="expressNoTem.valid || expressNoTem.pristine"
                class="text-danger">
