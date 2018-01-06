@@ -75,7 +75,8 @@
         <div>
           <div class="">
             <legend class="m0" class="bg-detail pl-lg">
-              汇款记录信息
+              <span *ngIf="loadWDData.rpCustWithdraw.state=='CR'||loadWDData.rpCustWithdraw.state=='DEAL'">当前状态</span>
+              <span *ngIf="loadWDData.rpCustWithdraw.state=='FAIL'||loadWDData.rpCustWithdraw.state=='DONE'">汇款记录信息</span>
             </legend>
           </div>
           <table class="t-items p w100">
