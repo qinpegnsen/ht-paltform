@@ -82,7 +82,7 @@ export class WeightAlertComponent implements OnInit {
       weight: this.curWeight,
     };
     if(this.curWeight>2147483647){
-      AppComponent.rzhAlt("info", '请输入小于2147483647数字');
+      AppComponent.rzhAlt("info", '请输入小于2147483647正整数');
       return;
     }
     let result=this.activitiesService.updateRpStoreWeight(url,data);
