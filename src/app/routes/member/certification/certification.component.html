@@ -21,11 +21,11 @@
       <div class="search-group  mb">
         <span class="search-title">姓名：</span>
         <div class="search-main">
-          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+          <input type="text" class="form-control border-b-grey" [(ngModel)]="name"
                  *ngIf="state=='AUDIT'" (change)="aqeuryAll('AUDIT',1)" maxlength="50" placeholder="请输入要查询的姓名">
-          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+          <input type="text" class="form-control border-b-grey" [(ngModel)]="name"
                  *ngIf="state=='PASS'" (change)="aqeuryAll('PASS',1)" maxlength="50" placeholder="请输入要查询的姓名">
-          <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="name"
+          <input type="text" class="form-control border-b-grey" [(ngModel)]="name"
                  *ngIf="state=='UNPASS'" (change)="aqeuryAll('UNPASS',1)" maxlength="50" placeholder="请输入要查询的姓名">
         </div>
       </div>

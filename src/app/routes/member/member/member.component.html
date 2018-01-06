@@ -6,29 +6,29 @@
   <div>
     <div class="p ng-scope" ng-if="search">
       <div class="col-md-12 ml-50">
-        <div class="search-group  mb">
+        <div class="search-group mb">
           <span class="search-title">会员名称：</span>
           <div class="search-main">
-            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custName"
+            <input type="text" class="form-control border-b-grey" [(ngModel)]="custName"
                    (change)="queryMemberList(1)" maxlength="50" placeholder="请输入要查询的会员名称">
           </div>
         </div>
         <div class="search-group mb">
           <span class="search-title">会员真实姓名：</span>
           <div class="search-main">
-            <input type="text" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custTruename"
+            <input type="text" class="form-control border-b-grey" [(ngModel)]="custTruename"
                    (change)="queryMemberList(1)"  maxlength="50" placeholder="请输入要查询的会员真实姓名">
           </div>
         </div>
-        <div class="search-group  mb">
+        <div class="search-group mb">
           <span class="search-title">会员手机号：</span>
           <div class="search-main">
-            <input type="text" maxlength="50" class="form-control border-b-grey ng-pristine ng-valid ng-touched" [(ngModel)]="custPhone" (change)="queryMemberList(1)" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
+            <input type="text" maxlength="50" class="form-control border-b-grey" [(ngModel)]="custPhone" (change)="queryMemberList(1)" [pattern]="patterns.phone" placeholder="请输入要查询的会员的手机号">
           </div>
         </div>
       </div>
       <div class="col-md-12 ml-50">
-        <div class="search-group  mb">
+        <div class="search-group mb">
           <span class="search-title">会员类别：</span>
           <div class="search-main">
             <select class="form-control" name="authState" [(ngModel)]="authState" (change)="search(1)">
@@ -37,7 +37,7 @@
             </select>
           </div>
         </div>
-        <div class="search-group  mb">
+        <div class="search-group mb">
           <span class="search-title">会员状态：</span>
           <div class="search-main">
             <select class="form-control" name="state" [(ngModel)]="state" (change)="search(1)">
@@ -47,7 +47,7 @@
           </div>
         </div>
         <button type="button" title="搜索" class="btn thc btn-thc ml align-top">
-          <i class="icon-magnifier "></i><span>&nbsp;&nbsp;搜索</span>
+          <i class="icon-magnifier"></i><span>&nbsp;&nbsp;搜索</span>
         </button>
       </div>
     </div>

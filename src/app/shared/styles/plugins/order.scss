@@ -213,16 +213,17 @@ $buyer-info-box-width: 200px;
 }
 
 .search-group {
-  min-width: 242px;
+  min-width: 260px;
   display: inline-block;
   .search-title {
-    width: 72px;
+    width: 30%;
     line-height: 36px;
     text-align: right;
     display: inline-block;
   }
   .search-main {
-    min-width: 170px;
+    width: 70%;
+    min-width: 180px;
     float: right;
   }
 }

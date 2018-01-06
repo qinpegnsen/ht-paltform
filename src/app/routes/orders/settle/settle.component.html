@@ -46,17 +46,19 @@
                class="form-control border-b-grey" placeholder="结算对象">
       </div>
     </div>
-    <div class="search-group ml-xl mb align-top">
-      <span class="search-title">订单号：</span>
-      <div class="search-main">
-        <input type="text" [(ngModel)]="query.ordno" (change)="queryDatas()"
-               class="form-control border-b-grey" placeholder="订单号">
+    <div class="tag-dib">
+      <div class="search-group ml-xl mb align-top">
+        <span class="search-title">订单号：</span>
+        <div class="search-main">
+          <input type="text" [(ngModel)]="query.ordno" (change)="queryDatas()"
+                 class="form-control border-b-grey" placeholder="订单号">
+        </div>
       </div>
+      <button type="button" title="搜索" (click)="queryDatas()"
+              class="btn thc btn-thc align-top ml">
+        <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
+      </button>
     </div>
-    <button type="button" title="搜索" (click)="queryDatas()"
-            class="btn thc btn-thc align-top ml">
-      <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
-    </button>
     <!--查询 end-->
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
            (pageChange)="queryDatas($event)">
@@ -134,7 +136,7 @@
             <span *ngIf="!item.ad">-</span>
           </td>
           <td class="text-right">
-            <span  *ngIf="item.buildGoldRate">{{item.buildGoldRate}} %</span>
+            <span *ngIf="item.buildGoldRate">{{item.buildGoldRate}} %</span>
             <span *ngIf="!item.buildGoldRate">-</span>
           </td>
           <td class="text-right">

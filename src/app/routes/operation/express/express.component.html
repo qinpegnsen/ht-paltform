@@ -8,7 +8,7 @@
     <div class="ng-scope pt-lg" ng-if="search">
       <div class="form-group mb0 express-width ml-lg">
         <span>查找：</span>
-          <input type="text" [(ngModel)]="searchKey" class="express-name form-control border-b-grey ng-pristine ng-valid ng-touched"(change)="queryExpressList(1)" maxlength="50" placeholder="请输入要查询的名称或者编号">
+          <input type="text" [(ngModel)]="searchKey" class="express-name form-control border-b-grey"(change)="queryExpressList(1)" maxlength="50" placeholder="请输入要查询的名称或者编号">
            <button type="button" title="搜索" id="toSearch" (click)="queryExpressList(1)"
                    class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
              <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>

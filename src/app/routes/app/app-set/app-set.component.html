@@ -76,7 +76,7 @@
           <select class="form-contro optTypeList" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)">
             <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}</option>
           </select>
-          <input class="form-control border-b-grey ng-pristine ng-valid ng-touched optKey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}" (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
+          <input class="form-control border-b-grey optKey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}" (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
           <input [(ngModel)]="optKey[i]" type="hidden">
         </div>
         <div class="main_right_optTypeDesc">{{typeDesc[i]}}</div>
