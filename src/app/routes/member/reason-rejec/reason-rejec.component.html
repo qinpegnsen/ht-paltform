@@ -10,14 +10,14 @@
     <!--表单-->
     <div class="pop deliver-box font12 w100">
       <div class="font12 p">
-        <span>身份证号：<span class="font14">{{count.idcard}}</span></span>
+        <span>身份证号：<span class="font16">{{count.idcard}}</span></span>
         <span class="pl-xl">姓名：{{count.name}}</span>
         <span *ngIf="count.endTime!=null" class="pl-xl">有效期：<span
-          class="font14">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span class="font14">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
+          class="font16">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span class="font16">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
         <span *ngIf="count.endTime==null" class="pl-xl">有效期：<span
-          class="font14">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          class="font16">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="700"
+      <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="800"
                     [height]="470"></e-ngx-viewer>
       <ng-container *ngIf="count.state=='AUDIT'">
         <dl class="bb m0 clearfix item-head p0">
