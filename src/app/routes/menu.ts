@@ -1,8 +1,6 @@
-
 /**
  * 菜单管理（一级路由的link不可删掉，将根据一级路由取子菜单）
  * 请保持每个一级菜单及其子菜单main后面的路径一致
- * @type {{text: string; link: string; icon: string; submenu: [{text: string; link: string},{text: string; link: string}]}}
  */
 const website = {
   text: '站点设置',
@@ -106,6 +104,11 @@ const goods = {
   link: '/main/goods',
   submenu: [
     {
+      text: '发布商品',
+      icon: 'fa fa-cube',
+      link: '/main/goods/publish'
+    },
+    {
       text: '自营商品管理',
       icon: 'fa fa-cube',
       link: '/main/goods/plat',
@@ -119,10 +122,10 @@ const goods = {
           text: '管理商品',
           link: '/main/goods/plat/manage'
         },
-        {
+        /*{
           text: '商品发布',
           link: '/main/goods/plat/publish'
-        }
+        }*/
       ]
     },
     {
@@ -664,7 +667,7 @@ const editPw = {
 /**
  * 菜单配置
  */
-export let menu = [
+export let MENU = [
   website,
   operation,
   goods,

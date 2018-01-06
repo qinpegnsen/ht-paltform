@@ -34,6 +34,34 @@ export class ActivitiesService {
   }
 
   /**
+   * 设置红包企业的权重
+   * @param url
+   * @param data
+   * @returns {any}
+   */
+  updateRpStoreWeight(url, data) {
+    let me = this, result;
+    me.ajax.put({
+      url: url,
+      data: data,
+      async: false,
+      success: (res) => {
+        if(res.success){
+          result=true;
+          AppComponent.rzhAlt("success", res.info);
+        }else{
+          AppComponent.rzhAlt("error", res.info);
+        }
+      },
+      error: (res) => {
+        AppComponent.rzhAlt("error", res.status + '**' + res.statusText);
+      }
+    })
+    return result;
+  }
+
+
+  /**
    * 新增红包规则 post
    */
   public addRedPackRules(url,data) {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {SubmitService} from "../../../../core/forms/submit.service";
 import {PublishComponent} from "../publish/publish.component";
+import {SubmitService} from "../../../core/forms/submit.service";
+import {Setting} from "../../../core/settings/setting";
 declare var $: any;
 
 @Component({
@@ -14,6 +15,7 @@ export class ChooseKindComponent implements OnInit {
   public thirdList;// 三级分类列表
   public choosedKind: string;// 选择的分类ID
   public choosedKindStr: string = '';// 已经选择的分类
+  public goodsUrls: any = Setting.URLS.goods;
 
   constructor(public submit: SubmitService,public publishComponent:PublishComponent) {
   }

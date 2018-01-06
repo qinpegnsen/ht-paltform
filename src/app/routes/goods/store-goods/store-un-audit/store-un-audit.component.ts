@@ -5,6 +5,7 @@ import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../../goods.service";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {Setting} from "../../../../core/settings/setting";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -15,6 +16,7 @@ declare var $: any;
 })
 export class StoreUnAuditComponent implements OnInit {
   public goodsList: Page = new Page();
+  public goodsUrls: any = Setting.URLS.goods;
   public auditQuery = {
     kindId: '',
     goodsName: '',

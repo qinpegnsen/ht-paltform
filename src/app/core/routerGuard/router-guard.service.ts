@@ -2,6 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {ActivatedRouteSnapshot, CanActivate, NavigationStart, Router, RouterStateSnapshot} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import {Observable} from "rxjs/Observable";
+import {MenuService} from "../menu/menu.service";
 const swal = require('sweetalert');
 
 @Injectable()
@@ -12,7 +13,7 @@ export class RouterGuardService implements CanActivate, OnDestroy {
   public path;//当前路由
   public routeChangeListener: any;//路由监听
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public menu: MenuService) {
     let me = this;
     //监听路由，该事件一旦执行(除非刷新)停不下来呀，所以可以用来着接着监听后面的子路由是否有权限
     //该事件需写在构造器里，因为写在别的地方，该服务被调用几次，他就会重复执行几次，越来越多
@@ -42,7 +43,6 @@ export class RouterGuardService implements CanActivate, OnDestroy {
       } else {
         return true
       }
-      ;
     }
     return true;
   }
@@ -52,15 +52,13 @@ export class RouterGuardService implements CanActivate, OnDestroy {
    * @returns {Array}
    */
   public getAllRouterLink() {
-    let allMenus = JSON.parse(localStorage.getItem('userMenu'));
-    if (isNullOrUndefined(allMenus)) allMenus = new Array(), this.router.navigate([this.urlLogin]);
-    let menuUrls = [];
+    let allMenus = this.menu.getMenu(), menuUrls = [];
     allMenus.forEach((menu) => {
       if (menu.submenu) {
-        menu.submenu.forEach((submenuTwo) => {
+        menu.submenu.forEach((submenuTwo:any = {}) => {
           if (submenuTwo.submenu) {
             let submenu2 = submenuTwo.submenu;
-            submenu2.forEach((submenuThree) => {
+            submenu2.forEach((submenuThree:any = {}) => {
               menuUrls.push(submenuThree.link)
             })
           }

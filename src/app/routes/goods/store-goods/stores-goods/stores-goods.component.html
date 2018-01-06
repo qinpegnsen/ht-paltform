@@ -24,6 +24,17 @@
           </select>
         </div>
       </div>
+      <div class="search-group-lg ml-xl mb clearfix">
+        <span class="search-title">店铺名：</span>
+        <div class="search-main search-main-lg">
+          <ng-select [items]="stores" class="p0 w100"
+                     [allowClear]="true"
+                     (removed)="unSelectStore()"
+                     (selected)="selectedStore($event)"
+                     placeholder="根据店铺名称查询">
+          </ng-select>
+        </div>
+      </div>
       <div class="search-group ml-xl mb clearfix">
         <span class="search-title">分类：</span>
         <div class="search-main">
@@ -146,11 +157,17 @@
             </button>
           </span>
             <button class="btn btn-purple btn-xs fa fa-check-square-o" *ngIf="goods.goodsAudit=='AUDIT'" title="审核"
-                    routerLink="audit"
+                    [routerLink]="goodsUrls.auditRe"
                     [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}"> 审核
             </button>
+            <ng-container *ngIf="goods.goodsAudit!='REJECT' && goods.state!='NORMAL'">
+              <button class="btn btn-primary btn-xs fa fa-pencil" title="修改"
+                      [routerLink]="goodsUrls.editRe"
+                      [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage}">
+              </button>
+            </ng-container>
             <button class="btn btn-green btn-xs icon-magnifier-add" title="详情"
-                    routerLink="detail"
+                    [routerLink]="goodsUrls.detailRe"
                     [queryParams]="{baseCode: goods.goodsBaseCode,page: goodsList.curPage,type:'detail'}">
             </button>
           </td>

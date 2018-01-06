@@ -100,8 +100,10 @@
         <td class="text-center">{{item.click}}</td>
         <td class="text-center">{{item.updateTime}}</td>
         <td class="text-center">
+          <button class="btn btn-green btn-sm fa fa-sitemap" title="设置权重"  (click)="showAlert(item.id,item.weight)"></button>
           <app-buttons [config]="updatebutton" routerLink="storePage"
                        [queryParams]="{type:'edit',id:item.id}"></app-buttons>
+
         </td>
       </tr>
       </tbody>
@@ -128,3 +130,8 @@
 <router-outlet  (deactivate)='onDeactivate()'></router-outlet>
 <!--路由嵌套 end-->
 
+<!--设置权重弹窗 start-->
+<app-weight-alert [orderId]="currentId" [weight]="weight" [page]="RpStoreData.curPage"
+                 (deliverGoods)="getDeliverOrderData($event)"
+></app-weight-alert>
+<!--设置权重弹窗 end-->

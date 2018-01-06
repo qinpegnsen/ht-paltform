@@ -110,8 +110,6 @@ export class StoreAllComponent implements OnInit {
    * 查询店铺列表
    */
   querySoterLists(){
-    console.log("█ 1111 ►►►",  1111);
-
     let _this = this, activePage = 1;
     let requestUrl = '/stores/query';
     let requestData = {

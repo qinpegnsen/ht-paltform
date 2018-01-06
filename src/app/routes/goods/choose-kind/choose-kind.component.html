@@ -23,7 +23,7 @@
     <span class="unchoosed" *ngIf="!choosedKindStr">请选择分类</span>
     <span *ngIf="choosedKindStr">您当前选择的分类是：{{choosedKindStr}}</span>
   </div>
-  <button type="button" class="btn btn-green btn-lg m-lg pull-right" routerLink="../step_two"
+  <button type="button" class="btn btn-green btn-lg m-lg pull-right" [routerLink]="goodsUrls.stepTwoRe"
           [queryParams]="{kindId:choosedKind,choosedKind:choosedKindStr}" [disabled]="!choosedKind">下一步
   </button>
 </div>

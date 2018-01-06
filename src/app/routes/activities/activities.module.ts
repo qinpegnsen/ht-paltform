@@ -14,6 +14,7 @@ import {ActivitiesService} from "./activities.service";
 import {StoreInvestComponent} from "./store-invest/store-invest.component";
 import { AuditComponent } from './audit/audit.component';
 import { AuditAlertComponent } from './audit-alert/audit-alert.component';
+import {WeightAlertComponent} from "./weight-alert/weight-alert.component";
 
 const storeRoutes: Routes = [
   {path: 'storePage', component: StoreRightPageComponent},
@@ -41,7 +42,7 @@ const routes: Routes = [
     SharedModule,
     FileUploadModule
   ],
-  declarations: [SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent,StoreInvestComponent, AuditComponent, AuditAlertComponent],
+  declarations: [SiteComponent, StaticsComponent, RecordComponent, AddRedPackageComponent, RpPondComponent, RpStoreComponent, StoreRightPageComponent,StoreInvestComponent, AuditComponent, AuditAlertComponent, WeightAlertComponent],
   providers:[ActivitiesService]
 })
 export class ActivitiesModule { }

@@ -1,9 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
-import {isNullOrUndefined} from "util";
-import {FreightTemplateService} from "./freight-template.service";
-import {Page} from "../../../core/page/page";
-import {SessionService} from "../session.service";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {isNullOrUndefined} from 'util';
+import {FreightTemplateService} from './freight-template.service';
+import {Page} from '../../../core/page/page';
+import {SessionService} from '../session.service';
+import {SubmitService} from '../../../core/forms/submit.service';
+import {Setting} from '../../../core/settings/setting';
+import {SelectComponent} from 'ng2-select';
+import {OperationService} from '../operation.service';
 const swal = require('sweetalert');
 
 @Component({
@@ -19,6 +23,7 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
   public deletebutton;//删除运费模板按钮配置
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
   public areas:Page= new Page();
+  public stores: Array<any> = new Array();//店铺列表
   public table = {
     curPage:1,
     lastPage:true,
@@ -31,14 +36,26 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
     totalPage:1,
     totalRow:5,
     voList:[]
-  }
+  };
+  public storeCode: string='SZH_PLAT_SELF_STORE';//查询店铺编码
+  public voList: any;   //店铺列表列表
 
-  constructor(public router:Router,public FreightTemplateService:FreightTemplateService) {
+  @ViewChild('allStores') public allStores: SelectComponent;
+
+  //监听选择店铺组件
+
+  constructor(public router:Router,public FreightTemplateService:FreightTemplateService, public submit: SubmitService,public operationService:OperationService) {
 
   }
 
   ngOnInit() {
     let _this = this;
+    _this.allStores.active = [{id: Setting.SELF_STORE, text: '三楂红平台自营店'}];
+    _this.selectedStore(_this.allStores.active);
+    _this.stores = _this.operationService.stores;
+    console.log("█ _this.allStores.active ►►►",  _this.allStores.active);
+
+
     /**
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
@@ -90,11 +107,29 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
 
 
   /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.storeCode = value.id;
+    this.operationService.selectedStore = value;
+
+  }
+
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.storeCode='';
+  }
+
+  /**
    * 查询运费模板列表信息
    * @param event
    */
   public queryList() {
-    let data={storeCode:'SZH_PLAT_SELF_STORE',level:1}
+    let data={storeCode:this.storeCode?this.storeCode:'SZH_PLAT_SELF_STORE'};
     let url= "/expressTpl/queryByStoreCode";
     let result = this.FreightTemplateService.controlDatas(url,data);
     console.log("█ data ►►►", data );

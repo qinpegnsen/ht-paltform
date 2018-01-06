@@ -1,14 +1,16 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {PublishComponent} from "../publish/publish.component";
-import {isNull, isNullOrUndefined, isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SubmitService} from "../../../../core/forms/submit.service";
-import {GoodsService} from "../../goods.service";
+import {SubmitService} from "../../../core/forms/submit.service";
+import {GoodsService} from "../goods.service";
 import {FileUploader} from "ng2-file-upload";
-import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
-import {AppComponent} from "../../../../app.component";
-import {MaskService} from "../../../../core/services/mask.service";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
+import {AppComponent} from "../../../app.component";
+import {MaskService} from "../../../core/services/mask.service";
 import {Location} from "@angular/common";
+import {SelectComponent} from "ng2-select";
+import {Setting} from "../../../core/settings/setting";
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -20,6 +22,7 @@ const swal = require('sweetalert');
 export class EditDetailComponent implements OnInit {
   public path: string;           // 当前路径
   public kindId: string;         //商品分类id
+  public stores: Array<any> = new Array();//店铺列表
   public saleAttrList: any;       // 所有规格数据
   public brandsList: any;        // 品牌列表
   public unitList: any;           // 计量单位列表
@@ -30,10 +33,10 @@ export class EditDetailComponent implements OnInit {
   public skuImg: any = {           // 图片属性
     vals: []
   };
-  public goodsImgList:any = {};       // 商品上传图片列表
+  public goodsImgList: any = {};       // 商品上传图片列表
   public oldImgs: any = {};        // 商品已经有的图片列表
   public goodsEditData: any;     // 修改商品时商品的原有数据
-  public tempMblHtml: string;    // 修改商品时临时用的移动端详情
+  public isOwnPlat: string;      // 修改商品时商品是否自营
   public goodsBody: any;          //PC端商品详情
   public mobileBody: any;          //移动端商品详情
   public storeCode: string;          //店铺编码
@@ -41,6 +44,7 @@ export class EditDetailComponent implements OnInit {
   public tplVals: any;               // 运费模板内容
   public unit: string = '件';       // 运费价格
   public refresh: boolean = false;    //是否刷新列表页
+  @ViewChild('allStores') public allStores: SelectComponent;//监听选择店铺组件
 
   public publishData: any = {
     goodsExpressInfo: {
@@ -65,6 +69,8 @@ export class EditDetailComponent implements OnInit {
               public router: Router,
               public location: Location,
               public tools: RzhtoolsService) {
+    this.publishData.storeCode = Setting.SELF_STORE;//默认自营店铺编码
+    this.publishData.storeName = Setting.SELF_STORE_NAME;//默认自营店铺名
   }
 
   back() {
@@ -72,7 +78,6 @@ export class EditDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-
     let me = this;
     me.publishComponent.step = 2
     me.route.url.subscribe(paths => {
@@ -83,15 +88,15 @@ export class EditDetailComponent implements OnInit {
     if (me.path != 'step_two') me.goodsBaseCode = me.submit.getParams('baseCode');
     me.getPageData();// 获取当前页面需要的数据
     if (me.path == 'step_two' && isNullOrUndefined(me.kindId)) {
-      me.router.navigate(['/main/goods/plat/publish/step_one'], {replaceUrl: true});
+      me.router.navigate([Setting.URLS.goods.chooseKind], {replaceUrl: true});
     } else {
       if (me.path == 'step_two' && !isNullOrUndefined(me.kindId)) {
-        me.publishData['kindSelectName'] = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
+        me.publishData.kindSelectName = me.route.snapshot.queryParams['choosedKind'].replace(/>>/g, '>');
         // 默认值
-        me.publishData['isFreight'] = 'N';                  //是否有运费
-        me.publishData['haveGift'] = 'Y';                   //是否有赠品
-        me.publishData['isJoinLimitime'] = 'Y';             //是有参加活动
-        me.publishData['brandCode'] = '';                   //品牌
+        me.publishData.isFreight = 'N';                  //是否有运费
+        me.publishData.haveGift = 'Y';                   //是否有赠品
+        me.publishData.isJoinLimitime = 'Y';             //是有参加活动
+        me.publishData.brandCode = '';                   //品牌
       }
 
       /**
@@ -213,17 +218,21 @@ export class EditDetailComponent implements OnInit {
   public allotPageData(pageData) {
     let me = this;
     // 商品基本基本信息
-    me.getExpressTpl();
+    me.stores = me.goods.getAllStores();
     me.baseAttrList = pageData.baseAttrList;      // 商品基本属性
     me.unitList = pageData.unitList;              // 计量单位
     me.brandsList = pageData.brandList;           // 品牌列表
     me.saleAttrList = pageData.saleAttrList;      // 规格
     if (me.path == 'step_two') {
+      me.getExpressTpl();
       me.goodsBaseCode = pageData.goodsBaseCode;  // 商品基本编码
+      me.allStores.active = [{id: me.publishData.storeCode, text: me.publishData.storeName}];//默认自营店
     }
     if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;
       me.publishData = me.goodsEditData;         // 商品发布数据
+      me.isOwnPlat = pageData.isOwnPlat;
+      me.getExpressTpl();
       me.checkedBaseAttr();                         //已选中的基本属性
       me.genClearArray(me.goodsEditData.goodsSkuList);    // 生成所选属性组合
       me.genTempGoodsImgsList();  // 将商品的图片组生成me.goodsImgList一样的数据，方便后续追加图片
@@ -234,10 +243,21 @@ export class EditDetailComponent implements OnInit {
           fixedFreight: null,
           expressTplId: null,
         };
-      }else if(!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)){
+      } else if (!isNullOrUndefined(me.publishData.goodsExpressInfo.expressTplId)) {
         me.getTplValById();  //根据物流模板ID获取模板值
       }
     }
+  }
+
+  /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.publishData.storeCode = value.id;
+    this.publishData.storeName = value.text;
+    this.publishData.goodsExpressInfo = {};
+    this.getExpressTpl();
   }
 
   /**
@@ -261,7 +281,7 @@ export class EditDetailComponent implements OnInit {
     let me = this, expressTpl;
     // 当切换到物流规则时，获取新的运费模板，此时target是还没切换过来的固定运费
     if (isNullOrUndefined(target) || target == 'FIXED') {
-      expressTpl = me.goods.getExpressTplByStoreCode('SZH_PLAT_SELF_STORE');// TODO获取运费模板
+      expressTpl = me.goods.getExpressTplByStoreCode(me.publishData.storeCode);// TODO获取运费模板
     }
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
@@ -790,7 +810,7 @@ export class EditDetailComponent implements OnInit {
     if ($('#goodsBody').summernote('isEmpty')) {
       AppComponent.rzhAlt('warning', '请编辑PC端商品详情');
       return false
-    } else if($('#mobileBody').summernote('isEmpty')) {
+    } else if ($('#mobileBody').summernote('isEmpty')) {
       AppComponent.rzhAlt('warning', '请编辑移动端商品详情');
       return false
     }
@@ -809,13 +829,18 @@ export class EditDetailComponent implements OnInit {
     me.publishData.goodsBody = $('#goodsBody').summernote('code');  // 商品详情 PC
     me.publishData.mobileBody = $('#mobileBody').summernote('code');  // 移动端详情
     $.when(me.goods.publishGoods('/goodsEdit/save', me.publishData)).done(data => {
-      if(data){
+      if (data) {
         if (me.path == 'edit') {
           AppComponent.rzhAlt("success", '操作成功');
           me.location.back();
           me.refresh = true;
         } else {
-          me.router.navigate(['/main/goods/plat/publish/step_three'], {queryParams: {baseCode: data}})
+          me.router.navigate([Setting.URLS.goods.published], {
+            queryParams: {
+              baseCode: data.goodsBaseCode,
+              isOwnPlat: data.isOwnPlat
+            }
+          })
         }
       }
     })

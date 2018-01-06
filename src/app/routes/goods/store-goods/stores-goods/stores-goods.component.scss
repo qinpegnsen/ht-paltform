@@ -3,9 +3,7 @@ $img-width: 60px;
 .panel-body{
   padding: 0 15px 15px 15px;
 }
-.search-group{
-  width: 235px;
-}
+
 .special {
   height: 250px;
   overflow-y: auto;
@@ -58,4 +56,17 @@ $img-width: 60px;
   height: 18px;
   line-height:18px;
   overflow: hidden;
+}
+
+.search-group-lg{
+  min-width: 272px;
+  display: inline-block;
+  .search-title{
+    width: 72px;
+    display: inline-block;
+  }
+  .search-main-lg{
+    min-width: 200px;
+    display: inline-block;
+  }
 }

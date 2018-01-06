@@ -6,6 +6,7 @@ import {isUndefined} from "util";
 import {PageEvent} from "angular2-datatable";
 import {GoodsService} from "../../goods.service";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
+import {Setting} from "../../../../core/settings/setting";
 const swal = require('sweetalert');
 declare var $: any;
 
@@ -17,7 +18,8 @@ declare var $: any;
 export class StoresGoodsComponent implements OnInit {
   public showList: boolean = true;     //是否显示列表页
   public goodsList: Page = new Page();
-  public query = {
+  public goodsUrls: any = Setting.URLS.goods;
+  public query: any = {
     kindId: '',
     goodsName: '',
     brandName: '',
@@ -33,6 +35,7 @@ export class StoresGoodsComponent implements OnInit {
   public goodsState: any;  // 商品状态列表
   public curBaseCode: string;  // 当前商品基本编号
   public curName: string;    // 当前商品名称
+  public stores: Array<any> = new Array();//店铺列表
 
   constructor(public router: Router,
               public tools: RzhtoolsService,
@@ -46,6 +49,25 @@ export class StoresGoodsComponent implements OnInit {
     me.kindList = this.goodsService.getKindList(); //获取分类列表
     me.goodsAudits = this.tools.getEnumDataList('1014');  // 商品审核状态列表
     me.goodsState = this.tools.getEnumDataList('1006');  // 商品状态列表
+    let stores = me.goodsService.getAllStores();
+    stores.forEach((item, i) => {
+      if (item.id == Setting.SELF_STORE) stores.splice(i, 1)
+    })
+    me.stores = stores;
+  }
+
+  /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.query.storeCode = value.id;
+    this.queryDatas(1);
+  }
+
+  unSelectStore(): void {
+    this.query.storeCode = null;
+    this.queryDatas(1);
   }
 
   /**
@@ -62,7 +84,7 @@ export class StoresGoodsComponent implements OnInit {
    */
   onDeactivate(event) {
     this.showList = true;
-    if(event.refresh) this.queryDatas(this.query.curPage)
+    if (event.refresh) this.queryDatas(this.query.curPage)
   }
 
   /**
@@ -163,7 +185,7 @@ export class StoresGoodsComponent implements OnInit {
    * 隐藏大图
    * @param event
    */
-  hideImg(event){
+  hideImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'none';
   }
@@ -199,6 +221,6 @@ export class StoresGoodsComponent implements OnInit {
    */
   getSkuData(data) {
     this.curBaseCode = null;
-    if(data.type) this.queryDatas(data.page)
+    if (data.type) this.queryDatas(data.page)
   }
 }
