@@ -65,6 +65,11 @@ export class StoresGoodsComponent implements OnInit {
     this.queryDatas(1);
   }
 
+  unSelectStore(): void {
+    this.query.storeCode = null;
+    this.queryDatas(1);
+  }
+
   /**
    * 子组件加载时
    * @param event

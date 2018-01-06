@@ -28,6 +28,8 @@
         <span class="search-title">店铺名：</span>
         <div class="search-main">
           <ng-select [items]="stores" class="p0"
+                     [allowClear]="true"
+                     (removed)="unSelectStore()"
                      (selected)="selectedStore($event)"
                      placeholder="根据店铺名称查询">
           </ng-select>

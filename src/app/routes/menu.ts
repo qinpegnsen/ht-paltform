@@ -104,7 +104,7 @@ const goods = {
   link: '/main/goods',
   submenu: [
     {
-      text: '商品发布',
+      text: '发布商品',
       icon: 'fa fa-cube',
       link: '/main/goods/publish'
     },

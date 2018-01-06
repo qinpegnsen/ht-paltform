@@ -3,6 +3,7 @@ import {CookieService} from 'angular2-cookie/core';
 import {any} from 'codelyzer/util/function';
 import {isNullOrUndefined} from 'util';
 import {Router} from '@angular/router';
+import {MENU} from "../../routes/menu";
 
 //后台菜单返回格式
 interface menuVO{
@@ -76,6 +77,7 @@ export class MenuService {
     let menus = JSON.parse(localStorage.getItem("userMenu"));
     if(isNullOrUndefined(menus)) menus = new Array(), this.router.navigate([this.urlLogin]);
     return menus; //从登录信息在本地缓存中取出
+    // return MENU; //返回本地菜单
   }
 
   /**
