@@ -3,6 +3,7 @@
  */
 export class Setting {
   public static SELF_STORE = 'SZH_PLAT_SELF_STORE';
+  public static SELF_STORE_NAME = '三楂红平台自营店';
   public static URLS = {
     goods: {
       chooseKind: '/main/goods/publish/step_one',//外部选择分类，如果发布商品入口在平台商品管理中，则注释此链接，解开下面三个链接

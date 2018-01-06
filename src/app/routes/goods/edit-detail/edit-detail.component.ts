@@ -69,7 +69,8 @@ export class EditDetailComponent implements OnInit {
               public router: Router,
               public location: Location,
               public tools: RzhtoolsService) {
-    this.publishData.storeCode = Setting.SELF_STORE;//默认自营店铺
+    this.publishData.storeCode = Setting.SELF_STORE;//默认自营店铺编码
+    this.publishData.storeName = Setting.SELF_STORE_NAME;//默认自营店铺名
   }
 
   back() {
@@ -225,7 +226,7 @@ export class EditDetailComponent implements OnInit {
     if (me.path == 'step_two') {
       me.getExpressTpl();
       me.goodsBaseCode = pageData.goodsBaseCode;  // 商品基本编码
-      me.allStores.active = [{id: me.publishData.storeCode, text: '三楂红平台自营店'}];
+      me.allStores.active = [{id: me.publishData.storeCode, text: me.publishData.storeName}];//默认自营店
     }
     if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;
