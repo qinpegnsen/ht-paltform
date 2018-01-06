@@ -99,7 +99,6 @@ export class StoreCancelComponent implements OnInit {
   }
 
   querySoterLists(){
-    console.log("█ 1111 ►►►",  1111);
 
     let _this = this, activePage = 1;
     let requestUrl = '/stores/query';

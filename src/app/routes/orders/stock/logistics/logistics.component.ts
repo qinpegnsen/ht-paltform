@@ -60,7 +60,7 @@ export class LogisticsComponent implements OnInit {
       queryKeywords:''
     };
     _this.goodsAudits = _this.submit.getData(requestUrl, requestData);
-    console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
+    //console.log("█ _this.goodsAudits  ►►►",  _this.goodsAudits );
   }
 
   /***

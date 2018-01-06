@@ -105,7 +105,7 @@ export class StorePendingComponent implements OnInit {
       isPlatShop:'N'
     };
     _this.voList = _this.submit.getData(requestUrl, requestData).voList;
-    console.log("█ _this.voList  ►►►",  _this.voList );
+    //console.log("█ _this.voList  ►►►",  _this.voList );
   }
 
   /**

@@ -67,7 +67,7 @@ export class CuccessComponent implements OnInit {
    * @param curPage
    */
   public queryDatas(curPage, event?: PageEvent) {
-    console.log('█ this.agentTime ►►►', this.agentTime);
+    //console.log('█ this.agentTime ►►►', this.agentTime);
 
     let _this = this, activePage = 1;
     if (typeof event !== 'undefined') {
@@ -93,7 +93,7 @@ export class CuccessComponent implements OnInit {
       state:'SUCCESS'
     };
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
-    console.log("█ _this.goodsList ►►►",  _this.goodsList);
+    //console.log("█ _this.goodsList ►►►",  _this.goodsList);
   }
 
   /**

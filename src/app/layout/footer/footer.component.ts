@@ -24,7 +24,7 @@ export class FooterComponent implements OnInit {
       data: {code:'plat_system_name'},
       success: (res) => {
         if (res.success) {
-          console.log("█ res.data ►►►",  res.data);
+          //console.log("█ res.data ►►►",  res.data);
           me.settings.app.name = res.data;
         }
       }

@@ -70,7 +70,7 @@ export class DepositAuditComponent implements OnInit {
   getAddRecordData(data) {
     this.currentId = null;
     this.drawMoney = null;
-    console.log("█ data ►►►",  data);
+    //console.log("█ data ►►►",  data);
     if(data.type) this.queryDatas(data.page)
   }
 
