@@ -255,6 +255,7 @@ export class EditDetailComponent implements OnInit {
   selectedStore(value: any): void {
     this.publishData.storeCode = value.id;
     this.publishData.storeName = value.text;
+    this.publishData.goodsExpressInfo = {};
     this.getExpressTpl();
   }
 
@@ -281,7 +282,6 @@ export class EditDetailComponent implements OnInit {
     if (isNullOrUndefined(target) || target == 'FIXED') {
       expressTpl = me.goods.getExpressTplByStoreCode(me.publishData.storeCode);// TODO获取运费模板
     }
-    this.publishData.goodsExpressInfo = {};
     if (!isNullOrUndefined(expressTpl)) me.logistics = expressTpl;
   }
 
@@ -834,7 +834,12 @@ export class EditDetailComponent implements OnInit {
           me.location.back();
           me.refresh = true;
         } else {
-          me.router.navigate([Setting.URLS.goods.published], {queryParams: {baseCode: data}})
+          me.router.navigate([Setting.URLS.goods.published], {
+            queryParams: {
+              baseCode: data.goodsBaseCode,
+              isOwnPlat: data.isOwnPlat
+            }
+          })
         }
       }
     })

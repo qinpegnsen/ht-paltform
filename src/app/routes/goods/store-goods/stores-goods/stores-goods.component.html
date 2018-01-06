@@ -24,10 +24,10 @@
           </select>
         </div>
       </div>
-      <div class="search-group ml-xl mb clearfix">
+      <div class="search-group-lg ml-xl mb clearfix">
         <span class="search-title">店铺名：</span>
-        <div class="search-main">
-          <ng-select [items]="stores" class="p0"
+        <div class="search-main search-main-lg">
+          <ng-select [items]="stores" class="p0 w100"
                      [allowClear]="true"
                      (removed)="unSelectStore()"
                      (selected)="selectedStore($event)"

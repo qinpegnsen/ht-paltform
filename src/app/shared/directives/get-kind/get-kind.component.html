@@ -1,5 +1,7 @@
 <div dropdown class="get-kind">
-  <button class="form-control rzh-sel-kind text-left" (click)="showSelectKind()" type="button"
+  <button class="form-control rzh-sel-kind text-left"
+          (click)="showSelectKind()" type="button"
+          [title]="myKindName"
           dropdownToggle>{{myKindName? myKindName :'全部分类'}}
     <b class="caret pull-right"></b></button>
   <div class="selectBox rzh-sel-kind" *ngIf="show">
