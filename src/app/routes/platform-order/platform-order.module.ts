@@ -47,7 +47,8 @@ const routes: Routes = [
   ],
   declarations: [PlatformCancelComponent, PlatformCompleteComponent, PlatformPendingComponent, PlatformReceivedComponent,OrderDetailComponent, DeliverComponent, PlatformPaymentComponent, PlatformAllComponent],
   providers: [
-    PlatformOrderService
+    PlatformOrderService,
+    PlatformPendingComponent
   ]
 })
 export class PlatformOrderModule { }
