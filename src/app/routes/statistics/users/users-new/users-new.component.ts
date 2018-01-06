@@ -67,7 +67,6 @@ export class UsersNewComponent implements OnInit {
     if (!_this.select || isNullOrUndefined(_this.select.year) || _this.select.year == "") AppComponent.rzhAlt("error", "年份必选");
     else if (isNullOrUndefined(_this.select.month) || _this.select.month == "") AppComponent.rzhAlt("error", "月份必选");
     else ret = _this.select.year + "-" + _this.select.month;
-    console.log("█ ret ►►►",  ret);
     return ret;
   }
 
