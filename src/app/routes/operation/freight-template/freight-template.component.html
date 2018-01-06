@@ -43,7 +43,7 @@
           <div class="table-thead">
             <div class="table-thead-header">
               <span>{{organ.tplName}}</span>
-              <span class="pl">所属店铺：{{organ.storeName}}</span>
+              <span class="pl26">所属店铺：{{organ.storeName}}</span>
               <span>
                 <!--修改运费模板按钮-->
               <app-buttons [config]="updatebutton" routerLink="add-formoek" [queryParams]="{linkType:'updataArticle',id:organ.id}"></app-buttons>
@@ -70,7 +70,7 @@
                   <rzhDefaultSorter by="agentName">首体积(m³)</rzhDefaultSorter>
                 </th>
                 <th class="col-md-1 unselectable text-center">
-                  <rzhDefaultSorter by="firstPrice">运费(元)</rzhDefaultSorter>
+                  <rzhDefaultSorter by="firstPrice">首费(元)</rzhDefaultSorter>
                 </th>
                 <th class="col-md-1 unselectable text-center" *ngIf="organ.valuationType == 'NUM'">
                   <rzhDefaultSorter by="agentName">续件(件)</rzhDefaultSorter>
@@ -82,7 +82,7 @@
                   <rzhDefaultSorter by="agentName">续体积(m³)</rzhDefaultSorter>
                 </th>
                 <th class="col-md-1 unselectable text-center">
-                  <rzhDefaultSorter by="addPrice">运费(元)</rzhDefaultSorter>
+                  <rzhDefaultSorter by="addPrice">续费(元)</rzhDefaultSorter>
                 </th>
               </tr>
               </thead>
@@ -93,9 +93,9 @@
                 </td>
                 <td class="text-center">{{storeExpressTplValList.createTime}}</td>
                 <td class="text-center">{{storeExpressTplValList.firstNum}}</td>
-                <td class="text-center thc font">￥&nbsp;{{storeExpressTplValList.firstPrice}}</td>
+                <td class="text-center">￥&nbsp;{{storeExpressTplValList.firstPrice}}</td>
                 <td class="text-center">{{storeExpressTplValList.addAttach}}</td>
-                <td class="text-center">{{storeExpressTplValList.addPrice}}</td>
+                <td class="text-center">￥&nbsp;{{storeExpressTplValList.addPrice}}</td>
               </tr>
               </tbody>
             </table>
