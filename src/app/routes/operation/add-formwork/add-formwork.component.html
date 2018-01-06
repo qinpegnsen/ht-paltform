@@ -370,8 +370,7 @@
 
                     <td class="text-center">
                       <!--修改运费模板值按钮-->
-                      <app-buttons [config]="updatebutton" (click)="edit(i, item.area);area_model = !area_model"></app-buttons>
-
+                      <button style="margin-top: 5px" class="mb-sm btn btn-info btn-sm" type="button" (click)="edit(i, item.area);area_model = !area_model"><i class="fa fa-map-marker"></i>&nbsp;</button>
                       <!--删除运费模板值按钮-->
                       <app-buttons [config]="deletebutton" (click)="delete(organ,i)"></app-buttons>
                     </td>
