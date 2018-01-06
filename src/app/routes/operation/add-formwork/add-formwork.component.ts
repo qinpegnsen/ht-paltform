@@ -57,6 +57,8 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     // 初始化地区数据
     _this.getallCheckeds();
+    console.log("█  _this.operationService.selectedStore ►►►",   _this.operationService.selectedStore);
+
     _this.linkType = this.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     _this.id = this.routeInfo.snapshot.queryParams['id'];
 
@@ -75,7 +77,7 @@ export class AddFormworkComponent implements OnInit {
     _this.queryFormwork();//请求模板详细数据并显示
     _this.stores = _this.operationService.stores;//获取店铺列表
     _this.allStore.active = [
-      _this.operationService.selectedStore ?_this.operationService.selectedStore :
+      _this.operationService.selectedStore?_this.operationService.selectedStore.length>0? _this.operationService.selectedStore[0]:_this.operationService.selectedStore:
         { id: Setting.SELF_STORE, text: '三楂红平台自营店' }];
     if(_this.operationService.selectedStore) _this.selectedStore(_this.operationService.selectedStore);
   }
@@ -515,7 +517,7 @@ export class AddFormworkComponent implements OnInit {
         tplName: formData.value.tplName,
         isFree: 'N',
         valuationType: formData.value.valuationType,
-        storeCode: this.storeCode,
+        storeCode:this.storeCode?this.storeCode:'SZH_PLAT_SELF_STORE',
         id: this.id,
         storeExpressTplValList: this.moduleList
       }

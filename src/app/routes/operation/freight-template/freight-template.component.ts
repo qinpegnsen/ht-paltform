@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
-import {isNullOrUndefined} from "util";
-import {FreightTemplateService} from "./freight-template.service";
-import {Page} from "../../../core/page/page";
-import {SessionService} from "../session.service";
+import {NavigationEnd, Router} from '@angular/router';
+import {isNullOrUndefined} from 'util';
+import {FreightTemplateService} from './freight-template.service';
+import {Page} from '../../../core/page/page';
+import {SessionService} from '../session.service';
 import {SubmitService} from '../../../core/forms/submit.service';
-import {GoodsService} from '../../goods/goods.service';
 import {Setting} from '../../../core/settings/setting';
 import {SelectComponent} from 'ng2-select';
 import {OperationService} from '../operation.service';
@@ -38,7 +37,7 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
     totalRow:5,
     voList:[]
   };
-  public storeCode: string='';//查询店铺编码
+  public storeCode: string='SZH_PLAT_SELF_STORE';//查询店铺编码
   public voList: any;   //店铺列表列表
 
   @ViewChild('allStores') public allStores: SelectComponent;
@@ -51,8 +50,12 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
 
   ngOnInit() {
     let _this = this;
-    _this.stores = _this.operationService.stores;
     _this.allStores.active = [{id: Setting.SELF_STORE, text: '三楂红平台自营店'}];
+    _this.selectedStore(_this.allStores.active);
+    _this.stores = _this.operationService.stores;
+    console.log("█ _this.allStores.active ►►►",  _this.allStores.active);
+
+
     /**
      * 按钮配置
      * @type {{type: string, text: string, title: string}}
@@ -110,7 +113,9 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
   selectedStore(value: any): void {
     this.storeCode = value.id;
     this.operationService.selectedStore = value;
+
   }
+
   /**
    * 删除信息
    * @param value
@@ -124,7 +129,7 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
    * @param event
    */
   public queryList() {
-    let data={storeCode:this.storeCode,level:1}
+    let data={storeCode:this.storeCode?this.storeCode:'SZH_PLAT_SELF_STORE'};
     let url= "/expressTpl/queryByStoreCode";
     let result = this.FreightTemplateService.controlDatas(url,data);
     console.log("█ data ►►►", data );
