@@ -8,6 +8,7 @@ import {SubmitService} from '../../../core/forms/submit.service';
 import {GoodsService} from '../../goods/goods.service';
 import {Setting} from '../../../core/settings/setting';
 import {SelectComponent} from 'ng2-select';
+import {OperationService} from '../operation.service';
 const swal = require('sweetalert');
 
 @Component({
@@ -44,14 +45,13 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
 
   //监听选择店铺组件
 
-  constructor(public router:Router,public FreightTemplateService:FreightTemplateService, public submit: SubmitService,public goods:GoodsService) {
+  constructor(public router:Router,public FreightTemplateService:FreightTemplateService, public submit: SubmitService,public operationService:OperationService) {
 
   }
 
   ngOnInit() {
     let _this = this;
-    _this.querySoterLists();
-    _this.stores = _this.goods.getAllStores();
+    _this.stores = _this.operationService.stores;
     _this.allStores.active = [{id: Setting.SELF_STORE, text: '三楂红平台自营店'}];
     /**
      * 按钮配置
@@ -109,6 +109,14 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
    */
   selectedStore(value: any): void {
     this.storeCode = value.id;
+    this.operationService.selectedStore = value;
+  }
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.storeCode='';
   }
 
   /**
@@ -127,19 +135,6 @@ export class FreightTemplateComponent implements OnInit ,OnDestroy{
       this.table.voList = result.data;
     }
     this.areas = new Page(this.table);
-  }
-
-  /**
-   * 查询店铺列表
-   */
-  querySoterLists(){
-    let _this = this, activePage = 1;
-    let requestUrl = '/stores/query';
-    let requestData = {
-      isPlatShop:'N'
-    };
-    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
-    console.log("█ _this.voList  ►►►",  _this.voList );
   }
 
 

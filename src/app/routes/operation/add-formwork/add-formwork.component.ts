@@ -13,8 +13,8 @@ import {PatternService} from '../../../core/forms/pattern.service';
 import {RzhtoolsService} from '../../../core/services/rzhtools.service';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {Setting} from '../../../core/settings/setting';
-import {GoodsService} from 'app/routes/goods/goods.service';
 import {SelectComponent} from 'ng2-select';
+import {OperationService} from '../operation.service';
 const swal = require('sweetalert');
 
 
@@ -22,7 +22,7 @@ const swal = require('sweetalert');
   selector: 'app-add-formwork',
   templateUrl: './add-formwork.component.html',
   styleUrls: ['./add-formwork.component.scss'],
-  providers:[AddFormworkService,SessionService]
+  providers: [AddFormworkService, SessionService]
 })
 export class AddFormworkComponent implements OnInit {
   public deletebutton;//删除运费模板按钮配置
@@ -37,9 +37,9 @@ export class AddFormworkComponent implements OnInit {
   public staff: any = {};
   public id;
   public cru: number = 0;
-  public storeCode: string='';//查询店铺编码
+  public storeCode: string = '';//查询店铺编码
   public voList: any;   //店铺列表列表
-  public sellerCode:any;
+  public sellerCode: any;
   public stores: Array<any> = new Array();//店铺列表
   @ViewChild('allStore') public allStore: SelectComponent;
 
@@ -49,7 +49,8 @@ export class AddFormworkComponent implements OnInit {
   allCheckeds = [];
   data: Array<any> = [];
   checkOptionsOnes = {};
-  constructor(public routeInfo: ActivatedRoute, public router: Router, public ajax: AjaxService, public session: SessionService, public FreightTemplateComponent: FreightTemplateComponent,public patterns: PatternService,public rzhtools:RzhtoolsService,public submit: SubmitService,public goods:GoodsService) {
+
+  constructor(public routeInfo: ActivatedRoute, public router: Router, public ajax: AjaxService, public session: SessionService, public FreightTemplateComponent: FreightTemplateComponent, public patterns: PatternService, public rzhtools: RzhtoolsService, public submit: SubmitService, public operationService: OperationService) {
   }
 
   ngOnInit() {
@@ -72,8 +73,11 @@ export class AddFormworkComponent implements OnInit {
       title: '删除运费模板值',
     };
     _this.queryFormwork();//请求模板详细数据并显示
-    _this.stores = _this.goods.getAllStores();
-    _this.allStore.active = [{id: Setting.SELF_STORE, text: '三楂红平台自营店'}];
+    _this.stores = _this.operationService.stores;//获取店铺列表
+    _this.allStore.active = [
+      _this.operationService.selectedStore ?_this.operationService.selectedStore :
+        { id: Setting.SELF_STORE, text: '三楂红平台自营店' }];
+    if(_this.operationService.selectedStore) _this.selectedStore(_this.operationService.selectedStore);
   }
 
   /**
@@ -236,10 +240,10 @@ export class AddFormworkComponent implements OnInit {
       tempResult = tempResult.concat(temp);
       tempAreaCode = tempAreaCode.concat(tempe)
     }
-    if(_this.linkType=='addArticle'){
+    if (_this.linkType == 'addArticle') {
       _this.moduleList[_this.cru].area = tempAreaCode.join(',');
       _this.moduleList[_this.cru].area_cn = tempResult.join(',');
-    }else if(_this.linkType=='updataArticle'){
+    } else if (_this.linkType == 'updataArticle') {
       _this.staff.storeExpressTplValList[_this.cru].area = tempAreaCode.join(',');
       _this.staff.storeExpressTplValList[_this.cru].area_cn = tempResult.join(',');
     }
@@ -314,7 +318,7 @@ export class AddFormworkComponent implements OnInit {
     let _this = this;
     _this.cru = index;
     _this.close();
-    switch (_this.linkType){
+    switch (_this.linkType) {
       case 'addArticle':
         if (_this.moduleList[this.cru].area) {
           const temp = _this.session.getDatas(_this.moduleList.length - 1);
@@ -358,7 +362,8 @@ export class AddFormworkComponent implements OnInit {
             });
           }
 
-        };
+        }
+        ;
         break;
       case 'updataArticle':
         if (_this.staff.storeExpressTplValList[this.cru].area) {
@@ -380,21 +385,21 @@ export class AddFormworkComponent implements OnInit {
               }
             });
           }
-         /* for (let i = 0; i < len; i++) {
-            _this.data[i]['provices'].forEach(item => {
-              _this.allCheckeds[index]['allChecked'] =
-                _this.data[index]['provices'].every(item => item.checked === true);
-              // 添加运费模板时选择区域的  全选全不选
-              if (_this.data[index]['provices'][j]['checked']) {
-                _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = true);
-              } else {
-                _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = false);
-              }
-              if (item.checked) {
-              } else {
-              }
-            });
-          }*/
+          /* for (let i = 0; i < len; i++) {
+           _this.data[i]['provices'].forEach(item => {
+           _this.allCheckeds[index]['allChecked'] =
+           _this.data[index]['provices'].every(item => item.checked === true);
+           // 添加运费模板时选择区域的  全选全不选
+           if (_this.data[index]['provices'][j]['checked']) {
+           _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = true);
+           } else {
+           _this.checkOptionsOnes[item.areaCode][0].forEach(value => value.checked = false);
+           }
+           if (item.checked) {
+           } else {
+           }
+           });
+           }*/
 
         } else {
           _this.allCheckeds.forEach((item) => {
@@ -416,7 +421,8 @@ export class AddFormworkComponent implements OnInit {
             });
           }
 
-        };
+        }
+        ;
         break;
     }
 
@@ -444,10 +450,17 @@ export class AddFormworkComponent implements OnInit {
   add() {
     let _this = this;
     //
-    if(_this.linkType=='addArticle'){
-        _this.moduleList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice: '', addAttach: '', addPrice: ''});
-    }else if(_this.linkType=='updataArticle'){
-        _this.staff.storeExpressTplValList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice: '', addAttach: '', addPrice: ''});
+    if (_this.linkType == 'addArticle') {
+      _this.moduleList.push({area: '', index: _this.moduleList.length + 1, firstNum: '', firstPrice: '', addAttach: '', addPrice: ''});
+    } else if (_this.linkType == 'updataArticle') {
+      _this.staff.storeExpressTplValList.push({
+        area: '',
+        index: _this.moduleList.length + 1,
+        firstNum: '',
+        firstPrice: '',
+        addAttach: '',
+        addPrice: ''
+      });
     }
   }
 
@@ -473,10 +486,10 @@ export class AddFormworkComponent implements OnInit {
         //
         // }
         // _this.AddFormworkService.delCode(url, data); //删除数据
-        if(_this.linkType=='addArticle'){
+        if (_this.linkType == 'addArticle') {
           _this.moduleList.splice(i, 1)
           _this.moduleList[i].area = '';
-        }else if(_this.linkType=='updataArticle'){
+        } else if (_this.linkType == 'updataArticle') {
           _this.staff.storeExpressTplValList.splice(i, 1)
           _this.staff.storeExpressTplValList[i].area = '';
         }
@@ -503,7 +516,7 @@ export class AddFormworkComponent implements OnInit {
         isFree: 'N',
         valuationType: formData.value.valuationType,
         storeCode: this.storeCode,
-        id:this.id,
+        id: this.id,
         storeExpressTplValList: this.moduleList
       }
       _this.ajax.post({
@@ -544,7 +557,7 @@ export class AddFormworkComponent implements OnInit {
         isFree: 'N',
         valuationType: formData.value.valuationType,
         storeCode: this.staff.storeCode,
-        id:_this.id,
+        id: _this.id,
         storeExpressTplValList: _this.staff.storeExpressTplValList
       };
 
@@ -577,8 +590,8 @@ export class AddFormworkComponent implements OnInit {
    * @param target
    * @param type
    */
-  twoNum(target,type?){
-    this.rzhtools.auditInputValueForNum(target,type);
+  twoNum(target, type?) {
+    this.rzhtools.auditInputValueForNum(target, type);
   }
 
   /**
@@ -586,8 +599,8 @@ export class AddFormworkComponent implements OnInit {
    * @param target
    * @param type
    */
-  threeNum(target,type?){
-    this.rzhtools.formworkInputValueForNum(target,type);
+  threeNum(target, type?) {
+    this.rzhtools.formworkInputValueForNum(target, type);
   }
 
 

@@ -3,12 +3,17 @@ import {AjaxService} from "../../core/services/ajax.service";
 import {AppComponent} from "../../app.component";
 import {SubmitService} from '../../core/forms/submit.service';
 import {isNullOrUndefined} from "util";
+import {GoodsService} from '../goods/goods.service';
 const swal = require('sweetalert');
 
 @Injectable()
 export class OperationService {
+  public stores: Array<any> = new Array();//店铺列表
+  public selectedStore:any;
 
-  constructor(public ajax: AjaxService,public submit: SubmitService) { }
+  constructor(public ajax: AjaxService,public submit: SubmitService,public goods:GoodsService) {
+    this.stores = this.goods.getAllStores();
+  }
 
   /**
    * delete 请求  特殊的提示

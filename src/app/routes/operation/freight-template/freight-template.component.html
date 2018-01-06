@@ -19,6 +19,8 @@
         <div class="w90 pl0 pr0 pull-left">
           <ng-select [items]="stores" class="p0" #allStores required
                      (selected)="selectedStore($event)"
+                     (removed)="removed($event)"
+                     [allowClear]="true"
                      placeholder="根据店铺名称查询">
           </ng-select>
         </div>
