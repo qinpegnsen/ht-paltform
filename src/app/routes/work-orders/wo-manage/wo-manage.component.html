@@ -1,6 +1,12 @@
+<div class="content-heading mb-lg thc font"  *ngIf="!detail">
+  工单管理
+</div>
+
 <div class="mb"[ngClass]="{'panel':!detail}">
+
   <div [ngClass]="{'panel-body':!detail}">
     <div *ngIf="!detail">
+
       <ul class="order-guide list-unstyled clearfix bb">
         <li class="pull-left thc" [class.font]="woType==''" [class.bb]="woType==''" routerLink="wo-all">所有</li>
         <li class="pull-left thc" [class.font]="woType=='NO'" [class.bb]="woType=='NO'" routerLink="wo-assign">待派单</li>

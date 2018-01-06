@@ -1,5 +1,10 @@
-<div class="panel" *ngIf="showList">
-  <div class="panel-body">
+
+<div class="" *ngIf="showList">
+  <div class="content-heading mb-lg thc font">
+    指派工单
+  </div>
+<div class="panel" >
+  <div class="panel-body pt0">
     <!--查询 start-->
     <div class="p text-right clearfix">
       <div class="search-term mb">
@@ -125,6 +130,8 @@
       </tfoot>
     </table>
   </div>
+</div>
+
 </div>
 <app-assign-to-agent [wono]="curAssignWono" [page]="woList.curPage"
                      (assignWo)="getAssignWoResult($event)"></app-assign-to-agent>
