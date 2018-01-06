@@ -17,6 +17,7 @@ export class Setting {
       editRe: 'edit',//相对路径，商品修改
       auditRe: 'audit',//相对路径，商品审核
       detailRe: 'detail',//相对路径，商品审核
+      stepTwoRe: '../step_two',//相对路径，商品发布第二步
     }
   }
 }
