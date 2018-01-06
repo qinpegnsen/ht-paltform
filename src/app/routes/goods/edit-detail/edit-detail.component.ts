@@ -255,6 +255,8 @@ export class EditDetailComponent implements OnInit {
   selectedStore(value: any): void {
     this.publishData.storeCode = value.id;
     this.publishData.storeName = value.text;
+    this.publishData.goodsExpressInfo.expressTplId = null;
+    this.getTplValById();
     this.getExpressTpl();
   }
 
@@ -316,9 +318,6 @@ export class EditDetailComponent implements OnInit {
     for (let tpl of me.logistics) {
       if (tpl.id == tplId) {
         return tpl;
-      } else {
-        this.publishData.goodsExpressInfo.expressTplId = null;//如果没找到匹配模板，将模板id置空，必须重新选择运费模板才能修改
-        return null;
       }
     }
   }
