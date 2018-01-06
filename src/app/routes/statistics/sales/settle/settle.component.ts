@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
 import {SubmitService} from "../../../../core/forms/submit.service";
-import {SettingsService} from "../../../../core/settings/settings.service";
 import {AppComponent} from "../../../../app.component";
 import {isNullOrUndefined} from "util";
 
