@@ -6,7 +6,9 @@ import {isNullOrUndefined} from 'util';
 @Injectable()
 export class StoreOrderService {
 
-  constructor(public submit: SubmitService,public ajax: AjaxService) { }
+  constructor(public submit: SubmitService,public ajax: AjaxService) {
+
+  }
 
   public getOrderLogisticsData(ordno) {
     let url = '/ord/tail/queryDeliveryList';

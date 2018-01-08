@@ -5,6 +5,7 @@ import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {StoreOrderService} from '../store-order.service';
+import {GoodsService} from '../../goods/goods.service';
 
 @Component({
   selector: 'app-store-pending',
@@ -25,9 +26,10 @@ export class StorePendingComponent implements OnInit {
   public voList: any;   //店铺列表列表
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
+  public stores: Array<any> = new Array();//店铺列表
 
-  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService) {
-
+  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService,public goods:GoodsService) {
+    this.stores = this.goods.getAllStores();
   }
 
   ngOnInit() {
@@ -36,6 +38,21 @@ export class StorePendingComponent implements OnInit {
     me.querySoterLists();
   }
 
+  /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.storeCode = value.id;
+  }
+
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.storeCode='';
+  }
   /**
    * 子组件加载时
    * @param event

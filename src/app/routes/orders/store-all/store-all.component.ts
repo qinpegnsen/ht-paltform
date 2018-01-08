@@ -5,6 +5,7 @@ import {StoreOrderService} from '../store-order.service';
 import {SubmitService} from '../../../core/forms/submit.service';
 import {isUndefined} from 'ngx-bootstrap/bs-moment/utils/type-checks';
 import {PageEvent} from '../../../shared/directives/ng2-datatable/DataTable';
+import {GoodsService} from '../../goods/goods.service';
 
 @Component({
   selector: 'app-store-all',
@@ -25,15 +26,15 @@ export class StoreAllComponent implements OnInit {
   public voList: any;   //店铺列表列表
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
+  public stores: Array<any> = new Array();//店铺列表
 
-  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService) {
-
+  constructor(public storeOrderService: StoreOrderService, public submit: SubmitService,public goods:GoodsService) {
+    this.stores = this.goods.getAllStores();
   }
 
   ngOnInit() {
     let me = this;
-    me.queryDatas(1)
-    me.querySoterLists();
+    me.queryDatas(1);
   }
 
   /**
@@ -74,6 +75,22 @@ export class StoreAllComponent implements OnInit {
 
 
   /**
+   * 选择店铺
+   * @param value
+   */
+  selectedStore(value: any): void {
+    this.storeCode = value.id;
+  }
+
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.storeCode='';
+  }
+
+  /**
    * 查询列表
    * @param event
    * @param curPage
@@ -106,18 +123,6 @@ export class StoreAllComponent implements OnInit {
     i.style.display = 'block';
   }
 
-  /**
-   * 查询店铺列表
-   */
-  querySoterLists(){
-    let _this = this, activePage = 1;
-    let requestUrl = '/stores/query';
-    let requestData = {
-      isPlatShop:'N'
-    };
-    _this.voList = _this.submit.getData(requestUrl, requestData).voList;
-    console.log("█ _this.voList  ►►►",  _this.voList );
-  }
   /**
    * 隐藏买家信息
    * @param i

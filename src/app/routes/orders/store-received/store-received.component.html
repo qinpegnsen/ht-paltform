@@ -8,10 +8,12 @@
         <div class="w100 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
             <div class="w90 pl0 pr0 pull-left">
-              <select class="form-control" name="voList" [(ngModel)]="storeCode" >
-                <option value="">请选择店铺名称查询</option>
-                <option *ngFor="let item of voList" [value]="item.storeCode">{{item.storeName}}</option>
-              </select>
+              <ng-select [items]="stores" class="p0" #allStores required
+                         (selected)="selectedStore($event)"
+                         (removed)="removed($event)"
+                         [allowClear]="true"
+                         placeholder="根据店铺名称查询">
+              </ng-select>
             </div>
           </div>
         </div>

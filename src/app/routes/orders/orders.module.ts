@@ -49,6 +49,7 @@ import {StoreReceivedComponent} from './store-received/store-received.component'
 import {StoreCompleteComponent} from './store-complete/store-complete.component';
 import {StoreCancelComponent} from './store-cancel/store-cancel.component';
 import {StoreOrderService} from './store-order.service';
+import {GoodsService} from '../goods/goods.service';
 
 
 const routes: Routes = [
@@ -237,7 +238,8 @@ const routes: Routes = [
     RefundDetailComponent,
     PlatformOrderService,
     PlatformPendingComponent,
-    StoreOrderService
+    StoreOrderService,
+    GoodsService
   ]
 })
 export class OrdersModule {
