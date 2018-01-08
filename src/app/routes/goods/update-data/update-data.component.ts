@@ -10,24 +10,25 @@ declare var $: any;
   styleUrls: ['./update-data.component.scss']
 })
 export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
-  @Input('showUpdateWindow') showUpdateWindow: boolean;
-  @Input('name') name: string;
-  @Input('val') val:any;
-  @Input('id') id:string;
-  public valStr: string='';
+  @Input('showUpdateWindow') showUpdateWindow: boolean;//是否显示修改弹窗
+  @Input('name') name: string;//属性名称
+  @Input('val') val:any;//属性值（所有）
+  @Input('id') id:string;//商品id
+  public valStr: string='';//每个属性值
 
   @Input() selTypeData: any; //选中的商品分类
   @Output() upDate = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
-    this.valStr='';
-    if(!isUndefined(this.val) && this.val.length > 0){
-      for(let i = 0; i < this.val.length; i ++){
-        this.valStr += this.val[i].enumValue +',';
-        this.valStr = this.valStr.substring(0,this.valStr.length-1) + ",";
+    let me=this;
+    me.valStr='';
+    if(!isUndefined(me.val) && me.val.length > 0){
+      for(let i = 0; i < me.val.length; i ++){
+        me.valStr += me.val[i].enumValue +',';
+        me.valStr = me.valStr.substring(0,me.valStr.length-1) + ",";
       }
     }
     if (changes['showUpdateWindow']) {
-      if(this.showUpdateWindow) $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 100);
+      if(me.showUpdateWindow) $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 100);
       else $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 10);
     }
   }
@@ -46,9 +47,9 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
   hideWindow(type?: string) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
-    this.showUpdateWindow = false;
+    me.showUpdateWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.upDate.emit(type)
+    me.upDate.emit(type)
   }
 
 

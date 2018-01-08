@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {isNullOrUndefined, isUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
-import {BasicPropertiesComponent} from "../basic-properties/basic-properties.component";
 import {AppComponent} from "../../../app.component";
 import {AddDataService} from "./add-data.service";
 import {ActivatedRoute} from "@angular/router";
@@ -14,13 +13,13 @@ declare var $: any;
   providers: [AddDataService]
 })
 export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
-  @Input('showAddWindow') showAddWindow: boolean;
+  @Input('showAddWindow') showAddWindow: boolean;//弹窗是否显示
   @Input() selTypeData: any; //选中的商品分类
   @Output() addData = new EventEmitter();
-  public selData:any;
+  public selData:any;//选中的商品值
+  public kindId: any;//选中的商品kindId
+  public level:any;//选中的商品等级
 
-  public kindId: any;
-  public level:any
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showAddWindow']) {
@@ -33,8 +32,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
     $('.wrapper > section'&& '.wrapper > footer ').css('z-index', 10);
   }
 
-  constructor(public submit: SubmitService, public basicPropertiesComponent: BasicPropertiesComponent,
-              public addDataService: AddDataService, public routeInfo: ActivatedRoute, public goods: GoodsService) {
+  constructor(public submit: SubmitService, public addDataService: AddDataService, public routeInfo: ActivatedRoute, public goods: GoodsService) {
   }
 
   ngOnInit() {
@@ -48,9 +46,9 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   hideWindow(type?: string) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
-    this.showAddWindow = false;
+    me.showAddWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.addData.emit(type)
+    me.addData.emit(type)
   }
 
   /*
@@ -62,7 +60,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
     if (this.level==3) {
       let url = '/goodsEnum/addGoodsBaseEnum';
       let data = {
-        kindId: this.kindId,
+        kindId: _this.kindId,
         name: obj.name,
         vals: obj.vals
       }
@@ -70,7 +68,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
       if (result == "请选择三级分类" || result=="") {
         return;
       } else {
-        this.hideWindow("success");
+        _this.hideWindow("success");
       }
     } else {
       AppComponent.rzhAlt("error", "请选择三级分类");
@@ -80,7 +78,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
   getKind(data) {
     this.kindId = data.kindId;
     this.level=data.level;
-    this.selData=data
+    this.selData=data;
   }
 
 }
