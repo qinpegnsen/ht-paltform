@@ -70,11 +70,13 @@ export class StaticsComponent implements OnInit {
       let start = new Date(ele.split('~')[0]).getDate();
       let end = new Date(ele.split('~')[1]).getDate();
       let now = new Date().getDate();
-      if (now > start && now < end) {
+      if (start< now&&now < end) {
         _this.select.week = ele;
       } else if (now == start || now == end) {
         _this.select.week = ele;//获取默认周
-      }else if (now > start || now > end) {//两个月的交界处
+      }else if ((start<now&&now>end)&&(Math.abs(start-end)!=6)) {//两个月的交界处 28  29  3
+        _this.select.week = ele;//获取默认周
+      }else if(start>now&&now<end&&(Math.abs(start-end)!=6)){//两个月的交界处 28 3 2
         _this.select.week = ele;//获取默认周
       }
     });
