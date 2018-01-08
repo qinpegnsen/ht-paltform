@@ -8,7 +8,6 @@ import {SharedModule} from "../../shared/shared.module";
 import {AfterDetailsComponent} from './after-details/after-details.component';
 import {AddproblemComponent} from './addproblem/addproblem.component';
 import {AfterService} from "./after.service";
-import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrdersService} from "../orders/orders/orders.service";
 import {StoreRefundComponent} from "./store-refund/store-refund.component";
 import {StoreReturnComponent} from "./store-return/store-return.component";
@@ -20,20 +19,16 @@ const routes: Routes = [
   {path: 'enterprise', children: [
     {path: 'storeRefundMan', component: StoreRefundComponent, children: [
       {path: 'after-details', component: AfterDetailsComponent},
-      {path: 'order-details', component: OrderDetailComponent}
     ]},
     {path: 'storeReturnMan', component: StoreReturnComponent, children: [
       {path: 'after-details', component: AfterDetailsComponent},
-      {path: 'order-details', component: OrderDetailComponent}
     ]}
   ]},
   {path: 'refund-control', component: RefundControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
-    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'return-control', component: ReturnControlComponent, children: [
     {path: 'after-details', component: AfterDetailsComponent},
-    {path: 'order-details', component: OrderDetailComponent}
   ]},
   {path: 'msg', component: MsgComponent, children: problemcomplem},
 ];
@@ -48,7 +43,6 @@ const routes: Routes = [
     ReturnControlComponent,
     MsgComponent,
     AfterDetailsComponent,
-    OrderDetailComponent,
     AddproblemComponent,
     StoreRefundComponent,
     StoreReturnComponent],
