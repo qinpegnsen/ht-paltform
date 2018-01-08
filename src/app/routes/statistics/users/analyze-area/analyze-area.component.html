@@ -55,10 +55,10 @@
       </div>
     <!--</div>-->
     <div  class=" panel w100 m0 mt-lg">
-      <ul class="clearfix p0">
-        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">下单金额</li>
-        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCOUNT'" (click)="qeuryAll('ORDCOUNT')">下单数量</li>
-        <li class="w33 text-center cursor-p pull-left order-count" [class.qh]="queryContent=='ORDCUSTCOUNT'" (click)="qeuryAll('ORDCUSTCOUNT')">下单会员数</li>
+      <ul class="clearfix p0 w95 m-auto">
+        <li class="w33 text-center cursor-p pull-left order-count" [ngClass]="{'qh':queryContent=='ORDSUM','bqh':queryContent!='ORDSUM'}" (click)="qeuryAll('ORDSUM')">下单金额</li>
+        <li class="w33 text-center cursor-p pull-left order-count" [ngClass]="{'qh':queryContent=='ORDCOUNT','bqh':queryContent!='ORDCOUNT'}"(click)="qeuryAll('ORDCOUNT')">下单数量</li>
+        <li class="w33 text-center cursor-p pull-left order-count" [ngClass]="{'qh':queryContent=='ORDCUSTCOUNT','bqh':queryContent!='ORDCUSTCOUNT'}"  (click)="qeuryAll('ORDCUSTCOUNT')">下单会员数</li>
       </ul>
     </div>
     <div class="panel w98 m-auto">

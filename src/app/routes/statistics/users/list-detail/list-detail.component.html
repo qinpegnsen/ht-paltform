@@ -51,17 +51,17 @@
            <span  *ngIf="member.authState=='AUTH'">
              <i class="icon icon-user-following gold-star " title="已实名认证"></i>&nbsp;
            </span>
-            <span *ngIf="member.authState!='AUTH'" class="custName" style="">
+            <span *ngIf="member.authState!='AUTH'" class="custName">
            </span>
             {{member.custName}}
           </td>
-          <td>{{member.custTruename}}</td>
+          <td [ngClass]="{'font-gray':!member.custTruename}">{{member.custTruename || '【未填写】'}}</td>
           <td>
             {{member.custSex | rzhState:'1002' }}
           </td>
           <td>{{member.coin}}</td>
-          <td>{{member.areaName}}</td>
-          <td>{{member.custBirthday}}</td>
+          <td [ngClass]="{'font-gray':!member.areaName}">{{member.areaName || '【未填写】'}}</td>
+          <td [ngClass]="{'font-gray':!member.custBirthday}">{{member.custBirthday || '【未填写】'}}</td>
           <td>{{member.custPhone}}</td>
           <td>
             {{member.isMember | rzhState:'1004'}}

@@ -47,7 +47,6 @@ export class AnalyzeAreaComponent implements OnInit {
   }
 
   ngOnInit() {
-
     let _this = this;
     _this.queryTypes = this.tools.getEnumDataList('1401');   //时间状态枚举列表
     _this.queryContents = this.tools.getEnumDataList('1402');   //内容状态枚举列表
@@ -58,10 +57,6 @@ export class AnalyzeAreaComponent implements OnInit {
   public getOption(maxs) {
     let _this = this;
     _this.option = {
-      title: {
-        text: '下单金额区域分析',
-        left: 'center'
-      },
       tooltip: {
         trigger: 'item'
       },

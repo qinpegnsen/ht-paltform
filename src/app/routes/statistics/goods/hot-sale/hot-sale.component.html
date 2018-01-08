@@ -54,13 +54,12 @@
   </div>
   <!--图表切换-->
   <div class=" panel w100 m0">
-    <ul class="clearfix p0">
-      <li class="w50 text-center cursor-p pull-left" [class.qh]="queryContent=='ORDSUM'" (click)="qeuryAll('ORDSUM')">
-        下单金额
-      </li>
-      <li class="w50 text-center cursor-p pull-left" [class.qh]="queryContent=='ORDCOUNT'"
-          (click)="qeuryAll('ORDCOUNT')">下单商品数
-      </li>
+    <ul class="clearfix p0 w95 m-auto">
+      <li class="w50 text-center cursor-p pull-left order-count" [ngClass]="{'qh':queryContent=='ORDSUM','bqh':queryContent!='ORDSUM'}"
+          (click)="qeuryAll('ORDSUM')">下单金额</li>
+      <li class="w50 text-center cursor-p pull-left order-count"
+          [ngClass]="{'qh':queryContent=='ORDCOUNT','bqh':queryContent!='ORDCOUNT'}"
+          (click)="qeuryAll('ORDCOUNT')">下单商品数</li>
     </ul>
   </div>
 
