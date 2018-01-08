@@ -57,7 +57,6 @@ export class RefundComponent implements OnInit {
    */
   getMonth() {
     let _this = this, ret: string = null;
-    if(_this.select.month<("0"+"10")) _this.select.month='0'+_this.select.month ,_this.select.month=_this.select.month;
     if (!_this.select || isNullOrUndefined(_this.select.year) || _this.select.year == "") {
       AppComponent.rzhAlt("error", "年份必选");
     }
@@ -72,7 +71,7 @@ export class RefundComponent implements OnInit {
   search() {
     let _this = this;
     _this.select.year = new Date().getFullYear();//获取默认年
-    _this.select.month = new Date().getMonth() + 1;//获取默认月
+    _this.select.month = '0'+(new Date().getMonth() + 1);//获取默认月
     _this.getWeekListByMonth();
     if (_this.queryType == "MONTH") _this.showType = {DAY: false, WEEK: false, MONTH: true};
     else if (_this.queryType == "WEEK") _this.showType = {DAY: false, WEEK: true, MONTH: false};

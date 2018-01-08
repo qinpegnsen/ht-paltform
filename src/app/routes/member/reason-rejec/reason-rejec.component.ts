@@ -5,6 +5,7 @@ import {CertificationComponent} from "../certification/certification.component";
 import {ReasonRejecService} from "./reason-rejec.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 declare var $: any;
+const swal = require('sweetalert');
 @Component({
   selector: 'app-reason-rejec',
   templateUrl: './reason-rejec.component.html',
@@ -70,14 +71,26 @@ export class ReasonRejecComponent implements OnInit {
    */
   access(id) {
     let me = this;
-    let url = '/custAuthInfo/updateState';
-    let data = {
-      id: id,
-      state: 'PASS',
-    }
-    me.submit.putRequest(url, data);
-    me.hideWindow("success");
-    me.certificationComponent.aqeuryAll('AUDIT', me.curPage);
+    swal({
+        title: '您确认审核通过吗？',
+        type: 'info',
+        confirmButtonText: '确认', //‘确认’按钮命名
+        showCancelButton: true, //显示‘取消’按钮
+        cancelButtonText: '取消', //‘取消’按钮命名
+        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
+      },
+      function () {  //点击‘确认’时执行
+        swal.close(); //关闭弹框
+        let url = '/custAuthInfo/updateState';
+        let data = {
+          id: id,
+          state: 'PASS',
+        }
+        me.submit.putRequest(url, data);
+        me.hideWindow("success");
+        me.certificationComponent.aqeuryAll('AUDIT', me.curPage);
+      }
+    );
   }
 
   /*

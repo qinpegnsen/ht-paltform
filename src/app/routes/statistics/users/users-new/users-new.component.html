@@ -1,13 +1,13 @@
 <div *ngIf="this.flag">
 
   <div class="content-heading mb-lg thc font">
-    新增会员
+    新增用户
   </div>
   <div class="panel mb p ts m-auto thc user-top">
     <p class="font18">操作提示</p>
     <ul>
-      <li>统计图展示了时间段内新增会员数的走势和与前一时间段的对比</li>
-      <li>统计表展示了时间段内新增会员数值和与前一时间段的同比数值，点击每条记录后的“查看”，了解新增会员的详细信息</li>
+      <li>统计图展示了时间段内新增用户数的走势和与前一时间段的对比</li>
+      <li>统计表展示了时间段内新增用户数值和与前一时间段的同比数值，点击每条记录后的“查看”，了解新增用户的详细信息</li>
     </ul>
   </div>
 
@@ -61,7 +61,7 @@
   </div>
 
   <div class="panel mt20">
-  <div class="table-title w100 h50 font18 thc statics-font">新增会员统计表</div>
+  <div class="table-title w100 h50 font18 thc statics-font">新增用户统计表</div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
@@ -88,15 +88,15 @@
       </thead>
       <tbody>
       <tr class="text-center" *ngFor="let item of prevData.yaxis;let i = index;">
-        <td class="">{{prevData.keys[i]}}</td>
+        <td class="">{{nowData.keys[i]}}</td>
         <td class="">{{item}}</td>
         <td class="">{{nowData.yaxis[i]}}</td>
         <td class="">
           <span (click)="details(prevData.keys[i],i)" class=" btn btn-green src">
             <i class="fa fa-search-plus">&nbsp;&nbsp;</i>
-            <span *ngIf="showType.DAY">查看当天</span>
-            <span *ngIf="showType.WEEK">查看本周</span>
-            <span *ngIf="showType.MONTH">查看本月</span>
+            <span *ngIf="showType.DAY">当前时段</span>
+            <span *ngIf="showType.WEEK">查看当天</span>
+            <span *ngIf="showType.MONTH">查看当天</span>
           </span>
         </td>
       </tr>

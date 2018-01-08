@@ -18,7 +18,6 @@ export class MeasureComponent implements OnInit {
   public updatebuttons: Object;//修改按钮
   public deletebuttons: Object;//删除按钮
   public data: Page = new Page();
-public isSpecial:boolean=true;
   constructor(public ajax: AjaxService,public measureService: MeasureService,public submit: SubmitService) { }
 
   ngOnInit() {

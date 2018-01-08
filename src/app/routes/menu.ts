@@ -407,17 +407,17 @@ const statistics = {
       ]
     },
     {
-      text: '会员统计',
+      text: '用户统计',
       icon: 'fa fa-users',
       alert: '▼',
       link: '/main/stat/users',
       submenu: [
         {
-          text: '新增会员',
+          text: '新增用户',
           link: '/main/stat/users-new'
         },
         {
-          text: '会员分析',
+          text: '用户分析',
           link: '/main/stat/analyze-users'
         },
         {
