@@ -79,7 +79,9 @@ export class RecordComponent implements OnInit {
    * 校验输入的面额值
    */
   getValue(value,val){
-    if(!value.valid||val.value<0||val.value.slice(0,1)==0){
+    if(val.value===''){
+      return;
+    }else  if(!value.valid||val.value<0||val.value.slice(0,1)==0){
       AppComponent.rzhAlt("info", '请输入0或者正整数');
     }
   }
