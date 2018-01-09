@@ -131,7 +131,7 @@ export class UsersNewComponent implements OnInit {
     let _this = this;
     _this.optionPrev = {
       title: {
-        text: '新增会员统计',
+        text: '新增用户统计',
         left: "47%",
       },
       legend: {
