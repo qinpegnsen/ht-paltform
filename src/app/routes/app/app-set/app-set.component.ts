@@ -14,6 +14,7 @@ declare var $;
   templateUrl: './app-set.component.html',
   styleUrls: ['./app-set.component.scss']
 })
+
 export class AppSetComponent implements OnInit {
   public items;//获取首页选中模板列表
   public indexTpls: Array<any> = new Array();//选中效果模板ID

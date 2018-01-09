@@ -61,5 +61,4 @@ public getOrderState(ordno) {
     let expressData = this.submit.getData(url, data);
     if (!isNullOrUndefined(expressData)) return expressData;
   }
-
 }

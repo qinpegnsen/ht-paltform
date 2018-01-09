@@ -22,10 +22,14 @@
         <div class="w100 pl-sm pr0 pull-left">
           <div class="form-group mb0 pr0">
             <div class="w100 pl0 pr0 pull-left">
-              <select class="form-control" name="agentList" [(ngModel)]="agentCode">
-                <option value="">请选择代理商名称查询</option>
-                <option *ngFor="let item of agentList" [value]="item.agentCode">{{item.agentName}}</option>
-              </select>
+              <ng-select [allowClear]="true"
+                         [items]="items"
+                         (data)="refreshValue($event)"
+                         (selected)="selected($event)"
+                         (removed)="removed($event)"
+                         (typed)="typed($event)"
+                         placeholder="根据代理商名称查询">
+              </ng-select>
             </div>
           </div>
         </div>

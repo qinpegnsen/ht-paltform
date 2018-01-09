@@ -26,6 +26,10 @@ export class PlatformReceivedComponent implements OnInit {
   public LogisticsData: any;//物流信息
   public showList: boolean = true;     //是否显示列表页
   public bsConfig: Partial<BsDatepickerConfig>;
+  public agentsCode:string;              //获取选择的企业的编码
+  private value:any = {};
+  public agentsList:any=new Array;        //获取正常状态企业列表
+  public items:Array<string> = new Array();
 
   constructor(public platformOrderService: PlatformOrderService, public submit: SubmitService) {
 
@@ -35,6 +39,58 @@ export class PlatformReceivedComponent implements OnInit {
     let me = this;
     me.queryDatas(1);
     me.querySoterLists();
+    this.getAgentList();//获取代理商的列表
+  }
+
+  /**
+   * 获取选择的企业的信息
+   * @param value
+   */
+  public selected(value:any):void {
+    this.agentsCode=value.id;
+  }
+
+  /**
+   * 输入框的值
+   * @param value
+   */
+  public typed(value:any):void {
+  }
+
+  /**
+   * 删除信息
+   * @param value
+   */
+  public removed(value:any):void {
+    this.agentsCode='';
+  }
+
+  /**
+   * 刷新的值
+   * @param value
+   */
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
+
+  /**
+   * 获取代理商的列表
+   */
+  getAgentList(){
+    let url = "/agent/queryAll";
+    let data = {};
+    let result = this.submit.getData(url, data);
+    if (result) {
+      for(let i=0;i<result.length;i++){
+        let obj;
+        obj={
+          id:result[i].agentCode,
+          text:result[i].agentName
+        };
+        this.agentsList.push(obj);
+      };
+      this.items=this.agentsList
+    }
   }
 
   /**
@@ -93,7 +149,7 @@ export class PlatformReceivedComponent implements OnInit {
       phone: _this.phone,
       ordno: _this.ordno,
       ordState:'DELIVERY',
-      agentCode: _this.agentCode,
+      agentCode: _this.agentsCode,
       isPlatCarry:_this.isPlatCarry
     };
     let requestUrl = '/ord/queryPlantOrd';
