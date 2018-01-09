@@ -1,0 +1,37 @@
+<div>
+  <ng-container *ngIf="!multiple">
+    <input class="form-control" type="text"
+           [placeholder]="placeholder"
+           [value]="checkedItem?checkedItem[0][textKey]:null" (focus)="showSearchBox()"/>
+  </ng-container>
+  <ng-container *ngIf="multiple">
+    <ul class="checked-item">
+      <li *ngFor="let item of checkedItem"
+          [ngClass]="{'selected':item.selected}"
+          (click)="emitResult(item)">{{item[textKey]}}</li>
+    </ul>
+    <input class="w100" type="text"
+           [placeholder]="placeholder"
+           [value]="checkedItem?checkedItem[textKey]:null" (focus)="showSearchBox()"/>
+  </ng-container>
+</div>
+<div class="search-box" *ngIf="showWindow">
+  <div class="mask"></div>
+  <div class="search-body">
+    <div class="close" (click)="hideSearchBox()">×</div>
+    <div class="search-area">
+      <div class="search-input">
+        <input class="form-control" name="search" autofocus
+               [(ngModel)]="searchText"
+               placeholder="输入关键字筛选"
+               (keyup)="matchResult()" type="text">
+      </div>
+      <button class="btn btn-sm thc btn-thc" (click)="matchResult()">搜索</button>
+    </div>
+    <ul class="search-result">
+      <li *ngFor="let item of data"
+          [ngClass]="{'selected':item.selected}"
+          (click)="emitResult(item)">{{item[textKey]}}</li>
+    </ul>
+  </div>
+</div>

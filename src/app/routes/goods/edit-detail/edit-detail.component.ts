@@ -226,7 +226,7 @@ export class EditDetailComponent implements OnInit {
     if (me.path == 'step_two') {
       me.getExpressTpl();
       me.goodsBaseCode = pageData.goodsBaseCode;  // 商品基本编码
-      me.allStores.active = [{id: me.publishData.storeCode, text: me.publishData.storeName}];//默认自营店
+      // me.allStores.active = [{id: me.publishData.storeCode, text: me.publishData.storeName}];//默认自营店
     }
     if (me.path != 'step_two') {
       me.goodsEditData = pageData.goodsSave;

@@ -15,10 +15,18 @@
       <dt class="col-xs-2"><i class="main-red">*</i>所属店铺：</dt>
       <dd class="col-xs-10 col-md-8">
         <div class="w50">
-          <ng-select [items]="stores" class="p0" #allStores required
+          <!--<ng-select [items]="stores" class="p0" #allStores required
                      (selected)="selectedStore($event)" [hidden]="path=='edit'"
                      placeholder="根据店铺名称查询">
-          </ng-select>
+          </ng-select>-->
+          <app-search [data]="stores"
+                      [idKey]="'id'"
+                      [textKey]="'text'"
+                      [defaultId]="publishData.storeCode"
+                      [placeholder]="'根据店铺名称查询'"
+                      (selected)="selectedStore($event)"
+                      [hidden]="path=='edit'">
+          </app-search>
           <span [hidden]="path!='edit'">{{publishData.storeName}}</span>
         </div>
       </dd>
