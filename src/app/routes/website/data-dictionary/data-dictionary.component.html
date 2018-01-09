@@ -1,6 +1,6 @@
 <div class="content-heading mb-lg thc font">
   数据字典列表
-  <app-buttons class="pull-right" [config]="addButton" routerLink="adddata"></app-buttons>
+  <app-buttons class="pull-right" [config]="addButton" routerLink="adddata" *ngIf="childMenuTitList.length < 1"></app-buttons>
 </div>
 <div class="panel">
   <div class="mb" *ngIf="childMenuTitList.length < 1">

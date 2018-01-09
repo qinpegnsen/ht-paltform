@@ -6,7 +6,6 @@ import {DataDictionaryComponent} from "../data-dictionary/data-dictionary.compon
 import {isNullOrUndefined} from "util";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {MeasureComponent} from "../measure/measure.component";
-import {cli} from "webdriver-manager/built/lib/webdriver";
 import {PatternService} from "../../../core/forms/pattern.service";
 
 @Component({
@@ -42,14 +41,14 @@ export class AdddataComponent implements OnInit {
   ngOnInit() {
     //路由中获取对应参数
     let _this = this;
-    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
-    _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
+    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];//获取分页
+    _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];//获取操作类型
     _this.acParentId = _this.routeInfo.snapshot.queryParams['acParentId'];
-    _this.code = _this.routeInfo.snapshot.queryParams['code'];
+    _this.code = _this.routeInfo.snapshot.queryParams['code'];//获取key的code
     _this.keyName = _this.routeInfo.snapshot.queryParams['key'];
     _this.keys = _this.routeInfo.snapshot.queryParams['keys'];
-    _this.typeCode = _this.routeInfo.snapshot.queryParams['typeCode'];
-    _this.id = _this.routeInfo.snapshot.queryParams['id'];
+    _this.typeCode = _this.routeInfo.snapshot.queryParams['typeCode'];//获取code
+    _this.id = _this.routeInfo.snapshot.queryParams['id'];//获取id
     if (_this.linkType == "updateSort") {//数据字典--若为修改操作,获取信息
       if (isNullOrUndefined(_this.typeCode)) _this.updataData = _this.sub.getData("/datadict/loadDatadictType", {code: _this.code}); //获取数据字典key
       else _this.updataData = _this.sub.getData("/datadict/loadDatadictByCode", {code: _this.code}); //获取数据字典val

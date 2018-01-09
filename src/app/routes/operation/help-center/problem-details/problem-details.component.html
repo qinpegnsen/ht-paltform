@@ -11,7 +11,7 @@
           <th class="w10 text-center">
             <rzhDefaultSorter by="sort">序号</rzhDefaultSorter>
           </th>
-          <th class="w20 text-left">
+          <th class="w28 text-left">
             <rzhDefaultSorter by="answer">问题</rzhDefaultSorter>
           </th>
           <th class="w10 text-center">
@@ -20,7 +20,7 @@
           <th class="w20 text-center">
             <rzhDefaultSorter by="creattime">创建时间</rzhDefaultSorter>
           </th>
-          <th class="w15 text-center">
+          <th class="w7 text-center">
             <rzhDefaultSorter by="creattime">排序</rzhDefaultSorter>
           </th>
           <th class="w25 text-center">
@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr  *ngFor="let a of dataTable.data;let i=index" style="list-style: none"  class="text-center" >
+        <tr  *ngFor="let a of dataTable.data;let i=index"  class="text-center ls" >
           <td>{{i+1}}</td>
           <td [innerHtml]="a.question" class="text-left"></td>
           <td>
@@ -55,7 +55,7 @@
               <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
             </div>
             <div class="col-sm-7">
-              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+              <div class="pull-right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
             </div>
           </td>
         </tr>

@@ -1,6 +1,6 @@
 <!--数据字典--添加类型key-->
 <div class="rightpage">
-  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
+  <form class="form-validate form-horizontal"  #addForm="ngForm">
     <!-- START panel-->
     <div>
       <div class="panel-body">
@@ -77,7 +77,7 @@
 
 <!--数据字典--修改数据字典key-->
 <div class="rightpage"  *ngIf="linkType=='updateSort'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addForm="ngForm">
+  <form class="form-validate form-horizontal" #addForm="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -128,7 +128,7 @@
 
 <!--数据字典--添加子菜单-->
 <div class="rightpage" *ngIf="linkType=='addChildSort'">
-  <form class="form-validate form-horizontal" style="height: 100%" #addChildClass="ngForm">
+  <form class="form-validate form-horizontal" #addChildClass="ngForm">
     <!-- START panel-->
     <div class="">
       <div class="panel-body">
@@ -177,7 +177,7 @@
 
 <!--计量单位--修改-->
 <div class="rightpage" *ngIf="linkType=='updateCount'">
-  <form class="form-validate form-horizontal" style="height: 100%"   #res="ngForm">
+  <form class="form-validate form-horizontal"  #res="ngForm">
     <!-- START panel-->
     <div class="panel-default">
       <div class="panel-body">
@@ -226,7 +226,7 @@
 
 <!--计量单位--添加-->
 <div class="rightpage"  *ngIf="linkType=='addCount'">
-  <form class="form-validate form-horizontal" style="height: 100%" #res="ngForm">
+  <form class="form-validate form-horizontal" #res="ngForm">
     <!-- START panel-->
     <div class="">
       <div class="panel-body">

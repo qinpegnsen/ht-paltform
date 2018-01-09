@@ -18,17 +18,13 @@ export class HelpInterlocutionComponent implements OnInit {
   public updatebutton: Object;//修改按钮
   public deletebutton: Object;//删除按钮
   public seebutton: Object;//查看按钮
-  public queryId:any;
-  public data: Page = new Page();
-
+  public data: Page = new Page();//查询到的帮助分类
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+
   constructor(public ajax: AjaxService,public submit: SubmitService,public router:Router,public routeInfo:ActivatedRoute) { }
 
   ngOnInit() {
-
     let me = this;
-    me.queryId = me.routeInfo.snapshot.queryParams['id'];
-
     //按钮配置
     me.addButton = {
       type: "add-thc",
@@ -51,7 +47,7 @@ export class HelpInterlocutionComponent implements OnInit {
       title: "查看",
       type: "details"
     };
-    this.qeuryAllService(1);
+    me.qeuryAllService(1);
   }
 
   /**
@@ -69,7 +65,7 @@ export class HelpInterlocutionComponent implements OnInit {
       curPage: activePage,
       pageSize:10,
     }
-    let result = this.submit.getData(url,data);
+    let result = me.submit.getData(url,data);
     me.data = new Page(result);
   }
 
@@ -79,7 +75,7 @@ export class HelpInterlocutionComponent implements OnInit {
   startState(data) {
     if (data.state == "HIDE") data.state = "SHOW"; else data.state = "HIDE";
     let url = "/helpKind/updateHelpKindState", _this = this;
-    this.ajax.put({
+    _this.ajax.put({
       url: url,
       data: {
         'id': data.id,

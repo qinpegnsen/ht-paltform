@@ -17,22 +17,22 @@ declare var $: any;
   providers:[HelpAnswerComponent]
 })
 export class HelpUpdateComponent implements OnInit {
-  public contents: string;
-  public linkType:string;
-  public kinds:any;
-  public b:any;
-  public operation:any;
-  public kindid: number;
-  public curPage:any;
+  public contents: string;//文本编辑器的内容
+  public linkType:string;//获取地址栏的参数
+  public kinds:any;//获取要修改的问题分类
+  public b:any;//要修改的问题的内容
+  public operation:any;//修改后的值
+  public kindid: number;//要修改的问题的id
+  public curPage:any;//获取到页码
   constructor(public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,
               public submitt: SubmitService, public tools: RzhtoolsService,public location: Location,public operationService:OperationService,public patterns:PatternService, public route: ActivatedRoute,
               public helpAnswerComponent:HelpAnswerComponent) { }
 
   ngOnInit() {
     let me = this;
-    me.kindid = me.routeInfo.snapshot.queryParams['id'];
-    me.curPage = this.routeInfo.snapshot.queryParams['curPage'];
-    sessionStorage.setItem('curPage',me.curPage)
+    me.kindid = me.routeInfo.snapshot.queryParams['id'];//要修改的问题的id
+    me.curPage = this.routeInfo.snapshot.queryParams['curPage'];//获取到页码
+    sessionStorage.setItem('curPage',me.curPage);
     me.linkType = me.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {

@@ -1,8 +1,9 @@
 
 <div class="content-heading mb-lg thc font">
   帮助问答（修改）
+  <span class="page-back btn btn-thc btn-circle fa fa-mail-reply" (click)="back()"></span>
 </div>
-<form class="form-validate" style="height: 100%"  #res="ngForm">
+<form class="form-validate" #res="ngForm">
   <div class="panel">
     <div class="panel-body help-center-width">
       <div class="select">
@@ -36,7 +37,7 @@
             </p>
             <p class="pull-right w89">
             <td class="w100 pull-left">
-              <div class="col-sm-9" style="margin-left: -15px">
+              <div class="col-sm-9 ml-d15" >
                 <div id="summernote" class="summernote"></div>
               </div>
             </td>

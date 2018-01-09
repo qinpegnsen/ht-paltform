@@ -9,7 +9,7 @@
       <div class="" >
         <span class="pull-left lh ml-lg">问题分类：</span>
           <span class="col-sm-2">
-             <select class="form-control" [(ngModel)]="kindId"  name="kindId"  (change)="searchdata($event)">
+             <select class="form-control" [(ngModel)]="kindId"  name="kindId"  (change)="qeuryAllService(1,$event)">
                 <option value="">全部</option>
                  <option *ngFor="let help of kinds" [value]="help.id">{{help.kindName}}</option>
              </select>
@@ -20,10 +20,10 @@
       <span class="label-width pull-left text-right mb0 lh">问题：</span>
         <div  class="search-help">
         <input type="text" [(ngModel)]="searchkey" class="form-control border-b-grey"
-        (change)="searchdata($event)" placeholder="请输入问题">
+        (change)="qeuryAllService(1,$event)" placeholder="请输入问题">
     </div>
     <!--<div class="  text-center">-->
-        <button type="button" title="搜索" id="toSearch" (click)="searchdata($event)"
+        <button type="button" title="搜索" id="toSearch" (click)="qeuryAllService(1,$event)"
         class="btn thc btn-thc bar-h3-btn mr ng-scope ml-lg">
         <em class="icon-magnifier"></em><span>&nbsp;&nbsp;搜索</span>
         </button>
@@ -82,7 +82,7 @@
               <div class="text-muted"><strong>第 {{data.genStartRow()}} 至 {{data.genEndRow()}} 条，共 {{data.totalRow}} 条</strong></div>
             </div>
             <div class="col-sm-7">
-              <div style="float: right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
+              <div class="pull-right"><rzhBootstrapPaginator></rzhBootstrapPaginator></div>
             </div>
           </td>
         </tr>

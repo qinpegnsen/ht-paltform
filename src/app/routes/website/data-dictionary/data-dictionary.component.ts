@@ -181,8 +181,8 @@ export class DataDictionaryComponent implements OnInit {
   startState(data) {
     if (data.enable == "Y") data.enable = "N"; else data.enable = "Y";
     let url = "/datadict/updateEnable", _this = this;
-    if (_this.childMenuTitList.length < 1) url = "/datadict/updateTypeEnable"; //修改数据字典key
-    this.ajax.put({
+    if (_this.childMenuTitList.length < 1) url = "/datadict/updateTypeEnable"; //修改数据字典key状态
+    _this.ajax.put({
       url: url,
       data: {
         'code': data.code,

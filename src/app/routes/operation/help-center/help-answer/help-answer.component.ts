@@ -19,10 +19,11 @@ export class HelpAnswerComponent implements OnInit {
   public addButton;//添加按钮
   public updatebutton: Object;//修改按钮
   public deletebutton: Object;//删除按钮
-  public kinds: string = '';
-  public kindId: string='';
-  public searchkey: string = '';
+  public kinds: string = '';//获取到的分类
+  public kindId: string='';//获取到帮助问题的id
+  public searchkey: string = '';//帮助分类的问题
   public flag:boolean=true;//定义boolean值用来控制内容组件是否显示
+
   constructor(public submit: SubmitService,public ajax: AjaxService,public router:Router,public settings: SettingsService,) { }
 
   ngOnInit() {
@@ -41,8 +42,8 @@ export class HelpAnswerComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-      this.qeuryAllService(1);
-      this.qeuryAll();
+    me.qeuryAllService(1);
+    me.qeuryAll();
     /**
      * 路由事件用来监听地址栏的变化
      * 1.当新增文章出现的时候，内容组件隐藏
@@ -65,7 +66,6 @@ export class HelpAnswerComponent implements OnInit {
         }
       });
     // me.kindId = me.kinds[0].id;   //帮助问题默认分类
-
   }
 
   /**
@@ -74,20 +74,6 @@ export class HelpAnswerComponent implements OnInit {
   // ngOnDestroy(){
   //   this.urlChange.unsubscribe()
   // }
-
-  /**
-   * 查找
-   */
-  searchdata(){
-    this.qeuryAllService(1);
-  }
-
-  /**
-   * 查询分类
-   */
-  qeuryAll(){
-    this.kinds = this.submit.getData("/helpKind/queryAll",'');
-  }
 
   /**
    * 帮助分类--查询分页
@@ -123,9 +109,7 @@ export class HelpAnswerComponent implements OnInit {
         'state': data.state
       },
       success: (res) => {
-        if (res.success) {
-          AppComponent.rzhAlt("success", res.info);
-        }
+        if (res.success) AppComponent.rzhAlt("success", res.info);
         else AppComponent.rzhAlt("error","操作失败");
       },
       error: (data) => {
@@ -159,4 +143,10 @@ export class HelpAnswerComponent implements OnInit {
     );
   }
 
+  /**
+   * 查询分类
+   */
+  qeuryAll(){
+    this.kinds = this.submit.getData("/helpKind/queryAll",'');
+  }
 }

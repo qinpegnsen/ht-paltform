@@ -19,16 +19,16 @@ declare var $: any;
 })
 export class HelpAssortmentComponent implements OnInit {
   public contents: string;
-  public linkType:string;
-  public kinds:any;
-  public kindId: string;
-  public curPage:any;
+  public linkType:string;//获取操作类型
+  public kinds:any;//获取所有分类
+  public kindId: string;//获取第一个分类
+  public curPage:any;//获取分页
   constructor(public ajax: AjaxService,public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,public submitt: SubmitService, public tools: RzhtoolsService,public operationService: OperationService,public patterns:PatternService) { }
 
   ngOnInit() {
     let me=this;
-    me.linkType = me.routeInfo.snapshot.queryParams['linkType'];//获取地址栏的参数
-    me.curPage = me.routeInfo.snapshot.queryParams['curPage'];
+    me.linkType = me.routeInfo.snapshot.queryParams['linkType'];//获取操作类型
+    me.curPage = me.routeInfo.snapshot.queryParams['curPage'];//获取分页
     // 调用富文本编辑器，初始化编辑器
     setTimeout(() => {
       $('#summernote').summernote({
@@ -64,7 +64,7 @@ export class HelpAssortmentComponent implements OnInit {
       });
       me.kindId = me.kinds[0].id;//默认选中第一个帮助分类
     }, 0);
-    this.qeuryAllService();
+    me.qeuryAllService();
   }
 
   /**

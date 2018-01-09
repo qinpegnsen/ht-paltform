@@ -11,10 +11,10 @@ import {PatternService} from "../../../../core/forms/pattern.service";
   styleUrls: ['./addrightpage.component.scss']
 })
 export class AddrightpageComponent implements OnInit {
-  public id: number;
-  public linkType: string;
-  public updataDataa: any;
-  public curPage:any;
+  public id: number;//分类的id
+  public linkType: string;//要执行的操作
+  public updataDataa: any;//修改数据
+  public curPage:any;//获取分页
   constructor(public settings: SettingsService, public router: Router, public routeInfo: ActivatedRoute,
               public sub: SubmitService, public submitt: SubmitService,
               public helpInterlocutionComponent:HelpInterlocutionComponent,public patterns:PatternService) {
@@ -22,17 +22,12 @@ export class AddrightpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    /**
-     * 路由中获取对应参数
-     */
     let _this = this;
-    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];
-    _this.id = _this.routeInfo.snapshot.queryParams['id'];
+    _this.curPage = this.routeInfo.snapshot.queryParams['curPage'];//获取分页
+    _this.id = _this.routeInfo.snapshot.queryParams['id'];//获取分类的id
     _this.linkType = _this.routeInfo.snapshot.queryParams['linkType'];
-
     if (_this.linkType == "updateCount") {//分类帮助--若为修改操作,获取信息
       _this.updataDataa = _this.submitt.getData("/helpKind/loadById", {id: _this.id});
-      //console.log(_this.updataDataa)
     }
   }
 

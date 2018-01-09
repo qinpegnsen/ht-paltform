@@ -36,7 +36,7 @@ export class MeasureComponent implements OnInit {
       title: "删除",
       type: "delete"
     };
-    this.qeuryAllService(1)
+    me.qeuryAllService(1)
   }
   //计量单位--查询分页
   qeuryAllService(curPage,event?: PageEvent){
@@ -50,10 +50,8 @@ export class MeasureComponent implements OnInit {
     let data={
       curPage: activePage,
       pageSize:10,
-      sort:'',
-      unitName:'',
     }
-    let result = this.submit.getData(url,data);
+    let result = me.submit.getData(url,data);
      me.data = new Page(result);
   }
 
