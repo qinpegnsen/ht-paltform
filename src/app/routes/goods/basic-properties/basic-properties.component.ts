@@ -9,7 +9,6 @@ const swal = require('sweetalert');
   styleUrls: ['./basic-properties.component.scss'],
 })
 export class BasicPropertiesComponent implements OnInit {
-
   @Input() selType: any; //选中的商品分类
   public addbuttons;//添加按钮
   public updatebuttons: Object;//修改按钮
@@ -17,14 +16,13 @@ export class BasicPropertiesComponent implements OnInit {
   public selectGoodsType:any; //选择的分类信息
 
   public kindList;// 分类列表
-  public kindId:string;
-  public data:any;
-  public showAddWindow:boolean = false;
-  public showUpdateWindow:boolean = false;
+  public kindId:string;//分类id
+  public data:any;//查询到的基本属性
+  public showAddWindow:boolean = false;//是否显示添加弹窗
+  public showUpdateWindow:boolean = false;//是否显示修改弹窗
 
-  public name1:any;
-  public val1:any;
-  public id1:any;
+  public name1:any;//基本属性名称
+  public val1:any;//基本属性值
   constructor( public submit: SubmitService,public goods: GoodsService) { }
 
   ngOnInit() {
@@ -54,7 +52,7 @@ export class BasicPropertiesComponent implements OnInit {
     let _this = this;
     _this.selectGoodsType = data;
     _this.kindId = data.kindId;
-    _this.queryBaseEnumList();
+    _this.queryBaseEnumList();//查询基本属性
   }
 
   /**
@@ -71,6 +69,19 @@ export class BasicPropertiesComponent implements OnInit {
     };
     let result=_this.submit.getData(requestUrl, requestData);
     _this.data = result;
+  }
+
+  /**
+   * 对基本属性进行（拖拽）排序
+   */
+  updateIdx(id,idx){
+    let me = this;
+    let url = "/goodsEnum/updateIdx";
+    let data={
+      id:id,
+      idx:idx,
+    }
+   me.submit.putRequest(url,data);
   }
 
   //删除
@@ -95,12 +106,14 @@ export class BasicPropertiesComponent implements OnInit {
       }
     );
   }
+
   /*
   * 添加弹窗
   * */
   addNewData() {
     this.showAddWindow = true;
   }
+
   /*
   * 修改弹窗
   * */
@@ -109,6 +122,7 @@ export class BasicPropertiesComponent implements OnInit {
     this.val1=val,
     this.showUpdateWindow = true;
   }
+
   /**
    * 发货回调函数
    * @param data
@@ -117,6 +131,7 @@ export class BasicPropertiesComponent implements OnInit {
     this.showAddWindow = false;
     if(data == 'success') this.queryBaseEnumList()
   }
+
   getUpdateResult(data) {
     this.showUpdateWindow = false;
     if(data == 'success') this.queryBaseEnumList()

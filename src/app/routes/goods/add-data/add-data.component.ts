@@ -74,6 +74,7 @@ export class AddDataComponent implements OnInit, OnChanges, OnDestroy {
       AppComponent.rzhAlt("error", "请选择三级分类");
     }
   }
+
   //查询分类
   getKind(data) {
     this.kindId = data.kindId;

@@ -98,7 +98,6 @@ export class HotSaleComponent implements OnInit {
     me.data = result;
     me.nowData = me.data;
     me.optionPrevInfo();
-    // console.log("█ result ►►►",  result);
   }
 
   /**
@@ -173,7 +172,9 @@ export class HotSaleComponent implements OnInit {
         _this.select.week = ele;
       } else if (now == start || now == end) {
         _this.select.week = ele;//获取默认周
-      } else if (now > start || now > end) {//两个月的交界处
+      } else if ((start<now&&now>end)&&(Math.abs(start-end)!=6)) {//两个月的交界处 28  29  3
+        _this.select.week = ele;//获取默认周
+      }else if(start>now&&now<end&&(Math.abs(start-end)!=6)){//两个月的交界处 28 3 2
         _this.select.week = ele;//获取默认周
       }
     });

@@ -28,7 +28,7 @@
         </div>
 
         <div *ngIf="showType.WEEK">
-          <select [(ngModel)]="select.year" class="form-control w21 pull-left mr5">
+          <select [(ngModel)]="select.year" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">
             <option *ngFor="let info of yearInfo" value="{{info}}">{{info}}</option>
           </select>
           <select [(ngModel)]="select.month" (change)="getWeekListByMonth()" class="form-control w21 pull-left mr5">

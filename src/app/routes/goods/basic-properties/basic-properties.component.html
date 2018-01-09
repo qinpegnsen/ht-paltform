@@ -8,7 +8,7 @@
     <li>新增数据可添加一个新的商品属性，编辑该数据可修改其规格名称、以及规格值；商品属性可与商品分类进行绑定，例如：颜色\尺寸\材质...</li>
     <li>商品属性值为该规格的具体属性参数，例如：规格颜色的属性值为-红色\黄色\黑色\白色...</li>
     <li>商品属性值可由平台进行建立，再由商家对已建属性值进行选择；商家也可自行建立自己的属性值，但每项属性的属性值总数不会超过10个</li>
-    <li style="color: red">进行删除属性及属性值操作时，因其有可能已被商家选择，且与商品进行了关联，删除既有的属性及属性值将直接影响前台商品的正常显示，请谨慎操作</li>
+    <li class="red">进行删除属性及属性值操作时，因其有可能已被商家选择，且与商品进行了关联，删除既有的属性及属性值将直接影响前台商品的正常显示，请谨慎操作</li>
   </ul>
 </div>
 <div class="panel ">
@@ -21,7 +21,10 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th class="text-center w25">
+        <th class="text-center w5">
+          <rzhDefaultSorter by="order">序号</rzhDefaultSorter>
+        </th>
+        <th class="text-center w20">
           <rzhDefaultSorter by="order">属性名称</rzhDefaultSorter>
         </th>
         <th class="text-center w50">
@@ -32,9 +35,10 @@
         </th>
       </tr>
       </thead>
-      <tbody dnd-sortable-container [sortableData]="data?.voList">
-      <tr *ngFor="let count of data?.baseTypeList;let i=index" class="text-center tr-border"  dnd-sortable
-          [sortableIndex]="i" >
+      <tbody dnd-sortable-container [sortableData]="data?.baseTypeList">
+      <tr class="text-center tr-border" *ngFor="let count of data?.baseTypeList;let i=index"   dnd-sortable
+          [sortableIndex]="i" (dragend)="updateIdx(count.id,i+1)" >
+      <td >{{i+1}}</td>
       <td >{{count.name}}</td>
       <td >
         <span *ngFor="let val of count.goodsEnumValList">{{val.enumValue}},</span>
