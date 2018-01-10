@@ -11,9 +11,9 @@ const swal = require('sweetalert');
 })
 export class BuyerEvaluationComponent implements OnInit {
 
-  public data: Page = new Page();
+  public data: Page = new Page();//查询评价
   public deletebutton: object;//删除按钮
-  public custName: any;
+  public custName: any;//评价人名称
 
   constructor(public submit: SubmitService) {
 
@@ -26,7 +26,7 @@ export class BuyerEvaluationComponent implements OnInit {
       type: "delete",
       text: '删除'
     };
-    this.qeuryAllService(1);
+    me.qeuryAllService(1);//买家评价查询
   }
 
   /**
@@ -46,9 +46,9 @@ export class BuyerEvaluationComponent implements OnInit {
     let data = {
       curPage: activePage,
       pageSize: 10,
-      custName: this.custName,
+      custName: me.custName,
     }
-    let result = this.submit.getData(url, data);
+    let result = me.submit.getData(url, data);
     me.data = new Page(result);
   }
 

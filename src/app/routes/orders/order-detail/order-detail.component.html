@@ -11,9 +11,9 @@
           </dl>
           <dl>
             <dt>留言：</dt>
-            <dd>
-              <div class="user-note">
-                {{orderDetailData.note}}
+            <dd [ngClass]="{'font-gray':!orderDetailData.note}">
+              <div class="user-note" >
+                {{orderDetailData.note || '【未填写】'}}
               </div>
             </dd>
           </dl>
