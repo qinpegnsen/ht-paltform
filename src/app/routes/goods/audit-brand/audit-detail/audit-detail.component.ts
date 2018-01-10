@@ -8,8 +8,8 @@ import {Location} from "@angular/common";
   styleUrls: ['./audit-detail.component.scss']
 })
 export class AuditDetailComponent implements OnInit {
-  public applyCode: any;//品牌id
-  public result: any;
+  public applyCode: any;//品牌code
+  public result: any;//品牌信息
 
   constructor(public submit: SubmitService,
               public location:Location,
@@ -17,7 +17,7 @@ export class AuditDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.applyCode = this.routeInfo.snapshot.queryParams['applyCode'];
+    this.applyCode = this.routeInfo.snapshot.queryParams['applyCode'];//获取品牌code
     this.qeuryDand();//查询品牌信息
   }
 

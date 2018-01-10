@@ -27,7 +27,7 @@
           <div class="col-md-8 col-xs-6 pl0">
             <input type="text" [(ngModel)]="goodsName"
                    class="form-control border-b-grey"
-                   (change)="search()" placeholder="商品名">
+                   (change)="qeuryAllService(1,$event)" placeholder="商品名">
           </div>
           <button type="button" title="搜索"
                   class="btn thc btn-thc bar-h3-btn mr ng-scope">
@@ -113,7 +113,7 @@
           </div>
           <div [hidden]="batchPrice.valid || batchPrice.pristine"
                class="col-sm-9 text-danger">
-            请填写批发价（最多写两位小数）【填写正确后点击空白区域】
+            批发价最多写(两位小数)[填正确后点击空白区域哦]
           </div>
         </td>
       </tr>

@@ -5,7 +5,7 @@ import {SubmitService} from "../../../core/forms/submit.service";
 import {Page} from "../../../core/page/page";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../../../app.component";
-import {isNullOrUndefined, isUndefined} from "util";
+import {isNull, isNullOrUndefined, isUndefined} from "util";
 import {GoodsService} from "../goods.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
@@ -18,11 +18,11 @@ import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 export class WholesaleComponent implements OnInit {
 
   public data: Page = new Page();
-  public goodsName: any = ''; //商品名
-  public brandName: any = ''; //品牌名
-  public kindId: any = ''; //品牌名
-  public brandList: any;   //品牌列表
-  public _goods = [];
+  public goodsName: any = ''; //批发商品的商品名
+  public brandName: any = ''; //批发商品的品牌名
+  public kindId: any = ''; //批发商品的id
+  public brandList: any;   //批发商品的品牌名
+  public _goods = [];//批发商品的批发价
   public value: any = {};
 
   constructor(public ajax: AjaxService, public submit: SubmitService,public rzhtools:RzhtoolsService,
@@ -30,8 +30,8 @@ export class WholesaleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.qeuryAllService(1);
-    this.getBrandList()
+    this.qeuryAllService(1);//批发商品管理--查询分页
+    this.getBrandList();//选择品牌名
   }
 
   /**
@@ -42,12 +42,6 @@ export class WholesaleComponent implements OnInit {
 
   twoNum(target,type?){
     this.rzhtools.auditInputValueForNum(target,type);
-  }
-  /**
-   * 品牌名称
-   */
-  search() {
-    this.qeuryAllService(1);
   }
 
   /**
@@ -106,7 +100,7 @@ export class WholesaleComponent implements OnInit {
       goodsName: me.goodsName,
       brandName: me.brandName,
     }
-    let result = this.submit.getData(url, data);
+    let result = me.submit.getData(url, data);
     me.data = new Page(result);
   }
 
@@ -149,16 +143,18 @@ export class WholesaleComponent implements OnInit {
     if (goods.goodsPrice.memberPrice < goods.goodsPrice.batchPrice) {
       AppComponent.rzhAlt("error", '批发价应小于会员价');
       goods.isBatch = 'N';
-      // return;
     }
     let _this = this;
     let url = '/goodsEdit/updateBatchPrice';
     let data = {
       goodsCode: goodsCode,
-      batchPrice: this._goods[i],
+      batchPrice: _this._goods[i],
     }
-    _this.submit.putRequest(url, data);
-    _this.qeuryAllService(curPage);
+    let res=_this.submit.putRequest(url, data);
+    if (isNull(res)) {
+      _this._goods[i] = null;
+      _this.qeuryAllService(curPage);
+    }
   }
 
   /**

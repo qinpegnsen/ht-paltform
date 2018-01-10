@@ -59,7 +59,6 @@ export class AddBrandComponent implements OnInit {
       switch (me.path) {
         //新增品牌
         case "addBrand":
-          //console.log("█ \"新增品牌\" ►►►", "新增品牌");
           me.pageTitle = "新增品牌";
           me.editBrand = true;
           this.brandInfo['kindparentCompId'] = this.submit.getParams('id');
@@ -69,7 +68,6 @@ export class AddBrandComponent implements OnInit {
 
         //修改品牌
         case "upBrand":
-          //console.log("█ \"修改品牌\" ►►►", "修改品牌");
           me.pageTitle = "修改品牌";
           me.editBrand = true;
           me.brandInfo = this.getBrandInfo('BRAND');// 获取品牌信息
@@ -78,7 +76,6 @@ export class AddBrandComponent implements OnInit {
 
         //查看品牌详情
         case "brandDetail":
-          //console.log("█ \"查看品牌详情\" ►►►", "查看品牌详情");
           me.pageTitle = "品牌详情";
           me.brandDetail = true;
           me.brandInfo = me.getBrandInfo('BRANDKIND');// 获取品牌信息
