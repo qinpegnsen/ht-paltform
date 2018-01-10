@@ -85,10 +85,10 @@
           <th class="w10 text-center">
             <rzhDefaultSorter by="time">交易方式</rzhDefaultSorter>
           </th>
-          <th class="w12 text-center">
+          <th class="w12 text-left">
             <rzhDefaultSorter by="id">收款账号</rzhDefaultSorter>
           </th>
-          <th class="w10 text-center">
+          <th class="w10 text-left">
             <rzhDefaultSorter by="id">收款账号开户行</rzhDefaultSorter>
           </th>
           <th class="w8 text-center">
@@ -122,8 +122,8 @@
           <td>{{x+1}}</td>
           <td>{{item.bacctName}}</td>
           <td>{{item.payWay | rzhState:'1017'}}</td>
-          <td>{{item.acct}}</td>
-          <td><span *ngIf="item.bank">{{item.bank}}</span><span *ngIf="!item.bank" class="font-gray">【无】</span></td>
+          <td class="text-left">{{item.acct}}</td>
+          <td class="text-left"><span *ngIf="item.bank">{{item.bank}}</span><span *ngIf="!item.bank" class="font-gray">【无】</span></td>
           <td>￥&nbsp;{{item.drawMoney | number:'1.2-2'}}</td>
           <td>￥&nbsp;{{item.brokerage | number:'1.2-2'}}</td>
           <td  class="thc font">￥&nbsp;{{item.drawMoney-item.brokerage | number:'1.2-2'}}</td>
