@@ -10,7 +10,7 @@ import {ActivitiesService} from "../activities.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {AppComponent} from "../../../app.component";
 defineLocale('cn', zhCn);
-
+declare var $: any;
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
@@ -78,11 +78,24 @@ export class RecordComponent implements OnInit {
   /**
    * 校验输入的面额值
    */
-  getValue(value,val){
-    if(val.value===''){
-      return;
-    }else  if(!value.valid||val.value<0||val.value.slice(0,1)==0){
-      AppComponent.rzhAlt("info", '请输入0或者正整数');
+  getValue(value){
+    if (String(value).indexOf('.') > -1) {
+      let index = String(value).indexOf('.');
+      let finalVal = String(value).slice(0, index + 3);
+      setTimeout(() => {
+        this.minAmount=finalVal;
+      }, 0)
+    }
+    if(value<0){
+      setTimeout(()=>{
+        this.minAmount='';
+      },0);
+      AppComponent.rzhAlt("info", '面额不能小于0');
+    }else if(isNaN(value)){
+      setTimeout(()=>{
+        this.minAmount='';
+      },0);
+      AppComponent.rzhAlt("info", '请输入非负的数字类型');
     }
   }
 }

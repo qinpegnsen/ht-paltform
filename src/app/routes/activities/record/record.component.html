@@ -6,7 +6,7 @@
   <ul>
     <li>可以按中奖面额区间、时间、手机号进行搜索</li>
     <li>按中奖面额区间搜索时，依次输入最小面额和最大面额，如输入错误则搜索结果为空，搜索结果包括最小面额和最大面额</li>
-    <li>按中奖面额区间搜索时，如果只输入最小面额,则会搜索大于当前面额的所有数据，反之亦然</li>
+    <li>按中奖面额区间搜索时，如果只输入最小面额，则会搜索大于当前面额的所有数据，反之亦然</li>
   </ul>
 </div>
 
@@ -39,8 +39,8 @@
         </div>
         <div class="my-place-time ml-xl col-md-2 pull-right clearfix mb">
           <span class="search-title font12">中奖面额区间：</span>
-          <input type="text" name="min" (ngModelChange)="getValue(min,minValue)" #minValue #min="ngModel" class="form-control border-b-grey w30 myCss" [(ngModel)]="minAmount" [pattern]="patternService.num" placeholder="最小"> -
-          <input type="text" name="max" (ngModelChange)="getValue(max,maxValue)" #maxValue #max="ngModel" class="form-control border-b-grey w30 myCss" [(ngModel)]="maxAmount" [pattern]="patternService.num" placeholder="最大">
+          <input type="text" name="min" (ngModelChange)="getValue(minValue.value)" #minValue class="form-control border-b-grey w30 myCss" [(ngModel)]="minAmount"  placeholder="最小"> -
+          <input type="text" name="max" (ngModelChange)="getValue(maxValue.value)" #maxValue  class="form-control border-b-grey w30 myCss" [(ngModel)]="maxAmount"  placeholder="最大">
         </div>
       </div>
     </div>
