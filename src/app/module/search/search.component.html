@@ -1,20 +1,31 @@
 <div>
+  <!--单选情况-->
   <ng-container *ngIf="!multiple">
-    <input class="form-control" type="text"
-           [placeholder]="placeholder"
-           [value]="checkedItem?checkedItem[0][textKey]:null" (focus)="showSearchBox()"/>
+    <div class="_relative single-show">
+      <input class="form-control pr-xl" type="text"
+             [placeholder]="placeholder"
+             [value]="checkedItem?.length > 0?checkedItem[0][textKey]:null" (focus)="showSearchBox()"/>
+      <span *ngIf="allowClear && checkedItem?.length > 0" class="clear" (click)="clearChecked()">×</span>
+    </div>
   </ng-container>
+
+  <!--多选情况-->
   <ng-container *ngIf="multiple">
-    <ul class="checked-item">
-      <li *ngFor="let item of checkedItem"
-          [ngClass]="{'selected':item.selected}"
-          (click)="emitResult(item)">{{item[textKey]}}</li>
-    </ul>
-    <input class="w100" type="text"
-           [placeholder]="placeholder"
-           [value]="checkedItem?checkedItem[textKey]:null" (focus)="showSearchBox()"/>
+    <div class="checked-show">
+      <ul class="checked-items">
+        <ng-container *ngIf="checkedItem?.length > 0">
+          <li *ngFor="let item of checkedItem;let i = index">
+            {{item[textKey]}} <span (click)="removeItem(i)">×</span>
+          </li>
+        </ng-container>
+      </ul>
+      <input class="w100" type="text"
+             [placeholder]="placeholder" (focus)="showSearchBox()"/>
+    </div>
   </ng-container>
 </div>
+
+<!--弹出框-->
 <div class="search-box" *ngIf="showWindow">
   <div class="mask"></div>
   <div class="search-body">
@@ -28,10 +39,28 @@
       </div>
       <button class="btn btn-sm thc btn-thc" (click)="matchResult()">搜索</button>
     </div>
+
+    <!--已选中项展示区-->
+    <ul class="select-items" *ngIf="checkedItem?.length > 0">
+      <li class="text-label"><strong>已选项：</strong></li>
+      <ng-container *ngIf="multiple || allowClear">
+        <li *ngFor="let item of checkedItem;let i = index">
+          {{item[textKey]}} <span (click)="removeItem(i)">×</span>
+        </li>
+      </ng-container>
+
+      <!--单选并且不允许清除的时候-->
+      <ng-container *ngIf="!multiple&&!allowClear">
+        <li *ngFor="let item of checkedItem;let i = index">{{item[textKey]}}</li>
+      </ng-container>
+      <li class="btn" *ngIf="checkedItem.length > 0" (click)="emitResult()">确定</li>
+    </ul>
+
+    <!--搜索结果区-->
     <ul class="search-result">
       <li *ngFor="let item of data"
-          [ngClass]="{'selected':item.selected}"
-          (click)="emitResult(item)">{{item[textKey]}}</li>
+          (click)="emitResult(item)">{{item[textKey]}}
+      </li>
     </ul>
   </div>
 </div>

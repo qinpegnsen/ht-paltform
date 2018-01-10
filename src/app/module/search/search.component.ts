@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
+import set = Reflect.set;
 declare var $: any;
 
 @Component({
@@ -23,9 +24,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input('idKey') idKey: string = 'id';    //指定编码字段的key
   @Input('textKey') textKey: string = 'text';    //设置显示文本的字段的key
   @Input('placeholder') placeholder: string = '';    //默认显示文本
-  @Input('defaultId') defaultId: string = '';    //设置选中想的id（或其他）
+  @Input('defaultId') defaultId: Array<any> = new Array();    //设置选中项的id（或其他），字符串数组
   @Input('multiple') multiple: boolean = false;    //设置多选
+  @Input('allowClear') allowClear: boolean = false;    //单选时，设置是否允许清空
   @Output() selected = new EventEmitter();   //向外输出选中的结果
+  @Output() removed = new EventEmitter();   //向外输出取消选中的项
 
   constructor() {
   }
@@ -33,6 +36,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let me = this;
     me.setDeafultVal();//默认选项
+    if (me.allowClear) {
+      setTimeout(_ => {
+        $('.single-show').hover(_ => $('.clear').show(), _ => $('.clear').hide())
+      })
+    }
   }
 
   /**
@@ -44,39 +52,37 @@ export class SearchComponent implements OnInit, OnDestroy {
       me.data = me.data.filter(val => {
         return val[me.textKey].indexOf(me.searchText) >= 0;
       })
-    } else {
-      me.data = me.nativeData;
-    }
+    } else this.refreshData();
   }
 
   /**
    * 设置默认选项
    */
   setDeafultVal(): void {
-    let me = this;
-    me.data = me.nativeData.map(item => {
-      if (!me.multiple) {
-        if (me.checkedItem && me.checkedItem[0]) {
-          if (item[me.idKey] === me.checkedItem[0][me.idKey]) item.selected = true;
-          else item.selected = false;
-        } else if (me.defaultId) {
-          if (item[me.idKey] === me.defaultId) item.selected = true, me.checkedItem[0] = item;
-          else item.selected = false;
-        }
-      } else {
-
-      }
-      return item;
-    })
+    let me = this, checked: Array<any> = new Array();
+    /*当没有选中项*/
+    if (me.defaultId && me.defaultId.length > 0) {
+      me.checkedItem = me.nativeData.filter(item => {
+        let selected: boolean = me.defaultId.some(it => {
+          return it === item[me.idKey]
+        })
+        if (selected) return item;
+      })
+    }
   }
 
+  /**
+   * 显示搜索框
+   */
   showSearchBox(): void {
     this.showWindow = true;
-    this.data = this.nativeData;
     this.setStyle();  //设置样式
-    this.setDeafultVal();
+    this.refreshData();
   }
 
+  /**
+   * 隐藏搜索框
+   */
   hideSearchBox(): void {
     this.showWindow = false;
     $('body').css('overflow', 'auto');
@@ -84,15 +90,53 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 向外传值，结果是一个对象，包含编码和值
-   * @param res（eg：{id: 12345, text: '心心相印'}）
+   * 从选中的数组中移除当前项
+   * @param idx
    */
-  emitResult(res: any) {
-    if (!this.multiple) {
-      this.checkedItem[0] = res;
-      this.selected.emit(res)// 向外传值，结果是一个对象，包含编码和值
+  removeItem(idx) {
+    this.removed.emit(this.checkedItem[idx]);
+    this.checkedItem.splice(idx, 1);//从选中的数组中移除当前项
+    if (this.checkedItem.length == 0) this.defaultId = new Array();//如果全部移除，默认选中项也置为空
+    this.refreshData();
+  }
+
+  clearChecked() {
+    if (this.allowClear) this.checkedItem = new Array(), this.defaultId = new Array();
+    this.refreshData();
+  }
+
+  /**
+   * 向外传值，结果是一个对象，包含编码和值
+   * @param item（eg：{id: 12345, text: '心心相印'}）
+   */
+  emitResult(item ?: any) {
+    if (!item) {// 当res不存在时，说明点击了确认
+      if (!this.multiple) this.selected.emit(this.checkedItem[0]);// 向外传值，结果是一个对象，包含编码和值
+      else this.selected.emit(this.checkedItem);// 向外传值，结果是一个对象数据，包含编码和值
       this.hideSearchBox();
-    } else this.checkedItem.push(res);
+    } else {
+      if (!this.multiple) this.checkedItem[0] = item, this.hideSearchBox();
+      else {
+        let hadItem: boolean = this.checkedItem.some(it => {
+          return it[this.idKey] === item[this.idKey]
+        })
+        if (!hadItem) this.checkedItem.push(item);
+      }
+      this.refreshData();
+    }
+  }
+
+  /**
+   * 更新结果区展示的未选中数据
+   */
+  refreshData() {
+    let me = this;
+    me.data = me.nativeData.filter(item => {
+      let selected: boolean = me.checkedItem.some(it => {
+        return it[me.idKey] === item[me.idKey]
+      })
+      if (!selected) return item;
+    })
   }
 
   /**

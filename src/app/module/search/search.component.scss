@@ -20,8 +20,28 @@
   z-index: 499;
 }
 
-.w100{
+.w100 {
   width: 100%;
+}
+
+._relative {
+  position: relative;
+}
+
+._absolute {
+  position: absolute;
+}
+
+.clear {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  &:hover{
+    color: #49b0e9;
+  }
 }
 
 .search-area {
@@ -34,43 +54,91 @@
   width: 50%;
   display: inline-block;
   margin-right: 5px;
-}
-
-.search-result {
-  padding: 15px;
+  vertical-align: middle;
 }
 
 .search-body .close {
   width: 24px;
   height: 24px;
   float: right;
-  font-size: 24px;
+  font-size: xx-large;
   line-height: 24px;
   text-align: center;
+  font-weight: normal;
 }
 
-.search-result {
+.search-result, .select-items, .checked-items {
   list-style: none;
+  padding: 15px;
   margin-bottom: 0;
   max-height: 520px;
   overflow-y: auto;
 }
 
-.search-result li {
+.checked-show {
   border: 1px solid #f1f1f1;
+  input {
+    padding: 0 10px;
+    border: none;
+  }
+}
+
+.select-items {
+  padding: 10px 15px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.search-result li, .select-items li, .checked-items li {
+  border: 1px solid #ddd;
   border-radius: 2px;
   line-height: 26px;
-  padding: 0 15px;
+  padding: 0 12px;
   margin: 5px 10px;
   display: inline-block;
-  &:hover{
+  span {
+    font-size: 24px;
+    vertical-align: top;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &.text-label {
+    border: none;
+    padding: 0;
+    &:hover {
+      color: #656565;
+      background-color: #ffffff;
+    }
+  }
+  &.btn {
+    color: #ffffff;
+    background-color: #e82d4d;
+    border-radius: 4px;
+    &:hover {
+      color: #ffffff;
+      background-color: #cc1635;
+      cursor: pointer;
+    }
+  }
+  &:hover {
     color: #cc1635;
     background-color: #f9f9f9;
-    cursor: pointer;
   }
-  &.selected{
+  &.selected {
     color: #ffffff;
     background-color: #e82d4d;
     border-color: #e82d4d;
+  }
+}
+
+.search-result li:hover {
+  cursor: pointer;
+}
+
+.checked-items {
+  padding: 0;
+  li {
+    line-height: 24px;
+    margin: 5px;
   }
 }

@@ -20,9 +20,7 @@
                      placeholder="根据店铺名称查询">
           </ng-select>-->
           <app-search [data]="stores"
-                      [idKey]="'id'"
-                      [textKey]="'text'"
-                      [defaultId]="publishData.storeCode"
+                      [defaultId]="[publishData.storeCode]"
                       [placeholder]="'根据店铺名称查询'"
                       (selected)="selectedStore($event)"
                       [hidden]="path=='edit'">
