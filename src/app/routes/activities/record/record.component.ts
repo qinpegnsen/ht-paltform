@@ -16,7 +16,7 @@ declare var $: any;
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss']
 })
-export class RecordComponent implements OnInit {
+export class RecordComponent implements OnInit{
 
   public logType:any;                 //选择的红包流水类型
   public phone:string='';             //会员手机号
@@ -28,8 +28,7 @@ export class RecordComponent implements OnInit {
   public maxAmount:string='1000';           //搜索区间默认的最大值
 
   constructor(private activitiesService: ActivitiesService,
-              public patternService: PatternService,
-              private tools: RzhtoolsService) {
+              public patternService: PatternService) {
     this.bsConfig = Object.assign({}, {
       locale: 'cn',
       rangeInputFormat: 'YYYY/MM/DD',//将时间格式转化成年月日的格式
@@ -70,15 +69,15 @@ export class RecordComponent implements OnInit {
       dateStr: this.dateStr?RzhtoolsService.dataFormat(this.dateStr[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.dateStr[1], 'yyyy/MM/dd'):'',
       minAmount:this.minAmount,
       maxAmount:this.maxAmount,
-    }
+    };
     let url='/rpCustAcctRec/queryRpCustAcctRecAdmin';
     this.rpDeTailData=new Page(this.activitiesService.queryRpCustAcctRecAdmin(url,data))
   }
 
   /**
-   * 校验输入的面额值
+   * 校验输入的最小面额值
    */
-  getValue(value){
+  getMinValue(value){
     if (String(value).indexOf('.') > -1) {
       let index = String(value).indexOf('.');
       let finalVal = String(value).slice(0, index + 3);
@@ -98,4 +97,29 @@ export class RecordComponent implements OnInit {
       AppComponent.rzhAlt("info", '请输入非负的数字类型');
     }
   }
+
+  /**
+   * 校验输入的最大面额值
+   */
+  getMaxValue(value){
+    if (String(value).indexOf('.') > -1) {
+      let index = String(value).indexOf('.');
+      let finalVal = String(value).slice(0, index + 3);
+      setTimeout(() => {
+        this.maxAmount=finalVal;
+      }, 0)
+    }
+    if(value<0){
+      setTimeout(()=>{
+        this.maxAmount='';
+      },0);
+      AppComponent.rzhAlt("info", '面额不能小于0');
+    }else if(isNaN(value)){
+      setTimeout(()=>{
+        this.maxAmount='';
+      },0);
+      AppComponent.rzhAlt("info", '请输入非负的数字类型');
+    }
+  }
+
 }

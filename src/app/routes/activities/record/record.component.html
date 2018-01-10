@@ -39,8 +39,8 @@
         </div>
         <div class="my-place-time ml-xl col-md-2 pull-right clearfix mb">
           <span class="search-title font12">中奖面额区间：</span>
-          <input type="text" name="min" (ngModelChange)="getValue(minValue.value)" #minValue class="form-control border-b-grey w30 myCss" [(ngModel)]="minAmount"  placeholder="最小"> -
-          <input type="text" name="max" (ngModelChange)="getValue(maxValue.value)" #maxValue  class="form-control border-b-grey w30 myCss" [(ngModel)]="maxAmount"  placeholder="最大">
+          <input type="text" name="min" (ngModelChange)="getMinValue(minValue.value)" #minValue class="form-control border-b-grey w30 myCss" [(ngModel)]="minAmount"  placeholder="最小"> -
+          <input type="text" name="max" (ngModelChange)="getMaxValue(maxValue.value)" #maxValue  class="form-control border-b-grey w30 myCss" [(ngModel)]="maxAmount"  placeholder="最大">
         </div>
       </div>
     </div>
