@@ -94,7 +94,6 @@ export class RecordComponent implements OnInit{
       setTimeout(()=>{
         this.minAmount='';
       },0);
-      AppComponent.rzhAlt("info", '请输入非负的数字类型');
     }
   }
 
@@ -118,7 +117,6 @@ export class RecordComponent implements OnInit{
       setTimeout(()=>{
         this.maxAmount='';
       },0);
-      AppComponent.rzhAlt("info", '请输入非负的数字类型');
     }
   }
 

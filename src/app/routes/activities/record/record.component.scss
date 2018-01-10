@@ -5,3 +5,8 @@
   width:275px!important;
   display: inline-block;
 }
+.input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
