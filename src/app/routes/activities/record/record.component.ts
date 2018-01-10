@@ -90,10 +90,6 @@ export class RecordComponent implements OnInit{
         this.minAmount='';
       },0);
       AppComponent.rzhAlt("info", '面额不能小于0');
-    }else if(isNaN(value)){
-      setTimeout(()=>{
-        this.minAmount='';
-      },0);
     }
   }
 
@@ -113,10 +109,6 @@ export class RecordComponent implements OnInit{
         this.maxAmount='';
       },0);
       AppComponent.rzhAlt("info", '面额不能小于0');
-    }else if(isNaN(value)){
-      setTimeout(()=>{
-        this.maxAmount='';
-      },0);
     }
   }
 
