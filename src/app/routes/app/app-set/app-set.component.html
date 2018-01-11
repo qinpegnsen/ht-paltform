@@ -29,7 +29,7 @@
     <div class="main_center">
       <div class="main_centerOne">
         <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index">
-          <img style="width: 300px" src="{{item.reslut}}"  [attr.width]="item.tplWidth" [attr.height]="item.tplHeight"
+          <img style="width: 300px;" src="{{item.reslut}}"  [attr.width]="item.tplWidth" [attr.height]="item.tplHeight"
                (click)="addTplCont(item.data,i + 1)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <ul>
@@ -84,8 +84,8 @@
         <div class="hidden-field">{{ord}}</div>
       </div>
       <div class="main_right_footer">
-        <button class="mb-sm btn-lg btn btn-warning btn-outline thc font b" type="button" (click)="cancel()">取消</button>
-        <button class="mb-sm btn-lg btn btn-primary btn-outline thc bg b" type="submit" (click)="addModel(ord)">提交</button>
+        <button class="mb-sm btn-lg btn btn-warning btn-outline b" type="button" (click)="cancel()">取消</button>
+        <button class="mb-sm btn-lg btn btn-primary btn-outline b" type="submit" (click)="addModel(ord)">提交</button>
       </div>
     </div>
   </div>
