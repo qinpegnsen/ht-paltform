@@ -9,7 +9,7 @@
         <dt>买家留言：</dt>
         <dd class="qpsP">{{orderData.note || '【未填写】'}}</dd>
       </dl>
-      <dl class="line">
+      <dl class="line" *ngIf="orderData.state!='CR'">
         <dt>支付方式：</dt>
         <dd>{{orderData.payWay | rzhState :'1017'}}
           <span class="pull-right" (mouseenter)="showTimeList(remit)"
