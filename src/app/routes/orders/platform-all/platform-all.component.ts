@@ -38,7 +38,6 @@ export class PlatformAllComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.queryDatas(1);
-    me.querySoterLists();
     this.getAgentList();//获取代理商的列表
   }
 
@@ -155,13 +154,6 @@ export class PlatformAllComponent implements OnInit {
     _this.goodsList = new Page(_this.submit.getData(requestUrl, requestData));
   }
 
-  querySoterLists(){
-    let _this = this, activePage = 1;
-    let requestUrl = '/agent/queryAll';
-    let requestData = {};
-    _this.agentList = _this.submit.getData(requestUrl, requestData);
-  }
-
   /**
    * 显示买家信息
    * @param event
@@ -189,7 +181,6 @@ export class PlatformAllComponent implements OnInit {
    */
   getDeliverOrderData(data) {
     this.curDeliverOrderId = null;
-    if (data.type) this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
+    this.queryDatas(1)//在当前页面发货之后需要刷新页面数据
   }
-
 }
