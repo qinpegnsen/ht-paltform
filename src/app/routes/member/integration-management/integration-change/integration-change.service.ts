@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import {AjaxService} from "../../../../core/services/ajax.service";
-import {AppComponent} from "../../../../app.component";
-import {isNull} from "util";
-import {Page} from "../../../../core/page/page";
-
 @Injectable()
 export class IntegrationChangeService {
 
@@ -26,11 +22,9 @@ export class IntegrationChangeService {
         if (res.success) {
           result = res.data;
         } else {
-
         }
       },
       error: (res) => {
-
       }
     });
     return result;

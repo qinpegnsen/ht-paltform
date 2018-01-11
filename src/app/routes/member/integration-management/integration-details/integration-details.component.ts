@@ -21,7 +21,7 @@ export class IntegrationDetailsComponent implements OnInit {
   public authStates:any;    //操作类型枚举
   public authState:string='';//操作类型
   public custTrueName:string='';//操作类型
-  public myTime;                      //传查询的时间范围
+  public myTime;             //传查询的时间范围
   locale = 'en';
   locales = listLocales();
   bsConfig: Partial<BsDatepickerConfig>;
@@ -42,9 +42,8 @@ export class IntegrationDetailsComponent implements OnInit {
 
   ngOnInit() {
     let _this=this;
-    _this.qeuryAllService(1);
+    _this.qeuryAllService(1);//查询重消币明细
     _this.authStates = this.tools.getEnumDataList('1027');   //操作类型枚举列表
-
   }
 
   //重消币明细--查询分页
@@ -64,9 +63,7 @@ export class IntegrationDetailsComponent implements OnInit {
       custTrueName:me.custTrueName,
       createTime:this.myTime?RzhtoolsService.dataFormat(this.myTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.myTime[1], 'yyyy/MM/dd'):'',
     }
-    let result = this.submit.getData(url,data);
-
+    let result = me.submit.getData(url,data);
     me.data = new Page(result);
-
   }
 }

@@ -9,20 +9,26 @@ import {RzhtoolsService} from "../../../../core/services/rzhtools.service";
   styleUrls: ['./order-amount.component.scss']
 })
 export class OrderAmountComponent implements OnInit {
-  public data:any;
-  public code: any = '';
-  public info: string;
-  public updata: any;
-  public remark:any;
+  public data:any;//订单金额
+  public code: any = '';//编码code
+  public info: string;//订单区间
+  public updata: any;//修改后的订单数据
+  public remark:any;//修改的订单金额
   constructor(public submit: SubmitService,public patterns:PatternService,public rzhtools:RzhtoolsService) { }
 
   ngOnInit() {
-    this.qeuryAll();
+    this.qeuryAll();// 查询订单金额
   }
 
+  /**
+   * 限制输入两位小数
+   * @param target
+   * @param type
+   */
     twoNum(target,type?){
       this.rzhtools.auditInputValueForNum(target,type);
     }
+
   /*
   * 查询订单金额
   * */
@@ -35,8 +41,9 @@ export class OrderAmountComponent implements OnInit {
     let result = this.submit.getData(url,data);
     me.data = result;
   }
+
   /*
-  * 修改
+  * 修改订单金额区间
   * */
   submitt(code,data1,info,remark){
     data1.isShow = !data1.isShow;
@@ -48,7 +55,7 @@ export class OrderAmountComponent implements OnInit {
       remark:remark,
     }
     let result=this.submit.putRequest(url, data,false);
-    this.qeuryAll();
+    this.qeuryAll();//查询订单金额
   }
 
   /**

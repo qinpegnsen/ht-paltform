@@ -27,7 +27,7 @@ export class UsersNewComponent implements OnInit {
   public select: any = {}; //选择的年份和月份信息
   public showType: any = {DAY: true, WEEK: false, MONTH: false}; //根据不同的状态显示
   public queryType: any = 'DAY';//日期选择
-  public contrastTime: any = new Date().getSeconds();
+  public contrastTime: any = new Date().getSeconds();//前一天时间
   public queryTypes: any;//日期选择
   public queryTime: any = new Date();
   public info: any = new Date();
@@ -106,7 +106,7 @@ export class UsersNewComponent implements OnInit {
   }
 
   /**
-   * 查询
+   * 查询新增用户
    */
   qeuryAll() {
     let me = this;
@@ -115,17 +115,17 @@ export class UsersNewComponent implements OnInit {
       queryType: me.queryType,
       queryTime: me.queryTime,
     }
-    let result = this.submit.getData(url, data);
+    let result = me.submit.getData(url, data);
     me.data = result;
     me.now = me.data.queryTime;
     me.prev = me.data.contrastTime;
     me.nowData = me.data[me.now];
     me.prevData = me.data[me.prev];
-    me.optionPrevInfo();
+    me.optionPrevInfo();//查询新增用户图表
   }
 
   /**
-   * 绘制图表（私有）
+   * 绘制图表
    */
   public optionPrevInfo() {
     let _this = this;
@@ -194,7 +194,6 @@ export class UsersNewComponent implements OnInit {
     };
   }
 
-
   /**
    * 查询对应的数据信息（新增会员数）
    * @param type 查询状态，如：日、周、月（DAY、WEEK、MONTH）
@@ -216,7 +215,7 @@ export class UsersNewComponent implements OnInit {
     if (!_this.queryTime || isNullOrUndefined(_this.queryTime)) {
       AppComponent.rzhAlt("error", "请选择日期");
     } else {
-      _this.qeuryAll();
+      _this.qeuryAll();//查询新增用户
     }
   }
 
@@ -245,7 +244,6 @@ export class UsersNewComponent implements OnInit {
       nowtime = RzhtoolsService.dataFormat(RzhtoolsService.getAroundDateByDate(new Date(date), 1), "yyyy-MM-dd HH:mm:ss");
       window.open('/#/main/stat/users-new/list-detail?prevtime=' + prevtime + '&nowtime=' + nowtime)
     }
-
 
   }
 }

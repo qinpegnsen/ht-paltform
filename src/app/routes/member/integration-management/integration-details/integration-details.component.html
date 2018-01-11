@@ -59,10 +59,10 @@
         <th class="w10 text-center">
           <rzhDefaultSorter by="coin">重消币</rzhDefaultSorter>
         </th>
-        <th class="w15 text-center">
+        <th class="w13 text-left">
           <rzhDefaultSorter by="descript">操作类型</rzhDefaultSorter>
         </th>
-        <th class="w15 text-left">
+        <th class="w17 text-left">
           <rzhDefaultSorter by="descript">操作描述</rzhDefaultSorter>
         </th>
         <th class="w15 text-center">
@@ -82,7 +82,7 @@
         <td *ngIf="count.coin>=0" class="green">
           {{count.coin}}
         </td>
-        <td class="text-center">{{count.logType | rzhState: '1027'}}</td>
+        <td class="text-left">{{count.logType | rzhState: '1027'}}</td>
         <td class="text-left">
           <!--支付订单{{count.phone}}，支付{{count.coin}} 重消币-->
           <!--支付订单{{count.phone}}，扣除{{count.coin}} 重消币-->

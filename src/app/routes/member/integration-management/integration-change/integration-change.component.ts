@@ -4,7 +4,6 @@ import {PatternService} from "../../../../core/forms/pattern.service";
 import {isNullOrUndefined} from "util";
 import {ActivatedRoute} from "@angular/router";
 import {IntegrationChangeService} from "./integration-change.service";
-import {AppComponent} from "../../../../app.component";
 
 
 @Component({
@@ -14,7 +13,7 @@ import {AppComponent} from "../../../../app.component";
   providers:[IntegrationChangeService]
 })
 export class IntegrationChangeComponent implements OnInit {
-  public sum:any;
+  public sum:any;//重消币
   public data: any = {
     phone: null,
     custCoin: null,
@@ -27,6 +26,11 @@ export class IntegrationChangeComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * 手机号判断
+   * @param phone
+   * @returns {boolean}
+   */
   testPhone(phone){
     if(/^1[0-9]{10}$/.test(phone)) return true;
   }
@@ -38,9 +42,9 @@ export class IntegrationChangeComponent implements OnInit {
     let _this=this;
     let url = '/custCoin/selectCoin';
     let data = {
-      phone:this.data.phone
+      phone:_this.data.phone
     }
-   _this.sum=this.integrationChangeService.getData(url, data);
+   _this.sum=_this.integrationChangeService.getData(url, data);
   }
 
   /**
@@ -49,7 +53,7 @@ export class IntegrationChangeComponent implements OnInit {
   submit() {
     let me=this;
     let url = '/custCoin/addCustCoin';
-    let res = this.submitt.postRequest(url, this.data);
+    let res = me.submitt.postRequest(url, this.data);
     if (isNullOrUndefined(res)) {
       me.data.phone = '';
       me.data.custCoin = '';
