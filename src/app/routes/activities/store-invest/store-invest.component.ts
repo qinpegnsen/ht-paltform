@@ -49,7 +49,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   }
 
   ngOnInit() {
-    this.payWayList=this.tools.getEnumDataList('1017');
+    this.payWayList=this.tools.getEnumDataList('3111');
   }
 
 
