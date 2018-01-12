@@ -3623,12 +3623,13 @@ input[type=number].num::-webkit-outer-spin-button {
 
 /*会员认证审核图片位置，写在组件内的样式不起作用，于是写在公共样式里*/
 
-.imageViewerContainer[_ngcontent-c12]   .imageViewer[_ngcontent-c12]{
+.imageViewerContainer .imageViewer{
   height: 350px!important;
 }
-.imageViewerContainer[_ngcontent-c12]   .smallImageViewer[_ngcontent-c12]{
+.imageViewerContainer .smallImageViewer{
   height: 70px!important;
 }
-.imageViewerContainer[_ngcontent-c12]   .smallImageViewer[_ngcontent-c12]   .moreImg[_ngcontent-c12]{
-  left:40px!important;
+.imageViewerContainer .smallImageViewer .moreImg{
+  margin-left: 40px;
 }
+
