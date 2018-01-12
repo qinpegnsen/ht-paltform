@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
-import {isNullOrUndefined} from "util";
+import {isNull, isNullOrUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
@@ -99,11 +99,16 @@ export class RecordComponent implements OnInit,AfterViewInit,OnDestroy{
    * 校验输入的最小面额值
    */
   getMinValue(value){
+    console.log("█ value ►►►",  value);
     if (String(value).indexOf('.') > -1) {
       let index = String(value).indexOf('.');
       let finalVal = String(value).slice(0, index + 3);
       setTimeout(() => {
         this.minAmount=finalVal;
+      }, 0)
+    }else if(!value){
+      setTimeout(() => {
+        this.minAmount='';
       }, 0)
     }
     if(value<0){
@@ -123,6 +128,10 @@ export class RecordComponent implements OnInit,AfterViewInit,OnDestroy{
       let finalVal = String(value).slice(0, index + 3);
       setTimeout(() => {
         this.maxAmount=finalVal;
+      }, 0)
+    }else if(!value){
+      setTimeout(() => {
+        this.maxAmount='';
       }, 0)
     }
     if(value<0){
