@@ -36,23 +36,22 @@
             </div>
           </dd>
         </dl>
-        <dl class="bb m0 clearfix p0" *ngIf="isAgree=='N'">
-          <dt class="col-xs-3 lh34 pr-14"><i class="main-red font16">* </i>驳回原因:</dt>
-          <dd class="orderId-color col-xs-9 font14 reason-unpass">
+        <dl class="bb m0 clearfix p0 h150" *ngIf="isAgree=='N'">
+          <dt class="col-xs-3 lh34 pr-14 h150"><i class="main-red font16">* </i>驳回原因:</dt>
+          <dd class="orderId-color col-xs-9 font14 reason-unpass h150">
             <input type="text" class="form-control" placeholder="请输入驳回原因" name="reason" required
                    #verifyReason="ngModel" [(ngModel)]="reason">
+            <div class="checkbox c-checkbox d-play" *ngFor="let item of reasons; let i = index;">
+              <label class="mr-lg">
+                <input type="checkbox" (change)="getReasonId($event,i)"/> <span class="fa fa-check"></span>
+                {{item}}
+              </label>
+            </div>
           </dd>
           <div [hidden]="verifyReason.valid || verifyReason.pristine"
                class="col-sm-9 pull-right text-danger reason">
             请输入驳回原因
           </div>
-        </dl>
-        <dl class="bb m0 clearfix p0" *ngIf="isAgree=='N'">
-          <span class="col-xs-12 ml-lg mt">
-            <label class="mr-lg" *ngFor="let item of reasons; let i = index;">
-              <input type="checkbox" (change)="getReasonId($event,i)"/> <span>{{item}}</span>
-            </label>
-          </span>
         </dl>
         <div class="panel-footer text-right">
           <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
