@@ -3,7 +3,7 @@ import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined, isUndefined} from "util";
 import {Page} from "../../../core/page/page";
 import {ActivitiesService} from "../activities.service";
-
+const swal = require('sweetalert');
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
@@ -64,12 +64,26 @@ export class AuditComponent implements OnInit {
    * 审核默认通过
    */
   auditPass(id) {
-    let url = "/rpCustWithdraw/updateStateTODeal";
-    let data = {
-      id: id
-    };
-    this.activitiesService.updateStateTODeal(url, data);
-    this.qeuryAll(this.curState, 1)
+    let that=this;
+    swal({
+      title: "您确定同意吗？",
+      type: "info",
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      closeOnConfirm: false,
+      confirmButtonText: "同意",
+      confirmButtonColor: "#ec6c62"
+    },function(isConfirm){
+      if (isConfirm) {
+        swal.close(); //关闭弹框
+        let url = "/rpCustWithdraw/updateStateTODeal";
+        let data = {
+          id: id
+        };
+        that.activitiesService.updateStateTODeal(url, data);
+        that.qeuryAll(this.curState, 1)
+      }
+    });
   }
 
   /**
