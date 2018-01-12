@@ -15,7 +15,7 @@ const swal = require('sweetalert');
 export class ReasonRejecComponent implements OnInit {
   public state: any;//审核状态
   public showRecord: boolean = true;         //默认是通过
-  public isAgree: string = 'Y';         //默认是通过
+  public isAgree: string = 'N';         //默认是通过
   public yesOrNo: any;         //商品审核是否通过枚举
   @Input('showReasonWindow') showReasonWindow: boolean;
   @Output() upDate = new EventEmitter();
@@ -23,12 +23,26 @@ export class ReasonRejecComponent implements OnInit {
   @Input('orderId') orderId: string;
   @Input('curPage') curPage: any;
   @Input('count') count: any = {};
+  public reason:string = '';//驳回原因
+  public reasonList:Array<string> = new Array();//选中的驳回原因编号
+  public reasons:Array<string> = [
+    '姓名有误',
+    '身份证号有误',
+    '身份证有效期有误',
+    '身份证正面照有误',
+    '身份证正面照不清晰',
+    '身份证反面照有误',
+    '身份证反面照不清晰',
+    '手持身份证照片有误',
+    '手持身份证照片不清晰',
+  ]
 
   ngOnChanges(changes: SimpleChanges): void {
 
     if (changes['showReasonWindow'] && changes['orderId']) {
       let me = this;
       me.images = new Array();
+      this.reason=null;
       if (this.showReasonWindow && this.orderId && !isNullOrUndefined(this.orderId)) {
         $('.wrapper > section').css('z-index', 200);
         me.images.push(me.count.idcardPic1, me.count.idcardPic2, me.count.idcardPic3);
@@ -39,7 +53,6 @@ export class ReasonRejecComponent implements OnInit {
 
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
-
   }
 
   constructor(public reasonRejecService: ReasonRejecService,
@@ -54,6 +67,22 @@ export class ReasonRejecComponent implements OnInit {
   }
 
   /**
+   * 获取驳回原因
+   * @param event
+   * @param idx
+   */
+  getReasonId(event,idx){
+    if(event.target.checked){
+      this.reasonList.push(this.reasons[idx]);
+    }else{
+      this.reasonList = this.reasonList.filter(item => {
+        return item !== this.reasons[idx];
+      })
+    }
+    this.reason = this.reasonList.join('，')+'，请重新提交';
+  }
+
+  /**
    * 关闭组件
    * @param type true:表示操作成功，false表示取消操作
    */
@@ -63,6 +92,7 @@ export class ReasonRejecComponent implements OnInit {
     this.showReasonWindow = false;
     if (isUndefined(type)) type = 'cancel';
     this.upDate.emit(type);
+    this.reason=null;
   }
 
 
@@ -71,26 +101,14 @@ export class ReasonRejecComponent implements OnInit {
    */
   access(id) {
     let me = this;
-    swal({
-        title: '您确认审核通过吗？',
-        type: 'info',
-        confirmButtonText: '确认', //‘确认’按钮命名
-        showCancelButton: true, //显示‘取消’按钮
-        cancelButtonText: '取消', //‘取消’按钮命名
-        closeOnConfirm: false  //点击‘确认’后，执行另外一个提示框
-      },
-      function () {  //点击‘确认’时执行
-        swal.close(); //关闭弹框
-        let url = '/custAuthInfo/updateState';
-        let data = {
-          id: id,
-          state: 'PASS',
-        }
-        me.submit.putRequest(url, data);
-        me.hideWindow("success");
-        me.certificationComponent.aqeuryAll('AUDIT', me.curPage);
-      }
-    );
+    let url = '/custAuthInfo/updateState';
+    let data = {
+      id:id,
+      state: 'PASS',
+    }
+    me.submit.putRequest(url, data);
+    me.hideWindow("success");
+    me.certificationComponent.aqeuryAll('AUDIT', me.curPage);
   }
 
   /*
@@ -102,7 +120,7 @@ export class ReasonRejecComponent implements OnInit {
     let data = {
       id: this.orderId,
       state: 'UNPASS',
-      verifyReason: obj.verifyReason,
+      verifyReason: obj.reason,
     }
     let a = this.reasonRejecService.reasonReject(url, data);
     me.hideWindow("success");

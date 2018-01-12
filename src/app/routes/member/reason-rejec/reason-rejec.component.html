@@ -10,12 +10,14 @@
     <!--表单-->
     <div class="pop deliver-box font12 w100">
       <div class="font12 p">
-        <span>身份证号：<span class="font16">{{count.idcard}}</span></span>
-        <span class="pl-xl">姓名：{{count.name}}</span>
+        <span>身份证号：<span class="font18 fw">{{count.idcard}}</span></span>
+        <span class="pl-xl">姓名：<span class=" fw font16">{{count.name}}</span></span>
         <span *ngIf="count.endTime!=null" class="pl-xl">有效期：<span
-          class="font16">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span class="font16">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
+          class="font18 fw">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span
+          class="font18 fw">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
         <span *ngIf="count.endTime==null" class="pl-xl">有效期：<span
-          class="font16">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;长期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          class="font18 fw">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp; <span
+          class="font16 fw">长期</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
       <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="800"
                     [height]="470"></e-ngx-viewer>
@@ -34,21 +36,28 @@
             </div>
           </dd>
         </dl>
-        <dl class="bb m0 clearfix p0" *ngIf="!showRecord">
-          <dt class="col-xs-3 lh34 pr-14"><i class="main-red font16">* </i>驳回原因: </dt>
-          <dd class="orderId-color col-xs-9 font14 reason-unpass" >
-            <input type="text" class="form-control" placeholder="请输入驳回原因" name="verifyReason" ngModel required
-                   #verifyReason="ngModel">
+        <dl class="bb m0 clearfix p0" *ngIf="isAgree=='N'">
+          <dt class="col-xs-3 lh34 pr-14"><i class="main-red font16">* </i>驳回原因:</dt>
+          <dd class="orderId-color col-xs-9 font14 reason-unpass">
+            <input type="text" class="form-control" placeholder="请输入驳回原因" name="reason" required
+                   #verifyReason="ngModel" [(ngModel)]="reason">
           </dd>
           <div [hidden]="verifyReason.valid || verifyReason.pristine"
                class="col-sm-9 pull-right text-danger reason">
             请输入驳回原因
           </div>
         </dl>
+        <dl class="bb m0 clearfix p0" *ngIf="isAgree=='N'">
+          <span class="col-xs-12 ml-lg mt">
+            <label class="mr-lg" *ngFor="let item of reasons; let i = index;">
+              <input type="checkbox" (change)="getReasonId($event,i)"/> <span>{{item}}</span>
+            </label>
+          </span>
+        </dl>
         <div class="panel-footer text-right">
           <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
-          <button class="ml btn btn-info thc bg b" *ngIf="showRecord" (click)="access(count.id)">确认提交</button>
-          <button class="ml btn btn-info thc bg b" *ngIf="!showRecord" type="button" (click)="delivery(updata.value)"
+          <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='Y'" (click)="access(count.id)">确认提交</button>
+          <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='N'" type="button" (click)="delivery(updata.value)"
                   [disabled]="!updata.form.valid">确认提交
           </button>
         </div>

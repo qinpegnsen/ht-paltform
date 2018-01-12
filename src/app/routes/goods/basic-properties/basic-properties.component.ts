@@ -66,6 +66,7 @@ export class BasicPropertiesComponent implements OnInit {
     let requestUrl = '/goodsEnum/queryBaseEnumList';
     let requestData = {
       kindId:kindId?kindId:_this.kindId,
+      sortColumns:'idx ASC',
     };
     let result=_this.submit.getData(requestUrl, requestData);
     _this.data = result;

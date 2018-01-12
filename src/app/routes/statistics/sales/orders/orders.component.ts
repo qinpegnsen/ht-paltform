@@ -122,6 +122,13 @@ export class OrdersComponent implements OnInit {
         left:"center",
         text: this.queryContentText+"统计"
       },
+      legend: {
+        data: [_this.prev, _this.now],
+        align: 'left',
+        left: "44%",
+        top: "8%",
+        bottom: "10%"
+      },
       color: ['#3398DB','#42DBB1'],
       tooltip: {
         trigger: 'axis',
