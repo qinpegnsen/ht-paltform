@@ -99,7 +99,6 @@ export class RecordComponent implements OnInit,AfterViewInit,OnDestroy{
    * 校验输入的最小面额值
    */
   getMinValue(value){
-    console.log("█ value ►►►",  value);
     if (String(value).indexOf('.') > -1) {
       let index = String(value).indexOf('.');
       let finalVal = String(value).slice(0, index + 3);
