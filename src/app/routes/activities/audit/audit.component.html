@@ -5,9 +5,8 @@
   <div class="panel mb p ts thc">
     <p class="font18">操作提示</p>
     <ul>
-      <li>如果用户选择的是支付宝或者微信提现，同意提现后，状态变为处理中，则内部调用接口直接打款</li>
-      <li>如果用户选择的是银行卡提现，同意提现后，状态变为处理中，需要线下打款后，再填写上传汇款信息及凭证，状态变为处理完成</li>
-      <li>如果打款失败，状态变为处理失败</li>
+      <li>如果用户选择的是支付宝或者微信提现，同意提现后，则直接打款，打款成功，状态变为处理完成，如果打款失败，状态变为处理失败</li>
+      <li>如果用户选择的是银行卡提现，同意提现后，状态变为处理中，需要线下打款后，如果打款成功，填写上传汇款信息及凭证，状态变为处理完成。如果打款失败，填写失败原因，状态变为处理失败</li>
     </ul>
   </div>
   <!--方块统计 start-->
@@ -132,7 +131,7 @@
           <td *ngIf="curState=='DEAL'">{{item.dealTime }}</td>
           <td *ngIf="curState=='DONE'||curState=='FAIL'">{{item.doneTime }}</td>
           <td>
-            <button class="btn btn-sm btn-purple fa fa-check" (click)="auditPass(item.id)" *ngIf="item.state=='CR'">
+            <button class="btn btn-sm btn-purple fa fa-check" (click)="auditPass(item.id,item.payWay)" *ngIf="item.state=='CR'">
               同意提现
             </button>
             <button class="btn btn-sm btn-purple fa fa-check" (click)="showAlert(item.id)"

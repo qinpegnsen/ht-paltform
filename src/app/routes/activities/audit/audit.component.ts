@@ -63,10 +63,11 @@ export class AuditComponent implements OnInit {
   /**
    * 审核默认通过
    */
-  auditPass(id) {
+  auditPass(id,payWay) {
     let that=this;
     swal({
       title: "您确定同意吗？",
+      text: payWay=='REMIT'?'':'同意提现后，则直接打款\n打款成功，状态变为处理完成，否则，变为处理失败',
       type: "info",
       showCancelButton: true,
       cancelButtonText: '取消',
