@@ -6,8 +6,10 @@
 <div class="panel mb p ts thc">
   <p class="font18">操作提示</p>
   <ul>
-    <li>可从下方页面左侧选择添加各类型布局模块到中间编辑预览区域内，选中要编辑的模块，再从页面右侧模块内容编辑栏中进行具体内容编辑。<span class="winner">右侧模块内容编辑栏中的图片或文字，操作类型是必填项</span></li>
-    <li>选中编辑某个模块时，请仔细阅读相关的操作小提示，严格按照建议图片尺寸大小进行图片上传，<span class="winner">并设置操作类型（例如:某个商品的编码），如果操作类型值为禁用时可不必填</span>，编辑完成后选择下方的“提交”按钮</li>
+    <li>可从下方页面左侧选择添加各类型布局模块到中间编辑预览区域内，选中要编辑的模块，再从页面右侧模块内容编辑栏中进行具体内容编辑。<span
+      class="winner">右侧模块内容编辑栏中的图片或文字，操作类型是必填项</span></li>
+    <li>选中编辑某个模块时，请仔细阅读相关的操作小提示，严格按照建议图片尺寸大小进行图片上传，<span class="winner">并设置操作类型（例如:某个商品的编码），如果操作类型值为禁用时可不必填</span>，编辑完成后选择下方的“提交”按钮
+    </li>
     <li><span class="winner">首页编辑完成后，需要点击“发布首页”按钮，移动端首页才会显示编辑后的内容</span></li>
   </ul>
 </div>
@@ -29,12 +31,12 @@
     <div class="main_center">
       <div class="main_centerOne">
         <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index">
-          <img style="width: 300px;" src="{{item.reslut}}"  [attr.width]="item.tplWidth" [attr.height]="item.tplHeight"
-               (click)="addTplCont(item.data,i + 1)"/>
+          <img src="{{item.reslut}}" (click)="addTplCont(item.data,i + 1)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <ul>
               <li (click)="deleteModel(i+1)" title="删除模板"><i class="fa fa-close"></i><br></li>
-              <li *ngIf="phoneIndexId[i]" title="设置" (click)="addNewData(item.indexData)"><i class="fa fa-gear"></i></li>
+              <li *ngIf="phoneIndexId[i]" title="设置" (click)="addNewData(item.indexData)"><i class="fa fa-gear"></i>
+              </li>
               <li *ngIf="phoneIndexId[i]" (click)="moveUp()" title="上移"><i class="fa fa-arrow-up"></i></li>
               <li *ngIf="phoneIndexId[i]" (click)="moveDown()" title="下移"><i class="fa fa-arrow-down"></i></li>
             </ul>
@@ -46,49 +48,59 @@
       <div class="main_left_header">
         <span>{{curItem.tplName}}</span>
       </div>
-      <div class="main_left_prompting">
-        <span><strong>模块操作小提示</strong></span>
-        <span>{{curItem.tplDesc }}</span>
-      </div>
-      <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
-        <div class="main_right_optIMG" *ngIf="curItem.tplType == 'IMG'">
-          <div class="main_right_optIMGa"><strong>图片：</strong></div>
-          <div  (change)="fileChangeListener(i)"
-               [style.background-image]="'url(' + contents[i]+ ')'"
-               class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
-            <span class="ui-state-disabled pull-left _uploadImg" *ngFor="let item of uploaders[i].queue">
-                <span class="upload-thumb" >
+      <div class="main_right_opt_box">
+        <div class="main_left_prompting">
+          <p class="mb0"><strong>模块操作小提示</strong></p>
+          <p class="font12 mb0">{{curItem.tplDesc}}</p>
+        </div>
+        <div class="main_right_opt" *ngFor="let item of contentList;let i = index">
+          <div class="main_right_optIMG cursor-p" *ngIf="curItem.tplType == 'IMG'">
+            <div class="ml-lg pt-lg"><strong>图片{{i+1}}：</strong></div>
+            <div (change)="fileChangeListener(i)"
+                 class="main_right_opt_img" (mouseover)="showMask1(i)" (mouseleave)="hideMask1(i)">
+              <img *ngIf="!uploaders[i].queue[0]" class="main_right_opt_img_before" [src]="contents[i]" alt="">
+              <div class="ui-state-disabled _uploadImg" *ngFor="let item of uploaders[i].queue">
+                <span class="upload-thumb">
                   <img *ngIf="item" [src]="item._file | imgUrl"
-                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name" class="_img">
+                       onerror="javascript:this.src='../../../assets/img/dummy.png'" [alt]="item?.file?.name"
+                       class="_img">
                 </span>
-              </span>
-            <a title='选择要上传的文件' *ngIf="flag[i]"><span class="fa fa-plus"></span>
-              <input type="file" name="tplImg" ng2FileSelect [uploader]="uploaders[i]" (change)="fileChangeListener($event)">
-            </a>
+              </div>
+              <a title='选择要上传的文件' *ngIf="flag[i]">
+                <span class="fa fa-plus font24"></span>
+                <input type="file" name="tplImg" ng2FileSelect [uploader]="uploaders[i]"
+                       (change)="fileChangeListener(i)">
+              </a>
+            </div>
           </div>
+          <div class="main_right_optTXT" *ngIf="curItem.tplType == 'TXT'">
+            <div><strong>文字：</strong></div>
+            <textarea class="form-control" [(ngModel)]="contents[i]"
+                      (change)="addUpdateId(i)"></textarea>
+          </div>
+          <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
+          <div class="main_right_optModel">
+            <select class="form-control optTypeList" name="optTypeList" [(ngModel)]="optTypeIndex[i]"
+                    (change)="showDesc(i)">
+              <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}
+              </option>
+            </select>
+            <input class="form-control border-b-grey optKey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}"
+                   (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
+            <input [(ngModel)]="optKey[i]" type="hidden">
+          </div>
+          <div class="main_right_optTypeDesc font-gray font12">{{typeDesc[i]}}</div>
+          <div class="hidden-field">{{optTypeCode[i]}}</div>
+          <div class="hidden-field">{{ord}}</div>
         </div>
-        <div class="main_right_optTXT" *ngIf="curItem.tplType == 'TXT'">
-          <div><strong>文字：</strong></div>
-          <textarea [(ngModel)]="contents[i]" (change)="addUpdateId(i)"></textarea>
-        </div>
-        <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
-        <div class="main_right_optModel">
-          <select class="form-contro optTypeList" name="optTypeList" [(ngModel)]="optTypeIndex[i]" (change)="showDesc(i)">
-            <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}</option>
-          </select>
-          <input class="form-control border-b-grey optKey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}" (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
-          <input [(ngModel)]="optKey[i]" type="hidden">
-        </div>
-        <div class="main_right_optTypeDesc">{{typeDesc[i]}}</div>
-        <div class="hidden-field">{{optTypeCode[i]}}</div>
-        <div class="hidden-field">{{ord}}</div>
       </div>
       <div class="main_right_footer">
-        <button class="mb-sm btn-lg btn btn-warning btn-outline b" type="button" (click)="cancel()">取消</button>
-        <button class="mb-sm btn-lg btn btn-primary btn-outline b" type="submit" (click)="addModel(ord)">提交</button>
+        <button class="mb-sm btn-lg btn thc font btn-outline b" type="button" (click)="cancel()">取消</button>
+        <button class="mb-sm btn-lg btn thc btn-thc btn-outline b" type="submit" (click)="addModel(ord)">提交</button>
       </div>
     </div>
   </div>
 </div>
 
-<app-logistics [showAddWindow]="showAddWindow" [indexId]="indexId" [indexData]="indexData" (upDate)="getUpdateResult()" ></app-logistics>
+<app-logistics [showAddWindow]="showAddWindow" [indexId]="indexId" [indexData]="indexData"
+               (upDate)="getUpdateResult()"></app-logistics>
