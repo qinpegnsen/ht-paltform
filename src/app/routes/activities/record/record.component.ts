@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PageEvent} from "../../../shared/directives/ng2-datatable/DataTable";
 import {isNullOrUndefined} from "util";
 import {Page} from "../../../core/page/page";
@@ -9,14 +9,16 @@ import {defineLocale} from "ngx-bootstrap";
 import {ActivitiesService} from "../activities.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {AppComponent} from "../../../app.component";
+import {Observable} from "rxjs/Observable";
 defineLocale('cn', zhCn);
+import 'rxjs/Rx';
 declare var $: any;
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss']
 })
-export class RecordComponent implements OnInit{
+export class RecordComponent implements OnInit,AfterViewInit,OnDestroy{
 
   public logType:any;                 //选择的红包流水类型
   public phone:string='';             //会员手机号
@@ -26,6 +28,10 @@ export class RecordComponent implements OnInit{
   public bsConfig: Partial<BsDatepickerConfig>;
   public minAmount:string='0';            //搜索区间默认的最小值
   public maxAmount:string='1000';           //搜索区间默认的最大值
+  public minInputChange$:any;                 //面额input事件的变化
+  public maxInputChange$:any;                 //面额input事件的变化
+  @ViewChild('minValue') minValue:ElementRef;
+  @ViewChild('maxValue') maxValue:ElementRef;
 
   constructor(private activitiesService: ActivitiesService,
               public patternService: PatternService) {
@@ -38,6 +44,21 @@ export class RecordComponent implements OnInit{
 
   ngOnInit() {
     this.queryRpCustAcctRecAdmin(1);
+  }
+
+  ngAfterViewInit(){
+    let that=this;
+    this.minInputChange$=Observable.fromEvent(this.minValue.nativeElement,'keyup')
+          .filter(e=>e['keyCode']=='13')
+          .subscribe(()=>{that.queryRpCustAcctRecAdmin(1)})
+    this.maxInputChange$=Observable.fromEvent(this.maxValue.nativeElement,'keyup')
+      .filter(e=>e['keyCode']=='13')
+      .subscribe(()=>{that.queryRpCustAcctRecAdmin(1)})
+  }
+
+  ngOnDestroy(){
+    this.minInputChange$.unsubscribe();
+    this.maxInputChange$.unsubscribe();
   }
 
   /**
