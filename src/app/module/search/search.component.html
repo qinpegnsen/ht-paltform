@@ -2,8 +2,8 @@
   <!--单选情况-->
   <ng-container *ngIf="!multiple">
     <div class="_relative single-show">
-      <input class="form-control pr-xl" type="text"
-             [placeholder]="placeholder"
+      <input class="form-control pr-xl" type="text" [disabled]="disabled"
+             [placeholder]="placeholder" [title]="checkedItem?.length > 0?checkedItem[0][textKey]:''"
              [value]="checkedItem?.length > 0?checkedItem[0][textKey]:null" (focus)="showSearchBox()"/>
       <span *ngIf="allowClear && checkedItem?.length > 0" class="clear" (click)="clearChecked()">×</span>
     </div>

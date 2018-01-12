@@ -19,13 +19,13 @@ export class AppSetComponent implements OnInit {
   public items;//获取首页选中模板列表
   public indexTpls: Array<any> = new Array();//选中效果模板ID
   public moduleList: Array<any> = new Array();//获取选中效果模板列表
-  public contentList = [];//获取选中模板的详细信息
+  public contentList: Array<any> = new Array();//获取选中模板的详细信息
   public ord;//每个选中模板的下标
   public phoneIndexId: Array<any> = new Array();//首页模板ID
   public item;//获取首页模板列表
   public curItem;//点击选中首页模板时相对应的详细信息
-  public flag = [];//判断选中首页模板信息的图片遮罩层是否显示
-  public flags = [];//判断选中模板的遮罩层是否显示
+  public flag: Array<any> = new Array();//判断选中首页模板信息的图片遮罩层是否显示
+  public flags: Array<any> = new Array();//判断选中模板的遮罩层是否显示
   public isShowContent = false;//判断选中模板信息是否显示
   public optTypeIndex: Array<any> = new Array();//获取选中模板的下标
   public isEntered: Array<any> = new Array();//获取选中模板后，判断input框是否可以输入
@@ -37,6 +37,7 @@ export class AppSetComponent implements OnInit {
   public updateImgs: Array<any> = new Array();//获取已经上传后的选中模板返回的ID
   public ids: Array<any> = new Array();//提交后选中模板中的每个模板值的ID
   public uploaders: Array<FileUploader> = new Array();//清空选中模板的图片
+  public goodsList: Array<any> = new Array();//商品列表
   public optTypeList: any;//操作类型的列表
   public myImg: any;//上传图片
   public tplImgCount: any;//模板图片数量
@@ -53,7 +54,12 @@ export class AppSetComponent implements OnInit {
   public updateOptTypeCode: Array<any> = new Array();//获取修改时选中模板的操作类型编码
   public updateOptKey: Array<any> = new Array();//获取修改时选中模板的操作内容
 
-  constructor(public submit: SubmitService, public routeInfo: ActivatedRoute, public ajax: AjaxService, public router: Router, public GetUidService: GetUidService, public AppSetService: AppSetService) {
+  constructor(public submit: SubmitService,
+              public routeInfo: ActivatedRoute,
+              public ajax: AjaxService,
+              public router: Router,
+              public GetUidService: GetUidService,
+              public AppSetService: AppSetService) {
   }
 
   ngOnInit() {
@@ -137,16 +143,20 @@ export class AppSetComponent implements OnInit {
     let requestData = {};
     _this.indexTpls = _this.submit.getData(requestUrl, requestData);
     for (let indexTpl = 0; indexTpl < _this.indexTpls.length; indexTpl++) {
+      let tplItem = _this.indexTpls[indexTpl], content: Array<any> = tplItem.indexContentList.map(item => { return item.content;});
       this.moduleList.push({
-        reslut: _this.indexTpls[indexTpl].phoneIndexTpl.tplCheckedImg,
-        tplWidth: _this.indexTpls[indexTpl].phoneIndexTpl.tplWidth,
-        tplHeight: _this.indexTpls[indexTpl].phoneIndexTpl.tplHeight,
+        tplCode: tplItem.tplCode,
+        reslut: tplItem.phoneIndexTpl.tplCheckedImg,
+        tplWidth: tplItem.phoneIndexTpl.tplWidth,
+        tplHeight: tplItem.phoneIndexTpl.tplHeight,
         index: this.moduleList.length + 1,
-        indexData: _this.indexTpls[indexTpl],
-        data: _this.indexTpls[indexTpl].phoneIndexTpl
+        indexData: tplItem,
+        data: tplItem.phoneIndexTpl,
+        content: content
       });
-      _this.phoneIndexId[indexTpl] = _this.indexTpls[indexTpl].indexId;
+      _this.phoneIndexId[indexTpl] = tplItem.indexId;
     }
+    console.log("█ this.moduleList ►►►",  this.moduleList);
   }
 
 
@@ -164,7 +174,8 @@ export class AppSetComponent implements OnInit {
       tplHeight: item.tplHeight,
       index: this.moduleList.length + 1,
       indexData: null,
-      data: item});
+      data: item
+    });
   }
 
   /**
@@ -266,7 +277,7 @@ export class AppSetComponent implements OnInit {
         this.uploaders.push(uploader);
       }
     }
-    _this.show(i-1);
+    _this.show(i - 1);
   }
 
   /**
@@ -299,7 +310,7 @@ export class AppSetComponent implements OnInit {
   /**
    * addUpdateId
    */
-  addUpdateId(i){
+  addUpdateId(i) {
     let _this = this;
     let upid = _this.ids[i];
     if (typeof(upid) != 'undefined') {
@@ -348,37 +359,38 @@ export class AppSetComponent implements OnInit {
   /**
    * 上移下移模板时翻新moduleList
    */
-  fanxin(){
+  fanxin() {
     let _this = this;
     let newModuleList: Array<any> = new Array();
-    for(let k=0;k<_this.moduleList.length;k++){
-      let item=_this.moduleList[k].data;
+    for (let k = 0; k < _this.moduleList.length; k++) {
+      let item = _this.moduleList[k].data;
       newModuleList.push({
         reslut: item.tplCheckedImg,
         tplWidth: item.tplWidth,
         tplHeight: item.tplHeight,
         index: newModuleList.length + 1,
         indexData: _this.moduleList[k].indexData,
-        data: item});
+        data: item
+      });
       _this.phoneIndexId[k] = _this.moduleList[k].indexData.indexId;
     }
-    _this.moduleList=newModuleList
+    _this.moduleList = newModuleList
   }
 
   /**
    * 模板上移
    */
-  moveUp(){
+  moveUp() {
     let _this = this;
-    if(_this.ord>1) {
+    if (_this.ord > 1) {
       let m1 = _this.moduleList[_this.ord - 1];
       let m2 = _this.moduleList[_this.ord - 1 - 1];
       _this.moduleList[_this.ord - 1] = m2;
       _this.moduleList[_this.ord - 1 - 1] = m1;
-      _this.flags[_this.ord-1]=false;
-      _this.flags[_this.ord-1-1]=true;
+      _this.flags[_this.ord - 1] = false;
+      _this.flags[_this.ord - 1 - 1] = true;
       _this.fanxin();
-      _this.ord=_this.ord-1;
+      _this.ord = _this.ord - 1;
     }
 
     _this.ajax.post({
@@ -393,19 +405,20 @@ export class AppSetComponent implements OnInit {
       }
     })
   }
+
   /**
    * 模板下移
    */
-  moveDown(){
+  moveDown() {
     let _this = this;
-    if(_this.ord<_this.moduleList.length) {
-      let m1=_this.moduleList[_this.ord-1];
+    if (_this.ord < _this.moduleList.length) {
+      let m1 = _this.moduleList[_this.ord - 1];
       let m2 = _this.moduleList[_this.ord + 1 - 1];
       _this.moduleList[_this.ord - 1] = m2;
       _this.moduleList[_this.ord + 1 - 1] = m1;
-      _this.flags[_this.ord-1]=false;
-      _this.flags[_this.ord+1-1]=true;
-      _this.ord=_this.ord+1;
+      _this.flags[_this.ord - 1] = false;
+      _this.flags[_this.ord + 1 - 1] = true;
+      _this.ord = _this.ord + 1;
       _this.fanxin();
     }
 
@@ -432,9 +445,9 @@ export class AppSetComponent implements OnInit {
       let imgCount = _this.tplImgCount;
       //校验添加首页模板内容时的操作类型值必填
       for (let n = 0; n < imgCount; n++) {
-        if($('.optKey')[n].value==''){
-          if($($('.optKey')[n]).attr('disabled')=='disabled'){
-          }else{
+        if ($('.optKey')[n].value == '') {
+          if ($($('.optKey')[n]).attr('disabled') == 'disabled') {
+          } else {
             flag = false;
             swal('第' + (n + 1) + '个操作类型值没有填');
             break;
@@ -443,20 +456,23 @@ export class AppSetComponent implements OnInit {
       }
       //校验添加首页模板内容时的操作类型必填
       for (let j = 0; j < imgCount; j++) {
-        if($('.optTypeList')[j].value==''){
+        if ($('.optTypeList')[j].value == '') {
           flag = false;
           swal('第' + (j + 1) + '个操作类型没有选');
           break;
         }
-      };
+      }
+      ;
       //校验添加首页模板内容时的图片必填
       for (let i = 0; i < imgCount; i++) {
         if (_this.uploaders[i].queue.length < 1) {
           flag = false;
           swal('第' + (i + 1) + '个图片未上传');
           break;
-        };
-      };
+        }
+        ;
+      }
+      ;
     }
     if (flag) {
       this.uploadImg()
@@ -481,7 +497,7 @@ export class AppSetComponent implements OnInit {
         if (res.success) {
           _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '', 'success');
-          _this.indexId=res.data.indexId;
+          _this.indexId = res.data.indexId;
           _this.phoneIndexId[_this.ord - 1] = _this.indexId;
           _this.moduleList[_this.ord - 1].indexData = res.data;
         } else {
@@ -617,6 +633,9 @@ export class AppSetComponent implements OnInit {
     );
   }
 
+  getGoodsList() {
+    this.goodsList = []
+  }
 
   /**
    * 图片上传
@@ -682,11 +701,9 @@ export class AppSetComponent implements OnInit {
    * 首页发布
    */
   release() {
-    let me=this;
+    let me = this;
     let url = "/phone/index/release";
-    let data={
-
-    }
+    let data = {}
     swal({
         title: '首页发布后会替换当前使用的首页，你确定要发布吗？',
         // type: 'info',

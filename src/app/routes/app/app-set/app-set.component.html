@@ -31,6 +31,70 @@
     <div class="main_center">
       <div class="main_centerOne">
         <div class="main_centerTwe" *ngFor="let item of moduleList;let i = index">
+          <!--轮播图-->
+          <ng-container *ngIf="item.tplCode == 'lunbotu'">
+            <div (click)="addTplCont(item.data,i + 1)">
+              <carousel [interval]="3000" [noWrap]="false">
+                <slide *ngFor="let slidez of item.content; let index=index" [active]="slidez.active">
+                  <img [src]="slidez" class="img-responsive">
+                </slide>
+              </carousel>
+            </div>
+          </ng-container>
+          <!--五小图-->
+          <ng-container *ngIf="item.tplCode == 'wuxiaotu'">
+            <ul class="wuxiaotu clearfix" (click)="addTplCont(item.data,i + 1)">
+              <li class="img-box" *ngFor="let item of item.content"><img [src]="item" alt=""></li>
+            </ul>
+          </ng-container>
+          <!--最新热点-->
+          <ng-container *ngIf="item.tplCode == 'zuixinredian'"></ng-container>
+          <!--左一右二-->
+          <ng-container *ngIf="item.tplCode == 'zuoyiyouer'"></ng-container>
+          <!--分隔条-->
+          <ng-container *ngIf="item.tplCode == 'fengetiao'">
+            <div class="fengetiao" (click)="addTplCont(item.data,i + 1)">
+              <img *ngFor="let item of item.content" [src]="item" alt="">
+            </div>
+          </ng-container>
+          <!--海报一图-->
+          <ng-container *ngIf="item.tplCode == 'haibaoyitu'">
+            <div class="haibaoyitu" (click)="addTplCont(item.data,i + 1)">
+              <img *ngFor="let item of item.content" [src]="item" alt="">
+            </div>
+          </ng-container>
+          <!--海报二图-->
+          <ng-container *ngIf="item.tplCode == 'haibaoertu'">
+            <ul class="haibaoertu clearfix" (click)="addTplCont(item.data,i + 1)">
+              <li class="img-box" *ngFor="let item of item.content"><img [src]="item" alt=""></li>
+            </ul>
+          </ng-container>
+          <!--海报三图-->
+          <ng-container *ngIf="item.tplCode == 'haibaosantu'">
+            <ul class="haibaosantu clearfix" (click)="addTplCont(item.data,i + 1)">
+              <li class="img-box" *ngFor="let item of item.content"><img [src]="item" alt=""></li>
+            </ul>
+          </ng-container>
+          <!--海报四图-->
+          <ng-container *ngIf="item.tplCode == 'haibaositu'">
+            <ul class="haibaositu clearfix" (click)="addTplCont(item.data,i + 1)">
+              <li class="img-box" *ngFor="let item of item.content"><img [src]="item" alt=""></li>
+            </ul>
+          </ng-container>
+          <!--商品一图-->
+          <ng-container *ngIf="item.tplCode == 'shangpinyitu'"></ng-container>
+          <!--商品二图-->
+          <ng-container *ngIf="item.tplCode == 'shangpinertu'"></ng-container>
+          <!--商品三图-->
+          <ng-container *ngIf="item.tplCode == 'shangpinsantu'"></ng-container>
+          <!--红包-->
+          <ng-container *ngIf="item.tplCode == 'hongbao'">
+            <div class="hongbao" (click)="addTplCont(item.data,i + 1)">
+              <img *ngFor="let item of item.content" [src]="item" alt="">
+            </div>
+          </ng-container>
+
+
           <img src="{{item.reslut}}" (click)="addTplCont(item.data,i + 1)"/>
           <div class="main_centerTwe_one" *ngIf="flags[i]">
             <ul>
@@ -82,11 +146,21 @@
           <div class="main_right_optModel">
             <select class="form-control optTypeList" name="optTypeList" [(ngModel)]="optTypeIndex[i]"
                     (change)="showDesc(i)">
-              <option *ngFor="let item of optTypeList;let optindex=index" [ngValue]="optindex">{{item.optTypeName}}
+              <option *ngFor="let item of optTypeList;let optindex=index" [value]="optindex">{{item.optTypeName}}
               </option>
             </select>
-            <input class="form-control border-b-grey optKey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}"
-                   (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
+            <div class="optKey">
+              <ng-container *ngIf="optTypeCode[i] !== 'goods_detail'">
+                <input class="form-control border-b-grey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}"
+                       (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
+              </ng-container>
+              <ng-container *ngIf="optTypeCode[i] === 'goods_detail'">
+                <app-search [data]="goodsList"
+                            [placeholder]="'选择商品'"
+                            [defaultId]="isEntered[i]=='N'?'':optKey[i]">
+                </app-search>
+              </ng-container>
+            </div>
             <input [(ngModel)]="optKey[i]" type="hidden">
           </div>
           <div class="main_right_optTypeDesc font-gray font12">{{typeDesc[i]}}</div>

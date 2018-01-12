@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input('placeholder') placeholder: string = '';    //默认显示文本
   @Input('defaultId') defaultId: Array<any> = new Array();    //设置选中项的id（或其他），字符串数组
   @Input('multiple') multiple: boolean = false;    //设置多选
+  @Input('disabled') disabled: boolean = false;    //设置是否可编辑
   @Input('allowClear') allowClear: boolean = false;    //单选时，设置是否允许清空
   @Output() selected = new EventEmitter();   //向外输出选中的结果
   @Output() removed = new EventEmitter();   //向外输出取消选中的项
