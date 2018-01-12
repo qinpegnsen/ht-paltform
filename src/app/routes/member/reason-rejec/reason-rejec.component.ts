@@ -23,9 +23,9 @@ export class ReasonRejecComponent implements OnInit {
   @Input('orderId') orderId: string;
   @Input('curPage') curPage: any;
   @Input('count') count: any = {};
-  public reason:string = '';//驳回原因
-  public reasonList:Array<string> = new Array();//选中的驳回原因编号
-  public reasons:Array<string> = [
+  public reason: string = '';//驳回原因
+  public reasonList: Array<string> = new Array();//选中的驳回原因编号
+  public reasons: Array<string> = [
     '姓名有误',
     '身份证号有误',
     '身份证有效期有误',
@@ -38,16 +38,15 @@ export class ReasonRejecComponent implements OnInit {
   ]
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    if (changes['showReasonWindow'] && changes['orderId']) {
+    if (this.showReasonWindow) {
       let me = this;
+      $('.wrapper > section').css('z-index', 200);
       me.images = new Array();
-      this.reason=null;
-      if (this.showReasonWindow && this.orderId && !isNullOrUndefined(this.orderId)) {
-        $('.wrapper > section').css('z-index', 200);
-        me.images.push(me.count.idcardPic1, me.count.idcardPic2, me.count.idcardPic3);
-      }
-      else $('.wrapper > section').css('z-index', 114);
+      me.reasonList = new Array();
+      me.reason = '';
+      me.images.push(me.count.idcardPic1, me.count.idcardPic2, me.count.idcardPic3);
+    }else{
+      $('.wrapper > section').css('z-index', 114);
     }
   }
 
@@ -71,15 +70,17 @@ export class ReasonRejecComponent implements OnInit {
    * @param event
    * @param idx
    */
-  getReasonId(event,idx){
-    if(event.target.checked){
-      this.reasonList.push(this.reasons[idx]);
-    }else{
-      this.reasonList = this.reasonList.filter(item => {
-        return item !== this.reasons[idx];
+  getReasonId(event, idx) {
+    let me=this;
+    if (event.target.checked) {
+      me.reasonList.push(me.reasons[idx]);
+    } else {
+      me.reasonList = me.reasonList.filter(item => {
+        return item !== me.reasons[idx];
       })
     }
-    this.reason = this.reasonList.join('，')+'，请重新提交';
+    if (me.reasonList.length > 0) me.reason = me.reasonList.join('，') + '，请重新提交';
+    else me.reason = '';
   }
 
   /**
@@ -89,12 +90,11 @@ export class ReasonRejecComponent implements OnInit {
   hideWindow(type?: string) {
     let me = this;
     $('.wrapper > section').css('z-index', 114);
-    this.showReasonWindow = false;
+    me.showReasonWindow = false;
     if (isUndefined(type)) type = 'cancel';
-    this.upDate.emit(type);
-    this.reason=null;
+    me.upDate.emit(type);
+    me.reason = null;
   }
-
 
   /**
    * 认证通过
@@ -103,7 +103,7 @@ export class ReasonRejecComponent implements OnInit {
     let me = this;
     let url = '/custAuthInfo/updateState';
     let data = {
-      id:id,
+      id: id,
       state: 'PASS',
     }
     me.submit.putRequest(url, data);
