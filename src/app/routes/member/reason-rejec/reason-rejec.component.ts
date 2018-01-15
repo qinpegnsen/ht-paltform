@@ -35,6 +35,7 @@ export class ReasonRejecComponent implements OnInit {
     '身份证反面照不清晰',
     '手持身份证照片有误',
     '手持身份证照片不清晰',
+    '没有按顺序上传图片',
   ]
 
   ngOnChanges(changes: SimpleChanges): void {
