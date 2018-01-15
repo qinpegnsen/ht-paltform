@@ -448,7 +448,7 @@ export class AddRedPackageComponent implements OnInit {
       this.refactorData();//重构数据
       if(this.moduleListCopy.length==0){
         AppComponent.rzhAlt("info", '请设置红包规则');
-        return
+        return;
       }
       let url = '/rpSetting/addRpSettingBatch';
       let json = {
