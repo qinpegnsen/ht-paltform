@@ -19,7 +19,7 @@
         <button type="button" title="搜索" class="btn thc btn-thc ml align-top pull-right" (click)="queryRpCustAcctRecAdmin(1)">
           <i class="icon-magnifier"></i><span>&nbsp;&nbsp;搜索</span>
         </button>
-        <div class="form-group mb0 col-md-2 pull-right">
+        <div class="form-group mb0 col-md-2 pull-right myWidth">
           <div class="pl0">
             <input type="text" class="form-control border-b-grey" [(ngModel)]="phone"
                    (change)="queryRpCustAcctRecAdmin(1)" maxlength="50" placeholder="请输入要查询的会员手机号">
@@ -29,7 +29,7 @@
                 class="btn thc btn-thc pull-right bar-h3-btn mr ng-scope mr20 pull-right">
           <em class="fa fa-refresh"></em>
         </button>
-        <div class="col-md-2 pull-right clearfix mb">
+        <div class="col-md-2 pull-right clearfix mb myWidth">
           <div class="_picker">
             <div class="input-group">
               <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="dateStr" readonly placeholder="选择查询时间">
