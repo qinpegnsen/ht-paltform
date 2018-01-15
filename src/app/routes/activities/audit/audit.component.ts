@@ -52,12 +52,15 @@ export class AuditComponent implements OnInit {
   }
 
   /**
-   * 发货回调函数
+   * 填写记录回调函数
    * @param data
    */
   getAddRecordData(data) {
     this.currentId = null;
-    if (data.type) this.qeuryAll(this.curState, data.page)
+    if (data.type) {
+      this.qeuryAll(this.curState, data.page);
+      this.getWithDrawTotal();
+    }
   }
 
   /**
@@ -82,7 +85,8 @@ export class AuditComponent implements OnInit {
           id: id
         };
         that.activitiesService.updateStateTODeal(url, data);
-        that.qeuryAll(this.curState, 1)
+        that.qeuryAll(this.curState, 1);
+        that.getWithDrawTotal();
       }
     });
   }

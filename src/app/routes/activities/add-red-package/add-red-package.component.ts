@@ -446,6 +446,10 @@ export class AddRedPackageComponent implements OnInit {
       this.formatSelDate();//获取红包设置的时间
       this.effectiveTimeStr = this.setDate + ' ' + this.setTime;//红包生效的时间
       this.refactorData();//重构数据
+      if(this.moduleListCopy.length==0){
+        AppComponent.rzhAlt("info", '请设置红包规则');
+        return;
+      }
       let url = '/rpSetting/addRpSettingBatch';
       let json = {
         rpSettingStrVOList: this.moduleListCopy

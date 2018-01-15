@@ -39,7 +39,7 @@ export class SiteComponent implements OnInit {
     };
     this.qeuryAll(this.isUse, 1);
     this.queryRpSwitchState();//查询红包开关的状态
-    this.quryRestBalanceAnddays();//查询红包奖池剩余的余额和使用天数
+
   }
 
   /**
@@ -64,6 +64,7 @@ export class SiteComponent implements OnInit {
    */
   isOpen(rpSwitchStare) {
     let that = this;
+    that.quryRestBalanceAnddays();//查询红包奖池剩余的余额和使用天数
     setTimeout(()=>{
       that.switchControll(rpSwitchStare);
     });//事件触发的时候不让他它动，只有在确认后才动

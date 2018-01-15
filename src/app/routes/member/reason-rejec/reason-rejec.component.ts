@@ -41,6 +41,7 @@ export class ReasonRejecComponent implements OnInit {
     if (this.showReasonWindow) {
       let me = this;
       $('.wrapper > section').css('z-index', 200);
+      me.isAgree = 'N';
       me.images = new Array();
       me.reasonList = new Array();
       me.reason = '';
