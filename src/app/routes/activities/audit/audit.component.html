@@ -38,7 +38,7 @@
             <div class="row">
               <div class="col-xs-9 ">
                 <!--<div class="font14 f-bold">领取金额（元）</div>-->
-                <div class="font14">昨日提现总额（元）</div>
+                <div class="font14">昨日申请提现总额（元）</div>
                 <p class="text-md m0">{{amountData?.sumYestodayDraw || '0' | number: '1.2-2'}}</p>
               </div>
               <div class="col-xs-3 text-right">
@@ -87,7 +87,7 @@
           <th class="w12 text-left">
             <rzhDefaultSorter by="id">收款账号</rzhDefaultSorter>
           </th>
-          <th class="w10 text-left">
+          <th class="w5 text-left">
             <rzhDefaultSorter by="id">收款账号开户行</rzhDefaultSorter>
           </th>
           <th class="w8 text-center">
@@ -99,10 +99,10 @@
           <th class="w7 text-center">
             <rzhDefaultSorter by="name">实际提现（元）</rzhDefaultSorter>
           </th>
-          <th class="w10 text-center">
+          <th class="w5 text-center">
             <rzhDefaultSorter by="time">状态</rzhDefaultSorter>
           </th>
-          <th class="w10 text-center" *ngIf="curState=='CR'">
+          <th class="w10 text-center">
             <rzhDefaultSorter by="picture">申请时间</rzhDefaultSorter>
           </th>
           <th class="w10 text-center" *ngIf="curState=='DEAL'">
@@ -127,7 +127,7 @@
           <td>￥&nbsp;{{item.brokerage | number:'1.2-2'}}</td>
           <td  class="thc font">￥&nbsp;{{item.drawMoney-item.brokerage | number:'1.2-2'}}</td>
           <td>{{item.state | rzhState:'2102'}}</td>
-          <td *ngIf="curState=='CR'">{{item.createTime }}</td>
+          <td>{{item.createTime }}</td>
           <td *ngIf="curState=='DEAL'">{{item.dealTime }}</td>
           <td *ngIf="curState=='DONE'||curState=='FAIL'">{{item.doneTime }}</td>
           <td>
