@@ -16,7 +16,7 @@ defineLocale('cn', zhCn);
 })
 export class RpDetailComponent implements OnInit {
 
-  public logType:any;                 //选择的红包流水类型
+  public logType:any='';                 //选择的红包流水类型
   public phone:string='';             //会员手机号
   public custName:string='';          //会员名称
   public dateStr;                      //传查询的时间范围
@@ -37,6 +37,14 @@ export class RpDetailComponent implements OnInit {
   ngOnInit() {
     this.logTypes = this.tools.getEnumDataList('2100');   //会员状态枚举列表
     this.queryRpCustAcctRecAdmin(1);
+  }
+
+  /**
+   * 清空时间
+   */
+  clearTime(){
+    this.dateStr = null;
+    this.queryRpCustAcctRecAdmin(1);// 获取数据
   }
 
   /**
