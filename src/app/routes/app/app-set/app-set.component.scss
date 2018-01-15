@@ -224,19 +224,18 @@
   margin: auto;
   background: white;
   cursor: pointer;
-  img {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .img-box{
+  .img-box {
     float: left;
     position: relative;
+    img {
+      position: absolute;
+    }
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
   ul {
     list-style: none;
@@ -305,41 +304,84 @@
   -o-transform: scale(1.25, 1.25); /* Opera */
 }
 
-.wuxiaotu {
-  list-style: none;
+.wuxiaotu .img-box {
+  width: 20%;
+  height: 22.22%;
+}
+
+.fengetiao .img-box {
+  width: 100%;
+  padding-bottom: 10%; //相对于宽的0.1
+}
+
+.haibaoyitu, .hongbao {
   .img-box {
-    width: 20%;
-    height: 22.22%;
+    width: 100%;
+    padding-bottom: 23%; //相对于宽的0.23
   }
 }
 
-.fengetiao {
-  width: 100%;
-  height: 10%;
+.haibaoertu .img-box {
+  width: 50%;
+  padding-bottom: 21.5%; //相对于宽的0.43
 }
 
-.haibaoyitu {
-  width: 100%;
-  height: 23%;
+.haibaosantu .img-box {
+  width: 33.333%;
+  padding-bottom: 36.666%; //相对于宽的1.1
 }
 
-.haibaoertu {
+.haibaositu .img-box {
+  width: 25%;
+  padding-bottom: 29%; //相对于宽的1.16
+}
+
+.shangpinsantu .img-box {
+  width: 33.333%;
+  padding-bottom: 40%;
+}
+
+.hotspot {
+  height: 30px;
+  overflow: hidden;
+  .hotspot-banner {
+    line-height: 30px;
+    -webkit-animation: hotspot infinite 5s;
+    -o-animation: hotspot infinite 5s;
+    animation: hotspot infinite 5s;
+  }
+}
+
+@keyframes hotspot {
+  0% {
+    transform: translateY(0px)
+  }
+  40% {
+    transform: translateY(0px)
+  }
+  50% {
+    transform: translateY(-30px)
+  }
+  90% {
+    transform: translateY(-30px)
+  }
+  100% {
+    transform: translateY(-60px)
+  }
+}
+
+.zuoyiyouer {
   .img-box {
     width: 50%;
-    height: 11.5%;
+    &:first-child {
+      padding-bottom: 40%;
+    }
+    &:nth-child(2), &:nth-child(3) {
+      padding-bottom: 20%;
+    }
   }
 }
 
-.haibaosantu {
-  .img-box {
-    width: 33.333%;
-    height: 7.666%;
-  }
-}
-
-.haibaositu {
-  .img-box {
-    width: 25%;
-    height: 5.75%;
-  }
+.zuixinredian .img-box {
+  padding-bottom: 9.5%;
 }

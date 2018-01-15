@@ -64,6 +64,7 @@ export class AppSetComponent implements OnInit {
 
   ngOnInit() {
     let _this = this;
+    _this.moduleList = new Array();
     _this.id = this.routeInfo.snapshot.queryParams['id'];
     _this.queryDatas(_this.item);//查询模板列表
     _this.queryData();//获取模板获取操作类型
@@ -143,7 +144,9 @@ export class AppSetComponent implements OnInit {
     let requestData = {};
     _this.indexTpls = _this.submit.getData(requestUrl, requestData);
     for (let indexTpl = 0; indexTpl < _this.indexTpls.length; indexTpl++) {
-      let tplItem = _this.indexTpls[indexTpl], content: Array<any> = tplItem.indexContentList.map(item => { return item.content;});
+      let tplItem = _this.indexTpls[indexTpl], content: Array<any> = tplItem.indexContentList.map(item => {
+        return item.content;
+      });
       this.moduleList.push({
         tplCode: tplItem.tplCode,
         reslut: tplItem.phoneIndexTpl.tplCheckedImg,
@@ -156,7 +159,6 @@ export class AppSetComponent implements OnInit {
       });
       _this.phoneIndexId[indexTpl] = tplItem.indexId;
     }
-    console.log("█ this.moduleList ►►►",  this.moduleList);
   }
 
 
@@ -174,7 +176,7 @@ export class AppSetComponent implements OnInit {
       tplHeight: item.tplHeight,
       index: this.moduleList.length + 1,
       indexData: null,
-      data: item
+      data: item,
     });
   }
 
@@ -192,15 +194,15 @@ export class AppSetComponent implements OnInit {
         /**
          * 点击当前的获取当前的信息，点击其他模板的时清空
          */
-        this.contentList.splice(0, this.contentList.length);//清空选中模板的详细信息
-        this.uploaders.splice(0, this.uploaders.length);//清空选中模板的图片
-        this.contents.splice(0, this.contents.length);//清空选中模板的图片暗码或者内容
-        this.optTypeCode.splice(0, this.optTypeCode.length);//清空选中模板的操作类型编码
-        this.optTypeIndex.splice(0, this.optTypeIndex.length);//清空选中模板的下标
-        this.typeDesc.splice(0, this.typeDesc.length);//清空选中模板的操作类型
-        this.isEntered.splice(0, this.isEntered.length);//清空选中模板的input是否可以输入
-        this.optKey.splice(0, this.optKey.length);//清空选中模板的input中的操作内容
-        this.ids.splice(0, this.ids.length);//提交后选中模板中的每个模板值的ID
+        this.contentList = new Array();//清空选中模板的详细信息
+        this.uploaders = new Array();//清空选中模板的图片
+        this.contents = new Array();//清空选中模板的图片暗码或者内容
+        this.optTypeCode = new Array();//清空选中模板的操作类型编码
+        this.optTypeIndex = new Array();//清空选中模板的下标
+        this.typeDesc = new Array();//清空选中模板的操作类型
+        this.isEntered = new Array();//清空选中模板的input是否可以输入
+        this.optKey = new Array();//清空选中模板的input中的操作内容
+        this.ids = new Array();//提交后选中模板中的每个模板值的ID
 
         /**
          * 查询模板信息说明这个模板已经发布过了
@@ -214,8 +216,9 @@ export class AppSetComponent implements OnInit {
 
           this.optKey[i] = res[i].optKey;//选中模板的input中的操作内容
           this.optTypeCode[i] = res[i].optTypeCode;//选中模板的操作类型编码
-          this.isEntered[i] = res[i].phoneIndexOptType.isEntered;//选中模板后，input框是否可以输入
-          this.typeDesc[i] = res[i].phoneIndexOptType.typeDesc;//选中模板的操作类型
+
+          this.isEntered[i] = res[i].phoneIndexOptType && res[i].phoneIndexOptType.isEntered ? res[i].phoneIndexOptType.isEntered : 'N';//选中模板后，input框是否可以输入
+          this.typeDesc[i] = res[i].phoneIndexOptType && res[i].phoneIndexOptType.typeDesc ? res[i].phoneIndexOptType.typeDesc : '';//选中模板的操作类型
 
           for (let j = 0; j < this.optTypeList.length; j++) {
             if (res[i].optTypeCode == this.optTypeList[j].optTypeCode) {
@@ -229,7 +232,6 @@ export class AppSetComponent implements OnInit {
           }); //初始化上传方法
           this.uploaders.push(uploader);
         }
-        ;
 
       },
       error: (res) => {
@@ -256,15 +258,15 @@ export class AppSetComponent implements OnInit {
       /**
        * 点击当前的获取当前的信息，点击其他模板的时清空
        */
-      _this.contentList.splice(0, _this.contentList.length);//清空选中模板的详细信息
-      _this.uploaders.splice(0, _this.uploaders.length);//清空选中模板的图片
-      _this.contents.splice(0, _this.contents.length);//清空选中模板的图片暗码或者内容
-      _this.optTypeCode.splice(0, _this.optTypeCode.length);//清空选中模板的操作类型编码
-      _this.typeDesc.splice(0, _this.typeDesc.length);//清空选中模板的操作类型
-      _this.isEntered.splice(0, _this.isEntered.length);//清空选中模板的input是否可以输入
-      _this.optKey.splice(0, _this.optKey.length);//清空选中模板的input中的操作内容
-      _this.ids.splice(0, _this.ids.length);//提交后选中模板中的每个模板值的ID
-      _this.optTypeIndex.splice(0, _this.optTypeIndex.length);//选中模板的下标
+      _this.contentList = new Array();//清空选中模板的详细信息
+      _this.uploaders = new Array();//清空选中模板的图片
+      _this.contents = new Array();//清空选中模板的图片暗码或者内容
+      _this.optTypeCode = new Array();//清空选中模板的操作类型编码
+      _this.typeDesc = new Array();//清空选中模板的操作类型
+      _this.isEntered = new Array();//清空选中模板的input是否可以输入
+      _this.optKey = new Array();//清空选中模板的input中的操作内容
+      _this.ids = new Array();//提交后选中模板中的每个模板值的ID
+      _this.optTypeIndex = new Array();//选中模板的下标
 
       _this.tplImgCount = item.tplImgCount;
       _this.tplType = item.tplType;
@@ -363,14 +365,18 @@ export class AppSetComponent implements OnInit {
     let _this = this;
     let newModuleList: Array<any> = new Array();
     for (let k = 0; k < _this.moduleList.length; k++) {
-      let item = _this.moduleList[k].data;
+      let item = _this.moduleList[k].data,
+        itemIndexContentList = _this.moduleList[k].indexData.indexContentList,
+        content: Array<any> = itemIndexContentList.map(it => {return it.content;});
       newModuleList.push({
+        tplCode: item.tplCode,
         reslut: item.tplCheckedImg,
         tplWidth: item.tplWidth,
         tplHeight: item.tplHeight,
         index: newModuleList.length + 1,
         indexData: _this.moduleList[k].indexData,
-        data: item
+        data: item,
+        content: content
       });
       _this.phoneIndexId[k] = _this.moduleList[k].indexData.indexId;
     }
@@ -383,8 +389,8 @@ export class AppSetComponent implements OnInit {
   moveUp() {
     let _this = this;
     if (_this.ord > 1) {
-      let m1 = _this.moduleList[_this.ord - 1];
-      let m2 = _this.moduleList[_this.ord - 1 - 1];
+      let m1 = _this.moduleList[_this.ord - 1];//当前
+      let m2 = _this.moduleList[_this.ord - 1 - 1];//前一个
       _this.moduleList[_this.ord - 1] = m2;
       _this.moduleList[_this.ord - 1 - 1] = m1;
       _this.flags[_this.ord - 1] = false;
@@ -462,7 +468,6 @@ export class AppSetComponent implements OnInit {
           break;
         }
       }
-      ;
       //校验添加首页模板内容时的图片必填
       for (let i = 0; i < imgCount; i++) {
         if (_this.uploaders[i].queue.length < 1) {
@@ -470,9 +475,7 @@ export class AppSetComponent implements OnInit {
           swal('第' + (i + 1) + '个图片未上传');
           break;
         }
-        ;
       }
-      ;
     }
     if (flag) {
       this.uploadImg()
@@ -495,7 +498,8 @@ export class AppSetComponent implements OnInit {
       },
       success: (res) => {
         if (res.success) {
-          _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
+          setTimeout(_ => {_this.ngOnInit()},1000);
+          // _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '', 'success');
           _this.indexId = res.data.indexId;
           _this.phoneIndexId[_this.ord - 1] = _this.indexId;
@@ -512,13 +516,13 @@ export class AppSetComponent implements OnInit {
     /**
      * 清空模板的信息
      */
-    _this.contentList.splice(0, _this.contentList.length);
-    _this.uploaders.splice(0, _this.uploaders.length);
-    _this.contents.splice(0, _this.contents.length);
-    _this.optTypeCode.splice(0, _this.optTypeCode.length);
-    _this.typeDesc.splice(0, _this.typeDesc.length);
-    _this.isEntered.splice(0, _this.isEntered.length);
-    _this.optKey.splice(0, _this.optKey.length);
+    _this.contentList = new Array();
+    _this.uploaders = new Array();
+    _this.contents = new Array();
+    _this.optTypeCode = new Array();
+    _this.typeDesc = new Array();
+    _this.isEntered = new Array();
+    _this.optKey = new Array();
   }
 
 
@@ -564,7 +568,8 @@ export class AppSetComponent implements OnInit {
         },
         success: (res) => {
           if (res.success) {
-            _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
+            setTimeout(_ => {_this.ngOnInit()},1000);
+            // _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
             swal('修改首页模板提交成功！', '', 'success');
           } else {
             swal('修改首页模板提交失败====！', 'error');
@@ -579,19 +584,19 @@ export class AppSetComponent implements OnInit {
       /**
        * 清空模板的信息
        */
-      _this.contentList.splice(0, _this.contentList.length);//清空选中模板的详细信息
-      _this.uploaders.splice(0, _this.uploaders.length);//清空选中模板的图片
-      _this.contents.splice(0, _this.contents.length);//清空选中模板的图片暗码或者内容
-      _this.optTypeCode.splice(0, _this.optTypeCode.length);
-      _this.typeDesc.splice(0, _this.typeDesc.length);
-      _this.isEntered.splice(0, _this.isEntered.length);
-      _this.optKey.splice(0, _this.optKey.length);
-      _this.updateIndexContentIds.splice(0, _this.updateIndexContentIds.length);
-      _this.updateContents.splice(0, _this.updateContents.length);
-      _this.updateOptTypeCode.splice(0, _this.updateOptTypeCode.length);
-      _this.updateOptKey.splice(0, _this.updateOptKey.length);
-      _this.updateIds.splice(0, _this.updateIds.length);
-      _this.updateImgs.splice(0, _this.updateImgs.length);
+      _this.contentList = new Array();//清空选中模板的详细信息
+      _this.uploaders = new Array();//清空选中模板的图片
+      _this.contents = new Array();//清空选中模板的图片暗码或者内容
+      _this.optTypeCode = new Array();
+      _this.typeDesc = new Array();
+      _this.isEntered = new Array();
+      _this.optKey = new Array();
+      _this.updateIndexContentIds = new Array();
+      _this.updateContents = new Array();
+      _this.updateOptTypeCode = new Array();
+      _this.updateOptKey = new Array();
+      _this.updateIds = new Array();
+      _this.updateImgs = new Array();
     }
   }
 
