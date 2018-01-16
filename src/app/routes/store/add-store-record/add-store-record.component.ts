@@ -23,7 +23,6 @@ export class AddStoreRecordComponent implements OnInit {
 
   public showWindow: boolean = false;
   public payWay: string = '';
-  // public failReason:string;//失败原因
   public uploader: FileUploader = new FileUploader({
     url: 'upload/basic/upload',
     itemAlias: "limitFile"
@@ -52,14 +51,15 @@ export class AddStoreRecordComponent implements OnInit {
       $('.wrapper > section').css('z-index', 200);
       this.showWindow = true;
       this.getCommonBankList();
-      this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
+      this.voncher.uuid = null;
+    }else{
+      $('.wrapper > section').css('z-index', 114);
     }
   }
 
   ngOnDestroy(): void {
     $('.wrapper > section').css('z-index', 114);
   }
-
 
   constructor(public submit: SubmitService,
               public tools: RzhtoolsService,
@@ -68,17 +68,21 @@ export class AddStoreRecordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.payWayList = this.tools.getEnumDataList('1803');
+    this.payWayList = this.tools.getEnumDataList('1803');//转账方式
+    this.yesOrNo = this.tools.getEnumDataList('1001');  // 商品审核是否通过
   }
 
+
   /**
-   * 监听图片选择
-   * @param $event
+   * 获取常用银行列表
    */
-  fileChangeListener() {
-    // 当选择了新的图片的时候，把老图片从待上传列表中移除
-    if (this.uploader.queue.length > 1) this.uploader.queue[0].remove();
-    this.myImg = true;  //表示已经选了图片
+  getCommonBankList() {
+    let url = '/datadict/querryDatadictList';
+    let data = {
+      code: 'common_use_bank_name'
+    }
+    let banks = this.submit.getRequest(url, data);
+    if (!isNullOrUndefined(banks)) this.commomBanks = banks.voList;
   }
 
 
@@ -96,34 +100,6 @@ export class AddStoreRecordComponent implements OnInit {
   }
 
   /**
-   * 添加完成提交表单
-   */
-  addFinished() {
-    let me = this;
-    if (me.isAgree == 'Y') {
-      me.voncher.voucherUrl = null;
-      // me.uploader.queue = [];
-      me.upLoadImg(); //上传图片及提交数据
-    } else {
-      me.submit.postRequest('/rpCustWithdraw/updateStateToFail', {id: me.curId, failReason: me.failReason});
-      // this.uploader.queue = [];
-      me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
-    }
-  }
-
-  /**
-   * 获取常用银行列表
-   */
-  getCommonBankList() {
-    let url = '/datadict/querryDatadictList';
-    let data = {
-      code: 'common_use_bank_name'
-    }
-    let banks = this.submit.getRequest(url, data);
-    if (!isNullOrUndefined(banks)) this.commomBanks = banks.voList;
-  }
-
-  /**
    * 关闭当前窗口，向父页面传递信息
    */
   hideWindow(type?: boolean) {
@@ -131,11 +107,11 @@ export class AddStoreRecordComponent implements OnInit {
     $('.wrapper > section').css('z-index', 114);
     this.showWindow = false;
     if (isUndefined(type)) type = false;
-    this.addRecord.emit({
+    me.addRecord.emit({
       type: type,
       page: me.page
     })// 向外传值
-    this.voncher = {
+    me.voncher = {
       id: '',
       payBank: '',
       payAcct: '',
@@ -144,8 +120,8 @@ export class AddStoreRecordComponent implements OnInit {
       voucherUrl: '',
       uuid: null
     };//清空数据
-    this.failReason='';//清空数据
-    this.changeIsAgree('N');//清空数据
+    me.failReason='';//失败原因清空
+    me.changeIsAgree('N');//是否到帐的判断
   }
 
   /**
@@ -190,6 +166,16 @@ export class AddStoreRecordComponent implements OnInit {
   }
 
   /**
+   * 监听图片选择
+   * @param $event
+   */
+  fileChangeListener() {
+    // 当选择了新的图片的时候，把老图片从待上传列表中移除
+    if (this.uploader.queue.length > 1) this.uploader.queue[0].remove();
+    this.myImg = true;  //表示已经选了图片
+  }
+
+  /**
    * 提交数据，刷新父当前页组件数据
    * method: post
    * @param submitUrl
@@ -215,7 +201,7 @@ export class AddStoreRecordComponent implements OnInit {
       id:me.curId,
       failReason:me.failReason
     }
-    let result = this.submit.postRequest(url,data);
+    let result = me.submit.postRequest(url,data);
     me.hideWindow(true)// 关闭当前窗口，向父页面传递信息
   }
 }

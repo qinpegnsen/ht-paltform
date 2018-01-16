@@ -9,34 +9,26 @@
       <form class="form-validate form-horizontal" #addVoncher="ngForm">
         <dl class="bb m0 clearfix">
         <dt class="col-xs-3"><i class="main-red font16">*</i> 收款人姓名：</dt>
-        <dd class="orderId-color col-xs-9">
-          <div class="col-xs-8">
-            {{name}}
-          </div>
+        <dd class="col-xs-9 agree-info font18">
+           <span>{{name}}</span>
         </dd>
       </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i class="main-red font16">*</i> 收款人账户：</dt>
-          <dd class="orderId-color col-xs-9">
-            <div class="col-xs-8">
-              {{acct}}
-            </div>
+          <dd class="col-xs-9 agree-info font22">
+              <span>{{acct}}</span>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i class="main-red font16">*</i> 收款人开户行：</dt>
-          <dd class="orderId-color col-xs-9">
-            <div class="col-xs-8">
-             {{bank}}
-            </div>
+          <dd class="col-xs-9 agree-info font18">
+            <span>{{bank}}</span>
           </dd>
         </dl>
         <dl class="bb m0 clearfix">
           <dt class="col-xs-3"><i class="main-red font16">*</i>提现金额：</dt>
-          <dd class="orderId-color col-xs-9">
-            <div class="col-xs-8">
-              {{drawMoney}}
-            </div>
+          <dd class="col-xs-9 agree-info font22">
+             <span>￥&nbsp;&nbsp;{{drawMoney}}</span>
           </dd>
         </dl>
       </form>

@@ -6,7 +6,6 @@
       <span class="f-bold thc font">汇款记录</span>
       <div class="popup-colse unselectable" (click)="hideWindow()">×</div>
     </div>
-
     <div class="pop add-con font12 w100">
       <dl class="bb m0 clearfix">
         <dt class="col-xs-3"> 是否到账：</dt>
@@ -125,7 +124,7 @@
     <div class="panel-footer text-right">
       <button class="ml btn btn-default mr  thc font b" (click)="hideWindow()">放弃操作</button>
       <button class="ml btn btn-info thc bg b" *ngIf="showRecord" [disabled]="!addVoncher.form.valid || !myImg"
-              (click)="addFinished()">确认提交
+              (click)="upLoadImg()">确认提交
       </button>
       <button class="ml btn btn-info thc bg b" *ngIf="!showRecord" [disabled]="!addVoncher.form.valid" (click)="fail()">确认提交
       </button>

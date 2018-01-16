@@ -2,6 +2,47 @@
   提现记录
 </div>
 <div class="panel panel-danger">
+  <div class="pt-lg ng-scope">
+    <div class="search-group ml-xl mb align-top">
+      <span class="search-title">收款人姓名：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.bacctName"
+               class="form-control border-b-grey"
+               (change)="queryDatas(1)" placeholder="收款人姓名">
+      </div>
+    </div>
+    <div class="search-group ml-xl mb align-top">
+      <span class="search-title">提现状态：</span>
+      <div class="search-main">
+        <select class="form-control" name="goodsAudit" [(ngModel)]="query.state" (change)="queryDatas(1)">
+          <ng-container *ngFor="let item of curMenus">
+            <option [value]="item.key">{{item.val}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="tag-dib">
+      <div class="place-time clearfix mb ml-xl">
+        <span class="_title">创建时间：</span>
+        <div class="_picker">
+          <div class="input-group">
+  <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="myTime" readonly placeholder="选择查询时间">
+  <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" title="搜索" (click)="queryDatas(1)"
+              class="btn thc btn-thc ml align-top">
+        <i class="icon icon-magnifier "></i>
+        <span>&nbsp;搜索</span>
+      </button>
+      <button type="button" title="重置查询" (click)="resetQuery()"
+              class="btn thc btn-thc ml align-top">
+        <i class=" fa fa-refresh "></i>
+        <span>&nbsp;重置查询</span>
+      </button>
+    </div>
+  </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
            (pageChange)="queryDatas(1,$event)">
@@ -47,7 +88,7 @@
           <td class="text-left">{{item.bacctName}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
-          <td><span class="main-red pull-right">¥{{item.drawMoney}}</span></td>
+          <td><span class="main-red">¥{{item.drawMoney | number: '1.2-2' }}</span></td>
           <td>{{item.payWay | rzhState: '1803'}}</td>
           <td>
             <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"

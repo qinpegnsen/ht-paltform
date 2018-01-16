@@ -11,33 +11,56 @@
 </div>
 <div class="panel panel-danger">
   <div class="pt-lg ng-scope">
-      <div class="search-group ml-xl mb">
-        <span class="search-title">提现状态：</span>
-        <div class="search-main">
-          <select class="form-control" name="goodsAudit" [(ngModel)]="query.state" (change)="queryDatas(1)">
-            <option value="">全部</option>
-            <ng-container *ngFor="let item of states">
-              <option *ngIf="item.key!='DONE'" [value]="item.key">{{item.val}}</option>
-            </ng-container>
-          </select>
-        </div>
+    <div class="search-group ml-xl mb align-top">
+      <span class="search-title">收款人姓名：</span>
+      <div class="search-main">
+        <input type="text" [(ngModel)]="query.bacctName"
+               class="form-control border-b-grey"
+               (change)="queryDatas(this.curState,1)" placeholder="收款人姓名">
       </div>
     </div>
+    <div class="tag-dib">
+      <div class="place-time clearfix mb ml-xl">
+        <span class="_title">申请时间：</span>
+        <div class="_picker">
+          <div class="input-group">
+            <input class="form-control" bsDaterangepicker [bsConfig]="bsConfig" #dpr="bsDaterangepicker" [(ngModel)]="myTime" readonly placeholder="选择查询时间">
+            <span class="btn input-group-addon fa fa-calendar" (click)="dpr.show()"></span>
+          </div>
+        </div>
+      </div>
+      <button type="button" title="搜索" (click)="queryDatas(this.curState,1)"
+              class="btn thc btn-thc ml align-top">
+        <i class="icon icon-magnifier "></i>
+        <span>&nbsp;搜索</span>
+      </button>
+      <button type="button" title="重置查询" (click)="resetQuery()"
+              class="btn thc btn-thc ml align-top">
+        <i class=" fa fa-refresh "></i>
+        <span>&nbsp;重置查询</span>
+      </button>
+    </div>
+    </div>
   <div class="panel-body">
+    <ul class="order-guide list-unstyled clearfix bb">
+      <li class="pull-left thc" [class.font]="curState=='CR'" [class.bb]="curState=='CR'"
+          (click)="queryDatas('CR',1)">待处理
+      </li>
+      <li class="pull-left thc" [class.font]="curState=='DEAL'" [class.bb]="curState=='DEAL'"
+          (click)="queryDatas('DEAL',1)">处理中
+      </li>
+    </ul>
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
-           (pageChange)="queryDatas(1,$event)">
+           (pageChange)="queryDatas('',1,$event)">
       <thead>
       <tr>
-        <th class="unselectable text-center w5">
-          <rzhDefaultSorter by="sort"></rzhDefaultSorter>
-        </th>
         <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="bacctName">收款人姓名</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="acct">收款人账户</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-left">
+        <th class="col-md-2 unselectable text-left">
           <rzhDefaultSorter by="bank">收款账户开户行</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -47,9 +70,12 @@
           <rzhDefaultSorter by="state">提现状态</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
-          <rzhDefaultSorter by="time">时间</rzhDefaultSorter>
+          <rzhDefaultSorter by="time">申请时间</rzhDefaultSorter>
         </th>
-        <th class="col-md-2 unselectable text-center">
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="time">处理时间</rzhDefaultSorter>
+        </th>
+        <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="manage">管理操作</rzhDefaultSorter>
         </th>
       </tr>
@@ -57,15 +83,16 @@
       <tbody>
       <ng-container *ngFor="let item of dataTable.data;let i = index">
         <tr class="text-center">
-          <td><i class="icon icon-arrow-down thc cursor-p" [class.font]="detail[i]" (click)="showDetail(i)"></i></td>
           <td class="text-left">{{item.bacctName}}</td>
           <td class="text-left">{{item.acct}}</td>
           <td class="text-left">{{item.bank}}</td>
           <td><span class="main-red">¥&nbsp;&nbsp;{{item.drawMoney}}</span></td>
           <td>{{item.state | rzhState: '1802'}}</td>
           <td>
-            <span *ngIf="item.state=='CR'">{{item.createTime}}</span>
-            <span *ngIf="item.state=='DEAL'">{{item.dealTime}}</span>
+            <span>{{item.createTime}}</span>
+          </td>
+          <td>
+            <span>{{item.dealTime}}</span>
           </td>
           <td>
             <ng-container *ngIf="item.state=='CR'">
@@ -79,27 +106,6 @@
             </ng-container>
           </td>
         </tr>
-
-        <tr *ngIf="detail[i]">
-          <td class="p0" colspan="11">
-            <ng-container *ngIf="item.createTime">
-              <div class="bg-table special text-left pl">
-                <span class="">申请时间：</span> <span>{{item.createTime}}</span>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="item.dealTime">
-              <div class="bg-table special text-left pl">
-                <span class="">处理时间：</span> <span>{{item.dealTime}}</span>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="item.doneTime">
-              <div class="bg-table special text-left pl">
-                <span class="">完成时间：</span> <span>{{item.doneTime}}</span>
-              </div>
-            </ng-container>
-          </td>
-        </tr>
-
       </ng-container>
       </tbody>
       <tfoot>

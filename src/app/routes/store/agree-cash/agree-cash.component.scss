@@ -33,10 +33,6 @@
   display: inline-block;
 }
 
-.add-voncher .orderId-color {
-  color: #6ec0ff;
-}
-
 .add-voncher .mask {
   background-color: rgba(0, 0, 0, 0.6);
 }
@@ -46,4 +42,8 @@
   max-width: 420px;
   min-height: 60px;
   max-height: 80px;
+}
+.agree-info {
+  height: 47px;
+  line-height: 27px;
 }
