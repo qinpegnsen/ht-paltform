@@ -116,7 +116,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       else this.selected.emit(this.checkedItem);// 向外传值，结果是一个对象数据，包含编码和值
       this.hideSearchBox();
     } else {
-      if (!this.multiple) this.checkedItem[0] = item, this.hideSearchBox();
+      if (!this.multiple) this.checkedItem[0] = item, this.hideSearchBox(),this.selected.emit(this.checkedItem);
       else {
         let hadItem: boolean = this.checkedItem.some(it => {
           return it[this.idKey] === item[this.idKey]
