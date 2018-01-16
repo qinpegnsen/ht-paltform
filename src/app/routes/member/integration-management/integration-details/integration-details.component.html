@@ -17,13 +17,20 @@
                [(ngModel)]="phone" (change)="qeuryAllService(1)" placeholder="请输入要查询的会员的手机号">
       </div>
     </div>
-    <div class="search-group">
-      <span class="search-title">时间范围：</span>
-      <div class="search-main">
-        <input placeholder="" type="text" class="form-control" bsDaterangepicker #dpr="bsDaterangepicker"
-               [bsConfig]="bsConfig" [(ngModel)]="myTime" readonly>
+    <div class="tag-dib">
+      <div class="search-group">
+        <span class="search-title">时间范围：</span>
+        <div class="search-main">
+          <input placeholder="请选择时间范围" type="text" class="form-control" bsDaterangepicker #dpr="bsDaterangepicker"
+                 [bsConfig]="bsConfig" [(ngModel)]="myTime" readonly>
+        </div>
       </div>
+      <button type="button" title="重置时间" (click)="clearTime()"
+              class="btn thc btn-thc pull-right bar-h3-btn mr ng-scope ml pull-right">
+        <em class="fa fa-refresh"></em>
+      </button>
     </div>
+
     <div class="tag-dib">
       <div class="search-group">
         <span class="search-title">消费类型：</span>
@@ -74,7 +81,7 @@
       <tr *ngFor="let count of dataTable.data;let x=index" class="text-center">
         <td>{{x+1}}</td>
         <td class="text-left">{{count.custName}}</td>
-        <td>{{count.name}}</td>
+        <td [ngClass]="{'font-gray':!count.name}">{{count.name || '未填写'}}</td>
         <td>{{count.phone}}</td>
         <td *ngIf="count.coin<0" class="red">
           {{count.coin}}

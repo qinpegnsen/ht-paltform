@@ -10,8 +10,8 @@
 .deliver-order ._popup {
   background-color: #fff;
   position: relative;
-  width: 800px;
-  top: 5%;
+  width: 1200px;
+  top: 15%;
   margin: auto;
   z-index: 300;
 }
@@ -38,19 +38,12 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.deliver-info {
-  border: 1px dashed #FEC500;
-  background-color: #FFFCE9;
-}
-
-.deliver-info dl {
+.deliver-box dl {
   margin-bottom: 0;
 }
 
-.deliver-info dt, .deliver-info dd {
-  padding: 3px;
-  border: none;
-  line-height: 30px;
+.deliver-box dd {
+  height: 42px;
 }
 
 .deliver-order .remark {
@@ -66,8 +59,7 @@
 }
 
 .reason {
-  margin-top:-14px;
-  margin-bottom:3px;
+  margin-top: -17px;
 }
 
 .item-head {
@@ -76,7 +68,7 @@
   text-align: left;
 }
 
-.c-radio.c-radio-nofont {
+.c-radio .c-radio-nofont {
   width: 55px;
 }
 
@@ -86,21 +78,44 @@
 
 .reason-unpass {
   height: 56px;
-  padding:6px 12px!important;
+  padding: 6px 12px !important;
 }
 
-.pr-14 {
-  padding-right: 20px !important;
-}
-
-.fw{
+.fw {
   font-weight: bold;
 }
 
-.h90{
-  height: 90px;
+.h250 {
+  height: 250px !important;
 }
-.checkbox{
+
+.checkbox {
   margin-top: 0;
   margin-bottom: 5px;
+}
+
+.deliver-order dd {
+  padding: 0 0 0 12px;
+}
+
+.lh-42 {
+  line-height: 42px;
+}
+
+.reject-info {
+  width: 400px;
+  background: #fff;
+  height: 570px
+}
+
+.h80 {
+  height: 80px !important;
+}
+
+.w800 {
+  width: 800px
+}
+
+.panel-footer {
+  border-top: 0 !important;
 }

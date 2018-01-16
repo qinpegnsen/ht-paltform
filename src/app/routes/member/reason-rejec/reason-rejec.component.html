@@ -8,63 +8,87 @@
     </div>
     <!--表单-->
     <div class="pop deliver-box font12 w100">
-      <div class="font12 p-sm">
-        <span>身份证号：<span class="font24 fw">{{count.idcard}}</span></span>
-        <span class="pl-xl">姓名：<span class=" fw font18">{{count.name}}</span></span>
-        <span *ngIf="count.endTime!=null" class="pl-xl">有效期：<span
-          class="font24 fw">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;至 &nbsp;&nbsp;<span
-          class="font24 fw">{{count.endTime | date:"yyyy-MM-dd"}}</span></span>
-        <span *ngIf="count.endTime==null" class="pl-xl">有效期：<span
-          class="font24 fw">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;至&nbsp;&nbsp; <span
-          class="font18 fw">长期</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      </div>
-      <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="800"
-                    [height]="470"></e-ngx-viewer>
-      <ng-container *ngIf="count.state=='AUDIT'">
-        <dl class="bb m0 clearfix item-head p0">
-          <dt class="col-xs-3">是否通过：</dt>
-          <dd class="orderId-color col-xs-9">
-            <div class="col-xs-8 radio-brand">
-            <span class="radio c-radio c-radio-nofont _myInline m0 pull-left" *ngFor="let item of yesOrNo">
-              <label>
-                <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
-                       (click)="changeIsAgree(isAgree)"/>
-                <span class="fa fa-circle"></span>{{item.val}}
-              </label>
-            </span>
-            </div>
+      <div class="font12 p-sm pull-right reject-info">
+        <dl class="clearfix bb">
+          <dt class="col-xs-3">身份证号：</dt>
+          <dd class="col-xs-9">
+            <span class="font24 ">{{count.idcard}}</span>
           </dd>
         </dl>
-        <dl class="bb m0 clearfix p0" *ngIf="isAgree=='N'">
-          <dt class="col-xs-3 lh34 pr-14 "><i class="main-red font16">* </i>驳回原因:</dt>
-          <dd class="orderId-color col-xs-9 font14 reason-unpass">
-            <input type="text" class="form-control" placeholder="请输入驳回原因" name="reason" required
-                   #verifyReason="ngModel" [(ngModel)]="reason">
+        <dl class="clearfix bb">
+          <dt class="col-xs-3">姓名：</dt>
+          <dd class="col-xs-9">
+            <span class="font18 lh-42">{{count.name}}</span>
           </dd>
-          <div [hidden]="verifyReason.valid || verifyReason.pristine"
-               class="col-sm-9 pull-right text-danger reason">
-            请输入或选择驳回原因
+        </dl>
+        <dl class="clearfix bb" *ngIf="count.endTime">
+          <dt class="col-xs-3">有效期：</dt>
+          <dd class="col-xs-9">
+            <span
+              class="font24">{{count.startTime | date:"yyyy-MM-dd"}}</span> &nbsp;&nbsp;<span class="font18">至</span>
+            &nbsp;&nbsp;<span
+            class="font24">{{count.endTime | date:"yyyy-MM-dd"}}</span>
+          </dd>
+        </dl>
+        <dl class="clearfix bb" *ngIf="!count.endTime">
+          <dt class="col-xs-3">有效期：</dt>
+          <dd class="col-xs-9">
+           <span
+             class="font24">{{count.startTime | date:"yyyy-MM-dd"}}</span>&nbsp;&nbsp;<span class="font18">至</span>&nbsp;&nbsp;
+            <span
+              class="font18">长期</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </dd>
+        </dl>
+        <ng-container *ngIf="count.state=='AUDIT'">
+          <dl class="bb m0 clearfix item-head p0">
+            <dt class="col-xs-3">是否通过：</dt>
+            <dd class="orderId-color col-xs-9">
+              <div class="col-xs-8 radio-brand mt">
+        <span class="radio c-radio c-radio-nofont _myInline m0 pull-left" *ngFor="let item of yesOrNo">
+        <label class="mr-lg">
+        <input type="radio" name="isPass" [value]="item.key" [(ngModel)]="isAgree"
+               (click)="changeIsAgree(isAgree)"/>
+        <span class="fa fa-circle"></span>{{item.val}}
+        </label>
+        </span>
+              </div>
+            </dd>
+          </dl>
+          <dl class="bb m0 clearfix p0 h80" *ngIf="isAgree=='N'">
+            <dt class="col-xs-3 lh34"><i class="main-red font16">* </i>驳回原因 :</dt>
+            <dd class="orderId-color col-xs-9 font14 reason-unpass h80">
+           <textarea class="form-control" [(ngModel)]="reason" placeholder="请输入或选择驳回原因" name="reason" required
+                     #verifyReason="ngModel"></textarea>
+            </dd>
+            <div [hidden]="verifyReason.valid || verifyReason.pristine"
+                 class="col-sm-9 pull-right text-danger reason">
+              请输入或选择驳回原因
+            </div>
+          </dl>
+          <dl class="bb m0 clearfix p0 h250" *ngIf="isAgree=='N'">
+            <dt class="col-xs-3 lh34 h90">快速选择驳回原因：</dt>
+            <dd class="orderId-color col-xs-9 font14 reason-unpass h250">
+              <div class="checkbox c-checkbox d-play" *ngFor="let item of reasons; let i = index;">
+                <label class="mr-lg">
+                  <input type="checkbox" (change)="getReasonId($event,i)"/> <span class="fa fa-check"></span>
+                  {{item}}
+                </label>
+              </div>
+            </dd>
+          </dl>
+          <div class="panel-footer text-right">
+            <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
+            <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='Y'" (click)="access(count.id)">确认提交</button>
+            <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='N'" type="button" (click)="delivery(updata.value)"
+                    [disabled]="!updata.form.valid">确认提交
+            </button>
           </div>
-        </dl>
-        <dl class="bb m0 clearfix p0 h90" *ngIf="isAgree=='N'">
-          <dt class="col-xs-3 lh34 h90">快速选择驳回原因：</dt>
-          <dd class="orderId-color col-xs-9 font14 reason-unpass h90">
-            <div class="checkbox c-checkbox d-play" *ngFor="let item of reasons; let i = index;">
-              <label class="mr-lg">
-                <input type="checkbox" (change)="getReasonId($event,i)"/> <span class="fa fa-check"></span>
-                {{item}}
-              </label>
-            </div>
-          </dd>
-        </dl>
-        <div class="panel-footer text-right">
-          <button class="btn btn-default ml thc font b" type="button" (click)="hideWindow()">放弃操作</button>
-          <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='Y'" (click)="access(count.id)">确认提交</button>
-          <button class="ml btn btn-info thc bg b" *ngIf="isAgree=='N'" type="button" (click)="delivery(updata.value)"
-                  [disabled]="!updata.form.valid">确认提交
-          </button>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
+      <div class="pull-left w800">
+        <e-ngx-viewer (ready)="imageViewerReady($event)" [model]="'image'" [source]="images" [width]="800"
+                      [height]="570"></e-ngx-viewer>
+      </div>
     </div>
   </form>
 </div>

@@ -66,4 +66,12 @@ export class IntegrationDetailsComponent implements OnInit {
     let result = me.submit.getData(url,data);
     me.data = new Page(result);
   }
+
+  /**
+   * 清空时间
+   */
+  clearTime(){
+    this.myTime = null;
+    this.qeuryAllService(1);// 获取数据
+  }
 }

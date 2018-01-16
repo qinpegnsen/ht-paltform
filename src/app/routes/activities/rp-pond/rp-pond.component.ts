@@ -197,7 +197,7 @@ export class RpPondComponent implements OnInit {
     let url = "/rpAccountRec/queryRpAccountRecAdmin";
     let data = {
       curPage: activePage,
-      pageSize: 10,
+      pageSize: 25,
       epCode: this.selectEnterCode,
       epSubname: this.epSubname,
       storeCode: this.storeCode,
