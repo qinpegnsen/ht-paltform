@@ -83,7 +83,7 @@ export class RecordComponent implements OnInit,AfterViewInit,OnDestroy{
     };
     let data={
       curPage:activePage,
-      pageSize:15,
+      // pageSize:15,
       logType:'DRAW',//抽奖、中奖记录
       phone:this.phone,
       custName:this.custName,
