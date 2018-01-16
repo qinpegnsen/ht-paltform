@@ -82,7 +82,7 @@ export class SiteComponent implements OnInit {
     }, function (isConfirm) {
       if (isConfirm) {
         if (that.rpSwitchStare == 'N') {
-          let url = '/redSchedulingAudit/updateRpDrawOpen';
+          let url = '/rpDrawSwitch/updateRpDrawOpen';
           let data = {
             state: 'Y'
           };
@@ -127,7 +127,7 @@ export class SiteComponent implements OnInit {
       confirmButtonColor: "#ec6c62"
     }, function (isConfirm) {
       if (isConfirm) {
-        let url = '/redSchedulingAudit/updateRpDrawClose';
+        let url = '/rpDrawSwitch/updateRpDrawClose';
         let data = {
           state: 'N'
         };
@@ -171,7 +171,7 @@ export class SiteComponent implements OnInit {
    * 查询红包按钮当前的状态
    */
   queryRpSwitchState() {
-    let url = '/redSchedulingAudit/loadRpDrawState';
+    let url = '/rpDrawSwitch/loadRpDrawState';
     let data = {};
     this.rpSwitchStare = this.activitiesService.RpSwitchState(url, data);
     if(this.rpSwitchStare == 'N') {
@@ -185,7 +185,7 @@ export class SiteComponent implements OnInit {
    * 查询红包奖池余额和剩余天数的信息
    */
   quryRestBalanceAnddays() {
-    let url = '/redSchedulingAudit/residueBalanceUseDays';
+    let url = '/rpDrawSwitch/residueBalanceUseDays';
     let data = {};
     this.rpPondReset = this.activitiesService.restBalanceAnddays(url, data);
   }
