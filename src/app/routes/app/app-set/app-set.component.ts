@@ -64,17 +64,21 @@ export class AppSetComponent implements OnInit {
 
   ngOnInit() {
     let _this = this;
-    _this.moduleList = new Array();
     _this.id = this.routeInfo.snapshot.queryParams['id'];
     _this.queryDatas(_this.item);//查询模板列表
     _this.queryData();//获取模板获取操作类型
+    _this.moduleList = new Array();
     _this.queryTplList();//查询选中效果模板列表
+    _this.queryAllGoods();//查询出所有商品
   }
 
   // 取消
   cancel() {
     let _this = this;
     _this.isShowContent = false;//点击取消时选中模板的详细信息隐藏
+    this.flags = this.flags.map(it => {
+      return it = false;
+    });
   }
 
   /*
@@ -287,11 +291,10 @@ export class AppSetComponent implements OnInit {
    * @param i
    */
   show(i) {
+    this.flags = this.flags.map(it => {
+      return it = false;
+    });
     this.flags[i] = true;
-    for (let j = 0; j < this.flags.length; j++) {
-      this.flags[j] = false;
-      this.flags[i] = true;
-    }
   }
 
   /**
@@ -321,16 +324,11 @@ export class AppSetComponent implements OnInit {
   }
 
   /**
-   * 监听模板类型操作的输入框
-   * @param event
-   * @param i
+   * 选择完商品
    */
-  changeInputValue(event, i) {
-    let _this = this;
-    _this.optKey[i] = event.target.value;
-
-    _this.addUpdateId(i);
-
+  selectedGoods(event,i) {
+    this.optKey[i] = event[0].goodsBaseCode;
+    this.addUpdateId(i);
   }
 
   /**
@@ -367,7 +365,9 @@ export class AppSetComponent implements OnInit {
     for (let k = 0; k < _this.moduleList.length; k++) {
       let item = _this.moduleList[k].data,
         itemIndexContentList = _this.moduleList[k].indexData.indexContentList,
-        content: Array<any> = itemIndexContentList.map(it => {return it.content;});
+        content: Array<any> = itemIndexContentList.map(it => {
+          return it.content;
+        });
       newModuleList.push({
         tplCode: item.tplCode,
         reslut: item.tplCheckedImg,
@@ -498,7 +498,10 @@ export class AppSetComponent implements OnInit {
       },
       success: (res) => {
         if (res.success) {
-          setTimeout(_ => {_this.ngOnInit()},1000);
+          setTimeout(_ => {
+            _this.moduleList = new Array();
+            _this.queryTplList();
+          }, 1000);
           // _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
           swal('添加首页模板提交成功！', '', 'success');
           _this.indexId = res.data.indexId;
@@ -533,9 +536,7 @@ export class AppSetComponent implements OnInit {
    * 3.把修改后的模板信息再push到模板信息中然后发布
    */
   updateContent() {
-    let _this = this;
-    let flag = true;
-    let uplength = _this.updateIds.length;
+    let _this = this, flag = true, uplength = _this.updateIds.length;
     if (uplength > 0) {
       for (let h = 0; h < uplength; h++) {
         let updateIndex = _this.updateIds[h];
@@ -568,7 +569,10 @@ export class AppSetComponent implements OnInit {
         },
         success: (res) => {
           if (res.success) {
-            setTimeout(_ => {_this.ngOnInit()},1000);
+            setTimeout(_ => {
+              _this.moduleList = new Array();
+              _this.queryTplList();
+            }, 1000);
             // _this.router.navigate(['/main/app/app-set'], {replaceUrl: true}); //路由跳转
             swal('修改首页模板提交成功！', '', 'success');
           } else {
@@ -580,7 +584,7 @@ export class AppSetComponent implements OnInit {
         }
       })
 
-      _this.isShowContent = false;
+      _this.cancel();
       /**
        * 清空模板的信息
        */
@@ -646,9 +650,7 @@ export class AppSetComponent implements OnInit {
    * 图片上传
    */
   uploadImg() {
-    let me = this;
-    let i;
-    let imgCount = me.optTypeCode.length;
+    let me = this, i, imgCount = me.optTypeCode.length;
     for (i = 0; i < imgCount; i++) {
       /**
        * 构建form时，传入自定义参数
@@ -722,6 +724,24 @@ export class AppSetComponent implements OnInit {
         me.AppSetService.release(url, data);
       }
     );
+  }
+
+  public queryAllGoods() {
+    this.ajax.get({
+      url: '/goodsQuery/queryAll',
+      async: false,
+      success: (data) => {
+        let info = data.info;
+        if (data.success) {
+          this.goodsList = data.data;
+        } else {
+          AppComponent.rzhAlt("error", info);
+        }
+      },
+      error: () => {
+        console.log('连接数据库失败');
+      }
+    });
   }
 }
 

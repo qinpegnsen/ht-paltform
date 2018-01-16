@@ -107,8 +107,8 @@
           </div>
           <div class="main_right_optTXT" *ngIf="curItem.tplType == 'TXT'">
             <div><strong>文字：</strong></div>
-            <textarea class="form-control" [(ngModel)]="contents[i]"
-                      (change)="addUpdateId(i)"></textarea>
+            <textarea class="form-control" [(ngModel)]="contents[i]" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="addUpdateId(i)"></textarea>
           </div>
           <h5 style="padding-left: 20px"><strong>操作类型：</strong></h5>
           <div class="main_right_optModel">
@@ -119,13 +119,19 @@
             </select>
             <div class="optKey">
               <ng-container *ngIf="optTypeCode[i] !== 'goods_detail'">
-                <input class="form-control border-b-grey" type="text" value="{{isEntered[i]=='N'?'':optKey[i]}}"
-                       (change)="changeInputValue($event,i)" [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
+                <input class="form-control border-b-grey" type="text"
+                       [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="isEntered[i]=='N'?'':optKey[i]"
+                       (ngModelChange)="addUpdateId(i)"
+                       [disabled]="isEntered[i]=='N'" placeholder="操作类型值">
               </ng-container>
               <ng-container *ngIf="optTypeCode[i] === 'goods_detail'">
-                <app-search [data]="goodsList"
+                <app-search [data]="goodsList" [width]="800"
                             [placeholder]="'选择商品'"
-                            [defaultId]="isEntered[i]=='N'?'':optKey[i]">
+                            [idKey]="'goodsBaseCode'"
+                            [textKey]="'goodsName'"
+                            (selected)="selectedGoods($event,i)"
+                            [defaultId]="[optKey[i]]">
                 </app-search>
               </ng-container>
             </div>
