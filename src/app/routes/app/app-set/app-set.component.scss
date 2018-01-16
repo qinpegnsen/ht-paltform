@@ -216,6 +216,7 @@
   margin-top: 30px;
   height: 630px;
   overflow-y: auto;
+  transition: all 0.1s;
 }
 
 .main_centerTwe {
@@ -304,6 +305,24 @@
   -o-transform: scale(1.25, 1.25); /* Opera */
 }
 
+.lunbotu {
+  width: 100%;
+  padding-top: 45%;
+  position: relative;
+  .carousel-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    /deep/ .carousel,
+    /deep/ .carousel-inner,
+    /deep/ .item,
+    /deep/ .img {
+      height: 100%;
+    }
+  }
+}
+
 .wuxiaotu .img-box {
   width: 20%;
   height: 22.22%;
@@ -349,7 +368,7 @@
     -webkit-animation: hotspot infinite 5s;
     -o-animation: hotspot infinite 5s;
     animation: hotspot infinite 5s;
-    li{
+    li {
       white-space: nowrap;
       overflow: hidden;
     }

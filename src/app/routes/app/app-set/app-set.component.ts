@@ -182,6 +182,7 @@ export class AppSetComponent implements OnInit {
       indexData: null,
       data: item,
     });
+    setTimeout(_ => {$('.main_centerOne')[0].scrollTop = $('.main_centerOne')[0].scrollHeight;},0)// 使滚动条一直保持在最底部
   }
 
   /**
@@ -326,7 +327,7 @@ export class AppSetComponent implements OnInit {
   /**
    * 选择完商品
    */
-  selectedGoods(event,i) {
+  selectedGoods(event, i) {
     this.optKey[i] = event[0].goodsBaseCode;
     this.addUpdateId(i);
   }

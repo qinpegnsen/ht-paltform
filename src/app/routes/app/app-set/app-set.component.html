@@ -34,11 +34,13 @@
           <!--轮播图-->
           <ng-container *ngIf="item.tplCode == 'lunbotu'">
             <div class="lunbotu" (click)="addTplCont(item.data,i + 1)">
-              <carousel [interval]="3000" [noWrap]="false">
-                <slide *ngFor="let slidez of item.content; let index=index" [active]="slidez.active">
-                  <img [src]="slidez" class="img-responsive">
-                </slide>
-              </carousel>
+              <div class="carousel-box">
+                <carousel [interval]="3000" [noWrap]="false">
+                  <slide *ngFor="let slidez of item.content; let index=index" [active]="slidez.active">
+                    <img [src]="slidez" class="img-responsive">
+                  </slide>
+                </carousel>
+              </div>
             </div>
           </ng-container>
           <!--最新热点-->
