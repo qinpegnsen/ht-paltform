@@ -60,8 +60,8 @@ export class CashRecordComponent implements OnInit {
   showImg(event) {
     let target = event.target.nextElementSibling;
     target.style.display = 'block';
-    target.style.top = (event.clientY + 20) + 'px';
-    target.style.left = (event.clientX + 30) + 'px';
+    target.style.top = (event.clientY + 30) + 'px';
+    target.style.left = (event.clientX -230) + 'px';
   }
 
   /**

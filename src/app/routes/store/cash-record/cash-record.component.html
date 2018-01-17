@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="search-group ml-xl mb align-top">
-      <span class="search-title">提现状态：</span>
+      <span class="search-title">提现状态:&nbsp; </span>
       <div class="search-main">
         <select class="form-control" name="goodsAudit" [(ngModel)]="query.state" (change)="queryDatas(1)">
           <ng-container *ngFor="let item of curMenus">
@@ -38,7 +38,7 @@
       </button>
       <button type="button" title="重置查询" (click)="resetQuery()"
               class="btn thc btn-thc ml align-top">
-        <i class=" fa fa-refresh "></i>
+        <i class=" fa fa-refresh"></i>
         <span>&nbsp;重置查询</span>
       </button>
     </div>
@@ -75,9 +75,7 @@
         <th class="col-md-1 unselectable text-left">
           <rzhDefaultSorter by="remark">汇款备注</rzhDefaultSorter>
         </th>
-        <!--<th class="col-md-1 unselectable text-left">-->
-          <!--<rzhDefaultSorter by="remark">驳回原因</rzhDefaultSorter>-->
-        <!--</th>-->
+
       </tr>
       </thead>
       <tbody>
@@ -90,15 +88,17 @@
           <td class="text-left">{{item.bank}}</td>
           <td><span class="main-red">¥{{item.drawMoney | number: '1.2-2' }}</span></td>
           <td>{{item.payWay | rzhState: '1803'}}</td>
-          <td>
+          <td *ngIf="item.voucherUrl">
             <img [src]="item.voucherUrl" class="goods-md-img" (mousemove)="showImg($event)"
                  (mouseleave)="hideImg($event)"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
             <img [src]="item.voucherUrl" class="hover-biger-img"
                  onerror="javascript:this.src='../../../assets/img/dummy.png'" alt="">
           </td>
+          <td *ngIf="!item.voucherUrl" [ngClass]="{'font-gray':!item.voucherUrl}">
+            【无】
+          </td>
           <td class="text-left font12" [ngClass]="{'font-gray':!item.remark}">{{item.remark || '【未填写】'}}</td>
-          <!--<td class="text-left font12">{{item.remark || '【未填写】'}}</td>-->
         </tr>
 
         <tr *ngIf="detail[i]">
@@ -126,6 +126,11 @@
                 <span>汇款账户：</span> <span>{{item.payAcct}}</span>
               </div>
             </ng-container>
+          <ng-container *ngIf="item.failReason">
+            <div class="bg-table special text-left pl">
+               <span>驳回原因：</span> <span>{{item.failReason}}</span>
+             </div>
+          </ng-container>
           </td>
         </tr>
       </ng-container>
