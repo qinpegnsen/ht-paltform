@@ -72,7 +72,7 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="time">申请时间</rzhDefaultSorter>
         </th>
-        <th class="col-md-1 unselectable text-center">
+        <th class="col-md-1 unselectable text-center" *ngIf="curState=='DEAL'">
           <rzhDefaultSorter by="time">处理时间</rzhDefaultSorter>
         </th>
         <th class="col-md-1 unselectable text-center">
@@ -91,7 +91,7 @@
           <td>
             <span>{{item.createTime}}</span>
           </td>
-          <td>
+          <td *ngIf="curState=='DEAL'">
             <span>{{item.dealTime}}</span>
           </td>
           <td>

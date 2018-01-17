@@ -43,7 +43,7 @@ export class CashRecordComponent implements OnInit {
   ngOnInit() {
     let me = this;
     me.queryDatas(1);// 获取品牌数据
-    me.states = me.tools.getEnumDataList('1802')
+    me.states = me.tools.getEnumDataList('1802');
     let curMenus=new Array();
     for(let i=0;i<me.states.length;i++){
       if(me.states[i].key=='DONE'||me.states[i].key=='FAIL'){
