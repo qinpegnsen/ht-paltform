@@ -45,6 +45,7 @@ export class EditDetailComponent implements OnInit {
   public unit: string = '件';       // 运费价格
   public refresh: boolean = false;    //是否刷新列表页
   @ViewChild('allStores') public allStores: SelectComponent;//监听选择店铺组件
+  public rate:any = {}; //费率
 
   public publishData: any = {
     goodsExpressInfo: {
@@ -247,6 +248,10 @@ export class EditDetailComponent implements OnInit {
         me.getTplValById();  //根据物流模板ID获取模板值
       }
     }
+    me.publishData.taxRate = pageData.taxRate?pageData.taxRate:0;            //税率
+    me.rate.buildgoldRate = pageData.buildgoldRate?pageData.buildgoldRate:0;//建设金费率
+    me.rate.bonusRate = pageData.bonusRate?pageData.bonusRate:0;             //分红比例
+    me.rate.rate = ((100-this.publishData.taxRate-this.rate.bonusRate-this.rate.buildgoldRate)*0.01).toFixed(2);//计算利润率（ 100-税率-建设金费率-分红费率）*0.01
   }
 
   /**
@@ -330,6 +335,13 @@ export class EditDetailComponent implements OnInit {
     if (Number(target.value) > 10000) {
       target.value = 9999.99
     }
+  }
+
+  /**
+   * 计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+   */
+  getRate(){
+    this.rate.rate = ((100-this.publishData.taxRate-this.rate.bonusRate-this.rate.buildgoldRate)*0.01).toFixed(2);
   }
 
   /**
@@ -698,8 +710,25 @@ export class EditDetailComponent implements OnInit {
   publishGoods() {
     let me = this;
     if (me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeDetailInfo() && me.judgeLogistics()) {
-      MaskService.showMask();//显示遮罩层
-      me.uploadImgs();// 先上传图片
+      if(me.ifHasNoProfit()){
+        swal({
+            title: "温馨提示",
+            text: "此商品，有规格对应商品的利润为负，确认提交吗？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            cancelButtonText: "取消",
+            confirmButtonText: "确认",
+            closeOnConfirm: true
+          },
+          function () {
+            MaskService.showMask();//显示遮罩层
+            me.uploadImgs();// 先上传图片
+          });
+      }else{
+        MaskService.showMask();//显示遮罩层
+        me.uploadImgs();// 先上传图片
+      }
     }
   }
 
@@ -727,7 +756,7 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 比较两个数字的大小
+   * 比较两个数字的大小，参数1<参数2返回true
    * @param arg1
    * @param arg2
    * @returns {boolean}
@@ -818,6 +847,16 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
+   * 判断商家设置的价格是否利润不是正数
+   */
+  ifHasNoProfit(){
+    let me = this, hasProfit = this.publishData.goodsSkuList.some(sku => {
+      return ((sku.price*me.rate.rate-sku.costPrice)<0 || (sku.memberPrice*me.rate.rate-sku.costPrice)<0)
+    })
+    return hasProfit;
+  }
+
+  /**
    * 整理数据并且发布商品
    */
   public genPublishDataAndPublish() {
@@ -844,7 +883,5 @@ export class EditDetailComponent implements OnInit {
         }
       }
     })
-
   }
-
 }
