@@ -45,7 +45,7 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped" #dataTable="rzhDataTable" [rzhData]="deposits"
-           (pageChange)="queryDatas('',1,$event)">
+           (pageChange)="queryDatas(1,$event)">
       <thead>
       <tr>
         <th class="unselectable text-center w5">

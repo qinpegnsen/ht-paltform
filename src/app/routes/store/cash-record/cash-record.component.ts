@@ -102,7 +102,7 @@ export class CashRecordComponent implements OnInit {
       dateStr:this.myTime?RzhtoolsService.dataFormat(this.myTime[0], 'yyyy/MM/dd') + '-' + RzhtoolsService.dataFormat(this.myTime[1], 'yyyy/MM/dd'):'',
     };
     _this.deposits = new Page(_this.submitService.getData(requestUrl, requestData));
-    this.detail = []
+    _this.detail = []
   }
 
   /**
