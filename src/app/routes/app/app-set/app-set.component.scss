@@ -320,6 +320,9 @@
     /deep/ .img {
       height: 100%;
     }
+    /deep/ .carousel-control{
+      display: none;
+    }
   }
 }
 
