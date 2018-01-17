@@ -66,7 +66,7 @@ export class UpdateDataComponent implements OnInit,OnChanges,OnDestroy {
       name: obj.name,
       vals: obj.valStr
     }
-    let result=me.submit.postRequest(url, data);
+    let result=me.submit.putRequest(url, data);
     if(result=="商品分类基本属性已存在"){
      return;
     }else{
