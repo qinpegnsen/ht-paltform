@@ -70,6 +70,9 @@
         <th class="col-md-1 unselectable text-center">
           <rzhDefaultSorter by="orgSign">状态</rzhDefaultSorter>
         </th>
+        <th class="col-md-1 unselectable text-center">
+          <rzhDefaultSorter by="orgSign">税率</rzhDefaultSorter>
+        </th>
         <th class="col-md-2 unselectable text-center thc font">管理操作</th>
       </tr>
       </thead>
@@ -90,13 +93,16 @@
           <td *ngIf="childKindList.length>0">{{kind.parentKindName}}</td>
           <td>{{kind.sort}}</td>
           <td>{{kind.keywords}}</td>
-          <td>{{kind.description}}</td>
+          <td>{{kind.description || '【未填写】'}}</td>
           <td>
             <label class="switch switch-md" title="显示/隐藏">
               <input [checked]="kind.state=='SHOW'" type="checkbox"
                      (change)="changeKindState(kind.state=='SHOW',kind.id,kind.kindParentId, kinds.curPage)">
               <span></span>
             </label>
+          </td>
+          <td>
+            {{kind.taxRate/100}}%
           </td>
           <td>
             <p *ngIf="kind.state!='DEL'">
@@ -142,7 +148,7 @@
       </tbody>
       <tfoot>
       <tr>
-        <td colspan="9">
+        <td colspan="10">
           <div class="col-sm-5">
             <div class="text-muted"><strong>第 {{kinds.genStartRow()}} 至 {{kinds.genEndRow()}} 条，共 {{kinds.totalRow}}
               条</strong></div>

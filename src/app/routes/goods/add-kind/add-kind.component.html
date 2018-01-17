@@ -97,6 +97,16 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
+            <label class="col-sm-4 control-label">税率</label>
+            <div class="col-sm-7">
+              <input class="form-control num" type="number" name="taxRate"
+                     [(ngModel)]="kindInfo.taxRate" #taxRate="ngModel"
+                     placeholder="税率"/>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="form-group">
             <label class="col-sm-4 control-label">排序</label>
             <div class="col-sm-7">
               <input class="form-control num" type="number" name="sort" [tooltip]="tip.sort" [pattern]="patterns.doubleDigit"
