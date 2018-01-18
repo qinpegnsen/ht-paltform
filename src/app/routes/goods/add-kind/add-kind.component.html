@@ -97,15 +97,15 @@
         </fieldset>
         <fieldset>
           <div class="form-group">
-            <label class="col-sm-4 control-label">税率</label>
-            <div class="col-sm-7">
-              <input class="form-control num" type="text" maxlength="4" [pattern]="patterns.positive"
+            <label class="col-sm-4 control-label">税率 </label>
+            <div class="col-sm-7" >
+              <input class="form-control num" type="number" maxlength="5"
                      name="taxRate" #taxRate="ngModel"   [(ngModel)]="kindInfo.taxRate" placeholder='请输入税率' />
             </div>
           </div>
-          <div [hidden]="taxRate.valid || taxRate.pristine"
+          <div [hidden]="taxRate.pristine || (taxRate.valid && taxRate.value<32767)"
                class="col-sm-8 pull-right text-danger">
-            请填写0-9999的整数
+            请填写0-32767之间的整数
           </div>
         </fieldset>
         <fieldset>
