@@ -248,7 +248,7 @@ export class RpPondComponent implements OnInit {
    */
   getDeliverOrderData() {
     this.showStroeInvest = false;
-    this.qeuryPushOrder(1);
+    this.ngOnInit();
   }
 
   /**

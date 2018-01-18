@@ -28,6 +28,7 @@ export class StoreInvestComponent implements OnInit,OnDestroy,OnChanges {
   @Output() deliverGoods = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.item={};
     if (changes['flag']) {
       if(this.flag){
         this.showDeliverWindow = true;

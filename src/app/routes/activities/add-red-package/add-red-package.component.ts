@@ -81,7 +81,7 @@ export class AddRedPackageComponent implements OnInit {
   addUsedTem() {
     let _this = this;
     swal({
-        title: '新增模板会覆盖已设置好的数据，是否还要继续？',
+        title: this.moduleList.length==0?'是否导入模板':'新增模板会覆盖已设置好的数据，是否还要继续？',
         type: 'info',
         confirmButtonText: '确认', //‘确认’按钮命名
         showCancelButton: true, //显示‘取消’按钮
