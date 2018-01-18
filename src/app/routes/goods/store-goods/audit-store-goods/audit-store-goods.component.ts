@@ -36,6 +36,7 @@ export class AuditStoreGoodsComponent implements OnInit {
   public tplVals: any;               // 运费模板内容
   public unit: string = '件';       // 运费价格
   public refresh: boolean;         // 是否刷新父组件数据
+  public rate:any = {}; //费率
   public publishData: any = {
     goodsExpressInfo: {
       freightType: null,
@@ -128,6 +129,17 @@ export class AuditStoreGoodsComponent implements OnInit {
       me.getExpressTpl(pageData.storeCode); //获取物流模板
       me.getTplValById();  //根据物流模板ID获取模板值
     }
+    me.publishData.taxRate = pageData.taxRate?(pageData.taxRate*0.01).toFixed(2):0;        //税率
+    me.rate.buildgoldRate = pageData.buildgoldRate?pageData.buildgoldRate:0;            //建设金费率
+    me.rate.bonusRate = pageData.bonusRate?pageData.bonusRate:0;                            //分红比例
+    me.getRate();//计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+  }
+
+  /**
+   * 计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+   */
+  getRate(){
+    this.rate.rate = ((100-this.publishData.taxRate-this.rate.bonusRate-this.rate.buildgoldRate)*0.01).toFixed(2);
   }
 
   /**

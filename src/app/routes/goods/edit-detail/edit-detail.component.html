@@ -97,10 +97,14 @@
     <dl class="clearfix">
       <dt class="col-xs-2"><i class="main-red">*</i>税率：</dt>
       <dd class="col-xs-10 col-md-8">
-        <div class="w50 input-group">
-          <input class="form-control num" type="number" required name="taxRate"
-                 [(ngModel)]="publishData.taxRate" (ngModelChange)="getRate()">
-          <span class="input-group-addon">%</span>
+        <div class="clearfix">
+          <div class="w50 pull-left input-group">
+            <input class="form-control num" type="number" required name="taxRate" #curTaxRate
+                   [(ngModel)]="publishData.taxRate" [pattern]="patterns.twodecimal" (ngModelChange)="getRate()">
+            <span class="input-group-addon">%</span>
+          </div>
+          <div *ngIf="!curTaxRate.valid && !curTaxRate.pristine && curTaxRate.value > 100"
+               class="pull-left text-danger pl-sm">请输入0-100之间的正整数</div>
         </div>
         <p class="tip" myHoverColor>商品税率，0-100之间的正整数</p>
       </dd>
@@ -154,8 +158,8 @@
       <dd class="col-xs-10">
         <table class="sku-table w100">
           <thead>
-          <tr class="text-center">
-            <th class="col-xs-2" *ngFor="let attr of skuAttr"
+          <tr>
+            <th class="col-xs-2 text-center" *ngFor="let attr of skuAttr"
                 [id]="attr.attrCode">{{attr.attrName}}
             </th>
             <th [class.col-xs-2]="skuAttr.length > 1">
@@ -226,7 +230,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
-            <td *ngFor="let val of sku.attrsList"><p>{{val.value}}</p></td>
+            <td class="text-center" *ngFor="let val of sku.attrsList"><p>{{val.value}}</p></td>
             <td>
               <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
                      (keyup)="auditInputValueForNum($event.target)" pattern="[0-9]+(.[0-9]{1,2})?"

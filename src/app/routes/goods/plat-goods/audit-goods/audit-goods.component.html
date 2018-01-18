@@ -74,6 +74,12 @@
         </div>
       </dd>
     </dl>
+    <dl class="clearfix">
+      <dt class="col-xs-2"><i class="main-red">*</i>税率：</dt>
+      <dd class="col-xs-10">
+        <span>{{publishData.taxRate}}%</span>
+      </dd>
+    </dl>
   </fieldset>
 
   <!--商品规格及图片-->
@@ -92,17 +98,18 @@
             <span class="_attrName" *ngIf="!saleAttr.used">{{saleAttr.name}}</span>
             <label class="w80" *ngIf="saleAttr.used">
               <input class="form-control" [ngModelOptions]="{standalone: true}" type="text"
-                                           readonly [(ngModel)]="saleAttr.name"></label>
+                     readonly [(ngModel)]="saleAttr.name"></label>
           </h6>
           <ul class="col-sm-10 col-xs-9 p">
             <li class="col-xs-4 col-md-3 _attr" *ngFor="let val of saleAttr.goodsEnumValList;let k = index;">
               <label class="checkbox-inline c-checkbox">
-                <input class="_val" type="checkbox" [(ngModel)]="val.checked"  [ngModelOptions]="{standalone: true}" disabled/>
+                <input class="_val" type="checkbox" [(ngModel)]="val.checked" [ngModelOptions]="{standalone: true}"
+                       disabled/>
                 <span class="fa fa-check"></span>
               </label>
               <span class="_value" *ngIf="!val.checked">{{val.enumValue}}</span>
               <label class="w66" *ngIf="val.checked">
-                <input class="form-control" type="text"  [ngModelOptions]="{standalone: true}"
+                <input class="form-control" type="text" [ngModelOptions]="{standalone: true}"
                        readonly [(ngModel)]="val.enumValue"/>
               </label>
             </li>
@@ -117,12 +124,15 @@
         <table class="sku-table w100">
           <thead>
           <!--当选择了规格时-->
-          <tr class="text-center">
+          <tr>
             <th class="col-xs-2" *ngFor="let attr of skuAttr"
                 [id]="attr.attrCode">{{attr.attrName}}
             </th>
             <th class="col-xs-2">
               <label class="s-menu mb0 cursor-p"><i class="main-red">*</i>市场价</label>
+            </th>
+            <th class="col-xs-2">
+              <label class="s-menu mb0 cursor-p"><i class="main-red">*</i>成本价</label>
             </th>
             <th class="col-xs-2">
               <label class="s-menu mb0 cursor-p"><i class="main-red">*</i>销售价</label>
@@ -136,15 +146,23 @@
           </tr>
           </thead>
           <tbody>
-
           <!--当选择了规格时-->
           <tr *ngFor="let sku of publishData.goodsSkuList;let i = index">
             <td *ngFor="let val of sku.attrsList"><p>{{val.value}}</p></td>
             <td>
               <input class="text _price num form-control" [name]="'marketPrice'+i" type="number" required
-                     [readonly]="myReadOnly" [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
+                     readonly [(ngModel)]="sku.marketPrice" #marketPrice="ngModel"/>
               <em class="add-on">元</em>
               <span [hidden]="marketPrice.value != 0" class="text-danger font12"> 市场价>0 </span>
+            </td>
+            <td>
+              <input class="text _price num form-control" [name]="'costPrice'+i" type="number" required
+                     readonly [(ngModel)]="sku.costPrice" #costPrice="ngModel"/>
+              <em class="add-on">元</em>
+              <ng-container *ngIf="marketPrice.value > 0 && costPrice.value >0">
+                <span [hidden]="compareNumber(costPrice.value,marketPrice.value)"
+                      class="text-danger font12"> 成本价< 市场价</span>
+              </ng-container>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'price'+i" type="number" required
@@ -154,23 +172,33 @@
                 <span [hidden]="compareNumber(price.value,marketPrice.value)"
                       class="text-danger font12"> 销售价<=市场价
                 </span>
+                <span class="font12 profit" [hidden]="!compareNumber(price.value,marketPrice.value)"
+                      [ngClass]="{'text-green':(sku.price*rate.rate-sku.costPrice)>0,
+                      'text-warning':(sku.price*rate.rate-sku.costPrice)<0}">
+                  利润：{{(sku.price*rate.rate-sku.costPrice) | number: '1.2-2'}}
+                </span>
               </ng-container>
               <span [hidden]="price.value != 0" class="text-danger font12"> 销售价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
-                     [readonly]="myReadOnly" [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
+                     readonly [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
                 <span [hidden]="compareNumber(memberPrice.value,price.value)"
                       class="text-danger font12"> 会员价<=销售价
+                </span>
+                <span class="font12 profit" [hidden]="!compareNumber(memberPrice.value,price.value)"
+                      [ngClass]="{'text-green':(sku.memberPrice*rate.rate-sku.costPrice)>0,
+                      'text-warning':(sku.memberPrice*rate.rate-sku.costPrice)<0}">
+                  利润：{{(sku.memberPrice*rate.rate-sku.costPrice) | number: '1.2-2'}}
                 </span>
               </ng-container>
               <span [hidden]="memberPrice.value != 0" class="text-danger font12"> 会员价>0 </span>
             </td>
             <td>
               <input class="text stock num form-control" [name]="'storageNum'+i" type="number" required
-                     [readonly]="myReadOnly" [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
+                     readonly [(ngModel)]="sku.storageNum" #storageNum="ngModel"/>
               <span [hidden]="storageNum.value > 9"
                     class="text-danger font12"> 库存>=10
               </span>
@@ -286,7 +314,8 @@
                    [hidden]="publishData.goodsExpressInfo.freightType!='TPL' || publishData.goodsExpressInfo.expressTplId == ''">
                 <p class="m0">
                   <strong>指定物流配送区域及运费</strong>
-                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank" (click)="lookLogisticsModule()">
+                  <a class="btn btn-xs btn-default fa fa-eye pull-right" target="_blank"
+                     (click)="lookLogisticsModule()">
                     查看详情</a>
                 </p>
                 <ul class="list-unstyled tpl-list mb0" *ngIf="publishData.goodsExpressInfo.expressTplId">

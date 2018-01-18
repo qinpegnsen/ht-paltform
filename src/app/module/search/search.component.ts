@@ -107,16 +107,20 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 向外传值，结果是一个对象，包含编码和值
+   * 向外传值
    * @param item（eg：{id: 12345, text: '心心相印'}）
    */
   emitResult(item ?: any) {
     if (!item) {// 当res不存在时，说明点击了确认
-      if (!this.multiple) this.selected.emit(this.checkedItem[0]);// 向外传值，结果是一个对象，包含编码和值
-      else this.selected.emit(this.checkedItem);// 向外传值，结果是一个对象数据，包含编码和值
+      if (!this.multiple) this.selected.emit(this.checkedItem[0]);// 单选向外传值，结果是一个对象，包含编码和值
+      else this.selected.emit(this.checkedItem);// 多选向外传值，结果是一个对象数组，包含编码和值
       this.hideSearchBox();
     } else {
-      if (!this.multiple) this.checkedItem[0] = item, this.hideSearchBox(),this.selected.emit(this.checkedItem);
+      if (!this.multiple) {
+        this.checkedItem[0] = item;
+        this.hideSearchBox();
+        this.selected.emit(item);
+      }// 单选向外传值，结果是一个对象，包含编码和值
       else {
         let hadItem: boolean = this.checkedItem.some(it => {
           return it[this.idKey] === item[this.idKey]

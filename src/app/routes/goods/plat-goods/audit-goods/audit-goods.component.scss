@@ -181,7 +181,6 @@
   height: 24px;
   padding: 5px 10px;
   position: relative;
-  text-align: center;
 }
 
 .sku-table .dropdown-menu {
@@ -194,7 +193,6 @@
   height: 30px;
   padding: 5px 10px;
   border-top: solid 1px #BCE8F1;
-  text-align: center;
   font-size: 0; // 解决行内块之间间隙的问题
 }
 
@@ -205,6 +203,10 @@
 
 .sku-table ._price {
   width: 50px;
+}
+
+.sku-table .profit{
+  padding: 0 5px;
 }
 
 .sku-table .stock {

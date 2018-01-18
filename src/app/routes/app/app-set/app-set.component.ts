@@ -328,7 +328,7 @@ export class AppSetComponent implements OnInit {
    * 选择完商品
    */
   selectedGoods(event, i) {
-    this.optKey[i] = event[0].goodsBaseCode;
+    this.optKey[i] = event.goodsBaseCode;
     this.addUpdateId(i);
   }
 

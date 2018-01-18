@@ -11,6 +11,7 @@ import {MaskService} from "../../../core/services/mask.service";
 import {Location} from "@angular/common";
 import {SelectComponent} from "ng2-select";
 import {Setting} from "../../../core/settings/setting";
+import {PatternService} from "../../../core/forms/pattern.service";
 declare var $: any;
 const swal = require('sweetalert');
 
@@ -69,6 +70,7 @@ export class EditDetailComponent implements OnInit {
               public goods: GoodsService,
               public router: Router,
               public location: Location,
+              public patterns: PatternService,
               public tools: RzhtoolsService) {
     this.publishData.storeCode = Setting.SELF_STORE;//默认自营店铺编码
     this.publishData.storeName = Setting.SELF_STORE_NAME;//默认自营店铺名
@@ -248,10 +250,10 @@ export class EditDetailComponent implements OnInit {
         me.getTplValById();  //根据物流模板ID获取模板值
       }
     }
-    me.publishData.taxRate = pageData.taxRate?pageData.taxRate:0;            //税率
-    me.rate.buildgoldRate = pageData.buildgoldRate?pageData.buildgoldRate:0;//建设金费率
-    me.rate.bonusRate = pageData.bonusRate?pageData.bonusRate:0;             //分红比例
-    me.rate.rate = ((100-this.publishData.taxRate-this.rate.bonusRate-this.rate.buildgoldRate)*0.01).toFixed(2);//计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+    me.publishData.taxRate = pageData.taxRate?(pageData.taxRate*0.01).toFixed(2):0;        //税率
+    me.rate.buildgoldRate = pageData.buildgoldRate?pageData.buildgoldRate:0;            //建设金费率
+    me.rate.bonusRate = pageData.bonusRate?pageData.bonusRate:0;                            //分红比例
+    me.getRate();//计算利润率（ 100-税率-建设金费率-分红费率）*0.01
   }
 
   /**
@@ -261,6 +263,8 @@ export class EditDetailComponent implements OnInit {
   selectedStore(value: any): void {
     this.publishData.storeCode = value.id;
     this.publishData.storeName = value.text;
+    this.rate.buildgoldRate = value.buildgoldRate;//当前店铺的建设金比例
+    this.getRate();//计算利润率
     this.publishData.goodsExpressInfo = {};
     this.getExpressTpl();
   }
@@ -710,7 +714,8 @@ export class EditDetailComponent implements OnInit {
   publishGoods() {
     let me = this;
     if (me.judgeSkuPrices() && me.judgeGoodsImgs() && me.judgeDetailInfo() && me.judgeLogistics()) {
-      if(me.ifHasNoProfit()){
+      if(me.publishData.taxRate >= 100) AppComponent.rzhAlt('warning', '税率数值过大，请设置正常税率');
+      else if(me.ifHasNoProfit()){
         swal({
             title: "温馨提示",
             text: "此商品，有规格对应商品的利润为负，确认提交吗？",
@@ -867,6 +872,7 @@ export class EditDetailComponent implements OnInit {
     me.genGoodsBaseAttrList();                                          // 商品基本属性
     me.publishData.goodsBody = $('#goodsBody').summernote('code');  // 商品详情 PC
     me.publishData.mobileBody = $('#mobileBody').summernote('code');  // 移动端详情
+    me.publishData.taxRate = me.publishData.taxRate*100;               //税率以万为单位
     $.when(me.goods.publishGoods('/goodsEdit/save', me.publishData)).done(data => {
       if (data) {
         if (me.path == 'edit') {

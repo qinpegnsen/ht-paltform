@@ -50,7 +50,8 @@ export class GoodsService {
         result.forEach(item => {
           obj = {
             id: item.storeCode,
-            text: item.storeName
+            text: item.storeName,
+            buildgoldRate: item.buildgoldRate
           };
           allStores.push(obj);
         })
