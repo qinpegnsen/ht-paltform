@@ -10,6 +10,7 @@ import {GetUidService} from "../../../core/services/get-uid.service";
 import {MaskService} from "../../../core/services/mask.service";
 import {PatternService} from "../../../core/forms/pattern.service";
 import {GoodsService} from "../goods.service";
+import {RzhtoolsService} from "../../../core/services/rzhtools.service";
 const swal = require('sweetalert');
 
 @Component({
@@ -18,7 +19,7 @@ const swal = require('sweetalert');
   styleUrls: ['./add-kind.component.scss']
 })
 export class AddKindComponent implements OnInit {
-  public kindInfo = {};
+  public kindInfo:any= {};
   public path;// 当前路由
   public pageTitle;// 右弹窗页面标题
   public editKind: boolean = false;
@@ -43,6 +44,7 @@ export class AddKindComponent implements OnInit {
               public parentComp: KindManageComponent,
               public getUid: GetUidService,
               public patterns: PatternService,
+              public tools: RzhtoolsService,
               public submit: SubmitService) {
     this.settings.showRightPage("28%"); // 此方法必须调用！页面右侧显示，带滑动效果,可以自定义宽度：..%  或者 ..px
   }
@@ -75,6 +77,7 @@ export class AddKindComponent implements OnInit {
           me.pageTitle = "修改分类";
           me.editKind = true;
           me.kindInfo = this.getKindInfo();// 获取分类信息
+          me.kindInfo.taxRate = me.kindInfo.taxRate?(me.kindInfo.taxRate*0.01).toFixed(2):0;
           break;
       }
     });
@@ -116,6 +119,7 @@ export class AddKindComponent implements OnInit {
     let me = this;
     let submitUrl, submitData;
     submitData = me.kindInfo;
+    submitData.taxRate = submitData.taxRate*100;
     switch (me.path) {
       //新增分类
       case "addKind":
@@ -179,7 +183,6 @@ export class AddKindComponent implements OnInit {
    * @param submitData
    */
   public submitFormDataAndRefresh(submitUrl, submitData,method){
-    console.log("█ submitData ►►►",  submitData);
     let me = this,pPage,kindPid;
     if(method == 'post'){
       me.submit.postRequest(submitUrl, submitData, true);
@@ -196,6 +199,16 @@ export class AddKindComponent implements OnInit {
   // 取消
   public cancel() {
     this.settings.closeRightPageAndRouteBack(); //关闭右侧滑动页面
+  }
+
+  /**
+   * 审核input框的value合不合要求
+   */
+  auditInputValueForNum(target, type?) {
+    this.tools.auditInputValueForNum(target, type);
+    if (Number(target.value) > 10000) {
+      target.value = 9999.99
+    }
   }
 
 }
