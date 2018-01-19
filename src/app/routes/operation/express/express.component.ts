@@ -104,4 +104,21 @@ export class ExpressComponent implements OnInit {
     let url= "/basicExpress/updateBasicExpress";
     this.service.putRequest(url,data);
   }
+
+  /**
+   * 物流公司是否常用
+   */
+  isOpen(express){
+    if(express.isUsually=="Y"){
+      express.isUsually="N"
+    }else if(express.isUsually=="N"){
+      express.isUsually="Y"
+    }
+    let data={
+      id:express.id,
+      isUsually:express.isUsually
+    }
+    let url= "/basicExpress/updateIsUsually";
+    this.service.putRequest(url,data);
+  }
 }

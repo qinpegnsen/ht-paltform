@@ -36,6 +36,9 @@
         <th class="w10 thc font">
           状态
         </th>
+        <th class="w10 thc font">
+          常用
+        </th>
         <th class="w20 thc font">操作</th>
       </tr>
       </thead>
@@ -48,6 +51,12 @@
         <td>
           <label class="switch">
             <input type="checkbox" [checked]="express.isUse=='Y'" (change)="isUse(express)"/>
+            <span></span>
+          </label>
+        </td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="express.isUsually=='Y'" (change)="isOpen(express)"/>
             <span></span>
           </label>
         </td>
