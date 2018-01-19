@@ -100,13 +100,14 @@
         <div class="clearfix">
           <div class="w50 pull-left input-group">
             <input class="form-control num" type="number" required name="taxRate" #curTaxRate
+                   (keyup)="auditInputValueForNum($event.target)"
                    [(ngModel)]="publishData.taxRate" [pattern]="patterns.twodecimal" (ngModelChange)="getRate()">
             <span class="input-group-addon">%</span>
           </div>
           <div *ngIf="!curTaxRate.valid && !curTaxRate.pristine && curTaxRate.value > 100"
-               class="pull-left text-danger pl-sm">请输入0-100之间的正整数</div>
+               class="pull-left text-danger pl-sm">请输入0-100之间的数</div>
         </div>
-        <p class="tip" myHoverColor>商品税率，0-100之间的正整数</p>
+        <p class="tip" myHoverColor>商品税率，0-100之间的数</p>
       </dd>
     </dl>
   </fieldset>
