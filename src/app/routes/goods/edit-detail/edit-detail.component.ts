@@ -342,10 +342,10 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 计算利润率1-（ 税率-建设金费率-分红费率）*0.0001
+   * 计算利润率1-（ 税率+建设金费率+分红费率）*0.0001
    */
   getRate(){
-    this.rate.rate = (1-(this.publishData.taxRate*100+this.rate.bonusRate+this.rate.buildgoldRate)*0.0001).toFixed(2);
+    this.rate.rate = (1-(this.publishData.taxRate*100+this.rate.bonusRate+this.rate.buildgoldRate)*0.0001).toFixed(4);
   }
 
   /**
