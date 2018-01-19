@@ -253,7 +253,7 @@ export class EditDetailComponent implements OnInit {
     me.publishData.taxRate = pageData.taxRate?(pageData.taxRate*0.01).toFixed(2):0;        //税率
     me.rate.buildgoldRate = pageData.buildgoldRate?pageData.buildgoldRate:0;            //建设金费率
     me.rate.bonusRate = pageData.bonusRate?pageData.bonusRate:0;                            //分红比例
-    me.getRate();//计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+    me.getRate();//计算利润率
   }
 
   /**
@@ -342,10 +342,10 @@ export class EditDetailComponent implements OnInit {
   }
 
   /**
-   * 计算利润率（ 100-税率-建设金费率-分红费率）*0.01
+   * 计算利润率1-（ 税率-建设金费率-分红费率）*0.0001
    */
   getRate(){
-    this.rate.rate = ((100-this.publishData.taxRate-this.rate.bonusRate-this.rate.buildgoldRate)*0.01).toFixed(2);
+    this.rate.rate = (1-(this.publishData.taxRate*100+this.rate.bonusRate+this.rate.buildgoldRate)*0.0001).toFixed(2);
   }
 
   /**
