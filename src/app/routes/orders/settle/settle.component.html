@@ -10,7 +10,7 @@
   <p class="font18">店铺订单结算规则</p>
   <ul>
     <li>　　　税费 = （购买数量-退货数量）*购买单价 * 税率</li>
-    <li>　　净利润 = 净营收 - 税 - 建设金 - 分红 - 成本</li
+    <li>　　净利润 = 净营收 - 税 - 建设金 - 分红 - 成本</li>
     <li>　　广告费 = 成本*广告抽取比例</li>
     <li>　　建设金 = 净营收 * 建设金抽取比例</li>
     <li>　订单总价 = 商品总价 + 运费</li>
@@ -84,7 +84,7 @@
           <rzhDefaultSorter by="refund">订单退款 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
-        <rzhDefaultSorter by="refund">净利润 (元)</rzhDefaultSorter>
+          <rzhDefaultSorter by="refund">净利润 (元)</rzhDefaultSorter>
         </th>
         <th class="w5 unselectable text-right">
           <rzhDefaultSorter by="rake">平台抽成比例</rzhDefaultSorter>
@@ -131,8 +131,8 @@
             <span *ngIf="!item.ordRefundPay">-</span>
           </td>
           <td class="text-right">
-          <span *ngIf="item.profits" class="main-color">  ¥ {{item.profits| number:'1.2-2'}}</span>
-          <span *ngIf="!item.profits">-</span>
+            <span *ngIf="item.profits" class="main-color">  ¥ {{item.profits| number:'1.2-2'}}</span>
+            <span *ngIf="!item.profits">-</span>
           </td>
           <td class="text-right">
             <span *ngIf="item.extraction_rate">{{item.extraction_rate}} %</span>
@@ -142,20 +142,21 @@
             <span *ngIf="item.ad">¥ {{item.ad | number:'1.2-2'}}</span>
             <span *ngIf="!item.ad">-</span>
             <i *ngIf="item.ad" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="adRate"
-                triggers="mouseenter:mouseleave"></i>
+               triggers="mouseenter:mouseleave"></i>
             <template #adRate>广告抽取比例：<span>{{item.adRate}} %</span></template>
           </td>
           <td class="text-right">
             <span *ngIf="item.buildGold">¥ {{item.buildGold | number:'1.2-2'}}</span>
             <span *ngIf="!item.buildGold">-</span>
-            <i *ngIf="item.buildGold" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="buildGoldRate" triggers="mouseenter:mouseleave"></i>
+            <i *ngIf="item.buildGold" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor
+               [popover]="buildGoldRate" triggers="mouseenter:mouseleave"></i>
             <template #buildGoldRate>建设金抽取比例：<span>{{item.buildGoldRate}} %</span></template>
           </td>
           <td>
             <span *ngIf="item.bonus">¥ {{item.bonus | number:'1.2-2'}}</span>
             <span *ngIf="!item.bonus">-</span>
-            <i  *ngIf="item.bonus" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
-                triggers="mouseenter:mouseleave"></i>
+            <i *ngIf="item.bonus" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
+               triggers="mouseenter:mouseleave"></i>
             <template #popTemplate>分红抽取比例：<span>{{item.bonusRate}} %</span></template>
           </td>
           <td class="text-right">
