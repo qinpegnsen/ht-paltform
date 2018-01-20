@@ -102,8 +102,11 @@
           <th class="w7 text-center">
             <rzhDefaultSorter by="name">实际提现（元）</rzhDefaultSorter>
           </th>
-          <th class="w5 text-center">
+          <th class="w5 text-center" *ngIf="curState=='DEAL'">
             <rzhDefaultSorter by="time">状态</rzhDefaultSorter>
+          </th>
+          <th class="w10 text-center"  *ngIf="curState!='DEAL'">
+            <rzhDefaultSorter by="id">状态</rzhDefaultSorter>
           </th>
           <th class="w10 text-center">
             <rzhDefaultSorter by="picture">申请时间</rzhDefaultSorter>
