@@ -434,8 +434,8 @@ export class ActivitiesService {
    * @returns {any}
    */
   public loadeWidthDraw(url,data){
-    let result;
-    this.ajax.get({
+    let result;let me=this;
+    me.ajax.get({
       url: url,
       data: data,
       async:false,
@@ -443,8 +443,8 @@ export class ActivitiesService {
         if(res.success){
           result=res.data;
         }else{
-          result=res.info;
           AppComponent.rzhAlt("error", res.info);
+          result=res.data;
         }
       },
       error: (res) => {

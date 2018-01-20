@@ -34,9 +34,9 @@
             </tr>
             <tr class="t-item clearfix">
               <td class="item-hd col-sm-2">交易方式：</td>
-              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.payWay | rzhState:'1017'}}</td>
+              <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw?.payWay | rzhState:'1017'}}</td>
             </tr>
-            <tr class="t-item clearfix" *ngIf="loadWDData.rpCustWithdraw.payWay=='REMIT'">
+            <tr class="t-item clearfix" *ngIf="loadWDData.rpCustWithdraw?.payWay=='REMIT'">
               <td class="item-hd col-sm-2">收款账号开户行：</td>
               <td class="item-bd col-sm-10 mb0">{{loadWDData.rpCustWithdraw.bank}}</td>
             </tr>

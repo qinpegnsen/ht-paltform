@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {SubmitService} from "../../../core/forms/submit.service";
 import {Location} from "@angular/common";
 import {ActivitiesService} from "../activities.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-audit-detail',
@@ -27,8 +28,11 @@ export class AuditDetailComponent implements OnInit {
     let url='/rpCustWithdraw/load';
     let data={
       id:me.submit.getParams('id')
+    };
+    me.loadWDData=me.activitiesService.loadeWidthDraw(url,data);
+    if(isNullOrUndefined(me.loadWDData)){
+      this.location.back();
     }
-    this.loadWDData=me.activitiesService.loadeWidthDraw(url,data);
   }
 
   /**
