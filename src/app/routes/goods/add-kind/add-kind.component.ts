@@ -118,8 +118,8 @@ export class AddKindComponent implements OnInit {
   addKindForm() {
     let me = this;
     let submitUrl, submitData;
-    submitData = me.kindInfo;
-    submitData.taxRate = submitData.taxRate*100;
+    submitData = Object.assign({},me.kindInfo);
+    submitData.taxRate = submitData.taxRate*100 || 0;
     switch (me.path) {
       //新增分类
       case "addKind":
