@@ -157,7 +157,7 @@
             <span *ngIf="!item.bonus">-</span>
             <i *ngIf="item.bonus" class="icon-info ml2 mt6" [myHover]="'#cc1635'" myHoverColor [popover]="popTemplate"
                triggers="mouseenter:mouseleave"></i>
-            <template #popTemplate>分红抽取比例：<span>{{item.bonusRate}} %</span></template>
+            <template #popTemplate>分红抽取比例：<span>{{item.bonusRate/100}} %</span></template>
           </td>
           <td class="text-right">
             <span *ngIf="item.freight">¥ {{item.freight | number:'1.2-2'}}</span>

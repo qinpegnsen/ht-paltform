@@ -99,7 +99,8 @@
           <div class="form-group">
             <label class="col-sm-4 control-label">税率</label>
             <div class="col-sm-7" >
-              <input class="form-control num w80 d-play pull-left" type="number" [pattern]="patterns.twodecimal"
+              <input class="form-control num w80 d-play pull-left" type="number"
+                     [pattern]="patterns.twodecimal"
                      (keyup)="auditInputValueForNum($event.target)"
                      name="taxRate" #taxRate="ngModel"   [(ngModel)]="kindInfo.taxRate" placeholder='请输入税率' />
               <span class="input-group-addon chance pull-left"><span class="span-l">%</span></span>

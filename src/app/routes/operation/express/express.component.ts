@@ -101,7 +101,7 @@ export class ExpressComponent implements OnInit {
       id:express.id,
       isUse:express.isUse
     }
-    let url= "/basicExpress/updateBasicExpress";
+    let url= "/basicExpress/updateIsUse";
     this.service.putRequest(url,data);
   }
 
