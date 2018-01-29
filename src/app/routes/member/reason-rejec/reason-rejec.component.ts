@@ -26,7 +26,7 @@ export class ReasonRejecComponent implements OnInit {
   public reason: string = '';//驳回原因
   public reasonList: Array<string> = new Array();//选中的驳回原因编号
   public reasons: Array<string> = [
-    '姓名有误',
+    '姓名必须与身份证姓名保持一致',
     '身份证号有误',
     '身份证有效期有误',
     '身份证正面照有误',
