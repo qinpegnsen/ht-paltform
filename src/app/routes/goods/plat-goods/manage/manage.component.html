@@ -38,14 +38,14 @@
             <div class="search-main">
               <input type="text" [(ngModel)]="query.goodsName"
                      class="form-control border-b-grey"
-                     (change)="queryDatas()" placeholder="商品名">
+                     (keyup.enter)="queryDatas()" placeholder="商品名">
             </div>
           </div>
           <div class="search-group ml-xl align-top">
             <span class="search-title">品牌：</span>
             <div class="search-main">
               <input type="text" [(ngModel)]="query.brandName"
-                     class="form-control border-b-grey" placeholder="品牌名称">
+                     class="form-control border-b-grey" placeholder="品牌名称" (keyup.enter)="queryDatas()">
             </div>
           </div>
           <button type="button" title="搜索" (click)="queryDatas()"
