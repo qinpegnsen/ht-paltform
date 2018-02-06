@@ -159,20 +159,13 @@
               <input class="text _price num form-control" [name]="'costPrice'+i" type="number" required
                      readonly [(ngModel)]="sku.costPrice" #costPrice="ngModel"/>
               <em class="add-on">元</em>
-              <ng-container *ngIf="marketPrice.value > 0 && costPrice.value >0">
-                <span [hidden]="compareNumber(costPrice.value,marketPrice.value)"
-                      class="text-danger font12"> 成本价< 市场价</span>
-              </ng-container>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'price'+i" type="number" required
                      [readonly]="myReadOnly" [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
-              <ng-container *ngIf="marketPrice.value > 0 && price.value>0">
-                <span [hidden]="compareNumber(price.value,marketPrice.value)"
-                      class="text-danger font12"> 销售价<=市场价
-                </span>
-                <span class="font12 profit" [hidden]="!compareNumber(price.value,marketPrice.value)"
+              <ng-container *ngIf="costPrice.value > 0 && price.value>0">
+                <span class="font12 profit"
                       [ngClass]="{'text-green':(sku.price*rate.rate-sku.costPrice)>0,
                       'text-warning':(sku.price*rate.rate-sku.costPrice)<0}">
                   利润：{{(sku.price*rate.rate-sku.costPrice) | number: '1.2-2'}}

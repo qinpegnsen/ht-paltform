@@ -768,7 +768,7 @@ export class EditDetailComponent implements OnInit {
    */
   compareNumber(arg1: string, arg2: string) {
     let num1 = Number(arg1), num2 = Number(arg2);
-    if (num1 < num2 || num1 == num2) return true;
+    if (num1 < num2) return true;
   }
 
   /**
@@ -812,17 +812,20 @@ export class EditDetailComponent implements OnInit {
         if (Number(item.marketPrice) == 0) {
           AppComponent.rzhAlt('warning', '请输入商品的市场价');
           return false;
+        } else if (Number(item.costPrice) == 0) {
+          AppComponent.rzhAlt('warning', '请输入商品成本价');
+          return false;
         } else if (Number(item.price) == 0) {
-          AppComponent.rzhAlt('warning', '请输入商品价格');
+          AppComponent.rzhAlt('warning', '请输入商品销售价');
           return false;
         } else if (Number(item.memberPrice) == 0) {
           AppComponent.rzhAlt('warning', '请输入商品的会员价');
           return false;
-        } else if (Number(item.price) > Number(item.marketPrice)) {
-          AppComponent.rzhAlt('warning', '商品价格应小于市场价');
+        } else if (Number(item.costPrice) > Number(item.marketPrice)) {
+          AppComponent.rzhAlt('warning', '成本价应小于市场价');
           return false;
         } else if (Number(item.memberPrice) > Number(item.price)) {
-          AppComponent.rzhAlt('warning', '会员价应小于商品价格');
+          AppComponent.rzhAlt('warning', '会员价应小于销售价');
           return false;
         } else if (Number(item.storageNum) < 10) {
           AppComponent.rzhAlt('warning', '商品库存必须大于10');

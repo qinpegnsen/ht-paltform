@@ -246,7 +246,7 @@
                      [(ngModel)]="sku.costPrice" #costPrice="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="marketPrice.value > 0 && costPrice.value >0">
-                <span [hidden]="compareNumber(costPrice.value,marketPrice.value)"
+                <span [hidden]="!compareNumber(marketPrice.value,costPrice.value)"
                       class="text-danger font12"> 成本价< 市场价</span>
               </ng-container>
             </td>
@@ -256,17 +256,13 @@
                      pattern="[0-9]+(.[0-9]{1,2})?"
                      [(ngModel)]="sku.price" #price="ngModel"/>
               <em class="add-on">元</em>
-              <ng-container *ngIf="marketPrice.value > 0 && price.value >0">
-                <span [hidden]="compareNumber(price.value,marketPrice.value)"
-                      class="text-danger font12"> 销售价<=市场价
-                </span>
-                <span class="font12 profit" [hidden]="!compareNumber(price.value,marketPrice.value)"
+              <ng-container *ngIf="costPrice.value > 0 && price.value > 0">
+                <span class="font12 profit"
                       [ngClass]="{'text-green':(sku.price*rate.rate-sku.costPrice)>0,
                       'text-warning':(sku.price*rate.rate-sku.costPrice)<0}">
                   利润：{{(sku.price*rate.rate-sku.costPrice) | number: '1.2-2'}}
                 </span>
               </ng-container>
-              <span [hidden]="price.value != 0" class="text-danger font12"> 销售价>0 </span>
             </td>
             <td>
               <input class="text _price num form-control" [name]="'memberPrice'+i" type="number" required
@@ -274,10 +270,10 @@
                      [(ngModel)]="sku.memberPrice" #memberPrice="ngModel"/>
               <em class="add-on">元</em>
               <ng-container *ngIf="price.value > 0 && memberPrice.value>0">
-                <span [hidden]="compareNumber(memberPrice.value,price.value)"
+                <span [hidden]="!compareNumber(memberPrice.value,price.value)"
                       class="text-danger font12"> 会员价<=销售价
                 </span>
-                <span class="font12 profit" [hidden]="!compareNumber(memberPrice.value,price.value)"
+                <span class="font12 profit" [hidden]="compareNumber(memberPrice.value,price.value)"
                       [ngClass]="{'text-green':(sku.memberPrice*rate.rate-sku.costPrice)>0,
                       'text-warning':(sku.memberPrice*rate.rate-sku.costPrice)<0}">
                   利润：{{(sku.memberPrice*rate.rate-sku.costPrice) | number: '1.2-2'}}
