@@ -271,7 +271,7 @@ export class AuditStoreGoodsComponent implements OnInit {
    */
   compareNumber(arg1: string, arg2: string) {
     let num1 = Number(arg1), num2 = Number(arg2);
-    if (num1 < num2 || num1 == num2) return true;
+    if (num1 < num2) return true;
   }
 
   /**
